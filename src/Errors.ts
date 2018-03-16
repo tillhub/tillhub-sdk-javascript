@@ -1,12 +1,14 @@
-export declare class ErrorClass implements Error {
-  public name: string
-  public message: string
-  constructor(message?: string)
+export class BaseError {
+  constructor(message: string) {
+    Error.apply(this, arguments)
+  }
 }
 
-export class AuthenticationFailed extends ErrorClass {
+BaseError.prototype = new Error()
+
+export class AuthenticationFailed extends BaseError {
   public name = 'AuthenticationFailed'
-  constructor(public message: string = 'Authenticat was not successful') {
+  constructor(public message: string = 'Authentication was not successful') {
     super(message)
   }
 }

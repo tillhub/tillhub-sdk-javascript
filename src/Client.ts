@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosRequestConfig, AxiosPromise, AxiosInstance } from 'axios'
 
 export interface ClientOptions {
   endpoint: string
@@ -6,9 +6,9 @@ export interface ClientOptions {
   headers?: object
 }
 
-export default class Client {
+export class Client {
   private static instance: Client
-  private axiosInstance: object
+  private axiosInstance: AxiosInstance
 
   private constructor(options: ClientOptions) {
     this.axiosInstance = axios.create({
@@ -30,7 +30,7 @@ export default class Client {
     return Client.instance
   }
 
-  getClient(): object {
+  getClient(): AxiosInstance {
     return this.axiosInstance
   }
 }
