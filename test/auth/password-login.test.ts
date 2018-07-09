@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 dotenv.config()
-import Tillhub from '../../src/tillhub-sdk'
+import Tillhub from '../../src/tillhub-js'
 
 /**
  * Dummy test
