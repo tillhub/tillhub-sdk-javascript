@@ -1,5 +1,5 @@
 {
-  "name": "tillhub-js",
+  "name": "@tillhub/javascript-sdk",
   "version": "0.0.0-development",
   "description": "The JavaScript (Browser) SDK for the Tillhub API.",
   "keywords": [],
@@ -14,7 +14,7 @@
     "type": "git",
     "url": "https://github.com/tillhub/tillhub-sdk-javascript.git"
   },
-  "license": "MIT",
+  "license": "Apache-2.0",
   "engines": {
     "node": ">=6.0.0"
   },
@@ -75,7 +75,6 @@
   },
   "devDependencies": {
     "@types/jest": "^23.1.4",
-    "@types/node": "^10.5.2",
     "axios": "^0.18.0",
     "colors": "^1.3.0",
     "commitizen": "^2.10.1",
