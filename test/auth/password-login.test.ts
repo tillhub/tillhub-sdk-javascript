@@ -1,4 +1,6 @@
 import * as dotenv from 'dotenv'
+import axios from 'axios'
+import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 // import {Tillhub} from '../../src/tillhub-js'
 import { v0, v1 } from '../../src/tillhub-js'
@@ -19,13 +21,29 @@ if (process.env.SYSTEM_TEST) {
 
 describe('Auth: make auth flow', () => {
   it('v0: Auth: Can make password auth implicitly', async () => {
-
     const options = {
       credentials: {
         username: user.username,
         password: user.password
       },
       base: process.env.TILLHUB_BASE
+    }
+
+    if (process.env.SYSTEM_TEST !== 'true') {
+      const mock = new MockAdapter(axios)
+
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: '4564'
+            }
+          }
+        ]
+      })
     }
 
     const auth = new v0.Auth(options)
@@ -39,13 +57,29 @@ describe('Auth: make auth flow', () => {
   })
 
   it('v1: Auth: Can make password auth implicitly', async () => {
-
     const options = {
       credentials: {
         username: user.username,
         password: user.password
       },
       base: process.env.TILLHUB_BASE
+    }
+
+    if (process.env.SYSTEM_TEST !== 'true') {
+      const mock = new MockAdapter(axios)
+
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: '4564'
+            }
+          }
+        ]
+      })
     }
 
     const auth = new v1.Auth(options)
