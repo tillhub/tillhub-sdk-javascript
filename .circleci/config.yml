@@ -16,7 +16,7 @@ jobs:
           name: test
           command: npm run test:prod && npm run build
 
-      - run: npm run report-coverage
+      - run: npm run coverage
       - run: npm run deploy-docs
       # - run: git describe --exact-match --tags HEAD && npm run docs && npm run deploy-docs
       - run:
