@@ -1,0 +1,24 @@
+version: 2
+jobs:
+  build:
+    branches:
+      ignore:
+        - gh-pages
+        - /feature-.*/
+    docker:
+      - image: 'circleci/node:latest'
+    steps:
+      - checkout
+      - run:
+          name: install
+          command: npm ci
+      - run:
+          name: test
+          command: npm run test:prod && npm run build
+
+      - run: npm run report-coverage
+      - run: npm run deploy-docs
+      # - run: git describe --exact-match --tags HEAD && npm run docs && npm run deploy-docs
+      - run:
+          name: release
+          command: npm run semantic-release || true
