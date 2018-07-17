@@ -22,12 +22,18 @@ export class Tillhub extends EventEmitter {
   auth: Auth
   http?: Client
 
+  public options: TillhubSDKOptions
+
   constructor(options: TillhubSDKOptions) {
     super()
 
+    this.options = options
+    this.options.base = this.options.base || 'https://api.tillhub.com'
+
     const authOptions: AuthOptions = {
       type: AuthTypes.username,
-      credentials: options.credentials
+      credentials: options.credentials,
+      base: this.options.base
     }
 
     // const clientOptions: ClientOptions = {
@@ -49,12 +55,14 @@ export class Tillhub extends EventEmitter {
 
       if (authResponse) {
         this.user = authResponse.user
-        this.http = Client.getInstance({
+        const clientOptions: ClientOptions = {
           headers: {
-            Authorization: authResponse.token,
+            Authorization: `Bearer ${authResponse.token}`,
             'X-Client-ID': authResponse.user
           }
-        } as ClientOptions)
+        }
+
+        this.http = Client.getInstance(clientOptions).setDefaults(clientOptions)
         return this.auth
       }
 
@@ -69,6 +77,7 @@ export class Tillhub extends EventEmitter {
    *
    */
   transactions(): Transactions {
-    return new Transactions()
+    if (!this.http) throw new errors.UninstantiatedClient()
+    return new Transactions({ user: this.user, base: this.options.base }, this.http)
   }
 }
