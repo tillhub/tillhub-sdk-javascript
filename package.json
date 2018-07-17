@@ -128,7 +128,7 @@
         "assets": [
           "package.json",
           "package-lock.json",
-          "lib/**/*.{js}",
+          "dist/**/*",
           "docs",
           "CHANGELOG.md"
         ],
