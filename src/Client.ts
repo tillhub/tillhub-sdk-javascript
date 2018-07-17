@@ -1,9 +1,10 @@
 import axios, { AxiosRequestConfig, AxiosPromise, AxiosInstance } from 'axios'
 
 export interface ClientOptions {
-  endpoint: string
+  base: string
   timeout?: number
   headers?: object
+  token?: string
 }
 
 export class Client {
@@ -12,11 +13,11 @@ export class Client {
 
   private constructor(options: ClientOptions) {
     this.axiosInstance = axios.create({
-      baseURL: options.endpoint,
+      baseURL: options.base,
       timeout: options.timeout || 10000,
       headers: {
         ...options.headers,
-        'X-Client-Type': 'foobar'
+        'X-Client-Type': 'Tillhub SDk JavaScript'
       }
     })
   }

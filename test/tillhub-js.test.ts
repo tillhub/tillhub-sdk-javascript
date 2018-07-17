@@ -1,6 +1,9 @@
 import * as dotenv from 'dotenv'
+import axios from 'axios'
+import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
-import {Tillhub} from '../src/tillhub-js'
+import { Tillhub, v1 } from '../src/tillhub-js'
+import { Client } from '../src/Client'
 
 let user = {
   username: 'test@example.com',
@@ -18,21 +21,95 @@ if (process.env.SYSTEM_TEST) {
 
 describe('SDK: can instantiate SDK', () => {
   it('Tillhub is instantiable', () => {
-    expect(new Tillhub(null)).toBeInstanceOf(Tillhub)
+    if (process.env.SYSTEM_TEST !== 'true') {
+      const mock = new MockAdapter(axios)
+
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: '4564'
+            }
+          }
+        ]
+      })
+    }
+
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE
+    }
+
+    const th = new Tillhub(options)
+    expect(th).toBeInstanceOf(Tillhub)
   })
 
   it('Tillhub is instantiable', () => {
+    if (process.env.SYSTEM_TEST !== 'true') {
+      const mock = new MockAdapter(axios)
 
-    // const options = {
-    //   credentials: {
-    //     username: user.username,
-    //     password: user.password
-    //   },
-    //   base: process.env.TILLHUB_BASE
-    // }
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: '4564'
+            }
+          }
+        ]
+      })
+    }
 
-    expect(
-      new Tillhub()
-    ).toBeInstanceOf(Tillhub)
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE
+    }
+
+    expect(new Tillhub(options)).toBeInstanceOf(Tillhub)
+  })
+
+  it('Tillhub is inittable', async () => {
+    if (process.env.SYSTEM_TEST !== 'true') {
+      const mock = new MockAdapter(axios)
+
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: '4564'
+            }
+          }
+        ]
+      })
+    }
+
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE
+    }
+
+    const th = new Tillhub(options)
+
+    const result = await th.init()
+
+    expect(result).toBeInstanceOf(v1.Auth)
+    expect(th.http).toBeInstanceOf(Client)
   })
 })
