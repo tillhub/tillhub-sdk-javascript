@@ -1,4 +1,4 @@
-# Tillhub JavaScript SDK [![Build Status](https://travis-ci.org/tillhub/tillhub-sdk-javascript.svg?branch=master)](https://travis-ci.org/tillhub/tillhub-sdk-javascript) [![Greenkeeper badge](https://badges.greenkeeper.io/tillhub/tillhub-sdk-javascript.svg)](https://greenkeeper.io/)
+# Tillhub JavaScript SDK [![CircleCI](https://circleci.com/gh/tillhub/tillhub-sdk-javascript/tree/master.svg?style=svg)](https://circleci.com/gh/tillhub/tillhub-sdk-javascript/tree/master) [![Greenkeeper badge](https://badges.greenkeeper.io/tillhub/tillhub-sdk-javascript.svg)](https://greenkeeper.io/)
 
 ## Usage
 
