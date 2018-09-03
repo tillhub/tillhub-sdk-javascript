@@ -1,3 +1,17 @@
+# [1.1.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.0.0...v1.1.0) (2018-09-03)
+
+
+### Bug Fixes
+
+* **build:** fixes release script ([f8db075](https://github.com/tillhub/tillhub-sdk-javascript/commit/f8db075))
+* **build:** fixes releasing ([6f8ff66](https://github.com/tillhub/tillhub-sdk-javascript/commit/6f8ff66))
+
+
+### Features
+
+* adds init and auth through class ([9a9724c](https://github.com/tillhub/tillhub-sdk-javascript/commit/9a9724c))
+* **transactions:** adds transactions get all ([6f5b320](https://github.com/tillhub/tillhub-sdk-javascript/commit/6f5b320))
+
 # 1.0.0 (2018-07-15)
 
 
