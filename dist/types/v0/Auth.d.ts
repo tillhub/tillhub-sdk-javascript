@@ -5,7 +5,7 @@ export declare enum AuthTypes {
 }
 export interface AuthOptions {
     type?: AuthTypes | undefined;
-    credentials: UsernameAuth | TokenAuth;
+    credentials?: UsernameAuth | TokenAuth;
     base?: string | undefined;
 }
 export interface UsernameAuth {
@@ -29,6 +29,7 @@ export declare class Auth {
     authenticated: boolean;
     options: AuthOptions;
     constructor(options: AuthOptions);
+    private determineAuthType;
     authenticate(): Promise<[errors.AuthenticationFailed | null, AuthResponse | null]>;
     loginUsername(authData: UsernameAuth): Promise<[errors.AuthenticationFailed | null, AuthResponse | null]>;
 }

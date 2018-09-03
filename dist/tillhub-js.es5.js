@@ -2997,11 +2997,14 @@ var Auth = /** @class */ (function () {
         this.authenticated = false;
         this.options = options;
         this.options.base = this.options.base || 'https://api.tillhub.com';
+        this.determineAuthType();
+    }
+    Auth.prototype.determineAuthType = function () {
         if (isUsernameAuth(this.options.credentials))
             this.options.type = AuthTypes.username;
         if (isTokenAuth(this.options.credentials))
             this.options.type = AuthTypes.username;
-    }
+    };
     Auth.prototype.authenticate = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
@@ -3025,7 +3028,13 @@ var Auth = /** @class */ (function () {
                             })];
                     case 1:
                         response = _a.sent();
-                        return [2 /*return*/, [null, { token: response.data.token, user: response.data.user.legacy_id || response.data.user.id }]];
+                        return [2 /*return*/, [
+                                null,
+                                {
+                                    token: response.data.token,
+                                    user: response.data.user.legacy_id || response.data.user.id
+                                }
+                            ]];
                     case 2:
                         err_1 = _a.sent();
                         return [2 /*return*/, [
@@ -3176,37 +3185,45 @@ var v1 = {
     Auth: Auth$1
 };
 
-var Tillhub = /** @class */ (function (_super) {
-    __extends(Tillhub, _super);
-    function Tillhub(options) {
+var defaultOptions = {
+    base: 'https://api.tillhub.com'
+};
+var TillhubClient = /** @class */ (function (_super) {
+    __extends(TillhubClient, _super);
+    function TillhubClient(options) {
         var _this = _super.call(this) || this;
-        _this.options = options;
-        _this.options.base = _this.options.base || 'https://api.tillhub.com';
-        var authOptions = {
-            type: AuthTypes.username,
-            credentials: options.credentials,
-            base: _this.options.base
-        };
-        // const clientOptions: ClientOptions = {
-        //   base: options.base || 'https://api.tillhub.com'
-        // }
-        // this.client = Client.getInstance(clientOptions)
-        _this.auth = new v1.Auth(authOptions);
+        _this.handleOptions(options);
         return _this;
     }
     /**
      * Initialise the SDK instance by authenticating the client
      *
      */
-    Tillhub.prototype.init = function () {
+    TillhubClient.prototype.init = function (options) {
         return __awaiter(this, void 0, void 0, function () {
-            var _a, authErr, authResponse, clientOptions, err_1;
+            var clientOptions, _a, authErr, authResponse, clientOptions, err_1;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        _b.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.auth.authenticate()];
+                        if (!this.options && options) {
+                            this.handleOptions(options);
+                        }
+                        // if we didn't provide auth credentials, we will just set the http client
+                        // and set defaults on the client later.
+                        if (!this.auth) {
+                            clientOptions = {
+                                headers: {
+                                    'X-Client-Type': 'sdk'
+                                }
+                            };
+                            this.http = Client.getInstance(clientOptions).setDefaults(clientOptions);
+                            return [2 /*return*/, undefined];
+                        }
+                        _b.label = 1;
                     case 1:
+                        _b.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.auth.authenticate()];
+                    case 2:
                         _a = _b.sent(), authErr = _a[0], authResponse = _a[1];
                         if (authErr)
                             throw authErr;
@@ -3215,31 +3232,59 @@ var Tillhub = /** @class */ (function (_super) {
                             clientOptions = {
                                 headers: {
                                     Authorization: "Bearer " + authResponse.token,
-                                    'X-Client-ID': authResponse.user
+                                    'X-Client-ID': authResponse.user,
+                                    'X-Client-Type': 'sdk'
                                 }
                             };
                             this.http = Client.getInstance(clientOptions).setDefaults(clientOptions);
                             return [2 /*return*/, this.auth];
                         }
                         throw new AuthenticationFailed();
-                    case 2:
+                    case 3:
                         err_1 = _b.sent();
                         throw err_1;
-                    case 3: return [2 /*return*/];
+                    case 4: return [2 /*return*/];
                 }
             });
         });
+    };
+    TillhubClient.prototype.handleOptions = function (options) {
+        this.options = options;
+        this.options.base = this.options.base || 'https://api.tillhub.com';
+        if (options.credentials) {
+            var authOptions = {
+                type: AuthTypes.username,
+                credentials: options.credentials,
+                base: this.options.base
+            };
+            this.auth = new v1.Auth(authOptions);
+        }
     };
     /**
      * Create an authenticated transactions instance
      *
      */
-    Tillhub.prototype.transactions = function () {
-        if (!this.http)
+    TillhubClient.prototype.transactions = function () {
+        if (!this.options || !this.options.base || !this.http)
             throw new UninstantiatedClient();
         return new Transactions({ user: this.user, base: this.options.base }, this.http);
     };
-    return Tillhub;
+    return TillhubClient;
 }(EventEmitter));
+var Tillhub = /** @class */ (function (_super) {
+    __extends(Tillhub, _super);
+    function Tillhub(options) {
+        return _super.call(this, options) || this;
+    }
+    Tillhub.getInstance = function (options) {
+        if (!Tillhub.instance) {
+            Tillhub.instance = new Tillhub(options);
+        }
+        return Tillhub.instance;
+    };
+    return Tillhub;
+}(TillhubClient));
+var tillhubJs = Tillhub.getInstance({ base: defaultOptions.base });
 
-export { v0, v1, Tillhub };
+export default tillhubJs;
+export { v0, v1, defaultOptions, TillhubClient, Tillhub };

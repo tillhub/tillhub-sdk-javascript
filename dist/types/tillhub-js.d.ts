@@ -8,24 +8,33 @@ import * as errors from './Errors';
 import v0 from './v0';
 import v1 from './v1';
 export { v0, v1 };
+export declare const defaultOptions: TillhubSDKOptions;
 export interface TillhubSDKOptions {
-    credentials: UsernameAuth | TokenAuth;
+    credentials?: UsernameAuth | TokenAuth | undefined;
     base?: string;
 }
-export declare class Tillhub extends EventEmitter {
+export declare class TillhubClient extends EventEmitter {
     user?: string;
-    auth: Auth;
+    auth?: Auth;
     http?: Client;
-    options: TillhubSDKOptions;
+    options: TillhubSDKOptions | undefined;
     constructor(options: TillhubSDKOptions);
     /**
      * Initialise the SDK instance by authenticating the client
      *
      */
-    init(): Promise<errors.AuthenticationFailed | Auth>;
+    init(options?: TillhubSDKOptions): Promise<errors.AuthenticationFailed | Auth | undefined>;
+    private handleOptions;
     /**
      * Create an authenticated transactions instance
      *
      */
     transactions(): Transactions;
 }
+export declare class Tillhub extends TillhubClient {
+    private static instance;
+    constructor(options: TillhubSDKOptions);
+    static getInstance(options: TillhubSDKOptions): Tillhub;
+}
+declare const _default: Tillhub;
+export default _default;

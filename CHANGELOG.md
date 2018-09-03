@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.1.2...v1.2.0) (2018-09-03)
+
+
+### Features
+
+* **sdk:** adds singleton with handling options correctly ([ad54dc2](https://github.com/tillhub/tillhub-sdk-javascript/commit/ad54dc2))
+
 ## [1.1.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.1.1...v1.1.2) (2018-09-03)
 
 

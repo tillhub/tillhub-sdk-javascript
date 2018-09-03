@@ -58,11 +58,14 @@ var Auth = /** @class */ (function () {
         this.authenticated = false;
         this.options = options;
         this.options.base = this.options.base || 'https://api.tillhub.com';
+        this.determineAuthType();
+    }
+    Auth.prototype.determineAuthType = function () {
         if (isUsernameAuth(this.options.credentials))
             this.options.type = AuthTypes.username;
         if (isTokenAuth(this.options.credentials))
             this.options.type = AuthTypes.username;
-    }
+    };
     Auth.prototype.authenticate = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
@@ -86,7 +89,13 @@ var Auth = /** @class */ (function () {
                             })];
                     case 1:
                         response = _a.sent();
-                        return [2 /*return*/, [null, { token: response.data.token, user: response.data.user.legacy_id || response.data.user.id }]];
+                        return [2 /*return*/, [
+                                null,
+                                {
+                                    token: response.data.token,
+                                    user: response.data.user.legacy_id || response.data.user.id
+                                }
+                            ]];
                     case 2:
                         err_1 = _a.sent();
                         return [2 /*return*/, [
