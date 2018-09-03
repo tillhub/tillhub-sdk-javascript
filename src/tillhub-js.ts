@@ -70,8 +70,10 @@ export class TillhubClient extends EventEmitter {
    *
    */
   transactions(): Transactions {
-    if (!this.options || !this.options.base || !this.http || !this.auth)
+    if (!this.options || !this.options.base || !this.http || !this.auth) {
       throw new errors.UninstantiatedClient()
+    }
+
     return new Transactions({ user: this.auth.user, base: this.options.base }, this.http)
   }
 }
