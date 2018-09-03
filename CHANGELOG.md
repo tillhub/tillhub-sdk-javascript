@@ -1,3 +1,11 @@
+## [1.1.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.1.1...v1.1.2) (2018-09-03)
+
+
+### Bug Fixes
+
+* **build:** fixes including docs into package ([029e6a4](https://github.com/tillhub/tillhub-sdk-javascript/commit/029e6a4))
+* **docs:** fixes indentation in docs ([9c6c160](https://github.com/tillhub/tillhub-sdk-javascript/commit/9c6c160))
+
 ## [1.1.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.1.0...v1.1.1) (2018-09-03)
 
 
