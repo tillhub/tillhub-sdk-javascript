@@ -1,3 +1,15 @@
+# [1.3.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.2.0...v1.3.0) (2018-09-03)
+
+
+### Bug Fixes
+
+* fixes linting ([b373cfb](https://github.com/tillhub/tillhub-sdk-javascript/commit/b373cfb))
+
+
+### Features
+
+* make runnable without much assumptions ([f53f92f](https://github.com/tillhub/tillhub-sdk-javascript/commit/f53f92f))
+
 # [1.2.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.1.2...v1.2.0) (2018-09-03)
 
 

@@ -71,7 +71,6 @@ var Transactions = /** @class */ (function () {
                             })];
                     case 2:
                         err_1 = _a.sent();
-                        console.log(err_1);
                         return [2 /*return*/, reject(new errors.TransactionFetchFailed())];
                     case 3: return [2 /*return*/];
                 }

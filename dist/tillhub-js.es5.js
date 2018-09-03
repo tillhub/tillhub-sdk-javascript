@@ -2978,6 +2978,31 @@ var TransactionFetchFailed = /** @class */ (function (_super) {
     return TransactionFetchFailed;
 }(BaseError));
 
+var Client = /** @class */ (function () {
+    function Client(options) {
+        this.axiosInstance = axios$1.create({
+            // baseURL: options.base || 'https://api.tillhub.com',
+            timeout: options.timeout || 10000,
+            headers: __assign({}, options.headers, { 'X-Client-Type': 'Tillhub SDK JavaScript' })
+        });
+    }
+    Client.getInstance = function (options) {
+        if (!Client.instance) {
+            Client.instance = new Client(options);
+            // ... any one time initialization goes here ...
+        }
+        return Client.instance;
+    };
+    Client.prototype.getClient = function () {
+        return this.axiosInstance;
+    };
+    Client.prototype.setDefaults = function (optons) {
+        this.axiosInstance.defaults.headers.common = __assign({}, this.axiosInstance.defaults.headers.common, optons.headers);
+        return Client.instance;
+    };
+    return Client;
+}());
+
 var AuthTypes;
 (function (AuthTypes) {
     AuthTypes[AuthTypes["username"] = 1] = "username";
@@ -2997,6 +3022,8 @@ var Auth = /** @class */ (function () {
         this.authenticated = false;
         this.options = options;
         this.options.base = this.options.base || 'https://api.tillhub.com';
+        if (!this.options.credentials)
+            return;
         this.determineAuthType();
     }
     Auth.prototype.determineAuthType = function () {
@@ -3016,18 +3043,35 @@ var Auth = /** @class */ (function () {
         });
     };
     Auth.prototype.loginUsername = function (authData) {
+        if (authData === void 0) { authData = {}; }
         return __awaiter(this, void 0, void 0, function () {
-            var response, err_1;
+            var username, password, response, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios$1.post(this.options.base + "/api/v0/users/login", {
-                                email: authData.username,
-                                password: authData.password
-                            })];
+                        if (this.options.credentials &&
+                            this.options.credentials.username &&
+                            this.options.credentials.password) {
+                            username = this.options.credentials.username;
+                            password = this.options.credentials.password;
+                        }
+                        else if (authData && authData.username && authData.password) {
+                            username = authData.username;
+                            password = authData.password;
+                        }
+                        else {
+                            throw new UninstantiatedClient();
+                        }
+                        _a.label = 1;
                     case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, axios$1.post(this.options.base + "/api/v0/users/login", {
+                                email: username,
+                                password: password
+                            })];
+                    case 2:
                         response = _a.sent();
+                        this.setDefaultHeader(response.data.user.legacy_id || response.data.user.id, response.data.token);
                         return [2 /*return*/, [
                                 null,
                                 {
@@ -3035,16 +3079,27 @@ var Auth = /** @class */ (function () {
                                     user: response.data.user.legacy_id || response.data.user.id
                                 }
                             ]];
-                    case 2:
+                    case 3:
                         err_1 = _a.sent();
                         return [2 /*return*/, [
                                 new AuthenticationFailed(),
                                 err_1.ressponse && err_1.response.data ? err_1.response.data : null
                             ]];
-                    case 3: return [2 /*return*/];
+                    case 4: return [2 /*return*/];
                 }
             });
         });
+    };
+    Auth.prototype.setDefaultHeader = function (user, token) {
+        var clientOptions = {
+            headers: {
+                Authorization: "Bearer " + token,
+                'X-Client-ID': user
+            }
+        };
+        this.token = token;
+        this.user = user;
+        Client.getInstance(clientOptions).setDefaults(clientOptions);
     };
     return Auth;
 }());
@@ -3084,7 +3139,6 @@ var Transactions = /** @class */ (function () {
                             })];
                     case 2:
                         err_1 = _a.sent();
-                        console.log(err_1);
                         return [2 /*return*/, reject(new TransactionFetchFailed())];
                     case 3: return [2 /*return*/];
                 }
@@ -3092,31 +3146,6 @@ var Transactions = /** @class */ (function () {
         }); });
     };
     return Transactions;
-}());
-
-var Client = /** @class */ (function () {
-    function Client(options) {
-        this.axiosInstance = axios$1.create({
-            // baseURL: options.base || 'https://api.tillhub.com',
-            timeout: options.timeout || 10000,
-            headers: __assign({}, options.headers, { 'X-Client-Type': 'Tillhub SDK JavaScript' })
-        });
-    }
-    Client.getInstance = function (options) {
-        if (!Client.instance) {
-            Client.instance = new Client(options);
-            // ... any one time initialization goes here ...
-        }
-        return Client.instance;
-    };
-    Client.prototype.getClient = function () {
-        return this.axiosInstance;
-    };
-    Client.prototype.setDefaults = function (optons) {
-        this.axiosInstance.defaults.headers.common = __assign({}, this.axiosInstance.defaults.headers.common, optons.headers);
-        return Client.instance;
-    };
-    return Client;
 }());
 
 var v0 = {
@@ -3134,10 +3163,9 @@ var Auth$1 = /** @class */ (function (_super) {
         _this.authenticated = false;
         _this.options = options;
         _this.options.base = _this.options.base || 'https://api.tillhub.com';
-        if (isUsernameAuth(_this.options.credentials))
-            _this.options.type = AuthTypes.username;
-        if (isTokenAuth(_this.options.credentials))
-            _this.options.type = AuthTypes.username;
+        if (!_this.options.credentials)
+            return _this;
+        _this.determineAuthType();
         return _this;
     }
     Auth$$1.prototype.authenticate = function () {
@@ -3166,6 +3194,7 @@ var Auth$1 = /** @class */ (function (_super) {
                             })];
                     case 1:
                         response = _a.sent();
+                        this.setDefaultHeader(response.data.user, response.data.token);
                         return [2 /*return*/, [null, response.data]];
                     case 2:
                         err_1 = _a.sent();
@@ -3192,6 +3221,8 @@ var TillhubClient = /** @class */ (function (_super) {
     __extends(TillhubClient, _super);
     function TillhubClient(options) {
         var _this = _super.call(this) || this;
+        if (!options)
+            return _this;
         _this.handleOptions(options);
         return _this;
     }
@@ -3200,53 +3231,13 @@ var TillhubClient = /** @class */ (function (_super) {
      *
      */
     TillhubClient.prototype.init = function (options) {
-        return __awaiter(this, void 0, void 0, function () {
-            var clientOptions, _a, authErr, authResponse, clientOptions, err_1;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        if (!this.options && options) {
-                            this.handleOptions(options);
-                        }
-                        // if we didn't provide auth credentials, we will just set the http client
-                        // and set defaults on the client later.
-                        if (!this.auth) {
-                            clientOptions = {
-                                headers: {
-                                    'X-Client-Type': 'sdk'
-                                }
-                            };
-                            this.http = Client.getInstance(clientOptions).setDefaults(clientOptions);
-                            return [2 /*return*/, undefined];
-                        }
-                        _b.label = 1;
-                    case 1:
-                        _b.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, this.auth.authenticate()];
-                    case 2:
-                        _a = _b.sent(), authErr = _a[0], authResponse = _a[1];
-                        if (authErr)
-                            throw authErr;
-                        if (authResponse) {
-                            this.user = authResponse.user;
-                            clientOptions = {
-                                headers: {
-                                    Authorization: "Bearer " + authResponse.token,
-                                    'X-Client-ID': authResponse.user,
-                                    'X-Client-Type': 'sdk'
-                                }
-                            };
-                            this.http = Client.getInstance(clientOptions).setDefaults(clientOptions);
-                            return [2 /*return*/, this.auth];
-                        }
-                        throw new AuthenticationFailed();
-                    case 3:
-                        err_1 = _b.sent();
-                        throw err_1;
-                    case 4: return [2 /*return*/];
-                }
-            });
-        });
+        if (options === void 0) { options = defaultOptions; }
+        this.handleOptions(options);
+        var clientOptions = {
+            headers: {}
+        };
+        this.auth = new v1.Auth({ base: options ? options.base : defaultOptions.base });
+        this.http = Client.getInstance(clientOptions).setDefaults(clientOptions);
     };
     TillhubClient.prototype.handleOptions = function (options) {
         this.options = options;
@@ -3265,9 +3256,10 @@ var TillhubClient = /** @class */ (function (_super) {
      *
      */
     TillhubClient.prototype.transactions = function () {
-        if (!this.options || !this.options.base || !this.http)
+        if (!this.options || !this.options.base || !this.http || !this.auth) {
             throw new UninstantiatedClient();
-        return new Transactions({ user: this.user, base: this.options.base }, this.http);
+        }
+        return new Transactions({ user: this.auth.user, base: this.options.base }, this.http);
     };
     return TillhubClient;
 }(EventEmitter));

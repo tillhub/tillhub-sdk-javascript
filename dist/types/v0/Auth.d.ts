@@ -28,8 +28,11 @@ export interface AuthResponse {
 export declare class Auth {
     authenticated: boolean;
     options: AuthOptions;
+    token?: string;
+    user?: string;
     constructor(options: AuthOptions);
-    private determineAuthType;
+    protected determineAuthType(): void;
     authenticate(): Promise<[errors.AuthenticationFailed | null, AuthResponse | null]>;
-    loginUsername(authData: UsernameAuth): Promise<[errors.AuthenticationFailed | null, AuthResponse | null]>;
+    loginUsername(authData?: UsernameAuth): Promise<[errors.AuthenticationFailed | null, AuthResponse | null]>;
+    protected setDefaultHeader(user: string, token: string): void;
 }

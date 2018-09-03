@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = require("axios");
 var errors = require("../Errors");
+var Client_1 = require("../Client");
 var AuthTypes;
 (function (AuthTypes) {
     AuthTypes[AuthTypes["username"] = 1] = "username";
@@ -58,6 +59,8 @@ var Auth = /** @class */ (function () {
         this.authenticated = false;
         this.options = options;
         this.options.base = this.options.base || 'https://api.tillhub.com';
+        if (!this.options.credentials)
+            return;
         this.determineAuthType();
     }
     Auth.prototype.determineAuthType = function () {
@@ -77,18 +80,35 @@ var Auth = /** @class */ (function () {
         });
     };
     Auth.prototype.loginUsername = function (authData) {
+        if (authData === void 0) { authData = {}; }
         return __awaiter(this, void 0, void 0, function () {
-            var response, err_1;
+            var username, password, response, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post(this.options.base + "/api/v0/users/login", {
-                                email: authData.username,
-                                password: authData.password
-                            })];
+                        if (this.options.credentials &&
+                            this.options.credentials.username &&
+                            this.options.credentials.password) {
+                            username = this.options.credentials.username;
+                            password = this.options.credentials.password;
+                        }
+                        else if (authData && authData.username && authData.password) {
+                            username = authData.username;
+                            password = authData.password;
+                        }
+                        else {
+                            throw new errors.UninstantiatedClient();
+                        }
+                        _a.label = 1;
                     case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, axios_1.default.post(this.options.base + "/api/v0/users/login", {
+                                email: username,
+                                password: password
+                            })];
+                    case 2:
                         response = _a.sent();
+                        this.setDefaultHeader(response.data.user.legacy_id || response.data.user.id, response.data.token);
                         return [2 /*return*/, [
                                 null,
                                 {
@@ -96,16 +116,27 @@ var Auth = /** @class */ (function () {
                                     user: response.data.user.legacy_id || response.data.user.id
                                 }
                             ]];
-                    case 2:
+                    case 3:
                         err_1 = _a.sent();
                         return [2 /*return*/, [
                                 new errors.AuthenticationFailed(),
                                 err_1.ressponse && err_1.response.data ? err_1.response.data : null
                             ]];
-                    case 3: return [2 /*return*/];
+                    case 4: return [2 /*return*/];
                 }
             });
         });
+    };
+    Auth.prototype.setDefaultHeader = function (user, token) {
+        var clientOptions = {
+            headers: {
+                Authorization: "Bearer " + token,
+                'X-Client-ID': user
+            }
+        };
+        this.token = token;
+        this.user = user;
+        Client_1.Client.getInstance(clientOptions).setDefaults(clientOptions);
     };
     return Auth;
 }());

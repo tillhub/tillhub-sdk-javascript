@@ -4,7 +4,6 @@ import { UsernameAuth, TokenAuth } from './v0/Auth';
 import { Auth } from './v1/Auth';
 import { Transactions } from './v0/Transactions';
 import { Client } from './Client';
-import * as errors from './Errors';
 import v0 from './v0';
 import v1 from './v1';
 export { v0, v1 };
@@ -18,12 +17,12 @@ export declare class TillhubClient extends EventEmitter {
     auth?: Auth;
     http?: Client;
     options: TillhubSDKOptions | undefined;
-    constructor(options: TillhubSDKOptions);
+    constructor(options?: TillhubSDKOptions);
     /**
      * Initialise the SDK instance by authenticating the client
      *
      */
-    init(options?: TillhubSDKOptions): Promise<errors.AuthenticationFailed | Auth | undefined>;
+    init(options?: TillhubSDKOptions): void;
     private handleOptions;
     /**
      * Create an authenticated transactions instance
