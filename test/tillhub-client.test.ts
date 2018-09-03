@@ -107,9 +107,9 @@ describe('SDK: client: can instantiate SDK client', () => {
 
     const th = new TillhubClient(options)
 
-    const result = await th.init()
+    th.init()
 
-    expect(result).toBeInstanceOf(v1.Auth)
+    expect(th.auth).toBeInstanceOf(v1.Auth)
     expect(th.http).toBeInstanceOf(Client)
   })
 })

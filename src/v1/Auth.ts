@@ -24,8 +24,9 @@ export class Auth extends v0.Auth {
 
     this.options.base = this.options.base || 'https://api.tillhub.com'
 
-    if (isUsernameAuth(this.options.credentials)) this.options.type = AuthTypes.username
-    if (isTokenAuth(this.options.credentials)) this.options.type = AuthTypes.username
+    if (!this.options.credentials) return
+
+    this.determineAuthType()
   }
 
   async authenticate(): Promise<[errors.AuthenticationFailed | null, AuthResponse | null]> {
@@ -48,6 +49,8 @@ export class Auth extends v0.Auth {
         id: authData.id,
         apiKey: authData.apiKey
       })
+
+      this.setDefaultHeader(response.data.user, response.data.token)
       return [null, response.data]
     } catch (err) {
       return [

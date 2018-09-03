@@ -55,9 +55,13 @@ describe('v0: Transactions: can get all', () => {
       base: process.env.TILLHUB_BASE
     }
 
-    const th = new TillhubClient(options)
+    const th = new TillhubClient()
 
-    await th.init()
+    th.init(options)
+    await th.auth.loginUsername({
+      username: user.username,
+      password: user.password
+    })
 
     const transactions = th.transactions()
 

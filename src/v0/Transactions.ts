@@ -54,8 +54,6 @@ export class Transactions {
           next
         } as TransactionResponse)
       } catch (err) {
-        console.log(err)
-
         return reject(new errors.TransactionFetchFailed())
       }
     })

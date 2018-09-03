@@ -1,5 +1,6 @@
 import axios from 'axios'
 import * as errors from '../Errors'
+import { Client, ClientOptions } from '../Client'
 
 export enum AuthTypes {
   username = 1,
@@ -41,16 +42,20 @@ export interface AuthResponse {
 export class Auth {
   authenticated: boolean = false
   public options: AuthOptions
+  public token?: string
+  public user?: string
 
   constructor(options: AuthOptions) {
     this.options = options
 
     this.options.base = this.options.base || 'https://api.tillhub.com'
 
+    if (!this.options.credentials) return
+
     this.determineAuthType()
   }
 
-  private determineAuthType() {
+  protected determineAuthType() {
     if (isUsernameAuth(this.options.credentials)) this.options.type = AuthTypes.username
     if (isTokenAuth(this.options.credentials)) this.options.type = AuthTypes.username
   }
@@ -64,13 +69,34 @@ export class Auth {
   }
 
   async loginUsername(
-    authData: UsernameAuth
+    authData: UsernameAuth = {} as UsernameAuth
   ): Promise<[errors.AuthenticationFailed | null, AuthResponse | null]> {
+    let username: string
+    let password: string
+    if (
+      this.options.credentials &&
+      (this.options.credentials as UsernameAuth).username &&
+      (this.options.credentials as UsernameAuth).password
+    ) {
+      username = (this.options.credentials as UsernameAuth).username
+      password = (this.options.credentials as UsernameAuth).password
+    } else if (authData && authData.username && authData.password) {
+      username = authData.username
+      password = authData.password
+    } else {
+      throw new errors.UninstantiatedClient()
+    }
+
     try {
       const response = await axios.post(`${this.options.base}/api/v0/users/login`, {
-        email: authData.username,
-        password: authData.password
+        email: username,
+        password: password
       })
+
+      this.setDefaultHeader(
+        response.data.user.legacy_id || response.data.user.id,
+        response.data.token
+      )
 
       return [
         null,
@@ -85,5 +111,19 @@ export class Auth {
         err.ressponse && err.response.data ? err.response.data : null
       ]
     }
+  }
+
+  protected setDefaultHeader(user: string, token: string): void {
+    const clientOptions: ClientOptions = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'X-Client-ID': user
+      }
+    }
+
+    this.token = token
+    this.user = user
+
+    Client.getInstance(clientOptions).setDefaults(clientOptions)
   }
 }

@@ -28,8 +28,10 @@ export class TillhubClient extends EventEmitter {
 
   public options: TillhubSDKOptions | undefined
 
-  constructor(options: TillhubSDKOptions) {
+  constructor(options?: TillhubSDKOptions) {
     super()
+
+    if (!options) return
 
     this.handleOptions(options)
   }
@@ -38,46 +40,14 @@ export class TillhubClient extends EventEmitter {
    * Initialise the SDK instance by authenticating the client
    *
    */
-  async init(options?: TillhubSDKOptions): Promise<errors.AuthenticationFailed | Auth | undefined> {
-    if (!this.options && options) {
-      this.handleOptions(options)
+  public init(options: TillhubSDKOptions = defaultOptions): void {
+    this.handleOptions(options)
+    const clientOptions: ClientOptions = {
+      headers: {}
     }
 
-    // if we didn't provide auth credentials, we will just set the http client
-    // and set defaults on the client later.
-    if (!this.auth) {
-      const clientOptions: ClientOptions = {
-        headers: {
-          'X-Client-Type': 'sdk'
-        }
-      }
-
-      this.http = Client.getInstance(clientOptions).setDefaults(clientOptions)
-      return undefined
-    }
-
-    try {
-      const [authErr, authResponse] = await this.auth.authenticate()
-      if (authErr) throw authErr
-
-      if (authResponse) {
-        this.user = authResponse.user
-        const clientOptions: ClientOptions = {
-          headers: {
-            Authorization: `Bearer ${authResponse.token}`,
-            'X-Client-ID': authResponse.user,
-            'X-Client-Type': 'sdk'
-          }
-        }
-
-        this.http = Client.getInstance(clientOptions).setDefaults(clientOptions)
-        return this.auth
-      }
-
-      throw new errors.AuthenticationFailed()
-    } catch (err) {
-      throw err
-    }
+    this.auth = new v1.Auth({ base: options ? options.base : defaultOptions.base })
+    this.http = Client.getInstance(clientOptions).setDefaults(clientOptions)
   }
 
   private handleOptions(options: TillhubSDKOptions): void {
@@ -100,8 +70,9 @@ export class TillhubClient extends EventEmitter {
    *
    */
   transactions(): Transactions {
-    if (!this.options || !this.options.base || !this.http) throw new errors.UninstantiatedClient()
-    return new Transactions({ user: this.user, base: this.options.base }, this.http)
+    if (!this.options || !this.options.base || !this.http || !this.auth)
+      throw new errors.UninstantiatedClient()
+    return new Transactions({ user: this.auth.user, base: this.options.base }, this.http)
   }
 }
 
