@@ -2045,7 +2045,7 @@ followRedirects.wrap = wrap_1;
 var _args = [
 	[
 		"axios@0.18.0",
-		"/home/circleci/project"
+		"/Users/jefe/repos/tillhub/sdks/javascript"
 	]
 ];
 var _development = true;
@@ -2071,7 +2071,7 @@ var _requiredBy = [
 ];
 var _resolved = "https://registry.npmjs.org/axios/-/axios-0.18.0.tgz";
 var _spec = "0.18.0";
-var _where = "/home/circleci/project";
+var _where = "/Users/jefe/repos/tillhub/sdks/javascript";
 var author = {
 	name: "Matt Zabriskie"
 };
