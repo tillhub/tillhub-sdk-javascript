@@ -24,7 +24,7 @@ exec("git init")
 exec("git add .")
 exec('git config user.name "Robert Jefe Lindstaedt"')
 exec('git config user.email "robert.lindstaedt@gmail.com"')
-exec('git commit -m "docs(docs): update gh-pages"')
+exec('git commit -m "docs(docs): update gh-pages [ci skip]"')
 exec(
   `git push --force --quiet "https://${ghToken}@${repository}" master:gh-pages`
 )
