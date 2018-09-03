@@ -8,7 +8,7 @@ export enum AuthTypes {
 
 export interface AuthOptions {
   type?: AuthTypes | undefined
-  credentials: UsernameAuth | TokenAuth,
+  credentials?: UsernameAuth | TokenAuth
   base?: string | undefined
 }
 
@@ -23,15 +23,15 @@ export interface TokenAuth {
 }
 
 export function isUsernameAuth(object: any): object is UsernameAuth {
-  return 'password' in object;
+  return 'password' in object
 }
 
 export function isTokenAuth(object: any): object is TokenAuth {
-  return 'apiKey' in object;
+  return 'apiKey' in object
 }
 
 export interface AuthResponse {
-  token: string,
+  token: string
   user: string
 }
 
@@ -47,6 +47,10 @@ export class Auth {
 
     this.options.base = this.options.base || 'https://api.tillhub.com'
 
+    this.determineAuthType()
+  }
+
+  private determineAuthType() {
     if (isUsernameAuth(this.options.credentials)) this.options.type = AuthTypes.username
     if (isTokenAuth(this.options.credentials)) this.options.type = AuthTypes.username
   }
@@ -68,7 +72,13 @@ export class Auth {
         password: authData.password
       })
 
-      return [null, { token: response.data.token, user: response.data.user.legacy_id || response.data.user.id } as AuthResponse]
+      return [
+        null,
+        {
+          token: response.data.token,
+          user: response.data.user.legacy_id || response.data.user.id
+        } as AuthResponse
+      ]
     } catch (err) {
       return [
         new errors.AuthenticationFailed(),

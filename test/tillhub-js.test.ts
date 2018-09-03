@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
-import { Tillhub, v1 } from '../src/tillhub-js'
+import { TillhubClient, v1 } from '../src/tillhub-js'
 import { Client } from '../src/Client'
 
 let user = {
@@ -20,7 +20,7 @@ if (process.env.SYSTEM_TEST) {
 }
 
 describe('SDK: can instantiate SDK', () => {
-  it('Tillhub is instantiable', () => {
+  it('TillhubClient is instantiable', () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       const mock = new MockAdapter(axios)
 
@@ -46,8 +46,8 @@ describe('SDK: can instantiate SDK', () => {
       base: process.env.TILLHUB_BASE
     }
 
-    const th = new Tillhub(options)
-    expect(th).toBeInstanceOf(Tillhub)
+    const th = new TillhubClient(options)
+    expect(th).toBeInstanceOf(TillhubClient)
   })
 
   it('Tillhub is instantiable', () => {
@@ -76,7 +76,7 @@ describe('SDK: can instantiate SDK', () => {
       base: process.env.TILLHUB_BASE
     }
 
-    expect(new Tillhub(options)).toBeInstanceOf(Tillhub)
+    expect(new TillhubClient(options)).toBeInstanceOf(TillhubClient)
   })
 
   it('Tillhub is inittable', async () => {
@@ -105,7 +105,7 @@ describe('SDK: can instantiate SDK', () => {
       base: process.env.TILLHUB_BASE
     }
 
-    const th = new Tillhub(options)
+    const th = new TillhubClient(options)
 
     const result = await th.init()
 

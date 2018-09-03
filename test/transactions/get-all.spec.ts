@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
-import { Tillhub, v1, v0 } from '../../src/tillhub-js'
+import { TillhubClient, v1, v0 } from '../../src/tillhub-js'
 
 let user = {
   username: 'test@example.com',
@@ -55,7 +55,7 @@ describe('v0: Transactions: can get all', () => {
       base: process.env.TILLHUB_BASE
     }
 
-    const th = new Tillhub(options)
+    const th = new TillhubClient(options)
 
     await th.init()
 

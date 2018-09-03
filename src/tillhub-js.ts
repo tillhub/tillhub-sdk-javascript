@@ -13,11 +13,11 @@ import v1 from './v1'
 export { v0, v1 }
 
 export interface TillhubSDKOptions {
-  credentials: UsernameAuth | TokenAuth
+  credentials?: UsernameAuth | TokenAuth | undefined
   base?: string
 }
 
-export class Tillhub extends EventEmitter {
+export class TillhubClient extends EventEmitter {
   user?: string
   auth: Auth
   http?: Client
@@ -36,11 +36,6 @@ export class Tillhub extends EventEmitter {
       base: this.options.base
     }
 
-    // const clientOptions: ClientOptions = {
-    //   base: options.base || 'https://api.tillhub.com'
-    // }
-
-    // this.client = Client.getInstance(clientOptions)
     this.auth = new v1.Auth(authOptions)
   }
 
@@ -48,7 +43,20 @@ export class Tillhub extends EventEmitter {
    * Initialise the SDK instance by authenticating the client
    *
    */
-  async init(): Promise<errors.AuthenticationFailed | Auth> {
+  async init(): Promise<errors.AuthenticationFailed | Auth | undefined> {
+    // if we didn't provide auth credentials, we will just set the http client
+    // and set defaults on the client later.
+    if (!this.auth) {
+      const clientOptions: ClientOptions = {
+        headers: {
+          'X-Client-Type': 'sdk'
+        }
+      }
+
+      this.http = Client.getInstance(clientOptions).setDefaults(clientOptions)
+      return undefined
+    }
+
     try {
       const [authErr, authResponse] = await this.auth.authenticate()
       if (authErr) throw authErr
@@ -58,7 +66,8 @@ export class Tillhub extends EventEmitter {
         const clientOptions: ClientOptions = {
           headers: {
             Authorization: `Bearer ${authResponse.token}`,
-            'X-Client-ID': authResponse.user
+            'X-Client-ID': authResponse.user,
+            'X-Client-Type': 'sdk'
           }
         }
 
@@ -79,5 +88,18 @@ export class Tillhub extends EventEmitter {
   transactions(): Transactions {
     if (!this.http) throw new errors.UninstantiatedClient()
     return new Transactions({ user: this.user, base: this.options.base }, this.http)
+  }
+}
+
+export default class Tillhub extends TillhubClient {
+  private static instance: Tillhub
+  private constructor(options: TillhubSDKOptions) {
+    super(options)
+
+    if (!Tillhub.instance) {
+      Tillhub.instance = new Tillhub(options)
+    }
+
+    return Tillhub.instance
   }
 }
