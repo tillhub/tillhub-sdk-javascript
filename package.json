@@ -7,7 +7,11 @@
   "module": "dist/tillhub-js.es5.js",
   "typings": "dist/types/tillhub-js.d.ts",
   "files": [
-    "dist"
+    "package.json",
+    "package-lock.json",
+    "dist/**/*",
+    "docs",
+    "CHANGELOG.md"
   ],
   "author": "Robert Jefe Lindstaedt <robert.lindstaedt@gmail.com>",
   "repository": {
