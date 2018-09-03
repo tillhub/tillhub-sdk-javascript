@@ -12,6 +12,10 @@ import v1 from './v1'
 
 export { v0, v1 }
 
+export const defaultOptions: TillhubSDKOptions = {
+  base: 'https://api.tillhub.com'
+}
+
 export interface TillhubSDKOptions {
   credentials?: UsernameAuth | TokenAuth | undefined
   base?: string
@@ -19,31 +23,26 @@ export interface TillhubSDKOptions {
 
 export class TillhubClient extends EventEmitter {
   user?: string
-  auth: Auth
+  auth?: Auth
   http?: Client
 
-  public options: TillhubSDKOptions
+  public options: TillhubSDKOptions | undefined
 
   constructor(options: TillhubSDKOptions) {
     super()
 
-    this.options = options
-    this.options.base = this.options.base || 'https://api.tillhub.com'
-
-    const authOptions: AuthOptions = {
-      type: AuthTypes.username,
-      credentials: options.credentials,
-      base: this.options.base
-    }
-
-    this.auth = new v1.Auth(authOptions)
+    this.handleOptions(options)
   }
 
   /**
    * Initialise the SDK instance by authenticating the client
    *
    */
-  async init(): Promise<errors.AuthenticationFailed | Auth | undefined> {
+  async init(options?: TillhubSDKOptions): Promise<errors.AuthenticationFailed | Auth | undefined> {
+    if (!this.options && options) {
+      this.handleOptions(options)
+    }
+
     // if we didn't provide auth credentials, we will just set the http client
     // and set defaults on the client later.
     if (!this.auth) {
@@ -81,21 +80,38 @@ export class TillhubClient extends EventEmitter {
     }
   }
 
+  private handleOptions(options: TillhubSDKOptions): void {
+    this.options = options
+    this.options.base = this.options.base || 'https://api.tillhub.com'
+
+    if (options.credentials) {
+      const authOptions: AuthOptions = {
+        type: AuthTypes.username,
+        credentials: options.credentials,
+        base: this.options.base
+      }
+
+      this.auth = new v1.Auth(authOptions)
+    }
+  }
+
   /**
    * Create an authenticated transactions instance
    *
    */
   transactions(): Transactions {
-    if (!this.http) throw new errors.UninstantiatedClient()
+    if (!this.options || !this.options.base || !this.http) throw new errors.UninstantiatedClient()
     return new Transactions({ user: this.user, base: this.options.base }, this.http)
   }
 }
 
-export default class Tillhub extends TillhubClient {
+export class Tillhub extends TillhubClient {
   private static instance: Tillhub
-  private constructor(options: TillhubSDKOptions) {
+  constructor(options: TillhubSDKOptions) {
     super(options)
+  }
 
+  static getInstance(options: TillhubSDKOptions): Tillhub {
     if (!Tillhub.instance) {
       Tillhub.instance = new Tillhub(options)
     }
@@ -103,3 +119,5 @@ export default class Tillhub extends TillhubClient {
     return Tillhub.instance
   }
 }
+
+export default Tillhub.getInstance({ base: defaultOptions.base })

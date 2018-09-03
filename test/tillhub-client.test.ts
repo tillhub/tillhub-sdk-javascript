@@ -19,7 +19,7 @@ if (process.env.SYSTEM_TEST) {
   user.apiKey = process.env.SYSTEM_TEST_API_KEY || user.apiKey
 }
 
-describe('SDK: can instantiate SDK', () => {
+describe('SDK: client: can instantiate SDK client', () => {
   it('TillhubClient is instantiable', () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       const mock = new MockAdapter(axios)
@@ -50,7 +50,7 @@ describe('SDK: can instantiate SDK', () => {
     expect(th).toBeInstanceOf(TillhubClient)
   })
 
-  it('Tillhub is instantiable', () => {
+  it('TillhubClient is instantiable', () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       const mock = new MockAdapter(axios)
 
@@ -79,7 +79,7 @@ describe('SDK: can instantiate SDK', () => {
     expect(new TillhubClient(options)).toBeInstanceOf(TillhubClient)
   })
 
-  it('Tillhub is inittable', async () => {
+  it('TillhubClient is inittable', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       const mock = new MockAdapter(axios)
 
