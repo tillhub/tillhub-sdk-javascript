@@ -27,7 +27,7 @@
     "build:main": "tsc -p tsconfig.json",
     "build:docs": "typedoc --out docs --target es6 --theme minimal --mode file src",
     "build:bundle": "webpack",
-    "build": "npm run clean && npm run build:main && npm run build:docs",
+    "build": "npm run clean && npm run build:bundle && npm run build:docs",
     "clean": "rimraf dist docs",
     "start": "rollup -c rollup.config.ts -w",
     "test": "jest",
