@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.3.2...v1.3.3) (2018-09-04)
+
+
+### Bug Fixes
+
+* use webpack to bundle ([c740d9e](https://github.com/tillhub/tillhub-sdk-javascript/commit/c740d9e))
+
 # [1.3.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.2.0...v1.3.0) (2018-09-03)
 
 
