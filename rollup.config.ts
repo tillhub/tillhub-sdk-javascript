@@ -6,6 +6,8 @@ import typescript from 'rollup-plugin-typescript2'
 import json from 'rollup-plugin-json'
 import builtins from 'rollup-plugin-node-builtins'
 import globals from 'rollup-plugin-node-globals'
+import visualizer from 'rollup-plugin-visualizer';
+
 
 const pkg = require('./package.json')
 
@@ -49,6 +51,7 @@ export default {
     }),
 
     // Resolve source maps to the original source
-    sourceMaps()
+    sourceMaps(),
+    visualizer()
   ],
 }
