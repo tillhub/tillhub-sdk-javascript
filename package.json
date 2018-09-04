@@ -86,7 +86,6 @@
     "@semantic-release/github": "^5.0.0",
     "@semantic-release/npm": "^4.0.1",
     "@types/jest": "^23.1.6",
-    "axios": "^0.18.0",
     "axios-mock-adapter": "^1.15.0",
     "browserify": "^16.2.2",
     "codecov": "^3.0.4",
@@ -127,7 +126,9 @@
     "webpack": "^4.17.2",
     "webpack-cli": "^3.1.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "axios": "^0.18.0"
+  },
   "release": {
     "verifyConditions": [
       "@semantic-release/changelog",
