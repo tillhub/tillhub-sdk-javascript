@@ -1,5 +1,3 @@
-/// <reference types="node" />
-import * as EventEmitter from 'events';
 import { UsernameAuth, TokenAuth } from './v0/Auth';
 import { Auth } from './v1/Auth';
 import { Transactions } from './v0/Transactions';
@@ -12,7 +10,7 @@ export interface TillhubSDKOptions {
     credentials?: UsernameAuth | TokenAuth | undefined;
     base?: string;
 }
-export declare class TillhubClient extends EventEmitter {
+export declare class TillhubClient {
     user?: string;
     auth?: Auth;
     http?: Client;

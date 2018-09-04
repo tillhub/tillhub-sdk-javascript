@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -9,14 +8,13 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-Object.defineProperty(exports, "__esModule", { value: true });
 var BaseError = /** @class */ (function () {
     function BaseError(message) {
         Error.apply(this, arguments);
     }
     return BaseError;
 }());
-exports.BaseError = BaseError;
+export { BaseError };
 BaseError.prototype = new Error();
 var AuthenticationFailed = /** @class */ (function (_super) {
     __extends(AuthenticationFailed, _super);
@@ -29,7 +27,7 @@ var AuthenticationFailed = /** @class */ (function (_super) {
     }
     return AuthenticationFailed;
 }(BaseError));
-exports.AuthenticationFailed = AuthenticationFailed;
+export { AuthenticationFailed };
 var UninstantiatedClient = /** @class */ (function (_super) {
     __extends(UninstantiatedClient, _super);
     function UninstantiatedClient(message) {
@@ -41,7 +39,7 @@ var UninstantiatedClient = /** @class */ (function (_super) {
     }
     return UninstantiatedClient;
 }(BaseError));
-exports.UninstantiatedClient = UninstantiatedClient;
+export { UninstantiatedClient };
 var TransactionFetchFailed = /** @class */ (function (_super) {
     __extends(TransactionFetchFailed, _super);
     function TransactionFetchFailed(message) {
@@ -53,5 +51,5 @@ var TransactionFetchFailed = /** @class */ (function (_super) {
     }
     return TransactionFetchFailed;
 }(BaseError));
-exports.TransactionFetchFailed = TransactionFetchFailed;
+export { TransactionFetchFailed };
 //# sourceMappingURL=Errors.js.map

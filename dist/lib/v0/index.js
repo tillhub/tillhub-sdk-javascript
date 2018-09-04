@@ -1,9 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var Auth_1 = require("./Auth");
-var Transactions_1 = require("./Transactions");
-exports.default = {
-    Auth: Auth_1.Auth,
-    Transactions: Transactions_1.Transactions
+import { Auth } from './Auth';
+import { Transactions } from './Transactions';
+export default {
+    Auth: Auth,
+    Transactions: Transactions
 };
 //# sourceMappingURL=index.js.map

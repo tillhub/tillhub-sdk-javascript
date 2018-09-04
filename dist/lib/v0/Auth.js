@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -34,23 +33,20 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var axios_1 = require("axios");
-var errors = require("../Errors");
-var Client_1 = require("../Client");
-var AuthTypes;
+import axios from 'axios';
+import * as errors from '../Errors';
+import { Client } from '../Client';
+export var AuthTypes;
 (function (AuthTypes) {
     AuthTypes[AuthTypes["username"] = 1] = "username";
     AuthTypes[AuthTypes["token"] = 2] = "token";
-})(AuthTypes = exports.AuthTypes || (exports.AuthTypes = {}));
-function isUsernameAuth(object) {
+})(AuthTypes || (AuthTypes = {}));
+export function isUsernameAuth(object) {
     return 'password' in object;
 }
-exports.isUsernameAuth = isUsernameAuth;
-function isTokenAuth(object) {
+export function isTokenAuth(object) {
     return 'apiKey' in object;
 }
-exports.isTokenAuth = isTokenAuth;
 /**
  * @class "v0.Auth"
  */
@@ -102,7 +98,7 @@ var Auth = /** @class */ (function () {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, axios_1.default.post(this.options.base + "/api/v0/users/login", {
+                        return [4 /*yield*/, axios.post(this.options.base + "/api/v0/users/login", {
                                 email: username,
                                 password: password
                             })];
@@ -136,9 +132,9 @@ var Auth = /** @class */ (function () {
         };
         this.token = token;
         this.user = user;
-        Client_1.Client.getInstance(clientOptions).setDefaults(clientOptions);
+        Client.getInstance(clientOptions).setDefaults(clientOptions);
     };
     return Auth;
 }());
-exports.Auth = Auth;
+export { Auth };
 //# sourceMappingURL=Auth.js.map

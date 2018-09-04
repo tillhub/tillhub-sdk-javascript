@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -34,8 +33,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var errors = require("../Errors");
+import * as errors from '../Errors';
 var Transactions = /** @class */ (function () {
     function Transactions(options, http) {
         this.options = options;
@@ -79,5 +77,5 @@ var Transactions = /** @class */ (function () {
     };
     return Transactions;
 }());
-exports.Transactions = Transactions;
+export { Transactions };
 //# sourceMappingURL=Transactions.js.map
