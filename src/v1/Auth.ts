@@ -1,15 +1,7 @@
 import axios from 'axios'
 import * as errors from '../Errors'
 import v0 from '../v0'
-import {
-  AuthOptions,
-  UsernameAuth,
-  AuthTypes,
-  AuthResponse,
-  TokenAuth,
-  isUsernameAuth,
-  isTokenAuth
-} from '../v0/Auth'
+import { AuthOptions, UsernameAuth, AuthTypes, AuthResponse, TokenAuth } from '../v0/Auth'
 
 /**
  * @extends "v0.Auth"

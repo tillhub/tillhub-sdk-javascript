@@ -1,7 +1,7 @@
 // Import here Polyfills if needed. Recommended core-js (npm i -D core-js)
 // import 'core-js/fn/array.find'
-import * as EventEmitter from 'events'
-import { AuthResponse, AuthOptions, AuthTypes, UsernameAuth, TokenAuth } from './v0/Auth'
+// import * as EventEmitter from 'events'
+import { AuthOptions, AuthTypes, UsernameAuth, TokenAuth } from './v0/Auth'
 import { Auth } from './v1/Auth'
 import { Transactions } from './v0/Transactions'
 import { Client, ClientOptions } from './Client'
@@ -21,7 +21,7 @@ export interface TillhubSDKOptions {
   base?: string
 }
 
-export class TillhubClient extends EventEmitter {
+export class TillhubClient {
   user?: string
   auth?: Auth
   http?: Client
@@ -29,7 +29,7 @@ export class TillhubClient extends EventEmitter {
   public options: TillhubSDKOptions | undefined
 
   constructor(options?: TillhubSDKOptions) {
-    super()
+    // super()
 
     if (!options) return
 

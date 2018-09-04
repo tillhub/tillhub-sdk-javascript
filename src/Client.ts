@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosPromise, AxiosInstance } from 'axios'
+import axios, { AxiosInstance } from 'axios'
 
 export interface ClientOptions {
   base?: string

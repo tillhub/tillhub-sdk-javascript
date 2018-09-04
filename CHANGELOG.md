@@ -1,10 +1,3 @@
-## [1.3.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.3.0...v1.3.1) (2018-09-03)
-
-
-### Bug Fixes
-
-* **build:** fixes browser resolving ([09d8ecd](https://github.com/tillhub/tillhub-sdk-javascript/commit/09d8ecd))
-
 # [1.3.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.2.0...v1.3.0) (2018-09-03)
 
 
