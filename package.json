@@ -3,7 +3,7 @@
   "version": "1.3.5",
   "description": "The JavaScript (Browser) SDK for the Tillhub API.",
   "keywords": [],
-  "main": "dist/bundle.js",
+  "main": "dist/tillhub-js.es5.js",
   "module": "dist/tillhub-js.es5.js",
   "typings": "dist/types/tillhub-js.d.ts",
   "files": [
@@ -26,7 +26,7 @@
     "prebuild": "rimraf dist",
     "build:main": "tsc -p tsconfig.json",
     "build:docs": "typedoc --out docs --target es6 --theme minimal --mode file src",
-    "build:bundle": "webpack",
+    "build:bundle": "tsc --module commonjs && rollup -c rollup.config.ts",
     "build": "npm run clean && npm run build:bundle && npm run build:docs",
     "clean": "rimraf dist docs",
     "start": "rollup -c rollup.config.ts -w",
@@ -86,6 +86,7 @@
     "@semantic-release/github": "^5.0.0",
     "@semantic-release/npm": "^4.0.1",
     "@types/jest": "^23.1.6",
+    "axios": "^0.18.0",
     "axios-mock-adapter": "^1.15.0",
     "browserify": "^16.2.2",
     "codecov": "^3.0.4",
@@ -114,7 +115,6 @@
     "semantic-release": "^15.9.12",
     "travis-deploy-once": "^5.0.1",
     "ts-jest": "^23.0.0",
-    "ts-loader": "^5.0.0",
     "ts-node": "^7.0.0",
     "tsify": "^4.0.0",
     "tslint": "^5.10.0",
@@ -122,13 +122,9 @@
     "tslint-config-standard": "^7.1.0",
     "typedoc": "^0.12.0",
     "typescript": "^2.9.2",
-    "validate-commit-msg": "^2.14.0",
-    "webpack": "^4.17.2",
-    "webpack-cli": "^3.1.0"
+    "validate-commit-msg": "^2.14.0"
   },
-  "dependencies": {
-    "axios": "^0.18.0"
-  },
+  "dependencies": {},
   "release": {
     "verifyConditions": [
       "@semantic-release/changelog",

@@ -4,10 +4,16 @@ import sourceMaps from 'rollup-plugin-sourcemaps'
 import camelCase from 'lodash.camelcase'
 import typescript from 'rollup-plugin-typescript2'
 import json from 'rollup-plugin-json'
+import builtins from 'rollup-plugin-node-builtins'
+import globals from 'rollup-plugin-node-globals'
 
 const pkg = require('./package.json')
 
 const libraryName = 'tillhub-js'
+
+const external = [
+
+];
 
 export default {
   input: `src/${libraryName}.ts`,
@@ -17,25 +23,29 @@ export default {
   ],
   sourcemap: true,
   // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
-  external: [],
+  external,
   watch: {
     include: 'src/**',
   },
+  format: 'iife',
   plugins: [
-    json(),
+
     // Compile TypeScript files
     typescript({ useTsconfigDeclarationDir: true }),
-    // Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs)
-    commonjs({
-      ignoreGlobal: true
-    }),
+    globals(),
+    builtins(),
     // Allow node_modules resolution, so you can use 'external' to control
     // which external modules to include in the bundle
     // https://github.com/rollup/rollup-plugin-node-resolve#usage
     resolve({
-      jsnext: true,
-      preferBuiltins: true,
+      preferBuiltins: false,
       browser: true
+    }),
+
+    json(),
+
+    commonjs({
+      ignoreGlobal: true
     }),
 
     // Resolve source maps to the original source
