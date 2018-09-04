@@ -1,3 +1,4 @@
+"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -43,10 +44,21 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import axios from 'axios';
-import * as errors from '../Errors';
-import v0 from '../v0';
-import { AuthTypes } from '../v0/Auth';
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var axios_1 = __importDefault(require("axios"));
+var errors = __importStar(require("../Errors"));
+var v0_1 = __importDefault(require("../v0"));
+var Auth_1 = require("../v0/Auth");
 /**
  * @extends "v0.Auth"
  */
@@ -65,10 +77,10 @@ var Auth = /** @class */ (function (_super) {
     Auth.prototype.authenticate = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                if (this.options.type === AuthTypes.username) {
+                if (this.options.type === Auth_1.AuthTypes.username) {
                     return [2 /*return*/, this.loginUsername(this.options.credentials)];
                 }
-                if (this.options.type === AuthTypes.token) {
+                if (this.options.type === Auth_1.AuthTypes.token) {
                     return [2 /*return*/, this.loginServiceAccount(this.options.credentials)];
                 }
                 return [2 /*return*/, [new errors.AuthenticationFailed('No auth data was provided'), null]];
@@ -82,7 +94,7 @@ var Auth = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios.post(this.options.base + "/api/v1/users/auth/key", {
+                        return [4 /*yield*/, axios_1.default.post(this.options.base + "/api/v1/users/auth/key", {
                                 id: authData.id,
                                 apiKey: authData.apiKey
                             })];
@@ -102,6 +114,6 @@ var Auth = /** @class */ (function (_super) {
         });
     };
     return Auth;
-}(v0.Auth));
-export { Auth };
+}(v0_1.default.Auth));
+exports.Auth = Auth;
 //# sourceMappingURL=Auth.js.map

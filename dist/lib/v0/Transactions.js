@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -33,7 +34,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import * as errors from '../Errors';
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var errors = __importStar(require("../Errors"));
 var Transactions = /** @class */ (function () {
     function Transactions(options, http) {
         this.options = options;
@@ -77,5 +86,5 @@ var Transactions = /** @class */ (function () {
     };
     return Transactions;
 }());
-export { Transactions };
+exports.Transactions = Transactions;
 //# sourceMappingURL=Transactions.js.map

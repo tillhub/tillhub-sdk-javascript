@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -33,20 +34,33 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import axios from 'axios';
-import * as errors from '../Errors';
-import { Client } from '../Client';
-export var AuthTypes;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var axios_1 = __importDefault(require("axios"));
+var errors = __importStar(require("../Errors"));
+var Client_1 = require("../Client");
+var AuthTypes;
 (function (AuthTypes) {
     AuthTypes[AuthTypes["username"] = 1] = "username";
     AuthTypes[AuthTypes["token"] = 2] = "token";
-})(AuthTypes || (AuthTypes = {}));
-export function isUsernameAuth(object) {
+})(AuthTypes = exports.AuthTypes || (exports.AuthTypes = {}));
+function isUsernameAuth(object) {
     return 'password' in object;
 }
-export function isTokenAuth(object) {
+exports.isUsernameAuth = isUsernameAuth;
+function isTokenAuth(object) {
     return 'apiKey' in object;
 }
+exports.isTokenAuth = isTokenAuth;
 /**
  * @class "v0.Auth"
  */
@@ -98,7 +112,7 @@ var Auth = /** @class */ (function () {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, axios.post(this.options.base + "/api/v0/users/login", {
+                        return [4 /*yield*/, axios_1.default.post(this.options.base + "/api/v0/users/login", {
                                 email: username,
                                 password: password
                             })];
@@ -132,9 +146,9 @@ var Auth = /** @class */ (function () {
         };
         this.token = token;
         this.user = user;
-        Client.getInstance(clientOptions).setDefaults(clientOptions);
+        Client_1.Client.getInstance(clientOptions).setDefaults(clientOptions);
     };
     return Auth;
 }());
-export { Auth };
+exports.Auth = Auth;
 //# sourceMappingURL=Auth.js.map

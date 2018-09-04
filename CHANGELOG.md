@@ -1,3 +1,10 @@
+## [1.3.6](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.3.5...v1.3.6) (2018-09-04)
+
+
+### Bug Fixes
+
+* revert back to bundling with rollup ([e2457c8](https://github.com/tillhub/tillhub-sdk-javascript/commit/e2457c8))
+
 ## [1.3.5](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.3.4...v1.3.5) (2018-09-04)
 
 

@@ -1,3 +1,4 @@
+"use strict";
 var __assign = (this && this.__assign) || Object.assign || function(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
         s = arguments[i];
@@ -6,10 +7,14 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     }
     return t;
 };
-import axios from 'axios';
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var axios_1 = __importDefault(require("axios"));
 var Client = /** @class */ (function () {
     function Client(options) {
-        this.axiosInstance = axios.create({
+        this.axiosInstance = axios_1.default.create({
             // baseURL: options.base || 'https://api.tillhub.com',
             timeout: options.timeout || 10000,
             headers: __assign({}, options.headers, { 'X-Client-Type': 'Tillhub SDK JavaScript' })
@@ -31,5 +36,5 @@ var Client = /** @class */ (function () {
     };
     return Client;
 }());
-export { Client };
+exports.Client = Client;
 //# sourceMappingURL=Client.js.map
