@@ -1,3 +1,10 @@
+## [1.3.5](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.3.4...v1.3.5) (2018-09-04)
+
+
+### Bug Fixes
+
+* fixes build script to bundle ([bb3d9e0](https://github.com/tillhub/tillhub-sdk-javascript/commit/bb3d9e0))
+
 ## [1.3.4](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.3.3...v1.3.4) (2018-09-04)
 
 
