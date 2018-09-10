@@ -121,7 +121,8 @@ var Auth = /** @class */ (function () {
                         this.setDefaultHeader(response.data.user.legacy_id || response.data.user.id, response.data.token);
                         return [2 /*return*/, {
                                 token: response.data.token,
-                                user: response.data.user.legacy_id || response.data.user.id
+                                user: response.data.user.legacy_id || response.data.user.id,
+                                name: response.data.user.name
                             }];
                     case 3:
                         err_1 = _a.sent();

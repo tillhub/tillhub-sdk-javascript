@@ -100,8 +100,12 @@ var Auth = /** @class */ (function (_super) {
                             })];
                     case 1:
                         response = _a.sent();
-                        this.setDefaultHeader(response.data.user, response.data.token);
-                        return [2 /*return*/, response.data];
+                        this.setDefaultHeader(response.data.user.legacy_id || response.data.user.id, response.data.token);
+                        return [2 /*return*/, {
+                                token: response.data.token,
+                                user: response.data.user.legacy_id || response.data.user.id,
+                                name: response.data.user.name
+                            }];
                     case 2:
                         err_1 = _a.sent();
                         error = new errors.AuthenticationFailed();

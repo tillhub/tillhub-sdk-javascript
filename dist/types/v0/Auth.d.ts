@@ -20,6 +20,7 @@ export declare function isTokenAuth(object: any): object is TokenAuth;
 export interface AuthResponse {
     token: string;
     user: string;
+    name?: string;
 }
 /**
  * @class "v0.Auth"

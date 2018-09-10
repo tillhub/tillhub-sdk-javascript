@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.3.9...v1.4.0) (2018-09-10)
+
+
+### Features
+
+* **auth:** exposes name ([9bb1f71](https://github.com/tillhub/tillhub-sdk-javascript/commit/9bb1f71))
+
 ## [1.3.9](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.3.8...v1.3.9) (2018-09-10)
 
 
