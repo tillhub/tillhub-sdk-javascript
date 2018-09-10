@@ -9,8 +9,8 @@ import th from '../../dist/lib/tillhub-js'
 export default class Simple extends React.Component {
   state = {
     result: null,
-    email: '',
-    password: '',
+    email: window.localStorage.getItem('email') || '',
+    password: window.localStorage.getItem('password') || '',
   }
 
   async makeCall() {
@@ -63,13 +63,19 @@ try {
           type="text"
           style={{ maxWidth: '10em', marginBottom: '1em' }}
           value={this.state.email}
-          onChange={(e) => this.setState({ email: e.target.value })}
+          onChange={(e) => {
+            window.localStorage.setItem('email', e.target.value)
+            this.setState({ email: e.target.value })
+          }}
           placeholder="Email" />
         <input
           type="text"
           style={{ maxWidth: '10em', marginBottom: '1em' }}
           value={this.state.password}
-          onChange={(e) => this.setState({ password: e.target.value })}
+          onChange={(e) => {
+            window.localStorage.setItem('password', e.target.value)
+            this.setState({ password: e.target.value })
+          }}
           placeholder="Password" />
 
         <button style={{ maxWidth: '5em', marginBottom: '1em' }} onClick={() => this.makeCall()}>Call</button>
