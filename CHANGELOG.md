@@ -1,3 +1,10 @@
+## [1.3.7](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.3.6...v1.3.7) (2018-09-10)
+
+
+### Bug Fixes
+
+* makes lib runnable; adds storybook ([272131a](https://github.com/tillhub/tillhub-sdk-javascript/commit/272131a))
+
 ## [1.3.6](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.3.5...v1.3.6) (2018-09-04)
 
 
