@@ -1,3 +1,10 @@
+## [1.3.8](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.3.7...v1.3.8) (2018-09-10)
+
+
+### Bug Fixes
+
+* fixes main ([386cc65](https://github.com/tillhub/tillhub-sdk-javascript/commit/386cc65))
+
 ## [1.3.7](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.3.6...v1.3.7) (2018-09-10)
 
 
