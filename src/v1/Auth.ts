@@ -21,7 +21,7 @@ export class Auth extends v0.Auth {
     this.determineAuthType()
   }
 
-  async authenticate(): Promise<[errors.AuthenticationFailed | null, AuthResponse | null]> {
+  async authenticate(): Promise<AuthResponse> {
     if (this.options.type === AuthTypes.username) {
       return this.loginUsername(this.options.credentials as UsernameAuth)
     }
@@ -30,12 +30,10 @@ export class Auth extends v0.Auth {
       return this.loginServiceAccount(this.options.credentials as TokenAuth)
     }
 
-    return [new errors.AuthenticationFailed('No auth data was provided'), null]
+    throw new errors.AuthenticationFailed('No auth data was provided')
   }
 
-  async loginServiceAccount(
-    authData: TokenAuth
-  ): Promise<[errors.AuthenticationFailed | null, AuthResponse | null]> {
+  async loginServiceAccount(authData: TokenAuth): Promise<AuthResponse> {
     try {
       const response = await axios.post(`${this.options.base}/api/v1/users/auth/key`, {
         id: authData.id,
@@ -43,12 +41,13 @@ export class Auth extends v0.Auth {
       })
 
       this.setDefaultHeader(response.data.user, response.data.token)
-      return [null, response.data]
+      return response.data
     } catch (err) {
-      return [
-        new errors.AuthenticationFailed(),
-        err.ressponse && err.response.data ? err.response.data : null
-      ]
+      const error = new errors.AuthenticationFailed()
+      err.error = err
+      err.body = err.ressponse && err.response.data ? err.response.data : null
+
+      throw error
     }
   }
 }

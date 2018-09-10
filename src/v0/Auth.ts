@@ -60,17 +60,15 @@ export class Auth {
     if (isTokenAuth(this.options.credentials)) this.options.type = AuthTypes.username
   }
 
-  async authenticate(): Promise<[errors.AuthenticationFailed | null, AuthResponse | null]> {
+  async authenticate(): Promise<AuthResponse> {
     if (this.options.type === AuthTypes.username) {
       return this.loginUsername(this.options.credentials as UsernameAuth)
     }
 
-    return [new errors.AuthenticationFailed('No auth data was provided'), null]
+    throw new errors.AuthenticationFailed('No auth data was provided')
   }
 
-  async loginUsername(
-    authData: UsernameAuth = {} as UsernameAuth
-  ): Promise<[errors.AuthenticationFailed | null, AuthResponse | null]> {
+  async loginUsername(authData: UsernameAuth = {} as UsernameAuth): Promise<AuthResponse> {
     let username: string
     let password: string
     if (
@@ -98,18 +96,16 @@ export class Auth {
         response.data.token
       )
 
-      return [
-        null,
-        {
-          token: response.data.token,
-          user: response.data.user.legacy_id || response.data.user.id
-        } as AuthResponse
-      ]
+      return {
+        token: response.data.token,
+        user: response.data.user.legacy_id || response.data.user.id
+      } as AuthResponse
     } catch (err) {
-      return [
-        new errors.AuthenticationFailed(),
-        err.ressponse && err.response.data ? err.response.data : null
-      ]
+      const error = new errors.AuthenticationFailed()
+      err.error = err
+      err.body = err.ressponse && err.response.data ? err.response.data : null
+
+      throw error
     }
   }
 

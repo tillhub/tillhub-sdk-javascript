@@ -3,6 +3,7 @@ import 'prismjs/themes/prism.css'
 import 'prismjs'
 import PrismCode from 'react-prism'
 import { codeBlock } from 'common-tags'
+import serialiseError from 'serialize-error'
 import th from '../../dist/lib/tillhub-js'
 
 export default class Simple extends React.Component {
@@ -23,10 +24,10 @@ export default class Simple extends React.Component {
     }
 
     try {
-      let [err, body] = await th.auth.loginUsername(options)
-      this.setState({ result: err ? err.toString() : JSON.stringify(body, null, 2) })
+      let data = await th.auth.loginUsername(options)
+      this.setState({ result: JSON.stringify(data, null, 2) })
     } catch (err) {
-      this.setState({ result: err })
+      this.setState({ result: JSON.stringify(serialiseError(err), null, 2) })
     }
   }
 
@@ -47,7 +48,14 @@ const options = {
   password: '${this.state.password}'
 }
 
-let [err, body] = await th.auth.loginUsername(options)
+try {
+  const data = await th.auth.loginUsername(options)
+} catch (err) {
+  // handle error
+  // we are attaching the body of the API error at err.body and the original error at err.error
+
+  // the example output below is just serialised
+}
         `}
         </PrismCode>
 
