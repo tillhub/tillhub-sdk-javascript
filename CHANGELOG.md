@@ -1,3 +1,11 @@
+## [1.3.9](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.3.8...v1.3.9) (2018-09-10)
+
+
+### Bug Fixes
+
+* fixes test after promise throw change ([0cbac16](https://github.com/tillhub/tillhub-sdk-javascript/commit/0cbac16))
+* refactor for simple err throw ([0e4ef96](https://github.com/tillhub/tillhub-sdk-javascript/commit/0e4ef96))
+
 ## [1.3.8](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.3.7...v1.3.8) (2018-09-10)
 
 

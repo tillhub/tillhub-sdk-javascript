@@ -83,13 +83,13 @@ var Auth = /** @class */ (function (_super) {
                 if (this.options.type === Auth_1.AuthTypes.token) {
                     return [2 /*return*/, this.loginServiceAccount(this.options.credentials)];
                 }
-                return [2 /*return*/, [new errors.AuthenticationFailed('No auth data was provided'), null]];
+                throw new errors.AuthenticationFailed('No auth data was provided');
             });
         });
     };
     Auth.prototype.loginServiceAccount = function (authData) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, err_1;
+            var response, err_1, error;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -101,13 +101,13 @@ var Auth = /** @class */ (function (_super) {
                     case 1:
                         response = _a.sent();
                         this.setDefaultHeader(response.data.user, response.data.token);
-                        return [2 /*return*/, [null, response.data]];
+                        return [2 /*return*/, response.data];
                     case 2:
                         err_1 = _a.sent();
-                        return [2 /*return*/, [
-                                new errors.AuthenticationFailed(),
-                                err_1.ressponse && err_1.response.data ? err_1.response.data : null
-                            ]];
+                        error = new errors.AuthenticationFailed();
+                        err_1.error = err_1;
+                        err_1.body = err_1.ressponse && err_1.response.data ? err_1.response.data : null;
+                        throw error;
                     case 3: return [2 /*return*/];
                 }
             });

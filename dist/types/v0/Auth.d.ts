@@ -1,4 +1,3 @@
-import * as errors from '../Errors';
 export declare enum AuthTypes {
     username = 1,
     token = 2
@@ -32,7 +31,7 @@ export declare class Auth {
     user?: string;
     constructor(options: AuthOptions);
     protected determineAuthType(): void;
-    authenticate(): Promise<[errors.AuthenticationFailed | null, AuthResponse | null]>;
-    loginUsername(authData?: UsernameAuth): Promise<[errors.AuthenticationFailed | null, AuthResponse | null]>;
+    authenticate(): Promise<AuthResponse>;
+    loginUsername(authData?: UsernameAuth): Promise<AuthResponse>;
     protected setDefaultHeader(user: string, token: string): void;
 }

@@ -85,14 +85,14 @@ var Auth = /** @class */ (function () {
                 if (this.options.type === AuthTypes.username) {
                     return [2 /*return*/, this.loginUsername(this.options.credentials)];
                 }
-                return [2 /*return*/, [new errors.AuthenticationFailed('No auth data was provided'), null]];
+                throw new errors.AuthenticationFailed('No auth data was provided');
             });
         });
     };
     Auth.prototype.loginUsername = function (authData) {
         if (authData === void 0) { authData = {}; }
         return __awaiter(this, void 0, void 0, function () {
-            var username, password, response, err_1;
+            var username, password, response, err_1, error;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -119,19 +119,16 @@ var Auth = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         this.setDefaultHeader(response.data.user.legacy_id || response.data.user.id, response.data.token);
-                        return [2 /*return*/, [
-                                null,
-                                {
-                                    token: response.data.token,
-                                    user: response.data.user.legacy_id || response.data.user.id
-                                }
-                            ]];
+                        return [2 /*return*/, {
+                                token: response.data.token,
+                                user: response.data.user.legacy_id || response.data.user.id
+                            }];
                     case 3:
                         err_1 = _a.sent();
-                        return [2 /*return*/, [
-                                new errors.AuthenticationFailed(),
-                                err_1.ressponse && err_1.response.data ? err_1.response.data : null
-                            ]];
+                        error = new errors.AuthenticationFailed();
+                        err_1.error = err_1;
+                        err_1.body = err_1.ressponse && err_1.response.data ? err_1.response.data : null;
+                        throw error;
                     case 4: return [2 /*return*/];
                 }
             });
