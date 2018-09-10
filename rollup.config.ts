@@ -4,8 +4,6 @@ import sourceMaps from 'rollup-plugin-sourcemaps'
 import camelCase from 'lodash.camelcase'
 import typescript from 'rollup-plugin-typescript2'
 import json from 'rollup-plugin-json'
-import builtins from 'rollup-plugin-node-builtins'
-import globals from 'rollup-plugin-node-globals'
 import visualizer from 'rollup-plugin-visualizer';
 
 
@@ -34,14 +32,13 @@ export default {
 
     // Compile TypeScript files
     typescript({ useTsconfigDeclarationDir: true }),
-    globals(),
-    builtins(),
     // Allow node_modules resolution, so you can use 'external' to control
     // which external modules to include in the bundle
     // https://github.com/rollup/rollup-plugin-node-resolve#usage
     resolve({
       preferBuiltins: false,
-      browser: true
+      browser: true,
+      extensions: ['.ts', '.js', '.ts']
     }),
 
     json(),
