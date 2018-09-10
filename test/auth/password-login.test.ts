@@ -48,12 +48,14 @@ describe('Auth: make auth flow', () => {
 
     const auth = new v0.Auth(options)
 
-    let [err, body] = await auth.authenticate()
-
-    expect(err).toBeNull()
-    expect(body).toBeTruthy()
-    expect(typeof body.token === 'string').toBe(true)
-    expect(typeof body.user === 'string').toBe(true)
+    try {
+      let data = await auth.authenticate()
+      expect(data).toBeTruthy()
+      expect(typeof data.token === 'string').toBe(true)
+      expect(typeof data.user === 'string').toBe(true)
+    } catch (err) {
+      throw err
+    }
   })
 
   it('v1: Auth: Can make password auth implicitly', async () => {
@@ -84,11 +86,13 @@ describe('Auth: make auth flow', () => {
 
     const auth = new v1.Auth(options)
 
-    let [err, body] = await auth.authenticate()
-
-    expect(err).toBeNull()
-    expect(body).toBeTruthy()
-    expect(typeof body.token === 'string').toBe(true)
-    expect(typeof body.user === 'string').toBe(true)
+    try {
+      let data = await auth.authenticate()
+      expect(data).toBeTruthy()
+      expect(typeof data.token === 'string').toBe(true)
+      expect(typeof data.user === 'string').toBe(true)
+    } catch (err) {
+      throw err
+    }
   })
 })

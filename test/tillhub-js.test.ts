@@ -61,14 +61,16 @@ describe('SDK: can instantiate SDK', () => {
       })
     }
 
-    let [err, body] = await th.auth.loginUsername(options)
-
-    expect(err).toBeNull()
-    expect(body).toBeTruthy()
-    expect(typeof body.token === 'string').toBe(true)
-    expect(body.token).toBe('sometoken')
-    expect(typeof body.user === 'string').toBe(true)
-    expect(body.user).toBe('4564')
-    expect(th.auth.token).toBe('sometoken')
+    try {
+      let data = await th.auth.loginUsername(options)
+      expect(data).toBeTruthy()
+      expect(typeof data.token === 'string').toBe(true)
+      expect(data.token).toBe('sometoken')
+      expect(typeof data.user === 'string').toBe(true)
+      expect(data.user).toBe('4564')
+      expect(th.auth.token).toBe('sometoken')
+    } catch (err) {
+      throw err
+    }
   })
 })
