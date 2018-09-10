@@ -34,6 +34,7 @@ export function isTokenAuth(object: any): object is TokenAuth {
 export interface AuthResponse {
   token: string
   user: string
+  name?: string
 }
 
 /**
@@ -98,7 +99,8 @@ export class Auth {
 
       return {
         token: response.data.token,
-        user: response.data.user.legacy_id || response.data.user.id
+        user: response.data.user.legacy_id || response.data.user.id,
+        name: response.data.user.name
       } as AuthResponse
     } catch (err) {
       const error = new errors.AuthenticationFailed()

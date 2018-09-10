@@ -40,8 +40,16 @@ export class Auth extends v0.Auth {
         apiKey: authData.apiKey
       })
 
-      this.setDefaultHeader(response.data.user, response.data.token)
-      return response.data
+      this.setDefaultHeader(
+        response.data.user.legacy_id || response.data.user.id,
+        response.data.token
+      )
+
+      return {
+        token: response.data.token,
+        user: response.data.user.legacy_id || response.data.user.id,
+        name: response.data.user.name
+      } as AuthResponse
     } catch (err) {
       const error = new errors.AuthenticationFailed()
       err.error = err
