@@ -100,7 +100,13 @@ export class TillhubClient {
   }
 
   taxes(): Taxes {
-    if (!this.options || !this.options.base || !this.http || !this.auth) {
+    if (
+      !this.options ||
+      !this.options.base ||
+      !this.http ||
+      !this.auth ||
+      !this.auth.authenticated
+    ) {
       throw new errors.UninstantiatedClient()
     }
 
