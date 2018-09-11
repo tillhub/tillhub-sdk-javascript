@@ -26,3 +26,10 @@ export class TransactionFetchFailed extends BaseError {
     super(message)
   }
 }
+
+export class TaxesFetchFailed extends BaseError {
+  public name = 'TaxesFetchFailed'
+  constructor(public message: string = 'Could not fetch taxes') {
+    super(message)
+  }
+}

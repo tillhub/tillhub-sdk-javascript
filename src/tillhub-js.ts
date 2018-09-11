@@ -4,6 +4,7 @@
 import { AuthOptions, AuthTypes, UsernameAuth, TokenAuth } from './v0/Auth'
 import { Auth } from './v1/Auth'
 import { Transactions } from './v0/Transactions'
+import { Taxes } from './v0/Taxes'
 import { Client, ClientOptions } from './Client'
 import * as errors from './Errors'
 
@@ -75,6 +76,14 @@ export class TillhubClient {
     }
 
     return new Transactions({ user: this.auth.user, base: this.options.base }, this.http)
+  }
+
+  taxes(): Taxes {
+    if (!this.options || !this.options.base || !this.http || !this.auth) {
+      throw new errors.UninstantiatedClient()
+    }
+
+    return new Taxes({ user: this.auth.user, base: this.options.base }, this.http)
   }
 }
 
