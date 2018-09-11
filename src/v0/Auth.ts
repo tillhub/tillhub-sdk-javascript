@@ -9,7 +9,7 @@ export enum AuthTypes {
 
 export interface AuthOptions {
   type?: AuthTypes | undefined
-  credentials?: UsernameAuth | TokenAuth
+  credentials?: UsernameAuth | KeyAuth
   base?: string | undefined
 }
 
@@ -18,7 +18,7 @@ export interface UsernameAuth {
   password: string
 }
 
-export interface TokenAuth {
+export interface KeyAuth {
   id: string
   apiKey: string
 }
@@ -27,7 +27,7 @@ export function isUsernameAuth(object: any): object is UsernameAuth {
   return 'password' in object
 }
 
-export function isTokenAuth(object: any): object is TokenAuth {
+export function isTokenAuth(object: any): object is KeyAuth {
   return 'apiKey' in object
 }
 

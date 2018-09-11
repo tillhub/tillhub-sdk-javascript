@@ -1,7 +1,7 @@
 import axios from 'axios'
 import * as errors from '../Errors'
 import v0 from '../v0'
-import { AuthOptions, UsernameAuth, AuthTypes, AuthResponse, TokenAuth } from '../v0/Auth'
+import { AuthOptions, UsernameAuth, AuthTypes, AuthResponse, KeyAuth } from '../v0/Auth'
 
 /**
  * @extends "v0.Auth"
@@ -27,13 +27,13 @@ export class Auth extends v0.Auth {
     }
 
     if (this.options.type === AuthTypes.token) {
-      return this.loginServiceAccount(this.options.credentials as TokenAuth)
+      return this.loginServiceAccount(this.options.credentials as KeyAuth)
     }
 
     throw new errors.AuthenticationFailed('No auth data was provided')
   }
 
-  async loginServiceAccount(authData: TokenAuth): Promise<AuthResponse> {
+  async loginServiceAccount(authData: KeyAuth): Promise<AuthResponse> {
     try {
       const response = await axios.post(`${this.options.base}/api/v1/users/auth/key`, {
         id: authData.id,

@@ -1,7 +1,7 @@
 // Import here Polyfills if needed. Recommended core-js (npm i -D core-js)
 // import 'core-js/fn/array.find'
 // import * as EventEmitter from 'events'
-import { AuthOptions, AuthTypes, UsernameAuth, TokenAuth } from './v0/Auth'
+import { AuthOptions, AuthTypes, UsernameAuth, KeyAuth } from './v0/Auth'
 import { Auth } from './v1/Auth'
 import { Transactions } from './v0/Transactions'
 import { Taxes } from './v0/Taxes'
@@ -18,7 +18,7 @@ export const defaultOptions: TillhubSDKOptions = {
 }
 
 export interface TillhubSDKOptions {
-  credentials?: UsernameAuth | TokenAuth | undefined
+  credentials?: UsernameAuth | KeyAuth | undefined
   base?: string
 }
 
