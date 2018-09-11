@@ -1,4 +1,4 @@
-import { Client } from '../Client';
+import { Client } from '../client';
 export interface TransactionsOptions {
     user?: string;
     base?: string;

@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Auth_1 = require("./Auth");
-var Transactions_1 = require("./Transactions");
-var Taxes_1 = require("./Taxes");
+var auth_1 = require("./auth");
+var transactions_1 = require("./transactions");
+var taxes_1 = require("./taxes");
 exports.default = {
-    Auth: Auth_1.Auth,
-    Transactions: Transactions_1.Transactions,
-    Taxes: Taxes_1.Taxes
+    Auth: auth_1.Auth,
+    Transactions: transactions_1.Transactions,
+    Taxes: taxes_1.Taxes
 };
 //# sourceMappingURL=index.js.map

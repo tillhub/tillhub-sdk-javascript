@@ -1,14 +1,4 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -44,9 +34,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -55,69 +42,45 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var axios_1 = __importDefault(require("axios"));
-var errors = __importStar(require("../Errors"));
-var v0_1 = __importDefault(require("../v0"));
-var Auth_1 = require("../v0/Auth");
-/**
- * @extends "v0.Auth"
- */
-var Auth = /** @class */ (function (_super) {
-    __extends(Auth, _super);
-    function Auth(options) {
-        var _this = _super.call(this, options) || this;
-        _this.authenticated = false;
-        _this.options = options;
-        _this.options.base = _this.options.base || 'https://api.tillhub.com';
-        if (!_this.options.credentials)
-            return _this;
-        _this.determineAuthType();
-        return _this;
+var errors = __importStar(require("../errors"));
+var Taxes = /** @class */ (function () {
+    function Taxes(options, http) {
+        this.options = options;
+        this.http = http;
+        this.endpoint = '/api/v0/taxes';
+        this.options.base = this.options.base || 'https://api.tillhub.com';
     }
-    Auth.prototype.authenticate = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                if (this.options.type === Auth_1.AuthTypes.username) {
-                    return [2 /*return*/, this.loginUsername(this.options.credentials)];
-                }
-                if (this.options.type === Auth_1.AuthTypes.token) {
-                    return [2 /*return*/, this.loginServiceAccount(this.options.credentials)];
-                }
-                throw new errors.AuthenticationFailed('No auth data was provided');
-            });
-        });
-    };
-    Auth.prototype.loginServiceAccount = function (authData) {
-        return __awaiter(this, void 0, void 0, function () {
-            var response, err_1, error;
+    Taxes.prototype.getAll = function (query) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post(this.options.base + "/api/v1/users/auth/key", {
-                                id: authData.id,
-                                apiKey: authData.apiKey
-                            })];
+                        uri = void 0;
+                        if (query && query.uri) {
+                            uri = query.uri;
+                        }
+                        else {
+                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user;
+                        }
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
-                        this.setDefaultHeader(response.data.user.legacy_id || response.data.user.id, response.data.token);
-                        return [2 /*return*/, {
-                                token: response.data.token,
-                                user: response.data.user.legacy_id || response.data.user.id,
-                                name: response.data.user.name
-                            }];
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            })];
                     case 2:
                         err_1 = _a.sent();
-                        error = new errors.AuthenticationFailed();
-                        err_1.error = err_1;
-                        err_1.body = err_1.ressponse && err_1.response.data ? err_1.response.data : null;
-                        throw error;
+                        return [2 /*return*/, reject(new errors.TaxesFetchFailed())];
                     case 3: return [2 /*return*/];
                 }
             });
-        });
+        }); });
     };
-    return Auth;
-}(v0_1.default.Auth));
-exports.Auth = Auth;
-//# sourceMappingURL=Auth.js.map
+    return Taxes;
+}());
+exports.Taxes = Taxes;
+//# sourceMappingURL=taxes.js.map

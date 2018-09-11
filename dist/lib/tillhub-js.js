@@ -20,14 +20,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// Import here Polyfills if needed. Recommended core-js (npm i -D core-js)
-// import 'core-js/fn/array.find'
-// import * as EventEmitter from 'events'
-var Auth_1 = require("./v0/Auth");
-var Transactions_1 = require("./v0/Transactions");
-var Taxes_1 = require("./v0/Taxes");
-var Client_1 = require("./Client");
-var errors = __importStar(require("./Errors"));
+var transactions_1 = require("./v0/transactions");
+var taxes_1 = require("./v0/taxes");
+var client_1 = require("./client");
+var errors = __importStar(require("./errors"));
 var v0_1 = __importDefault(require("./v0"));
 exports.v0 = v0_1.default;
 var v1_1 = __importDefault(require("./v1"));
@@ -48,40 +44,60 @@ var TillhubClient = /** @class */ (function () {
      */
     TillhubClient.prototype.init = function (options) {
         if (options === void 0) { options = exports.defaultOptions; }
-        this.handleOptions(options);
+        // in cases where credentials and / or tokens and / or users are already
+        // we will short circuit the client initialisations
+        if (this.handleOptions(options))
+            return;
+        // in all other cases we will instantiate clients, that need to be authenticated
+        // by the caller before any API will be available
         var clientOptions = {
             headers: {}
         };
         this.auth = new v1_1.default.Auth({ base: options ? options.base : exports.defaultOptions.base });
-        this.http = Client_1.Client.getInstance(clientOptions).setDefaults(clientOptions);
+        this.http = client_1.Client.getInstance(clientOptions).setDefaults(clientOptions);
     };
     TillhubClient.prototype.handleOptions = function (options) {
         this.options = options;
         this.options.base = this.options.base || 'https://api.tillhub.com';
+        this.user = this.options.user;
         if (options.credentials) {
             var authOptions = {
-                type: Auth_1.AuthTypes.username,
                 credentials: options.credentials,
-                base: this.options.base
+                base: this.options.base,
+                user: this.user
+            };
+            var clientOptions = {
+                headers: {}
             };
             this.auth = new v1_1.default.Auth(authOptions);
+            this.http = client_1.Client.getInstance(clientOptions).setDefaults(clientOptions);
+            return true;
         }
+        return false;
     };
     /**
      * Create an authenticated transactions instance
      *
      */
     TillhubClient.prototype.transactions = function () {
-        if (!this.options || !this.options.base || !this.http || !this.auth) {
+        if (!this.options ||
+            !this.options.base ||
+            !this.http ||
+            !this.auth ||
+            !this.auth.authenticated) {
             throw new errors.UninstantiatedClient();
         }
-        return new Transactions_1.Transactions({ user: this.auth.user, base: this.options.base }, this.http);
+        return new transactions_1.Transactions({ user: this.auth.user, base: this.options.base }, this.http);
     };
     TillhubClient.prototype.taxes = function () {
-        if (!this.options || !this.options.base || !this.http || !this.auth) {
+        if (!this.options ||
+            !this.options.base ||
+            !this.http ||
+            !this.auth ||
+            !this.auth.authenticated) {
             throw new errors.UninstantiatedClient();
         }
-        return new Taxes_1.Taxes({ user: this.auth.user, base: this.options.base }, this.http);
+        return new taxes_1.Taxes({ user: this.auth.user, base: this.options.base }, this.http);
     };
     return TillhubClient;
 }());

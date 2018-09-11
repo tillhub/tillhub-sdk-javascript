@@ -46,19 +46,24 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = __importDefault(require("axios"));
-var errors = __importStar(require("../Errors"));
-var Client_1 = require("../Client");
+var errors = __importStar(require("../errors"));
+var client_1 = require("../client");
 var AuthTypes;
 (function (AuthTypes) {
     AuthTypes[AuthTypes["username"] = 1] = "username";
-    AuthTypes[AuthTypes["token"] = 2] = "token";
+    AuthTypes[AuthTypes["key"] = 2] = "key";
+    AuthTypes[AuthTypes["token"] = 3] = "token";
 })(AuthTypes = exports.AuthTypes || (exports.AuthTypes = {}));
 function isUsernameAuth(object) {
     return 'password' in object;
 }
 exports.isUsernameAuth = isUsernameAuth;
-function isTokenAuth(object) {
+function isKeyAuth(object) {
     return 'apiKey' in object;
+}
+exports.isKeyAuth = isKeyAuth;
+function isTokenAuth(object) {
+    return 'token' in object;
 }
 exports.isTokenAuth = isTokenAuth;
 /**
@@ -72,12 +77,17 @@ var Auth = /** @class */ (function () {
         if (!this.options.credentials)
             return;
         this.determineAuthType();
+        if (this.options.user && this.options.type === AuthTypes.token) {
+            this.setDefaultHeader(this.options.user, this.options.credentials.token);
+        }
     }
     Auth.prototype.determineAuthType = function () {
         if (isUsernameAuth(this.options.credentials))
             this.options.type = AuthTypes.username;
+        if (isKeyAuth(this.options.credentials))
+            this.options.type = AuthTypes.key;
         if (isTokenAuth(this.options.credentials))
-            this.options.type = AuthTypes.username;
+            this.options.type = AuthTypes.token;
     };
     Auth.prototype.authenticate = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -144,9 +154,10 @@ var Auth = /** @class */ (function () {
         };
         this.token = token;
         this.user = user;
-        Client_1.Client.getInstance(clientOptions).setDefaults(clientOptions);
+        this.authenticated = true;
+        client_1.Client.getInstance(clientOptions).setDefaults(clientOptions);
     };
     return Auth;
 }());
 exports.Auth = Auth;
-//# sourceMappingURL=Auth.js.map
+//# sourceMappingURL=auth.js.map

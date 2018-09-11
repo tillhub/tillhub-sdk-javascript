@@ -1,4 +1,4 @@
-import { Auth } from './Auth';
+import { Auth } from './auth';
 declare const _default: {
     Auth: typeof Auth;
 };

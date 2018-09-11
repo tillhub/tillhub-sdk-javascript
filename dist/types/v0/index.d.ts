@@ -1,6 +1,6 @@
-import { Auth } from './Auth';
-import { Transactions } from './Transactions';
-import { Taxes } from './Taxes';
+import { Auth } from './auth';
+import { Transactions } from './transactions';
+import { Taxes } from './taxes';
 declare const _default: {
     Auth: typeof Auth;
     Transactions: typeof Transactions;

@@ -1,15 +1,16 @@
-import { UsernameAuth, TokenAuth } from './v0/Auth';
-import { Auth } from './v1/Auth';
-import { Transactions } from './v0/Transactions';
-import { Taxes } from './v0/Taxes';
-import { Client } from './Client';
+import { UsernameAuth, KeyAuth, TokenAuth } from './v0/auth';
+import { Auth } from './v1/auth';
+import { Transactions } from './v0/transactions';
+import { Taxes } from './v0/taxes';
+import { Client } from './client';
 import v0 from './v0';
 import v1 from './v1';
 export { v0, v1 };
 export declare const defaultOptions: TillhubSDKOptions;
 export interface TillhubSDKOptions {
-    credentials?: UsernameAuth | TokenAuth | undefined;
+    credentials?: UsernameAuth | KeyAuth | TokenAuth | undefined;
     base?: string;
+    user?: string;
 }
 export declare class TillhubClient {
     user?: string;

@@ -1,4 +1,4 @@
-import { Client } from '../Client';
+import { Client } from '../client';
 export interface TaxesOptions {
     user?: string;
     base?: string;

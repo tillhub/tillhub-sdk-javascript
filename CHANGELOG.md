@@ -1,3 +1,18 @@
+# [1.6.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.5.0...v1.6.0) (2018-09-11)
+
+
+### Bug Fixes
+
+* check for auth on taxes ([811eac1](https://github.com/tillhub/tillhub-sdk-javascript/commit/811eac1))
+* fixes last case sensitive cases ([8ef6da4](https://github.com/tillhub/tillhub-sdk-javascript/commit/8ef6da4))
+* fixes type after rebase ([2c5a36c](https://github.com/tillhub/tillhub-sdk-javascript/commit/2c5a36c))
+* rename case sensitive naming ([d081960](https://github.com/tillhub/tillhub-sdk-javascript/commit/d081960))
+
+
+### Features
+
+* be able to rehydrate from token ([88dbec3](https://github.com/tillhub/tillhub-sdk-javascript/commit/88dbec3))
+
 # [1.5.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.4.0...v1.5.0) (2018-09-11)
 
 

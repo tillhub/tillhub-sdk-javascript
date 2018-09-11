@@ -66,4 +66,4 @@ var TaxesFetchFailed = /** @class */ (function (_super) {
     return TaxesFetchFailed;
 }(BaseError));
 exports.TaxesFetchFailed = TaxesFetchFailed;
-//# sourceMappingURL=Errors.js.map
+//# sourceMappingURL=errors.js.map
