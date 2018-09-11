@@ -4,12 +4,13 @@ import { Client, ClientOptions } from '../Client'
 
 export enum AuthTypes {
   username = 1,
+  key,
   token
 }
 
 export interface AuthOptions {
   type?: AuthTypes | undefined
-  credentials?: UsernameAuth | KeyAuth
+  credentials?: UsernameAuth | KeyAuth | TokenAuth
   base?: string | undefined
 }
 
@@ -23,12 +24,20 @@ export interface KeyAuth {
   apiKey: string
 }
 
+export interface TokenAuth {
+  token: string
+}
+
 export function isUsernameAuth(object: any): object is UsernameAuth {
   return 'password' in object
 }
 
-export function isTokenAuth(object: any): object is KeyAuth {
+export function isKeyAuth(object: any): object is KeyAuth {
   return 'apiKey' in object
+}
+
+export function isTokenAuth(object: any): object is KeyAuth {
+  return 'token' in object
 }
 
 export interface AuthResponse {
@@ -58,7 +67,8 @@ export class Auth {
 
   protected determineAuthType() {
     if (isUsernameAuth(this.options.credentials)) this.options.type = AuthTypes.username
-    if (isTokenAuth(this.options.credentials)) this.options.type = AuthTypes.username
+    if (isKeyAuth(this.options.credentials)) this.options.type = AuthTypes.key
+    if (isTokenAuth(this.options.credentials)) this.options.type = AuthTypes.token
   }
 
   async authenticate(): Promise<AuthResponse> {
