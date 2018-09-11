@@ -1,7 +1,7 @@
 // Import here Polyfills if needed. Recommended core-js (npm i -D core-js)
 // import 'core-js/fn/array.find'
 // import * as EventEmitter from 'events'
-import { AuthOptions, AuthTypes, UsernameAuth, KeyAuth } from './v0/Auth'
+import { AuthOptions, AuthTypes, UsernameAuth, KeyAuth, TokenAuth } from './v0/Auth'
 import { Auth } from './v1/Auth'
 import { Transactions } from './v0/Transactions'
 import { Taxes } from './v0/Taxes'
@@ -18,8 +18,9 @@ export const defaultOptions: TillhubSDKOptions = {
 }
 
 export interface TillhubSDKOptions {
-  credentials?: UsernameAuth | KeyAuth | undefined
+  credentials?: UsernameAuth | KeyAuth | TokenAuth | undefined
   base?: string
+  user?: string
 }
 
 export class TillhubClient {
@@ -42,7 +43,12 @@ export class TillhubClient {
    *
    */
   public init(options: TillhubSDKOptions = defaultOptions): void {
-    this.handleOptions(options)
+    // in cases where credentials and / or tokens and / or users are already
+    // we will short circuit the client initialisations
+    if (this.handleOptions(options)) return
+    // in all other cases we will instantiate clients, that need to be authenticated
+    // by the caller before any API will be available
+
     const clientOptions: ClientOptions = {
       headers: {}
     }
@@ -51,19 +57,28 @@ export class TillhubClient {
     this.http = Client.getInstance(clientOptions).setDefaults(clientOptions)
   }
 
-  private handleOptions(options: TillhubSDKOptions): void {
+  private handleOptions(options: TillhubSDKOptions): boolean {
     this.options = options
     this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.user = this.options.user
 
     if (options.credentials) {
       const authOptions: AuthOptions = {
-        type: AuthTypes.username,
         credentials: options.credentials,
-        base: this.options.base
+        base: this.options.base,
+        user: this.user
+      }
+
+      const clientOptions: ClientOptions = {
+        headers: {}
       }
 
       this.auth = new v1.Auth(authOptions)
+      this.http = Client.getInstance(clientOptions).setDefaults(clientOptions)
+      return true
     }
+
+    return false
   }
 
   /**
@@ -71,7 +86,13 @@ export class TillhubClient {
    *
    */
   transactions(): Transactions {
-    if (!this.options || !this.options.base || !this.http || !this.auth) {
+    if (
+      !this.options ||
+      !this.options.base ||
+      !this.http ||
+      !this.auth ||
+      !this.auth.authenticated
+    ) {
       throw new errors.UninstantiatedClient()
     }
 

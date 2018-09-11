@@ -1,7 +1,7 @@
 import axios from 'axios'
 import * as errors from '../Errors'
 import v0 from '../v0'
-import { AuthOptions, UsernameAuth, AuthTypes, AuthResponse, KeyAuth } from '../v0/Auth'
+import { AuthOptions, UsernameAuth, AuthTypes, AuthResponse, KeyAuth, TokenAuth } from '../v0/Auth'
 
 /**
  * @extends "v0.Auth"
@@ -19,6 +19,10 @@ export class Auth extends v0.Auth {
     if (!this.options.credentials) return
 
     this.determineAuthType()
+
+    if (this.options.user && this.options.type === AuthTypes.token) {
+      this.setDefaultHeader(this.options.user, (this.options.credentials as TokenAuth).token)
+    }
   }
 
   async authenticate(): Promise<AuthResponse> {

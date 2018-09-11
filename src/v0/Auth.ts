@@ -12,6 +12,8 @@ export interface AuthOptions {
   type?: AuthTypes | undefined
   credentials?: UsernameAuth | KeyAuth | TokenAuth
   base?: string | undefined
+  user?: string
+  token?: string
 }
 
 export interface UsernameAuth {
@@ -63,6 +65,10 @@ export class Auth {
     if (!this.options.credentials) return
 
     this.determineAuthType()
+
+    if (this.options.user && this.options.type === AuthTypes.token) {
+      this.setDefaultHeader(this.options.user, (this.options.credentials as TokenAuth).token)
+    }
   }
 
   protected determineAuthType() {
@@ -131,6 +137,7 @@ export class Auth {
 
     this.token = token
     this.user = user
+    this.authenticated = true
 
     Client.getInstance(clientOptions).setDefaults(clientOptions)
   }
