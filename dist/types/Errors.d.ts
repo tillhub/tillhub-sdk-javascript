@@ -16,3 +16,8 @@ export declare class TransactionFetchFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class TaxesFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}

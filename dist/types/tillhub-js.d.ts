@@ -1,6 +1,7 @@
 import { UsernameAuth, TokenAuth } from './v0/Auth';
 import { Auth } from './v1/Auth';
 import { Transactions } from './v0/Transactions';
+import { Taxes } from './v0/Taxes';
 import { Client } from './Client';
 import v0 from './v0';
 import v1 from './v1';
@@ -27,6 +28,7 @@ export declare class TillhubClient {
      *
      */
     transactions(): Transactions;
+    taxes(): Taxes;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;

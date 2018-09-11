@@ -25,6 +25,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // import * as EventEmitter from 'events'
 var Auth_1 = require("./v0/Auth");
 var Transactions_1 = require("./v0/Transactions");
+var Taxes_1 = require("./v0/Taxes");
 var Client_1 = require("./Client");
 var errors = __importStar(require("./Errors"));
 var v0_1 = __importDefault(require("./v0"));
@@ -75,6 +76,12 @@ var TillhubClient = /** @class */ (function () {
             throw new errors.UninstantiatedClient();
         }
         return new Transactions_1.Transactions({ user: this.auth.user, base: this.options.base }, this.http);
+    };
+    TillhubClient.prototype.taxes = function () {
+        if (!this.options || !this.options.base || !this.http || !this.auth) {
+            throw new errors.UninstantiatedClient();
+        }
+        return new Taxes_1.Taxes({ user: this.auth.user, base: this.options.base }, this.http);
     };
     return TillhubClient;
 }());

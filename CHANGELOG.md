@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.4.0...v1.5.0) (2018-09-11)
+
+
+### Features
+
+* **taxes:** Add taxes endpoint ([38c35a9](https://github.com/tillhub/tillhub-sdk-javascript/commit/38c35a9))
+
 # [1.4.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.3.9...v1.4.0) (2018-09-10)
 
 

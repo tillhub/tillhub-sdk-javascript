@@ -54,4 +54,16 @@ var TransactionFetchFailed = /** @class */ (function (_super) {
     return TransactionFetchFailed;
 }(BaseError));
 exports.TransactionFetchFailed = TransactionFetchFailed;
+var TaxesFetchFailed = /** @class */ (function (_super) {
+    __extends(TaxesFetchFailed, _super);
+    function TaxesFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch taxes'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'TaxesFetchFailed';
+        return _this;
+    }
+    return TaxesFetchFailed;
+}(BaseError));
+exports.TaxesFetchFailed = TaxesFetchFailed;
 //# sourceMappingURL=Errors.js.map
