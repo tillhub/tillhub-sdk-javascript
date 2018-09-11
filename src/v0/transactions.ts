@@ -1,5 +1,5 @@
-import { Client } from '../Client'
-import * as errors from '../Errors'
+import { Client } from '../client'
+import * as errors from '../errors'
 
 export interface TransactionsOptions {
   user?: string

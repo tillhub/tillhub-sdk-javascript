@@ -1,6 +1,6 @@
 import axios from 'axios'
-import * as errors from '../Errors'
-import { Client, ClientOptions } from '../Client'
+import * as errors from '../errors'
+import { Client, ClientOptions } from '../client'
 
 export enum AuthTypes {
   username = 1,
