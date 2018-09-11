@@ -1,4 +1,4 @@
-import { Auth } from './Auth'
+import { Auth } from './auth'
 
 export default {
   Auth

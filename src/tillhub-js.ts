@@ -1,12 +1,12 @@
 // Import here Polyfills if needed. Recommended core-js (npm i -D core-js)
 // import 'core-js/fn/array.find'
 // import * as EventEmitter from 'events'
-import { AuthOptions, AuthTypes, UsernameAuth, KeyAuth, TokenAuth } from './v0/Auth'
-import { Auth } from './v1/Auth'
-import { Transactions } from './v0/Transactions'
-import { Taxes } from './v0/Taxes'
-import { Client, ClientOptions } from './Client'
-import * as errors from './Errors'
+import { AuthOptions, AuthTypes, UsernameAuth, KeyAuth, TokenAuth } from './v0/auth'
+import { Auth } from './v1/auth'
+import { Transactions } from './v0/transactions'
+import { Taxes } from './v0/taxes'
+import { Client, ClientOptions } from './client'
+import * as errors from './errors'
 
 import v0 from './v0'
 import v1 from './v1'
