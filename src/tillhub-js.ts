@@ -4,13 +4,10 @@
 import { AuthOptions, AuthTypes, UsernameAuth, KeyAuth, TokenAuth } from './v0/auth'
 import { Auth } from './v1/auth'
 import { Transactions } from './v0/transactions'
-import { Taxes } from './v0'
-import { Product } from './v1'
-import { Client, ClientOptions } from './client'
-import * as errors from './errors'
-
 import * as v0 from './v0'
 import * as v1 from './v1'
+import { Client, ClientOptions } from './client'
+import * as errors from './errors'
 
 export { v0, v1 }
 
@@ -100,7 +97,7 @@ export class TillhubClient {
     return new Transactions({ user: this.auth.user, base: this.options.base }, this.http)
   }
 
-  taxes(): Taxes {
+  taxes(): v0.Taxes {
     if (
       !this.options ||
       !this.options.base ||
@@ -111,15 +108,15 @@ export class TillhubClient {
       throw new errors.UninstantiatedClient()
     }
 
-    return new Taxes({ user: this.auth.user, base: this.options.base }, this.http)
+    return new v0.Taxes({ user: this.auth.user, base: this.options.base }, this.http)
   }
 
-  product(): Product {
+  product(): v1.Product {
     if (!this.options || !this.options.base || !this.http || !this.auth) {
       throw new errors.UninstantiatedClient()
     }
 
-    return new Product({ user: this.auth.user, base: this.options.base }, this.http)
+    return new v1.Product({ user: this.auth.user, base: this.options.base }, this.http)
   }
 }
 
