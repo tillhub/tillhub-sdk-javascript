@@ -6,6 +6,7 @@ import { Auth } from './v1/auth'
 import { Transactions } from './v0/transactions'
 import * as v0 from './v0'
 import * as v1 from './v1'
+import { Deliveries } from './v0/deliveries'
 import { Client, ClientOptions } from './client'
 import * as errors from './errors'
 
@@ -117,6 +118,20 @@ export class TillhubClient {
     }
 
     return new v1.Product({ user: this.auth.user, base: this.options.base }, this.http)
+  }
+
+  deliveries(): Deliveries {
+    if (
+      !this.options ||
+      !this.options.base ||
+      !this.http ||
+      !this.auth ||
+      !this.auth.authenticated
+    ) {
+      throw new errors.UninstantiatedClient()
+    }
+
+    return new Deliveries({ user: this.auth.user, base: this.options.base }, this.http)
   }
 }
 

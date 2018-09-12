@@ -1,36 +1,37 @@
 import { Client } from '../client'
 import * as errors from '../errors'
 
-export interface TransactionsOptions {
+export interface DeliveriesOptions {
   user?: string
   base?: string
 }
 
-export interface TransactionsQuery {
+export interface DeliveriesQuery {
   limit?: number
   uri?: string
+  embed?: string[]
 }
 
-export interface TransactionResponse {
+export interface DeliveriesResponse {
   data: object[]
   metadata: object
-  next?: Promise<TransactionResponse>
+  next?: Promise<DeliveriesResponse>
 }
 
-export class Transactions {
+export class Deliveries {
   endpoint: string
   http: Client
-  public options: TransactionsOptions
+  public options: DeliveriesOptions
 
-  constructor(options: TransactionsOptions, http: Client) {
+  constructor(options: DeliveriesOptions, http: Client) {
     this.options = options
     this.http = http
 
-    this.endpoint = '/api/v0/transactions'
+    this.endpoint = '/api/v0/deliveries'
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 
-  getAll(query?: TransactionsQuery | undefined): Promise<TransactionResponse> {
+  getAll(query?: DeliveriesQuery | undefined): Promise<DeliveriesResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
@@ -39,7 +40,7 @@ export class Transactions {
         if (query && query.uri) {
           uri = query.uri
         } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}/legacy`
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -50,11 +51,11 @@ export class Transactions {
 
         return resolve({
           data: response.data.results,
-          metadata: { count: response.data.count, cursor: response.data.cursor },
+          metadata: { count: response.data.count },
           next
-        } as TransactionResponse)
+        } as DeliveriesResponse)
       } catch (err) {
-        return reject(new errors.TransactionFetchFailed())
+        return reject(new errors.DeliveriesFetchFailed())
       }
     })
   }
