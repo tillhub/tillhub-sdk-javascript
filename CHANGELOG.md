@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.8.0...v1.8.1) (2018-09-12)
+
+
+### Bug Fixes
+
+* Add query string handling to deliveries ([05639b0](https://github.com/tillhub/tillhub-sdk-javascript/commit/05639b0))
+
 # [1.8.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.7.0...v1.8.0) (2018-09-12)
 
 
