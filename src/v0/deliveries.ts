@@ -43,6 +43,15 @@ export class Deliveries {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}`
         }
 
+        if (query && query.embed) {
+          const queryString = query.embed
+            .map(item => {
+              return `embed[]=${item}`
+            })
+            .join('&')
+          uri = `${uri}?${queryString}`
+        }
+
         const response = await this.http.getClient().get(uri)
 
         if (response.data.cursor && response.data.cursor.next) {
