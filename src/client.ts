@@ -35,10 +35,10 @@ export class Client {
     return this.axiosInstance
   }
 
-  setDefaults(optons: ClientOptions): Client {
+  setDefaults(options: ClientOptions): Client {
     this.axiosInstance.defaults.headers.common = {
       ...this.axiosInstance.defaults.headers.common,
-      ...optons.headers
+      ...options.headers
     }
 
     return Client.instance

@@ -40,3 +40,10 @@ export class ProductCreateFailed extends BaseError {
     super(message)
   }
 }
+
+export class DeliveriesFetchFailed extends BaseError {
+  public name = 'DeliveriesFetchFailed'
+  constructor(public message: string = 'Could not fetch deliveries') {
+    super(message)
+  }
+}
