@@ -4,7 +4,7 @@ import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import th, { TillhubClient, v0 } from '../src/tillhub-js'
 import { Client } from '../src/client'
-import { Auth } from '../src/v1/auth'
+import { Auth } from '../src/v1'
 
 let user = {
   username: 'test@example.com',

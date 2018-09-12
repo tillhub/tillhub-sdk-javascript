@@ -4,13 +4,13 @@
 import { AuthOptions, AuthTypes, UsernameAuth, KeyAuth, TokenAuth } from './v0/auth'
 import { Auth } from './v1/auth'
 import { Transactions } from './v0/transactions'
-import { Taxes } from './v0/taxes'
-import { Product } from './v1/product'
+import { Taxes } from './v0'
+import { Product } from './v1'
 import { Client, ClientOptions } from './client'
 import * as errors from './errors'
 
-import v0 from './v0'
-import v1 from './v1'
+import * as v0 from './v0'
+import * as v1 from './v1'
 
 export { v0, v1 }
 

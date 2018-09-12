@@ -2,7 +2,6 @@ import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
-// import {Tillhub} from '../../src/tillhub-js'
 import { v0, v1 } from '../../src/tillhub-js'
 
 let user = {
