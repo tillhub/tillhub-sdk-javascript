@@ -3,6 +3,7 @@ import { Auth } from './v1/auth';
 import { Transactions } from './v0/transactions';
 import * as v0 from './v0';
 import * as v1 from './v1';
+import { Deliveries } from './v0/deliveries';
 import { Client } from './client';
 export { v0, v1 };
 export declare const defaultOptions: TillhubSDKOptions;
@@ -30,6 +31,7 @@ export declare class TillhubClient {
     transactions(): Transactions;
     taxes(): v0.Taxes;
     product(): v1.Product;
+    deliveries(): Deliveries;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;

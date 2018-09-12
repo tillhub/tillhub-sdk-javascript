@@ -22,6 +22,7 @@ var v0 = __importStar(require("./v0"));
 exports.v0 = v0;
 var v1 = __importStar(require("./v1"));
 exports.v1 = v1;
+var deliveries_1 = require("./v0/deliveries");
 var client_1 = require("./client");
 var errors = __importStar(require("./errors"));
 exports.defaultOptions = {
@@ -100,6 +101,16 @@ var TillhubClient = /** @class */ (function () {
             throw new errors.UninstantiatedClient();
         }
         return new v1.Product({ user: this.auth.user, base: this.options.base }, this.http);
+    };
+    TillhubClient.prototype.deliveries = function () {
+        if (!this.options ||
+            !this.options.base ||
+            !this.http ||
+            !this.auth ||
+            !this.auth.authenticated) {
+            throw new errors.UninstantiatedClient();
+        }
+        return new deliveries_1.Deliveries({ user: this.auth.user, base: this.options.base }, this.http);
     };
     return TillhubClient;
 }());

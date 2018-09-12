@@ -6,4 +6,6 @@ var transactions_1 = require("./transactions");
 exports.Transactions = transactions_1.Transactions;
 var taxes_1 = require("./taxes");
 exports.Taxes = taxes_1.Taxes;
+var deliveries_1 = require("./deliveries");
+exports.Deliveries = deliveries_1.Deliveries;
 //# sourceMappingURL=index.js.map

@@ -43,14 +43,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var errors = __importStar(require("../errors"));
-var Transactions = /** @class */ (function () {
-    function Transactions(options, http) {
+var Deliveries = /** @class */ (function () {
+    function Deliveries(options, http) {
         this.options = options;
         this.http = http;
-        this.endpoint = '/api/v0/transactions';
+        this.endpoint = '/api/v0/deliveries';
         this.options.base = this.options.base || 'https://api.tillhub.com';
     }
-    Transactions.prototype.getAll = function (query) {
+    Deliveries.prototype.getAll = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var next, uri, response, err_1;
@@ -63,7 +63,7 @@ var Transactions = /** @class */ (function () {
                             uri = query.uri;
                         }
                         else {
-                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/legacy";
+                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user;
                         }
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
@@ -73,18 +73,18 @@ var Transactions = /** @class */ (function () {
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
-                                metadata: { count: response.data.count, cursor: response.data.cursor },
+                                metadata: { count: response.data.count },
                                 next: next
                             })];
                     case 2:
                         err_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TransactionFetchFailed())];
+                        return [2 /*return*/, reject(new errors.DeliveriesFetchFailed())];
                     case 3: return [2 /*return*/];
                 }
             });
         }); });
     };
-    return Transactions;
+    return Deliveries;
 }());
-exports.Transactions = Transactions;
-//# sourceMappingURL=transactions.js.map
+exports.Deliveries = Deliveries;
+//# sourceMappingURL=deliveries.js.map

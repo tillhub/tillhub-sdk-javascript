@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.7.0...v1.8.0) (2018-09-12)
+
+
+### Features
+
+* Add deliveries API ([491a708](https://github.com/tillhub/tillhub-sdk-javascript/commit/491a708))
+
 # [1.7.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.6.0...v1.7.0) (2018-09-12)
 
 

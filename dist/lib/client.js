@@ -30,8 +30,8 @@ var Client = /** @class */ (function () {
     Client.prototype.getClient = function () {
         return this.axiosInstance;
     };
-    Client.prototype.setDefaults = function (optons) {
-        this.axiosInstance.defaults.headers.common = __assign({}, this.axiosInstance.defaults.headers.common, optons.headers);
+    Client.prototype.setDefaults = function (options) {
+        this.axiosInstance.defaults.headers.common = __assign({}, this.axiosInstance.defaults.headers.common, options.headers);
         return Client.instance;
     };
     return Client;

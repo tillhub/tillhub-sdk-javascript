@@ -78,4 +78,16 @@ var ProductCreateFailed = /** @class */ (function (_super) {
     return ProductCreateFailed;
 }(BaseError));
 exports.ProductCreateFailed = ProductCreateFailed;
+var DeliveriesFetchFailed = /** @class */ (function (_super) {
+    __extends(DeliveriesFetchFailed, _super);
+    function DeliveriesFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch deliveries'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'DeliveriesFetchFailed';
+        return _this;
+    }
+    return DeliveriesFetchFailed;
+}(BaseError));
+exports.DeliveriesFetchFailed = DeliveriesFetchFailed;
 //# sourceMappingURL=errors.js.map

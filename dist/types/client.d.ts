@@ -11,5 +11,5 @@ export declare class Client {
     private constructor();
     static getInstance(options: ClientOptions): Client;
     getClient(): AxiosInstance;
-    setDefaults(optons: ClientOptions): Client;
+    setDefaults(options: ClientOptions): Client;
 }
