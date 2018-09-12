@@ -1,3 +1,18 @@
+# [1.7.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.6.0...v1.7.0) (2018-09-12)
+
+
+### Bug Fixes
+
+* **global:** fix imports ([7ba42a4](https://github.com/tillhub/tillhub-sdk-javascript/commit/7ba42a4))
+* **product:** fix more imports ([0002634](https://github.com/tillhub/tillhub-sdk-javascript/commit/0002634))
+* **product:** rename file without caps ([3d58dad](https://github.com/tillhub/tillhub-sdk-javascript/commit/3d58dad))
+* **tillhub-js:** fix duplicate import ([4aa6cb8](https://github.com/tillhub/tillhub-sdk-javascript/commit/4aa6cb8))
+
+
+### Features
+
+* **product:** add product endpoint and createProduct  method ([812003b](https://github.com/tillhub/tillhub-sdk-javascript/commit/812003b))
+
 # [1.6.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.5.0...v1.6.0) (2018-09-11)
 
 

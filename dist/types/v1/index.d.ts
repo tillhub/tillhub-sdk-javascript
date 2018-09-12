@@ -1,5 +1,3 @@
 import { Auth } from './auth';
-declare const _default: {
-    Auth: typeof Auth;
-};
-export default _default;
+import { Product } from './product';
+export { Auth, Product };

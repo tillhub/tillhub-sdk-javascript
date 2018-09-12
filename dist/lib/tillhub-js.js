@@ -16,18 +16,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
     result["default"] = mod;
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var transactions_1 = require("./v0/transactions");
-var taxes_1 = require("./v0/taxes");
+var v0 = __importStar(require("./v0"));
+exports.v0 = v0;
+var v1 = __importStar(require("./v1"));
+exports.v1 = v1;
 var client_1 = require("./client");
 var errors = __importStar(require("./errors"));
-var v0_1 = __importDefault(require("./v0"));
-exports.v0 = v0_1.default;
-var v1_1 = __importDefault(require("./v1"));
-exports.v1 = v1_1.default;
 exports.defaultOptions = {
     base: 'https://api.tillhub.com'
 };
@@ -53,7 +49,7 @@ var TillhubClient = /** @class */ (function () {
         var clientOptions = {
             headers: {}
         };
-        this.auth = new v1_1.default.Auth({ base: options ? options.base : exports.defaultOptions.base });
+        this.auth = new v1.Auth({ base: options ? options.base : exports.defaultOptions.base });
         this.http = client_1.Client.getInstance(clientOptions).setDefaults(clientOptions);
     };
     TillhubClient.prototype.handleOptions = function (options) {
@@ -69,7 +65,7 @@ var TillhubClient = /** @class */ (function () {
             var clientOptions = {
                 headers: {}
             };
-            this.auth = new v1_1.default.Auth(authOptions);
+            this.auth = new v1.Auth(authOptions);
             this.http = client_1.Client.getInstance(clientOptions).setDefaults(clientOptions);
             return true;
         }
@@ -97,7 +93,13 @@ var TillhubClient = /** @class */ (function () {
             !this.auth.authenticated) {
             throw new errors.UninstantiatedClient();
         }
-        return new taxes_1.Taxes({ user: this.auth.user, base: this.options.base }, this.http);
+        return new v0.Taxes({ user: this.auth.user, base: this.options.base }, this.http);
+    };
+    TillhubClient.prototype.product = function () {
+        if (!this.options || !this.options.base || !this.http || !this.auth) {
+            throw new errors.UninstantiatedClient();
+        }
+        return new v1.Product({ user: this.auth.user, base: this.options.base }, this.http);
     };
     return TillhubClient;
 }());

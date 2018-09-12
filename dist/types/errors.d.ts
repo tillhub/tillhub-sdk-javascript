@@ -21,3 +21,8 @@ export declare class TaxesFetchFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class ProductCreateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}

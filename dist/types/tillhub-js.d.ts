@@ -1,10 +1,9 @@
 import { UsernameAuth, KeyAuth, TokenAuth } from './v0/auth';
 import { Auth } from './v1/auth';
 import { Transactions } from './v0/transactions';
-import { Taxes } from './v0/taxes';
+import * as v0 from './v0';
+import * as v1 from './v1';
 import { Client } from './client';
-import v0 from './v0';
-import v1 from './v1';
 export { v0, v1 };
 export declare const defaultOptions: TillhubSDKOptions;
 export interface TillhubSDKOptions {
@@ -29,7 +28,8 @@ export declare class TillhubClient {
      *
      */
     transactions(): Transactions;
-    taxes(): Taxes;
+    taxes(): v0.Taxes;
+    product(): v1.Product;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;

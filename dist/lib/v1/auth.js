@@ -57,7 +57,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = __importDefault(require("axios"));
 var errors = __importStar(require("../errors"));
-var v0_1 = __importDefault(require("../v0"));
+var v0 = __importStar(require("../v0"));
 var auth_1 = require("../v0/auth");
 /**
  * @extends "v0.Auth"
@@ -121,6 +121,6 @@ var Auth = /** @class */ (function (_super) {
         });
     };
     return Auth;
-}(v0_1.default.Auth));
+}(v0.Auth));
 exports.Auth = Auth;
 //# sourceMappingURL=auth.js.map
