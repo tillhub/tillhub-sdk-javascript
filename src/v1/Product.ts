@@ -6,7 +6,15 @@ export interface Images {
   avatar?: string
 }
 
-export interface Product {
+type ProductTypes =
+  | 'product'
+  | 'voucher'
+  | 'linked'
+  | 'linked_product'
+  | 'variant'
+  | 'variant_product'
+
+export interface ProductType {
   name?: string
   description?: string | null
   attributes?: object | null
@@ -39,7 +47,7 @@ export interface Product {
   brand?: string | null
   active?: boolean
   deleted?: boolean
-  type?: string
+  type?: ProductTypes
   manufacturer?: object | null
   supplier?: object | null
   condition?: string | null
@@ -49,45 +57,6 @@ export interface Product {
   product_group?: string | null
   delegated_to?: string[] | null
 }
-
-/*
-
-type: {
-  type: 'string',
-    description:
-  'variant is a child of variant_product, and has a parent property containing the ID of a variant_product typed parent product',
-    enum: [
-    'product',
-    'voucher',
-    'linked',
-    'linked_product',
-    'variant',
-    'variant_product'
-  ]
-},
-images: {
-  anyOf: [
-    {
-      type: 'object',
-      additionalProperties: false,
-      properties: {
-        '1x': {
-          type: 'string',
-          format: 'uri'
-        },
-        avatar: {
-          type: 'string',
-          format: 'uri'
-        }
-      }
-    },
-    {
-      type: 'null'
-    }
-  ]
-}
-
- */
 
 export interface ProductOptions {
   user?: string
@@ -112,7 +81,7 @@ export class Product {
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 
-  createProduct(product: Product): Promise<ProductResponse> {
+  createProduct(product: ProductType): Promise<ProductResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {

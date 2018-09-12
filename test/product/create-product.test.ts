@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
-import { TillhubClient, v1 } from '../../src/tillhub-js'
+import th, { TillhubClient, v1 } from '../../src/tillhub-js'
 
 let user = {
   username: 'test@example.com',
@@ -26,13 +26,26 @@ describe('Craete Product', () => {
   it('create', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       const mock = new MockAdapter(axios)
+      const legacyId = '4564'
 
-      mock.onPost('https://api.tillhub.com/api/v1/product').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
         return [
           200,
           {
-            data: productObj,
-            metadata: {}
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+
+      mock.onPost(`https://api.tillhub.com/api/v1/product/${legacyId}`).reply(function(config) {
+        return [
+          200,
+          {
+            results: productObj
           }
         ]
       })
@@ -46,8 +59,6 @@ describe('Craete Product', () => {
       base: process.env.TILLHUB_BASE
     }
 
-    const th = new TillhubClient()
-
     th.init(options)
     await th.auth.loginUsername({
       username: user.username,
@@ -60,6 +71,6 @@ describe('Craete Product', () => {
 
     const { data } = await product.createProduct(productObj)
 
-    expect(Array.isArray(data)).toBe(true)
+    expect(data).toEqual(productObj)
   })
 })
