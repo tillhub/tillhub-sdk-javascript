@@ -18,11 +18,8 @@ if (process.env.SYSTEM_TEST) {
   user.apiKey = process.env.SYSTEM_TEST_API_KEY || user.apiKey
 }
 
-const query = {
-  deliveryId: 'abc123'
-}
-
-const respMsg = `Deleted delivery ${query.deliveryId}`
+const deliveryId = 'abc123'
+const respMsg = `Deleted delivery ${deliveryId}`
 
 describe('v0: Deliveries', () => {
   it('can delete one', async () => {
@@ -44,7 +41,7 @@ describe('v0: Deliveries', () => {
       })
 
       mock
-        .onDelete(`https://api.tillhub.com/api/v0/deliveries/${legacyId}/${query.deliveryId}`)
+        .onDelete(`https://api.tillhub.com/api/v0/deliveries/${legacyId}/${deliveryId}`)
         .reply(function(config) {
           return [
             200,
@@ -73,7 +70,7 @@ describe('v0: Deliveries', () => {
 
     expect(delivery).toBeInstanceOf(v0.Deliveries)
 
-    const { msg } = await delivery.deleteDelivery(query)
+    const { msg } = await delivery.deleteDelivery(deliveryId)
 
     expect(msg).toEqual(respMsg)
   })

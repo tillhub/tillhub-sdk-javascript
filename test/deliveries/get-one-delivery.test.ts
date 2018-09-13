@@ -18,9 +18,11 @@ if (process.env.SYSTEM_TEST) {
   user.apiKey = process.env.SYSTEM_TEST_API_KEY || user.apiKey
 }
 
-const query = {
+const requestObject = {
   deliveryId: 'abc123',
-  embed: ['location']
+  query: {
+    embed: ['location']
+  }
 }
 
 describe('v0: Deliveries: can get one', () => {
@@ -45,7 +47,7 @@ describe('v0: Deliveries: can get one', () => {
       mock
         .onGet(
           `https://api.tillhub.com/api/v0/deliveries/${legacyId}/${
-            query.deliveryId
+            requestObject.deliveryId
           }?embed[]=location`
         )
         .reply(function(config) {
@@ -79,7 +81,7 @@ describe('v0: Deliveries: can get one', () => {
 
     expect(deliveries).toBeInstanceOf(v0.Deliveries)
 
-    const { data } = await deliveries.getOne(query)
+    const { data } = await deliveries.getOne(requestObject)
 
     expect(Array.isArray(data)).toBe(true)
   })

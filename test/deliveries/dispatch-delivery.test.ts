@@ -18,9 +18,11 @@ if (process.env.SYSTEM_TEST) {
   user.apiKey = process.env.SYSTEM_TEST_API_KEY || user.apiKey
 }
 
-const query = {
+const requestObject = {
   deliveryId: 'abc123',
-  embed: ['location']
+  query: {
+    embed: ['location']
+  }
 }
 
 const responseObj = [
@@ -63,7 +65,7 @@ describe('v0: Deliveries', () => {
       mock
         .onPost(
           `https://api.tillhub.com/api/v0/deliveries/${legacyId}/${
-            query.deliveryId
+            requestObject.deliveryId
           }/dispatch?embed[]=location`
         )
         .reply(function(config) {
@@ -94,7 +96,7 @@ describe('v0: Deliveries', () => {
 
     expect(delivery).toBeInstanceOf(v0.Deliveries)
 
-    const { data } = await delivery.dispatchDelivery(query)
+    const { data } = await delivery.dispatchDelivery(requestObject)
 
     expect(data).toEqual(responseObj)
   })

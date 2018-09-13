@@ -1,51 +1,25 @@
 import { Client } from '../client'
 import * as errors from '../errors'
 
-export interface DeliveriesCreateRequestObject {
-  query?: DeliveriesCreateQuery
-  body: DeliveriesCreateBody
-}
-
-export interface DeliveriesUpdateRequestObject {
-  query: DeliveriesUpdateQuery
-  body: DeliveriesUpdateBody
-}
-
 export interface DeliveriesOptions {
   user?: string
   base?: string
 }
 
-export interface DeliveriesGetAllQuery {
+export interface DeliveriesQuery {
   limit?: number
   embed?: string[]
   uri?: string
 }
 
-export interface DeliveriesGetOneQuery {
+export interface DeliveriesGetOneRequestObject {
   deliveryId: string
-  embed?: string[]
+  query?: DeliveriesQuery
 }
 
-export interface DeliveriesCreateQuery {
-  limit?: number
-  embed?: string[]
-}
-
-export interface DeliveriesUpdateQuery {
-  deliveryId: string
-  embed?: string[]
-}
-
-export interface DeliveriesDeleteQuery {
-  deliveryId: string
-}
-
-export interface DeliveriesResponse {
-  data: object[]
-  metadata: object
-  next?: Promise<DeliveriesResponse>
-  msg?: string
+export interface DeliveriesCreateRequestObject {
+  body: DeliveriesCreateBody
+  query?: DeliveriesQuery
 }
 
 export interface DeliveriesCreateBody {
@@ -74,6 +48,12 @@ export interface DeliveriesCreateBody {
   status?: string | null
 }
 
+export interface DeliveriesUpdateRequestObject {
+  body: DeliveriesUpdateBody
+  deliveryId: string
+  query?: DeliveriesQuery
+}
+
 export interface DeliveriesUpdateBody {
   order?: string | null
   open?: boolean
@@ -99,6 +79,18 @@ export interface DeliveriesUpdateBody {
   status?: string | null
 }
 
+export interface DeliveriesSimpleUpdateRequestBody {
+  deliveryId: string
+  query?: DeliveriesQuery
+}
+
+export interface DeliveriesResponse {
+  data: object[]
+  metadata: object
+  next?: Promise<DeliveriesResponse>
+  msg?: string
+}
+
 export class Deliveries {
   endpoint: string
   http: Client
@@ -112,7 +104,7 @@ export class Deliveries {
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 
-  getAll(query?: DeliveriesGetAllQuery | undefined): Promise<DeliveriesResponse> {
+  getAll(query?: DeliveriesQuery | undefined): Promise<DeliveriesResponse> {
     return new Promise(async (resolve, reject) => {
       let uri
       let next
@@ -151,12 +143,13 @@ export class Deliveries {
     })
   }
 
-  getOne(query: DeliveriesGetOneQuery): Promise<DeliveriesResponse> {
+  getOne(requestObject: DeliveriesGetOneRequestObject): Promise<DeliveriesResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${query.deliveryId}`
+      const { deliveryId, query } = requestObject
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deliveryId}`
 
       try {
-        if (query.embed) {
+        if (query && query.embed) {
           const queryString = query.embed
             .map(item => {
               return `embed[]=${item}`
@@ -209,11 +202,11 @@ export class Deliveries {
 
   updateDelivery(requestObject: DeliveriesUpdateRequestObject): Promise<DeliveriesResponse> {
     return new Promise(async (resolve, reject) => {
-      const { body, query } = requestObject
+      const { body, query, deliveryId } = requestObject
 
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${query.deliveryId}`
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deliveryId}`
 
-      if (query.embed) {
+      if (query && query.embed) {
         const queryString = query.embed
           .map(item => {
             return `embed[]=${item}`
@@ -236,13 +229,15 @@ export class Deliveries {
     })
   }
 
-  setInProgress(query: DeliveriesUpdateQuery): Promise<DeliveriesResponse> {
+  setInProgress(requestObject: DeliveriesSimpleUpdateRequestBody): Promise<DeliveriesResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${
-        query.deliveryId
-      }/in_progress`
+      const { deliveryId, query } = requestObject
 
-      if (query.embed) {
+      let uri = `${this.options.base}${this.endpoint}/${
+        this.options.user
+      }/${deliveryId}/in_progress`
+
+      if (query && query.embed) {
         const queryString = query.embed
           .map(item => {
             return `embed[]=${item}`
@@ -265,13 +260,13 @@ export class Deliveries {
     })
   }
 
-  dispatchDelivery(query: DeliveriesUpdateQuery): Promise<DeliveriesResponse> {
+  dispatchDelivery(requestObject: DeliveriesSimpleUpdateRequestBody): Promise<DeliveriesResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${
-        query.deliveryId
-      }/dispatch`
+      const { deliveryId, query } = requestObject
 
-      if (query.embed) {
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deliveryId}/dispatch`
+
+      if (query && query.embed) {
         const queryString = query.embed
           .map(item => {
             return `embed[]=${item}`
@@ -294,9 +289,9 @@ export class Deliveries {
     })
   }
 
-  deleteDelivery(query: DeliveriesDeleteQuery): Promise<DeliveriesResponse> {
+  deleteDelivery(deliveryId: string): Promise<DeliveriesResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${query.deliveryId}`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deliveryId}`
       try {
         const response = await this.http.getClient().delete(uri)
 

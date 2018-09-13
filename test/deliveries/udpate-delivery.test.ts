@@ -19,8 +19,8 @@ if (process.env.SYSTEM_TEST) {
 }
 
 const requestObject = {
+  deliveryId: 'abc123',
   query: {
-    deliveryId: 'abc123',
     embed: ['location']
   },
   body: {
@@ -53,7 +53,7 @@ describe('v0: Deliveries', () => {
       mock
         .onPut(
           `https://api.tillhub.com/api/v0/deliveries/${legacyId}/${
-            query.deliveryId
+            requestObject.deliveryId
           }?embed[]=location`
         )
         .reply(function(config) {
