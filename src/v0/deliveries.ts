@@ -16,10 +16,15 @@ export interface DeliveriesOptions {
   base?: string
 }
 
-export interface DeliveriesGetQuery {
+export interface DeliveriesGetAllQuery {
   limit?: number
   embed?: string[]
   uri?: string
+}
+
+export interface DeliveriesGetOneQuery {
+  deliveryId: string
+  embed?: string[]
 }
 
 export interface DeliveriesCreateQuery {
@@ -107,7 +112,7 @@ export class Deliveries {
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 
-  getAll(query?: DeliveriesGetQuery | undefined): Promise<DeliveriesResponse> {
+  getAll(query?: DeliveriesGetAllQuery | undefined): Promise<DeliveriesResponse> {
     return new Promise(async (resolve, reject) => {
       let uri
       let next
@@ -141,7 +146,34 @@ export class Deliveries {
           next
         } as DeliveriesResponse)
       } catch (err) {
-        return reject(new errors.DeliveriesFetchFailed())
+        return reject(new errors.DeliveriesFetchAllFailed())
+      }
+    })
+  }
+
+  getOne(query: DeliveriesGetOneQuery): Promise<DeliveriesResponse> {
+    return new Promise(async (resolve, reject) => {
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${query.deliveryId}`
+
+      try {
+        if (query.embed) {
+          const queryString = query.embed
+            .map(item => {
+              return `embed[]=${item}`
+            })
+            .join('&')
+
+          uri = `${uri}?${queryString}`
+        }
+
+        const response = await this.http.getClient().get(uri)
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as DeliveriesResponse)
+      } catch (err) {
+        return reject(new errors.DeliveriesFetchOneFailed())
       }
     })
   }
