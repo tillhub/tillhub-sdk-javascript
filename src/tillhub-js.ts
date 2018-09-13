@@ -3,10 +3,8 @@
 // import * as EventEmitter from 'events'
 import { AuthOptions, AuthTypes, UsernameAuth, KeyAuth, TokenAuth } from './v0/auth'
 import { Auth } from './v1/auth'
-import { Transactions } from './v0/transactions'
 import * as v0 from './v0'
 import * as v1 from './v1'
-import { Deliveries } from './v0/deliveries'
 import { Client, ClientOptions } from './client'
 import * as errors from './errors'
 
@@ -84,7 +82,7 @@ export class TillhubClient {
    * Create an authenticated transactions instance
    *
    */
-  transactions(): Transactions {
+  transactions(): v0.Transactions {
     if (
       !this.options ||
       !this.options.base ||
@@ -95,7 +93,7 @@ export class TillhubClient {
       throw new errors.UninstantiatedClient()
     }
 
-    return new Transactions({ user: this.auth.user, base: this.options.base }, this.http)
+    return new v0.Transactions({ user: this.auth.user, base: this.options.base }, this.http)
   }
 
   taxes(): v0.Taxes {
@@ -120,7 +118,7 @@ export class TillhubClient {
     return new v1.Product({ user: this.auth.user, base: this.options.base }, this.http)
   }
 
-  deliveries(): Deliveries {
+  deliveries(): v0.Deliveries {
     if (
       !this.options ||
       !this.options.base ||
@@ -131,7 +129,7 @@ export class TillhubClient {
       throw new errors.UninstantiatedClient()
     }
 
-    return new Deliveries({ user: this.auth.user, base: this.options.base }, this.http)
+    return new v0.Deliveries({ user: this.auth.user, base: this.options.base }, this.http)
   }
 }
 

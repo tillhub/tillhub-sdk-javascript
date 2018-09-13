@@ -1,21 +1,97 @@
 import { Client } from '../client'
 import * as errors from '../errors'
 
+export interface DeliveriesCreateRequestObject {
+  query?: DeliveriesCreateQuery
+  body: DeliveriesCreateBody
+}
+
+export interface DeliveriesUpdateRequestObject {
+  query: DeliveriesUpdateQuery
+  body: DeliveriesUpdateBody
+}
+
 export interface DeliveriesOptions {
   user?: string
   base?: string
 }
 
-export interface DeliveriesQuery {
+export interface DeliveriesGetQuery {
   limit?: number
-  uri?: string
   embed?: string[]
+  uri?: string
+}
+
+export interface DeliveriesCreateQuery {
+  limit?: number
+  embed?: string[]
+}
+
+export interface DeliveriesUpdateQuery {
+  deliveryId: string
+  embed?: string[]
+}
+
+export interface DeliveriesDeleteQuery {
+  deliveryId: string
 }
 
 export interface DeliveriesResponse {
   data: object[]
   metadata: object
   next?: Promise<DeliveriesResponse>
+  msg?: string
+}
+
+export interface DeliveriesCreateBody {
+  items: object[]
+  order?: string | null
+  open?: boolean
+  deleted?: boolean
+  ordered_at?: string | null
+  received?: boolean
+  delivered?: boolean
+  dispatched?: boolean
+  revoked?: boolean
+  received_at?: string | null
+  dispatched_at?: string | null
+  delivered_at?: string | null
+  revoked_at?: string | null
+  comments?: string | null
+  from?: string | null
+  to?: string | null
+  recipient?: object | null
+  sender?: object | null
+  metadata?: object
+  orders?: object[]
+  issuer?: object
+  stock_mode?: string | null
+  status?: string | null
+}
+
+export interface DeliveriesUpdateBody {
+  order?: string | null
+  open?: boolean
+  deleted?: boolean
+  ordered_at?: string | null
+  received?: boolean
+  delivered?: boolean
+  dispatched?: boolean
+  revoked?: boolean
+  received_at?: string | null
+  dispatched_at?: string | null
+  delivered_at?: string | null
+  revoked_at?: string | null
+  comments?: string | null
+  from?: string | null
+  to?: string | null
+  recipient?: object | null
+  sender?: object | null
+  metadata?: object
+  orders?: object[]
+  issuer?: object
+  stock_mode?: string | null
+  status?: string | null
 }
 
 export class Deliveries {
@@ -31,12 +107,12 @@ export class Deliveries {
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 
-  getAll(query?: DeliveriesQuery | undefined): Promise<DeliveriesResponse> {
+  getAll(query?: DeliveriesGetQuery | undefined): Promise<DeliveriesResponse> {
     return new Promise(async (resolve, reject) => {
+      let uri
       let next
 
       try {
-        let uri
         if (query && query.uri) {
           uri = query.uri
         } else {
@@ -49,6 +125,7 @@ export class Deliveries {
               return `embed[]=${item}`
             })
             .join('&')
+
           uri = `${uri}?${queryString}`
         }
 
@@ -65,6 +142,79 @@ export class Deliveries {
         } as DeliveriesResponse)
       } catch (err) {
         return reject(new errors.DeliveriesFetchFailed())
+      }
+    })
+  }
+
+  createDelivery(requestObject: DeliveriesCreateRequestObject): Promise<DeliveriesResponse> {
+    return new Promise(async (resolve, reject) => {
+      const { body, query } = requestObject
+
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+
+      try {
+        if (query && query.embed) {
+          const queryString = query.embed
+            .map(item => {
+              return `embed[]=${item}`
+            })
+            .join('&')
+
+          uri = `${uri}?${queryString}`
+        }
+
+        const response = await this.http.getClient().post(uri, body)
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as DeliveriesResponse)
+      } catch (err) {
+        return reject(new errors.DeliveriesCreateFailed())
+      }
+    })
+  }
+
+  updateDelivery(requestObject: DeliveriesUpdateRequestObject): Promise<DeliveriesResponse> {
+    return new Promise(async (resolve, reject) => {
+      const { body, query } = requestObject
+
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${query.deliveryId}`
+
+      if (query.embed) {
+        const queryString = query.embed
+          .map(item => {
+            return `embed[]=${item}`
+          })
+          .join('&')
+
+        uri = `${uri}?${queryString}`
+      }
+
+      try {
+        const response = await this.http.getClient().put(uri, body)
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as DeliveriesResponse)
+      } catch (err) {
+        return reject(new errors.DeliveriesUpdateFailed())
+      }
+    })
+  }
+
+  deleteDelivery(query: DeliveriesDeleteQuery): Promise<DeliveriesResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${query.deliveryId}`
+      try {
+        const response = await this.http.getClient().delete(uri)
+
+        return resolve({
+          msg: response.data.msg
+        } as DeliveriesResponse)
+      } catch (err) {
+        return reject(new errors.DeliveriesDeleteFailed())
       }
     })
   }

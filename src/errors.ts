@@ -47,3 +47,24 @@ export class DeliveriesFetchFailed extends BaseError {
     super(message)
   }
 }
+
+export class DeliveriesCreateFailed extends BaseError {
+  public name = 'DeliveriesCreateFailed'
+  constructor(public message: string = 'Could not create delivery') {
+    super(message)
+  }
+}
+
+export class DeliveriesUpdateFailed extends BaseError {
+  public name = 'DeliveriesUpdateFailed'
+  constructor(public message: string = 'Could not update delivery') {
+    super(message)
+  }
+}
+
+export class DeliveriesDeleteFailed extends BaseError {
+  public name = 'DeliveriesDeleteFailed'
+  constructor(public message: string = 'Could not delete delivery') {
+    super(message)
+  }
+}

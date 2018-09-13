@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
-import { TillhubClient, v1, v0 } from '../../src/tillhub-js'
+import th, { v0 } from '../../src/tillhub-js'
 
 let user = {
   username: 'test@example.com',
@@ -18,10 +18,24 @@ if (process.env.SYSTEM_TEST) {
   user.apiKey = process.env.SYSTEM_TEST_API_KEY || user.apiKey
 }
 
-describe('v0: Deliveries: can get all', () => {
-  it("Tillhub's deliveries are instantiable", async () => {
+const requestObject = {
+  query: {
+    deliveryId: 'abc123',
+    embed: ['location']
+  },
+  body: {
+    dispatched: true,
+    dispatched_at: new Date().toISOString()
+  }
+}
+
+describe('v0: Deliveries', () => {
+  it('can update one', async () => {
+    const { body, query } = requestObject
+
     if (process.env.SYSTEM_TEST !== 'true') {
       const mock = new MockAdapter(axios)
+      const legacyId = '4564'
 
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
         return [
@@ -30,21 +44,26 @@ describe('v0: Deliveries: can get all', () => {
             token: '',
             user: {
               id: '123',
-              legacy_id: '456'
+              legacy_id: legacyId
             }
           }
         ]
       })
 
-      mock.onGet('https://api.tillhub.com/api/v0/deliveries/456').reply(function(config) {
-        return [
-          200,
-          {
-            count: 1,
-            results: [{}]
-          }
-        ]
-      })
+      mock
+        .onPut(
+          `https://api.tillhub.com/api/v0/deliveries/${legacyId}/${
+            query.deliveryId
+          }?embed[]=location`
+        )
+        .reply(function(config) {
+          return [
+            200,
+            {
+              results: body
+            }
+          ]
+        })
     }
 
     const options = {
@@ -55,20 +74,18 @@ describe('v0: Deliveries: can get all', () => {
       base: process.env.TILLHUB_BASE
     }
 
-    const th = new TillhubClient()
-
     th.init(options)
     await th.auth.loginUsername({
       username: user.username,
       password: user.password
     })
 
-    const deliveries = th.deliveries()
+    const delivery = th.deliveries()
 
-    expect(deliveries).toBeInstanceOf(v0.Deliveries)
+    expect(delivery).toBeInstanceOf(v0.Deliveries)
 
-    const { data } = await deliveries.getAll()
+    const { data } = await delivery.updateDelivery(requestObject)
 
-    expect(Array.isArray(data)).toBe(true)
+    expect(data).toEqual(body)
   })
 })
