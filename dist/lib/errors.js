@@ -126,6 +126,30 @@ var DeliveriesUpdateFailed = /** @class */ (function (_super) {
     return DeliveriesUpdateFailed;
 }(BaseError));
 exports.DeliveriesUpdateFailed = DeliveriesUpdateFailed;
+var DeliveriesInProgressFailed = /** @class */ (function (_super) {
+    __extends(DeliveriesInProgressFailed, _super);
+    function DeliveriesInProgressFailed(message) {
+        if (message === void 0) { message = 'Could not change delivery status to "in_progress'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'DeliveriesInProgressFailed';
+        return _this;
+    }
+    return DeliveriesInProgressFailed;
+}(BaseError));
+exports.DeliveriesInProgressFailed = DeliveriesInProgressFailed;
+var DeliveriesDispatchFailed = /** @class */ (function (_super) {
+    __extends(DeliveriesDispatchFailed, _super);
+    function DeliveriesDispatchFailed(message) {
+        if (message === void 0) { message = 'Could not change delivery status to "in_progress'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'DeliveriesDispatchFailed';
+        return _this;
+    }
+    return DeliveriesDispatchFailed;
+}(BaseError));
+exports.DeliveriesDispatchFailed = DeliveriesDispatchFailed;
 var DeliveriesDeleteFailed = /** @class */ (function (_super) {
     __extends(DeliveriesDeleteFailed, _super);
     function DeliveriesDeleteFailed(message) {

@@ -195,10 +195,78 @@ var Deliveries = /** @class */ (function () {
             });
         }); });
     };
+    Deliveries.prototype.setInProgress = function (query) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, queryString, response, err_5;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + query.deliveryId + "/in_progress";
+                        if (query.embed) {
+                            queryString = query.embed
+                                .map(function (item) {
+                                return "embed[]=" + item;
+                            })
+                                .join('&');
+                            uri = uri + "?" + queryString;
+                        }
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().post(uri)];
+                    case 2:
+                        response = _a.sent();
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        err_5 = _a.sent();
+                        return [2 /*return*/, reject(new errors.DeliveriesInProgressFailed())];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Deliveries.prototype.dispatchDelivery = function (query) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, queryString, response, err_6;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + query.deliveryId + "/dispatch";
+                        if (query.embed) {
+                            queryString = query.embed
+                                .map(function (item) {
+                                return "embed[]=" + item;
+                            })
+                                .join('&');
+                            uri = uri + "?" + queryString;
+                        }
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().post(uri)];
+                    case 2:
+                        response = _a.sent();
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        err_6 = _a.sent();
+                        return [2 /*return*/, reject(new errors.DeliveriesDispatchFailed())];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     Deliveries.prototype.deleteDelivery = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_5;
+            var uri, response, err_7;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -213,7 +281,7 @@ var Deliveries = /** @class */ (function () {
                                 msg: response.data.msg
                             })];
                     case 3:
-                        err_5 = _a.sent();
+                        err_7 = _a.sent();
                         return [2 /*return*/, reject(new errors.DeliveriesDeleteFailed())];
                     case 4: return [2 /*return*/];
                 }

@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.10.0...v1.11.0) (2018-09-13)
+
+
+### Features
+
+* Add dispatch and in_progress handlers to deliveries ([fabab75](https://github.com/tillhub/tillhub-sdk-javascript/commit/fabab75))
+
 # [1.10.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.9.0...v1.10.0) (2018-09-13)
 
 

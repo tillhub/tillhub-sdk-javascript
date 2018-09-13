@@ -46,6 +46,16 @@ export declare class DeliveriesUpdateFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class DeliveriesInProgressFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class DeliveriesDispatchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
 export declare class DeliveriesDeleteFailed extends BaseError {
     message: string;
     name: string;

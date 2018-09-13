@@ -95,5 +95,7 @@ export declare class Deliveries {
     getOne(query: DeliveriesGetOneQuery): Promise<DeliveriesResponse>;
     createDelivery(requestObject: DeliveriesCreateRequestObject): Promise<DeliveriesResponse>;
     updateDelivery(requestObject: DeliveriesUpdateRequestObject): Promise<DeliveriesResponse>;
+    setInProgress(query: DeliveriesUpdateQuery): Promise<DeliveriesResponse>;
+    dispatchDelivery(query: DeliveriesUpdateQuery): Promise<DeliveriesResponse>;
     deleteDelivery(query: DeliveriesDeleteQuery): Promise<DeliveriesResponse>;
 }
