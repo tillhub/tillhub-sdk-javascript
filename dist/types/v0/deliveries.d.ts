@@ -1,41 +1,20 @@
 import { Client } from '../client';
-export interface DeliveriesCreateRequestObject {
-    query?: DeliveriesCreateQuery;
-    body: DeliveriesCreateBody;
-}
-export interface DeliveriesUpdateRequestObject {
-    query: DeliveriesUpdateQuery;
-    body: DeliveriesUpdateBody;
-}
 export interface DeliveriesOptions {
     user?: string;
     base?: string;
 }
-export interface DeliveriesGetAllQuery {
+export interface DeliveriesQuery {
     limit?: number;
     embed?: string[];
     uri?: string;
 }
-export interface DeliveriesGetOneQuery {
+export interface DeliveriesGetOneRequestObject {
     deliveryId: string;
-    embed?: string[];
+    query?: DeliveriesQuery;
 }
-export interface DeliveriesCreateQuery {
-    limit?: number;
-    embed?: string[];
-}
-export interface DeliveriesUpdateQuery {
-    deliveryId: string;
-    embed?: string[];
-}
-export interface DeliveriesDeleteQuery {
-    deliveryId: string;
-}
-export interface DeliveriesResponse {
-    data: object[];
-    metadata: object;
-    next?: Promise<DeliveriesResponse>;
-    msg?: string;
+export interface DeliveriesCreateRequestObject {
+    body: DeliveriesCreateBody;
+    query?: DeliveriesQuery;
 }
 export interface DeliveriesCreateBody {
     items: object[];
@@ -62,6 +41,11 @@ export interface DeliveriesCreateBody {
     stock_mode?: string | null;
     status?: string | null;
 }
+export interface DeliveriesUpdateRequestObject {
+    body: DeliveriesUpdateBody;
+    deliveryId: string;
+    query?: DeliveriesQuery;
+}
 export interface DeliveriesUpdateBody {
     order?: string | null;
     open?: boolean;
@@ -86,16 +70,26 @@ export interface DeliveriesUpdateBody {
     stock_mode?: string | null;
     status?: string | null;
 }
+export interface DeliveriesSimpleUpdateRequestBody {
+    deliveryId: string;
+    query?: DeliveriesQuery;
+}
+export interface DeliveriesResponse {
+    data: object[];
+    metadata: object;
+    next?: Promise<DeliveriesResponse>;
+    msg?: string;
+}
 export declare class Deliveries {
     endpoint: string;
     http: Client;
     options: DeliveriesOptions;
     constructor(options: DeliveriesOptions, http: Client);
-    getAll(query?: DeliveriesGetAllQuery | undefined): Promise<DeliveriesResponse>;
-    getOne(query: DeliveriesGetOneQuery): Promise<DeliveriesResponse>;
+    getAll(query?: DeliveriesQuery | undefined): Promise<DeliveriesResponse>;
+    getOne(requestObject: DeliveriesGetOneRequestObject): Promise<DeliveriesResponse>;
     createDelivery(requestObject: DeliveriesCreateRequestObject): Promise<DeliveriesResponse>;
     updateDelivery(requestObject: DeliveriesUpdateRequestObject): Promise<DeliveriesResponse>;
-    setInProgress(query: DeliveriesUpdateQuery): Promise<DeliveriesResponse>;
-    dispatchDelivery(query: DeliveriesUpdateQuery): Promise<DeliveriesResponse>;
-    deleteDelivery(query: DeliveriesDeleteQuery): Promise<DeliveriesResponse>;
+    setInProgress(requestObject: DeliveriesSimpleUpdateRequestBody): Promise<DeliveriesResponse>;
+    dispatchDelivery(requestObject: DeliveriesSimpleUpdateRequestBody): Promise<DeliveriesResponse>;
+    deleteDelivery(deliveryId: string): Promise<DeliveriesResponse>;
 }

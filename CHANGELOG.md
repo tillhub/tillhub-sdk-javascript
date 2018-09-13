@@ -1,3 +1,10 @@
+## [1.11.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.11.0...v1.11.1) (2018-09-13)
+
+
+### Bug Fixes
+
+* Change all delivery IDs to be moved out of query in request object ([903f5e1](https://github.com/tillhub/tillhub-sdk-javascript/commit/903f5e1))
+
 # [1.11.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.10.0...v1.11.0) (2018-09-13)
 
 

@@ -91,18 +91,19 @@ var Deliveries = /** @class */ (function () {
             });
         }); });
     };
-    Deliveries.prototype.getOne = function (query) {
+    Deliveries.prototype.getOne = function (requestObject) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, queryString, response, err_2;
+            var deliveryId, query, uri, queryString, response, err_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + query.deliveryId;
+                        deliveryId = requestObject.deliveryId, query = requestObject.query;
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + deliveryId;
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        if (query.embed) {
+                        if (query && query.embed) {
                             queryString = query.embed
                                 .map(function (item) {
                                 return "embed[]=" + item;
@@ -163,13 +164,13 @@ var Deliveries = /** @class */ (function () {
     Deliveries.prototype.updateDelivery = function (requestObject) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var body, query, uri, queryString, response, err_4;
+            var body, query, deliveryId, uri, queryString, response, err_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        body = requestObject.body, query = requestObject.query;
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + query.deliveryId;
-                        if (query.embed) {
+                        body = requestObject.body, query = requestObject.query, deliveryId = requestObject.deliveryId;
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + deliveryId;
+                        if (query && query.embed) {
                             queryString = query.embed
                                 .map(function (item) {
                                 return "embed[]=" + item;
@@ -195,15 +196,16 @@ var Deliveries = /** @class */ (function () {
             });
         }); });
     };
-    Deliveries.prototype.setInProgress = function (query) {
+    Deliveries.prototype.setInProgress = function (requestObject) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, queryString, response, err_5;
+            var deliveryId, query, uri, queryString, response, err_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + query.deliveryId + "/in_progress";
-                        if (query.embed) {
+                        deliveryId = requestObject.deliveryId, query = requestObject.query;
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + deliveryId + "/in_progress";
+                        if (query && query.embed) {
                             queryString = query.embed
                                 .map(function (item) {
                                 return "embed[]=" + item;
@@ -229,15 +231,16 @@ var Deliveries = /** @class */ (function () {
             });
         }); });
     };
-    Deliveries.prototype.dispatchDelivery = function (query) {
+    Deliveries.prototype.dispatchDelivery = function (requestObject) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, queryString, response, err_6;
+            var deliveryId, query, uri, queryString, response, err_6;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + query.deliveryId + "/dispatch";
-                        if (query.embed) {
+                        deliveryId = requestObject.deliveryId, query = requestObject.query;
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + deliveryId + "/dispatch";
+                        if (query && query.embed) {
                             queryString = query.embed
                                 .map(function (item) {
                                 return "embed[]=" + item;
@@ -263,14 +266,14 @@ var Deliveries = /** @class */ (function () {
             });
         }); });
     };
-    Deliveries.prototype.deleteDelivery = function (query) {
+    Deliveries.prototype.deleteDelivery = function (deliveryId) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, err_7;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + query.deliveryId;
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + deliveryId;
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
