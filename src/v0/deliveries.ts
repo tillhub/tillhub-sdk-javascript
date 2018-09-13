@@ -236,6 +236,64 @@ export class Deliveries {
     })
   }
 
+  setInProgress(query: DeliveriesUpdateQuery): Promise<DeliveriesResponse> {
+    return new Promise(async (resolve, reject) => {
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${
+        query.deliveryId
+      }/in_progress`
+
+      if (query.embed) {
+        const queryString = query.embed
+          .map(item => {
+            return `embed[]=${item}`
+          })
+          .join('&')
+
+        uri = `${uri}?${queryString}`
+      }
+
+      try {
+        const response = await this.http.getClient().post(uri)
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as DeliveriesResponse)
+      } catch (err) {
+        return reject(new errors.DeliveriesInProgressFailed())
+      }
+    })
+  }
+
+  dispatchDelivery(query: DeliveriesUpdateQuery): Promise<DeliveriesResponse> {
+    return new Promise(async (resolve, reject) => {
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${
+        query.deliveryId
+      }/dispatch`
+
+      if (query.embed) {
+        const queryString = query.embed
+          .map(item => {
+            return `embed[]=${item}`
+          })
+          .join('&')
+
+        uri = `${uri}?${queryString}`
+      }
+
+      try {
+        const response = await this.http.getClient().post(uri)
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as DeliveriesResponse)
+      } catch (err) {
+        return reject(new errors.DeliveriesDispatchFailed())
+      }
+    })
+  }
+
   deleteDelivery(query: DeliveriesDeleteQuery): Promise<DeliveriesResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${query.deliveryId}`

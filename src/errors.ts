@@ -69,6 +69,20 @@ export class DeliveriesUpdateFailed extends BaseError {
   }
 }
 
+export class DeliveriesInProgressFailed extends BaseError {
+  public name = 'DeliveriesInProgressFailed'
+  constructor(public message: string = 'Could not change delivery status to "in_progress') {
+    super(message)
+  }
+}
+
+export class DeliveriesDispatchFailed extends BaseError {
+  public name = 'DeliveriesDispatchFailed'
+  constructor(public message: string = 'Could not change delivery status to "in_progress') {
+    super(message)
+  }
+}
+
 export class DeliveriesDeleteFailed extends BaseError {
   public name = 'DeliveriesDeleteFailed'
   constructor(public message: string = 'Could not delete delivery') {
