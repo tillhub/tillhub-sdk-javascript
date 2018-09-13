@@ -1,9 +1,7 @@
 import { UsernameAuth, KeyAuth, TokenAuth } from './v0/auth';
 import { Auth } from './v1/auth';
-import { Transactions } from './v0/transactions';
 import * as v0 from './v0';
 import * as v1 from './v1';
-import { Deliveries } from './v0/deliveries';
 import { Client } from './client';
 export { v0, v1 };
 export declare const defaultOptions: TillhubSDKOptions;
@@ -28,10 +26,10 @@ export declare class TillhubClient {
      * Create an authenticated transactions instance
      *
      */
-    transactions(): Transactions;
+    transactions(): v0.Transactions;
     taxes(): v0.Taxes;
     product(): v1.Product;
-    deliveries(): Deliveries;
+    deliveries(): v0.Deliveries;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;

@@ -90,4 +90,40 @@ var DeliveriesFetchFailed = /** @class */ (function (_super) {
     return DeliveriesFetchFailed;
 }(BaseError));
 exports.DeliveriesFetchFailed = DeliveriesFetchFailed;
+var DeliveriesCreateFailed = /** @class */ (function (_super) {
+    __extends(DeliveriesCreateFailed, _super);
+    function DeliveriesCreateFailed(message) {
+        if (message === void 0) { message = 'Could not create delivery'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'DeliveriesCreateFailed';
+        return _this;
+    }
+    return DeliveriesCreateFailed;
+}(BaseError));
+exports.DeliveriesCreateFailed = DeliveriesCreateFailed;
+var DeliveriesUpdateFailed = /** @class */ (function (_super) {
+    __extends(DeliveriesUpdateFailed, _super);
+    function DeliveriesUpdateFailed(message) {
+        if (message === void 0) { message = 'Could not update delivery'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'DeliveriesUpdateFailed';
+        return _this;
+    }
+    return DeliveriesUpdateFailed;
+}(BaseError));
+exports.DeliveriesUpdateFailed = DeliveriesUpdateFailed;
+var DeliveriesDeleteFailed = /** @class */ (function (_super) {
+    __extends(DeliveriesDeleteFailed, _super);
+    function DeliveriesDeleteFailed(message) {
+        if (message === void 0) { message = 'Could not delete delivery'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'DeliveriesDeleteFailed';
+        return _this;
+    }
+    return DeliveriesDeleteFailed;
+}(BaseError));
+exports.DeliveriesDeleteFailed = DeliveriesDeleteFailed;
 //# sourceMappingURL=errors.js.map

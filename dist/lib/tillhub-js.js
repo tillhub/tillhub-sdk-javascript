@@ -17,12 +17,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var transactions_1 = require("./v0/transactions");
 var v0 = __importStar(require("./v0"));
 exports.v0 = v0;
 var v1 = __importStar(require("./v1"));
 exports.v1 = v1;
-var deliveries_1 = require("./v0/deliveries");
 var client_1 = require("./client");
 var errors = __importStar(require("./errors"));
 exports.defaultOptions = {
@@ -84,7 +82,7 @@ var TillhubClient = /** @class */ (function () {
             !this.auth.authenticated) {
             throw new errors.UninstantiatedClient();
         }
-        return new transactions_1.Transactions({ user: this.auth.user, base: this.options.base }, this.http);
+        return new v0.Transactions({ user: this.auth.user, base: this.options.base }, this.http);
     };
     TillhubClient.prototype.taxes = function () {
         if (!this.options ||
@@ -110,7 +108,7 @@ var TillhubClient = /** @class */ (function () {
             !this.auth.authenticated) {
             throw new errors.UninstantiatedClient();
         }
-        return new deliveries_1.Deliveries({ user: this.auth.user, base: this.options.base }, this.http);
+        return new v0.Deliveries({ user: this.auth.user, base: this.options.base }, this.http);
     };
     return TillhubClient;
 }());

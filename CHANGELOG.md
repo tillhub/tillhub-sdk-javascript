@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.8.1...v1.9.0) (2018-09-13)
+
+
+### Features
+
+* Add all CRUD handlers for deliveries ([9fde382](https://github.com/tillhub/tillhub-sdk-javascript/commit/9fde382))
+
 ## [1.8.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.8.0...v1.8.1) (2018-09-12)
 
 

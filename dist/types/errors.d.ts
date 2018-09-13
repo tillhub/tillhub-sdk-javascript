@@ -31,3 +31,18 @@ export declare class DeliveriesFetchFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class DeliveriesCreateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class DeliveriesUpdateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class DeliveriesDeleteFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
