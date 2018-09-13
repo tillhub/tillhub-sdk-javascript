@@ -11,10 +11,14 @@ export interface DeliveriesOptions {
     user?: string;
     base?: string;
 }
-export interface DeliveriesGetQuery {
+export interface DeliveriesGetAllQuery {
     limit?: number;
     embed?: string[];
     uri?: string;
+}
+export interface DeliveriesGetOneQuery {
+    deliveryId: string;
+    embed?: string[];
 }
 export interface DeliveriesCreateQuery {
     limit?: number;
@@ -87,7 +91,8 @@ export declare class Deliveries {
     http: Client;
     options: DeliveriesOptions;
     constructor(options: DeliveriesOptions, http: Client);
-    getAll(query?: DeliveriesGetQuery | undefined): Promise<DeliveriesResponse>;
+    getAll(query?: DeliveriesGetAllQuery | undefined): Promise<DeliveriesResponse>;
+    getOne(query: DeliveriesGetOneQuery): Promise<DeliveriesResponse>;
     createDelivery(requestObject: DeliveriesCreateRequestObject): Promise<DeliveriesResponse>;
     updateDelivery(requestObject: DeliveriesUpdateRequestObject): Promise<DeliveriesResponse>;
     deleteDelivery(query: DeliveriesDeleteQuery): Promise<DeliveriesResponse>;

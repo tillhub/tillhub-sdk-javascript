@@ -78,18 +78,30 @@ var ProductCreateFailed = /** @class */ (function (_super) {
     return ProductCreateFailed;
 }(BaseError));
 exports.ProductCreateFailed = ProductCreateFailed;
-var DeliveriesFetchFailed = /** @class */ (function (_super) {
-    __extends(DeliveriesFetchFailed, _super);
-    function DeliveriesFetchFailed(message) {
+var DeliveriesFetchAllFailed = /** @class */ (function (_super) {
+    __extends(DeliveriesFetchAllFailed, _super);
+    function DeliveriesFetchAllFailed(message) {
         if (message === void 0) { message = 'Could not fetch deliveries'; }
         var _this = _super.call(this, message) || this;
         _this.message = message;
-        _this.name = 'DeliveriesFetchFailed';
+        _this.name = 'DeliveriesFetchAllFailed';
         return _this;
     }
-    return DeliveriesFetchFailed;
+    return DeliveriesFetchAllFailed;
 }(BaseError));
-exports.DeliveriesFetchFailed = DeliveriesFetchFailed;
+exports.DeliveriesFetchAllFailed = DeliveriesFetchAllFailed;
+var DeliveriesFetchOneFailed = /** @class */ (function (_super) {
+    __extends(DeliveriesFetchOneFailed, _super);
+    function DeliveriesFetchOneFailed(message) {
+        if (message === void 0) { message = 'Could not fetch delivery'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'DeliveriesFetchOneFailed';
+        return _this;
+    }
+    return DeliveriesFetchOneFailed;
+}(BaseError));
+exports.DeliveriesFetchOneFailed = DeliveriesFetchOneFailed;
 var DeliveriesCreateFailed = /** @class */ (function (_super) {
     __extends(DeliveriesCreateFailed, _super);
     function DeliveriesCreateFailed(message) {

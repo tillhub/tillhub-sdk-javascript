@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.9.0...v1.10.0) (2018-09-13)
+
+
+### Features
+
+* Add getOne handler for deliveries ([5e3798e](https://github.com/tillhub/tillhub-sdk-javascript/commit/5e3798e))
+
 # [1.9.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.8.1...v1.9.0) (2018-09-13)
 
 
