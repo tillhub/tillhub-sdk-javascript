@@ -209,7 +209,7 @@ export class Deliveries {
       try {
         const response = await this.http.getClient().post(uri, null, {
           headers: {
-            accept: 'application/json' // not needed for tillhub-api, but axios sets default headers { 'accept': 'application/json, text/plain, */*' } if not specified
+            Accept: 'application/json' // not needed for tillhub-api, but axios sets default headers { 'accept': 'application/json, text/plain, */*' } if not specified
           }
         })
 
