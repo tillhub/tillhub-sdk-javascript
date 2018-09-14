@@ -200,6 +200,25 @@ export class Deliveries {
     })
   }
 
+  createDeliveryPDF(deliveryId: string): Promise<DeliveriesResponse> {
+    return new Promise(async (resolve, reject) => {
+      let uri = `${this.options.base}${this.endpoint}/${
+        this.options.user
+      }/${deliveryId}/pdf?format=uri`
+
+      try {
+        const response = await this.http.getClient().post(uri)
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as DeliveriesResponse)
+      } catch (err) {
+        return reject(new errors.DeliveriesPDFFailed())
+      }
+    })
+  }
+
   updateDelivery(requestObject: DeliveriesUpdateRequestObject): Promise<DeliveriesResponse> {
     return new Promise(async (resolve, reject) => {
       const { body, query, deliveryId } = requestObject
