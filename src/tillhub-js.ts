@@ -110,6 +110,20 @@ export class TillhubClient {
     return new v0.Taxes({ user: this.auth.user, base: this.options.base }, this.http)
   }
 
+  productGroups(): v0.ProductGroups {
+    if (
+      !this.options ||
+      !this.options.base ||
+      !this.http ||
+      !this.auth ||
+      !this.auth.authenticated
+    ) {
+      throw new errors.UninstantiatedClient()
+    }
+
+    return new v0.ProductGroups({ user: this.auth.user, base: this.options.base }, this.http)
+  }
+
   product(): v1.Product {
     if (!this.options || !this.options.base || !this.http || !this.auth) {
       throw new errors.UninstantiatedClient()

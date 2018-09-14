@@ -96,3 +96,10 @@ export class DeliveriesDeleteFailed extends BaseError {
     super(message)
   }
 }
+
+export class ProductGroupsFetchFailed extends BaseError {
+  public name = 'ProductGroupsFetchFailed'
+  constructor(public message: string = 'Could not fetch product groups') {
+    super(message)
+  }
+}
