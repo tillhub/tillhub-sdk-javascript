@@ -1,3 +1,10 @@
+## [1.14.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.14.1...v1.14.2) (2018-09-14)
+
+
+### Bug Fixes
+
+* Change custom header in create delievery pdf ([e4425be](https://github.com/tillhub/tillhub-sdk-javascript/commit/e4425be))
+
 ## [1.14.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.14.0...v1.14.1) (2018-09-14)
 
 
