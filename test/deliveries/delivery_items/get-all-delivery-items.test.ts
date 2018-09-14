@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
-import th, { v0 } from '../../../src/tillhub-js'
+import { TillhubClient, v0 } from '../../../src/tillhub-js'
 
 let user = {
   username: 'test@example.com',
@@ -19,18 +19,14 @@ if (process.env.SYSTEM_TEST) {
 }
 
 const requestObject = {
+  deliveryId: 'abc123',
   query: {
-    embed: ['location', 'location']
-  },
-  body: {
-    product: '12345'
+    embed: ['location', 'product']
   }
 }
 
-describe('v0: Deliveries', () => {
-  it('can create one', async () => {
-    const { body } = requestObject
-
+describe('v0: Deliveries: Items', () => {
+  it('can get all items of a delivery', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       const mock = new MockAdapter(axios)
       const legacyId = '4564'
@@ -49,12 +45,17 @@ describe('v0: Deliveries', () => {
       })
 
       mock
-        .onPost(`https://api.tillhub.com/api/v0/deliveries/${legacyId}?embed[]=location`)
+        .onGet(
+          `https://api.tillhub.com/api/v0/deliveries/${legacyId}/${
+            requestObject.deliveryId
+          }/items?embed[]=location&embed[]=product`
+        )
         .reply(function(config) {
           return [
             200,
             {
-              results: body
+              count: 1,
+              results: [{}]
             }
           ]
         })
@@ -68,18 +69,20 @@ describe('v0: Deliveries', () => {
       base: process.env.TILLHUB_BASE
     }
 
+    const th = new TillhubClient()
+
     th.init(options)
     await th.auth.loginUsername({
       username: user.username,
       password: user.password
     })
 
-    const delivery = th.deliveries()
+    const deliveries = th.deliveries()
 
-    expect(delivery).toBeInstanceOf(v0.Deliveries)
+    expect(deliveries).toBeInstanceOf(v0.Deliveries)
 
-    const { data } = await delivery.createDeliveryItem(requestObject)
+    const { data } = await deliveries.getAllDeliveryItems(requestObject)
 
-    expect(data).toEqual(body)
+    expect(Array.isArray(data)).toBe(true)
   })
 })

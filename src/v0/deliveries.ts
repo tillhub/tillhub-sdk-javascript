@@ -84,6 +84,50 @@ export interface DeliveriesSimpleUpdateRequestBody {
   query?: DeliveriesQuery
 }
 
+export interface DeliveryItemsCreateRequestObject {
+  body: DeliveryItemsCreateBody
+  query?: DeliveriesQuery
+}
+
+export interface DeliveryItemsCreateBody {
+  items: object[]
+}
+
+export interface DeliveryItemsCreateBodyItem {
+  product: string
+  delivery: string
+  position?: number
+  qty?: number | null
+  qty_picked?: number | null
+  stock?: string
+  stock_location?: string
+  added_at?: string
+  comments?: string | null
+}
+
+export interface DeliveryItemsGetAllRequestObject {
+  deliveryId: string
+  query?: DeliveriesQuery
+}
+
+export interface DeliveryItemUpdateRequestObject {
+  itemId: string
+  body: DeliveryItemsUpdateBody
+  query?: DeliveriesQuery
+}
+
+export interface DeliveryItemsUpdateBody {
+  product?: string
+  delivery?: string
+  position?: number
+  qty?: number | null
+  qty_picked?: number | null
+  stock?: string
+  stock_location?: string
+  added_at?: string
+  comments?: string | null
+}
+
 export interface DeliveriesResponse {
   data: object[]
   metadata: object
@@ -315,6 +359,112 @@ export class Deliveries {
   deleteDelivery(deliveryId: string): Promise<DeliveriesResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deliveryId}`
+      try {
+        const response = await this.http.getClient().delete(uri)
+
+        return resolve({
+          msg: response.data.msg
+        } as DeliveriesResponse)
+      } catch (err) {
+        return reject(new errors.DeliveriesDeleteFailed())
+      }
+    })
+  }
+
+  createDeliveryItems(
+    requestObject: DeliveryItemsCreateRequestObject
+  ): Promise<DeliveriesResponse> {
+    return new Promise(async (resolve, reject) => {
+      const { body, query } = requestObject
+
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/items`
+
+      try {
+        if (query && query.embed) {
+          const queryString = query.embed
+            .map(item => {
+              return `embed[]=${item}`
+            })
+            .join('&')
+
+          uri = `${uri}?${queryString}`
+        }
+
+        const response = await this.http.getClient().post(uri, body)
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as DeliveriesResponse)
+      } catch (err) {
+        return reject(new errors.DeliveryItemsCreateFailed())
+      }
+    })
+  }
+
+  getAllDeliveryItems(
+    requestObject: DeliveryItemsGetAllRequestObject
+  ): Promise<DeliveriesResponse> {
+    return new Promise(async (resolve, reject) => {
+      const { deliveryId, query } = requestObject
+
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deliveryId}/items`
+
+      try {
+        if (query && query.embed) {
+          const queryString = query.embed
+            .map(item => {
+              return `embed[]=${item}`
+            })
+            .join('&')
+
+          uri = `${uri}?${queryString}`
+        }
+
+        const response = await this.http.getClient().get(uri)
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as DeliveriesResponse)
+      } catch (err) {
+        return reject(new errors.DeliveryItemsFetchAllFailed())
+      }
+    })
+  }
+
+  updateDeliveryItem(requestObject: DeliveryItemUpdateRequestObject): Promise<DeliveriesResponse> {
+    return new Promise(async (resolve, reject) => {
+      const { body, query, itemId } = requestObject
+
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/items/${itemId}`
+
+      if (query && query.embed) {
+        const queryString = query.embed
+          .map(item => {
+            return `embed[]=${item}`
+          })
+          .join('&')
+
+        uri = `${uri}?${queryString}`
+      }
+
+      try {
+        const response = await this.http.getClient().put(uri, body)
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as DeliveriesResponse)
+      } catch (err) {
+        return reject(new errors.DeliveriesUpdateFailed())
+      }
+    })
+  }
+
+  deleteDeliveryItem(itemId: string): Promise<DeliveriesResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/items/${itemId}`
       try {
         const response = await this.http.getClient().delete(uri)
 

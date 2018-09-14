@@ -97,6 +97,20 @@ export class DeliveriesDeleteFailed extends BaseError {
   }
 }
 
+export class DeliveryItemsCreateFailed extends BaseError {
+  public name = 'DeliveryItemsCreateFailed'
+  constructor(public message: string = 'Could not create delivery items') {
+    super(message)
+  }
+}
+
+export class DeliveryItemsFetchAllFailed extends BaseError {
+  public name = 'DeliveryItemsFetchAllFailed'
+  constructor(public message: string = 'Could not fetch delivery items') {
+    super(message)
+  }
+}
+
 export class ProductGroupsFetchFailed extends BaseError {
   public name = 'ProductGroupsFetchFailed'
   constructor(public message: string = 'Could not fetch product groups') {
