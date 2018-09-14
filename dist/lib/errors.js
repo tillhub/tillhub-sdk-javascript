@@ -114,6 +114,18 @@ var DeliveriesCreateFailed = /** @class */ (function (_super) {
     return DeliveriesCreateFailed;
 }(BaseError));
 exports.DeliveriesCreateFailed = DeliveriesCreateFailed;
+var DeliveriesPDFFailed = /** @class */ (function (_super) {
+    __extends(DeliveriesPDFFailed, _super);
+    function DeliveriesPDFFailed(message) {
+        if (message === void 0) { message = 'Could not create PDF for delivery'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'DeliveriesPDFFailed';
+        return _this;
+    }
+    return DeliveriesPDFFailed;
+}(BaseError));
+exports.DeliveriesPDFFailed = DeliveriesPDFFailed;
 var DeliveriesUpdateFailed = /** @class */ (function (_super) {
     __extends(DeliveriesUpdateFailed, _super);
     function DeliveriesUpdateFailed(message) {

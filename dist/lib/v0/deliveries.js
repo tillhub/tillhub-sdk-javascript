@@ -161,10 +161,36 @@ var Deliveries = /** @class */ (function () {
             });
         }); });
     };
+    Deliveries.prototype.createDeliveryPDF = function (deliveryId) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, err_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + deliveryId + "/pdf?format=uri";
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().post(uri)];
+                    case 2:
+                        response = _a.sent();
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        err_4 = _a.sent();
+                        return [2 /*return*/, reject(new errors.DeliveriesPDFFailed())];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     Deliveries.prototype.updateDelivery = function (requestObject) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var body, query, deliveryId, uri, queryString, response, err_4;
+            var body, query, deliveryId, uri, queryString, response, err_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -189,7 +215,7 @@ var Deliveries = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_4 = _a.sent();
+                        err_5 = _a.sent();
                         return [2 /*return*/, reject(new errors.DeliveriesUpdateFailed())];
                     case 4: return [2 /*return*/];
                 }
@@ -199,7 +225,7 @@ var Deliveries = /** @class */ (function () {
     Deliveries.prototype.setInProgress = function (requestObject) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var deliveryId, query, uri, queryString, response, err_5;
+            var deliveryId, query, uri, queryString, response, err_6;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -224,7 +250,7 @@ var Deliveries = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_5 = _a.sent();
+                        err_6 = _a.sent();
                         return [2 /*return*/, reject(new errors.DeliveriesInProgressFailed())];
                     case 4: return [2 /*return*/];
                 }
@@ -234,7 +260,7 @@ var Deliveries = /** @class */ (function () {
     Deliveries.prototype.dispatchDelivery = function (requestObject) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var deliveryId, query, uri, queryString, response, err_6;
+            var deliveryId, query, uri, queryString, response, err_7;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -259,7 +285,7 @@ var Deliveries = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_6 = _a.sent();
+                        err_7 = _a.sent();
                         return [2 /*return*/, reject(new errors.DeliveriesDispatchFailed())];
                     case 4: return [2 /*return*/];
                 }
@@ -269,7 +295,7 @@ var Deliveries = /** @class */ (function () {
     Deliveries.prototype.deleteDelivery = function (deliveryId) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_7;
+            var uri, response, err_8;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -284,7 +310,7 @@ var Deliveries = /** @class */ (function () {
                                 msg: response.data.msg
                             })];
                     case 3:
-                        err_7 = _a.sent();
+                        err_8 = _a.sent();
                         return [2 /*return*/, reject(new errors.DeliveriesDeleteFailed())];
                     case 4: return [2 /*return*/];
                 }

@@ -1,3 +1,11 @@
+# [1.12.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.11.1...v1.12.0) (2018-09-14)
+
+
+### Features
+
+* Add create delivery PDF handler ([8d6a06a](https://github.com/tillhub/tillhub-sdk-javascript/commit/8d6a06a))
+* Remove custom header from delivery pdf handler ([45dcf15](https://github.com/tillhub/tillhub-sdk-javascript/commit/45dcf15))
+
 ## [1.11.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.11.0...v1.11.1) (2018-09-13)
 
 

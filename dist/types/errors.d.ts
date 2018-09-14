@@ -41,6 +41,11 @@ export declare class DeliveriesCreateFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class DeliveriesPDFFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
 export declare class DeliveriesUpdateFailed extends BaseError {
     message: string;
     name: string;

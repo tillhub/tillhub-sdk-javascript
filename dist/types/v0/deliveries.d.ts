@@ -88,6 +88,7 @@ export declare class Deliveries {
     getAll(query?: DeliveriesQuery | undefined): Promise<DeliveriesResponse>;
     getOne(requestObject: DeliveriesGetOneRequestObject): Promise<DeliveriesResponse>;
     createDelivery(requestObject: DeliveriesCreateRequestObject): Promise<DeliveriesResponse>;
+    createDeliveryPDF(deliveryId: string): Promise<DeliveriesResponse>;
     updateDelivery(requestObject: DeliveriesUpdateRequestObject): Promise<DeliveriesResponse>;
     setInProgress(requestObject: DeliveriesSimpleUpdateRequestBody): Promise<DeliveriesResponse>;
     dispatchDelivery(requestObject: DeliveriesSimpleUpdateRequestBody): Promise<DeliveriesResponse>;
