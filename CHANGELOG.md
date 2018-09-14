@@ -1,3 +1,10 @@
+# [1.14.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.13.0...v1.14.0) (2018-09-14)
+
+
+### Features
+
+* **accounts:** add accounts handler and getAll method ([6712c72](https://github.com/tillhub/tillhub-sdk-javascript/commit/6712c72))
+
 # [1.13.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.12.0...v1.13.0) (2018-09-14)
 
 

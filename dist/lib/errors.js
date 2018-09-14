@@ -186,4 +186,16 @@ var ProductGroupsFetchFailed = /** @class */ (function (_super) {
     return ProductGroupsFetchFailed;
 }(BaseError));
 exports.ProductGroupsFetchFailed = ProductGroupsFetchFailed;
+var AccountsFetchFailed = /** @class */ (function (_super) {
+    __extends(AccountsFetchFailed, _super);
+    function AccountsFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch accounts'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'AccountsFetchFailed';
+        return _this;
+    }
+    return AccountsFetchFailed;
+}(BaseError));
+exports.AccountsFetchFailed = AccountsFetchFailed;
 //# sourceMappingURL=errors.js.map

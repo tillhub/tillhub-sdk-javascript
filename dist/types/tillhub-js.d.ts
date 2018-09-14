@@ -28,9 +28,10 @@ export declare class TillhubClient {
      */
     transactions(): v0.Transactions;
     taxes(): v0.Taxes;
-    productGroups(): v0.ProductGroups;
     product(): v1.Product;
+    productGroups(): v0.ProductGroups;
     deliveries(): v0.Deliveries;
+    accounts(): v0.Accounts;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;

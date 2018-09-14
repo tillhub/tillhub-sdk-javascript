@@ -71,3 +71,8 @@ export declare class ProductGroupsFetchFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class AccountsFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
