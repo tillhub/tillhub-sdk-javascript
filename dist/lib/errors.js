@@ -174,6 +174,30 @@ var DeliveriesDeleteFailed = /** @class */ (function (_super) {
     return DeliveriesDeleteFailed;
 }(BaseError));
 exports.DeliveriesDeleteFailed = DeliveriesDeleteFailed;
+var DeliveryItemsCreateFailed = /** @class */ (function (_super) {
+    __extends(DeliveryItemsCreateFailed, _super);
+    function DeliveryItemsCreateFailed(message) {
+        if (message === void 0) { message = 'Could not create delivery items'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'DeliveryItemsCreateFailed';
+        return _this;
+    }
+    return DeliveryItemsCreateFailed;
+}(BaseError));
+exports.DeliveryItemsCreateFailed = DeliveryItemsCreateFailed;
+var DeliveryItemsFetchAllFailed = /** @class */ (function (_super) {
+    __extends(DeliveryItemsFetchAllFailed, _super);
+    function DeliveryItemsFetchAllFailed(message) {
+        if (message === void 0) { message = 'Could not fetch delivery items'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'DeliveryItemsFetchAllFailed';
+        return _this;
+    }
+    return DeliveryItemsFetchAllFailed;
+}(BaseError));
+exports.DeliveryItemsFetchAllFailed = DeliveryItemsFetchAllFailed;
 var ProductGroupsFetchFailed = /** @class */ (function (_super) {
     __extends(ProductGroupsFetchFailed, _super);
     function ProductGroupsFetchFailed(message) {

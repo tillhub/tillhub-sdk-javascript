@@ -74,6 +74,44 @@ export interface DeliveriesSimpleUpdateRequestBody {
     deliveryId: string;
     query?: DeliveriesQuery;
 }
+export interface DeliveryItemsCreateRequestObject {
+    body: DeliveryItemsCreateBody;
+    query?: DeliveriesQuery;
+}
+export interface DeliveryItemsCreateBody {
+    items: object[];
+}
+export interface DeliveryItemsCreateBodyItem {
+    product: string;
+    delivery: string;
+    position?: number;
+    qty?: number | null;
+    qty_picked?: number | null;
+    stock?: string;
+    stock_location?: string;
+    added_at?: string;
+    comments?: string | null;
+}
+export interface DeliveryItemsGetAllRequestObject {
+    deliveryId: string;
+    query?: DeliveriesQuery;
+}
+export interface DeliveryItemUpdateRequestObject {
+    itemId: string;
+    body: DeliveryItemsUpdateBody;
+    query?: DeliveriesQuery;
+}
+export interface DeliveryItemsUpdateBody {
+    product?: string;
+    delivery?: string;
+    position?: number;
+    qty?: number | null;
+    qty_picked?: number | null;
+    stock?: string;
+    stock_location?: string;
+    added_at?: string;
+    comments?: string | null;
+}
 export interface DeliveriesResponse {
     data: object[];
     metadata: object;
@@ -93,4 +131,8 @@ export declare class Deliveries {
     setInProgress(requestObject: DeliveriesSimpleUpdateRequestBody): Promise<DeliveriesResponse>;
     dispatchDelivery(requestObject: DeliveriesSimpleUpdateRequestBody): Promise<DeliveriesResponse>;
     deleteDelivery(deliveryId: string): Promise<DeliveriesResponse>;
+    createDeliveryItems(requestObject: DeliveryItemsCreateRequestObject): Promise<DeliveriesResponse>;
+    getAllDeliveryItems(requestObject: DeliveryItemsGetAllRequestObject): Promise<DeliveriesResponse>;
+    updateDeliveryItem(requestObject: DeliveryItemUpdateRequestObject): Promise<DeliveriesResponse>;
+    deleteDeliveryItem(itemId: string): Promise<DeliveriesResponse>;
 }
