@@ -62,6 +62,13 @@ export class DeliveriesCreateFailed extends BaseError {
   }
 }
 
+export class DeliveriesPDFFailed extends BaseError {
+  public name = 'DeliveriesPDFFailed'
+  constructor(public message: string = 'Could not create PDF for delivery') {
+    super(message)
+  }
+}
+
 export class DeliveriesUpdateFailed extends BaseError {
   public name = 'DeliveriesUpdateFailed'
   constructor(public message: string = 'Could not update delivery') {
