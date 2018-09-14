@@ -207,11 +207,7 @@ export class Deliveries {
       }/${deliveryId}/pdf?format=uri`
 
       try {
-        const response = await this.http.getClient().post(uri, null, {
-          headers: {
-            Accept: 'application/json'
-          }
-        })
+        const response = await this.http.getClient().post(uri)
 
         return resolve({
           data: response.data.results,
