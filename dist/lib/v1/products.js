@@ -79,4 +79,4 @@ var Product = /** @class */ (function () {
     return Product;
 }());
 exports.Product = Product;
-//# sourceMappingURL=product.js.map
+//# sourceMappingURL=products.js.map

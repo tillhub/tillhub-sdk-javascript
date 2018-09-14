@@ -1,3 +1,10 @@
+# [1.15.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.14.2...v1.15.0) (2018-09-14)
+
+
+### Features
+
+* **product:** fix endpoint typo ([0967ba2](https://github.com/tillhub/tillhub-sdk-javascript/commit/0967ba2))
+
 ## [1.14.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.14.1...v1.14.2) (2018-09-14)
 
 
