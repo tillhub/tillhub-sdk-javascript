@@ -1,3 +1,10 @@
+## [1.14.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.14.0...v1.14.1) (2018-09-14)
+
+
+### Bug Fixes
+
+* Set custom header in create delivery pdf ([2bcd1d9](https://github.com/tillhub/tillhub-sdk-javascript/commit/2bcd1d9))
+
 # [1.14.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.13.0...v1.14.0) (2018-09-14)
 
 

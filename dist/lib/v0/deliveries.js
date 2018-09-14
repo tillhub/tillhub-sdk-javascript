@@ -172,7 +172,11 @@ var Deliveries = /** @class */ (function () {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, this.http.getClient().post(uri)];
+                        return [4 /*yield*/, this.http.getClient().post(uri, null, {
+                                headers: {
+                                    accept: 'application/json' // not needed for tillhub-api, but axios sets default headers { 'accept': 'application/json, text/plain, */*' } if not specified
+                                }
+                            })];
                     case 2:
                         response = _a.sent();
                         return [2 /*return*/, resolve({
