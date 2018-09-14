@@ -26,7 +26,7 @@ describe('Craete Product', () => {
   it('create', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       const mock = new MockAdapter(axios)
-      const legacyId = '4564'
+      const userId = '4564'
 
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
         return [
@@ -35,13 +35,13 @@ describe('Craete Product', () => {
             token: '',
             user: {
               id: '123',
-              legacy_id: legacyId
+              legacy_id: userId
             }
           }
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v1/product/${legacyId}`).reply(function(config) {
+      mock.onPost(`https://api.tillhub.com/api/v1/products/${userId}`).reply(function(config) {
         return [
           200,
           {
