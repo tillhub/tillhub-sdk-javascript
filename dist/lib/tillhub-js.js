@@ -94,6 +94,16 @@ var TillhubClient = /** @class */ (function () {
         }
         return new v0.Taxes({ user: this.auth.user, base: this.options.base }, this.http);
     };
+    TillhubClient.prototype.productGroups = function () {
+        if (!this.options ||
+            !this.options.base ||
+            !this.http ||
+            !this.auth ||
+            !this.auth.authenticated) {
+            throw new errors.UninstantiatedClient();
+        }
+        return new v0.ProductGroups({ user: this.auth.user, base: this.options.base }, this.http);
+    };
     TillhubClient.prototype.product = function () {
         if (!this.options || !this.options.base || !this.http || !this.auth) {
             throw new errors.UninstantiatedClient();

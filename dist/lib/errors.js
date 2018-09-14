@@ -174,4 +174,16 @@ var DeliveriesDeleteFailed = /** @class */ (function (_super) {
     return DeliveriesDeleteFailed;
 }(BaseError));
 exports.DeliveriesDeleteFailed = DeliveriesDeleteFailed;
+var ProductGroupsFetchFailed = /** @class */ (function (_super) {
+    __extends(ProductGroupsFetchFailed, _super);
+    function ProductGroupsFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch product groups'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'ProductGroupsFetchFailed';
+        return _this;
+    }
+    return ProductGroupsFetchFailed;
+}(BaseError));
+exports.ProductGroupsFetchFailed = ProductGroupsFetchFailed;
 //# sourceMappingURL=errors.js.map

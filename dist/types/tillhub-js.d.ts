@@ -28,6 +28,7 @@ export declare class TillhubClient {
      */
     transactions(): v0.Transactions;
     taxes(): v0.Taxes;
+    productGroups(): v0.ProductGroups;
     product(): v1.Product;
     deliveries(): v0.Deliveries;
 }

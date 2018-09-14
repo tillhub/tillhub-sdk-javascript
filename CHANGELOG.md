@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.12.0...v1.13.0) (2018-09-14)
+
+
+### Features
+
+* **product groups:** add product groups hander and get all method ([a0dbcd0](https://github.com/tillhub/tillhub-sdk-javascript/commit/a0dbcd0))
+
 # [1.12.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.11.1...v1.12.0) (2018-09-14)
 
 

@@ -66,3 +66,8 @@ export declare class DeliveriesDeleteFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class ProductGroupsFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
