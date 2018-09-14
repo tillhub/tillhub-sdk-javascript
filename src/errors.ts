@@ -103,3 +103,10 @@ export class ProductGroupsFetchFailed extends BaseError {
     super(message)
   }
 }
+
+export class AccountsFetchFailed extends BaseError {
+  public name = 'AccountsFetchFailed'
+  constructor(public message: string = 'Could not fetch accounts') {
+    super(message)
+  }
+}
