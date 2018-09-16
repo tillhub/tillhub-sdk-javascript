@@ -1,3 +1,16 @@
+# [1.17.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.16.0...v1.17.0) (2018-09-16)
+
+
+### Bug Fixes
+
+* fixes after merging ([0d49df8](https://github.com/tillhub/tillhub-sdk-javascript/commit/0d49df8))
+* **build:** update deps to unhang ([47aaeee](https://github.com/tillhub/tillhub-sdk-javascript/commit/47aaeee))
+
+
+### Features
+
+* adds templates ([a95a75b](https://github.com/tillhub/tillhub-sdk-javascript/commit/a95a75b))
+
 # [1.16.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.15.0...v1.16.0) (2018-09-14)
 
 

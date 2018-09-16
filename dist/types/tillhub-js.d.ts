@@ -27,11 +27,32 @@ export declare class TillhubClient {
      *
      */
     transactions(): v0.Transactions;
+    /**
+     * Create an authenticated taxes instance
+     *
+     */
     taxes(): v0.Taxes;
+    /**
+     * Create an authenticated products instance
+     *
+     */
     product(): v1.Product;
     productGroups(): v0.ProductGroups;
+    /**
+     * Create an authenticated deliveries instance
+     *
+     */
     deliveries(): v0.Deliveries;
+    /**
+     * Create an authenticated accounts instance
+     *
+     */
     accounts(): v0.Accounts;
+    /**
+     * Create an authenticated templates instance
+     *
+     */
+    templates(): v1.Templates;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;

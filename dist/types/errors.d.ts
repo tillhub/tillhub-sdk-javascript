@@ -86,3 +86,18 @@ export declare class AccountsFetchFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class TemplatesCreationFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class TemplatesPutFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class TemplatesFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}

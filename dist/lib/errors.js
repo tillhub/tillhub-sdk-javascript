@@ -1,8 +1,11 @@
 "use strict";
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -222,4 +225,40 @@ var AccountsFetchFailed = /** @class */ (function (_super) {
     return AccountsFetchFailed;
 }(BaseError));
 exports.AccountsFetchFailed = AccountsFetchFailed;
+var TemplatesCreationFailed = /** @class */ (function (_super) {
+    __extends(TemplatesCreationFailed, _super);
+    function TemplatesCreationFailed(message) {
+        if (message === void 0) { message = 'Could not create template'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'TemplatesCreationFailed';
+        return _this;
+    }
+    return TemplatesCreationFailed;
+}(BaseError));
+exports.TemplatesCreationFailed = TemplatesCreationFailed;
+var TemplatesPutFailed = /** @class */ (function (_super) {
+    __extends(TemplatesPutFailed, _super);
+    function TemplatesPutFailed(message) {
+        if (message === void 0) { message = 'Could not replace template'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'TemplatesPutFailed';
+        return _this;
+    }
+    return TemplatesPutFailed;
+}(BaseError));
+exports.TemplatesPutFailed = TemplatesPutFailed;
+var TemplatesFetchFailed = /** @class */ (function (_super) {
+    __extends(TemplatesFetchFailed, _super);
+    function TemplatesFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch templates'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'TemplatesFetchFailed';
+        return _this;
+    }
+    return TemplatesFetchFailed;
+}(BaseError));
+exports.TemplatesFetchFailed = TemplatesFetchFailed;
 //# sourceMappingURL=errors.js.map

@@ -1,8 +1,11 @@
 "use strict";
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -84,6 +87,10 @@ var TillhubClient = /** @class */ (function () {
         }
         return new v0.Transactions({ user: this.auth.user, base: this.options.base }, this.http);
     };
+    /**
+     * Create an authenticated taxes instance
+     *
+     */
     TillhubClient.prototype.taxes = function () {
         if (!this.options ||
             !this.options.base ||
@@ -94,6 +101,10 @@ var TillhubClient = /** @class */ (function () {
         }
         return new v0.Taxes({ user: this.auth.user, base: this.options.base }, this.http);
     };
+    /**
+     * Create an authenticated products instance
+     *
+     */
     TillhubClient.prototype.product = function () {
         if (!this.options || !this.options.base || !this.http || !this.auth) {
             throw new errors.UninstantiatedClient();
@@ -110,6 +121,10 @@ var TillhubClient = /** @class */ (function () {
         }
         return new v0.ProductGroups({ user: this.auth.user, base: this.options.base }, this.http);
     };
+    /**
+     * Create an authenticated deliveries instance
+     *
+     */
     TillhubClient.prototype.deliveries = function () {
         if (!this.options ||
             !this.options.base ||
@@ -120,6 +135,10 @@ var TillhubClient = /** @class */ (function () {
         }
         return new v0.Deliveries({ user: this.auth.user, base: this.options.base }, this.http);
     };
+    /**
+     * Create an authenticated accounts instance
+     *
+     */
     TillhubClient.prototype.accounts = function () {
         if (!this.options ||
             !this.options.base ||
@@ -129,6 +148,20 @@ var TillhubClient = /** @class */ (function () {
             throw new errors.UninstantiatedClient();
         }
         return new v0.Accounts({ user: this.auth.user, base: this.options.base }, this.http);
+    };
+    /**
+     * Create an authenticated templates instance
+     *
+     */
+    TillhubClient.prototype.templates = function () {
+        if (!this.options ||
+            !this.options.base ||
+            !this.http ||
+            !this.auth ||
+            !this.auth.authenticated) {
+            throw new errors.UninstantiatedClient();
+        }
+        return new v1.Templates({ user: this.auth.user, base: this.options.base }, this.http);
     };
     return TillhubClient;
 }());
