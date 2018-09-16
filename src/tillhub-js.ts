@@ -140,7 +140,6 @@ export class TillhubClient {
     return new v0.ProductGroups({ user: this.auth.user, base: this.options.base }, this.http)
   }
 
-
   /**
    * Create an authenticated deliveries instance
    *
@@ -159,8 +158,11 @@ export class TillhubClient {
     return new v0.Deliveries({ user: this.auth.user, base: this.options.base }, this.http)
   }
 
+  /**
+   * Create an authenticated accounts instance
+   *
+   */
   accounts(): v0.Accounts {
-
     if (
       !this.options ||
       !this.options.base ||
@@ -173,20 +175,24 @@ export class TillhubClient {
 
     return new v0.Accounts({ user: this.auth.user, base: this.options.base }, this.http)
   }
-}
 
-templates(): v1.Templates {
-  if (
-    !this.options ||
-    !this.options.base ||
-    !this.http ||
-    !this.auth ||
-    !this.auth.authenticated
-  ) {
-    throw new errors.UninstantiatedClient()
+  /**
+   * Create an authenticated templates instance
+   *
+   */
+  templates(): v1.Templates {
+    if (
+      !this.options ||
+      !this.options.base ||
+      !this.http ||
+      !this.auth ||
+      !this.auth.authenticated
+    ) {
+      throw new errors.UninstantiatedClient()
+    }
+
+    return new v1.Templates({ user: this.auth.user, base: this.options.base }, this.http)
   }
-
-  return new v1.Templates({ user: this.auth.user, base: this.options.base }, this.http)
 }
 
 export class Tillhub extends TillhubClient {
