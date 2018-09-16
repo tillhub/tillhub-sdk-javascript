@@ -96,6 +96,10 @@ export class TillhubClient {
     return new v0.Transactions({ user: this.auth.user, base: this.options.base }, this.http)
   }
 
+  /**
+   * Create an authenticated taxes instance
+   *
+   */
   taxes(): v0.Taxes {
     if (
       !this.options ||
@@ -110,6 +114,10 @@ export class TillhubClient {
     return new v0.Taxes({ user: this.auth.user, base: this.options.base }, this.http)
   }
 
+  /**
+   * Create an authenticated products instance
+   *
+   */
   product(): v1.Product {
     if (!this.options || !this.options.base || !this.http || !this.auth) {
       throw new errors.UninstantiatedClient()
@@ -132,6 +140,11 @@ export class TillhubClient {
     return new v0.ProductGroups({ user: this.auth.user, base: this.options.base }, this.http)
   }
 
+
+  /**
+   * Create an authenticated deliveries instance
+   *
+   */
   deliveries(): v0.Deliveries {
     if (
       !this.options ||
@@ -147,6 +160,7 @@ export class TillhubClient {
   }
 
   accounts(): v0.Accounts {
+
     if (
       !this.options ||
       !this.options.base ||
@@ -159,6 +173,20 @@ export class TillhubClient {
 
     return new v0.Accounts({ user: this.auth.user, base: this.options.base }, this.http)
   }
+}
+
+templates(): v1.Templates {
+  if (
+    !this.options ||
+    !this.options.base ||
+    !this.http ||
+    !this.auth ||
+    !this.auth.authenticated
+  ) {
+    throw new errors.UninstantiatedClient()
+  }
+
+  return new v1.Templates({ user: this.auth.user, base: this.options.base }, this.http)
 }
 
 export class Tillhub extends TillhubClient {

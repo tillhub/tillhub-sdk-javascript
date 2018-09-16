@@ -124,3 +124,24 @@ export class AccountsFetchFailed extends BaseError {
     super(message)
   }
 }
+
+export class TemplatesCreationFailed extends BaseError {
+  public name = 'TemplatesCreationFailed'
+  constructor(public message: string = 'Could not create template') {
+    super(message)
+  }
+}
+
+export class TemplatesPutFailed extends BaseError {
+  public name = 'TemplatesPutFailed'
+  constructor(public message: string = 'Could not replace template') {
+    super(message)
+  }
+}
+
+export class TemplatesFetchFailed extends BaseError {
+  public name = 'TemplatesFetchFailed'
+  constructor(public message: string = 'Could not fetch templates') {
+    super(message)
+  }
+}
