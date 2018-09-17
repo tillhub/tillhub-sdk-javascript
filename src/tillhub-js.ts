@@ -115,15 +115,15 @@ export class TillhubClient {
   }
 
   /**
-   * Create an authenticated products instance
-   *
-   */
-  product(): v1.Product {
+  * Create an authenticated products instance
+  *
+  */
+  products(): v1.Products {
     if (!this.options || !this.options.base || !this.http || !this.auth) {
       throw new errors.UninstantiatedClient()
     }
 
-    return new v1.Product({ user: this.auth.user, base: this.options.base }, this.http)
+    return new v1.Products({ user: this.auth.user, base: this.options.base }, this.http)
   }
 
   productGroups(): v0.ProductGroups {

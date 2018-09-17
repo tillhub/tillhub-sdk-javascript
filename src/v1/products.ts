@@ -14,7 +14,7 @@ type ProductTypes =
   | 'variant'
   | 'variant_product'
 
-export interface ProductType {
+export interface Product {
   name?: string
   description?: string | null
   attributes?: object | null
@@ -58,22 +58,22 @@ export interface ProductType {
   delegated_to?: string[] | null
 }
 
-export interface ProductOptions {
+export interface ProductsOptions {
   user?: string
   base?: string
 }
 
-export interface ProductResponse {
+export interface ProductsResponse {
   data: object[]
   metadata: object
 }
 
-export class Product {
+export class Products {
   endpoint: string
   http: Client
-  public options: ProductOptions
+  public options: ProductsOptions
 
-  constructor(options: ProductOptions, http: Client) {
+  constructor(options: ProductsOptions, http: Client) {
     this.options = options
     this.http = http
 
@@ -81,7 +81,7 @@ export class Product {
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 
-  createProduct(product: ProductType): Promise<ProductResponse> {
+  create(product: Product): Promise<ProductsResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
@@ -90,9 +90,9 @@ export class Product {
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
-        } as ProductResponse)
+        } as ProductsResponse)
       } catch (err) {
-        return reject(new errors.ProductCreateFailed())
+        return reject(new errors.ProductsCreateFailed())
       }
     })
   }

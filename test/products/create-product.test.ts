@@ -22,7 +22,7 @@ const productObj = {
   name: 'iPhone'
 }
 
-describe('Craete Product', () => {
+describe('Create a new Product', () => {
   it('create', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       const mock = new MockAdapter(axios)
@@ -65,11 +65,11 @@ describe('Craete Product', () => {
       password: user.password
     })
 
-    const product = th.product()
+    const products = th.products()
 
-    expect(product).toBeInstanceOf(v1.Product)
+    expect(products).toBeInstanceOf(v1.Products)
 
-    const { data } = await product.createProduct(productObj)
+    const { data } = await products.create(productObj)
 
     expect(data).toEqual(productObj)
   })

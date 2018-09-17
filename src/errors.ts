@@ -34,8 +34,8 @@ export class TaxesFetchFailed extends BaseError {
   }
 }
 
-export class ProductCreateFailed extends BaseError {
-  public name = 'ProductCreateFailed'
+export class ProductsCreateFailed extends BaseError {
+  public name = 'ProductsCreateFailed'
   constructor(public message: string = 'Could not create the product') {
     super(message)
   }
