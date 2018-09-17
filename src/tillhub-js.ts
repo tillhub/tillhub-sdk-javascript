@@ -115,9 +115,9 @@ export class TillhubClient {
   }
 
   /**
-  * Create an authenticated products instance
-  *
-  */
+   * Create an authenticated products instance
+   *
+   */
   products(): v1.Products {
     if (!this.options || !this.options.base || !this.http || !this.auth) {
       throw new errors.UninstantiatedClient()
