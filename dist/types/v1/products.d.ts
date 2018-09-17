@@ -4,7 +4,7 @@ export interface Images {
     avatar?: string;
 }
 declare type ProductTypes = 'product' | 'voucher' | 'linked' | 'linked_product' | 'variant' | 'variant_product';
-export interface ProductType {
+export interface Product {
     name?: string;
     description?: string | null;
     attributes?: object | null;
@@ -47,19 +47,19 @@ export interface ProductType {
     product_group?: string | null;
     delegated_to?: string[] | null;
 }
-export interface ProductOptions {
+export interface ProductsOptions {
     user?: string;
     base?: string;
 }
-export interface ProductResponse {
+export interface ProductsResponse {
     data: object[];
     metadata: object;
 }
-export declare class Product {
+export declare class Products {
     endpoint: string;
     http: Client;
-    options: ProductOptions;
-    constructor(options: ProductOptions, http: Client);
-    createProduct(product: ProductType): Promise<ProductResponse>;
+    options: ProductsOptions;
+    constructor(options: ProductsOptions, http: Client);
+    create(product: Product): Promise<ProductsResponse>;
 }
 export {};

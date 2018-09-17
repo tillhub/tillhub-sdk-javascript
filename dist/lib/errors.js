@@ -69,18 +69,18 @@ var TaxesFetchFailed = /** @class */ (function (_super) {
     return TaxesFetchFailed;
 }(BaseError));
 exports.TaxesFetchFailed = TaxesFetchFailed;
-var ProductCreateFailed = /** @class */ (function (_super) {
-    __extends(ProductCreateFailed, _super);
-    function ProductCreateFailed(message) {
+var ProductsCreateFailed = /** @class */ (function (_super) {
+    __extends(ProductsCreateFailed, _super);
+    function ProductsCreateFailed(message) {
         if (message === void 0) { message = 'Could not create the product'; }
         var _this = _super.call(this, message) || this;
         _this.message = message;
-        _this.name = 'ProductCreateFailed';
+        _this.name = 'ProductsCreateFailed';
         return _this;
     }
-    return ProductCreateFailed;
+    return ProductsCreateFailed;
 }(BaseError));
-exports.ProductCreateFailed = ProductCreateFailed;
+exports.ProductsCreateFailed = ProductsCreateFailed;
 var DeliveriesFetchAllFailed = /** @class */ (function (_super) {
     __extends(DeliveriesFetchAllFailed, _super);
     function DeliveriesFetchAllFailed(message) {

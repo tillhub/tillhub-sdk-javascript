@@ -1,3 +1,11 @@
+## [1.17.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.17.0...v1.17.1) (2018-09-17)
+
+
+### Bug Fixes
+
+* **products:** fix typos -- pluralize to products ([aa68955](https://github.com/tillhub/tillhub-sdk-javascript/commit/aa68955))
+* **products:** try fix jsdoc asterisks alignment ([94621c8](https://github.com/tillhub/tillhub-sdk-javascript/commit/94621c8))
+
 # [1.17.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.16.0...v1.17.0) (2018-09-16)
 
 

@@ -43,14 +43,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var errors = __importStar(require("../errors"));
-var Product = /** @class */ (function () {
-    function Product(options, http) {
+var Products = /** @class */ (function () {
+    function Products(options, http) {
         this.options = options;
         this.http = http;
         this.endpoint = '/api/v1/products';
         this.options.base = this.options.base || 'https://api.tillhub.com';
     }
-    Product.prototype.createProduct = function (product) {
+    Products.prototype.create = function (product) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, err_1;
@@ -70,13 +70,13 @@ var Product = /** @class */ (function () {
                             })];
                     case 3:
                         err_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductCreateFailed())];
+                        return [2 /*return*/, reject(new errors.ProductsCreateFailed())];
                     case 4: return [2 /*return*/];
                 }
             });
         }); });
     };
-    return Product;
+    return Products;
 }());
-exports.Product = Product;
+exports.Products = Products;
 //# sourceMappingURL=products.js.map
