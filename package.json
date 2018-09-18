@@ -32,7 +32,7 @@
     "start": "rollup -c rollup.config.ts -w",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:prod": "npm run lint && npm run test -- --coverage --no-cache",
+    "test:prod": "npm run lint && npm run test -- --coverage --no-cache --detectOpenHandles",
     "deploy-docs": "ts-node tools/gh-pages-publish",
     "coverage": "codecov",
     "precommit": "git add -A && lint-staged",
