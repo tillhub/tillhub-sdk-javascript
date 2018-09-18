@@ -1,3 +1,10 @@
+## [1.18.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.18.0...v1.18.1) (2018-09-18)
+
+
+### Bug Fixes
+
+* **products:** add product delete error message ([554dcda](https://github.com/tillhub/tillhub-sdk-javascript/commit/554dcda))
+
 # [1.18.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.17.1...v1.18.0) (2018-09-18)
 
 

@@ -105,6 +105,18 @@ var ProductsUpdateFailed = /** @class */ (function (_super) {
     return ProductsUpdateFailed;
 }(BaseError));
 exports.ProductsUpdateFailed = ProductsUpdateFailed;
+var ProductsDeleteFailed = /** @class */ (function (_super) {
+    __extends(ProductsDeleteFailed, _super);
+    function ProductsDeleteFailed(message) {
+        if (message === void 0) { message = 'Could not delete the product'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'ProductsDeleteFailed';
+        return _this;
+    }
+    return ProductsDeleteFailed;
+}(BaseError));
+exports.ProductsDeleteFailed = ProductsDeleteFailed;
 var DeliveriesFetchAllFailed = /** @class */ (function (_super) {
     __extends(DeliveriesFetchAllFailed, _super);
     function DeliveriesFetchAllFailed(message) {

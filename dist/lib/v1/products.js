@@ -148,7 +148,7 @@ var Products = /** @class */ (function () {
                             })];
                     case 3:
                         err_4 = _a.sent();
-                        return [2 /*return*/, reject(new errors.DeliveriesDeleteFailed())];
+                        return [2 /*return*/, reject(new errors.ProductsDeleteFailed())];
                     case 4: return [2 /*return*/];
                 }
             });
