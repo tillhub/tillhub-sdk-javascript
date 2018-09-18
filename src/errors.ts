@@ -55,6 +55,13 @@ export class ProductsUpdateFailed extends BaseError {
   }
 }
 
+export class ProductsDeleteFailed extends BaseError {
+  public name = 'ProductsDeleteFailed'
+  constructor(public message: string = 'Could not delete the product') {
+    super(message)
+  }
+}
+
 export class DeliveriesFetchAllFailed extends BaseError {
   public name = 'DeliveriesFetchAllFailed'
   constructor(public message: string = 'Could not fetch deliveries') {

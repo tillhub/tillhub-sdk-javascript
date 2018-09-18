@@ -148,7 +148,7 @@ export class Products {
           msg: response.data.msg
         } as ProductsResponse)
       } catch (err) {
-        return reject(new errors.DeliveriesDeleteFailed())
+        return reject(new errors.ProductsDeleteFailed())
       }
     })
   }
