@@ -66,6 +66,12 @@ export interface ProductsOptions {
 export interface ProductsResponse {
   data: object[]
   metadata: object
+  msg?: string
+}
+
+export interface ProductsUpdateRequestObject {
+  productId: string
+  body: Product
 }
 
 export class Products {
@@ -93,6 +99,56 @@ export class Products {
         } as ProductsResponse)
       } catch (err) {
         return reject(new errors.ProductsCreateFailed())
+      }
+    })
+  }
+
+  getOne(productId: string): Promise<ProductsResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productId}`
+      try {
+        const response = await this.http.getClient().get(uri)
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as ProductsResponse)
+      } catch (err) {
+        return reject(new errors.ProductFetchFailed())
+      }
+    })
+  }
+
+  update(requestObject: ProductsUpdateRequestObject): Promise<ProductsResponse> {
+    return new Promise(async (resolve, reject) => {
+      const { body, productId } = requestObject
+
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productId}`
+
+      try {
+        const response = await this.http.getClient().put(uri, body)
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as ProductsResponse)
+      } catch (err) {
+        return reject(new errors.ProductsUpdateFailed())
+      }
+    })
+  }
+
+  delete(productId: string): Promise<ProductsResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productId}`
+      try {
+        const response = await this.http.getClient().delete(uri)
+
+        return resolve({
+          msg: response.data.msg
+        } as ProductsResponse)
+      } catch (err) {
+        return reject(new errors.DeliveriesDeleteFailed())
       }
     })
   }

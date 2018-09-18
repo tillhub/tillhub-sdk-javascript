@@ -41,6 +41,20 @@ export class ProductsCreateFailed extends BaseError {
   }
 }
 
+export class ProductFetchFailed extends BaseError {
+  public name = 'ProductFetchFailed'
+  constructor(public message: string = 'Could not fetch the product') {
+    super(message)
+  }
+}
+
+export class ProductsUpdateFailed extends BaseError {
+  public name = 'ProductsUpdateFailed'
+  constructor(public message: string = 'Could not update the product') {
+    super(message)
+  }
+}
+
 export class DeliveriesFetchAllFailed extends BaseError {
   public name = 'DeliveriesFetchAllFailed'
   constructor(public message: string = 'Could not fetch deliveries') {

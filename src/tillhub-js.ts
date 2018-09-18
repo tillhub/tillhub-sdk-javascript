@@ -126,6 +126,10 @@ export class TillhubClient {
     return new v1.Products({ user: this.auth.user, base: this.options.base }, this.http)
   }
 
+  /**
+   * Create an authenticated product groups instance
+   *
+   */
   productGroups(): v0.ProductGroups {
     if (
       !this.options ||
