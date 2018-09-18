@@ -111,6 +111,10 @@ var TillhubClient = /** @class */ (function () {
         }
         return new v1.Products({ user: this.auth.user, base: this.options.base }, this.http);
     };
+    /**
+     * Create an authenticated product groups instance
+     *
+     */
     TillhubClient.prototype.productGroups = function () {
         if (!this.options ||
             !this.options.base ||

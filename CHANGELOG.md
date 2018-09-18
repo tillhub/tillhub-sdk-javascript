@@ -1,3 +1,10 @@
+# [1.18.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.17.1...v1.18.0) (2018-09-18)
+
+
+### Features
+
+* **products:** add get, update and delete methods for a single product ([038a1ac](https://github.com/tillhub/tillhub-sdk-javascript/commit/038a1ac))
+
 ## [1.17.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.17.0...v1.17.1) (2018-09-17)
 
 

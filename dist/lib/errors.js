@@ -81,6 +81,30 @@ var ProductsCreateFailed = /** @class */ (function (_super) {
     return ProductsCreateFailed;
 }(BaseError));
 exports.ProductsCreateFailed = ProductsCreateFailed;
+var ProductFetchFailed = /** @class */ (function (_super) {
+    __extends(ProductFetchFailed, _super);
+    function ProductFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch the product'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'ProductFetchFailed';
+        return _this;
+    }
+    return ProductFetchFailed;
+}(BaseError));
+exports.ProductFetchFailed = ProductFetchFailed;
+var ProductsUpdateFailed = /** @class */ (function (_super) {
+    __extends(ProductsUpdateFailed, _super);
+    function ProductsUpdateFailed(message) {
+        if (message === void 0) { message = 'Could not update the product'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'ProductsUpdateFailed';
+        return _this;
+    }
+    return ProductsUpdateFailed;
+}(BaseError));
+exports.ProductsUpdateFailed = ProductsUpdateFailed;
 var DeliveriesFetchAllFailed = /** @class */ (function (_super) {
     __extends(DeliveriesFetchAllFailed, _super);
     function DeliveriesFetchAllFailed(message) {

@@ -54,6 +54,11 @@ export interface ProductsOptions {
 export interface ProductsResponse {
     data: object[];
     metadata: object;
+    msg?: string;
+}
+export interface ProductsUpdateRequestObject {
+    productId: string;
+    body: Product;
 }
 export declare class Products {
     endpoint: string;
@@ -61,5 +66,8 @@ export declare class Products {
     options: ProductsOptions;
     constructor(options: ProductsOptions, http: Client);
     create(product: Product): Promise<ProductsResponse>;
+    getOne(productId: string): Promise<ProductsResponse>;
+    update(requestObject: ProductsUpdateRequestObject): Promise<ProductsResponse>;
+    delete(productId: string): Promise<ProductsResponse>;
 }
 export {};

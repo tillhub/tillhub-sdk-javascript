@@ -37,6 +37,10 @@ export declare class TillhubClient {
      *
      */
     products(): v1.Products;
+    /**
+     * Create an authenticated product groups instance
+     *
+     */
     productGroups(): v0.ProductGroups;
     /**
      * Create an authenticated deliveries instance
