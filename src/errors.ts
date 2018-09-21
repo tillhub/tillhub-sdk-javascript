@@ -166,3 +166,10 @@ export class TemplatesFetchFailed extends BaseError {
     super(message)
   }
 }
+
+export class ConfigurationsFetchFailed extends BaseError {
+  public name = 'ConfigurationsFetchFailed'
+  constructor(public message: string = 'Could not fetch configs') {
+    super(message)
+  }
+}

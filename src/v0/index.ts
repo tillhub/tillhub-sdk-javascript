@@ -4,5 +4,6 @@ import { Taxes } from './taxes'
 import { Deliveries } from './deliveries'
 import { ProductGroups } from './product_groups'
 import { Accounts } from './accounts'
+import { Configurations } from './Configurations'
 
-export { Auth, Transactions, Taxes, Deliveries, ProductGroups, Accounts }
+export { Auth, Transactions, Taxes, Deliveries, ProductGroups, Accounts, Configurations }
