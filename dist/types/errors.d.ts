@@ -116,3 +116,8 @@ export declare class TemplatesFetchFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class ConfigurationsFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}

@@ -12,4 +12,6 @@ var product_groups_1 = require("./product_groups");
 exports.ProductGroups = product_groups_1.ProductGroups;
 var accounts_1 = require("./accounts");
 exports.Accounts = accounts_1.Accounts;
+var configurations_1 = require("./configurations");
+exports.Configurations = configurations_1.Configurations;
 //# sourceMappingURL=index.js.map

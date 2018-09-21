@@ -1,3 +1,15 @@
+# [1.19.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.18.1...v1.19.0) (2018-09-21)
+
+
+### Bug Fixes
+
+* **configurations:** fix typo ([6f75910](https://github.com/tillhub/tillhub-sdk-javascript/commit/6f75910))
+
+
+### Features
+
+* **configurations:** add configurations handler with get all method ([602e976](https://github.com/tillhub/tillhub-sdk-javascript/commit/602e976))
+
 ## [1.18.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.18.0...v1.18.1) (2018-09-18)
 
 

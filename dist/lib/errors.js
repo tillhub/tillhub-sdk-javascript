@@ -297,4 +297,16 @@ var TemplatesFetchFailed = /** @class */ (function (_super) {
     return TemplatesFetchFailed;
 }(BaseError));
 exports.TemplatesFetchFailed = TemplatesFetchFailed;
+var ConfigurationsFetchFailed = /** @class */ (function (_super) {
+    __extends(ConfigurationsFetchFailed, _super);
+    function ConfigurationsFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch configs'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'ConfigurationsFetchFailed';
+        return _this;
+    }
+    return ConfigurationsFetchFailed;
+}(BaseError));
+exports.ConfigurationsFetchFailed = ConfigurationsFetchFailed;
 //# sourceMappingURL=errors.js.map
