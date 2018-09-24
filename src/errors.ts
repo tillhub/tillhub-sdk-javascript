@@ -173,3 +173,10 @@ export class ConfigurationsFetchFailed extends BaseError {
     super(message)
   }
 }
+
+export class BranchesFetchFailed extends BaseError {
+  public name = 'BranchesFetchFailed'
+  constructor(public message: string = 'Could not fetch branches') {
+    super(message)
+  }
+}
