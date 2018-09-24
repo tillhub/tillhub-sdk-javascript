@@ -1,3 +1,10 @@
+## [1.21.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.21.0...v1.21.1) (2018-09-24)
+
+
+### Bug Fixes
+
+* adds missing query ([fd2b7b4](https://github.com/tillhub/tillhub-sdk-javascript/commit/fd2b7b4))
+
 # [1.21.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.20.0...v1.21.0) (2018-09-24)
 
 

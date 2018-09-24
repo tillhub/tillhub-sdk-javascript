@@ -119,7 +119,7 @@ var Templates = /** @class */ (function () {
                             uri = options.uri;
                         }
                         else {
-                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user + (options && options.query ? qs_1.default.stringify(options.query) : '');
+                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user + (options && options.query ? "?" + qs_1.default.stringify(options.query) : '');
                         }
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
