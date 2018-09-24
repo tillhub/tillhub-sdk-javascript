@@ -14,4 +14,6 @@ var accounts_1 = require("./accounts");
 exports.Accounts = accounts_1.Accounts;
 var configurations_1 = require("./configurations");
 exports.Configurations = configurations_1.Configurations;
+var branches_1 = require("./branches");
+exports.Branches = branches_1.Branches;
 //# sourceMappingURL=index.js.map

@@ -5,4 +5,5 @@ import { Deliveries } from './deliveries';
 import { ProductGroups } from './product_groups';
 import { Accounts } from './accounts';
 import { Configurations } from './configurations';
-export { Auth, Transactions, Taxes, Deliveries, ProductGroups, Accounts, Configurations };
+import { Branches } from './branches';
+export { Auth, Transactions, Taxes, Deliveries, ProductGroups, Accounts, Configurations, Branches };

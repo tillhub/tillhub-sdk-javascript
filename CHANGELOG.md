@@ -1,3 +1,10 @@
+# [1.20.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.19.0...v1.20.0) (2018-09-24)
+
+
+### Features
+
+* **branches:** add branches handler and getAll method ([b1fc3ab](https://github.com/tillhub/tillhub-sdk-javascript/commit/b1fc3ab))
+
 # [1.19.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.18.1...v1.19.0) (2018-09-21)
 
 

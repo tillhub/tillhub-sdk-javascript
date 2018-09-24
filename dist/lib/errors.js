@@ -309,4 +309,16 @@ var ConfigurationsFetchFailed = /** @class */ (function (_super) {
     return ConfigurationsFetchFailed;
 }(BaseError));
 exports.ConfigurationsFetchFailed = ConfigurationsFetchFailed;
+var BranchesFetchFailed = /** @class */ (function (_super) {
+    __extends(BranchesFetchFailed, _super);
+    function BranchesFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch branches'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'BranchesFetchFailed';
+        return _this;
+    }
+    return BranchesFetchFailed;
+}(BaseError));
+exports.BranchesFetchFailed = BranchesFetchFailed;
 //# sourceMappingURL=errors.js.map
