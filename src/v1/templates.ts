@@ -1,9 +1,11 @@
+import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 
-export interface TemplatesQuery {
+export interface TemplatesOptions {
   limit?: number
   uri?: string
+  query?: any
 }
 
 type TemplateTypes = 'delivery_note_v1' | 'invoice_v1' | 'full_receipt_v1'
@@ -74,9 +76,9 @@ export class Templates {
     })
   }
 
-  put(template: Template): Promise<TemplatesResponse> {
+  put(templateId: string, template: Template): Promise<TemplatesResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${templateId}`
       try {
         const response = await this.http.getClient().put(uri, template)
 
@@ -90,14 +92,16 @@ export class Templates {
     })
   }
 
-  getAll(query?: TemplatesQuery | undefined): Promise<TemplatesResponse> {
+  getAll(options?: TemplatesOptions | undefined): Promise<TemplatesResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         let uri
-        if (query && query.uri) {
-          uri = query.uri
+        if (options && options.uri) {
+          uri = options.uri
         } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
+            options && options.query ? qs.stringify(options.query) : ''
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
