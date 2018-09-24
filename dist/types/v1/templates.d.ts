@@ -1,7 +1,8 @@
 import { Client } from '../client';
-export interface TemplatesQuery {
+export interface TemplatesOptions {
     limit?: number;
     uri?: string;
+    query?: any;
 }
 declare type TemplateTypes = 'delivery_note_v1' | 'invoice_v1' | 'full_receipt_v1';
 declare type PaperSize = 'A4' | 'letter';
@@ -43,7 +44,7 @@ export declare class Templates {
     options: TemplatesOptions;
     constructor(options: TemplatesOptions, http: Client);
     create(template: Template): Promise<TemplatesResponse>;
-    put(template: Template): Promise<TemplatesResponse>;
-    getAll(query?: TemplatesQuery | undefined): Promise<TemplatesResponse>;
+    put(templateId: string, template: Template): Promise<TemplatesResponse>;
+    getAll(options?: TemplatesOptions | undefined): Promise<TemplatesResponse>;
 }
 export {};

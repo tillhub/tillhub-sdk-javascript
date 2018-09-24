@@ -1,3 +1,10 @@
+# [1.21.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.20.0...v1.21.0) (2018-09-24)
+
+
+### Features
+
+* fixes put; fixes options ([10214ac](https://github.com/tillhub/tillhub-sdk-javascript/commit/10214ac))
+
 # [1.20.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.19.0...v1.20.0) (2018-09-24)
 
 
