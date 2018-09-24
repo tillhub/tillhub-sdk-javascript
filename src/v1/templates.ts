@@ -100,7 +100,7 @@ export class Templates {
           uri = options.uri
         } else {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
-            options && options.query ? qs.stringify(options.query) : ''
+            options && options.query ? `?${qs.stringify(options.query)}` : ''
           }`
         }
 
