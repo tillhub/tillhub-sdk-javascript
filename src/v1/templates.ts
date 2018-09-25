@@ -37,6 +37,26 @@ export interface Template {
   deleted?: Boolean
 }
 
+export interface TemplatesPreviewRequestObject {
+  body: TemplatesPreviewBody
+  templateId: string
+  query?: TemplatesQuery
+}
+
+export interface TemplatesPreviewBody {
+  paper_size?: string
+  title?: string
+  addresses?: object
+  main_text?: string
+  attention?: string
+  font_color?: string
+  font?: string
+}
+
+export interface TemplatesQuery {
+  format?: string
+}
+
 export interface TemplatesOptions {
   user?: string
   base?: string
@@ -112,6 +132,29 @@ export class Templates {
         } as TemplatesResponse)
       } catch (err) {
         return reject(new errors.TemplatesFetchFailed())
+      }
+    })
+  }
+
+  preview(requestObject: TemplatesPreviewRequestObject): Promise<TemplatesResponse> {
+    return new Promise(async (resolve, reject) => {
+      const { body, query, templateId } = requestObject
+
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${templateId}/preview`
+
+      try {
+        if (query && query.format) {
+          uri = `${uri}?format=${query.format}`
+        }
+
+        const response = await this.http.getClient().post(uri, body)
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as TemplatesResponse)
+      } catch (err) {
+        return reject(new errors.TemplatesPreviewFailed())
       }
     })
   }

@@ -167,6 +167,13 @@ export class TemplatesFetchFailed extends BaseError {
   }
 }
 
+export class TemplatesPreviewFailed extends BaseError {
+  public name = 'TemplatesPreviewFailed'
+  constructor(public message: string = 'Could not preview template') {
+    super(message)
+  }
+}
+
 export class ConfigurationsFetchFailed extends BaseError {
   public name = 'ConfigurationsFetchFailed'
   constructor(public message: string = 'Could not fetch configs') {
