@@ -136,6 +136,36 @@ var Templates = /** @class */ (function () {
             });
         }); });
     };
+    Templates.prototype.preview = function (requestObject) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var body, query, templateId, uri, response, err_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        body = requestObject.body, query = requestObject.query, templateId = requestObject.templateId;
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + templateId + "/preview";
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        if (query && query.format) {
+                            uri = uri + "?format=" + query.format;
+                        }
+                        return [4 /*yield*/, this.http.getClient().post(uri, body)];
+                    case 2:
+                        response = _a.sent();
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        err_4 = _a.sent();
+                        return [2 /*return*/, reject(new errors.TemplatesPreviewFailed())];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     return Templates;
 }());
 exports.Templates = Templates;

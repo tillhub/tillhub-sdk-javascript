@@ -1,3 +1,10 @@
+# [1.22.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.21.1...v1.22.0) (2018-09-25)
+
+
+### Features
+
+* Add templates preview ([c2ec22c](https://github.com/tillhub/tillhub-sdk-javascript/commit/c2ec22c))
+
 ## [1.21.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.21.0...v1.21.1) (2018-09-24)
 
 

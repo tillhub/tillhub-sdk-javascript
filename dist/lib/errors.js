@@ -297,6 +297,18 @@ var TemplatesFetchFailed = /** @class */ (function (_super) {
     return TemplatesFetchFailed;
 }(BaseError));
 exports.TemplatesFetchFailed = TemplatesFetchFailed;
+var TemplatesPreviewFailed = /** @class */ (function (_super) {
+    __extends(TemplatesPreviewFailed, _super);
+    function TemplatesPreviewFailed(message) {
+        if (message === void 0) { message = 'Could not preview template'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'TemplatesPreviewFailed';
+        return _this;
+    }
+    return TemplatesPreviewFailed;
+}(BaseError));
+exports.TemplatesPreviewFailed = TemplatesPreviewFailed;
 var ConfigurationsFetchFailed = /** @class */ (function (_super) {
     __extends(ConfigurationsFetchFailed, _super);
     function ConfigurationsFetchFailed(message) {

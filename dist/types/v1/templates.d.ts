@@ -30,6 +30,23 @@ export interface Template {
     active?: Boolean;
     deleted?: Boolean;
 }
+export interface TemplatesPreviewRequestObject {
+    body: TemplatesPreviewBody;
+    templateId: string;
+    query?: TemplatesQuery;
+}
+export interface TemplatesPreviewBody {
+    paper_size?: string;
+    title?: string;
+    addresses?: object;
+    main_text?: string;
+    attention?: string;
+    font_color?: string;
+    font?: string;
+}
+export interface TemplatesQuery {
+    format?: string;
+}
 export interface TemplatesOptions {
     user?: string;
     base?: string;
@@ -46,5 +63,6 @@ export declare class Templates {
     create(template: Template): Promise<TemplatesResponse>;
     put(templateId: string, template: Template): Promise<TemplatesResponse>;
     getAll(options?: TemplatesOptions | undefined): Promise<TemplatesResponse>;
+    preview(requestObject: TemplatesPreviewRequestObject): Promise<TemplatesResponse>;
 }
 export {};
