@@ -132,7 +132,7 @@ export class Products {
           next
         } as ProductsResponse)
       } catch (err) {
-        return reject(new errors.ProductFetchFailed())
+        return reject(new errors.ProductsFetchFailed())
       }
     })
   }
@@ -168,6 +168,23 @@ export class Products {
         } as ProductsResponse)
       } catch (err) {
         return reject(new errors.ProductsUpdateFailed())
+      }
+    })
+  }
+
+  count(): Promise<ProductsResponse> {
+    return new Promise(async (resolve, reject) => {
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+
+      try {
+        const response = await this.http.getClient().get(uri)
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as ProductsResponse)
+      } catch (err) {
+        return reject(new errors.ProductsCountFailed())
       }
     })
   }
