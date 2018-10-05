@@ -1,3 +1,10 @@
+# [1.23.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.22.1...v1.23.0) (2018-10-05)
+
+
+### Features
+
+* **products:** add get all products handler ([adf2308](https://github.com/tillhub/tillhub-sdk-javascript/commit/adf2308))
+
 ## [1.22.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.22.0...v1.22.1) (2018-09-25)
 
 

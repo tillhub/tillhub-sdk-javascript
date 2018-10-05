@@ -56,6 +56,10 @@ export interface ProductsResponse {
     metadata: object;
     msg?: string;
 }
+export interface ProductsQuery {
+    limit?: number;
+    uri?: string;
+}
 export interface ProductsUpdateRequestObject {
     productId: string;
     body: Product;
@@ -66,6 +70,7 @@ export declare class Products {
     options: ProductsOptions;
     constructor(options: ProductsOptions, http: Client);
     create(product: Product): Promise<ProductsResponse>;
+    getAll(query?: ProductsQuery | undefined): Promise<ProductsResponse>;
     getOne(productId: string): Promise<ProductsResponse>;
     update(requestObject: ProductsUpdateRequestObject): Promise<ProductsResponse>;
     delete(productId: string): Promise<ProductsResponse>;

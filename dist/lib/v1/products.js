@@ -76,10 +76,44 @@ var Products = /** @class */ (function () {
             });
         }); });
     };
+    Products.prototype.getAll = function (query) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var next, uri, response, err_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = void 0;
+                        if (query && query.uri) {
+                            uri = query.uri;
+                        }
+                        else {
+                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user;
+                        }
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.data.cursor && response.data.cursor.next) {
+                            next = this.getAll({ uri: response.data.cursor.next });
+                        }
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { count: response.data.count, cursor: response.data.cursor },
+                                next: next
+                            })];
+                    case 2:
+                        err_2 = _a.sent();
+                        return [2 /*return*/, reject(new errors.ProductFetchFailed())];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     Products.prototype.getOne = function (productId) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_2;
+            var uri, response, err_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -95,7 +129,7 @@ var Products = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_2 = _a.sent();
+                        err_3 = _a.sent();
                         return [2 /*return*/, reject(new errors.ProductFetchFailed())];
                     case 4: return [2 /*return*/];
                 }
@@ -105,7 +139,7 @@ var Products = /** @class */ (function () {
     Products.prototype.update = function (requestObject) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var body, productId, uri, response, err_3;
+            var body, productId, uri, response, err_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -122,7 +156,7 @@ var Products = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_3 = _a.sent();
+                        err_4 = _a.sent();
                         return [2 /*return*/, reject(new errors.ProductsUpdateFailed())];
                     case 4: return [2 /*return*/];
                 }
@@ -132,7 +166,7 @@ var Products = /** @class */ (function () {
     Products.prototype.delete = function (productId) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_4;
+            var uri, response, err_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -147,7 +181,7 @@ var Products = /** @class */ (function () {
                                 msg: response.data.msg
                             })];
                     case 3:
-                        err_4 = _a.sent();
+                        err_5 = _a.sent();
                         return [2 /*return*/, reject(new errors.ProductsDeleteFailed())];
                     case 4: return [2 /*return*/];
                 }
