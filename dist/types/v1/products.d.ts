@@ -73,6 +73,7 @@ export declare class Products {
     getAll(query?: ProductsQuery | undefined): Promise<ProductsResponse>;
     getOne(productId: string): Promise<ProductsResponse>;
     update(requestObject: ProductsUpdateRequestObject): Promise<ProductsResponse>;
+    count(): Promise<ProductsResponse>;
     delete(productId: string): Promise<ProductsResponse>;
 }
 export {};

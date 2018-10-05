@@ -26,7 +26,17 @@ export declare class ProductsCreateFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class ProductsFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
 export declare class ProductFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class ProductsCountFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string);

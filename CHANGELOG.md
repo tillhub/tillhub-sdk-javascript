@@ -1,3 +1,10 @@
+# [1.24.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.23.0...v1.24.0) (2018-10-05)
+
+
+### Features
+
+* **products:** add handler to count number of total products ([bfa0c64](https://github.com/tillhub/tillhub-sdk-javascript/commit/bfa0c64))
+
 # [1.23.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.22.1...v1.23.0) (2018-10-05)
 
 

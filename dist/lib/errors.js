@@ -81,6 +81,18 @@ var ProductsCreateFailed = /** @class */ (function (_super) {
     return ProductsCreateFailed;
 }(BaseError));
 exports.ProductsCreateFailed = ProductsCreateFailed;
+var ProductsFetchFailed = /** @class */ (function (_super) {
+    __extends(ProductsFetchFailed, _super);
+    function ProductsFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch the products'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'ProductsFetchFailed';
+        return _this;
+    }
+    return ProductsFetchFailed;
+}(BaseError));
+exports.ProductsFetchFailed = ProductsFetchFailed;
 var ProductFetchFailed = /** @class */ (function (_super) {
     __extends(ProductFetchFailed, _super);
     function ProductFetchFailed(message) {
@@ -93,6 +105,18 @@ var ProductFetchFailed = /** @class */ (function (_super) {
     return ProductFetchFailed;
 }(BaseError));
 exports.ProductFetchFailed = ProductFetchFailed;
+var ProductsCountFailed = /** @class */ (function (_super) {
+    __extends(ProductsCountFailed, _super);
+    function ProductsCountFailed(message) {
+        if (message === void 0) { message = 'Could not count the products'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'ProductsCountFailed';
+        return _this;
+    }
+    return ProductsCountFailed;
+}(BaseError));
+exports.ProductsCountFailed = ProductsCountFailed;
 var ProductsUpdateFailed = /** @class */ (function (_super) {
     __extends(ProductsUpdateFailed, _super);
     function ProductsUpdateFailed(message) {
