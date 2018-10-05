@@ -69,6 +69,11 @@ export interface ProductsResponse {
   msg?: string
 }
 
+export interface ProductsQuery {
+  limit?: number
+  uri?: string
+}
+
 export interface ProductsUpdateRequestObject {
   productId: string
   body: Product
@@ -99,6 +104,35 @@ export class Products {
         } as ProductsResponse)
       } catch (err) {
         return reject(new errors.ProductsCreateFailed())
+      }
+    })
+  }
+
+  getAll(query?: ProductsQuery | undefined): Promise<ProductsResponse> {
+    return new Promise(async (resolve, reject) => {
+      let next
+
+      try {
+        let uri
+        if (query && query.uri) {
+          uri = query.uri
+        } else {
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+        }
+
+        const response = await this.http.getClient().get(uri)
+
+        if (response.data.cursor && response.data.cursor.next) {
+          next = this.getAll({ uri: response.data.cursor.next })
+        }
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count, cursor: response.data.cursor },
+          next
+        } as ProductsResponse)
+      } catch (err) {
+        return reject(new errors.ProductFetchFailed())
       }
     })
   }
