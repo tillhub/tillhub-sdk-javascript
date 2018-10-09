@@ -201,3 +201,10 @@ export class BranchesFetchFailed extends BaseError {
     super(message)
   }
 }
+
+export class BranchesCountFailed extends BaseError {
+  public name = 'BranchesCountFailed'
+  constructor(public message: string = 'Could not count the branches') {
+    super(message)
+  }
+}

@@ -70,7 +70,7 @@ export class Branches {
           metadata: { count: response.data.count }
         } as BranchesResponse)
       } catch (err) {
-        return reject(new errors.ProductsCountFailed())
+        return reject(new errors.BranchesCountFailed())
       }
     })
   }
