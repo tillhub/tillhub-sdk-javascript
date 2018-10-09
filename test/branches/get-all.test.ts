@@ -20,11 +20,13 @@ if (process.env.SYSTEM_TEST) {
 
 describe('v0: Branches: can get all', () => {
   const legacyId = '4564'
+  const mock = new MockAdapter(axios)
+  afterEach(() => {
+    mock.reset()
+  })
 
   it("Tillhub's branches are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      const mock = new MockAdapter(axios)
-
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
         return [
           200,
@@ -113,9 +115,9 @@ describe('v0: Branches: can get all', () => {
     })
 
     try {
-      await th.branches().count()
+      await th.branches().getAll()
     } catch (err) {
-      expect(err.name).toBe('BranchesCountFailed')
+      expect(err.name).toBe('BranchesFetchFailed')
     }
   })
 })
