@@ -1,3 +1,10 @@
+# [1.25.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.24.0...v1.25.0) (2018-10-09)
+
+
+### Features
+
+* **branches:** add count method to branches ([75e8bba](https://github.com/tillhub/tillhub-sdk-javascript/commit/75e8bba))
+
 # [1.24.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.23.0...v1.24.0) (2018-10-05)
 
 

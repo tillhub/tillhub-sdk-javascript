@@ -17,4 +17,5 @@ export declare class Branches {
     options: BranchesOptions;
     constructor(options: BranchesOptions, http: Client);
     getAll(query?: BranchesQuery | undefined): Promise<BranchesResponse>;
+    count(): Promise<BranchesResponse>;
 }
