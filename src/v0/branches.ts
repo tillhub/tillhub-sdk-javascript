@@ -31,6 +31,8 @@ export class Branches {
 
   getAll(query?: BranchesQuery | undefined): Promise<BranchesResponse> {
     return new Promise(async (resolve, reject) => {
+      let next
+
       try {
         let uri
         if (query && query.uri) {
@@ -41,12 +43,34 @@ export class Branches {
 
         const response = await this.http.getClient().get(uri)
 
+        if (response.data.cursor && response.data.cursor.next) {
+          next = this.getAll({ uri: response.data.cursor.next })
+        }
+
+        return resolve({
+          data: response.data.results,
+          metadata: { cursor: response.data.cursor },
+          next
+        } as BranchesResponse)
+      } catch (err) {
+        return reject(new errors.BranchesFetchFailed())
+      }
+    })
+  }
+
+  count(): Promise<BranchesResponse> {
+    return new Promise(async (resolve, reject) => {
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+
+      try {
+        const response = await this.http.getClient().get(uri)
+
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
         } as BranchesResponse)
       } catch (err) {
-        return reject(new errors.BranchesFetchFailed())
+        return reject(new errors.ProductsCountFailed())
       }
     })
   }
