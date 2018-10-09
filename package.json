@@ -127,7 +127,7 @@
     "rollup-plugin-typescript2": "^0.18.0",
     "rollup-plugin-visualizer": "^0.9.0",
     "semantic-release": "^15.9.15",
-    "serialize-error": "^2.1.0",
+    "serialize-error": "^3.0.0",
     "storybook": "^1.0.0",
     "travis-deploy-once": "^5.0.7",
     "ts-jest": "^23.1.4",
