@@ -357,4 +357,16 @@ var BranchesFetchFailed = /** @class */ (function (_super) {
     return BranchesFetchFailed;
 }(BaseError));
 exports.BranchesFetchFailed = BranchesFetchFailed;
+var BranchesCountFailed = /** @class */ (function (_super) {
+    __extends(BranchesCountFailed, _super);
+    function BranchesCountFailed(message) {
+        if (message === void 0) { message = 'Could not count the branches'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'BranchesCountFailed';
+        return _this;
+    }
+    return BranchesCountFailed;
+}(BaseError));
+exports.BranchesCountFailed = BranchesCountFailed;
 //# sourceMappingURL=errors.js.map

@@ -104,7 +104,7 @@ var Branches = /** @class */ (function () {
                             })];
                     case 3:
                         err_2 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductsCountFailed())];
+                        return [2 /*return*/, reject(new errors.BranchesCountFailed())];
                     case 4: return [2 /*return*/];
                 }
             });

@@ -1,3 +1,10 @@
+## [1.25.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.25.0...v1.25.1) (2018-10-09)
+
+
+### Bug Fixes
+
+* **branches:** add branches count test and error handler ([bcb99b0](https://github.com/tillhub/tillhub-sdk-javascript/commit/bcb99b0))
+
 # [1.25.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.24.0...v1.25.0) (2018-10-09)
 
 

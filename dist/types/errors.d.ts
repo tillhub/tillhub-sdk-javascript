@@ -141,3 +141,8 @@ export declare class BranchesFetchFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class BranchesCountFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
