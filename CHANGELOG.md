@@ -1,3 +1,11 @@
+## [1.25.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.25.1...v1.25.2) (2018-10-09)
+
+
+### Bug Fixes
+
+* **branches:** add response status check and tests ([6cd1b47](https://github.com/tillhub/tillhub-sdk-javascript/commit/6cd1b47))
+* **sdk:** add response status checks and tests ([dc4c3b2](https://github.com/tillhub/tillhub-sdk-javascript/commit/dc4c3b2))
+
 ## [1.25.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.25.0...v1.25.1) (2018-10-09)
 
 

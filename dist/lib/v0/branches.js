@@ -68,6 +68,8 @@ var Branches = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
+                        if (response.status !== 200)
+                            reject(new errors.BranchesFetchFailed());
                         if (response.data.cursor && response.data.cursor.next) {
                             next = this.getAll({ uri: response.data.cursor.next });
                         }
@@ -98,6 +100,8 @@ var Branches = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();
+                        if (response.status !== 200)
+                            reject(new errors.BranchesCountFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }

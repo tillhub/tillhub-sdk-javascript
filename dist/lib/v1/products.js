@@ -64,6 +64,7 @@ var Products = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().post(uri, product)];
                     case 2:
                         response = _a.sent();
+                        response.status !== 200 && reject(new errors.ProductsCreateFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
@@ -94,6 +95,7 @@ var Products = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
+                        response.status !== 200 && reject(new errors.ProductsFetchFailed());
                         if (response.data.cursor && response.data.cursor.next) {
                             next = this.getAll({ uri: response.data.cursor.next });
                         }
@@ -124,6 +126,7 @@ var Products = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();
+                        response.status !== 200 && reject(new errors.ProductFetchFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
@@ -151,6 +154,7 @@ var Products = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().put(uri, body)];
                     case 2:
                         response = _a.sent();
+                        response.status !== 200 && reject(new errors.ProductsUpdateFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
@@ -177,6 +181,7 @@ var Products = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();
+                        response.status !== 200 && reject(new errors.ProductsCountFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
@@ -203,6 +208,7 @@ var Products = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().delete(uri)];
                     case 2:
                         response = _a.sent();
+                        response.status !== 200 && reject(new errors.ProductsDeleteFailed());
                         return [2 /*return*/, resolve({
                                 msg: response.data.msg
                             })];

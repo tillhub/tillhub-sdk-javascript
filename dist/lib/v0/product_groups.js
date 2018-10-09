@@ -68,6 +68,7 @@ var ProductGroups = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
+                        response.status !== 200 && reject(new errors.ProductGroupsFetchFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
