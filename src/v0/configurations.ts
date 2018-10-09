@@ -40,6 +40,7 @@ export class Configurations {
         }
 
         const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.ConfigurationsFetchFailed())
 
         return resolve({
           data: response.data.results,

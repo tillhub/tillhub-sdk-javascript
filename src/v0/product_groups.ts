@@ -40,6 +40,7 @@ export class ProductGroups {
         }
 
         const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.ProductGroupsFetchFailed())
 
         return resolve({
           data: response.data.results,

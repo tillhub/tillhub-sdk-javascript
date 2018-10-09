@@ -19,13 +19,16 @@ if (process.env.SYSTEM_TEST) {
 }
 
 const productId = '123456'
+const legacyId = '4564'
+
+const mock = new MockAdapter(axios)
+afterEach(() => {
+  mock.reset()
+})
 
 describe('v1: Products: can get one', () => {
   it("Tillhub's products are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      const mock = new MockAdapter(axios)
-      const legacyId = '4564'
-
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
         return [
           200,
@@ -75,5 +78,51 @@ describe('v1: Products: can get one', () => {
     const { data } = await products.getOne(productId)
 
     expect(Array.isArray(data)).toBe(true)
+  })
+
+  it('rejects on status codes that are not 200', async () => {
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock
+        .onPost('https://api.tillhub.com/api/v0/users/login')
+        .reply(function(config) {
+          return [
+            200,
+            {
+              token: '',
+              user: {
+                id: '123',
+                legacy_id: legacyId
+              }
+            }
+          ]
+        })
+
+        .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/${productId}`)
+        .reply(function(config) {
+          return [205]
+        })
+    }
+
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE
+    }
+
+    const th = new TillhubClient()
+
+    th.init(options)
+    await th.auth.loginUsername({
+      username: user.username,
+      password: user.password
+    })
+
+    try {
+      await th.products().getOne(productId)
+    } catch (err) {
+      expect(err.name).toBe('ProductFetchFailed')
+    }
   })
 })

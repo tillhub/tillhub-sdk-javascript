@@ -18,11 +18,15 @@ if (process.env.SYSTEM_TEST) {
   user.apiKey = process.env.SYSTEM_TEST_API_KEY || user.apiKey
 }
 
+const legacyId = '4564'
+const mock = new MockAdapter(axios)
+afterEach(() => {
+  mock.reset()
+})
+
 describe('v0: Products: can get all', () => {
   it("Tillhub's Products are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      const mock = new MockAdapter(axios)
-
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
         return [
           200,
@@ -30,13 +34,13 @@ describe('v0: Products: can get all', () => {
             token: '',
             user: {
               id: '123',
-              legacy_id: '4564'
+              legacy_id: legacyId
             }
           }
         ]
       })
 
-      mock.onGet('https://api.tillhub.com/api/v1/products/4564').reply(function(config) {
+      mock.onGet(`https://api.tillhub.com/api/v1/products/${legacyId}`).reply(function(config) {
         return [
           200,
           {
@@ -70,5 +74,48 @@ describe('v0: Products: can get all', () => {
     const { data } = await products.getAll()
 
     expect(Array.isArray(data)).toBe(true)
+  })
+
+  it('rejects on status codes that are not 200', async () => {
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+
+      mock.onGet(`https://api.tillhub.com/api/v1/products/${legacyId}`).reply(function(config) {
+        return [205]
+      })
+    }
+
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE
+    }
+
+    const th = new TillhubClient()
+
+    th.init(options)
+    await th.auth.loginUsername({
+      username: user.username,
+      password: user.password
+    })
+
+    try {
+      await th.products().getAll()
+    } catch (err) {
+      expect(err.name).toBe('ProductsFetchFailed')
+    }
   })
 })

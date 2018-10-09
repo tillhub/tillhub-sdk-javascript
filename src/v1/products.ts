@@ -97,6 +97,7 @@ export class Products {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
         const response = await this.http.getClient().post(uri, product)
+        response.status !== 200 && reject(new errors.ProductsCreateFailed())
 
         return resolve({
           data: response.data.results,
@@ -121,6 +122,7 @@ export class Products {
         }
 
         const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.ProductsFetchFailed())
 
         if (response.data.cursor && response.data.cursor.next) {
           next = this.getAll({ uri: response.data.cursor.next })
@@ -142,6 +144,7 @@ export class Products {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productId}`
       try {
         const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.ProductFetchFailed())
 
         return resolve({
           data: response.data.results,
@@ -161,6 +164,7 @@ export class Products {
 
       try {
         const response = await this.http.getClient().put(uri, body)
+        response.status !== 200 && reject(new errors.ProductsUpdateFailed())
 
         return resolve({
           data: response.data.results,
@@ -178,6 +182,7 @@ export class Products {
 
       try {
         const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.ProductsCountFailed())
 
         return resolve({
           data: response.data.results,
@@ -194,6 +199,7 @@ export class Products {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productId}`
       try {
         const response = await this.http.getClient().delete(uri)
+        response.status !== 200 && reject(new errors.ProductsDeleteFailed())
 
         return resolve({
           msg: response.data.msg

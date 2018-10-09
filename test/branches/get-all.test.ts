@@ -78,8 +78,6 @@ describe('v0: Branches: can get all', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      const mock = new MockAdapter(axios)
-
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
         return [
           200,
