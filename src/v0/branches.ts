@@ -42,6 +42,7 @@ export class Branches {
         }
 
         const response = await this.http.getClient().get(uri)
+        if (response.status !== 200) reject(new errors.BranchesFetchFailed())
 
         if (response.data.cursor && response.data.cursor.next) {
           next = this.getAll({ uri: response.data.cursor.next })
@@ -64,6 +65,7 @@ export class Branches {
 
       try {
         const response = await this.http.getClient().get(uri)
+        if (response.status !== 200) reject(new errors.BranchesCountFailed())
 
         return resolve({
           data: response.data.results,
