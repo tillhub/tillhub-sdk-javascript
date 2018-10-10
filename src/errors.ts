@@ -146,6 +146,13 @@ export class DeliveryItemsFetchAllFailed extends BaseError {
   }
 }
 
+export class DeliveryItemUpdateFailed extends BaseError {
+  public name = 'DeliveryItemUpdateFailed'
+  constructor(public message: string = 'Could not update delivery') {
+    super(message)
+  }
+}
+
 export class ProductGroupsFetchFailed extends BaseError {
   public name = 'ProductGroupsFetchFailed'
   constructor(public message: string = 'Could not fetch product groups') {

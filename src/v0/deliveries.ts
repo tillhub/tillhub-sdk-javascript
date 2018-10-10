@@ -457,7 +457,7 @@ export class Deliveries {
           metadata: { count: response.data.count }
         } as DeliveriesResponse)
       } catch (err) {
-        return reject(new errors.DeliveriesUpdateFailed())
+        return reject(new errors.DeliveryItemUpdateFailed())
       }
     })
   }

@@ -38,14 +38,18 @@ const requestObject = {
   templateId: '123abc'
 }
 
+const legacyId = '4564'
+
+const mock = new MockAdapter(axios)
+afterEach(() => {
+  mock.reset()
+})
+
 describe('v0: Templates', () => {
   it('can create a preview for one template', async () => {
     const { body, templateId } = requestObject
 
     if (process.env.SYSTEM_TEST !== 'true') {
-      const mock = new MockAdapter(axios)
-      const legacyId = '4564'
-
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
         return [
           200,
@@ -94,5 +98,50 @@ describe('v0: Templates', () => {
     const { data } = await template.preview(requestObject)
 
     expect(data).toEqual(body)
+  })
+
+  it('rejects on status codes that are not 200', async () => {
+    if (process.env.SYSTEM_TEST !== 'true') {
+      const { templateId } = requestObject
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+      mock
+        .onPost(
+          `https://api.tillhub.com/api/v1/templates/${legacyId}/${templateId}/preview?format=uri`
+        )
+        .reply(function(config) {
+          return [400]
+        })
+    }
+
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE
+    }
+
+    th.init(options)
+    await th.auth.loginUsername({
+      username: user.username,
+      password: user.password
+    })
+
+    try {
+      await th.templates().preview(requestObject)
+    } catch (err) {
+      expect(err.name).toBe('TemplatesPreviewFailed')
+    }
   })
 })

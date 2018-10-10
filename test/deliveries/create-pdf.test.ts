@@ -25,12 +25,16 @@ const responseObj = [
   }
 ]
 
+const legacyId = '4564'
+
+const mock = new MockAdapter(axios)
+afterEach(() => {
+  mock.reset()
+})
+
 describe('v0: Deliveries', () => {
   it('can create PDF', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      const mock = new MockAdapter(axios)
-      const legacyId = '4564'
-
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
         return [
           200,
@@ -79,5 +83,49 @@ describe('v0: Deliveries', () => {
     const { data } = await delivery.createDeliveryPDF(deliveryId)
 
     expect(data).toEqual(responseObj)
+  })
+
+  it('rejects on status codes that are not 200', async () => {
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+      mock
+        .onPost(
+          `https://api.tillhub.com/api/v0/deliveries/${legacyId}/${deliveryId}/pdf?format=uri`
+        )
+        .reply(function(config) {
+          return [400]
+        })
+    }
+
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE
+    }
+
+    th.init(options)
+    await th.auth.loginUsername({
+      username: user.username,
+      password: user.password
+    })
+
+    try {
+      await th.deliveries().createDeliveryPDF(deliveryId)
+    } catch (err) {
+      expect(err.name).toBe('DeliveriesPDFFailed')
+    }
   })
 })

@@ -25,12 +25,16 @@ const requestObject = {
   }
 }
 
+const legacyId = '4564'
+
+const mock = new MockAdapter(axios)
+afterEach(() => {
+  mock.reset()
+})
+
 describe('v0: Deliveries: can get one', () => {
   it("Tillhub's deliveries are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      const mock = new MockAdapter(axios)
-      const legacyId = '4564'
-
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
         return [
           200,
@@ -84,5 +88,53 @@ describe('v0: Deliveries: can get one', () => {
     const { data } = await deliveries.getOne(requestObject)
 
     expect(Array.isArray(data)).toBe(true)
+  })
+
+  it('rejects on status codes that are not 200', async () => {
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+      mock
+        .onGet(
+          `https://api.tillhub.com/api/v0/deliveries/${legacyId}/${
+            requestObject.deliveryId
+          }?embed[]=location`
+        )
+        .reply(function(config) {
+          return [400]
+        })
+    }
+
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE
+    }
+
+    const th = new TillhubClient()
+
+    th.init(options)
+    await th.auth.loginUsername({
+      username: user.username,
+      password: user.password
+    })
+
+    try {
+      await th.deliveries().getOne(requestObject)
+    } catch (err) {
+      expect(err.name).toBe('DeliveriesFetchOneFailed')
+    }
   })
 })
