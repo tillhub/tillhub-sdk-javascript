@@ -7,6 +7,7 @@ import { Accounts } from './accounts'
 import { Configurations } from './configurations'
 import { Branches } from './branches'
 import { Customers } from './customers'
+import { Vouchers } from './Vouchers'
 
 export {
   Auth,
@@ -17,5 +18,6 @@ export {
   Accounts,
   Configurations,
   Branches,
-  Customers
+  Customers,
+  Vouchers
 }

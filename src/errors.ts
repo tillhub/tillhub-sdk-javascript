@@ -236,3 +236,38 @@ export class CustomerDeleteFailed extends BaseError {
     super(message)
   }
 }
+
+export class VouchersFetchFailed extends BaseError {
+  public name = 'VouchersFetchFailed'
+  constructor(public message: string = 'Could not fetch the vouchers') {
+    super(message)
+  }
+}
+
+export class VouchersCountFailed extends BaseError {
+  public name = 'VouchersCountFailed'
+  constructor(public message: string = 'Could not count the vouchers') {
+    super(message)
+  }
+}
+
+export class VoucherDeleteFailed extends BaseError {
+  public name = 'VoucherDeleteFailed'
+  constructor(public message: string = 'Could not delete the voucher') {
+    super(message)
+  }
+}
+
+export class VouchersLogsFetchFailed extends BaseError {
+  public name = 'VouchersLogsFetchFailed'
+  constructor(public message: string = 'Could not fetch the vouchers logs') {
+    super(message)
+  }
+}
+
+export class VouchersLogsCountFailed extends BaseError {
+  public name = 'VouchersLogsCountFailed'
+  constructor(public message: string = 'Could not count the vouchers logs') {
+    super(message)
+  }
+}
