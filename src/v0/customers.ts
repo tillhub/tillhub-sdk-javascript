@@ -14,6 +14,7 @@ export interface CustomersQuery {
 export interface CustomersResponse {
   data: object[]
   metadata: object
+  msg?: string
 }
 
 export class Customers {
@@ -55,6 +56,22 @@ export class Customers {
         } as CustomersResponse)
       } catch (err) {
         return reject(new errors.CustomersFetchFailed())
+      }
+    })
+  }
+
+  delete(customerId: string): Promise<CustomersResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${customerId}`
+      try {
+        const response = await this.http.getClient().delete(uri)
+        response.status !== 200 && reject(new errors.CustomerDeleteFailed())
+
+        return resolve({
+          msg: response.data.msg
+        } as CustomersResponse)
+      } catch (err) {
+        return reject(new errors.CustomerDeleteFailed())
       }
     })
   }

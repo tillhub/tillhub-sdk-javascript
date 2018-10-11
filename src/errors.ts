@@ -229,3 +229,10 @@ export class CustomersCountFailed extends BaseError {
     super(message)
   }
 }
+
+export class CustomerDeleteFailed extends BaseError {
+  public name = 'CustomerDeleteFailed'
+  constructor(public message: string = 'Could not delete the customer') {
+    super(message)
+  }
+}
