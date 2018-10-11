@@ -101,6 +101,11 @@ export declare class DeliveryItemsFetchAllFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class DeliveryItemUpdateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
 export declare class ProductGroupsFetchFailed extends BaseError {
     message: string;
     name: string;
@@ -142,6 +147,16 @@ export declare class BranchesFetchFailed extends BaseError {
     constructor(message?: string);
 }
 export declare class BranchesCountFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class CustomersFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class CustomersCountFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string);

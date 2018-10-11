@@ -420,7 +420,7 @@ var Deliveries = /** @class */ (function () {
                             })];
                     case 3:
                         err_11 = _a.sent();
-                        return [2 /*return*/, reject(new errors.DeliveriesUpdateFailed())];
+                        return [2 /*return*/, reject(new errors.DeliveryItemUpdateFailed())];
                     case 4: return [2 /*return*/];
                 }
             });

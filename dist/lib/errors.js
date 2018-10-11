@@ -261,6 +261,18 @@ var DeliveryItemsFetchAllFailed = /** @class */ (function (_super) {
     return DeliveryItemsFetchAllFailed;
 }(BaseError));
 exports.DeliveryItemsFetchAllFailed = DeliveryItemsFetchAllFailed;
+var DeliveryItemUpdateFailed = /** @class */ (function (_super) {
+    __extends(DeliveryItemUpdateFailed, _super);
+    function DeliveryItemUpdateFailed(message) {
+        if (message === void 0) { message = 'Could not update delivery'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'DeliveryItemUpdateFailed';
+        return _this;
+    }
+    return DeliveryItemUpdateFailed;
+}(BaseError));
+exports.DeliveryItemUpdateFailed = DeliveryItemUpdateFailed;
 var ProductGroupsFetchFailed = /** @class */ (function (_super) {
     __extends(ProductGroupsFetchFailed, _super);
     function ProductGroupsFetchFailed(message) {
@@ -369,4 +381,28 @@ var BranchesCountFailed = /** @class */ (function (_super) {
     return BranchesCountFailed;
 }(BaseError));
 exports.BranchesCountFailed = BranchesCountFailed;
+var CustomersFetchFailed = /** @class */ (function (_super) {
+    __extends(CustomersFetchFailed, _super);
+    function CustomersFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch customers'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'CustomersFetchFailed';
+        return _this;
+    }
+    return CustomersFetchFailed;
+}(BaseError));
+exports.CustomersFetchFailed = CustomersFetchFailed;
+var CustomersCountFailed = /** @class */ (function (_super) {
+    __extends(CustomersCountFailed, _super);
+    function CustomersCountFailed(message) {
+        if (message === void 0) { message = 'Could not count the customers'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'CustomersCountFailed';
+        return _this;
+    }
+    return CustomersCountFailed;
+}(BaseError));
+exports.CustomersCountFailed = CustomersCountFailed;
 //# sourceMappingURL=errors.js.map

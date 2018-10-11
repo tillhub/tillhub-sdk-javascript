@@ -1,3 +1,10 @@
+# [1.26.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.25.2...v1.26.0) (2018-10-11)
+
+
+### Features
+
+* **customers:** add customers handler with count and getAll methods ([deff6b5](https://github.com/tillhub/tillhub-sdk-javascript/commit/deff6b5))
+
 ## [1.25.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.25.1...v1.25.2) (2018-10-09)
 
 
