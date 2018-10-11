@@ -405,4 +405,16 @@ var CustomersCountFailed = /** @class */ (function (_super) {
     return CustomersCountFailed;
 }(BaseError));
 exports.CustomersCountFailed = CustomersCountFailed;
+var CustomerDeleteFailed = /** @class */ (function (_super) {
+    __extends(CustomerDeleteFailed, _super);
+    function CustomerDeleteFailed(message) {
+        if (message === void 0) { message = 'Could not delete the customer'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'CustomerDeleteFailed';
+        return _this;
+    }
+    return CustomerDeleteFailed;
+}(BaseError));
+exports.CustomerDeleteFailed = CustomerDeleteFailed;
 //# sourceMappingURL=errors.js.map

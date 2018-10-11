@@ -1,3 +1,10 @@
+# [1.27.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.26.0...v1.27.0) (2018-10-11)
+
+
+### Features
+
+* **customers:** add customer delete method ([f6c371a](https://github.com/tillhub/tillhub-sdk-javascript/commit/f6c371a))
+
 # [1.26.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.25.2...v1.26.0) (2018-10-11)
 
 
