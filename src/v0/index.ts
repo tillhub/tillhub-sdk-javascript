@@ -7,7 +7,7 @@ import { Accounts } from './accounts'
 import { Configurations } from './configurations'
 import { Branches } from './branches'
 import { Customers } from './customers'
-import { Vouchers } from './Vouchers'
+import { Vouchers } from './vouchers'
 
 export {
   Auth,
