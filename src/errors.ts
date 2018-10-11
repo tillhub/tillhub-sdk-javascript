@@ -215,3 +215,17 @@ export class BranchesCountFailed extends BaseError {
     super(message)
   }
 }
+
+export class CustomersFetchFailed extends BaseError {
+  public name = 'CustomersFetchFailed'
+  constructor(public message: string = 'Could not fetch customers') {
+    super(message)
+  }
+}
+
+export class CustomersCountFailed extends BaseError {
+  public name = 'CustomersCountFailed'
+  constructor(public message: string = 'Could not count the customers') {
+    super(message)
+  }
+}
