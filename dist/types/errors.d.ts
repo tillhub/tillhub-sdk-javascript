@@ -166,3 +166,28 @@ export declare class CustomerDeleteFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class VouchersFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class VouchersCountFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class VoucherDeleteFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class VouchersLogsFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class VouchersLogsCountFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}

@@ -417,4 +417,64 @@ var CustomerDeleteFailed = /** @class */ (function (_super) {
     return CustomerDeleteFailed;
 }(BaseError));
 exports.CustomerDeleteFailed = CustomerDeleteFailed;
+var VouchersFetchFailed = /** @class */ (function (_super) {
+    __extends(VouchersFetchFailed, _super);
+    function VouchersFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch the vouchers'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'VouchersFetchFailed';
+        return _this;
+    }
+    return VouchersFetchFailed;
+}(BaseError));
+exports.VouchersFetchFailed = VouchersFetchFailed;
+var VouchersCountFailed = /** @class */ (function (_super) {
+    __extends(VouchersCountFailed, _super);
+    function VouchersCountFailed(message) {
+        if (message === void 0) { message = 'Could not count the vouchers'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'VouchersCountFailed';
+        return _this;
+    }
+    return VouchersCountFailed;
+}(BaseError));
+exports.VouchersCountFailed = VouchersCountFailed;
+var VoucherDeleteFailed = /** @class */ (function (_super) {
+    __extends(VoucherDeleteFailed, _super);
+    function VoucherDeleteFailed(message) {
+        if (message === void 0) { message = 'Could not delete the voucher'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'VoucherDeleteFailed';
+        return _this;
+    }
+    return VoucherDeleteFailed;
+}(BaseError));
+exports.VoucherDeleteFailed = VoucherDeleteFailed;
+var VouchersLogsFetchFailed = /** @class */ (function (_super) {
+    __extends(VouchersLogsFetchFailed, _super);
+    function VouchersLogsFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch the vouchers logs'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'VouchersLogsFetchFailed';
+        return _this;
+    }
+    return VouchersLogsFetchFailed;
+}(BaseError));
+exports.VouchersLogsFetchFailed = VouchersLogsFetchFailed;
+var VouchersLogsCountFailed = /** @class */ (function (_super) {
+    __extends(VouchersLogsCountFailed, _super);
+    function VouchersLogsCountFailed(message) {
+        if (message === void 0) { message = 'Could not count the vouchers logs'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'VouchersLogsCountFailed';
+        return _this;
+    }
+    return VouchersLogsCountFailed;
+}(BaseError));
+exports.VouchersLogsCountFailed = VouchersLogsCountFailed;
 //# sourceMappingURL=errors.js.map

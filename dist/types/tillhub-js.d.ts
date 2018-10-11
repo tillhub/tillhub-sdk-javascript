@@ -72,6 +72,11 @@ export declare class TillhubClient {
      *
      */
     customers(): v0.Customers;
+    /**
+     * Create an authenticated vouchers instance
+     *
+     */
+    vouchers(): v0.Vouchers;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;

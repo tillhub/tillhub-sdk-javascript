@@ -7,4 +7,5 @@ import { Accounts } from './accounts';
 import { Configurations } from './configurations';
 import { Branches } from './branches';
 import { Customers } from './customers';
-export { Auth, Transactions, Taxes, Deliveries, ProductGroups, Accounts, Configurations, Branches, Customers };
+import { Vouchers } from './vouchers';
+export { Auth, Transactions, Taxes, Deliveries, ProductGroups, Accounts, Configurations, Branches, Customers, Vouchers };

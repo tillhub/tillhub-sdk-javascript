@@ -18,4 +18,6 @@ var branches_1 = require("./branches");
 exports.Branches = branches_1.Branches;
 var customers_1 = require("./customers");
 exports.Customers = customers_1.Customers;
+var vouchers_1 = require("./vouchers");
+exports.Vouchers = vouchers_1.Vouchers;
 //# sourceMappingURL=index.js.map

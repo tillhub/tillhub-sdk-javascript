@@ -1,3 +1,15 @@
+# [1.28.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.27.0...v1.28.0) (2018-10-11)
+
+
+### Bug Fixes
+
+* **vouchers:** fix typo in file path ([0abe131](https://github.com/tillhub/tillhub-sdk-javascript/commit/0abe131))
+
+
+### Features
+
+* **vouchers:** add count and getAll methods for vouchers and vouchers logs ([7acb83c](https://github.com/tillhub/tillhub-sdk-javascript/commit/7acb83c))
+
 # [1.27.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.26.0...v1.27.0) (2018-10-11)
 
 
