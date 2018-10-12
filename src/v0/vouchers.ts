@@ -94,23 +94,36 @@ export class Vouchers {
     })
   }
 
-  getAllLogs(): Promise<VouchersResponse> {
+  getAllLogs(query?: VouchersQuery | undefined): Promise<VouchersResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/logs`
+      let next
 
       try {
+        let uri
+        if (query && query.uri) {
+          uri = query.uri
+        } else {
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}/logs`
+        }
+
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) reject(new errors.VouchersLogsFetchFailed())
 
+        if (response.data.cursor && response.data.cursor.next) {
+          next = this.getAll({ uri: response.data.cursor.next })
+        }
+
         return resolve({
           data: response.data.results,
-          metadata: { count: response.data.count }
+          metadata: { count: response.data.count },
+          next
         } as VouchersResponse)
       } catch (err) {
         return reject(new errors.VouchersLogsFetchFailed())
       }
     })
   }
+
   countLogs(): Promise<VouchersResponse> {
     return new Promise(async (resolve, reject) => {
       let uri = `${this.options.base}${this.endpoint}/${this.options.user}/logs/meta`
