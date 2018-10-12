@@ -1,3 +1,10 @@
+## [1.28.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.28.0...v1.28.1) (2018-10-12)
+
+
+### Bug Fixes
+
+* **vouchers:** add missing pagination to vouchers logs getAll method ([a44e3a9](https://github.com/tillhub/tillhub-sdk-javascript/commit/a44e3a9))
+
 # [1.28.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.27.0...v1.28.0) (2018-10-11)
 
 

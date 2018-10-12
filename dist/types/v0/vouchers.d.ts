@@ -20,6 +20,6 @@ export declare class Vouchers {
     getAll(query?: VouchersQuery | undefined): Promise<VouchersResponse>;
     delete(voucherId: string): Promise<VouchersResponse>;
     count(): Promise<VouchersResponse>;
-    getAllLogs(): Promise<VouchersResponse>;
+    getAllLogs(query?: VouchersQuery | undefined): Promise<VouchersResponse>;
     countLogs(): Promise<VouchersResponse>;
 }

@@ -140,30 +140,38 @@ var Vouchers = /** @class */ (function () {
             });
         }); });
     };
-    Vouchers.prototype.getAllLogs = function () {
+    Vouchers.prototype.getAllLogs = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_4;
+            var next, uri, response, err_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/logs";
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
+                        _a.trys.push([0, 2, , 3]);
+                        uri = void 0;
+                        if (query && query.uri) {
+                            uri = query.uri;
+                        }
+                        else {
+                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/logs";
+                        }
                         return [4 /*yield*/, this.http.getClient().get(uri)];
-                    case 2:
+                    case 1:
                         response = _a.sent();
                         if (response.status !== 200)
                             reject(new errors.VouchersLogsFetchFailed());
+                        if (response.data.cursor && response.data.cursor.next) {
+                            next = this.getAll({ uri: response.data.cursor.next });
+                        }
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
-                                metadata: { count: response.data.count }
+                                metadata: { count: response.data.count },
+                                next: next
                             })];
-                    case 3:
+                    case 2:
                         err_4 = _a.sent();
                         return [2 /*return*/, reject(new errors.VouchersLogsFetchFailed())];
-                    case 4: return [2 /*return*/];
+                    case 3: return [2 /*return*/];
                 }
             });
         }); });
