@@ -76,6 +76,13 @@ export class ProductsDeleteFailed extends BaseError {
   }
 }
 
+export class ProductsSearchFailed extends BaseError {
+  public name = 'ProductsSearchFailed'
+  constructor(public message: string = 'Could not search for the product') {
+    super(message)
+  }
+}
+
 export class DeliveriesFetchAllFailed extends BaseError {
   public name = 'DeliveriesFetchAllFailed'
   constructor(public message: string = 'Could not fetch deliveries') {
