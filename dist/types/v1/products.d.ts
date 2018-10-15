@@ -75,5 +75,6 @@ export declare class Products {
     update(requestObject: ProductsUpdateRequestObject): Promise<ProductsResponse>;
     count(): Promise<ProductsResponse>;
     delete(productId: string): Promise<ProductsResponse>;
+    search(searchTerm: string): Promise<ProductsResponse>;
 }
 export {};

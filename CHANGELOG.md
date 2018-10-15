@@ -1,3 +1,10 @@
+# [1.29.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.28.1...v1.29.0) (2018-10-15)
+
+
+### Features
+
+* **products:** add search handler ([6564aaf](https://github.com/tillhub/tillhub-sdk-javascript/commit/6564aaf))
+
 ## [1.28.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.28.0...v1.28.1) (2018-10-12)
 
 

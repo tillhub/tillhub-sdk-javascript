@@ -51,6 +51,11 @@ export declare class ProductsDeleteFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class ProductsSearchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
 export declare class DeliveriesFetchAllFailed extends BaseError {
     message: string;
     name: string;

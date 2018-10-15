@@ -141,6 +141,18 @@ var ProductsDeleteFailed = /** @class */ (function (_super) {
     return ProductsDeleteFailed;
 }(BaseError));
 exports.ProductsDeleteFailed = ProductsDeleteFailed;
+var ProductsSearchFailed = /** @class */ (function (_super) {
+    __extends(ProductsSearchFailed, _super);
+    function ProductsSearchFailed(message) {
+        if (message === void 0) { message = 'Could not search for the product'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'ProductsSearchFailed';
+        return _this;
+    }
+    return ProductsSearchFailed;
+}(BaseError));
+exports.ProductsSearchFailed = ProductsSearchFailed;
 var DeliveriesFetchAllFailed = /** @class */ (function (_super) {
     __extends(DeliveriesFetchAllFailed, _super);
     function DeliveriesFetchAllFailed(message) {
