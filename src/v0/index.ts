@@ -8,6 +8,7 @@ import { Configurations } from './configurations'
 import { Branches } from './branches'
 import { Customers } from './customers'
 import { Vouchers } from './vouchers'
+import { Invoices } from './invoices'
 
 export {
   Auth,
@@ -19,5 +20,6 @@ export {
   Configurations,
   Branches,
   Customers,
-  Vouchers
+  Vouchers,
+  Invoices
 }
