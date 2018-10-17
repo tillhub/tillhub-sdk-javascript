@@ -489,4 +489,64 @@ var VouchersLogsCountFailed = /** @class */ (function (_super) {
     return VouchersLogsCountFailed;
 }(BaseError));
 exports.VouchersLogsCountFailed = VouchersLogsCountFailed;
+var InvoicesFetchAllFailed = /** @class */ (function (_super) {
+    __extends(InvoicesFetchAllFailed, _super);
+    function InvoicesFetchAllFailed(message) {
+        if (message === void 0) { message = 'Could not fetch invoices'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'InvoicesFetchAllFailed';
+        return _this;
+    }
+    return InvoicesFetchAllFailed;
+}(BaseError));
+exports.InvoicesFetchAllFailed = InvoicesFetchAllFailed;
+var InvoicesFetchOneFailed = /** @class */ (function (_super) {
+    __extends(InvoicesFetchOneFailed, _super);
+    function InvoicesFetchOneFailed(message) {
+        if (message === void 0) { message = 'Could not fetch the invoice'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'InvoicesFetchOneFailed';
+        return _this;
+    }
+    return InvoicesFetchOneFailed;
+}(BaseError));
+exports.InvoicesFetchOneFailed = InvoicesFetchOneFailed;
+var InvoicesCreateFailed = /** @class */ (function (_super) {
+    __extends(InvoicesCreateFailed, _super);
+    function InvoicesCreateFailed(message) {
+        if (message === void 0) { message = 'Could not create invoice'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'InvoicesCreateFailed';
+        return _this;
+    }
+    return InvoicesCreateFailed;
+}(BaseError));
+exports.InvoicesCreateFailed = InvoicesCreateFailed;
+var InvoicesUpdateFailed = /** @class */ (function (_super) {
+    __extends(InvoicesUpdateFailed, _super);
+    function InvoicesUpdateFailed(message) {
+        if (message === void 0) { message = 'Could not update invoice'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'InvoicesUpdateFailed';
+        return _this;
+    }
+    return InvoicesUpdateFailed;
+}(BaseError));
+exports.InvoicesUpdateFailed = InvoicesUpdateFailed;
+var InvoicesDeleteFailed = /** @class */ (function (_super) {
+    __extends(InvoicesDeleteFailed, _super);
+    function InvoicesDeleteFailed(message) {
+        if (message === void 0) { message = 'Could not delete invoice'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'InvoicesDeleteFailed';
+        return _this;
+    }
+    return InvoicesDeleteFailed;
+}(BaseError));
+exports.InvoicesDeleteFailed = InvoicesDeleteFailed;
 //# sourceMappingURL=errors.js.map

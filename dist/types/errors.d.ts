@@ -196,3 +196,28 @@ export declare class VouchersLogsCountFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class InvoicesFetchAllFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class InvoicesFetchOneFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class InvoicesCreateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class InvoicesUpdateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class InvoicesDeleteFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}

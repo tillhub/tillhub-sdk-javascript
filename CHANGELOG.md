@@ -1,3 +1,10 @@
+# [1.30.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.29.0...v1.30.0) (2018-10-17)
+
+
+### Features
+
+* Add invoices handlers ([b46b769](https://github.com/tillhub/tillhub-sdk-javascript/commit/b46b769))
+
 # [1.29.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.28.1...v1.29.0) (2018-10-15)
 
 

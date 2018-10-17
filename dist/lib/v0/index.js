@@ -20,4 +20,6 @@ var customers_1 = require("./customers");
 exports.Customers = customers_1.Customers;
 var vouchers_1 = require("./vouchers");
 exports.Vouchers = vouchers_1.Vouchers;
+var invoices_1 = require("./invoices");
+exports.Invoices = invoices_1.Invoices;
 //# sourceMappingURL=index.js.map
