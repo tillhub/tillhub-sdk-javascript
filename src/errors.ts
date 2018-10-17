@@ -278,3 +278,38 @@ export class VouchersLogsCountFailed extends BaseError {
     super(message)
   }
 }
+
+export class InvoicesFetchAllFailed extends BaseError {
+  public name = 'InvoicesFetchAllFailed'
+  constructor(public message: string = 'Could not fetch invoices') {
+    super(message)
+  }
+}
+
+export class InvoicesFetchOneFailed extends BaseError {
+  public name = 'InvoicesFetchOneFailed'
+  constructor(public message: string = 'Could not fetch the invoice') {
+    super(message)
+  }
+}
+
+export class InvoicesCreateFailed extends BaseError {
+  public name = 'InvoicesCreateFailed'
+  constructor(public message: string = 'Could not create invoice') {
+    super(message)
+  }
+}
+
+export class InvoicesUpdateFailed extends BaseError {
+  public name = 'InvoicesUpdateFailed'
+  constructor(public message: string = 'Could not update invoice') {
+    super(message)
+  }
+}
+
+export class InvoicesDeleteFailed extends BaseError {
+  public name = 'InvoicesDeleteFailed'
+  constructor(public message: string = 'Could not delete invoice') {
+    super(message)
+  }
+}
