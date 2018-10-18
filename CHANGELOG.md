@@ -1,3 +1,10 @@
+## [1.30.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.30.0...v1.30.1) (2018-10-18)
+
+
+### Bug Fixes
+
+* **products:** fix typo in search uri ([17a45c8](https://github.com/tillhub/tillhub-sdk-javascript/commit/17a45c8))
+
 # [1.30.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.29.0...v1.30.0) (2018-10-17)
 
 
