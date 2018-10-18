@@ -42,7 +42,7 @@ describe('v1: Products: can search for products', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/search?=${searchTerm}`)
+        .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/search?q=${searchTerm}`)
         .reply(function(config) {
           return [
             200,
@@ -95,7 +95,7 @@ describe('v1: Products: can search for products', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/search?=${searchTerm}`)
+        .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/search?q=${searchTerm}`)
         .reply(function(config) {
           return [205]
         })

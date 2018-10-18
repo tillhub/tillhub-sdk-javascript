@@ -212,7 +212,7 @@ export class Products {
 
   search(searchTerm: string): Promise<ProductsResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/search?=${searchTerm}`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/search?q=${searchTerm}`
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.ProductsSearchFailed())
