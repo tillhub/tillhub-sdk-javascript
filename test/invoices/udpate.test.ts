@@ -21,7 +21,12 @@ if (process.env.SYSTEM_TEST) {
 const requestObject = {
   invoiceId: 'abc123',
   query: {
-    embed: ['customer', 'assignee', 'assigned_by']
+    embed: ['customer', 'assignee', 'assigned_by'],
+    limit: 500,
+    offset: 200,
+    direction: 'desc',
+    order_by: 'due_date',
+    filter: 'sadie'
   },
   body: {
     balance: 800,
