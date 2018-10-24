@@ -9,4 +9,5 @@ import { Branches } from './branches';
 import { Customers } from './customers';
 import { Vouchers } from './vouchers';
 import { Invoices } from './invoices';
-export { Auth, Transactions, Taxes, Deliveries, ProductGroups, Accounts, Configurations, Branches, Customers, Vouchers, Invoices };
+import { Stocks } from './stocks';
+export { Auth, Transactions, Taxes, Deliveries, ProductGroups, Accounts, Configurations, Branches, Customers, Vouchers, Invoices, Stocks };

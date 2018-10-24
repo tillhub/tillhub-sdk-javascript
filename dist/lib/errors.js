@@ -549,4 +549,28 @@ var InvoicesDeleteFailed = /** @class */ (function (_super) {
     return InvoicesDeleteFailed;
 }(BaseError));
 exports.InvoicesDeleteFailed = InvoicesDeleteFailed;
+var StocksFetchFailed = /** @class */ (function (_super) {
+    __extends(StocksFetchFailed, _super);
+    function StocksFetchFailed(message) {
+        if (message === void 0) { message = 'Could fetch the stocks'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'StocksFetchFailed';
+        return _this;
+    }
+    return StocksFetchFailed;
+}(BaseError));
+exports.StocksFetchFailed = StocksFetchFailed;
+var StocksLocationsFetchFailed = /** @class */ (function (_super) {
+    __extends(StocksLocationsFetchFailed, _super);
+    function StocksLocationsFetchFailed(message) {
+        if (message === void 0) { message = 'Could fetch the stocks locations'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'StocksLocationsFetchFailed';
+        return _this;
+    }
+    return StocksLocationsFetchFailed;
+}(BaseError));
+exports.StocksLocationsFetchFailed = StocksLocationsFetchFailed;
 //# sourceMappingURL=errors.js.map

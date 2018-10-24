@@ -221,3 +221,13 @@ export declare class InvoicesDeleteFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class StocksFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class StocksLocationsFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}

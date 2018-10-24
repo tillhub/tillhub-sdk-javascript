@@ -1,3 +1,10 @@
+# [1.33.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.32.0...v1.33.0) (2018-10-24)
+
+
+### Features
+
+* **stocks:** add stocks handler - get all and get locations ([b164261](https://github.com/tillhub/tillhub-sdk-javascript/commit/b164261))
+
 # [1.32.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.31.0...v1.32.0) (2018-10-24)
 
 

@@ -22,4 +22,6 @@ var vouchers_1 = require("./vouchers");
 exports.Vouchers = vouchers_1.Vouchers;
 var invoices_1 = require("./invoices");
 exports.Invoices = invoices_1.Invoices;
+var stocks_1 = require("./stocks");
+exports.Stocks = stocks_1.Stocks;
 //# sourceMappingURL=index.js.map

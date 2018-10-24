@@ -237,6 +237,20 @@ var TillhubClient = /** @class */ (function () {
         }
         return new v0.Invoices({ user: this.auth.user, base: this.options.base }, this.http);
     };
+    /**
+     * Create an authenticated Stocks instance
+     *
+     */
+    TillhubClient.prototype.stocks = function () {
+        if (!this.options ||
+            !this.options.base ||
+            !this.http ||
+            !this.auth ||
+            !this.auth.authenticated) {
+            throw new errors.UninstantiatedClient();
+        }
+        return new v0.Stocks({ user: this.auth.user, base: this.options.base }, this.http);
+    };
     return TillhubClient;
 }());
 exports.TillhubClient = TillhubClient;
