@@ -26,7 +26,9 @@ const requestObject = {
     offset: 200,
     direction: 'desc',
     order_by: 'due_date',
-    filter: 'sadie'
+    filter: 'sadie',
+    archived: false,
+    deleted: false
   },
   body: {
     balance: 800,
