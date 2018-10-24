@@ -5,6 +5,10 @@ export interface InvoicesOptions {
 }
 export interface InvoicesQuery {
     limit?: number;
+    offset?: number;
+    filter?: string;
+    order_by?: string;
+    direction?: string;
     embed?: string[];
     uri?: string;
 }

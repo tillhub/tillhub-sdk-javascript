@@ -1,3 +1,10 @@
+# [1.31.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.30.1...v1.31.0) (2018-10-24)
+
+
+### Features
+
+* **invoices:** Add query params to invoices-get-all handler ([52e6a9e](https://github.com/tillhub/tillhub-sdk-javascript/commit/52e6a9e))
+
 ## [1.30.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.30.0...v1.30.1) (2018-10-18)
 
 
