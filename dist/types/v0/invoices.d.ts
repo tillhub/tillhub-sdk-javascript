@@ -11,6 +11,8 @@ export interface InvoicesQuery {
     direction?: string;
     embed?: string[];
     uri?: string;
+    archived?: boolean;
+    deleted?: boolean;
 }
 export interface InvoicesGetOneRequestObject {
     invoiceId: string;
