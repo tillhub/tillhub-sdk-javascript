@@ -313,3 +313,17 @@ export class InvoicesDeleteFailed extends BaseError {
     super(message)
   }
 }
+
+export class StocksFetchFailed extends BaseError {
+  public name = 'StocksFetchFailed'
+  constructor(public message: string = 'Could fetch the stocks') {
+    super(message)
+  }
+}
+
+export class StocksLocationsFetchFailed extends BaseError {
+  public name = 'StocksLocationsFetchFailed'
+  constructor(public message: string = 'Could fetch the stocks locations') {
+    super(message)
+  }
+}

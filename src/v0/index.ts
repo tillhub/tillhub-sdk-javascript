@@ -9,6 +9,7 @@ import { Branches } from './branches'
 import { Customers } from './customers'
 import { Vouchers } from './vouchers'
 import { Invoices } from './invoices'
+import { Stocks } from './stocks'
 
 export {
   Auth,
@@ -21,5 +22,6 @@ export {
   Branches,
   Customers,
   Vouchers,
-  Invoices
+  Invoices,
+  Stocks
 }
