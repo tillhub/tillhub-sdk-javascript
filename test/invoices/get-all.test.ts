@@ -25,6 +25,7 @@ const query = {
   direction: 'desc',
   order_by: 'due_date',
   filter: 'sadie',
+  location: '3eb26d95-9934-4df5-aeee-b48401c177df',
   archived: false,
   deleted: false
 }

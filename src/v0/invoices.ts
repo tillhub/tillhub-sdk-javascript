@@ -12,6 +12,7 @@ export interface InvoicesQuery {
   filter?: string
   order_by?: string
   direction?: string
+  location?: string
   embed?: string[]
   uri?: string
   archived?: boolean
