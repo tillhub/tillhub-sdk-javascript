@@ -1,3 +1,4 @@
+import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 
@@ -110,8 +111,9 @@ export class Invoices {
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 
-  getAll(query?: InvoicesQuery | undefined): Promise<InvoicesResponse> {
+  getAll(q?: InvoicesQuery | undefined): Promise<InvoicesResponse> {
     return new Promise(async (resolve, reject) => {
+      const query = JSON.parse(JSON.stringify(q))
       let uri
       let next
 
@@ -122,13 +124,8 @@ export class Invoices {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}`
         }
 
-        if (query && query.embed) {
-          const queryString = query.embed
-            .map(item => {
-              return `embed[]=${item}`
-            })
-            .join('&')
-
+        const queryString = qs.stringify(query)
+        if (queryString) {
           uri = `${uri}?${queryString}`
         }
 

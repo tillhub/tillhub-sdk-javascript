@@ -1,3 +1,4 @@
+import qs from 'qs'
 import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
@@ -30,11 +31,9 @@ const query = {
   deleted: false
 }
 
-const queryString = query.embed
-  .map(item => {
-    return `embed[]=${item}`
-  })
-  .join('&')
+function queryString() {
+  return qs.stringify(query)
+}
 
 const legacyId = '4564'
 
@@ -60,7 +59,7 @@ describe('v0: Invoices: can get all', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/invoices/${legacyId}?${queryString}`)
+        .onGet(`https://api.tillhub.com/api/v0/invoices/${legacyId}?${queryString()}`)
         .reply(function(config) {
           return [
             200,
@@ -112,7 +111,7 @@ describe('v0: Invoices: can get all', () => {
         ]
       })
       mock
-        .onGet(`https://api.tillhub.com/api/v0/invoices/${legacyId}?${queryString}`)
+        .onGet(`https://api.tillhub.com/api/v0/invoices/${legacyId}?${queryString()}`)
         .reply(function(config) {
           return [400]
         })
