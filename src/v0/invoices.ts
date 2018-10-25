@@ -229,7 +229,7 @@ export class Invoices {
           metadata: { count: response.data.count }
         } as InvoicesResponse)
       } catch (err) {
-        return reject(new errors.InvoicesUpdateFailed())
+        return reject(new errors.InvoicesUpdateFailed(err.message))
       }
     })
   }
