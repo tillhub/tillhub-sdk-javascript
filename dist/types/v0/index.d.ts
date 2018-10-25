@@ -10,4 +10,5 @@ import { Customers } from './customers';
 import { Vouchers } from './vouchers';
 import { Invoices } from './invoices';
 import { Stocks } from './stocks';
-export { Auth, Transactions, Taxes, Deliveries, ProductGroups, Accounts, Configurations, Branches, Customers, Vouchers, Invoices, Stocks };
+import { Orders } from './orders';
+export { Auth, Transactions, Taxes, Deliveries, ProductGroups, Accounts, Configurations, Branches, Customers, Vouchers, Invoices, Stocks, Orders };

@@ -1,3 +1,10 @@
+# [1.39.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.38.0...v1.39.0) (2018-10-25)
+
+
+### Features
+
+* **orders:** add orders handler and fetching methods ([ef23797](https://github.com/tillhub/tillhub-sdk-javascript/commit/ef23797))
+
 # [1.38.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.37.0...v1.38.0) (2018-10-25)
 
 

@@ -552,7 +552,7 @@ exports.InvoicesDeleteFailed = InvoicesDeleteFailed;
 var StocksFetchFailed = /** @class */ (function (_super) {
     __extends(StocksFetchFailed, _super);
     function StocksFetchFailed(message) {
-        if (message === void 0) { message = 'Could fetch the stocks'; }
+        if (message === void 0) { message = 'Could not fetch the stocks'; }
         var _this = _super.call(this, message) || this;
         _this.message = message;
         _this.name = 'StocksFetchFailed';
@@ -564,7 +564,7 @@ exports.StocksFetchFailed = StocksFetchFailed;
 var StocksCreateFailed = /** @class */ (function (_super) {
     __extends(StocksCreateFailed, _super);
     function StocksCreateFailed(message) {
-        if (message === void 0) { message = 'Could create the stock'; }
+        if (message === void 0) { message = 'Could not create the stock'; }
         var _this = _super.call(this, message) || this;
         _this.message = message;
         _this.name = 'StocksCreateFailed';
@@ -576,7 +576,7 @@ exports.StocksCreateFailed = StocksCreateFailed;
 var StocksUpdateFailed = /** @class */ (function (_super) {
     __extends(StocksUpdateFailed, _super);
     function StocksUpdateFailed(message) {
-        if (message === void 0) { message = 'Could update the stock'; }
+        if (message === void 0) { message = 'Could not update the stock'; }
         var _this = _super.call(this, message) || this;
         _this.message = message;
         _this.name = 'StocksUpdateFailed';
@@ -588,7 +588,7 @@ exports.StocksUpdateFailed = StocksUpdateFailed;
 var StocksLocationsFetchFailed = /** @class */ (function (_super) {
     __extends(StocksLocationsFetchFailed, _super);
     function StocksLocationsFetchFailed(message) {
-        if (message === void 0) { message = 'Could fetch the stocks locations'; }
+        if (message === void 0) { message = 'Could not fetch the stocks locations'; }
         var _this = _super.call(this, message) || this;
         _this.message = message;
         _this.name = 'StocksLocationsFetchFailed';
@@ -597,4 +597,40 @@ var StocksLocationsFetchFailed = /** @class */ (function (_super) {
     return StocksLocationsFetchFailed;
 }(BaseError));
 exports.StocksLocationsFetchFailed = StocksLocationsFetchFailed;
+var OrdersFetchFailed = /** @class */ (function (_super) {
+    __extends(OrdersFetchFailed, _super);
+    function OrdersFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch the orders'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'OrdersFetchFailed';
+        return _this;
+    }
+    return OrdersFetchFailed;
+}(BaseError));
+exports.OrdersFetchFailed = OrdersFetchFailed;
+var IncomingOrdersFetchFailed = /** @class */ (function (_super) {
+    __extends(IncomingOrdersFetchFailed, _super);
+    function IncomingOrdersFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch incoming orders'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'IncomingOrdersFetchFailed';
+        return _this;
+    }
+    return IncomingOrdersFetchFailed;
+}(BaseError));
+exports.IncomingOrdersFetchFailed = IncomingOrdersFetchFailed;
+var OutgoingOrdersFetchFailed = /** @class */ (function (_super) {
+    __extends(OutgoingOrdersFetchFailed, _super);
+    function OutgoingOrdersFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch outgoing orders'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'OutgoingOrdersFetchFailed';
+        return _this;
+    }
+    return OutgoingOrdersFetchFailed;
+}(BaseError));
+exports.OutgoingOrdersFetchFailed = OutgoingOrdersFetchFailed;
 //# sourceMappingURL=errors.js.map
