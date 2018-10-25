@@ -1,3 +1,10 @@
+# [1.36.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.35.1...v1.36.0) (2018-10-25)
+
+
+### Features
+
+* **invoices:** Add more detailed error message ([5b33d79](https://github.com/tillhub/tillhub-sdk-javascript/commit/5b33d79))
+
 ## [1.35.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.35.0...v1.35.1) (2018-10-25)
 
 

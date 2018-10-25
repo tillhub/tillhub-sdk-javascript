@@ -190,7 +190,7 @@ var Invoices = /** @class */ (function () {
                             })];
                     case 3:
                         err_4 = _a.sent();
-                        return [2 /*return*/, reject(new errors.InvoicesUpdateFailed())];
+                        return [2 /*return*/, reject(new errors.InvoicesUpdateFailed(err_4.message))];
                     case 4: return [2 /*return*/];
                 }
             });
