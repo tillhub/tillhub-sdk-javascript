@@ -91,7 +91,7 @@ export declare class Invoices {
     http: Client;
     options: InvoicesOptions;
     constructor(options: InvoicesOptions, http: Client);
-    getAll(query?: InvoicesQuery | undefined): Promise<InvoicesResponse>;
+    getAll(q?: InvoicesQuery | undefined): Promise<InvoicesResponse>;
     getOne(requestObject: InvoicesGetOneRequestObject): Promise<InvoicesResponse>;
     create(requestObject: InvoicesCreateRequestObject): Promise<InvoicesResponse>;
     update(requestObject: InvoicesUpdateRequestObject): Promise<InvoicesResponse>;

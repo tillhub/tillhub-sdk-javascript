@@ -34,6 +34,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -42,6 +45,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var qs_1 = __importDefault(require("qs"));
 var errors = __importStar(require("../errors"));
 var Invoices = /** @class */ (function () {
     function Invoices(options, http) {
@@ -50,30 +54,29 @@ var Invoices = /** @class */ (function () {
         this.endpoint = '/api/v0/invoices';
         this.options.base = this.options.base || 'https://api.tillhub.com';
     }
-    Invoices.prototype.getAll = function (query) {
+    Invoices.prototype.getAll = function (q) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, next, queryString, response, err_1;
+            var query, uri, next, queryString, response, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        query = JSON.parse(JSON.stringify(q));
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
                         if (query && query.uri) {
                             uri = query.uri;
                         }
                         else {
                             uri = "" + this.options.base + this.endpoint + "/" + this.options.user;
                         }
-                        if (query && query.embed) {
-                            queryString = query.embed
-                                .map(function (item) {
-                                return "embed[]=" + item;
-                            })
-                                .join('&');
+                        queryString = qs_1.default.stringify(query);
+                        if (queryString) {
                             uri = uri + "?" + queryString;
                         }
                         return [4 /*yield*/, this.http.getClient().get(uri)];
-                    case 1:
+                    case 2:
                         response = _a.sent();
                         if (response.data.cursor && response.data.cursor.next) {
                             next = this.getAll({ uri: response.data.cursor.next });
@@ -83,10 +86,10 @@ var Invoices = /** @class */ (function () {
                                 metadata: { count: response.data.count },
                                 next: next
                             })];
-                    case 2:
+                    case 3:
                         err_1 = _a.sent();
                         return [2 /*return*/, reject(new errors.InvoicesFetchAllFailed())];
-                    case 3: return [2 /*return*/];
+                    case 4: return [2 /*return*/];
                 }
             });
         }); });
