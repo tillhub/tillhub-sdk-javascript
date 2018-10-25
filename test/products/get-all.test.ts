@@ -76,6 +76,65 @@ describe('v0: Products: can get all', () => {
     expect(Array.isArray(data)).toBe(true)
   })
 
+  it('Get products with query options', async () => {
+    const queryProp = 'blah'
+    const queryValue = 'yada'
+    const queryOptions = {
+      [queryProp]: queryValue
+    }
+
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+
+      mock
+        .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}?${queryProp}=${queryValue}`)
+        .reply(function(config) {
+          return [
+            200,
+            {
+              count: 1,
+              results: [{}]
+            }
+          ]
+        })
+    }
+
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE
+    }
+
+    const th = new TillhubClient()
+
+    th.init(options)
+    await th.auth.loginUsername({
+      username: user.username,
+      password: user.password
+    })
+
+    const products = th.products()
+
+    expect(products).toBeInstanceOf(v1.Products)
+
+    const { data } = await products.getAll({ query: queryOptions })
+
+    expect(Array.isArray(data)).toBe(true)
+  })
+
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {

@@ -1,3 +1,4 @@
+import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 
@@ -69,9 +70,10 @@ export interface ProductsResponse {
   msg?: string
 }
 
-export interface ProductsQuery {
+export interface ProductsOptions {
   limit?: number
   uri?: string
+  query?: any
 }
 
 export interface ProductsUpdateRequestObject {
@@ -109,16 +111,18 @@ export class Products {
     })
   }
 
-  getAll(query?: ProductsQuery | undefined): Promise<ProductsResponse> {
+  getAll(options?: ProductsOptions | undefined): Promise<ProductsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
         let uri
-        if (query && query.uri) {
-          uri = query.uri
+        if (options && options.uri) {
+          uri = options.uri
         } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
+            options && options.query ? `?${qs.stringify(options.query)}` : ''
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
