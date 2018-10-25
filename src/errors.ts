@@ -323,7 +323,7 @@ export class StocksFetchFailed extends BaseError {
 
 export class StocksCreateFailed extends BaseError {
   public name = 'StocksCreateFailed'
-  constructor(public message: string = 'Could create the stock') {
+  constructor(public message: string = 'Could not create the stock') {
     super(message)
   }
 }
