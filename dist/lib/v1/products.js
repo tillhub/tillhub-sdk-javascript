@@ -34,6 +34,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -42,6 +45,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var qs_1 = __importDefault(require("qs"));
 var errors = __importStar(require("../errors"));
 var Products = /** @class */ (function () {
     function Products(options, http) {
@@ -77,7 +81,7 @@ var Products = /** @class */ (function () {
             });
         }); });
     };
-    Products.prototype.getAll = function (query) {
+    Products.prototype.getAll = function (options) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var next, uri, response, err_2;
@@ -86,11 +90,11 @@ var Products = /** @class */ (function () {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         uri = void 0;
-                        if (query && query.uri) {
-                            uri = query.uri;
+                        if (options && options.uri) {
+                            uri = options.uri;
                         }
                         else {
-                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user;
+                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user + (options && options.query ? "?" + qs_1.default.stringify(options.query) : '');
                         }
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:

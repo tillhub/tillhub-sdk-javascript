@@ -1,3 +1,10 @@
+# [1.35.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.34.0...v1.35.0) (2018-10-25)
+
+
+### Features
+
+* **products:** get products by query ([ec991d6](https://github.com/tillhub/tillhub-sdk-javascript/commit/ec991d6))
+
 # [1.34.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.33.0...v1.34.0) (2018-10-25)
 
 
