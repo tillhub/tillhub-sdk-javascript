@@ -321,6 +321,20 @@ export class StocksFetchFailed extends BaseError {
   }
 }
 
+export class StocksCreateFailed extends BaseError {
+  public name = 'StocksCreateFailed'
+  constructor(public message: string = 'Could create the stock') {
+    super(message)
+  }
+}
+
+export class StocksUpdateFailed extends BaseError {
+  public name = 'StocksUpdateFailed'
+  constructor(public message: string = 'Could update the stock') {
+    super(message)
+  }
+}
+
 export class StocksLocationsFetchFailed extends BaseError {
   public name = 'StocksLocationsFetchFailed'
   constructor(public message: string = 'Could fetch the stocks locations') {

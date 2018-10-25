@@ -16,6 +16,18 @@ export interface StocksResponse {
   metadata: object
 }
 
+export interface Stock {
+  product: string
+  location: string
+  location_type: string | null
+  qty: number
+}
+
+export interface StocksUpdateRequestObject {
+  stockId: string
+  body: Stock
+}
+
 export class Stocks {
   endpoint: string
   http: Client
@@ -48,6 +60,43 @@ export class Stocks {
         } as StocksResponse)
       } catch (err) {
         return reject(new errors.StocksFetchFailed())
+      }
+    })
+  }
+
+  create(stock: Stock): Promise<StocksResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+      try {
+        const response = await this.http.getClient().post(uri, stock)
+        response.status !== 200 && reject(new errors.StocksCreateFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as StocksResponse)
+      } catch (err) {
+        return reject(new errors.StocksCreateFailed())
+      }
+    })
+  }
+
+  update(requestObject: StocksUpdateRequestObject): Promise<StocksResponse> {
+    return new Promise(async (resolve, reject) => {
+      const { body, stockId } = requestObject
+
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${stockId}`
+
+      try {
+        const response = await this.http.getClient().put(uri, body)
+        response.status !== 200 && reject(new errors.StocksUpdateFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as StocksResponse)
+      } catch (err) {
+        return reject(new errors.StocksUpdateFailed())
       }
     })
   }
