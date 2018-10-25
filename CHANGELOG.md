@@ -1,3 +1,10 @@
+# [1.34.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.33.0...v1.34.0) (2018-10-25)
+
+
+### Features
+
+* **stocks:** add create and update handlers ([4c4cc15](https://github.com/tillhub/tillhub-sdk-javascript/commit/4c4cc15))
+
 # [1.33.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.32.0...v1.33.0) (2018-10-24)
 
 

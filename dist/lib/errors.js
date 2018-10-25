@@ -561,6 +561,30 @@ var StocksFetchFailed = /** @class */ (function (_super) {
     return StocksFetchFailed;
 }(BaseError));
 exports.StocksFetchFailed = StocksFetchFailed;
+var StocksCreateFailed = /** @class */ (function (_super) {
+    __extends(StocksCreateFailed, _super);
+    function StocksCreateFailed(message) {
+        if (message === void 0) { message = 'Could create the stock'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'StocksCreateFailed';
+        return _this;
+    }
+    return StocksCreateFailed;
+}(BaseError));
+exports.StocksCreateFailed = StocksCreateFailed;
+var StocksUpdateFailed = /** @class */ (function (_super) {
+    __extends(StocksUpdateFailed, _super);
+    function StocksUpdateFailed(message) {
+        if (message === void 0) { message = 'Could update the stock'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'StocksUpdateFailed';
+        return _this;
+    }
+    return StocksUpdateFailed;
+}(BaseError));
+exports.StocksUpdateFailed = StocksUpdateFailed;
 var StocksLocationsFetchFailed = /** @class */ (function (_super) {
     __extends(StocksLocationsFetchFailed, _super);
     function StocksLocationsFetchFailed(message) {

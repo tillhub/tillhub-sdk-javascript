@@ -226,6 +226,16 @@ export declare class StocksFetchFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class StocksCreateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class StocksUpdateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
 export declare class StocksLocationsFetchFailed extends BaseError {
     message: string;
     name: string;
