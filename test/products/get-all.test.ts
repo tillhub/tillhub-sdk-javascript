@@ -77,10 +77,13 @@ describe('v0: Products: can get all', () => {
   })
 
   it('Get products with query options', async () => {
-    const queryProp = 'blah'
-    const queryValue = 'yada'
+    const queryProp1 = 'blah'
+    const queryValue1 = 'yada'
+    const queryProp2 = 'asdf'
+    const queryValue2 = 'qwer'
     const queryOptions = {
-      [queryProp]: queryValue
+      [queryProp1]: queryValue1,
+      [queryProp2]: queryValue2
     }
 
     if (process.env.SYSTEM_TEST !== 'true') {
@@ -98,7 +101,9 @@ describe('v0: Products: can get all', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}?${queryProp}=${queryValue}`)
+        .onGet(
+          `https://api.tillhub.com/api/v1/products/${legacyId}?${queryProp1}=${queryValue1}&${queryProp2}=${queryValue2}`
+        )
         .reply(function(config) {
           return [
             200,
