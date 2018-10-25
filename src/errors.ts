@@ -316,7 +316,7 @@ export class InvoicesDeleteFailed extends BaseError {
 
 export class StocksFetchFailed extends BaseError {
   public name = 'StocksFetchFailed'
-  constructor(public message: string = 'Could fetch the stocks') {
+  constructor(public message: string = 'Could not fetch the stocks') {
     super(message)
   }
 }
@@ -330,14 +330,35 @@ export class StocksCreateFailed extends BaseError {
 
 export class StocksUpdateFailed extends BaseError {
   public name = 'StocksUpdateFailed'
-  constructor(public message: string = 'Could update the stock') {
+  constructor(public message: string = 'Could not update the stock') {
     super(message)
   }
 }
 
 export class StocksLocationsFetchFailed extends BaseError {
   public name = 'StocksLocationsFetchFailed'
-  constructor(public message: string = 'Could fetch the stocks locations') {
+  constructor(public message: string = 'Could not fetch the stocks locations') {
+    super(message)
+  }
+}
+
+export class OrdersFetchFailed extends BaseError {
+  public name = 'OrdersFetchFailed'
+  constructor(public message: string = 'Could not fetch the orders') {
+    super(message)
+  }
+}
+
+export class IncomingOrdersFetchFailed extends BaseError {
+  public name = 'IncomingOrdersFetchFailed'
+  constructor(public message: string = 'Could not fetch incoming orders') {
+    super(message)
+  }
+}
+
+export class OutgoingOrdersFetchFailed extends BaseError {
+  public name = 'OutgoingOrdersFetchFailed'
+  constructor(public message: string = 'Could not fetch outgoing orders') {
     super(message)
   }
 }
