@@ -1,3 +1,10 @@
+## [1.35.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.35.0...v1.35.1) (2018-10-25)
+
+
+### Bug Fixes
+
+* **stocks:** fix stocks endpoint to singular ([4b548c5](https://github.com/tillhub/tillhub-sdk-javascript/commit/4b548c5))
+
 # [1.35.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.34.0...v1.35.0) (2018-10-25)
 
 
