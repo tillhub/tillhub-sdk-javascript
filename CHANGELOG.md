@@ -1,3 +1,10 @@
+## [1.36.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.36.0...v1.36.1) (2018-10-25)
+
+
+### Bug Fixes
+
+* **invoices:** Small fix in test ([bf1e0fa](https://github.com/tillhub/tillhub-sdk-javascript/commit/bf1e0fa))
+
 # [1.36.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.35.1...v1.36.0) (2018-10-25)
 
 
