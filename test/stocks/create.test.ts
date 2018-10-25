@@ -47,7 +47,7 @@ describe('Create a new stock', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/stocks/${userId}`).reply(function(config) {
+      mock.onPost(`https://api.tillhub.com/api/v0/stock/${userId}`).reply(function(config) {
         return [
           200,
           {
@@ -97,7 +97,7 @@ describe('Create a new stock', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v1/stocks/${userId}`).reply(function(config) {
+      mock.onPost(`https://api.tillhub.com/api/v1/stock/${userId}`).reply(function(config) {
         return [205]
       })
     }

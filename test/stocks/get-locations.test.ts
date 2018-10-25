@@ -42,7 +42,7 @@ describe('v0: Stocks: can get all locations', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/stocks/${legacyId}/locations`)
+        .onGet(`https://api.tillhub.com/api/v0/stock/${legacyId}/locations`)
         .reply(function(config) {
           return [
             200,
@@ -94,7 +94,7 @@ describe('v0: Stocks: can get all locations', () => {
         ]
       })
       mock
-        .onGet(`https://api.tillhub.com/api/v0/stocks/${legacyId}locations`)
+        .onGet(`https://api.tillhub.com/api/v0/stock/${legacyId}locations`)
         .reply(function(config) {
           return [205]
         })

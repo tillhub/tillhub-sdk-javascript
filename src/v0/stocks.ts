@@ -37,7 +37,7 @@ export class Stocks {
     this.options = options
     this.http = http
 
-    this.endpoint = '/api/v0/stocks'
+    this.endpoint = '/api/v0/stock'
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 

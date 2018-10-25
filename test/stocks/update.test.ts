@@ -54,7 +54,7 @@ describe('v0: Stocks', () => {
       })
 
       mock
-        .onPut(`https://api.tillhub.com/api/v0/stocks/${legacyId}/${stockId}`)
+        .onPut(`https://api.tillhub.com/api/v0/stock/${legacyId}/${stockId}`)
         .reply(function(config) {
           return [
             200,
@@ -107,7 +107,7 @@ describe('v0: Stocks', () => {
           ]
         })
 
-        .onPut(`https://api.tillhub.com/api/v0/stocks/${legacyId}/${stockId}`)
+        .onPut(`https://api.tillhub.com/api/v0/stock/${legacyId}/${stockId}`)
         .reply(function(config) {
           return [205]
         })
