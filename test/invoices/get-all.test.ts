@@ -19,7 +19,14 @@ if (process.env.SYSTEM_TEST) {
 }
 
 const query = {
-  embed: ['customer', 'assignee', 'assigned_by']
+  embed: ['customer', 'assignee', 'assigned_by'],
+  limit: 500,
+  offset: 200,
+  direction: 'desc',
+  order_by: 'due_date',
+  filter: 'sadie',
+  archived: false,
+  deleted: false
 }
 
 const queryString = query.embed
