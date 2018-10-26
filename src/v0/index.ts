@@ -11,6 +11,7 @@ import { Vouchers } from './vouchers'
 import { Invoices } from './invoices'
 import { Stocks } from './stocks'
 import { Orders } from './orders'
+import { Analytics } from './analytics'
 
 export {
   Auth,
@@ -25,5 +26,6 @@ export {
   Vouchers,
   Invoices,
   Stocks,
-  Orders
+  Orders,
+  Analytics
 }
