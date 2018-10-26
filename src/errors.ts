@@ -412,6 +412,13 @@ export class OrderItemsDeleteFailed extends BaseError {
   }
 }
 
+export class OrderSuggestionsFetchFailed extends BaseError {
+  public name = 'OrderSuggestionsFetchFailed'
+  constructor(public message: string = 'Could not fetch the orders suggestions') {
+    super(message)
+  }
+}
+
 export class RevenuesFetchFailed extends BaseError {
   public name = 'RevenuesFetchFailed'
   constructor(public message: string = 'Could not fetch the Revenues') {

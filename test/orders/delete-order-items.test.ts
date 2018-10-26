@@ -52,7 +52,7 @@ describe('v0: Orders: can delete Order Items', () => {
 
       mock
         .onDelete(
-          `https://api.tillhub.com/api/v0/orders/${legacyId}/order=wert&auto=false&suggestion=true&order_qty=4/order_items`
+          `https://api.tillhub.com/api/v0/orders/${legacyId}/order_items/order=wert&auto=false&suggestion=true&order_qty=4`
         )
         .reply(function(config) {
           return [
@@ -105,7 +105,7 @@ describe('v0: Orders: can delete Order Items', () => {
       })
       mock
         .onDelete(
-          `https://api.tillhub.com/api/v0/orders/${legacyId}/order=wert&auto=false&suggestion=true&order_qty=4/order_items`
+          `https://api.tillhub.com/api/v0/orders/${legacyId}/order_items/order=wert&auto=false&suggestion=true&order_qty=4`
         )
         .reply(function(config) {
           return [205]

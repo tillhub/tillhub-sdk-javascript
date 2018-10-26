@@ -78,7 +78,7 @@ export class Orders {
 
   getOrderItems(orderId: string | undefined): Promise<OrdersResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${orderId}/order_items`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/order_items/${orderId}`
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.OrderItemsFetchFailed())
@@ -95,8 +95,9 @@ export class Orders {
 
   deleteOrderItems(query: OrdersQuery): Promise<OrdersResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${query.itemId ||
-        qs.stringify(query)}/order_items`
+      const uri = `${this.options.base}${this.endpoint}/${
+        this.options.user
+      }/order_items/${query.itemId || qs.stringify(query)}`
       try {
         const response = await this.http.getClient().delete(uri)
         response.status !== 200 && reject(new errors.OrderItemsDeleteFailed())
@@ -190,6 +191,29 @@ export class Orders {
         } as OrdersResponse)
       } catch (err) {
         return reject(new errors.OutgoingOrdersFetchFailed())
+      }
+    })
+  }
+
+  getOrderSuggestions(query?: OrdersQuery | undefined): Promise<OrdersResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let uri
+        if (query && query.uri) {
+          uri = query.uri
+        } else {
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}/suggestions`
+        }
+
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.OrderSuggestionsFetchFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as OrdersResponse)
+      } catch (err) {
+        return reject(new errors.OrderSuggestionsFetchFailed())
       }
     })
   }

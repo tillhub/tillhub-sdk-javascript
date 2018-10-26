@@ -25,9 +25,7 @@ afterEach(() => {
   mock.reset()
 })
 
-const orderId = '1q2w3'
-
-describe('v0: Orders: can get all Order Items', () => {
+describe('v0: Orders: can get order suggestions', () => {
   it("Tillhub's orders are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
@@ -44,7 +42,7 @@ describe('v0: Orders: can get all Order Items', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/orders/${legacyId}/order_items/${orderId}`)
+        .onGet(`https://api.tillhub.com/api/v0/orders/${legacyId}/suggestions`)
         .reply(function(config) {
           return [
             200,
@@ -76,7 +74,7 @@ describe('v0: Orders: can get all Order Items', () => {
 
     expect(orders).toBeInstanceOf(v0.Orders)
 
-    const { data } = await orders.getOrderItems(orderId)
+    const { data } = await orders.getOrderSuggestions()
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -96,7 +94,7 @@ describe('v0: Orders: can get all Order Items', () => {
         ]
       })
       mock
-        .onGet(`https://api.tillhub.com/api/v0/orders/${legacyId}/order_items/${orderId}`)
+        .onGet(`https://api.tillhub.com/api/v0/orders/${legacyId}/suggestions`)
         .reply(function(config) {
           return [205]
         })
@@ -119,9 +117,9 @@ describe('v0: Orders: can get all Order Items', () => {
     })
 
     try {
-      await th.orders().getOrderItems(orderId)
+      await th.orders().getOrderSuggestions()
     } catch (err) {
-      expect(err.name).toBe('OrderItemsFetchFailed')
+      expect(err.name).toBe('OrderSuggestionsFetchFailed')
     }
   })
 })
