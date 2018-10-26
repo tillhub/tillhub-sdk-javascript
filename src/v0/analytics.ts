@@ -12,7 +12,7 @@ export interface AnalyticsResponse {
   msg?: string
 }
 
-export interface DayOfWeekOptions {
+export interface RevenuBasicOptions {
   branch_number?: string | null
   start: string
   end: string
@@ -38,7 +38,7 @@ export class Analytics {
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 
-  getRevenuesForDayOfWeek(query: DayOfWeekOptions): Promise<AnalyticsResponse> {
+  getRevenuesForDayOfWeek(query: RevenuBasicOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const startEnd = `start=${query.start}&end=${query.end}`
@@ -69,6 +69,27 @@ export class Analytics {
         let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${revenueQuery}`
         const response = await this.http.getClient().get(uri)
 
+        response.status !== 200 && reject(new errors.RevenuesFetchFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as AnalyticsResponse)
+      } catch (err) {
+        return reject(new errors.RevenuesFetchFailed())
+      }
+    })
+  }
+
+  getRevenuesForHourOfDay(query: RevenuBasicOptions): Promise<AnalyticsResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const startEnd = `start=${query.start}&end=${query.end}`
+        const branch = query.branch_number ? `&branch_number=${query.branch_number}` : ''
+        const hourOfDayQuery = `aggregates/revenues/hour_of_day?${startEnd}${branch}`
+        const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${hourOfDayQuery}`
+
+        const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.RevenuesFetchFailed())
 
         return resolve({
