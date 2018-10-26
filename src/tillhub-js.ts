@@ -307,7 +307,7 @@ export class TillhubClient {
   }
 
   /**
-   * Create an authenticated Stocks instance
+   * Create an authenticated Orders instance
    *
    */
   orders(): v0.Orders {
@@ -322,6 +322,24 @@ export class TillhubClient {
     }
 
     return new v0.Orders({ user: this.auth.user, base: this.options.base }, this.http)
+  }
+
+  /**
+   * Create an authenticated Analytics instance
+   *
+   */
+  analytics(): v0.Analytics {
+    if (
+      !this.options ||
+      !this.options.base ||
+      !this.http ||
+      !this.auth ||
+      !this.auth.authenticated
+    ) {
+      throw new errors.UninstantiatedClient()
+    }
+
+    return new v0.Analytics({ user: this.auth.user, base: this.options.base }, this.http)
   }
 }
 

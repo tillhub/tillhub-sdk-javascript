@@ -362,3 +362,10 @@ export class OutgoingOrdersFetchFailed extends BaseError {
     super(message)
   }
 }
+
+export class RevenuesFetchFailed extends BaseError {
+  public name = 'RevenuesFetchFailed'
+  constructor(public message: string = 'Could not fetch the Revenues') {
+    super(message)
+  }
+}
