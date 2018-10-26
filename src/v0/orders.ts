@@ -23,6 +23,19 @@ export interface OrdersResponse {
   msg?: string
 }
 
+export interface OrdersUpdateValues {
+  id?: string
+  open?: boolean
+  deleted?: boolean
+  ordered_at?: string
+  finalized_at?: string
+}
+
+export interface OrdersUpdateRequest {
+  orderId: string
+  values: OrdersUpdateValues
+}
+
 export interface OrderItems {
   added_at: string
   issuer: object
@@ -72,6 +85,24 @@ export class Orders {
         } as OrdersResponse)
       } catch (err) {
         return reject(new errors.OrdersFetchFailed())
+      }
+    })
+  }
+
+  update(options: OrdersUpdateRequest): Promise<OrdersResponse> {
+    return new Promise(async (resolve, reject) => {
+      const { orderId, values } = options
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${orderId}`
+      try {
+        const response = await this.http.getClient().put(uri, values)
+        response.status !== 200 && reject(new errors.OrdersUpdateFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as OrdersResponse)
+      } catch (err) {
+        return reject(new errors.OrdersUpdateFailed())
       }
     })
   }

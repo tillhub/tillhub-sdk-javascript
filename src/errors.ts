@@ -370,6 +370,13 @@ export class OrdersFetchFailed extends BaseError {
   }
 }
 
+export class OrdersUpdateFailed extends BaseError {
+  public name = 'OrdersUpdateFailed'
+  constructor(public message: string = 'Could not update the orders') {
+    super(message)
+  }
+}
+
 export class IncomingOrdersFetchFailed extends BaseError {
   public name = 'IncomingOrdersFetchFailed'
   constructor(public message: string = 'Could not fetch incoming orders') {
