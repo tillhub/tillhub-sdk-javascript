@@ -107,6 +107,34 @@ var Analytics = /** @class */ (function () {
             });
         }); });
     };
+    Analytics.prototype.getRevenuesForHourOfDay = function (query) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var startEnd, branch, hourOfDayQuery, uri, response, err_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        startEnd = "start=" + query.start + "&end=" + query.end;
+                        branch = query.branch_number ? "&branch_number=" + query.branch_number : '';
+                        hourOfDayQuery = "aggregates/revenues/hour_of_day?" + startEnd + branch;
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + hourOfDayQuery;
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        response.status !== 200 && reject(new errors.RevenuesFetchFailed());
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 2:
+                        err_3 = _a.sent();
+                        return [2 /*return*/, reject(new errors.RevenuesFetchFailed())];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     return Analytics;
 }());
 exports.Analytics = Analytics;

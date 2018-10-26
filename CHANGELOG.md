@@ -1,3 +1,10 @@
+# [1.43.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.42.0...v1.43.0) (2018-10-26)
+
+
+### Features
+
+* **analytics:** added getRevenueForHourOfDay to analytics in V0 ([b28168a](https://github.com/tillhub/tillhub-sdk-javascript/commit/b28168a))
+
 # [1.42.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.41.0...v1.42.0) (2018-10-26)
 
 

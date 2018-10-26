@@ -8,7 +8,7 @@ export interface AnalyticsResponse {
     metadata: object;
     msg?: string;
 }
-export interface DayOfWeekOptions {
+export interface RevenuBasicOptions {
     branch_number?: string | null;
     start: string;
     end: string;
@@ -24,6 +24,7 @@ export declare class Analytics {
     http: Client;
     options: AnalyticsOptions;
     constructor(options: AnalyticsOptions, http: Client);
-    getRevenuesForDayOfWeek(query: DayOfWeekOptions): Promise<AnalyticsResponse>;
+    getRevenuesForDayOfWeek(query: RevenuBasicOptions): Promise<AnalyticsResponse>;
     getRevenues(query: RevenuesOptions): Promise<AnalyticsResponse>;
+    getRevenuesForHourOfDay(query: RevenuBasicOptions): Promise<AnalyticsResponse>;
 }
