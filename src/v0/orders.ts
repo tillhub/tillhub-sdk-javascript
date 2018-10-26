@@ -10,11 +10,34 @@ export interface OrdersOptions {
 export interface OrdersQuery {
   limit?: number
   uri?: string
+  itemId?: string
+  order?: string
+  auto?: boolean
+  suggestion?: boolean
+  order_qty?: number
 }
 
 export interface OrdersResponse {
   data: object[]
   metadata: object
+  msg?: string
+}
+
+export interface OrderItems {
+  added_at: string
+  issuer: object
+  order_qty: number
+  auto: boolean
+  suggestion: boolean
+  deleted?: boolean
+  order: string
+  product: string
+  stock?: string
+  location: string
+}
+
+export interface OrderItemsCreateRequest {
+  order_items: OrderItems[]
 }
 
 export class Orders {
@@ -49,6 +72,74 @@ export class Orders {
         } as OrdersResponse)
       } catch (err) {
         return reject(new errors.OrdersFetchFailed())
+      }
+    })
+  }
+
+  getOrderItems(orderId: string | undefined): Promise<OrdersResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${orderId}/order_items`
+      try {
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.OrderItemsFetchFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as OrdersResponse)
+      } catch (err) {
+        return reject(new errors.OrderItemsFetchFailed())
+      }
+    })
+  }
+
+  deleteOrderItems(query: OrdersQuery): Promise<OrdersResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${query.itemId ||
+        qs.stringify(query)}/order_items`
+      try {
+        const response = await this.http.getClient().delete(uri)
+        response.status !== 200 && reject(new errors.OrderItemsDeleteFailed())
+
+        return resolve({
+          msg: response.data.msg
+        } as OrdersResponse)
+      } catch (err) {
+        return reject(new errors.OrderItemsDeleteFailed())
+      }
+    })
+  }
+
+  createOrderItems(body: OrderItemsCreateRequest): Promise<OrdersResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/order_items`
+      try {
+        const response = await this.http.getClient().post(uri, body)
+        response.status !== 200 && reject(new errors.OrderItemsCreateFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as OrdersResponse)
+      } catch (err) {
+        return reject(new errors.OrderItemsCreateFailed())
+      }
+    })
+  }
+
+  updateOrderItems(items: OrderItems[]): Promise<OrdersResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/order_items`
+      try {
+        const response = await this.http.getClient().put(uri, items)
+        response.status !== 200 && reject(new errors.OrderItemsUpdateFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as OrdersResponse)
+      } catch (err) {
+        return reject(new errors.OrderItemsUpdateFailed())
       }
     })
   }

@@ -384,6 +384,34 @@ export class OutgoingOrdersFetchFailed extends BaseError {
   }
 }
 
+export class OrderItemsFetchFailed extends BaseError {
+  public name = 'OrderItemsFetchFailed'
+  constructor(public message: string = 'Could not fetch the order items') {
+    super(message)
+  }
+}
+
+export class OrderItemsCreateFailed extends BaseError {
+  public name = 'OrderItemsCreateFailed'
+  constructor(public message: string = 'Could not create the order items') {
+    super(message)
+  }
+}
+
+export class OrderItemsUpdateFailed extends BaseError {
+  public name = 'OrderItemsUpdateFailed'
+  constructor(public message: string = 'Could not update the order items') {
+    super(message)
+  }
+}
+
+export class OrderItemsDeleteFailed extends BaseError {
+  public name = 'OrderItemsDeleteFailed'
+  constructor(public message: string = 'Could not delete the order items') {
+    super(message)
+  }
+}
+
 export class RevenuesFetchFailed extends BaseError {
   public name = 'RevenuesFetchFailed'
   constructor(public message: string = 'Could not fetch the Revenues') {
