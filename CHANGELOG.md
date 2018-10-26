@@ -1,3 +1,15 @@
+# [1.44.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.43.0...v1.44.0) (2018-10-26)
+
+
+### Bug Fixes
+
+* **orders:** fix uri for get and delete order items and add order suggestions ([0926a9c](https://github.com/tillhub/tillhub-sdk-javascript/commit/0926a9c))
+
+
+### Features
+
+* **orders:** add orders update ([9efd7aa](https://github.com/tillhub/tillhub-sdk-javascript/commit/9efd7aa))
+
 # [1.43.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.42.0...v1.43.0) (2018-10-26)
 
 

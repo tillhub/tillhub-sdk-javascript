@@ -645,6 +645,18 @@ var OrdersFetchFailed = /** @class */ (function (_super) {
     return OrdersFetchFailed;
 }(BaseError));
 exports.OrdersFetchFailed = OrdersFetchFailed;
+var OrdersUpdateFailed = /** @class */ (function (_super) {
+    __extends(OrdersUpdateFailed, _super);
+    function OrdersUpdateFailed(message) {
+        if (message === void 0) { message = 'Could not update the orders'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'OrdersUpdateFailed';
+        return _this;
+    }
+    return OrdersUpdateFailed;
+}(BaseError));
+exports.OrdersUpdateFailed = OrdersUpdateFailed;
 var IncomingOrdersFetchFailed = /** @class */ (function (_super) {
     __extends(IncomingOrdersFetchFailed, _super);
     function IncomingOrdersFetchFailed(message) {
@@ -717,6 +729,18 @@ var OrderItemsDeleteFailed = /** @class */ (function (_super) {
     return OrderItemsDeleteFailed;
 }(BaseError));
 exports.OrderItemsDeleteFailed = OrderItemsDeleteFailed;
+var OrderSuggestionsFetchFailed = /** @class */ (function (_super) {
+    __extends(OrderSuggestionsFetchFailed, _super);
+    function OrderSuggestionsFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch the orders suggestions'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'OrderSuggestionsFetchFailed';
+        return _this;
+    }
+    return OrderSuggestionsFetchFailed;
+}(BaseError));
+exports.OrderSuggestionsFetchFailed = OrderSuggestionsFetchFailed;
 var RevenuesFetchFailed = /** @class */ (function (_super) {
     __extends(RevenuesFetchFailed, _super);
     function RevenuesFetchFailed(message) {

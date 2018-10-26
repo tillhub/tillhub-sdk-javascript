@@ -17,6 +17,17 @@ export interface OrdersResponse {
     metadata: object;
     msg?: string;
 }
+export interface OrdersUpdateValues {
+    id?: string;
+    open?: boolean;
+    deleted?: boolean;
+    ordered_at?: string;
+    finalized_at?: string;
+}
+export interface OrdersUpdateRequest {
+    orderId: string;
+    values: OrdersUpdateValues;
+}
 export interface OrderItems {
     added_at: string;
     issuer: object;
@@ -38,10 +49,12 @@ export declare class Orders {
     options: OrdersOptions;
     constructor(options: OrdersOptions, http: Client);
     getAll(query?: OrdersQuery | undefined): Promise<OrdersResponse>;
+    update(options: OrdersUpdateRequest): Promise<OrdersResponse>;
     getOrderItems(orderId: string | undefined): Promise<OrdersResponse>;
     deleteOrderItems(query: OrdersQuery): Promise<OrdersResponse>;
     createOrderItems(body: OrderItemsCreateRequest): Promise<OrdersResponse>;
     updateOrderItems(items: OrderItems[]): Promise<OrdersResponse>;
     getIncomingOrders(query?: OrdersQuery | undefined): Promise<OrdersResponse>;
     getOutgoingOrders(query?: OrdersQuery | undefined): Promise<OrdersResponse>;
+    getOrderSuggestions(query?: OrdersQuery | undefined): Promise<OrdersResponse>;
 }
