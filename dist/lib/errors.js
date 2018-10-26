@@ -669,6 +669,54 @@ var OutgoingOrdersFetchFailed = /** @class */ (function (_super) {
     return OutgoingOrdersFetchFailed;
 }(BaseError));
 exports.OutgoingOrdersFetchFailed = OutgoingOrdersFetchFailed;
+var OrderItemsFetchFailed = /** @class */ (function (_super) {
+    __extends(OrderItemsFetchFailed, _super);
+    function OrderItemsFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch the order items'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'OrderItemsFetchFailed';
+        return _this;
+    }
+    return OrderItemsFetchFailed;
+}(BaseError));
+exports.OrderItemsFetchFailed = OrderItemsFetchFailed;
+var OrderItemsCreateFailed = /** @class */ (function (_super) {
+    __extends(OrderItemsCreateFailed, _super);
+    function OrderItemsCreateFailed(message) {
+        if (message === void 0) { message = 'Could not create the order items'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'OrderItemsCreateFailed';
+        return _this;
+    }
+    return OrderItemsCreateFailed;
+}(BaseError));
+exports.OrderItemsCreateFailed = OrderItemsCreateFailed;
+var OrderItemsUpdateFailed = /** @class */ (function (_super) {
+    __extends(OrderItemsUpdateFailed, _super);
+    function OrderItemsUpdateFailed(message) {
+        if (message === void 0) { message = 'Could not update the order items'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'OrderItemsUpdateFailed';
+        return _this;
+    }
+    return OrderItemsUpdateFailed;
+}(BaseError));
+exports.OrderItemsUpdateFailed = OrderItemsUpdateFailed;
+var OrderItemsDeleteFailed = /** @class */ (function (_super) {
+    __extends(OrderItemsDeleteFailed, _super);
+    function OrderItemsDeleteFailed(message) {
+        if (message === void 0) { message = 'Could not delete the order items'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'OrderItemsDeleteFailed';
+        return _this;
+    }
+    return OrderItemsDeleteFailed;
+}(BaseError));
+exports.OrderItemsDeleteFailed = OrderItemsDeleteFailed;
 var RevenuesFetchFailed = /** @class */ (function (_super) {
     __extends(RevenuesFetchFailed, _super);
     function RevenuesFetchFailed(message) {

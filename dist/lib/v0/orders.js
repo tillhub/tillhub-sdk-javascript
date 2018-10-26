@@ -85,10 +85,118 @@ var Orders = /** @class */ (function () {
             });
         }); });
     };
-    Orders.prototype.getIncomingOrders = function (query) {
+    Orders.prototype.getOrderItems = function (orderId) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, err_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + orderId + "/order_items";
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 && reject(new errors.OrderItemsFetchFailed());
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        err_2 = _a.sent();
+                        return [2 /*return*/, reject(new errors.OrderItemsFetchFailed())];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Orders.prototype.deleteOrderItems = function (query) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, err_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + (query.itemId ||
+                            qs_1.default.stringify(query)) + "/order_items";
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().delete(uri)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 && reject(new errors.OrderItemsDeleteFailed());
+                        return [2 /*return*/, resolve({
+                                msg: response.data.msg
+                            })];
+                    case 3:
+                        err_3 = _a.sent();
+                        return [2 /*return*/, reject(new errors.OrderItemsDeleteFailed())];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Orders.prototype.createOrderItems = function (body) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, err_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/order_items";
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().post(uri, body)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 && reject(new errors.OrderItemsCreateFailed());
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        err_4 = _a.sent();
+                        return [2 /*return*/, reject(new errors.OrderItemsCreateFailed())];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Orders.prototype.updateOrderItems = function (items) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, err_5;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/order_items";
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().put(uri, items)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 && reject(new errors.OrderItemsUpdateFailed());
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        err_5 = _a.sent();
+                        return [2 /*return*/, reject(new errors.OrderItemsUpdateFailed())];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Orders.prototype.getIncomingOrders = function (query) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, err_6;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -109,7 +217,7 @@ var Orders = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 2:
-                        err_2 = _a.sent();
+                        err_6 = _a.sent();
                         return [2 /*return*/, reject(new errors.IncomingOrdersFetchFailed())];
                     case 3: return [2 /*return*/];
                 }
@@ -119,7 +227,7 @@ var Orders = /** @class */ (function () {
     Orders.prototype.getOutgoingOrders = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_3;
+            var uri, response, err_7;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -140,7 +248,7 @@ var Orders = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 2:
-                        err_3 = _a.sent();
+                        err_7 = _a.sent();
                         return [2 /*return*/, reject(new errors.OutgoingOrdersFetchFailed())];
                     case 3: return [2 /*return*/];
                 }

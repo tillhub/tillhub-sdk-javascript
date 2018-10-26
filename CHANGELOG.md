@@ -1,3 +1,10 @@
+# [1.42.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.41.0...v1.42.0) (2018-10-26)
+
+
+### Features
+
+* **order items:** add order items CRUD ([3e1f563](https://github.com/tillhub/tillhub-sdk-javascript/commit/3e1f563))
+
 # [1.41.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.40.0...v1.41.0) (2018-10-26)
 
 

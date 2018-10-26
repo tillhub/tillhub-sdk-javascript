@@ -271,6 +271,26 @@ export declare class OutgoingOrdersFetchFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class OrderItemsFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class OrderItemsCreateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class OrderItemsUpdateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class OrderItemsDeleteFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
 export declare class RevenuesFetchFailed extends BaseError {
     message: string;
     name: string;
