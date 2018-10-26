@@ -17,6 +17,38 @@ export interface VouchersResponse {
   msg?: string
 }
 
+export interface VoucherResponse {
+  data: Voucher
+  metadata: object
+  msg?: string
+}
+
+type VoucherFormatTypes = 'numeric' | 'alphanumeric' | 'alphabetic'
+type VoucherTypes = 'amount' | 'discount' | 'product'
+
+export interface Voucher {
+  type?: VoucherTypes | null
+  format: string | null
+  format_type: VoucherFormatTypes | null
+  amount?: number | null
+  amount_max?: number | null
+  currency?: string
+  issuable?: boolean
+  reissuable?: boolean
+  issuer?: string
+  comment?: string
+  expires_at?: string
+  title?: string
+  partial_redemption?: boolean
+  active?: boolean
+  namespace?: string
+  limited_to_region?: boolean
+  refundable?: boolean
+  mutable?: boolean
+  exchange_for_cash?: boolean
+  restriction_single_transaction?: boolean
+}
+
 export class Vouchers {
   endpoint: string
   http: Client
@@ -138,6 +170,56 @@ export class Vouchers {
         } as VouchersResponse)
       } catch (err) {
         return reject(new errors.VouchersLogsCountFailed())
+      }
+    })
+  }
+
+  get(voucherId: string): Promise<VoucherResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${voucherId}`
+      try {
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.VoucherFetchFailed())
+
+        return resolve({
+          data: response.data.results[0] as Voucher,
+          msg: response.data.msg,
+          metadata: { count: response.data.count }
+        } as VoucherResponse)
+      } catch (err) {
+        return reject(new errors.VoucherFetchFailed())
+      }
+    })
+  }
+
+  put(voucherId: string, voucher: Voucher): Promise<VoucherResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${voucherId}`
+      try {
+        const response = await this.http.getClient().put(uri, voucher)
+
+        return resolve({
+          data: response.data.results[0] as Voucher,
+          metadata: { count: response.data.count }
+        } as VoucherResponse)
+      } catch (err) {
+        return reject(new errors.VoucherPutFailed())
+      }
+    })
+  }
+
+  create(voucher: Voucher): Promise<VoucherResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+      try {
+        const response = await this.http.getClient().post(uri, voucher)
+
+        return resolve({
+          data: response.data.results[0] as Voucher,
+          metadata: { count: response.data.count }
+        } as VoucherResponse)
+      } catch (err) {
+        return reject(new errors.VoucherCreationFailed())
       }
     })
   }
