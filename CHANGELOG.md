@@ -1,3 +1,10 @@
+# [1.40.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.39.0...v1.40.0) (2018-10-26)
+
+
+### Features
+
+* **analytics:** added analytics in v0 and added test ([7151d7c](https://github.com/tillhub/tillhub-sdk-javascript/commit/7151d7c))
+
 # [1.39.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.38.0...v1.39.0) (2018-10-25)
 
 

@@ -26,4 +26,6 @@ var stocks_1 = require("./stocks");
 exports.Stocks = stocks_1.Stocks;
 var orders_1 = require("./orders");
 exports.Orders = orders_1.Orders;
+var analytics_1 = require("./analytics");
+exports.Analytics = analytics_1.Analytics;
 //# sourceMappingURL=index.js.map

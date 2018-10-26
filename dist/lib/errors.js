@@ -633,4 +633,16 @@ var OutgoingOrdersFetchFailed = /** @class */ (function (_super) {
     return OutgoingOrdersFetchFailed;
 }(BaseError));
 exports.OutgoingOrdersFetchFailed = OutgoingOrdersFetchFailed;
+var RevenuesFetchFailed = /** @class */ (function (_super) {
+    __extends(RevenuesFetchFailed, _super);
+    function RevenuesFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch the Revenues'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'RevenuesFetchFailed';
+        return _this;
+    }
+    return RevenuesFetchFailed;
+}(BaseError));
+exports.RevenuesFetchFailed = RevenuesFetchFailed;
 //# sourceMappingURL=errors.js.map

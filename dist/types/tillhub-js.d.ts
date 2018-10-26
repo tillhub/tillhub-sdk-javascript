@@ -88,10 +88,15 @@ export declare class TillhubClient {
      */
     stocks(): v0.Stocks;
     /**
-     * Create an authenticated Stocks instance
+     * Create an authenticated Orders instance
      *
      */
     orders(): v0.Orders;
+    /**
+     * Create an authenticated Analytics instance
+     *
+     */
+    analytics(): v0.Analytics;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;

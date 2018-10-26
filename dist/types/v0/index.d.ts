@@ -11,4 +11,5 @@ import { Vouchers } from './vouchers';
 import { Invoices } from './invoices';
 import { Stocks } from './stocks';
 import { Orders } from './orders';
-export { Auth, Transactions, Taxes, Deliveries, ProductGroups, Accounts, Configurations, Branches, Customers, Vouchers, Invoices, Stocks, Orders };
+import { Analytics } from './analytics';
+export { Auth, Transactions, Taxes, Deliveries, ProductGroups, Accounts, Configurations, Branches, Customers, Vouchers, Invoices, Stocks, Orders, Analytics };

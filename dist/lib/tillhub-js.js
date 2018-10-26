@@ -252,7 +252,7 @@ var TillhubClient = /** @class */ (function () {
         return new v0.Stocks({ user: this.auth.user, base: this.options.base }, this.http);
     };
     /**
-     * Create an authenticated Stocks instance
+     * Create an authenticated Orders instance
      *
      */
     TillhubClient.prototype.orders = function () {
@@ -264,6 +264,20 @@ var TillhubClient = /** @class */ (function () {
             throw new errors.UninstantiatedClient();
         }
         return new v0.Orders({ user: this.auth.user, base: this.options.base }, this.http);
+    };
+    /**
+     * Create an authenticated Analytics instance
+     *
+     */
+    TillhubClient.prototype.analytics = function () {
+        if (!this.options ||
+            !this.options.base ||
+            !this.http ||
+            !this.auth ||
+            !this.auth.authenticated) {
+            throw new errors.UninstantiatedClient();
+        }
+        return new v0.Analytics({ user: this.auth.user, base: this.options.base }, this.http);
     };
     return TillhubClient;
 }());
