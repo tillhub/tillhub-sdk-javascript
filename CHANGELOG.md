@@ -1,3 +1,10 @@
+# [1.41.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.40.0...v1.41.0) (2018-10-26)
+
+
+### Features
+
+* **vouchers:** adds crud routes ([a54ab15](https://github.com/tillhub/tillhub-sdk-javascript/commit/a54ab15))
+
 # [1.40.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.39.0...v1.40.0) (2018-10-26)
 
 

@@ -176,6 +176,21 @@ export declare class VouchersFetchFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class VoucherFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class VoucherPutFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class VoucherCreationFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
 export declare class VouchersCountFailed extends BaseError {
     message: string;
     name: string;

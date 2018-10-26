@@ -441,6 +441,42 @@ var VouchersFetchFailed = /** @class */ (function (_super) {
     return VouchersFetchFailed;
 }(BaseError));
 exports.VouchersFetchFailed = VouchersFetchFailed;
+var VoucherFetchFailed = /** @class */ (function (_super) {
+    __extends(VoucherFetchFailed, _super);
+    function VoucherFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch voucher'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'VoucherFetchFailed';
+        return _this;
+    }
+    return VoucherFetchFailed;
+}(BaseError));
+exports.VoucherFetchFailed = VoucherFetchFailed;
+var VoucherPutFailed = /** @class */ (function (_super) {
+    __extends(VoucherPutFailed, _super);
+    function VoucherPutFailed(message) {
+        if (message === void 0) { message = 'Could not alter voucher'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'VoucherPutFailed';
+        return _this;
+    }
+    return VoucherPutFailed;
+}(BaseError));
+exports.VoucherPutFailed = VoucherPutFailed;
+var VoucherCreationFailed = /** @class */ (function (_super) {
+    __extends(VoucherCreationFailed, _super);
+    function VoucherCreationFailed(message) {
+        if (message === void 0) { message = 'Could not alter voucher'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'VoucherPutFailed';
+        return _this;
+    }
+    return VoucherCreationFailed;
+}(BaseError));
+exports.VoucherCreationFailed = VoucherCreationFailed;
 var VouchersCountFailed = /** @class */ (function (_super) {
     __extends(VouchersCountFailed, _super);
     function VouchersCountFailed(message) {
