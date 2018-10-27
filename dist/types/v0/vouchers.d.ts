@@ -14,11 +14,17 @@ export interface VouchersResponse {
 }
 export interface VoucherResponse {
     data: Voucher;
-    metadata: object;
+    metadata?: {
+        count?: number;
+        patch?: any;
+    };
     msg?: string;
 }
 declare type VoucherFormatTypes = 'numeric' | 'alphanumeric' | 'alphabetic';
 declare type VoucherTypes = 'amount' | 'discount' | 'product';
+export interface Voucher {
+    id?: string;
+}
 export interface Voucher {
     type?: VoucherTypes | null;
     format: string | null;
@@ -53,6 +59,7 @@ export declare class Vouchers {
     countLogs(): Promise<VouchersResponse>;
     get(voucherId: string): Promise<VoucherResponse>;
     put(voucherId: string, voucher: Voucher): Promise<VoucherResponse>;
+    patch(source: Voucher, target: Voucher): Promise<VoucherResponse>;
     create(voucher: Voucher): Promise<VoucherResponse>;
 }
 export {};

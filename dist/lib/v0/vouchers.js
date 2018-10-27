@@ -42,6 +42,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var just_diff_1 = require("just-diff");
 var errors = __importStar(require("../errors"));
 var Vouchers = /** @class */ (function () {
     function Vouchers(options, http) {
@@ -258,10 +259,47 @@ var Vouchers = /** @class */ (function () {
             });
         }); });
     };
+    Vouchers.prototype.patch = function (source, target) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, patch, response, err_8;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!source.id || !target.id || source.id !== target.id) {
+                            return [2 /*return*/, reject(new errors.VoucherTypeError('source and target object require ID to be set and be equal to each other'))];
+                        }
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + source.id;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        patch = just_diff_1.diff(source, target, just_diff_1.jsonPatchPathConverter);
+                        return [4 /*yield*/, this.http.getClient()({
+                                method: 'PATCH',
+                                url: uri,
+                                headers: {
+                                    'content-type': 'application/json-patch+json'
+                                },
+                                data: patch
+                            })];
+                    case 2:
+                        response = _a.sent();
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count, patch: patch }
+                            })];
+                    case 3:
+                        err_8 = _a.sent();
+                        return [2 /*return*/, reject(new errors.VoucherPatchFailed())];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     Vouchers.prototype.create = function (voucher) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_8;
+            var uri, response, err_9;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -277,7 +315,7 @@ var Vouchers = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_8 = _a.sent();
+                        err_9 = _a.sent();
                         return [2 /*return*/, reject(new errors.VoucherCreationFailed())];
                     case 4: return [2 /*return*/];
                 }

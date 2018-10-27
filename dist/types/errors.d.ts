@@ -171,6 +171,11 @@ export declare class CustomerDeleteFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class VoucherTypeError extends BaseError {
+    message: string;
+    name: string;
+    constructor(message: string);
+}
 export declare class VouchersFetchFailed extends BaseError {
     message: string;
     name: string;
@@ -182,6 +187,11 @@ export declare class VoucherFetchFailed extends BaseError {
     constructor(message?: string);
 }
 export declare class VoucherPutFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class VoucherPatchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string);

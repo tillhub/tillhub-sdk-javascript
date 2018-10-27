@@ -429,6 +429,17 @@ var CustomerDeleteFailed = /** @class */ (function (_super) {
     return CustomerDeleteFailed;
 }(BaseError));
 exports.CustomerDeleteFailed = CustomerDeleteFailed;
+var VoucherTypeError = /** @class */ (function (_super) {
+    __extends(VoucherTypeError, _super);
+    function VoucherTypeError(message) {
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'VouchersFetchFailed';
+        return _this;
+    }
+    return VoucherTypeError;
+}(BaseError));
+exports.VoucherTypeError = VoucherTypeError;
 var VouchersFetchFailed = /** @class */ (function (_super) {
     __extends(VouchersFetchFailed, _super);
     function VouchersFetchFailed(message) {
@@ -465,6 +476,18 @@ var VoucherPutFailed = /** @class */ (function (_super) {
     return VoucherPutFailed;
 }(BaseError));
 exports.VoucherPutFailed = VoucherPutFailed;
+var VoucherPatchFailed = /** @class */ (function (_super) {
+    __extends(VoucherPatchFailed, _super);
+    function VoucherPatchFailed(message) {
+        if (message === void 0) { message = 'Could not alter voucher'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'VoucherPatchFailed';
+        return _this;
+    }
+    return VoucherPatchFailed;
+}(BaseError));
+exports.VoucherPatchFailed = VoucherPatchFailed;
 var VoucherCreationFailed = /** @class */ (function (_super) {
     __extends(VoucherCreationFailed, _super);
     function VoucherCreationFailed(message) {

@@ -1,3 +1,10 @@
+# [1.45.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.44.0...v1.45.0) (2018-10-27)
+
+
+### Features
+
+* **vouchers:** implements patch ([06c7633](https://github.com/tillhub/tillhub-sdk-javascript/commit/06c7633))
+
 # [1.44.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.43.0...v1.44.0) (2018-10-26)
 
 
