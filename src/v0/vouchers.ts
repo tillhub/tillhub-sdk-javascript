@@ -1,3 +1,4 @@
+import { diff, jsonPatchPathConverter } from 'just-diff'
 import { Client } from '../client'
 import * as errors from '../errors'
 
@@ -19,12 +20,19 @@ export interface VouchersResponse {
 
 export interface VoucherResponse {
   data: Voucher
-  metadata: object
+  metadata?: {
+    count?: number
+    patch?: any
+  }
   msg?: string
 }
 
 type VoucherFormatTypes = 'numeric' | 'alphanumeric' | 'alphabetic'
 type VoucherTypes = 'amount' | 'discount' | 'product'
+
+export interface Voucher {
+  id?: string
+}
 
 export interface Voucher {
   type?: VoucherTypes | null
@@ -204,6 +212,39 @@ export class Vouchers {
         } as VoucherResponse)
       } catch (err) {
         return reject(new errors.VoucherPutFailed())
+      }
+    })
+  }
+
+  patch(source: Voucher, target: Voucher): Promise<VoucherResponse> {
+    return new Promise(async (resolve, reject) => {
+      if (!source.id || !target.id || source.id !== target.id) {
+        return reject(
+          new errors.VoucherTypeError(
+            'source and target object require ID to be set and be equal to each other'
+          )
+        )
+      }
+
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${source.id}`
+      try {
+        const patch = diff(source, target, jsonPatchPathConverter)
+
+        const response = await this.http.getClient()({
+          method: 'PATCH',
+          url: uri,
+          headers: {
+            'content-type': 'application/json-patch+json'
+          },
+          data: patch
+        })
+
+        return resolve({
+          data: response.data.results[0] as Voucher,
+          metadata: { count: response.data.count, patch }
+        } as VoucherResponse)
+      } catch (err) {
+        return reject(new errors.VoucherPatchFailed())
       }
     })
   }

@@ -244,6 +244,13 @@ export class CustomerDeleteFailed extends BaseError {
   }
 }
 
+export class VoucherTypeError extends BaseError {
+  public name = 'VouchersFetchFailed'
+  constructor(public message: string) {
+    super(message)
+  }
+}
+
 export class VouchersFetchFailed extends BaseError {
   public name = 'VouchersFetchFailed'
   constructor(public message: string = 'Could not fetch the vouchers') {
@@ -260,6 +267,13 @@ export class VoucherFetchFailed extends BaseError {
 
 export class VoucherPutFailed extends BaseError {
   public name = 'VoucherPutFailed'
+  constructor(public message: string = 'Could not alter voucher') {
+    super(message)
+  }
+}
+
+export class VoucherPatchFailed extends BaseError {
+  public name = 'VoucherPatchFailed'
   constructor(public message: string = 'Could not alter voucher') {
     super(message)
   }

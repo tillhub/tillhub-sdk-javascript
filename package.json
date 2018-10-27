@@ -69,7 +69,8 @@
     ],
     "coveragePathIgnorePatterns": [
       "/node_modules/",
-      "/test/"
+      "/test/",
+      "/src/@types/"
     ],
     "coverageThreshold": {
       "global": {
@@ -144,6 +145,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "just-diff": "^2.2.0",
     "qs": "^6.5.2"
   },
   "release": {
