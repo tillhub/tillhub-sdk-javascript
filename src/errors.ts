@@ -440,6 +440,27 @@ export class OrderSuggestionsFetchFailed extends BaseError {
   }
 }
 
+export class HistoricOrderItemsFetchFailed extends BaseError {
+  public name = 'HistoricOrderItemsFetchFailed'
+  constructor(public message: string = 'Could not fetch the historic order items') {
+    super(message)
+  }
+}
+
+export class BookStockFailed extends BaseError {
+  public name = 'BookStockFailed'
+  constructor(public message: string = 'Could not book the stocks') {
+    super(message)
+  }
+}
+
+export class OpenOrderFetchFailed extends BaseError {
+  public name = 'OpenOrderFetchFailed'
+  constructor(public message: string = 'Could not fetch open order') {
+    super(message)
+  }
+}
+
 export class RevenuesFetchFailed extends BaseError {
   public name = 'RevenuesFetchFailed'
   constructor(public message: string = 'Could not fetch the Revenues') {

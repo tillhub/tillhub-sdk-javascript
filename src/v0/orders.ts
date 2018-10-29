@@ -53,6 +53,16 @@ export interface OrderItemsCreateRequest {
   order_items: OrderItems[]
 }
 
+export interface BookStockBody {
+  qty: number
+}
+
+export interface BookStockRequest {
+  orderId: string
+  body: BookStockBody
+  uri?: string
+}
+
 export class Orders {
   endpoint: string
   http: Client
@@ -245,6 +255,75 @@ export class Orders {
         } as OrdersResponse)
       } catch (err) {
         return reject(new errors.OrderSuggestionsFetchFailed())
+      }
+    })
+  }
+
+  getHistoricOrderItems(orderId?: string | undefined): Promise<OrdersResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const uri = `${this.options.base}${this.endpoint}/${
+          this.options.user
+        }/${orderId}/order_items`
+
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.HistoricOrderItemsFetchFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as OrdersResponse)
+      } catch (err) {
+        return reject(new errors.HistoricOrderItemsFetchFailed())
+      }
+    })
+  }
+
+  bookStock(query: BookStockRequest): Promise<OrdersResponse> {
+    return new Promise(async (resolve, reject) => {
+      const { orderId, body } = query
+      try {
+        let uri
+        if (query && query.uri) {
+          uri = query.uri
+        } else {
+          uri = `${this.options.base}${this.endpoint}/${
+            this.options.user
+          }/order_items/${orderId}/book_stock`
+        }
+
+        const response = await this.http.getClient().post(uri, body)
+        response.status !== 200 && reject(new errors.BookStockFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as OrdersResponse)
+      } catch (err) {
+        return reject(new errors.BookStockFailed())
+      }
+    })
+  }
+
+  getOpenOrder(query?: OrdersQuery | undefined): Promise<OrdersResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let uri
+        if (query && query.uri) {
+          uri = query.uri
+        } else {
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}/open`
+        }
+
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.OpenOrderFetchFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as OrdersResponse)
+      } catch (err) {
+        return reject(new errors.OpenOrderFetchFailed())
       }
     })
   }
