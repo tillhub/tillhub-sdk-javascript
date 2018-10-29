@@ -764,6 +764,42 @@ var OrderSuggestionsFetchFailed = /** @class */ (function (_super) {
     return OrderSuggestionsFetchFailed;
 }(BaseError));
 exports.OrderSuggestionsFetchFailed = OrderSuggestionsFetchFailed;
+var HistoricOrderItemsFetchFailed = /** @class */ (function (_super) {
+    __extends(HistoricOrderItemsFetchFailed, _super);
+    function HistoricOrderItemsFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch the historic order items'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'HistoricOrderItemsFetchFailed';
+        return _this;
+    }
+    return HistoricOrderItemsFetchFailed;
+}(BaseError));
+exports.HistoricOrderItemsFetchFailed = HistoricOrderItemsFetchFailed;
+var BookStockFailed = /** @class */ (function (_super) {
+    __extends(BookStockFailed, _super);
+    function BookStockFailed(message) {
+        if (message === void 0) { message = 'Could not book the stocks'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'BookStockFailed';
+        return _this;
+    }
+    return BookStockFailed;
+}(BaseError));
+exports.BookStockFailed = BookStockFailed;
+var OpenOrderFetchFailed = /** @class */ (function (_super) {
+    __extends(OpenOrderFetchFailed, _super);
+    function OpenOrderFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch open order'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'OpenOrderFetchFailed';
+        return _this;
+    }
+    return OpenOrderFetchFailed;
+}(BaseError));
+exports.OpenOrderFetchFailed = OpenOrderFetchFailed;
 var RevenuesFetchFailed = /** @class */ (function (_super) {
     __extends(RevenuesFetchFailed, _super);
     function RevenuesFetchFailed(message) {

@@ -311,6 +311,21 @@ export declare class OrderSuggestionsFetchFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class HistoricOrderItemsFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class BookStockFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class OpenOrderFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
 export declare class RevenuesFetchFailed extends BaseError {
     message: string;
     name: string;

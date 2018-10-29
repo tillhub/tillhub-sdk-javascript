@@ -1,3 +1,10 @@
+# [1.46.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.45.0...v1.46.0) (2018-10-29)
+
+
+### Features
+
+* **orders:** add book stock, and get historic order items and open order handlers ([ccdd630](https://github.com/tillhub/tillhub-sdk-javascript/commit/ccdd630))
+
 # [1.45.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.44.0...v1.45.0) (2018-10-27)
 
 

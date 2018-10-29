@@ -313,6 +313,96 @@ var Orders = /** @class */ (function () {
             });
         }); });
     };
+    Orders.prototype.getHistoricOrderItems = function (orderId) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, err_10;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + orderId + "/order_items";
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        response.status !== 200 && reject(new errors.HistoricOrderItemsFetchFailed());
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 2:
+                        err_10 = _a.sent();
+                        return [2 /*return*/, reject(new errors.HistoricOrderItemsFetchFailed())];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Orders.prototype.bookStock = function (query) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var orderId, body, uri, response, err_11;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        orderId = query.orderId, body = query.body;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        uri = void 0;
+                        if (query && query.uri) {
+                            uri = query.uri;
+                        }
+                        else {
+                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/order_items/" + orderId + "/book_stock";
+                        }
+                        return [4 /*yield*/, this.http.getClient().post(uri, body)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 && reject(new errors.BookStockFailed());
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        err_11 = _a.sent();
+                        return [2 /*return*/, reject(new errors.BookStockFailed())];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Orders.prototype.getOpenOrder = function (query) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, err_12;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = void 0;
+                        if (query && query.uri) {
+                            uri = query.uri;
+                        }
+                        else {
+                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/open";
+                        }
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        response.status !== 200 && reject(new errors.OpenOrderFetchFailed());
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 2:
+                        err_12 = _a.sent();
+                        return [2 /*return*/, reject(new errors.OpenOrderFetchFailed())];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     return Orders;
 }());
 exports.Orders = Orders;

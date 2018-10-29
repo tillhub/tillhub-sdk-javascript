@@ -43,6 +43,14 @@ export interface OrderItems {
 export interface OrderItemsCreateRequest {
     order_items: OrderItems[];
 }
+export interface BookStockBody {
+    qty: number;
+}
+export interface BookStockRequest {
+    orderId: string;
+    body: BookStockBody;
+    uri?: string;
+}
 export declare class Orders {
     endpoint: string;
     http: Client;
@@ -57,4 +65,7 @@ export declare class Orders {
     getIncomingOrders(query?: OrdersQuery | undefined): Promise<OrdersResponse>;
     getOutgoingOrders(query?: OrdersQuery | undefined): Promise<OrdersResponse>;
     getOrderSuggestions(query?: OrdersQuery | undefined): Promise<OrdersResponse>;
+    getHistoricOrderItems(orderId?: string | undefined): Promise<OrdersResponse>;
+    bookStock(query: BookStockRequest): Promise<OrdersResponse>;
+    getOpenOrder(query?: OrdersQuery | undefined): Promise<OrdersResponse>;
 }
