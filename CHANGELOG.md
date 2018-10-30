@@ -1,3 +1,10 @@
+## [1.46.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.46.0...v1.46.1) (2018-10-30)
+
+
+### Bug Fixes
+
+* **orders:** mistake in uri ([8fcaddd](https://github.com/tillhub/tillhub-sdk-javascript/commit/8fcaddd))
+
 # [1.46.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.45.0...v1.46.0) (2018-10-29)
 
 
