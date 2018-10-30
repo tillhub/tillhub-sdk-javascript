@@ -1,3 +1,10 @@
+## [1.46.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.46.1...v1.46.2) (2018-10-30)
+
+
+### Bug Fixes
+
+* **orders:** another mistake in deleteOrderItems uri ([cb71af3](https://github.com/tillhub/tillhub-sdk-javascript/commit/cb71af3))
+
 ## [1.46.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.46.0...v1.46.1) (2018-10-30)
 
 

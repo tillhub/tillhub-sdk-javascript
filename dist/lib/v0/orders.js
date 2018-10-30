@@ -142,12 +142,19 @@ var Orders = /** @class */ (function () {
     };
     Orders.prototype.deleteOrderItems = function (query) {
         var _this = this;
+        var route;
+        if (query.itemId) {
+            route = "/" + query.itemId;
+        }
+        else {
+            route = "?" + qs_1.default.stringify(query);
+        }
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, err_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/order_items?" + (query.itemId || qs_1.default.stringify(query));
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/order_items" + route;
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
