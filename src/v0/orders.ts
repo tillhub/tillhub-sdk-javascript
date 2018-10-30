@@ -135,10 +135,14 @@ export class Orders {
   }
 
   deleteOrderItems(query: OrdersQuery): Promise<OrdersResponse> {
+    let route: string
+    if (query.itemId) {
+      route = `/${query.itemId}`
+    } else {
+      route = `?${qs.stringify(query)}`
+    }
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${
-        this.options.user
-      }/order_items?${query.itemId || qs.stringify(query)}`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/order_items${route}`
       try {
         const response = await this.http.getClient().delete(uri)
         response.status !== 200 && reject(new errors.OrderItemsDeleteFailed())
