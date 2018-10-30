@@ -1,3 +1,10 @@
+## [1.46.3](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.46.2...v1.46.3) (2018-10-30)
+
+
+### Bug Fixes
+
+* **orders:** add alowed statuses ([9ad03fe](https://github.com/tillhub/tillhub-sdk-javascript/commit/9ad03fe))
+
 ## [1.46.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.46.1...v1.46.2) (2018-10-30)
 
 

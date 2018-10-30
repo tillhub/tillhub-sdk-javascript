@@ -47,6 +47,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var qs_1 = __importDefault(require("qs"));
 var errors = __importStar(require("../errors"));
+var allowedStatuses = [200, 204];
 var Orders = /** @class */ (function () {
     function Orders(options, http) {
         this.options = options;
@@ -161,7 +162,8 @@ var Orders = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().delete(uri)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 && reject(new errors.OrderItemsDeleteFailed());
+                        allowedStatuses.includes(response.status) === false &&
+                            reject(new errors.OrderItemsDeleteFailed());
                         return [2 /*return*/, resolve({
                                 msg: response.data.msg
                             })];
