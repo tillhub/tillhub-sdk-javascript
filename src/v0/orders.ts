@@ -2,6 +2,8 @@ import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 
+const allowedStatuses = [200, 204]
+
 export interface OrdersOptions {
   user?: string
   base?: string
@@ -145,7 +147,8 @@ export class Orders {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/order_items${route}`
       try {
         const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new errors.OrderItemsDeleteFailed())
+        allowedStatuses.includes(response.status) === false &&
+          reject(new errors.OrderItemsDeleteFailed())
 
         return resolve({
           msg: response.data.msg
