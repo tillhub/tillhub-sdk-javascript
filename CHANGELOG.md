@@ -1,3 +1,10 @@
+## [1.47.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.47.0...v1.47.1) (2018-10-31)
+
+
+### Bug Fixes
+
+* **order items:** fix updateOrderItems params shape ([d67499e](https://github.com/tillhub/tillhub-sdk-javascript/commit/d67499e))
+
 # [1.47.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.46.3...v1.47.0) (2018-10-31)
 
 

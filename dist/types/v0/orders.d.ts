@@ -67,7 +67,7 @@ export declare class Orders {
     getOrderItems(orderId: string | undefined): Promise<OrdersResponse>;
     deleteOrderItems(query: OrdersQuery): Promise<OrdersResponse>;
     createOrderItems(body: OrderItemsCreateRequest): Promise<OrdersResponse>;
-    updateOrderItems(items: OrderItem[]): Promise<OrdersResponse>;
+    updateOrderItems(body: OrderItemsCreateRequest): Promise<OrdersResponse>;
     updateOrderItem(query: OrderItemsUpdateRequest): Promise<OrdersResponse>;
     getIncomingOrders(query?: OrdersQuery | undefined): Promise<OrdersResponse>;
     getOutgoingOrders(query?: OrdersQuery | undefined): Promise<OrdersResponse>;

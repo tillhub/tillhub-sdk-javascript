@@ -228,7 +228,7 @@ var Orders = /** @class */ (function () {
             });
         }); });
     };
-    Orders.prototype.updateOrderItems = function (items) {
+    Orders.prototype.updateOrderItems = function (body) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, err_7;
@@ -239,7 +239,7 @@ var Orders = /** @class */ (function () {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, this.http.getClient().put(uri, items)];
+                        return [4 /*yield*/, this.http.getClient().put(uri, body)];
                     case 2:
                         response = _a.sent();
                         response.status !== 200 && reject(new errors.OrderItemsUpdateFailed());
