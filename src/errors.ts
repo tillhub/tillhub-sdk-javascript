@@ -426,6 +426,13 @@ export class OrderItemsCreateFailed extends BaseError {
   }
 }
 
+export class OrderItemUpdateFailed extends BaseError {
+  public name = 'OrderItemUpdateFailed'
+  constructor(public message: string = 'Could not update the order item') {
+    super(message)
+  }
+}
+
 export class OrderItemsUpdateFailed extends BaseError {
   public name = 'OrderItemsUpdateFailed'
   constructor(public message: string = 'Could not update the order items') {

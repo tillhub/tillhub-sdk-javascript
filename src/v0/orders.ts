@@ -39,21 +39,26 @@ export interface OrdersRequest {
   values: OrdersUpdateValues
 }
 
-export interface OrderItems {
+export interface OrderItem {
+  order: string
   added_at?: string
   issuer?: object
   order_qty: number
   auto?: boolean
   suggestion?: boolean
   deleted?: boolean
-  order?: string
   product: string
   stock?: string
   location?: string
 }
 
 export interface OrderItemsCreateRequest {
-  order_items: OrderItems[]
+  order_items: OrderItem[]
+}
+
+export interface OrderItemsUpdateRequest {
+  itemId: string
+  item: OrderItem
 }
 
 export interface BookStockBody {
@@ -169,9 +174,7 @@ export class Orders {
         allowedStatuses.includes(response.status) === false &&
           reject(new errors.OrderItemsDeleteFailed())
 
-        return resolve({
-          msg: response.data.msg
-        } as OrdersResponse)
+        return resolve({ msg: response.data.msg } as OrdersResponse)
       } catch (err) {
         return reject(new errors.OrderItemsDeleteFailed())
       }
@@ -195,7 +198,7 @@ export class Orders {
     })
   }
 
-  updateOrderItems(items: OrderItems[]): Promise<OrdersResponse> {
+  updateOrderItems(items: OrderItem[]): Promise<OrdersResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/order_items`
       try {
@@ -208,6 +211,24 @@ export class Orders {
         } as OrdersResponse)
       } catch (err) {
         return reject(new errors.OrderItemsUpdateFailed())
+      }
+    })
+  }
+
+  updateOrderItem(query: OrderItemsUpdateRequest): Promise<OrdersResponse> {
+    return new Promise(async (resolve, reject) => {
+      const { item, itemId } = query
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/order_items/${itemId}`
+      try {
+        const response = await this.http.getClient().put(uri, item)
+        response.status !== 200 && reject(new errors.OrderItemUpdateFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as OrdersResponse)
+      } catch (err) {
+        return reject(new errors.OrderItemUpdateFailed())
       }
     })
   }
