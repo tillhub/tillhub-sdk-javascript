@@ -271,6 +271,11 @@ export declare class OrdersFetchFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class OrdersCreateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
 export declare class OrdersUpdateFailed extends BaseError {
     message: string;
     name: string;
@@ -292,6 +297,11 @@ export declare class OrderItemsFetchFailed extends BaseError {
     constructor(message?: string);
 }
 export declare class OrderItemsCreateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class OrderItemUpdateFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string);

@@ -1,3 +1,11 @@
+# [1.47.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.46.3...v1.47.0) (2018-10-31)
+
+
+### Features
+
+* **orders:** add create orders ([6c9a582](https://github.com/tillhub/tillhub-sdk-javascript/commit/6c9a582))
+* **orders:** add update order item handler ([cf5403e](https://github.com/tillhub/tillhub-sdk-javascript/commit/cf5403e))
+
 ## [1.46.3](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.46.2...v1.46.3) (2018-10-30)
 
 

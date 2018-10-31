@@ -668,6 +668,18 @@ var OrdersFetchFailed = /** @class */ (function (_super) {
     return OrdersFetchFailed;
 }(BaseError));
 exports.OrdersFetchFailed = OrdersFetchFailed;
+var OrdersCreateFailed = /** @class */ (function (_super) {
+    __extends(OrdersCreateFailed, _super);
+    function OrdersCreateFailed(message) {
+        if (message === void 0) { message = 'Could not create the orders'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'OrdersCreateFailed';
+        return _this;
+    }
+    return OrdersCreateFailed;
+}(BaseError));
+exports.OrdersCreateFailed = OrdersCreateFailed;
 var OrdersUpdateFailed = /** @class */ (function (_super) {
     __extends(OrdersUpdateFailed, _super);
     function OrdersUpdateFailed(message) {
@@ -728,6 +740,18 @@ var OrderItemsCreateFailed = /** @class */ (function (_super) {
     return OrderItemsCreateFailed;
 }(BaseError));
 exports.OrderItemsCreateFailed = OrderItemsCreateFailed;
+var OrderItemUpdateFailed = /** @class */ (function (_super) {
+    __extends(OrderItemUpdateFailed, _super);
+    function OrderItemUpdateFailed(message) {
+        if (message === void 0) { message = 'Could not update the order item'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'OrderItemUpdateFailed';
+        return _this;
+    }
+    return OrderItemUpdateFailed;
+}(BaseError));
+exports.OrderItemUpdateFailed = OrderItemUpdateFailed;
 var OrderItemsUpdateFailed = /** @class */ (function (_super) {
     __extends(OrderItemsUpdateFailed, _super);
     function OrderItemsUpdateFailed(message) {

@@ -23,25 +23,30 @@ export interface OrdersUpdateValues {
     deleted?: boolean;
     ordered_at?: string;
     finalized_at?: string;
+    direction?: string;
 }
-export interface OrdersUpdateRequest {
+export interface OrdersRequest {
     orderId: string;
     values: OrdersUpdateValues;
 }
-export interface OrderItems {
-    added_at: string;
-    issuer: object;
-    order_qty: number;
-    auto: boolean;
-    suggestion: boolean;
-    deleted?: boolean;
+export interface OrderItem {
     order: string;
+    added_at?: string;
+    issuer?: object;
+    order_qty: number;
+    auto?: boolean;
+    suggestion?: boolean;
+    deleted?: boolean;
     product: string;
     stock?: string;
-    location: string;
+    location?: string;
 }
 export interface OrderItemsCreateRequest {
-    order_items: OrderItems[];
+    order_items: OrderItem[];
+}
+export interface OrderItemsUpdateRequest {
+    itemId: string;
+    item: OrderItem;
 }
 export interface BookStockBody {
     qty: number;
@@ -57,11 +62,13 @@ export declare class Orders {
     options: OrdersOptions;
     constructor(options: OrdersOptions, http: Client);
     getAll(query?: OrdersQuery | undefined): Promise<OrdersResponse>;
-    update(options: OrdersUpdateRequest): Promise<OrdersResponse>;
+    create(options: OrdersRequest): Promise<OrdersResponse>;
+    update(options: OrdersRequest): Promise<OrdersResponse>;
     getOrderItems(orderId: string | undefined): Promise<OrdersResponse>;
     deleteOrderItems(query: OrdersQuery): Promise<OrdersResponse>;
     createOrderItems(body: OrderItemsCreateRequest): Promise<OrdersResponse>;
-    updateOrderItems(items: OrderItems[]): Promise<OrdersResponse>;
+    updateOrderItems(items: OrderItem[]): Promise<OrdersResponse>;
+    updateOrderItem(query: OrderItemsUpdateRequest): Promise<OrdersResponse>;
     getIncomingOrders(query?: OrdersQuery | undefined): Promise<OrdersResponse>;
     getOutgoingOrders(query?: OrdersQuery | undefined): Promise<OrdersResponse>;
     getOrderSuggestions(query?: OrdersQuery | undefined): Promise<OrdersResponse>;
