@@ -25,18 +25,20 @@ afterEach(() => {
   mock.reset()
 })
 
-const orderItemsUpdate = [
-  {
-    order: '1q2w3',
-    product: 'zxcv',
-    added_at: '12/11/10',
-    issuer: { name: 'Moshe' },
-    order_qty: 4,
-    auto: true,
-    suggestion: true,
-    location: 'Petah Tikva'
-  }
-]
+const orderItemsUpdate = {
+  order_items: [
+    {
+      order: '1q2w3',
+      product: 'zxcv',
+      added_at: '12/11/10',
+      issuer: { name: 'Moshe' },
+      order_qty: 4,
+      auto: true,
+      suggestion: true,
+      location: 'Petah Tikva'
+    }
+  ]
+}
 
 describe('v0: Orders: can update Order Items', () => {
   it("Tillhub's orders are instantiable", async () => {

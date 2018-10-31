@@ -198,11 +198,11 @@ export class Orders {
     })
   }
 
-  updateOrderItems(items: OrderItem[]): Promise<OrdersResponse> {
+  updateOrderItems(body: OrderItemsCreateRequest): Promise<OrdersResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/order_items`
       try {
-        const response = await this.http.getClient().put(uri, items)
+        const response = await this.http.getClient().put(uri, body)
         response.status !== 200 && reject(new errors.OrderItemsUpdateFailed())
 
         return resolve({
