@@ -384,6 +384,13 @@ export class OrdersFetchFailed extends BaseError {
   }
 }
 
+export class OrdersCreateFailed extends BaseError {
+  public name = 'OrdersCreateFailed'
+  constructor(public message: string = 'Could not create the orders') {
+    super(message)
+  }
+}
+
 export class OrdersUpdateFailed extends BaseError {
   public name = 'OrdersUpdateFailed'
   constructor(public message: string = 'Could not update the orders') {

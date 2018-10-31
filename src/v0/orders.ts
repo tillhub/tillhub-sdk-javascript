@@ -31,24 +31,25 @@ export interface OrdersUpdateValues {
   deleted?: boolean
   ordered_at?: string
   finalized_at?: string
+  direction?: string
 }
 
-export interface OrdersUpdateRequest {
+export interface OrdersRequest {
   orderId: string
   values: OrdersUpdateValues
 }
 
 export interface OrderItems {
-  added_at: string
-  issuer: object
+  added_at?: string
+  issuer?: object
   order_qty: number
-  auto: boolean
-  suggestion: boolean
+  auto?: boolean
+  suggestion?: boolean
   deleted?: boolean
-  order: string
+  order?: string
   product: string
   stock?: string
-  location: string
+  location?: string
 }
 
 export interface OrderItemsCreateRequest {
@@ -101,7 +102,25 @@ export class Orders {
     })
   }
 
-  update(options: OrdersUpdateRequest): Promise<OrdersResponse> {
+  create(options: OrdersRequest): Promise<OrdersResponse> {
+    return new Promise(async (resolve, reject) => {
+      const { orderId, values } = options
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${orderId}`
+      try {
+        const response = await this.http.getClient().post(uri, values)
+        response.status !== 200 && reject(new errors.OrdersCreateFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as OrdersResponse)
+      } catch (err) {
+        return reject(new errors.OrdersCreateFailed())
+      }
+    })
+  }
+
+  update(options: OrdersRequest): Promise<OrdersResponse> {
     return new Promise(async (resolve, reject) => {
       const { orderId, values } = options
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${orderId}`
