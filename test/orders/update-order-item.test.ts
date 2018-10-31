@@ -18,7 +18,8 @@ if (process.env.SYSTEM_TEST) {
   user.apiKey = process.env.SYSTEM_TEST_API_KEY || user.apiKey
 }
 
-let th, options
+let th
+let options
 const legacyId = '4564'
 const mock = new MockAdapter(axios)
 
