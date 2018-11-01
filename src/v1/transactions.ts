@@ -52,7 +52,11 @@ export class Transactions {
           uri = `${uri}?format=${query.format}`
         }
 
-        const response = await this.http.getClient().post(uri)
+        const response = await this.http.getClient().post(uri, null, {
+          headers: {
+            Accept: 'application/json' // not needed for tillhub-api, but axios sets default headers { 'accept': 'application/json, text/plain, */*' } if not specified
+          }
+        })
 
         return resolve({
           data: response.data.results
