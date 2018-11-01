@@ -27,6 +27,13 @@ export class TransactionFetchFailed extends BaseError {
   }
 }
 
+export class TransactionPdfFailed extends BaseError {
+  public name = 'TransactionPdfFailed'
+  constructor(public message: string = 'Could not create pdf') {
+    super(message)
+  }
+}
+
 export class TaxesFetchFailed extends BaseError {
   public name = 'TaxesFetchFailed'
   constructor(public message: string = 'Could not fetch taxes') {
