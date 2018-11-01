@@ -1,3 +1,10 @@
+## [1.48.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.48.0...v1.48.1) (2018-11-01)
+
+
+### Bug Fixes
+
+* **transactions_v1:** add headers to pdf call ([60b3944](https://github.com/tillhub/tillhub-sdk-javascript/commit/60b3944))
+
 # [1.48.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.47.3...v1.48.0) (2018-11-01)
 
 

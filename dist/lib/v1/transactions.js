@@ -71,7 +71,11 @@ var Transactions = /** @class */ (function () {
                         if (query && query.format) {
                             uri = uri + "?format=" + query.format;
                         }
-                        return [4 /*yield*/, this.http.getClient().post(uri)];
+                        return [4 /*yield*/, this.http.getClient().post(uri, null, {
+                                headers: {
+                                    Accept: 'application/json' // not needed for tillhub-api, but axios sets default headers { 'accept': 'application/json, text/plain, */*' } if not specified
+                                }
+                            })];
                     case 2:
                         response = _a.sent();
                         return [2 /*return*/, resolve({
