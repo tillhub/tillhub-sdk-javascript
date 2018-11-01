@@ -40,7 +40,6 @@ export interface OrdersRequest {
 }
 
 export interface OrderItem {
-  order: string
   added_at?: string
   issuer?: object
   order_qty: number
@@ -52,13 +51,25 @@ export interface OrderItem {
   location?: string
 }
 
+export interface OrderItemCreate extends OrderItem {
+  order: string
+}
+
+export interface OrderItemUpdate extends OrderItem {
+  id: string
+}
+
 export interface OrderItemsCreateRequest {
-  order_items: OrderItem[]
+  order_items: OrderItemCreate[]
 }
 
 export interface OrderItemsUpdateRequest {
+  order_items: OrderItemUpdate[]
+}
+
+export interface OrderItemUpdateRequest {
   itemId: string
-  item: OrderItem
+  item: OrderItemUpdate
 }
 
 export interface BookStockBody {
@@ -198,7 +209,7 @@ export class Orders {
     })
   }
 
-  updateOrderItems(body: OrderItemsCreateRequest): Promise<OrdersResponse> {
+  updateOrderItems(body: OrderItemsUpdateRequest): Promise<OrdersResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/order_items`
       try {
@@ -215,7 +226,7 @@ export class Orders {
     })
   }
 
-  updateOrderItem(query: OrderItemsUpdateRequest): Promise<OrdersResponse> {
+  updateOrderItem(query: OrderItemUpdateRequest): Promise<OrdersResponse> {
     return new Promise(async (resolve, reject) => {
       const { item, itemId } = query
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/order_items/${itemId}`

@@ -28,7 +28,7 @@ afterEach(() => {
 const orderItemsUpdate = {
   order_items: [
     {
-      order: '1q2w3',
+      id: '1q2w3',
       product: 'zxcv',
       added_at: '12/11/10',
       issuer: { name: 'Moshe' },
