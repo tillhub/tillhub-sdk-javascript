@@ -44,7 +44,7 @@ describe('v0: Orders: can get all Order Items', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/orders/${legacyId}/order_items/${orderId}`)
+        .onGet(`https://api.tillhub.com/api/v0/orders/${legacyId}/${orderId}/order_items`)
         .reply(function(config) {
           return [
             200,
@@ -96,7 +96,7 @@ describe('v0: Orders: can get all Order Items', () => {
         ]
       })
       mock
-        .onGet(`https://api.tillhub.com/api/v0/orders/${legacyId}/order_items/${orderId}`)
+        .onGet(`https://api.tillhub.com/api/v0/orders/${legacyId}/${orderId}/order_items`)
         .reply(function(config) {
           return [205]
         })
