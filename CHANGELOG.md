@@ -1,3 +1,10 @@
+## [1.47.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.47.1...v1.47.2) (2018-11-01)
+
+
+### Bug Fixes
+
+* **order items:** mistake in uri ([bf49cab](https://github.com/tillhub/tillhub-sdk-javascript/commit/bf49cab))
+
 ## [1.47.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.47.0...v1.47.1) (2018-10-31)
 
 
