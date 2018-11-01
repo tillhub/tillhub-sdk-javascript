@@ -30,7 +30,6 @@ export interface OrdersRequest {
     values: OrdersUpdateValues;
 }
 export interface OrderItem {
-    order: string;
     added_at?: string;
     issuer?: object;
     order_qty: number;
@@ -41,12 +40,21 @@ export interface OrderItem {
     stock?: string;
     location?: string;
 }
+export interface OrderItemCreate extends OrderItem {
+    order: string;
+}
+export interface OrderItemUpdate extends OrderItem {
+    id: string;
+}
 export interface OrderItemsCreateRequest {
-    order_items: OrderItem[];
+    order_items: OrderItemCreate[];
 }
 export interface OrderItemsUpdateRequest {
+    order_items: OrderItemUpdate[];
+}
+export interface OrderItemUpdateRequest {
     itemId: string;
-    item: OrderItem;
+    item: OrderItemUpdate;
 }
 export interface BookStockBody {
     qty: number;
@@ -67,8 +75,8 @@ export declare class Orders {
     getOrderItems(orderId: string | undefined): Promise<OrdersResponse>;
     deleteOrderItems(query: OrdersQuery): Promise<OrdersResponse>;
     createOrderItems(body: OrderItemsCreateRequest): Promise<OrdersResponse>;
-    updateOrderItems(body: OrderItemsCreateRequest): Promise<OrdersResponse>;
-    updateOrderItem(query: OrderItemsUpdateRequest): Promise<OrdersResponse>;
+    updateOrderItems(body: OrderItemsUpdateRequest): Promise<OrdersResponse>;
+    updateOrderItem(query: OrderItemUpdateRequest): Promise<OrdersResponse>;
     getIncomingOrders(query?: OrdersQuery | undefined): Promise<OrdersResponse>;
     getOutgoingOrders(query?: OrdersQuery | undefined): Promise<OrdersResponse>;
     getOrderSuggestions(query?: OrdersQuery | undefined): Promise<OrdersResponse>;

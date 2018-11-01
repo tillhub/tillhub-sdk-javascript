@@ -1,3 +1,10 @@
+## [1.47.3](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.47.2...v1.47.3) (2018-11-01)
+
+
+### Bug Fixes
+
+* **order items:** type interfaces for update and create ([9116849](https://github.com/tillhub/tillhub-sdk-javascript/commit/9116849))
+
 ## [1.47.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.47.1...v1.47.2) (2018-11-01)
 
 
