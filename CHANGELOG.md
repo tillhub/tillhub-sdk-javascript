@@ -1,3 +1,10 @@
+# [1.48.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.47.3...v1.48.0) (2018-11-01)
+
+
+### Features
+
+* **transactions_v1:** Add handler for getting pdf url ([e2b144d](https://github.com/tillhub/tillhub-sdk-javascript/commit/e2b144d))
+
 ## [1.47.3](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.47.2...v1.47.3) (2018-11-01)
 
 

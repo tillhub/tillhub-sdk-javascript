@@ -57,6 +57,18 @@ var TransactionFetchFailed = /** @class */ (function (_super) {
     return TransactionFetchFailed;
 }(BaseError));
 exports.TransactionFetchFailed = TransactionFetchFailed;
+var TransactionPdfFailed = /** @class */ (function (_super) {
+    __extends(TransactionPdfFailed, _super);
+    function TransactionPdfFailed(message) {
+        if (message === void 0) { message = 'Could not create pdf'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'TransactionPdfFailed';
+        return _this;
+    }
+    return TransactionPdfFailed;
+}(BaseError));
+exports.TransactionPdfFailed = TransactionPdfFailed;
 var TaxesFetchFailed = /** @class */ (function (_super) {
     __extends(TaxesFetchFailed, _super);
     function TaxesFetchFailed(message) {

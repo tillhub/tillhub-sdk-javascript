@@ -97,6 +97,11 @@ export declare class TillhubClient {
      *
      */
     analytics(): v0.Analytics;
+    /**
+     * Create an authenticated Transactions instance
+     *
+     */
+    transactions_v1(): v1.Transactions;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;
