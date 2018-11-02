@@ -102,6 +102,11 @@ export declare class TillhubClient {
      *
      */
     transactions_v1(): v1.Transactions;
+    /**
+     * Create an authenticated Staff instance
+     *
+     */
+    staff(): v0.Staff;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;

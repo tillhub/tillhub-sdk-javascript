@@ -28,4 +28,6 @@ var orders_1 = require("./orders");
 exports.Orders = orders_1.Orders;
 var analytics_1 = require("./analytics");
 exports.Analytics = analytics_1.Analytics;
+var staff_1 = require("./staff");
+exports.Staff = staff_1.Staff;
 //# sourceMappingURL=index.js.map

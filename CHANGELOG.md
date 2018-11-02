@@ -1,3 +1,10 @@
+# [1.49.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.48.1...v1.49.0) (2018-11-02)
+
+
+### Features
+
+* **Staff:** added Staff handler and getAll method ([b3e6394](https://github.com/tillhub/tillhub-sdk-javascript/commit/b3e6394))
+
 ## [1.48.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.48.0...v1.48.1) (2018-11-01)
 
 

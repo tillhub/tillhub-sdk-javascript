@@ -848,4 +848,16 @@ var RevenuesFetchFailed = /** @class */ (function (_super) {
     return RevenuesFetchFailed;
 }(BaseError));
 exports.RevenuesFetchFailed = RevenuesFetchFailed;
+var StaffFetchFailed = /** @class */ (function (_super) {
+    __extends(StaffFetchFailed, _super);
+    function StaffFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch the Staff'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'StaffFetchFailed';
+        return _this;
+    }
+    return StaffFetchFailed;
+}(BaseError));
+exports.StaffFetchFailed = StaffFetchFailed;
 //# sourceMappingURL=errors.js.map
