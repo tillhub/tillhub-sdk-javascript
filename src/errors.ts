@@ -488,3 +488,10 @@ export class RevenuesFetchFailed extends BaseError {
     super(message)
   }
 }
+
+export class StaffFetchFailed extends BaseError {
+  public name = 'StaffFetchFailed'
+  constructor(public message: string = 'Could not fetch the Staff') {
+    super(message)
+  }
+}

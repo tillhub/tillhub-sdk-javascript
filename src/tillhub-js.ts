@@ -359,6 +359,24 @@ export class TillhubClient {
 
     return new v1.Transactions({ user: this.auth.user, base: this.options.base }, this.http)
   }
+
+  /**
+   * Create an authenticated Staff instance
+   *
+   */
+  staff(): v0.Staff {
+    if (
+      !this.options ||
+      !this.options.base ||
+      !this.http ||
+      !this.auth ||
+      !this.auth.authenticated
+    ) {
+      throw new errors.UninstantiatedClient()
+    }
+
+    return new v0.Staff({ user: this.auth.user, base: this.options.base }, this.http)
+  }
 }
 
 export class Tillhub extends TillhubClient {

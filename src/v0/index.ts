@@ -12,6 +12,7 @@ import { Invoices } from './invoices'
 import { Stocks } from './stocks'
 import { Orders } from './orders'
 import { Analytics } from './analytics'
+import { Staff } from './staff'
 
 export {
   Auth,
@@ -27,5 +28,6 @@ export {
   Invoices,
   Stocks,
   Orders,
-  Analytics
+  Analytics,
+  Staff
 }
