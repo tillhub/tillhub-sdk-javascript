@@ -1,3 +1,10 @@
+# [1.50.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.49.0...v1.50.0) (2018-11-08)
+
+
+### Features
+
+* **v1.registers:** added get all registers ([5d792e8](https://github.com/tillhub/tillhub-sdk-javascript/commit/5d792e8))
+
 # [1.49.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.48.1...v1.49.0) (2018-11-02)
 
 

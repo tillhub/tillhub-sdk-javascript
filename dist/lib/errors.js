@@ -860,4 +860,16 @@ var StaffFetchFailed = /** @class */ (function (_super) {
     return StaffFetchFailed;
 }(BaseError));
 exports.StaffFetchFailed = StaffFetchFailed;
+var RegistersFetchFailed = /** @class */ (function (_super) {
+    __extends(RegistersFetchFailed, _super);
+    function RegistersFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch the Registers'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'RegistersFetchFailed';
+        return _this;
+    }
+    return RegistersFetchFailed;
+}(BaseError));
+exports.RegistersFetchFailed = RegistersFetchFailed;
 //# sourceMappingURL=errors.js.map

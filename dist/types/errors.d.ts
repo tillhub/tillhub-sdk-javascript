@@ -351,3 +351,8 @@ export declare class StaffFetchFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class RegistersFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}

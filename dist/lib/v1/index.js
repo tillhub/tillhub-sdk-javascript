@@ -8,4 +8,6 @@ var templates_1 = require("./templates");
 exports.Templates = templates_1.Templates;
 var transactions_1 = require("./transactions");
 exports.Transactions = transactions_1.Transactions;
+var registers_1 = require("./registers");
+exports.Registers = registers_1.Registers;
 //# sourceMappingURL=index.js.map
