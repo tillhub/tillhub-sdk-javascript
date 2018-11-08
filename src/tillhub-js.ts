@@ -377,6 +377,24 @@ export class TillhubClient {
 
     return new v0.Staff({ user: this.auth.user, base: this.options.base }, this.http)
   }
+
+  /**
+   * Create an authenticated Registers instance
+   *
+   */
+  registers(): v1.Registers {
+    if (
+      !this.options ||
+      !this.options.base ||
+      !this.http ||
+      !this.auth ||
+      !this.auth.authenticated
+    ) {
+      throw new errors.UninstantiatedClient()
+    }
+
+    return new v1.Registers({ user: this.auth.user, base: this.options.base }, this.http)
+  }
 }
 
 export class Tillhub extends TillhubClient {

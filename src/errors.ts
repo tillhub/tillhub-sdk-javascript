@@ -495,3 +495,10 @@ export class StaffFetchFailed extends BaseError {
     super(message)
   }
 }
+
+export class RegistersFetchFailed extends BaseError {
+  public name = 'RegistersFetchFailed'
+  constructor(public message: string = 'Could not fetch the Registers') {
+    super(message)
+  }
+}
