@@ -872,4 +872,16 @@ var RegistersFetchFailed = /** @class */ (function (_super) {
     return RegistersFetchFailed;
 }(BaseError));
 exports.RegistersFetchFailed = RegistersFetchFailed;
+var StatisticsProductFetchFailed = /** @class */ (function (_super) {
+    __extends(StatisticsProductFetchFailed, _super);
+    function StatisticsProductFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch the Statistics Products'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'StatisticsProductFetchFailed';
+        return _this;
+    }
+    return StatisticsProductFetchFailed;
+}(BaseError));
+exports.StatisticsProductFetchFailed = StatisticsProductFetchFailed;
 //# sourceMappingURL=errors.js.map

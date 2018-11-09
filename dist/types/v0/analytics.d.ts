@@ -19,6 +19,16 @@ export interface RevenuesOptions {
     start: string;
     end: string;
 }
+export interface ProductsOptions {
+    [key: string]: any;
+    branch_number?: string | number;
+    register_number?: string | number;
+    staff_id?: string | number;
+    limit?: number;
+    offset?: number;
+    start?: string;
+    end?: string;
+}
 export declare class Analytics {
     endpoint: string;
     http: Client;
@@ -27,4 +37,5 @@ export declare class Analytics {
     getRevenuesForDayOfWeek(query: RevenuBasicOptions): Promise<AnalyticsResponse>;
     getRevenues(query: RevenuesOptions): Promise<AnalyticsResponse>;
     getRevenuesForHourOfDay(query: RevenuBasicOptions): Promise<AnalyticsResponse>;
+    getReportsProducts(query: ProductsOptions): Promise<AnalyticsResponse>;
 }

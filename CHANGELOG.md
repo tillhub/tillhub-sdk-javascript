@@ -1,3 +1,10 @@
+# [1.51.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.50.0...v1.51.0) (2018-11-09)
+
+
+### Features
+
+* **analytics:** added getReportsProducts method ([e6c9842](https://github.com/tillhub/tillhub-sdk-javascript/commit/e6c9842))
+
 # [1.50.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.49.0...v1.50.0) (2018-11-08)
 
 
