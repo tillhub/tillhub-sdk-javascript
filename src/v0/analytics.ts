@@ -25,6 +25,17 @@ export interface RevenuesOptions {
   end: string
 }
 
+export interface ProductsOptions {
+  [key: string]: any
+  branch_number?: string | number
+  register_number?: string | number
+  staff_id?: string | number
+  limit?: number
+  offset?: number
+  start?: string
+  end?: string
+}
+
 export class Analytics {
   endpoint: string
   http: Client
@@ -98,6 +109,33 @@ export class Analytics {
         } as AnalyticsResponse)
       } catch (err) {
         return reject(new errors.RevenuesFetchFailed())
+      }
+    })
+  }
+
+  getReportsProducts(query: ProductsOptions): Promise<AnalyticsResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let uri = `${this.options.base}${this.endpoint}/${this.options.user}/reports/products`
+        const queryKeys = Object.keys(query)
+          .map((key: string) => {
+            return `${key}=${query[key].toString()}`
+          })
+          .join('&')
+
+        if (Object.keys(query).length) {
+          uri += `?${queryKeys}`
+        }
+        console.log(uri)
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.StatisticsProductFetchFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as AnalyticsResponse)
+      } catch (err) {
+        return reject(new errors.StatisticsProductFetchFailed())
       }
     })
   }

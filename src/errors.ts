@@ -502,3 +502,10 @@ export class RegistersFetchFailed extends BaseError {
     super(message)
   }
 }
+
+export class StatisticsProductFetchFailed extends BaseError {
+  public name = 'StatisticsProductFetchFailed'
+  constructor(public message: string = 'Could not fetch the Statistics Products') {
+    super(message)
+  }
+}
