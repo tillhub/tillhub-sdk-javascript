@@ -21,9 +21,9 @@ export interface RevenuesOptions {
 }
 export interface ProductsOptions {
     [key: string]: any;
-    branch_number?: string | number;
-    register_number?: string | number;
-    staff_id?: string | number;
+    branch_id?: string;
+    register_id?: string;
+    staff_id?: string;
     limit?: number;
     offset?: number;
     start?: string;

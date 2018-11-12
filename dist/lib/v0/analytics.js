@@ -152,7 +152,6 @@ var Analytics = /** @class */ (function () {
                         if (Object.keys(query).length) {
                             uri += "?" + queryKeys;
                         }
-                        console.log(uri);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
