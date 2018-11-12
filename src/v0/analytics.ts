@@ -27,9 +27,9 @@ export interface RevenuesOptions {
 
 export interface ProductsOptions {
   [key: string]: any
-  branch_number?: string | number
-  register_number?: string | number
-  staff_id?: string | number
+  branch_id?: string
+  register_id?: string
+  staff_id?: string
   limit?: number
   offset?: number
   start?: string
@@ -126,7 +126,6 @@ export class Analytics {
         if (Object.keys(query).length) {
           uri += `?${queryKeys}`
         }
-        console.log(uri)
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.StatisticsProductFetchFailed())
 
