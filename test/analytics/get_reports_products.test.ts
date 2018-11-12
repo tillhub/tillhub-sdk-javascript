@@ -59,8 +59,13 @@ describe('v0: Analytics Reports Products - getReportsProducts', () => {
           return [
             200,
             {
-              count: 1,
-              results: [{}]
+              count: 25,
+              table_size: '123',
+              results: [
+                {
+                  values: [{}]
+                }
+              ]
             }
           ]
         })
