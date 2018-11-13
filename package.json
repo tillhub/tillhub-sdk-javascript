@@ -112,7 +112,7 @@
     "prettier": "^1.14.2",
     "prismjs": "^1.15.0",
     "prompt": "^1.0.0",
-    "react": "^16.5.1",
+    "react": "16.6.1",
     "react-dom": "^16.5.1",
     "react-prism": "^4.3.2",
     "replace-in-file": "^3.4.2",
