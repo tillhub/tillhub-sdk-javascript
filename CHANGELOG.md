@@ -1,3 +1,10 @@
+## [1.51.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.51.1...v1.51.2) (2018-11-15)
+
+
+### Bug Fixes
+
+* fixed the query interface for analytics getReportsProducts ([2e47d9f](https://github.com/tillhub/tillhub-sdk-javascript/commit/2e47d9f))
+
 ## [1.51.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.51.0...v1.51.1) (2018-11-12)
 
 
