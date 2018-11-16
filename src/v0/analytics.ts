@@ -129,10 +129,9 @@ export class Analytics {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.StatisticsProductFetchFailed())
         return resolve({
-          data: response.data.results[0].values,
+          data: response.data.results,
           metadata: {
-            count: response.data.results[0].count,
-            table_size: response.data.results[0].table_size
+            count: response.data.count
           }
         } as AnalyticsResponse)
       } catch (err) {
