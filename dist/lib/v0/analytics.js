@@ -157,10 +157,9 @@ var Analytics = /** @class */ (function () {
                         response = _a.sent();
                         response.status !== 200 && reject(new errors.StatisticsProductFetchFailed());
                         return [2 /*return*/, resolve({
-                                data: response.data.results[0].values,
+                                data: response.data.results,
                                 metadata: {
-                                    count: response.data.results[0].count,
-                                    table_size: response.data.results[0].table_size
+                                    count: response.data.count
                                 }
                             })];
                     case 2:

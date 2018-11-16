@@ -1,3 +1,10 @@
+## [1.52.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.52.0...v1.52.1) (2018-11-16)
+
+
+### Bug Fixes
+
+* **analytics:** Fixed analytics/getReportsProducts to return response.data.results ([0616b67](https://github.com/tillhub/tillhub-sdk-javascript/commit/0616b67))
+
 # [1.52.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.51.2...v1.52.0) (2018-11-16)
 
 
