@@ -509,3 +509,10 @@ export class StatisticsProductFetchFailed extends BaseError {
     super(message)
   }
 }
+
+export class StaffOverviewFetchFailed extends BaseError {
+  public name = 'StaffOverviewFetchFailed'
+  constructor(public message: string = 'Could not fetch the staff overview report') {
+    super(message)
+  }
+}
