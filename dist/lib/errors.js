@@ -884,4 +884,16 @@ var StatisticsProductFetchFailed = /** @class */ (function (_super) {
     return StatisticsProductFetchFailed;
 }(BaseError));
 exports.StatisticsProductFetchFailed = StatisticsProductFetchFailed;
+var StaffOverviewFetchFailed = /** @class */ (function (_super) {
+    __extends(StaffOverviewFetchFailed, _super);
+    function StaffOverviewFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch the staff overview report'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'StaffOverviewFetchFailed';
+        return _this;
+    }
+    return StaffOverviewFetchFailed;
+}(BaseError));
+exports.StaffOverviewFetchFailed = StaffOverviewFetchFailed;
 //# sourceMappingURL=errors.js.map

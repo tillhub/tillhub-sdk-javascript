@@ -38,4 +38,5 @@ export declare class Analytics {
     getRevenues(query: RevenuesOptions): Promise<AnalyticsResponse>;
     getRevenuesForHourOfDay(query: RevenuBasicOptions): Promise<AnalyticsResponse>;
     getReportsProducts(query: ProductsOptions): Promise<AnalyticsResponse>;
+    getStaffOverviewReport(): Promise<AnalyticsResponse>;
 }

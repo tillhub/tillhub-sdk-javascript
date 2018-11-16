@@ -1,3 +1,10 @@
+# [1.52.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.51.2...v1.52.0) (2018-11-16)
+
+
+### Features
+
+* **analytics:** add staff report handler ([98e38ca](https://github.com/tillhub/tillhub-sdk-javascript/commit/98e38ca))
+
 ## [1.51.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.51.1...v1.51.2) (2018-11-15)
 
 
