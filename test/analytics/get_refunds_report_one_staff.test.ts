@@ -26,7 +26,7 @@ afterEach(() => {
   mock.reset()
 })
 
-describe('v0: Analytics: gets product groups transactions report grouped by one staff member', () => {
+describe('v0: Analytics: gets refunds report grouped by one staff member', () => {
   it("Tillhub's Analytics are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
@@ -44,7 +44,7 @@ describe('v0: Analytics: gets product groups transactions report grouped by one 
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/product_groups/${staffMember}`
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/refunds/${staffMember}`
         )
         .reply(function(config) {
           return [
@@ -77,7 +77,7 @@ describe('v0: Analytics: gets product groups transactions report grouped by one 
 
     expect(analytics).toBeInstanceOf(v0.Analytics)
 
-    const { data } = await analytics.getProductGroupsReportOneStaffMember(staffMember)
+    const { data } = await analytics.getRefundsReportOneStaff(staffMember)
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -99,7 +99,7 @@ describe('v0: Analytics: gets product groups transactions report grouped by one 
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/product_groups/${staffMember}`
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/refunds/${staffMember}`
         )
         .reply(function(config) {
           return [205]
@@ -123,9 +123,9 @@ describe('v0: Analytics: gets product groups transactions report grouped by one 
     })
 
     try {
-      await th.analytics().getProductGroupsReportOneStaffMember(staffMember)
+      await th.analytics().getRefundsReportOneStaff(staffMember)
     } catch (err) {
-      expect(err.name).toBe('ProductGroupsReportOneStaffMemberFetchFailed')
+      expect(err.name).toBe('RefundsReportOneStaffFetchFailed')
     }
   })
 })

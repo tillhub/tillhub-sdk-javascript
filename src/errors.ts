@@ -524,8 +524,8 @@ export class ProductGroupsReportFetchFailed extends BaseError {
   }
 }
 
-export class ProductGroupsReportOneStaffMemberFetchFailed extends BaseError {
-  public name = 'ProductGroupsReportOneStaffMemberFetchFailed'
+export class ProductGroupsReportOneStaffFetchFailed extends BaseError {
+  public name = 'ProductGroupsReportOneStaffFetchFailed'
   constructor(
     public message: string = 'Could not fetch the product groups report for the requested staff member'
   ) {
@@ -536,6 +536,15 @@ export class ProductGroupsReportOneStaffMemberFetchFailed extends BaseError {
 export class RefundsReportFetchFailed extends BaseError {
   public name = 'RefundsReportFetchFailed'
   constructor(public message: string = 'Could not fetch the refunds report') {
+    super(message)
+  }
+}
+
+export class RefundsReportOneStaffFetchFailed extends BaseError {
+  public name = 'RefundsReportOneStaffFetchFailed'
+  constructor(
+    public message: string = 'Could not fetch the refunds report for the requested staff member'
+  ) {
     super(message)
   }
 }
