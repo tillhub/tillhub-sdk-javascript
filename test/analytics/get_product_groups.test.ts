@@ -25,7 +25,7 @@ afterEach(() => {
   mock.reset()
 })
 
-describe('v0: Analytics: gets staff overview report grouped by staff member', () => {
+describe('v0: Analytics: gets product groups transactions report grouped by all staff', () => {
   it("Tillhub's Analytics are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
