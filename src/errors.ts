@@ -516,3 +516,10 @@ export class StaffOverviewFetchFailed extends BaseError {
     super(message)
   }
 }
+
+export class ProductGroupsReportFetchFailed extends BaseError {
+  public name = 'ProductGroupsReportFetchFailed'
+  constructor(public message: string = 'Could not fetch the product groups report') {
+    super(message)
+  }
+}

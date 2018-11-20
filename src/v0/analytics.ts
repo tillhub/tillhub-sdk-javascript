@@ -159,4 +159,24 @@ export class Analytics {
       }
     })
   }
+
+  getProductGroupsReport(): Promise<AnalyticsResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const uri = `${this.options.base}${this.endpoint}/${
+          this.options.user
+        }/reports/staff/product_groups`
+
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.ProductGroupsReportFetchFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as AnalyticsResponse)
+      } catch (err) {
+        return reject(new errors.ProductGroupsReportFetchFailed())
+      }
+    })
+  }
 }
