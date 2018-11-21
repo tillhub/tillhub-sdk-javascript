@@ -195,6 +195,106 @@ var Analytics = /** @class */ (function () {
             });
         }); });
     };
+    Analytics.prototype.getProductGroupsReport = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, err_6;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/reports/staff/product_groups";
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        response.status !== 200 && reject(new errors.ProductGroupsReportFetchFailed());
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 2:
+                        err_6 = _a.sent();
+                        return [2 /*return*/, reject(new errors.ProductGroupsReportFetchFailed())];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Analytics.prototype.getProductGroupsReportOneStaff = function (staffMember) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, err_7;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/reports/staff/product_groups/" + staffMember;
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        response.status !== 200 && reject(new errors.ProductGroupsReportOneStaffFetchFailed());
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 2:
+                        err_7 = _a.sent();
+                        return [2 /*return*/, reject(new errors.ProductGroupsReportOneStaffFetchFailed())];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Analytics.prototype.getRefundsReport = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, err_8;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/reports/staff/refunds";
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        response.status !== 200 && reject(new errors.RefundsReportFetchFailed());
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 2:
+                        err_8 = _a.sent();
+                        return [2 /*return*/, reject(new errors.RefundsReportFetchFailed())];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Analytics.prototype.getRefundsReportOneStaff = function (staffMember) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, err_9;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/reports/staff/refunds/" + staffMember;
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        response.status !== 200 && reject(new errors.RefundsReportOneStaffFetchFailed());
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 2:
+                        err_9 = _a.sent();
+                        return [2 /*return*/, reject(new errors.RefundsReportOneStaffFetchFailed())];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     return Analytics;
 }());
 exports.Analytics = Analytics;

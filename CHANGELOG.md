@@ -1,3 +1,13 @@
+# [1.53.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.52.1...v1.53.0) (2018-11-21)
+
+
+### Features
+
+* **analytics:** add handler for product groups report per one staff member ([d9c5a56](https://github.com/tillhub/tillhub-sdk-javascript/commit/d9c5a56))
+* **analytics:** add handler for refunds report per one staff member; renaming stuff; ([7decc2e](https://github.com/tillhub/tillhub-sdk-javascript/commit/7decc2e))
+* **analytics:** add product groups report handler ([2fb5ca2](https://github.com/tillhub/tillhub-sdk-javascript/commit/2fb5ca2))
+* **analytics:** add refunds report per all staff handler ([f8ebb43](https://github.com/tillhub/tillhub-sdk-javascript/commit/f8ebb43))
+
 ## [1.52.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.52.0...v1.52.1) (2018-11-16)
 
 
