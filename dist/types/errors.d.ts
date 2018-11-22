@@ -386,3 +386,8 @@ export declare class RefundsReportOneStaffFetchFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class VouchersReportFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}

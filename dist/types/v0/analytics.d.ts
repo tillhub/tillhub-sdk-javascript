@@ -43,4 +43,5 @@ export declare class Analytics {
     getProductGroupsReportOneStaff(staffMember: string): Promise<AnalyticsResponse>;
     getRefundsReport(): Promise<AnalyticsResponse>;
     getRefundsReportOneStaff(staffMember: string): Promise<AnalyticsResponse>;
+    getVouchersReports(): Promise<AnalyticsResponse>;
 }

@@ -944,4 +944,16 @@ var RefundsReportOneStaffFetchFailed = /** @class */ (function (_super) {
     return RefundsReportOneStaffFetchFailed;
 }(BaseError));
 exports.RefundsReportOneStaffFetchFailed = RefundsReportOneStaffFetchFailed;
+var VouchersReportFetchFailed = /** @class */ (function (_super) {
+    __extends(VouchersReportFetchFailed, _super);
+    function VouchersReportFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch the vouchers report'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'VouchersReportFetchFailed';
+        return _this;
+    }
+    return VouchersReportFetchFailed;
+}(BaseError));
+exports.VouchersReportFetchFailed = VouchersReportFetchFailed;
 //# sourceMappingURL=errors.js.map

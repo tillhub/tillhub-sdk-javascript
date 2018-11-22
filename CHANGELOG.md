@@ -1,3 +1,10 @@
+# [1.54.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.53.0...v1.54.0) (2018-11-22)
+
+
+### Features
+
+* **analytics:** added vouchers reports handler in analytics ([3afabd0](https://github.com/tillhub/tillhub-sdk-javascript/commit/3afabd0))
+
 # [1.53.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.52.1...v1.53.0) (2018-11-21)
 
 
