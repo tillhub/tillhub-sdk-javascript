@@ -548,3 +548,10 @@ export class RefundsReportOneStaffFetchFailed extends BaseError {
     super(message)
   }
 }
+
+export class VouchersReportFetchFailed extends BaseError {
+  public name = 'VouchersReportFetchFailed'
+  constructor(public message: string = 'Could not fetch the vouchers report') {
+    super(message)
+  }
+}
