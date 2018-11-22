@@ -239,4 +239,22 @@ export class Analytics {
       }
     })
   }
+
+  getVouchersReports(): Promise<AnalyticsResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const uri = `${this.options.base}${this.endpoint}/${this.options.user}/reports/vouchers`
+
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.VouchersReportFetchFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as AnalyticsResponse)
+      } catch (err) {
+        return reject(new errors.VouchersReportFetchFailed())
+      }
+    })
+  }
 }
