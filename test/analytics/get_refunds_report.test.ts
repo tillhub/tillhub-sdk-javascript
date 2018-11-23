@@ -19,14 +19,15 @@ if (process.env.SYSTEM_TEST) {
 }
 
 const legacyId = '4564'
+const staffMember = '963'
 
 const mock = new MockAdapter(axios)
 afterEach(() => {
   mock.reset()
 })
 
-describe('v0: Analytics: gets refunds report grouped by all staff', () => {
-  it("Tillhub's Analytics are instantiable", async () => {
+describe('v0: Analytics: gets refunds report', () => {
+  it('gets refunds report grouped by all staff', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
         return [
@@ -42,7 +43,7 @@ describe('v0: Analytics: gets refunds report grouped by all staff', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/refunds`)
+        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/refunds/`)
         .reply(function(config) {
           return [
             200,
@@ -79,6 +80,61 @@ describe('v0: Analytics: gets refunds report grouped by all staff', () => {
     expect(Array.isArray(data)).toBe(true)
   })
 
+  it('gets refunds report grouped by one staff member', async () => {
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+
+      mock
+        .onGet(
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/refunds/${staffMember}`
+        )
+        .reply(function(config) {
+          return [
+            200,
+            {
+              count: 1,
+              results: [{}]
+            }
+          ]
+        })
+    }
+
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE
+    }
+
+    const th = new TillhubClient()
+
+    th.init(options)
+    await th.auth.loginUsername({
+      username: user.username,
+      password: user.password
+    })
+
+    const analytics = th.analytics()
+
+    expect(analytics).toBeInstanceOf(v0.Analytics)
+
+    const { data } = await analytics.getRefundsReport(staffMember)
+
+    expect(Array.isArray(data)).toBe(true)
+  })
+
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
@@ -95,7 +151,9 @@ describe('v0: Analytics: gets refunds report grouped by all staff', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/refunds`)
+        .onGet(
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/refunds/${staffMember}`
+        )
         .reply(function(config) {
           return [205]
         })
@@ -118,7 +176,7 @@ describe('v0: Analytics: gets refunds report grouped by all staff', () => {
     })
 
     try {
-      await th.analytics().getRefundsReport()
+      await th.analytics().getRefundsReport(staffMember)
     } catch (err) {
       expect(err.name).toBe('RefundsReportFetchFailed')
     }

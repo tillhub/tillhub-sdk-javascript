@@ -1,6 +1,8 @@
 import { Client } from '../client'
 import * as errors from '../errors'
 
+export type StaffID = string | null
+
 export interface AnalyticsOptions {
   user?: string
   base?: string
@@ -160,12 +162,12 @@ export class Analytics {
     })
   }
 
-  getProductGroupsReport(): Promise<AnalyticsResponse> {
+  getProductGroupsReport(staff?: StaffID): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = `${this.options.base}${this.endpoint}/${
           this.options.user
-        }/reports/staff/product_groups`
+        }/reports/staff/product_groups/${staff || ''}`
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.ProductGroupsReportFetchFailed())
@@ -180,32 +182,12 @@ export class Analytics {
     })
   }
 
-  getProductGroupsReportOneStaff(staffMember: string): Promise<AnalyticsResponse> {
+  getRefundsReport(staff?: StaffID): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = `${this.options.base}${this.endpoint}/${
           this.options.user
-        }/reports/staff/product_groups/${staffMember}`
-
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.ProductGroupsReportOneStaffFetchFailed())
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new errors.ProductGroupsReportOneStaffFetchFailed())
-      }
-    })
-  }
-
-  getRefundsReport(): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = `${this.options.base}${this.endpoint}/${
-          this.options.user
-        }/reports/staff/refunds`
+        }/reports/staff/refunds/${staff || ''}`
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.RefundsReportFetchFailed())
@@ -216,26 +198,6 @@ export class Analytics {
         } as AnalyticsResponse)
       } catch (err) {
         return reject(new errors.RefundsReportFetchFailed())
-      }
-    })
-  }
-
-  getRefundsReportOneStaff(staffMember: string): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = `${this.options.base}${this.endpoint}/${
-          this.options.user
-        }/reports/staff/refunds/${staffMember}`
-
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.RefundsReportOneStaffFetchFailed())
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new errors.RefundsReportOneStaffFetchFailed())
       }
     })
   }
