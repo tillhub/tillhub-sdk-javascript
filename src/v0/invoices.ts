@@ -146,6 +146,24 @@ export class Invoices {
     })
   }
 
+  getMeta(): Promise<InvoicesResponse> {
+    return new Promise(async (resolve, reject) => {
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+
+      try {
+        const response = await this.http.getClient().get(uri)
+        if (response.status !== 200) reject(new errors.InvoicesGetMetaFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as InvoicesResponse)
+      } catch (err) {
+        return reject(new errors.InvoicesGetMetaFailed())
+      }
+    })
+  }
+
   getOne(requestObject: InvoicesGetOneRequestObject): Promise<InvoicesResponse> {
     return new Promise(async (resolve, reject) => {
       const { invoiceId, query } = requestObject
