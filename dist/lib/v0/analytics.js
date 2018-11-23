@@ -195,7 +195,7 @@ var Analytics = /** @class */ (function () {
             });
         }); });
     };
-    Analytics.prototype.getProductGroupsReport = function () {
+    Analytics.prototype.getProductGroupsReport = function (staff) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, err_6;
@@ -203,7 +203,7 @@ var Analytics = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/reports/staff/product_groups";
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/reports/staff/product_groups/" + (staff || '');
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
@@ -220,7 +220,7 @@ var Analytics = /** @class */ (function () {
             });
         }); });
     };
-    Analytics.prototype.getProductGroupsReportOneStaff = function (staffMember) {
+    Analytics.prototype.getRefundsReport = function (staff) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, err_7;
@@ -228,32 +228,7 @@ var Analytics = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/reports/staff/product_groups/" + staffMember;
-                        return [4 /*yield*/, this.http.getClient().get(uri)];
-                    case 1:
-                        response = _a.sent();
-                        response.status !== 200 && reject(new errors.ProductGroupsReportOneStaffFetchFailed());
-                        return [2 /*return*/, resolve({
-                                data: response.data.results,
-                                metadata: { count: response.data.count }
-                            })];
-                    case 2:
-                        err_7 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductGroupsReportOneStaffFetchFailed())];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        }); });
-    };
-    Analytics.prototype.getRefundsReport = function () {
-        var _this = this;
-        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_8;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/reports/staff/refunds";
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/reports/staff/refunds/" + (staff || '');
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
@@ -263,33 +238,8 @@ var Analytics = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 2:
-                        err_8 = _a.sent();
+                        err_7 = _a.sent();
                         return [2 /*return*/, reject(new errors.RefundsReportFetchFailed())];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        }); });
-    };
-    Analytics.prototype.getRefundsReportOneStaff = function (staffMember) {
-        var _this = this;
-        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_9;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/reports/staff/refunds/" + staffMember;
-                        return [4 /*yield*/, this.http.getClient().get(uri)];
-                    case 1:
-                        response = _a.sent();
-                        response.status !== 200 && reject(new errors.RefundsReportOneStaffFetchFailed());
-                        return [2 /*return*/, resolve({
-                                data: response.data.results,
-                                metadata: { count: response.data.count }
-                            })];
-                    case 2:
-                        err_9 = _a.sent();
-                        return [2 /*return*/, reject(new errors.RefundsReportOneStaffFetchFailed())];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -298,7 +248,7 @@ var Analytics = /** @class */ (function () {
     Analytics.prototype.getVouchersReports = function () {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_10;
+            var uri, response, err_8;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -313,7 +263,7 @@ var Analytics = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 2:
-                        err_10 = _a.sent();
+                        err_8 = _a.sent();
                         return [2 /*return*/, reject(new errors.VouchersReportFetchFailed())];
                     case 3: return [2 /*return*/];
                 }

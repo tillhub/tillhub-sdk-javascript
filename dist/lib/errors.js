@@ -908,18 +908,6 @@ var ProductGroupsReportFetchFailed = /** @class */ (function (_super) {
     return ProductGroupsReportFetchFailed;
 }(BaseError));
 exports.ProductGroupsReportFetchFailed = ProductGroupsReportFetchFailed;
-var ProductGroupsReportOneStaffFetchFailed = /** @class */ (function (_super) {
-    __extends(ProductGroupsReportOneStaffFetchFailed, _super);
-    function ProductGroupsReportOneStaffFetchFailed(message) {
-        if (message === void 0) { message = 'Could not fetch the product groups report for the requested staff member'; }
-        var _this = _super.call(this, message) || this;
-        _this.message = message;
-        _this.name = 'ProductGroupsReportOneStaffFetchFailed';
-        return _this;
-    }
-    return ProductGroupsReportOneStaffFetchFailed;
-}(BaseError));
-exports.ProductGroupsReportOneStaffFetchFailed = ProductGroupsReportOneStaffFetchFailed;
 var RefundsReportFetchFailed = /** @class */ (function (_super) {
     __extends(RefundsReportFetchFailed, _super);
     function RefundsReportFetchFailed(message) {
@@ -932,18 +920,6 @@ var RefundsReportFetchFailed = /** @class */ (function (_super) {
     return RefundsReportFetchFailed;
 }(BaseError));
 exports.RefundsReportFetchFailed = RefundsReportFetchFailed;
-var RefundsReportOneStaffFetchFailed = /** @class */ (function (_super) {
-    __extends(RefundsReportOneStaffFetchFailed, _super);
-    function RefundsReportOneStaffFetchFailed(message) {
-        if (message === void 0) { message = 'Could not fetch the refunds report for the requested staff member'; }
-        var _this = _super.call(this, message) || this;
-        _this.message = message;
-        _this.name = 'RefundsReportOneStaffFetchFailed';
-        return _this;
-    }
-    return RefundsReportOneStaffFetchFailed;
-}(BaseError));
-exports.RefundsReportOneStaffFetchFailed = RefundsReportOneStaffFetchFailed;
 var VouchersReportFetchFailed = /** @class */ (function (_super) {
     __extends(VouchersReportFetchFailed, _super);
     function VouchersReportFetchFailed(message) {

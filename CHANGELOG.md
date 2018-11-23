@@ -1,3 +1,10 @@
+## [1.54.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.54.0...v1.54.1) (2018-11-23)
+
+
+### Bug Fixes
+
+* **analytics:** make fetching methods work with and without staff id ([0a892c4](https://github.com/tillhub/tillhub-sdk-javascript/commit/0a892c4))
+
 # [1.54.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.53.0...v1.54.0) (2018-11-22)
 
 

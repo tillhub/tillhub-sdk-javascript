@@ -1,4 +1,5 @@
 import { Client } from '../client';
+export declare type StaffID = string | null;
 export interface AnalyticsOptions {
     user?: string;
     base?: string;
@@ -39,9 +40,7 @@ export declare class Analytics {
     getRevenuesForHourOfDay(query: RevenuBasicOptions): Promise<AnalyticsResponse>;
     getReportsProducts(query: ProductsOptions): Promise<AnalyticsResponse>;
     getStaffOverviewReport(): Promise<AnalyticsResponse>;
-    getProductGroupsReport(): Promise<AnalyticsResponse>;
-    getProductGroupsReportOneStaff(staffMember: string): Promise<AnalyticsResponse>;
-    getRefundsReport(): Promise<AnalyticsResponse>;
-    getRefundsReportOneStaff(staffMember: string): Promise<AnalyticsResponse>;
+    getProductGroupsReport(staff?: StaffID): Promise<AnalyticsResponse>;
+    getRefundsReport(staff?: StaffID): Promise<AnalyticsResponse>;
     getVouchersReports(): Promise<AnalyticsResponse>;
 }
