@@ -356,6 +356,13 @@ export class InvoicesDeleteFailed extends BaseError {
   }
 }
 
+export class InvoicesGetMetaFailed extends BaseError {
+  public name = 'InvoicesGetMetaFailed'
+  constructor(public message: string = 'Could not get invoice meta') {
+    super(message)
+  }
+}
+
 export class StocksFetchFailed extends BaseError {
   public name = 'StocksFetchFailed'
   constructor(public message: string = 'Could not fetch the stocks') {
