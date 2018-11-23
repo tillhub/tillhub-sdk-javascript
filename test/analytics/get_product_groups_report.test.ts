@@ -19,30 +19,22 @@ if (process.env.SYSTEM_TEST) {
 }
 
 const legacyId = '4564'
+const staffMember = '963'
 
 const mock = new MockAdapter(axios)
 afterEach(() => {
   mock.reset()
 })
 
-describe('v0: Analytics: gets product groups transactions report grouped by all staff', () => {
-  it("Tillhub's Analytics are instantiable", async () => {
+describe('v0: Analytics: gets product groups transactions report', () => {
+  it('gets product groups transactions report grouped by all staff', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
-        return [
-          200,
-          {
-            token: '',
-            user: {
-              id: '123',
-              legacy_id: legacyId
-            }
-          }
-        ]
+        return [200, { token: '', user: { id: '123', legacy_id: legacyId } }]
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/product_groups`)
+        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/product_groups/`)
         .reply(function(config) {
           return [
             200,
@@ -55,26 +47,60 @@ describe('v0: Analytics: gets product groups transactions report grouped by all 
     }
 
     const options = {
-      credentials: {
-        username: user.username,
-        password: user.password
-      },
+      credentials: { username: user.username, password: user.password },
       base: process.env.TILLHUB_BASE
     }
 
     const th = new TillhubClient()
 
     th.init(options)
-    await th.auth.loginUsername({
-      username: user.username,
-      password: user.password
-    })
+    await th.auth.loginUsername({ username: user.username, password: user.password })
 
     const analytics = th.analytics()
 
     expect(analytics).toBeInstanceOf(v0.Analytics)
 
     const { data } = await analytics.getProductGroupsReport()
+
+    expect(Array.isArray(data)).toBe(true)
+  })
+
+  it('gets product groups transactions report grouped by one staff member', async () => {
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+        return [200, { token: '', user: { id: '123', legacy_id: legacyId } }]
+      })
+
+      mock
+        .onGet(
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/product_groups/${staffMember}`
+        )
+        .reply(function(config) {
+          return [
+            200,
+            {
+              count: 1,
+              results: [{}]
+            }
+          ]
+        })
+    }
+
+    const options = {
+      credentials: { username: user.username, password: user.password },
+      base: process.env.TILLHUB_BASE
+    }
+
+    const th = new TillhubClient()
+
+    th.init(options)
+    await th.auth.loginUsername({ username: user.username, password: user.password })
+
+    const analytics = th.analytics()
+
+    expect(analytics).toBeInstanceOf(v0.Analytics)
+
+    const { data } = await analytics.getProductGroupsReport(staffMember)
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -95,7 +121,9 @@ describe('v0: Analytics: gets product groups transactions report grouped by all 
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/product_groups`)
+        .onGet(
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/product_groups/${staffMember}`
+        )
         .reply(function(config) {
           return [205]
         })
@@ -118,7 +146,7 @@ describe('v0: Analytics: gets product groups transactions report grouped by all 
     })
 
     try {
-      await th.analytics().getProductGroupsReport()
+      await th.analytics().getProductGroupsReport(staffMember)
     } catch (err) {
       expect(err.name).toBe('ProductGroupsReportFetchFailed')
     }
