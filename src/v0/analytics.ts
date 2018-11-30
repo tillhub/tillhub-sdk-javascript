@@ -38,6 +38,21 @@ export interface ProductsOptions {
   end?: string
 }
 
+export interface VoucherOptions {
+  [key: string]: any
+  voucher_number?: string
+  redeemed_id?: string
+  redeemed_branch?: string
+  redeemed_email?: string
+  redeemed_external_custom_id?: string
+  redeemed_at?: string
+  issuer?: string
+  issued_at?: string
+  valid_until?: string
+  comment?: string
+  search?: string
+}
+
 export class Analytics {
   endpoint: string
   http: Client
@@ -202,11 +217,20 @@ export class Analytics {
     })
   }
 
-  getVouchersReports(): Promise<AnalyticsResponse> {
+  getVouchersReports(query?: VoucherOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const uri = `${this.options.base}${this.endpoint}/${this.options.user}/reports/vouchers`
+        let uri = `${this.options.base}${this.endpoint}/${this.options.user}/reports/vouchers`
+        const q = query || {}
+        const queryKeys = Object.keys(q)
+          .map((key: string) => {
+            return `${key}=${q[key].toString()}`
+          })
+          .join('&')
 
+        if (Object.keys(q).length) {
+          uri += `?${queryKeys}`
+        }
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.VouchersReportFetchFailed())
 
