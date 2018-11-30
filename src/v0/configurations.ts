@@ -1,3 +1,4 @@
+import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 
@@ -6,9 +7,11 @@ export interface ConfigurationsOptions {
   base?: string
 }
 
-export interface ConfigurationsQuery {
+export interface ConfigurationsQueryOptions {
   limit?: number
   uri?: string
+  owner?: string
+  query?: any
 }
 
 export interface ConfigurationsResponse {
@@ -29,14 +32,21 @@ export class Configurations {
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 
-  getAll(query?: ConfigurationsQuery | undefined): Promise<ConfigurationsResponse> {
+  getAll(optionsOrQuery?: ConfigurationsQueryOptions | undefined): Promise<ConfigurationsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         let uri
-        if (query && query.uri) {
-          uri = query.uri
+        if (optionsOrQuery && optionsOrQuery.uri) {
+          uri = optionsOrQuery.uri
         } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+          let queryString = ''
+          if (optionsOrQuery && (optionsOrQuery.query || optionsOrQuery.owner)) {
+            queryString = qs.stringify({ owner: optionsOrQuery.owner, ...optionsOrQuery.query })
+          }
+
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
+            queryString ? `?${queryString}` : ''
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
