@@ -620,6 +620,18 @@ var InvoicesDeleteFailed = /** @class */ (function (_super) {
     return InvoicesDeleteFailed;
 }(BaseError));
 exports.InvoicesDeleteFailed = InvoicesDeleteFailed;
+var InvoicesGetMetaFailed = /** @class */ (function (_super) {
+    __extends(InvoicesGetMetaFailed, _super);
+    function InvoicesGetMetaFailed(message) {
+        if (message === void 0) { message = 'Could not get invoice meta'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'InvoicesGetMetaFailed';
+        return _this;
+    }
+    return InvoicesGetMetaFailed;
+}(BaseError));
+exports.InvoicesGetMetaFailed = InvoicesGetMetaFailed;
 var StocksFetchFailed = /** @class */ (function (_super) {
     __extends(StocksFetchFailed, _super);
     function StocksFetchFailed(message) {

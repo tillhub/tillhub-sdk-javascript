@@ -92,6 +92,7 @@ export declare class Invoices {
     options: InvoicesOptions;
     constructor(options: InvoicesOptions, http: Client);
     getAll(q?: InvoicesQuery | undefined): Promise<InvoicesResponse>;
+    getMeta(): Promise<InvoicesResponse>;
     getOne(requestObject: InvoicesGetOneRequestObject): Promise<InvoicesResponse>;
     create(requestObject: InvoicesCreateRequestObject): Promise<InvoicesResponse>;
     update(requestObject: InvoicesUpdateRequestObject): Promise<InvoicesResponse>;

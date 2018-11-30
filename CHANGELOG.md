@@ -1,3 +1,11 @@
+# [1.55.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.54.1...v1.55.0) (2018-11-30)
+
+
+### Features
+
+* **invoices:** Add meta handler ([6ef2082](https://github.com/tillhub/tillhub-sdk-javascript/commit/6ef2082))
+* expose features from login ([9667675](https://github.com/tillhub/tillhub-sdk-javascript/commit/9667675))
+
 ## [1.54.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.54.0...v1.54.1) (2018-11-23)
 
 

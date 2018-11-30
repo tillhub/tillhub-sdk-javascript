@@ -251,6 +251,11 @@ export declare class InvoicesDeleteFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class InvoicesGetMetaFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
 export declare class StocksFetchFailed extends BaseError {
     message: string;
     name: string;

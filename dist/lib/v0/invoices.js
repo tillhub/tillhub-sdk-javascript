@@ -94,10 +94,38 @@ var Invoices = /** @class */ (function () {
             });
         }); });
     };
+    Invoices.prototype.getMeta = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, err_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/meta";
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200)
+                            reject(new errors.InvoicesGetMetaFailed());
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        err_2 = _a.sent();
+                        return [2 /*return*/, reject(new errors.InvoicesGetMetaFailed())];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     Invoices.prototype.getOne = function (requestObject) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var invoiceId, query, uri, queryString, response, err_2;
+            var invoiceId, query, uri, queryString, response, err_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -122,7 +150,7 @@ var Invoices = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_2 = _a.sent();
+                        err_3 = _a.sent();
                         return [2 /*return*/, reject(new errors.InvoicesFetchOneFailed())];
                     case 4: return [2 /*return*/];
                 }
@@ -132,7 +160,7 @@ var Invoices = /** @class */ (function () {
     Invoices.prototype.create = function (requestObject) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var body, query, uri, queryString, response, err_3;
+            var body, query, uri, queryString, response, err_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -157,7 +185,7 @@ var Invoices = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_3 = _a.sent();
+                        err_4 = _a.sent();
                         return [2 /*return*/, reject(new errors.InvoicesCreateFailed())];
                     case 4: return [2 /*return*/];
                 }
@@ -167,7 +195,7 @@ var Invoices = /** @class */ (function () {
     Invoices.prototype.update = function (requestObject) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var body, query, invoiceId, uri, queryString, response, err_4;
+            var body, query, invoiceId, uri, queryString, response, err_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -192,8 +220,8 @@ var Invoices = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_4 = _a.sent();
-                        return [2 /*return*/, reject(new errors.InvoicesUpdateFailed(err_4.message))];
+                        err_5 = _a.sent();
+                        return [2 /*return*/, reject(new errors.InvoicesUpdateFailed(err_5.message))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -202,7 +230,7 @@ var Invoices = /** @class */ (function () {
     Invoices.prototype.deleteOne = function (invoiceId) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_5;
+            var uri, response, err_6;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -217,7 +245,7 @@ var Invoices = /** @class */ (function () {
                                 msg: response.data.msg
                             })];
                     case 3:
-                        err_5 = _a.sent();
+                        err_6 = _a.sent();
                         return [2 /*return*/, reject(new errors.InvoicesDeleteFailed())];
                     case 4: return [2 /*return*/];
                 }

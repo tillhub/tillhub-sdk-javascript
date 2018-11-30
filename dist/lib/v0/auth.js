@@ -132,7 +132,8 @@ var Auth = /** @class */ (function () {
                         return [2 /*return*/, {
                                 token: response.data.token,
                                 user: response.data.user.legacy_id || response.data.user.id,
-                                name: response.data.user.name
+                                name: response.data.user.name,
+                                features: response.data.features || {}
                             }];
                     case 3:
                         err_1 = _a.sent();

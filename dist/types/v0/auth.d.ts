@@ -28,6 +28,7 @@ export interface AuthResponse {
     token: string;
     user: string;
     name?: string;
+    features?: any;
 }
 /**
  * @class "v0.Auth"
