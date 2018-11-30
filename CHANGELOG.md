@@ -1,3 +1,10 @@
+# [1.56.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.55.0...v1.56.0) (2018-11-30)
+
+
+### Features
+
+* **configurations:** allow querying client account config ([e0fd087](https://github.com/tillhub/tillhub-sdk-javascript/commit/e0fd087))
+
 # [1.55.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.54.1...v1.55.0) (2018-11-30)
 
 

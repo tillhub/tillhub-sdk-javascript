@@ -3,9 +3,11 @@ export interface ConfigurationsOptions {
     user?: string;
     base?: string;
 }
-export interface ConfigurationsQuery {
+export interface ConfigurationsQueryOptions {
     limit?: number;
     uri?: string;
+    owner?: string;
+    query?: any;
 }
 export interface ConfigurationsResponse {
     data: object[];
@@ -16,5 +18,5 @@ export declare class Configurations {
     http: Client;
     options: ConfigurationsOptions;
     constructor(options: ConfigurationsOptions, http: Client);
-    getAll(query?: ConfigurationsQuery | undefined): Promise<ConfigurationsResponse>;
+    getAll(optionsOrQuery?: ConfigurationsQueryOptions | undefined): Promise<ConfigurationsResponse>;
 }
