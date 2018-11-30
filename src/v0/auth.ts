@@ -46,6 +46,7 @@ export interface AuthResponse {
   token: string
   user: string
   name?: string
+  features?: any
 }
 
 /**
@@ -116,7 +117,8 @@ export class Auth {
       return {
         token: response.data.token,
         user: response.data.user.legacy_id || response.data.user.id,
-        name: response.data.user.name
+        name: response.data.user.name,
+        features: response.data.features || {}
       } as AuthResponse
     } catch (err) {
       const error = new errors.AuthenticationFailed()
