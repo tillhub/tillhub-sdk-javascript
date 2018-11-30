@@ -39,6 +39,9 @@ describe('Auth: make auth flow', () => {
             user: {
               id: '123',
               legacy_id: '4564'
+            },
+            features: {
+              inventory: true
             }
           }
         ]
@@ -52,6 +55,8 @@ describe('Auth: make auth flow', () => {
       expect(data).toBeTruthy()
       expect(typeof data.token === 'string').toBe(true)
       expect(typeof data.user === 'string').toBe(true)
+      expect(typeof data.features === 'object').toBe(true)
+      expect(data.features).toEqual({ inventory: true })
     } catch (err) {
       throw err
     }
@@ -77,6 +82,9 @@ describe('Auth: make auth flow', () => {
             user: {
               id: '123',
               legacy_id: '4564'
+            },
+            features: {
+              inventory: true
             }
           }
         ]
@@ -90,6 +98,8 @@ describe('Auth: make auth flow', () => {
       expect(data).toBeTruthy()
       expect(typeof data.token === 'string').toBe(true)
       expect(typeof data.user === 'string').toBe(true)
+      expect(typeof data.features === 'object').toBe(true)
+      expect(data.features).toEqual({ inventory: true })
     } catch (err) {
       throw err
     }
