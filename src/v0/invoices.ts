@@ -113,18 +113,17 @@ export class Invoices {
 
   getAll(q?: InvoicesQuery | undefined): Promise<InvoicesResponse> {
     return new Promise(async (resolve, reject) => {
-      const query = JSON.parse(JSON.stringify(q))
       let uri
       let next
 
       try {
-        if (query && query.uri) {
-          uri = query.uri
+        if (q && q.uri) {
+          uri = q.uri
         } else {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}`
         }
 
-        const queryString = qs.stringify(query)
+        const queryString = qs.stringify(q)
         if (queryString) {
           uri = `${uri}?${queryString}`
         }
