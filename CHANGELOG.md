@@ -1,3 +1,11 @@
+# [1.57.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.56.0...v1.57.0) (2018-12-03)
+
+
+### Features
+
+* using qs.stringify to get query and added filter test ([96b0764](https://github.com/tillhub/tillhub-sdk-javascript/commit/96b0764))
+* **analytics.getVouchersReports:** allow getVouchersReport to take query parameters ([efa26ef](https://github.com/tillhub/tillhub-sdk-javascript/commit/efa26ef))
+
 # [1.56.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.55.0...v1.56.0) (2018-11-30)
 
 

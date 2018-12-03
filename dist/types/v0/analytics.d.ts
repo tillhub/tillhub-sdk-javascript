@@ -30,6 +30,20 @@ export interface ProductsOptions {
     start?: string;
     end?: string;
 }
+export interface VoucherOptions {
+    [key: string]: any;
+    voucher_number?: string;
+    redeemed_id?: string;
+    redeemed_branch?: string;
+    redeemed_email?: string;
+    redeemed_external_custom_id?: string;
+    redeemed_at?: string;
+    issuer?: string;
+    issued_at?: string;
+    valid_until?: string;
+    comment?: string;
+    search?: string;
+}
 export declare class Analytics {
     endpoint: string;
     http: Client;
@@ -42,5 +56,5 @@ export declare class Analytics {
     getStaffOverviewReport(): Promise<AnalyticsResponse>;
     getProductGroupsReport(staff?: StaffID): Promise<AnalyticsResponse>;
     getRefundsReport(staff?: StaffID): Promise<AnalyticsResponse>;
-    getVouchersReports(): Promise<AnalyticsResponse>;
+    getVouchersReports(query?: VoucherOptions | undefined): Promise<AnalyticsResponse>;
 }
