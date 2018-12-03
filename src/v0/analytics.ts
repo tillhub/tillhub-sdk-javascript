@@ -1,3 +1,4 @@
+import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 
@@ -36,6 +37,21 @@ export interface ProductsOptions {
   offset?: number
   start?: string
   end?: string
+}
+
+export interface VoucherOptions {
+  [key: string]: any
+  voucher_number?: string
+  redeemed_id?: string
+  redeemed_branch?: string
+  redeemed_email?: string
+  redeemed_external_custom_id?: string
+  redeemed_at?: string
+  issuer?: string
+  issued_at?: string
+  valid_until?: string
+  comment?: string
+  search?: string
 }
 
 export class Analytics {
@@ -202,10 +218,16 @@ export class Analytics {
     })
   }
 
-  getVouchersReports(): Promise<AnalyticsResponse> {
+  getVouchersReports(query?: VoucherOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const uri = `${this.options.base}${this.endpoint}/${this.options.user}/reports/vouchers`
+        let uri = `${this.options.base}${this.endpoint}/${this.options.user}/reports/vouchers`
+
+        const queryString = qs.stringify(query)
+
+        if (queryString) {
+          uri = `${uri}?${queryString}`
+        }
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.VouchersReportFetchFailed())
