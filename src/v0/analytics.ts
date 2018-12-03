@@ -1,3 +1,4 @@
+import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 
@@ -217,20 +218,17 @@ export class Analytics {
     })
   }
 
-  getVouchersReports(query?: VoucherOptions): Promise<AnalyticsResponse> {
+  getVouchersReports(query?: VoucherOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         let uri = `${this.options.base}${this.endpoint}/${this.options.user}/reports/vouchers`
-        const q = query || {}
-        const queryKeys = Object.keys(q)
-          .map((key: string) => {
-            return `${key}=${q[key].toString()}`
-          })
-          .join('&')
 
-        if (Object.keys(q).length) {
-          uri += `?${queryKeys}`
+        const queryString = qs.stringify(query)
+
+        if (queryString) {
+          uri = `${uri}?${queryString}`
         }
+
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.VouchersReportFetchFailed())
 
