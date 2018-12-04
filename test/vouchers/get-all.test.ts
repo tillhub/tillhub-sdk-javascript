@@ -77,6 +77,59 @@ describe('v0: vouchers: can get all', () => {
     expect(Array.isArray(data)).toBe(true)
   })
 
+  it("Tillhub's vouchers queryable with limit", async () => {
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+
+      mock
+        .onGet(`https://api.tillhub.com/api/v0/vouchers/${legacyId}?limit=10`)
+        .reply(function(config) {
+          return [
+            200,
+            {
+              count: 1,
+              results: [{}]
+            }
+          ]
+        })
+    }
+
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE
+    }
+
+    const th = new TillhubClient()
+
+    th.init(options)
+    await th.auth.loginUsername({
+      username: user.username,
+      password: user.password
+    })
+
+    const vouchers = th.vouchers()
+
+    expect(vouchers).toBeInstanceOf(v0.Vouchers)
+
+    const { data } = await vouchers.getAll({ limit: 10 })
+
+    expect(Array.isArray(data)).toBe(true)
+  })
+
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {

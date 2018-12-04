@@ -1,4 +1,5 @@
 import { diff, jsonPatchPathConverter } from 'just-diff'
+import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 
@@ -7,9 +8,10 @@ export interface VouchersOptions {
   base?: string
 }
 
-export interface VouchersQuery {
+export interface VouchersQueryOptions {
   limit?: number
   uri?: string
+  query?: any
 }
 
 export interface VouchersResponse {
@@ -70,16 +72,23 @@ export class Vouchers {
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 
-  getAll(query?: VouchersQuery | undefined): Promise<VouchersResponse> {
+  getAll(optionsOrQuery?: VouchersQueryOptions | undefined): Promise<VouchersResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
         let uri
-        if (query && query.uri) {
-          uri = query.uri
+        if (optionsOrQuery && optionsOrQuery.uri) {
+          uri = optionsOrQuery.uri
         } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+          let queryString = ''
+          if (optionsOrQuery && (optionsOrQuery.query || optionsOrQuery.limit)) {
+            queryString = qs.stringify({ limit: optionsOrQuery.limit, ...optionsOrQuery.query })
+          }
+
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
+            queryString ? `?${queryString}` : ''
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -158,14 +167,14 @@ export class Vouchers {
     })
   }
 
-  getAllLogs(query?: VouchersQuery | undefined): Promise<VouchersResponse> {
+  getAllLogs(optionsOrQuery?: VouchersQueryOptions | undefined): Promise<VouchersResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
         let uri
-        if (query && query.uri) {
-          uri = query.uri
+        if (optionsOrQuery && optionsOrQuery.uri) {
+          uri = optionsOrQuery.uri
         } else {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}/logs`
         }
