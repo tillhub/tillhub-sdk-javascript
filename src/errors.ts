@@ -300,6 +300,13 @@ export class VouchersCountFailed extends BaseError {
   }
 }
 
+export class VouchersMetaFailed extends BaseError {
+  public name = 'VouchersMetaFailed'
+  constructor(public message: string = 'Could not get voucher metadata') {
+    super(message)
+  }
+}
+
 export class VoucherDeleteFailed extends BaseError {
   public name = 'VoucherDeleteFailed'
   constructor(public message: string = 'Could not delete the voucher') {

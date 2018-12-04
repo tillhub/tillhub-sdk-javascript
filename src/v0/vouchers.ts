@@ -100,6 +100,30 @@ export class Vouchers {
     })
   }
 
+  meta(): Promise<VouchersResponse> {
+    return new Promise(async (resolve, reject) => {
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+
+      try {
+        const response = await this.http.getClient().get(uri)
+        if (response.status !== 200) reject(new errors.VouchersMetaFailed())
+
+        if (!response.data.results[0]) {
+          return reject(
+            new errors.VouchersMetaFailed('could not get voucher metadata unexpectedly')
+          )
+        }
+
+        return resolve({
+          data: response.data.results[0],
+          metadata: { count: response.data.count }
+        } as VouchersResponse)
+      } catch (err) {
+        return reject(new errors.VouchersMetaFailed())
+      }
+    })
+  }
+
   delete(voucherId: string): Promise<VouchersResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${voucherId}`
