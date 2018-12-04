@@ -53,6 +53,7 @@ export declare class Vouchers {
     options: VouchersOptions;
     constructor(options: VouchersOptions, http: Client);
     getAll(query?: VouchersQuery | undefined): Promise<VouchersResponse>;
+    meta(): Promise<VouchersResponse>;
     delete(voucherId: string): Promise<VouchersResponse>;
     count(): Promise<VouchersResponse>;
     getAllLogs(query?: VouchersQuery | undefined): Promise<VouchersResponse>;

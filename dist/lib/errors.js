@@ -524,6 +524,18 @@ var VouchersCountFailed = /** @class */ (function (_super) {
     return VouchersCountFailed;
 }(BaseError));
 exports.VouchersCountFailed = VouchersCountFailed;
+var VouchersMetaFailed = /** @class */ (function (_super) {
+    __extends(VouchersMetaFailed, _super);
+    function VouchersMetaFailed(message) {
+        if (message === void 0) { message = 'Could not get voucher metadata'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'VouchersMetaFailed';
+        return _this;
+    }
+    return VouchersMetaFailed;
+}(BaseError));
+exports.VouchersMetaFailed = VouchersMetaFailed;
 var VoucherDeleteFailed = /** @class */ (function (_super) {
     __extends(VoucherDeleteFailed, _super);
     function VoucherDeleteFailed(message) {

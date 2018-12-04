@@ -1,3 +1,10 @@
+# [1.58.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.57.0...v1.58.0) (2018-12-04)
+
+
+### Features
+
+* **vouchers:** adds meta ([253904a](https://github.com/tillhub/tillhub-sdk-javascript/commit/253904a))
+
 # [1.57.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.56.0...v1.57.0) (2018-12-03)
 
 

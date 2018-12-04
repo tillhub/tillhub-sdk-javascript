@@ -87,10 +87,41 @@ var Vouchers = /** @class */ (function () {
             });
         }); });
     };
-    Vouchers.prototype.delete = function (voucherId) {
+    Vouchers.prototype.meta = function () {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, err_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/meta";
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200)
+                            reject(new errors.VouchersMetaFailed());
+                        if (!response.data.results[0]) {
+                            return [2 /*return*/, reject(new errors.VouchersMetaFailed('could not get voucher metadata unexpectedly'))];
+                        }
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        err_2 = _a.sent();
+                        return [2 /*return*/, reject(new errors.VouchersMetaFailed())];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Vouchers.prototype.delete = function (voucherId) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, err_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -106,7 +137,7 @@ var Vouchers = /** @class */ (function () {
                                 msg: response.data.msg
                             })];
                     case 3:
-                        err_2 = _a.sent();
+                        err_3 = _a.sent();
                         return [2 /*return*/, reject(new errors.VoucherDeleteFailed())];
                     case 4: return [2 /*return*/];
                 }
@@ -116,7 +147,7 @@ var Vouchers = /** @class */ (function () {
     Vouchers.prototype.count = function () {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_3;
+            var uri, response, err_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -134,7 +165,7 @@ var Vouchers = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_3 = _a.sent();
+                        err_4 = _a.sent();
                         return [2 /*return*/, reject(new errors.VouchersCountFailed())];
                     case 4: return [2 /*return*/];
                 }
@@ -144,7 +175,7 @@ var Vouchers = /** @class */ (function () {
     Vouchers.prototype.getAllLogs = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var next, uri, response, err_4;
+            var next, uri, response, err_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -170,7 +201,7 @@ var Vouchers = /** @class */ (function () {
                                 next: next
                             })];
                     case 2:
-                        err_4 = _a.sent();
+                        err_5 = _a.sent();
                         return [2 /*return*/, reject(new errors.VouchersLogsFetchFailed())];
                     case 3: return [2 /*return*/];
                 }
@@ -180,7 +211,7 @@ var Vouchers = /** @class */ (function () {
     Vouchers.prototype.countLogs = function () {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_5;
+            var uri, response, err_6;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -198,7 +229,7 @@ var Vouchers = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_5 = _a.sent();
+                        err_6 = _a.sent();
                         return [2 /*return*/, reject(new errors.VouchersLogsCountFailed())];
                     case 4: return [2 /*return*/];
                 }
@@ -208,7 +239,7 @@ var Vouchers = /** @class */ (function () {
     Vouchers.prototype.get = function (voucherId) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_6;
+            var uri, response, err_7;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -226,7 +257,7 @@ var Vouchers = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_6 = _a.sent();
+                        err_7 = _a.sent();
                         return [2 /*return*/, reject(new errors.VoucherFetchFailed())];
                     case 4: return [2 /*return*/];
                 }
@@ -236,7 +267,7 @@ var Vouchers = /** @class */ (function () {
     Vouchers.prototype.put = function (voucherId, voucher) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_7;
+            var uri, response, err_8;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -252,7 +283,7 @@ var Vouchers = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_7 = _a.sent();
+                        err_8 = _a.sent();
                         return [2 /*return*/, reject(new errors.VoucherPutFailed())];
                     case 4: return [2 /*return*/];
                 }
@@ -262,7 +293,7 @@ var Vouchers = /** @class */ (function () {
     Vouchers.prototype.patch = function (source, target) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, patch, response, err_8;
+            var uri, patch, response, err_9;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -289,7 +320,7 @@ var Vouchers = /** @class */ (function () {
                                 metadata: { count: response.data.count, patch: patch }
                             })];
                     case 3:
-                        err_8 = _a.sent();
+                        err_9 = _a.sent();
                         return [2 /*return*/, reject(new errors.VoucherPatchFailed())];
                     case 4: return [2 /*return*/];
                 }
@@ -299,7 +330,7 @@ var Vouchers = /** @class */ (function () {
     Vouchers.prototype.create = function (voucher) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_9;
+            var uri, response, err_10;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -315,7 +346,7 @@ var Vouchers = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_9 = _a.sent();
+                        err_10 = _a.sent();
                         return [2 /*return*/, reject(new errors.VoucherCreationFailed())];
                     case 4: return [2 /*return*/];
                 }
