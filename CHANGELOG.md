@@ -1,3 +1,10 @@
+# [1.59.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.58.0...v1.59.0) (2018-12-04)
+
+
+### Features
+
+* **vouchers:** allow querying with limit ([9794caf](https://github.com/tillhub/tillhub-sdk-javascript/commit/9794caf))
+
 # [1.58.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.57.0...v1.58.0) (2018-12-04)
 
 

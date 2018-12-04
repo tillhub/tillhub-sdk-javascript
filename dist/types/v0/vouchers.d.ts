@@ -3,9 +3,10 @@ export interface VouchersOptions {
     user?: string;
     base?: string;
 }
-export interface VouchersQuery {
+export interface VouchersQueryOptions {
     limit?: number;
     uri?: string;
+    query?: any;
 }
 export interface VouchersResponse {
     data: object[];
@@ -52,11 +53,11 @@ export declare class Vouchers {
     http: Client;
     options: VouchersOptions;
     constructor(options: VouchersOptions, http: Client);
-    getAll(query?: VouchersQuery | undefined): Promise<VouchersResponse>;
+    getAll(optionsOrQuery?: VouchersQueryOptions | undefined): Promise<VouchersResponse>;
     meta(): Promise<VouchersResponse>;
     delete(voucherId: string): Promise<VouchersResponse>;
     count(): Promise<VouchersResponse>;
-    getAllLogs(query?: VouchersQuery | undefined): Promise<VouchersResponse>;
+    getAllLogs(optionsOrQuery?: VouchersQueryOptions | undefined): Promise<VouchersResponse>;
     countLogs(): Promise<VouchersResponse>;
     get(voucherId: string): Promise<VoucherResponse>;
     put(voucherId: string, voucher: Voucher): Promise<VoucherResponse>;
