@@ -1,3 +1,10 @@
+# [1.61.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.60.0...v1.61.0) (2018-12-05)
+
+
+### Features
+
+* **branches:** adds create handler ([2b43c5d](https://github.com/tillhub/tillhub-sdk-javascript/commit/2b43c5d))
+
 # [1.60.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.59.0...v1.60.0) (2018-12-05)
 
 

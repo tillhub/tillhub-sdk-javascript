@@ -417,6 +417,18 @@ var BranchPutFailed = /** @class */ (function (_super) {
     return BranchPutFailed;
 }(BaseError));
 exports.BranchPutFailed = BranchPutFailed;
+var BranchCreationFailed = /** @class */ (function (_super) {
+    __extends(BranchCreationFailed, _super);
+    function BranchCreationFailed(message) {
+        if (message === void 0) { message = 'Could not create branch'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'VoucherPutFailed';
+        return _this;
+    }
+    return BranchCreationFailed;
+}(BaseError));
+exports.BranchCreationFailed = BranchCreationFailed;
 var BranchesCountFailed = /** @class */ (function (_super) {
     __extends(BranchesCountFailed, _super);
     function BranchesCountFailed(message) {
@@ -527,7 +539,7 @@ exports.VoucherPatchFailed = VoucherPatchFailed;
 var VoucherCreationFailed = /** @class */ (function (_super) {
     __extends(VoucherCreationFailed, _super);
     function VoucherCreationFailed(message) {
-        if (message === void 0) { message = 'Could not alter voucher'; }
+        if (message === void 0) { message = 'Could not create voucher'; }
         var _this = _super.call(this, message) || this;
         _this.message = message;
         _this.name = 'VoucherPutFailed';

@@ -43,5 +43,6 @@ export declare class Branches {
     getAll(query?: BranchesQuery | undefined): Promise<BranchesResponse>;
     get(branchId: string): Promise<BranchResponse>;
     put(branchId: string, branch: Branch): Promise<BranchResponse>;
+    create(branch: Branch): Promise<BranchResponse>;
     count(): Promise<BranchesResponse>;
 }
