@@ -223,6 +223,20 @@ export class BranchesFetchFailed extends BaseError {
   }
 }
 
+export class BranchFetchFailed extends BaseError {
+  public name = 'BrancheFetchFailed'
+  constructor(public message: string = 'Could not fetch branch') {
+    super(message)
+  }
+}
+
+export class BranchPutFailed extends BaseError {
+  public name = 'BranchPutFailed'
+  constructor(public message: string = 'Could not alter branch') {
+    super(message)
+  }
+}
+
 export class BranchesCountFailed extends BaseError {
   public name = 'BranchesCountFailed'
   constructor(public message: string = 'Could not count the branches') {
