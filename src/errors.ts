@@ -237,6 +237,13 @@ export class BranchPutFailed extends BaseError {
   }
 }
 
+export class BranchCreationFailed extends BaseError {
+  public name = 'VoucherPutFailed'
+  constructor(public message: string = 'Could not create branch') {
+    super(message)
+  }
+}
+
 export class BranchesCountFailed extends BaseError {
   public name = 'BranchesCountFailed'
   constructor(public message: string = 'Could not count the branches') {
@@ -302,7 +309,7 @@ export class VoucherPatchFailed extends BaseError {
 
 export class VoucherCreationFailed extends BaseError {
   public name = 'VoucherPutFailed'
-  constructor(public message: string = 'Could not alter voucher') {
+  constructor(public message: string = 'Could not create voucher') {
     super(message)
   }
 }

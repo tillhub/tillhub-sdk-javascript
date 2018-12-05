@@ -119,6 +119,22 @@ export class Branches {
     })
   }
 
+  create(branch: Branch): Promise<BranchResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+      try {
+        const response = await this.http.getClient().post(uri, branch)
+
+        return resolve({
+          data: response.data.results[0] as Branch,
+          metadata: { count: response.data.count }
+        } as BranchResponse)
+      } catch (err) {
+        return reject(new errors.BranchCreationFailed())
+      }
+    })
+  }
+
   count(): Promise<BranchesResponse> {
     return new Promise(async (resolve, reject) => {
       let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
