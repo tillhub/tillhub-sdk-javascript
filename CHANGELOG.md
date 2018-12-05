@@ -1,3 +1,10 @@
+## [1.61.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.61.0...v1.61.1) (2018-12-05)
+
+
+### Bug Fixes
+
+* **errors:** fixes error naming ([8095b2f](https://github.com/tillhub/tillhub-sdk-javascript/commit/8095b2f))
+
 # [1.61.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.60.0...v1.61.0) (2018-12-05)
 
 

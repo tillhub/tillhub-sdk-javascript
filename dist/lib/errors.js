@@ -423,7 +423,7 @@ var BranchCreationFailed = /** @class */ (function (_super) {
         if (message === void 0) { message = 'Could not create branch'; }
         var _this = _super.call(this, message) || this;
         _this.message = message;
-        _this.name = 'VoucherPutFailed';
+        _this.name = 'VoucherPostFailed';
         return _this;
     }
     return BranchCreationFailed;
@@ -542,7 +542,7 @@ var VoucherCreationFailed = /** @class */ (function (_super) {
         if (message === void 0) { message = 'Could not create voucher'; }
         var _this = _super.call(this, message) || this;
         _this.message = message;
-        _this.name = 'VoucherPutFailed';
+        _this.name = 'VoucherPostFailed';
         return _this;
     }
     return VoucherCreationFailed;
