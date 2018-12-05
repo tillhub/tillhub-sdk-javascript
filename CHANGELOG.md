@@ -1,3 +1,10 @@
+# [1.60.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.59.0...v1.60.0) (2018-12-05)
+
+
+### Features
+
+* **branches:** adds get one and put one ([215a4ac](https://github.com/tillhub/tillhub-sdk-javascript/commit/215a4ac))
+
 # [1.59.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.58.0...v1.59.0) (2018-12-04)
 
 

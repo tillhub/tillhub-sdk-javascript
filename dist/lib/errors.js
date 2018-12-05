@@ -393,6 +393,30 @@ var BranchesFetchFailed = /** @class */ (function (_super) {
     return BranchesFetchFailed;
 }(BaseError));
 exports.BranchesFetchFailed = BranchesFetchFailed;
+var BranchFetchFailed = /** @class */ (function (_super) {
+    __extends(BranchFetchFailed, _super);
+    function BranchFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch branch'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'BrancheFetchFailed';
+        return _this;
+    }
+    return BranchFetchFailed;
+}(BaseError));
+exports.BranchFetchFailed = BranchFetchFailed;
+var BranchPutFailed = /** @class */ (function (_super) {
+    __extends(BranchPutFailed, _super);
+    function BranchPutFailed(message) {
+        if (message === void 0) { message = 'Could not alter branch'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'BranchPutFailed';
+        return _this;
+    }
+    return BranchPutFailed;
+}(BaseError));
+exports.BranchPutFailed = BranchPutFailed;
 var BranchesCountFailed = /** @class */ (function (_super) {
     __extends(BranchesCountFailed, _super);
     function BranchesCountFailed(message) {
