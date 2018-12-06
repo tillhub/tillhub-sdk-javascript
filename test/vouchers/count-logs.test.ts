@@ -74,9 +74,9 @@ describe('v0: Branches: can get count number of all vouchers logs', () => {
 
     expect(vouchers).toBeInstanceOf(v0.Vouchers)
 
-    const { data } = await vouchers.countLogs()
+    const { data } = await vouchers.logs.meta()
 
-    expect(Array.isArray(data)).toBe(true)
+    expect(data).toEqual({ count: 50 })
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -118,9 +118,9 @@ describe('v0: Branches: can get count number of all vouchers logs', () => {
     })
 
     try {
-      await th.vouchers().countLogs()
+      await th.vouchers().logs.meta()
     } catch (err) {
-      expect(err.name).toBe('VouchersLogsCountFailed')
+      expect(err.name).toBe('VoucherLogsMetaFailed')
     }
   })
 })

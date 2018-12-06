@@ -286,6 +286,13 @@ export class VouchersFetchFailed extends BaseError {
   }
 }
 
+export class VoucherLogsFetchFailed extends BaseError {
+  public name = 'VoucherLogsFetchFailed'
+  constructor(public message: string = 'Could not fetch the voucher logs') {
+    super(message)
+  }
+}
+
 export class VoucherFetchFailed extends BaseError {
   public name = 'VoucherFetchFailed'
   constructor(public message: string = 'Could not fetch voucher') {
@@ -324,6 +331,13 @@ export class VouchersCountFailed extends BaseError {
 export class VouchersMetaFailed extends BaseError {
   public name = 'VouchersMetaFailed'
   constructor(public message: string = 'Could not get voucher metadata') {
+    super(message)
+  }
+}
+
+export class VoucherLogsMetaFailed extends BaseError {
+  public name = 'VoucherLogsMetaFailed'
+  constructor(public message: string = 'Could not get voucher logs metadata') {
     super(message)
   }
 }
