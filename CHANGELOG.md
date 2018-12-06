@@ -1,3 +1,10 @@
+## [1.61.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.61.1...v1.61.2) (2018-12-06)
+
+
+### Bug Fixes
+
+* **docs:** fixes docs; need to trigger release ([b4ae787](https://github.com/tillhub/tillhub-sdk-javascript/commit/b4ae787))
+
 ## [1.61.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.61.0...v1.61.1) (2018-12-05)
 
 

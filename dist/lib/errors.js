@@ -500,6 +500,18 @@ var VouchersFetchFailed = /** @class */ (function (_super) {
     return VouchersFetchFailed;
 }(BaseError));
 exports.VouchersFetchFailed = VouchersFetchFailed;
+var VoucherLogsFetchFailed = /** @class */ (function (_super) {
+    __extends(VoucherLogsFetchFailed, _super);
+    function VoucherLogsFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch the voucher logs'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'VoucherLogsFetchFailed';
+        return _this;
+    }
+    return VoucherLogsFetchFailed;
+}(BaseError));
+exports.VoucherLogsFetchFailed = VoucherLogsFetchFailed;
 var VoucherFetchFailed = /** @class */ (function (_super) {
     __extends(VoucherFetchFailed, _super);
     function VoucherFetchFailed(message) {
@@ -572,6 +584,18 @@ var VouchersMetaFailed = /** @class */ (function (_super) {
     return VouchersMetaFailed;
 }(BaseError));
 exports.VouchersMetaFailed = VouchersMetaFailed;
+var VoucherLogsMetaFailed = /** @class */ (function (_super) {
+    __extends(VoucherLogsMetaFailed, _super);
+    function VoucherLogsMetaFailed(message) {
+        if (message === void 0) { message = 'Could not get voucher logs metadata'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'VoucherLogsMetaFailed';
+        return _this;
+    }
+    return VoucherLogsMetaFailed;
+}(BaseError));
+exports.VoucherLogsMetaFailed = VoucherLogsMetaFailed;
 var VoucherDeleteFailed = /** @class */ (function (_super) {
     __extends(VoucherDeleteFailed, _super);
     function VoucherDeleteFailed(message) {

@@ -13,6 +13,11 @@ export interface VouchersResponse {
     metadata: object;
     msg?: string;
 }
+export interface VoucherLogsResponse {
+    data: object[];
+    metadata: object;
+    msg?: string;
+}
 export interface VoucherResponse {
     data: Voucher;
     metadata?: {
@@ -51,17 +56,25 @@ export interface Voucher {
 export declare class Vouchers {
     endpoint: string;
     http: Client;
+    logs: VoucherLogs;
     options: VouchersOptions;
     constructor(options: VouchersOptions, http: Client);
     getAll(optionsOrQuery?: VouchersQueryOptions | undefined): Promise<VouchersResponse>;
     meta(): Promise<VouchersResponse>;
     delete(voucherId: string): Promise<VouchersResponse>;
     count(): Promise<VouchersResponse>;
-    getAllLogs(optionsOrQuery?: VouchersQueryOptions | undefined): Promise<VouchersResponse>;
-    countLogs(): Promise<VouchersResponse>;
     get(voucherId: string): Promise<VoucherResponse>;
+    getLogs(voucherId: string, optionsOrQuery?: VouchersQueryOptions | undefined): Promise<VoucherLogsResponse>;
     put(voucherId: string, voucher: Voucher): Promise<VoucherResponse>;
     patch(source: Voucher, target: Voucher): Promise<VoucherResponse>;
     create(voucher: Voucher): Promise<VoucherResponse>;
+}
+export declare class VoucherLogs {
+    endpoint: string;
+    http: Client;
+    options: VouchersOptions;
+    constructor(options: VouchersOptions, http: Client);
+    getAll(optionsOrQuery?: VouchersQueryOptions | undefined): Promise<VoucherLogsResponse>;
+    meta(): Promise<VoucherLogsResponse>;
 }
 export {};

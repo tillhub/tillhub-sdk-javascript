@@ -63,6 +63,7 @@ var Vouchers = /** @class */ (function () {
     function Vouchers(options, http) {
         this.options = options;
         this.http = http;
+        this.logs = new VoucherLogs(options, http);
         this.endpoint = '/api/v0/vouchers';
         this.options.base = this.options.base || 'https://api.tillhub.com';
     }
@@ -191,74 +192,10 @@ var Vouchers = /** @class */ (function () {
             });
         }); });
     };
-    Vouchers.prototype.getAllLogs = function (optionsOrQuery) {
-        var _this = this;
-        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var next, uri, response, err_5;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        uri = void 0;
-                        if (optionsOrQuery && optionsOrQuery.uri) {
-                            uri = optionsOrQuery.uri;
-                        }
-                        else {
-                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/logs";
-                        }
-                        return [4 /*yield*/, this.http.getClient().get(uri)];
-                    case 1:
-                        response = _a.sent();
-                        if (response.status !== 200)
-                            reject(new errors.VouchersLogsFetchFailed());
-                        if (response.data.cursor && response.data.cursor.next) {
-                            next = this.getAll({ uri: response.data.cursor.next });
-                        }
-                        return [2 /*return*/, resolve({
-                                data: response.data.results,
-                                metadata: { count: response.data.count },
-                                next: next
-                            })];
-                    case 2:
-                        err_5 = _a.sent();
-                        return [2 /*return*/, reject(new errors.VouchersLogsFetchFailed())];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        }); });
-    };
-    Vouchers.prototype.countLogs = function () {
-        var _this = this;
-        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_6;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/logs/meta";
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, this.http.getClient().get(uri)];
-                    case 2:
-                        response = _a.sent();
-                        if (response.status !== 200)
-                            reject(new errors.VouchersLogsCountFailed());
-                        return [2 /*return*/, resolve({
-                                data: response.data.results,
-                                metadata: { count: response.data.count }
-                            })];
-                    case 3:
-                        err_6 = _a.sent();
-                        return [2 /*return*/, reject(new errors.VouchersLogsCountFailed())];
-                    case 4: return [2 /*return*/];
-                }
-            });
-        }); });
-    };
     Vouchers.prototype.get = function (voucherId) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_7;
+            var uri, response, err_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -276,9 +213,45 @@ var Vouchers = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_7 = _a.sent();
+                        err_5 = _a.sent();
                         return [2 /*return*/, reject(new errors.VoucherFetchFailed())];
                     case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Vouchers.prototype.getLogs = function (voucherId, optionsOrQuery) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var next, uri, response, err_6;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = void 0;
+                        if (optionsOrQuery && optionsOrQuery.uri) {
+                            uri = optionsOrQuery.uri;
+                        }
+                        else {
+                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + voucherId + "/logs";
+                        }
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200)
+                            reject(new errors.VoucherLogsFetchFailed());
+                        if (response.data.cursor && response.data.cursor.next) {
+                            next = this.getAll({ uri: response.data.cursor.next });
+                        }
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { count: response.data.count },
+                                next: next
+                            })];
+                    case 2:
+                        err_6 = _a.sent();
+                        return [2 /*return*/, reject(new errors.VoucherLogsFetchFailed())];
+                    case 3: return [2 /*return*/];
                 }
             });
         }); });
@@ -286,7 +259,7 @@ var Vouchers = /** @class */ (function () {
     Vouchers.prototype.put = function (voucherId, voucher) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_8;
+            var uri, response, err_7;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -302,7 +275,7 @@ var Vouchers = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_8 = _a.sent();
+                        err_7 = _a.sent();
                         return [2 /*return*/, reject(new errors.VoucherPutFailed())];
                     case 4: return [2 /*return*/];
                 }
@@ -312,7 +285,7 @@ var Vouchers = /** @class */ (function () {
     Vouchers.prototype.patch = function (source, target) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, patch, response, err_9;
+            var uri, patch, response, err_8;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -339,7 +312,7 @@ var Vouchers = /** @class */ (function () {
                                 metadata: { count: response.data.count, patch: patch }
                             })];
                     case 3:
-                        err_9 = _a.sent();
+                        err_8 = _a.sent();
                         return [2 /*return*/, reject(new errors.VoucherPatchFailed())];
                     case 4: return [2 /*return*/];
                 }
@@ -349,7 +322,7 @@ var Vouchers = /** @class */ (function () {
     Vouchers.prototype.create = function (voucher) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_10;
+            var uri, response, err_9;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -365,7 +338,7 @@ var Vouchers = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_10 = _a.sent();
+                        err_9 = _a.sent();
                         return [2 /*return*/, reject(new errors.VoucherCreationFailed())];
                     case 4: return [2 /*return*/];
                 }
@@ -375,4 +348,85 @@ var Vouchers = /** @class */ (function () {
     return Vouchers;
 }());
 exports.Vouchers = Vouchers;
+var VoucherLogs = /** @class */ (function () {
+    function VoucherLogs(options, http) {
+        this.options = options;
+        this.http = http;
+        this.endpoint = '/api/v0/vouchers';
+        this.options.base = this.options.base || 'https://api.tillhub.com';
+    }
+    VoucherLogs.prototype.getAll = function (optionsOrQuery) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var next, uri, queryString, response, err_10;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = void 0;
+                        if (optionsOrQuery && optionsOrQuery.uri) {
+                            uri = optionsOrQuery.uri;
+                        }
+                        else {
+                            queryString = '';
+                            if (optionsOrQuery && (optionsOrQuery.query || optionsOrQuery.limit)) {
+                                queryString = qs_1.default.stringify(__assign({ limit: optionsOrQuery.limit }, optionsOrQuery.query));
+                            }
+                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/logs" + (queryString ? "?" + queryString : '');
+                        }
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200)
+                            reject(new errors.VouchersLogsFetchFailed());
+                        if (response.data.cursor && response.data.cursor.next) {
+                            next = this.getAll({ uri: response.data.cursor.next });
+                        }
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { cursor: response.data.cursor },
+                                next: next
+                            })];
+                    case 2:
+                        err_10 = _a.sent();
+                        return [2 /*return*/, reject(new errors.VouchersLogsFetchFailed())];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    VoucherLogs.prototype.meta = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, err_11;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/logs/meta";
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200)
+                            reject(new errors.VoucherLogsMetaFailed());
+                        if (!response.data.results[0]) {
+                            return [2 /*return*/, reject(new errors.VouchersMetaFailed('could not get voucher metadata unexpectedly'))];
+                        }
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        err_11 = _a.sent();
+                        return [2 /*return*/, reject(new errors.VoucherLogsMetaFailed())];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    return VoucherLogs;
+}());
+exports.VoucherLogs = VoucherLogs;
 //# sourceMappingURL=vouchers.js.map
