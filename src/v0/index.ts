@@ -7,7 +7,7 @@ import { Accounts } from './accounts'
 import { Configurations } from './configurations'
 import { Branches } from './branches'
 import { Customers } from './customers'
-import { Vouchers } from './vouchers'
+import { Vouchers, VoucherLogs } from './vouchers'
 import { Invoices } from './invoices'
 import { Stocks } from './stocks'
 import { Orders } from './orders'
@@ -25,6 +25,7 @@ export {
   Branches,
   Customers,
   Vouchers,
+  VoucherLogs,
   Invoices,
   Stocks,
   Orders,
