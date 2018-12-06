@@ -20,6 +20,7 @@ var customers_1 = require("./customers");
 exports.Customers = customers_1.Customers;
 var vouchers_1 = require("./vouchers");
 exports.Vouchers = vouchers_1.Vouchers;
+exports.VoucherLogs = vouchers_1.VoucherLogs;
 var invoices_1 = require("./invoices");
 exports.Invoices = invoices_1.Invoices;
 var stocks_1 = require("./stocks");

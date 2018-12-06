@@ -224,6 +224,20 @@ var TillhubClient = /** @class */ (function () {
         return new v0.Vouchers({ user: this.auth.user, base: this.options.base }, this.http);
     };
     /**
+     * Create an authenticated vouchers logs instance
+     *
+     */
+    TillhubClient.prototype.voucherLogs = function () {
+        if (!this.options ||
+            !this.options.base ||
+            !this.http ||
+            !this.auth ||
+            !this.auth.authenticated) {
+            throw new errors.UninstantiatedClient();
+        }
+        return new v0.VoucherLogs({ user: this.auth.user, base: this.options.base }, this.http);
+    };
+    /**
      * Create an authenticated invoices instance
      *
      */

@@ -78,6 +78,11 @@ export declare class TillhubClient {
      */
     vouchers(): v0.Vouchers;
     /**
+     * Create an authenticated vouchers logs instance
+     *
+     */
+    voucherLogs(): v0.VoucherLogs;
+    /**
      * Create an authenticated invoices instance
      *
      */

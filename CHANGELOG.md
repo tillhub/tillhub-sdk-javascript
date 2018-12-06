@@ -1,3 +1,10 @@
+# [1.62.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.61.2...v1.62.0) (2018-12-06)
+
+
+### Features
+
+* **vouchers:** expose logs class ([c253544](https://github.com/tillhub/tillhub-sdk-javascript/commit/c253544))
+
 ## [1.61.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.61.1...v1.61.2) (2018-12-06)
 
 
