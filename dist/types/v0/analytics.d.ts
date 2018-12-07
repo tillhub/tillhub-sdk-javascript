@@ -57,4 +57,5 @@ export declare class Analytics {
     getProductGroupsReport(staff?: StaffID): Promise<AnalyticsResponse>;
     getRefundsReport(staff?: StaffID): Promise<AnalyticsResponse>;
     getVouchersReports(query?: VoucherOptions | undefined): Promise<AnalyticsResponse>;
+    getProductsReport(staff?: StaffID): Promise<AnalyticsResponse>;
 }

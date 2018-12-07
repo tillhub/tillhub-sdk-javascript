@@ -1028,4 +1028,16 @@ var VouchersReportFetchFailed = /** @class */ (function (_super) {
     return VouchersReportFetchFailed;
 }(BaseError));
 exports.VouchersReportFetchFailed = VouchersReportFetchFailed;
+var ProductsReportFetchFailed = /** @class */ (function (_super) {
+    __extends(ProductsReportFetchFailed, _super);
+    function ProductsReportFetchFailed(message) {
+        if (message === void 0) { message = 'Could not fetch the products report'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'ProductsReportFetchFailed';
+        return _this;
+    }
+    return ProductsReportFetchFailed;
+}(BaseError));
+exports.ProductsReportFetchFailed = ProductsReportFetchFailed;
 //# sourceMappingURL=errors.js.map

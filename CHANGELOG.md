@@ -1,3 +1,10 @@
+# [1.64.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.63.0...v1.64.0) (2018-12-07)
+
+
+### Features
+
+* **analytics:** add staff reports products handler ([8913b94](https://github.com/tillhub/tillhub-sdk-javascript/commit/8913b94))
+
 # [1.63.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.62.0...v1.63.0) (2018-12-07)
 
 
