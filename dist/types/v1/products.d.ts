@@ -5,6 +5,9 @@ export interface Images {
 }
 declare type ProductTypes = 'product' | 'voucher' | 'linked' | 'linked_product' | 'variant' | 'variant_product';
 export interface Product {
+    id?: string;
+}
+export interface Product {
     name?: string;
     description?: string | null;
     attributes?: object | null;
@@ -56,6 +59,14 @@ export interface ProductsResponse {
     metadata: object;
     msg?: string;
 }
+export interface ProductResponse {
+    data: Product;
+    metadata?: {
+        count?: number;
+        patch?: any;
+    };
+    msg?: string;
+}
 export interface ProductsOptions {
     limit?: number;
     uri?: string;
@@ -72,7 +83,8 @@ export declare class Products {
     constructor(options: ProductsOptions, http: Client);
     create(product: Product): Promise<ProductsResponse>;
     getAll(options?: ProductsOptions | undefined): Promise<ProductsResponse>;
-    getOne(productId: string): Promise<ProductsResponse>;
+    get(productId: string): Promise<ProductResponse>;
+    meta(): Promise<ProductsResponse>;
     update(requestObject: ProductsUpdateRequestObject): Promise<ProductsResponse>;
     count(): Promise<ProductsResponse>;
     delete(productId: string): Promise<ProductsResponse>;

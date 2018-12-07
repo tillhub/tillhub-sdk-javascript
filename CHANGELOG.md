@@ -1,3 +1,10 @@
+# [1.63.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.62.0...v1.63.0) (2018-12-07)
+
+
+### Features
+
+* **products:** adds meta; removes getOne; adds get ([aeca7ee](https://github.com/tillhub/tillhub-sdk-javascript/commit/aeca7ee))
+
 # [1.62.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.61.2...v1.62.0) (2018-12-06)
 
 

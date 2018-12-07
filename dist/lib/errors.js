@@ -129,6 +129,18 @@ var ProductsCountFailed = /** @class */ (function (_super) {
     return ProductsCountFailed;
 }(BaseError));
 exports.ProductsCountFailed = ProductsCountFailed;
+var ProductsMetaFailed = /** @class */ (function (_super) {
+    __extends(ProductsMetaFailed, _super);
+    function ProductsMetaFailed(message) {
+        if (message === void 0) { message = 'Could not get products metadata'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'ProductsMetaFailed';
+        return _this;
+    }
+    return ProductsMetaFailed;
+}(BaseError));
+exports.ProductsMetaFailed = ProductsMetaFailed;
 var ProductsUpdateFailed = /** @class */ (function (_super) {
     __extends(ProductsUpdateFailed, _super);
     function ProductsUpdateFailed(message) {

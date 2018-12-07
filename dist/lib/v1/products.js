@@ -116,7 +116,7 @@ var Products = /** @class */ (function () {
             });
         }); });
     };
-    Products.prototype.getOne = function (productId) {
+    Products.prototype.get = function (productId) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, err_3;
@@ -132,7 +132,8 @@ var Products = /** @class */ (function () {
                         response = _a.sent();
                         response.status !== 200 && reject(new errors.ProductFetchFailed());
                         return [2 /*return*/, resolve({
-                                data: response.data.results,
+                                data: response.data.results[0],
+                                msg: response.data.msg,
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
@@ -143,10 +144,41 @@ var Products = /** @class */ (function () {
             });
         }); });
     };
+    Products.prototype.meta = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, err_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/meta";
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200)
+                            reject(new errors.ProductsMetaFailed());
+                        if (!response.data.results[0]) {
+                            return [2 /*return*/, reject(new errors.ProductsMetaFailed('could not get voucher metadata unexpectedly'))];
+                        }
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        err_4 = _a.sent();
+                        return [2 /*return*/, reject(new errors.ProductsMetaFailed())];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     Products.prototype.update = function (requestObject) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var body, productId, uri, response, err_4;
+            var body, productId, uri, response, err_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -164,7 +196,7 @@ var Products = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_4 = _a.sent();
+                        err_5 = _a.sent();
                         return [2 /*return*/, reject(new errors.ProductsUpdateFailed())];
                     case 4: return [2 /*return*/];
                 }
@@ -174,7 +206,7 @@ var Products = /** @class */ (function () {
     Products.prototype.count = function () {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_5;
+            var uri, response, err_6;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -191,7 +223,7 @@ var Products = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_5 = _a.sent();
+                        err_6 = _a.sent();
                         return [2 /*return*/, reject(new errors.ProductsCountFailed())];
                     case 4: return [2 /*return*/];
                 }
@@ -201,7 +233,7 @@ var Products = /** @class */ (function () {
     Products.prototype.delete = function (productId) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_6;
+            var uri, response, err_7;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -217,7 +249,7 @@ var Products = /** @class */ (function () {
                                 msg: response.data.msg
                             })];
                     case 3:
-                        err_6 = _a.sent();
+                        err_7 = _a.sent();
                         return [2 /*return*/, reject(new errors.ProductsDeleteFailed())];
                     case 4: return [2 /*return*/];
                 }
@@ -227,7 +259,7 @@ var Products = /** @class */ (function () {
     Products.prototype.search = function (searchTerm) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_7;
+            var uri, response, err_8;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -244,7 +276,7 @@ var Products = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_7 = _a.sent();
+                        err_8 = _a.sent();
                         return [2 /*return*/, reject(new errors.ProductsSearchFailed())];
                     case 4: return [2 /*return*/];
                 }

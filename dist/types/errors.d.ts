@@ -46,6 +46,11 @@ export declare class ProductsCountFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class ProductsMetaFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
 export declare class ProductsUpdateFailed extends BaseError {
     message: string;
     name: string;
