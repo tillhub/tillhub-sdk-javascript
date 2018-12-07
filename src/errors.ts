@@ -69,6 +69,13 @@ export class ProductsCountFailed extends BaseError {
   }
 }
 
+export class ProductsMetaFailed extends BaseError {
+  public name = 'ProductsMetaFailed'
+  constructor(public message: string = 'Could not get products metadata') {
+    super(message)
+  }
+}
+
 export class ProductsUpdateFailed extends BaseError {
   public name = 'ProductsUpdateFailed'
   constructor(public message: string = 'Could not update the product') {

@@ -16,6 +16,10 @@ type ProductTypes =
   | 'variant_product'
 
 export interface Product {
+  id?: string
+}
+
+export interface Product {
   name?: string
   description?: string | null
   attributes?: object | null
@@ -67,6 +71,15 @@ export interface ProductsOptions {
 export interface ProductsResponse {
   data: object[]
   metadata: object
+  msg?: string
+}
+
+export interface ProductResponse {
+  data: Product
+  metadata?: {
+    count?: number
+    patch?: any
+  }
   msg?: string
 }
 
@@ -143,7 +156,7 @@ export class Products {
     })
   }
 
-  getOne(productId: string): Promise<ProductsResponse> {
+  get(productId: string): Promise<ProductResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productId}`
       try {
@@ -151,11 +164,36 @@ export class Products {
         response.status !== 200 && reject(new errors.ProductFetchFailed())
 
         return resolve({
-          data: response.data.results,
+          data: response.data.results[0] as Product,
+          msg: response.data.msg,
+          metadata: { count: response.data.count }
+        } as ProductResponse)
+      } catch (err) {
+        return reject(new errors.ProductFetchFailed())
+      }
+    })
+  }
+
+  meta(): Promise<ProductsResponse> {
+    return new Promise(async (resolve, reject) => {
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+
+      try {
+        const response = await this.http.getClient().get(uri)
+        if (response.status !== 200) reject(new errors.ProductsMetaFailed())
+
+        if (!response.data.results[0]) {
+          return reject(
+            new errors.ProductsMetaFailed('could not get voucher metadata unexpectedly')
+          )
+        }
+
+        return resolve({
+          data: response.data.results[0],
           metadata: { count: response.data.count }
         } as ProductsResponse)
       } catch (err) {
-        return reject(new errors.ProductFetchFailed())
+        return reject(new errors.ProductsMetaFailed())
       }
     })
   }

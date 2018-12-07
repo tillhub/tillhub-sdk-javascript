@@ -74,9 +74,9 @@ describe('v1: Products: can get count number of all products', () => {
 
     expect(products).toBeInstanceOf(v1.Products)
 
-    const { data } = await products.count()
+    const { data } = await products.meta()
 
-    expect(Array.isArray(data)).toBe(true)
+    expect(data).toEqual({ count: 50 })
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -118,9 +118,9 @@ describe('v1: Products: can get count number of all products', () => {
     })
 
     try {
-      await th.products().count()
+      await th.products().meta()
     } catch (err) {
-      expect(err.name).toBe('ProductsCountFailed')
+      expect(err.name).toBe('ProductsMetaFailed')
     }
   })
 })

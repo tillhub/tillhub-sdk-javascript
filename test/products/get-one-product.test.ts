@@ -49,7 +49,7 @@ describe('v1: Products: can get one', () => {
             200,
             {
               count: 1,
-              results: [{}]
+              results: [{ id: '12345' }]
             }
           ]
         })
@@ -75,9 +75,9 @@ describe('v1: Products: can get one', () => {
 
     expect(products).toBeInstanceOf(v1.Products)
 
-    const { data } = await products.getOne(productId)
+    const { data } = await products.get(productId)
 
-    expect(Array.isArray(data)).toBe(true)
+    expect(data).toEqual({ id: '12345' })
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -99,7 +99,7 @@ describe('v1: Products: can get one', () => {
 
         .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/${productId}`)
         .reply(function(config) {
-          return [205]
+          return [404]
         })
     }
 
@@ -120,7 +120,7 @@ describe('v1: Products: can get one', () => {
     })
 
     try {
-      await th.products().getOne(productId)
+      await th.products().get(productId)
     } catch (err) {
       expect(err.name).toBe('ProductFetchFailed')
     }
