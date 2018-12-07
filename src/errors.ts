@@ -593,3 +593,10 @@ export class VouchersReportFetchFailed extends BaseError {
     super(message)
   }
 }
+
+export class ProductsReportFetchFailed extends BaseError {
+  public name = 'ProductsReportFetchFailed'
+  constructor(public message: string = 'Could not fetch the products report') {
+    super(message)
+  }
+}
