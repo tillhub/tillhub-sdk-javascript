@@ -34,6 +34,13 @@ export class TransactionPdfFailed extends BaseError {
   }
 }
 
+export class TransactionSigningInitialisationFailed extends BaseError {
+  public name = 'TransactionSigningInitialisationFailed'
+  constructor(public message: string = 'Could not initialise signing system') {
+    super(message)
+  }
+}
+
 export class TaxesFetchFailed extends BaseError {
   public name = 'TaxesFetchFailed'
   constructor(public message: string = 'Could not fetch taxes') {
