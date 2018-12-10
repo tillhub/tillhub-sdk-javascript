@@ -1,3 +1,10 @@
+# [1.66.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.65.0...v1.66.0) (2018-12-10)
+
+
+### Features
+
+* **tx:** adds signing handler ([fee246f](https://github.com/tillhub/tillhub-sdk-javascript/commit/fee246f))
+
 # [1.65.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.64.0...v1.65.0) (2018-12-10)
 
 

@@ -43,10 +43,15 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var errors = __importStar(require("../errors"));
+var SignatureTypes;
+(function (SignatureTypes) {
+    SignatureTypes["Fiksaltrust"] = "fiskaltrust";
+})(SignatureTypes || (SignatureTypes = {}));
 var Transactions = /** @class */ (function () {
     function Transactions(options, http) {
         this.options = options;
         this.http = http;
+        this.signing = new Signing(options, http);
         this.endpoint = '/api/v1/transactions';
         this.options.base = this.options.base || 'https://api.tillhub.com';
     }
@@ -92,4 +97,41 @@ var Transactions = /** @class */ (function () {
     return Transactions;
 }());
 exports.Transactions = Transactions;
+var Signing = /** @class */ (function () {
+    function Signing(options, http) {
+        this.options = options;
+        this.http = http;
+        this.endpoint = '/api/v1/transactions';
+        this.options.base = this.options.base || 'https://api.tillhub.com';
+    }
+    Signing.prototype.initialise = function (singingResourceType, singingResource, signingSystem, signingConfiguration) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, err_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/legacy/signing/" + singingResourceType + "/" + singingResource + "/" + signingSystem + "/initialise";
+                        return [4 /*yield*/, this.http.getClient().post(uri, signingConfiguration, {
+                                headers: {
+                                    Accept: 'application/json' // not needed for tillhub-api, but axios sets default headers { 'accept': 'application/json, text/plain, */*' } if not specified
+                                }
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, resolve({
+                                data: response.data.results
+                            })];
+                    case 2:
+                        err_2 = _a.sent();
+                        return [2 /*return*/, reject(new errors.TransactionSigningInitialisationFailed(err_2.message))];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    return Signing;
+}());
+exports.Signing = Signing;
 //# sourceMappingURL=transactions.js.map

@@ -69,6 +69,18 @@ var TransactionPdfFailed = /** @class */ (function (_super) {
     return TransactionPdfFailed;
 }(BaseError));
 exports.TransactionPdfFailed = TransactionPdfFailed;
+var TransactionSigningInitialisationFailed = /** @class */ (function (_super) {
+    __extends(TransactionSigningInitialisationFailed, _super);
+    function TransactionSigningInitialisationFailed(message) {
+        if (message === void 0) { message = 'Could not initialise signing system'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'TransactionSigningInitialisationFailed';
+        return _this;
+    }
+    return TransactionSigningInitialisationFailed;
+}(BaseError));
+exports.TransactionSigningInitialisationFailed = TransactionSigningInitialisationFailed;
 var TaxesFetchFailed = /** @class */ (function (_super) {
     __extends(TaxesFetchFailed, _super);
     function TaxesFetchFailed(message) {
