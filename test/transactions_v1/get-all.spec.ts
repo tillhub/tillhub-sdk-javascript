@@ -42,7 +42,7 @@ describe('v0: Transactions: can get all', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/transactions/${legacyId}/legacy`)
+        .onGet(`https://api.tillhub.com/api/v1/transactions/${legacyId}/legacy`)
         .reply(function(config) {
           return [
             200,
@@ -72,7 +72,7 @@ describe('v0: Transactions: can get all', () => {
 
     const transactions = th.transactions()
 
-    expect(transactions).toBeInstanceOf(v0.Transactions)
+    expect(transactions).toBeInstanceOf(v1.Transactions)
 
     const { data } = await transactions.getAll()
 
@@ -94,7 +94,7 @@ describe('v0: Transactions: can get all', () => {
         ]
       })
       mock
-        .onGet(`https://api.tillhub.com/api/v0/transactions/${legacyId}/legacy`)
+        .onGet(`https://api.tillhub.com/api/v1/transactions/${legacyId}/legacy`)
         .reply(function(config) {
           return [400]
         })

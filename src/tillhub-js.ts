@@ -79,24 +79,6 @@ export class TillhubClient {
   }
 
   /**
-   * Create an authenticated transactions instance
-   *
-   */
-  transactions(): v0.Transactions {
-    if (
-      !this.options ||
-      !this.options.base ||
-      !this.http ||
-      !this.auth ||
-      !this.auth.authenticated
-    ) {
-      throw new errors.UninstantiatedClient()
-    }
-
-    return new v0.Transactions({ user: this.auth.user, base: this.options.base }, this.http)
-  }
-
-  /**
    * Create an authenticated taxes instance
    *
    */
@@ -364,7 +346,7 @@ export class TillhubClient {
    * Create an authenticated Transactions instance
    *
    */
-  transactions_v1(): v1.Transactions {
+  transactions(): v1.Transactions {
     if (
       !this.options ||
       !this.options.base ||

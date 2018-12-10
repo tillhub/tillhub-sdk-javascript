@@ -86,7 +86,7 @@ describe('v1: Transactions', () => {
       password: user.password
     })
 
-    const transaction = th.transactions_v1()
+    const transaction = th.transactions()
 
     expect(transaction).toBeInstanceOf(v1.Transactions)
 
@@ -135,7 +135,7 @@ describe('v1: Transactions', () => {
     })
 
     try {
-      await th.transactions_v1().pdfUri(requestObject)
+      await th.transactions().pdfUri(requestObject)
     } catch (err) {
       expect(err.name).toBe('TransactionPdfFailed')
     }

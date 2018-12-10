@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
-import th, { TillhubClient, v0 } from '../src/tillhub-js'
+import th, { TillhubClient, v1 } from '../src/tillhub-js'
 import { Client } from '../src/client'
 import { Auth } from '../src/v1'
 
@@ -114,6 +114,6 @@ describe('SDK: can instantiate SDK', () => {
 
     const transactions = th.transactions()
 
-    expect(transactions).toBeInstanceOf(v0.Transactions)
+    expect(transactions).toBeInstanceOf(v1.Transactions)
   })
 })
