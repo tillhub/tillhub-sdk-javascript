@@ -20,7 +20,7 @@ if (process.env.SYSTEM_TEST) {
 
 const legacyId = '4564'
 const queryString =
-  'start=2018-07-29T14%253A55%253A05.000Z&end=2018-08-29T14%253A55%253A05.000Z&branch_id=1&register_id=1&staff_id=1&limit=200&offset=10'
+  'start=2018-07-29T14%253A55%253A05.000Z&end=2018-08-29T14%253A55%253A05.000Z&branch_id=1&register_id=1&staff_id=1&limit=200&offset=10&q=thisSearch'
 const queryObject = {
   start: '2018-07-29T14%3A55%3A05.000Z',
   end: '2018-08-29T14%3A55%3A05.000Z',
@@ -28,7 +28,8 @@ const queryObject = {
   register_id: '1',
   staff_id: '1',
   limit: 200,
-  offset: 10
+  offset: 10,
+  q: 'thisSearch'
 }
 const mock = new MockAdapter(axios)
 afterEach(() => {
