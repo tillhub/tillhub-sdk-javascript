@@ -23,11 +23,6 @@ export declare class TillhubClient {
     init(options?: TillhubSDKOptions): void;
     private handleOptions;
     /**
-     * Create an authenticated transactions instance
-     *
-     */
-    transactions(): v0.Transactions;
-    /**
      * Create an authenticated taxes instance
      *
      */
@@ -106,7 +101,7 @@ export declare class TillhubClient {
      * Create an authenticated Transactions instance
      *
      */
-    transactions_v1(): v1.Transactions;
+    transactions(): v1.Transactions;
     /**
      * Create an authenticated Staff instance
      *

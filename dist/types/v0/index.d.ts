@@ -1,5 +1,4 @@
 import { Auth } from './auth';
-import { Transactions } from './transactions';
 import { Taxes } from './taxes';
 import { Deliveries } from './deliveries';
 import { ProductGroups } from './product_groups';
@@ -13,4 +12,4 @@ import { Stocks } from './stocks';
 import { Orders } from './orders';
 import { Analytics } from './analytics';
 import { Staff } from './staff';
-export { Auth, Transactions, Taxes, Deliveries, ProductGroups, Accounts, Configurations, Branches, Customers, Vouchers, VoucherLogs, Invoices, Stocks, Orders, Analytics, Staff };
+export { Auth, Taxes, Deliveries, ProductGroups, Accounts, Configurations, Branches, Customers, Vouchers, VoucherLogs, Invoices, Stocks, Orders, Analytics, Staff };

@@ -1,3 +1,10 @@
+## [1.66.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.66.0...v1.66.1) (2018-12-10)
+
+
+### Bug Fixes
+
+* **tx:** retires unused tx v0 ([1fa13e6](https://github.com/tillhub/tillhub-sdk-javascript/commit/1fa13e6))
+
 # [1.66.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.65.0...v1.66.0) (2018-12-10)
 
 

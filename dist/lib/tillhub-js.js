@@ -74,20 +74,6 @@ var TillhubClient = /** @class */ (function () {
         return false;
     };
     /**
-     * Create an authenticated transactions instance
-     *
-     */
-    TillhubClient.prototype.transactions = function () {
-        if (!this.options ||
-            !this.options.base ||
-            !this.http ||
-            !this.auth ||
-            !this.auth.authenticated) {
-            throw new errors.UninstantiatedClient();
-        }
-        return new v0.Transactions({ user: this.auth.user, base: this.options.base }, this.http);
-    };
-    /**
      * Create an authenticated taxes instance
      *
      */
@@ -297,7 +283,7 @@ var TillhubClient = /** @class */ (function () {
      * Create an authenticated Transactions instance
      *
      */
-    TillhubClient.prototype.transactions_v1 = function () {
+    TillhubClient.prototype.transactions = function () {
         if (!this.options ||
             !this.options.base ||
             !this.http ||

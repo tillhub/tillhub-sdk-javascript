@@ -25,6 +25,7 @@ export declare class Transactions {
     signing: Signing;
     options: TransactionsOptions;
     constructor(options: TransactionsOptions, http: Client);
+    getAll(query?: TransactionsQuery | undefined): Promise<TransactionResponse>;
     pdfUri(requestObject: PdfRequestObject): Promise<TransactionResponse>;
 }
 export declare class Signing {
