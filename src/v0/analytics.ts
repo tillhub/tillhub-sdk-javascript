@@ -37,6 +37,8 @@ export interface ProductsOptions {
   offset?: number
   start?: string
   end?: string
+  search?: string
+  format?: string
 }
 
 export interface VoucherOptions {
@@ -131,19 +133,16 @@ export class Analytics {
     })
   }
 
-  getReportsProducts(query: ProductsOptions): Promise<AnalyticsResponse> {
+  getReportsProducts(query?: ProductsOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         let uri = `${this.options.base}${this.endpoint}/${this.options.user}/reports/products`
-        const queryKeys = Object.keys(query)
-          .map((key: string) => {
-            return `${key}=${query[key].toString()}`
-          })
-          .join('&')
+        const queryString = qs.stringify(query)
 
-        if (Object.keys(query).length) {
-          uri += `?${queryKeys}`
+        if (queryString) {
+          uri = `${uri}?${queryString}`
         }
+
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.StatisticsProductFetchFailed())
         return resolve({
