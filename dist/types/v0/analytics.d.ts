@@ -29,6 +29,8 @@ export interface ProductsOptions {
     offset?: number;
     start?: string;
     end?: string;
+    search?: string;
+    format?: string;
 }
 export interface VoucherOptions {
     [key: string]: any;
@@ -52,7 +54,7 @@ export declare class Analytics {
     getRevenuesForDayOfWeek(query: RevenuBasicOptions): Promise<AnalyticsResponse>;
     getRevenues(query: RevenuesOptions): Promise<AnalyticsResponse>;
     getRevenuesForHourOfDay(query: RevenuBasicOptions): Promise<AnalyticsResponse>;
-    getReportsProducts(query: ProductsOptions): Promise<AnalyticsResponse>;
+    getReportsProducts(query?: ProductsOptions | undefined): Promise<AnalyticsResponse>;
     getStaffOverviewReport(): Promise<AnalyticsResponse>;
     getProductGroupsReport(staff?: StaffID): Promise<AnalyticsResponse>;
     getRefundsReport(staff?: StaffID): Promise<AnalyticsResponse>;

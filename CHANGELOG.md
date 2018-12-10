@@ -1,3 +1,10 @@
+# [1.65.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.64.0...v1.65.0) (2018-12-10)
+
+
+### Features
+
+* **v0/analytics/getReportsProducts:** added search and format input options ([437a1a5](https://github.com/tillhub/tillhub-sdk-javascript/commit/437a1a5))
+
 # [1.64.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.63.0...v1.64.0) (2018-12-07)
 
 
