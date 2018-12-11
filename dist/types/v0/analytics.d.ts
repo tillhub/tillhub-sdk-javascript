@@ -29,7 +29,7 @@ export interface ProductsOptions {
     offset?: number;
     start?: string;
     end?: string;
-    search?: string;
+    q?: string;
     format?: string;
 }
 export interface VoucherOptions {
@@ -44,7 +44,7 @@ export interface VoucherOptions {
     issued_at?: string;
     valid_until?: string;
     comment?: string;
-    search?: string;
+    q?: string;
 }
 export declare class Analytics {
     endpoint: string;

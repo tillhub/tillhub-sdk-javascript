@@ -1,3 +1,10 @@
+## [1.66.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.66.1...v1.66.2) (2018-12-11)
+
+
+### Bug Fixes
+
+* **analytics:** renamed the property input from search to q ([e97d233](https://github.com/tillhub/tillhub-sdk-javascript/commit/e97d233))
+
 ## [1.66.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.66.0...v1.66.1) (2018-12-10)
 
 
