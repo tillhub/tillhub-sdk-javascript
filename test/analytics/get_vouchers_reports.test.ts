@@ -22,11 +22,11 @@ const mockVoucherQuery = {
   issued_at: '2018-01-12T22:48:13.000Z',
   valid_until: '2018-01-12T22:48:13.000Z',
   comment: 'someComment',
-  search: 'at'
+  q: 'at'
 }
 
 const mockString =
-  'voucher_number=123&redeemed_id=234&redeemed_branch=1&redeemed_email=email%40email.com&redeemed_external_custom_id=345&redeemed_at=2018-01-12T22%3A48%3A13.000Z&issuer=store&issued_at=2018-01-12T22%3A48%3A13.000Z&valid_until=2018-01-12T22%3A48%3A13.000Z&comment=someComment&search=at'
+  'voucher_number=123&redeemed_id=234&redeemed_branch=1&redeemed_email=email%40email.com&redeemed_external_custom_id=345&redeemed_at=2018-01-12T22%3A48%3A13.000Z&issuer=store&issued_at=2018-01-12T22%3A48%3A13.000Z&valid_until=2018-01-12T22%3A48%3A13.000Z&comment=someComment&q=at'
 
 if (process.env.SYSTEM_TEST) {
   user.username = process.env.SYSTEM_TEST_USERNAME || user.username
