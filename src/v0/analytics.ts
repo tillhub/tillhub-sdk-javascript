@@ -54,6 +54,8 @@ export interface VoucherOptions {
   valid_until?: string
   comment?: string
   q?: string
+  amount?: string | number
+  currency?: string
 }
 
 export class Analytics {
