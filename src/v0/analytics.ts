@@ -54,7 +54,7 @@ export interface VoucherOptions {
   valid_until?: string
   comment?: string
   q?: string
-  amount?: string | number
+  amount?: string
   currency?: string
 }
 
