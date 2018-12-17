@@ -617,21 +617,21 @@ export class AuditActionsFetchAllFailed extends BaseError {
 
 export class AuditActionsFetchOneFailed extends BaseError {
   public name = 'AuditActionsFetchOneFailed'
-  constructor(public message: string = 'Could not fetch audit actions') {
+  constructor(public message: string = 'Could not fetch audit action') {
     super(message)
   }
 }
 
 export class AuditActionsGetMetaFailed extends BaseError {
   public name = 'AuditActionsGetMetaFailed'
-  constructor(public message: string = 'Could not fetch audit actions') {
+  constructor(public message: string = 'Could not fetch audit actions meta') {
     super(message)
   }
 }
 
 export class AuditActionsCreateFailed extends BaseError {
   public name = 'AuditActionsCreateFailed'
-  constructor(public message: string = 'Could not fetch audit actions') {
+  constructor(public message: string = 'Could not create audit action') {
     super(message)
   }
 }
