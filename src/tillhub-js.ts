@@ -379,6 +379,24 @@ export class TillhubClient {
   }
 
   /**
+   * Create an authenticated Staff instance
+   *
+   */
+  audits(): v0.Audits {
+    if (
+      !this.options ||
+      !this.options.base ||
+      !this.http ||
+      !this.auth ||
+      !this.auth.authenticated
+    ) {
+      throw new errors.UninstantiatedClient()
+    }
+
+    return new v0.Audits({ user: this.auth.user, base: this.options.base }, this.http)
+  }
+
+  /**
    * Create an authenticated Registers instance
    *
    */
