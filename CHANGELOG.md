@@ -1,3 +1,11 @@
+# [1.69.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.68.0...v1.69.0) (2018-12-17)
+
+
+### Features
+
+* **audits:** Add handlers for audits endpoint ([6f18948](https://github.com/tillhub/tillhub-sdk-javascript/commit/6f18948))
+* **audits:** Change message of error messages ([2ddee7b](https://github.com/tillhub/tillhub-sdk-javascript/commit/2ddee7b))
+
 # [1.68.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.67.0...v1.68.0) (2018-12-17)
 
 

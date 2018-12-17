@@ -29,4 +29,6 @@ var analytics_1 = require("./analytics");
 exports.Analytics = analytics_1.Analytics;
 var staff_1 = require("./staff");
 exports.Staff = staff_1.Staff;
+var audits_1 = require("./audits");
+exports.Audits = audits_1.Audits;
 //# sourceMappingURL=index.js.map

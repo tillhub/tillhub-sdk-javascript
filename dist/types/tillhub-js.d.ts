@@ -108,6 +108,11 @@ export declare class TillhubClient {
      */
     staff(): v0.Staff;
     /**
+     * Create an authenticated Staff instance
+     *
+     */
+    audits(): v0.Audits;
+    /**
      * Create an authenticated Registers instance
      *
      */

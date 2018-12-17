@@ -1052,4 +1052,52 @@ var ProductsReportFetchFailed = /** @class */ (function (_super) {
     return ProductsReportFetchFailed;
 }(BaseError));
 exports.ProductsReportFetchFailed = ProductsReportFetchFailed;
+var AuditActionsFetchAllFailed = /** @class */ (function (_super) {
+    __extends(AuditActionsFetchAllFailed, _super);
+    function AuditActionsFetchAllFailed(message) {
+        if (message === void 0) { message = 'Could not fetch audit actions'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'AuditActionsFetchAllFailed';
+        return _this;
+    }
+    return AuditActionsFetchAllFailed;
+}(BaseError));
+exports.AuditActionsFetchAllFailed = AuditActionsFetchAllFailed;
+var AuditActionsFetchOneFailed = /** @class */ (function (_super) {
+    __extends(AuditActionsFetchOneFailed, _super);
+    function AuditActionsFetchOneFailed(message) {
+        if (message === void 0) { message = 'Could not fetch audit action'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'AuditActionsFetchOneFailed';
+        return _this;
+    }
+    return AuditActionsFetchOneFailed;
+}(BaseError));
+exports.AuditActionsFetchOneFailed = AuditActionsFetchOneFailed;
+var AuditActionsGetMetaFailed = /** @class */ (function (_super) {
+    __extends(AuditActionsGetMetaFailed, _super);
+    function AuditActionsGetMetaFailed(message) {
+        if (message === void 0) { message = 'Could not fetch audit actions meta'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'AuditActionsGetMetaFailed';
+        return _this;
+    }
+    return AuditActionsGetMetaFailed;
+}(BaseError));
+exports.AuditActionsGetMetaFailed = AuditActionsGetMetaFailed;
+var AuditActionsCreateFailed = /** @class */ (function (_super) {
+    __extends(AuditActionsCreateFailed, _super);
+    function AuditActionsCreateFailed(message) {
+        if (message === void 0) { message = 'Could not create audit action'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'AuditActionsCreateFailed';
+        return _this;
+    }
+    return AuditActionsCreateFailed;
+}(BaseError));
+exports.AuditActionsCreateFailed = AuditActionsCreateFailed;
 //# sourceMappingURL=errors.js.map

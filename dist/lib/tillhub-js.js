@@ -308,6 +308,20 @@ var TillhubClient = /** @class */ (function () {
         return new v0.Staff({ user: this.auth.user, base: this.options.base }, this.http);
     };
     /**
+     * Create an authenticated Staff instance
+     *
+     */
+    TillhubClient.prototype.audits = function () {
+        if (!this.options ||
+            !this.options.base ||
+            !this.http ||
+            !this.auth ||
+            !this.auth.authenticated) {
+            throw new errors.UninstantiatedClient();
+        }
+        return new v0.Audits({ user: this.auth.user, base: this.options.base }, this.http);
+    };
+    /**
      * Create an authenticated Registers instance
      *
      */

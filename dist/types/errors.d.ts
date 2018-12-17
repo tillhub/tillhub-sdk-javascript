@@ -431,3 +431,23 @@ export declare class ProductsReportFetchFailed extends BaseError {
     name: string;
     constructor(message?: string);
 }
+export declare class AuditActionsFetchAllFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class AuditActionsFetchOneFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class AuditActionsGetMetaFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class AuditActionsCreateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
