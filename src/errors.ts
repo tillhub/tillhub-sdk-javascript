@@ -607,3 +607,31 @@ export class ProductsReportFetchFailed extends BaseError {
     super(message)
   }
 }
+
+export class AuditActionsFetchAllFailed extends BaseError {
+  public name = 'AuditActionsFetchAllFailed'
+  constructor(public message: string = 'Could not fetch audit actions') {
+    super(message)
+  }
+}
+
+export class AuditActionsFetchOneFailed extends BaseError {
+  public name = 'AuditActionsFetchOneFailed'
+  constructor(public message: string = 'Could not fetch audit actions') {
+    super(message)
+  }
+}
+
+export class AuditActionsGetMetaFailed extends BaseError {
+  public name = 'AuditActionsGetMetaFailed'
+  constructor(public message: string = 'Could not fetch audit actions') {
+    super(message)
+  }
+}
+
+export class AuditActionsCreateFailed extends BaseError {
+  public name = 'AuditActionsCreateFailed'
+  constructor(public message: string = 'Could not fetch audit actions') {
+    super(message)
+  }
+}
