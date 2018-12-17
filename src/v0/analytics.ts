@@ -48,10 +48,13 @@ export interface VoucherOptions {
   redeemed_branch?: string
   redeemed_email?: string
   redeemed_external_custom_id?: string
-  redeemed_at?: string
+  redeemed_at_start?: string
+  redeemed_at_end?: string
   issuer?: string
-  issued_at?: string
-  valid_until?: string
+  issued_at_start?: string
+  issued_at_end?: string
+  valid_until_start?: string
+  valid_until_end?: string
   comment?: string
   q?: string
   amount?: string
