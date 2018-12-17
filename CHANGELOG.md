@@ -1,3 +1,10 @@
+# [1.68.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.67.0...v1.68.0) (2018-12-17)
+
+
+### Features
+
+* added query inputs ([d8132cc](https://github.com/tillhub/tillhub-sdk-javascript/commit/d8132cc))
+
 # [1.67.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.66.2...v1.67.0) (2018-12-17)
 
 
