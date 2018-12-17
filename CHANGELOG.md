@@ -1,3 +1,10 @@
+# [1.67.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.66.2...v1.67.0) (2018-12-17)
+
+
+### Features
+
+* **anaytics/reports/vouchers:** added amount and currency options ([ba8ef7d](https://github.com/tillhub/tillhub-sdk-javascript/commit/ba8ef7d))
+
 ## [1.66.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.66.1...v1.66.2) (2018-12-11)
 
 
