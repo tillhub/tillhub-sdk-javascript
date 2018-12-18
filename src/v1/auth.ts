@@ -42,6 +42,10 @@ export class Auth extends v0.Auth {
       return this.loginServiceAccount(this.options.credentials as KeyAuth)
     }
 
+    if (this.options.type === AuthTypes.org) {
+      return this.loginWithOrganisation(this.options.credentials as OrgAuth)
+    }
+
     throw new errors.AuthenticationFailed('No auth data was provided')
   }
 

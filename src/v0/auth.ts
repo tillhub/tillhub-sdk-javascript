@@ -5,7 +5,8 @@ import { Client, ClientOptions } from '../client'
 export enum AuthTypes {
   username = 1,
   key,
-  token
+  token,
+  org
 }
 
 export interface AuthOptions {
@@ -48,6 +49,10 @@ export function isTokenAuth(object: any): object is KeyAuth {
   return 'token' in object
 }
 
+export function isOrgAuth(object: any): object is KeyAuth {
+  return 'organisation' in object
+}
+
 export interface AuthResponse {
   token: string
   user: string
@@ -82,6 +87,7 @@ export class Auth {
     if (isUsernameAuth(this.options.credentials)) this.options.type = AuthTypes.username
     if (isKeyAuth(this.options.credentials)) this.options.type = AuthTypes.key
     if (isTokenAuth(this.options.credentials)) this.options.type = AuthTypes.token
+    if (isOrgAuth(this.options.credentials)) this.options.type = AuthTypes.org
   }
 
   async authenticate(): Promise<AuthResponse> {
