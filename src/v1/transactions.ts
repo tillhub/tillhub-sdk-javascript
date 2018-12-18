@@ -135,7 +135,61 @@ export class Signing {
 
         const response = await this.http.getClient().post(uri, signingConfiguration, {
           headers: {
-            Accept: 'application/json' // not needed for tillhub-api, but axios sets default headers { 'accept': 'application/json, text/plain, */*' } if not specified
+            Accept: 'application/json'
+          }
+        })
+
+        return resolve({
+          data: response.data.results
+        } as any)
+      } catch (err) {
+        return reject(new errors.TransactionSigningInitialisationFailed(err.message))
+      }
+    })
+  }
+
+  yearly(
+    singingResourceType: string,
+    singingResource: string,
+    signingSystem: string,
+    signingConfiguration: FiskaltrustAuth
+  ): Promise<TransactionResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let uri = `${this.options.base}${this.endpoint}/${
+          this.options.user
+        }/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/yearly`
+
+        const response = await this.http.getClient().post(uri, signingConfiguration, {
+          headers: {
+            Accept: 'application/json'
+          }
+        })
+
+        return resolve({
+          data: response.data.results
+        } as any)
+      } catch (err) {
+        return reject(new errors.TransactionSigningInitialisationFailed(err.message))
+      }
+    })
+  }
+
+  monthly(
+    singingResourceType: string,
+    singingResource: string,
+    signingSystem: string,
+    signingConfiguration: FiskaltrustAuth
+  ): Promise<TransactionResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let uri = `${this.options.base}${this.endpoint}/${
+          this.options.user
+        }/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/monthly`
+
+        const response = await this.http.getClient().post(uri, signingConfiguration, {
+          headers: {
+            Accept: 'application/json'
           }
         })
 
