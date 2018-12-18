@@ -1,3 +1,10 @@
+# [1.71.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.70.1...v1.71.0) (2018-12-18)
+
+
+### Features
+
+* **auth:** adds org auth handler ([48ca75c](https://github.com/tillhub/tillhub-sdk-javascript/commit/48ca75c))
+
 ## [1.70.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.70.0...v1.70.1) (2018-12-18)
 
 
