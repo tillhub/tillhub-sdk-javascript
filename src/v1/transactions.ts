@@ -151,8 +151,7 @@ export class Signing {
   yearly(
     singingResourceType: string,
     singingResource: string,
-    signingSystem: string,
-    signingConfiguration: FiskaltrustAuth
+    signingSystem: string
   ): Promise<TransactionResponse> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -160,7 +159,7 @@ export class Signing {
           this.options.user
         }/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/yearly`
 
-        const response = await this.http.getClient().post(uri, signingConfiguration, {
+        const response = await this.http.getClient().post(uri, undefined, {
           headers: {
             Accept: 'application/json'
           }
@@ -170,7 +169,7 @@ export class Signing {
           data: response.data.results
         } as any)
       } catch (err) {
-        return reject(new errors.TransactionSigningInitialisationFailed(err.message))
+        return reject(new errors.TransactionSigningYearlyReceiptFailed(err.message))
       }
     })
   }
@@ -178,8 +177,7 @@ export class Signing {
   monthly(
     singingResourceType: string,
     singingResource: string,
-    signingSystem: string,
-    signingConfiguration: FiskaltrustAuth
+    signingSystem: string
   ): Promise<TransactionResponse> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -187,7 +185,7 @@ export class Signing {
           this.options.user
         }/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/monthly`
 
-        const response = await this.http.getClient().post(uri, signingConfiguration, {
+        const response = await this.http.getClient().post(uri, undefined, {
           headers: {
             Accept: 'application/json'
           }
@@ -197,7 +195,7 @@ export class Signing {
           data: response.data.results
         } as any)
       } catch (err) {
-        return reject(new errors.TransactionSigningInitialisationFailed(err.message))
+        return reject(new errors.TransactionSigningMonthlyReceiptFailed(err.message))
       }
     })
   }

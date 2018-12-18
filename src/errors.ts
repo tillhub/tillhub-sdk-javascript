@@ -41,6 +41,20 @@ export class TransactionSigningInitialisationFailed extends BaseError {
   }
 }
 
+export class TransactionSigningYearlyReceiptFailed extends BaseError {
+  public name = 'TransactionSigningYearlyReceiptFailed'
+  constructor(public message: string = 'Could not generate yearly receipt') {
+    super(message)
+  }
+}
+
+export class TransactionSigningMonthlyReceiptFailed extends BaseError {
+  public name = 'TransactionSigningMonthlyReceiptFailed'
+  constructor(public message: string = 'Could not generate monthly receipt') {
+    super(message)
+  }
+}
+
 export class TaxesFetchFailed extends BaseError {
   public name = 'TaxesFetchFailed'
   constructor(public message: string = 'Could not fetch taxes') {
