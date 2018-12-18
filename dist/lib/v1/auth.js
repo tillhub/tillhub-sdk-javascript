@@ -89,6 +89,9 @@ var Auth = /** @class */ (function (_super) {
                 if (this.options.type === auth_1.AuthTypes.token) {
                     return [2 /*return*/, this.loginServiceAccount(this.options.credentials)];
                 }
+                if (this.options.type === auth_1.AuthTypes.org) {
+                    return [2 /*return*/, this.loginWithOrganisation(this.options.credentials)];
+                }
                 throw new errors.AuthenticationFailed('No auth data was provided');
             });
         });

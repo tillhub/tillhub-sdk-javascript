@@ -1,3 +1,10 @@
+# [1.72.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.71.0...v1.72.0) (2018-12-18)
+
+
+### Features
+
+* **auth:** adds runtime inference for org auth ([9cdada8](https://github.com/tillhub/tillhub-sdk-javascript/commit/9cdada8))
+
 # [1.71.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.70.1...v1.71.0) (2018-12-18)
 
 

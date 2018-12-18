@@ -1,7 +1,8 @@
 export declare enum AuthTypes {
     username = 1,
     key = 2,
-    token = 3
+    token = 3,
+    org = 4
 }
 export interface AuthOptions {
     type?: AuthTypes | undefined;
@@ -29,6 +30,7 @@ export interface TokenAuth {
 export declare function isUsernameAuth(object: any): object is UsernameAuth;
 export declare function isKeyAuth(object: any): object is KeyAuth;
 export declare function isTokenAuth(object: any): object is KeyAuth;
+export declare function isOrgAuth(object: any): object is KeyAuth;
 export interface AuthResponse {
     token: string;
     user: string;

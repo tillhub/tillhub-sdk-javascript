@@ -53,6 +53,7 @@ var AuthTypes;
     AuthTypes[AuthTypes["username"] = 1] = "username";
     AuthTypes[AuthTypes["key"] = 2] = "key";
     AuthTypes[AuthTypes["token"] = 3] = "token";
+    AuthTypes[AuthTypes["org"] = 4] = "org";
 })(AuthTypes = exports.AuthTypes || (exports.AuthTypes = {}));
 function isUsernameAuth(object) {
     return 'password' in object;
@@ -66,6 +67,10 @@ function isTokenAuth(object) {
     return 'token' in object;
 }
 exports.isTokenAuth = isTokenAuth;
+function isOrgAuth(object) {
+    return 'organisation' in object;
+}
+exports.isOrgAuth = isOrgAuth;
 /**
  * @class "v0.Auth"
  */
@@ -88,6 +93,8 @@ var Auth = /** @class */ (function () {
             this.options.type = AuthTypes.key;
         if (isTokenAuth(this.options.credentials))
             this.options.type = AuthTypes.token;
+        if (isOrgAuth(this.options.credentials))
+            this.options.type = AuthTypes.org;
     };
     Auth.prototype.authenticate = function () {
         return __awaiter(this, void 0, void 0, function () {
