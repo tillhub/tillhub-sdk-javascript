@@ -165,7 +165,7 @@ var Signing = /** @class */ (function () {
             });
         }); });
     };
-    Signing.prototype.yearly = function (singingResourceType, singingResource, signingSystem, signingConfiguration) {
+    Signing.prototype.yearly = function (singingResourceType, singingResource, signingSystem) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, err_4;
@@ -174,7 +174,7 @@ var Signing = /** @class */ (function () {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/legacy/signing/" + singingResourceType + "/" + singingResource + "/" + signingSystem + "/yearly";
-                        return [4 /*yield*/, this.http.getClient().post(uri, signingConfiguration, {
+                        return [4 /*yield*/, this.http.getClient().post(uri, undefined, {
                                 headers: {
                                     Accept: 'application/json'
                                 }
@@ -186,13 +186,13 @@ var Signing = /** @class */ (function () {
                             })];
                     case 2:
                         err_4 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TransactionSigningInitialisationFailed(err_4.message))];
+                        return [2 /*return*/, reject(new errors.TransactionSigningYearlyReceiptFailed(err_4.message))];
                     case 3: return [2 /*return*/];
                 }
             });
         }); });
     };
-    Signing.prototype.monthly = function (singingResourceType, singingResource, signingSystem, signingConfiguration) {
+    Signing.prototype.monthly = function (singingResourceType, singingResource, signingSystem) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, err_5;
@@ -201,7 +201,7 @@ var Signing = /** @class */ (function () {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/legacy/signing/" + singingResourceType + "/" + singingResource + "/" + signingSystem + "/monthly";
-                        return [4 /*yield*/, this.http.getClient().post(uri, signingConfiguration, {
+                        return [4 /*yield*/, this.http.getClient().post(uri, undefined, {
                                 headers: {
                                     Accept: 'application/json'
                                 }
@@ -213,7 +213,7 @@ var Signing = /** @class */ (function () {
                             })];
                     case 2:
                         err_5 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TransactionSigningInitialisationFailed(err_5.message))];
+                        return [2 /*return*/, reject(new errors.TransactionSigningMonthlyReceiptFailed(err_5.message))];
                     case 3: return [2 /*return*/];
                 }
             });

@@ -1,3 +1,10 @@
+## [1.70.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.70.0...v1.70.1) (2018-12-18)
+
+
+### Bug Fixes
+
+* **tx:** aligngs signing handlers to API, adds correct errors ([e4dfa45](https://github.com/tillhub/tillhub-sdk-javascript/commit/e4dfa45))
+
 # [1.70.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.69.0...v1.70.0) (2018-12-18)
 
 

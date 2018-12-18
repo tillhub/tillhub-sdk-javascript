@@ -81,6 +81,30 @@ var TransactionSigningInitialisationFailed = /** @class */ (function (_super) {
     return TransactionSigningInitialisationFailed;
 }(BaseError));
 exports.TransactionSigningInitialisationFailed = TransactionSigningInitialisationFailed;
+var TransactionSigningYearlyReceiptFailed = /** @class */ (function (_super) {
+    __extends(TransactionSigningYearlyReceiptFailed, _super);
+    function TransactionSigningYearlyReceiptFailed(message) {
+        if (message === void 0) { message = 'Could not generate yearly receipt'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'TransactionSigningYearlyReceiptFailed';
+        return _this;
+    }
+    return TransactionSigningYearlyReceiptFailed;
+}(BaseError));
+exports.TransactionSigningYearlyReceiptFailed = TransactionSigningYearlyReceiptFailed;
+var TransactionSigningMonthlyReceiptFailed = /** @class */ (function (_super) {
+    __extends(TransactionSigningMonthlyReceiptFailed, _super);
+    function TransactionSigningMonthlyReceiptFailed(message) {
+        if (message === void 0) { message = 'Could not generate monthly receipt'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'TransactionSigningMonthlyReceiptFailed';
+        return _this;
+    }
+    return TransactionSigningMonthlyReceiptFailed;
+}(BaseError));
+exports.TransactionSigningMonthlyReceiptFailed = TransactionSigningMonthlyReceiptFailed;
 var TaxesFetchFailed = /** @class */ (function (_super) {
     __extends(TaxesFetchFailed, _super);
     function TaxesFetchFailed(message) {
