@@ -26,6 +26,12 @@ export interface KeyAuth {
   apiKey: string
 }
 
+export interface OrgAuth {
+  organisation: string
+  username: string
+  password: string
+}
+
 export interface TokenAuth {
   token: string
 }

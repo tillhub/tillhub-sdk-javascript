@@ -1,7 +1,15 @@
 import axios from 'axios'
 import * as errors from '../errors'
 import * as v0 from '../v0'
-import { AuthOptions, UsernameAuth, AuthTypes, AuthResponse, KeyAuth, TokenAuth } from '../v0/auth'
+import {
+  AuthOptions,
+  UsernameAuth,
+  AuthTypes,
+  AuthResponse,
+  KeyAuth,
+  OrgAuth,
+  TokenAuth
+} from '../v0/auth'
 
 /**
  * @extends "v0.Auth"
@@ -43,6 +51,36 @@ export class Auth extends v0.Auth {
         id: authData.id,
         apiKey: authData.apiKey
       })
+
+      this.setDefaultHeader(
+        response.data.user.legacy_id || response.data.user.id,
+        response.data.token
+      )
+
+      return {
+        token: response.data.token,
+        user: response.data.user.legacy_id || response.data.user.id,
+        name: response.data.user.name
+      } as AuthResponse
+    } catch (err) {
+      const error = new errors.AuthenticationFailed()
+      err.error = err
+      err.body = err.ressponse && err.response.data ? err.response.data : null
+
+      throw error
+    }
+  }
+
+  async loginWithOrganisation(authData: OrgAuth): Promise<AuthResponse> {
+    try {
+      const response = await axios.post(
+        `${this.options.base}/api/v1/users/auth/organisation/login`,
+        {
+          organisation: authData.organisation,
+          username: authData.username,
+          password: authData.password
+        }
+      )
 
       this.setDefaultHeader(
         response.data.user.legacy_id || response.data.user.id,
