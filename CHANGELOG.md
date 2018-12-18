@@ -1,3 +1,10 @@
+# [1.70.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.69.0...v1.70.0) (2018-12-18)
+
+
+### Features
+
+* **tx:** adds yearly and monthly receipts ([7d0c1e2](https://github.com/tillhub/tillhub-sdk-javascript/commit/7d0c1e2))
+
 # [1.69.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.68.0...v1.69.0) (2018-12-17)
 
 

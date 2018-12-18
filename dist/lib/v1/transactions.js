@@ -149,7 +149,7 @@ var Signing = /** @class */ (function () {
                         uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/legacy/signing/" + singingResourceType + "/" + singingResource + "/" + signingSystem + "/initialise";
                         return [4 /*yield*/, this.http.getClient().post(uri, signingConfiguration, {
                                 headers: {
-                                    Accept: 'application/json' // not needed for tillhub-api, but axios sets default headers { 'accept': 'application/json, text/plain, */*' } if not specified
+                                    Accept: 'application/json'
                                 }
                             })];
                     case 1:
@@ -160,6 +160,60 @@ var Signing = /** @class */ (function () {
                     case 2:
                         err_3 = _a.sent();
                         return [2 /*return*/, reject(new errors.TransactionSigningInitialisationFailed(err_3.message))];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Signing.prototype.yearly = function (singingResourceType, singingResource, signingSystem, signingConfiguration) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, err_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/legacy/signing/" + singingResourceType + "/" + singingResource + "/" + signingSystem + "/yearly";
+                        return [4 /*yield*/, this.http.getClient().post(uri, signingConfiguration, {
+                                headers: {
+                                    Accept: 'application/json'
+                                }
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, resolve({
+                                data: response.data.results
+                            })];
+                    case 2:
+                        err_4 = _a.sent();
+                        return [2 /*return*/, reject(new errors.TransactionSigningInitialisationFailed(err_4.message))];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Signing.prototype.monthly = function (singingResourceType, singingResource, signingSystem, signingConfiguration) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, err_5;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/legacy/signing/" + singingResourceType + "/" + singingResource + "/" + signingSystem + "/monthly";
+                        return [4 /*yield*/, this.http.getClient().post(uri, signingConfiguration, {
+                                headers: {
+                                    Accept: 'application/json'
+                                }
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, resolve({
+                                data: response.data.results
+                            })];
+                    case 2:
+                        err_5 = _a.sent();
+                        return [2 /*return*/, reject(new errors.TransactionSigningInitialisationFailed(err_5.message))];
                     case 3: return [2 /*return*/];
                 }
             });

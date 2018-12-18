@@ -34,5 +34,7 @@ export declare class Signing {
     options: TransactionsOptions;
     constructor(options: TransactionsOptions, http: Client);
     initialise(singingResourceType: string, singingResource: string, signingSystem: string, signingConfiguration: FiskaltrustAuth): Promise<TransactionResponse>;
+    yearly(singingResourceType: string, singingResource: string, signingSystem: string, signingConfiguration: FiskaltrustAuth): Promise<TransactionResponse>;
+    monthly(singingResourceType: string, singingResource: string, signingSystem: string, signingConfiguration: FiskaltrustAuth): Promise<TransactionResponse>;
 }
 export {};
