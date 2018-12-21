@@ -382,7 +382,7 @@ export class TillhubClient {
    * Create an authenticated Staff instance
    *
    */
-  audits(): v0.Audits {
+  auditActions(): v0.AuditActions {
     if (
       !this.options ||
       !this.options.base ||
@@ -393,7 +393,7 @@ export class TillhubClient {
       throw new errors.UninstantiatedClient()
     }
 
-    return new v0.Audits({ user: this.auth.user, base: this.options.base }, this.http)
+    return new v0.AuditActions({ user: this.auth.user, base: this.options.base }, this.http)
   }
 
   /**

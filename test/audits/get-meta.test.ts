@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
-import { TillhubClient, v0 } from '../../../src/tillhub-js'
+import { TillhubClient, v0 } from '../../src/tillhub-js'
 
 let user = {
   username: 'test@example.com',
@@ -19,15 +19,12 @@ if (process.env.SYSTEM_TEST) {
   user.apiKey = process.env.SYSTEM_TEST_API_KEY || user.apiKey
 }
 
-const requestObject = {
-  auditActionId: 'abc123',
-  query: {
-    embed: ['user.register', 'user.staff', 'user.branch']
-  }
+const query = {
+  type: ['carts.item.remove', 'carts.clear']
 }
 
 function queryString() {
-  return qs.stringify(requestObject.query)
+  return qs.stringify(query)
 }
 
 const legacyId = '4564'
@@ -37,7 +34,7 @@ afterEach(() => {
   mock.reset()
 })
 
-describe('v0: Audits: Actions: can get one', () => {
+describe('v0: Audits: Actions: can get meta', () => {
   it("Tillhub's audits are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
@@ -54,11 +51,7 @@ describe('v0: Audits: Actions: can get one', () => {
       })
 
       mock
-        .onGet(
-          `https://api.tillhub.com/api/v0/audits/${legacyId}/actions/${
-            requestObject.auditActionId
-          }?${queryString()}`
-        )
+        .onGet(`https://api.tillhub.com/api/v0/audits/${legacyId}/actions/meta?${queryString()}`)
         .reply(function(config) {
           return [
             200,
@@ -86,11 +79,11 @@ describe('v0: Audits: Actions: can get one', () => {
       password: user.password
     })
 
-    const audits = th.audits()
+    const audits = th.auditActions()
 
-    expect(audits).toBeInstanceOf(v0.Audits)
+    expect(audits).toBeInstanceOf(v0.AuditActions)
 
-    const { data } = await audits.getOneAction(requestObject)
+    const { data } = await audits.meta(query)
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -109,13 +102,8 @@ describe('v0: Audits: Actions: can get one', () => {
           }
         ]
       })
-
       mock
-        .onGet(
-          `https://api.tillhub.com/api/v0/audits/${legacyId}/actions/${
-            requestObject.auditActionId
-          }?${queryString()}`
-        )
+        .onGet(`https://api.tillhub.com/api/v0/audits/${legacyId}/actions/meta?${queryString()}`)
         .reply(function(config) {
           return [400]
         })
@@ -138,9 +126,9 @@ describe('v0: Audits: Actions: can get one', () => {
     })
 
     try {
-      await th.audits().getOneAction(requestObject)
+      await th.auditActions().meta(query)
     } catch (err) {
-      expect(err.name).toBe('AuditActionsFetchOneFailed')
+      expect(err.name).toBe('AuditActionsGetMetaFailed')
     }
   })
 })

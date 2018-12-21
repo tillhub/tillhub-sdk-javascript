@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
-import { TillhubClient, v0 } from '../../../src/tillhub-js'
+import { TillhubClient, v0 } from '../../src/tillhub-js'
 
 let user = {
   username: 'test@example.com',
@@ -84,11 +84,11 @@ describe('v0: Audits: Actions: can get all', () => {
       password: user.password
     })
 
-    const audits = th.audits()
+    const audits = th.auditActions()
 
-    expect(audits).toBeInstanceOf(v0.Audits)
+    expect(audits).toBeInstanceOf(v0.AuditActions)
 
-    const { data } = await audits.getAllActions(query)
+    const { data } = await audits.getAll(query)
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -131,7 +131,7 @@ describe('v0: Audits: Actions: can get all', () => {
     })
 
     try {
-      await th.audits().getAllActions(query)
+      await th.auditActions().getAll(query)
     } catch (err) {
       expect(err.name).toBe('AuditActionsFetchAllFailed')
     }

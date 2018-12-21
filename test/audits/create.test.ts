@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
-import th, { v0 } from '../../../src/tillhub-js'
+import th, { v0 } from '../../src/tillhub-js'
 
 let user = {
   username: 'test@example.com',
@@ -77,11 +77,11 @@ describe('v0: Audit Actions', () => {
       password: user.password
     })
 
-    const audits = th.audits()
+    const audits = th.auditActions()
 
-    expect(audits).toBeInstanceOf(v0.Audits)
+    expect(audits).toBeInstanceOf(v0.AuditActions)
 
-    const response = await audits.createAction(body)
+    const response = await audits.create(body)
 
     expect(response).toEqual({ msg: 'Action audits accepted.' })
   })
@@ -122,7 +122,7 @@ describe('v0: Audit Actions', () => {
     })
 
     try {
-      await th.audits().createAction(body)
+      await th.auditActions().create(body)
     } catch (err) {
       expect(err.name).toBe('AuditActionsCreateFailed')
     }
