@@ -86,7 +86,7 @@
     "@babel/core": "^7.0.1",
     "@semantic-release/changelog": "^3.0.0",
     "@semantic-release/git": "^7.0.4",
-    "@semantic-release/github": "^5.0.5",
+    "@semantic-release/github": "^5.2.7",
     "@semantic-release/npm": "^5.0.4",
     "@storybook/addon-actions": "^3.4.10",
     "@storybook/react": "^4.0.0-alpha.21",
