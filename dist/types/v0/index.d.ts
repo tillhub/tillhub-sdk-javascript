@@ -12,5 +12,5 @@ import { Stocks } from './stocks';
 import { Orders } from './orders';
 import { Analytics } from './analytics';
 import { Staff } from './staff';
-import { Audits } from './audits';
-export { Auth, Taxes, Deliveries, ProductGroups, Accounts, Configurations, Branches, Customers, Vouchers, VoucherLogs, Invoices, Stocks, Orders, Analytics, Staff, Audits };
+import { AuditActions } from './auditActions';
+export { Auth, Taxes, Deliveries, ProductGroups, Accounts, Configurations, Branches, Customers, Vouchers, VoucherLogs, Invoices, Stocks, Orders, Analytics, Staff, AuditActions };

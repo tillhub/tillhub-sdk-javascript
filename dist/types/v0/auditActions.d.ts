@@ -6,9 +6,7 @@ export interface AuditsOptions {
 export interface AuditsQuery {
     type?: string | string[];
     limit?: number;
-    offset?: number;
-    order_by?: string;
-    order_direction?: string;
+    cursor_field?: string;
     embed?: string | string[];
     uri?: string;
 }
@@ -27,13 +25,13 @@ export interface AuditsResponse {
     metadata?: object;
     msg?: string;
 }
-export declare class Audits {
+export declare class AuditActions {
     endpoint: string;
     http: Client;
     options: AuditsOptions;
     constructor(options: AuditsOptions, http: Client);
-    getAllActions(q?: AuditsQuery | undefined): Promise<AuditsResponse>;
-    getActionsMeta(q?: AuditsMetaQuery | undefined): Promise<AuditsResponse>;
-    getOneAction(requestObject: AuditActionsGetOneRequestObject): Promise<AuditsResponse>;
-    createAction(body: AuditActionsCreateBody): Promise<AuditsResponse>;
+    getAll(q?: AuditsQuery | undefined): Promise<AuditsResponse>;
+    meta(q?: AuditsMetaQuery | undefined): Promise<AuditsResponse>;
+    get(requestObject: AuditActionsGetOneRequestObject): Promise<AuditsResponse>;
+    create(body: AuditActionsCreateBody): Promise<AuditsResponse>;
 }

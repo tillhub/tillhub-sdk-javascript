@@ -47,14 +47,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var qs_1 = __importDefault(require("qs"));
 var errors = __importStar(require("../errors"));
-var Audits = /** @class */ (function () {
-    function Audits(options, http) {
+var AuditActions = /** @class */ (function () {
+    function AuditActions(options, http) {
         this.options = options;
         this.http = http;
         this.endpoint = '/api/v0/audits';
         this.options.base = this.options.base || 'https://api.tillhub.com';
     }
-    Audits.prototype.getAllActions = function (q) {
+    AuditActions.prototype.getAll = function (q) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, queryString, response, err_1;
@@ -87,7 +87,7 @@ var Audits = /** @class */ (function () {
             });
         }); });
     };
-    Audits.prototype.getActionsMeta = function (q) {
+    AuditActions.prototype.meta = function (q) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, queryString, response, err_2;
@@ -119,7 +119,7 @@ var Audits = /** @class */ (function () {
             });
         }); });
     };
-    Audits.prototype.getOneAction = function (requestObject) {
+    AuditActions.prototype.get = function (requestObject) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var auditActionId, query, uri, queryString, response, err_3;
@@ -150,7 +150,7 @@ var Audits = /** @class */ (function () {
             });
         }); });
     };
-    Audits.prototype.createAction = function (body) {
+    AuditActions.prototype.create = function (body) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, err_4;
@@ -175,7 +175,7 @@ var Audits = /** @class */ (function () {
             });
         }); });
     };
-    return Audits;
+    return AuditActions;
 }());
-exports.Audits = Audits;
-//# sourceMappingURL=audits.js.map
+exports.AuditActions = AuditActions;
+//# sourceMappingURL=auditActions.js.map

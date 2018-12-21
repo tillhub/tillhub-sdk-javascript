@@ -1,3 +1,10 @@
+# [1.73.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.72.0...v1.73.0) (2018-12-21)
+
+
+### Features
+
+* **auditActions:** Refactor audits handlers according to convention in order to be used in th-datat ([ce0228c](https://github.com/tillhub/tillhub-sdk-javascript/commit/ce0228c))
+
 # [1.72.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.71.0...v1.72.0) (2018-12-18)
 
 
