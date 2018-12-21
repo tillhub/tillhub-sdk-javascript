@@ -10,9 +10,7 @@ export interface AuditsOptions {
 export interface AuditsQuery {
   type?: string | string[]
   limit?: number
-  offset?: number
-  order_by?: string
-  order_direction?: string
+  cursor_field?: string
   embed?: string | string[]
   uri?: string
 }
@@ -36,7 +34,7 @@ export interface AuditsResponse {
   msg?: string
 }
 
-export class Audits {
+export class AuditActions {
   endpoint: string
   http: Client
   public options: AuditsOptions
@@ -49,7 +47,7 @@ export class Audits {
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 
-  getAllActions(q?: AuditsQuery | undefined): Promise<AuditsResponse> {
+  getAll(q?: AuditsQuery | undefined): Promise<AuditsResponse> {
     return new Promise(async (resolve, reject) => {
       let uri
 
@@ -77,7 +75,7 @@ export class Audits {
     })
   }
 
-  getActionsMeta(q?: AuditsMetaQuery | undefined): Promise<AuditsResponse> {
+  meta(q?: AuditsMetaQuery | undefined): Promise<AuditsResponse> {
     return new Promise(async (resolve, reject) => {
       let uri = `${this.options.base}${this.endpoint}/${this.options.user}/actions/meta`
 
@@ -100,7 +98,7 @@ export class Audits {
     })
   }
 
-  getOneAction(requestObject: AuditActionsGetOneRequestObject): Promise<AuditsResponse> {
+  get(requestObject: AuditActionsGetOneRequestObject): Promise<AuditsResponse> {
     return new Promise(async (resolve, reject) => {
       const { auditActionId, query } = requestObject
       let uri = `${this.options.base}${this.endpoint}/${this.options.user}/actions/${auditActionId}`
@@ -123,7 +121,7 @@ export class Audits {
     })
   }
 
-  createAction(body: AuditActionsCreateBody): Promise<AuditsResponse> {
+  create(body: AuditActionsCreateBody): Promise<AuditsResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/actions`
 
