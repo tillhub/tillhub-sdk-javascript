@@ -199,4 +199,30 @@ export class Signing {
       }
     })
   }
+
+  zero(
+    singingResourceType: string,
+    singingResource: string,
+    signingSystem: string
+  ): Promise<TransactionResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let uri = `${this.options.base}${this.endpoint}/${
+          this.options.user
+        }/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/zero`
+
+        const response = await this.http.getClient().post(uri, undefined, {
+          headers: {
+            Accept: 'application/json'
+          }
+        })
+
+        return resolve({
+          data: response.data.results
+        } as any)
+      } catch (err) {
+        return reject(new errors.TransactionSigningZeroReceiptFailed(err.message))
+      }
+    })
+  }
 }

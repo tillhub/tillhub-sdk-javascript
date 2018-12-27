@@ -55,6 +55,13 @@ export class TransactionSigningMonthlyReceiptFailed extends BaseError {
   }
 }
 
+export class TransactionSigningZeroReceiptFailed extends BaseError {
+  public name = 'TransactionSigningZeroReceiptFailed'
+  constructor(public message: string = 'Could not generate zero receipt') {
+    super(message)
+  }
+}
+
 export class TaxesFetchFailed extends BaseError {
   public name = 'TaxesFetchFailed'
   constructor(public message: string = 'Could not fetch taxes') {
