@@ -219,6 +219,33 @@ var Signing = /** @class */ (function () {
             });
         }); });
     };
+    Signing.prototype.zero = function (singingResourceType, singingResource, signingSystem) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, err_6;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/legacy/signing/" + singingResourceType + "/" + singingResource + "/" + signingSystem + "/zero";
+                        return [4 /*yield*/, this.http.getClient().post(uri, undefined, {
+                                headers: {
+                                    Accept: 'application/json'
+                                }
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, resolve({
+                                data: response.data.results
+                            })];
+                    case 2:
+                        err_6 = _a.sent();
+                        return [2 /*return*/, reject(new errors.TransactionSigningZeroReceiptFailed(err_6.message))];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     return Signing;
 }());
 exports.Signing = Signing;

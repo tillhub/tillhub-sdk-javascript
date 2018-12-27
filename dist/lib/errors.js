@@ -105,6 +105,18 @@ var TransactionSigningMonthlyReceiptFailed = /** @class */ (function (_super) {
     return TransactionSigningMonthlyReceiptFailed;
 }(BaseError));
 exports.TransactionSigningMonthlyReceiptFailed = TransactionSigningMonthlyReceiptFailed;
+var TransactionSigningZeroReceiptFailed = /** @class */ (function (_super) {
+    __extends(TransactionSigningZeroReceiptFailed, _super);
+    function TransactionSigningZeroReceiptFailed(message) {
+        if (message === void 0) { message = 'Could not generate zero receipt'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'TransactionSigningZeroReceiptFailed';
+        return _this;
+    }
+    return TransactionSigningZeroReceiptFailed;
+}(BaseError));
+exports.TransactionSigningZeroReceiptFailed = TransactionSigningZeroReceiptFailed;
 var TaxesFetchFailed = /** @class */ (function (_super) {
     __extends(TaxesFetchFailed, _super);
     function TaxesFetchFailed(message) {
