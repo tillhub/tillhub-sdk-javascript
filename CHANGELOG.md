@@ -1,3 +1,10 @@
+# [1.75.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.74.0...v1.75.0) (2019-01-02)
+
+
+### Features
+
+* **audit actions:** Change return result of meta ([7c428f2](https://github.com/tillhub/tillhub-sdk-javascript/commit/7c428f2))
+
 # [1.74.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.73.0...v1.74.0) (2018-12-27)
 
 

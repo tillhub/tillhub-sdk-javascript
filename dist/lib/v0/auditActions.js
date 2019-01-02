@@ -108,7 +108,7 @@ var AuditActions = /** @class */ (function () {
                         if (response.status !== 200)
                             reject(new errors.AuditActionsGetMetaFailed());
                         return [2 /*return*/, resolve({
-                                data: response.data.results,
+                                data: response.data.results[0],
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
