@@ -68,7 +68,8 @@ export class Branches {
         }
 
         const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) reject(new errors.BranchesFetchFailed())
+        if (response.status !== 200)
+          reject(new errors.BranchesFetchFailed(undefined, { status: response.status }))
 
         if (response.data.cursor && response.data.cursor.next) {
           next = this.getAll({ uri: response.data.cursor.next })
@@ -79,8 +80,8 @@ export class Branches {
           metadata: { cursor: response.data.cursor },
           next
         } as BranchesResponse)
-      } catch (err) {
-        return reject(new errors.BranchesFetchFailed())
+      } catch (error) {
+        return reject(new errors.BranchesFetchFailed(undefined, { error }))
       }
     })
   }
@@ -90,15 +91,16 @@ export class Branches {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${branchId}`
       try {
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.BranchFetchFailed())
+        response.status !== 200 &&
+          reject(new errors.BranchFetchFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results[0] as Branch,
           msg: response.data.msg,
           metadata: { count: response.data.count }
         } as BranchResponse)
-      } catch (err) {
-        return reject(new errors.VoucherFetchFailed())
+      } catch (error) {
+        return reject(new errors.VoucherFetchFailed(undefined, { error }))
       }
     })
   }
@@ -113,8 +115,8 @@ export class Branches {
           data: response.data.results[0] as Branch,
           metadata: { count: response.data.count }
         } as BranchResponse)
-      } catch (err) {
-        return reject(new errors.BranchPutFailed())
+      } catch (error) {
+        return reject(new errors.BranchPutFailed(undefined, { error }))
       }
     })
   }
@@ -129,8 +131,8 @@ export class Branches {
           data: response.data.results[0] as Branch,
           metadata: { count: response.data.count }
         } as BranchResponse)
-      } catch (err) {
-        return reject(new errors.BranchCreationFailed())
+      } catch (error) {
+        return reject(new errors.BranchCreationFailed(undefined, { error }))
       }
     })
   }
@@ -141,14 +143,15 @@ export class Branches {
 
       try {
         const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) reject(new errors.BranchesCountFailed())
+        if (response.status !== 200)
+          reject(new errors.BranchesCountFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
         } as BranchesResponse)
-      } catch (err) {
-        return reject(new errors.BranchesCountFailed())
+      } catch (error) {
+        return reject(new errors.BranchesCountFailed(undefined, { error }))
       }
     })
   }

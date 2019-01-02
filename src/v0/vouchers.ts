@@ -100,7 +100,8 @@ export class Vouchers {
         }
 
         const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) reject(new errors.VouchersFetchFailed())
+        if (response.status !== 200)
+          reject(new errors.VouchersFetchFailed(undefined, { status: response.status }))
 
         if (response.data.cursor && response.data.cursor.next) {
           next = this.getAll({ uri: response.data.cursor.next })
@@ -111,8 +112,8 @@ export class Vouchers {
           metadata: { cursor: response.data.cursor },
           next
         } as VouchersResponse)
-      } catch (err) {
-        return reject(new errors.VouchersFetchFailed())
+      } catch (error) {
+        return reject(new errors.VouchersFetchFailed(undefined, { error }))
       }
     })
   }
@@ -123,7 +124,8 @@ export class Vouchers {
 
       try {
         const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) reject(new errors.VouchersMetaFailed())
+        if (response.status !== 200)
+          reject(new errors.VouchersMetaFailed(undefined, { status: response.status }))
 
         if (!response.data.results[0]) {
           return reject(
@@ -135,8 +137,8 @@ export class Vouchers {
           data: response.data.results[0],
           metadata: { count: response.data.count }
         } as VouchersResponse)
-      } catch (err) {
-        return reject(new errors.VouchersMetaFailed())
+      } catch (error) {
+        return reject(new errors.VouchersMetaFailed(undefined, { error }))
       }
     })
   }
@@ -151,8 +153,8 @@ export class Vouchers {
         return resolve({
           msg: response.data.msg
         } as VouchersResponse)
-      } catch (err) {
-        return reject(new errors.VoucherDeleteFailed())
+      } catch (error) {
+        return reject(new errors.VoucherDeleteFailed(undefined, { error }))
       }
     })
   }
@@ -163,14 +165,15 @@ export class Vouchers {
 
       try {
         const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) reject(new errors.VouchersCountFailed())
+        if (response.status !== 200)
+          reject(new errors.VouchersCountFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
         } as VouchersResponse)
-      } catch (err) {
-        return reject(new errors.VouchersCountFailed())
+      } catch (error) {
+        return reject(new errors.VouchersCountFailed(undefined, { error }))
       }
     })
   }
@@ -187,8 +190,8 @@ export class Vouchers {
           msg: response.data.msg,
           metadata: { count: response.data.count }
         } as VoucherResponse)
-      } catch (err) {
-        return reject(new errors.VoucherFetchFailed())
+      } catch (error) {
+        return reject(new errors.VoucherFetchFailed(undefined, { error }))
       }
     })
   }
@@ -209,7 +212,8 @@ export class Vouchers {
         }
 
         const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) reject(new errors.VoucherLogsFetchFailed())
+        if (response.status !== 200)
+          reject(new errors.VoucherLogsFetchFailed(undefined, { status: response.status }))
 
         if (response.data.cursor && response.data.cursor.next) {
           next = this.getAll({ uri: response.data.cursor.next })
@@ -220,8 +224,8 @@ export class Vouchers {
           metadata: { count: response.data.count },
           next
         } as VouchersResponse)
-      } catch (err) {
-        return reject(new errors.VoucherLogsFetchFailed())
+      } catch (error) {
+        return reject(new errors.VoucherLogsFetchFailed(undefined, { error }))
       }
     })
   }
@@ -236,8 +240,8 @@ export class Vouchers {
           data: response.data.results[0] as Voucher,
           metadata: { count: response.data.count }
         } as VoucherResponse)
-      } catch (err) {
-        return reject(new errors.VoucherPutFailed())
+      } catch (error) {
+        return reject(new errors.VoucherPutFailed(undefined, { error }))
       }
     })
   }
@@ -269,8 +273,8 @@ export class Vouchers {
           data: response.data.results[0] as Voucher,
           metadata: { count: response.data.count, patch }
         } as VoucherResponse)
-      } catch (err) {
-        return reject(new errors.VoucherPatchFailed())
+      } catch (error) {
+        return reject(new errors.VoucherPatchFailed(undefined, { error }))
       }
     })
   }
@@ -285,8 +289,8 @@ export class Vouchers {
           data: response.data.results[0] as Voucher,
           metadata: { count: response.data.count }
         } as VoucherResponse)
-      } catch (err) {
-        return reject(new errors.VoucherCreationFailed())
+      } catch (error) {
+        return reject(new errors.VoucherCreationFailed(undefined, { error }))
       }
     })
   }
@@ -325,7 +329,8 @@ export class VoucherLogs {
         }
 
         const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) reject(new errors.VouchersLogsFetchFailed())
+        if (response.status !== 200)
+          reject(new errors.VouchersLogsFetchFailed(undefined, { status: response.status }))
 
         if (response.data.cursor && response.data.cursor.next) {
           next = this.getAll({ uri: response.data.cursor.next })
@@ -336,8 +341,8 @@ export class VoucherLogs {
           metadata: { cursor: response.data.cursor },
           next
         } as VouchersResponse)
-      } catch (err) {
-        return reject(new errors.VouchersLogsFetchFailed())
+      } catch (error) {
+        return reject(new errors.VouchersLogsFetchFailed(undefined, { error }))
       }
     })
   }
@@ -348,7 +353,8 @@ export class VoucherLogs {
 
       try {
         const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) reject(new errors.VoucherLogsMetaFailed())
+        if (response.status !== 200)
+          reject(new errors.VoucherLogsMetaFailed(undefined, { status: response.status }))
 
         if (!response.data.results[0]) {
           return reject(
@@ -360,8 +366,8 @@ export class VoucherLogs {
           data: response.data.results[0],
           metadata: { count: response.data.count }
         } as VouchersResponse)
-      } catch (err) {
-        return reject(new errors.VoucherLogsMetaFailed())
+      } catch (error) {
+        return reject(new errors.VoucherLogsMetaFailed(undefined, { error }))
       }
     })
   }

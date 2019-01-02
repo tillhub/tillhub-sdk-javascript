@@ -1,6 +1,8 @@
 // Import here Polyfills if needed. Recommended core-js (npm i -D core-js)
 // import 'core-js/fn/array.find'
 // import * as EventEmitter from 'events'
+import events from 'events'
+// import { AxiosError } from 'axios'
 import { AuthOptions, AuthTypes, UsernameAuth, KeyAuth, TokenAuth } from './v0/auth'
 import { Auth } from './v1/auth'
 import * as v0 from './v0'
@@ -21,7 +23,13 @@ export interface TillhubSDKOptions {
   user?: string
 }
 
-export class TillhubClient {
+export declare interface TillhubClient {
+  on(event: 'raw-error', listener: (error: Error) => void): this
+  on(event: 'error', listener: (error: Error) => void): this
+  on(event: string, listener: Function): this
+}
+
+export class TillhubClient extends events.EventEmitter {
   user?: string
   auth?: Auth
   http?: Client
@@ -31,7 +39,7 @@ export class TillhubClient {
   public initialized = false
 
   constructor(options?: TillhubSDKOptions) {
-    // super()
+    super()
 
     if (!options) return
 
@@ -440,6 +448,11 @@ export class Tillhub extends TillhubClient {
   private static instance: Tillhub
   constructor(options: TillhubSDKOptions) {
     super(options)
+
+    // only emit errors, when we have listeners to prevent unhandled rejects etc.
+    this.on('raw-error', (err: Error) => {
+      if (this.listeners('error').length > 0) this.emit('error', err)
+    })
   }
 
   static getInstance(options: TillhubSDKOptions): Tillhub {
