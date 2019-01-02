@@ -1,13 +1,15 @@
-export class BaseError {
+export class BaseError extends Error {
   public properties?: any
+  public message: string
 
   constructor(message: string, properties?: any) {
-    Error.apply(this, arguments)
+    super()
+    this.message = message
     this.properties = properties
+
+    Object.setPrototypeOf(this, BaseError.prototype)
   }
 }
-
-BaseError.prototype = new Error()
 
 export class AuthenticationFailed extends BaseError {
   public name = 'AuthenticationFailed'
