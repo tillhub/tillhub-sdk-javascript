@@ -26,6 +26,7 @@ describe('SDK: can instantiate SDK', () => {
   })
 
   it('Base has been set automatically', () => {
+    if (!th.options) throw new Error('Options must be defined')
     expect(th.options.base).toBe('https://api.tillhub.com')
   })
 
@@ -33,6 +34,8 @@ describe('SDK: can instantiate SDK', () => {
     th.init({
       base: 'https://staging-api.tillhub.com'
     })
+
+    if (!th.options) throw new Error('Options must be defined')
 
     expect(th.options.base).toBe('https://staging-api.tillhub.com')
     expect(th.auth).toBeInstanceOf(Auth)

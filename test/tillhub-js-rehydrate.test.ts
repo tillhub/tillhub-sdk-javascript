@@ -5,6 +5,7 @@ dotenv.config()
 import th, { TillhubClient, v1 } from '../src/tillhub-js'
 import { Client } from '../src/client'
 import { Auth } from '../src/v1'
+import { LocalStorageMock } from './util'
 
 let user = {
   username: 'test@example.com',
@@ -21,26 +22,6 @@ if (process.env.SYSTEM_TEST) {
 }
 
 describe('SDK: can instantiate SDK', () => {
-  class LocalStorageMock {
-    private store = {}
-
-    clear() {
-      this.store = {}
-    }
-
-    getItem(key: string) {
-      return this.store[key] || null
-    }
-
-    setItem(key: string, value: string) {
-      this.store[key] = value
-    }
-
-    removeItem(key: string) {
-      delete this.store[key]
-    }
-  }
-
   const localStorage = new LocalStorageMock()
 
   it('Tillhub SDK is instantiable and is instance of Tillhub client', () => {
@@ -48,6 +29,7 @@ describe('SDK: can instantiate SDK', () => {
   })
 
   it('Base has been set automatically', () => {
+    if (!th.options) throw new Error('Options must be defined')
     expect(th.options.base).toBe('https://api.tillhub.com')
   })
 
@@ -55,6 +37,8 @@ describe('SDK: can instantiate SDK', () => {
     th.init({
       base: 'https://staging-api.tillhub.com'
     })
+
+    if (!th.options) throw new Error('Options must be defined')
 
     expect(th.options.base).toBe('https://staging-api.tillhub.com')
     expect(th.auth).toBeInstanceOf(Auth)

@@ -90,12 +90,11 @@ describe('v0: vouchers: can patch one', () => {
 
     expect(vouchers).toBeInstanceOf(v0.Vouchers)
 
-    const {
-      data,
-      metadata: { patch }
-    } = await vouchers.patch(voucherSource as any, voucherTarget as any)
+    const { data, metadata } = await vouchers.patch(voucherSource as any, voucherTarget as any)
 
-    expect(patch).toEqual([{ op: 'replace', path: '/amount', value: 10.99 }])
+    if (!metadata) throw new Error('metadata must be defined')
+
+    expect(metadata.patch).toEqual([{ op: 'replace', path: '/amount', value: 10.99 }])
 
     expect(Array.isArray(data)).toBe(false)
     expect((data as any).id).toBe(voucherId)

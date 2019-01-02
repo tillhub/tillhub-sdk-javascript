@@ -3,6 +3,7 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import th, { TillhubClient, v1 } from '../../src/tillhub-js'
+import { TemplateTypes } from '../../src/v1/templates'
 
 let user = {
   username: 'test@example.com',
@@ -20,7 +21,7 @@ if (process.env.SYSTEM_TEST) {
 
 const templateObj = {
   name: 'iPhone',
-  type: 'invoice_v1'
+  type: 'invoice_v1' as TemplateTypes
 }
 
 const legacyId = '4564'

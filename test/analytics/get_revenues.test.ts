@@ -3,6 +3,7 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import { TillhubClient, v0 } from '../../src/tillhub-js'
+import { RevenuePeriods } from '../../src/v0/analytics'
 
 let user = {
   username: 'test@example.com',
@@ -25,7 +26,7 @@ const queryObject = {
   start: '2018-06-01T14%3A55%3A05.000Z',
   end: '2018-06-29T14%3A55%3A05.000Z',
   branch_number: '1',
-  precision: 'day'
+  precision: 'day' as RevenuePeriods
 }
 
 const mock = new MockAdapter(axios)

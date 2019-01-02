@@ -18,7 +18,7 @@ if (process.env.SYSTEM_TEST) {
   user.apiKey = process.env.SYSTEM_TEST_API_KEY || user.apiKey
 }
 
-let th
+let th: any
 let options
 const mock = new MockAdapter(axios)
 const legacyId = '4564'
@@ -83,7 +83,7 @@ afterEach(() => {
 
 describe('v0: Orders: can create Orders', () => {
   it("Tillhub's orders are instantiable", async () => {
-    const orders = th.orders()
+    const orders: any = th.orders()
     expect(orders).toBeInstanceOf(v0.Orders)
     const { data } = await orders.create(createObject)
     expect(Array.isArray(data)).toBe(true)
