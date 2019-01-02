@@ -1,3 +1,10 @@
+# [1.77.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.76.0...v1.77.0) (2019-01-02)
+
+
+### Features
+
+* **audit-actions:** Change return value "next" to be a function ([e42d1b4](https://github.com/tillhub/tillhub-sdk-javascript/commit/e42d1b4))
+
 # [1.76.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.75.0...v1.76.0) (2019-01-02)
 
 
