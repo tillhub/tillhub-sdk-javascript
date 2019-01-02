@@ -24,7 +24,7 @@ describe('v0: Branches: can get count number of all branches', () => {
       const mock = new MockAdapter(axios)
       const legacyId = '4564'
 
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -39,7 +39,7 @@ describe('v0: Branches: can get count number of all branches', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/branches/${legacyId}/meta`)
-        .reply(function(config) {
+        .reply(function (config) {
           return [
             200,
             {
@@ -80,7 +80,7 @@ describe('v0: Branches: can get count number of all branches', () => {
       const mock = new MockAdapter(axios)
       const legacyId = '4564'
 
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -95,7 +95,7 @@ describe('v0: Branches: can get count number of all branches', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/branches/${legacyId}/meta`)
-        .reply(function(config) {
+        .reply(function (config) {
           return [205]
         })
     }

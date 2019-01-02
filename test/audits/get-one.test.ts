@@ -40,7 +40,7 @@ afterEach(() => {
 describe('v0: Audits: Actions: can get one', () => {
   it("Tillhub's audits are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -59,7 +59,7 @@ describe('v0: Audits: Actions: can get one', () => {
             requestObject.auditActionId
           }?${queryString()}`
         )
-        .reply(function(config) {
+        .reply(function (config) {
           return [
             200,
             {
@@ -97,7 +97,7 @@ describe('v0: Audits: Actions: can get one', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -116,7 +116,7 @@ describe('v0: Audits: Actions: can get one', () => {
             requestObject.auditActionId
           }?${queryString()}`
         )
-        .reply(function(config) {
+        .reply(function (config) {
           return [400]
         })
     }

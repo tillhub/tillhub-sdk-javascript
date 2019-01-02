@@ -29,7 +29,7 @@ afterEach(() => {
 describe('v0: Invoices: can get meta', () => {
   it("Tillhub's invoices are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -44,7 +44,7 @@ describe('v0: Invoices: can get meta', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/invoices/${legacyId}/meta`)
-        .reply(function(config) {
+        .reply(function (config) {
           return [
             200,
             {
@@ -82,7 +82,7 @@ describe('v0: Invoices: can get meta', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -96,7 +96,7 @@ describe('v0: Invoices: can get meta', () => {
       })
       mock
         .onGet(`https://api.tillhub.com/api/v0/invoices/${legacyId}/meta`)
-        .reply(function(config) {
+        .reply(function (config) {
           return [400]
         })
     }

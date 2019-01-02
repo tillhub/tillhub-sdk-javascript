@@ -29,7 +29,7 @@ afterEach(() => {
 describe('v0: Analytics: gets refunds report', () => {
   it('gets refunds report grouped by all staff', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -44,7 +44,7 @@ describe('v0: Analytics: gets refunds report', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/refunds/`)
-        .reply(function(config) {
+        .reply(function (config) {
           return [
             200,
             {
@@ -82,7 +82,7 @@ describe('v0: Analytics: gets refunds report', () => {
 
   it('gets refunds report grouped by one staff member', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -99,7 +99,7 @@ describe('v0: Analytics: gets refunds report', () => {
         .onGet(
           `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/refunds/${staffMember}`
         )
-        .reply(function(config) {
+        .reply(function (config) {
           return [
             200,
             {
@@ -137,7 +137,7 @@ describe('v0: Analytics: gets refunds report', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -154,7 +154,7 @@ describe('v0: Analytics: gets refunds report', () => {
         .onGet(
           `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/refunds/${staffMember}`
         )
-        .reply(function(config) {
+        .reply(function (config) {
           return [205]
         })
     }

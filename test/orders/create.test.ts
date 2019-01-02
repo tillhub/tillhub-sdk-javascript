@@ -34,7 +34,7 @@ const createObject = {
 
 beforeEach(async () => {
   if (process.env.SYSTEM_TEST !== 'true') {
-    mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+    mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
       return [
         200,
         {
@@ -49,7 +49,7 @@ beforeEach(async () => {
 
     mock
       .onPost(`https://api.tillhub.com/api/v0/orders/${legacyId}/${orderId}`)
-      .reply(function(config) {
+      .reply(function (config) {
         return [
           200,
           {

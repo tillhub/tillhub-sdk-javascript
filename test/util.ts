@@ -10,7 +10,7 @@ export class LocalStorageMock {
   }
 
   setItem(key: string, value: string | null) {
-    ;(this.store as any)[key] = value as any
+    (this.store as any)[key] = value as any
   }
 
   removeItem(key: string) {

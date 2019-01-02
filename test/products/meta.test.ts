@@ -28,7 +28,7 @@ describe('v1: Products: can get count number of all products', () => {
   })
   it("Tillhub's products are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -43,7 +43,7 @@ describe('v1: Products: can get count number of all products', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/meta`)
-        .reply(function(config) {
+        .reply(function (config) {
           return [
             200,
             {
@@ -81,7 +81,7 @@ describe('v1: Products: can get count number of all products', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -96,7 +96,7 @@ describe('v1: Products: can get count number of all products', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/meta`)
-        .reply(function(config) {
+        .reply(function (config) {
           return [205]
         })
     }

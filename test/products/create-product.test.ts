@@ -29,7 +29,7 @@ afterEach(() => {
 describe('Create a new Product', () => {
   it('create', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -42,7 +42,7 @@ describe('Create a new Product', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v1/products/${userId}`).reply(function(config) {
+      mock.onPost(`https://api.tillhub.com/api/v1/products/${userId}`).reply(function (config) {
         return [
           200,
           {
@@ -79,7 +79,7 @@ describe('Create a new Product', () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       const mock = new MockAdapter(axios)
 
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -92,7 +92,7 @@ describe('Create a new Product', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v1/products/${userId}`).reply(function(config) {
+      mock.onPost(`https://api.tillhub.com/api/v1/products/${userId}`).reply(function (config) {
         return [205]
       })
     }

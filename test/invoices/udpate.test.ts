@@ -72,7 +72,7 @@ describe('v0: Invoices', () => {
     const { body, query } = requestObject
 
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -91,7 +91,7 @@ describe('v0: Invoices', () => {
             requestObject.invoiceId
           }?${queryString}`
         )
-        .reply(function(config) {
+        .reply(function (config) {
           return [
             200,
             {
@@ -126,7 +126,7 @@ describe('v0: Invoices', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -144,7 +144,7 @@ describe('v0: Invoices', () => {
             requestObject.invoiceId
           }?${queryString}`
         )
-        .reply(function(config) {
+        .reply(function (config) {
           return [400]
         })
     }

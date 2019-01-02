@@ -48,7 +48,7 @@ describe('v0: Deliveries: Items', () => {
     const { body } = requestObject
 
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -65,7 +65,7 @@ describe('v0: Deliveries: Items', () => {
         .onPost(
           `https://api.tillhub.com/api/v0/deliveries/${legacyId}/items?embed[]=location&embed[]=product`
         )
-        .reply(function(config) {
+        .reply(function (config) {
           return [
             200,
             {
@@ -100,7 +100,7 @@ describe('v0: Deliveries: Items', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -116,7 +116,7 @@ describe('v0: Deliveries: Items', () => {
         .onPost(
           `https://api.tillhub.com/api/v0/deliveries/${legacyId}/items?embed[]=location&embed[]=product`
         )
-        .reply(function(config) {
+        .reply(function (config) {
           return [400]
         })
     }

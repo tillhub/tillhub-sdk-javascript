@@ -40,7 +40,7 @@ describe('v0: Deliveries: Items', () => {
     const { body, itemId } = requestObject
 
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -57,7 +57,7 @@ describe('v0: Deliveries: Items', () => {
         .onPut(
           `https://api.tillhub.com/api/v0/deliveries/${legacyId}/items/${itemId}?embed[]=location&embed[]=product`
         )
-        .reply(function(config) {
+        .reply(function (config) {
           return [
             200,
             {
@@ -94,7 +94,7 @@ describe('v0: Deliveries: Items', () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       const { itemId } = requestObject
 
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -110,7 +110,7 @@ describe('v0: Deliveries: Items', () => {
         .onPut(
           `https://api.tillhub.com/api/v0/deliveries/${legacyId}/items/${itemId}?embed[]=location&embed[]=product`
         )
-        .reply(function(config) {
+        .reply(function (config) {
           return [400]
         })
     }

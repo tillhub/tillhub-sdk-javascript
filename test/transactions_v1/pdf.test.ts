@@ -43,7 +43,7 @@ const results = 'some pdf uri'
 describe('v1: Transactions', () => {
   it('can get pdf uri', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -62,7 +62,7 @@ describe('v1: Transactions', () => {
             requestObject.transactionId
           }/legacy/${requestObject.template}/pdf?${queryString()}`
         )
-        .reply(function(config) {
+        .reply(function (config) {
           return [
             200,
             {
@@ -97,7 +97,7 @@ describe('v1: Transactions', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -115,7 +115,7 @@ describe('v1: Transactions', () => {
             requestObject.transactionId
           }/legacy/${requestObject.template}/pdf?${queryString()}`
         )
-        .reply(function(config) {
+        .reply(function (config) {
           return [400]
         })
     }

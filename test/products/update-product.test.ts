@@ -38,7 +38,7 @@ describe('v1: Products', () => {
     const { body, productId } = requestObject
 
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -53,7 +53,7 @@ describe('v1: Products', () => {
 
       mock
         .onPut(`https://api.tillhub.com/api/v1/products/${legacyId}/${productId}`)
-        .reply(function(config) {
+        .reply(function (config) {
           return [
             200,
             {
@@ -92,7 +92,7 @@ describe('v1: Products', () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
         .onPost('https://api.tillhub.com/api/v0/users/login')
-        .reply(function(config) {
+        .reply(function (config) {
           return [
             200,
             {
@@ -106,7 +106,7 @@ describe('v1: Products', () => {
         })
 
         .onPut(`https://api.tillhub.com/api/v1/products/${legacyId}/${productId}`)
-        .reply(function(config) {
+        .reply(function (config) {
           return [205]
         })
     }

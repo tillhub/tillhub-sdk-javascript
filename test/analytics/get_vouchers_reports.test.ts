@@ -45,7 +45,7 @@ afterEach(() => {
 describe('v0: Analytics: reports gets all vouchers', () => {
   it("Tillhub's Analytics are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -62,7 +62,7 @@ describe('v0: Analytics: reports gets all vouchers', () => {
         .onGet(
           `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/vouchers?${mockString}`
         )
-        .reply(function(config) {
+        .reply(function (config) {
           return [
             200,
             {
@@ -100,7 +100,7 @@ describe('v0: Analytics: reports gets all vouchers', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -115,7 +115,7 @@ describe('v0: Analytics: reports gets all vouchers', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/vouchers`)
-        .reply(function(config) {
+        .reply(function (config) {
           return [205]
         })
     }
@@ -145,7 +145,7 @@ describe('v0: Analytics: reports gets all vouchers', () => {
 
   it('takes empty query sting', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -160,7 +160,7 @@ describe('v0: Analytics: reports gets all vouchers', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/vouchers`)
-        .reply(function(config) {
+        .reply(function (config) {
           return [
             200,
             {

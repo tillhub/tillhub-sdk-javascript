@@ -28,7 +28,7 @@ afterEach(() => {
 describe('v0: vouchers: can get all', () => {
   it("Tillhub's vouchers are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -41,7 +41,7 @@ describe('v0: vouchers: can get all', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/vouchers/${legacyId}`).reply(function(config) {
+      mock.onGet(`https://api.tillhub.com/api/v0/vouchers/${legacyId}`).reply(function (config) {
         return [
           200,
           {
@@ -79,7 +79,7 @@ describe('v0: vouchers: can get all', () => {
 
   it("Tillhub's vouchers queryable with limit", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -94,7 +94,7 @@ describe('v0: vouchers: can get all', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/vouchers/${legacyId}?limit=10`)
-        .reply(function(config) {
+        .reply(function (config) {
           return [
             200,
             {
@@ -132,7 +132,7 @@ describe('v0: vouchers: can get all', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -145,7 +145,7 @@ describe('v0: vouchers: can get all', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/vouchers/${legacyId}`).reply(function(config) {
+      mock.onGet(`https://api.tillhub.com/api/v0/vouchers/${legacyId}`).reply(function (config) {
         return [500]
       })
     }

@@ -50,7 +50,7 @@ describe('SDK: can instantiate SDK', () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       const mock = new MockAdapter(axios)
 
-      mock.onPost('https://staging-api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://staging-api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {

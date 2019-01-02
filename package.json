@@ -35,18 +35,12 @@
     "test:prod": "npm run lint && npm run test -- --coverage --no-cache --runInBand",
     "deploy-docs": "ts-node tools/gh-pages-publish",
     "coverage": "codecov",
-    "precommit": "git add -A && lint-staged",
+    "precommit": "npm run lint -- --fix && git add -A",
     "commit": "git-cz",
     "semantic-release": "semantic-release",
     "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
     "travis-deploy-once": "travis-deploy-once",
     "storybook": "start-storybook -p 9001 -c examples/.storybook"
-  },
-  "lint-staged": {
-    "{src,test}/**/*.ts": [
-      "prettier --write --no-semi --single-quote",
-      "git add"
-    ]
   },
   "config": {
     "commitizen": {
@@ -108,7 +102,6 @@
     "husky": "^0.14.3",
     "jest": "^23.6.0",
     "jest-localstorage-mock": "^2.3.0",
-    "lint-staged": "^8.1.0",
     "lodash.camelcase": "^4.3.0",
     "prettier": "^1.15.3",
     "prismjs": "^1.15.0",

@@ -28,7 +28,7 @@ afterEach(() => {
 describe('v0: customers', () => {
   it('can delete one', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -43,7 +43,7 @@ describe('v0: customers', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/customers/${legacyId}/${customerId}`)
-        .reply(function(config) {
+        .reply(function (config) {
           return [
             200,
             {
@@ -80,7 +80,7 @@ describe('v0: customers', () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
         .onPost('https://api.tillhub.com/api/v0/users/login')
-        .reply(function(config) {
+        .reply(function (config) {
           return [
             200,
             {
@@ -94,7 +94,7 @@ describe('v0: customers', () => {
         })
 
         .onDelete(`https://api.tillhub.com/api/v0/customers/${legacyId}/${customerId}`)
-        .reply(function(config) {
+        .reply(function (config) {
           return [500]
         })
     }

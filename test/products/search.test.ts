@@ -28,7 +28,7 @@ afterEach(() => {
 describe('v1: Products: can search for products', () => {
   it("Tillhub's Products are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -43,7 +43,7 @@ describe('v1: Products: can search for products', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/search?q=${searchTerm}`)
-        .reply(function(config) {
+        .reply(function (config) {
           return [
             200,
             {
@@ -81,7 +81,7 @@ describe('v1: Products: can search for products', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -96,7 +96,7 @@ describe('v1: Products: can search for products', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/search?q=${searchTerm}`)
-        .reply(function(config) {
+        .reply(function (config) {
           return [205]
         })
     }

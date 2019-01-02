@@ -29,7 +29,7 @@ afterEach(() => {
 describe('v1: Products: can get one', () => {
   it("Tillhub's products are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -44,7 +44,7 @@ describe('v1: Products: can get one', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/${productId}`)
-        .reply(function(config) {
+        .reply(function (config) {
           return [
             200,
             {
@@ -84,7 +84,7 @@ describe('v1: Products: can get one', () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
         .onPost('https://api.tillhub.com/api/v0/users/login')
-        .reply(function(config) {
+        .reply(function (config) {
           return [
             200,
             {
@@ -98,7 +98,7 @@ describe('v1: Products: can get one', () => {
         })
 
         .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/${productId}`)
-        .reply(function(config) {
+        .reply(function (config) {
           return [404]
         })
     }

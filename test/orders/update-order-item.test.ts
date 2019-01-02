@@ -41,7 +41,7 @@ const requestObj = {
 
 beforeEach(async () => {
   if (process.env.SYSTEM_TEST !== 'true') {
-    mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+    mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
       return [
         200,
         {
@@ -56,7 +56,7 @@ beforeEach(async () => {
 
     mock
       .onPut(`https://api.tillhub.com/api/v0/orders/${legacyId}/order_items/${itemId}`)
-      .reply(function(config) {
+      .reply(function (config) {
         return [
           200,
           {

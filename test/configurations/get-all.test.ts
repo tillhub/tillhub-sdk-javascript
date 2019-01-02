@@ -28,7 +28,7 @@ afterEach(() => {
 describe('v0: Configurations: can get all', () => {
   it("Tillhub's Configurations are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -43,7 +43,7 @@ describe('v0: Configurations: can get all', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/configurations/${legacyId}`)
-        .reply(function(config) {
+        .reply(function (config) {
           return [
             200,
             {
@@ -81,7 +81,7 @@ describe('v0: Configurations: can get all', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -95,7 +95,7 @@ describe('v0: Configurations: can get all', () => {
       })
       mock
         .onGet(`https://api.tillhub.com/api/v0/configurations/${legacyId}`)
-        .reply(function(config) {
+        .reply(function (config) {
           return [205]
         })
     }

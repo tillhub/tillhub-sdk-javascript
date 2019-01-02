@@ -31,7 +31,7 @@ afterEach(() => {
 describe('v0: Deliveries', () => {
   it('can delete one', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -46,7 +46,7 @@ describe('v0: Deliveries', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/deliveries/${legacyId}/${deliveryId}`)
-        .reply(function(config) {
+        .reply(function (config) {
           return [
             200,
             {
@@ -81,7 +81,7 @@ describe('v0: Deliveries', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -95,7 +95,7 @@ describe('v0: Deliveries', () => {
       })
       mock
         .onDelete(`https://api.tillhub.com/api/v0/deliveries/${legacyId}/${deliveryId}`)
-        .reply(function(config) {
+        .reply(function (config) {
           return [400]
         })
     }

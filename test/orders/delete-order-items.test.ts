@@ -37,7 +37,7 @@ const orderItemsDelete = {
 describe('v0: Orders: can delete Order Items', () => {
   it("Tillhub's orders are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -54,7 +54,7 @@ describe('v0: Orders: can delete Order Items', () => {
         .onDelete(
           `https://api.tillhub.com/api/v0/orders/${legacyId}/order_items?order=wert&auto=false&suggestion=true&order_qty=4`
         )
-        .reply(function(config) {
+        .reply(function (config) {
           return [
             200,
             {
@@ -91,7 +91,7 @@ describe('v0: Orders: can delete Order Items', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function(config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
           200,
           {
@@ -107,7 +107,7 @@ describe('v0: Orders: can delete Order Items', () => {
         .onDelete(
           `https://api.tillhub.com/api/v0/orders/${legacyId}/order_items?order=wert&auto=false&suggestion=true&order_qty=4`
         )
-        .reply(function(config) {
+        .reply(function (config) {
           return [205]
         })
     }
