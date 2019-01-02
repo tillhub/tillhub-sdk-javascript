@@ -24,8 +24,7 @@ export interface TillhubSDKOptions {
 }
 
 export declare interface TillhubClient {
-  on(event: 'raw-error', listener: (error: Error) => void): this
-  on(event: 'error', listener: (error: Error) => void): this
+  on(event: 'raw-error' | 'error', listener: (error: Error) => void): this
   on(event: string, listener: Function): this
 }
 

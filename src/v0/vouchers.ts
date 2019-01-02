@@ -100,8 +100,9 @@ export class Vouchers {
         }
 
         const response = await this.http.getClient().get(uri)
-        if (response.status !== 200)
-          reject(new errors.VouchersFetchFailed(undefined, { status: response.status }))
+        if (response.status !== 200) {
+          return reject(new errors.VouchersFetchFailed(undefined, { status: response.status }))
+        }
 
         if (response.data.cursor && response.data.cursor.next) {
           next = this.getAll({ uri: response.data.cursor.next })
@@ -124,8 +125,9 @@ export class Vouchers {
 
       try {
         const response = await this.http.getClient().get(uri)
-        if (response.status !== 200)
-          reject(new errors.VouchersMetaFailed(undefined, { status: response.status }))
+        if (response.status !== 200) {
+          return reject(new errors.VouchersMetaFailed(undefined, { status: response.status }))
+        }
 
         if (!response.data.results[0]) {
           return reject(
@@ -148,7 +150,9 @@ export class Vouchers {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${voucherId}`
       try {
         const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new errors.VoucherDeleteFailed())
+        if (response.status !== 200) {
+          return reject(new errors.VoucherDeleteFailed(undefined, { status: response.status }))
+        }
 
         return resolve({
           msg: response.data.msg
@@ -165,8 +169,9 @@ export class Vouchers {
 
       try {
         const response = await this.http.getClient().get(uri)
-        if (response.status !== 200)
-          reject(new errors.VouchersCountFailed(undefined, { status: response.status }))
+        if (response.status !== 200) {
+          return reject(new errors.VouchersCountFailed(undefined, { status: response.status }))
+        }
 
         return resolve({
           data: response.data.results,
@@ -212,8 +217,9 @@ export class Vouchers {
         }
 
         const response = await this.http.getClient().get(uri)
-        if (response.status !== 200)
-          reject(new errors.VoucherLogsFetchFailed(undefined, { status: response.status }))
+        if (response.status !== 200) {
+          return reject(new errors.VoucherLogsFetchFailed(undefined, { status: response.status }))
+        }
 
         if (response.data.cursor && response.data.cursor.next) {
           next = this.getAll({ uri: response.data.cursor.next })
@@ -329,8 +335,9 @@ export class VoucherLogs {
         }
 
         const response = await this.http.getClient().get(uri)
-        if (response.status !== 200)
-          reject(new errors.VouchersLogsFetchFailed(undefined, { status: response.status }))
+        if (response.status !== 200) {
+          return reject(new errors.VouchersLogsFetchFailed(undefined, { status: response.status }))
+        }
 
         if (response.data.cursor && response.data.cursor.next) {
           next = this.getAll({ uri: response.data.cursor.next })
@@ -353,8 +360,9 @@ export class VoucherLogs {
 
       try {
         const response = await this.http.getClient().get(uri)
-        if (response.status !== 200)
-          reject(new errors.VoucherLogsMetaFailed(undefined, { status: response.status }))
+        if (response.status !== 200) {
+          return reject(new errors.VoucherLogsMetaFailed(undefined, { status: response.status }))
+        }
 
         if (!response.data.results[0]) {
           return reject(
