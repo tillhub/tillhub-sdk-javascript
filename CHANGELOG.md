@@ -1,3 +1,12 @@
+## [1.79.3](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.79.2...v1.79.3) (2019-01-02)
+
+
+### Bug Fixes
+
+* adds some compile targets to git tree ([7d9447f](https://github.com/tillhub/tillhub-sdk-javascript/commit/7d9447f))
+* dist ([b1dd089](https://github.com/tillhub/tillhub-sdk-javascript/commit/b1dd089))
+* lower root ([aa47220](https://github.com/tillhub/tillhub-sdk-javascript/commit/aa47220))
+
 ## [1.79.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.79.1...v1.79.2) (2019-01-02)
 
 
