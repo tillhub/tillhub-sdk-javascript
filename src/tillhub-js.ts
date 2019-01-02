@@ -28,13 +28,16 @@ export class TillhubClient {
 
   public options: TillhubSDKOptions | undefined
   public static environment = environment
+  public initialized = false
 
   constructor(options?: TillhubSDKOptions) {
     // super()
 
     if (!options) return
 
-    this.handleOptions(options)
+    if (this.handleOptions(options)) {
+      this.initialized = true
+    }
   }
 
   /**
@@ -54,6 +57,22 @@ export class TillhubClient {
 
     this.auth = new v1.Auth({ base: options ? options.base : defaultOptions.base })
     this.http = Client.getInstance(clientOptions).setDefaults(clientOptions)
+  }
+
+  /**
+   * De-Initialise the SDK instance and all its state
+   *
+   */
+  public destroy(): void {
+    Client.clearInstance()
+
+    if (this.auth) {
+      this.auth.clearInstance()
+    }
+
+    this.http = undefined
+    this.options = undefined
+    this.user = undefined
   }
 
   private handleOptions(options: TillhubSDKOptions): boolean {

@@ -83,6 +83,18 @@ export class Auth {
     }
   }
 
+  /**
+   * Initialise the SDK instance by authenticating the client
+   *
+   */
+  public clearInstance(): void {
+    this.authenticated = false
+    this.options.credentials = undefined
+    this.options.token = undefined
+    this.options.user = undefined
+    this.options.type = undefined
+  }
+
   protected determineAuthType() {
     if (isUsernameAuth(this.options.credentials)) this.options.type = AuthTypes.username
     if (isKeyAuth(this.options.credentials)) this.options.type = AuthTypes.key

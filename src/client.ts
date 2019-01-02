@@ -1,5 +1,7 @@
 import axios, { AxiosInstance } from 'axios'
 
+import { environment } from './environment'
+
 export interface ClientOptions {
   base?: string
   timeout?: number
@@ -7,6 +9,17 @@ export interface ClientOptions {
   token?: string
 }
 
+const defaultHeaders = {
+  'X-Client-Type': 'Tillhub SDK JavaScript',
+  'X-Client-Version': environment.VERSION
+}
+
+/**
+ * The Tillhub HTTP client is an axios instance that carries the state of of Authentication
+ * in - if default headers have been set - has Authorization header.
+ *
+ * Since this class is a singleton we are destroying state internally through `.clearInstance()`.
+ */
 export class Client {
   private static instance: Client
   private axiosInstance: AxiosInstance
@@ -17,7 +30,7 @@ export class Client {
       timeout: options.timeout || 10000,
       headers: {
         ...options.headers,
-        'X-Client-Type': 'Tillhub SDK JavaScript'
+        ...defaultHeaders
       }
     })
   }
@@ -31,6 +44,10 @@ export class Client {
     return Client.instance
   }
 
+  static clearInstance(): void {
+    Client.instance.clearDefaults()
+  }
+
   getClient(): AxiosInstance {
     return this.axiosInstance
   }
@@ -42,5 +59,11 @@ export class Client {
     }
 
     return Client.instance
+  }
+
+  clearDefaults(): void {
+    this.axiosInstance.defaults.headers.common = {
+      ...defaultHeaders
+    }
   }
 }
