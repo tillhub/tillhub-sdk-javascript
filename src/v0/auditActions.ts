@@ -49,6 +49,7 @@ export class AuditActions {
 
   getAll(q?: AuditsQuery | undefined): Promise<AuditsResponse> {
     return new Promise(async (resolve, reject) => {
+      let next
       let uri
 
       try {
@@ -65,9 +66,14 @@ export class AuditActions {
 
         const response = await this.http.getClient().get(uri)
 
+        if (response.data.cursor && response.data.cursor.next) {
+          next = this.getAll({ uri: response.data.cursor.next })
+        }
+
         return resolve({
           data: response.data.results,
-          metadata: { count: response.data.count }
+          metadata: { cursor: response.data.cursor },
+          next
         } as AuditsResponse)
       } catch (err) {
         return reject(new errors.AuditActionsFetchAllFailed())
