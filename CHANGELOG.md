@@ -1,3 +1,10 @@
+# [1.78.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.77.0...v1.78.0) (2019-01-02)
+
+
+### Features
+
+* **audit-actions:** Revert changing response return value "next" ([26a4b94](https://github.com/tillhub/tillhub-sdk-javascript/commit/26a4b94))
+
 # [1.77.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.76.0...v1.77.0) (2019-01-02)
 
 
