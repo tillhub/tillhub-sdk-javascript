@@ -3,8 +3,8 @@
   "version": "1.79.2",
   "description": "The JavaScript (Browser) SDK for the Tillhub API.",
   "keywords": [],
-  "main": "dist/lib/tillhub-js.js",
-  "module": "dist/lib/tillhub-js.js",
+  "main": "dist/tillhub-js.js",
+  "module": "dist/tillhub-js.js",
   "typings": "dist/types/tillhub-js.d.ts",
   "files": [
     "package.json",
