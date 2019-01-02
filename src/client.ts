@@ -36,6 +36,11 @@ export class Client {
   }
 
   static getInstance(options: ClientOptions): Client {
+    // use headers in any case
+    if (Client.instance) {
+      Client.instance.setDefaults(options)
+    }
+
     if (!Client.instance) {
       Client.instance = new Client(options)
       // ... any one time initialization goes here ...
