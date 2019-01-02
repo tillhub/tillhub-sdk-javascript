@@ -1,3 +1,11 @@
+## [1.79.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.79.1...v1.79.2) (2019-01-02)
+
+
+### Bug Fixes
+
+* dist ([de11d7c](https://github.com/tillhub/tillhub-sdk-javascript/commit/de11d7c))
+* dist ([729f5a3](https://github.com/tillhub/tillhub-sdk-javascript/commit/729f5a3))
+
 ## [1.79.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.79.0...v1.79.1) (2019-01-02)
 
 
