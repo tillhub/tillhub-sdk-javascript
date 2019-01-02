@@ -89,7 +89,7 @@ export class AuditActions {
         if (response.status !== 200) reject(new errors.AuditActionsGetMetaFailed())
 
         return resolve({
-          data: response.data.results,
+          data: response.data.results[0],
           metadata: { count: response.data.count }
         } as AuditsResponse)
       } catch (err) {

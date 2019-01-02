@@ -57,7 +57,7 @@ describe('v0: Audits: Actions: can get meta', () => {
             200,
             {
               count: 1,
-              results: [{}]
+              results: [{ count: 1 }]
             }
           ]
         })
@@ -85,7 +85,7 @@ describe('v0: Audits: Actions: can get meta', () => {
 
     const { data } = await audits.meta(query)
 
-    expect(Array.isArray(data)).toBe(true)
+    expect(data).toEqual({ count: 1 })
   })
 
   it('rejects on status codes that are not 200', async () => {
