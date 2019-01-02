@@ -7,6 +7,7 @@ import * as v0 from './v0'
 import * as v1 from './v1'
 import { Client, ClientOptions } from './client'
 import * as errors from './errors'
+import { environment } from './environment'
 
 export { v0, v1 }
 
@@ -26,6 +27,7 @@ export class TillhubClient {
   http?: Client
 
   public options: TillhubSDKOptions | undefined
+  public static environment = environment
 
   constructor(options?: TillhubSDKOptions) {
     // super()
