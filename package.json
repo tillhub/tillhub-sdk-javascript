@@ -26,7 +26,7 @@
     "prebuild": "rimraf dist",
     "build:main": "tsc -p tsconfig.json",
     "build:docs": "typedoc --out docs --target es6 --theme minimal --mode file src",
-    "build:bundle": "tsc --module commonjs",
+    "build:bundle": "tsc --module commonjs && cp package.json dist/package.json",
     "build": "npm run clean && npm run build:bundle && npm run build:docs",
     "clean": "rimraf dist docs",
     "start": "rollup -c rollup.config.ts -w",
