@@ -46,6 +46,11 @@ export declare class Auth {
     token?: string;
     user?: string;
     constructor(options: AuthOptions);
+    /**
+     * Initialise the SDK instance by authenticating the client
+     *
+     */
+    clearInstance(): void;
     protected determineAuthType(): void;
     authenticate(): Promise<AuthResponse>;
     loginUsername(authData?: UsernameAuth): Promise<AuthResponse>;

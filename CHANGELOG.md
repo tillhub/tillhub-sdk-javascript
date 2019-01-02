@@ -1,3 +1,22 @@
+# [1.79.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.78.0...v1.79.0) (2019-01-02)
+
+
+### Bug Fixes
+
+* **chore:** adds dotenv type ref ([dc3c173](https://github.com/tillhub/tillhub-sdk-javascript/commit/dc3c173))
+* **chore:** fixes linitng issues on version mismatch ([d96545f](https://github.com/tillhub/tillhub-sdk-javascript/commit/d96545f))
+* **chore:** removes lint-staged ([20a8245](https://github.com/tillhub/tillhub-sdk-javascript/commit/20a8245))
+* **errors:** extend properly from error ([255290b](https://github.com/tillhub/tillhub-sdk-javascript/commit/255290b))
+* **linter:** adds some more explicit casts ([451e44a](https://github.com/tillhub/tillhub-sdk-javascript/commit/451e44a))
+* **sdk:** strictly initialise auth ([6d85ce7](https://github.com/tillhub/tillhub-sdk-javascript/commit/6d85ce7))
+
+
+### Features
+
+* **errors enhance error visibility:** prepares emitting errors ([def2e55](https://github.com/tillhub/tillhub-sdk-javascript/commit/def2e55))
+* **sdk:** adds destroy ([a89806c](https://github.com/tillhub/tillhub-sdk-javascript/commit/a89806c))
+* **tillhub:** adds environment information ([6913937](https://github.com/tillhub/tillhub-sdk-javascript/commit/6913937))
+
 # [1.78.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.77.0...v1.78.0) (2019-01-02)
 
 

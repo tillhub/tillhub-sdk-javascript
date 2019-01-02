@@ -5,13 +5,16 @@ var __extends = (this && this.__extends) || (function () {
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
         return extendStatics(d, b);
-    }
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -20,21 +23,32 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// Import here Polyfills if needed. Recommended core-js (npm i -D core-js)
+// import 'core-js/fn/array.find'
+// import * as EventEmitter from 'events'
+var events_1 = __importDefault(require("events"));
 var v0 = __importStar(require("./v0"));
 exports.v0 = v0;
 var v1 = __importStar(require("./v1"));
 exports.v1 = v1;
 var client_1 = require("./client");
 var errors = __importStar(require("./errors"));
+var environment_1 = require("./environment");
 exports.defaultOptions = {
     base: 'https://api.tillhub.com'
 };
-var TillhubClient = /** @class */ (function () {
+var TillhubClient = /** @class */ (function (_super) {
+    __extends(TillhubClient, _super);
     function TillhubClient(options) {
-        // super()
+        var _this = _super.call(this) || this;
+        _this.initialized = false;
+        _this.auth = new v1.Auth({ base: exports.defaultOptions.base });
         if (!options)
-            return;
-        this.handleOptions(options);
+            return _this;
+        if (_this.handleOptions(options)) {
+            _this.initialized = true;
+        }
+        return _this;
     }
     /**
      * Initialise the SDK instance by authenticating the client
@@ -51,8 +65,23 @@ var TillhubClient = /** @class */ (function () {
         var clientOptions = {
             headers: {}
         };
-        this.auth = new v1.Auth({ base: options ? options.base : exports.defaultOptions.base });
+        if (options.base) {
+            this.auth = new v1.Auth({ base: options.base });
+        }
         this.http = client_1.Client.getInstance(clientOptions).setDefaults(clientOptions);
+    };
+    /**
+     * De-Initialise the SDK instance and all its state
+     *
+     */
+    TillhubClient.prototype.destroy = function () {
+        client_1.Client.clearInstance();
+        if (this.auth) {
+            this.auth.clearInstance();
+        }
+        this.http = undefined;
+        this.options = undefined;
+        this.user = undefined;
     };
     TillhubClient.prototype.handleOptions = function (options) {
         this.options = options;
@@ -335,13 +364,20 @@ var TillhubClient = /** @class */ (function () {
         }
         return new v1.Registers({ user: this.auth.user, base: this.options.base }, this.http);
     };
+    TillhubClient.environment = environment_1.environment;
     return TillhubClient;
-}());
+}(events_1.default.EventEmitter));
 exports.TillhubClient = TillhubClient;
 var Tillhub = /** @class */ (function (_super) {
     __extends(Tillhub, _super);
     function Tillhub(options) {
-        return _super.call(this, options) || this;
+        var _this = _super.call(this, options) || this;
+        // only emit errors, when we have listeners to prevent unhandled rejects etc.
+        _this.on('raw-error', function (err) {
+            if (_this.listeners('error').length > 0)
+                _this.emit('error', err);
+        });
+        return _this;
     }
     Tillhub.getInstance = function (options) {
         if (!Tillhub.instance) {

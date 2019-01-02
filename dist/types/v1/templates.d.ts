@@ -4,19 +4,19 @@ export interface TemplatesOptions {
     uri?: string;
     query?: any;
 }
-declare type TemplateTypes = 'delivery_note_v1' | 'invoice_v1' | 'full_receipt_v1';
-declare type PaperSize = 'A4' | 'letter';
-declare type Font = 'Open Sans';
+export declare type TemplateTypes = 'delivery_note_v1' | 'invoice_v1' | 'full_receipt_v1';
+export declare type PaperSize = 'A4' | 'letter';
+export declare type Font = 'Open Sans';
 interface TemplateOptions {
-    title?: String;
-    logo?: String;
+    title?: string;
+    logo?: string;
     main_text?: String;
     addresses?: {
         self?: {
-            enabled: Boolean;
+            enabled: boolean;
         } | null;
         local?: {
-            enabled: Boolean;
+            enabled: boolean;
         } | null;
     } | null;
     font_color?: String;
@@ -27,8 +27,8 @@ export interface Template {
     name?: string | null;
     type: TemplateTypes;
     options?: TemplateOptions | null;
-    active?: Boolean;
-    deleted?: Boolean;
+    active?: boolean;
+    deleted?: boolean;
 }
 export interface TemplatesPreviewRequestObject {
     body: TemplatesPreviewBody;

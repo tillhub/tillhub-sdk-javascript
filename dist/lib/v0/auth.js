@@ -86,6 +86,17 @@ var Auth = /** @class */ (function () {
             this.setDefaultHeader(this.options.user, this.options.credentials.token);
         }
     }
+    /**
+     * Initialise the SDK instance by authenticating the client
+     *
+     */
+    Auth.prototype.clearInstance = function () {
+        this.authenticated = false;
+        this.options.credentials = undefined;
+        this.options.token = undefined;
+        this.options.user = undefined;
+        this.options.type = undefined;
+    };
     Auth.prototype.determineAuthType = function () {
         if (isUsernameAuth(this.options.credentials))
             this.options.type = AuthTypes.username;

@@ -14,9 +14,10 @@ export interface RevenuBasicOptions {
     start: string;
     end: string;
 }
+export declare type RevenuePeriods = 'hour' | 'day';
 export interface RevenuesOptions {
     branch_number?: string | null;
-    precision?: 'hour' | 'day';
+    precision?: RevenuePeriods;
     start: string;
     end: string;
 }

@@ -53,7 +53,7 @@ var Branches = /** @class */ (function () {
     Branches.prototype.getAll = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var next, uri, response, err_1;
+            var next, uri, response, error_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -68,8 +68,9 @@ var Branches = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
-                        if (response.status !== 200)
-                            reject(new errors.BranchesFetchFailed());
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new errors.BranchesFetchFailed(undefined, { status: response.status }))];
+                        }
                         if (response.data.cursor && response.data.cursor.next) {
                             next = this.getAll({ uri: response.data.cursor.next });
                         }
@@ -79,8 +80,8 @@ var Branches = /** @class */ (function () {
                                 next: next
                             })];
                     case 2:
-                        err_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.BranchesFetchFailed())];
+                        error_1 = _a.sent();
+                        return [2 /*return*/, reject(new errors.BranchesFetchFailed(undefined, { error: error_1 }))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -89,7 +90,7 @@ var Branches = /** @class */ (function () {
     Branches.prototype.get = function (branchId) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_2;
+            var uri, response, error_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -100,15 +101,16 @@ var Branches = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 && reject(new errors.BranchFetchFailed());
+                        response.status !== 200 &&
+                            reject(new errors.BranchFetchFailed(undefined, { status: response.status }));
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 msg: response.data.msg,
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_2 = _a.sent();
-                        return [2 /*return*/, reject(new errors.VoucherFetchFailed())];
+                        error_2 = _a.sent();
+                        return [2 /*return*/, reject(new errors.VoucherFetchFailed(undefined, { error: error_2 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -117,7 +119,7 @@ var Branches = /** @class */ (function () {
     Branches.prototype.put = function (branchId, branch) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_3;
+            var uri, response, error_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -133,8 +135,8 @@ var Branches = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_3 = _a.sent();
-                        return [2 /*return*/, reject(new errors.BranchPutFailed())];
+                        error_3 = _a.sent();
+                        return [2 /*return*/, reject(new errors.BranchPutFailed(undefined, { error: error_3 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -143,7 +145,7 @@ var Branches = /** @class */ (function () {
     Branches.prototype.create = function (branch) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_4;
+            var uri, response, error_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -159,8 +161,8 @@ var Branches = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_4 = _a.sent();
-                        return [2 /*return*/, reject(new errors.BranchCreationFailed())];
+                        error_4 = _a.sent();
+                        return [2 /*return*/, reject(new errors.BranchCreationFailed(undefined, { error: error_4 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -169,7 +171,7 @@ var Branches = /** @class */ (function () {
     Branches.prototype.count = function () {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_5;
+            var uri, response, error_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -180,15 +182,16 @@ var Branches = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();
-                        if (response.status !== 200)
-                            reject(new errors.BranchesCountFailed());
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new errors.BranchesCountFailed(undefined, { status: response.status }))];
+                        }
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_5 = _a.sent();
-                        return [2 /*return*/, reject(new errors.BranchesCountFailed())];
+                        error_5 = _a.sent();
+                        return [2 /*return*/, reject(new errors.BranchesCountFailed(undefined, { error: error_5 }))];
                     case 4: return [2 /*return*/];
                 }
             });

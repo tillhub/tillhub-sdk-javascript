@@ -1,3 +1,5 @@
+/// <reference types="node" />
+import events from 'events';
 import { UsernameAuth, KeyAuth, TokenAuth } from './v0/auth';
 import { Auth } from './v1/auth';
 import * as v0 from './v0';
@@ -10,17 +12,30 @@ export interface TillhubSDKOptions {
     base?: string;
     user?: string;
 }
-export declare class TillhubClient {
+export declare interface TillhubClient {
+    on(event: 'raw-error' | 'error', listener: (error: Error) => void): this;
+    on(event: string, listener: Function): this;
+}
+export declare class TillhubClient extends events.EventEmitter {
     user?: string;
-    auth?: Auth;
+    auth: Auth;
     http?: Client;
     options: TillhubSDKOptions | undefined;
+    static environment: {
+        VERSION: any;
+    };
+    initialized: boolean;
     constructor(options?: TillhubSDKOptions);
     /**
      * Initialise the SDK instance by authenticating the client
      *
      */
     init(options?: TillhubSDKOptions): void;
+    /**
+     * De-Initialise the SDK instance and all its state
+     *
+     */
+    destroy(): void;
     private handleOptions;
     /**
      * Create an authenticated taxes instance
