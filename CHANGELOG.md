@@ -1,3 +1,10 @@
+## [1.79.4](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.79.3...v1.79.4) (2019-01-02)
+
+
+### Bug Fixes
+
+* **client:** use new headers in any case ([54b6852](https://github.com/tillhub/tillhub-sdk-javascript/commit/54b6852))
+
 ## [1.79.3](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.79.2...v1.79.3) (2019-01-02)
 
 
