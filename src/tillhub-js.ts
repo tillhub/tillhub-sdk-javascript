@@ -31,7 +31,7 @@ export declare interface TillhubClient {
 
 export class TillhubClient extends events.EventEmitter {
   user?: string
-  auth?: Auth
+  auth: Auth
   http?: Client
 
   public options: TillhubSDKOptions | undefined
@@ -40,6 +40,8 @@ export class TillhubClient extends events.EventEmitter {
 
   constructor(options?: TillhubSDKOptions) {
     super()
+
+    this.auth = new v1.Auth({ base: defaultOptions.base })
 
     if (!options) return
 
@@ -63,7 +65,10 @@ export class TillhubClient extends events.EventEmitter {
       headers: {}
     }
 
-    this.auth = new v1.Auth({ base: options ? options.base : defaultOptions.base })
+    if (options.base) {
+      this.auth = new v1.Auth({ base: options.base })
+    }
+
     this.http = Client.getInstance(clientOptions).setDefaults(clientOptions)
   }
 
