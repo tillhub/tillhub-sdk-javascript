@@ -1,3 +1,10 @@
+## [1.79.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.79.0...v1.79.1) (2019-01-02)
+
+
+### Bug Fixes
+
+* makes pkg available in prod ([9e85d9d](https://github.com/tillhub/tillhub-sdk-javascript/commit/9e85d9d))
+
 # [1.79.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.78.0...v1.79.0) (2019-01-02)
 
 
