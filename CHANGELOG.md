@@ -1,3 +1,11 @@
+# [1.76.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.75.0...v1.76.0) (2019-01-02)
+
+
+### Features
+
+* **audit-actions:** add next cursor in reponse ([3ccf52d](https://github.com/tillhub/tillhub-sdk-javascript/commit/3ccf52d))
+* **audit-actions:** pass on query params into next ([81a88ca](https://github.com/tillhub/tillhub-sdk-javascript/commit/81a88ca))
+
 # [1.75.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.74.0...v1.75.0) (2019-01-02)
 
 
