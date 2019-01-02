@@ -67,7 +67,7 @@ export class AuditActions {
         const response = await this.http.getClient().get(uri)
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = this.getAll({ ...q, uri: response.data.cursor.next })
+          next = () => this.getAll({ ...q, uri: response.data.cursor.next })
         }
 
         return resolve({
