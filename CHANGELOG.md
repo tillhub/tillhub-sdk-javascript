@@ -1,3 +1,10 @@
+# [1.81.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.80.0...v1.81.0) (2019-01-03)
+
+
+### Features
+
+* **taxes:** cover api ([3d347ca](https://github.com/tillhub/tillhub-sdk-javascript/commit/3d347ca))
+
 # [1.80.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.79.4...v1.80.0) (2019-01-03)
 
 

@@ -133,6 +133,30 @@ var TaxesFetchFailed = /** @class */ (function (_super) {
     return TaxesFetchFailed;
 }(BaseError));
 exports.TaxesFetchFailed = TaxesFetchFailed;
+var TaxesPutFailed = /** @class */ (function (_super) {
+    __extends(TaxesPutFailed, _super);
+    function TaxesPutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not alter tax'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TaxesPutFailed';
+        return _this;
+    }
+    return TaxesPutFailed;
+}(BaseError));
+exports.TaxesPutFailed = TaxesPutFailed;
+var TaxesCreationFailed = /** @class */ (function (_super) {
+    __extends(TaxesCreationFailed, _super);
+    function TaxesCreationFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create tax'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TaxesCreationFailed';
+        return _this;
+    }
+    return TaxesCreationFailed;
+}(BaseError));
+exports.TaxesCreationFailed = TaxesCreationFailed;
 var ProductsCreateFailed = /** @class */ (function (_super) {
     __extends(ProductsCreateFailed, _super);
     function ProductsCreateFailed(message, properties) {

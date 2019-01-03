@@ -73,7 +73,7 @@ var ProductGroups = /** @class */ (function () {
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
-                                metadata: {},
+                                metadata: { count: response.data.count },
                                 next: next
                             })];
                     case 2:
