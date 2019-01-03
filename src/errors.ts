@@ -223,6 +223,34 @@ export class ProductGroupsFetchFailed extends BaseError {
   }
 }
 
+export class ProductGroupFetchFailed extends BaseError {
+  public name = 'ProductGroupFetchFailed'
+  constructor(public message: string = 'Could not fetch product group', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ProductGroupPutFailed extends BaseError {
+  public name = 'ProductGroupPutFailed'
+  constructor(public message: string = 'Could not alter product group', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ProductGroupCreationFailed extends BaseError {
+  public name = 'ProductGroupCreationFailed'
+  constructor(public message: string = 'Could create product group', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ProuctGroupsCountFailed extends BaseError {
+  public name = 'ProuctGroupsCountFailed'
+  constructor(public message: string = 'Could not get count of product groups', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class AccountsFetchFailed extends BaseError {
   public name = 'AccountsFetchFailed'
   constructor(public message: string = 'Could not fetch accounts', properties?: any) {

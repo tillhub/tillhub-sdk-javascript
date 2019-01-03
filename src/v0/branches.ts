@@ -101,7 +101,7 @@ export class Branches {
           metadata: { count: response.data.count }
         } as BranchResponse)
       } catch (error) {
-        return reject(new errors.VoucherFetchFailed(undefined, { error }))
+        return reject(new errors.BranchFetchFailed(undefined, { error }))
       }
     })
   }
