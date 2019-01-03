@@ -77,6 +77,20 @@ export class TaxesFetchFailed extends BaseError {
   }
 }
 
+export class TaxesPutFailed extends BaseError {
+  public name = 'TaxesPutFailed'
+  constructor(public message: string = 'Could not alter tax', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class TaxesCreationFailed extends BaseError {
+  public name = 'TaxesCreationFailed'
+  constructor(public message: string = 'Could not create tax', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class ProductsCreateFailed extends BaseError {
   public name = 'ProductsCreateFailed'
   constructor(public message: string = 'Could not create the product', properties?: any) {

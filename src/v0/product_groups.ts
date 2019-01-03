@@ -70,7 +70,7 @@ export class ProductGroups {
 
         return resolve({
           data: response.data.results,
-          metadata: {},
+          metadata: { count: response.data.count },
           next
         } as ProductGroupsResponse)
       } catch (error) {

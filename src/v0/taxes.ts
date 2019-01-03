@@ -12,8 +12,30 @@ export interface TaxesQuery {
 }
 
 export interface TaxesResponse {
-  data: object[]
+  data: Tax[]
   metadata: object
+}
+
+export interface TaxResponse {
+  data: Tax
+  metadata?: {
+    count?: number
+    patch?: any
+  }
+  msg?: string
+}
+export interface Tax {
+  id?: string
+}
+
+export interface Tax {
+  name: string
+  fa_account_number?: string
+  type: 'vat'
+  account: string
+  rate?: string
+  percentage?: string
+  is_fixed: boolean
 }
 
 export class Taxes {
@@ -31,6 +53,8 @@ export class Taxes {
 
   getAll(query?: TaxesQuery | undefined): Promise<TaxesResponse> {
     return new Promise(async (resolve, reject) => {
+      let next
+
       try {
         let uri
         if (query && query.uri) {
@@ -40,14 +64,68 @@ export class Taxes {
         }
 
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.TaxesFetchFailed())
+        if (response.status !== 200) {
+          return reject(new errors.TaxesFetchFailed(undefined, { status: response.status }))
+        }
 
         return resolve({
           data: response.data.results,
-          metadata: { count: response.data.count }
+          metadata: { count: response.data.count },
+          next
         } as TaxesResponse)
-      } catch (err) {
-        return reject(new errors.TaxesFetchFailed())
+      } catch (error) {
+        return reject(new errors.TaxesFetchFailed(undefined, { error }))
+      }
+    })
+  }
+
+  get(taxId: string): Promise<TaxResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${taxId}`
+      try {
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 &&
+          reject(new errors.TaxesFetchFailed(undefined, { status: response.status }))
+
+        return resolve({
+          data: response.data.results[0] as Tax,
+          msg: response.data.msg,
+          metadata: { count: response.data.count }
+        } as TaxResponse)
+      } catch (error) {
+        return reject(new errors.TaxesFetchFailed(undefined, { error }))
+      }
+    })
+  }
+
+  put(taxId: string, tax: Tax): Promise<TaxResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${taxId}`
+      try {
+        const response = await this.http.getClient().put(uri, tax)
+
+        return resolve({
+          data: response.data.results[0] as Tax,
+          metadata: { count: response.data.count }
+        } as TaxResponse)
+      } catch (error) {
+        return reject(new errors.TaxesPutFailed(undefined, { error }))
+      }
+    })
+  }
+
+  create(tax: Tax): Promise<TaxResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+      try {
+        const response = await this.http.getClient().post(uri, tax)
+
+        return resolve({
+          data: response.data.results[0] as Tax,
+          metadata: { count: response.data.count }
+        } as TaxResponse)
+      } catch (error) {
+        return reject(new errors.TaxesCreationFailed(undefined, { error }))
       }
     })
   }
