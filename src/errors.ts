@@ -426,6 +426,34 @@ export class CustomersFetchFailed extends BaseError {
   }
 }
 
+export class CustomerFetchFailed extends BaseError {
+  public name = 'CustomerFetchFailed'
+  constructor(public message: string = 'Could not fetch customer', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class CustomerPutFailed extends BaseError {
+  public name = 'CustomerPutFailed'
+  constructor(public message: string = 'Could not alter customer', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class CustomerCreationFailed extends BaseError {
+  public name = 'CustomerCreationFailed'
+  constructor(public message: string = 'Could not create customer', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class CustomersMetaFailed extends BaseError {
+  public name = 'CustomersMetaFailed'
+  constructor(public message: string = 'Could not get customers metadata', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class CustomersCountFailed extends BaseError {
   public name = 'CustomersCountFailed'
   constructor(public message: string = 'Could not count the customers', properties?: any) {

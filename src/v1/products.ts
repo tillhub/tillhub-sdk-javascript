@@ -135,7 +135,7 @@ export class Products {
         } else {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             options && options.query ? `?${qs.stringify(options.query)}` : ''
-          }`
+            }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -180,11 +180,11 @@ export class Products {
 
       try {
         const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) reject(new errors.ProductsMetaFailed())
+        if (response.status !== 200) return reject(new errors.ProductsMetaFailed(undefined, { status: response.status }))
 
         if (!response.data.results[0]) {
           return reject(
-            new errors.ProductsMetaFailed('could not get voucher metadata unexpectedly')
+            new errors.ProductsMetaFailed('could not get product metadata unexpectedly')
           )
         }
 
