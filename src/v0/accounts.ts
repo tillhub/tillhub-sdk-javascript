@@ -103,11 +103,11 @@ export class Accounts {
     })
   }
 
-  put(accountId: string, Account: Account): Promise<AccountResponse> {
+  put(accountId: string, account: Account): Promise<AccountResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${accountId}`
       try {
-        const response = await this.http.getClient().put(uri, Account)
+        const response = await this.http.getClient().put(uri, account)
 
         return resolve({
           data: response.data.results[0] as Account,
@@ -119,11 +119,11 @@ export class Accounts {
     })
   }
 
-  create(Account: Account): Promise<AccountResponse> {
+  create(account: Account): Promise<AccountResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
-        const response = await this.http.getClient().post(uri, Account)
+        const response = await this.http.getClient().post(uri, account)
 
         return resolve({
           data: response.data.results[0] as Account,

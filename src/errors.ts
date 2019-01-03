@@ -321,6 +321,34 @@ export class ExpenseAccountCreationFailed extends BaseError {
   }
 }
 
+export class PaymentOptionsFetchFailed extends BaseError {
+  public name = 'PaymentOptionsFetchFailed'
+  constructor(public message: string = 'Could not fetch payment option', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class PaymentOptionFetchFailed extends BaseError {
+  public name = 'PaymentOptionFetchFailed'
+  constructor(public message: string = 'Could not fetch payment option', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class PaymentOptionPutFailed extends BaseError {
+  public name = 'PaymentOptionPutFailed'
+  constructor(public message: string = 'Could not alter payment option', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class PaymentOptionCreationFailed extends BaseError {
+  public name = 'PaymentOptionCreationFailed'
+  constructor(public message: string = 'Could not create payment option', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class TemplatesCreationFailed extends BaseError {
   public name = 'TemplatesCreationFailed'
   constructor(public message: string = 'Could not create template', properties?: any) {

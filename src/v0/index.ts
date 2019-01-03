@@ -4,6 +4,7 @@ import { Deliveries } from './deliveries'
 import { ProductGroups } from './product_groups'
 import { Accounts } from './accounts'
 import { ExpenseAccounts } from './expense_accounts'
+import { PaymentOptions } from './payment_options'
 import { Configurations } from './configurations'
 import { Branches } from './branches'
 import { Customers } from './customers'
@@ -22,6 +23,7 @@ export {
   ProductGroups,
   Accounts,
   ExpenseAccounts,
+  PaymentOptions,
   Configurations,
   Branches,
   Customers,

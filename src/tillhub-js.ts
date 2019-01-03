@@ -214,6 +214,24 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated expense accounts instance
+   *
+   */
+  paymentOptions(): v0.PaymentOptions {
+    if (
+      !this.options ||
+      !this.options.base ||
+      !this.http ||
+      !this.auth ||
+      !this.auth.authenticated
+    ) {
+      throw new errors.UninstantiatedClient()
+    }
+
+    return new v0.PaymentOptions({ user: this.auth.user, base: this.options.base }, this.http)
+  }
+
+  /**
    * Create an authenticated templates instance
    *
    */
