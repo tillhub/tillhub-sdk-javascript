@@ -1,3 +1,11 @@
+# [1.82.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.81.0...v1.82.0) (2019-01-03)
+
+
+### Features
+
+* **accounting:** adds payment options ([fdf128a](https://github.com/tillhub/tillhub-sdk-javascript/commit/fdf128a))
+* adds expense accounts and accounts ([6caf18c](https://github.com/tillhub/tillhub-sdk-javascript/commit/6caf18c))
+
 # [1.81.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.80.0...v1.81.0) (2019-01-03)
 
 

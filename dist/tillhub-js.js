@@ -169,6 +169,34 @@ var TillhubClient = /** @class */ (function (_super) {
         return new v0.Accounts({ user: this.auth.user, base: this.options.base }, this.http);
     };
     /**
+     * Create an authenticated expense accounts instance
+     *
+     */
+    TillhubClient.prototype.expenseAccounts = function () {
+        if (!this.options ||
+            !this.options.base ||
+            !this.http ||
+            !this.auth ||
+            !this.auth.authenticated) {
+            throw new errors.UninstantiatedClient();
+        }
+        return new v0.ExpenseAccounts({ user: this.auth.user, base: this.options.base }, this.http);
+    };
+    /**
+     * Create an authenticated expense accounts instance
+     *
+     */
+    TillhubClient.prototype.paymentOptions = function () {
+        if (!this.options ||
+            !this.options.base ||
+            !this.http ||
+            !this.auth ||
+            !this.auth.authenticated) {
+            throw new errors.UninstantiatedClient();
+        }
+        return new v0.PaymentOptions({ user: this.auth.user, base: this.options.base }, this.http);
+    };
+    /**
      * Create an authenticated templates instance
      *
      */

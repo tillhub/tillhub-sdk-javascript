@@ -63,6 +63,16 @@ export declare class TillhubClient extends events.EventEmitter {
      */
     accounts(): v0.Accounts;
     /**
+     * Create an authenticated expense accounts instance
+     *
+     */
+    expenseAccounts(): v0.ExpenseAccounts;
+    /**
+     * Create an authenticated expense accounts instance
+     *
+     */
+    paymentOptions(): v0.PaymentOptions;
+    /**
      * Create an authenticated templates instance
      *
      */

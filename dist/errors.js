@@ -457,6 +457,138 @@ var AccountsFetchFailed = /** @class */ (function (_super) {
     return AccountsFetchFailed;
 }(BaseError));
 exports.AccountsFetchFailed = AccountsFetchFailed;
+var AccountFetchFailed = /** @class */ (function (_super) {
+    __extends(AccountFetchFailed, _super);
+    function AccountFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch account'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'AccountFetchFailed';
+        return _this;
+    }
+    return AccountFetchFailed;
+}(BaseError));
+exports.AccountFetchFailed = AccountFetchFailed;
+var AccountPutFailed = /** @class */ (function (_super) {
+    __extends(AccountPutFailed, _super);
+    function AccountPutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not alter account'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'AccountPutFailed';
+        return _this;
+    }
+    return AccountPutFailed;
+}(BaseError));
+exports.AccountPutFailed = AccountPutFailed;
+var AccountCreationFailed = /** @class */ (function (_super) {
+    __extends(AccountCreationFailed, _super);
+    function AccountCreationFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create account'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'AccountCreationFailed';
+        return _this;
+    }
+    return AccountCreationFailed;
+}(BaseError));
+exports.AccountCreationFailed = AccountCreationFailed;
+var ExpenseAccountsFetchFailed = /** @class */ (function (_super) {
+    __extends(ExpenseAccountsFetchFailed, _super);
+    function ExpenseAccountsFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch expense accounts'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ExpenseAccountsFetchFailed';
+        return _this;
+    }
+    return ExpenseAccountsFetchFailed;
+}(BaseError));
+exports.ExpenseAccountsFetchFailed = ExpenseAccountsFetchFailed;
+var ExpenseAccountFetchFailed = /** @class */ (function (_super) {
+    __extends(ExpenseAccountFetchFailed, _super);
+    function ExpenseAccountFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch expense account'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ExpenseAccountFetchFailed';
+        return _this;
+    }
+    return ExpenseAccountFetchFailed;
+}(BaseError));
+exports.ExpenseAccountFetchFailed = ExpenseAccountFetchFailed;
+var ExpenseAccountPutFailed = /** @class */ (function (_super) {
+    __extends(ExpenseAccountPutFailed, _super);
+    function ExpenseAccountPutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not alter expense account'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ExpenseAccountPutFailed';
+        return _this;
+    }
+    return ExpenseAccountPutFailed;
+}(BaseError));
+exports.ExpenseAccountPutFailed = ExpenseAccountPutFailed;
+var ExpenseAccountCreationFailed = /** @class */ (function (_super) {
+    __extends(ExpenseAccountCreationFailed, _super);
+    function ExpenseAccountCreationFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create expense account'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ExpenseAccountCreationFailed';
+        return _this;
+    }
+    return ExpenseAccountCreationFailed;
+}(BaseError));
+exports.ExpenseAccountCreationFailed = ExpenseAccountCreationFailed;
+var PaymentOptionsFetchFailed = /** @class */ (function (_super) {
+    __extends(PaymentOptionsFetchFailed, _super);
+    function PaymentOptionsFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch payment option'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PaymentOptionsFetchFailed';
+        return _this;
+    }
+    return PaymentOptionsFetchFailed;
+}(BaseError));
+exports.PaymentOptionsFetchFailed = PaymentOptionsFetchFailed;
+var PaymentOptionFetchFailed = /** @class */ (function (_super) {
+    __extends(PaymentOptionFetchFailed, _super);
+    function PaymentOptionFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch payment option'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PaymentOptionFetchFailed';
+        return _this;
+    }
+    return PaymentOptionFetchFailed;
+}(BaseError));
+exports.PaymentOptionFetchFailed = PaymentOptionFetchFailed;
+var PaymentOptionPutFailed = /** @class */ (function (_super) {
+    __extends(PaymentOptionPutFailed, _super);
+    function PaymentOptionPutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not alter payment option'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PaymentOptionPutFailed';
+        return _this;
+    }
+    return PaymentOptionPutFailed;
+}(BaseError));
+exports.PaymentOptionPutFailed = PaymentOptionPutFailed;
+var PaymentOptionCreationFailed = /** @class */ (function (_super) {
+    __extends(PaymentOptionCreationFailed, _super);
+    function PaymentOptionCreationFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create payment option'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PaymentOptionCreationFailed';
+        return _this;
+    }
+    return PaymentOptionCreationFailed;
+}(BaseError));
+exports.PaymentOptionCreationFailed = PaymentOptionCreationFailed;
 var TemplatesCreationFailed = /** @class */ (function (_super) {
     __extends(TemplatesCreationFailed, _super);
     function TemplatesCreationFailed(message, properties) {

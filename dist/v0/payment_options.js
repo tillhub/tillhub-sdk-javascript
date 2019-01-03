@@ -43,14 +43,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var errors = __importStar(require("../errors"));
-var Accounts = /** @class */ (function () {
-    function Accounts(options, http) {
+var PaymentOptions = /** @class */ (function () {
+    function PaymentOptions(options, http) {
         this.options = options;
         this.http = http;
-        this.endpoint = '/api/v0/accounts';
+        this.endpoint = '/api/v0/payment_options';
         this.options.base = this.options.base || 'https://api.tillhub.com';
     }
-    Accounts.prototype.getAll = function (query) {
+    PaymentOptions.prototype.getAll = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var next, uri, response, error_1;
@@ -69,7 +69,7 @@ var Accounts = /** @class */ (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.AccountsFetchFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new errors.PaymentOptionsFetchFailed(undefined, { status: response.status }))];
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
@@ -78,20 +78,20 @@ var Accounts = /** @class */ (function () {
                             })];
                     case 2:
                         error_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.AccountsFetchFailed(undefined, { error: error_1 }))];
+                        return [2 /*return*/, reject(new errors.PaymentOptionsFetchFailed(undefined, { error: error_1 }))];
                     case 3: return [2 /*return*/];
                 }
             });
         }); });
     };
-    Accounts.prototype.get = function (accountId) {
+    PaymentOptions.prototype.get = function (paymentOptionId) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, error_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + accountId;
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + paymentOptionId;
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -99,7 +99,7 @@ var Accounts = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         response.status !== 200 &&
-                            reject(new errors.AccountFetchFailed(undefined, { status: response.status }));
+                            reject(new errors.PaymentOptionFetchFailed(undefined, { status: response.status }));
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 msg: response.data.msg,
@@ -107,24 +107,24 @@ var Accounts = /** @class */ (function () {
                             })];
                     case 3:
                         error_2 = _a.sent();
-                        return [2 /*return*/, reject(new errors.AccountFetchFailed(undefined, { error: error_2 }))];
+                        return [2 /*return*/, reject(new errors.PaymentOptionFetchFailed(undefined, { error: error_2 }))];
                     case 4: return [2 /*return*/];
                 }
             });
         }); });
     };
-    Accounts.prototype.put = function (accountId, account) {
+    PaymentOptions.prototype.put = function (paymentOptionId, paymentOption) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, error_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + accountId;
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + paymentOptionId;
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, this.http.getClient().put(uri, account)];
+                        return [4 /*yield*/, this.http.getClient().put(uri, paymentOption)];
                     case 2:
                         response = _a.sent();
                         return [2 /*return*/, resolve({
@@ -133,13 +133,13 @@ var Accounts = /** @class */ (function () {
                             })];
                     case 3:
                         error_3 = _a.sent();
-                        return [2 /*return*/, reject(new errors.AccountPutFailed(undefined, { error: error_3 }))];
+                        return [2 /*return*/, reject(new errors.PaymentOptionPutFailed(undefined, { error: error_3 }))];
                     case 4: return [2 /*return*/];
                 }
             });
         }); });
     };
-    Accounts.prototype.create = function (account) {
+    PaymentOptions.prototype.create = function (paymentOption) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, error_4;
@@ -150,7 +150,7 @@ var Accounts = /** @class */ (function () {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, this.http.getClient().post(uri, account)];
+                        return [4 /*yield*/, this.http.getClient().post(uri, paymentOption)];
                     case 2:
                         response = _a.sent();
                         return [2 /*return*/, resolve({
@@ -159,13 +159,13 @@ var Accounts = /** @class */ (function () {
                             })];
                     case 3:
                         error_4 = _a.sent();
-                        return [2 /*return*/, reject(new errors.AccountCreationFailed(undefined, { error: error_4 }))];
+                        return [2 /*return*/, reject(new errors.PaymentOptionCreationFailed(undefined, { error: error_4 }))];
                     case 4: return [2 /*return*/];
                 }
             });
         }); });
     };
-    return Accounts;
+    return PaymentOptions;
 }());
-exports.Accounts = Accounts;
-//# sourceMappingURL=accounts.js.map
+exports.PaymentOptions = PaymentOptions;
+//# sourceMappingURL=payment_options.js.map
