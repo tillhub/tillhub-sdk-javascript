@@ -272,6 +272,55 @@ export class AccountsFetchFailed extends BaseError {
   }
 }
 
+export class AccountFetchFailed extends BaseError {
+  public name = 'AccountFetchFailed'
+  constructor(public message: string = 'Could not fetch account', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class AccountPutFailed extends BaseError {
+  public name = 'AccountPutFailed'
+  constructor(public message: string = 'Could not alter account', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class AccountCreationFailed extends BaseError {
+  public name = 'AccountCreationFailed'
+  constructor(public message: string = 'Could not create account', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ExpenseAccountsFetchFailed extends BaseError {
+  public name = 'ExpenseAccountsFetchFailed'
+  constructor(public message: string = 'Could not fetch expense accounts', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ExpenseAccountFetchFailed extends BaseError {
+  public name = 'ExpenseAccountFetchFailed'
+  constructor(public message: string = 'Could not fetch expense account', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ExpenseAccountPutFailed extends BaseError {
+  public name = 'ExpenseAccountPutFailed'
+  constructor(public message: string = 'Could not alter expense account', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ExpenseAccountCreationFailed extends BaseError {
+  public name = 'ExpenseAccountCreationFailed'
+  constructor(public message: string = 'Could not create expense account', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class TemplatesCreationFailed extends BaseError {
   public name = 'TemplatesCreationFailed'
   constructor(public message: string = 'Could not create template', properties?: any) {
