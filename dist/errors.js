@@ -721,6 +721,54 @@ var CustomersFetchFailed = /** @class */ (function (_super) {
     return CustomersFetchFailed;
 }(BaseError));
 exports.CustomersFetchFailed = CustomersFetchFailed;
+var CustomerFetchFailed = /** @class */ (function (_super) {
+    __extends(CustomerFetchFailed, _super);
+    function CustomerFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch customer'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'CustomerFetchFailed';
+        return _this;
+    }
+    return CustomerFetchFailed;
+}(BaseError));
+exports.CustomerFetchFailed = CustomerFetchFailed;
+var CustomerPutFailed = /** @class */ (function (_super) {
+    __extends(CustomerPutFailed, _super);
+    function CustomerPutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not alter customer'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'CustomerPutFailed';
+        return _this;
+    }
+    return CustomerPutFailed;
+}(BaseError));
+exports.CustomerPutFailed = CustomerPutFailed;
+var CustomerCreationFailed = /** @class */ (function (_super) {
+    __extends(CustomerCreationFailed, _super);
+    function CustomerCreationFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create customer'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'CustomerCreationFailed';
+        return _this;
+    }
+    return CustomerCreationFailed;
+}(BaseError));
+exports.CustomerCreationFailed = CustomerCreationFailed;
+var CustomersMetaFailed = /** @class */ (function (_super) {
+    __extends(CustomersMetaFailed, _super);
+    function CustomersMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get customers metadata'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'CustomersMetaFailed';
+        return _this;
+    }
+    return CustomersMetaFailed;
+}(BaseError));
+exports.CustomersMetaFailed = CustomersMetaFailed;
 var CustomersCountFailed = /** @class */ (function (_super) {
     __extends(CustomersCountFailed, _super);
     function CustomersCountFailed(message, properties) {

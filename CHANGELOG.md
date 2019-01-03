@@ -1,3 +1,15 @@
+# [1.84.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.83.0...v1.84.0) (2019-01-03)
+
+
+### Bug Fixes
+
+* **customers:** fix by cast to customer response ([7b64a4a](https://github.com/tillhub/tillhub-sdk-javascript/commit/7b64a4a))
+
+
+### Features
+
+* **customers:** extend to cover baseline of api ([ab9f80c](https://github.com/tillhub/tillhub-sdk-javascript/commit/ab9f80c))
+
 # [1.83.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.82.0...v1.83.0) (2019-01-03)
 
 

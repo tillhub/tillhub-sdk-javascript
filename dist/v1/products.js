@@ -159,9 +159,9 @@ var Products = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200)
-                            reject(new errors.ProductsMetaFailed());
+                            return [2 /*return*/, reject(new errors.ProductsMetaFailed(undefined, { status: response.status }))];
                         if (!response.data.results[0]) {
-                            return [2 /*return*/, reject(new errors.ProductsMetaFailed('could not get voucher metadata unexpectedly'))];
+                            return [2 /*return*/, reject(new errors.ProductsMetaFailed('could not get product metadata unexpectedly'))];
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],

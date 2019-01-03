@@ -293,6 +293,26 @@ export declare class CustomersFetchFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class CustomerFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class CustomerPutFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class CustomerCreationFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class CustomersMetaFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
 export declare class CustomersCountFailed extends BaseError {
     message: string;
     name: string;
