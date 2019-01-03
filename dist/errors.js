@@ -373,6 +373,54 @@ var ProductGroupsFetchFailed = /** @class */ (function (_super) {
     return ProductGroupsFetchFailed;
 }(BaseError));
 exports.ProductGroupsFetchFailed = ProductGroupsFetchFailed;
+var ProductGroupFetchFailed = /** @class */ (function (_super) {
+    __extends(ProductGroupFetchFailed, _super);
+    function ProductGroupFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch product group'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductGroupFetchFailed';
+        return _this;
+    }
+    return ProductGroupFetchFailed;
+}(BaseError));
+exports.ProductGroupFetchFailed = ProductGroupFetchFailed;
+var ProductGroupPutFailed = /** @class */ (function (_super) {
+    __extends(ProductGroupPutFailed, _super);
+    function ProductGroupPutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not alter product group'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductGroupPutFailed';
+        return _this;
+    }
+    return ProductGroupPutFailed;
+}(BaseError));
+exports.ProductGroupPutFailed = ProductGroupPutFailed;
+var ProductGroupCreationFailed = /** @class */ (function (_super) {
+    __extends(ProductGroupCreationFailed, _super);
+    function ProductGroupCreationFailed(message, properties) {
+        if (message === void 0) { message = 'Could create product group'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductGroupCreationFailed';
+        return _this;
+    }
+    return ProductGroupCreationFailed;
+}(BaseError));
+exports.ProductGroupCreationFailed = ProductGroupCreationFailed;
+var ProuctGroupsCountFailed = /** @class */ (function (_super) {
+    __extends(ProuctGroupsCountFailed, _super);
+    function ProuctGroupsCountFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get count of product groups'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProuctGroupsCountFailed';
+        return _this;
+    }
+    return ProuctGroupsCountFailed;
+}(BaseError));
+exports.ProuctGroupsCountFailed = ProuctGroupsCountFailed;
 var AccountsFetchFailed = /** @class */ (function (_super) {
     __extends(AccountsFetchFailed, _super);
     function AccountsFetchFailed(message, properties) {

@@ -53,7 +53,7 @@ var ProductGroups = /** @class */ (function () {
     ProductGroups.prototype.getAll = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_1;
+            var next, uri, response, error_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -68,15 +68,99 @@ var ProductGroups = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
-                        response.status !== 200 && reject(new errors.ProductGroupsFetchFailed());
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new errors.ProductGroupsFetchFailed(undefined, { status: response.status }))];
+                        }
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
-                                metadata: { count: response.data.count }
+                                metadata: {},
+                                next: next
                             })];
                     case 2:
-                        err_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductGroupsFetchFailed())];
+                        error_1 = _a.sent();
+                        return [2 /*return*/, reject(new errors.ProductGroupsFetchFailed(undefined, { error: error_1 }))];
                     case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    ProductGroups.prototype.get = function (productGroupId) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + productGroupId;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 &&
+                            reject(new errors.ProductGroupFetchFailed(undefined, { status: response.status }));
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_2 = _a.sent();
+                        return [2 /*return*/, reject(new errors.ProductGroupFetchFailed(undefined, { error: error_2 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    ProductGroups.prototype.put = function (productGroupId, productGroup) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + productGroupId;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().put(uri, productGroup)];
+                    case 2:
+                        response = _a.sent();
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_3 = _a.sent();
+                        return [2 /*return*/, reject(new errors.ProductGroupPutFailed(undefined, { error: error_3 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    ProductGroups.prototype.create = function (productGroup) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().post(uri, productGroup)];
+                    case 2:
+                        response = _a.sent();
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_4 = _a.sent();
+                        return [2 /*return*/, reject(new errors.ProductGroupCreationFailed(undefined, { error: error_4 }))];
+                    case 4: return [2 /*return*/];
                 }
             });
         }); });

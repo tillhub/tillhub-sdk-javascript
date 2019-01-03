@@ -110,7 +110,7 @@ var Branches = /** @class */ (function () {
                             })];
                     case 3:
                         error_2 = _a.sent();
-                        return [2 /*return*/, reject(new errors.VoucherFetchFailed(undefined, { error: error_2 }))];
+                        return [2 /*return*/, reject(new errors.BranchFetchFailed(undefined, { error: error_2 }))];
                     case 4: return [2 /*return*/];
                 }
             });

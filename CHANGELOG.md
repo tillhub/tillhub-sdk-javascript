@@ -1,3 +1,10 @@
+# [1.80.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.79.4...v1.80.0) (2019-01-03)
+
+
+### Features
+
+* **product_groups:** complete api coverage ([cf7ae6f](https://github.com/tillhub/tillhub-sdk-javascript/commit/cf7ae6f))
+
 ## [1.79.4](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.79.3...v1.79.4) (2019-01-02)
 
 
