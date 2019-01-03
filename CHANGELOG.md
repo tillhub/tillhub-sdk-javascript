@@ -1,3 +1,10 @@
+# [1.83.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.82.0...v1.83.0) (2019-01-03)
+
+
+### Features
+
+* use generic factory for sdk callables ([aec9f19](https://github.com/tillhub/tillhub-sdk-javascript/commit/aec9f19))
+
 # [1.82.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.81.0...v1.82.0) (2019-01-03)
 
 

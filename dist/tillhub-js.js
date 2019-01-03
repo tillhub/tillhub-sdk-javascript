@@ -102,11 +102,7 @@ var TillhubClient = /** @class */ (function (_super) {
         }
         return false;
     };
-    /**
-     * Create an authenticated taxes instance
-     *
-     */
-    TillhubClient.prototype.taxes = function () {
+    TillhubClient.prototype.generateAuthenticatedInstance = function (type) {
         if (!this.options ||
             !this.options.base ||
             !this.http ||
@@ -114,31 +110,28 @@ var TillhubClient = /** @class */ (function (_super) {
             !this.auth.authenticated) {
             throw new errors.UninstantiatedClient();
         }
-        return new v0.Taxes({ user: this.auth.user, base: this.options.base }, this.http);
+        return new type({ user: this.auth.user, base: this.options.base }, this.http);
+    };
+    /**
+     * Create an authenticated taxes instance
+     *
+     */
+    TillhubClient.prototype.taxes = function () {
+        return this.generateAuthenticatedInstance(v0.Taxes);
     };
     /**
      * Create an authenticated products instance
      *
      */
     TillhubClient.prototype.products = function () {
-        if (!this.options || !this.options.base || !this.http || !this.auth) {
-            throw new errors.UninstantiatedClient();
-        }
-        return new v1.Products({ user: this.auth.user, base: this.options.base }, this.http);
+        return this.generateAuthenticatedInstance(v1.Products);
     };
     /**
      * Create an authenticated product groups instance
      *
      */
     TillhubClient.prototype.productGroups = function () {
-        if (!this.options ||
-            !this.options.base ||
-            !this.http ||
-            !this.auth ||
-            !this.auth.authenticated) {
-            throw new errors.UninstantiatedClient();
-        }
-        return new v0.ProductGroups({ user: this.auth.user, base: this.options.base }, this.http);
+        return this.generateAuthenticatedInstance(v0.ProductGroups);
     };
     /**
      * Create an authenticated deliveries instance
@@ -159,42 +152,21 @@ var TillhubClient = /** @class */ (function (_super) {
      *
      */
     TillhubClient.prototype.accounts = function () {
-        if (!this.options ||
-            !this.options.base ||
-            !this.http ||
-            !this.auth ||
-            !this.auth.authenticated) {
-            throw new errors.UninstantiatedClient();
-        }
-        return new v0.Accounts({ user: this.auth.user, base: this.options.base }, this.http);
+        return this.generateAuthenticatedInstance(v0.Accounts);
     };
     /**
      * Create an authenticated expense accounts instance
      *
      */
     TillhubClient.prototype.expenseAccounts = function () {
-        if (!this.options ||
-            !this.options.base ||
-            !this.http ||
-            !this.auth ||
-            !this.auth.authenticated) {
-            throw new errors.UninstantiatedClient();
-        }
-        return new v0.ExpenseAccounts({ user: this.auth.user, base: this.options.base }, this.http);
+        return this.generateAuthenticatedInstance(v0.ExpenseAccounts);
     };
     /**
      * Create an authenticated expense accounts instance
      *
      */
     TillhubClient.prototype.paymentOptions = function () {
-        if (!this.options ||
-            !this.options.base ||
-            !this.http ||
-            !this.auth ||
-            !this.auth.authenticated) {
-            throw new errors.UninstantiatedClient();
-        }
-        return new v0.PaymentOptions({ user: this.auth.user, base: this.options.base }, this.http);
+        return this.generateAuthenticatedInstance(v0.PaymentOptions);
     };
     /**
      * Create an authenticated templates instance
@@ -229,14 +201,7 @@ var TillhubClient = /** @class */ (function (_super) {
      *
      */
     TillhubClient.prototype.branches = function () {
-        if (!this.options ||
-            !this.options.base ||
-            !this.http ||
-            !this.auth ||
-            !this.auth.authenticated) {
-            throw new errors.UninstantiatedClient();
-        }
-        return new v0.Branches({ user: this.auth.user, base: this.options.base }, this.http);
+        return this.generateAuthenticatedInstance(v0.Branches);
     };
     /**
      * Create an authenticated customers instance
@@ -257,28 +222,14 @@ var TillhubClient = /** @class */ (function (_super) {
      *
      */
     TillhubClient.prototype.vouchers = function () {
-        if (!this.options ||
-            !this.options.base ||
-            !this.http ||
-            !this.auth ||
-            !this.auth.authenticated) {
-            throw new errors.UninstantiatedClient();
-        }
-        return new v0.Vouchers({ user: this.auth.user, base: this.options.base }, this.http);
+        return this.generateAuthenticatedInstance(v0.Vouchers);
     };
     /**
      * Create an authenticated vouchers logs instance
      *
      */
     TillhubClient.prototype.voucherLogs = function () {
-        if (!this.options ||
-            !this.options.base ||
-            !this.http ||
-            !this.auth ||
-            !this.auth.authenticated) {
-            throw new errors.UninstantiatedClient();
-        }
-        return new v0.VoucherLogs({ user: this.auth.user, base: this.options.base }, this.http);
+        return this.generateAuthenticatedInstance(v0.VoucherLogs);
     };
     /**
      * Create an authenticated invoices instance

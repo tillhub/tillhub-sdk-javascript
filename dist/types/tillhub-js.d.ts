@@ -37,6 +37,7 @@ export declare class TillhubClient extends events.EventEmitter {
      */
     destroy(): void;
     private handleOptions;
+    private generateAuthenticatedInstance;
     /**
      * Create an authenticated taxes instance
      *
