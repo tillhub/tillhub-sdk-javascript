@@ -111,11 +111,7 @@ export class TillhubClient extends events.EventEmitter {
     return false
   }
 
-  /**
-   * Create an authenticated taxes instance
-   *
-   */
-  taxes(): v0.Taxes {
+  private generateAuthenticatedInstance<T>(type: { new(options: object, http: Client): T }): T {
     if (
       !this.options ||
       !this.options.base ||
@@ -126,7 +122,15 @@ export class TillhubClient extends events.EventEmitter {
       throw new errors.UninstantiatedClient()
     }
 
-    return new v0.Taxes({ user: this.auth.user, base: this.options.base }, this.http)
+    return new type({ user: this.auth.user, base: this.options.base }, this.http)
+  }
+
+  /**
+   * Create an authenticated taxes instance
+   *
+   */
+  taxes(): v0.Taxes {
+    return this.generateAuthenticatedInstance(v0.Taxes)
   }
 
   /**
@@ -134,11 +138,7 @@ export class TillhubClient extends events.EventEmitter {
    *
    */
   products(): v1.Products {
-    if (!this.options || !this.options.base || !this.http || !this.auth) {
-      throw new errors.UninstantiatedClient()
-    }
-
-    return new v1.Products({ user: this.auth.user, base: this.options.base }, this.http)
+    return this.generateAuthenticatedInstance(v1.Products)
   }
 
   /**
@@ -146,17 +146,7 @@ export class TillhubClient extends events.EventEmitter {
    *
    */
   productGroups(): v0.ProductGroups {
-    if (
-      !this.options ||
-      !this.options.base ||
-      !this.http ||
-      !this.auth ||
-      !this.auth.authenticated
-    ) {
-      throw new errors.UninstantiatedClient()
-    }
-
-    return new v0.ProductGroups({ user: this.auth.user, base: this.options.base }, this.http)
+    return this.generateAuthenticatedInstance(v0.ProductGroups)
   }
 
   /**
@@ -182,17 +172,7 @@ export class TillhubClient extends events.EventEmitter {
    *
    */
   accounts(): v0.Accounts {
-    if (
-      !this.options ||
-      !this.options.base ||
-      !this.http ||
-      !this.auth ||
-      !this.auth.authenticated
-    ) {
-      throw new errors.UninstantiatedClient()
-    }
-
-    return new v0.Accounts({ user: this.auth.user, base: this.options.base }, this.http)
+    return this.generateAuthenticatedInstance(v0.Accounts)
   }
 
   /**
@@ -200,17 +180,7 @@ export class TillhubClient extends events.EventEmitter {
    *
    */
   expenseAccounts(): v0.ExpenseAccounts {
-    if (
-      !this.options ||
-      !this.options.base ||
-      !this.http ||
-      !this.auth ||
-      !this.auth.authenticated
-    ) {
-      throw new errors.UninstantiatedClient()
-    }
-
-    return new v0.ExpenseAccounts({ user: this.auth.user, base: this.options.base }, this.http)
+    return this.generateAuthenticatedInstance(v0.ExpenseAccounts)
   }
 
   /**
@@ -218,17 +188,7 @@ export class TillhubClient extends events.EventEmitter {
    *
    */
   paymentOptions(): v0.PaymentOptions {
-    if (
-      !this.options ||
-      !this.options.base ||
-      !this.http ||
-      !this.auth ||
-      !this.auth.authenticated
-    ) {
-      throw new errors.UninstantiatedClient()
-    }
-
-    return new v0.PaymentOptions({ user: this.auth.user, base: this.options.base }, this.http)
+    return this.generateAuthenticatedInstance(v0.PaymentOptions)
   }
 
   /**
@@ -272,17 +232,7 @@ export class TillhubClient extends events.EventEmitter {
    *
    */
   branches(): v0.Branches {
-    if (
-      !this.options ||
-      !this.options.base ||
-      !this.http ||
-      !this.auth ||
-      !this.auth.authenticated
-    ) {
-      throw new errors.UninstantiatedClient()
-    }
-
-    return new v0.Branches({ user: this.auth.user, base: this.options.base }, this.http)
+    return this.generateAuthenticatedInstance(v0.Branches)
   }
 
   /**
@@ -308,17 +258,7 @@ export class TillhubClient extends events.EventEmitter {
    *
    */
   vouchers(): v0.Vouchers {
-    if (
-      !this.options ||
-      !this.options.base ||
-      !this.http ||
-      !this.auth ||
-      !this.auth.authenticated
-    ) {
-      throw new errors.UninstantiatedClient()
-    }
-
-    return new v0.Vouchers({ user: this.auth.user, base: this.options.base }, this.http)
+    return this.generateAuthenticatedInstance(v0.Vouchers)
   }
 
   /**
@@ -326,17 +266,7 @@ export class TillhubClient extends events.EventEmitter {
    *
    */
   voucherLogs(): v0.VoucherLogs {
-    if (
-      !this.options ||
-      !this.options.base ||
-      !this.http ||
-      !this.auth ||
-      !this.auth.authenticated
-    ) {
-      throw new errors.UninstantiatedClient()
-    }
-
-    return new v0.VoucherLogs({ user: this.auth.user, base: this.options.base }, this.http)
+    return this.generateAuthenticatedInstance(v0.VoucherLogs)
   }
 
   /**
