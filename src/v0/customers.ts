@@ -229,7 +229,7 @@ export class Customers {
     })
   }
 
-  delete(customerId: string): Promise<object> {
+  delete(customerId: string): Promise<CustomerResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${customerId}`
       try {
@@ -238,7 +238,7 @@ export class Customers {
 
         return resolve({
           msg: response.data.msg
-        } as object)
+        } as CustomerResponse)
       } catch (err) {
         return reject(new errors.CustomerDeleteFailed())
       }
