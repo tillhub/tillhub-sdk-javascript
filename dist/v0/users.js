@@ -47,7 +47,7 @@ var Users = /** @class */ (function () {
     function Users(options, http) {
         this.options = options;
         this.http = http;
-        if (this.configurationId) {
+        if (options.configurationId) {
             this.configurationId = options.configurationId;
         }
         this.endpoint = "/api/v0/configurations/users";

@@ -1,3 +1,10 @@
+## [1.86.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.86.1...v1.86.2) (2019-01-07)
+
+
+### Bug Fixes
+
+* **users:** fixes ref to options config id ([3777ef6](https://github.com/tillhub/tillhub-sdk-javascript/commit/3777ef6))
+
 ## [1.86.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.86.0...v1.86.1) (2019-01-07)
 
 
