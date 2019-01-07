@@ -143,6 +143,11 @@ export declare class TillhubClient extends events.EventEmitter {
      *
      */
     registers(): v1.Registers;
+    /**
+     * Create an authenticated Images instance
+     *
+     */
+    images(): v0.Images;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;

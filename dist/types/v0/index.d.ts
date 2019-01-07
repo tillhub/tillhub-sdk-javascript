@@ -15,4 +15,5 @@ import { Orders } from './orders';
 import { Analytics } from './analytics';
 import { Staff } from './staff';
 import { AuditActions } from './auditActions';
-export { Auth, Taxes, Deliveries, ProductGroups, Accounts, ExpenseAccounts, PaymentOptions, Configurations, Branches, Customers, Vouchers, VoucherLogs, Invoices, Stocks, Orders, Analytics, Staff, AuditActions };
+import { Images } from './images';
+export { Auth, Taxes, Deliveries, ProductGroups, Accounts, ExpenseAccounts, PaymentOptions, Configurations, Branches, Customers, Vouchers, VoucherLogs, Invoices, Stocks, Orders, Analytics, Staff, AuditActions, Images };

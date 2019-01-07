@@ -1,3 +1,10 @@
+# [1.85.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.84.0...v1.85.0) (2019-01-07)
+
+
+### Features
+
+* added image handler for assets api ([3108aae](https://github.com/tillhub/tillhub-sdk-javascript/commit/3108aae))
+
 # [1.84.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.83.0...v1.84.0) (2019-01-03)
 
 

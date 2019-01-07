@@ -1392,4 +1392,28 @@ var AuditActionsCreateFailed = /** @class */ (function (_super) {
     return AuditActionsCreateFailed;
 }(BaseError));
 exports.AuditActionsCreateFailed = AuditActionsCreateFailed;
+var ImageCreationFailed = /** @class */ (function (_super) {
+    __extends(ImageCreationFailed, _super);
+    function ImageCreationFailed(message) {
+        if (message === void 0) { message = 'Could not create new image'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'ImageCreationFailed';
+        return _this;
+    }
+    return ImageCreationFailed;
+}(BaseError));
+exports.ImageCreationFailed = ImageCreationFailed;
+var ImagePutFailed = /** @class */ (function (_super) {
+    __extends(ImagePutFailed, _super);
+    function ImagePutFailed(message) {
+        if (message === void 0) { message = 'Could not update new image'; }
+        var _this = _super.call(this, message) || this;
+        _this.message = message;
+        _this.name = 'ImagePutFailed';
+        return _this;
+    }
+    return ImagePutFailed;
+}(BaseError));
+exports.ImagePutFailed = ImagePutFailed;
 //# sourceMappingURL=errors.js.map

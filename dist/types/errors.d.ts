@@ -573,3 +573,13 @@ export declare class AuditActionsCreateFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class ImageCreationFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}
+export declare class ImagePutFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string);
+}

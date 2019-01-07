@@ -35,4 +35,6 @@ var staff_1 = require("./staff");
 exports.Staff = staff_1.Staff;
 var auditActions_1 = require("./auditActions");
 exports.AuditActions = auditActions_1.AuditActions;
+var images_1 = require("./images");
+exports.Images = images_1.Images;
 //# sourceMappingURL=index.js.map
