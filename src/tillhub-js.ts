@@ -412,6 +412,24 @@ export class TillhubClient extends events.EventEmitter {
 
     return new v1.Registers({ user: this.auth.user, base: this.options.base }, this.http)
   }
+
+  /**
+   * Create an authenticated Images instance
+   *
+   */
+  images(): v0.Images {
+    if (
+      !this.options ||
+      !this.options.base ||
+      !this.http ||
+      !this.auth ||
+      !this.auth.authenticated
+    ) {
+      throw new errors.UninstantiatedClient()
+    }
+
+    return new v0.Images({ user: this.auth.user, base: this.options.base }, this.http)
+  }
 }
 
 export class Tillhub extends TillhubClient {
