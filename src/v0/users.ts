@@ -4,7 +4,7 @@ import * as errors from '../errors'
 export interface UsersOptions {
   user?: string
   base?: string
-  configurationId: string
+  configurationId?: string
 }
 
 export interface UsersQuery {
@@ -59,14 +59,19 @@ export class Users {
   endpoint: string
   http: Client
   public options: UsersOptions
-  public configurationId: string
+  public configurationId?: string
 
   constructor(options: UsersOptions, http: Client) {
     this.options = options
     this.http = http
-    this.configurationId = options.configurationId
 
-    this.endpoint = `/api/v0/configurations/${this.configurationId}/users`
+    if (this.configurationId) {
+      this.configurationId = options.configurationId
+      this.endpoint = `/api/v0/configurations/${this.configurationId}/users`
+    } else {
+      this.endpoint = `/api/v0/configurations/users`
+    }
+
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 

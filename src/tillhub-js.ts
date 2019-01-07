@@ -227,8 +227,8 @@ export class TillhubClient extends events.EventEmitter {
    * Create an authenticated configurations instance
    *
    */
-  users(configurationId: string): v0.Configurations {
-    return this.generateAuthenticatedInstance(v0.Configurations, { configurationId })
+  users(configurationId: string): v0.Users {
+    return this.generateAuthenticatedInstance(v0.Users, { configurationId })
   }
 
   /**
