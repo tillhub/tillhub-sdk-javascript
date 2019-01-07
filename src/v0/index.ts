@@ -6,6 +6,7 @@ import { Accounts } from './accounts'
 import { ExpenseAccounts } from './expense_accounts'
 import { PaymentOptions } from './payment_options'
 import { Configurations } from './configurations'
+import { Users } from './Users'
 import { Branches } from './branches'
 import { Customers } from './customers'
 import { Vouchers, VoucherLogs } from './vouchers'
@@ -26,6 +27,7 @@ export {
   ExpenseAccounts,
   PaymentOptions,
   Configurations,
+  Users,
   Branches,
   Customers,
   Vouchers,

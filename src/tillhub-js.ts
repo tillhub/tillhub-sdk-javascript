@@ -23,6 +23,8 @@ export interface TillhubSDKOptions {
   user?: string
 }
 
+type MaybeOptions = object
+
 export declare interface TillhubClient {
   on(event: 'raw-error' | 'error', listener: (error: Error) => void): this
   on(event: string, listener: Function): this
@@ -111,7 +113,7 @@ export class TillhubClient extends events.EventEmitter {
     return false
   }
 
-  private generateAuthenticatedInstance<T>(type: { new(options: object, http: Client): T }): T {
+  private generateAuthenticatedInstance<T>(type: { new(options: object, http: Client): T }, maybeOptions?: MaybeOptions): T {
     if (
       !this.options ||
       !this.options.base ||
@@ -122,7 +124,11 @@ export class TillhubClient extends events.EventEmitter {
       throw new errors.UninstantiatedClient()
     }
 
-    return new type({ user: this.auth.user, base: this.options.base }, this.http)
+    return new type({
+      user: this.auth.user,
+      base: this.options.base,
+      ...maybeOptions
+    }, this.http)
   }
 
   /**
@@ -214,17 +220,15 @@ export class TillhubClient extends events.EventEmitter {
    *
    */
   configurations(): v0.Configurations {
-    if (
-      !this.options ||
-      !this.options.base ||
-      !this.http ||
-      !this.auth ||
-      !this.auth.authenticated
-    ) {
-      throw new errors.UninstantiatedClient()
-    }
+    return this.generateAuthenticatedInstance(v0.Configurations)
+  }
 
-    return new v0.Configurations({ user: this.auth.user, base: this.options.base }, this.http)
+  /**
+   * Create an authenticated configurations instance
+   *
+   */
+  users(configurationId: string): v0.Configurations {
+    return this.generateAuthenticatedInstance(v0.Configurations, { configurationId })
   }
 
   /**

@@ -379,7 +379,56 @@ export class TemplatesPreviewFailed extends BaseError {
 
 export class ConfigurationsFetchFailed extends BaseError {
   public name = 'ConfigurationsFetchFailed'
-  constructor(public message: string = 'Could not fetch configs', properties?: any) {
+  constructor(public message: string = 'Could not fetch configurations', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ConfigurationFetchFailed extends BaseError {
+  public name = 'ConfigurationFetchFailed'
+  constructor(public message: string = 'Could not fetch configuration', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ConfigurationPutFailed extends BaseError {
+  public name = 'ConfigurationPutFailed'
+  constructor(public message: string = 'Could not alter configuration', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ConfigurationCreationFailed extends BaseError {
+  public name = 'ConfigurationCreationFailed'
+  constructor(public message: string = 'Could not create configuration', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class UsersFetchFailed extends BaseError {
+  public name = 'UsersFetchFailed'
+  constructor(public message: string = 'Could not fetch user', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class UserFetchFailed extends BaseError {
+  public name = 'UserFetchFailed'
+  constructor(public message: string = 'Could not fetch user', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class UserPutFailed extends BaseError {
+  public name = 'UserPutFailed'
+  constructor(public message: string = 'Could not alter user', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class UserCreationFailed extends BaseError {
+  public name = 'UserCreationFailed'
+  constructor(public message: string = 'Could not create user', properties?: any) {
     super(message, properties)
   }
 }
