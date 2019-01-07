@@ -126,7 +126,7 @@ export class Users {
   put(userId: string, user: User): Promise<UserResponse> {
     if (!this.configurationId) throw new TypeError('fetching users requires configuration ID to be set.')
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${userId}/${this.configurationId}/users`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${this.configurationId}/users/${userId}`
       try {
         const response = await this.http.getClient().put(uri, user)
 
