@@ -65,7 +65,7 @@ export class Users {
     this.options = options
     this.http = http
 
-    if (this.configurationId) {
+    if (options.configurationId) {
       this.configurationId = options.configurationId
     }
 
