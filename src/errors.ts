@@ -829,3 +829,17 @@ export class AuditActionsCreateFailed extends BaseError {
     super(message, properties)
   }
 }
+
+export class ImageCreationFailed extends BaseError {
+  public name = 'ImageCreationFailed'
+  constructor(public message: string = 'Could not create new image') {
+    super(message)
+  }
+}
+
+export class ImagePutFailed extends BaseError {
+  public name = 'ImagePutFailed'
+  constructor(public message: string = 'Could not update new image') {
+    super(message)
+  }
+}
