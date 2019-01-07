@@ -68,7 +68,7 @@ var Users = /** @class */ (function () {
                             uri = query.uri;
                         }
                         else {
-                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + this.configurationId;
+                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + this.configurationId + "/users";
                         }
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
@@ -98,7 +98,7 @@ var Users = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + this.configurationId + "/" + userId;
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + this.configurationId + "/users/" + userId;
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -129,7 +129,7 @@ var Users = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + userId + "/" + this.configurationId;
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + userId + "/" + this.configurationId + "/users";
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -157,7 +157,7 @@ var Users = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.configurationId + "/" + this.options.user;
+                        uri = "" + this.options.base + this.endpoint + "/" + this.configurationId + "/" + this.options.user + "/users";
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);

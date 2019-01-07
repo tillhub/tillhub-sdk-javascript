@@ -1,3 +1,10 @@
+## [1.86.3](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.86.2...v1.86.3) (2019-01-07)
+
+
+### Bug Fixes
+
+* **users:** fixes missing route prop ([14f977c](https://github.com/tillhub/tillhub-sdk-javascript/commit/14f977c))
+
 ## [1.86.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.86.1...v1.86.2) (2019-01-07)
 
 
