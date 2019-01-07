@@ -733,6 +733,18 @@ var UserCreationFailed = /** @class */ (function (_super) {
     return UserCreationFailed;
 }(BaseError));
 exports.UserCreationFailed = UserCreationFailed;
+var UserDeleteFailed = /** @class */ (function (_super) {
+    __extends(UserDeleteFailed, _super);
+    function UserDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete user'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'UserDeleteFailed';
+        return _this;
+    }
+    return UserDeleteFailed;
+}(BaseError));
+exports.UserDeleteFailed = UserDeleteFailed;
 var BranchesFetchFailed = /** @class */ (function (_super) {
     __extends(BranchesFetchFailed, _super);
     function BranchesFetchFailed(message, properties) {

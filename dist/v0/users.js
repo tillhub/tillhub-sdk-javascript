@@ -129,7 +129,7 @@ var Users = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + userId + "/" + this.configurationId + "/users";
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + this.configurationId + "/users/" + userId;
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -171,6 +171,34 @@ var Users = /** @class */ (function () {
                     case 3:
                         error_4 = _a.sent();
                         return [2 /*return*/, reject(new errors.UserCreationFailed(undefined, { error: error_4 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Users.prototype.delete = function (userId) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_5;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + this.configurationId + "/users/" + userId;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().delete(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new errors.UserDeleteFailed(undefined, { status: response.status }))];
+                        }
+                        return [2 /*return*/, resolve({
+                                msg: response.data.msg
+                            })];
+                    case 3:
+                        error_5 = _a.sent();
+                        return [2 /*return*/, reject(new errors.UserDeleteFailed(undefined, { error: error_5 }))];
                     case 4: return [2 /*return*/];
                 }
             });

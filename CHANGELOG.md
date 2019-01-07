@@ -1,3 +1,15 @@
+# [1.87.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.86.4...v1.87.0) (2019-01-07)
+
+
+### Bug Fixes
+
+* **users:** fixes put url ref ([ff9dda3](https://github.com/tillhub/tillhub-sdk-javascript/commit/ff9dda3))
+
+
+### Features
+
+* **users:** covers deletion ([bab6ebf](https://github.com/tillhub/tillhub-sdk-javascript/commit/bab6ebf))
+
 ## [1.86.4](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.86.3...v1.86.4) (2019-01-07)
 
 

@@ -57,4 +57,5 @@ export declare class Users {
     get(userId: string): Promise<UserResponse>;
     put(userId: string, user: User): Promise<UserResponse>;
     create(user: User): Promise<UserResponse>;
+    delete(userId: string): Promise<UserResponse>;
 }
