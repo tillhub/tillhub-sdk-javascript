@@ -69,7 +69,7 @@ export class Users {
       this.configurationId = options.configurationId
     }
 
-    this.endpoint = `/api/v0/configurations/users`
+    this.endpoint = `/api/v0/configurations`
 
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
