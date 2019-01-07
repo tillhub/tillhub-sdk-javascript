@@ -84,7 +84,7 @@ export class Users {
         if (query && query.uri) {
           uri = query.uri
         } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}/${this.configurationId}`
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}/${this.configurationId}/users`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -106,7 +106,7 @@ export class Users {
   get(userId: string): Promise<UserResponse> {
     if (!this.configurationId) throw new TypeError('fetching users requires configuration ID to be set.')
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${this.configurationId}/${userId}`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${this.configurationId}/users/${userId}`
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
@@ -126,7 +126,7 @@ export class Users {
   put(userId: string, user: User): Promise<UserResponse> {
     if (!this.configurationId) throw new TypeError('fetching users requires configuration ID to be set.')
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${userId}/${this.configurationId}`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${userId}/${this.configurationId}/users`
       try {
         const response = await this.http.getClient().put(uri, user)
 
@@ -143,7 +143,7 @@ export class Users {
   create(user: User): Promise<UserResponse> {
     if (!this.configurationId) throw new TypeError('fetching users requires configuration ID to be set.')
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.configurationId}/${this.options.user}`
+      const uri = `${this.options.base}${this.endpoint}/${this.configurationId}/${this.options.user}/users`
       try {
         const response = await this.http.getClient().post(uri, user)
 
