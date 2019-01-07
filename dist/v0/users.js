@@ -1,15 +1,4 @@
 "use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -45,9 +34,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -56,73 +42,62 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var qs_1 = __importDefault(require("qs"));
 var errors = __importStar(require("../errors"));
-var users_1 = require("./users");
-var ConfigurationReference = /** @class */ (function () {
-    function ConfigurationReference(response, http, options) {
-        this.data = response.data;
-        this.id = response.data.id;
-        this.metadata = response.metadata;
-        this.response = response;
+var Users = /** @class */ (function () {
+    function Users(options, http) {
         this.options = options;
         this.http = http;
-    }
-    ConfigurationReference.prototype.users = function () {
-        return new users_1.Users(this.options, this.http);
-    };
-    return ConfigurationReference;
-}());
-var Configurations = /** @class */ (function () {
-    function Configurations(options, http) {
-        this.options = options;
-        this.http = http;
-        this.endpoint = '/api/v0/configurations';
+        if (this.configurationId) {
+            this.configurationId = options.configurationId;
+            this.endpoint = "/api/v0/configurations/" + this.configurationId + "/users";
+        }
+        else {
+            this.endpoint = "/api/v0/configurations/users";
+        }
         this.options.base = this.options.base || 'https://api.tillhub.com';
     }
-    Configurations.prototype.getAll = function (optionsOrQuery) {
+    Users.prototype.getAll = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, queryString, response, err_1;
+            var next, uri, response, error_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         uri = void 0;
-                        if (optionsOrQuery && optionsOrQuery.uri) {
-                            uri = optionsOrQuery.uri;
+                        if (query && query.uri) {
+                            uri = query.uri;
                         }
                         else {
-                            queryString = '';
-                            if (optionsOrQuery && (optionsOrQuery.query || optionsOrQuery.owner)) {
-                                queryString = qs_1.default.stringify(__assign({ owner: optionsOrQuery.owner }, optionsOrQuery.query));
-                            }
-                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user + (queryString ? "?" + queryString : '');
+                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user;
                         }
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
-                        response.status !== 200 && reject(new errors.ConfigurationsFetchFailed());
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new errors.UsersFetchFailed(undefined, { status: response.status }))];
+                        }
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
-                                metadata: { count: response.data.count }
+                                metadata: { count: response.data.count },
+                                next: next
                             })];
                     case 2:
-                        err_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ConfigurationsFetchFailed())];
+                        error_1 = _a.sent();
+                        return [2 /*return*/, reject(new errors.UsersFetchFailed(undefined, { error: error_1 }))];
                     case 3: return [2 /*return*/];
                 }
             });
         }); });
     };
-    Configurations.prototype.get = function (configurationId) {
+    Users.prototype.get = function (userId) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, error_1;
+            var uri, response, error_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + configurationId;
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + userId;
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -130,59 +105,32 @@ var Configurations = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         response.status !== 200 &&
-                            reject(new errors.ConfigurationFetchFailed(undefined, { status: response.status }));
-                        // we are wrapping the response into a class to reference sub APIs more easily
-                        return [2 /*return*/, resolve(new ConfigurationReference({
-                                data: response.data.results[0],
-                                msg: response.data.msg,
-                                metadata: { count: response.data.count }
-                            }, this.http, this.options))];
-                    case 3:
-                        error_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ConfigurationFetchFailed(undefined, { error: error_1 }))];
-                    case 4: return [2 /*return*/];
-                }
-            });
-        }); });
-    };
-    Configurations.prototype.put = function (configurationId, configuration) {
-        var _this = this;
-        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, error_2;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + configurationId;
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, this.http.getClient().put(uri, configuration)];
-                    case 2:
-                        response = _a.sent();
+                            reject(new errors.UsersFetchFailed(undefined, { status: response.status }));
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
+                                msg: response.data.msg,
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
                         error_2 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ConfigurationPutFailed(undefined, { error: error_2 }))];
+                        return [2 /*return*/, reject(new errors.UserFetchFailed(undefined, { error: error_2 }))];
                     case 4: return [2 /*return*/];
                 }
             });
         }); });
     };
-    Configurations.prototype.create = function (configuration) {
+    Users.prototype.put = function (userId, user) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, error_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user;
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + userId;
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, this.http.getClient().post(uri, configuration)];
+                        return [4 /*yield*/, this.http.getClient().put(uri, user)];
                     case 2:
                         response = _a.sent();
                         return [2 /*return*/, resolve({
@@ -191,13 +139,39 @@ var Configurations = /** @class */ (function () {
                             })];
                     case 3:
                         error_3 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ConfigurationCreationFailed(undefined, { error: error_3 }))];
+                        return [2 /*return*/, reject(new errors.UserPutFailed(undefined, { error: error_3 }))];
                     case 4: return [2 /*return*/];
                 }
             });
         }); });
     };
-    return Configurations;
+    Users.prototype.create = function (user) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().post(uri, user)];
+                    case 2:
+                        response = _a.sent();
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_4 = _a.sent();
+                        return [2 /*return*/, reject(new errors.UserCreationFailed(undefined, { error: error_4 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    return Users;
 }());
-exports.Configurations = Configurations;
-//# sourceMappingURL=configurations.js.map
+exports.Users = Users;
+//# sourceMappingURL=users.js.map

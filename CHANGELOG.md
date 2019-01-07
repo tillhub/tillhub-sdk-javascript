@@ -1,3 +1,15 @@
+# [1.86.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.85.0...v1.86.0) (2019-01-07)
+
+
+### Bug Fixes
+
+* **users:** fixes users ref ([7a5febd](https://github.com/tillhub/tillhub-sdk-javascript/commit/7a5febd))
+
+
+### Features
+
+* **sdk:** cover configurations, add users ([775b3ec](https://github.com/tillhub/tillhub-sdk-javascript/commit/775b3ec))
+
 # [1.85.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.84.0...v1.85.0) (2019-01-07)
 
 

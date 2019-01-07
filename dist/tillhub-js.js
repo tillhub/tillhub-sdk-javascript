@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -102,7 +113,7 @@ var TillhubClient = /** @class */ (function (_super) {
         }
         return false;
     };
-    TillhubClient.prototype.generateAuthenticatedInstance = function (type) {
+    TillhubClient.prototype.generateAuthenticatedInstance = function (type, maybeOptions) {
         if (!this.options ||
             !this.options.base ||
             !this.http ||
@@ -110,7 +121,7 @@ var TillhubClient = /** @class */ (function (_super) {
             !this.auth.authenticated) {
             throw new errors.UninstantiatedClient();
         }
-        return new type({ user: this.auth.user, base: this.options.base }, this.http);
+        return new type(__assign({ user: this.auth.user, base: this.options.base }, maybeOptions), this.http);
     };
     /**
      * Create an authenticated taxes instance
@@ -187,14 +198,14 @@ var TillhubClient = /** @class */ (function (_super) {
      *
      */
     TillhubClient.prototype.configurations = function () {
-        if (!this.options ||
-            !this.options.base ||
-            !this.http ||
-            !this.auth ||
-            !this.auth.authenticated) {
-            throw new errors.UninstantiatedClient();
-        }
-        return new v0.Configurations({ user: this.auth.user, base: this.options.base }, this.http);
+        return this.generateAuthenticatedInstance(v0.Configurations);
+    };
+    /**
+     * Create an authenticated configurations instance
+     *
+     */
+    TillhubClient.prototype.users = function (configurationId) {
+        return this.generateAuthenticatedInstance(v0.Users, { configurationId: configurationId });
     };
     /**
      * Create an authenticated branches instance

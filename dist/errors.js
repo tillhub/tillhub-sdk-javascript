@@ -640,7 +640,7 @@ exports.TemplatesPreviewFailed = TemplatesPreviewFailed;
 var ConfigurationsFetchFailed = /** @class */ (function (_super) {
     __extends(ConfigurationsFetchFailed, _super);
     function ConfigurationsFetchFailed(message, properties) {
-        if (message === void 0) { message = 'Could not fetch configs'; }
+        if (message === void 0) { message = 'Could not fetch configurations'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ConfigurationsFetchFailed';
@@ -649,6 +649,90 @@ var ConfigurationsFetchFailed = /** @class */ (function (_super) {
     return ConfigurationsFetchFailed;
 }(BaseError));
 exports.ConfigurationsFetchFailed = ConfigurationsFetchFailed;
+var ConfigurationFetchFailed = /** @class */ (function (_super) {
+    __extends(ConfigurationFetchFailed, _super);
+    function ConfigurationFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch configuration'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ConfigurationFetchFailed';
+        return _this;
+    }
+    return ConfigurationFetchFailed;
+}(BaseError));
+exports.ConfigurationFetchFailed = ConfigurationFetchFailed;
+var ConfigurationPutFailed = /** @class */ (function (_super) {
+    __extends(ConfigurationPutFailed, _super);
+    function ConfigurationPutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not alter configuration'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ConfigurationPutFailed';
+        return _this;
+    }
+    return ConfigurationPutFailed;
+}(BaseError));
+exports.ConfigurationPutFailed = ConfigurationPutFailed;
+var ConfigurationCreationFailed = /** @class */ (function (_super) {
+    __extends(ConfigurationCreationFailed, _super);
+    function ConfigurationCreationFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create configuration'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ConfigurationCreationFailed';
+        return _this;
+    }
+    return ConfigurationCreationFailed;
+}(BaseError));
+exports.ConfigurationCreationFailed = ConfigurationCreationFailed;
+var UsersFetchFailed = /** @class */ (function (_super) {
+    __extends(UsersFetchFailed, _super);
+    function UsersFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch user'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'UsersFetchFailed';
+        return _this;
+    }
+    return UsersFetchFailed;
+}(BaseError));
+exports.UsersFetchFailed = UsersFetchFailed;
+var UserFetchFailed = /** @class */ (function (_super) {
+    __extends(UserFetchFailed, _super);
+    function UserFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch user'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'UserFetchFailed';
+        return _this;
+    }
+    return UserFetchFailed;
+}(BaseError));
+exports.UserFetchFailed = UserFetchFailed;
+var UserPutFailed = /** @class */ (function (_super) {
+    __extends(UserPutFailed, _super);
+    function UserPutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not alter user'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'UserPutFailed';
+        return _this;
+    }
+    return UserPutFailed;
+}(BaseError));
+exports.UserPutFailed = UserPutFailed;
+var UserCreationFailed = /** @class */ (function (_super) {
+    __extends(UserCreationFailed, _super);
+    function UserCreationFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create user'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'UserCreationFailed';
+        return _this;
+    }
+    return UserCreationFailed;
+}(BaseError));
+exports.UserCreationFailed = UserCreationFailed;
 var BranchesFetchFailed = /** @class */ (function (_super) {
     __extends(BranchesFetchFailed, _super);
     function BranchesFetchFailed(message, properties) {
