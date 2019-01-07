@@ -157,7 +157,7 @@ var Users = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.configurationId + "/" + this.options.user + "/users";
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + this.configurationId + "/users";
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);

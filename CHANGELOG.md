@@ -1,3 +1,10 @@
+## [1.87.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.87.0...v1.87.1) (2019-01-07)
+
+
+### Bug Fixes
+
+* **users:** fixes prop order in post url ([09091ec](https://github.com/tillhub/tillhub-sdk-javascript/commit/09091ec))
+
 # [1.87.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.86.4...v1.87.0) (2019-01-07)
 
 
