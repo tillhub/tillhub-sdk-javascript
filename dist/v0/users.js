@@ -49,15 +49,14 @@ var Users = /** @class */ (function () {
         this.http = http;
         if (this.configurationId) {
             this.configurationId = options.configurationId;
-            this.endpoint = "/api/v0/configurations/" + this.configurationId + "/users";
         }
-        else {
-            this.endpoint = "/api/v0/configurations/users";
-        }
+        this.endpoint = "/api/v0/configurations/users";
         this.options.base = this.options.base || 'https://api.tillhub.com';
     }
     Users.prototype.getAll = function (query) {
         var _this = this;
+        if (!this.configurationId)
+            throw new TypeError('fetching users requires configuration ID to be set.');
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var next, uri, response, error_1;
             return __generator(this, function (_a) {
@@ -69,7 +68,7 @@ var Users = /** @class */ (function () {
                             uri = query.uri;
                         }
                         else {
-                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user;
+                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + this.configurationId;
                         }
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
@@ -92,12 +91,14 @@ var Users = /** @class */ (function () {
     };
     Users.prototype.get = function (userId) {
         var _this = this;
+        if (!this.configurationId)
+            throw new TypeError('fetching users requires configuration ID to be set.');
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, error_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + userId;
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + this.configurationId + "/" + userId;
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -121,12 +122,14 @@ var Users = /** @class */ (function () {
     };
     Users.prototype.put = function (userId, user) {
         var _this = this;
+        if (!this.configurationId)
+            throw new TypeError('fetching users requires configuration ID to be set.');
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, error_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + userId;
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + userId + "/" + this.configurationId;
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -147,12 +150,14 @@ var Users = /** @class */ (function () {
     };
     Users.prototype.create = function (user) {
         var _this = this;
+        if (!this.configurationId)
+            throw new TypeError('fetching users requires configuration ID to be set.');
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, error_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user;
+                        uri = "" + this.options.base + this.endpoint + "/" + this.configurationId + "/" + this.options.user;
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);

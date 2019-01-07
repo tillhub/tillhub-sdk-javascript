@@ -1,3 +1,10 @@
+## [1.86.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.86.0...v1.86.1) (2019-01-07)
+
+
+### Bug Fixes
+
+* **users:** fixes url ref, hint about current implementation status through typeerror ([fbd7a48](https://github.com/tillhub/tillhub-sdk-javascript/commit/fbd7a48))
+
 # [1.86.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.85.0...v1.86.0) (2019-01-07)
 
 
