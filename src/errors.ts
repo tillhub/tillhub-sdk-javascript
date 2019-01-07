@@ -433,6 +433,13 @@ export class UserCreationFailed extends BaseError {
   }
 }
 
+export class UserDeleteFailed extends BaseError {
+  public name = 'UserDeleteFailed'
+  constructor(public message: string = 'Could not delete user', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class BranchesFetchFailed extends BaseError {
   public name = 'BranchesFetchFailed'
   constructor(public message: string = 'Could not fetch branches', properties?: any) {

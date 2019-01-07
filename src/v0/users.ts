@@ -156,4 +156,22 @@ export class Users {
       }
     })
   }
+
+  delete(userId: string): Promise<UserResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${this.configurationId}/users/${userId}`
+      try {
+        const response = await this.http.getClient().delete(uri)
+        if (response.status !== 200) {
+          return reject(new errors.UserDeleteFailed(undefined, { status: response.status }))
+        }
+
+        return resolve({
+          msg: response.data.msg
+        } as UserResponse)
+      } catch (error) {
+        return reject(new errors.UserDeleteFailed(undefined, { error }))
+      }
+    })
+  }
 }
