@@ -50,7 +50,7 @@ var Users = /** @class */ (function () {
         if (options.configurationId) {
             this.configurationId = options.configurationId;
         }
-        this.endpoint = "/api/v0/configurations/users";
+        this.endpoint = "/api/v0/configurations";
         this.options.base = this.options.base || 'https://api.tillhub.com';
     }
     Users.prototype.getAll = function (query) {

@@ -1,3 +1,10 @@
+## [1.86.4](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.86.3...v1.86.4) (2019-01-07)
+
+
+### Bug Fixes
+
+* **users:** removes excessive route prop ([7aabd1b](https://github.com/tillhub/tillhub-sdk-javascript/commit/7aabd1b))
+
 ## [1.86.3](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.86.2...v1.86.3) (2019-01-07)
 
 
