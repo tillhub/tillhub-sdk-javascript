@@ -1,3 +1,10 @@
+# [1.88.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.87.1...v1.88.0) (2019-01-08)
+
+
+### Features
+
+* **accounts:** allow querying for account types ([1f6eaab](https://github.com/tillhub/tillhub-sdk-javascript/commit/1f6eaab))
+
 ## [1.87.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.87.0...v1.87.1) (2019-01-07)
 
 

@@ -3,9 +3,13 @@ export interface AccountsOptions {
     user?: string;
     base?: string;
 }
-export interface AccountsQuery {
+export declare type AccountType = 'expense' | 'deposit' | 'bank';
+export interface AccountsQueryOrOptions {
     limit?: number;
     uri?: string;
+    query?: {
+        type?: AccountType;
+    };
 }
 export interface AccountsResponse {
     data: Account[];
@@ -22,7 +26,6 @@ export interface AccountResponse {
 export interface Account {
     id?: string;
 }
-export declare type AccountType = 'expense' | 'deposit' | 'bank';
 interface AccountsRefType {
     branch: string;
     branch_number: number;
@@ -40,7 +43,7 @@ export declare class Accounts {
     http: Client;
     options: AccountsOptions;
     constructor(options: AccountsOptions, http: Client);
-    getAll(query?: AccountsQuery | undefined): Promise<AccountsResponse>;
+    getAll(queryOrOptions?: AccountsQueryOrOptions | undefined): Promise<AccountsResponse>;
     get(accountId: string): Promise<AccountResponse>;
     put(accountId: string, account: Account): Promise<AccountResponse>;
     create(account: Account): Promise<AccountResponse>;
