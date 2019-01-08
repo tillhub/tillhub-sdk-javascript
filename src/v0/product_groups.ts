@@ -1,3 +1,4 @@
+import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 
@@ -6,9 +7,14 @@ export interface ProductGroupsOptions {
   base?: string
 }
 
+export type ProductGroupsEmbedOptions = 'account' | 'tax'
+
 export interface ProductGroupsQuery {
   limit?: number
   uri?: string
+  query?: {
+    embed?: ProductGroupsEmbedOptions | ProductGroupsEmbedOptions[]
+  }
 }
 
 export interface ProductGroupsResponse {
@@ -51,16 +57,21 @@ export class ProductGroups {
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 
-  getAll(query?: ProductGroupsQuery | undefined): Promise<ProductGroupsResponse> {
+  getAll(queryOrOptions?: ProductGroupsQuery | undefined): Promise<ProductGroupsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
         let uri
-        if (query && query.uri) {
-          uri = query.uri
+        if (queryOrOptions && queryOrOptions.uri) {
+          uri = queryOrOptions.uri
         } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+          let queryString = ''
+          if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
+            queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
+          }
+
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}${queryString ? `?${queryString}` : ''}`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -79,9 +90,20 @@ export class ProductGroups {
     })
   }
 
-  get(productGroupId: string): Promise<ProductGroupResponse> {
+  get(productGroupId: string, queryOrOptions?: ProductGroupsQuery | undefined): Promise<ProductGroupResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productGroupId}`
+      let uri
+      if (queryOrOptions && queryOrOptions.uri) {
+        uri = queryOrOptions.uri
+      } else {
+        let queryString = ''
+        if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
+          queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
+        }
+
+        uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productGroupId}${queryString ? `?${queryString}` : ''}`
+      }
+
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
