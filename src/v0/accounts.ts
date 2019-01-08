@@ -1,3 +1,4 @@
+import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 
@@ -6,9 +7,14 @@ export interface AccountsOptions {
   base?: string
 }
 
-export interface AccountsQuery {
+export type AccountType = 'expense' | 'deposit' | 'bank'
+
+export interface AccountsQueryOrOptions {
   limit?: number
   uri?: string
+  query?: {
+    type?: AccountType
+  }
 }
 
 export interface AccountsResponse {
@@ -28,7 +34,6 @@ export interface Account {
   id?: string
 }
 
-export type AccountType = 'expense' | 'deposit' | 'bank'
 interface AccountsRefType {
   branch: string
   branch_number: number
@@ -56,16 +61,21 @@ export class Accounts {
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 
-  getAll(query?: AccountsQuery | undefined): Promise<AccountsResponse> {
+  getAll(queryOrOptions?: AccountsQueryOrOptions | undefined): Promise<AccountsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
         let uri
-        if (query && query.uri) {
-          uri = query.uri
+        if (queryOrOptions && queryOrOptions.uri) {
+          uri = queryOrOptions.uri
         } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+          let queryString = ''
+          if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
+            queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
+          }
+
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}${queryString ? `?${queryString}` : ''}`
         }
 
         const response = await this.http.getClient().get(uri)
