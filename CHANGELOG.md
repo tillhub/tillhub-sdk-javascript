@@ -1,3 +1,10 @@
+# [1.89.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.88.0...v1.89.0) (2019-01-08)
+
+
+### Features
+
+* **product_groups:** allow embedding into product groups ([697dce3](https://github.com/tillhub/tillhub-sdk-javascript/commit/697dce3))
+
 # [1.88.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.87.1...v1.88.0) (2019-01-08)
 
 

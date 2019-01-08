@@ -3,9 +3,13 @@ export interface ProductGroupsOptions {
     user?: string;
     base?: string;
 }
+export declare type ProductGroupsEmbedOptions = 'account' | 'tax';
 export interface ProductGroupsQuery {
     limit?: number;
     uri?: string;
+    query?: {
+        embed?: ProductGroupsEmbedOptions | ProductGroupsEmbedOptions[];
+    };
 }
 export interface ProductGroupsResponse {
     data: ProductGroup[];
@@ -36,8 +40,8 @@ export declare class ProductGroups {
     http: Client;
     options: ProductGroupsOptions;
     constructor(options: ProductGroupsOptions, http: Client);
-    getAll(query?: ProductGroupsQuery | undefined): Promise<ProductGroupsResponse>;
-    get(productGroupId: string): Promise<ProductGroupResponse>;
+    getAll(queryOrOptions?: ProductGroupsQuery | undefined): Promise<ProductGroupsResponse>;
+    get(productGroupId: string, queryOrOptions?: ProductGroupsQuery | undefined): Promise<ProductGroupResponse>;
     put(productGroupId: string, productGroup: ProductGroup): Promise<ProductGroupResponse>;
     create(productGroup: ProductGroup): Promise<ProductGroupResponse>;
 }
