@@ -97,6 +97,27 @@ export class Analytics {
     })
   }
 
+  getRevenuesSumForTimeRange(query: RevenuBasicOptions): Promise<AnalyticsResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const startEnd = `start=${query.start}&end=${query.end}`
+        const branch = query.branch_number ? `&branch_number=${query.branch_number}` : ''
+        const path = `aggregates/revenues/sum?${startEnd}${branch}`
+        const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${path}`
+
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.RevenuesFetchFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as AnalyticsResponse)
+      } catch (err) {
+        return reject(new errors.RevenuesFetchFailed())
+      }
+    })
+  }
+
   getRevenues(query: RevenuesOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
