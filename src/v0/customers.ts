@@ -1,3 +1,4 @@
+import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 
@@ -133,7 +134,12 @@ export class Customers {
         if (query && query.uri) {
           uri = query.uri
         } else {
+          const queryString = qs.stringify(query)
           uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+
+          if (queryString) {
+            uri = `${uri}?${queryString}`
+          }
         }
 
         const response = await this.http.getClient().get(uri)
