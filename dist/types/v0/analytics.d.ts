@@ -58,6 +58,7 @@ export declare class Analytics {
     options: AnalyticsOptions;
     constructor(options: AnalyticsOptions, http: Client);
     getRevenuesForDayOfWeek(query: RevenuBasicOptions): Promise<AnalyticsResponse>;
+    getRevenuesSumForTimeRange(query: RevenuBasicOptions): Promise<AnalyticsResponse>;
     getRevenues(query: RevenuesOptions): Promise<AnalyticsResponse>;
     getRevenuesForHourOfDay(query: RevenuBasicOptions): Promise<AnalyticsResponse>;
     getReportsProducts(query?: ProductsOptions | undefined): Promise<AnalyticsResponse>;

@@ -1,3 +1,10 @@
+# [1.90.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.89.0...v1.90.0) (2019-01-09)
+
+
+### Features
+
+* **analytics:** added handler for revenues sum for time range ([299947a](https://github.com/tillhub/tillhub-sdk-javascript/commit/299947a))
+
 # [1.89.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.88.0...v1.89.0) (2019-01-08)
 
 
