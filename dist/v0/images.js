@@ -63,7 +63,7 @@ var Images = /** @class */ (function () {
                         _a.trys.push([1, 3, , 4]);
                         return [4 /*yield*/, this.http
                                 .getClient()
-                                .put(uri, payload, { headers: { 'Content-Type': 'multipart/form-data' } })];
+                                .put(uri, payload, { headers: { 'Content-Type': 'image/jpeg' } })];
                     case 2:
                         response = _a.sent();
                         return [2 /*return*/, resolve({
@@ -90,7 +90,7 @@ var Images = /** @class */ (function () {
                         _a.trys.push([1, 3, , 4]);
                         return [4 /*yield*/, this.http
                                 .getClient()
-                                .post(uri, payload, { headers: { 'Content-Type': 'multipart/form-data' } })];
+                                .post(uri, payload, { headers: { 'Content-Type': 'image/jpeg' } })];
                     case 2:
                         response = _a.sent();
                         return [2 /*return*/, resolve({

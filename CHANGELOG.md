@@ -1,3 +1,10 @@
+# [1.93.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.92.0...v1.93.0) (2019-01-10)
+
+
+### Features
+
+* images: updated header content type ([28b6825](https://github.com/tillhub/tillhub-sdk-javascript/commit/28b6825))
+
 # [1.92.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.91.0...v1.92.0) (2019-01-10)
 
 
