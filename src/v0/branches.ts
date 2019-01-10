@@ -18,6 +18,7 @@ export interface BranchesQuery {
 export interface BranchesResponse {
   data: object[]
   metadata: object
+  next?: () => Promise<BranchesResponse>
 }
 
 export interface BranchResponse {

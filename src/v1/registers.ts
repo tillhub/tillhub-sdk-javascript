@@ -19,6 +19,7 @@ export interface RegistersQuery {
 export interface RegistersResponse {
   data: object[]
   metadata: object
+  next?: () => Promise<RegistersResponse>
 }
 
 export class Registers {

@@ -94,7 +94,7 @@ export interface InvoicesSimpleUpdateRequestBody {
 export interface InvoicesResponse {
   data: object[]
   metadata: object
-  next?: Promise<InvoicesResponse>
+  next?: () => Promise<InvoicesResponse>
   msg?: string
 }
 

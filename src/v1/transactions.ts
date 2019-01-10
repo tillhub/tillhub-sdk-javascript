@@ -19,6 +19,7 @@ export interface TransactionsOptions {
 
 export interface TransactionResponse {
   data: object[]
+  next?: () => Promise<TransactionResponse>
 }
 
 enum SignatureTypes {

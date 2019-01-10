@@ -32,6 +32,7 @@ export interface AuditsResponse {
   data?: object[]
   metadata?: object
   msg?: string
+  next?: () => Promise<AuditsResponse>
 }
 
 export class AuditActions {

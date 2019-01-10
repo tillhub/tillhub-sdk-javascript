@@ -72,6 +72,7 @@ export interface ProductsResponse {
   data: object[]
   metadata: object
   msg?: string
+  next?: () => Promise<ProductsResponse>
 }
 
 export interface ProductResponse {
