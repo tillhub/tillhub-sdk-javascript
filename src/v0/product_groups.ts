@@ -14,6 +14,7 @@ export interface ProductGroupsQuery {
   uri?: string
   query?: {
     embed?: ProductGroupsEmbedOptions | ProductGroupsEmbedOptions[]
+    deleted?: boolean
   }
 }
 

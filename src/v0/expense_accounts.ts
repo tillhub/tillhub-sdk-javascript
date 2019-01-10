@@ -1,3 +1,4 @@
+import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 
@@ -9,6 +10,9 @@ export interface ExpenseAccountsOptions {
 export interface ExpenseAccountsQuery {
   limit?: number
   uri?: string
+  query?: {
+    deleted?: boolean
+  }
 }
 
 export interface ExpenseAccountsResponse {
@@ -51,16 +55,21 @@ export class ExpenseAccounts {
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 
-  getAll(query?: ExpenseAccountsQuery | undefined): Promise<ExpenseAccountsResponse> {
+  getAll(queryOrOptions?: ExpenseAccountsQuery | undefined): Promise<ExpenseAccountsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
         let uri
-        if (query && query.uri) {
-          uri = query.uri
+        if (queryOrOptions && queryOrOptions.uri) {
+          uri = queryOrOptions.uri
         } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+          let queryString = ''
+          if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
+            queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
+          }
+
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}${queryString ? `?${queryString}` : ''}`
         }
 
         const response = await this.http.getClient().get(uri)

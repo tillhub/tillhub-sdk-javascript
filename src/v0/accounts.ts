@@ -14,6 +14,7 @@ export interface AccountsQueryOrOptions {
   uri?: string
   query?: {
     type?: AccountType
+    deleted?: boolean
   }
 }
 
