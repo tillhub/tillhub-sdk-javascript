@@ -15,6 +15,10 @@ export interface CustomersQuery {
   }
 }
 
+export interface CustomersMetaQuery {
+  deleted?: boolean
+}
+
 export interface CustomersResponse {
   data: Customer[]
   metadata: object
@@ -214,11 +218,16 @@ export class Customers {
     })
   }
 
-  meta(): Promise<CustomersResponse> {
+  meta(q?: CustomersMetaQuery | undefined): Promise<CustomersResponse> {
     return new Promise(async (resolve, reject) => {
       let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
 
       try {
+        const queryString = qs.stringify(q)
+        if (queryString) {
+          uri = `${uri}?${queryString}`
+        }
+
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) return reject(new errors.CustomersMetaFailed(undefined, { status: response.status }))
 
@@ -233,7 +242,7 @@ export class Customers {
           metadata: { count: response.data.count }
         } as CustomersResponse)
       } catch (err) {
-        return reject(new errors.ProductsMetaFailed())
+        return reject(new errors.CustomersMetaFailed())
       }
     })
   }
