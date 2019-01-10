@@ -22,6 +22,7 @@ export interface CustomersMetaQuery {
 export interface CustomersResponse {
   data: Customer[]
   metadata: object
+  next?: () => Promise<CustomersResponse>
 }
 
 export interface CustomerResponse {
@@ -153,7 +154,7 @@ export class Customers {
         if (response.status !== 200) reject(new errors.CustomersFetchFailed())
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<CustomersResponse> => this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({
