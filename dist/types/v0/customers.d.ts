@@ -16,6 +16,7 @@ export interface CustomersMetaQuery {
 export interface CustomersResponse {
     data: Customer[];
     metadata: object;
+    next?: () => Promise<CustomersResponse>;
 }
 export interface CustomerResponse {
     data: Customer;

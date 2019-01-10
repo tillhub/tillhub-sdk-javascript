@@ -1,3 +1,10 @@
+## [1.94.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.94.0...v1.94.1) (2019-01-10)
+
+
+### Bug Fixes
+
+* **customers:** return function that returns a promise instead of triggering promise immediately ([03472de](https://github.com/tillhub/tillhub-sdk-javascript/commit/03472de))
+
 # [1.94.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.93.0...v1.94.0) (2019-01-10)
 
 

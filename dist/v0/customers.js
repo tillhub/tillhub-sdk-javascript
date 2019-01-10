@@ -68,7 +68,8 @@ var Customers = /** @class */ (function () {
     Customers.prototype.getAll = function (queryOrOptions) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var next, uri, queryString, response, err_1;
+            var next, uri, queryString, response_1, err_1;
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -86,15 +87,15 @@ var Customers = /** @class */ (function () {
                         }
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
-                        response = _a.sent();
-                        if (response.status !== 200)
+                        response_1 = _a.sent();
+                        if (response_1.status !== 200)
                             reject(new errors.CustomersFetchFailed());
-                        if (response.data.cursor && response.data.cursor.next) {
-                            next = this.getAll({ uri: response.data.cursor.next });
+                        if (response_1.data.cursor && response_1.data.cursor.next) {
+                            next = function () { return _this.getAll({ uri: response_1.data.cursor.next }); };
                         }
                         return [2 /*return*/, resolve({
-                                data: response.data.results,
-                                metadata: { cursor: response.data.cursor },
+                                data: response_1.data.results,
+                                metadata: { cursor: response_1.data.cursor },
                                 next: next
                             })];
                     case 2:
