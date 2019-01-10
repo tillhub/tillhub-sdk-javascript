@@ -10,6 +10,9 @@ export interface CustomersQuery {
         deleted?: boolean;
     };
 }
+export interface CustomersMetaQuery {
+    deleted?: boolean;
+}
 export interface CustomersResponse {
     data: Customer[];
     metadata: object;
@@ -107,7 +110,7 @@ export declare class Customers {
     get(customerId: string): Promise<CustomerResponse>;
     put(customerId: string, customer: Customer): Promise<CustomerResponse>;
     create(customer: Customer): Promise<CustomerResponse>;
-    meta(): Promise<CustomersResponse>;
+    meta(q?: CustomersMetaQuery | undefined): Promise<CustomersResponse>;
     delete(customerId: string): Promise<CustomerResponse>;
     count(): Promise<CustomersResponse>;
 }

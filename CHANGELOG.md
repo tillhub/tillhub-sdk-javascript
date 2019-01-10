@@ -1,3 +1,10 @@
+# [1.94.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.93.0...v1.94.0) (2019-01-10)
+
+
+### Features
+
+* **customers:** add query to meta ([eae544f](https://github.com/tillhub/tillhub-sdk-javascript/commit/eae544f))
+
 # [1.93.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.92.0...v1.93.0) (2019-01-10)
 
 

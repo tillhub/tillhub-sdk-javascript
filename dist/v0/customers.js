@@ -186,10 +186,10 @@ var Customers = /** @class */ (function () {
             });
         }); });
     };
-    Customers.prototype.meta = function () {
+    Customers.prototype.meta = function (q) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_2;
+            var uri, queryString, response, err_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -197,6 +197,10 @@ var Customers = /** @class */ (function () {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
+                        queryString = qs_1.default.stringify(q);
+                        if (queryString) {
+                            uri = uri + "?" + queryString;
+                        }
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();
@@ -211,7 +215,7 @@ var Customers = /** @class */ (function () {
                             })];
                     case 3:
                         err_2 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductsMetaFailed())];
+                        return [2 /*return*/, reject(new errors.CustomersMetaFailed())];
                     case 4: return [2 /*return*/];
                 }
             });
