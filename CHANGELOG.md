@@ -1,3 +1,10 @@
+## [1.94.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.94.1...v1.94.2) (2019-01-10)
+
+
+### Bug Fixes
+
+* fix all next cursors ([7495e35](https://github.com/tillhub/tillhub-sdk-javascript/commit/7495e35))
+
 ## [1.94.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.94.0...v1.94.1) (2019-01-10)
 
 

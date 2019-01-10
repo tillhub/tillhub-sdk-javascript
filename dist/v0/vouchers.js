@@ -70,7 +70,8 @@ var Vouchers = /** @class */ (function () {
     Vouchers.prototype.getAll = function (optionsOrQuery) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var next, uri, queryString, response, error_1;
+            var next, uri, queryString, response_1, error_1;
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -88,16 +89,16 @@ var Vouchers = /** @class */ (function () {
                         }
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
-                        response = _a.sent();
-                        if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.VouchersFetchFailed(undefined, { status: response.status }))];
+                        response_1 = _a.sent();
+                        if (response_1.status !== 200) {
+                            return [2 /*return*/, reject(new errors.VouchersFetchFailed(undefined, { status: response_1.status }))];
                         }
-                        if (response.data.cursor && response.data.cursor.next) {
-                            next = this.getAll({ uri: response.data.cursor.next });
+                        if (response_1.data.cursor && response_1.data.cursor.next) {
+                            next = function () { return _this.getAll({ uri: response_1.data.cursor.next }); };
                         }
                         return [2 /*return*/, resolve({
-                                data: response.data.results,
-                                metadata: { cursor: response.data.cursor },
+                                data: response_1.data.results,
+                                metadata: { cursor: response_1.data.cursor },
                                 next: next
                             })];
                     case 2:
@@ -228,7 +229,8 @@ var Vouchers = /** @class */ (function () {
     Vouchers.prototype.getLogs = function (voucherId, optionsOrQuery) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var next, uri, response, error_6;
+            var next, uri, response_2, error_6;
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -242,16 +244,16 @@ var Vouchers = /** @class */ (function () {
                         }
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
-                        response = _a.sent();
-                        if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.VoucherLogsFetchFailed(undefined, { status: response.status }))];
+                        response_2 = _a.sent();
+                        if (response_2.status !== 200) {
+                            return [2 /*return*/, reject(new errors.VoucherLogsFetchFailed(undefined, { status: response_2.status }))];
                         }
-                        if (response.data.cursor && response.data.cursor.next) {
-                            next = this.getAll({ uri: response.data.cursor.next });
+                        if (response_2.data.cursor && response_2.data.cursor.next) {
+                            next = function () { return _this.getAll({ uri: response_2.data.cursor.next }); };
                         }
                         return [2 /*return*/, resolve({
-                                data: response.data.results,
-                                metadata: { count: response.data.count },
+                                data: response_2.data.results,
+                                metadata: { count: response_2.data.count },
                                 next: next
                             })];
                     case 2:
@@ -364,7 +366,8 @@ var VoucherLogs = /** @class */ (function () {
     VoucherLogs.prototype.getAll = function (optionsOrQuery) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var next, uri, queryString, response, error_10;
+            var next, uri, queryString, response_3, error_10;
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -382,16 +385,16 @@ var VoucherLogs = /** @class */ (function () {
                         }
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
-                        response = _a.sent();
-                        if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.VouchersLogsFetchFailed(undefined, { status: response.status }))];
+                        response_3 = _a.sent();
+                        if (response_3.status !== 200) {
+                            return [2 /*return*/, reject(new errors.VouchersLogsFetchFailed(undefined, { status: response_3.status }))];
                         }
-                        if (response.data.cursor && response.data.cursor.next) {
-                            next = this.getAll({ uri: response.data.cursor.next });
+                        if (response_3.data.cursor && response_3.data.cursor.next) {
+                            next = function () { return _this.getAll({ uri: response_3.data.cursor.next }); };
                         }
                         return [2 /*return*/, resolve({
-                                data: response.data.results,
-                                metadata: { cursor: response.data.cursor },
+                                data: response_3.data.results,
+                                metadata: { cursor: response_3.data.cursor },
                                 next: next
                             })];
                     case 2:
