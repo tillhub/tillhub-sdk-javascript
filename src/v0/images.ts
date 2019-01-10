@@ -36,7 +36,7 @@ export class Images {
       try {
         const response = await this.http
           .getClient()
-          .put(uri, payload, { headers: { 'Content-Type': 'multipart/form-data' } })
+          .put(uri, payload, { headers: { 'Content-Type': 'image/jpeg' } })
         return resolve({
           data: response.data.results
         } as ImagesResponse)
@@ -54,7 +54,7 @@ export class Images {
       try {
         const response = await this.http
           .getClient()
-          .post(uri, payload, { headers: { 'Content-Type': 'multipart/form-data' } })
+          .post(uri, payload, { headers: { 'Content-Type': 'image/jpeg' } })
         return resolve({
           data: response.data.results
         } as ImagesResponse)
