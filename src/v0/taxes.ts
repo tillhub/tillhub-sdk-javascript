@@ -129,4 +129,20 @@ export class Taxes {
       }
     })
   }
+
+  delete(taxId: string): Promise<TaxResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${taxId}`
+      try {
+        const response = await this.http.getClient().delete(uri)
+        response.status !== 200 && reject(new errors.CustomerDeleteFailed())
+
+        return resolve({
+          msg: response.data.msg
+        } as TaxResponse)
+      } catch (err) {
+        return reject(new errors.TaxDeleteFailed())
+      }
+    })
+  }
 }

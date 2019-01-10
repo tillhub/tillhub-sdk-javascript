@@ -91,6 +91,13 @@ export class TaxesCreationFailed extends BaseError {
   }
 }
 
+export class TaxDeleteFailed extends BaseError {
+  public name = 'TaxDeleteFailed'
+  constructor(public message: string = 'Could not delete tax', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class ProductsCreateFailed extends BaseError {
   public name = 'ProductsCreateFailed'
   constructor(public message: string = 'Could not create the product', properties?: any) {
@@ -265,6 +272,13 @@ export class ProuctGroupsCountFailed extends BaseError {
   }
 }
 
+export class ProductGroupDeleteFailed extends BaseError {
+  public name = 'ProductGroupDeleteFailed'
+  constructor(public message: string = 'Could not delete product group', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class AccountsFetchFailed extends BaseError {
   public name = 'AccountsFetchFailed'
   constructor(public message: string = 'Could not fetch accounts', properties?: any) {
@@ -289,6 +303,13 @@ export class AccountPutFailed extends BaseError {
 export class AccountCreationFailed extends BaseError {
   public name = 'AccountCreationFailed'
   constructor(public message: string = 'Could not create account', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class AccountDeleteFailed extends BaseError {
+  public name = 'AccountDeleteFailed'
+  constructor(public message: string = 'Could not delete account', properties?: any) {
     super(message, properties)
   }
 }
@@ -328,6 +349,13 @@ export class PaymentOptionsFetchFailed extends BaseError {
   }
 }
 
+export class ExpenseAccountDeleteFailed extends BaseError {
+  public name = 'ExpenseAccountDeleteFailed'
+  constructor(public message: string = 'Could not delete expense account', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class PaymentOptionFetchFailed extends BaseError {
   public name = 'PaymentOptionFetchFailed'
   constructor(public message: string = 'Could not fetch payment option', properties?: any) {
@@ -345,6 +373,13 @@ export class PaymentOptionPutFailed extends BaseError {
 export class PaymentOptionCreationFailed extends BaseError {
   public name = 'PaymentOptionCreationFailed'
   constructor(public message: string = 'Could not create payment option', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class PaymentOptionDeleteFailed extends BaseError {
+  public name = 'PaymentOptionDeleteFailed'
+  constructor(public message: string = 'Could not delete payment option', properties?: any) {
     super(message, properties)
   }
 }
@@ -471,6 +506,13 @@ export class BranchCreationFailed extends BaseError {
 export class BranchesCountFailed extends BaseError {
   public name = 'BranchesCountFailed'
   constructor(public message: string = 'Could not count the branches', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class BranchDeleteFailed extends BaseError {
+  public name = 'BranchDeleteFailed'
+  constructor(public message: string = 'Could not delete branch', properties?: any) {
     super(message, properties)
   }
 }

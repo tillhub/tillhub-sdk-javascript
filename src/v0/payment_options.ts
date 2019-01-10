@@ -133,4 +133,20 @@ export class PaymentOptions {
       }
     })
   }
+
+  delete(paymentOptionId: string): Promise<PaymentOptionResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${paymentOptionId}`
+      try {
+        const response = await this.http.getClient().delete(uri)
+        response.status !== 200 && reject(new errors.CustomerDeleteFailed())
+
+        return resolve({
+          msg: response.data.msg
+        } as PaymentOptionResponse)
+      } catch (err) {
+        return reject(new errors.PaymentOptionDeleteFailed())
+      }
+    })
+  }
 }
