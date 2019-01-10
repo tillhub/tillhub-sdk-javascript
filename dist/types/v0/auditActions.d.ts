@@ -24,6 +24,7 @@ export interface AuditsResponse {
     data?: object[];
     metadata?: object;
     msg?: string;
+    next?: () => Promise<AuditsResponse>;
 }
 export declare class AuditActions {
     endpoint: string;

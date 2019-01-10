@@ -115,7 +115,7 @@ export interface DeliveryItemsUpdateBody {
 export interface DeliveriesResponse {
     data: object[];
     metadata: object;
-    next?: Promise<DeliveriesResponse>;
+    next?: () => Promise<DeliveriesResponse>;
     msg?: string;
 }
 export declare class Deliveries {

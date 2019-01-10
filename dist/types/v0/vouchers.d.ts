@@ -12,11 +12,13 @@ export interface VouchersResponse {
     data: object[];
     metadata: object;
     msg?: string;
+    next?: () => Promise<VouchersResponse>;
 }
 export interface VoucherLogsResponse {
     data: object[];
     metadata: object;
     msg?: string;
+    next?: () => Promise<VoucherLogsResponse>;
 }
 export interface VoucherResponse {
     data: Voucher;

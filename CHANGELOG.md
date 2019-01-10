@@ -1,3 +1,10 @@
+## [1.94.3](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.94.2...v1.94.3) (2019-01-10)
+
+
+### Bug Fixes
+
+* annotate next cursor types ([978cc13](https://github.com/tillhub/tillhub-sdk-javascript/commit/978cc13))
+
 ## [1.94.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.94.1...v1.94.2) (2019-01-10)
 
 

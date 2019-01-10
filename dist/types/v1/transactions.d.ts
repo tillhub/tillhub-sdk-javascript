@@ -14,6 +14,7 @@ export interface TransactionsOptions {
 }
 export interface TransactionResponse {
     data: object[];
+    next?: () => Promise<TransactionResponse>;
 }
 interface FiskaltrustAuth {
     cashbox: string;
