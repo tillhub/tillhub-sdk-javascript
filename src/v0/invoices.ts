@@ -132,7 +132,7 @@ export class Invoices {
         const response = await this.http.getClient().get(uri)
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<InvoicesResponse> => this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({

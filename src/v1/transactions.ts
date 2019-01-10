@@ -60,7 +60,7 @@ export class Transactions {
         const response = await this.http.getClient().get(uri)
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<TransactionResponse> => this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({
@@ -85,7 +85,7 @@ export class Transactions {
         } else {
           uri = `${this.options.base}${this.endpoint}/${
             this.options.user
-          }/${transactionId}/legacy/${template}/pdf`
+            }/${transactionId}/legacy/${template}/pdf`
         }
 
         if (query && query.format) {
@@ -131,7 +131,7 @@ export class Signing {
       try {
         let uri = `${this.options.base}${this.endpoint}/${
           this.options.user
-        }/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/initialise`
+          }/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/initialise`
 
         const response = await this.http.getClient().post(uri, signingConfiguration, {
           headers: {
@@ -157,7 +157,7 @@ export class Signing {
       try {
         let uri = `${this.options.base}${this.endpoint}/${
           this.options.user
-        }/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/yearly`
+          }/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/yearly`
 
         const response = await this.http.getClient().post(uri, undefined, {
           headers: {
@@ -183,7 +183,7 @@ export class Signing {
       try {
         let uri = `${this.options.base}${this.endpoint}/${
           this.options.user
-        }/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/monthly`
+          }/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/monthly`
 
         const response = await this.http.getClient().post(uri, undefined, {
           headers: {
@@ -209,7 +209,7 @@ export class Signing {
       try {
         let uri = `${this.options.base}${this.endpoint}/${
           this.options.user
-        }/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/zero`
+          }/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/zero`
 
         const response = await this.http.getClient().post(uri, undefined, {
           headers: {

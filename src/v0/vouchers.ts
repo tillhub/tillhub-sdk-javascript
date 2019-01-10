@@ -96,7 +96,7 @@ export class Vouchers {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             queryString ? `?${queryString}` : ''
-          }`
+            }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -105,7 +105,7 @@ export class Vouchers {
         }
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<VouchersResponse> => this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({
@@ -222,7 +222,7 @@ export class Vouchers {
         }
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<VoucherLogsResponse> => this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({
@@ -331,7 +331,7 @@ export class VoucherLogs {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}/logs${
             queryString ? `?${queryString}` : ''
-          }`
+            }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -340,7 +340,7 @@ export class VoucherLogs {
         }
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<VoucherLogsResponse> => this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({

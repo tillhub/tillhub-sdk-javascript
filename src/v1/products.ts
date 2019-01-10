@@ -142,7 +142,7 @@ export class Products {
         response.status !== 200 && reject(new errors.ProductsFetchFailed())
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<ProductsResponse> => this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({

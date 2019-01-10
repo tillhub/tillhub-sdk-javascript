@@ -173,7 +173,7 @@ export class Deliveries {
         const response = await this.http.getClient().get(uri)
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<DeliveriesResponse> => this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({
@@ -248,7 +248,7 @@ export class Deliveries {
     return new Promise(async (resolve, reject) => {
       let uri = `${this.options.base}${this.endpoint}/${
         this.options.user
-      }/${deliveryId}/pdf?format=uri`
+        }/${deliveryId}/pdf?format=uri`
 
       try {
         const response = await this.http.getClient().post(uri, null, {
@@ -302,7 +302,7 @@ export class Deliveries {
 
       let uri = `${this.options.base}${this.endpoint}/${
         this.options.user
-      }/${deliveryId}/in_progress`
+        }/${deliveryId}/in_progress`
 
       if (query && query.embed) {
         const queryString = query.embed

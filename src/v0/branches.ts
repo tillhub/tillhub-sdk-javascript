@@ -82,7 +82,7 @@ export class Branches {
         }
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<BranchesResponse> => this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({
