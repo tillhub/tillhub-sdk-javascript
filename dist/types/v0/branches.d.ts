@@ -6,6 +6,9 @@ export interface BranchesOptions {
 export interface BranchesQuery {
     limit?: number;
     uri?: string;
+    query?: {
+        deleted?: boolean;
+    };
 }
 export interface BranchesResponse {
     data: object[];
@@ -40,7 +43,7 @@ export declare class Branches {
     http: Client;
     options: BranchesOptions;
     constructor(options: BranchesOptions, http: Client);
-    getAll(query?: BranchesQuery | undefined): Promise<BranchesResponse>;
+    getAll(queryOrOptions?: BranchesQuery | undefined): Promise<BranchesResponse>;
     get(branchId: string): Promise<BranchResponse>;
     put(branchId: string, branch: Branch): Promise<BranchResponse>;
     create(branch: Branch): Promise<BranchResponse>;

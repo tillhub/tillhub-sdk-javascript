@@ -1,3 +1,10 @@
+# [1.92.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.91.0...v1.92.0) (2019-01-10)
+
+
+### Features
+
+* **master data:** allow queries ([f443baf](https://github.com/tillhub/tillhub-sdk-javascript/commit/f443baf))
+
 # [1.91.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.90.0...v1.91.0) (2019-01-10)
 
 

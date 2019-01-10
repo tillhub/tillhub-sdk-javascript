@@ -6,6 +6,9 @@ export interface TaxesOptions {
 export interface TaxesQuery {
     limit?: number;
     uri?: string;
+    query?: {
+        deleted?: boolean;
+    };
 }
 export interface TaxesResponse {
     data: Tax[];
@@ -36,7 +39,7 @@ export declare class Taxes {
     http: Client;
     options: TaxesOptions;
     constructor(options: TaxesOptions, http: Client);
-    getAll(query?: TaxesQuery | undefined): Promise<TaxesResponse>;
+    getAll(queryOrOptions?: TaxesQuery | undefined): Promise<TaxesResponse>;
     get(taxId: string): Promise<TaxResponse>;
     put(taxId: string, tax: Tax): Promise<TaxResponse>;
     create(tax: Tax): Promise<TaxResponse>;

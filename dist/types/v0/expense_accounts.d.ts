@@ -6,6 +6,9 @@ export interface ExpenseAccountsOptions {
 export interface ExpenseAccountsQuery {
     limit?: number;
     uri?: string;
+    query?: {
+        deleted?: boolean;
+    };
 }
 export interface ExpenseAccountsResponse {
     data: ExpenseAccount[];
@@ -35,7 +38,7 @@ export declare class ExpenseAccounts {
     http: Client;
     options: ExpenseAccountsOptions;
     constructor(options: ExpenseAccountsOptions, http: Client);
-    getAll(query?: ExpenseAccountsQuery | undefined): Promise<ExpenseAccountsResponse>;
+    getAll(queryOrOptions?: ExpenseAccountsQuery | undefined): Promise<ExpenseAccountsResponse>;
     get(expenseAccountId: string): Promise<ExpenseAccountResponse>;
     put(expenseAccountId: string, expenseAccount: ExpenseAccount): Promise<ExpenseAccountResponse>;
     create(expenseAccount: ExpenseAccount): Promise<ExpenseAccountResponse>;

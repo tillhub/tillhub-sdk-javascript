@@ -6,6 +6,9 @@ export interface PaymentOptionsOptions {
 export interface PaymentOptionsQuery {
     limit?: number;
     uri?: string;
+    query?: {
+        deleted?: boolean;
+    };
 }
 export interface PaymentOptionsResponse {
     data: PaymentOption[];
@@ -39,7 +42,7 @@ export declare class PaymentOptions {
     http: Client;
     options: PaymentOptionsOptions;
     constructor(options: PaymentOptionsOptions, http: Client);
-    getAll(query?: PaymentOptionsQuery | undefined): Promise<PaymentOptionsResponse>;
+    getAll(queryOrOptions?: PaymentOptionsQuery | undefined): Promise<PaymentOptionsResponse>;
     get(paymentOptionId: string): Promise<PaymentOptionResponse>;
     put(paymentOptionId: string, paymentOption: PaymentOption): Promise<PaymentOptionResponse>;
     create(paymentOption: PaymentOption): Promise<PaymentOptionResponse>;

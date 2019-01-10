@@ -6,6 +6,9 @@ export interface CustomersOptions {
 export interface CustomersQuery {
     limit?: number;
     uri?: string;
+    query?: {
+        deleted?: boolean;
+    };
 }
 export interface CustomersResponse {
     data: Customer[];
@@ -100,7 +103,7 @@ export declare class Customers {
     http: Client;
     options: CustomersOptions;
     constructor(options: CustomersOptions, http: Client);
-    getAll(query?: CustomersQuery | undefined): Promise<CustomersResponse>;
+    getAll(queryOrOptions?: CustomersQuery | undefined): Promise<CustomersResponse>;
     get(customerId: string): Promise<CustomerResponse>;
     put(customerId: string, customer: Customer): Promise<CustomerResponse>;
     create(customer: Customer): Promise<CustomerResponse>;
