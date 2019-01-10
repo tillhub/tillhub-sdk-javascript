@@ -1,3 +1,10 @@
+# [1.91.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.90.0...v1.91.0) (2019-01-10)
+
+
+### Features
+
+* adds delete handlers for master data handlers ([0d3adb8](https://github.com/tillhub/tillhub-sdk-javascript/commit/0d3adb8))
+
 # [1.90.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.89.0...v1.90.0) (2019-01-09)
 
 

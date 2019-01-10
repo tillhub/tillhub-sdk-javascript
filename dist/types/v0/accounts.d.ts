@@ -47,5 +47,6 @@ export declare class Accounts {
     get(accountId: string): Promise<AccountResponse>;
     put(accountId: string, account: Account): Promise<AccountResponse>;
     create(account: Account): Promise<AccountResponse>;
+    delete(accountId: string): Promise<AccountResponse>;
 }
 export {};

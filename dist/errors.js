@@ -157,6 +157,18 @@ var TaxesCreationFailed = /** @class */ (function (_super) {
     return TaxesCreationFailed;
 }(BaseError));
 exports.TaxesCreationFailed = TaxesCreationFailed;
+var TaxDeleteFailed = /** @class */ (function (_super) {
+    __extends(TaxDeleteFailed, _super);
+    function TaxDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete tax'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TaxDeleteFailed';
+        return _this;
+    }
+    return TaxDeleteFailed;
+}(BaseError));
+exports.TaxDeleteFailed = TaxDeleteFailed;
 var ProductsCreateFailed = /** @class */ (function (_super) {
     __extends(ProductsCreateFailed, _super);
     function ProductsCreateFailed(message, properties) {
@@ -445,6 +457,18 @@ var ProuctGroupsCountFailed = /** @class */ (function (_super) {
     return ProuctGroupsCountFailed;
 }(BaseError));
 exports.ProuctGroupsCountFailed = ProuctGroupsCountFailed;
+var ProductGroupDeleteFailed = /** @class */ (function (_super) {
+    __extends(ProductGroupDeleteFailed, _super);
+    function ProductGroupDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete product group'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductGroupDeleteFailed';
+        return _this;
+    }
+    return ProductGroupDeleteFailed;
+}(BaseError));
+exports.ProductGroupDeleteFailed = ProductGroupDeleteFailed;
 var AccountsFetchFailed = /** @class */ (function (_super) {
     __extends(AccountsFetchFailed, _super);
     function AccountsFetchFailed(message, properties) {
@@ -493,6 +517,18 @@ var AccountCreationFailed = /** @class */ (function (_super) {
     return AccountCreationFailed;
 }(BaseError));
 exports.AccountCreationFailed = AccountCreationFailed;
+var AccountDeleteFailed = /** @class */ (function (_super) {
+    __extends(AccountDeleteFailed, _super);
+    function AccountDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete account'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'AccountDeleteFailed';
+        return _this;
+    }
+    return AccountDeleteFailed;
+}(BaseError));
+exports.AccountDeleteFailed = AccountDeleteFailed;
 var ExpenseAccountsFetchFailed = /** @class */ (function (_super) {
     __extends(ExpenseAccountsFetchFailed, _super);
     function ExpenseAccountsFetchFailed(message, properties) {
@@ -553,6 +589,18 @@ var PaymentOptionsFetchFailed = /** @class */ (function (_super) {
     return PaymentOptionsFetchFailed;
 }(BaseError));
 exports.PaymentOptionsFetchFailed = PaymentOptionsFetchFailed;
+var ExpenseAccountDeleteFailed = /** @class */ (function (_super) {
+    __extends(ExpenseAccountDeleteFailed, _super);
+    function ExpenseAccountDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete expense account'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ExpenseAccountDeleteFailed';
+        return _this;
+    }
+    return ExpenseAccountDeleteFailed;
+}(BaseError));
+exports.ExpenseAccountDeleteFailed = ExpenseAccountDeleteFailed;
 var PaymentOptionFetchFailed = /** @class */ (function (_super) {
     __extends(PaymentOptionFetchFailed, _super);
     function PaymentOptionFetchFailed(message, properties) {
@@ -589,6 +637,18 @@ var PaymentOptionCreationFailed = /** @class */ (function (_super) {
     return PaymentOptionCreationFailed;
 }(BaseError));
 exports.PaymentOptionCreationFailed = PaymentOptionCreationFailed;
+var PaymentOptionDeleteFailed = /** @class */ (function (_super) {
+    __extends(PaymentOptionDeleteFailed, _super);
+    function PaymentOptionDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete payment option'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PaymentOptionDeleteFailed';
+        return _this;
+    }
+    return PaymentOptionDeleteFailed;
+}(BaseError));
+exports.PaymentOptionDeleteFailed = PaymentOptionDeleteFailed;
 var TemplatesCreationFailed = /** @class */ (function (_super) {
     __extends(TemplatesCreationFailed, _super);
     function TemplatesCreationFailed(message, properties) {
@@ -805,6 +865,18 @@ var BranchesCountFailed = /** @class */ (function (_super) {
     return BranchesCountFailed;
 }(BaseError));
 exports.BranchesCountFailed = BranchesCountFailed;
+var BranchDeleteFailed = /** @class */ (function (_super) {
+    __extends(BranchDeleteFailed, _super);
+    function BranchDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete branch'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'BranchDeleteFailed';
+        return _this;
+    }
+    return BranchDeleteFailed;
+}(BaseError));
+exports.BranchDeleteFailed = BranchDeleteFailed;
 var CustomersFetchFailed = /** @class */ (function (_super) {
     __extends(CustomersFetchFailed, _super);
     function CustomersFetchFailed(message, properties) {

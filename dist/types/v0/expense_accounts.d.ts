@@ -39,4 +39,5 @@ export declare class ExpenseAccounts {
     get(expenseAccountId: string): Promise<ExpenseAccountResponse>;
     put(expenseAccountId: string, expenseAccount: ExpenseAccount): Promise<ExpenseAccountResponse>;
     create(expenseAccount: ExpenseAccount): Promise<ExpenseAccountResponse>;
+    delete(expenseAccountId: string): Promise<ExpenseAccountResponse>;
 }

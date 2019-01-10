@@ -45,4 +45,5 @@ export declare class Branches {
     put(branchId: string, branch: Branch): Promise<BranchResponse>;
     create(branch: Branch): Promise<BranchResponse>;
     count(): Promise<BranchesResponse>;
+    delete(branchId: string): Promise<BranchResponse>;
 }

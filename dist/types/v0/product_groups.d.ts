@@ -44,4 +44,5 @@ export declare class ProductGroups {
     get(productGroupId: string, queryOrOptions?: ProductGroupsQuery | undefined): Promise<ProductGroupResponse>;
     put(productGroupId: string, productGroup: ProductGroup): Promise<ProductGroupResponse>;
     create(productGroup: ProductGroup): Promise<ProductGroupResponse>;
+    delete(taxId: string): Promise<ProductGroupResponse>;
 }

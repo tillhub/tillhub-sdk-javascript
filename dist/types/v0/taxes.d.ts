@@ -40,4 +40,5 @@ export declare class Taxes {
     get(taxId: string): Promise<TaxResponse>;
     put(taxId: string, tax: Tax): Promise<TaxResponse>;
     create(tax: Tax): Promise<TaxResponse>;
+    delete(taxId: string): Promise<TaxResponse>;
 }

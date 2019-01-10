@@ -58,6 +58,11 @@ export declare class TaxesCreationFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class TaxDeleteFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
 export declare class ProductsCreateFailed extends BaseError {
     message: string;
     name: string;
@@ -178,6 +183,11 @@ export declare class ProuctGroupsCountFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class ProductGroupDeleteFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
 export declare class AccountsFetchFailed extends BaseError {
     message: string;
     name: string;
@@ -194,6 +204,11 @@ export declare class AccountPutFailed extends BaseError {
     constructor(message?: string, properties?: any);
 }
 export declare class AccountCreationFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class AccountDeleteFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);
@@ -223,6 +238,11 @@ export declare class PaymentOptionsFetchFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class ExpenseAccountDeleteFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
 export declare class PaymentOptionFetchFailed extends BaseError {
     message: string;
     name: string;
@@ -234,6 +254,11 @@ export declare class PaymentOptionPutFailed extends BaseError {
     constructor(message?: string, properties?: any);
 }
 export declare class PaymentOptionCreationFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class PaymentOptionDeleteFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);
@@ -324,6 +349,11 @@ export declare class BranchCreationFailed extends BaseError {
     constructor(message?: string, properties?: any);
 }
 export declare class BranchesCountFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class BranchDeleteFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);

@@ -43,4 +43,5 @@ export declare class PaymentOptions {
     get(paymentOptionId: string): Promise<PaymentOptionResponse>;
     put(paymentOptionId: string, paymentOption: PaymentOption): Promise<PaymentOptionResponse>;
     create(paymentOption: PaymentOption): Promise<PaymentOptionResponse>;
+    delete(paymentOptionId: string): Promise<PaymentOptionResponse>;
 }
