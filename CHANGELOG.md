@@ -1,3 +1,10 @@
+# [1.95.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.94.3...v1.95.0) (2019-01-11)
+
+
+### Features
+
+* **branches:** covers api for timzeone and currency, fixes type requirements ([ade7244](https://github.com/tillhub/tillhub-sdk-javascript/commit/ade7244))
+
 ## [1.94.3](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.94.2...v1.94.3) (2019-01-10)
 
 
