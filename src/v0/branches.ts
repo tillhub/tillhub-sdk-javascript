@@ -34,17 +34,18 @@ export interface Branch {
 }
 
 export interface Branch {
-  branch_number: number
+  branch_number?: number
   name: string
-  email: string
+  email?: string
   custom_id?: string
   external_custom_id?: string
-  timezone?: string
   receipt_header?: string
   receipt_footer?: string
   active?: boolean
   deleted?: boolean
   configuration?: string
+  timezone_default?: string | null
+  currency_default?: string | null
 }
 
 export class Branches {
