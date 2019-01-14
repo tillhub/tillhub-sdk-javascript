@@ -1,3 +1,10 @@
+# [1.96.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.95.0...v1.96.0) (2019-01-14)
+
+
+### Features
+
+* analytics: VoucherOptions added additional filter parameters ([abcd114](https://github.com/tillhub/tillhub-sdk-javascript/commit/abcd114))
+
 # [1.95.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.94.3...v1.95.0) (2019-01-11)
 
 

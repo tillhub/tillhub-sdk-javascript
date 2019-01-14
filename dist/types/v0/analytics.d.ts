@@ -49,8 +49,11 @@ export interface VoucherOptions {
     valid_until_end?: string;
     comment?: string;
     q?: string;
-    amount?: string;
+    amount_old?: string;
+    amount_new?: string;
     currency?: string;
+    delta?: string;
+    type?: 'update' | 'decrement' | 'increment' | 'create';
 }
 export declare class Analytics {
     endpoint: string;
