@@ -1,3 +1,10 @@
+# [1.97.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.96.0...v1.97.0) (2019-01-15)
+
+
+### Features
+
+* updated analytics voucher option interface ([91351c9](https://github.com/tillhub/tillhub-sdk-javascript/commit/91351c9))
+
 # [1.96.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.95.0...v1.96.0) (2019-01-14)
 
 
