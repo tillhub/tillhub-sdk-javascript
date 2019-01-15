@@ -66,6 +66,7 @@ export interface Configuration {
   level?: 'client_account' | 'registers' | 'branches'
   taxes?: object | null
   analytics?: object
+  custom_dashboards?: object
 }
 
 class ConfigurationReference {
