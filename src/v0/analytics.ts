@@ -63,7 +63,7 @@ export interface VoucherOptions {
   amount_new?: string
   currency?: string
   delta?: string
-  type?: 'update' | 'decrement' | 'increment' | 'create'
+  type?: 'update:update' | 'update:decrement' | 'update:increment' | 'create'
 }
 
 export class Analytics {
