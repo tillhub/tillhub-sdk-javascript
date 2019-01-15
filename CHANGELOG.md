@@ -1,3 +1,10 @@
+## [1.98.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.98.0...v1.98.1) (2019-01-15)
+
+
+### Bug Fixes
+
+* **auth:** fixes key in service account auth ([d8b487c](https://github.com/tillhub/tillhub-sdk-javascript/commit/d8b487c))
+
 # [1.98.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.97.0...v1.98.0) (2019-01-15)
 
 

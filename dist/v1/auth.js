@@ -105,7 +105,7 @@ var Auth = /** @class */ (function (_super) {
                         _a.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post(this.options.base + "/api/v1/users/auth/key", {
                                 id: authData.id,
-                                apiKey: authData.apiKey
+                                api_key: authData.apiKey
                             })];
                     case 1:
                         response = _a.sent();
