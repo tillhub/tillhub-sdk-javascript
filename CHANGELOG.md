@@ -1,3 +1,10 @@
+# [1.98.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.97.0...v1.98.0) (2019-01-15)
+
+
+### Features
+
+* **configurations:** adds custom dashboards ([23b44d7](https://github.com/tillhub/tillhub-sdk-javascript/commit/23b44d7))
+
 # [1.97.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.96.0...v1.97.0) (2019-01-15)
 
 
