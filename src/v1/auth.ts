@@ -53,7 +53,7 @@ export class Auth extends v0.Auth {
     try {
       const response = await axios.post(`${this.options.base}/api/v1/users/auth/key`, {
         id: authData.id,
-        apiKey: authData.apiKey
+        api_key: authData.apiKey
       })
 
       this.setDefaultHeader(
