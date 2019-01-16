@@ -623,6 +623,11 @@ export declare class ProductsReportFetchFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class PaymentsReportFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
 export declare class AuditActionsFetchAllFailed extends BaseError {
     message: string;
     name: string;

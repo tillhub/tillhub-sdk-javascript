@@ -1,3 +1,10 @@
+# [1.100.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.99.0...v1.100.0) (2019-01-16)
+
+
+### Features
+
+* **analytics:** payments report handler ([bb3d108](https://github.com/tillhub/tillhub-sdk-javascript/commit/bb3d108))
+
 # [1.99.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.98.1...v1.99.0) (2019-01-16)
 
 

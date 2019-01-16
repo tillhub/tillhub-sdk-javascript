@@ -1512,6 +1512,18 @@ var ProductsReportFetchFailed = /** @class */ (function (_super) {
     return ProductsReportFetchFailed;
 }(BaseError));
 exports.ProductsReportFetchFailed = ProductsReportFetchFailed;
+var PaymentsReportFetchFailed = /** @class */ (function (_super) {
+    __extends(PaymentsReportFetchFailed, _super);
+    function PaymentsReportFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the payments report'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PaymentsReportFetchFailed';
+        return _this;
+    }
+    return PaymentsReportFetchFailed;
+}(BaseError));
+exports.PaymentsReportFetchFailed = PaymentsReportFetchFailed;
 var AuditActionsFetchAllFailed = /** @class */ (function (_super) {
     __extends(AuditActionsFetchAllFailed, _super);
     function AuditActionsFetchAllFailed(message, properties) {
