@@ -907,6 +907,13 @@ export class PaymentsReportFetchFailed extends BaseError {
   }
 }
 
+export class SimpleSalesCartItemsReportFetchFailed extends BaseError {
+  public name = 'SimpleSalesCartItemsReportFetchFailed'
+  constructor(public message: string = 'Could not fetch the sales cart items report', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class AuditActionsFetchAllFailed extends BaseError {
   public name = 'AuditActionsFetchAllFailed'
   constructor(public message: string = 'Could not fetch audit actions', properties?: any) {

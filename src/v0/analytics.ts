@@ -66,6 +66,14 @@ export interface VoucherOptions {
   type?: 'update:update' | 'update:decrement' | 'update:increment' | 'create'
 }
 
+export interface SimpleSalesCartItemsOptions {
+  [key: string]: any
+  start?: string
+  end?: string,
+  embed?: string | string[]
+  include?: string | string[]
+}
+
 export class Analytics {
   endpoint: string
   http: Client
@@ -193,7 +201,7 @@ export class Analytics {
       try {
         const uri = `${this.options.base}${this.endpoint}/${
           this.options.user
-        }/reports/staff/overview`
+          }/reports/staff/overview`
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.StaffOverviewFetchFailed())
@@ -213,7 +221,7 @@ export class Analytics {
       try {
         const uri = `${this.options.base}${this.endpoint}/${
           this.options.user
-        }/reports/staff/product_groups/${staff || ''}`
+          }/reports/staff/product_groups/${staff || ''}`
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.ProductGroupsReportFetchFailed())
@@ -233,7 +241,7 @@ export class Analytics {
       try {
         const uri = `${this.options.base}${this.endpoint}/${
           this.options.user
-        }/reports/staff/refunds/${staff || ''}`
+          }/reports/staff/refunds/${staff || ''}`
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.RefundsReportFetchFailed())
@@ -277,7 +285,7 @@ export class Analytics {
       try {
         const uri = `${this.options.base}${this.endpoint}/${
           this.options.user
-        }/reports/staff/products/${staff || ''}`
+          }/reports/staff/products/${staff || ''}`
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.ProductsReportFetchFailed())
@@ -308,6 +316,35 @@ export class Analytics {
         } as AnalyticsResponse)
       } catch (err) {
         return reject(new errors.PaymentsReportFetchFailed())
+      }
+    })
+  }
+
+  getSimpleSalesCartItems(query?: SimpleSalesCartItemsOptions | undefined): Promise<AnalyticsResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let uri = `${this.options.base}${this.endpoint}/${
+          this.options.user
+          }/reports/transactions/simple`
+
+        const queryString = qs.stringify(query)
+
+        if (queryString) {
+          uri = `${uri}?${queryString}`
+        }
+
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.SimpleSalesCartItemsReportFetchFailed())
+
+        return resolve({
+          data: response.data.results[0].results,
+          metadata: {
+            count: response.data.results[0].count,
+            metric: response.data.results[0].metric
+          }
+        } as AnalyticsResponse)
+      } catch (err) {
+        return reject(new errors.SimpleSalesCartItemsReportFetchFailed())
       }
     })
   }
