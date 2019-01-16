@@ -1,3 +1,10 @@
+# [1.101.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.100.0...v1.101.0) (2019-01-16)
+
+
+### Features
+
+* **analytics:** adds simple cartitem tx ([da3234f](https://github.com/tillhub/tillhub-sdk-javascript/commit/da3234f))
+
 # [1.100.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.99.0...v1.100.0) (2019-01-16)
 
 

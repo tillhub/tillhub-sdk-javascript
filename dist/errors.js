@@ -1524,6 +1524,18 @@ var PaymentsReportFetchFailed = /** @class */ (function (_super) {
     return PaymentsReportFetchFailed;
 }(BaseError));
 exports.PaymentsReportFetchFailed = PaymentsReportFetchFailed;
+var SimpleSalesCartItemsReportFetchFailed = /** @class */ (function (_super) {
+    __extends(SimpleSalesCartItemsReportFetchFailed, _super);
+    function SimpleSalesCartItemsReportFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the sales cart items report'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'SimpleSalesCartItemsReportFetchFailed';
+        return _this;
+    }
+    return SimpleSalesCartItemsReportFetchFailed;
+}(BaseError));
+exports.SimpleSalesCartItemsReportFetchFailed = SimpleSalesCartItemsReportFetchFailed;
 var AuditActionsFetchAllFailed = /** @class */ (function (_super) {
     __extends(AuditActionsFetchAllFailed, _super);
     function AuditActionsFetchAllFailed(message, properties) {

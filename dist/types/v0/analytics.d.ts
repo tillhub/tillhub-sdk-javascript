@@ -55,6 +55,13 @@ export interface VoucherOptions {
     delta?: string;
     type?: 'update:update' | 'update:decrement' | 'update:increment' | 'create';
 }
+export interface SimpleSalesCartItemsOptions {
+    [key: string]: any;
+    start?: string;
+    end?: string;
+    embed?: string | string[];
+    include?: string | string[];
+}
 export declare class Analytics {
     endpoint: string;
     http: Client;
@@ -71,4 +78,5 @@ export declare class Analytics {
     getVouchersReports(query?: VoucherOptions | undefined): Promise<AnalyticsResponse>;
     getProductsReport(staff?: StaffID): Promise<AnalyticsResponse>;
     getPaymentsReport(): Promise<AnalyticsResponse>;
+    getSimpleSalesCartItems(query?: SimpleSalesCartItemsOptions | undefined): Promise<AnalyticsResponse>;
 }

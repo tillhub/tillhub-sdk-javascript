@@ -352,6 +352,38 @@ var Analytics = /** @class */ (function () {
             });
         }); });
     };
+    Analytics.prototype.getSimpleSalesCartItems = function (query) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, queryString, response, err_12;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/reports/transactions/simple";
+                        queryString = qs_1.default.stringify(query);
+                        if (queryString) {
+                            uri = uri + "?" + queryString;
+                        }
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        response.status !== 200 && reject(new errors.SimpleSalesCartItemsReportFetchFailed());
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0].results,
+                                metadata: {
+                                    count: response.data.results[0].count,
+                                    metric: response.data.results[0].metric
+                                }
+                            })];
+                    case 2:
+                        err_12 = _a.sent();
+                        return [2 /*return*/, reject(new errors.SimpleSalesCartItemsReportFetchFailed())];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     return Analytics;
 }());
 exports.Analytics = Analytics;
