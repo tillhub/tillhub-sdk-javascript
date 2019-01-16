@@ -1,3 +1,10 @@
+# [1.99.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.98.1...v1.99.0) (2019-01-16)
+
+
+### Features
+
+* **realtime:** prepare realtime for bundle testing ([de7be91](https://github.com/tillhub/tillhub-sdk-javascript/commit/de7be91))
+
 ## [1.98.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.98.0...v1.98.1) (2019-01-15)
 
 
