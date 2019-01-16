@@ -900,6 +900,13 @@ export class ProductsReportFetchFailed extends BaseError {
   }
 }
 
+export class PaymentsReportFetchFailed extends BaseError {
+  public name = 'PaymentsReportFetchFailed'
+  constructor(public message: string = 'Could not fetch the payments report', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class AuditActionsFetchAllFailed extends BaseError {
   public name = 'AuditActionsFetchAllFailed'
   constructor(public message: string = 'Could not fetch audit actions', properties?: any) {
