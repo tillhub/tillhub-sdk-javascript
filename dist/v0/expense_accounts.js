@@ -62,7 +62,7 @@ var ExpenseAccounts = /** @class */ (function () {
     function ExpenseAccounts(options, http) {
         this.options = options;
         this.http = http;
-        this.endpoint = '/api/v0/expnse_accounts';
+        this.endpoint = '/api/v0/expense_accounts';
         this.options.base = this.options.base || 'https://api.tillhub.com';
     }
     ExpenseAccounts.prototype.getAll = function (queryOrOptions) {

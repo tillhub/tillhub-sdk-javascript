@@ -1,3 +1,10 @@
+## [1.101.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.101.0...v1.101.1) (2019-01-16)
+
+
+### Bug Fixes
+
+* **expense_accounts:** fixes route ref ([a987b28](https://github.com/tillhub/tillhub-sdk-javascript/commit/a987b28))
+
 # [1.101.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.100.0...v1.101.0) (2019-01-16)
 
 
