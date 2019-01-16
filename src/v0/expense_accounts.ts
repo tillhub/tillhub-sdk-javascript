@@ -51,7 +51,7 @@ export class ExpenseAccounts {
     this.options = options
     this.http = http
 
-    this.endpoint = '/api/v0/expnse_accounts'
+    this.endpoint = '/api/v0/expense_accounts'
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 
