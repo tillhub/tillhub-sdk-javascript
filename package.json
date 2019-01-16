@@ -140,6 +140,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "just-diff": "^2.2.0",
+    "mqtt": "^2.18.8",
     "qs": "^6.6.0"
   },
   "release": {
