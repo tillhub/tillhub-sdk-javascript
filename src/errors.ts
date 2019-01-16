@@ -18,6 +18,13 @@ export class AuthenticationFailed extends BaseError {
   }
 }
 
+export class PasswordResetFailed extends BaseError {
+  public name = 'PasswordResetFailed'
+  constructor(public message: string = 'Password reset was not successful', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class UninstantiatedClient extends BaseError {
   public name = 'UninstantiatedClient'
   constructor(
