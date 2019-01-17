@@ -69,7 +69,7 @@ export interface VoucherOptions {
 export interface SimpleSalesCartItemsOptions {
   [key: string]: any
   start?: string
-  end?: string,
+  end?: string
   embed?: string | string[]
   include?: string | string[]
 }
@@ -201,7 +201,7 @@ export class Analytics {
       try {
         const uri = `${this.options.base}${this.endpoint}/${
           this.options.user
-          }/reports/staff/overview`
+        }/reports/staff/overview`
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.StaffOverviewFetchFailed())
@@ -221,7 +221,7 @@ export class Analytics {
       try {
         const uri = `${this.options.base}${this.endpoint}/${
           this.options.user
-          }/reports/staff/product_groups/${staff || ''}`
+        }/reports/staff/product_groups/${staff || ''}`
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.ProductGroupsReportFetchFailed())
@@ -241,7 +241,7 @@ export class Analytics {
       try {
         const uri = `${this.options.base}${this.endpoint}/${
           this.options.user
-          }/reports/staff/refunds/${staff || ''}`
+        }/reports/staff/refunds/${staff || ''}`
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.RefundsReportFetchFailed())
@@ -285,7 +285,7 @@ export class Analytics {
       try {
         const uri = `${this.options.base}${this.endpoint}/${
           this.options.user
-          }/reports/staff/products/${staff || ''}`
+        }/reports/staff/products/${staff || ''}`
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.ProductsReportFetchFailed())
@@ -320,12 +320,14 @@ export class Analytics {
     })
   }
 
-  getSimpleSalesCartItems(query?: SimpleSalesCartItemsOptions | undefined): Promise<AnalyticsResponse> {
+  getSimpleSalesCartItems(
+    query?: SimpleSalesCartItemsOptions | undefined
+  ): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         let uri = `${this.options.base}${this.endpoint}/${
           this.options.user
-          }/reports/transactions/simple`
+        }/reports/transactions/simple`
 
         const queryString = qs.stringify(query)
 
@@ -352,7 +354,7 @@ export class Analytics {
   getVatReport(): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const uri = `${this.options.base}${this.endpoint}/${this.options.user}/reports/staff/vat`
+        const uri = `${this.options.base}${this.endpoint}/${this.options.user}/reports/vat`
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.VatReportFetchFailed())

@@ -33,7 +33,7 @@ describe('v0: Analytics: gets vat report', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/vat`)
+        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/vat`)
         .reply(function (config) {
           return [
             200,
@@ -80,7 +80,7 @@ describe('v0: Analytics: gets vat report', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/vat`)
+        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/vat`)
         .reply(function (config) {
           return [205]
         })
