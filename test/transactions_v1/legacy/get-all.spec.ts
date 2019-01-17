@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
-import { TillhubClient, v1 } from '../../src/tillhub-js'
+import { TillhubClient, v1, v0 } from '../../../src/tillhub-js'
 
 let user = {
   username: 'test@example.com',
@@ -25,7 +25,7 @@ afterEach(() => {
   mock.reset()
 })
 
-describe('v0: Transactions: can get all', () => {
+describe('v0: TransactionsLegacy: can get all', () => {
   it('Tillhub is transaction is instantiable', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
@@ -42,7 +42,7 @@ describe('v0: Transactions: can get all', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v1/transactions/${legacyId}`)
+        .onGet(`https://api.tillhub.com/api/v1/transactions/${legacyId}/legacy`)
         .reply(function (config) {
           return [
             200,
@@ -70,9 +70,9 @@ describe('v0: Transactions: can get all', () => {
       password: user.password
     })
 
-    const transactions = th.transactions()
+    const transactions = th.transactionsLegacy()
 
-    expect(transactions).toBeInstanceOf(v1.Transactions)
+    expect(transactions).toBeInstanceOf(v1.TransactionsLegacy)
 
     const { data } = await transactions.getAll()
 
@@ -94,7 +94,7 @@ describe('v0: Transactions: can get all', () => {
         ]
       })
       mock
-        .onGet(`https://api.tillhub.com/api/v1/transactions/${legacyId}`)
+        .onGet(`https://api.tillhub.com/api/v1/transactions/${legacyId}/legacy`)
         .reply(function (config) {
           return [400]
         })
@@ -117,7 +117,7 @@ describe('v0: Transactions: can get all', () => {
     })
 
     try {
-      await th.transactions().getAll()
+      await th.transactionsLegacy().getAll()
     } catch (err) {
       expect(err.name).toBe('TransactionFetchFailed')
     }

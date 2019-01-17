@@ -1,3 +1,4 @@
+import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 
@@ -10,6 +11,10 @@ export interface PdfRequestObject {
 export interface TransactionsQuery {
   uri?: string
   format?: string
+}
+
+export interface TransactionsMetaQuery {
+  type?: string | string[]
 }
 
 export interface TransactionsOptions {
@@ -32,6 +37,75 @@ interface FiskaltrustAuth {
 }
 
 export class Transactions {
+  endpoint: string
+  http: Client
+  // signing: Signing
+  public options: TransactionsOptions
+
+  constructor(options: TransactionsOptions, http: Client) {
+    this.options = options
+    this.http = http
+    // this.signing = new Signing(options, http)
+
+    this.endpoint = '/api/v1/transactions'
+    this.options.base = this.options.base || 'https://api.tillhub.com'
+  }
+
+  getAll(query?: TransactionsQuery | undefined): Promise<TransactionResponse> {
+    return new Promise(async (resolve, reject) => {
+      let next
+
+      try {
+        let uri
+        if (query && query.uri) {
+          uri = query.uri
+        } else {
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+        }
+
+        const response = await this.http.getClient().get(uri)
+
+        if (response.data.cursor && response.data.cursor.next) {
+          next = (): Promise<TransactionResponse> => this.getAll({ uri: response.data.cursor.next })
+        }
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count, cursor: response.data.cursor },
+          next
+        } as TransactionResponse)
+      } catch (err) {
+        return reject(new errors.TransactionFetchFailed())
+      }
+    })
+  }
+
+  meta(q?: TransactionsMetaQuery | undefined): Promise<TransactionResponse> {
+    return new Promise(async (resolve, reject) => {
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+
+      try {
+        const queryString = qs.stringify(q)
+        if (queryString) {
+          uri = `${uri}?${queryString}`
+        }
+
+        const response = await this.http.getClient().get(uri)
+
+        if (response.status !== 200) reject(new errors.TransactionsGetMetaFailed())
+
+        return resolve({
+          data: response.data.results[0],
+          metadata: { count: response.data.count }
+        } as TransactionResponse)
+      } catch (err) {
+        return reject(new errors.TransactionsGetMetaFailed())
+      }
+    })
+  }
+}
+
+export class TransactionsLegacy {
   endpoint: string
   http: Client
   signing: Signing
