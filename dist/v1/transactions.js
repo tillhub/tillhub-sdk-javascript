@@ -34,6 +34,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -42,6 +45,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var qs_1 = __importDefault(require("qs"));
 var errors = __importStar(require("../errors"));
 var SignatureTypes;
 (function (SignatureTypes) {
@@ -51,7 +55,7 @@ var Transactions = /** @class */ (function () {
     function Transactions(options, http) {
         this.options = options;
         this.http = http;
-        this.signing = new Signing(options, http);
+        // this.signing = new Signing(options, http)
         this.endpoint = '/api/v1/transactions';
         this.options.base = this.options.base || 'https://api.tillhub.com';
     }
@@ -69,7 +73,7 @@ var Transactions = /** @class */ (function () {
                             uri = query.uri;
                         }
                         else {
-                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/legacy";
+                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user;
                         }
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
@@ -90,10 +94,88 @@ var Transactions = /** @class */ (function () {
             });
         }); });
     };
-    Transactions.prototype.pdfUri = function (requestObject) {
+    Transactions.prototype.meta = function (q) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var query, transactionId, template, uri, response, err_2;
+            var uri, queryString, response, err_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/meta";
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        queryString = qs_1.default.stringify(q);
+                        if (queryString) {
+                            uri = uri + "?" + queryString;
+                        }
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200)
+                            reject(new errors.TransactionsGetMetaFailed());
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        err_2 = _a.sent();
+                        return [2 /*return*/, reject(new errors.TransactionsGetMetaFailed())];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    return Transactions;
+}());
+exports.Transactions = Transactions;
+var TransactionsLegacy = /** @class */ (function () {
+    function TransactionsLegacy(options, http) {
+        this.options = options;
+        this.http = http;
+        this.signing = new Signing(options, http);
+        this.endpoint = '/api/v1/transactions';
+        this.options.base = this.options.base || 'https://api.tillhub.com';
+    }
+    TransactionsLegacy.prototype.getAll = function (query) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var next, uri, response_2, err_3;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = void 0;
+                        if (query && query.uri) {
+                            uri = query.uri;
+                        }
+                        else {
+                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/legacy";
+                        }
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
+                        response_2 = _a.sent();
+                        if (response_2.data.cursor && response_2.data.cursor.next) {
+                            next = function () { return _this.getAll({ uri: response_2.data.cursor.next }); };
+                        }
+                        return [2 /*return*/, resolve({
+                                data: response_2.data.results,
+                                metadata: { count: response_2.data.count, cursor: response_2.data.cursor },
+                                next: next
+                            })];
+                    case 2:
+                        err_3 = _a.sent();
+                        return [2 /*return*/, reject(new errors.TransactionFetchFailed())];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    TransactionsLegacy.prototype.pdfUri = function (requestObject) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var query, transactionId, template, uri, response, err_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -122,16 +204,16 @@ var Transactions = /** @class */ (function () {
                                 data: response.data.results
                             })];
                     case 3:
-                        err_2 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TransactionPdfFailed(err_2.message))];
+                        err_4 = _a.sent();
+                        return [2 /*return*/, reject(new errors.TransactionPdfFailed(err_4.message))];
                     case 4: return [2 /*return*/];
                 }
             });
         }); });
     };
-    return Transactions;
+    return TransactionsLegacy;
 }());
-exports.Transactions = Transactions;
+exports.TransactionsLegacy = TransactionsLegacy;
 var Signing = /** @class */ (function () {
     function Signing(options, http) {
         this.options = options;
@@ -142,7 +224,7 @@ var Signing = /** @class */ (function () {
     Signing.prototype.initialise = function (singingResourceType, singingResource, signingSystem, signingConfiguration) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_3;
+            var uri, response, err_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -159,8 +241,8 @@ var Signing = /** @class */ (function () {
                                 data: response.data.results
                             })];
                     case 2:
-                        err_3 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TransactionSigningInitialisationFailed(err_3.message))];
+                        err_5 = _a.sent();
+                        return [2 /*return*/, reject(new errors.TransactionSigningInitialisationFailed(err_5.message))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -169,7 +251,7 @@ var Signing = /** @class */ (function () {
     Signing.prototype.yearly = function (singingResourceType, singingResource, signingSystem) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_4;
+            var uri, response, err_6;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -186,8 +268,8 @@ var Signing = /** @class */ (function () {
                                 data: response.data.results
                             })];
                     case 2:
-                        err_4 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TransactionSigningYearlyReceiptFailed(err_4.message))];
+                        err_6 = _a.sent();
+                        return [2 /*return*/, reject(new errors.TransactionSigningYearlyReceiptFailed(err_6.message))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -196,7 +278,7 @@ var Signing = /** @class */ (function () {
     Signing.prototype.monthly = function (singingResourceType, singingResource, signingSystem) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_5;
+            var uri, response, err_7;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -213,8 +295,8 @@ var Signing = /** @class */ (function () {
                                 data: response.data.results
                             })];
                     case 2:
-                        err_5 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TransactionSigningMonthlyReceiptFailed(err_5.message))];
+                        err_7 = _a.sent();
+                        return [2 /*return*/, reject(new errors.TransactionSigningMonthlyReceiptFailed(err_7.message))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -223,7 +305,7 @@ var Signing = /** @class */ (function () {
     Signing.prototype.zero = function (singingResourceType, singingResource, signingSystem) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_6;
+            var uri, response, err_8;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -240,8 +322,8 @@ var Signing = /** @class */ (function () {
                                 data: response.data.results
                             })];
                     case 2:
-                        err_6 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TransactionSigningZeroReceiptFailed(err_6.message))];
+                        err_8 = _a.sent();
+                        return [2 /*return*/, reject(new errors.TransactionSigningZeroReceiptFailed(err_8.message))];
                     case 3: return [2 /*return*/];
                 }
             });

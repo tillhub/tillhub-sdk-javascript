@@ -121,6 +121,18 @@ var TransactionSigningZeroReceiptFailed = /** @class */ (function (_super) {
     return TransactionSigningZeroReceiptFailed;
 }(BaseError));
 exports.TransactionSigningZeroReceiptFailed = TransactionSigningZeroReceiptFailed;
+var TransactionsGetMetaFailed = /** @class */ (function (_super) {
+    __extends(TransactionsGetMetaFailed, _super);
+    function TransactionsGetMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get transactions meta'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TransactionsGetMetaFailed';
+        return _this;
+    }
+    return TransactionsGetMetaFailed;
+}(BaseError));
+exports.TransactionsGetMetaFailed = TransactionsGetMetaFailed;
 var TaxesFetchFailed = /** @class */ (function (_super) {
     __extends(TaxesFetchFailed, _super);
     function TaxesFetchFailed(message, properties) {

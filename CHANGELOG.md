@@ -1,3 +1,16 @@
+# [2.0.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.102.1...v2.0.0) (2019-01-17)
+
+
+### Features
+
+* **transactions v1:** Change v1.Transactions to v1.TransactionsLegacy. Create new v1.Transactions. ([a227eeb](https://github.com/tillhub/tillhub-sdk-javascript/commit/a227eeb))
+
+
+### BREAKING CHANGES
+
+* **transactions v1:** v1.Transactions is no longer using the api endpoint v1/transactions/legacy but
+instead v1/transactions
+
 ## [1.102.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.102.0...v1.102.1) (2019-01-17)
 
 

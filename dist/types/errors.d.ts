@@ -43,6 +43,11 @@ export declare class TransactionSigningZeroReceiptFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class TransactionsGetMetaFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
 export declare class TaxesFetchFailed extends BaseError {
     message: string;
     name: string;

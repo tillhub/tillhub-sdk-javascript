@@ -8,6 +8,9 @@ export interface TransactionsQuery {
     uri?: string;
     format?: string;
 }
+export interface TransactionsMetaQuery {
+    type?: string | string[];
+}
 export interface TransactionsOptions {
     user?: string;
     base?: string;
@@ -21,6 +24,14 @@ interface FiskaltrustAuth {
     cashbox_auth: string;
 }
 export declare class Transactions {
+    endpoint: string;
+    http: Client;
+    options: TransactionsOptions;
+    constructor(options: TransactionsOptions, http: Client);
+    getAll(query?: TransactionsQuery | undefined): Promise<TransactionResponse>;
+    meta(q?: TransactionsMetaQuery | undefined): Promise<TransactionResponse>;
+}
+export declare class TransactionsLegacy {
     endpoint: string;
     http: Client;
     signing: Signing;

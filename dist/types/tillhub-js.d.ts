@@ -129,6 +129,11 @@ export declare class TillhubClient extends events.EventEmitter {
      */
     analytics(): v0.Analytics;
     /**
+     * Create an authenticated TransactionsLegacy instance
+     *
+     */
+    transactionsLegacy(): v1.TransactionsLegacy;
+    /**
      * Create an authenticated Transactions instance
      *
      */
