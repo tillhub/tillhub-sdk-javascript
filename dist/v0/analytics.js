@@ -392,7 +392,7 @@ var Analytics = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/reports/staff/vat";
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/reports/vat";
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();

@@ -1,3 +1,10 @@
+## [1.102.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.102.0...v1.102.1) (2019-01-17)
+
+
+### Bug Fixes
+
+* **analytics:** vat report route fix ([bbaf3d3](https://github.com/tillhub/tillhub-sdk-javascript/commit/bbaf3d3))
+
 # [1.102.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.101.1...v1.102.0) (2019-01-17)
 
 
