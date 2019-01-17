@@ -70,6 +70,13 @@ export class TransactionSigningZeroReceiptFailed extends BaseError {
   }
 }
 
+export class TransactionsGetMetaFailed extends BaseError {
+  public name = 'TransactionsGetMetaFailed'
+  constructor(public message: string = 'Could not get transactions meta', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class TaxesFetchFailed extends BaseError {
   public name = 'TaxesFetchFailed'
   constructor(public message: string = 'Could not fetch taxes', properties?: any) {

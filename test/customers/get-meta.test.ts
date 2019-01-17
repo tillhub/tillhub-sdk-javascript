@@ -56,7 +56,6 @@ describe('v0: Branches: can get count number of all customers logs', () => {
           return [
             200,
             {
-              count: 50,
               results: [{ count: 50 }]
             }
           ]

@@ -1,8 +1,9 @@
+import qs from 'qs'
 import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
-import { TillhubClient, v1 } from '../../src/tillhub-js'
+import th, { v1 } from '../../../src/tillhub-js'
 
 let user = {
   username: 'test@example.com',
@@ -18,6 +19,18 @@ if (process.env.SYSTEM_TEST) {
   user.apiKey = process.env.SYSTEM_TEST_API_KEY || user.apiKey
 }
 
+const requestObject = {
+  transactionId: '4d471a6c-1561-4aca-a5b5-1fdf478b8e86',
+  template: 'invoice',
+  query: {
+    format: 'uri'
+  }
+}
+
+function queryString() {
+  return qs.stringify(requestObject.query)
+}
+
 const legacyId = '4564'
 
 const mock = new MockAdapter(axios)
@@ -25,8 +38,10 @@ afterEach(() => {
   mock.reset()
 })
 
-describe('v0: Transactions: can get all', () => {
-  it('Tillhub is transaction is instantiable', async () => {
+const results = 'some pdf uri'
+
+describe('v1: TransactionsLegacy', () => {
+  it('can get pdf uri', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
@@ -42,13 +57,16 @@ describe('v0: Transactions: can get all', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v1/transactions/${legacyId}`)
+        .onPost(
+          `https://api.tillhub.com/api/v1/transactions/${legacyId}/${
+            requestObject.transactionId
+          }/legacy/${requestObject.template}/pdf?${queryString()}`
+        )
         .reply(function (config) {
           return [
             200,
             {
-              count: 1,
-              results: [{}]
+              results
             }
           ]
         })
@@ -62,21 +80,19 @@ describe('v0: Transactions: can get all', () => {
       base: process.env.TILLHUB_BASE
     }
 
-    const th = new TillhubClient()
-
     th.init(options)
     await th.auth.loginUsername({
       username: user.username,
       password: user.password
     })
 
-    const transactions = th.transactions()
+    const transaction = th.transactionsLegacy()
 
-    expect(transactions).toBeInstanceOf(v1.Transactions)
+    expect(transaction).toBeInstanceOf(v1.TransactionsLegacy)
 
-    const { data } = await transactions.getAll()
+    const { data } = await transaction.pdfUri(requestObject)
 
-    expect(Array.isArray(data)).toBe(true)
+    expect(data).toEqual(results)
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -94,7 +110,11 @@ describe('v0: Transactions: can get all', () => {
         ]
       })
       mock
-        .onGet(`https://api.tillhub.com/api/v1/transactions/${legacyId}`)
+        .onPost(
+          `https://api.tillhub.com/api/v1/transactions/${legacyId}/${
+            requestObject.transactionId
+          }/legacy/${requestObject.template}/pdf?${queryString()}`
+        )
         .reply(function (config) {
           return [400]
         })
@@ -108,8 +128,6 @@ describe('v0: Transactions: can get all', () => {
       base: process.env.TILLHUB_BASE
     }
 
-    const th = new TillhubClient()
-
     th.init(options)
     await th.auth.loginUsername({
       username: user.username,
@@ -117,9 +135,9 @@ describe('v0: Transactions: can get all', () => {
     })
 
     try {
-      await th.transactions().getAll()
+      await th.transactionsLegacy().pdfUri(requestObject)
     } catch (err) {
-      expect(err.name).toBe('TransactionFetchFailed')
+      expect(err.name).toBe('TransactionPdfFailed')
     }
   })
 })
