@@ -1,3 +1,10 @@
+# [1.102.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.101.1...v1.102.0) (2019-01-17)
+
+
+### Features
+
+* **reports:** add get vat report handler ([0533d21](https://github.com/tillhub/tillhub-sdk-javascript/commit/0533d21))
+
 ## [1.101.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.101.0...v1.101.1) (2019-01-16)
 
 

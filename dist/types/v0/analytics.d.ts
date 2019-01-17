@@ -79,4 +79,5 @@ export declare class Analytics {
     getProductsReport(staff?: StaffID): Promise<AnalyticsResponse>;
     getPaymentsReport(): Promise<AnalyticsResponse>;
     getSimpleSalesCartItems(query?: SimpleSalesCartItemsOptions | undefined): Promise<AnalyticsResponse>;
+    getVatReport(): Promise<AnalyticsResponse>;
 }
