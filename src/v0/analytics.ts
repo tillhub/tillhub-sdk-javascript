@@ -66,6 +66,11 @@ export interface VoucherOptions {
   type?: 'update:update' | 'update:decrement' | 'update:increment' | 'create'
 }
 
+export interface VatOptions {
+  [key: string]: any
+  format?: string
+}
+
 export interface SimpleSalesCartItemsOptions {
   [key: string]: any
   start?: string
@@ -351,10 +356,16 @@ export class Analytics {
     })
   }
 
-  getVatReport(): Promise<AnalyticsResponse> {
+  getVatReport(query?: VatOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const uri = `${this.options.base}${this.endpoint}/${this.options.user}/reports/vat`
+        let uri = `${this.options.base}${this.endpoint}/${this.options.user}/reports/vat`
+
+        const queryString = qs.stringify(query)
+
+        if (queryString) {
+          uri = `${uri}?${queryString}`
+        }
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.VatReportFetchFailed())
