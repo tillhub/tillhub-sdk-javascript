@@ -56,7 +56,6 @@ export interface VoucherOptions {
     type?: 'update:update' | 'update:decrement' | 'update:increment' | 'create';
 }
 export interface VatOptions {
-    [key: string]: any;
     format?: string;
 }
 export interface SimpleSalesCartItemsOptions {

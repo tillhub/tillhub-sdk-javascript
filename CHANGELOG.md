@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.1.0...v2.2.0) (2019-01-18)
+
+
+### Features
+
+* **staff:** count all staff handler ([2cb8b26](https://github.com/tillhub/tillhub-sdk-javascript/commit/2cb8b26))
+
 # [2.1.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.0.0...v2.1.0) (2019-01-18)
 
 

@@ -1632,4 +1632,16 @@ var ImagePutFailed = /** @class */ (function (_super) {
     return ImagePutFailed;
 }(BaseError));
 exports.ImagePutFailed = ImagePutFailed;
+var StaffCountFailed = /** @class */ (function (_super) {
+    __extends(StaffCountFailed, _super);
+    function StaffCountFailed(message, properties) {
+        if (message === void 0) { message = 'Could not count the staff'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StaffCountFailed';
+        return _this;
+    }
+    return StaffCountFailed;
+}(BaseError));
+exports.StaffCountFailed = StaffCountFailed;
 //# sourceMappingURL=errors.js.map

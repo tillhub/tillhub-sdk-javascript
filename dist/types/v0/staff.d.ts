@@ -18,4 +18,5 @@ export declare class Staff {
     options: StaffOptions;
     constructor(options: StaffOptions, http: Client);
     getAll(query?: StaffQuery | undefined): Promise<StaffResponse>;
+    count(): Promise<StaffResponse>;
 }
