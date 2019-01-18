@@ -65,7 +65,7 @@ export class Staff {
     })
   }
 
-  count(): Promise<StaffResponse> {
+  meta(): Promise<StaffResponse> {
     return new Promise(async (resolve, reject) => {
       let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
 

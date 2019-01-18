@@ -72,7 +72,7 @@ describe('v0: Staff: can get count number of all staff', () => {
 
     expect(staff).toBeInstanceOf(v0.Staff)
 
-    const { data } = await staff.count()
+    const { data } = await staff.meta()
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -114,7 +114,7 @@ describe('v0: Staff: can get count number of all staff', () => {
     })
 
     try {
-      await th.staff().count()
+      await th.staff().meta()
     } catch (err) {
       expect(err.name).toBe('StaffCountFailed')
     }
