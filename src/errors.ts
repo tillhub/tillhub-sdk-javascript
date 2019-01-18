@@ -916,7 +916,10 @@ export class PaymentsReportFetchFailed extends BaseError {
 
 export class SimpleSalesCartItemsReportFetchFailed extends BaseError {
   public name = 'SimpleSalesCartItemsReportFetchFailed'
-  constructor(public message: string = 'Could not fetch the sales cart items report', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the sales cart items report',
+    properties?: any
+  ) {
     super(message, properties)
   }
 }
@@ -967,5 +970,12 @@ export class ImagePutFailed extends BaseError {
   public name = 'ImagePutFailed'
   constructor(public message: string = 'Could not update new image') {
     super(message)
+  }
+}
+
+export class StaffCountFailed extends BaseError {
+  public name = 'StaffCountFailed'
+  constructor(public message: string = 'Could not count the staff', properties?: any) {
+    super(message, properties)
   }
 }

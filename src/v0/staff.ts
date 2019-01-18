@@ -64,4 +64,24 @@ export class Staff {
       }
     })
   }
+
+  count(): Promise<StaffResponse> {
+    return new Promise(async (resolve, reject) => {
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+
+      try {
+        const response = await this.http.getClient().get(uri)
+        if (response.status !== 200) {
+          return reject(new errors.StaffCountFailed(undefined, { status: response.status }))
+        }
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as StaffResponse)
+      } catch (error) {
+        return reject(new errors.StaffCountFailed(undefined, { error }))
+      }
+    })
+  }
 }
