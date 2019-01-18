@@ -67,7 +67,6 @@ export interface VoucherOptions {
 }
 
 export interface VatOptions {
-  [key: string]: any
   format?: string
 }
 
