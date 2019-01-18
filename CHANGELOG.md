@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.2.0...v2.2.1) (2019-01-18)
+
+
+### Bug Fixes
+
+* **staff:** rename method ([42c0b11](https://github.com/tillhub/tillhub-sdk-javascript/commit/42c0b11))
+
 # [2.2.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.1.0...v2.2.0) (2019-01-18)
 
 

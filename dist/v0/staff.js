@@ -92,7 +92,7 @@ var Staff = /** @class */ (function () {
             });
         }); });
     };
-    Staff.prototype.count = function () {
+    Staff.prototype.meta = function () {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, error_1;
