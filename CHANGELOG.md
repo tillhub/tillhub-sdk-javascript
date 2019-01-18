@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.0.0...v2.1.0) (2019-01-18)
+
+
+### Features
+
+* **analytics:** export vat report ([a3a5d9a](https://github.com/tillhub/tillhub-sdk-javascript/commit/a3a5d9a))
+
 # [2.0.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v1.102.1...v2.0.0) (2019-01-17)
 
 

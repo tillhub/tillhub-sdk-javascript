@@ -55,6 +55,10 @@ export interface VoucherOptions {
     delta?: string;
     type?: 'update:update' | 'update:decrement' | 'update:increment' | 'create';
 }
+export interface VatOptions {
+    [key: string]: any;
+    format?: string;
+}
 export interface SimpleSalesCartItemsOptions {
     [key: string]: any;
     start?: string;
@@ -79,5 +83,5 @@ export declare class Analytics {
     getProductsReport(staff?: StaffID): Promise<AnalyticsResponse>;
     getPaymentsReport(): Promise<AnalyticsResponse>;
     getSimpleSalesCartItems(query?: SimpleSalesCartItemsOptions | undefined): Promise<AnalyticsResponse>;
-    getVatReport(): Promise<AnalyticsResponse>;
+    getVatReport(query?: VatOptions | undefined): Promise<AnalyticsResponse>;
 }

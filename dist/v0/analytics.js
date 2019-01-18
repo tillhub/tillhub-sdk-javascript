@@ -384,15 +384,19 @@ var Analytics = /** @class */ (function () {
             });
         }); });
     };
-    Analytics.prototype.getVatReport = function () {
+    Analytics.prototype.getVatReport = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_13;
+            var uri, queryString, response, err_13;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/reports/vat";
+                        queryString = qs_1.default.stringify(query);
+                        if (queryString) {
+                            uri = uri + "?" + queryString;
+                        }
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
