@@ -6,13 +6,7 @@ export interface StaffOptions {
   base?: string
 }
 
-export interface StaffQuery {
-  start?: string | null
-  deleted?: boolean | null
-  active?: boolean | null
-}
-
-export interface StaffResponse {
+export interface StaffsResponse {
   data: object[]
   metadata: object
 }
@@ -30,57 +24,19 @@ export class Staff {
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 
-  getAll(query?: StaffQuery | undefined): Promise<StaffResponse> {
+  getAll(): Promise<StaffsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        let uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-        let isQuery = false
-        if (query) {
-          if (query.start !== null) {
-            isQuery ? (uri += '&') : (uri += '?')
-            isQuery = true
-            uri += `start=${query.start}`
-          }
-          if (query.deleted !== null) {
-            isQuery ? (uri += '&') : (uri += '?')
-            isQuery = true
-            uri += `deleted=${query.deleted}`
-          }
-          if (query.active !== null) {
-            isQuery ? (uri += '&') : (uri += '?')
-            isQuery = true
-            uri += `active=${query.active}`
-          }
-        }
+        const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
 
         const response = await this.http.getClient().get(uri)
 
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
-        } as StaffResponse)
+        } as StaffsResponse)
       } catch (err) {
-        return reject(new errors.StaffFetchFailed())
-      }
-    })
-  }
-
-  meta(): Promise<StaffResponse> {
-    return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
-
-      try {
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new errors.StaffCountFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as StaffResponse)
-      } catch (error) {
-        return reject(new errors.StaffCountFailed(undefined, { error }))
+        return reject(new errors.StaffsFetchFailed())
       }
     })
   }

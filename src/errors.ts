@@ -842,9 +842,9 @@ export class RevenuesFetchFailed extends BaseError {
   }
 }
 
-export class StaffFetchFailed extends BaseError {
-  public name = 'StaffFetchFailed'
-  constructor(public message: string = 'Could not fetch the Staff', properties?: any) {
+export class StaffsFetchFailed extends BaseError {
+  public name = 'StaffsFetchFailed'
+  constructor(public message: string = 'Could not fetch all the Staff members', properties?: any) {
     super(message, properties)
   }
 }
