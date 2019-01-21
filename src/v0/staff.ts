@@ -80,7 +80,6 @@ export class Staff {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
         const response = await this.http.getClient().post(uri, staffMember)
-        console.log('asdf', response.data.results[0])
 
         return resolve({
           data: response.data.results[0] as StaffMember,
