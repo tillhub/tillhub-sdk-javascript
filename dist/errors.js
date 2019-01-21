@@ -37,6 +37,30 @@ var AuthenticationFailed = /** @class */ (function (_super) {
     return AuthenticationFailed;
 }(BaseError));
 exports.AuthenticationFailed = AuthenticationFailed;
+var PasswordResetFailed = /** @class */ (function (_super) {
+    __extends(PasswordResetFailed, _super);
+    function PasswordResetFailed(message, properties) {
+        if (message === void 0) { message = 'Password reset was not successful'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PasswordResetFailed';
+        return _this;
+    }
+    return PasswordResetFailed;
+}(BaseError));
+exports.PasswordResetFailed = PasswordResetFailed;
+var RequestNewPasswordFailed = /** @class */ (function (_super) {
+    __extends(RequestNewPasswordFailed, _super);
+    function RequestNewPasswordFailed(message, properties) {
+        if (message === void 0) { message = 'New password could not be saved'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'RequestNewPasswordFailed';
+        return _this;
+    }
+    return RequestNewPasswordFailed;
+}(BaseError));
+exports.RequestNewPasswordFailed = RequestNewPasswordFailed;
 var UninstantiatedClient = /** @class */ (function (_super) {
     __extends(UninstantiatedClient, _super);
     function UninstantiatedClient(message, properties) {

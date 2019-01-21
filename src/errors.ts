@@ -25,6 +25,13 @@ export class PasswordResetFailed extends BaseError {
   }
 }
 
+export class RequestNewPasswordFailed extends BaseError {
+  public name = 'RequestNewPasswordFailed'
+  constructor(public message: string = 'New password could not be saved', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class UninstantiatedClient extends BaseError {
   public name = 'UninstantiatedClient'
   constructor(

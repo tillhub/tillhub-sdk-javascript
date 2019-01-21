@@ -117,10 +117,65 @@ var Auth = /** @class */ (function () {
             });
         });
     };
+    Auth.prototype.createNewPassword = function (resetData) {
+        if (resetData === void 0) { resetData = {}; }
+        return __awaiter(this, void 0, void 0, function () {
+            var response, err_1, error;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post(this.options.base + "/api/v0/users/login/reset", {
+                                password: resetData.password,
+                                password_reset_id: resetData.password_reset_id
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, {
+                                msg: response.data.msg
+                            }];
+                    case 2:
+                        err_1 = _a.sent();
+                        error = new errors.RequestNewPasswordFailed();
+                        err_1.error = err_1;
+                        err_1.body = err_1.ressponse && err_1.response.data ? err_1.response.data : null;
+                        throw error;
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Auth.prototype.requestPasswordReset = function (resetData) {
+        if (resetData === void 0) { resetData = {}; }
+        return __awaiter(this, void 0, void 0, function () {
+            var response, err_2, error;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post(this.options.base + "/api/v0/users/login/reset", {
+                                email: resetData.email
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, {
+                                msg: response.data.msg
+                            }];
+                    case 2:
+                        err_2 = _a.sent();
+                        error = new errors.PasswordResetFailed();
+                        err_2.error = err_2;
+                        err_2.body = err_2.ressponse && err_2.response.data ? err_2.response.data : null;
+                        throw error;
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
     Auth.prototype.loginUsername = function (authData) {
         if (authData === void 0) { authData = {}; }
         return __awaiter(this, void 0, void 0, function () {
-            var username, password, response, err_1, error;
+            var username, password, response, err_3, error;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -154,10 +209,10 @@ var Auth = /** @class */ (function () {
                                 features: response.data.features || {}
                             }];
                     case 3:
-                        err_1 = _a.sent();
+                        err_3 = _a.sent();
                         error = new errors.AuthenticationFailed();
-                        err_1.error = err_1;
-                        err_1.body = err_1.ressponse && err_1.response.data ? err_1.response.data : null;
+                        err_3.error = err_3;
+                        err_3.body = err_3.ressponse && err_3.response.data ? err_3.response.data : null;
                         throw error;
                     case 4: return [2 /*return*/];
                 }

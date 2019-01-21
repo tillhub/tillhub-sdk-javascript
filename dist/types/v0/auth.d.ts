@@ -15,6 +15,14 @@ export interface UsernameAuth {
     username: string;
     password: string;
 }
+export interface PasswordReset {
+    email: string;
+}
+export interface PasswordNew {
+    email: string;
+    password: string;
+    password_reset_id: string;
+}
 export interface KeyAuth {
     id: string;
     apiKey: string;
@@ -37,6 +45,12 @@ export interface AuthResponse {
     name?: string;
     features?: any;
 }
+export interface PasswordResetResponse {
+    msg: string;
+}
+export interface PasswordNewResponse {
+    msg: string;
+}
 /**
  * @class "v0.Auth"
  */
@@ -53,6 +67,8 @@ export declare class Auth {
     clearInstance(): void;
     protected determineAuthType(): void;
     authenticate(): Promise<AuthResponse>;
+    createNewPassword(resetData?: PasswordNew): Promise<PasswordNewResponse>;
+    requestPasswordReset(resetData?: PasswordReset): Promise<PasswordResetResponse>;
     loginUsername(authData?: UsernameAuth): Promise<AuthResponse>;
     protected setDefaultHeader(user: string, token: string): void;
 }

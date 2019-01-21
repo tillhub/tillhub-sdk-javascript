@@ -8,6 +8,16 @@ export declare class AuthenticationFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class PasswordResetFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class RequestNewPasswordFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
 export declare class UninstantiatedClient extends BaseError {
     message: string;
     name: string;

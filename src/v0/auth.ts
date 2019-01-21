@@ -26,6 +26,12 @@ export interface PasswordReset {
   email: string
 }
 
+export interface PasswordNew {
+  email: string,
+  password: string,
+  password_reset_id: string
+}
+
 export interface KeyAuth {
   id: string
   apiKey: string
@@ -65,6 +71,10 @@ export interface AuthResponse {
 }
 
 export interface PasswordResetResponse {
+  msg: string
+}
+
+export interface PasswordNewResponse {
   msg: string
 }
 
@@ -116,6 +126,24 @@ export class Auth {
     }
 
     throw new errors.AuthenticationFailed('No auth data was provided')
+  }
+
+  async createNewPassword(resetData: PasswordNew = {} as PasswordNew): Promise<PasswordNewResponse> {
+    try {
+      const response = await axios.post(`${this.options.base}/api/v0/users/login/reset`, {
+        password: resetData.password,
+        password_reset_id: resetData.password_reset_id
+      })
+      return {
+        msg: response.data.msg
+      } as PasswordNewResponse
+    } catch (err) {
+      const error = new errors.RequestNewPasswordFailed()
+      err.error = err
+      err.body = err.ressponse && err.response.data ? err.response.data : null
+
+      throw error
+    }
   }
 
   async requestPasswordReset(resetData: PasswordReset = {} as PasswordReset): Promise<PasswordResetResponse> {
