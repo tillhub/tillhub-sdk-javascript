@@ -588,7 +588,7 @@ export declare class RevenuesFetchFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
-export declare class StaffFetchFailed extends BaseError {
+export declare class StaffsFetchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);

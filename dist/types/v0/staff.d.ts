@@ -3,12 +3,7 @@ export interface StaffOptions {
     user?: string;
     base?: string;
 }
-export interface StaffQuery {
-    start?: string | undefined;
-    deleted?: boolean | undefined;
-    active?: boolean | undefined;
-}
-export interface StaffResponse {
+export interface StaffsResponse {
     data: object[];
     metadata: object;
 }
@@ -17,6 +12,5 @@ export declare class Staff {
     http: Client;
     options: StaffOptions;
     constructor(options: StaffOptions, http: Client);
-    getAll(query?: StaffQuery | undefined): Promise<StaffResponse>;
-    meta(): Promise<StaffResponse>;
+    getAll(): Promise<StaffsResponse>;
 }

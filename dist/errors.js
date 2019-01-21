@@ -1428,18 +1428,18 @@ var RevenuesFetchFailed = /** @class */ (function (_super) {
     return RevenuesFetchFailed;
 }(BaseError));
 exports.RevenuesFetchFailed = RevenuesFetchFailed;
-var StaffFetchFailed = /** @class */ (function (_super) {
-    __extends(StaffFetchFailed, _super);
-    function StaffFetchFailed(message, properties) {
-        if (message === void 0) { message = 'Could not fetch the Staff'; }
+var StaffsFetchFailed = /** @class */ (function (_super) {
+    __extends(StaffsFetchFailed, _super);
+    function StaffsFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch all the Staff members'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
-        _this.name = 'StaffFetchFailed';
+        _this.name = 'StaffsFetchFailed';
         return _this;
     }
-    return StaffFetchFailed;
+    return StaffsFetchFailed;
 }(BaseError));
-exports.StaffFetchFailed = StaffFetchFailed;
+exports.StaffsFetchFailed = StaffsFetchFailed;
 var RegistersFetchFailed = /** @class */ (function (_super) {
     __extends(RegistersFetchFailed, _super);
     function RegistersFetchFailed(message, properties) {

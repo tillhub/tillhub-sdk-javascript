@@ -50,33 +50,15 @@ var Staff = /** @class */ (function () {
         this.endpoint = '/api/v0/staff';
         this.options.base = this.options.base || 'https://api.tillhub.com';
     }
-    Staff.prototype.getAll = function (query) {
+    Staff.prototype.getAll = function () {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, isQuery, response, err_1;
+            var uri, response, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         uri = "" + this.options.base + this.endpoint + "/" + this.options.user;
-                        isQuery = false;
-                        if (query) {
-                            if (query.start) {
-                                isQuery ? (uri += '&') : (uri += '?');
-                                isQuery = true;
-                                uri += "start=" + query.start;
-                            }
-                            if (query.deleted !== undefined) {
-                                isQuery ? (uri += '&') : (uri += '?');
-                                isQuery = true;
-                                uri += "deleted=" + query.deleted;
-                            }
-                            if (query.active !== undefined) {
-                                isQuery ? (uri += '&') : (uri += '?');
-                                isQuery = true;
-                                uri += "active=" + query.active;
-                            }
-                        }
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
@@ -86,37 +68,8 @@ var Staff = /** @class */ (function () {
                             })];
                     case 2:
                         err_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.StaffFetchFailed())];
+                        return [2 /*return*/, reject(new errors.StaffsFetchFailed())];
                     case 3: return [2 /*return*/];
-                }
-            });
-        }); });
-    };
-    Staff.prototype.meta = function () {
-        var _this = this;
-        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, error_1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/meta";
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, this.http.getClient().get(uri)];
-                    case 2:
-                        response = _a.sent();
-                        if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.StaffCountFailed(undefined, { status: response.status }))];
-                        }
-                        return [2 /*return*/, resolve({
-                                data: response.data.results,
-                                metadata: { count: response.data.count }
-                            })];
-                    case 3:
-                        error_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.StaffCountFailed(undefined, { error: error_1 }))];
-                    case 4: return [2 /*return*/];
                 }
             });
         }); });

@@ -1,3 +1,11 @@
+# [2.3.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.2.2...v2.3.0) (2019-01-21)
+
+
+### Features
+
+* **staff:** remove unused query params and count method; pluralise ([64af27e](https://github.com/tillhub/tillhub-sdk-javascript/commit/64af27e))
+* **tests:** abstract sdk test init to utils ([c2b6a0b](https://github.com/tillhub/tillhub-sdk-javascript/commit/c2b6a0b))
+
 ## [2.2.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.2.1...v2.2.2) (2019-01-21)
 
 
