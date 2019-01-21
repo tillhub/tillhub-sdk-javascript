@@ -436,6 +436,24 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated Register instance
+   *
+   */
+  register(registerId: string): v1.Register {
+    if (
+      !this.options ||
+      !this.options.base ||
+      !this.http ||
+      !this.auth ||
+      !this.auth.authenticated
+    ) {
+      throw new errors.UninstantiatedClient()
+    }
+
+    return new v1.Register(registerId, { user: this.auth.user, base: this.options.base }, this.http)
+  }
+
+  /**
    * Create an authenticated Images instance
    *
    */

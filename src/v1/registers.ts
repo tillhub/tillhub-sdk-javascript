@@ -1,6 +1,7 @@
 import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
+import { Register, RegisterOptions } from './register/register'
 
 export interface RegistersOptions {
   user?: string
@@ -68,5 +69,9 @@ export class Registers {
         return reject(new errors.RegistersFetchFailed())
       }
     })
+  }
+
+  register(registerId: string): Register {
+    return new Register(registerId, this.options as RegisterOptions, this.http)
   }
 }

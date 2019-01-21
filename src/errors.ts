@@ -856,6 +856,27 @@ export class RegistersFetchFailed extends BaseError {
   }
 }
 
+export class RegisterFetchFailed extends BaseError {
+  public name = 'RegisterFetchFailed'
+  constructor(public message: string = 'Could not fetch the Register', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class RegisterNotificationCreateFailed extends BaseError {
+  public name = 'RegisterNotificationCreateFailed'
+  constructor(public message: string = 'Could not create the Notification', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class RegisterDeviceConfigurationPutFailed extends BaseError {
+  public name = 'RegisterDeviceConfigurationPutFailed'
+  constructor(public message: string = 'Could not update the Device Configuration', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class StatisticsProductFetchFailed extends BaseError {
   public name = 'StatisticsProductFetchFailed'
   constructor(
