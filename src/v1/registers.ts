@@ -2,6 +2,33 @@ import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 
+export interface DeviceConfigurationObject {
+  device_token: string
+  bundle_id: string
+  network?: { ip: string }
+}
+
+export interface RegisterResponse {
+  data: object
+}
+
+export interface NotificationResponse {
+  data: string
+}
+
+export interface Notification {
+  aps?: {
+    alert: string | object
+    sound?: string
+    badge?: string
+  }
+  data?: {
+    command: string
+    args?: string[]
+    ui?: boolean
+  }
+}
+
 export interface RegistersOptions {
   user?: string
   base?: string
@@ -69,4 +96,42 @@ export class Registers {
       }
     })
   }
-}
+
+  async get(registerId: string): Promise<RegisterResponse> {
+    const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${registerId}`
+
+    try {
+      const response = await this.http.getClient().get(uri)
+      return {
+        data: response.data.results[0]
+      } as RegisterResponse
+    } catch (error) {
+      throw new errors.RegisterFetchFailed(undefined, { error })
+    }
+  }
+
+  async notify(registerId: string, notification: Notification): Promise<NotificationResponse> {
+    try {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${registerId}/notification`
+      const response = await this.http.getClient().post(uri, notification)
+      return {
+        data: response.data.msg
+      } as NotificationResponse
+    } catch (error) {
+      throw new errors.RegisterNotificationCreateFailed(undefined, { error })
+    }
+  }
+
+  async updateDeviceConfiguration(registerId: string, deviceConfiguration: DeviceConfigurationObject): Promise<RegisterResponse> {
+    try {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${registerId}/device_configuration`
+
+      const response = await this.http.getClient().put(uri, deviceConfiguration)
+      return {
+        data: response.data.results[0]
+      } as RegisterResponse
+    } catch (error) {
+      console.warn(error)
+      throw new errors.RegisterDeviceConfigurationPutFailed(undefined, { error })
+    }
+  }}
