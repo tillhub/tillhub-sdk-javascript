@@ -1440,6 +1440,18 @@ var StaffsFetchFailed = /** @class */ (function (_super) {
     return StaffsFetchFailed;
 }(BaseError));
 exports.StaffsFetchFailed = StaffsFetchFailed;
+var StaffMemberCreateFailed = /** @class */ (function (_super) {
+    __extends(StaffMemberCreateFailed, _super);
+    function StaffMemberCreateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create the Staff member'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StaffMemberCreateFailed';
+        return _this;
+    }
+    return StaffMemberCreateFailed;
+}(BaseError));
+exports.StaffMemberCreateFailed = StaffMemberCreateFailed;
 var RegistersFetchFailed = /** @class */ (function (_super) {
     __extends(RegistersFetchFailed, _super);
     function RegistersFetchFailed(message, properties) {

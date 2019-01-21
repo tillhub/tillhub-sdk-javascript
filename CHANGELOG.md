@@ -1,3 +1,15 @@
+# [2.5.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.4.0...v2.5.0) (2019-01-21)
+
+
+### Bug Fixes
+
+* **staff:** remove console log ([6c043cb](https://github.com/tillhub/tillhub-sdk-javascript/commit/6c043cb))
+
+
+### Features
+
+* **staff:** create staff member ([ed2804e](https://github.com/tillhub/tillhub-sdk-javascript/commit/ed2804e))
+
 # [2.4.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.3.0...v2.4.0) (2019-01-21)
 
 
