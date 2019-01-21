@@ -3,6 +3,5 @@ import { Products } from './products'
 import { Templates } from './templates'
 import { Transactions, TransactionsLegacy } from './transactions'
 import { Registers } from './registers'
-import { Register } from './register/register'
 
-export { Auth, Products, Templates, Transactions, TransactionsLegacy, Registers, Register }
+export { Auth, Products, Templates, Transactions, TransactionsLegacy, Registers }

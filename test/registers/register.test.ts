@@ -58,7 +58,7 @@ afterEach(() => {
 })
 
 describe('v1: Register', () => {
-  it('gets the register instance and queries the remote state', async () => {
+  it('queries the remote state of a register', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
@@ -100,77 +100,16 @@ describe('v1: Register', () => {
       password: user.password
     })
 
-    const register = th.register(mockRegister.id)
+    const registers = th.registers()
 
-    expect(register).toBeInstanceOf(v1.Register)
+    expect(registers).toBeInstanceOf(v1.Registers)
 
-    const { data } = await register.get()
-
-    expect(data).toEqual(mockRegister)
-  })
-
-  it('gets the register instance through `registers` and query the remote state', async () => {
-    if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
-        return [
-          200,
-          {
-            token: '',
-            user: {
-              id: '123',
-              legacy_id: legacyId
-            }
-          }
-        ]
-      })
-
-      mock.onGet(`https://api.tillhub.com/api/v1/Registers/${legacyId}`).reply(function (config) {
-        return [
-          200,
-          {
-            count: 1,
-            results: [{}]
-          }
-        ]
-      })
-
-      mock.onGet(`https://api.tillhub.com/api/v1/Registers/${legacyId}/${mockRegister.id}`).reply(function (config) {
-        return [
-          200,
-          {
-            count: 1,
-            results: [mockRegister]
-          }
-        ]
-      })
-    }
-
-    const options = {
-      credentials: {
-        username: user.username,
-        password: user.password
-      },
-      base: process.env.TILLHUB_BASE
-    }
-
-    const th = new TillhubClient()
-
-    th.init(options)
-    await th.auth.loginUsername({
-      username: user.username,
-      password: user.password
-    })
-
-    const register = th.registers().register(mockRegister.id)
-
-    expect(register).toBeInstanceOf(v1.Register)
-
-    const { data } = await register.get()
+    const { data } = await registers.get(mockRegister.id)
 
     expect(data).toEqual(mockRegister)
   })
 
-  it('sends a notification', async () => {
+  it('sends a notification to a register', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
@@ -212,16 +151,16 @@ describe('v1: Register', () => {
       password: user.password
     })
 
-    const register = th.register(mockRegister.id)
+    const registers = th.registers()
 
-    expect(register).toBeInstanceOf(v1.Register)
+    expect(registers).toBeInstanceOf(v1.Registers)
 
-    const { data } = await register.notify({ aps: { alert: 'Hello, World!' } })
+    const { data } = await registers.notify(mockRegister.id, { aps: { alert: 'Hello, World!' } })
 
     expect(data).toEqual(notificationSuccessMsg)
   })
 
-  it('updates the device configuration', async () => {
+  it('updates the device configuration of a register', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
@@ -263,16 +202,16 @@ describe('v1: Register', () => {
       password: user.password
     })
 
-    const register = th.register(mockRegister.id)
+    const registers = th.registers()
 
-    expect(register).toBeInstanceOf(v1.Register)
+    expect(registers).toBeInstanceOf(v1.Registers)
 
-    const { data } = await register.deviceConfiguration().update(mockRegister.device_configuration)
+    const { data } = await registers.updateDeviceConfiguration(mockRegister.id, mockRegister.device_configuration)
 
     expect(data).toEqual(mockRegister)
   })
 
-  it('rejects on status codes that are not 200', async () => {
+  it('rejects on status codes that are not 200 when querying a register', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
@@ -309,7 +248,7 @@ describe('v1: Register', () => {
     })
 
     try {
-      await th.register(mockRegister.id).get()
+      await th.registers().get(mockRegister.id)
     } catch (err) {
       expect(err.name).toBe('RegisterFetchFailed')
     }
