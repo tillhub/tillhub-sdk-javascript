@@ -61,17 +61,17 @@ var Staff = /** @class */ (function () {
                         uri = "" + this.options.base + this.endpoint + "/" + this.options.user;
                         isQuery = false;
                         if (query) {
-                            if (query.start !== null) {
+                            if (query.start) {
                                 isQuery ? (uri += '&') : (uri += '?');
                                 isQuery = true;
                                 uri += "start=" + query.start;
                             }
-                            if (query.deleted !== null) {
+                            if (query.deleted !== undefined) {
                                 isQuery ? (uri += '&') : (uri += '?');
                                 isQuery = true;
                                 uri += "deleted=" + query.deleted;
                             }
-                            if (query.active !== null) {
+                            if (query.active !== undefined) {
                                 isQuery ? (uri += '&') : (uri += '?');
                                 isQuery = true;
                                 uri += "active=" + query.active;

@@ -1,3 +1,10 @@
+## [2.2.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.2.1...v2.2.2) (2019-01-21)
+
+
+### Bug Fixes
+
+* **staff:** fix staff getAll query params types and checks; add tests; refctor test process ([d10639a](https://github.com/tillhub/tillhub-sdk-javascript/commit/d10639a))
+
 ## [2.2.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.2.0...v2.2.1) (2019-01-18)
 
 

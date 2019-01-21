@@ -4,9 +4,9 @@ export interface StaffOptions {
     base?: string;
 }
 export interface StaffQuery {
-    start?: string | null;
-    deleted?: boolean | null;
-    active?: boolean | null;
+    start?: string | undefined;
+    deleted?: boolean | undefined;
+    active?: boolean | undefined;
 }
 export interface StaffResponse {
     data: object[];
