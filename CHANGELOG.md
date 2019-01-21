@@ -1,3 +1,10 @@
+# [2.6.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.5.0...v2.6.0) (2019-01-21)
+
+
+### Features
+
+* added `register` ([d11bca6](https://github.com/tillhub/tillhub-sdk-javascript/commit/d11bca6))
+
 # [2.5.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.4.0...v2.5.0) (2019-01-21)
 
 

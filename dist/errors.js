@@ -1464,6 +1464,42 @@ var RegistersFetchFailed = /** @class */ (function (_super) {
     return RegistersFetchFailed;
 }(BaseError));
 exports.RegistersFetchFailed = RegistersFetchFailed;
+var RegisterFetchFailed = /** @class */ (function (_super) {
+    __extends(RegisterFetchFailed, _super);
+    function RegisterFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the Register'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'RegisterFetchFailed';
+        return _this;
+    }
+    return RegisterFetchFailed;
+}(BaseError));
+exports.RegisterFetchFailed = RegisterFetchFailed;
+var RegisterNotificationCreateFailed = /** @class */ (function (_super) {
+    __extends(RegisterNotificationCreateFailed, _super);
+    function RegisterNotificationCreateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create the Notification'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'RegisterNotificationCreateFailed';
+        return _this;
+    }
+    return RegisterNotificationCreateFailed;
+}(BaseError));
+exports.RegisterNotificationCreateFailed = RegisterNotificationCreateFailed;
+var RegisterDeviceConfigurationPutFailed = /** @class */ (function (_super) {
+    __extends(RegisterDeviceConfigurationPutFailed, _super);
+    function RegisterDeviceConfigurationPutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not update the Device Configuration'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'RegisterDeviceConfigurationPutFailed';
+        return _this;
+    }
+    return RegisterDeviceConfigurationPutFailed;
+}(BaseError));
+exports.RegisterDeviceConfigurationPutFailed = RegisterDeviceConfigurationPutFailed;
 var StatisticsProductFetchFailed = /** @class */ (function (_super) {
     __extends(StatisticsProductFetchFailed, _super);
     function StatisticsProductFetchFailed(message, properties) {

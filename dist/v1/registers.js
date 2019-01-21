@@ -95,6 +95,75 @@ var Registers = /** @class */ (function () {
             });
         }); });
     };
+    Registers.prototype.get = function (registerId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var uri, response, error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + registerId;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        return [2 /*return*/, {
+                                data: response.data.results[0]
+                            }];
+                    case 3:
+                        error_1 = _a.sent();
+                        throw new errors.RegisterFetchFailed(undefined, { error: error_1 });
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Registers.prototype.notify = function (registerId, notification) {
+        return __awaiter(this, void 0, void 0, function () {
+            var uri, response, error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + registerId + "/notification";
+                        return [4 /*yield*/, this.http.getClient().post(uri, notification)];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, {
+                                data: response.data.msg
+                            }];
+                    case 2:
+                        error_2 = _a.sent();
+                        throw new errors.RegisterNotificationCreateFailed(undefined, { error: error_2 });
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Registers.prototype.updateDeviceConfiguration = function (registerId, deviceConfiguration) {
+        return __awaiter(this, void 0, void 0, function () {
+            var uri, response, error_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + registerId + "/device_configuration";
+                        return [4 /*yield*/, this.http.getClient().put(uri, deviceConfiguration)];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, {
+                                data: response.data.results[0]
+                            }];
+                    case 2:
+                        error_3 = _a.sent();
+                        console.warn(error_3);
+                        throw new errors.RegisterDeviceConfigurationPutFailed(undefined, { error: error_3 });
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
     return Registers;
 }());
 exports.Registers = Registers;

@@ -603,6 +603,21 @@ export declare class RegistersFetchFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class RegisterFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class RegisterNotificationCreateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class RegisterDeviceConfigurationPutFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
 export declare class StatisticsProductFetchFailed extends BaseError {
     message: string;
     name: string;
