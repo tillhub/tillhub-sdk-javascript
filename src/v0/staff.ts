@@ -7,9 +7,9 @@ export interface StaffOptions {
 }
 
 export interface StaffQuery {
-  start?: string | undefined
-  deleted?: boolean | undefined
-  active?: boolean | undefined
+  start?: string | null
+  deleted?: boolean | null
+  active?: boolean | null
 }
 
 export interface StaffResponse {
@@ -36,17 +36,17 @@ export class Staff {
         let uri = `${this.options.base}${this.endpoint}/${this.options.user}`
         let isQuery = false
         if (query) {
-          if (query.start) {
+          if (query.start !== null) {
             isQuery ? (uri += '&') : (uri += '?')
             isQuery = true
             uri += `start=${query.start}`
           }
-          if (query.deleted !== undefined) {
+          if (query.deleted !== null) {
             isQuery ? (uri += '&') : (uri += '?')
             isQuery = true
             uri += `deleted=${query.deleted}`
           }
-          if (query.active !== undefined) {
+          if (query.active !== null) {
             isQuery ? (uri += '&') : (uri += '?')
             isQuery = true
             uri += `active=${query.active}`
