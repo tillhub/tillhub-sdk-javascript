@@ -70,6 +70,10 @@ export interface VatOptions {
   format?: string
 }
 
+export interface CustomersOptions {
+  format?: string
+}
+
 export interface SimpleSalesCartItemsOptions {
   [key: string]: any
   start?: string
@@ -375,6 +379,30 @@ export class Analytics {
         } as AnalyticsResponse)
       } catch (err) {
         return reject(new errors.VatReportFetchFailed())
+      }
+    })
+  }
+
+  getCustomersReport(query?: CustomersOptions | undefined): Promise<AnalyticsResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let uri = `${this.options.base}${this.endpoint}/${this.options.user}/reports/customers`
+
+        const queryString = qs.stringify(query)
+
+        if (queryString) {
+          uri = `${uri}?${queryString}`
+        }
+
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.CustomerFetchFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as AnalyticsResponse)
+      } catch (err) {
+        return reject(new errors.CustomerFetchFailed())
       }
     })
   }
