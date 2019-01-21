@@ -12,7 +12,31 @@ afterEach(() => {
   mock.reset()
 })
 
-describe('v0: Staff: can get all staff members', () => {
+const staffMember = {
+  firstname: 'asdf',
+  lastname: 'asdf',
+  displayname: 'asdf',
+  phonenumbers: {
+    home: 123456798
+  },
+  email: 'asdf',
+  addresses: {
+    street: 'qert',
+    street_number: 12,
+    region: 'DE',
+    postal_code: 12345,
+    country: 'Germany'
+  },
+  pin: 4567,
+  metadata: {},
+  scopes: ['asdf.qwert.zxcv'],
+  staff_number: 7894,
+  discounts: {},
+  short_code: 7894,
+  default: true
+}
+
+describe('v0: Staff: can create one staff member', () => {
   it("Tillhub's staff are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
@@ -28,12 +52,12 @@ describe('v0: Staff: can get all staff members', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}`).reply(function (config) {
+      mock.onPost(`https://api.tillhub.com/api/v0/staff/${legacyId}`).reply(function (config) {
         return [
           200,
           {
             count: 1,
-            results: [{}]
+            results: [staffMember]
           }
         ]
       })
@@ -45,9 +69,9 @@ describe('v0: Staff: can get all staff members', () => {
 
     expect(Staff).toBeInstanceOf(v0.Staff)
 
-    const { data } = await Staff.getAll()
+    const { data } = await Staff.create(staffMember)
 
-    expect(Array.isArray(data)).toBe(true)
+    expect(data).toMatchObject(staffMember)
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -65,16 +89,16 @@ describe('v0: Staff: can get all staff members', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}`).reply(function (config) {
+      mock.onPost(`https://api.tillhub.com/api/v0/staff/${legacyId}`).reply(function (config) {
         return [205]
       })
     }
 
     try {
       const th = await initThInstance()
-      await th.staff().getAll()
+      await th.staff().create(staffMember)
     } catch (err) {
-      expect(err.name).toBe('StaffsFetchFailed')
+      expect(err.name).toBe('StaffMemberCreateFailed')
     }
   })
 })

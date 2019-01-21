@@ -849,6 +849,13 @@ export class StaffsFetchFailed extends BaseError {
   }
 }
 
+export class StaffMemberCreateFailed extends BaseError {
+  public name = 'StaffMemberCreateFailed'
+  constructor(public message: string = 'Could not create the Staff member', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class RegistersFetchFailed extends BaseError {
   public name = 'RegistersFetchFailed'
   constructor(public message: string = 'Could not fetch the Registers', properties?: any) {
