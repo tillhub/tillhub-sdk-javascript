@@ -58,6 +58,9 @@ export interface VoucherOptions {
 export interface VatOptions {
     format?: string;
 }
+export interface CustomersOptions {
+    format?: string;
+}
 export interface SimpleSalesCartItemsOptions {
     [key: string]: any;
     start?: string;
@@ -83,4 +86,5 @@ export declare class Analytics {
     getPaymentsReport(): Promise<AnalyticsResponse>;
     getSimpleSalesCartItems(query?: SimpleSalesCartItemsOptions | undefined): Promise<AnalyticsResponse>;
     getVatReport(query?: VatOptions | undefined): Promise<AnalyticsResponse>;
+    getCustomersReport(query?: CustomersOptions | undefined): Promise<AnalyticsResponse>;
 }

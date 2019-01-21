@@ -1,3 +1,10 @@
+# [2.4.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.3.0...v2.4.0) (2019-01-21)
+
+
+### Features
+
+* **analytics:** added getCustomersReport handler in analytics ([c6df68b](https://github.com/tillhub/tillhub-sdk-javascript/commit/c6df68b))
+
 # [2.3.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.2.2...v2.3.0) (2019-01-21)
 
 
