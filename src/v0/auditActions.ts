@@ -13,6 +13,11 @@ export interface AuditsQuery {
   cursor_field?: string
   embed?: string | string[]
   uri?: string
+  branch?: string
+  register?: string
+  staff?: string
+  start?: string
+  end?: string
 }
 
 export interface AuditsMetaQuery {
