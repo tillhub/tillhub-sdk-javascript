@@ -74,8 +74,8 @@ export class Transactions {
           metadata: { count: response.data.count, cursor: response.data.cursor },
           next
         } as TransactionResponse)
-      } catch (err) {
-        return reject(new errors.TransactionFetchFailed())
+      } catch (error) {
+        return reject(new errors.TransactionFetchFailed(undefined, { error }))
       }
     })
   }
@@ -98,8 +98,8 @@ export class Transactions {
           data: response.data.results[0],
           metadata: { count: response.data.count }
         } as TransactionResponse)
-      } catch (err) {
-        return reject(new errors.TransactionsGetMetaFailed())
+      } catch (error) {
+        return reject(new errors.TransactionsGetMetaFailed(undefined, { error }))
       }
     })
   }
@@ -143,8 +143,8 @@ export class TransactionsLegacy {
           metadata: { count: response.data.count, cursor: response.data.cursor },
           next
         } as TransactionResponse)
-      } catch (err) {
-        return reject(new errors.TransactionFetchFailed())
+      } catch (error) {
+        return reject(new errors.TransactionFetchFailed(undefined, { error }))
       }
     })
   }
