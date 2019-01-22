@@ -1,3 +1,17 @@
+# [2.7.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.6.0...v2.7.0) (2019-01-22)
+
+
+### Bug Fixes
+
+* **staff:** syntax fix ([0f366aa](https://github.com/tillhub/tillhub-sdk-javascript/commit/0f366aa))
+
+
+### Features
+
+* **staff:** delete staff handler ([28f10c1](https://github.com/tillhub/tillhub-sdk-javascript/commit/28f10c1))
+* **staff:** get one staff member handler ([8d97172](https://github.com/tillhub/tillhub-sdk-javascript/commit/8d97172))
+* **staff:** staff put handler ([0df6ae6](https://github.com/tillhub/tillhub-sdk-javascript/commit/0df6ae6))
+
 # [2.6.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.5.0...v2.6.0) (2019-01-21)
 
 

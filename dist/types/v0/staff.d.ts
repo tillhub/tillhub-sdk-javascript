@@ -7,6 +7,14 @@ export interface StaffResponse {
     data: StaffMember[];
     metadata: object;
 }
+export interface StaffMemberResponse {
+    data: StaffMember;
+    metadata?: {
+        count?: number;
+        patch?: any;
+    };
+    msg?: string;
+}
 export interface StaffAddress {
     street?: string;
     street_number?: number;
@@ -45,4 +53,7 @@ export declare class Staff {
     constructor(options: StaffOptions, http: Client);
     getAll(): Promise<StaffResponse>;
     create(staffMember: StaffMember): Promise<StaffResponse>;
+    getOne(staffId: string): Promise<StaffMemberResponse>;
+    put(staffId: string, staff: StaffMember): Promise<StaffMemberResponse>;
+    delete(staffId: string): Promise<StaffMemberResponse>;
 }

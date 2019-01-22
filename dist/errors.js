@@ -1428,18 +1428,54 @@ var RevenuesFetchFailed = /** @class */ (function (_super) {
     return RevenuesFetchFailed;
 }(BaseError));
 exports.RevenuesFetchFailed = RevenuesFetchFailed;
-var StaffsFetchFailed = /** @class */ (function (_super) {
-    __extends(StaffsFetchFailed, _super);
-    function StaffsFetchFailed(message, properties) {
+var StaffFetchFailed = /** @class */ (function (_super) {
+    __extends(StaffFetchFailed, _super);
+    function StaffFetchFailed(message, properties) {
         if (message === void 0) { message = 'Could not fetch all the Staff members'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
-        _this.name = 'StaffsFetchFailed';
+        _this.name = 'StaffFetchFailed';
         return _this;
     }
-    return StaffsFetchFailed;
+    return StaffFetchFailed;
 }(BaseError));
-exports.StaffsFetchFailed = StaffsFetchFailed;
+exports.StaffFetchFailed = StaffFetchFailed;
+var StaffFetchOneFailed = /** @class */ (function (_super) {
+    __extends(StaffFetchOneFailed, _super);
+    function StaffFetchOneFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the Staff member'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StaffFetchOneFailed';
+        return _this;
+    }
+    return StaffFetchOneFailed;
+}(BaseError));
+exports.StaffFetchOneFailed = StaffFetchOneFailed;
+var StaffPutFailed = /** @class */ (function (_super) {
+    __extends(StaffPutFailed, _super);
+    function StaffPutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not alter the Staff member'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StaffPutFailed';
+        return _this;
+    }
+    return StaffPutFailed;
+}(BaseError));
+exports.StaffPutFailed = StaffPutFailed;
+var StaffDeleteFailed = /** @class */ (function (_super) {
+    __extends(StaffDeleteFailed, _super);
+    function StaffDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete the Staff member'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StaffDeleteFailed';
+        return _this;
+    }
+    return StaffDeleteFailed;
+}(BaseError));
+exports.StaffDeleteFailed = StaffDeleteFailed;
 var StaffMemberCreateFailed = /** @class */ (function (_super) {
     __extends(StaffMemberCreateFailed, _super);
     function StaffMemberCreateFailed(message, properties) {
