@@ -1,3 +1,10 @@
+## [2.8.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.8.0...v2.8.1) (2019-01-22)
+
+
+### Bug Fixes
+
+* **staff:** change staff member date of birth type ([8beb5fd](https://github.com/tillhub/tillhub-sdk-javascript/commit/8beb5fd))
+
 # [2.8.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.7.0...v2.8.0) (2019-01-22)
 
 
