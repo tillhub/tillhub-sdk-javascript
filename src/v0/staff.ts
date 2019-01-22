@@ -49,7 +49,7 @@ export interface StaffMember {
   scopes?: string[]
   staff_number?: number
   discounts?: object
-  date_of_birth?: Date
+  date_of_birth?: string | null
   short_code?: number
   default?: boolean
 }
