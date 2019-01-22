@@ -11,6 +11,15 @@ export interface StaffResponse {
   metadata: object
 }
 
+export interface StaffMemberResponse {
+  data: StaffMember
+  metadata?: {
+    count?: number
+    patch?: any
+  }
+  msg?: string
+}
+
 export interface StaffAddress {
   street?: string
   street_number?: number
@@ -93,7 +102,7 @@ export class Staff {
     })
   }
 
-  put(staffId: string, staff: StaffMember): Promise<StaffResponse> {
+  put(staffId: string, staff: StaffMember): Promise<StaffMemberResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${staffId}`
       try {
@@ -103,9 +112,25 @@ export class Staff {
         return resolve({
           data: response.data.results[0] as StaffMember,
           metadata: { count: response.data.count }
-        } as StaffResponse)
+        } as StaffMemberResponse)
       } catch (error) {
         return reject(new errors.StaffPutFailed(undefined, { error }))
+      }
+    })
+  }
+
+  delete(staffId: string): Promise<StaffMemberResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${staffId}`
+      try {
+        const response = await this.http.getClient().delete(uri)
+        response.status !== 200 && reject(new errors.StaffDeleteFailed())
+
+        return resolve({
+          msg: response.data.msg
+        } as StaffMemberResponse)
+      } catch (error) {
+        return reject(new errors.StaffDeleteFailed(undefined, { error }))
       }
     })
   }

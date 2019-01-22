@@ -856,6 +856,13 @@ export class StaffPutFailed extends BaseError {
   }
 }
 
+export class StaffDeleteFailed extends BaseError {
+  public name = 'StaffDeleteFailed'
+  constructor(public message: string = 'Could not delete the Staff member', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class StaffMemberCreateFailed extends BaseError {
   public name = 'StaffMemberCreateFailed'
   constructor(public message: string = 'Could not create the Staff member', properties?: any) {
