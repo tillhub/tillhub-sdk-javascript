@@ -64,6 +64,7 @@ export class Staff {
         const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
 
         const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.StaffsFetchFailed())
 
         return resolve({
           data: response.data.results,
@@ -80,6 +81,7 @@ export class Staff {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
         const response = await this.http.getClient().post(uri, staffMember)
+        response.status !== 200 && reject(new errors.StaffMemberCreateFailed())
 
         return resolve({
           data: response.data.results[0] as StaffMember,
@@ -87,6 +89,23 @@ export class Staff {
         } as StaffResponse)
       } catch (error) {
         return reject(new errors.StaffMemberCreateFailed(undefined, { error }))
+      }
+    })
+  }
+
+  put(staffId: string, staff: StaffMember): Promise<StaffResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${staffId}`
+      try {
+        const response = await this.http.getClient().put(uri, staff)
+        response.status !== 200 && reject(new errors.StaffPutFailed())
+
+        return resolve({
+          data: response.data.results[0] as StaffMember,
+          metadata: { count: response.data.count }
+        } as StaffResponse)
+      } catch (error) {
+        return reject(new errors.StaffPutFailed(undefined, { error }))
       }
     })
   }

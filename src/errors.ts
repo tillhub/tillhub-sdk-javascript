@@ -849,6 +849,13 @@ export class StaffsFetchFailed extends BaseError {
   }
 }
 
+export class StaffPutFailed extends BaseError {
+  public name = 'StaffPutFailed'
+  constructor(public message: string = 'Could not alter the Staff member', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class StaffMemberCreateFailed extends BaseError {
   public name = 'StaffMemberCreateFailed'
   constructor(public message: string = 'Could not create the Staff member', properties?: any) {
