@@ -11,6 +11,15 @@ export interface StaffResponse {
   metadata: object
 }
 
+export interface StaffMemberResponse {
+  data: StaffMember
+  metadata?: {
+    count?: number
+    patch?: any
+  }
+  msg?: string
+}
+
 export interface StaffAddress {
   street?: string
   street_number?: number
@@ -64,13 +73,14 @@ export class Staff {
         const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
 
         const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.StaffFetchFailed())
 
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
         } as StaffResponse)
       } catch (err) {
-        return reject(new errors.StaffsFetchFailed())
+        return reject(new errors.StaffFetchFailed())
       }
     })
   }
@@ -80,6 +90,7 @@ export class Staff {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
         const response = await this.http.getClient().post(uri, staffMember)
+        response.status !== 200 && reject(new errors.StaffMemberCreateFailed())
 
         return resolve({
           data: response.data.results[0] as StaffMember,
@@ -87,6 +98,60 @@ export class Staff {
         } as StaffResponse)
       } catch (error) {
         return reject(new errors.StaffMemberCreateFailed(undefined, { error }))
+      }
+    })
+  }
+
+  getOne(staffId: string): Promise<StaffMemberResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${staffId}`
+      try {
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 &&
+          reject(new errors.StaffFetchOneFailed(undefined, { status: response.status }))
+
+        return resolve({
+          data: response.data.results[0] as StaffMember,
+          msg: response.data.msg,
+          metadata: { count: response.data.count }
+        } as StaffMemberResponse)
+      } catch (error) {
+        return reject(new errors.StaffFetchOneFailed(undefined, { error }))
+      }
+    })
+  }
+
+  put(staffId: string, staff: StaffMember): Promise<StaffMemberResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${staffId}`
+      try {
+        const response = await this.http.getClient().put(uri, staff)
+        response.status !== 200 &&
+          reject(new errors.StaffPutFailed(undefined, { status: response.status }))
+
+        return resolve({
+          data: response.data.results[0] as StaffMember,
+          metadata: { count: response.data.count }
+        } as StaffMemberResponse)
+      } catch (error) {
+        return reject(new errors.StaffPutFailed(undefined, { error }))
+      }
+    })
+  }
+
+  delete(staffId: string): Promise<StaffMemberResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${staffId}`
+      try {
+        const response = await this.http.getClient().delete(uri)
+        response.status !== 200 &&
+          reject(new errors.StaffDeleteFailed(undefined, { status: response.status }))
+
+        return resolve({
+          msg: response.data.msg
+        } as StaffMemberResponse)
+      } catch (error) {
+        return reject(new errors.StaffDeleteFailed(undefined, { error }))
       }
     })
   }

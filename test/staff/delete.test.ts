@@ -12,7 +12,10 @@ afterEach(() => {
   mock.reset()
 })
 
-describe('v0: Staff: can get all staff members', () => {
+const staffId = 'asdf5566'
+const respMsg = `Deleted staff ${staffId}`
+
+describe('v0: Staff: can alter the Staff member', () => {
   it("Tillhub's staff are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
@@ -28,26 +31,27 @@ describe('v0: Staff: can get all staff members', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}`).reply(function (config) {
-        return [
-          200,
-          {
-            count: 1,
-            results: [{}]
-          }
-        ]
-      })
+      mock
+        .onDelete(`https://api.tillhub.com/api/v0/staff/${legacyId}/${staffId}`)
+        .reply(function (config) {
+          return [
+            200,
+            {
+              msg: respMsg
+            }
+          ]
+        })
     }
 
     const th = await initThInstance()
 
-    const Staff = th.staff()
+    const staff = th.staff()
 
-    expect(Staff).toBeInstanceOf(v0.Staff)
+    expect(staff).toBeInstanceOf(v0.Staff)
 
-    const { data } = await Staff.getAll()
+    const { msg } = await staff.delete(staffId)
 
-    expect(Array.isArray(data)).toBe(true)
+    expect(msg).toEqual(respMsg)
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -64,17 +68,19 @@ describe('v0: Staff: can get all staff members', () => {
           }
         ]
       })
-
-      mock.onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}`).reply(function (config) {
-        return [205]
-      })
+      mock
+        .onDelete(`https://api.tillhub.com/api/v0/staff/${legacyId}/${staffId}`)
+        .reply(function (config) {
+          return [205]
+        })
     }
 
+    const th = await initThInstance()
+
     try {
-      const th = await initThInstance()
-      await th.staff().getAll()
+      await th.staff().delete(staffId)
     } catch (err) {
-      expect(err.name).toBe('StaffFetchFailed')
+      expect(err.name).toBe('StaffDeleteFailed')
     }
   })
 })
