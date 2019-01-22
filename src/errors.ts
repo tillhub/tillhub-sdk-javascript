@@ -842,9 +842,16 @@ export class RevenuesFetchFailed extends BaseError {
   }
 }
 
-export class StaffsFetchFailed extends BaseError {
-  public name = 'StaffsFetchFailed'
+export class StaffFetchFailed extends BaseError {
+  public name = 'StaffFetchFailed'
   constructor(public message: string = 'Could not fetch all the Staff members', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class StaffFetchOneFailed extends BaseError {
+  public name = 'StaffFetchOneFailed'
+  constructor(public message: string = 'Could not fetch the Staff member', properties?: any) {
     super(message, properties)
   }
 }
@@ -893,7 +900,10 @@ export class RegisterNotificationCreateFailed extends BaseError {
 
 export class RegisterDeviceConfigurationPutFailed extends BaseError {
   public name = 'RegisterDeviceConfigurationPutFailed'
-  constructor(public message: string = 'Could not update the Device Configuration', properties?: any) {
+  constructor(
+    public message: string = 'Could not update the Device Configuration',
+    properties?: any
+  ) {
     super(message, properties)
   }
 }

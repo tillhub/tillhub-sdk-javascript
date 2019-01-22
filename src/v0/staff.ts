@@ -73,14 +73,14 @@ export class Staff {
         const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
 
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.StaffsFetchFailed())
+        response.status !== 200 && reject(new errors.StaffFetchFailed())
 
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
         } as StaffResponse)
       } catch (err) {
-        return reject(new errors.StaffsFetchFailed())
+        return reject(new errors.StaffFetchFailed())
       }
     })
   }
@@ -102,12 +102,32 @@ export class Staff {
     })
   }
 
+  getOne(staffId: string): Promise<StaffMemberResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${staffId}`
+      try {
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 &&
+          reject(new errors.StaffFetchOneFailed(undefined, { status: response.status }))
+
+        return resolve({
+          data: response.data.results[0] as StaffMember,
+          msg: response.data.msg,
+          metadata: { count: response.data.count }
+        } as StaffMemberResponse)
+      } catch (error) {
+        return reject(new errors.StaffFetchOneFailed(undefined, { error }))
+      }
+    })
+  }
+
   put(staffId: string, staff: StaffMember): Promise<StaffMemberResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${staffId}`
       try {
         const response = await this.http.getClient().put(uri, staff)
-        response.status !== 200 && reject(new errors.StaffPutFailed())
+        response.status !== 200 &&
+          reject(new errors.StaffPutFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results[0] as StaffMember,
@@ -124,7 +144,8 @@ export class Staff {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${staffId}`
       try {
         const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new errors.StaffDeleteFailed())
+        response.status !== 200 &&
+          reject(new errors.StaffDeleteFailed(undefined, { status: response.status }))
 
         return resolve({
           msg: response.data.msg
