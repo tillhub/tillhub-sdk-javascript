@@ -75,7 +75,7 @@ describe('v0: Staff: can get one staff member', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/staffId`)
+        .onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/${staffId}`)
         .reply(function (config) {
           return [205]
         })
