@@ -62,7 +62,7 @@ var Transactions = /** @class */ (function () {
     Transactions.prototype.getAll = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var next, uri, response_1, err_1;
+            var next, uri, response_1, error_1;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -87,8 +87,8 @@ var Transactions = /** @class */ (function () {
                                 next: next
                             })];
                     case 2:
-                        err_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TransactionFetchFailed())];
+                        error_1 = _a.sent();
+                        return [2 /*return*/, reject(new errors.TransactionFetchFailed(undefined, { error: error_1 }))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -97,7 +97,7 @@ var Transactions = /** @class */ (function () {
     Transactions.prototype.meta = function (q) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, queryString, response, err_2;
+            var uri, queryString, response, error_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -119,8 +119,8 @@ var Transactions = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_2 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TransactionsGetMetaFailed())];
+                        error_2 = _a.sent();
+                        return [2 /*return*/, reject(new errors.TransactionsGetMetaFailed(undefined, { error: error_2 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -140,7 +140,7 @@ var TransactionsLegacy = /** @class */ (function () {
     TransactionsLegacy.prototype.getAll = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var next, uri, response_2, err_3;
+            var next, uri, response_2, error_3;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -165,8 +165,8 @@ var TransactionsLegacy = /** @class */ (function () {
                                 next: next
                             })];
                     case 2:
-                        err_3 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TransactionFetchFailed())];
+                        error_3 = _a.sent();
+                        return [2 /*return*/, reject(new errors.TransactionFetchFailed(undefined, { error: error_3 }))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -175,7 +175,7 @@ var TransactionsLegacy = /** @class */ (function () {
     TransactionsLegacy.prototype.pdfUri = function (requestObject) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var query, transactionId, template, uri, response, err_4;
+            var query, transactionId, template, uri, response, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -204,8 +204,8 @@ var TransactionsLegacy = /** @class */ (function () {
                                 data: response.data.results
                             })];
                     case 3:
-                        err_4 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TransactionPdfFailed(err_4.message))];
+                        err_1 = _a.sent();
+                        return [2 /*return*/, reject(new errors.TransactionPdfFailed(err_1.message))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -224,7 +224,7 @@ var Signing = /** @class */ (function () {
     Signing.prototype.initialise = function (singingResourceType, singingResource, signingSystem, signingConfiguration) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_5;
+            var uri, response, err_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -241,8 +241,8 @@ var Signing = /** @class */ (function () {
                                 data: response.data.results
                             })];
                     case 2:
-                        err_5 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TransactionSigningInitialisationFailed(err_5.message))];
+                        err_2 = _a.sent();
+                        return [2 /*return*/, reject(new errors.TransactionSigningInitialisationFailed(err_2.message))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -251,7 +251,7 @@ var Signing = /** @class */ (function () {
     Signing.prototype.yearly = function (singingResourceType, singingResource, signingSystem) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_6;
+            var uri, response, err_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -268,8 +268,8 @@ var Signing = /** @class */ (function () {
                                 data: response.data.results
                             })];
                     case 2:
-                        err_6 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TransactionSigningYearlyReceiptFailed(err_6.message))];
+                        err_3 = _a.sent();
+                        return [2 /*return*/, reject(new errors.TransactionSigningYearlyReceiptFailed(err_3.message))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -278,7 +278,7 @@ var Signing = /** @class */ (function () {
     Signing.prototype.monthly = function (singingResourceType, singingResource, signingSystem) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_7;
+            var uri, response, err_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -295,8 +295,8 @@ var Signing = /** @class */ (function () {
                                 data: response.data.results
                             })];
                     case 2:
-                        err_7 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TransactionSigningMonthlyReceiptFailed(err_7.message))];
+                        err_4 = _a.sent();
+                        return [2 /*return*/, reject(new errors.TransactionSigningMonthlyReceiptFailed(err_4.message))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -305,7 +305,7 @@ var Signing = /** @class */ (function () {
     Signing.prototype.zero = function (singingResourceType, singingResource, signingSystem) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_8;
+            var uri, response, err_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -322,8 +322,8 @@ var Signing = /** @class */ (function () {
                                 data: response.data.results
                             })];
                     case 2:
-                        err_8 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TransactionSigningZeroReceiptFailed(err_8.message))];
+                        err_5 = _a.sent();
+                        return [2 /*return*/, reject(new errors.TransactionSigningZeroReceiptFailed(err_5.message))];
                     case 3: return [2 /*return*/];
                 }
             });

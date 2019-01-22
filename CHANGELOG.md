@@ -1,3 +1,10 @@
+# [2.8.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.7.0...v2.8.0) (2019-01-22)
+
+
+### Features
+
+* **audit-actions:** add query params ([e6709af](https://github.com/tillhub/tillhub-sdk-javascript/commit/e6709af))
+
 # [2.7.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.6.0...v2.7.0) (2019-01-22)
 
 
