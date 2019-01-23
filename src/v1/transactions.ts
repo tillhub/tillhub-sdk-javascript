@@ -181,6 +181,30 @@ export class TransactionsLegacy {
       }
     })
   }
+
+  meta(q?: TransactionsMetaQuery | undefined): Promise<TransactionResponse> {
+    return new Promise(async (resolve, reject) => {
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta/legacy`
+
+      try {
+        const queryString = qs.stringify(q)
+        if (queryString) {
+          uri = `${uri}?${queryString}`
+        }
+
+        const response = await this.http.getClient().get(uri)
+
+        if (response.status !== 200) reject(new errors.TransactionsGetMetaFailed())
+
+        return resolve({
+          data: response.data.results[0],
+          metadata: { count: response.data.count }
+        } as TransactionResponse)
+      } catch (error) {
+        return reject(new errors.TransactionsGetMetaFailed(undefined, { error }))
+      }
+    })
+  }
 }
 
 export class Signing {
