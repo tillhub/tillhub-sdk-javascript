@@ -49,14 +49,14 @@ var Client = /** @class */ (function () {
         Client.instance.clearDefaults();
     };
     Client.prototype.getClient = function () {
-        return this.axiosInstance;
+        return Client.instance.axiosInstance;
     };
     Client.prototype.setDefaults = function (options) {
-        this.axiosInstance.defaults.headers.common = __assign({}, this.axiosInstance.defaults.headers.common, options.headers);
+        Client.instance.axiosInstance.defaults.headers.common = __assign({}, this.axiosInstance.defaults.headers.common, options.headers);
         return Client.instance;
     };
     Client.prototype.clearDefaults = function () {
-        this.axiosInstance.defaults.headers.common = __assign({}, defaultHeaders);
+        Client.instance.axiosInstance.defaults.headers.common = __assign({}, defaultHeaders);
     };
     return Client;
 }());
