@@ -211,6 +211,38 @@ var TransactionsLegacy = /** @class */ (function () {
             });
         }); });
     };
+    TransactionsLegacy.prototype.meta = function (q) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, queryString, response, error_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/meta/legacy";
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        queryString = qs_1.default.stringify(q);
+                        if (queryString) {
+                            uri = uri + "?" + queryString;
+                        }
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200)
+                            reject(new errors.TransactionsGetMetaFailed());
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_4 = _a.sent();
+                        return [2 /*return*/, reject(new errors.TransactionsGetMetaFailed(undefined, { error: error_4 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     return TransactionsLegacy;
 }());
 exports.TransactionsLegacy = TransactionsLegacy;

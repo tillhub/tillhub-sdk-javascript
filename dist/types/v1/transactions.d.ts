@@ -39,6 +39,7 @@ export declare class TransactionsLegacy {
     constructor(options: TransactionsOptions, http: Client);
     getAll(query?: TransactionsQuery | undefined): Promise<TransactionResponse>;
     pdfUri(requestObject: PdfRequestObject): Promise<TransactionResponse>;
+    meta(q?: TransactionsMetaQuery | undefined): Promise<TransactionResponse>;
 }
 export declare class Signing {
     endpoint: string;
