@@ -54,11 +54,11 @@ export class Client {
   }
 
   getClient(): AxiosInstance {
-    return this.axiosInstance
+    return Client.instance.axiosInstance
   }
 
   setDefaults(options: ClientOptions): Client {
-    this.axiosInstance.defaults.headers.common = {
+    Client.instance.axiosInstance.defaults.headers.common = {
       ...this.axiosInstance.defaults.headers.common,
       ...options.headers
     }
@@ -67,7 +67,7 @@ export class Client {
   }
 
   clearDefaults(): void {
-    this.axiosInstance.defaults.headers.common = {
+    Client.instance.axiosInstance.defaults.headers.common = {
       ...defaultHeaders
     }
   }
