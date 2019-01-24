@@ -11,6 +11,7 @@ export interface TransactionsQuery {
 }
 export interface TransactionsMetaQuery {
     type?: string | string[];
+    legacy?: boolean;
 }
 export interface TransactionsOptions {
     user?: string;

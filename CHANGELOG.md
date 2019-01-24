@@ -1,3 +1,10 @@
+# [2.11.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.10.0...v2.11.0) (2019-01-24)
+
+
+### Features
+
+* **transactions:** add query param to meta handler ([1c8e268](https://github.com/tillhub/tillhub-sdk-javascript/commit/1c8e268))
+
 # [2.10.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.9.1...v2.10.0) (2019-01-24)
 
 
