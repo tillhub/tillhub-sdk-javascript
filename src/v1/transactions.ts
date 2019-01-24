@@ -11,6 +11,7 @@ export interface PdfRequestObject {
 export interface TransactionsQuery {
   uri?: string
   format?: string
+  legacy?: boolean
 }
 
 export interface TransactionsMetaQuery {
