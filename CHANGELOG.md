@@ -1,3 +1,10 @@
+# [2.10.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.9.1...v2.10.0) (2019-01-24)
+
+
+### Features
+
+* **transactions:** add query param ([f60cb3b](https://github.com/tillhub/tillhub-sdk-javascript/commit/f60cb3b))
+
 ## [2.9.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.9.0...v2.9.1) (2019-01-23)
 
 
