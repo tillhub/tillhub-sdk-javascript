@@ -62,7 +62,7 @@ var Transactions = /** @class */ (function () {
     Transactions.prototype.getAll = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var next, uri, response_1, error_1;
+            var next, uri, queryString, response_1, error_1;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -74,6 +74,10 @@ var Transactions = /** @class */ (function () {
                         }
                         else {
                             uri = "" + this.options.base + this.endpoint + "/" + this.options.user;
+                        }
+                        queryString = query && qs_1.default.stringify(query);
+                        if (queryString) {
+                            uri = uri + "?" + queryString;
                         }
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:

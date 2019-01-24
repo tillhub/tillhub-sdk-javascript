@@ -1,3 +1,10 @@
+# [2.12.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.11.0...v2.12.0) (2019-01-24)
+
+
+### Features
+
+* **transactions:** fix handle query ([bce8f41](https://github.com/tillhub/tillhub-sdk-javascript/commit/bce8f41))
+
 # [2.11.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.10.0...v2.11.0) (2019-01-24)
 
 
