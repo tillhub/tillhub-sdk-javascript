@@ -65,6 +65,11 @@ export class Transactions {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}`
         }
 
+        const queryString = query && qs.stringify(query)
+        if (queryString) {
+          uri = `${uri}?${queryString}`
+        }
+
         const response = await this.http.getClient().get(uri)
 
         if (response.data.cursor && response.data.cursor.next) {

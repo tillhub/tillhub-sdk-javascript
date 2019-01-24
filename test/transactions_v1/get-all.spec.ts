@@ -1,3 +1,4 @@
+import qs from 'qs'
 import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
@@ -19,6 +20,12 @@ if (process.env.SYSTEM_TEST) {
 }
 
 const legacyId = '4564'
+
+const query = {
+  legacy: true
+}
+
+const queryString = qs.stringify(query)
 
 const mock = new MockAdapter(axios)
 afterEach(() => {
@@ -42,7 +49,7 @@ describe('v0: Transactions: can get all', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v1/transactions/${legacyId}`)
+        .onGet(`https://api.tillhub.com/api/v1/transactions/${legacyId}?${queryString}`)
         .reply(function (config) {
           return [
             200,
@@ -74,7 +81,7 @@ describe('v0: Transactions: can get all', () => {
 
     expect(transactions).toBeInstanceOf(v1.Transactions)
 
-    const { data } = await transactions.getAll()
+    const { data } = await transactions.getAll(query)
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -94,7 +101,7 @@ describe('v0: Transactions: can get all', () => {
         ]
       })
       mock
-        .onGet(`https://api.tillhub.com/api/v1/transactions/${legacyId}`)
+        .onGet(`https://api.tillhub.com/api/v1/transactions/${legacyId}?${queryString}`)
         .reply(function (config) {
           return [400]
         })
@@ -117,7 +124,7 @@ describe('v0: Transactions: can get all', () => {
     })
 
     try {
-      await th.transactions().getAll()
+      await th.transactions().getAll(query)
     } catch (err) {
       expect(err.name).toBe('TransactionFetchFailed')
     }
