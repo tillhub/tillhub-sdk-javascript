@@ -623,6 +623,11 @@ export declare class RegisterFetchFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class RegisterPutFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
 export declare class RegisterNotificationCreateFailed extends BaseError {
     message: string;
     name: string;

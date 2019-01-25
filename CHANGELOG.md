@@ -1,3 +1,10 @@
+# [2.13.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.12.0...v2.13.0) (2019-01-25)
+
+
+### Features
+
+* **registers:** adds registers put ([fc1b5df](https://github.com/tillhub/tillhub-sdk-javascript/commit/fc1b5df))
+
 # [2.12.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.11.0...v2.12.0) (2019-01-24)
 
 

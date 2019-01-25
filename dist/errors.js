@@ -1512,6 +1512,18 @@ var RegisterFetchFailed = /** @class */ (function (_super) {
     return RegisterFetchFailed;
 }(BaseError));
 exports.RegisterFetchFailed = RegisterFetchFailed;
+var RegisterPutFailed = /** @class */ (function (_super) {
+    __extends(RegisterPutFailed, _super);
+    function RegisterPutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not alter register'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'RegisterPutFailed';
+        return _this;
+    }
+    return RegisterPutFailed;
+}(BaseError));
+exports.RegisterPutFailed = RegisterPutFailed;
 var RegisterNotificationCreateFailed = /** @class */ (function (_super) {
     __extends(RegisterNotificationCreateFailed, _super);
     function RegisterNotificationCreateFailed(message, properties) {

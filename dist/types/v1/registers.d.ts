@@ -6,9 +6,6 @@ export interface DeviceConfigurationObject {
         ip: string;
     };
 }
-export interface RegisterResponse {
-    data: object;
-}
 export interface NotificationResponse {
     data: string;
 }
@@ -36,10 +33,21 @@ export interface RegistersQuery {
     limit?: number;
     uri?: string;
 }
+export interface RegisterResponse {
+    data: Register;
+}
 export interface RegistersResponse {
-    data: object[];
+    data: Register[];
     metadata: object;
     next?: () => Promise<RegistersResponse>;
+}
+export interface Register {
+    id: string;
+}
+export interface Register {
+    name?: string | null;
+    description?: string | null;
+    register_number: number;
 }
 export declare class Registers {
     endpoint: string;
@@ -50,4 +58,5 @@ export declare class Registers {
     get(registerId: string): Promise<RegisterResponse>;
     notify(registerId: string, notification: Notification): Promise<NotificationResponse>;
     updateDeviceConfiguration(registerId: string, deviceConfiguration: DeviceConfigurationObject): Promise<RegisterResponse>;
+    put(registerId: string, register: Register): Promise<RegisterResponse>;
 }
