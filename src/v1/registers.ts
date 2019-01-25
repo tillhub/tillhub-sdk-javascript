@@ -8,10 +8,6 @@ export interface DeviceConfigurationObject {
   network?: { ip: string }
 }
 
-export interface RegisterResponse {
-  data: object
-}
-
 export interface NotificationResponse {
   data: string
 }
@@ -43,10 +39,23 @@ export interface RegistersQuery {
   uri?: string
 }
 
+export interface RegisterResponse {
+  data: Register
+}
+
 export interface RegistersResponse {
-  data: object[]
+  data: Register[]
   metadata: object
   next?: () => Promise<RegistersResponse>
+}
+export interface Register {
+  id: string
+}
+
+export interface Register {
+  name?: string | null
+  description?: string | null
+  register_number: number
 }
 
 export class Registers {
@@ -134,4 +143,21 @@ export class Registers {
       console.warn(error)
       throw new errors.RegisterDeviceConfigurationPutFailed(undefined, { error })
     }
-  }}
+  }
+
+  put(registerId: string, register: Register): Promise<RegisterResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${registerId}`
+      try {
+        const response = await this.http.getClient().put(uri, register)
+
+        return resolve({
+          data: response.data.results[0] as Register,
+          metadata: { count: response.data.count }
+        } as RegisterResponse)
+      } catch (error) {
+        return reject(new errors.RegisterPutFailed(undefined, { error }))
+      }
+    })
+  }
+}

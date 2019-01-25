@@ -891,6 +891,13 @@ export class RegisterFetchFailed extends BaseError {
   }
 }
 
+export class RegisterPutFailed extends BaseError {
+  public name = 'RegisterPutFailed'
+  constructor(public message: string = 'Could not alter register', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class RegisterNotificationCreateFailed extends BaseError {
   public name = 'RegisterNotificationCreateFailed'
   constructor(public message: string = 'Could not create the Notification', properties?: any) {
