@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.0.0...v3.1.0) (2019-01-29)
+
+
+### Features
+
+* **notifications:** add new handler for email notification ([606e457](https://github.com/tillhub/tillhub-sdk-javascript/commit/606e457))
+
 # [3.0.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.13.0...v3.0.0) (2019-01-29)
 
 

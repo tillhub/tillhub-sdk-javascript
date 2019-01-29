@@ -382,6 +382,20 @@ var TillhubClient = /** @class */ (function (_super) {
         }
         return new v0.Images({ user: this.auth.user, base: this.options.base }, this.http);
     };
+    /**
+     * Create an authenticated Notifications instance
+     *
+     */
+    TillhubClient.prototype.notifications = function () {
+        if (!this.options ||
+            !this.options.base ||
+            !this.http ||
+            !this.auth ||
+            !this.auth.authenticated) {
+            throw new errors.UninstantiatedClient();
+        }
+        return new v0.Notifications({ user: this.auth.user, base: this.options.base }, this.http);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));

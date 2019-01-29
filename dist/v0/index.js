@@ -39,4 +39,6 @@ var auditActions_1 = require("./auditActions");
 exports.AuditActions = auditActions_1.AuditActions;
 var images_1 = require("./images");
 exports.Images = images_1.Images;
+var notifications_1 = require("./notifications");
+exports.Notifications = notifications_1.Notifications;
 //# sourceMappingURL=index.js.map

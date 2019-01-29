@@ -1740,4 +1740,16 @@ var StaffCountFailed = /** @class */ (function (_super) {
     return StaffCountFailed;
 }(BaseError));
 exports.StaffCountFailed = StaffCountFailed;
+var NotificationsEmailError = /** @class */ (function (_super) {
+    __extends(NotificationsEmailError, _super);
+    function NotificationsEmailError(message, properties) {
+        if (message === void 0) { message = 'Could not send email'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'NotificationsEmailError';
+        return _this;
+    }
+    return NotificationsEmailError;
+}(BaseError));
+exports.NotificationsEmailError = NotificationsEmailError;
 //# sourceMappingURL=errors.js.map
