@@ -1038,3 +1038,10 @@ export class StaffCountFailed extends BaseError {
     super(message, properties)
   }
 }
+
+export class NotificationsEmailError extends BaseError {
+  public name = 'NotificationsEmailError'
+  constructor(public message: string = 'Could not send email', properties?: any) {
+    super(message, properties)
+  }
+}
