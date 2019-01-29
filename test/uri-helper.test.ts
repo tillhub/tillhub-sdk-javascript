@@ -16,6 +16,19 @@ describe('UriHelper constructor', () => {
     expect(uriHelper.baseUri).toBe(expectedBaseUriResult)
   })
 
+  it('will defalut to https://api.tillhub.com if no base is provided', () => {
+    const noBase = { user: '23456' }
+    const uriHelper = new UriHelper(mockEndpoint, noBase)
+    const noBaseUri = `https://api.tillhub.com${mockEndpoint}/${noBase.user}`
+    expect(uriHelper.baseUri).toBe(noBaseUri)
+  })
+
+  it('will be just base and endpoint if no user is provided', () => {
+    const noUser = { base: 'http://localTesting:3000' }
+    const uriHelper = new UriHelper(mockEndpoint, noUser)
+    const noUserUri = `${noUser.base}${mockEndpoint}`
+    expect(uriHelper.baseUri).toBe(noUserUri)
+  })
 })
 
 describe('UriHelper generateBaseUri()', () => {

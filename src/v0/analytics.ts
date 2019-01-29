@@ -6,7 +6,7 @@ import { UriHelper } from '../uri-helper'
 export type StaffID = string | null
 
 export interface AnalyticsOptions {
-  user: string
+  user?: string
   base?: string
 }
 

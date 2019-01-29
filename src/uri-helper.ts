@@ -1,7 +1,7 @@
 import qs from 'qs'
 
-export interface HandlerOpiton {
-  user: string
+export interface HandlerOption {
+  user?: string
   base?: string
 }
 
@@ -16,9 +16,10 @@ export interface HandlerQuery {
 export class UriHelper {
   public baseUri: string
 
-  constructor(endpoint: string, options: HandlerOpiton) {
+  constructor(endpoint: string, options: HandlerOption) {
     const base = options.base || 'https://api.tillhub.com'
-    this.baseUri = `${base}${endpoint}/${options.user}`
+    const user = options.user ? `/${options.user}` : ''
+    this.baseUri = `${base}${endpoint}${user}`
   }
 
   public generateBaseUri(path?: string): string {
