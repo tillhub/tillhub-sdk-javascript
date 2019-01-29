@@ -33,6 +33,19 @@ export interface OrgAuth {
   password: string
 }
 
+export interface PasswordResetRequest {
+  email: string
+}
+
+export interface PasswordResetNonce {
+  password: string
+  password_reset_id: string
+}
+
+export interface PasswordResetRequestResponse {
+  msg: string
+}
+
 export interface TokenAuth {
   token: string
 }
@@ -150,6 +163,37 @@ export class Auth {
       err.body = err.ressponse && err.response.data ? err.response.data : null
 
       throw error
+    }
+  }
+
+  async requestPasswordReset(target: PasswordResetRequest): Promise<PasswordResetRequestResponse> {
+    try {
+      const { data } = await axios.post(`${this.options.base}/api/v0/users/login/reset`, {
+        email: target.email
+      })
+
+      return {
+        msg: data.msg
+      } as PasswordResetRequestResponse
+    } catch (err) {
+
+      throw new errors.PasswordResetRequestFailed(undefined, { error: err })
+    }
+  }
+
+  async setNewPassword(nonce: PasswordResetNonce): Promise<PasswordResetRequestResponse> {
+    try {
+      const { data } = await axios.post(`${this.options.base}/api/v0/users/login/reset`, {
+        password: nonce.password,
+        password_reset_id: nonce.password_reset_id
+      })
+
+      return {
+        msg: data.msg
+      } as PasswordResetRequestResponse
+    } catch (err) {
+
+      throw new errors.PasswordSetRequestFailed(undefined, { error: err })
     }
   }
 
