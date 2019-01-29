@@ -1,6 +1,7 @@
 import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
+import { UriHelper } from '../uri-helper'
 
 export type StaffID = string | null
 
@@ -86,6 +87,7 @@ export class Analytics {
   endpoint: string
   http: Client
   public options: AnalyticsOptions
+  public uriHelper: UriHelper
 
   constructor(options: AnalyticsOptions, http: Client) {
     this.options = options
@@ -93,15 +95,14 @@ export class Analytics {
 
     this.endpoint = '/api/v0/analytics'
     this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
   getRevenuesForDayOfWeek(query: RevenuBasicOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const startEnd = `start=${query.start}&end=${query.end}`
-        const branch = query.branch_number ? `&branch_number=${query.branch_number}` : ''
-        const dayOfWeek = `aggregates/revenues/day_of_week?${startEnd}${branch}`
-        const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${dayOfWeek}`
+        const base = this.uriHelper.generateBaseUri('/aggregates/revenues/day_of_week')
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.RevenuesFetchFailed())
@@ -119,10 +120,8 @@ export class Analytics {
   getRevenuesSumForTimeRange(query: RevenuBasicOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const startEnd = `start=${query.start}&end=${query.end}`
-        const branch = query.branch_number ? `&branch_number=${query.branch_number}` : ''
-        const path = `aggregates/revenues/sum?${startEnd}${branch}`
-        const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${path}`
+        const base = this.uriHelper.generateBaseUri('/aggregates/revenues/sum')
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.RevenuesFetchFailed())
@@ -140,11 +139,9 @@ export class Analytics {
   getRevenues(query: RevenuesOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const startEnd = `start=${query.start}&end=${query.end}`
-        const branch = query.branch_number ? `&branch_number=${query.branch_number}` : ''
-        const precision = `&precision=${query.precision}`
-        const revenueQuery = `aggregates/revenues?${startEnd}${branch}${precision}`
-        let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${revenueQuery}`
+        const base = this.uriHelper.generateBaseUri('/aggregates/revenues')
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
+
         const response = await this.http.getClient().get(uri)
 
         response.status !== 200 && reject(new errors.RevenuesFetchFailed())
@@ -162,10 +159,8 @@ export class Analytics {
   getRevenuesForHourOfDay(query: RevenuBasicOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const startEnd = `start=${query.start}&end=${query.end}`
-        const branch = query.branch_number ? `&branch_number=${query.branch_number}` : ''
-        const hourOfDayQuery = `aggregates/revenues/hour_of_day?${startEnd}${branch}`
-        const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${hourOfDayQuery}`
+        const base = this.uriHelper.generateBaseUri('/aggregates/revenues/hour_of_day')
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.RevenuesFetchFailed())

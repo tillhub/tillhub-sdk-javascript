@@ -22,8 +22,8 @@ const legacyId = '4564'
 const queryString =
   'start=2018-07-29T14%3A55%3A05.000Z&end=2018-08-29T14%3A55%3A05.000Z&branch_number=1'
 const queryObject = {
-  start: '2018-07-29T14%3A55%3A05.000Z',
-  end: '2018-08-29T14%3A55%3A05.000Z',
+  start: '2018-07-29T14:55:05.000Z',
+  end: '2018-08-29T14:55:05.000Z',
   branch_number: '1'
 }
 const mock = new MockAdapter(axios)
