@@ -891,6 +891,16 @@ export class StaffMemberCreateFailed extends BaseError {
   }
 }
 
+export class StaffPinGetFailed extends BaseError {
+  public name = 'StaffPinGetFailed'
+  constructor(
+    public message: string = 'Could not get a unique Staff pin number',
+    properties?: any
+  ) {
+    super(message, properties)
+  }
+}
+
 export class RegistersFetchFailed extends BaseError {
   public name = 'RegistersFetchFailed'
   constructor(public message: string = 'Could not fetch the Registers', properties?: any) {
