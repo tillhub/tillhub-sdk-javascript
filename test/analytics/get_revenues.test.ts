@@ -23,8 +23,8 @@ const legacyId = '4564'
 const queryString =
   'start=2018-06-01T14%3A55%3A05.000Z&end=2018-06-29T14%3A55%3A05.000Z&branch_number=1&precision=day'
 const queryObject = {
-  start: '2018-06-01T14%3A55%3A05.000Z',
-  end: '2018-06-29T14%3A55%3A05.000Z',
+  start: '2018-06-01T14:55:05.000Z',
+  end: '2018-06-29T14:55:05.000Z',
   branch_number: '1',
   precision: 'day' as RevenuePeriods
 }
