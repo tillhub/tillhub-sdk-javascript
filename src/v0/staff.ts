@@ -1,3 +1,4 @@
+import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 
@@ -35,6 +36,14 @@ export interface StaffPhoneNumbers {
   home?: number
   mobile?: number
   work?: number
+}
+
+export interface PinRequest {
+  provided_pin?: string
+}
+
+export interface PinResponse {
+  pin?: string
 }
 
 export interface StaffMember {
@@ -147,11 +156,36 @@ export class Staff {
         response.status !== 200 &&
           reject(new errors.StaffDeleteFailed(undefined, { status: response.status }))
 
-        return resolve({
-          msg: response.data.msg
-        } as StaffMemberResponse)
+        return resolve({ msg: response.data.msg } as StaffMemberResponse)
       } catch (error) {
         return reject(new errors.StaffDeleteFailed(undefined, { error }))
+      }
+    })
+  }
+
+  getPin(providedPin?: PinRequest): Promise<StaffMemberResponse> {
+    const queryString = qs.stringify(providedPin)
+    return new Promise(async (resolve, reject) => {
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/pin`
+      if (queryString) {
+        uri = `${uri}?${queryString}`
+      }
+      try {
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 &&
+          reject(
+            new errors.StaffPinGetFailed(undefined, {
+              status: response.status
+            })
+          )
+
+        return resolve({
+          data: response.data.results as PinResponse,
+          msg: response.data.msg,
+          metadata: { count: response.data.count }
+        } as StaffMemberResponse)
+      } catch (error) {
+        return reject(new errors.StaffPinGetFailed(undefined, { error }))
       }
     })
   }
