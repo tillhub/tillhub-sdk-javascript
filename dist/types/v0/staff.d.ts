@@ -30,6 +30,12 @@ export interface StaffPhoneNumbers {
     mobile?: number;
     work?: number;
 }
+export interface PinRequest {
+    provided_pin?: string;
+}
+export interface PinResponse {
+    pin?: string;
+}
 export interface StaffMember {
     firstname?: string;
     lastname?: string;
@@ -56,4 +62,5 @@ export declare class Staff {
     getOne(staffId: string): Promise<StaffMemberResponse>;
     put(staffId: string, staff: StaffMember): Promise<StaffMemberResponse>;
     delete(staffId: string): Promise<StaffMemberResponse>;
+    getPin(providedPin?: PinRequest): Promise<StaffMemberResponse>;
 }

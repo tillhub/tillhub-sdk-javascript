@@ -623,6 +623,11 @@ export declare class StaffMemberCreateFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class StaffPinGetFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
 export declare class RegistersFetchFailed extends BaseError {
     message: string;
     name: string;
