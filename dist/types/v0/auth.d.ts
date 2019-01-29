@@ -24,6 +24,16 @@ export interface OrgAuth {
     username: string;
     password: string;
 }
+export interface PasswordResetRequest {
+    email: string;
+}
+export interface PasswordResetNonce {
+    password: string;
+    password_reset_id: string;
+}
+export interface PasswordResetRequestResponse {
+    msg: string;
+}
 export interface TokenAuth {
     token: string;
 }
@@ -54,5 +64,7 @@ export declare class Auth {
     protected determineAuthType(): void;
     authenticate(): Promise<AuthResponse>;
     loginUsername(authData?: UsernameAuth): Promise<AuthResponse>;
+    requestPasswordReset(target: PasswordResetRequest): Promise<PasswordResetRequestResponse>;
+    setNewPassword(nonce: PasswordResetNonce): Promise<PasswordResetRequestResponse>;
     protected setDefaultHeader(user: string, token: string): void;
 }

@@ -1,3 +1,10 @@
+# [3.2.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.1.0...v3.2.0) (2019-01-29)
+
+
+### Features
+
+* **auth:** adds necessary password reset methods ([2232eb6](https://github.com/tillhub/tillhub-sdk-javascript/commit/2232eb6))
+
 # [3.1.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.0.0...v3.1.0) (2019-01-29)
 
 

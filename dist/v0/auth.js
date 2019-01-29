@@ -164,6 +164,53 @@ var Auth = /** @class */ (function () {
             });
         });
     };
+    Auth.prototype.requestPasswordReset = function (target) {
+        return __awaiter(this, void 0, void 0, function () {
+            var data, err_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post(this.options.base + "/api/v0/users/login/reset", {
+                                email: target.email
+                            })];
+                    case 1:
+                        data = (_a.sent()).data;
+                        return [2 /*return*/, {
+                                msg: data.msg
+                            }];
+                    case 2:
+                        err_2 = _a.sent();
+                        throw new errors.PasswordResetRequestFailed(undefined, { error: err_2 });
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Auth.prototype.setNewPassword = function (nonce) {
+        return __awaiter(this, void 0, void 0, function () {
+            var data, err_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post(this.options.base + "/api/v0/users/login/reset", {
+                                password: nonce.password,
+                                password_reset_id: nonce.password_reset_id
+                            })];
+                    case 1:
+                        data = (_a.sent()).data;
+                        return [2 /*return*/, {
+                                msg: data.msg
+                            }];
+                    case 2:
+                        err_3 = _a.sent();
+                        throw new errors.PasswordSetRequestFailed(undefined, { error: err_3 });
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
     Auth.prototype.setDefaultHeader = function (user, token) {
         var clientOptions = {
             headers: {
