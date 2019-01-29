@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { UriHelper } from '../uri-helper';
 export declare type StaffID = string | null;
 export interface AnalyticsOptions {
     user?: string;
@@ -72,6 +73,7 @@ export declare class Analytics {
     endpoint: string;
     http: Client;
     options: AnalyticsOptions;
+    uriHelper: UriHelper;
     constructor(options: AnalyticsOptions, http: Client);
     getRevenuesForDayOfWeek(query: RevenuBasicOptions): Promise<AnalyticsResponse>;
     getRevenuesSumForTimeRange(query: RevenuBasicOptions): Promise<AnalyticsResponse>;

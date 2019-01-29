@@ -1,3 +1,17 @@
+# [3.0.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.13.0...v3.0.0) (2019-01-29)
+
+
+### Bug Fixes
+
+* **uri:** created uri helper class to stringify queries ([c46c73a](https://github.com/tillhub/tillhub-sdk-javascript/commit/c46c73a))
+* **uri:** fixed user options on UriHelper constructor to be optional ([3dd67cf](https://github.com/tillhub/tillhub-sdk-javascript/commit/3dd67cf))
+
+
+### BREAKING CHANGES
+
+* **uri:** potential uri string difference
+* **uri:** potential quieres format changes in analytics calls
+
 # [2.13.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v2.12.0...v2.13.0) (2019-01-25)
 
 

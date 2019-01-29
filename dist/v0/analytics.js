@@ -47,25 +47,25 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var qs_1 = __importDefault(require("qs"));
 var errors = __importStar(require("../errors"));
+var uri_helper_1 = require("../uri-helper");
 var Analytics = /** @class */ (function () {
     function Analytics(options, http) {
         this.options = options;
         this.http = http;
         this.endpoint = '/api/v0/analytics';
         this.options.base = this.options.base || 'https://api.tillhub.com';
+        this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
     }
     Analytics.prototype.getRevenuesForDayOfWeek = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var startEnd, branch, dayOfWeek, uri, response, err_1;
+            var base, uri, response, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        startEnd = "start=" + query.start + "&end=" + query.end;
-                        branch = query.branch_number ? "&branch_number=" + query.branch_number : '';
-                        dayOfWeek = "aggregates/revenues/day_of_week?" + startEnd + branch;
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + dayOfWeek;
+                        base = this.uriHelper.generateBaseUri('/aggregates/revenues/day_of_week');
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
@@ -85,15 +85,13 @@ var Analytics = /** @class */ (function () {
     Analytics.prototype.getRevenuesSumForTimeRange = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var startEnd, branch, path, uri, response, err_2;
+            var base, uri, response, err_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        startEnd = "start=" + query.start + "&end=" + query.end;
-                        branch = query.branch_number ? "&branch_number=" + query.branch_number : '';
-                        path = "aggregates/revenues/sum?" + startEnd + branch;
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + path;
+                        base = this.uriHelper.generateBaseUri('/aggregates/revenues/sum');
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
@@ -113,16 +111,13 @@ var Analytics = /** @class */ (function () {
     Analytics.prototype.getRevenues = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var startEnd, branch, precision, revenueQuery, uri, response, err_3;
+            var base, uri, response, err_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        startEnd = "start=" + query.start + "&end=" + query.end;
-                        branch = query.branch_number ? "&branch_number=" + query.branch_number : '';
-                        precision = "&precision=" + query.precision;
-                        revenueQuery = "aggregates/revenues?" + startEnd + branch + precision;
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + revenueQuery;
+                        base = this.uriHelper.generateBaseUri('/aggregates/revenues');
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
@@ -142,15 +137,13 @@ var Analytics = /** @class */ (function () {
     Analytics.prototype.getRevenuesForHourOfDay = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var startEnd, branch, hourOfDayQuery, uri, response, err_4;
+            var base, uri, response, err_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        startEnd = "start=" + query.start + "&end=" + query.end;
-                        branch = query.branch_number ? "&branch_number=" + query.branch_number : '';
-                        hourOfDayQuery = "aggregates/revenues/hour_of_day?" + startEnd + branch;
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + hourOfDayQuery;
+                        base = this.uriHelper.generateBaseUri('/aggregates/revenues/hour_of_day');
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
