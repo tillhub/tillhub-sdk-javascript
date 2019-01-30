@@ -164,12 +164,10 @@ export class Staff {
   }
 
   getPin(providedPin?: PinRequest): Promise<StaffMemberResponse> {
-    const queryString = qs.stringify(providedPin)
+    const queryString = qs.stringify(providedPin, { addQueryPrefix: true })
+
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/pin`
-      if (queryString) {
-        uri = `${uri}?${queryString}`
-      }
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/pin${queryString}`
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
@@ -185,6 +183,14 @@ export class Staff {
           metadata: { count: response.data.count }
         } as StaffMemberResponse)
       } catch (error) {
+        if (error.response.status === 409) {
+          return reject(
+            new errors.StaffPinGetFailed(undefined, {
+              status: error.response.status,
+              name: error.response.data.name
+            })
+          )
+        }
         return reject(new errors.StaffPinGetFailed(undefined, { error }))
       }
     })

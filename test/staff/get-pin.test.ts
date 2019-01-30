@@ -13,6 +13,11 @@ afterEach(() => {
   mock.reset()
 })
 
+const pin = {
+  provided_pin: '1234'
+}
+const queryString = qs.stringify(pin, { addQueryPrefix: true })
+
 describe('v0: Staff: can get a unique pin number', () => {
   it("Tillhub's staff are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
@@ -52,19 +57,13 @@ describe('v0: Staff: can get a unique pin number', () => {
   })
 
   it('can send a user provided pin to determine if unique', async () => {
-    const pin = {
-      provided_pin: '1234'
-    }
-
-    const queryString = qs.stringify(pin)
-
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [200, { token: '', user: { id: '123', legacy_id: legacyId } }]
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/pin?${queryString}`)
+        .onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/pin${queryString}`)
         .reply(function (config) {
           return [
             200,
@@ -84,8 +83,6 @@ describe('v0: Staff: can get a unique pin number', () => {
 
     const { data } = await Staff.getPin(pin)
 
-    console.log('data', data)
-
     expect(Array.isArray(data)).toBe(true)
   })
 
@@ -104,7 +101,7 @@ describe('v0: Staff: can get a unique pin number', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/pin`).reply(function (config) {
         return [205]
       })
     }
@@ -114,6 +111,44 @@ describe('v0: Staff: can get a unique pin number', () => {
       await th.staff().getPin()
     } catch (err) {
       expect(err.name).toBe('StaffPinGetFailed')
+    }
+  })
+
+  it('rejects on status code 409', async () => {
+    const errorName = 'ErrorName'
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+
+      mock
+        .onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/pin${queryString}`)
+        .reply(function (config) {
+          return [
+            409,
+            {
+              name: 'ErrorName'
+            }
+          ]
+        })
+    }
+
+    try {
+      const th = await initThInstance()
+      await th.staff().getPin(pin)
+    } catch (err) {
+      expect(err.name).toBe('StaffPinGetFailed')
+      expect(err.properties.status).toBe(409)
+      expect(err.properties.name).toBe(errorName)
     }
   })
 })
