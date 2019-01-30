@@ -151,7 +151,7 @@ export class Customers {
         }
 
         const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) reject(new errors.CustomersFetchFailed())
+        if (response.status !== 200) reject(new errors.CustomersFetchFailed(undefined, { status: response.status }))
 
         if (response.data.cursor && response.data.cursor.next) {
           next = (): Promise<CustomersResponse> => this.getAll({ uri: response.data.cursor.next })
@@ -163,7 +163,7 @@ export class Customers {
           next
         } as CustomersResponse)
       } catch (err) {
-        return reject(new errors.CustomersFetchFailed())
+        return reject(new errors.CustomersFetchFailed(undefined, { error: err }))
       }
     })
   }
@@ -243,7 +243,7 @@ export class Customers {
           metadata: { count: response.data.count }
         } as CustomersResponse)
       } catch (err) {
-        return reject(new errors.CustomersMetaFailed())
+        return reject(new errors.CustomersMetaFailed(undefined, { error: err }))
       }
     })
   }
@@ -259,7 +259,7 @@ export class Customers {
           msg: response.data.msg
         } as CustomerResponse)
       } catch (err) {
-        return reject(new errors.CustomerDeleteFailed())
+        return reject(new errors.CustomerDeleteFailed(undefined, { error: err }))
       }
     })
   }
@@ -277,7 +277,7 @@ export class Customers {
           metadata: { count: response.data.count }
         } as CustomersResponse)
       } catch (err) {
-        return reject(new errors.CustomersCountFailed())
+        return reject(new errors.CustomersCountFailed(undefined, { error: err }))
       }
     })
   }
