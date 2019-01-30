@@ -190,16 +190,13 @@ var Staff = /** @class */ (function () {
     };
     Staff.prototype.getPin = function (providedPin) {
         var _this = this;
-        var queryString = qs_1.default.stringify(providedPin);
+        var queryString = qs_1.default.stringify(providedPin, { addQueryPrefix: true });
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, error_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/pin";
-                        if (queryString) {
-                            uri = uri + "?" + queryString;
-                        }
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/pin" + queryString;
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -217,6 +214,12 @@ var Staff = /** @class */ (function () {
                             })];
                     case 3:
                         error_5 = _a.sent();
+                        if (error_5.response.status === 409) {
+                            return [2 /*return*/, reject(new errors.StaffPinGetFailed(undefined, {
+                                    status: error_5.response.status,
+                                    name: error_5.response.data.name
+                                }))];
+                        }
                         return [2 /*return*/, reject(new errors.StaffPinGetFailed(undefined, { error: error_5 }))];
                     case 4: return [2 /*return*/];
                 }

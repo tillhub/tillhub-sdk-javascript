@@ -1,3 +1,10 @@
+## [3.4.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.4.0...v3.4.1) (2019-01-30)
+
+
+### Bug Fixes
+
+* **staff:** pin generator - handle 409 error - not unique ([b544ce1](https://github.com/tillhub/tillhub-sdk-javascript/commit/b544ce1))
+
 # [3.4.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.3.0...v3.4.0) (2019-01-30)
 
 
