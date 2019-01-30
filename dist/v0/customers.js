@@ -89,7 +89,7 @@ var Customers = /** @class */ (function () {
                     case 1:
                         response_1 = _a.sent();
                         if (response_1.status !== 200)
-                            reject(new errors.CustomersFetchFailed());
+                            reject(new errors.CustomersFetchFailed(undefined, { status: response_1.status }));
                         if (response_1.data.cursor && response_1.data.cursor.next) {
                             next = function () { return _this.getAll({ uri: response_1.data.cursor.next }); };
                         }
@@ -100,7 +100,7 @@ var Customers = /** @class */ (function () {
                             })];
                     case 2:
                         err_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.CustomersFetchFailed())];
+                        return [2 /*return*/, reject(new errors.CustomersFetchFailed(undefined, { error: err_1 }))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -216,7 +216,7 @@ var Customers = /** @class */ (function () {
                             })];
                     case 3:
                         err_2 = _a.sent();
-                        return [2 /*return*/, reject(new errors.CustomersMetaFailed())];
+                        return [2 /*return*/, reject(new errors.CustomersMetaFailed(undefined, { error: err_2 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -242,7 +242,7 @@ var Customers = /** @class */ (function () {
                             })];
                     case 3:
                         err_3 = _a.sent();
-                        return [2 /*return*/, reject(new errors.CustomerDeleteFailed())];
+                        return [2 /*return*/, reject(new errors.CustomerDeleteFailed(undefined, { error: err_3 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -270,7 +270,7 @@ var Customers = /** @class */ (function () {
                             })];
                     case 3:
                         err_4 = _a.sent();
-                        return [2 /*return*/, reject(new errors.CustomersCountFailed())];
+                        return [2 /*return*/, reject(new errors.CustomersCountFailed(undefined, { error: err_4 }))];
                     case 4: return [2 /*return*/];
                 }
             });

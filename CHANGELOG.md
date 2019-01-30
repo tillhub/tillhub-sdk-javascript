@@ -1,3 +1,10 @@
+# [3.4.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.3.0...v3.4.0) (2019-01-30)
+
+
+### Features
+
+* **customers:** enhance error reporting ([3c2b0a2](https://github.com/tillhub/tillhub-sdk-javascript/commit/3c2b0a2))
+
 # [3.3.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.2.0...v3.3.0) (2019-01-29)
 
 
