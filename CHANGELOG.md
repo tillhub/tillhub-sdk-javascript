@@ -1,3 +1,10 @@
+# [3.5.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.4.2...v3.5.0) (2019-01-31)
+
+
+### Features
+
+* **v0/analytics:** added customers transaction and overview handler to analytics ([aae53f5](https://github.com/tillhub/tillhub-sdk-javascript/commit/aae53f5))
+
 ## [3.4.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.4.1...v3.4.2) (2019-01-31)
 
 

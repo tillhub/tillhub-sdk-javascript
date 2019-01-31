@@ -62,6 +62,10 @@ export interface VatOptions {
 export interface CustomersOptions {
     format?: string;
 }
+export interface CustomersTransactionOptions {
+    customer_id: string | null;
+    currency?: string;
+}
 export interface SimpleSalesCartItemsOptions {
     [key: string]: any;
     start?: string;
@@ -89,4 +93,6 @@ export declare class Analytics {
     getSimpleSalesCartItems(query?: SimpleSalesCartItemsOptions | undefined): Promise<AnalyticsResponse>;
     getVatReport(query?: VatOptions | undefined): Promise<AnalyticsResponse>;
     getCustomersReport(query?: CustomersOptions | undefined): Promise<AnalyticsResponse>;
+    getCustomersTransaction(query: CustomersTransactionOptions): Promise<AnalyticsResponse>;
+    getCustomersOverview(query: CustomersTransactionOptions): Promise<AnalyticsResponse>;
 }
