@@ -1,3 +1,10 @@
+## [3.4.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.4.1...v3.4.2) (2019-01-31)
+
+
+### Bug Fixes
+
+* **staff:** add safety check for reponse ([0c4e1a4](https://github.com/tillhub/tillhub-sdk-javascript/commit/0c4e1a4))
+
 ## [3.4.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.4.0...v3.4.1) (2019-01-30)
 
 

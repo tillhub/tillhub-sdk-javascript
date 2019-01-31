@@ -214,7 +214,7 @@ var Staff = /** @class */ (function () {
                             })];
                     case 3:
                         error_5 = _a.sent();
-                        if (error_5.response.status === 409) {
+                        if (error_5.response && error_5.response.status === 409) {
                             return [2 /*return*/, reject(new errors.StaffPinGetFailed(undefined, {
                                     status: error_5.response.status,
                                     name: error_5.response.data.name
