@@ -75,6 +75,11 @@ export interface CustomersOptions {
   format?: string
 }
 
+export interface CustomersTransactionOptions {
+  customer_id: string | null,
+  currency?: string
+}
+
 export interface SimpleSalesCartItemsOptions {
   [key: string]: any
   start?: string
@@ -381,13 +386,48 @@ export class Analytics {
   getCustomersReport(query?: CustomersOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        let uri = `${this.options.base}${this.endpoint}/${this.options.user}/reports/customers`
+        const base = this.uriHelper.generateBaseUri('/reports/customers')
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const queryString = qs.stringify(query)
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.CustomerFetchFailed())
 
-        if (queryString) {
-          uri = `${uri}?${queryString}`
-        }
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as AnalyticsResponse)
+      } catch (err) {
+        return reject(new errors.CustomerFetchFailed())
+      }
+    })
+  }
+
+  getCustomersTransaction(query: CustomersTransactionOptions): Promise<AnalyticsResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+
+        const base = this.uriHelper.generateBaseUri('/reports/customers/transactions')
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.CustomerFetchFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as AnalyticsResponse)
+      } catch (err) {
+        return reject(new errors.CustomerFetchFailed())
+      }
+    })
+  }
+
+  getCustomersOverview(query: CustomersTransactionOptions): Promise<AnalyticsResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+
+        const base = this.uriHelper.generateBaseUri('/reports/customers/overview')
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.CustomerFetchFailed())
