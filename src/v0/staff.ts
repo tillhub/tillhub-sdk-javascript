@@ -183,7 +183,7 @@ export class Staff {
           metadata: { count: response.data.count }
         } as StaffMemberResponse)
       } catch (error) {
-        if (error.response.status === 409) {
+        if (error.response && error.response.status === 409) {
           return reject(
             new errors.StaffPinGetFailed(undefined, {
               status: error.response.status,
