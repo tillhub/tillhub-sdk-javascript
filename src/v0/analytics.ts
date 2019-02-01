@@ -67,11 +67,7 @@ export interface VoucherOptions {
   type?: 'update:update' | 'update:decrement' | 'update:increment' | 'create'
 }
 
-export interface VatOptions {
-  format?: string
-}
-
-export interface CustomersOptions {
+export interface ExportFormatOptions {
   format?: string
 }
 
@@ -354,7 +350,7 @@ export class Analytics {
     })
   }
 
-  getVatReport(query?: VatOptions | undefined): Promise<AnalyticsResponse> {
+  getVatReport(query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         let uri = `${this.options.base}${this.endpoint}/${this.options.user}/reports/vat`
@@ -378,7 +374,7 @@ export class Analytics {
     })
   }
 
-  getCustomersReport(query?: CustomersOptions | undefined): Promise<AnalyticsResponse> {
+  getCustomersReport(query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         let uri = `${this.options.base}${this.endpoint}/${this.options.user}/reports/customers`
@@ -398,6 +394,27 @@ export class Analytics {
         } as AnalyticsResponse)
       } catch (err) {
         return reject(new errors.CustomerFetchFailed())
+      }
+    })
+  }
+
+  getStocksReport(query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const queryString = qs.stringify(query, { addQueryPrefix: true })
+        const uri = `${this.options.base}${this.endpoint}/${
+          this.options.user
+        }/reports/stocks${queryString}`
+
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.StocksReportFetchFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as AnalyticsResponse)
+      } catch (err) {
+        return reject(new errors.StocksReportFetchFailed())
       }
     })
   }
