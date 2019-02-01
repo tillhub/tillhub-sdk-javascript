@@ -56,10 +56,7 @@ export interface VoucherOptions {
     delta?: string;
     type?: 'update:update' | 'update:decrement' | 'update:increment' | 'create';
 }
-export interface VatOptions {
-    format?: string;
-}
-export interface CustomersOptions {
+export interface ExportFormatOptions {
     format?: string;
 }
 export interface CustomersTransactionOptions {
@@ -91,8 +88,9 @@ export declare class Analytics {
     getProductsReport(staff?: StaffID): Promise<AnalyticsResponse>;
     getPaymentsReport(): Promise<AnalyticsResponse>;
     getSimpleSalesCartItems(query?: SimpleSalesCartItemsOptions | undefined): Promise<AnalyticsResponse>;
-    getVatReport(query?: VatOptions | undefined): Promise<AnalyticsResponse>;
-    getCustomersReport(query?: CustomersOptions | undefined): Promise<AnalyticsResponse>;
+    getVatReport(query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse>;
+    getCustomersReport(query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse>;
     getCustomersTransaction(query: CustomersTransactionOptions): Promise<AnalyticsResponse>;
     getCustomersOverview(query: CustomersTransactionOptions): Promise<AnalyticsResponse>;
+    getStocksReport(query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse>;
 }

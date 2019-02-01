@@ -1,3 +1,10 @@
+# [3.6.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.5.0...v3.6.0) (2019-02-01)
+
+
+### Features
+
+* **analytics:** get stocks report ([bef351b](https://github.com/tillhub/tillhub-sdk-javascript/commit/bef351b))
+
 # [3.5.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.4.2...v3.5.0) (2019-01-31)
 
 

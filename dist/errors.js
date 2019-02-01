@@ -1692,6 +1692,18 @@ var VatReportFetchFailed = /** @class */ (function (_super) {
     return VatReportFetchFailed;
 }(BaseError));
 exports.VatReportFetchFailed = VatReportFetchFailed;
+var StocksReportFetchFailed = /** @class */ (function (_super) {
+    __extends(StocksReportFetchFailed, _super);
+    function StocksReportFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the stocks report'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StocksReportFetchFailed';
+        return _this;
+    }
+    return StocksReportFetchFailed;
+}(BaseError));
+exports.StocksReportFetchFailed = StocksReportFetchFailed;
 var AuditActionsFetchAllFailed = /** @class */ (function (_super) {
     __extends(AuditActionsFetchAllFailed, _super);
     function AuditActionsFetchAllFailed(message, properties) {
