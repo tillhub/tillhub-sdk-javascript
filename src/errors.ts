@@ -1014,6 +1014,13 @@ export class VatReportFetchFailed extends BaseError {
   }
 }
 
+export class StocksReportFetchFailed extends BaseError {
+  public name = 'StocksReportFetchFailed'
+  constructor(public message: string = 'Could not fetch the stocks report', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class AuditActionsFetchAllFailed extends BaseError {
   public name = 'AuditActionsFetchAllFailed'
   constructor(public message: string = 'Could not fetch audit actions', properties?: any) {
