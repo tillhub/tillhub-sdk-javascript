@@ -764,7 +764,7 @@ export class StocksBookFetchFailed extends BaseError {
 
 export class StocksBookGetMetaFailed extends BaseError {
   public name = 'StocksBookGetMetaFailed'
-  constructor(public message: string = 'Could not fetch the stocks book', properties?: any) {
+  constructor(public message: string = 'Could not fetch stocks book meta', properties?: any) {
     super(message, properties)
   }
 }
