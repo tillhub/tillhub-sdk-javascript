@@ -1,3 +1,10 @@
+## [3.9.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.9.0...v3.9.1) (2019-02-04)
+
+
+### Bug Fixes
+
+* **stocks-book:** change error message in stocks book meta ([357b030](https://github.com/tillhub/tillhub-sdk-javascript/commit/357b030))
+
 # [3.9.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.8.0...v3.9.0) (2019-02-04)
 
 

@@ -1299,7 +1299,7 @@ exports.StocksBookFetchFailed = StocksBookFetchFailed;
 var StocksBookGetMetaFailed = /** @class */ (function (_super) {
     __extends(StocksBookGetMetaFailed, _super);
     function StocksBookGetMetaFailed(message, properties) {
-        if (message === void 0) { message = 'Could not fetch the stocks book'; }
+        if (message === void 0) { message = 'Could not fetch stocks book meta'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'StocksBookGetMetaFailed';
