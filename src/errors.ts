@@ -454,6 +454,13 @@ export class ConfigurationPutFailed extends BaseError {
   }
 }
 
+export class ConfigurationPatchFailed extends BaseError {
+  public name = 'ConfigurationPatchFailed'
+  constructor(public message: string = 'Could not patch configuration', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class ConfigurationCreationFailed extends BaseError {
   public name = 'ConfigurationCreationFailed'
   constructor(public message: string = 'Could not create configuration', properties?: any) {
