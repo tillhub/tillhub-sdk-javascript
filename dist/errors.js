@@ -769,6 +769,18 @@ var ConfigurationPutFailed = /** @class */ (function (_super) {
     return ConfigurationPutFailed;
 }(BaseError));
 exports.ConfigurationPutFailed = ConfigurationPutFailed;
+var ConfigurationPatchFailed = /** @class */ (function (_super) {
+    __extends(ConfigurationPatchFailed, _super);
+    function ConfigurationPatchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not patch configuration'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ConfigurationPatchFailed';
+        return _this;
+    }
+    return ConfigurationPatchFailed;
+}(BaseError));
+exports.ConfigurationPatchFailed = ConfigurationPatchFailed;
 var ConfigurationCreationFailed = /** @class */ (function (_super) {
     __extends(ConfigurationCreationFailed, _super);
     function ConfigurationCreationFailed(message, properties) {

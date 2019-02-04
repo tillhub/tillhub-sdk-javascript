@@ -313,6 +313,11 @@ export declare class ConfigurationPutFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class ConfigurationPatchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
 export declare class ConfigurationCreationFailed extends BaseError {
     message: string;
     name: string;

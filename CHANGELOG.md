@@ -1,3 +1,10 @@
+# [3.7.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.6.0...v3.7.0) (2019-02-04)
+
+
+### Features
+
+* **configurations:** added `patch` ([d8928e5](https://github.com/tillhub/tillhub-sdk-javascript/commit/d8928e5))
+
 # [3.6.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.5.0...v3.6.0) (2019-02-01)
 
 

@@ -82,6 +82,7 @@ export declare class Configurations {
     getAll(optionsOrQuery?: ConfigurationsQueryOptions | undefined): Promise<ConfigurationsResponse>;
     get(configurationId: string): Promise<ConfigurationReference>;
     put(configurationId: string, configuration: Configuration): Promise<ConfigurationResponse>;
+    patch(configurationId: string, configuration: Configuration): Promise<ConfigurationResponse>;
     create(configuration: Configuration): Promise<ConfigurationResponse>;
 }
 export {};
