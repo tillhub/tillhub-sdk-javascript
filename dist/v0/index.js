@@ -29,6 +29,7 @@ var invoices_1 = require("./invoices");
 exports.Invoices = invoices_1.Invoices;
 var stocks_1 = require("./stocks");
 exports.Stocks = stocks_1.Stocks;
+exports.StocksBook = stocks_1.StocksBook;
 var orders_1 = require("./orders");
 exports.Orders = orders_1.Orders;
 var analytics_1 = require("./analytics");

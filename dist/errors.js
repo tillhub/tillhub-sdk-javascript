@@ -1284,6 +1284,30 @@ var StocksLocationsFetchFailed = /** @class */ (function (_super) {
     return StocksLocationsFetchFailed;
 }(BaseError));
 exports.StocksLocationsFetchFailed = StocksLocationsFetchFailed;
+var StocksBookFetchFailed = /** @class */ (function (_super) {
+    __extends(StocksBookFetchFailed, _super);
+    function StocksBookFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the stocks book'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StocksBookFetchFailed';
+        return _this;
+    }
+    return StocksBookFetchFailed;
+}(BaseError));
+exports.StocksBookFetchFailed = StocksBookFetchFailed;
+var StocksBookGetMetaFailed = /** @class */ (function (_super) {
+    __extends(StocksBookGetMetaFailed, _super);
+    function StocksBookGetMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the stocks book'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StocksBookGetMetaFailed';
+        return _this;
+    }
+    return StocksBookGetMetaFailed;
+}(BaseError));
+exports.StocksBookGetMetaFailed = StocksBookGetMetaFailed;
 var OrdersFetchFailed = /** @class */ (function (_super) {
     __extends(OrdersFetchFailed, _super);
     function OrdersFetchFailed(message, properties) {

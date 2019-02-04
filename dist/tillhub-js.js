@@ -271,6 +271,20 @@ var TillhubClient = /** @class */ (function (_super) {
         return new v0.Stocks({ user: this.auth.user, base: this.options.base }, this.http);
     };
     /**
+     * Create an authenticated StocksBook instance
+     *
+     */
+    TillhubClient.prototype.stocksBook = function () {
+        if (!this.options ||
+            !this.options.base ||
+            !this.http ||
+            !this.auth ||
+            !this.auth.authenticated) {
+            throw new errors.UninstantiatedClient();
+        }
+        return new v0.StocksBook({ user: this.auth.user, base: this.options.base }, this.http);
+    };
+    /**
      * Create an authenticated Orders instance
      *
      */

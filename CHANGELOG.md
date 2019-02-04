@@ -1,3 +1,10 @@
+# [3.9.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.8.0...v3.9.0) (2019-02-04)
+
+
+### Features
+
+* **stocks-book:** add handlers for stocks book ([e1281e4](https://github.com/tillhub/tillhub-sdk-javascript/commit/e1281e4))
+
 # [3.8.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.7.0...v3.8.0) (2019-02-04)
 
 

@@ -43,6 +43,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var errors = __importStar(require("../errors"));
+var uri_helper_1 = require("../uri-helper");
 var Stocks = /** @class */ (function () {
     function Stocks(options, http) {
         this.options = options;
@@ -170,4 +171,75 @@ var Stocks = /** @class */ (function () {
     return Stocks;
 }());
 exports.Stocks = Stocks;
+var StocksBook = /** @class */ (function () {
+    function StocksBook(options, http) {
+        this.options = options;
+        this.http = http;
+        this.endpoint = '/api/v0/stock';
+        this.options.base = this.options.base || 'https://api.tillhub.com';
+        this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
+    }
+    StocksBook.prototype.getAll = function (query) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var next, base, uri, response_1, error_1;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri("/book");
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
+                        response_1 = _a.sent();
+                        if (response_1.data.cursor && response_1.data.cursor.next) {
+                            next = function () { return _this.getAll({ uri: response_1.data.cursor.next }); };
+                        }
+                        return [2 /*return*/, resolve({
+                                data: response_1.data.results,
+                                metadata: { count: response_1.data.count, cursor: response_1.data.cursor },
+                                next: next
+                            })];
+                    case 2:
+                        error_1 = _a.sent();
+                        return [2 /*return*/, reject(new errors.StocksBookFetchFailed(undefined, { error: error_1 }))];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    StocksBook.prototype.meta = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, base, uri_1, response, error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/meta";
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        base = this.uriHelper.generateBaseUri("/book/meta");
+                        uri_1 = this.uriHelper.generateUriWithQuery(base);
+                        return [4 /*yield*/, this.http.getClient().get(uri_1)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200)
+                            reject(new errors.StocksBookGetMetaFailed());
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_2 = _a.sent();
+                        return [2 /*return*/, reject(new errors.StocksBookGetMetaFailed(undefined, { error: error_2 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    return StocksBook;
+}());
+exports.StocksBook = StocksBook;
 //# sourceMappingURL=stocks.js.map

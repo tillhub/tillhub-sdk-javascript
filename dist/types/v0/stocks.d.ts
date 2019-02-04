@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { UriHelper } from '../uri-helper';
 export interface StocksOptions {
     user?: string;
     base?: string;
@@ -6,6 +7,18 @@ export interface StocksOptions {
 export interface StocksQuery {
     limit?: number;
     uri?: string;
+}
+export interface StocksBookQuery {
+    limit?: number;
+    uri?: string;
+    embed?: string[];
+    start?: string;
+    end?: string;
+    product?: string;
+    location?: string;
+    to?: string;
+    from?: string;
+    branch?: string;
 }
 export interface StocksResponse {
     data: object[];
@@ -30,4 +43,13 @@ export declare class Stocks {
     create(stock: Stock): Promise<StocksResponse>;
     update(requestObject: StocksUpdateRequestObject): Promise<StocksResponse>;
     getLocations(query?: StocksQuery | undefined): Promise<StocksResponse>;
+}
+export declare class StocksBook {
+    endpoint: string;
+    http: Client;
+    options: StocksOptions;
+    uriHelper: UriHelper;
+    constructor(options: StocksOptions, http: Client);
+    getAll(query?: StocksBookQuery | undefined): Promise<StocksResponse>;
+    meta(): Promise<StocksResponse>;
 }

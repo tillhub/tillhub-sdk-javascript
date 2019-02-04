@@ -119,6 +119,11 @@ export declare class TillhubClient extends events.EventEmitter {
      */
     stocks(): v0.Stocks;
     /**
+     * Create an authenticated StocksBook instance
+     *
+     */
+    stocksBook(): v0.StocksBook;
+    /**
      * Create an authenticated Orders instance
      *
      */
