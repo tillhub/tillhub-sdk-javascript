@@ -173,6 +173,22 @@ export class Configurations {
     })
   }
 
+  patch(configurationId: string, configuration: Configuration): Promise<ConfigurationResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${configurationId}`
+      try {
+        const response = await this.http.getClient().patch(uri, configuration)
+
+        return resolve({
+          data: response.data.results[0] as Configuration,
+          metadata: { count: response.data.count }
+        } as ConfigurationResponse)
+      } catch (error) {
+        return reject(new errors.ConfigurationPatchFailed(undefined, { error }))
+      }
+    })
+  }
+
   create(configuration: Configuration): Promise<ConfigurationResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
