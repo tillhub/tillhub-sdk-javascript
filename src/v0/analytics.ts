@@ -84,6 +84,31 @@ export interface SimpleSalesCartItemsOptions {
   include?: string | string[]
 }
 
+export interface ProductGoupsOptions {
+  description?: string
+  product_group_id?: string
+  qty?: {
+    from: number,
+    to: number
+  }
+  revenue?: {
+    from: number,
+    to: number
+  }
+  net_revenue?: {
+    from: number,
+    to: number
+  }
+  discount?: {
+    from: number,
+    to: number
+  }
+  column?: string
+  direction?: string
+  q?: string
+  format?: string
+}
+
 export class Analytics {
   endpoint: string
   http: Client
@@ -443,18 +468,35 @@ export class Analytics {
       try {
         const queryString = qs.stringify(query, { addQueryPrefix: true })
         const uri = `${this.options.base}${this.endpoint}/${
-          this.options.user
-        }/reports/stocks${queryString}`
-
+        this.options.user
+      }/reports/stocks${queryString}`
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.StocksReportFetchFailed())
-
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
         } as AnalyticsResponse)
       } catch (err) {
         return reject(new errors.StocksReportFetchFailed())
+      }
+    })
+  }
+
+  getProductGroups(query?: ProductGoupsOptions | undefined): Promise<AnalyticsResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const base = this.uriHelper.generateBaseUri('/reports/product_groups')
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.ProductGroupsFetchFailed())
+        return resolve({
+          data: response.data.results,
+          metadata: {
+            count: response.data.count
+          }
+        } as AnalyticsResponse)
+      } catch (err) {
+        return reject(new errors.ProductGroupsFetchFailed())
       }
     })
   }
