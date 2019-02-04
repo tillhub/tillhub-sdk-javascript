@@ -11,7 +11,7 @@ import { Branches } from './branches'
 import { Customers } from './customers'
 import { Vouchers, VoucherLogs } from './vouchers'
 import { Invoices } from './invoices'
-import { Stocks } from './stocks'
+import { Stocks, StocksBook } from './stocks'
 import { Orders } from './orders'
 import { Analytics } from './analytics'
 import { Staff } from './staff'
@@ -35,6 +35,7 @@ export {
   VoucherLogs,
   Invoices,
   Stocks,
+  StocksBook,
   Orders,
   Analytics,
   Staff,

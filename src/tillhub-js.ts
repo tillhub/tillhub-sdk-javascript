@@ -310,6 +310,24 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated StocksBook instance
+   *
+   */
+  stocksBook(): v0.StocksBook {
+    if (
+      !this.options ||
+      !this.options.base ||
+      !this.http ||
+      !this.auth ||
+      !this.auth.authenticated
+    ) {
+      throw new errors.UninstantiatedClient()
+    }
+
+    return new v0.StocksBook({ user: this.auth.user, base: this.options.base }, this.http)
+  }
+
+  /**
    * Create an authenticated Orders instance
    *
    */
