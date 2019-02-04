@@ -1,5 +1,6 @@
 import { Client } from '../client'
 import * as errors from '../errors'
+import { UriHelper } from '../uri-helper'
 
 export interface StocksOptions {
   user?: string
@@ -9,6 +10,19 @@ export interface StocksOptions {
 export interface StocksQuery {
   limit?: number
   uri?: string
+}
+
+export interface StocksBookQuery {
+  limit?: number
+  uri?: string
+  embed?: string[]
+  start?: string
+  end?: string
+  product?: string
+  location?: string
+  to?: string
+  from?: string
+  branch?: string
 }
 
 export interface StocksResponse {
@@ -120,6 +134,69 @@ export class Stocks {
         } as StocksResponse)
       } catch (err) {
         return reject(new errors.StocksLocationsFetchFailed())
+      }
+    })
+  }
+}
+
+export class StocksBook {
+  endpoint: string
+  http: Client
+  public options: StocksOptions
+  public uriHelper: UriHelper
+
+  constructor(options: StocksOptions, http: Client) {
+    this.options = options
+    this.http = http
+
+    this.endpoint = '/api/v0/stock'
+    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
+  }
+
+  getAll(query?: StocksBookQuery | undefined): Promise<StocksResponse> {
+    return new Promise(async (resolve, reject) => {
+      let next
+
+      try {
+        const base = this.uriHelper.generateBaseUri(`/book`)
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+        const response = await this.http.getClient().get(uri)
+
+        if (response.data.cursor && response.data.cursor.next) {
+          next = (): Promise<StocksResponse> => this.getAll({ uri: response.data.cursor.next })
+        }
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count, cursor: response.data.cursor },
+          next
+        } as StocksResponse)
+      } catch (error) {
+        return reject(new errors.StocksBookFetchFailed(undefined, { error }))
+      }
+    })
+  }
+
+  meta(): Promise<StocksResponse> {
+    return new Promise(async (resolve, reject) => {
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+
+      try {
+        const base = this.uriHelper.generateBaseUri(`/book/meta`)
+        const uri = this.uriHelper.generateUriWithQuery(base)
+
+        const response = await this.http.getClient().get(uri)
+
+        if (response.status !== 200) reject(new errors.StocksBookGetMetaFailed())
+
+        return resolve({
+          data: response.data.results[0],
+          metadata: { count: response.data.count }
+        } as StocksResponse)
+      } catch (error) {
+        return reject(new errors.StocksBookGetMetaFailed(undefined, { error }))
       }
     })
   }
