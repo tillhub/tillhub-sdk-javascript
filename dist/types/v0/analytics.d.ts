@@ -70,6 +70,30 @@ export interface SimpleSalesCartItemsOptions {
     embed?: string | string[];
     include?: string | string[];
 }
+export interface ProductGoupsOptions {
+    description?: string;
+    product_group_id?: string;
+    qty?: {
+        from: number;
+        to: number;
+    };
+    revenue?: {
+        from: number;
+        to: number;
+    };
+    net_revenue?: {
+        from: number;
+        to: number;
+    };
+    discount?: {
+        from: number;
+        to: number;
+    };
+    column?: string;
+    direction?: string;
+    q?: string;
+    format?: string;
+}
 export declare class Analytics {
     endpoint: string;
     http: Client;
@@ -93,4 +117,5 @@ export declare class Analytics {
     getCustomersTransaction(query: CustomersTransactionOptions): Promise<AnalyticsResponse>;
     getCustomersOverview(query: CustomersTransactionOptions): Promise<AnalyticsResponse>;
     getStocksReport(query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse>;
+    getProductGroups(query?: ProductGoupsOptions | undefined): Promise<AnalyticsResponse>;
 }

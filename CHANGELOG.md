@@ -1,3 +1,10 @@
+# [3.8.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.7.0...v3.8.0) (2019-02-04)
+
+
+### Features
+
+* **analytics:** getProductGroup handler ([e65b2ff](https://github.com/tillhub/tillhub-sdk-javascript/commit/e65b2ff))
+
 # [3.7.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.6.0...v3.7.0) (2019-02-04)
 
 
