@@ -53,13 +53,13 @@ export interface StaffMember {
   phonenumbers?: StaffPhoneNumbers
   email?: string
   addresses?: StaffAddress
-  pin?: number
+  pin?: string
   metadata?: object
   scopes?: string[]
   staff_number?: number
   discounts?: object
   date_of_birth?: string | null
-  short_code?: number
+  short_code?: string
   default?: boolean
 }
 
