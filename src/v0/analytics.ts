@@ -109,6 +109,11 @@ export interface ProductGoupsOptions {
   format?: string
 }
 
+export interface ProductGoupsFilters {
+  column: string,
+  type?: string
+}
+
 export class Analytics {
   endpoint: string
   http: Client
@@ -497,6 +502,25 @@ export class Analytics {
         } as AnalyticsResponse)
       } catch (err) {
         return reject(new errors.ProductGroupsFetchFailed())
+      }
+    })
+  }
+
+  getProductGroupsFilters(query: ProductGoupsFilters): Promise<AnalyticsResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const base = this.uriHelper.generateBaseUri('/reports/product_groups/filters')
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.ProductGroupsFiltersFetchFailed())
+        return resolve({
+          data: response.data.results,
+          metadata: {
+            count: response.data.count
+          }
+        } as AnalyticsResponse)
+      } catch (err) {
+        return reject(new errors.ProductGroupsFiltersFetchFailed())
       }
     })
   }
