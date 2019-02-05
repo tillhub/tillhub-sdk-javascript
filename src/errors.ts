@@ -1097,3 +1097,10 @@ export class NotificationsEmailError extends BaseError {
     super(message, properties)
   }
 }
+
+export class ProductGroupsFiltersFetchFailed extends BaseError {
+  public name = 'ProductGroupsFiltersFetchFailed'
+  constructor(public message: string = 'Could not get products group filters', properties?: any) {
+    super(message, properties)
+  }
+}
