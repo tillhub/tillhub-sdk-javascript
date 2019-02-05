@@ -1836,4 +1836,16 @@ var NotificationsEmailError = /** @class */ (function (_super) {
     return NotificationsEmailError;
 }(BaseError));
 exports.NotificationsEmailError = NotificationsEmailError;
+var ProductGroupsFiltersFetchFailed = /** @class */ (function (_super) {
+    __extends(ProductGroupsFiltersFetchFailed, _super);
+    function ProductGroupsFiltersFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get products group filters'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductGroupsFiltersFetchFailed';
+        return _this;
+    }
+    return ProductGroupsFiltersFetchFailed;
+}(BaseError));
+exports.ProductGroupsFiltersFetchFailed = ProductGroupsFiltersFetchFailed;
 //# sourceMappingURL=errors.js.map

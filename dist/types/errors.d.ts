@@ -758,3 +758,8 @@ export declare class NotificationsEmailError extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class ProductGroupsFiltersFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}

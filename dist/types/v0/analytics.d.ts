@@ -94,6 +94,10 @@ export interface ProductGoupsOptions {
     q?: string;
     format?: string;
 }
+export interface ProductGoupsFilters {
+    column: string;
+    type?: string;
+}
 export declare class Analytics {
     endpoint: string;
     http: Client;
@@ -118,4 +122,5 @@ export declare class Analytics {
     getCustomersOverview(query: CustomersTransactionOptions): Promise<AnalyticsResponse>;
     getStocksReport(query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse>;
     getProductGroups(query?: ProductGoupsOptions | undefined): Promise<AnalyticsResponse>;
+    getProductGroupsFilters(query: ProductGoupsFilters): Promise<AnalyticsResponse>;
 }

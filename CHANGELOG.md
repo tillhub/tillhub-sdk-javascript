@@ -1,3 +1,15 @@
+# [3.10.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.9.1...v3.10.0) (2019-02-05)
+
+
+### Bug Fixes
+
+* **tests:** update product group filter tests ([b2da40b](https://github.com/tillhub/tillhub-sdk-javascript/commit/b2da40b))
+
+
+### Features
+
+* **analytics:** added getProductGroupsFilters handler ([07088da](https://github.com/tillhub/tillhub-sdk-javascript/commit/07088da))
+
 ## [3.9.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.9.0...v3.9.1) (2019-02-04)
 
 
