@@ -19,31 +19,18 @@ if (process.env.SYSTEM_TEST) {
 }
 
 const legacyId = '4564'
-const queryString = 'description=1&product_group_id=2&qty%5Bfrom%5D=10&qty%5Bto%5D=20&revenue%5Bfrom%5D=10&revenue%5Bto%5D=20&net_revenue%5Bfrom%5D=10&net_revenue%5Bto%5D=20&q=thisSearch'
+const queryString = 'column=qty&type=range'
 
 const queryObject = {
-  description: '1',
-  product_group_id: '2',
-  qty: {
-    from: 10,
-    to: 20
-  },
-  revenue: {
-    from: 10,
-    to: 20
-  },
-  net_revenue: {
-    from: 10,
-    to: 20
-  },
-  q: 'thisSearch'
+  column: 'qty',
+  type: 'range'
 }
 const mock = new MockAdapter(axios)
 afterEach(() => {
   mock.reset()
 })
 
-describe('v0: Analytics Report Groups - getReportGroups', () => {
+describe('v0: Analytics Report Groups - getProductGroupsFiltersFilters', () => {
   it("Tillhub's Analytics are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
@@ -61,7 +48,7 @@ describe('v0: Analytics Report Groups - getReportGroups', () => {
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/product_groups?${queryString}`
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/product_groups/filters?${queryString}`
         )
         .reply(function (config) {
           return [
@@ -99,7 +86,7 @@ describe('v0: Analytics Report Groups - getReportGroups', () => {
 
     expect(analytics).toBeInstanceOf(v0.Analytics)
 
-    const { data } = await analytics.getProductGroups(queryObject)
+    const { data } = await analytics.getProductGroupsFilters(queryObject)
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -121,7 +108,7 @@ describe('v0: Analytics Report Groups - getReportGroups', () => {
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/product_groups?${queryString}`
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/product_groups/filters?${queryString}`
         )
         .reply(function (config) {
           return [205]
@@ -145,9 +132,9 @@ describe('v0: Analytics Report Groups - getReportGroups', () => {
     })
 
     try {
-      await th.analytics().getProductGroups(queryObject)
+      await th.analytics().getProductGroupsFilters(queryObject)
     } catch (err) {
-      expect(err.name).toBe('ProductGroupsFetchFailed')
+      expect(err.name).toBe('ProductGroupsFiltersFetchFailed')
     }
   })
 })
