@@ -53,6 +53,7 @@ var Client = /** @class */ (function () {
     };
     Client.prototype.setDefaults = function (options) {
         Client.instance.axiosInstance.defaults.headers.common = __assign({}, this.axiosInstance.defaults.headers.common, options.headers);
+        Client.instance.axiosInstance.defaults.headers = __assign({}, this.axiosInstance.defaults.headers, options.headers);
         return Client.instance;
     };
     Client.prototype.clearDefaults = function () {

@@ -1,3 +1,10 @@
+## [3.11.3](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.11.2...v3.11.3) (2019-02-06)
+
+
+### Bug Fixes
+
+* **auth/client:** also set headers manually ([ddaa5cc](https://github.com/tillhub/tillhub-sdk-javascript/commit/ddaa5cc))
+
 ## [3.11.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.11.1...v3.11.2) (2019-02-06)
 
 
