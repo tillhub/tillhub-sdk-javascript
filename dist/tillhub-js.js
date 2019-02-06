@@ -107,6 +107,9 @@ var TillhubClient = /** @class */ (function (_super) {
             var clientOptions = {
                 headers: {}
             };
+            if (options.credentials.token && clientOptions.headers) {
+                clientOptions.headers['Authorization'] = "Bearer " + options.credentials.token;
+            }
             this.auth = new v1.Auth(authOptions);
             this.http = client_1.Client.getInstance(clientOptions).setDefaults(clientOptions);
             return true;

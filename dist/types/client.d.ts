@@ -2,7 +2,9 @@ import { AxiosInstance } from 'axios';
 export interface ClientOptions {
     base?: string;
     timeout?: number;
-    headers?: object;
+    headers?: {
+        [key: string]: any;
+    };
     token?: string;
 }
 /**

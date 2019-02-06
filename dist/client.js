@@ -56,6 +56,8 @@ var Client = /** @class */ (function () {
         return Client.instance;
     };
     Client.prototype.clearDefaults = function () {
+        Client.instance.axiosInstance.defaults.headers.common['Authorization'] = undefined;
+        Client.instance.axiosInstance.defaults.headers['Authorization'] = undefined;
         Client.instance.axiosInstance.defaults.headers.common = __assign({}, defaultHeaders);
     };
     return Client;
