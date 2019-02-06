@@ -105,6 +105,10 @@ export class TillhubClient extends events.EventEmitter {
         headers: {}
       }
 
+      if ((options.credentials as TokenAuth).token && clientOptions.headers) {
+        clientOptions.headers['Authorization'] = `Bearer ${(options.credentials as TokenAuth).token}`
+      }
+
       this.auth = new v1.Auth(authOptions)
       this.http = Client.getInstance(clientOptions).setDefaults(clientOptions)
       return true

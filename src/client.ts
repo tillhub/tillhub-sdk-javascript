@@ -5,7 +5,9 @@ import { environment } from './environment'
 export interface ClientOptions {
   base?: string
   timeout?: number
-  headers?: object
+  headers?: {
+    [key: string]: any;
+  }
   token?: string
 }
 
@@ -67,6 +69,8 @@ export class Client {
   }
 
   clearDefaults(): void {
+    Client.instance.axiosInstance.defaults.headers.common['Authorization'] = undefined
+    Client.instance.axiosInstance.defaults.headers['Authorization'] = undefined
     Client.instance.axiosInstance.defaults.headers.common = {
       ...defaultHeaders
     }
