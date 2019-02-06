@@ -1,3 +1,11 @@
+## [3.11.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.11.0...v3.11.1) (2019-02-06)
+
+
+### Bug Fixes
+
+* **registers:** fix endpoint ref ([cc1796c](https://github.com/tillhub/tillhub-sdk-javascript/commit/cc1796c))
+* **registers:** fixes failing tests after removing endpoint regression ([ba793ee](https://github.com/tillhub/tillhub-sdk-javascript/commit/ba793ee))
+
 # [3.11.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.10.0...v3.11.0) (2019-02-06)
 
 
