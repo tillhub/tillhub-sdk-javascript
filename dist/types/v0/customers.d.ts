@@ -10,6 +10,9 @@ export interface CustomersQuery {
         deleted?: boolean;
     };
 }
+export interface CustomersCreateOptions {
+    generate_customer_number?: boolean;
+}
 export interface CustomersMetaQuery {
     deleted?: boolean;
 }
@@ -110,7 +113,7 @@ export declare class Customers {
     getAll(queryOrOptions?: CustomersQuery | undefined): Promise<CustomersResponse>;
     get(customerId: string): Promise<CustomerResponse>;
     put(customerId: string, customer: Customer): Promise<CustomerResponse>;
-    create(customer: Customer): Promise<CustomerResponse>;
+    create(customer: Customer, options?: CustomersCreateOptions): Promise<CustomerResponse>;
     meta(q?: CustomersMetaQuery | undefined): Promise<CustomersResponse>;
     delete(customerId: string): Promise<CustomerResponse>;
     count(): Promise<CustomersResponse>;

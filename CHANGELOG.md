@@ -1,3 +1,10 @@
+# [3.11.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.10.0...v3.11.0) (2019-02-06)
+
+
+### Features
+
+* **customers:** adds generate customer number ([b2d2c9d](https://github.com/tillhub/tillhub-sdk-javascript/commit/b2d2c9d))
+
 # [3.10.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.9.1...v3.10.0) (2019-02-05)
 
 

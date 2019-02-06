@@ -161,14 +161,20 @@ var Customers = /** @class */ (function () {
             });
         }); });
     };
-    Customers.prototype.create = function (customer) {
+    Customers.prototype.create = function (customer, options) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, error_3;
+            var uri, queryString, response, error_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         uri = "" + this.options.base + this.endpoint + "/" + this.options.user;
+                        if (options) {
+                            queryString = qs_1.default.stringify(options);
+                            if (queryString) {
+                                uri = uri + "?" + queryString;
+                            }
+                        }
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
