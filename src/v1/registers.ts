@@ -67,7 +67,7 @@ export class Registers {
     this.options = options
     this.http = http
 
-    this.endpoint = '/api/v1/Registers'
+    this.endpoint = '/api/v1/registers'
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 
