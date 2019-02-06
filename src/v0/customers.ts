@@ -15,6 +15,10 @@ export interface CustomersQuery {
   }
 }
 
+export interface CustomersCreateOptions {
+  generate_customer_number?: boolean
+}
+
 export interface CustomersMetaQuery {
   deleted?: boolean
 }
@@ -203,9 +207,17 @@ export class Customers {
     })
   }
 
-  create(customer: Customer): Promise<CustomerResponse> {
+  create(customer: Customer, options?: CustomersCreateOptions): Promise<CustomerResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+
+      if (options) {
+        const queryString = qs.stringify(options)
+        if (queryString) {
+          uri = `${uri}?${queryString}`
+        }
+      }
+
       try {
         const response = await this.http.getClient().post(uri, customer)
 
