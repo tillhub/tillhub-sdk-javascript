@@ -41,7 +41,7 @@ describe('v1: Registers: can get all', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v1/Registers/${legacyId}`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v1/registers/${legacyId}`).reply(function (config) {
         return [
           200,
           {
@@ -93,7 +93,7 @@ describe('v1: Registers: can get all', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v1/Registers/${legacyId}?branch=1`)
+        .onGet(`https://api.tillhub.com/api/v1/registers/${legacyId}?branch=1`)
         .reply(function (config) {
           return [
             200,
@@ -145,7 +145,7 @@ describe('v1: Registers: can get all', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/Registers/${legacyId}`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v0/registers/${legacyId}`).reply(function (config) {
         return [205]
       })
     }

@@ -73,7 +73,7 @@ describe('v1: Register', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v1/Registers/${legacyId}/${mockRegister.id}`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v1/registers/${legacyId}/${mockRegister.id}`).reply(function (config) {
         return [
           200,
           {
@@ -124,7 +124,7 @@ describe('v1: Register', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v1/Registers/${legacyId}/${mockRegister.id}/notification`, mockNotification).reply(function (config) {
+      mock.onPost(`https://api.tillhub.com/api/v1/registers/${legacyId}/${mockRegister.id}/notification`, mockNotification).reply(function (config) {
         return [
           200,
           {
@@ -175,7 +175,7 @@ describe('v1: Register', () => {
         ]
       })
 
-      mock.onPut(`https://api.tillhub.com/api/v1/Registers/${legacyId}/${mockRegister.id}/device_configuration`, mockRegister.device_configuration).reply(function (config) {
+      mock.onPut(`https://api.tillhub.com/api/v1/registers/${legacyId}/${mockRegister.id}/device_configuration`, mockRegister.device_configuration).reply(function (config) {
         return [
           200,
           {
@@ -226,7 +226,7 @@ describe('v1: Register', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v1/Registers/${legacyId}/${mockRegister.id}`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v1/registers/${legacyId}/${mockRegister.id}`).reply(function (config) {
         return [404]
       })
     }
