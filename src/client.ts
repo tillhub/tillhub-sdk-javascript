@@ -65,6 +65,11 @@ export class Client {
       ...options.headers
     }
 
+    Client.instance.axiosInstance.defaults.headers = {
+      ...this.axiosInstance.defaults.headers,
+      ...options.headers
+    }
+
     return Client.instance
   }
 
