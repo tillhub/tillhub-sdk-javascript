@@ -30,6 +30,15 @@ export interface Stock {
     location_type: string | null;
     qty: number;
 }
+export interface Location {
+    id?: string;
+    name?: string;
+    insert_id?: number;
+    type?: string;
+    created_at?: Object;
+    location_type?: string | null;
+    qty?: number;
+}
 export interface StocksUpdateRequestObject {
     stockId: string;
     body: Stock;
@@ -43,6 +52,7 @@ export declare class Stocks {
     create(stock: Stock): Promise<StocksResponse>;
     update(requestObject: StocksUpdateRequestObject): Promise<StocksResponse>;
     getLocations(query?: StocksQuery | undefined): Promise<StocksResponse>;
+    getOneLocation(locationId: string): Promise<StocksResponse>;
 }
 export declare class StocksBook {
     endpoint: string;

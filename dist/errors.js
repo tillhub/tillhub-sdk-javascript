@@ -1284,6 +1284,18 @@ var StocksLocationsFetchFailed = /** @class */ (function (_super) {
     return StocksLocationsFetchFailed;
 }(BaseError));
 exports.StocksLocationsFetchFailed = StocksLocationsFetchFailed;
+var StocksLocationFetchOneFailed = /** @class */ (function (_super) {
+    __extends(StocksLocationFetchOneFailed, _super);
+    function StocksLocationFetchOneFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch location'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StocksLocationFetchOneFailed';
+        return _this;
+    }
+    return StocksLocationFetchOneFailed;
+}(BaseError));
+exports.StocksLocationFetchOneFailed = StocksLocationFetchOneFailed;
 var StocksBookFetchFailed = /** @class */ (function (_super) {
     __extends(StocksBookFetchFailed, _super);
     function StocksBookFetchFailed(message, properties) {

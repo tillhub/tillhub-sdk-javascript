@@ -168,6 +168,35 @@ var Stocks = /** @class */ (function () {
             });
         }); });
     };
+    Stocks.prototype.getOneLocation = function (locationId) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/locations/" + locationId;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 &&
+                            reject(new errors.StocksLocationFetchOneFailed(undefined, { status: response.status }));
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_1 = _a.sent();
+                        return [2 /*return*/, reject(new errors.StocksLocationFetchOneFailed(undefined, { error: error_1 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     return Stocks;
 }());
 exports.Stocks = Stocks;
@@ -182,7 +211,7 @@ var StocksBook = /** @class */ (function () {
     StocksBook.prototype.getAll = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var next, base, uri, response_1, error_1;
+            var next, base, uri, response_1, error_2;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -202,8 +231,8 @@ var StocksBook = /** @class */ (function () {
                                 next: next
                             })];
                     case 2:
-                        error_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.StocksBookFetchFailed(undefined, { error: error_1 }))];
+                        error_2 = _a.sent();
+                        return [2 /*return*/, reject(new errors.StocksBookFetchFailed(undefined, { error: error_2 }))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -212,7 +241,7 @@ var StocksBook = /** @class */ (function () {
     StocksBook.prototype.meta = function () {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, base, uri_1, response, error_2;
+            var uri, base, uri_1, response, error_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -232,8 +261,8 @@ var StocksBook = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        error_2 = _a.sent();
-                        return [2 /*return*/, reject(new errors.StocksBookGetMetaFailed(undefined, { error: error_2 }))];
+                        error_3 = _a.sent();
+                        return [2 /*return*/, reject(new errors.StocksBookGetMetaFailed(undefined, { error: error_3 }))];
                     case 4: return [2 /*return*/];
                 }
             });

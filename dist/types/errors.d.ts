@@ -528,6 +528,11 @@ export declare class StocksLocationsFetchFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class StocksLocationFetchOneFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
 export declare class StocksBookFetchFailed extends BaseError {
     message: string;
     name: string;
