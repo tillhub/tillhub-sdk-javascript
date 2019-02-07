@@ -37,6 +37,16 @@ export interface Stock {
   qty: number
 }
 
+export interface Location {
+  id?: string
+  name?: string
+  insert_id?: number
+  type?: string
+  created_at?: Object
+  location_type?: string | null
+  qty?: number
+}
+
 export interface StocksUpdateRequestObject {
   stockId: string
   body: Stock
@@ -134,6 +144,25 @@ export class Stocks {
         } as StocksResponse)
       } catch (err) {
         return reject(new errors.StocksLocationsFetchFailed())
+      }
+    })
+  }
+
+  getOneLocation(locationId: string): Promise<StocksResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/locations/${locationId}`
+      try {
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 &&
+          reject(new errors.StocksLocationFetchOneFailed(undefined, { status: response.status }))
+
+        return resolve({
+          data: response.data.results[0],
+          msg: response.data.msg,
+          metadata: { count: response.data.count }
+        } as StocksResponse)
+      } catch (error) {
+        return reject(new errors.StocksLocationFetchOneFailed(undefined, { error }))
       }
     })
   }

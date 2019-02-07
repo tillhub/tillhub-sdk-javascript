@@ -755,6 +755,13 @@ export class StocksLocationsFetchFailed extends BaseError {
   }
 }
 
+export class StocksLocationFetchOneFailed extends BaseError {
+  public name = 'StocksLocationFetchOneFailed'
+  constructor(public message: string = 'Could not fetch location', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class StocksBookFetchFailed extends BaseError {
   public name = 'StocksBookFetchFailed'
   constructor(public message: string = 'Could not fetch the stocks book', properties?: any) {
