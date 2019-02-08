@@ -23,6 +23,7 @@ export interface StocksBookQuery {
   to?: string
   from?: string
   branch?: string
+  format?: string
 }
 
 export interface StocksResponse {
