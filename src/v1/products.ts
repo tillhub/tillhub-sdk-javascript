@@ -199,20 +199,19 @@ export class Products {
     })
   }
 
-  update(requestObject: ProductsUpdateRequestObject): Promise<ProductsResponse> {
+  put(productId: string, product: Product): Promise<ProductResponse> {
     return new Promise(async (resolve, reject) => {
-      const { body, productId } = requestObject
 
       let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productId}`
 
       try {
-        const response = await this.http.getClient().put(uri, body)
+        const response = await this.http.getClient().put(uri, product)
         response.status !== 200 && reject(new errors.ProductsUpdateFailed())
 
         return resolve({
-          data: response.data.results,
+          data: response.data.results[0],
           metadata: { count: response.data.count }
-        } as ProductsResponse)
+        } as ProductResponse)
       } catch (err) {
         return reject(new errors.ProductsUpdateFailed())
       }
