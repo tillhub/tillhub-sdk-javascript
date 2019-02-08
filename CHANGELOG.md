@@ -1,3 +1,10 @@
+## [3.13.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.13.1...v3.13.2) (2019-02-08)
+
+
+### Bug Fixes
+
+* **products:** fixes misaligned put ([abb3903](https://github.com/tillhub/tillhub-sdk-javascript/commit/abb3903))
+
 ## [3.13.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.13.0...v3.13.1) (2019-02-08)
 
 

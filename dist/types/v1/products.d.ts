@@ -86,7 +86,7 @@ export declare class Products {
     getAll(options?: ProductsOptions | undefined): Promise<ProductsResponse>;
     get(productId: string): Promise<ProductResponse>;
     meta(): Promise<ProductsResponse>;
-    update(requestObject: ProductsUpdateRequestObject): Promise<ProductsResponse>;
+    put(productId: string, product: Product): Promise<ProductResponse>;
     count(): Promise<ProductsResponse>;
     delete(productId: string): Promise<ProductsResponse>;
     search(searchTerm: string): Promise<ProductsResponse>;
