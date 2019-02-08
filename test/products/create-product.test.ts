@@ -23,9 +23,11 @@ const productObj = {
 }
 const userId = '4564'
 const mock = new MockAdapter(axios)
+
 afterEach(() => {
   mock.reset()
 })
+
 describe('Create a new Product', () => {
   it('create', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
@@ -46,7 +48,9 @@ describe('Create a new Product', () => {
         return [
           200,
           {
-            results: productObj
+            results: [
+              productObj
+            ]
           }
         ]
       })
@@ -72,7 +76,8 @@ describe('Create a new Product', () => {
 
     const { data } = await products.create(productObj)
 
-    expect(data).toEqual(productObj)
+    expect(typeof data).toEqual('object')
+    expect(data.name).toEqual('iPhone')
   })
 
   it('rejects on status codes that are not 200', async () => {
