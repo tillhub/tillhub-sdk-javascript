@@ -18,6 +18,7 @@ import { Staff } from './staff'
 import { AuditActions } from './auditActions'
 import { Images } from './images'
 import { Notifications } from './notifications'
+import { Print } from './print'
 
 export {
   Auth,
@@ -41,5 +42,6 @@ export {
   Staff,
   AuditActions,
   Images,
-  Notifications
+  Notifications,
+  Print
 }
