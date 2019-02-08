@@ -69,7 +69,7 @@ export interface ProductsOptions {
 }
 
 export interface ProductsResponse {
-  data: object[]
+  data: Product[]
   metadata: object
   msg?: string
   next?: () => Promise<ProductsResponse>
@@ -108,7 +108,7 @@ export class Products {
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 
-  create(product: Product): Promise<ProductsResponse> {
+  create(product: Product): Promise<ProductResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
@@ -116,9 +116,9 @@ export class Products {
         response.status !== 200 && reject(new errors.ProductsCreateFailed())
 
         return resolve({
-          data: response.data.results,
+          data: response.data.results[0],
           metadata: { count: response.data.count }
-        } as ProductsResponse)
+        } as ProductResponse)
       } catch (err) {
         return reject(new errors.ProductsCreateFailed())
       }
