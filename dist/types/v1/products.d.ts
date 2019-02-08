@@ -55,7 +55,7 @@ export interface ProductsOptions {
     base?: string;
 }
 export interface ProductsResponse {
-    data: object[];
+    data: Product[];
     metadata: object;
     msg?: string;
     next?: () => Promise<ProductsResponse>;
@@ -82,7 +82,7 @@ export declare class Products {
     http: Client;
     options: ProductsOptions;
     constructor(options: ProductsOptions, http: Client);
-    create(product: Product): Promise<ProductsResponse>;
+    create(product: Product): Promise<ProductResponse>;
     getAll(options?: ProductsOptions | undefined): Promise<ProductsResponse>;
     get(productId: string): Promise<ProductResponse>;
     meta(): Promise<ProductsResponse>;

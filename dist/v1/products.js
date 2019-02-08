@@ -70,7 +70,7 @@ var Products = /** @class */ (function () {
                         response = _a.sent();
                         response.status !== 200 && reject(new errors.ProductsCreateFailed());
                         return [2 /*return*/, resolve({
-                                data: response.data.results,
+                                data: response.data.results[0],
                                 metadata: { count: response.data.count }
                             })];
                     case 3:

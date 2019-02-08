@@ -1,3 +1,10 @@
+## [3.13.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.13.0...v3.13.1) (2019-02-08)
+
+
+### Bug Fixes
+
+* **products:** fixes misaligned create response ([12a1dae](https://github.com/tillhub/tillhub-sdk-javascript/commit/12a1dae))
+
 # [3.13.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.12.0...v3.13.0) (2019-02-08)
 
 
