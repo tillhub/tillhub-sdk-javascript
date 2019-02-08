@@ -18,12 +18,11 @@ if (process.env.SYSTEM_TEST) {
   user.apiKey = process.env.SYSTEM_TEST_API_KEY || user.apiKey
 }
 
+const productId = 'abc123'
+
 const requestObject = {
-  productId: 'abc123',
-  body: {
-    name: 'iPhone',
-    custom_id: '23455'
-  }
+  name: 'iPhone',
+  custom_id: '23455'
 }
 
 const legacyId = '4564'
@@ -35,8 +34,6 @@ afterEach(() => {
 
 describe('v1: Products', () => {
   it('can update one', async () => {
-    const { body, productId } = requestObject
-
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
@@ -57,7 +54,12 @@ describe('v1: Products', () => {
           return [
             200,
             {
-              results: body
+              results: [
+                {
+                  id: productId,
+                  ...requestObject
+                }
+              ]
             }
           ]
         })
@@ -81,14 +83,12 @@ describe('v1: Products', () => {
 
     expect(product).toBeInstanceOf(v1.Products)
 
-    const { data } = await product.update(requestObject)
+    const { data } = await product.put(productId, requestObject)
 
-    expect(data).toEqual(body)
+    expect(data.custom_id).toEqual(requestObject.custom_id)
   })
 
   it('rejects on status codes that are not 200', async () => {
-    const { productId } = requestObject
-
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
         .onPost('https://api.tillhub.com/api/v0/users/login')
@@ -128,7 +128,7 @@ describe('v1: Products', () => {
     })
 
     try {
-      await th.products().update(requestObject)
+      await th.products().put(productId, requestObject)
     } catch (err) {
       expect(err.name).toBe('ProductsUpdateFailed')
     }
