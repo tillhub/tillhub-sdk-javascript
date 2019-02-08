@@ -1,3 +1,10 @@
+# [3.13.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.12.0...v3.13.0) (2019-02-08)
+
+
+### Features
+
+* **stock-book:** Add optional query param ([68db22a](https://github.com/tillhub/tillhub-sdk-javascript/commit/68db22a))
+
 # [3.12.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.11.3...v3.12.0) (2019-02-07)
 
 
