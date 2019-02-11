@@ -895,7 +895,7 @@ var BranchCreationFailed = /** @class */ (function (_super) {
         if (message === void 0) { message = 'Could not create branch'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
-        _this.name = 'VoucherPostFailed';
+        _this.name = 'BranchCreationFailed';
         return _this;
     }
     return BranchCreationFailed;
@@ -925,6 +925,78 @@ var BranchDeleteFailed = /** @class */ (function (_super) {
     return BranchDeleteFailed;
 }(BaseError));
 exports.BranchDeleteFailed = BranchDeleteFailed;
+var DiscountsFetchFailed = /** @class */ (function (_super) {
+    __extends(DiscountsFetchFailed, _super);
+    function DiscountsFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch discounts'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'DiscountsFetchFailed';
+        return _this;
+    }
+    return DiscountsFetchFailed;
+}(BaseError));
+exports.DiscountsFetchFailed = DiscountsFetchFailed;
+var DiscountFetchFailed = /** @class */ (function (_super) {
+    __extends(DiscountFetchFailed, _super);
+    function DiscountFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch discount'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'DiscounteFetchFailed';
+        return _this;
+    }
+    return DiscountFetchFailed;
+}(BaseError));
+exports.DiscountFetchFailed = DiscountFetchFailed;
+var DiscountPutFailed = /** @class */ (function (_super) {
+    __extends(DiscountPutFailed, _super);
+    function DiscountPutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not alter discount'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'DiscountPutFailed';
+        return _this;
+    }
+    return DiscountPutFailed;
+}(BaseError));
+exports.DiscountPutFailed = DiscountPutFailed;
+var DiscountCreationFailed = /** @class */ (function (_super) {
+    __extends(DiscountCreationFailed, _super);
+    function DiscountCreationFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create discount'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'DiscountCreationFailed';
+        return _this;
+    }
+    return DiscountCreationFailed;
+}(BaseError));
+exports.DiscountCreationFailed = DiscountCreationFailed;
+var DiscountsCountFailed = /** @class */ (function (_super) {
+    __extends(DiscountsCountFailed, _super);
+    function DiscountsCountFailed(message, properties) {
+        if (message === void 0) { message = 'Could not count discounts'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'DiscountsCountFailed';
+        return _this;
+    }
+    return DiscountsCountFailed;
+}(BaseError));
+exports.DiscountsCountFailed = DiscountsCountFailed;
+var DiscountDeleteFailed = /** @class */ (function (_super) {
+    __extends(DiscountDeleteFailed, _super);
+    function DiscountDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete discount'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'DiscountDeleteFailed';
+        return _this;
+    }
+    return DiscountDeleteFailed;
+}(BaseError));
+exports.DiscountDeleteFailed = DiscountDeleteFailed;
 var CustomersFetchFailed = /** @class */ (function (_super) {
     __extends(CustomersFetchFailed, _super);
     function CustomersFetchFailed(message, properties) {

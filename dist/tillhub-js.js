@@ -218,18 +218,18 @@ var TillhubClient = /** @class */ (function (_super) {
         return this.generateAuthenticatedInstance(v0.Branches);
     };
     /**
+     * Create an authenticated discounts instance
+     *
+     */
+    TillhubClient.prototype.discounts = function () {
+        return this.generateAuthenticatedInstance(v0.Discounts);
+    };
+    /**
      * Create an authenticated customers instance
      *
      */
     TillhubClient.prototype.customers = function () {
-        if (!this.options ||
-            !this.options.base ||
-            !this.http ||
-            !this.auth ||
-            !this.auth.authenticated) {
-            throw new errors.UninstantiatedClient();
-        }
-        return new v0.Customers({ user: this.auth.user, base: this.options.base }, this.http);
+        return this.generateAuthenticatedInstance(v0.Customers);
     };
     /**
      * Create an authenticated vouchers instance
@@ -348,14 +348,7 @@ var TillhubClient = /** @class */ (function (_super) {
      *
      */
     TillhubClient.prototype.staff = function () {
-        if (!this.options ||
-            !this.options.base ||
-            !this.http ||
-            !this.auth ||
-            !this.auth.authenticated) {
-            throw new errors.UninstantiatedClient();
-        }
-        return new v0.Staff({ user: this.auth.user, base: this.options.base }, this.http);
+        return this.generateAuthenticatedInstance(v0.Staff);
     };
     /**
      * Create an authenticated Staff instance
@@ -376,14 +369,7 @@ var TillhubClient = /** @class */ (function (_super) {
      *
      */
     TillhubClient.prototype.registers = function () {
-        if (!this.options ||
-            !this.options.base ||
-            !this.http ||
-            !this.auth ||
-            !this.auth.authenticated) {
-            throw new errors.UninstantiatedClient();
-        }
-        return new v1.Registers({ user: this.auth.user, base: this.options.base }, this.http);
+        return this.generateAuthenticatedInstance(v1.Registers);
     };
     /**
      * Create an authenticated Images instance

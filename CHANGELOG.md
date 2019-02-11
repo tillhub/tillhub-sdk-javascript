@@ -1,3 +1,16 @@
+# [3.15.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.14.0...v3.15.0) (2019-02-11)
+
+
+### Bug Fixes
+
+* **errors:** align error name with class name ([54ee155](https://github.com/tillhub/tillhub-sdk-javascript/commit/54ee155))
+
+
+### Features
+
+* adds discounts ([342754f](https://github.com/tillhub/tillhub-sdk-javascript/commit/342754f))
+* **discounts:** expose discounts ([e32098c](https://github.com/tillhub/tillhub-sdk-javascript/commit/e32098c))
+
 # [3.14.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.13.2...v3.14.0) (2019-02-11)
 
 
