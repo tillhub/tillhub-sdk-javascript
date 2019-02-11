@@ -1,3 +1,10 @@
+# [3.14.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.13.2...v3.14.0) (2019-02-11)
+
+
+### Features
+
+* added print API routes ([47b64ac](https://github.com/tillhub/tillhub-sdk-javascript/commit/47b64ac))
+
 ## [3.13.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.13.1...v3.13.2) (2019-02-08)
 
 

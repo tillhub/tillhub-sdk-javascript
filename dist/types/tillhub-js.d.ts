@@ -168,6 +168,11 @@ export declare class TillhubClient extends events.EventEmitter {
      *
      */
     notifications(): v0.Notifications;
+    /**
+     * Create an authenticated Print instance
+     *
+     */
+    print(): v0.Print;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;

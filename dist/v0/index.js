@@ -42,4 +42,6 @@ var images_1 = require("./images");
 exports.Images = images_1.Images;
 var notifications_1 = require("./notifications");
 exports.Notifications = notifications_1.Notifications;
+var print_1 = require("./print");
+exports.Print = print_1.Print;
 //# sourceMappingURL=index.js.map

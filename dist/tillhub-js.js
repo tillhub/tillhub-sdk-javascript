@@ -413,6 +413,13 @@ var TillhubClient = /** @class */ (function (_super) {
         }
         return new v0.Notifications({ user: this.auth.user, base: this.options.base }, this.http);
     };
+    /**
+     * Create an authenticated Print instance
+     *
+     */
+    TillhubClient.prototype.print = function () {
+        return this.generateAuthenticatedInstance(v0.Print);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));

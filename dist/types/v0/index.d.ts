@@ -18,4 +18,5 @@ import { Staff } from './staff';
 import { AuditActions } from './auditActions';
 import { Images } from './images';
 import { Notifications } from './notifications';
-export { Auth, Taxes, Deliveries, ProductGroups, Accounts, ExpenseAccounts, PaymentOptions, Configurations, Users, Branches, Customers, Vouchers, VoucherLogs, Invoices, Stocks, StocksBook, Orders, Analytics, Staff, AuditActions, Images, Notifications };
+import { Print } from './print';
+export { Auth, Taxes, Deliveries, ProductGroups, Accounts, ExpenseAccounts, PaymentOptions, Configurations, Users, Branches, Customers, Vouchers, VoucherLogs, Invoices, Stocks, StocksBook, Orders, Analytics, Staff, AuditActions, Images, Notifications, Print };

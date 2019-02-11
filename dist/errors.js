@@ -1860,4 +1860,202 @@ var ProductGroupsFiltersFetchFailed = /** @class */ (function (_super) {
     return ProductGroupsFiltersFetchFailed;
 }(BaseError));
 exports.ProductGroupsFiltersFetchFailed = ProductGroupsFiltersFetchFailed;
+/**
+ * PRINT API
+ */
+/* Jobs */
+var PrintJobsFetchFailed = /** @class */ (function (_super) {
+    __extends(PrintJobsFetchFailed, _super);
+    function PrintJobsFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch print jobs'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PrintJobsFetchFailed';
+        return _this;
+    }
+    return PrintJobsFetchFailed;
+}(BaseError));
+exports.PrintJobsFetchFailed = PrintJobsFetchFailed;
+var PrintJobFetchFailed = /** @class */ (function (_super) {
+    __extends(PrintJobFetchFailed, _super);
+    function PrintJobFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch print job'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PrintJobFetchFailed';
+        return _this;
+    }
+    return PrintJobFetchFailed;
+}(BaseError));
+exports.PrintJobFetchFailed = PrintJobFetchFailed;
+var PrintJobCreateFailed = /** @class */ (function (_super) {
+    __extends(PrintJobCreateFailed, _super);
+    function PrintJobCreateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create print job'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PrintJobCreateFailed';
+        return _this;
+    }
+    return PrintJobCreateFailed;
+}(BaseError));
+exports.PrintJobCreateFailed = PrintJobCreateFailed;
+var PrintJobDeleteFailed = /** @class */ (function (_super) {
+    __extends(PrintJobDeleteFailed, _super);
+    function PrintJobDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete print job'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PrintJobDeleteFailed';
+        return _this;
+    }
+    return PrintJobDeleteFailed;
+}(BaseError));
+exports.PrintJobDeleteFailed = PrintJobDeleteFailed;
+var PrintJobUpdateFailed = /** @class */ (function (_super) {
+    __extends(PrintJobUpdateFailed, _super);
+    function PrintJobUpdateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not update print job'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PrintJobUpdateFailed';
+        return _this;
+    }
+    return PrintJobUpdateFailed;
+}(BaseError));
+exports.PrintJobUpdateFailed = PrintJobUpdateFailed;
+var PrintJobDataFetchFailed = /** @class */ (function (_super) {
+    __extends(PrintJobDataFetchFailed, _super);
+    function PrintJobDataFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch print job data'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PrintJobDataFetchFailed';
+        return _this;
+    }
+    return PrintJobDataFetchFailed;
+}(BaseError));
+exports.PrintJobDataFetchFailed = PrintJobDataFetchFailed;
+/* Messages */
+var PrintMessagesFetchFailed = /** @class */ (function (_super) {
+    __extends(PrintMessagesFetchFailed, _super);
+    function PrintMessagesFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch print messages'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PrintMessagesFetchFailed';
+        return _this;
+    }
+    return PrintMessagesFetchFailed;
+}(BaseError));
+exports.PrintMessagesFetchFailed = PrintMessagesFetchFailed;
+var PrintMessageFetchFailed = /** @class */ (function (_super) {
+    __extends(PrintMessageFetchFailed, _super);
+    function PrintMessageFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch print message'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PrintMessageFetchFailed';
+        return _this;
+    }
+    return PrintMessageFetchFailed;
+}(BaseError));
+exports.PrintMessageFetchFailed = PrintMessageFetchFailed;
+var PrintMessageCreateFailed = /** @class */ (function (_super) {
+    __extends(PrintMessageCreateFailed, _super);
+    function PrintMessageCreateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create print message'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PrintMessageCreateFailed';
+        return _this;
+    }
+    return PrintMessageCreateFailed;
+}(BaseError));
+exports.PrintMessageCreateFailed = PrintMessageCreateFailed;
+var PrintMessageDeleteFailed = /** @class */ (function (_super) {
+    __extends(PrintMessageDeleteFailed, _super);
+    function PrintMessageDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete print message'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PrintMessageDeleteFailed';
+        return _this;
+    }
+    return PrintMessageDeleteFailed;
+}(BaseError));
+exports.PrintMessageDeleteFailed = PrintMessageDeleteFailed;
+var PrintMessageUpdateFailed = /** @class */ (function (_super) {
+    __extends(PrintMessageUpdateFailed, _super);
+    function PrintMessageUpdateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not update print message'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PrintMessageUpdateFailed';
+        return _this;
+    }
+    return PrintMessageUpdateFailed;
+}(BaseError));
+exports.PrintMessageUpdateFailed = PrintMessageUpdateFailed;
+/* Printers */
+var PrintersFetchFailed = /** @class */ (function (_super) {
+    __extends(PrintersFetchFailed, _super);
+    function PrintersFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch printers'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PrintersFetchFailed';
+        return _this;
+    }
+    return PrintersFetchFailed;
+}(BaseError));
+exports.PrintersFetchFailed = PrintersFetchFailed;
+var PrinterFetchFailed = /** @class */ (function (_super) {
+    __extends(PrinterFetchFailed, _super);
+    function PrinterFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch printer'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PrinterFetchFailed';
+        return _this;
+    }
+    return PrinterFetchFailed;
+}(BaseError));
+exports.PrinterFetchFailed = PrinterFetchFailed;
+var PrinterCreateFailed = /** @class */ (function (_super) {
+    __extends(PrinterCreateFailed, _super);
+    function PrinterCreateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create printer'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PrinterCreateFailed';
+        return _this;
+    }
+    return PrinterCreateFailed;
+}(BaseError));
+exports.PrinterCreateFailed = PrinterCreateFailed;
+var PrinterDeleteFailed = /** @class */ (function (_super) {
+    __extends(PrinterDeleteFailed, _super);
+    function PrinterDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete printer'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PrinterDeleteFailed';
+        return _this;
+    }
+    return PrinterDeleteFailed;
+}(BaseError));
+exports.PrinterDeleteFailed = PrinterDeleteFailed;
+var PrinterUpdateFailed = /** @class */ (function (_super) {
+    __extends(PrinterUpdateFailed, _super);
+    function PrinterUpdateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not update printer'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PrinterUpdateFailed';
+        return _this;
+    }
+    return PrinterUpdateFailed;
+}(BaseError));
+exports.PrinterUpdateFailed = PrinterUpdateFailed;
 //# sourceMappingURL=errors.js.map
