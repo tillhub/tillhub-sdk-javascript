@@ -492,6 +492,14 @@ export class TillhubClient extends events.EventEmitter {
 
     return new v0.Notifications({ user: this.auth.user, base: this.options.base }, this.http)
   }
+
+  /**
+   * Create an authenticated Print instance
+   *
+   */
+  print(): v0.Print {
+    return this.generateAuthenticatedInstance(v0.Print)
+  }
 }
 
 export class Tillhub extends TillhubClient {

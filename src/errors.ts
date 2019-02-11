@@ -1111,3 +1111,122 @@ export class ProductGroupsFiltersFetchFailed extends BaseError {
     super(message, properties)
   }
 }
+
+/**
+ * PRINT API
+ */
+
+/* Jobs */
+export class PrintJobsFetchFailed extends BaseError {
+  public name = 'PrintJobsFetchFailed'
+  constructor(public message: string = 'Could not fetch print jobs', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class PrintJobFetchFailed extends BaseError {
+  public name = 'PrintJobFetchFailed'
+  constructor(public message: string = 'Could not fetch print job', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class PrintJobCreateFailed extends BaseError {
+  public name = 'PrintJobCreateFailed'
+  constructor(public message: string = 'Could not create print job', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class PrintJobDeleteFailed extends BaseError {
+  public name = 'PrintJobDeleteFailed'
+  constructor(public message: string = 'Could not delete print job', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class PrintJobUpdateFailed extends BaseError {
+  public name = 'PrintJobUpdateFailed'
+  constructor(public message: string = 'Could not update print job', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class PrintJobDataFetchFailed extends BaseError {
+  public name = 'PrintJobDataFetchFailed'
+  constructor(public message: string = 'Could not fetch print job data', properties?: any) {
+    super(message, properties)
+  }
+}
+
+/* Messages */
+export class PrintMessagesFetchFailed extends BaseError {
+  public name = 'PrintMessagesFetchFailed'
+  constructor(public message: string = 'Could not fetch print messages', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class PrintMessageFetchFailed extends BaseError {
+  public name = 'PrintMessageFetchFailed'
+  constructor(public message: string = 'Could not fetch print message', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class PrintMessageCreateFailed extends BaseError {
+  public name = 'PrintMessageCreateFailed'
+  constructor(public message: string = 'Could not create print message', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class PrintMessageDeleteFailed extends BaseError {
+  public name = 'PrintMessageDeleteFailed'
+  constructor(public message: string = 'Could not delete print message', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class PrintMessageUpdateFailed extends BaseError {
+  public name = 'PrintMessageUpdateFailed'
+  constructor(public message: string = 'Could not update print message', properties?: any) {
+    super(message, properties)
+  }
+}
+
+/* Printers */
+export class PrintersFetchFailed extends BaseError {
+  public name = 'PrintersFetchFailed'
+  constructor(public message: string = 'Could not fetch printers', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class PrinterFetchFailed extends BaseError {
+  public name = 'PrinterFetchFailed'
+  constructor(public message: string = 'Could not fetch printer', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class PrinterCreateFailed extends BaseError {
+  public name = 'PrinterCreateFailed'
+  constructor(public message: string = 'Could not create printer', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class PrinterDeleteFailed extends BaseError {
+  public name = 'PrinterDeleteFailed'
+  constructor(public message: string = 'Could not delete printer', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class PrinterUpdateFailed extends BaseError {
+  public name = 'PrinterUpdateFailed'
+  constructor(public message: string = 'Could not update printer', properties?: any) {
+    super(message, properties)
+  }
+}
