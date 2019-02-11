@@ -256,17 +256,7 @@ export class TillhubClient extends events.EventEmitter {
    *
    */
   customers(): v0.Customers {
-    if (
-      !this.options ||
-      !this.options.base ||
-      !this.http ||
-      !this.auth ||
-      !this.auth.authenticated
-    ) {
-      throw new errors.UninstantiatedClient()
-    }
-
-    return new v0.Customers({ user: this.auth.user, base: this.options.base }, this.http)
+    return this.generateAuthenticatedInstance(v0.Customers)
   }
 
   /**
@@ -416,17 +406,7 @@ export class TillhubClient extends events.EventEmitter {
    *
    */
   staff(): v0.Staff {
-    if (
-      !this.options ||
-      !this.options.base ||
-      !this.http ||
-      !this.auth ||
-      !this.auth.authenticated
-    ) {
-      throw new errors.UninstantiatedClient()
-    }
-
-    return new v0.Staff({ user: this.auth.user, base: this.options.base }, this.http)
+    return this.generateAuthenticatedInstance(v0.Staff)
   }
 
   /**
@@ -452,17 +432,7 @@ export class TillhubClient extends events.EventEmitter {
    *
    */
   registers(): v1.Registers {
-    if (
-      !this.options ||
-      !this.options.base ||
-      !this.http ||
-      !this.auth ||
-      !this.auth.authenticated
-    ) {
-      throw new errors.UninstantiatedClient()
-    }
-
-    return new v1.Registers({ user: this.auth.user, base: this.options.base }, this.http)
+    return this.generateAuthenticatedInstance(v1.Registers)
   }
 
   /**
