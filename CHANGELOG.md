@@ -1,3 +1,10 @@
+## [3.15.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.15.0...v3.15.1) (2019-02-11)
+
+
+### Bug Fixes
+
+* **discounts:** fixes incorrect group type ([6796a0f](https://github.com/tillhub/tillhub-sdk-javascript/commit/6796a0f))
+
 # [3.15.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.14.0...v3.15.0) (2019-02-11)
 
 
