@@ -525,7 +525,7 @@ export class BranchPutFailed extends BaseError {
 }
 
 export class BranchCreationFailed extends BaseError {
-  public name = 'VoucherPostFailed'
+  public name = 'BranchCreationFailed'
   constructor(public message: string = 'Could not create branch', properties?: any) {
     super(message, properties)
   }
