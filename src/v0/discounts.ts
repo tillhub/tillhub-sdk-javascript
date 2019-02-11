@@ -31,7 +31,7 @@ export interface DiscountResponse {
 }
 
 type DiscountType = 'percentage' | 'value'
-type DiscountGroupType = 'group' | 'customer'
+type DiscountGroupType = 'cart' | 'customer'
 
 export interface Discount {
   id?: string
