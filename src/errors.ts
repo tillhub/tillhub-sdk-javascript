@@ -545,6 +545,48 @@ export class BranchDeleteFailed extends BaseError {
   }
 }
 
+export class DiscountsFetchFailed extends BaseError {
+  public name = 'DiscountsFetchFailed'
+  constructor(public message: string = 'Could not fetch discounts', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class DiscountFetchFailed extends BaseError {
+  public name = 'DiscounteFetchFailed'
+  constructor(public message: string = 'Could not fetch discount', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class DiscountPutFailed extends BaseError {
+  public name = 'DiscountPutFailed'
+  constructor(public message: string = 'Could not alter discount', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class DiscountCreationFailed extends BaseError {
+  public name = 'DiscountCreationFailed'
+  constructor(public message: string = 'Could not create discount', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class DiscountsCountFailed extends BaseError {
+  public name = 'DiscountsCountFailed'
+  constructor(public message: string = 'Could not count discounts', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class DiscountDeleteFailed extends BaseError {
+  public name = 'DiscountDeleteFailed'
+  constructor(public message: string = 'Could not delete discount', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class CustomersFetchFailed extends BaseError {
   public name = 'CustomersFetchFailed'
   constructor(public message: string = 'Could not fetch customers', properties?: any) {

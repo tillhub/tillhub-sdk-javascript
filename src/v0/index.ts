@@ -19,6 +19,7 @@ import { AuditActions } from './auditActions'
 import { Images } from './images'
 import { Notifications } from './notifications'
 import { Print } from './print'
+import { Discounts } from './discounts'
 
 export {
   Auth,
@@ -32,6 +33,7 @@ export {
   Users,
   Branches,
   Customers,
+  Discounts,
   Vouchers,
   VoucherLogs,
   Invoices,
