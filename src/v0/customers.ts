@@ -83,7 +83,7 @@ export interface CustomerCompany {
 
 export interface CustomerImage {
   '1x': string
-  'avatar': string
+  avatar: string
 }
 
 export interface CustomerInternalDiscount {
@@ -102,6 +102,7 @@ export interface CustomerDiscount {
 }
 
 export interface Customer {
+  gender?: string | null
   firstname?: string
   lastname?: string
   middlename?: string | null
@@ -151,11 +152,15 @@ export class Customers {
             queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
           }
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${queryString ? `?${queryString}` : ''}`
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
+            queryString ? `?${queryString}` : ''
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) reject(new errors.CustomersFetchFailed(undefined, { status: response.status }))
+        if (response.status !== 200) {
+          reject(new errors.CustomersFetchFailed(undefined, { status: response.status }))
+        }
 
         if (response.data.cursor && response.data.cursor.next) {
           next = (): Promise<CustomersResponse> => this.getAll({ uri: response.data.cursor.next })
@@ -242,12 +247,11 @@ export class Customers {
         }
 
         const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) return reject(new errors.CustomersMetaFailed(undefined, { status: response.status }))
-
+        if (response.status !== 200) {
+          return reject(new errors.CustomersMetaFailed(undefined, { status: response.status }))
+        }
         if (!response.data.results[0]) {
-          return reject(
-            new errors.CustomersMetaFailed()
-          )
+          return reject(new errors.CustomersMetaFailed())
         }
 
         return resolve({
