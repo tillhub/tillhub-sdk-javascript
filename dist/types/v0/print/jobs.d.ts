@@ -32,7 +32,7 @@ export declare class Jobs {
     constructor(options: PrintOptions, http: Client, uriHelper: UriHelper);
     getAll(query?: Object): Promise<PrintJobsResponse>;
     get(jobId: string): Promise<PrintJobResponse>;
-    create(job: Object): Promise<PrintJobResponse>;
+    create(job: Object, query?: Object): Promise<PrintJobResponse>;
     update(jobId: string, job: Object): Promise<PrintJobResponse>;
     delete(jobId: string): Promise<PrintJobResponse>;
     getData(jobId: string): Promise<PrintJobDataResponse>;

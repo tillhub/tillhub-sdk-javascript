@@ -22,9 +22,16 @@ var Print = /** @class */ (function () {
     Print.prototype.printers = function () {
         return new printers_1.Printers(this.options, this.http, this.uriHelper);
     };
-    Print.prototype.subscribeTo = function (eventName) {
+    /**
+     * Returns an EventSource instance as an endpoint to receive events for the given event name.
+     * Subscription state and event handling can be handled via setting `onmessage`, `onopen`, and `onerror` callbacks on the EventSource instance.
+     * @param {string} eventName - name of the event to subscribe to (e.g. `jobs`, `messages`, `printers`)
+     * @param {Object} [query] - query object
+     * @returns {EventSource} - event source notifying of server-sent events
+     */
+    Print.prototype.subscribeTo = function (eventName, query) {
         var base = this.uriHelper.generateBaseUri("/events/" + eventName);
-        var uri = this.uriHelper.generateUriWithQuery(base);
+        var uri = this.uriHelper.generateUriWithQuery(base, query);
         return new EventSource(uri);
     };
     return Print;

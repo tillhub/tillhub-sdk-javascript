@@ -1,3 +1,10 @@
+## [3.16.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.16.0...v3.16.1) (2019-02-12)
+
+
+### Bug Fixes
+
+* **print:** added query support for `subscribeTo()` + `jobs().create()` ([b58a6d0](https://github.com/tillhub/tillhub-sdk-javascript/commit/b58a6d0))
+
 # [3.16.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.15.1...v3.16.0) (2019-02-12)
 
 

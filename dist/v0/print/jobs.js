@@ -102,7 +102,7 @@ var Jobs = /** @class */ (function () {
             });
         });
     };
-    Jobs.prototype.create = function (job) {
+    Jobs.prototype.create = function (job, query) {
         return __awaiter(this, void 0, void 0, function () {
             var base, uri, response, e_3;
             return __generator(this, function (_a) {
@@ -110,7 +110,7 @@ var Jobs = /** @class */ (function () {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri("/jobs");
-                        uri = this.uriHelper.generateUriWithQuery(base);
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         return [4 /*yield*/, this.http.getClient().post(uri, job)];
                     case 1:
                         response = _a.sent();
