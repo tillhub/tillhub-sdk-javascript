@@ -1,3 +1,10 @@
+# [3.16.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.15.1...v3.16.0) (2019-02-12)
+
+
+### Features
+
+* **customers:** add gender ([55c2cfc](https://github.com/tillhub/tillhub-sdk-javascript/commit/55c2cfc))
+
 ## [3.15.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.15.0...v3.15.1) (2019-02-11)
 
 

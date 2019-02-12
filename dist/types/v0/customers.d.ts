@@ -68,7 +68,7 @@ export interface CustomerCompany {
 }
 export interface CustomerImage {
     '1x': string;
-    'avatar': string;
+    avatar: string;
 }
 export interface CustomerInternalDiscount {
     id: string;
@@ -84,6 +84,7 @@ export interface CustomerDiscount {
     group: 'cart' | 'customer';
 }
 export interface Customer {
+    gender?: string | null;
     firstname?: string;
     lastname?: string;
     middlename?: string | null;

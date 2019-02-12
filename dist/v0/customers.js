@@ -88,8 +88,9 @@ var Customers = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response_1 = _a.sent();
-                        if (response_1.status !== 200)
+                        if (response_1.status !== 200) {
                             reject(new errors.CustomersFetchFailed(undefined, { status: response_1.status }));
+                        }
                         if (response_1.data.cursor && response_1.data.cursor.next) {
                             next = function () { return _this.getAll({ uri: response_1.data.cursor.next }); };
                         }
@@ -211,8 +212,9 @@ var Customers = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();
-                        if (response.status !== 200)
+                        if (response.status !== 200) {
                             return [2 /*return*/, reject(new errors.CustomersMetaFailed(undefined, { status: response.status }))];
+                        }
                         if (!response.data.results[0]) {
                             return [2 /*return*/, reject(new errors.CustomersMetaFailed())];
                         }
