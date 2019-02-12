@@ -77,10 +77,10 @@ export class Jobs {
     }
   }
 
-  async create(job: Object): Promise<PrintJobResponse> {
+  async create(job: Object, query?: Object): Promise<PrintJobResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/jobs`)
-      const uri = this.uriHelper.generateUriWithQuery(base)
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
       const response = await this.http.getClient().post(uri, job)
       if (response.status !== 200) throw new errors.PrintJobCreateFailed()
 
