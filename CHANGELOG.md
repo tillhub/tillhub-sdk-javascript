@@ -1,3 +1,10 @@
+## [3.17.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.17.0...v3.17.1) (2019-02-18)
+
+
+### Bug Fixes
+
+* **products:** adds proper query option typing ([c8679e3](https://github.com/tillhub/tillhub-sdk-javascript/commit/c8679e3))
+
 # [3.17.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.16.1...v3.17.0) (2019-02-18)
 
 

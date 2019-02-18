@@ -71,7 +71,9 @@ export interface ProductResponse {
 export interface ProductsOptions {
     limit?: number;
     uri?: string;
-    query?: any;
+    query?: {
+        [key: string]: any;
+    };
 }
 export interface ProductsUpdateRequestObject {
     productId: string;
