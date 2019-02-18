@@ -30,12 +30,14 @@ export interface DiscountResponse {
   msg?: string
 }
 
-type DiscountType = 'percentage' | 'value'
-type DiscountGroupType = 'cart' | 'customer'
+export type DiscountType = 'percentage' | 'value'
+export type DiscountGroupType = 'cart' | 'customer'
 
 export interface Discount {
   id?: string
 }
+
+export interface Constraints {}
 
 export interface Discount {
   amount?: number
@@ -45,6 +47,7 @@ export interface Discount {
   group: DiscountGroupType
   active?: boolean
   deleted?: boolean
+  constraints?: Constraints | null
 }
 
 export class Discounts {
@@ -74,7 +77,9 @@ export class Discounts {
             queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
           }
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${queryString ? `?${queryString}` : ''}`
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
+            queryString ? `?${queryString}` : ''
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
