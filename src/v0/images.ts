@@ -11,7 +11,7 @@ export interface ImagesResponse {
 }
 
 export interface ImagesQuery {
-  subsystem: 'products' | 'customers' | 'branches'
+  subsystem: 'products' | 'customers' | 'branches' | 'staff'
   prefix: string
 }
 
