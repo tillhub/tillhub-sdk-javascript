@@ -7,7 +7,7 @@ export interface ImagesResponse {
     data: object;
 }
 export interface ImagesQuery {
-    subsystem: 'products' | 'customers' | 'branches';
+    subsystem: 'products' | 'customers' | 'branches' | 'staff';
     prefix: string;
 }
 export declare class Images {

@@ -1,3 +1,10 @@
+# [3.18.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.17.1...v3.18.0) (2019-02-18)
+
+
+### Features
+
+* add staff subsystem to image handler ([ec6bb94](https://github.com/tillhub/tillhub-sdk-javascript/commit/ec6bb94))
+
 ## [3.17.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.17.0...v3.17.1) (2019-02-18)
 
 
