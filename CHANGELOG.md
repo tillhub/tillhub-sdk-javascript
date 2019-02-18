@@ -1,3 +1,10 @@
+# [3.17.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.16.1...v3.17.0) (2019-02-18)
+
+
+### Features
+
+* **discounts:** time range constraints ([1eff7a8](https://github.com/tillhub/tillhub-sdk-javascript/commit/1eff7a8))
+
 ## [3.16.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.16.0...v3.16.1) (2019-02-12)
 
 

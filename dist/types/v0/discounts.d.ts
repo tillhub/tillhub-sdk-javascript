@@ -23,10 +23,12 @@ export interface DiscountResponse {
     };
     msg?: string;
 }
-declare type DiscountType = 'percentage' | 'value';
-declare type DiscountGroupType = 'cart' | 'customer';
+export declare type DiscountType = 'percentage' | 'value';
+export declare type DiscountGroupType = 'cart' | 'customer';
 export interface Discount {
     id?: string;
+}
+export interface Constraints {
 }
 export interface Discount {
     amount?: number;
@@ -36,6 +38,7 @@ export interface Discount {
     group: DiscountGroupType;
     active?: boolean;
     deleted?: boolean;
+    constraints?: Constraints | null;
 }
 export declare class Discounts {
     endpoint: string;
@@ -49,4 +52,3 @@ export declare class Discounts {
     count(): Promise<DiscountsResponse>;
     delete(discountId: string): Promise<DiscountResponse>;
 }
-export {};
