@@ -1019,6 +1019,16 @@ export class StatisticsProductFetchFailed extends BaseError {
   }
 }
 
+export class StatisticsProductChildrenFetchFailed extends BaseError {
+  public name = 'StatisticsProductChildrenFetchFailed'
+  constructor(
+    public message: string = 'Could not fetch the Statistics Products Children',
+    properties?: any
+  ) {
+    super(message, properties)
+  }
+}
+
 export class StaffOverviewFetchFailed extends BaseError {
   public name = 'StaffOverviewFetchFailed'
   constructor(
