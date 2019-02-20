@@ -886,3 +886,8 @@ export declare class PrinterUpdateFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class MessagesFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}

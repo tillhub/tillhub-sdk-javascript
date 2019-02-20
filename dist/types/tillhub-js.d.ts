@@ -174,6 +174,11 @@ export declare class TillhubClient extends events.EventEmitter {
      */
     notifications(): v0.Notifications;
     /**
+     * Create an authenticated Messages instance
+     *
+     */
+    messages(): v0.Messages;
+    /**
      * Create an authenticated Print instance
      *
      */

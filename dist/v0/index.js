@@ -46,4 +46,6 @@ var print_1 = require("./print");
 exports.Print = print_1.Print;
 var discounts_1 = require("./discounts");
 exports.Discounts = discounts_1.Discounts;
+var messages_1 = require("./messages");
+exports.Messages = messages_1.Messages;
 //# sourceMappingURL=index.js.map

@@ -1,3 +1,10 @@
+# [3.20.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.19.0...v3.20.0) (2019-02-20)
+
+
+### Features
+
+* **messages:** add entity and get all handler ([7d6f928](https://github.com/tillhub/tillhub-sdk-javascript/commit/7d6f928))
+
 # [3.19.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.18.0...v3.19.0) (2019-02-20)
 
 

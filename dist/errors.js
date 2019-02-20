@@ -2142,4 +2142,16 @@ var PrinterUpdateFailed = /** @class */ (function (_super) {
     return PrinterUpdateFailed;
 }(BaseError));
 exports.PrinterUpdateFailed = PrinterUpdateFailed;
+var MessagesFetchFailed = /** @class */ (function (_super) {
+    __extends(MessagesFetchFailed, _super);
+    function MessagesFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the messages'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'MessagesFetchFailed';
+        return _this;
+    }
+    return MessagesFetchFailed;
+}(BaseError));
+exports.MessagesFetchFailed = MessagesFetchFailed;
 //# sourceMappingURL=errors.js.map
