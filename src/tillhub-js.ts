@@ -106,7 +106,9 @@ export class TillhubClient extends events.EventEmitter {
       }
 
       if ((options.credentials as TokenAuth).token && clientOptions.headers) {
-        clientOptions.headers['Authorization'] = `Bearer ${(options.credentials as TokenAuth).token}`
+        clientOptions.headers['Authorization'] = `Bearer ${
+          (options.credentials as TokenAuth).token
+        }`
       }
 
       this.auth = new v1.Auth(authOptions)
@@ -117,7 +119,10 @@ export class TillhubClient extends events.EventEmitter {
     return false
   }
 
-  private generateAuthenticatedInstance<T>(type: { new(options: object, http: Client): T }, maybeOptions?: MaybeOptions): T {
+  private generateAuthenticatedInstance<T>(
+    type: { new (options: object, http: Client): T },
+    maybeOptions?: MaybeOptions
+  ): T {
     if (
       !this.options ||
       !this.options.base ||
@@ -128,11 +133,14 @@ export class TillhubClient extends events.EventEmitter {
       throw new errors.UninstantiatedClient()
     }
 
-    return new type({
-      user: this.auth.user,
-      base: this.options.base,
-      ...maybeOptions
-    }, this.http)
+    return new type(
+      {
+        user: this.auth.user,
+        base: this.options.base,
+        ...maybeOptions
+      },
+      this.http
+    )
   }
 
   /**
@@ -469,6 +477,24 @@ export class TillhubClient extends events.EventEmitter {
     }
 
     return new v0.Notifications({ user: this.auth.user, base: this.options.base }, this.http)
+  }
+
+  /**
+   * Create an authenticated Messages instance
+   *
+   */
+  messages(): v0.Messages {
+    if (
+      !this.options ||
+      !this.options.base ||
+      !this.http ||
+      !this.auth ||
+      !this.auth.authenticated
+    ) {
+      throw new errors.UninstantiatedClient()
+    }
+
+    return new v0.Messages({ user: this.auth.user, base: this.options.base }, this.http)
   }
 
   /**

@@ -1272,3 +1272,10 @@ export class PrinterUpdateFailed extends BaseError {
     super(message, properties)
   }
 }
+
+export class MessagesFetchFailed extends BaseError {
+  public name = 'MessagesFetchFailed'
+  constructor(public message: string = 'Could not fetch the messages', properties?: any) {
+    super(message, properties)
+  }
+}
