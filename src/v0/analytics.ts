@@ -209,12 +209,8 @@ export class Analytics {
   getReportsProducts(query?: ProductsOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        let uri = `${this.options.base}${this.endpoint}/${this.options.user}/reports/products`
-        const queryString = qs.stringify(query)
-
-        if (queryString) {
-          uri = `${uri}?${queryString}`
-        }
+        const base = this.uriHelper.generateBaseUri('/reports/products')
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.StatisticsProductFetchFailed())
@@ -226,6 +222,26 @@ export class Analytics {
         } as AnalyticsResponse)
       } catch (err) {
         return reject(new errors.StatisticsProductFetchFailed())
+      }
+    })
+  }
+
+  getProductsChildren(productNumber: String, query?: ProductsOptions | undefined): Promise<AnalyticsResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const base = this.uriHelper.generateBaseUri(`/reports/products/${productNumber}`)
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.StatisticsProductChildrenFetchFailed())
+        return resolve({
+          data: response.data.results,
+          metadata: {
+            count: response.data.count
+          }
+        } as AnalyticsResponse)
+      } catch (err) {
+        return reject(new errors.StatisticsProductChildrenFetchFailed())
       }
     })
   }
