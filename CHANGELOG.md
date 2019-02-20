@@ -1,3 +1,10 @@
+# [3.19.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.18.0...v3.19.0) (2019-02-20)
+
+
+### Features
+
+* added product children handler ([4a04fcc](https://github.com/tillhub/tillhub-sdk-javascript/commit/4a04fcc))
+
 # [3.18.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.17.1...v3.18.0) (2019-02-18)
 
 

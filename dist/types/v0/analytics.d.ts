@@ -109,6 +109,7 @@ export declare class Analytics {
     getRevenues(query: RevenuesOptions): Promise<AnalyticsResponse>;
     getRevenuesForHourOfDay(query: RevenuBasicOptions): Promise<AnalyticsResponse>;
     getReportsProducts(query?: ProductsOptions | undefined): Promise<AnalyticsResponse>;
+    getProductsChildren(productNumber: String, query?: ProductsOptions | undefined): Promise<AnalyticsResponse>;
     getStaffOverviewReport(): Promise<AnalyticsResponse>;
     getProductGroupsReport(staff?: StaffID): Promise<AnalyticsResponse>;
     getRefundsReport(staff?: StaffID): Promise<AnalyticsResponse>;

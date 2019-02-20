@@ -708,6 +708,11 @@ export declare class StatisticsProductFetchFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class StatisticsProductChildrenFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
 export declare class StaffOverviewFetchFailed extends BaseError {
     message: string;
     name: string;

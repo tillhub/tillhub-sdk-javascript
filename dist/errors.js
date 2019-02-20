@@ -1716,6 +1716,18 @@ var StatisticsProductFetchFailed = /** @class */ (function (_super) {
     return StatisticsProductFetchFailed;
 }(BaseError));
 exports.StatisticsProductFetchFailed = StatisticsProductFetchFailed;
+var StatisticsProductChildrenFetchFailed = /** @class */ (function (_super) {
+    __extends(StatisticsProductChildrenFetchFailed, _super);
+    function StatisticsProductChildrenFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the Statistics Products Children'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StatisticsProductChildrenFetchFailed';
+        return _this;
+    }
+    return StatisticsProductChildrenFetchFailed;
+}(BaseError));
+exports.StatisticsProductChildrenFetchFailed = StatisticsProductChildrenFetchFailed;
 var StaffOverviewFetchFailed = /** @class */ (function (_super) {
     __extends(StaffOverviewFetchFailed, _super);
     function StaffOverviewFetchFailed(message, properties) {
