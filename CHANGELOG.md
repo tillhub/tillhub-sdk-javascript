@@ -1,3 +1,10 @@
+## [3.22.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.22.0...v3.22.1) (2019-02-21)
+
+
+### Bug Fixes
+
+* **messages:** change query param name ([11d4550](https://github.com/tillhub/tillhub-sdk-javascript/commit/11d4550))
+
 # [3.22.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.21.0...v3.22.0) (2019-02-21)
 
 
