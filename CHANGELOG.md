@@ -1,3 +1,10 @@
+# [3.21.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.20.0...v3.21.0) (2019-02-21)
+
+
+### Features
+
+* **messages:** get messages with query params for filters ([2a84275](https://github.com/tillhub/tillhub-sdk-javascript/commit/2a84275))
+
 # [3.20.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.19.0...v3.20.0) (2019-02-20)
 
 

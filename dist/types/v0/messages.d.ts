@@ -3,6 +3,10 @@ export interface MessagesOptions {
     user?: string;
     base?: string;
 }
+export interface MessagesQueryOptions {
+    read?: boolean;
+    ignored?: boolean;
+}
 export interface MessagesResponse {
     data: Message[];
     metadata: object;
@@ -32,5 +36,5 @@ export declare class Messages {
     http: Client;
     options: MessagesOptions;
     constructor(options: MessagesOptions, http: Client);
-    getAll(): Promise<MessagesResponse>;
+    getAll(query?: MessagesQueryOptions | undefined): Promise<MessagesResponse>;
 }
