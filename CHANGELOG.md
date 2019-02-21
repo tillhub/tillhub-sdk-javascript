@@ -1,3 +1,10 @@
+# [3.22.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.21.0...v3.22.0) (2019-02-21)
+
+
+### Features
+
+* **messages:** add last updated at as query param ([68d5503](https://github.com/tillhub/tillhub-sdk-javascript/commit/68d5503))
+
 # [3.21.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.20.0...v3.21.0) (2019-02-21)
 
 
