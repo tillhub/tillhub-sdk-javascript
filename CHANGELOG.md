@@ -1,3 +1,10 @@
+# [3.23.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.22.1...v3.23.0) (2019-02-21)
+
+
+### Features
+
+* added favourites (v0) ([1d63a8f](https://github.com/tillhub/tillhub-sdk-javascript/commit/1d63a8f))
+
 ## [3.22.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.22.0...v3.22.1) (2019-02-21)
 
 

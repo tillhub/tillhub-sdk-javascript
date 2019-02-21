@@ -21,4 +21,5 @@ import { Notifications } from './notifications';
 import { Print } from './print';
 import { Discounts } from './discounts';
 import { Messages } from './messages';
-export { Auth, Taxes, Deliveries, ProductGroups, Accounts, ExpenseAccounts, PaymentOptions, Configurations, Users, Branches, Customers, Discounts, Vouchers, VoucherLogs, Invoices, Stocks, StocksBook, Orders, Analytics, Staff, AuditActions, Images, Notifications, Print, Messages };
+import { Favourites } from './favourites';
+export { Auth, Taxes, Deliveries, ProductGroups, Accounts, ExpenseAccounts, PaymentOptions, Configurations, Users, Branches, Customers, Discounts, Vouchers, VoucherLogs, Invoices, Stocks, StocksBook, Orders, Analytics, Staff, AuditActions, Images, Notifications, Print, Messages, Favourites };

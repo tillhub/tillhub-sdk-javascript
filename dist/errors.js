@@ -2154,4 +2154,67 @@ var MessagesFetchFailed = /** @class */ (function (_super) {
     return MessagesFetchFailed;
 }(BaseError));
 exports.MessagesFetchFailed = MessagesFetchFailed;
+/**
+ * FAVOURITES
+ */
+var FavouritesFetchFailed = /** @class */ (function (_super) {
+    __extends(FavouritesFetchFailed, _super);
+    function FavouritesFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch favourites set'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'FavouritesFetchFailed';
+        return _this;
+    }
+    return FavouritesFetchFailed;
+}(BaseError));
+exports.FavouritesFetchFailed = FavouritesFetchFailed;
+var FavouriteFetchFailed = /** @class */ (function (_super) {
+    __extends(FavouriteFetchFailed, _super);
+    function FavouriteFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch favourite'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'FavouriteFetchFailed';
+        return _this;
+    }
+    return FavouriteFetchFailed;
+}(BaseError));
+exports.FavouriteFetchFailed = FavouriteFetchFailed;
+var FavouriteCreateFailed = /** @class */ (function (_super) {
+    __extends(FavouriteCreateFailed, _super);
+    function FavouriteCreateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create favourite'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'FavouriteCreateFailed';
+        return _this;
+    }
+    return FavouriteCreateFailed;
+}(BaseError));
+exports.FavouriteCreateFailed = FavouriteCreateFailed;
+var FavouriteDeleteFailed = /** @class */ (function (_super) {
+    __extends(FavouriteDeleteFailed, _super);
+    function FavouriteDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete favourite'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'FavouriteDeleteFailed';
+        return _this;
+    }
+    return FavouriteDeleteFailed;
+}(BaseError));
+exports.FavouriteDeleteFailed = FavouriteDeleteFailed;
+var FavouriteUpdateFailed = /** @class */ (function (_super) {
+    __extends(FavouriteUpdateFailed, _super);
+    function FavouriteUpdateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not update favourite'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'FavouriteUpdateFailed';
+        return _this;
+    }
+    return FavouriteUpdateFailed;
+}(BaseError));
+exports.FavouriteUpdateFailed = FavouriteUpdateFailed;
 //# sourceMappingURL=errors.js.map

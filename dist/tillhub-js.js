@@ -420,6 +420,13 @@ var TillhubClient = /** @class */ (function (_super) {
     TillhubClient.prototype.print = function () {
         return this.generateAuthenticatedInstance(v0.Print);
     };
+    /**
+     * Create an authenticated Favourites instance
+     *
+     */
+    TillhubClient.prototype.favourites = function () {
+        return this.generateAuthenticatedInstance(v0.Favourites);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));

@@ -48,4 +48,6 @@ var discounts_1 = require("./discounts");
 exports.Discounts = discounts_1.Discounts;
 var messages_1 = require("./messages");
 exports.Messages = messages_1.Messages;
+var favourites_1 = require("./favourites");
+exports.Favourites = favourites_1.Favourites;
 //# sourceMappingURL=index.js.map
