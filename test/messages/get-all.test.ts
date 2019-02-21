@@ -16,7 +16,7 @@ afterEach(() => {
 const queryParams = {
   read: false,
   ignored: false,
-  last_updated_at: new Date().toISOString()
+  min_updated_at: new Date().toISOString()
 }
 
 describe('v0: Messages: can get all messages', () => {

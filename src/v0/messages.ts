@@ -10,7 +10,7 @@ export interface MessagesOptions {
 export interface MessagesQueryOptions {
   read?: boolean
   ignored?: boolean
-  last_updated_at?: string
+  min_updated_at?: string
 }
 
 export interface MessagesResponse {
