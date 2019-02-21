@@ -7,6 +7,11 @@ export interface MessagesOptions {
   base?: string
 }
 
+export interface MessagesQueryOptions {
+  read?: boolean
+  ignored?: boolean
+}
+
 export interface MessagesResponse {
   data: Message[]
   metadata: object
@@ -46,10 +51,11 @@ export class Messages {
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 
-  getAll(): Promise<MessagesResponse> {
+  getAll(query?: MessagesQueryOptions | undefined): Promise<MessagesResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+        const queryString = qs.stringify(query, { addQueryPrefix: true })
+        const uri = `${this.options.base}${this.endpoint}/${this.options.user}${queryString}`
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.MessagesFetchFailed())
