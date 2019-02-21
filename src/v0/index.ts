@@ -21,6 +21,7 @@ import { Notifications } from './notifications'
 import { Print } from './print'
 import { Discounts } from './discounts'
 import { Messages } from './messages'
+import { Favourites } from './favourites'
 
 export {
   Auth,
@@ -47,5 +48,6 @@ export {
   Images,
   Notifications,
   Print,
-  Messages
+  Messages,
+  Favourites
 }
