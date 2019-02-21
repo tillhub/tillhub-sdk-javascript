@@ -1289,3 +1289,42 @@ export class MessagesFetchFailed extends BaseError {
     super(message, properties)
   }
 }
+
+/**
+ * FAVOURITES
+ */
+
+export class FavouritesFetchFailed extends BaseError {
+  public name = 'FavouritesFetchFailed'
+  constructor(public message: string = 'Could not fetch favourites set', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class FavouriteFetchFailed extends BaseError {
+  public name = 'FavouriteFetchFailed'
+  constructor(public message: string = 'Could not fetch favourite', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class FavouriteCreateFailed extends BaseError {
+  public name = 'FavouriteCreateFailed'
+  constructor(public message: string = 'Could not create favourite', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class FavouriteDeleteFailed extends BaseError {
+  public name = 'FavouriteDeleteFailed'
+  constructor(public message: string = 'Could not delete favourite', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class FavouriteUpdateFailed extends BaseError {
+  public name = 'FavouriteUpdateFailed'
+  constructor(public message: string = 'Could not update favourite', properties?: any) {
+    super(message, properties)
+  }
+}
