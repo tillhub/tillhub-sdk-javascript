@@ -3,7 +3,6 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import { TillhubClient } from '../../src/tillhub-js'
-import { Favourites } from '../../src/v0'
 import {
   FavouritesFetchFailed,
   FavouriteFetchFailed,
@@ -11,6 +10,7 @@ import {
   FavouriteUpdateFailed,
   FavouriteDeleteFailed
 } from '../../src/errors'
+import { Favourites, Favourite } from '../../src/v0/favourites'
 
 let user = {
   username: 'test@example.com',
@@ -28,7 +28,7 @@ if (process.env.SYSTEM_TEST) {
 
 const legacyId = '4564'
 const favouriteId = '1337'
-const mockFavourite = { foo: 'bar' }
+const mockFavourite = { name: 'bar' } as Favourite
 const mockMsg = `Deleted favourite ${favouriteId}`
 
 const mock = new MockAdapter(axios)
@@ -210,7 +210,7 @@ describe('v0: Favourites', () => {
       })
 
       mock
-        .onPatch(`https://api.tillhub.com/api/v0/favourites/${legacyId}/${favouriteId}`)
+        .onPut(`https://api.tillhub.com/api/v0/favourites/${legacyId}/${favouriteId}`)
         .reply((config) => {
           return [
             200,
@@ -455,7 +455,7 @@ describe('v0: Favourites', () => {
       })
 
       mock
-        .onPatch(`https://api.tillhub.com/api/v0/favourites/${legacyId}/${favouriteId}`)
+        .onPut(`https://api.tillhub.com/api/v0/favourites/${legacyId}/${favouriteId}`)
         .reply((config) => {
           return [
             205

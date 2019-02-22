@@ -74,9 +74,9 @@ export class Favourites {
     }
   }
 
-  async get(favouritesId: string): Promise<FavouriteResponse> {
+  async get(favouriteId: string): Promise<FavouriteResponse> {
     try {
-      const base = this.uriHelper.generateBaseUri(`/${favouritesId}`)
+      const base = this.uriHelper.generateBaseUri(`/${favouriteId}`)
       const uri = this.uriHelper.generateUriWithQuery(base)
 
       const response = await this.http.getClient().get(uri)
@@ -92,12 +92,12 @@ export class Favourites {
     }
   }
 
-  async create(favourites: Object): Promise<FavouriteResponse> {
+  async create(favourite: Favourite): Promise<FavouriteResponse> {
     try {
       const base = this.uriHelper.generateBaseUri()
       const uri = this.uriHelper.generateUriWithQuery(base)
 
-      const response = await this.http.getClient().post(uri, favourites)
+      const response = await this.http.getClient().post(uri, favourite)
       if (response.status !== 200) throw new errors.FavouriteCreateFailed()
 
       return {
@@ -109,12 +109,12 @@ export class Favourites {
     }
   }
 
-  async update(favouritesId: string, favourites: Object): Promise<FavouriteResponse> {
+  async update(favouriteId: string, favourite: Favourite): Promise<FavouriteResponse> {
     try {
-      const base = this.uriHelper.generateBaseUri(`/${favouritesId}`)
+      const base = this.uriHelper.generateBaseUri(`/${favouriteId}`)
       const uri = this.uriHelper.generateUriWithQuery(base)
 
-      const response = await this.http.getClient().patch(uri, favourites)
+      const response = await this.http.getClient().put(uri, favourite)
       if (response.status !== 200) throw new errors.FavouriteUpdateFailed()
 
       return {
@@ -126,9 +126,9 @@ export class Favourites {
     }
   }
 
-  async delete(favouritesId: string): Promise<FavouriteResponse> {
+  async delete(favouriteId: string): Promise<FavouriteResponse> {
     try {
-      const base = this.uriHelper.generateBaseUri(`/${favouritesId}`)
+      const base = this.uriHelper.generateBaseUri(`/${favouriteId}`)
       const uri = this.uriHelper.generateUriWithQuery(base)
 
       const response = await this.http.getClient().delete(uri)
