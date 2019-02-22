@@ -624,7 +624,14 @@ export class CustomersMetaFailed extends BaseError {
 
 export class CustomersCountFailed extends BaseError {
   public name = 'CustomersCountFailed'
-  constructor(public message: string = 'Could not count the customers', properties?: any) {
+  constructor(public message: string = 'Could not count customers', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class CustomersSearchFailed extends BaseError {
+  public name = 'CustomersSearchFailed'
+  constructor(public message: string = 'Could not search for customer', properties?: any) {
     super(message, properties)
   }
 }

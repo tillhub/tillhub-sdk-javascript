@@ -154,7 +154,7 @@ export class Customers {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             queryString ? `?${queryString}` : ''
-          }`
+            }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -294,6 +294,23 @@ export class Customers {
         } as CustomersResponse)
       } catch (err) {
         return reject(new errors.CustomersCountFailed(undefined, { error: err }))
+      }
+    })
+  }
+
+  search(searchTerm: string): Promise<CustomersResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/search?q=${searchTerm}`
+      try {
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.CustomersSearchFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as CustomersResponse)
+      } catch (err) {
+        return reject(new errors.CustomersSearchFailed())
       }
     })
   }
