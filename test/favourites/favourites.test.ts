@@ -210,7 +210,7 @@ describe('v0: Favourites', () => {
       })
 
       mock
-        .onPatch(`https://api.tillhub.com/api/v0/favourites/${legacyId}/${favouriteId}`)
+        .onPut(`https://api.tillhub.com/api/v0/favourites/${legacyId}/${favouriteId}`)
         .reply((config) => {
           return [
             200,
@@ -455,7 +455,7 @@ describe('v0: Favourites', () => {
       })
 
       mock
-        .onPatch(`https://api.tillhub.com/api/v0/favourites/${legacyId}/${favouriteId}`)
+        .onPut(`https://api.tillhub.com/api/v0/favourites/${legacyId}/${favouriteId}`)
         .reply((config) => {
           return [
             205

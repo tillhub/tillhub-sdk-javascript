@@ -114,7 +114,7 @@ export class Favourites {
       const base = this.uriHelper.generateBaseUri(`/${favouritesId}`)
       const uri = this.uriHelper.generateUriWithQuery(base)
 
-      const response = await this.http.getClient().patch(uri, favourites)
+      const response = await this.http.getClient().put(uri, favourites)
       if (response.status !== 200) throw new errors.FavouriteUpdateFailed()
 
       return {
