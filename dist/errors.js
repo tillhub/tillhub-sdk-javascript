@@ -1060,7 +1060,7 @@ exports.CustomersMetaFailed = CustomersMetaFailed;
 var CustomersCountFailed = /** @class */ (function (_super) {
     __extends(CustomersCountFailed, _super);
     function CustomersCountFailed(message, properties) {
-        if (message === void 0) { message = 'Could not count the customers'; }
+        if (message === void 0) { message = 'Could not count customers'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CustomersCountFailed';
@@ -1069,6 +1069,18 @@ var CustomersCountFailed = /** @class */ (function (_super) {
     return CustomersCountFailed;
 }(BaseError));
 exports.CustomersCountFailed = CustomersCountFailed;
+var CustomersSearchFailed = /** @class */ (function (_super) {
+    __extends(CustomersSearchFailed, _super);
+    function CustomersSearchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not search for customer'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'CustomersSearchFailed';
+        return _this;
+    }
+    return CustomersSearchFailed;
+}(BaseError));
+exports.CustomersSearchFailed = CustomersSearchFailed;
 var CustomerDeleteFailed = /** @class */ (function (_super) {
     __extends(CustomerDeleteFailed, _super);
     function CustomerDeleteFailed(message, properties) {

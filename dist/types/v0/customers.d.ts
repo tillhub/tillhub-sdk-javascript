@@ -118,4 +118,5 @@ export declare class Customers {
     meta(q?: CustomersMetaQuery | undefined): Promise<CustomersResponse>;
     delete(customerId: string): Promise<CustomerResponse>;
     count(): Promise<CustomersResponse>;
+    search(searchTerm: string): Promise<CustomersResponse>;
 }

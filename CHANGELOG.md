@@ -1,3 +1,10 @@
+# [3.24.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.23.1...v3.24.0) (2019-02-22)
+
+
+### Features
+
+* **customers:** adds search ([07fe650](https://github.com/tillhub/tillhub-sdk-javascript/commit/07fe650))
+
 ## [3.23.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.23.0...v3.23.1) (2019-02-22)
 
 
