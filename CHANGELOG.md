@@ -1,3 +1,10 @@
+## [3.23.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.23.0...v3.23.1) (2019-02-22)
+
+
+### Bug Fixes
+
+* **favourites:** fixed update using wrong route ([103593b](https://github.com/tillhub/tillhub-sdk-javascript/commit/103593b))
+
 # [3.23.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.22.1...v3.23.0) (2019-02-21)
 
 

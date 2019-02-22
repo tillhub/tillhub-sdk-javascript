@@ -41,8 +41,8 @@ export declare class Favourites {
     uriHelper: UriHelper;
     constructor(options: FavouritesOptions, http: Client);
     getAll(query?: Object): Promise<FavouritesResponse>;
-    get(favouritesId: string): Promise<FavouriteResponse>;
-    create(favourites: Object): Promise<FavouriteResponse>;
-    update(favouritesId: string, favourites: Object): Promise<FavouriteResponse>;
-    delete(favouritesId: string): Promise<FavouriteResponse>;
+    get(favouriteId: string): Promise<FavouriteResponse>;
+    create(favourite: Favourite): Promise<FavouriteResponse>;
+    update(favouriteId: string, favourite: Favourite): Promise<FavouriteResponse>;
+    delete(favouriteId: string): Promise<FavouriteResponse>;
 }

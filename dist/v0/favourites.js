@@ -78,14 +78,14 @@ var Favourites = /** @class */ (function () {
             });
         });
     };
-    Favourites.prototype.get = function (favouritesId) {
+    Favourites.prototype.get = function (favouriteId) {
         return __awaiter(this, void 0, void 0, function () {
             var base, uri, response, e_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        base = this.uriHelper.generateBaseUri("/" + favouritesId);
+                        base = this.uriHelper.generateBaseUri("/" + favouriteId);
                         uri = this.uriHelper.generateUriWithQuery(base);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
@@ -105,7 +105,7 @@ var Favourites = /** @class */ (function () {
             });
         });
     };
-    Favourites.prototype.create = function (favourites) {
+    Favourites.prototype.create = function (favourite) {
         return __awaiter(this, void 0, void 0, function () {
             var base, uri, response, e_3;
             return __generator(this, function (_a) {
@@ -114,7 +114,7 @@ var Favourites = /** @class */ (function () {
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri();
                         uri = this.uriHelper.generateUriWithQuery(base);
-                        return [4 /*yield*/, this.http.getClient().post(uri, favourites)];
+                        return [4 /*yield*/, this.http.getClient().post(uri, favourite)];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
@@ -131,16 +131,16 @@ var Favourites = /** @class */ (function () {
             });
         });
     };
-    Favourites.prototype.update = function (favouritesId, favourites) {
+    Favourites.prototype.update = function (favouriteId, favourite) {
         return __awaiter(this, void 0, void 0, function () {
             var base, uri, response, e_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        base = this.uriHelper.generateBaseUri("/" + favouritesId);
+                        base = this.uriHelper.generateBaseUri("/" + favouriteId);
                         uri = this.uriHelper.generateUriWithQuery(base);
-                        return [4 /*yield*/, this.http.getClient().patch(uri, favourites)];
+                        return [4 /*yield*/, this.http.getClient().put(uri, favourite)];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
@@ -157,14 +157,14 @@ var Favourites = /** @class */ (function () {
             });
         });
     };
-    Favourites.prototype.delete = function (favouritesId) {
+    Favourites.prototype.delete = function (favouriteId) {
         return __awaiter(this, void 0, void 0, function () {
             var base, uri, response, e_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        base = this.uriHelper.generateBaseUri("/" + favouritesId);
+                        base = this.uriHelper.generateBaseUri("/" + favouriteId);
                         uri = this.uriHelper.generateUriWithQuery(base);
                         return [4 /*yield*/, this.http.getClient().delete(uri)];
                     case 1:
