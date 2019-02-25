@@ -47,6 +47,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var qs_1 = __importDefault(require("qs"));
 var errors = __importStar(require("../errors"));
+var uri_helper_1 = require("../uri-helper");
 var SignatureTypes;
 (function (SignatureTypes) {
     SignatureTypes["Fiksaltrust"] = "fiskaltrust";
@@ -58,27 +59,19 @@ var Transactions = /** @class */ (function () {
         // this.signing = new Signing(options, http)
         this.endpoint = '/api/v1/transactions';
         this.options.base = this.options.base || 'https://api.tillhub.com';
+        this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
     }
     Transactions.prototype.getAll = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var next, uri, queryString, response_1, error_1;
+            var next, base, uri, response_1, error_1;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        uri = void 0;
-                        if (query && query.uri) {
-                            uri = query.uri;
-                        }
-                        else {
-                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user;
-                        }
-                        queryString = query && qs_1.default.stringify(query);
-                        if (queryString) {
-                            uri = uri + "?" + queryString;
-                        }
+                        base = this.uriHelper.generateBaseUri();
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response_1 = _a.sent();

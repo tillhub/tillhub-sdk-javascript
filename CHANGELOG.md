@@ -1,3 +1,10 @@
+# [3.25.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.24.0...v3.25.0) (2019-02-25)
+
+
+### Features
+
+* **transactions_v1:** Accept query ([b62cd94](https://github.com/tillhub/tillhub-sdk-javascript/commit/b62cd94))
+
 # [3.24.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.23.1...v3.24.0) (2019-02-22)
 
 
