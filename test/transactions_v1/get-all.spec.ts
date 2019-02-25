@@ -22,10 +22,13 @@ if (process.env.SYSTEM_TEST) {
 const legacyId = '4564'
 
 const query = {
-  legacy: true
+  legacy: true,
+  query: {
+    date_start: '2019-10-05'
+  }
 }
 
-const queryString = qs.stringify(query)
+const queryString = qs.stringify(query.query)
 
 const mock = new MockAdapter(axios)
 afterEach(() => {
@@ -49,7 +52,7 @@ describe('v0: Transactions: can get all', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v1/transactions/${legacyId}?${queryString}`)
+        .onGet(`https://api.tillhub.com/api/v1/transactions/${legacyId}?legacy=true&${queryString}`)
         .reply(function (config) {
           return [
             200,
@@ -101,7 +104,7 @@ describe('v0: Transactions: can get all', () => {
         ]
       })
       mock
-        .onGet(`https://api.tillhub.com/api/v1/transactions/${legacyId}?${queryString}`)
+        .onGet(`https://api.tillhub.com/api/v1/transactions/${legacyId}?legacy=true&${queryString}`)
         .reply(function (config) {
           return [400]
         })

@@ -1,6 +1,7 @@
 import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
+import { UriHelper } from '../uri-helper'
 
 export interface PdfRequestObject {
   transactionId: string
@@ -12,6 +13,7 @@ export interface TransactionsQuery {
   uri?: string
   format?: string
   legacy?: boolean
+  query?: object
 }
 
 export interface TransactionsMetaQuery {
@@ -43,6 +45,7 @@ export class Transactions {
   http: Client
   // signing: Signing
   public options: TransactionsOptions
+  public uriHelper: UriHelper
 
   constructor(options: TransactionsOptions, http: Client) {
     this.options = options
@@ -51,6 +54,7 @@ export class Transactions {
 
     this.endpoint = '/api/v1/transactions'
     this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
   getAll(query?: TransactionsQuery | undefined): Promise<TransactionResponse> {
@@ -58,17 +62,9 @@ export class Transactions {
       let next
 
       try {
-        let uri
-        if (query && query.uri) {
-          uri = query.uri
-        } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-        }
 
-        const queryString = query && qs.stringify(query)
-        if (queryString) {
-          uri = `${uri}?${queryString}`
-        }
+        const base = this.uriHelper.generateBaseUri()
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
 
