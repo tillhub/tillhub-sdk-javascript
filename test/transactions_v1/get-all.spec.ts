@@ -22,10 +22,12 @@ if (process.env.SYSTEM_TEST) {
 const legacyId = '4564'
 
 const query = {
-  legacy: true
+  query: {
+    date_start: '2019-10-05'
+  }
 }
 
-const queryString = qs.stringify(query)
+const queryString = qs.stringify(query.query)
 
 const mock = new MockAdapter(axios)
 afterEach(() => {
