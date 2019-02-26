@@ -1,3 +1,10 @@
+# [3.26.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.25.0...v3.26.0) (2019-02-26)
+
+
+### Features
+
+* **messages:** update handler ([8341c92](https://github.com/tillhub/tillhub-sdk-javascript/commit/8341c92))
+
 # [3.25.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.24.0...v3.25.0) (2019-02-25)
 
 

@@ -2229,4 +2229,16 @@ var FavouriteUpdateFailed = /** @class */ (function (_super) {
     return FavouriteUpdateFailed;
 }(BaseError));
 exports.FavouriteUpdateFailed = FavouriteUpdateFailed;
+var MessagesUpdateFailed = /** @class */ (function (_super) {
+    __extends(MessagesUpdateFailed, _super);
+    function MessagesUpdateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not update the message'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'MessagesUpdateFailed';
+        return _this;
+    }
+    return MessagesUpdateFailed;
+}(BaseError));
+exports.MessagesUpdateFailed = MessagesUpdateFailed;
 //# sourceMappingURL=errors.js.map

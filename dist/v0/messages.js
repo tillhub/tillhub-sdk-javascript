@@ -47,12 +47,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var qs_1 = __importDefault(require("qs"));
 var errors = __importStar(require("../errors"));
+var uri_helper_1 = require("../uri-helper");
 var Messages = /** @class */ (function () {
     function Messages(options, http) {
         this.options = options;
         this.http = http;
         this.endpoint = '/api/v0/messages';
         this.options.base = this.options.base || 'https://api.tillhub.com';
+        this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
     }
     Messages.prototype.getAll = function (query) {
         var _this = this;
@@ -75,6 +77,31 @@ var Messages = /** @class */ (function () {
                     case 2:
                         err_1 = _a.sent();
                         return [2 /*return*/, reject(new errors.MessagesFetchFailed())];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Messages.prototype.update = function (messageId, messageRequest) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, err_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = this.uriHelper.generateBaseUri("/" + messageId);
+                        return [4 /*yield*/, this.http.getClient().put(uri, messageRequest)];
+                    case 1:
+                        response = _a.sent();
+                        response.status !== 200 && reject(new errors.MessagesUpdateFailed());
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            })];
+                    case 2:
+                        err_2 = _a.sent();
+                        return [2 /*return*/, reject(new errors.MessagesUpdateFailed())];
                     case 3: return [2 /*return*/];
                 }
             });

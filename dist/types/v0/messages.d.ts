@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { UriHelper } from '../uri-helper';
 export interface MessagesOptions {
     user?: string;
     base?: string;
@@ -13,11 +14,7 @@ export interface MessagesResponse {
     metadata: object;
 }
 export interface Message {
-    id: string;
-    updated_at?: string;
-    created_at: string;
     message?: string;
-    invoked_at?: string;
     consumer_type?: string;
     channel?: string;
     level?: string;
@@ -36,6 +33,8 @@ export declare class Messages {
     endpoint: string;
     http: Client;
     options: MessagesOptions;
+    uriHelper: UriHelper;
     constructor(options: MessagesOptions, http: Client);
     getAll(query?: MessagesQueryOptions | undefined): Promise<MessagesResponse>;
+    update(messageId: string, messageRequest: Message): Promise<MessagesResponse>;
 }
