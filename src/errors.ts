@@ -1335,3 +1335,10 @@ export class FavouriteUpdateFailed extends BaseError {
     super(message, properties)
   }
 }
+
+export class MessagesUpdateFailed extends BaseError {
+  public name = 'MessagesUpdateFailed'
+  constructor(public message: string = 'Could not update the message', properties?: any) {
+    super(message, properties)
+  }
+}

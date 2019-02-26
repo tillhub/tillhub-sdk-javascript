@@ -1,6 +1,7 @@
 import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
+import { UriHelper } from '../uri-helper'
 
 export interface MessagesOptions {
   user?: string
@@ -19,11 +20,7 @@ export interface MessagesResponse {
 }
 
 export interface Message {
-  id: string
-  updated_at?: string
-  created_at: string
   message?: string
-  invoked_at?: string
   consumer_type?: string
   channel?: string
   level?: string
@@ -43,6 +40,7 @@ export class Messages {
   endpoint: string
   http: Client
   public options: MessagesOptions
+  public uriHelper: UriHelper
 
   constructor(options: MessagesOptions, http: Client) {
     this.options = options
@@ -50,6 +48,7 @@ export class Messages {
 
     this.endpoint = '/api/v0/messages'
     this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
   getAll(query?: MessagesQueryOptions | undefined): Promise<MessagesResponse> {
@@ -67,6 +66,24 @@ export class Messages {
         } as MessagesResponse)
       } catch (err) {
         return reject(new errors.MessagesFetchFailed())
+      }
+    })
+  }
+
+  update(messageId: string, messageRequest: Message): Promise<MessagesResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const uri = this.uriHelper.generateBaseUri(`/${messageId}`)
+
+        const response = await this.http.getClient().put(uri, messageRequest)
+        response.status !== 200 && reject(new errors.MessagesUpdateFailed())
+
+        return resolve({
+          data: response.data.results[0] as Message,
+          metadata: { count: response.data.count }
+        } as MessagesResponse)
+      } catch (err) {
+        return reject(new errors.MessagesUpdateFailed())
       }
     })
   }
