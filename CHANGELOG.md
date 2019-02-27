@@ -1,3 +1,10 @@
+# [3.27.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.26.1...v3.27.0) (2019-02-27)
+
+
+### Features
+
+* **branches:** external custom id - check unique ([bb12190](https://github.com/tillhub/tillhub-sdk-javascript/commit/bb12190))
+
 ## [3.26.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.26.0...v3.26.1) (2019-02-27)
 
 

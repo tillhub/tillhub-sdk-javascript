@@ -378,6 +378,11 @@ export declare class BranchDeleteFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class ExternalCustomIdGetUniqueFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
 export declare class DiscountsFetchFailed extends BaseError {
     message: string;
     name: string;

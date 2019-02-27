@@ -58,12 +58,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var qs_1 = __importDefault(require("qs"));
 var errors = __importStar(require("../errors"));
+var uri_helper_1 = require("../uri-helper");
 var Branches = /** @class */ (function () {
     function Branches(options, http) {
         this.options = options;
         this.http = http;
         this.endpoint = '/api/v0/branches';
         this.options.base = this.options.base || 'https://api.tillhub.com';
+        this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
     }
     Branches.prototype.getAll = function (queryOrOptions) {
         var _this = this;
@@ -238,6 +240,44 @@ var Branches = /** @class */ (function () {
                     case 3:
                         err_1 = _a.sent();
                         return [2 /*return*/, reject(new errors.BranchDeleteFailed())];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Branches.prototype.externalId = function (query) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var base, uri, response, error_6;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        base = this.uriHelper.generateBaseUri("/external_id");
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 &&
+                            reject(new errors.ExternalCustomIdGetUniqueFailed(undefined, {
+                                status: response.status
+                            }));
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_6 = _a.sent();
+                        if (error_6.response && error_6.response.status === 409) {
+                            return [2 /*return*/, reject(new errors.ExternalCustomIdGetUniqueFailed(undefined, {
+                                    status: error_6.response.status,
+                                    name: error_6.response.data.name
+                                }))];
+                        }
+                        return [2 /*return*/, reject(new errors.ExternalCustomIdGetUniqueFailed(undefined, { error: error_6 }))];
                     case 4: return [2 /*return*/];
                 }
             });

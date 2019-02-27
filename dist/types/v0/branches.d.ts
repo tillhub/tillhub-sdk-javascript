@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { UriHelper } from '../uri-helper';
 export interface BranchesOptions {
     user?: string;
     base?: string;
@@ -26,6 +27,12 @@ export interface BranchResponse {
 export interface Branch {
     id?: string;
 }
+export interface ExternalCustomIdQuery {
+    provided_id: string;
+}
+export interface ExternalCustomIdResponse {
+    external_custom_id: string;
+}
 export interface Branch {
     branch_number?: number;
     name: string;
@@ -44,6 +51,7 @@ export declare class Branches {
     endpoint: string;
     http: Client;
     options: BranchesOptions;
+    uriHelper: UriHelper;
     constructor(options: BranchesOptions, http: Client);
     getAll(queryOrOptions?: BranchesQuery | undefined): Promise<BranchesResponse>;
     get(branchId: string): Promise<BranchResponse>;
@@ -51,4 +59,5 @@ export declare class Branches {
     create(branch: Branch): Promise<BranchResponse>;
     count(): Promise<BranchesResponse>;
     delete(branchId: string): Promise<BranchResponse>;
+    externalId(query: ExternalCustomIdQuery): Promise<BranchResponse>;
 }

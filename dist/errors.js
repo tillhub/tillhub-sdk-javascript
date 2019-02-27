@@ -925,6 +925,18 @@ var BranchDeleteFailed = /** @class */ (function (_super) {
     return BranchDeleteFailed;
 }(BaseError));
 exports.BranchDeleteFailed = BranchDeleteFailed;
+var ExternalCustomIdGetUniqueFailed = /** @class */ (function (_super) {
+    __extends(ExternalCustomIdGetUniqueFailed, _super);
+    function ExternalCustomIdGetUniqueFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get a unique external_custom_id'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ExternalCustomIdGetUniqueFailed';
+        return _this;
+    }
+    return ExternalCustomIdGetUniqueFailed;
+}(BaseError));
+exports.ExternalCustomIdGetUniqueFailed = ExternalCustomIdGetUniqueFailed;
 var DiscountsFetchFailed = /** @class */ (function (_super) {
     __extends(DiscountsFetchFailed, _super);
     function DiscountsFetchFailed(message, properties) {
