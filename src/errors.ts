@@ -545,6 +545,16 @@ export class BranchDeleteFailed extends BaseError {
   }
 }
 
+export class ExternalCustomIdGetUniqueFailed extends BaseError {
+  public name = 'ExternalCustomIdGetUniqueFailed'
+  constructor(
+    public message: string = 'Could not get a unique external_custom_id',
+    properties?: any
+  ) {
+    super(message, properties)
+  }
+}
+
 export class DiscountsFetchFailed extends BaseError {
   public name = 'DiscountsFetchFailed'
   constructor(public message: string = 'Could not fetch discounts', properties?: any) {
