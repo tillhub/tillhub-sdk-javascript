@@ -38,7 +38,7 @@ export interface Branch {
   name: string
   email?: string
   custom_id?: string
-  external_custom_id?: string
+  external_custom_id?: string | null
   receipt_header?: string
   receipt_footer?: string
   active?: boolean
@@ -75,7 +75,9 @@ export class Branches {
             queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
           }
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${queryString ? `?${queryString}` : ''}`
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
+            queryString ? `?${queryString}` : ''
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
