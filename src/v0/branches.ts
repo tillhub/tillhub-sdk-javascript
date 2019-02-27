@@ -1,6 +1,7 @@
 import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
+import { UriHelper } from '../uri-helper'
 
 export interface BranchesOptions {
   user?: string
@@ -33,6 +34,14 @@ export interface Branch {
   id?: string
 }
 
+export interface ExternalCustomIdQuery {
+  provided_id: string
+}
+
+export interface ExternalCustomIdResponse {
+  external_custom_id: string
+}
+
 export interface Branch {
   branch_number?: number
   name: string
@@ -52,6 +61,7 @@ export class Branches {
   endpoint: string
   http: Client
   public options: BranchesOptions
+  public uriHelper: UriHelper
 
   constructor(options: BranchesOptions, http: Client) {
     this.options = options
@@ -59,6 +69,7 @@ export class Branches {
 
     this.endpoint = '/api/v0/branches'
     this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
   getAll(queryOrOptions?: BranchesQuery | undefined): Promise<BranchesResponse> {
@@ -183,6 +194,38 @@ export class Branches {
         } as BranchResponse)
       } catch (err) {
         return reject(new errors.BranchDeleteFailed())
+      }
+    })
+  }
+
+  externalId(query: ExternalCustomIdQuery): Promise<BranchResponse> {
+    return new Promise(async (resolve, reject) => {
+      const base = this.uriHelper.generateBaseUri(`/external_id`)
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+      try {
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 &&
+          reject(
+            new errors.ExternalCustomIdGetUniqueFailed(undefined, {
+              status: response.status
+            })
+          )
+
+        return resolve({
+          data: response.data.results as ExternalCustomIdResponse,
+          msg: response.data.msg,
+          metadata: { count: response.data.count }
+        } as BranchResponse)
+      } catch (error) {
+        if (error.response && error.response.status === 409) {
+          return reject(
+            new errors.ExternalCustomIdGetUniqueFailed(undefined, {
+              status: error.response.status,
+              name: error.response.data.name
+            })
+          )
+        }
+        return reject(new errors.ExternalCustomIdGetUniqueFailed(undefined, { error }))
       }
     })
   }
