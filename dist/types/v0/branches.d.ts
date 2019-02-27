@@ -31,7 +31,7 @@ export interface Branch {
     name: string;
     email?: string;
     custom_id?: string;
-    external_custom_id?: string;
+    external_custom_id?: string | null;
     receipt_header?: string;
     receipt_footer?: string;
     active?: boolean;

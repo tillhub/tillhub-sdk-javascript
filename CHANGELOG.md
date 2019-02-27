@@ -1,3 +1,10 @@
+## [3.26.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.26.0...v3.26.1) (2019-02-27)
+
+
+### Bug Fixes
+
+* **branches:** external custom id can be null ([f3747b6](https://github.com/tillhub/tillhub-sdk-javascript/commit/f3747b6))
+
 # [3.26.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.25.0...v3.26.0) (2019-02-26)
 
 
