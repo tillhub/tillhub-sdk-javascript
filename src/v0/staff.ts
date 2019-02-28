@@ -40,6 +40,7 @@ export interface StaffPhoneNumbers {
 
 export interface PinRequest {
   provided_pin?: string
+  staff_id?: string
 }
 
 export interface PinResponse {
