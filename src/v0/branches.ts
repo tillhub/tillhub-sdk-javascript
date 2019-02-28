@@ -36,6 +36,7 @@ export interface Branch {
 
 export interface ExternalCustomIdQuery {
   provided_id: string
+  branch?: string
 }
 
 export interface ExternalCustomIdResponse {
@@ -198,7 +199,7 @@ export class Branches {
     })
   }
 
-  externalId(query: ExternalCustomIdQuery): Promise<BranchResponse> {
+  getUniqueExternalId(query: ExternalCustomIdQuery): Promise<BranchResponse> {
     return new Promise(async (resolve, reject) => {
       const base = this.uriHelper.generateBaseUri(`/external_id`)
       const uri = this.uriHelper.generateUriWithQuery(base, query)
