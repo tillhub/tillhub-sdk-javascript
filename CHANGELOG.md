@@ -1,3 +1,10 @@
+## [3.27.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.27.0...v3.27.1) (2019-02-28)
+
+
+### Bug Fixes
+
+* **branches:** get unique external custom id in edit mode ([50ba488](https://github.com/tillhub/tillhub-sdk-javascript/commit/50ba488))
+
 # [3.27.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.26.1...v3.27.0) (2019-02-27)
 
 

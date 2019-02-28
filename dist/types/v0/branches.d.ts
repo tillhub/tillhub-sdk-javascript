@@ -29,6 +29,7 @@ export interface Branch {
 }
 export interface ExternalCustomIdQuery {
     provided_id: string;
+    branch?: string;
 }
 export interface ExternalCustomIdResponse {
     external_custom_id: string;
@@ -59,5 +60,5 @@ export declare class Branches {
     create(branch: Branch): Promise<BranchResponse>;
     count(): Promise<BranchesResponse>;
     delete(branchId: string): Promise<BranchResponse>;
-    externalId(query: ExternalCustomIdQuery): Promise<BranchResponse>;
+    getUniqueExternalId(query: ExternalCustomIdQuery): Promise<BranchResponse>;
 }

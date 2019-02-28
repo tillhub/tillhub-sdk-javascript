@@ -245,7 +245,7 @@ var Branches = /** @class */ (function () {
             });
         }); });
     };
-    Branches.prototype.externalId = function (query) {
+    Branches.prototype.getUniqueExternalId = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var base, uri, response, error_6;
