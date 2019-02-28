@@ -436,6 +436,24 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated Staff instance
+   *
+   */
+  auditLogs(): v0.AuditLogs {
+    if (
+      !this.options ||
+      !this.options.base ||
+      !this.http ||
+      !this.auth ||
+      !this.auth.authenticated
+    ) {
+      throw new errors.UninstantiatedClient()
+    }
+
+    return new v0.AuditLogs({ user: this.auth.user, base: this.options.base }, this.http)
+  }
+
+  /**
    * Create an authenticated Registers instance
    *
    */
