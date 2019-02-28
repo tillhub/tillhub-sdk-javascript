@@ -1,3 +1,10 @@
+## [3.27.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.27.1...v3.27.2) (2019-02-28)
+
+
+### Bug Fixes
+
+* **staff:** check unique pin in edit mode with existing staff member ([11659de](https://github.com/tillhub/tillhub-sdk-javascript/commit/11659de))
+
 ## [3.27.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.27.0...v3.27.1) (2019-02-28)
 
 
