@@ -20,8 +20,7 @@ if (process.env.SYSTEM_TEST) {
 }
 
 const query = {
-  type: ['product.create', 'product.update'],
-  order_by: 'created_at'
+  type: ['product.create', 'product.update']
 }
 
 function queryString() {
