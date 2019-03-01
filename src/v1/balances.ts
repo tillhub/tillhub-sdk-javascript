@@ -76,6 +76,30 @@ export class Balances {
     })
   }
 
+  meta(): Promise<BalancesResponse> {
+    return new Promise(async (resolve, reject) => {
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+
+      try {
+        const response = await this.http.getClient().get(uri)
+        if (response.status !== 200) return reject(new errors.BalancesMetaFailed(undefined, { status: response.status }))
+
+        if (!response.data.results[0]) {
+          return reject(
+            new errors.BalancesMetaFailed('could not get balances metadata unexpectedly')
+          )
+        }
+
+        return resolve({
+          data: response.data.results[0],
+          metadata: { count: response.data.count }
+        } as BalancesResponse)
+      } catch (err) {
+        return reject(new errors.BalancesMetaFailed())
+      }
+    })
+  }
+
   async get(transactionId: string): Promise<BalancesResponse> {
     const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${transactionId}`
 
