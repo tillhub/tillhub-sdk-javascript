@@ -427,6 +427,13 @@ var TillhubClient = /** @class */ (function (_super) {
     TillhubClient.prototype.favourites = function () {
         return this.generateAuthenticatedInstance(v0.Favourites);
     };
+    /**
+     * Create an authenticated Balances instance
+     *
+     */
+    TillhubClient.prototype.balances = function () {
+        return this.generateAuthenticatedInstance(v1.Balances);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));

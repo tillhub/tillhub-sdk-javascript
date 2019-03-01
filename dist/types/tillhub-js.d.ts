@@ -188,6 +188,11 @@ export declare class TillhubClient extends events.EventEmitter {
      *
      */
     favourites(): v0.Favourites;
+    /**
+     * Create an authenticated Balances instance
+     *
+     */
+    balances(): v1.Balances;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;

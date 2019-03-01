@@ -11,4 +11,6 @@ exports.Transactions = transactions_1.Transactions;
 exports.TransactionsLegacy = transactions_1.TransactionsLegacy;
 var registers_1 = require("./registers");
 exports.Registers = registers_1.Registers;
+var balances_1 = require("./balances");
+exports.Balances = balances_1.Balances;
 //# sourceMappingURL=index.js.map

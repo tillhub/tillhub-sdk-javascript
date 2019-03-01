@@ -1,3 +1,10 @@
+# [3.28.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.27.2...v3.28.0) (2019-03-01)
+
+
+### Features
+
+* **v1 branches:** added v1 branches get call ([ba74920](https://github.com/tillhub/tillhub-sdk-javascript/commit/ba74920))
+
 ## [3.27.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.27.1...v3.27.2) (2019-02-28)
 
 

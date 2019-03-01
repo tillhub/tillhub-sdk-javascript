@@ -934,3 +934,13 @@ export declare class MessagesUpdateFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class BalancesFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class BalancesFetchOneFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}

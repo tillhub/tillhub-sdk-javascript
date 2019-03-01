@@ -2253,4 +2253,28 @@ var MessagesUpdateFailed = /** @class */ (function (_super) {
     return MessagesUpdateFailed;
 }(BaseError));
 exports.MessagesUpdateFailed = MessagesUpdateFailed;
+var BalancesFetchFailed = /** @class */ (function (_super) {
+    __extends(BalancesFetchFailed, _super);
+    function BalancesFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the balances'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'BalancesFetchFailed';
+        return _this;
+    }
+    return BalancesFetchFailed;
+}(BaseError));
+exports.BalancesFetchFailed = BalancesFetchFailed;
+var BalancesFetchOneFailed = /** @class */ (function (_super) {
+    __extends(BalancesFetchOneFailed, _super);
+    function BalancesFetchOneFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the balance'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'BalancesFetchOneFailed';
+        return _this;
+    }
+    return BalancesFetchOneFailed;
+}(BaseError));
+exports.BalancesFetchOneFailed = BalancesFetchOneFailed;
 //# sourceMappingURL=errors.js.map
