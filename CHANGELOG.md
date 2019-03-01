@@ -1,3 +1,10 @@
+## [3.31.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.31.0...v3.31.1) (2019-03-01)
+
+
+### Bug Fixes
+
+* **reports:** fix typo ([57c715a](https://github.com/tillhub/tillhub-sdk-javascript/commit/57c715a))
+
 # [3.31.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.30.0...v3.31.0) (2019-03-01)
 
 

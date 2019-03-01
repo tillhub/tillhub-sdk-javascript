@@ -1812,18 +1812,18 @@ var ProductsReportFetchFailed = /** @class */ (function (_super) {
     return ProductsReportFetchFailed;
 }(BaseError));
 exports.ProductsReportFetchFailed = ProductsReportFetchFailed;
-var LineCancelationReportFetchFailed = /** @class */ (function (_super) {
-    __extends(LineCancelationReportFetchFailed, _super);
-    function LineCancelationReportFetchFailed(message, properties) {
-        if (message === void 0) { message = 'Could not fetch the line cancelation report'; }
+var LineCancellationReportFetchFailed = /** @class */ (function (_super) {
+    __extends(LineCancellationReportFetchFailed, _super);
+    function LineCancellationReportFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the line cancellation report'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
-        _this.name = 'LineCancelationReportFetchFailed';
+        _this.name = 'LineCancellationReportFetchFailed';
         return _this;
     }
-    return LineCancelationReportFetchFailed;
+    return LineCancellationReportFetchFailed;
 }(BaseError));
-exports.LineCancelationReportFetchFailed = LineCancelationReportFetchFailed;
+exports.LineCancellationReportFetchFailed = LineCancellationReportFetchFailed;
 var PaymentsReportFetchFailed = /** @class */ (function (_super) {
     __extends(PaymentsReportFetchFailed, _super);
     function PaymentsReportFetchFailed(message, properties) {
