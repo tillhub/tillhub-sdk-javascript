@@ -545,7 +545,7 @@ export class Analytics {
   getLineCancelationReport(): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const uri = this.uriHelper.generateBaseUri('/reports/products/line_cancelation')
+        const uri = this.uriHelper.generateBaseUri('/reports/products/line_cancelations')
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.LineCancelationReportFetchFailed())
         return resolve({
