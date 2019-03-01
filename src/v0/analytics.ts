@@ -72,7 +72,7 @@ export interface ExportFormatOptions {
 }
 
 export interface CustomersTransactionOptions {
-  customer_id: string | null,
+  customer_id: string | null
   currency?: string
 }
 
@@ -88,19 +88,19 @@ export interface ProductGoupsOptions {
   description?: string
   product_group_id?: string
   qty?: {
-    from: number,
+    from: number
     to: number
   }
   revenue?: {
-    from: number,
+    from: number
     to: number
   }
   net_revenue?: {
-    from: number,
+    from: number
     to: number
   }
   discount?: {
-    from: number,
+    from: number
     to: number
   }
   column?: string
@@ -110,7 +110,7 @@ export interface ProductGoupsOptions {
 }
 
 export interface ProductGoupsFilters {
-  column: string,
+  column: string
   type?: string
 }
 
@@ -226,7 +226,10 @@ export class Analytics {
     })
   }
 
-  getProductsChildren(productNumber: String, query?: ProductsOptions | undefined): Promise<AnalyticsResponse> {
+  getProductsChildren(
+    productNumber: String,
+    query?: ProductsOptions | undefined
+  ): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const base = this.uriHelper.generateBaseUri(`/reports/products/${productNumber}`)
@@ -447,7 +450,6 @@ export class Analytics {
   getCustomersTransaction(query: CustomersTransactionOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-
         const base = this.uriHelper.generateBaseUri('/reports/customers/transactions')
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 
@@ -467,7 +469,6 @@ export class Analytics {
   getCustomersOverview(query: CustomersTransactionOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-
         const base = this.uriHelper.generateBaseUri('/reports/customers/overview')
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 
@@ -489,8 +490,8 @@ export class Analytics {
       try {
         const queryString = qs.stringify(query, { addQueryPrefix: true })
         const uri = `${this.options.base}${this.endpoint}/${
-        this.options.user
-      }/reports/stocks${queryString}`
+          this.options.user
+        }/reports/stocks${queryString}`
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.StocksReportFetchFailed())
         return resolve({
@@ -537,6 +538,24 @@ export class Analytics {
         } as AnalyticsResponse)
       } catch (err) {
         return reject(new errors.ProductGroupsFiltersFetchFailed())
+      }
+    })
+  }
+
+  getLineCancelationReport(): Promise<AnalyticsResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const uri = this.uriHelper.generateBaseUri('/reports/products/line_cancelation')
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.LineCancelationReportFetchFailed())
+        return resolve({
+          data: response.data.results,
+          metadata: {
+            count: response.data.count
+          }
+        } as AnalyticsResponse)
+      } catch (err) {
+        return reject(new errors.LineCancelationReportFetchFailed())
       }
     })
   }
