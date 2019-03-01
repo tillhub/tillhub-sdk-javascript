@@ -12,8 +12,8 @@ afterEach(() => {
   mock.reset()
 })
 
-describe('v0: Analytics: gets Products Line Cancelation report', () => {
-  it('gets line cancelation report per product', async () => {
+describe('v0: Analytics: gets Products Line Cancellation report', () => {
+  it('gets line cancellation report per product', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [200, { token: '', user: { id: '123', legacy_id: legacyId } }]
@@ -21,7 +21,7 @@ describe('v0: Analytics: gets Products Line Cancelation report', () => {
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/products/line_cancelations`
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/products/line_cancellations`
         )
         .reply(function (config) {
           return [
@@ -40,7 +40,7 @@ describe('v0: Analytics: gets Products Line Cancelation report', () => {
 
     expect(Analytics).toBeInstanceOf(v0.Analytics)
 
-    const { data } = await Analytics.getLineCancelationReport()
+    const { data } = await Analytics.getLineCancellationReport()
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -62,7 +62,7 @@ describe('v0: Analytics: gets Products Line Cancelation report', () => {
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/products/line_cancelations`
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/products/line_cancellations`
         )
         .reply(function (config) {
           return [205]
@@ -71,9 +71,9 @@ describe('v0: Analytics: gets Products Line Cancelation report', () => {
 
     try {
       const th = await initThInstance()
-      await th.analytics().getLineCancelationReport()
+      await th.analytics().getLineCancellationReport()
     } catch (err) {
-      expect(err.name).toBe('LineCancelationReportFetchFailed')
+      expect(err.name).toBe('LineCancellationReportFetchFailed')
     }
   })
 })

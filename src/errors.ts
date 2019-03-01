@@ -1087,10 +1087,10 @@ export class ProductsReportFetchFailed extends BaseError {
   }
 }
 
-export class LineCancelationReportFetchFailed extends BaseError {
-  public name = 'LineCancelationReportFetchFailed'
+export class LineCancellationReportFetchFailed extends BaseError {
+  public name = 'LineCancellationReportFetchFailed'
   constructor(
-    public message: string = 'Could not fetch the line cancelation report',
+    public message: string = 'Could not fetch the line cancellation report',
     properties?: any
   ) {
     super(message, properties)
