@@ -418,7 +418,7 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
-   * Create an authenticated Staff instance
+   * Create an authenticated AuditActions instance
    *
    */
   auditActions(): v0.AuditActions {
@@ -436,7 +436,7 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
-   * Create an authenticated Staff instance
+   * Create an authenticated AuditLogs instance
    *
    */
   auditLogs(): v0.AuditLogs {

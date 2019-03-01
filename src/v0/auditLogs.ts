@@ -1,6 +1,7 @@
 import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
+import { UriHelper } from '../uri-helper'
 
 export interface AuditsOptions {
   user?: string
@@ -11,11 +12,7 @@ export interface AuditsQuery {
   type?: string | string[]
   limit?: number
   cursor_field?: string
-  embed?: string | string[]
   uri?: string
-  branch?: string
-  register?: string
-  staff?: string
   start?: string
   end?: string
 }
@@ -40,6 +37,7 @@ export class AuditLogs {
   endpoint: string
   http: Client
   public options: AuditsOptions
+  public uriHelper: UriHelper
 
   constructor(options: AuditsOptions, http: Client) {
     this.options = options
@@ -47,6 +45,7 @@ export class AuditLogs {
 
     this.endpoint = '/api/v0/audits'
     this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
   getAll(q?: AuditsQuery | undefined): Promise<AuditsResponse> {
@@ -55,16 +54,8 @@ export class AuditLogs {
       let uri
 
       try {
-        if (q && q.uri) {
-          uri = q.uri
-        } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}/logs`
-        }
-
-        const queryString = qs.stringify(q)
-        if (queryString) {
-          uri = `${uri}?${queryString}`
-        }
+        const base = this.uriHelper.generateBaseUri('/logs')
+        const uri = this.uriHelper.generateUriWithQuery(base, q)
 
         const response = await this.http.getClient().get(uri)
 
@@ -85,13 +76,9 @@ export class AuditLogs {
 
   meta(q?: AuditsMetaQuery | undefined): Promise<AuditsResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/logs/meta`
-
       try {
-        const queryString = qs.stringify(q)
-        if (queryString) {
-          uri = `${uri}?${queryString}`
-        }
+        const base = this.uriHelper.generateBaseUri('/logs/meta')
+        const uri = this.uriHelper.generateUriWithQuery(base, q)
 
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) reject(new errors.AuditLogsGetMetaFailed())
@@ -109,13 +96,10 @@ export class AuditLogs {
   get(requestObject: AuditLogsGetOneRequestObject): Promise<AuditsResponse> {
     return new Promise(async (resolve, reject) => {
       const { auditLogId, query } = requestObject
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/logs/${auditLogId}`
 
       try {
-        const queryString = qs.stringify(query)
-        if (queryString) {
-          uri = `${uri}?${queryString}`
-        }
+        const base = this.uriHelper.generateBaseUri(`/logs/${auditLogId}`)
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
 
