@@ -2313,4 +2313,16 @@ var BalancesFetchOneFailed = /** @class */ (function (_super) {
     return BalancesFetchOneFailed;
 }(BaseError));
 exports.BalancesFetchOneFailed = BalancesFetchOneFailed;
+var BalancesMetaFailed = /** @class */ (function (_super) {
+    __extends(BalancesMetaFailed, _super);
+    function BalancesMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch meta data for balances'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'BalancesMetaFailed';
+        return _this;
+    }
+    return BalancesMetaFailed;
+}(BaseError));
+exports.BalancesMetaFailed = BalancesMetaFailed;
 //# sourceMappingURL=errors.js.map

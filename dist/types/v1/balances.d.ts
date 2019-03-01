@@ -27,5 +27,6 @@ export declare class Balances {
     options: BalancesOptions;
     constructor(options: BalancesOptions, http: Client);
     getAll(q?: BalancesQuery): Promise<BalancesResponse>;
+    meta(): Promise<BalancesResponse>;
     get(transactionId: string): Promise<BalancesResponse>;
 }

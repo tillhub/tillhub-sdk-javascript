@@ -959,3 +959,8 @@ export declare class BalancesFetchOneFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class BalancesMetaFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
