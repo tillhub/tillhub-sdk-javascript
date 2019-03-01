@@ -512,6 +512,14 @@ export class TillhubClient extends events.EventEmitter {
   favourites(): v0.Favourites {
     return this.generateAuthenticatedInstance(v0.Favourites)
   }
+
+  /**
+   * Create an authenticated Balances instance
+   *
+   */
+  balances(): v1.Balances {
+    return this.generateAuthenticatedInstance(v1.Balances)
+  }
 }
 
 export class Tillhub extends TillhubClient {

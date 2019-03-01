@@ -1352,3 +1352,17 @@ export class MessagesUpdateFailed extends BaseError {
     super(message, properties)
   }
 }
+
+export class BalancesFetchFailed extends BaseError {
+  public name = 'BalancesFetchFailed'
+  constructor(public message: string = 'Could not fetch the balances', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class BalancesFetchOneFailed extends BaseError {
+  public name = 'BalancesFetchOneFailed'
+  constructor(public message: string = 'Could not fetch the balance', properties?: any) {
+    super(message, properties)
+  }
+}
