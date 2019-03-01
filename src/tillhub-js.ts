@@ -418,7 +418,7 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
-   * Create an authenticated Staff instance
+   * Create an authenticated AuditActions instance
    *
    */
   auditActions(): v0.AuditActions {
@@ -433,6 +433,24 @@ export class TillhubClient extends events.EventEmitter {
     }
 
     return new v0.AuditActions({ user: this.auth.user, base: this.options.base }, this.http)
+  }
+
+  /**
+   * Create an authenticated AuditLogs instance
+   *
+   */
+  auditLogs(): v0.AuditLogs {
+    if (
+      !this.options ||
+      !this.options.base ||
+      !this.http ||
+      !this.auth ||
+      !this.auth.authenticated
+    ) {
+      throw new errors.UninstantiatedClient()
+    }
+
+    return new v0.AuditLogs({ user: this.auth.user, base: this.options.base }, this.http)
   }
 
   /**

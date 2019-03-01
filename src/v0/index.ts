@@ -16,6 +16,7 @@ import { Orders } from './orders'
 import { Analytics } from './analytics'
 import { Staff } from './staff'
 import { AuditActions } from './auditActions'
+import { AuditLogs } from './auditLogs'
 import { Images } from './images'
 import { Notifications } from './notifications'
 import { Print } from './print'
@@ -45,6 +46,7 @@ export {
   Analytics,
   Staff,
   AuditActions,
+  AuditLogs,
   Images,
   Notifications,
   Print,

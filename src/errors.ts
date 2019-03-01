@@ -1146,6 +1146,27 @@ export class AuditActionsCreateFailed extends BaseError {
   }
 }
 
+export class AuditLogsFetchAllFailed extends BaseError {
+  public name = 'AuditLogsFetchAllFailed'
+  constructor(public message: string = 'Could not fetch audit logs', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class AuditLogsFetchOneFailed extends BaseError {
+  public name = 'AuditLogsFetchOneFailed'
+  constructor(public message: string = 'Could not fetch audit log', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class AuditLogsGetMetaFailed extends BaseError {
+  public name = 'AuditLogsGetMetaFailed'
+  constructor(public message: string = 'Could not fetch audit logs meta', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class ImageCreationFailed extends BaseError {
   public name = 'ImageCreationFailed'
   constructor(public message: string = 'Could not create new image') {
