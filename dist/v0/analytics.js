@@ -591,6 +591,33 @@ var Analytics = /** @class */ (function () {
             });
         }); });
     };
+    Analytics.prototype.getLineCancelationReport = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, err_21;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = this.uriHelper.generateBaseUri('/reports/products/line_cancelations');
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        response.status !== 200 && reject(new errors.LineCancelationReportFetchFailed());
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: {
+                                    count: response.data.count
+                                }
+                            })];
+                    case 2:
+                        err_21 = _a.sent();
+                        return [2 /*return*/, reject(new errors.LineCancelationReportFetchFailed())];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     return Analytics;
 }());
 exports.Analytics = Analytics;

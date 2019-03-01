@@ -1,3 +1,15 @@
+# [3.31.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.30.0...v3.31.0) (2019-03-01)
+
+
+### Bug Fixes
+
+* **reports:** fix line cancelation report uri ([4213a5c](https://github.com/tillhub/tillhub-sdk-javascript/commit/4213a5c))
+
+
+### Features
+
+* **reports:** get line cancelations report per product ([46e88c2](https://github.com/tillhub/tillhub-sdk-javascript/commit/46e88c2))
+
 # [3.30.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.29.0...v3.30.0) (2019-03-01)
 
 
