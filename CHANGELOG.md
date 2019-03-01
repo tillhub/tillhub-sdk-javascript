@@ -1,3 +1,10 @@
+# [3.29.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.28.0...v3.29.0) (2019-03-01)
+
+
+### Features
+
+* **audit_logs:** add handlers ([be38798](https://github.com/tillhub/tillhub-sdk-javascript/commit/be38798))
+
 # [3.28.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.27.2...v3.28.0) (2019-03-01)
 
 

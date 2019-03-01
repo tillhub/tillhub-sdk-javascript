@@ -1908,6 +1908,42 @@ var AuditActionsCreateFailed = /** @class */ (function (_super) {
     return AuditActionsCreateFailed;
 }(BaseError));
 exports.AuditActionsCreateFailed = AuditActionsCreateFailed;
+var AuditLogsFetchAllFailed = /** @class */ (function (_super) {
+    __extends(AuditLogsFetchAllFailed, _super);
+    function AuditLogsFetchAllFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch audit logs'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'AuditLogsFetchAllFailed';
+        return _this;
+    }
+    return AuditLogsFetchAllFailed;
+}(BaseError));
+exports.AuditLogsFetchAllFailed = AuditLogsFetchAllFailed;
+var AuditLogsFetchOneFailed = /** @class */ (function (_super) {
+    __extends(AuditLogsFetchOneFailed, _super);
+    function AuditLogsFetchOneFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch audit log'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'AuditLogsFetchOneFailed';
+        return _this;
+    }
+    return AuditLogsFetchOneFailed;
+}(BaseError));
+exports.AuditLogsFetchOneFailed = AuditLogsFetchOneFailed;
+var AuditLogsGetMetaFailed = /** @class */ (function (_super) {
+    __extends(AuditLogsGetMetaFailed, _super);
+    function AuditLogsGetMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch audit logs meta'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'AuditLogsGetMetaFailed';
+        return _this;
+    }
+    return AuditLogsGetMetaFailed;
+}(BaseError));
+exports.AuditLogsGetMetaFailed = AuditLogsGetMetaFailed;
 var ImageCreationFailed = /** @class */ (function (_super) {
     __extends(ImageCreationFailed, _super);
     function ImageCreationFailed(message) {

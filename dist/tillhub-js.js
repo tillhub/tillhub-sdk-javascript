@@ -351,7 +351,7 @@ var TillhubClient = /** @class */ (function (_super) {
         return this.generateAuthenticatedInstance(v0.Staff);
     };
     /**
-     * Create an authenticated Staff instance
+     * Create an authenticated AuditActions instance
      *
      */
     TillhubClient.prototype.auditActions = function () {
@@ -363,6 +363,20 @@ var TillhubClient = /** @class */ (function (_super) {
             throw new errors.UninstantiatedClient();
         }
         return new v0.AuditActions({ user: this.auth.user, base: this.options.base }, this.http);
+    };
+    /**
+     * Create an authenticated AuditLogs instance
+     *
+     */
+    TillhubClient.prototype.auditLogs = function () {
+        if (!this.options ||
+            !this.options.base ||
+            !this.http ||
+            !this.auth ||
+            !this.auth.authenticated) {
+            throw new errors.UninstantiatedClient();
+        }
+        return new v0.AuditLogs({ user: this.auth.user, base: this.options.base }, this.http);
     };
     /**
      * Create an authenticated Registers instance

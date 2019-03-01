@@ -154,10 +154,15 @@ export declare class TillhubClient extends events.EventEmitter {
      */
     staff(): v0.Staff;
     /**
-     * Create an authenticated Staff instance
+     * Create an authenticated AuditActions instance
      *
      */
     auditActions(): v0.AuditActions;
+    /**
+     * Create an authenticated AuditLogs instance
+     *
+     */
+    auditLogs(): v0.AuditLogs;
     /**
      * Create an authenticated Registers instance
      *

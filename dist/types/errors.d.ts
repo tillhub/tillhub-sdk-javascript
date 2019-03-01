@@ -788,6 +788,21 @@ export declare class AuditActionsCreateFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class AuditLogsFetchAllFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class AuditLogsFetchOneFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class AuditLogsGetMetaFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
 export declare class ImageCreationFailed extends BaseError {
     message: string;
     name: string;
