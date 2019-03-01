@@ -1387,3 +1387,10 @@ export class BalancesFetchOneFailed extends BaseError {
     super(message, properties)
   }
 }
+
+export class BalancesMetaFailed extends BaseError {
+  public name = 'BalancesMetaFailed'
+  constructor(public message: string = 'Could not fetch meta data for balances', properties?: any) {
+    super(message, properties)
+  }
+}
