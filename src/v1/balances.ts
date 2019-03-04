@@ -20,6 +20,7 @@ export interface BalancesQuery {
   staff?: string | null
   limit?: number
   uri?: string
+  format?: string
 }
 
 export interface LatestQuery {
