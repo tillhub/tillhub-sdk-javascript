@@ -1,3 +1,10 @@
+# [3.32.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.31.1...v3.32.0) (2019-03-04)
+
+
+### Features
+
+* **v1 balances:** added format parameter for query ([296576c](https://github.com/tillhub/tillhub-sdk-javascript/commit/296576c))
+
 ## [3.31.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.31.0...v3.31.1) (2019-03-01)
 
 
