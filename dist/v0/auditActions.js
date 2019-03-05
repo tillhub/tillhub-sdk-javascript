@@ -45,9 +45,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -56,35 +53,28 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var qs_1 = __importDefault(require("qs"));
 var errors = __importStar(require("../errors"));
+var uri_helper_1 = require("../uri-helper");
 var AuditActions = /** @class */ (function () {
     function AuditActions(options, http) {
         this.options = options;
         this.http = http;
         this.endpoint = '/api/v0/audits';
         this.options.base = this.options.base || 'https://api.tillhub.com';
+        this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
     }
     AuditActions.prototype.getAll = function (q) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var next, uri, queryString, response_1, err_1;
+            var next, uri, base, uri_1, response_1, err_1;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        if (q && q.uri) {
-                            uri = q.uri;
-                        }
-                        else {
-                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/actions";
-                        }
-                        queryString = qs_1.default.stringify(q);
-                        if (queryString) {
-                            uri = uri + "?" + queryString;
-                        }
-                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                        base = this.uriHelper.generateBaseUri('/actions');
+                        uri_1 = this.uriHelper.generateUriWithQuery(base, q);
+                        return [4 /*yield*/, this.http.getClient().get(uri_1)];
                     case 1:
                         response_1 = _a.sent();
                         if (response_1.data.cursor && response_1.data.cursor.next) {
@@ -106,20 +96,15 @@ var AuditActions = /** @class */ (function () {
     AuditActions.prototype.meta = function (q) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, queryString, response, err_2;
+            var base, uri, response, err_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/actions/meta";
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        queryString = qs_1.default.stringify(q);
-                        if (queryString) {
-                            uri = uri + "?" + queryString;
-                        }
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri('/actions/meta');
+                        uri = this.uriHelper.generateUriWithQuery(base, q);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
-                    case 2:
+                    case 1:
                         response = _a.sent();
                         if (response.status !== 200)
                             reject(new errors.AuditActionsGetMetaFailed());
@@ -127,10 +112,10 @@ var AuditActions = /** @class */ (function () {
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count }
                             })];
-                    case 3:
+                    case 2:
                         err_2 = _a.sent();
                         return [2 /*return*/, reject(new errors.AuditActionsGetMetaFailed())];
-                    case 4: return [2 /*return*/];
+                    case 3: return [2 /*return*/];
                 }
             });
         }); });
@@ -138,19 +123,16 @@ var AuditActions = /** @class */ (function () {
     AuditActions.prototype.get = function (requestObject) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var auditActionId, query, uri, queryString, response, err_3;
+            var auditActionId, query, base, uri, response, err_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         auditActionId = requestObject.auditActionId, query = requestObject.query;
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/actions/" + auditActionId;
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        queryString = qs_1.default.stringify(query);
-                        if (queryString) {
-                            uri = uri + "?" + queryString;
-                        }
+                        base = this.uriHelper.generateBaseUri("/actions/" + auditActionId);
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();

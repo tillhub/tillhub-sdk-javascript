@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { UriHelper } from '../uri-helper';
 export interface AuditsOptions {
     user?: string;
     base?: string;
@@ -35,6 +36,7 @@ export declare class AuditActions {
     endpoint: string;
     http: Client;
     options: AuditsOptions;
+    uriHelper: UriHelper;
     constructor(options: AuditsOptions, http: Client);
     getAll(q?: AuditsQuery | undefined): Promise<AuditsResponse>;
     meta(q?: AuditsMetaQuery | undefined): Promise<AuditsResponse>;
