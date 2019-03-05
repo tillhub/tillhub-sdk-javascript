@@ -41,6 +41,7 @@ Additionally, you can import the transpiled modules from `dist/lib` in case you 
 import Auth from '@tillhub/javascript-sdk/dist/lib/Auth'
 ```
 
+
 ## Development
 
 - `npm t`: Run test suite
