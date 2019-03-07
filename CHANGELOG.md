@@ -1,3 +1,16 @@
+# [3.34.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.33.0...v3.34.0) (2019-03-07)
+
+
+### Bug Fixes
+
+* moved errors.ts to errors/index.ts ([5fd8056](https://github.com/tillhub/tillhub-sdk-javascript/commit/5fd8056))
+* removed factory for reports and followed current error convention ([c040925](https://github.com/tillhub/tillhub-sdk-javascript/commit/c040925))
+
+
+### Features
+
+* **v0/analytics/reports:** added balances handler for reports ([816c973](https://github.com/tillhub/tillhub-sdk-javascript/commit/816c973))
+
 # [3.33.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.32.0...v3.33.0) (2019-03-05)
 
 

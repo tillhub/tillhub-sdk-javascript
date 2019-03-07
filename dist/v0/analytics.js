@@ -48,6 +48,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var qs_1 = __importDefault(require("qs"));
 var errors = __importStar(require("../errors"));
 var uri_helper_1 = require("../uri-helper");
+var balances_1 = require("./analytics/reports/balances");
 var Analytics = /** @class */ (function () {
     function Analytics(options, http) {
         this.options = options;
@@ -617,6 +618,9 @@ var Analytics = /** @class */ (function () {
                 }
             });
         }); });
+    };
+    Analytics.prototype.balances = function () {
+        return new balances_1.Balances(this.options, this.http, this.uriHelper);
     };
     return Analytics;
 }());

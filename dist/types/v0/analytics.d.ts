@@ -1,5 +1,6 @@
 import { Client } from '../client';
 import { UriHelper } from '../uri-helper';
+import { Balances } from './analytics/reports/balances';
 export declare type StaffID = string | null;
 export interface AnalyticsOptions {
     user?: string;
@@ -125,4 +126,5 @@ export declare class Analytics {
     getProductGroups(query?: ProductGoupsOptions | undefined): Promise<AnalyticsResponse>;
     getProductGroupsFilters(query: ProductGoupsFilters): Promise<AnalyticsResponse>;
     getLineCancellationReport(): Promise<AnalyticsResponse>;
+    balances(): Balances;
 }

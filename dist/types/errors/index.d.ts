@@ -1,8 +1,5 @@
-export declare class BaseError extends Error {
-    properties?: any;
-    message: string;
-    constructor(message: string, properties?: any);
-}
+import { BaseError } from './baseError';
+export { BaseError };
 export declare class AuthenticationFailed extends BaseError {
     message: string;
     name: string;
