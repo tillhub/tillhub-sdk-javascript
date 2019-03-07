@@ -118,9 +118,9 @@ describe('v0: Analytics Reports Balances: can get count number of all balances',
     })
 
     try {
-      await th.balances().meta()
+      await th.analytics().balances()
     } catch (err) {
-      expect(err.name).toBe('BalancesMetaFailed')
+      expect(err.name).toBe('ReportsBalancesMetaFailed')
     }
   })
 })

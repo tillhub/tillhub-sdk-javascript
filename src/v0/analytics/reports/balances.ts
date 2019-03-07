@@ -54,7 +54,7 @@ export class Balances {
         } as BalancesResponse)
 
       } catch (err) {
-        return reject(new errors.ReportsFetchAllFailed('Balance'))
+        return reject(new errors.ReportsBalancesFetchAllFailed())
       }
     })
   }
@@ -65,11 +65,11 @@ export class Balances {
         const uri = this.uriHelper.generateBaseUri('/reports/balances/meta')
         const response = await this.http.getClient().get(uri)
 
-        if (response.status !== 200) return reject(new errors.ReportsFetchMetaFailed('Balance', undefined, { status: response.status }))
+        if (response.status !== 200) return reject(new errors.ReportsBalancesMetaFailed(undefined, { status: response.status }))
 
         if (!response.data.results[0]) {
           return reject(
-            new errors.ReportsFetchMetaFailed('Balance', 'Could not get balances metadata unexpectedly')
+            new errors.ReportsBalancesMetaFailed('Could not get balances metadata unexpectedly')
           )
         }
 
@@ -79,7 +79,7 @@ export class Balances {
         } as BalancesResponse)
 
       } catch (err) {
-        return reject(new errors.ReportsFetchMetaFailed('Balance'))
+        return reject(new errors.ReportsBalancesMetaFailed())
       }
     })
   }
