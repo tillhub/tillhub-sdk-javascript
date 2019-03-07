@@ -2,6 +2,7 @@ import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 import { UriHelper } from '../uri-helper'
+import { Balances } from './analytics/reports/balances'
 
 export type StaffID = string | null
 
@@ -558,5 +559,9 @@ export class Analytics {
         return reject(new errors.LineCancellationReportFetchFailed())
       }
     })
+  }
+
+  balances(): Balances {
+    return new Balances(this.options, this.http, this.uriHelper)
   }
 }
