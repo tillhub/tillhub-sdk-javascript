@@ -33,6 +33,6 @@ export declare class Balances {
     uriHelper: UriHelper;
     constructor(options: BalancesOptions, http: Client, uriHelper: UriHelper);
     getAll(query?: BalancesQuery): Promise<BalancesResponse>;
-    meta(): Promise<BalancesResponse>;
+    meta(query?: BalancesQuery): Promise<BalancesResponse>;
     get(requestObject: BalancesGetOneRequestObject): Promise<BalancesResponse>;
 }

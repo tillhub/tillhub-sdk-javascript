@@ -1,3 +1,10 @@
+## [3.35.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.35.0...v3.35.1) (2019-03-11)
+
+
+### Bug Fixes
+
+* meta query ([cdf0938](https://github.com/tillhub/tillhub-sdk-javascript/commit/cdf0938))
+
 # [3.35.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.34.0...v3.35.0) (2019-03-11)
 
 
