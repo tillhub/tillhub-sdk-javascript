@@ -108,6 +108,36 @@ var Balances = /** @class */ (function () {
             });
         }); });
     };
+    Balances.prototype.get = function (requestObject) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var next, base, uri, response_2, err_3;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri("/reports/balances/" + requestObject.balanceId);
+                        uri = this.uriHelper.generateUriWithQuery(base, requestObject.query);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
+                        response_2 = _a.sent();
+                        if (response_2.data.cursor && response_2.data.cursor.next) {
+                            next = function () { return _this.getAll({ uri: response_2.data.cursor.next }); };
+                        }
+                        return [2 /*return*/, resolve({
+                                data: response_2.data.results[0],
+                                metadata: { count: response_2.data.count },
+                                next: next
+                            })];
+                    case 2:
+                        err_3 = _a.sent();
+                        return [2 /*return*/, reject(new errors.ReportsBalancesFetchOneFailed())];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     return Balances;
 }());
 exports.Balances = Balances;

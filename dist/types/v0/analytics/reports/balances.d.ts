@@ -4,6 +4,14 @@ export interface BalancesOptions {
     user?: string;
     base?: string;
 }
+export interface BalanceGetOneQuery {
+    legacy?: boolean;
+    currency: string;
+}
+export interface BalancesGetOneRequestObject {
+    balanceId: string;
+    query: BalanceGetOneQuery;
+}
 export interface BalancesResponse {
     data: object[];
     metadata: object;
@@ -26,4 +34,5 @@ export declare class Balances {
     constructor(options: BalancesOptions, http: Client, uriHelper: UriHelper);
     getAll(query?: BalancesQuery): Promise<BalancesResponse>;
     meta(): Promise<BalancesResponse>;
+    get(requestObject: BalancesGetOneRequestObject): Promise<BalancesResponse>;
 }

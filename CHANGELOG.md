@@ -1,3 +1,10 @@
+# [3.35.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.34.0...v3.35.0) (2019-03-11)
+
+
+### Features
+
+* **analytics/reports/balances:** added get to balances in reports ([c34145a](https://github.com/tillhub/tillhub-sdk-javascript/commit/c34145a))
+
 # [3.34.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.33.0...v3.34.0) (2019-03-07)
 
 
