@@ -69,10 +69,11 @@ export class Balances {
     })
   }
 
-  meta(): Promise<BalancesResponse> {
+  meta(query?: BalancesQuery): Promise<BalancesResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const uri = this.uriHelper.generateBaseUri('/reports/balances/meta')
+        const base = this.uriHelper.generateBaseUri('/reports/balances/meta')
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
         const response = await this.http.getClient().get(uri)
 
         if (response.status !== 200) return reject(new errors.ReportsBalancesMetaFailed(undefined, { status: response.status }))
