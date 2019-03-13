@@ -1,3 +1,10 @@
+# [3.36.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.35.1...v3.36.0) (2019-03-13)
+
+
+### Features
+
+* **analytics:** remove line cancellation handler ([e8ce285](https://github.com/tillhub/tillhub-sdk-javascript/commit/e8ce285))
+
 ## [3.35.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.35.0...v3.35.1) (2019-03-11)
 
 

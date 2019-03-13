@@ -125,6 +125,5 @@ export declare class Analytics {
     getStocksReport(query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse>;
     getProductGroups(query?: ProductGoupsOptions | undefined): Promise<AnalyticsResponse>;
     getProductGroupsFilters(query: ProductGoupsFilters): Promise<AnalyticsResponse>;
-    getLineCancellationReport(): Promise<AnalyticsResponse>;
     balances(): Balances;
 }
