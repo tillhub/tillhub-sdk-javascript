@@ -543,24 +543,6 @@ export class Analytics {
     })
   }
 
-  getLineCancellationReport(): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri('/reports/products/line_cancellations')
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.LineCancellationReportFetchFailed())
-        return resolve({
-          data: response.data.results,
-          metadata: {
-            count: response.data.count
-          }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new errors.LineCancellationReportFetchFailed())
-      }
-    })
-  }
-
   balances(): Balances {
     return new Balances(this.options, this.http, this.uriHelper)
   }
