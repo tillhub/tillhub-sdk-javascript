@@ -1,3 +1,10 @@
+# [3.37.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.36.0...v3.37.0) (2019-03-14)
+
+
+### Features
+
+* **analytics/reports/payment_options:** added payment_options handler ([6bcb6d5](https://github.com/tillhub/tillhub-sdk-javascript/commit/6bcb6d5))
+
 # [3.36.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.35.1...v3.36.0) (2019-03-13)
 
 

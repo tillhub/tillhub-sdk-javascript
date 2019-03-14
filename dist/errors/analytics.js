@@ -50,4 +50,16 @@ var ReportsBalancesMetaFailed = /** @class */ (function (_super) {
     return ReportsBalancesMetaFailed;
 }(baseError_1.BaseError));
 exports.ReportsBalancesMetaFailed = ReportsBalancesMetaFailed;
+var ReportsPaymentOptionsFetchAllFailed = /** @class */ (function (_super) {
+    __extends(ReportsPaymentOptionsFetchAllFailed, _super);
+    function ReportsPaymentOptionsFetchAllFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch all the payment options'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ReportsPaymentOptionsFetchAllFailed';
+        return _this;
+    }
+    return ReportsPaymentOptionsFetchAllFailed;
+}(baseError_1.BaseError));
+exports.ReportsPaymentOptionsFetchAllFailed = ReportsPaymentOptionsFetchAllFailed;
 //# sourceMappingURL=analytics.js.map
