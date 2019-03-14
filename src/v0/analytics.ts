@@ -3,6 +3,7 @@ import { Client } from '../client'
 import * as errors from '../errors'
 import { UriHelper } from '../uri-helper'
 import { Balances } from './analytics/reports/balances'
+import { PaymentOptions } from './analytics/reports/payment_options'
 
 export type StaffID = string | null
 
@@ -546,4 +547,9 @@ export class Analytics {
   balances(): Balances {
     return new Balances(this.options, this.http, this.uriHelper)
   }
+
+  paymentOptions(): PaymentOptions {
+    return new PaymentOptions(this.options, this.http, this.uriHelper)
+  }
+
 }

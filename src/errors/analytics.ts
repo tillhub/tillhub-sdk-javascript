@@ -20,3 +20,10 @@ export class ReportsBalancesMetaFailed extends BaseError {
     super(message, properties)
   }
 }
+
+export class ReportsPaymentOptionsFetchAllFailed extends BaseError {
+  public name = 'ReportsPaymentOptionsFetchAllFailed'
+  constructor(public message: string = 'Could not fetch all the payment options', properties?: any) {
+    super(message, properties)
+  }
+}
