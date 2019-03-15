@@ -50,6 +50,7 @@ var errors = __importStar(require("../errors"));
 var uri_helper_1 = require("../uri-helper");
 var balances_1 = require("./analytics/reports/balances");
 var payment_options_1 = require("./analytics/reports/payment_options");
+var payments_1 = require("./analytics/reports/payments");
 var Analytics = /** @class */ (function () {
     function Analytics(options, http) {
         this.options = options;
@@ -598,6 +599,9 @@ var Analytics = /** @class */ (function () {
     };
     Analytics.prototype.paymentOptions = function () {
         return new payment_options_1.PaymentOptions(this.options, this.http, this.uriHelper);
+    };
+    Analytics.prototype.payments = function () {
+        return new payments_1.Payments(this.options, this.http, this.uriHelper);
     };
     return Analytics;
 }());

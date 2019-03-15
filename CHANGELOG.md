@@ -1,3 +1,10 @@
+# [3.38.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.37.0...v3.38.0) (2019-03-15)
+
+
+### Features
+
+* **reports:** get payments report ([fa3f9a7](https://github.com/tillhub/tillhub-sdk-javascript/commit/fa3f9a7))
+
 # [3.37.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.36.0...v3.37.0) (2019-03-14)
 
 

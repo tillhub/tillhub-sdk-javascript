@@ -2,6 +2,7 @@ import { Client } from '../client';
 import { UriHelper } from '../uri-helper';
 import { Balances } from './analytics/reports/balances';
 import { PaymentOptions } from './analytics/reports/payment_options';
+import { Payments } from './analytics/reports/payments';
 export declare type StaffID = string | null;
 export interface AnalyticsOptions {
     user?: string;
@@ -128,4 +129,5 @@ export declare class Analytics {
     getProductGroupsFilters(query: ProductGoupsFilters): Promise<AnalyticsResponse>;
     balances(): Balances;
     paymentOptions(): PaymentOptions;
+    payments(): Payments;
 }

@@ -62,4 +62,28 @@ var ReportsPaymentOptionsFetchAllFailed = /** @class */ (function (_super) {
     return ReportsPaymentOptionsFetchAllFailed;
 }(baseError_1.BaseError));
 exports.ReportsPaymentOptionsFetchAllFailed = ReportsPaymentOptionsFetchAllFailed;
+var ReportsPaymentsFetchAllFailed = /** @class */ (function (_super) {
+    __extends(ReportsPaymentsFetchAllFailed, _super);
+    function ReportsPaymentsFetchAllFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch all the payments'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ReportsPaymentsFetchAllFailed';
+        return _this;
+    }
+    return ReportsPaymentsFetchAllFailed;
+}(baseError_1.BaseError));
+exports.ReportsPaymentsFetchAllFailed = ReportsPaymentsFetchAllFailed;
+var ReportsPaymentsMetaFailed = /** @class */ (function (_super) {
+    __extends(ReportsPaymentsMetaFailed, _super);
+    function ReportsPaymentsMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch meta data for payments'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ReportsPaymentsMetaFailed';
+        return _this;
+    }
+    return ReportsPaymentsMetaFailed;
+}(baseError_1.BaseError));
+exports.ReportsPaymentsMetaFailed = ReportsPaymentsMetaFailed;
 //# sourceMappingURL=analytics.js.map

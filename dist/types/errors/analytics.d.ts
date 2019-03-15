@@ -19,3 +19,13 @@ export declare class ReportsPaymentOptionsFetchAllFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class ReportsPaymentsFetchAllFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ReportsPaymentsMetaFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
