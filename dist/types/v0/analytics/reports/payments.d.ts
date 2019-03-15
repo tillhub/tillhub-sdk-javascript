@@ -10,6 +10,7 @@ export interface PaymentsResponse {
 }
 export interface PaymentsQuery {
     uri?: string;
+    format?: string;
 }
 export declare class Payments {
     http: Client;

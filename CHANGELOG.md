@@ -1,3 +1,10 @@
+# [3.39.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.38.1...v3.39.0) (2019-03-15)
+
+
+### Features
+
+* **analytics:** export payments report ([88b8cd6](https://github.com/tillhub/tillhub-sdk-javascript/commit/88b8cd6))
+
 ## [3.38.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.38.0...v3.38.1) (2019-03-15)
 
 
