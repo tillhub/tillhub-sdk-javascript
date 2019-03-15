@@ -44,6 +44,53 @@ describe('v0: Analytics: gets Payments report', () => {
     expect(Array.isArray(data)).toBe(true)
   })
 
+  it('takes a query string', async () => {
+    const paymentsQuery = {
+      format: 'csv'
+    }
+
+    const queryString = qs.stringify(paymentsQuery, { addQueryPrefix: true })
+
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+
+      mock
+        .onGet(
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/payments${queryString}`
+        )
+        .reply(function (config) {
+          return [
+            200,
+            {
+              count: 1,
+              results: [{}]
+            }
+          ]
+        })
+    }
+
+    const th = await initThInstance()
+
+    const payments = th.analytics().payments()
+
+    expect(payments).toBeInstanceOf(Payments)
+
+    const { data } = await payments.getAll(paymentsQuery)
+
+    expect(Array.isArray(data)).toBe(true)
+  })
+
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {

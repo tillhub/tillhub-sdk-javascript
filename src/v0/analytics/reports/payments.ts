@@ -14,6 +14,7 @@ export interface PaymentsResponse {
 
 export interface PaymentsQuery {
   uri?: string
+  format?: string
 }
 
 export class Payments {
@@ -31,7 +32,8 @@ export class Payments {
     return new Promise(async (resolve, reject) => {
       let next
       try {
-        const uri = this.uriHelper.generateBaseUri('/reports/payments')
+        const base = this.uriHelper.generateBaseUri('/reports/payments')
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
         const response = await this.http.getClient().get(uri)
 
         if (response.data.cursor && response.data.cursor.next) {
