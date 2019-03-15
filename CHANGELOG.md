@@ -1,3 +1,10 @@
+## [3.38.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.38.0...v3.38.1) (2019-03-15)
+
+
+### Bug Fixes
+
+* interface typo ([2f23096](https://github.com/tillhub/tillhub-sdk-javascript/commit/2f23096))
+
 # [3.38.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.37.0...v3.38.0) (2019-03-15)
 
 

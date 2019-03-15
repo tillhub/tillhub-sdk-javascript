@@ -11,7 +11,7 @@ export interface PaymentOptionsResponse {
 export interface PaymentOptionsQuery {
     start?: string;
     end?: string;
-    branche_id?: string;
+    branch_id?: string;
     register_id?: string;
     payment_method?: string;
     uri?: string;
