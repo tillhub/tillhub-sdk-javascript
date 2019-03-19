@@ -1,3 +1,10 @@
+# [3.40.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.39.0...v3.40.0) (2019-03-19)
+
+
+### Features
+
+* **payment report:** add filters to query ([9ee467a](https://github.com/tillhub/tillhub-sdk-javascript/commit/9ee467a))
+
 # [3.39.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.38.1...v3.39.0) (2019-03-15)
 
 

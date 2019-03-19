@@ -11,6 +11,22 @@ export interface PaymentsResponse {
 export interface PaymentsQuery {
     uri?: string;
     format?: string;
+    start?: string;
+    end?: string;
+    payment_option?: string;
+    payment_type?: string;
+    transaction_number?: number;
+    balance_number?: number;
+    customer_number?: string;
+    cashier_number?: string;
+    change?: {
+        from: number;
+        to: number;
+    };
+    amount?: {
+        from: number;
+        to: number;
+    };
 }
 export declare class Payments {
     http: Client;
