@@ -46,7 +46,21 @@ describe('v0: Analytics: gets Payments report', () => {
 
   it('takes a query string', async () => {
     const paymentsQuery = {
-      format: 'csv'
+      format: 'csv',
+      date_start: '2019-03-18T22:59:59.999Z',
+      date_end: '2019-03-07T23:00:00.000Z',
+      payment_option: 'Visa',
+      payment_type: 'cash',
+      transaction_number: 5,
+      balance_number: 4,
+      amount: {
+        from: 20,
+        to: 1400
+      },
+      change: {
+        from: 1,
+        to: 8
+      }
     }
 
     const queryString = qs.stringify(paymentsQuery, { addQueryPrefix: true })
