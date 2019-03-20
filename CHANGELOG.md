@@ -1,3 +1,10 @@
+# [3.41.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.40.0...v3.41.0) (2019-03-20)
+
+
+### Features
+
+* **payments report:** add query params ([eabcd75](https://github.com/tillhub/tillhub-sdk-javascript/commit/eabcd75))
+
 # [3.40.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.39.0...v3.40.0) (2019-03-19)
 
 

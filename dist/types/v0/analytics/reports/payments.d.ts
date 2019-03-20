@@ -19,6 +19,10 @@ export interface PaymentsQuery {
     balance_number?: number;
     customer_number?: string;
     cashier_number?: string;
+    legacy?: boolean;
+    limit?: number;
+    cursor_field?: string;
+    q?: string;
     change?: {
         from: number;
         to: number;
@@ -28,11 +32,14 @@ export interface PaymentsQuery {
         to: number;
     };
 }
+export interface MetaQuery {
+    legacy?: boolean;
+}
 export declare class Payments {
     http: Client;
     options: PaymentsOptions;
     uriHelper: UriHelper;
     constructor(options: PaymentsOptions, http: Client, uriHelper: UriHelper);
     getAll(query?: PaymentsQuery): Promise<PaymentsResponse>;
-    meta(): Promise<PaymentsResponse>;
+    meta(query?: MetaQuery): Promise<PaymentsResponse>;
 }
