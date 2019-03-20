@@ -23,6 +23,10 @@ export interface PaymentsQuery {
   balance_number?: number
   customer_number?: string
   cashier_number?: string
+  legacy?: boolean
+  limit?: number
+  cursor_field?: string
+  q?: string
   change?: {
     from: number
     to: number
@@ -31,6 +35,10 @@ export interface PaymentsQuery {
     from: number
     to: number
   }
+}
+
+export interface MetaQuery {
+  legacy?: boolean
 }
 
 export class Payments {
@@ -67,10 +75,11 @@ export class Payments {
     })
   }
 
-  meta(): Promise<PaymentsResponse> {
+  meta(query?: MetaQuery): Promise<PaymentsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const uri = this.uriHelper.generateBaseUri('/reports/payments/meta')
+        const base = this.uriHelper.generateBaseUri('/reports/payments/meta')
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
         const response = await this.http.getClient().get(uri)
 
         if (response.status !== 200) {
