@@ -1826,18 +1826,6 @@ var SimpleSalesCartItemsReportFetchFailed = /** @class */ (function (_super) {
     return SimpleSalesCartItemsReportFetchFailed;
 }(baseError_1.BaseError));
 exports.SimpleSalesCartItemsReportFetchFailed = SimpleSalesCartItemsReportFetchFailed;
-var VatReportFetchFailed = /** @class */ (function (_super) {
-    __extends(VatReportFetchFailed, _super);
-    function VatReportFetchFailed(message, properties) {
-        if (message === void 0) { message = 'Could not fetch the vat report'; }
-        var _this = _super.call(this, message, properties) || this;
-        _this.message = message;
-        _this.name = 'VatReportFetchFailed';
-        return _this;
-    }
-    return VatReportFetchFailed;
-}(baseError_1.BaseError));
-exports.VatReportFetchFailed = VatReportFetchFailed;
 var StocksReportFetchFailed = /** @class */ (function (_super) {
     __extends(StocksReportFetchFailed, _super);
     function StocksReportFetchFailed(message, properties) {

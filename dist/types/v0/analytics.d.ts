@@ -3,6 +3,7 @@ import { UriHelper } from '../uri-helper';
 import { Balances } from './analytics/reports/balances';
 import { PaymentOptions } from './analytics/reports/payment_options';
 import { Payments } from './analytics/reports/payments';
+import { Vat } from './analytics/reports/vat';
 export declare type StaffID = string | null;
 export interface AnalyticsOptions {
     user?: string;
@@ -120,7 +121,6 @@ export declare class Analytics {
     getProductsReport(staff?: StaffID): Promise<AnalyticsResponse>;
     getPaymentsReport(): Promise<AnalyticsResponse>;
     getSimpleSalesCartItems(query?: SimpleSalesCartItemsOptions | undefined): Promise<AnalyticsResponse>;
-    getVatReport(query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse>;
     getCustomersReport(query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse>;
     getCustomersTransaction(query: CustomersTransactionOptions): Promise<AnalyticsResponse>;
     getCustomersOverview(query: CustomersTransactionOptions): Promise<AnalyticsResponse>;
@@ -130,4 +130,5 @@ export declare class Analytics {
     balances(): Balances;
     paymentOptions(): PaymentOptions;
     payments(): Payments;
+    vat(): Vat;
 }

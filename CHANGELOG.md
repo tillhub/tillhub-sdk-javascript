@@ -1,3 +1,10 @@
+# [3.42.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.41.0...v3.42.0) (2019-03-26)
+
+
+### Features
+
+* **analytics/vat:** refactor get all vat report; add meta handler ([c394dda](https://github.com/tillhub/tillhub-sdk-javascript/commit/c394dda))
+
 # [3.41.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.40.0...v3.41.0) (2019-03-20)
 
 

@@ -755,11 +755,6 @@ export declare class SimpleSalesCartItemsReportFetchFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
-export declare class VatReportFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
 export declare class StocksReportFetchFailed extends BaseError {
     message: string;
     name: string;

@@ -29,3 +29,13 @@ export declare class ReportsPaymentsMetaFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class VatReportFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class VatReportFetchMetaFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}

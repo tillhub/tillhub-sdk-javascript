@@ -86,4 +86,28 @@ var ReportsPaymentsMetaFailed = /** @class */ (function (_super) {
     return ReportsPaymentsMetaFailed;
 }(baseError_1.BaseError));
 exports.ReportsPaymentsMetaFailed = ReportsPaymentsMetaFailed;
+var VatReportFetchFailed = /** @class */ (function (_super) {
+    __extends(VatReportFetchFailed, _super);
+    function VatReportFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the vat report'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'VatReportFetchFailed';
+        return _this;
+    }
+    return VatReportFetchFailed;
+}(baseError_1.BaseError));
+exports.VatReportFetchFailed = VatReportFetchFailed;
+var VatReportFetchMetaFailed = /** @class */ (function (_super) {
+    __extends(VatReportFetchMetaFailed, _super);
+    function VatReportFetchMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch meta data for vat report'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'VatReportFetchMetaFailed';
+        return _this;
+    }
+    return VatReportFetchMetaFailed;
+}(baseError_1.BaseError));
+exports.VatReportFetchMetaFailed = VatReportFetchMetaFailed;
 //# sourceMappingURL=analytics.js.map
