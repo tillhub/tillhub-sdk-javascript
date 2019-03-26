@@ -2,21 +2,8 @@ import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
-import { TillhubClient, v0 } from '../../src/tillhub-js'
-
-let user = {
-  username: 'test@example.com',
-  password: '12345678',
-  clientAccount: 'someuuid',
-  apiKey: '12345678'
-}
-
-if (process.env.SYSTEM_TEST) {
-  user.username = process.env.SYSTEM_TEST_USERNAME || user.username
-  user.password = process.env.SYSTEM_TEST_PASSWORD || user.password
-  user.clientAccount = process.env.SYSTEM_TEST_CLIENT_ACCOUNT_ID || user.clientAccount
-  user.apiKey = process.env.SYSTEM_TEST_API_KEY || user.apiKey
-}
+import { Vat } from '../../../src/v0/analytics/reports/vat'
+import { initThInstance } from '../../util'
 
 const legacyId = '4564'
 
@@ -45,21 +32,13 @@ describe('v0: Analytics: gets vat report', () => {
         })
     }
 
-    const options = {
-      credentials: { username: user.username, password: user.password },
-      base: process.env.TILLHUB_BASE
-    }
+    const th = await initThInstance()
 
-    const th = new TillhubClient()
+    const vat = th.analytics().vat()
 
-    th.init(options)
-    await th.auth.loginUsername({ username: user.username, password: user.password })
+    expect(vat).toBeInstanceOf(Vat)
 
-    const analytics = th.analytics()
-
-    expect(analytics).toBeInstanceOf(v0.Analytics)
-
-    const { data } = await analytics.getVatReport()
+    const { data } = await vat.getAll()
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -98,27 +77,13 @@ describe('v0: Analytics: gets vat report', () => {
         })
     }
 
-    const options = {
-      credentials: {
-        username: user.username,
-        password: user.password
-      },
-      base: process.env.TILLHUB_BASE
-    }
+    const th = await initThInstance()
 
-    const th = new TillhubClient()
+    const vat = th.analytics().vat()
 
-    th.init(options)
-    await th.auth.loginUsername({
-      username: user.username,
-      password: user.password
-    })
+    expect(vat).toBeInstanceOf(Vat)
 
-    const analytics = th.analytics()
-
-    expect(analytics).toBeInstanceOf(v0.Analytics)
-
-    const { data } = await analytics.getVatReport(mockVatQuery)
+    const { data } = await vat.getAll(mockVatQuery)
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -145,24 +110,13 @@ describe('v0: Analytics: gets vat report', () => {
         })
     }
 
-    const options = {
-      credentials: {
-        username: user.username,
-        password: user.password
-      },
-      base: process.env.TILLHUB_BASE
-    }
-
-    const th = new TillhubClient()
-
-    th.init(options)
-    await th.auth.loginUsername({
-      username: user.username,
-      password: user.password
-    })
+    const th = await initThInstance()
 
     try {
-      await th.analytics().getVatReport()
+      await th
+        .analytics()
+        .vat()
+        .getAll()
     } catch (err) {
       expect(err.name).toBe('VatReportFetchFailed')
     }

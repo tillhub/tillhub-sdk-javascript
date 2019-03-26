@@ -44,3 +44,20 @@ export class ReportsPaymentsMetaFailed extends BaseError {
     super(message, properties)
   }
 }
+
+export class VatReportFetchFailed extends BaseError {
+  public name = 'VatReportFetchFailed'
+  constructor(public message: string = 'Could not fetch the vat report', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class VatReportFetchMetaFailed extends BaseError {
+  public name = 'VatReportFetchMetaFailed'
+  constructor(
+    public message: string = 'Could not fetch meta data for vat report',
+    properties?: any
+  ) {
+    super(message, properties)
+  }
+}

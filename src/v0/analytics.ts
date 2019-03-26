@@ -5,6 +5,7 @@ import { UriHelper } from '../uri-helper'
 import { Balances } from './analytics/reports/balances'
 import { PaymentOptions } from './analytics/reports/payment_options'
 import { Payments } from './analytics/reports/payments'
+import { Vat } from './analytics/reports/vat'
 
 export type StaffID = string | null
 
@@ -407,30 +408,6 @@ export class Analytics {
     })
   }
 
-  getVatReport(query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        let uri = `${this.options.base}${this.endpoint}/${this.options.user}/reports/vat`
-
-        const queryString = qs.stringify(query)
-
-        if (queryString) {
-          uri = `${uri}?${queryString}`
-        }
-
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.VatReportFetchFailed())
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new errors.VatReportFetchFailed())
-      }
-    })
-  }
-
   getCustomersReport(query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -555,5 +532,9 @@ export class Analytics {
 
   payments(): Payments {
     return new Payments(this.options, this.http, this.uriHelper)
+  }
+
+  vat(): Vat {
+    return new Vat(this.options, this.http, this.uriHelper)
   }
 }

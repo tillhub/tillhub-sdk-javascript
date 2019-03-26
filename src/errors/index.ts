@@ -1095,13 +1095,6 @@ export class SimpleSalesCartItemsReportFetchFailed extends BaseError {
   }
 }
 
-export class VatReportFetchFailed extends BaseError {
-  public name = 'VatReportFetchFailed'
-  constructor(public message: string = 'Could not fetch the vat report', properties?: any) {
-    super(message, properties)
-  }
-}
-
 export class StocksReportFetchFailed extends BaseError {
   public name = 'StocksReportFetchFailed'
   constructor(public message: string = 'Could not fetch the stocks report', properties?: any) {
