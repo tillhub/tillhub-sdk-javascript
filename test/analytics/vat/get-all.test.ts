@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
-import { TillhubClient, v0 } from '../../src/tillhub-js'
+import { TillhubClient, v0 } from '../../../src/tillhub-js'
 
 let user = {
   username: 'test@example.com',
@@ -59,7 +59,7 @@ describe('v0: Analytics: gets vat report', () => {
 
     expect(analytics).toBeInstanceOf(v0.Analytics)
 
-    const { data } = await analytics.getVatReport()
+    const { data } = await analytics.vat().getAll()
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -118,7 +118,7 @@ describe('v0: Analytics: gets vat report', () => {
 
     expect(analytics).toBeInstanceOf(v0.Analytics)
 
-    const { data } = await analytics.getVatReport(mockVatQuery)
+    const { data } = await analytics.vat().getAll(mockVatQuery)
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -162,7 +162,10 @@ describe('v0: Analytics: gets vat report', () => {
     })
 
     try {
-      await th.analytics().getVatReport()
+      await th
+        .analytics()
+        .vat()
+        .getAll()
     } catch (err) {
       expect(err.name).toBe('VatReportFetchFailed')
     }
