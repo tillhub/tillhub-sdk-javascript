@@ -7,49 +7,12 @@ import { initThInstance } from '../../util'
 
 const legacyId = '4564'
 
-const mock = new MockAdapter(axios)
-afterEach(() => {
-  mock.reset()
-})
-
-describe('v0: Analytics: gets vat report', () => {
-  it('gets vat report', async () => {
-    if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
-        return [200, { token: '', user: { id: '123', legacy_id: legacyId } }]
-      })
-
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/vat`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              count: 1,
-              results: [{}]
-            }
-          ]
-        })
-    }
-
-    const th = await initThInstance()
-
-    const vat = th.analytics().vat()
-
-    expect(vat).toBeInstanceOf(Vat)
-
-    const { data } = await vat.getAll()
-
-    expect(Array.isArray(data)).toBe(true)
+describe('v0: Analytics: gets vat report metadata', () => {
+  const mock = new MockAdapter(axios)
+  afterEach(() => {
+    mock.reset()
   })
-
-  it('takes a query string', async () => {
-    const mockVatQuery = {
-      format: 'csv'
-    }
-
-    const mockString = 'format=csv'
-
+  it('get metadata', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
@@ -65,13 +28,13 @@ describe('v0: Analytics: gets vat report', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/vat?${mockString}`)
+        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/vat/meta`)
         .reply(function (config) {
           return [
             200,
             {
-              count: 1,
-              results: [{}]
+              count: 50,
+              results: [{ count: 50 }]
             }
           ]
         })
@@ -83,9 +46,9 @@ describe('v0: Analytics: gets vat report', () => {
 
     expect(vat).toBeInstanceOf(Vat)
 
-    const { data } = await vat.getAll(mockVatQuery)
+    const { data } = await vat.meta()
 
-    expect(Array.isArray(data)).toBe(true)
+    expect(data).toEqual({ count: 50 })
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -104,21 +67,20 @@ describe('v0: Analytics: gets vat report', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/vat`)
+        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/vat/meta`)
         .reply(function (config) {
           return [205]
         })
     }
-
     const th = await initThInstance()
 
     try {
       await th
         .analytics()
         .vat()
-        .getAll()
+        .meta()
     } catch (err) {
-      expect(err.name).toBe('VatReportFetchFailed')
+      expect(err.name).toBe('VatReportFetchMetaFailed')
     }
   })
 })

@@ -53,7 +53,7 @@ export class VatReportFetchFailed extends BaseError {
 }
 
 export class VatReportFetchMetaFailed extends BaseError {
-  public name = 'VatReportFetchFailed'
+  public name = 'VatReportFetchMetaFailed'
   constructor(
     public message: string = 'Could not fetch meta data for vat report',
     properties?: any
