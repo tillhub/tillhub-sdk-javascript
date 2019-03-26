@@ -12,6 +12,7 @@ export interface VatQuery {
     format?: string;
     uri?: string;
     legacy?: boolean;
+    limit?: number;
 }
 export interface MetaQuery {
     legacy?: boolean;

@@ -1,3 +1,10 @@
+## [3.42.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.42.0...v3.42.1) (2019-03-26)
+
+
+### Bug Fixes
+
+* **analyitics/vat:** add limit query param to get all ([79c762b](https://github.com/tillhub/tillhub-sdk-javascript/commit/79c762b))
+
 # [3.42.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.41.0...v3.42.0) (2019-03-26)
 
 
