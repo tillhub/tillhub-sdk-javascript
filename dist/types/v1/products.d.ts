@@ -87,6 +87,8 @@ export declare class Products {
     create(product: Product): Promise<ProductResponse>;
     getAll(options?: ProductsOptions | undefined): Promise<ProductsResponse>;
     get(productId: string): Promise<ProductResponse>;
+    getDetails(productId: string): Promise<ProductResponse>;
+    getChildrenDetails(productId: string): Promise<ProductResponse>;
     meta(): Promise<ProductsResponse>;
     put(productId: string, product: Product): Promise<ProductResponse>;
     count(): Promise<ProductsResponse>;

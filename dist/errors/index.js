@@ -207,18 +207,6 @@ var ProductsCreateFailed = /** @class */ (function (_super) {
     return ProductsCreateFailed;
 }(baseError_1.BaseError));
 exports.ProductsCreateFailed = ProductsCreateFailed;
-var ProductsFetchFailed = /** @class */ (function (_super) {
-    __extends(ProductsFetchFailed, _super);
-    function ProductsFetchFailed(message, properties) {
-        if (message === void 0) { message = 'Could not fetch the products'; }
-        var _this = _super.call(this, message, properties) || this;
-        _this.message = message;
-        _this.name = 'ProductsFetchFailed';
-        return _this;
-    }
-    return ProductsFetchFailed;
-}(baseError_1.BaseError));
-exports.ProductsFetchFailed = ProductsFetchFailed;
 var ProductFetchFailed = /** @class */ (function (_super) {
     __extends(ProductFetchFailed, _super);
     function ProductFetchFailed(message, properties) {
@@ -231,6 +219,42 @@ var ProductFetchFailed = /** @class */ (function (_super) {
     return ProductFetchFailed;
 }(baseError_1.BaseError));
 exports.ProductFetchFailed = ProductFetchFailed;
+var ProductsFetchFailed = /** @class */ (function (_super) {
+    __extends(ProductsFetchFailed, _super);
+    function ProductsFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the products'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductsFetchFailed';
+        return _this;
+    }
+    return ProductsFetchFailed;
+}(baseError_1.BaseError));
+exports.ProductsFetchFailed = ProductsFetchFailed;
+var ProductDetailsFetchFailed = /** @class */ (function (_super) {
+    __extends(ProductDetailsFetchFailed, _super);
+    function ProductDetailsFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the details of the product'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductDetailsFetchFailed';
+        return _this;
+    }
+    return ProductDetailsFetchFailed;
+}(baseError_1.BaseError));
+exports.ProductDetailsFetchFailed = ProductDetailsFetchFailed;
+var ProductChildrenDetailsFetchFailed = /** @class */ (function (_super) {
+    __extends(ProductChildrenDetailsFetchFailed, _super);
+    function ProductChildrenDetailsFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the details of the children products'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductChildrenDetailsFetchFailed';
+        return _this;
+    }
+    return ProductChildrenDetailsFetchFailed;
+}(baseError_1.BaseError));
+exports.ProductChildrenDetailsFetchFailed = ProductChildrenDetailsFetchFailed;
 var ProductsCountFailed = /** @class */ (function (_super) {
     __extends(ProductsCountFailed, _super);
     function ProductsCountFailed(message, properties) {

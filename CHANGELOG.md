@@ -1,3 +1,10 @@
+# [3.43.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.42.1...v3.43.0) (2019-03-27)
+
+
+### Features
+
+* **products_v1:** add product details ([b877fe1](https://github.com/tillhub/tillhub-sdk-javascript/commit/b877fe1))
+
 ## [3.42.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.42.0...v3.42.1) (2019-03-26)
 
 
