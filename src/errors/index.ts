@@ -117,6 +117,12 @@ export class ProductsCreateFailed extends BaseError {
   }
 }
 
+export class ProductFetchFailed extends BaseError {
+  public name = 'ProductFetchFailed'
+  constructor(public message: string = 'Could not fetch the product', properties?: any) {
+    super(message, properties)
+  }
+}
 export class ProductsFetchFailed extends BaseError {
   public name = 'ProductsFetchFailed'
   constructor(public message: string = 'Could not fetch the products', properties?: any) {
@@ -124,9 +130,15 @@ export class ProductsFetchFailed extends BaseError {
   }
 }
 
-export class ProductFetchFailed extends BaseError {
-  public name = 'ProductFetchFailed'
-  constructor(public message: string = 'Could not fetch the product', properties?: any) {
+export class ProductDetailsFetchFailed extends BaseError {
+  public name = 'ProductDetailsFetchFailed'
+  constructor(public message: string = 'Could not fetch the details of the product', properties?: any) {
+    super(message, properties)
+  }
+}
+export class ProductChildrenDetailsFetchFailed extends BaseError {
+  public name = 'ProductChildrenDetailsFetchFailed'
+  constructor(public message: string = 'Could not fetch the details of the children products', properties?: any) {
     super(message, properties)
   }
 }
