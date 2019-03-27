@@ -177,6 +177,42 @@ export class Products {
     })
   }
 
+  getDetails(productId: string): Promise<ProductResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productId}/details`
+      try {
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.ProductDetailsFetchFailed())
+
+        return resolve({
+          data: response.data.results[0] as Product,
+          msg: response.data.msg,
+          metadata: { count: response.data.count }
+        } as ProductResponse)
+      } catch (err) {
+        return reject(new errors.ProductDetailsFetchFailed())
+      }
+    })
+  }
+
+  getChildrenDetails(productId: string): Promise<ProductResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productId}/children/details`
+      try {
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new errors.ProductChildrenDetailsFetchFailed())
+
+        return resolve({
+          data: response.data.results[0] as Product,
+          msg: response.data.msg,
+          metadata: { count: response.data.count }
+        } as ProductResponse)
+      } catch (err) {
+        return reject(new errors.ProductChildrenDetailsFetchFailed())
+      }
+    })
+  }
+
   meta(): Promise<ProductsResponse> {
     return new Promise(async (resolve, reject) => {
       let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
