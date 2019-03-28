@@ -49,7 +49,7 @@ describe('v1: Products: can get details of product children', () => {
             200,
             {
               count: 1,
-              results: [{ id: '12345' }]
+              results: [{ id: '12345' }, { id: '456789' }]
             }
           ]
         })
@@ -77,7 +77,7 @@ describe('v1: Products: can get details of product children', () => {
 
     const { data } = await products.getChildrenDetails(productId)
 
-    expect(data).toEqual({ id: '12345' })
+    expect(data).toEqual([{ id: '12345' }, { id: '456789' }])
   })
 
   it('rejects on status codes that are not 200', async () => {
