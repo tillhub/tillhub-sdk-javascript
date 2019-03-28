@@ -48,7 +48,6 @@ describe('v1: Products: can get details of product children', () => {
           return [
             200,
             {
-              count: 1,
               results: [{ id: '12345' }, { id: '456789' }]
             }
           ]
