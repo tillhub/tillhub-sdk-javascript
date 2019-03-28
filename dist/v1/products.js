@@ -189,7 +189,7 @@ var Products = /** @class */ (function () {
                         response = _a.sent();
                         response.status !== 200 && reject(new errors.ProductChildrenDetailsFetchFailed());
                         return [2 /*return*/, resolve({
-                                data: response.data.results[0],
+                                data: response.data.results,
                                 msg: response.data.msg,
                                 metadata: { count: response.data.count }
                             })];

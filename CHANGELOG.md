@@ -1,3 +1,10 @@
+# [3.44.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.43.0...v3.44.0) (2019-03-28)
+
+
+### Features
+
+* **products_v1:** change results in response for children details ([2672c89](https://github.com/tillhub/tillhub-sdk-javascript/commit/2672c89))
+
 # [3.43.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.42.1...v3.43.0) (2019-03-27)
 
 
