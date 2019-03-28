@@ -203,7 +203,7 @@ export class Products {
         response.status !== 200 && reject(new errors.ProductChildrenDetailsFetchFailed())
 
         return resolve({
-          data: response.data.results[0] as Product,
+          data: response.data.results,
           msg: response.data.msg,
           metadata: { count: response.data.count }
         } as ProductResponse)
