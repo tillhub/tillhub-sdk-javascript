@@ -76,7 +76,7 @@ export class Staff {
   public options: StaffOptions
   public uriHelper: UriHelper
 
-  constructor(options: StaffOptions, http: Client, uriHelper: UriHelper) {
+  constructor(options: StaffOptions, http: Client) {
     this.options = options
     this.http = http
 
