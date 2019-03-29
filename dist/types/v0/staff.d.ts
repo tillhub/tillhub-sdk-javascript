@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { UriHelper } from '../uri-helper';
 export interface StaffOptions {
     user?: string;
     base?: string;
@@ -37,6 +38,10 @@ export interface PinRequest {
 export interface PinResponse {
     pin?: string;
 }
+export interface StaffQuery {
+    staff_id_template?: string;
+    generate_staff_id?: boolean;
+}
 export interface StaffMember {
     firstname?: string;
     lastname?: string;
@@ -57,9 +62,10 @@ export declare class Staff {
     endpoint: string;
     http: Client;
     options: StaffOptions;
+    uriHelper: UriHelper;
     constructor(options: StaffOptions, http: Client);
     getAll(): Promise<StaffResponse>;
-    create(staffMember: StaffMember): Promise<StaffResponse>;
+    create(staffMember: StaffMember, query?: StaffQuery): Promise<StaffResponse>;
     getOne(staffId: string): Promise<StaffMemberResponse>;
     put(staffId: string, staff: StaffMember): Promise<StaffMemberResponse>;
     delete(staffId: string): Promise<StaffMemberResponse>;

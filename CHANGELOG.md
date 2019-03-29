@@ -1,3 +1,15 @@
+# [3.45.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.44.0...v3.45.0) (2019-03-29)
+
+
+### Bug Fixes
+
+* **staff:** class signature ([3e028e3](https://github.com/tillhub/tillhub-sdk-javascript/commit/3e028e3))
+
+
+### Features
+
+* **staff:** add query params for id generator ([731bf5b](https://github.com/tillhub/tillhub-sdk-javascript/commit/731bf5b))
+
 # [3.44.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.43.0...v3.44.0) (2019-03-28)
 
 

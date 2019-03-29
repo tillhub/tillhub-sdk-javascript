@@ -47,12 +47,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var qs_1 = __importDefault(require("qs"));
 var errors = __importStar(require("../errors"));
+var uri_helper_1 = require("../uri-helper");
 var Staff = /** @class */ (function () {
     function Staff(options, http) {
         this.options = options;
         this.http = http;
         this.endpoint = '/api/v0/staff';
         this.options.base = this.options.base || 'https://api.tillhub.com';
+        this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
     }
     Staff.prototype.getAll = function () {
         var _this = this;
@@ -79,14 +81,15 @@ var Staff = /** @class */ (function () {
             });
         }); });
     };
-    Staff.prototype.create = function (staffMember) {
+    Staff.prototype.create = function (staffMember, query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, error_1;
+            var base, uri, response, error_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user;
+                        base = this.uriHelper.generateBaseUri();
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
