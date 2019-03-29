@@ -1,6 +1,7 @@
 import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
+import { UriHelper } from '../uri-helper'
 
 export interface StaffOptions {
   user?: string
@@ -47,6 +48,11 @@ export interface PinResponse {
   pin?: string
 }
 
+export interface StaffQuery {
+  staff_id_template?: string
+  generate_staff_id?: boolean
+}
+
 export interface StaffMember {
   firstname?: string
   lastname?: string
@@ -68,13 +74,15 @@ export class Staff {
   endpoint: string
   http: Client
   public options: StaffOptions
+  public uriHelper: UriHelper
 
-  constructor(options: StaffOptions, http: Client) {
+  constructor(options: StaffOptions, http: Client, uriHelper: UriHelper) {
     this.options = options
     this.http = http
 
     this.endpoint = '/api/v0/staff'
     this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
   getAll(): Promise<StaffResponse> {
@@ -95,9 +103,11 @@ export class Staff {
     })
   }
 
-  create(staffMember: StaffMember): Promise<StaffResponse> {
+  create(staffMember: StaffMember, query?: StaffQuery): Promise<StaffResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
       try {
         const response = await this.http.getClient().post(uri, staffMember)
         response.status !== 200 && reject(new errors.StaffMemberCreateFailed())

@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
+import qs from 'qs'
 import { v0 } from '../../src/tillhub-js'
 import { initThInstance } from '../util'
 
@@ -37,6 +38,11 @@ const staffMember = {
 }
 
 describe('v0: Staff: can create one staff member', () => {
+  const query = {
+    staff_id_template: '{country}{-}{branch}',
+    generate_staff_id: true
+  }
+
   it("Tillhub's staff are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
@@ -52,15 +58,17 @@ describe('v0: Staff: can create one staff member', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/staff/${legacyId}`).reply(function (config) {
-        return [
-          200,
-          {
-            count: 1,
-            results: [staffMember]
-          }
-        ]
-      })
+      mock
+        .onPost(`https://api.tillhub.com/api/v0/staff/${legacyId}?${qs.stringify(query)}`)
+        .reply(function (config) {
+          return [
+            200,
+            {
+              count: 1,
+              results: [staffMember]
+            }
+          ]
+        })
     }
 
     const th = await initThInstance()
@@ -69,7 +77,7 @@ describe('v0: Staff: can create one staff member', () => {
 
     expect(Staff).toBeInstanceOf(v0.Staff)
 
-    const { data } = await Staff.create(staffMember)
+    const { data } = await Staff.create(staffMember, query)
 
     expect(data).toMatchObject(staffMember)
   })
