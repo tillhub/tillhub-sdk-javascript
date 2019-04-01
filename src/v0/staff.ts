@@ -1,7 +1,7 @@
 import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
-import { UriHelper } from '../uri-helper'
+import { UriHelper, HandlerQuery } from '../uri-helper'
 
 export interface StaffOptions {
   user?: string
@@ -51,6 +51,10 @@ export interface PinResponse {
 export interface StaffQuery {
   staff_id_template?: string
   generate_staff_id?: boolean
+}
+
+export interface HandleStaffQuery extends HandlerQuery {
+  query?: StaffQuery
 }
 
 export interface StaffMember {
@@ -103,7 +107,7 @@ export class Staff {
     })
   }
 
-  create(staffMember: StaffMember, query?: StaffQuery): Promise<StaffResponse> {
+  create(staffMember: StaffMember, query?: HandleStaffQuery): Promise<StaffResponse> {
     return new Promise(async (resolve, reject) => {
       const base = this.uriHelper.generateBaseUri()
       const uri = this.uriHelper.generateUriWithQuery(base, query)
