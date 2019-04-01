@@ -41,6 +41,10 @@ export interface AuditsResponse {
   next?: () => Promise<AuditsResponse>
 }
 
+export interface AuditsTypesQuery {
+  delegated?: boolean
+}
+
 export class AuditActions {
   endpoint: string
   http: Client
@@ -133,6 +137,23 @@ export class AuditActions {
         } as AuditsResponse)
       } catch (err) {
         return reject(new errors.AuditActionsCreateFailed())
+      }
+    })
+  }
+
+  getTypes(query: AuditsTypesQuery): Promise<AuditsResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const base = this.uriHelper.generateBaseUri(`/actions/types`)
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+        const response = await this.http.getClient().get(uri)
+
+        return resolve({
+          data: response.data.results
+        } as AuditsResponse)
+      } catch (err) {
+        return reject(new errors.AuditActionsTypesFetchFailed())
       }
     })
   }
