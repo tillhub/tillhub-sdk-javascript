@@ -1,5 +1,5 @@
 import { Client } from '../client';
-import { UriHelper } from '../uri-helper';
+import { UriHelper, HandlerQuery } from '../uri-helper';
 export interface StaffOptions {
     user?: string;
     base?: string;
@@ -42,6 +42,9 @@ export interface StaffQuery {
     staff_id_template?: string;
     generate_staff_id?: boolean;
 }
+export interface HandleStaffQuery extends HandlerQuery {
+    query?: StaffQuery;
+}
 export interface StaffMember {
     firstname?: string;
     lastname?: string;
@@ -65,7 +68,7 @@ export declare class Staff {
     uriHelper: UriHelper;
     constructor(options: StaffOptions, http: Client);
     getAll(): Promise<StaffResponse>;
-    create(staffMember: StaffMember, query?: StaffQuery): Promise<StaffResponse>;
+    create(staffMember: StaffMember, query?: HandleStaffQuery): Promise<StaffResponse>;
     getOne(staffId: string): Promise<StaffMemberResponse>;
     put(staffId: string, staff: StaffMember): Promise<StaffMemberResponse>;
     delete(staffId: string): Promise<StaffMemberResponse>;

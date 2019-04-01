@@ -1,3 +1,10 @@
+## [3.45.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.45.0...v3.45.1) (2019-04-01)
+
+
+### Bug Fixes
+
+* **staff:** fix wrong type interface for staff query ([64ccb2a](https://github.com/tillhub/tillhub-sdk-javascript/commit/64ccb2a))
+
 # [3.45.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.44.0...v3.45.0) (2019-03-29)
 
 
