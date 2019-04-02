@@ -1148,6 +1148,12 @@ export class AuditActionsCreateFailed extends BaseError {
     super(message, properties)
   }
 }
+export class AuditActionsTypesFetchFailed extends BaseError {
+  public name = 'AuditActionsTypesFetchFailed'
+  constructor(public message: string = 'Could not fetch audit action types', properties?: any) {
+    super(message, properties)
+  }
+}
 
 export class AuditLogsFetchAllFailed extends BaseError {
   public name = 'AuditLogsFetchAllFailed'
