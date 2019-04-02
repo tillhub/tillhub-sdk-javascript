@@ -315,6 +315,18 @@ var ProductsSearchFailed = /** @class */ (function (_super) {
     return ProductsSearchFailed;
 }(baseError_1.BaseError));
 exports.ProductsSearchFailed = ProductsSearchFailed;
+var ProductsBookStockFailed = /** @class */ (function (_super) {
+    __extends(ProductsBookStockFailed, _super);
+    function ProductsBookStockFailed(message, properties) {
+        if (message === void 0) { message = 'Could not book stock for the product'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductsBookStockFailed';
+        return _this;
+    }
+    return ProductsBookStockFailed;
+}(baseError_1.BaseError));
+exports.ProductsBookStockFailed = ProductsBookStockFailed;
 var DeliveriesFetchAllFailed = /** @class */ (function (_super) {
     __extends(DeliveriesFetchAllFailed, _super);
     function DeliveriesFetchAllFailed(message, properties) {

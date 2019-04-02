@@ -79,6 +79,14 @@ export interface ProductsUpdateRequestObject {
     productId: string;
     body: Product;
 }
+export interface BookStockQuery {
+    productId: string;
+    body: BookStock;
+}
+export interface BookStock {
+    location: string;
+    qty: number;
+}
 export declare class Products {
     endpoint: string;
     http: Client;
@@ -94,5 +102,6 @@ export declare class Products {
     count(): Promise<ProductsResponse>;
     delete(productId: string): Promise<ProductsResponse>;
     search(searchTerm: string): Promise<ProductsResponse>;
+    bookStock(requestOptions: BookStockQuery): Promise<ProductResponse>;
 }
 export {};

@@ -1,3 +1,10 @@
+# [3.46.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.45.1...v3.46.0) (2019-04-02)
+
+
+### Features
+
+* **products_v1:** add book stock handler ([95777fc](https://github.com/tillhub/tillhub-sdk-javascript/commit/95777fc))
+
 ## [3.45.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.45.0...v3.45.1) (2019-04-01)
 
 
