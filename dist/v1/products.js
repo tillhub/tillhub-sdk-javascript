@@ -47,35 +47,41 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var qs_1 = __importDefault(require("qs"));
 var errors = __importStar(require("../errors"));
+var uri_helper_1 = require("../uri-helper");
 var Products = /** @class */ (function () {
     function Products(options, http) {
         this.options = options;
         this.http = http;
         this.endpoint = '/api/v1/products';
         this.options.base = this.options.base || 'https://api.tillhub.com';
+        this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
     }
-    Products.prototype.create = function (product) {
+    Products.prototype.create = function (product, query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_1;
+            var base, uri, response, error_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user;
+                        base = this.uriHelper.generateBaseUri();
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
                         return [4 /*yield*/, this.http.getClient().post(uri, product)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 && reject(new errors.ProductsCreateFailed());
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new errors.ProductsCreateFailed(undefined, { status: response.status }))];
+                        }
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
-                                metadata: { count: response.data.count }
+                                metadata: { count: response.data.count },
+                                errors: response.data.errors || []
                             })];
                     case 3:
-                        err_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductsCreateFailed())];
+                        error_1 = _a.sent();
+                        return [2 /*return*/, reject(new errors.ProductsCreateFailed(undefined, { error: error_1 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -84,7 +90,7 @@ var Products = /** @class */ (function () {
     Products.prototype.getAll = function (options) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var next, uri, response_1, err_2;
+            var next, uri, response_1, error_2;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -100,7 +106,9 @@ var Products = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response_1 = _a.sent();
-                        response_1.status !== 200 && reject(new errors.ProductsFetchFailed());
+                        if (response_1.status !== 200) {
+                            return [2 /*return*/, reject(new errors.ProductsFetchFailed(undefined, { status: response_1.status }))];
+                        }
                         if (response_1.data.cursor && response_1.data.cursor.next) {
                             next = function () { return _this.getAll({ uri: response_1.data.cursor.next }); };
                         }
@@ -110,8 +118,8 @@ var Products = /** @class */ (function () {
                                 next: next
                             })];
                     case 2:
-                        err_2 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductsFetchFailed())];
+                        error_2 = _a.sent();
+                        return [2 /*return*/, reject(new errors.ProductsFetchFailed(undefined, { error: error_2 }))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -120,7 +128,7 @@ var Products = /** @class */ (function () {
     Products.prototype.get = function (productId) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_3;
+            var uri, response, error_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -131,15 +139,17 @@ var Products = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 && reject(new errors.ProductFetchFailed());
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new errors.ProductFetchFailed(undefined, { status: response.status }))];
+                        }
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 msg: response.data.msg,
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_3 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductFetchFailed())];
+                        error_3 = _a.sent();
+                        return [2 /*return*/, reject(new errors.ProductFetchFailed(undefined, { error: error_3 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -148,7 +158,7 @@ var Products = /** @class */ (function () {
     Products.prototype.getDetails = function (productId) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_4;
+            var uri, response, error_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -159,15 +169,17 @@ var Products = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 && reject(new errors.ProductDetailsFetchFailed());
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new errors.ProductDetailsFetchFailed(undefined, { status: response.status }))];
+                        }
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 msg: response.data.msg,
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_4 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductDetailsFetchFailed())];
+                        error_4 = _a.sent();
+                        return [2 /*return*/, reject(new errors.ProductDetailsFetchFailed(undefined, { error: error_4 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -176,7 +188,7 @@ var Products = /** @class */ (function () {
     Products.prototype.getChildrenDetails = function (productId) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_5;
+            var uri, response, error_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -187,15 +199,17 @@ var Products = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 && reject(new errors.ProductChildrenDetailsFetchFailed());
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new errors.ProductChildrenDetailsFetchFailed(undefined, { status: response.status }))];
+                        }
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 msg: response.data.msg,
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_5 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductChildrenDetailsFetchFailed())];
+                        error_5 = _a.sent();
+                        return [2 /*return*/, reject(new errors.ProductChildrenDetailsFetchFailed(undefined, { error: error_5 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -204,7 +218,7 @@ var Products = /** @class */ (function () {
     Products.prototype.meta = function () {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_6;
+            var uri, response, error_6;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -215,18 +229,21 @@ var Products = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();
-                        if (response.status !== 200)
+                        if (response.status !== 200) {
                             return [2 /*return*/, reject(new errors.ProductsMetaFailed(undefined, { status: response.status }))];
+                        }
                         if (!response.data.results[0]) {
-                            return [2 /*return*/, reject(new errors.ProductsMetaFailed('could not get product metadata unexpectedly'))];
+                            return [2 /*return*/, reject(new errors.ProductsMetaFailed('could not get product metadata unexpectedly', {
+                                    status: response.status
+                                }))];
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_6 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductsMetaFailed())];
+                        error_6 = _a.sent();
+                        return [2 /*return*/, reject(new errors.ProductsMetaFailed(undefined, { error: error_6 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -235,7 +252,7 @@ var Products = /** @class */ (function () {
     Products.prototype.put = function (productId, product) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_7;
+            var uri, response, error_7;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -246,14 +263,16 @@ var Products = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().put(uri, product)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 && reject(new errors.ProductsUpdateFailed());
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new errors.ProductsUpdateFailed(undefined, { status: response.status }))];
+                        }
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_7 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductsUpdateFailed())];
+                        error_7 = _a.sent();
+                        return [2 /*return*/, reject(new errors.ProductsUpdateFailed(undefined, { error: error_7 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -262,7 +281,7 @@ var Products = /** @class */ (function () {
     Products.prototype.count = function () {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_8;
+            var uri, response, error_8;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -273,14 +292,16 @@ var Products = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 && reject(new errors.ProductsCountFailed());
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new errors.ProductsCountFailed(undefined, { status: response.status }))];
+                        }
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_8 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductsCountFailed())];
+                        error_8 = _a.sent();
+                        return [2 /*return*/, reject(new errors.ProductsCountFailed(undefined, { error: error_8 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -289,7 +310,7 @@ var Products = /** @class */ (function () {
     Products.prototype.delete = function (productId) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_9;
+            var uri, response, error_9;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -300,13 +321,15 @@ var Products = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().delete(uri)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 && reject(new errors.ProductsDeleteFailed());
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new errors.ProductsDeleteFailed(undefined, { status: response.status }))];
+                        }
                         return [2 /*return*/, resolve({
                                 msg: response.data.msg
                             })];
                     case 3:
-                        err_9 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductsDeleteFailed())];
+                        error_9 = _a.sent();
+                        return [2 /*return*/, reject(new errors.ProductsDeleteFailed(undefined, { error: error_9 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -315,7 +338,7 @@ var Products = /** @class */ (function () {
     Products.prototype.search = function (searchTerm) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_10;
+            var uri, response, error_10;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -326,14 +349,16 @@ var Products = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 && reject(new errors.ProductsSearchFailed());
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new errors.ProductsSearchFailed(undefined, { status: response.status }))];
+                        }
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_10 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductsSearchFailed())];
+                        error_10 = _a.sent();
+                        return [2 /*return*/, reject(new errors.ProductsSearchFailed(undefined, { error: error_10 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -342,7 +367,7 @@ var Products = /** @class */ (function () {
     Products.prototype.bookStock = function (requestOptions) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_11;
+            var uri, response, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -359,7 +384,7 @@ var Products = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_11 = _a.sent();
+                        err_1 = _a.sent();
                         return [2 /*return*/, reject(new errors.ProductsBookStockFailed())];
                     case 4: return [2 /*return*/];
                 }

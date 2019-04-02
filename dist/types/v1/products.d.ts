@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { UriHelper, HandlerQuery } from '../uri-helper';
 export interface Images {
     '1x'?: string;
     avatar?: string;
@@ -53,6 +54,11 @@ export interface Product {
 export interface ProductsOptions {
     user?: string;
     base?: string;
+    limit?: number;
+    uri?: string;
+    query?: {
+        [key: string]: any;
+    };
 }
 export interface ProductsResponse {
     data: Product[];
@@ -67,13 +73,19 @@ export interface ProductResponse {
         patch?: any;
     };
     msg?: string;
+    errors?: ErrorObject[];
 }
-export interface ProductsOptions {
-    limit?: number;
-    uri?: string;
-    query?: {
-        [key: string]: any;
-    };
+export interface ErrorObject {
+    message: string;
+    code: number;
+    errorDetails: object;
+}
+export interface ProductsCreateQuery {
+    product_id_template?: string;
+    generate_product_id?: boolean;
+}
+export interface HandlerProductsQuery extends HandlerQuery {
+    query?: ProductsCreateQuery;
 }
 export interface ProductsUpdateRequestObject {
     productId: string;
@@ -91,8 +103,9 @@ export declare class Products {
     endpoint: string;
     http: Client;
     options: ProductsOptions;
+    uriHelper: UriHelper;
     constructor(options: ProductsOptions, http: Client);
-    create(product: Product): Promise<ProductResponse>;
+    create(product: Product, query?: HandlerProductsQuery): Promise<ProductResponse>;
     getAll(options?: ProductsOptions | undefined): Promise<ProductsResponse>;
     get(productId: string): Promise<ProductResponse>;
     getDetails(productId: string): Promise<ProductResponse>;

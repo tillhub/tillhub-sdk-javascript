@@ -1,3 +1,10 @@
+# [3.48.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.47.0...v3.48.0) (2019-04-02)
+
+
+### Features
+
+* **products:** generate product ID params; better errors ([bccd58c](https://github.com/tillhub/tillhub-sdk-javascript/commit/bccd58c))
+
 # [3.47.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.46.0...v3.47.0) (2019-04-02)
 
 
