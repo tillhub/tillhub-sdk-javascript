@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv'
 import axios from 'axios'
+import qs from 'qs'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import th, { TillhubClient, v1 } from '../../src/tillhub-js'
@@ -48,9 +49,8 @@ describe('Create a new Product', () => {
         return [
           200,
           {
-            results: [
-              productObj
-            ]
+            results: [productObj],
+            errors: []
           }
         ]
       })
@@ -74,10 +74,121 @@ describe('Create a new Product', () => {
 
     expect(products).toBeInstanceOf(v1.Products)
 
-    const { data } = await products.create(productObj)
+    const { data, errors } = await products.create(productObj)
 
     expect(typeof data).toEqual('object')
     expect(data.name).toEqual('iPhone')
+    expect(errors).toEqual([])
+  })
+
+  it('creates with returned errors array', async () => {
+    const errorsObject = {
+      message: 'An Error',
+      code: '404',
+      errorDetails: {}
+    }
+
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: userId
+            }
+          }
+        ]
+      })
+
+      mock.onPost(`https://api.tillhub.com/api/v1/products/${userId}`).reply(function (config) {
+        return [
+          200,
+          {
+            results: [productObj],
+            errors: [errorsObject]
+          }
+        ]
+      })
+    }
+
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE
+    }
+
+    th.init(options)
+    await th.auth.loginUsername({
+      username: user.username,
+      password: user.password
+    })
+
+    const products = th.products()
+
+    expect(products).toBeInstanceOf(v1.Products)
+
+    const { errors } = await products.create(productObj)
+
+    expect(errors).toMatchObject([errorsObject])
+  })
+
+  it('creates with query params', async () => {
+    const query = {
+      product_id_template: '{country}{-}{branch}',
+      generate_product_id: true
+    }
+
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: userId
+            }
+          }
+        ]
+      })
+
+      mock
+        .onPost(`https://api.tillhub.com/api/v1/products/${userId}?${qs.stringify(query)}`)
+        .reply(function (config) {
+          return [
+            200,
+            {
+              results: [productObj]
+            }
+          ]
+        })
+    }
+
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE
+    }
+
+    th.init(options)
+    await th.auth.loginUsername({
+      username: user.username,
+      password: user.password
+    })
+
+    const products = th.products()
+
+    expect(products).toBeInstanceOf(v1.Products)
+
+    const { data } = await products.create(productObj, query)
+
+    expect(data).toMatchObject(productObj)
   })
 
   it('rejects on status codes that are not 200', async () => {
