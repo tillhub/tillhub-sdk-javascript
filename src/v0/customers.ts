@@ -1,6 +1,7 @@
 import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
+import { UriHelper, HandlerQuery } from '../uri-helper'
 
 export interface CustomersOptions {
   user?: string
@@ -13,10 +14,6 @@ export interface CustomersQuery {
   query?: {
     deleted?: boolean
   }
-}
-
-export interface CustomersCreateOptions {
-  generate_customer_number?: boolean
 }
 
 export interface CustomersMetaQuery {
@@ -36,6 +33,16 @@ export interface CustomerResponse {
     patch?: any
   }
   msg?: string
+  errors?: ErrorObject
+}
+
+export interface CustomerQuery {
+  customer_number_template?: string
+  generate_customer_number?: boolean
+}
+
+export interface HandlerCustomerQuery extends HandlerQuery {
+  query?: CustomerQuery
 }
 
 export interface Customer {
@@ -62,6 +69,12 @@ export interface CustomerContacts {
   post?: {
     enabled: boolean
   }
+}
+
+export interface ErrorObject {
+  message: string
+  code: number
+  errorDetails: object
 }
 
 export type CustomerAddressType = 'delivery' | 'billing'
@@ -129,6 +142,7 @@ export class Customers {
   endpoint: string
   http: Client
   public options: CustomersOptions
+  public uriHelper: UriHelper
 
   constructor(options: CustomersOptions, http: Client) {
     this.options = options
@@ -136,6 +150,7 @@ export class Customers {
 
     this.endpoint = '/api/v0/customers'
     this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
   getAll(queryOrOptions?: CustomersQuery | undefined): Promise<CustomersResponse> {
@@ -154,7 +169,7 @@ export class Customers {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             queryString ? `?${queryString}` : ''
-            }`
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -182,9 +197,10 @@ export class Customers {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${customerId}`
       try {
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new errors.CustomersFetchFailed(undefined, { status: response.status }))
 
+        if (response.status !== 200) {
+          return reject(new errors.CustomerFetchFailed(undefined, { status: response.status }))
+        }
         return resolve({
           data: response.data.results[0] as Customer,
           msg: response.data.msg,
@@ -202,6 +218,9 @@ export class Customers {
       try {
         const response = await this.http.getClient().put(uri, customer)
 
+        if (response.status !== 200) {
+          return reject(new errors.CustomerPutFailed(undefined, { status: response.status }))
+        }
         return resolve({
           data: response.data.results[0] as Customer,
           metadata: { count: response.data.count }
@@ -212,23 +231,20 @@ export class Customers {
     })
   }
 
-  create(customer: Customer, options?: CustomersCreateOptions): Promise<CustomerResponse> {
+  create(customer: Customer, query?: HandlerCustomerQuery): Promise<CustomerResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-
-      if (options) {
-        const queryString = qs.stringify(options)
-        if (queryString) {
-          uri = `${uri}?${queryString}`
-        }
-      }
-
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
       try {
         const response = await this.http.getClient().post(uri, customer)
 
+        if (response.status !== 200) {
+          return reject(new errors.CustomerCreationFailed(undefined, { status: response.status }))
+        }
         return resolve({
           data: response.data.results[0] as Customer,
-          metadata: { count: response.data.count }
+          metadata: { count: response.data.count },
+          errors: response.data.errors || []
         } as CustomerResponse)
       } catch (error) {
         return reject(new errors.CustomerCreationFailed(undefined, { error }))
@@ -251,7 +267,7 @@ export class Customers {
           return reject(new errors.CustomersMetaFailed(undefined, { status: response.status }))
         }
         if (!response.data.results[0]) {
-          return reject(new errors.CustomersMetaFailed())
+          return reject(new errors.CustomersMetaFailed(undefined, { status: response.status }))
         }
 
         return resolve({
@@ -269,8 +285,9 @@ export class Customers {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${customerId}`
       try {
         const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new errors.CustomerDeleteFailed())
-
+        if (response.status !== 200) {
+          reject(new errors.CustomerDeleteFailed(undefined, { status: response.status }))
+        }
         return resolve({
           msg: response.data.msg
         } as CustomerResponse)
@@ -286,8 +303,9 @@ export class Customers {
 
       try {
         const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) reject(new errors.CustomersCountFailed())
-
+        if (response.status !== 200) {
+          reject(new errors.CustomersCountFailed(undefined, { status: response.status }))
+        }
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
@@ -309,8 +327,8 @@ export class Customers {
           data: response.data.results,
           metadata: { count: response.data.count }
         } as CustomersResponse)
-      } catch (err) {
-        return reject(new errors.CustomersSearchFailed())
+      } catch (error) {
+        return reject(new errors.CustomersSearchFailed(undefined, { error }))
       }
     })
   }
