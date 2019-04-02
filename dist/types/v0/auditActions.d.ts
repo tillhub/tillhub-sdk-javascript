@@ -32,6 +32,9 @@ export interface AuditsResponse {
     msg?: string;
     next?: () => Promise<AuditsResponse>;
 }
+export interface AuditsTypesQuery {
+    delegated?: boolean;
+}
 export declare class AuditActions {
     endpoint: string;
     http: Client;
@@ -42,4 +45,5 @@ export declare class AuditActions {
     meta(q?: AuditsMetaQuery | undefined): Promise<AuditsResponse>;
     get(requestObject: AuditActionsGetOneRequestObject): Promise<AuditsResponse>;
     create(body: AuditActionsCreateBody): Promise<AuditsResponse>;
+    getTypes(query: AuditsTypesQuery): Promise<AuditsResponse>;
 }

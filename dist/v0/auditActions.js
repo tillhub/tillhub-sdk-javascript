@@ -173,6 +173,30 @@ var AuditActions = /** @class */ (function () {
             });
         }); });
     };
+    AuditActions.prototype.getTypes = function (query) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var base, uri, response, err_5;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri("/actions/types");
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, resolve({
+                                data: response.data.results
+                            })];
+                    case 2:
+                        err_5 = _a.sent();
+                        return [2 /*return*/, reject(new errors.AuditActionsTypesFetchFailed())];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     return AuditActions;
 }());
 exports.AuditActions = AuditActions;

@@ -1922,6 +1922,18 @@ var AuditActionsCreateFailed = /** @class */ (function (_super) {
     return AuditActionsCreateFailed;
 }(baseError_1.BaseError));
 exports.AuditActionsCreateFailed = AuditActionsCreateFailed;
+var AuditActionsTypesFetchFailed = /** @class */ (function (_super) {
+    __extends(AuditActionsTypesFetchFailed, _super);
+    function AuditActionsTypesFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch audit action types'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'AuditActionsTypesFetchFailed';
+        return _this;
+    }
+    return AuditActionsTypesFetchFailed;
+}(baseError_1.BaseError));
+exports.AuditActionsTypesFetchFailed = AuditActionsTypesFetchFailed;
 var AuditLogsFetchAllFailed = /** @class */ (function (_super) {
     __extends(AuditLogsFetchAllFailed, _super);
     function AuditLogsFetchAllFailed(message, properties) {

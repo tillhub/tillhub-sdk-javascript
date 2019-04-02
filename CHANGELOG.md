@@ -1,3 +1,10 @@
+# [3.47.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.46.0...v3.47.0) (2019-04-02)
+
+
+### Features
+
+* **audit-actions:** add handler for getting types ([5a6c9ea](https://github.com/tillhub/tillhub-sdk-javascript/commit/5a6c9ea))
+
 # [3.46.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.45.1...v3.46.0) (2019-04-02)
 
 
