@@ -97,6 +97,15 @@ export interface ProductsUpdateRequestObject {
   body: Product
 }
 
+export interface BookStockQuery {
+  productId: string
+  body: BookStock
+}
+export interface BookStock {
+  location: string
+  qty: number
+}
+
 export class Products {
   endpoint: string
   http: Client
@@ -303,6 +312,23 @@ export class Products {
         } as ProductsResponse)
       } catch (err) {
         return reject(new errors.ProductsSearchFailed())
+      }
+    })
+  }
+
+  bookStock(requestOptions: BookStockQuery): Promise<ProductResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${requestOptions.productId}/stock/book`
+      try {
+        const response = await this.http.getClient().post(uri, requestOptions.body)
+        response.status !== 200 && reject(new errors.ProductsBookStockFailed())
+
+        return resolve({
+          data: response.data.results[0],
+          metadata: { count: response.data.count }
+        } as ProductResponse)
+      } catch (err) {
+        return reject(new errors.ProductsBookStockFailed())
       }
     })
   }

@@ -178,6 +178,13 @@ export class ProductsSearchFailed extends BaseError {
   }
 }
 
+export class ProductsBookStockFailed extends BaseError {
+  public name = 'ProductsBookStockFailed'
+  constructor(public message: string = 'Could not book stock for the product', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class DeliveriesFetchAllFailed extends BaseError {
   public name = 'DeliveriesFetchAllFailed'
   constructor(public message: string = 'Could not fetch deliveries', properties?: any) {
