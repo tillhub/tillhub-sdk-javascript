@@ -13,37 +13,24 @@ afterEach(() => {
   mock.reset()
 })
 
-const staffMember = {
-  firstname: 'asdf',
-  lastname: 'asdf',
-  displayname: 'asdf',
-  phonenumbers: {
-    home: 123456798
+const customer = {
+  firstname: 'Carol',
+  lastname: 'Danvers',
+  gender: 'female',
+  company: {
+    name: 'US Air Force'
   },
-  email: 'asdf',
-  addresses: {
-    street: 'qert',
-    street_number: 12,
-    region: 'DE',
-    postal_code: 12345,
-    country: 'Germany'
-  },
-  pin: 4567,
-  metadata: {},
-  scopes: ['asdf.qwert.zxcv'],
-  staff_number: 7894,
-  discounts: {},
-  short_code: 7894,
-  default: true
+  active: false,
+  displayname: 'Vers'
 }
 
-describe('v0: Staff: can create one staff member', () => {
+describe('v0: Customers: can create a customer', () => {
   const query = {
-    staff_id_template: '{country}{-}{branch}',
-    generate_staff_id: true
+    customer_number_template: '{country}{-}{branch}',
+    generate_customer_number: true
   }
 
-  it("Tillhub's staff are instantiable", async () => {
+  it("Tillhub's customers are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
@@ -59,13 +46,13 @@ describe('v0: Staff: can create one staff member', () => {
       })
 
       mock
-        .onPost(`https://api.tillhub.com/api/v0/staff/${legacyId}?${qs.stringify(query)}`)
+        .onPost(`https://api.tillhub.com/api/v0/customers/${legacyId}?${qs.stringify(query)}`)
         .reply(function (config) {
           return [
             200,
             {
               count: 1,
-              results: [staffMember],
+              results: [customer],
               errors: []
             }
           ]
@@ -74,13 +61,13 @@ describe('v0: Staff: can create one staff member', () => {
 
     const th = await initThInstance()
 
-    const Staff = th.staff()
+    const Customers = th.customers()
 
-    expect(Staff).toBeInstanceOf(v0.Staff)
+    expect(Customers).toBeInstanceOf(v0.Customers)
 
-    const { data, errors } = await Staff.create(staffMember, query)
+    const { data, errors } = await Customers.create(customer, { query })
 
-    expect(data).toMatchObject(staffMember)
+    expect(data).toMatchObject(customer)
     expect(errors).toEqual([])
   })
 
@@ -99,16 +86,16 @@ describe('v0: Staff: can create one staff member', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/staff/${legacyId}`).reply(function (config) {
+      mock.onPost(`https://api.tillhub.com/api/v0/customers/${legacyId}`).reply(function (config) {
         return [205]
       })
     }
 
     try {
       const th = await initThInstance()
-      await th.staff().create(staffMember)
+      await th.customers().create(customer)
     } catch (err) {
-      expect(err.name).toBe('StaffMemberCreateFailed')
+      expect(err.name).toBe('CustomerCreationFailed')
     }
   })
 })

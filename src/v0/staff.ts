@@ -11,6 +11,7 @@ export interface StaffOptions {
 export interface StaffResponse {
   data: StaffMember[]
   metadata: object
+  errors?: ErrorObject
 }
 
 export interface StaffMemberResponse {
@@ -55,6 +56,12 @@ export interface StaffQuery {
 
 export interface HandleStaffQuery extends HandlerQuery {
   query?: StaffQuery
+}
+
+export interface ErrorObject {
+  message: string
+  code: number
+  errorDetails: object
 }
 
 export interface StaffMember {
@@ -118,7 +125,8 @@ export class Staff {
 
         return resolve({
           data: response.data.results[0] as StaffMember,
-          metadata: { count: response.data.count }
+          metadata: { count: response.data.count },
+          errors: response.data.errors || []
         } as StaffResponse)
       } catch (error) {
         return reject(new errors.StaffMemberCreateFailed(undefined, { error }))
