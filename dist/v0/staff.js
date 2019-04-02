@@ -99,7 +99,8 @@ var Staff = /** @class */ (function () {
                         response.status !== 200 && reject(new errors.StaffMemberCreateFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
-                                metadata: { count: response.data.count }
+                                metadata: { count: response.data.count },
+                                errors: response.data.errors || []
                             })];
                     case 3:
                         error_1 = _a.sent();

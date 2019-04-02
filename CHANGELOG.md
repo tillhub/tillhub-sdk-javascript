@@ -1,3 +1,10 @@
+# [3.49.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.48.0...v3.49.0) (2019-04-02)
+
+
+### Features
+
+* **Customers/Staff:** add errors array to handlers ([68ef848](https://github.com/tillhub/tillhub-sdk-javascript/commit/68ef848))
+
 # [3.48.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.47.0...v3.48.0) (2019-04-02)
 
 

@@ -7,6 +7,7 @@ export interface StaffOptions {
 export interface StaffResponse {
     data: StaffMember[];
     metadata: object;
+    errors?: ErrorObject;
 }
 export interface StaffMemberResponse {
     data: StaffMember;
@@ -44,6 +45,11 @@ export interface StaffQuery {
 }
 export interface HandleStaffQuery extends HandlerQuery {
     query?: StaffQuery;
+}
+export interface ErrorObject {
+    message: string;
+    code: number;
+    errorDetails: object;
 }
 export interface StaffMember {
     firstname?: string;

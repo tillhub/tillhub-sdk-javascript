@@ -58,12 +58,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var qs_1 = __importDefault(require("qs"));
 var errors = __importStar(require("../errors"));
+var uri_helper_1 = require("../uri-helper");
 var Customers = /** @class */ (function () {
     function Customers(options, http) {
         this.options = options;
         this.http = http;
         this.endpoint = '/api/v0/customers';
         this.options.base = this.options.base || 'https://api.tillhub.com';
+        this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
     }
     Customers.prototype.getAll = function (queryOrOptions) {
         var _this = this;
@@ -121,8 +123,9 @@ var Customers = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 &&
-                            reject(new errors.CustomersFetchFailed(undefined, { status: response.status }));
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new errors.CustomerFetchFailed(undefined, { status: response.status }))];
+                        }
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 msg: response.data.msg,
@@ -150,6 +153,9 @@ var Customers = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().put(uri, customer)];
                     case 2:
                         response = _a.sent();
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new errors.CustomerPutFailed(undefined, { status: response.status }))];
+                        }
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count }
@@ -162,29 +168,28 @@ var Customers = /** @class */ (function () {
             });
         }); });
     };
-    Customers.prototype.create = function (customer, options) {
+    Customers.prototype.create = function (customer, query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, queryString, response, error_3;
+            var base, uri, response, error_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user;
-                        if (options) {
-                            queryString = qs_1.default.stringify(options);
-                            if (queryString) {
-                                uri = uri + "?" + queryString;
-                            }
-                        }
+                        base = this.uriHelper.generateBaseUri();
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
                         return [4 /*yield*/, this.http.getClient().post(uri, customer)];
                     case 2:
                         response = _a.sent();
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new errors.CustomerCreationFailed(undefined, { status: response.status }))];
+                        }
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
-                                metadata: { count: response.data.count }
+                                metadata: { count: response.data.count },
+                                errors: response.data.errors || []
                             })];
                     case 3:
                         error_3 = _a.sent();
@@ -216,7 +221,7 @@ var Customers = /** @class */ (function () {
                             return [2 /*return*/, reject(new errors.CustomersMetaFailed(undefined, { status: response.status }))];
                         }
                         if (!response.data.results[0]) {
-                            return [2 /*return*/, reject(new errors.CustomersMetaFailed())];
+                            return [2 /*return*/, reject(new errors.CustomersMetaFailed(undefined, { status: response.status }))];
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
@@ -244,7 +249,9 @@ var Customers = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().delete(uri)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 && reject(new errors.CustomerDeleteFailed());
+                        if (response.status !== 200) {
+                            reject(new errors.CustomerDeleteFailed(undefined, { status: response.status }));
+                        }
                         return [2 /*return*/, resolve({
                                 msg: response.data.msg
                             })];
@@ -270,8 +277,9 @@ var Customers = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();
-                        if (response.status !== 200)
-                            reject(new errors.CustomersCountFailed());
+                        if (response.status !== 200) {
+                            reject(new errors.CustomersCountFailed(undefined, { status: response.status }));
+                        }
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
@@ -287,7 +295,7 @@ var Customers = /** @class */ (function () {
     Customers.prototype.search = function (searchTerm) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_5;
+            var uri, response, error_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -304,8 +312,8 @@ var Customers = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        err_5 = _a.sent();
-                        return [2 /*return*/, reject(new errors.CustomersSearchFailed())];
+                        error_4 = _a.sent();
+                        return [2 /*return*/, reject(new errors.CustomersSearchFailed(undefined, { error: error_4 }))];
                     case 4: return [2 /*return*/];
                 }
             });

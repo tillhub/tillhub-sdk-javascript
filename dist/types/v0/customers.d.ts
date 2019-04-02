@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { UriHelper, HandlerQuery } from '../uri-helper';
 export interface CustomersOptions {
     user?: string;
     base?: string;
@@ -9,9 +10,6 @@ export interface CustomersQuery {
     query?: {
         deleted?: boolean;
     };
-}
-export interface CustomersCreateOptions {
-    generate_customer_number?: boolean;
 }
 export interface CustomersMetaQuery {
     deleted?: boolean;
@@ -28,6 +26,14 @@ export interface CustomerResponse {
         patch?: any;
     };
     msg?: string;
+    errors?: ErrorObject;
+}
+export interface CustomerQuery {
+    customer_number_template?: string;
+    generate_customer_number?: boolean;
+}
+export interface HandlerCustomerQuery extends HandlerQuery {
+    query?: CustomerQuery;
 }
 export interface Customer {
     id?: string;
@@ -51,6 +57,11 @@ export interface CustomerContacts {
     post?: {
         enabled: boolean;
     };
+}
+export interface ErrorObject {
+    message: string;
+    code: number;
+    errorDetails: object;
 }
 export declare type CustomerAddressType = 'delivery' | 'billing';
 export interface CustomerAddress {
@@ -110,11 +121,12 @@ export declare class Customers {
     endpoint: string;
     http: Client;
     options: CustomersOptions;
+    uriHelper: UriHelper;
     constructor(options: CustomersOptions, http: Client);
     getAll(queryOrOptions?: CustomersQuery | undefined): Promise<CustomersResponse>;
     get(customerId: string): Promise<CustomerResponse>;
     put(customerId: string, customer: Customer): Promise<CustomerResponse>;
-    create(customer: Customer, options?: CustomersCreateOptions): Promise<CustomerResponse>;
+    create(customer: Customer, query?: HandlerCustomerQuery): Promise<CustomerResponse>;
     meta(q?: CustomersMetaQuery | undefined): Promise<CustomersResponse>;
     delete(customerId: string): Promise<CustomerResponse>;
     count(): Promise<CustomersResponse>;
