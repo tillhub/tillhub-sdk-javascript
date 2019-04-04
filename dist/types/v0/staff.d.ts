@@ -4,6 +4,13 @@ export interface StaffOptions {
     user?: string;
     base?: string;
 }
+export interface StaffQueryOrOptions {
+    limit?: number;
+    uri?: string;
+    query?: {
+        deleted?: boolean;
+    };
+}
 export interface StaffResponse {
     data: StaffMember[];
     metadata: object;
@@ -80,7 +87,7 @@ export declare class Staff {
     options: StaffOptions;
     uriHelper: UriHelper;
     constructor(options: StaffOptions, http: Client);
-    getAll(): Promise<StaffResponse>;
+    getAll(queryOrOptions?: StaffQueryOrOptions): Promise<StaffResponse>;
     create(staffMember: StaffMember, query?: HandleStaffQuery): Promise<StaffResponse>;
     getOne(staffId: string): Promise<StaffMemberResponse>;
     put(staffId: string, staff: StaffMember): Promise<StaffMemberResponse>;

@@ -1,3 +1,10 @@
+# [3.51.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.50.0...v3.51.0) (2019-04-04)
+
+
+### Features
+
+* **staff:** adds staff query options ([73ca365](https://github.com/tillhub/tillhub-sdk-javascript/commit/73ca365))
+
 # [3.50.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.49.0...v3.50.0) (2019-04-04)
 
 
