@@ -132,13 +132,19 @@ export class ProductsFetchFailed extends BaseError {
 
 export class ProductDetailsFetchFailed extends BaseError {
   public name = 'ProductDetailsFetchFailed'
-  constructor(public message: string = 'Could not fetch the details of the product', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the details of the product',
+    properties?: any
+  ) {
     super(message, properties)
   }
 }
 export class ProductChildrenDetailsFetchFailed extends BaseError {
   public name = 'ProductChildrenDetailsFetchFailed'
-  constructor(public message: string = 'Could not fetch the details of the children products', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the details of the children products',
+    properties?: any
+  ) {
     super(message, properties)
   }
 }
@@ -994,6 +1000,13 @@ export class StaffPinGetFailed extends BaseError {
     public message: string = 'Could not get a unique Staff pin number',
     properties?: any
   ) {
+    super(message, properties)
+  }
+}
+
+export class StaffNumberGetFailed extends BaseError {
+  public name = 'StaffNumberGetFailed'
+  constructor(public message: string = 'Could not get a unique Staff number', properties?: any) {
     super(message, properties)
   }
 }

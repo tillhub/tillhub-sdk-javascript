@@ -49,6 +49,15 @@ export interface PinResponse {
   pin?: string
 }
 
+export interface StaffNumberRequest {
+  provided_staff_number?: string
+  staff_id?: string
+}
+
+export interface StaffNumberResponse {
+  number?: string
+}
+
 export interface StaffQuery {
   staff_id_template?: string
   generate_staff_id?: boolean
@@ -215,6 +224,41 @@ export class Staff {
           )
         }
         return reject(new errors.StaffPinGetFailed(undefined, { error }))
+      }
+    })
+  }
+
+  getStaffNumber(providedStaffNumber?: StaffNumberRequest): Promise<StaffMemberResponse> {
+    const queryString = qs.stringify(providedStaffNumber, { addQueryPrefix: true })
+
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${
+        this.options.user
+      }/staff_number${queryString}`
+      try {
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 &&
+          reject(
+            new errors.StaffNumberGetFailed(undefined, {
+              status: response.status
+            })
+          )
+
+        return resolve({
+          data: response.data.results as StaffNumberResponse,
+          msg: response.data.msg,
+          metadata: { count: response.data.count }
+        } as StaffMemberResponse)
+      } catch (error) {
+        if (error.response && error.response.status === 409) {
+          return reject(
+            new errors.StaffNumberGetFailed(undefined, {
+              status: error.response.status,
+              name: error.response.data.name
+            })
+          )
+        }
+        return reject(new errors.StaffNumberGetFailed(undefined, { error }))
       }
     })
   }
