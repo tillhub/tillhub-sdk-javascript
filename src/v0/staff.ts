@@ -8,6 +8,14 @@ export interface StaffOptions {
   base?: string
 }
 
+export interface StaffQueryOrOptions {
+  limit?: number
+  uri?: string
+  query?: {
+    deleted?: boolean
+  }
+}
+
 export interface StaffResponse {
   data: StaffMember[]
   metadata: object
@@ -105,20 +113,35 @@ export class Staff {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(): Promise<StaffResponse> {
+  getAll(queryOrOptions?: StaffQueryOrOptions): Promise<StaffResponse> {
     return new Promise(async (resolve, reject) => {
+      let next
+
       try {
-        const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+        let uri
+        if (queryOrOptions && queryOrOptions.uri) {
+          uri = queryOrOptions.uri
+        } else {
+          let queryString = ''
+          if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
+            queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
+          }
+
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}${queryString ? `?${queryString}` : ''}`
+        }
 
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.StaffFetchFailed())
+        if (response.status !== 200) {
+          return reject(new errors.StaffFetchFailed(undefined, { status: response.status }))
+        }
 
         return resolve({
           data: response.data.results,
-          metadata: { count: response.data.count }
+          metadata: { count: response.data.count },
+          next
         } as StaffResponse)
-      } catch (err) {
-        return reject(new errors.StaffFetchFailed())
+      } catch (error) {
+        return reject(new errors.StaffFetchFailed(undefined, { error }))
       }
     })
   }
@@ -234,7 +257,7 @@ export class Staff {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${
         this.options.user
-      }/staff_number${queryString}`
+        }/staff_number${queryString}`
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
