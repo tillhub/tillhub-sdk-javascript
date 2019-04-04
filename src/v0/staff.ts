@@ -51,6 +51,7 @@ export interface PinResponse {
 
 export interface StaffNumberRequest {
   provided_staff_number?: string
+  staff_id?: string
 }
 
 export interface StaffNumberResponse {
