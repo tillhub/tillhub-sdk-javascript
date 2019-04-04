@@ -1694,6 +1694,18 @@ var StaffPinGetFailed = /** @class */ (function (_super) {
     return StaffPinGetFailed;
 }(baseError_1.BaseError));
 exports.StaffPinGetFailed = StaffPinGetFailed;
+var StaffNumberGetFailed = /** @class */ (function (_super) {
+    __extends(StaffNumberGetFailed, _super);
+    function StaffNumberGetFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get a unique Staff number'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StaffNumberGetFailed';
+        return _this;
+    }
+    return StaffNumberGetFailed;
+}(baseError_1.BaseError));
+exports.StaffNumberGetFailed = StaffNumberGetFailed;
 var RegistersFetchFailed = /** @class */ (function (_super) {
     __extends(RegistersFetchFailed, _super);
     function RegistersFetchFailed(message, properties) {

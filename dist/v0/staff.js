@@ -230,6 +230,44 @@ var Staff = /** @class */ (function () {
             });
         }); });
     };
+    Staff.prototype.getStaffNumber = function (providedStaffNumber) {
+        var _this = this;
+        var queryString = qs_1.default.stringify(providedStaffNumber, { addQueryPrefix: true });
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_6;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/staff_number" + queryString;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 &&
+                            reject(new errors.StaffNumberGetFailed(undefined, {
+                                status: response.status
+                            }));
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_6 = _a.sent();
+                        if (error_6.response && error_6.response.status === 409) {
+                            return [2 /*return*/, reject(new errors.StaffNumberGetFailed(undefined, {
+                                    status: error_6.response.status,
+                                    name: error_6.response.data.name
+                                }))];
+                        }
+                        return [2 /*return*/, reject(new errors.StaffNumberGetFailed(undefined, { error: error_6 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     return Staff;
 }());
 exports.Staff = Staff;

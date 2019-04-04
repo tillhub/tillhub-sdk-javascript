@@ -39,6 +39,13 @@ export interface PinRequest {
 export interface PinResponse {
     pin?: string;
 }
+export interface StaffNumberRequest {
+    provided_staff_number?: string;
+    staff_id?: string;
+}
+export interface StaffNumberResponse {
+    number?: string;
+}
 export interface StaffQuery {
     staff_id_template?: string;
     generate_staff_id?: boolean;
@@ -79,4 +86,5 @@ export declare class Staff {
     put(staffId: string, staff: StaffMember): Promise<StaffMemberResponse>;
     delete(staffId: string): Promise<StaffMemberResponse>;
     getPin(providedPin?: PinRequest): Promise<StaffMemberResponse>;
+    getStaffNumber(providedStaffNumber?: StaffNumberRequest): Promise<StaffMemberResponse>;
 }

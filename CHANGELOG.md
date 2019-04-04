@@ -1,3 +1,11 @@
+# [3.50.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.49.0...v3.50.0) (2019-04-04)
+
+
+### Features
+
+* **staff:** accepts staff id in query params ([d91aaf5](https://github.com/tillhub/tillhub-sdk-javascript/commit/d91aaf5))
+* **staff:** uniqie staff nubmer ([1171e7c](https://github.com/tillhub/tillhub-sdk-javascript/commit/1171e7c))
+
 # [3.49.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.48.0...v3.49.0) (2019-04-02)
 
 
