@@ -2,6 +2,7 @@ import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 import { Users, UsersOptions } from './users'
+import { UriHelper } from '../uri-helper'
 
 export interface ConfigurationsOptions {
   user?: string
@@ -98,6 +99,7 @@ export class Configurations {
   endpoint: string
   http: Client
   public options: ConfigurationsOptions
+  public uriHelper: UriHelper
 
   constructor(options: ConfigurationsOptions, http: Client) {
     this.options = options
@@ -105,6 +107,7 @@ export class Configurations {
 
     this.endpoint = '/api/v0/configurations'
     this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
   getAll(optionsOrQuery?: ConfigurationsQueryOptions | undefined): Promise<ConfigurationsResponse> {
@@ -201,6 +204,21 @@ export class Configurations {
         } as ConfigurationResponse)
       } catch (error) {
         return reject(new errors.ConfigurationCreationFailed(undefined, { error }))
+      }
+    })
+  }
+
+  delete(configurationId: string): Promise<ConfigurationResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const uri = this.uriHelper.generateBaseUri(`/${configurationId}`)
+        const response = await this.http.getClient().delete(uri)
+
+        return resolve({
+          msg: response.data.msg
+        } as ConfigurationResponse)
+      } catch (error) {
+        return reject(new errors.ConfigurationDeleteFailed(undefined, { error }))
       }
     })
   }

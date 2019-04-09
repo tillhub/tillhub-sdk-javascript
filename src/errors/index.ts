@@ -484,6 +484,13 @@ export class ConfigurationCreationFailed extends BaseError {
   }
 }
 
+export class ConfigurationDeleteFailed extends BaseError {
+  public name = 'ConfigurationDeleteFailed'
+  constructor(public message: string = 'Could not delete configuration', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class UsersFetchFailed extends BaseError {
   public name = 'UsersFetchFailed'
   constructor(public message: string = 'Could not fetch user', properties?: any) {
