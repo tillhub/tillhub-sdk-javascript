@@ -62,7 +62,7 @@ export interface HandleStaffQuery extends HandlerQuery {
 }
 export interface ErrorObject {
     id: string;
-    message: string;
+    label: string;
     errorDetails: object;
 }
 export interface StaffMember {

@@ -60,7 +60,7 @@ export interface CustomerContacts {
 }
 export interface ErrorObject {
     id: string;
-    message: string;
+    label: string;
     errorDetails: object;
 }
 export declare type CustomerAddressType = 'delivery' | 'billing';

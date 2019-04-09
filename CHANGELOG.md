@@ -1,3 +1,10 @@
+## [3.53.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.53.0...v3.53.1) (2019-04-09)
+
+
+### Bug Fixes
+
+* **errors array:** replace message with label ([6afe3f2](https://github.com/tillhub/tillhub-sdk-javascript/commit/6afe3f2))
+
 # [3.53.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.52.0...v3.53.0) (2019-04-09)
 
 
