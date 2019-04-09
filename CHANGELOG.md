@@ -1,3 +1,10 @@
+# [3.52.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.51.0...v3.52.0) (2019-04-09)
+
+
+### Features
+
+* **errors array:** add id; remove code ([f1d28c3](https://github.com/tillhub/tillhub-sdk-javascript/commit/f1d28c3))
+
 # [3.51.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.50.0...v3.51.0) (2019-04-04)
 
 

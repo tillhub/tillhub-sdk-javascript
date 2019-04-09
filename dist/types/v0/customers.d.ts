@@ -26,7 +26,7 @@ export interface CustomerResponse {
         patch?: any;
     };
     msg?: string;
-    errors?: ErrorObject;
+    errors?: ErrorObject[];
 }
 export interface CustomerQuery {
     customer_number_template?: string;
@@ -59,8 +59,8 @@ export interface CustomerContacts {
     };
 }
 export interface ErrorObject {
+    id: string;
     message: string;
-    code: number;
     errorDetails: object;
 }
 export declare type CustomerAddressType = 'delivery' | 'billing';

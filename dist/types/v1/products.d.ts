@@ -76,8 +76,8 @@ export interface ProductResponse {
     errors?: ErrorObject[];
 }
 export interface ErrorObject {
+    id: string;
     message: string;
-    code: number;
     errorDetails: object;
 }
 export interface ProductsCreateQuery {
