@@ -79,6 +79,9 @@ var TillhubClient = /** @class */ (function (_super) {
         if (options.base) {
             this.auth = new v1.Auth({ base: options.base });
         }
+        if (options.responseInterceptors) {
+            clientOptions.responseInterceptors = options.responseInterceptors;
+        }
         this.http = client_1.Client.getInstance(clientOptions).setDefaults(clientOptions);
     };
     /**

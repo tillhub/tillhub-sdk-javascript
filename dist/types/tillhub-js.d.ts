@@ -11,6 +11,7 @@ export interface TillhubSDKOptions {
     credentials?: UsernameAuth | KeyAuth | TokenAuth | undefined;
     base?: string;
     user?: string;
+    responseInterceptors?: Function[];
 }
 export declare interface TillhubClient {
     on(event: 'raw-error' | 'error', listener: (error: Error) => void): this;

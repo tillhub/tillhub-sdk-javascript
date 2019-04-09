@@ -28,11 +28,17 @@ var defaultHeaders = {
  */
 var Client = /** @class */ (function () {
     function Client(options) {
+        var _this = this;
         this.axiosInstance = axios_1.default.create({
             // baseURL: options.base || 'https://api.tillhub.com',
             timeout: options.timeout || 10000,
             headers: __assign({}, options.headers, defaultHeaders)
         });
+        if (options.responseInterceptors && options.responseInterceptors.length) {
+            options.responseInterceptors.forEach(function (interceptor) {
+                _this.axiosInstance.interceptors.response.use(interceptor);
+            });
+        }
     }
     Client.getInstance = function (options) {
         // use headers in any case

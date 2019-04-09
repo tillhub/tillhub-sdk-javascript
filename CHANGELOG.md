@@ -1,3 +1,10 @@
+# [3.54.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.53.1...v3.54.0) (2019-04-09)
+
+
+### Features
+
+* **sdk:** adds optional response interceptors ([2f076a6](https://github.com/tillhub/tillhub-sdk-javascript/commit/2f076a6))
+
 ## [3.53.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.53.0...v3.53.1) (2019-04-09)
 
 
