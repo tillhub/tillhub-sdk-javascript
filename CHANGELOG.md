@@ -1,3 +1,10 @@
+# [3.53.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.52.0...v3.53.0) (2019-04-09)
+
+
+### Features
+
+* **auth:** adds login as support ([a6c23fe](https://github.com/tillhub/tillhub-sdk-javascript/commit/a6c23fe))
+
 # [3.52.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.51.0...v3.52.0) (2019-04-09)
 
 

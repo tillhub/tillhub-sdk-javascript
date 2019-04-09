@@ -54,6 +54,7 @@ var AuthTypes;
     AuthTypes[AuthTypes["key"] = 2] = "key";
     AuthTypes[AuthTypes["token"] = 3] = "token";
     AuthTypes[AuthTypes["org"] = 4] = "org";
+    AuthTypes[AuthTypes["support"] = 5] = "support";
 })(AuthTypes = exports.AuthTypes || (exports.AuthTypes = {}));
 function isUsernameAuth(object) {
     return 'password' in object;

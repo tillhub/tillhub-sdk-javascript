@@ -1,5 +1,5 @@
 import * as v0 from '../v0';
-import { AuthOptions, AuthResponse, KeyAuth, OrgAuth } from '../v0/auth';
+import { AuthOptions, AuthResponse, KeyAuth, OrgAuth, SupportAuth } from '../v0/auth';
 /**
  * @extends "v0.Auth"
  */
@@ -10,4 +10,5 @@ export declare class Auth extends v0.Auth {
     authenticate(): Promise<AuthResponse>;
     loginServiceAccount(authData: KeyAuth): Promise<AuthResponse>;
     loginWithOrganisation(authData: OrgAuth): Promise<AuthResponse>;
+    loginAsSupport(authData: SupportAuth): Promise<AuthResponse>;
 }

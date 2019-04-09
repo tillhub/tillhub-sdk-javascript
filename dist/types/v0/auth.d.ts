@@ -2,7 +2,8 @@ export declare enum AuthTypes {
     username = 1,
     key = 2,
     token = 3,
-    org = 4
+    org = 4,
+    support = 5
 }
 export interface AuthOptions {
     type?: AuthTypes | undefined;
@@ -23,6 +24,10 @@ export interface OrgAuth {
     organisation: string;
     username: string;
     password: string;
+}
+export interface SupportAuth {
+    token: string;
+    client_account: string;
 }
 export interface PasswordResetRequest {
     email: string;
@@ -46,6 +51,7 @@ export interface AuthResponse {
     user: string;
     name?: string;
     features?: any;
+    is_support?: boolean;
 }
 /**
  * @class "v0.Auth"

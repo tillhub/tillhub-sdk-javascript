@@ -92,6 +92,9 @@ var Auth = /** @class */ (function (_super) {
                 if (this.options.type === auth_1.AuthTypes.org) {
                     return [2 /*return*/, this.loginWithOrganisation(this.options.credentials)];
                 }
+                if (this.options.type === auth_1.AuthTypes.support) {
+                    return [2 /*return*/, this.loginAsSupport(this.options.credentials)];
+                }
                 throw new errors.AuthenticationFailed('No auth data was provided');
             });
         });
@@ -151,6 +154,37 @@ var Auth = /** @class */ (function (_super) {
                         error = new errors.AuthenticationFailed();
                         err_2.error = err_2;
                         err_2.body = err_2.ressponse && err_2.response.data ? err_2.response.data : null;
+                        throw error;
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Auth.prototype.loginAsSupport = function (authData) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, err_3, error;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post(this.options.base + "/api/v1/users/auth/support/login", {
+                                token: authData.token,
+                                client_account: authData.client_account
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        this.setDefaultHeader(response.data.user.legacy_id || response.data.user.id, response.data.token);
+                        return [2 /*return*/, {
+                                token: response.data.token,
+                                user: response.data.user.legacy_id || response.data.user.id,
+                                name: response.data.user.name,
+                                is_support: true
+                            }];
+                    case 2:
+                        err_3 = _a.sent();
+                        error = new errors.AuthenticationFailed();
+                        err_3.error = err_3;
+                        err_3.body = err_3.ressponse && err_3.response.data ? err_3.response.data : null;
                         throw error;
                     case 3: return [2 /*return*/];
                 }
