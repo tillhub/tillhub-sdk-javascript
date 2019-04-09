@@ -335,6 +335,11 @@ export declare class ConfigurationCreationFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class ConfigurationDeleteFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
 export declare class UsersFetchFailed extends BaseError {
     message: string;
     name: string;

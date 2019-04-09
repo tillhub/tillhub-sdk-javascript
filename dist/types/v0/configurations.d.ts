@@ -1,5 +1,6 @@
 import { Client } from '../client';
 import { Users } from './users';
+import { UriHelper } from '../uri-helper';
 export interface ConfigurationsOptions {
     user?: string;
     base?: string;
@@ -78,11 +79,13 @@ export declare class Configurations {
     endpoint: string;
     http: Client;
     options: ConfigurationsOptions;
+    uriHelper: UriHelper;
     constructor(options: ConfigurationsOptions, http: Client);
     getAll(optionsOrQuery?: ConfigurationsQueryOptions | undefined): Promise<ConfigurationsResponse>;
     get(configurationId: string): Promise<ConfigurationReference>;
     put(configurationId: string, configuration: Configuration): Promise<ConfigurationResponse>;
     patch(configurationId: string, configuration: Configuration): Promise<ConfigurationResponse>;
     create(configuration: Configuration): Promise<ConfigurationResponse>;
+    delete(configurationId: string): Promise<ConfigurationResponse>;
 }
 export {};

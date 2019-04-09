@@ -1,3 +1,10 @@
+# [3.55.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.54.0...v3.55.0) (2019-04-09)
+
+
+### Features
+
+* **configurations:** add delete handler ([2af1549](https://github.com/tillhub/tillhub-sdk-javascript/commit/2af1549))
+
 # [3.54.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.53.1...v3.54.0) (2019-04-09)
 
 

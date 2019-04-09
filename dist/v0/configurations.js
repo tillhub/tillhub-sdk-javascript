@@ -59,6 +59,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var qs_1 = __importDefault(require("qs"));
 var errors = __importStar(require("../errors"));
 var users_1 = require("./users");
+var uri_helper_1 = require("../uri-helper");
 var ConfigurationReference = /** @class */ (function () {
     function ConfigurationReference(response, http, options) {
         this.data = response.data;
@@ -79,6 +80,7 @@ var Configurations = /** @class */ (function () {
         this.http = http;
         this.endpoint = '/api/v0/configurations';
         this.options.base = this.options.base || 'https://api.tillhub.com';
+        this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
     }
     Configurations.prototype.getAll = function (optionsOrQuery) {
         var _this = this;
@@ -219,6 +221,29 @@ var Configurations = /** @class */ (function () {
                         error_4 = _a.sent();
                         return [2 /*return*/, reject(new errors.ConfigurationCreationFailed(undefined, { error: error_4 }))];
                     case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Configurations.prototype.delete = function (configurationId) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_5;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = this.uriHelper.generateBaseUri("/" + configurationId);
+                        return [4 /*yield*/, this.http.getClient().delete(uri)];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, resolve({
+                                msg: response.data.msg
+                            })];
+                    case 2:
+                        error_5 = _a.sent();
+                        return [2 /*return*/, reject(new errors.ConfigurationDeleteFailed(undefined, { error: error_5 }))];
+                    case 3: return [2 /*return*/];
                 }
             });
         }); });

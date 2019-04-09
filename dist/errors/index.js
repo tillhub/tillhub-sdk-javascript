@@ -819,6 +819,18 @@ var ConfigurationCreationFailed = /** @class */ (function (_super) {
     return ConfigurationCreationFailed;
 }(baseError_1.BaseError));
 exports.ConfigurationCreationFailed = ConfigurationCreationFailed;
+var ConfigurationDeleteFailed = /** @class */ (function (_super) {
+    __extends(ConfigurationDeleteFailed, _super);
+    function ConfigurationDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete configuration'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ConfigurationDeleteFailed';
+        return _this;
+    }
+    return ConfigurationDeleteFailed;
+}(baseError_1.BaseError));
+exports.ConfigurationDeleteFailed = ConfigurationDeleteFailed;
 var UsersFetchFailed = /** @class */ (function (_super) {
     __extends(UsersFetchFailed, _super);
     function UsersFetchFailed(message, properties) {
