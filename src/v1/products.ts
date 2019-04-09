@@ -92,8 +92,8 @@ export interface ProductResponse {
 }
 
 export interface ErrorObject {
+  id: string
   message: string
-  code: number
   errorDetails: object
 }
 

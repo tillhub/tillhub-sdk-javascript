@@ -33,7 +33,7 @@ export interface CustomerResponse {
     patch?: any
   }
   msg?: string
-  errors?: ErrorObject
+  errors?: ErrorObject[]
 }
 
 export interface CustomerQuery {
@@ -72,8 +72,8 @@ export interface CustomerContacts {
 }
 
 export interface ErrorObject {
+  id: string
   message: string
-  code: number
   errorDetails: object
 }
 

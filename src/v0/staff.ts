@@ -19,7 +19,7 @@ export interface StaffQueryOrOptions {
 export interface StaffResponse {
   data: StaffMember[]
   metadata: object
-  errors?: ErrorObject
+  errors?: ErrorObject[]
 }
 
 export interface StaffMemberResponse {
@@ -76,8 +76,8 @@ export interface HandleStaffQuery extends HandlerQuery {
 }
 
 export interface ErrorObject {
+  id: string
   message: string
-  code: number
   errorDetails: object
 }
 
