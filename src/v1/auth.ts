@@ -8,7 +8,8 @@ import {
   AuthResponse,
   KeyAuth,
   OrgAuth,
-  TokenAuth
+  TokenAuth,
+  SupportAuth
 } from '../v0/auth'
 
 /**
@@ -44,6 +45,10 @@ export class Auth extends v0.Auth {
 
     if (this.options.type === AuthTypes.org) {
       return this.loginWithOrganisation(this.options.credentials as OrgAuth)
+    }
+
+    if (this.options.type === AuthTypes.support) {
+      return this.loginAsSupport(this.options.credentials as SupportAuth)
     }
 
     throw new errors.AuthenticationFailed('No auth data was provided')
@@ -95,6 +100,36 @@ export class Auth extends v0.Auth {
         token: response.data.token,
         user: response.data.user.legacy_id || response.data.user.id,
         name: response.data.user.name
+      } as AuthResponse
+    } catch (err) {
+      const error = new errors.AuthenticationFailed()
+      err.error = err
+      err.body = err.ressponse && err.response.data ? err.response.data : null
+
+      throw error
+    }
+  }
+
+  async loginAsSupport(authData: SupportAuth): Promise<AuthResponse> {
+    try {
+      const response = await axios.post(
+        `${this.options.base}/api/v1/users/auth/support/login`,
+        {
+          token: authData.token,
+          client_account: authData.client_account
+        }
+      )
+
+      this.setDefaultHeader(
+        response.data.user.legacy_id || response.data.user.id,
+        response.data.token
+      )
+
+      return {
+        token: response.data.token,
+        user: response.data.user.legacy_id || response.data.user.id,
+        name: response.data.user.name,
+        is_support: true
       } as AuthResponse
     } catch (err) {
       const error = new errors.AuthenticationFailed()

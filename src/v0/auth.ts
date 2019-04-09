@@ -6,7 +6,8 @@ export enum AuthTypes {
   username = 1,
   key,
   token,
-  org
+  org,
+  support
 }
 
 export interface AuthOptions {
@@ -31,6 +32,11 @@ export interface OrgAuth {
   organisation: string
   username: string
   password: string
+}
+
+export interface SupportAuth {
+  token: string
+  client_account: string
 }
 
 export interface PasswordResetRequest {
@@ -71,6 +77,7 @@ export interface AuthResponse {
   user: string
   name?: string
   features?: any
+  is_support?: boolean
 }
 
 /**
