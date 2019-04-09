@@ -73,7 +73,7 @@ export interface CustomerContacts {
 
 export interface ErrorObject {
   id: string
-  message: string
+  label: string
   errorDetails: object
 }
 

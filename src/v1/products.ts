@@ -93,7 +93,7 @@ export interface ProductResponse {
 
 export interface ErrorObject {
   id: string
-  message: string
+  label: string
   errorDetails: object
 }
 
@@ -363,7 +363,9 @@ export class Products {
 
   bookStock(requestOptions: BookStockQuery): Promise<ProductResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${requestOptions.productId}/stock/book`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${
+        requestOptions.productId
+      }/stock/book`
       try {
         const response = await this.http.getClient().post(uri, requestOptions.body)
         response.status !== 200 && reject(new errors.ProductsBookStockFailed())

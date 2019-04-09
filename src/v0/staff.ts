@@ -77,7 +77,7 @@ export interface HandleStaffQuery extends HandlerQuery {
 
 export interface ErrorObject {
   id: string
-  message: string
+  label: string
   errorDetails: object
 }
 
@@ -127,7 +127,9 @@ export class Staff {
             queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
           }
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${queryString ? `?${queryString}` : ''}`
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
+            queryString ? `?${queryString}` : ''
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -257,7 +259,7 @@ export class Staff {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${
         this.options.user
-        }/staff_number${queryString}`
+      }/staff_number${queryString}`
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
