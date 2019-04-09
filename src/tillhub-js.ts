@@ -20,7 +20,8 @@ export const defaultOptions: TillhubSDKOptions = {
 export interface TillhubSDKOptions {
   credentials?: UsernameAuth | KeyAuth | TokenAuth | undefined
   base?: string
-  user?: string
+  user?: string,
+  responseInterceptors?: Function[]
 }
 
 type MaybeOptions = object
@@ -70,6 +71,10 @@ export class TillhubClient extends events.EventEmitter {
       this.auth = new v1.Auth({ base: options.base })
     }
 
+    if (options.responseInterceptors) {
+      clientOptions.responseInterceptors = options.responseInterceptors
+    }
+
     this.http = Client.getInstance(clientOptions).setDefaults(clientOptions)
   }
 
@@ -108,7 +113,7 @@ export class TillhubClient extends events.EventEmitter {
       if ((options.credentials as TokenAuth).token && clientOptions.headers) {
         clientOptions.headers['Authorization'] = `Bearer ${
           (options.credentials as TokenAuth).token
-        }`
+          }`
       }
 
       this.auth = new v1.Auth(authOptions)
@@ -120,7 +125,7 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   private generateAuthenticatedInstance<T>(
-    type: { new (options: object, http: Client): T },
+    type: { new(options: object, http: Client): T },
     maybeOptions?: MaybeOptions
   ): T {
     if (

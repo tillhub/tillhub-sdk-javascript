@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from 'axios'
+import axios, { AxiosInstance, AxiosResponse } from 'axios'
 
 import { environment } from './environment'
 
@@ -8,7 +8,8 @@ export interface ClientOptions {
   headers?: {
     [key: string]: any;
   }
-  token?: string
+  token?: string,
+  responseInterceptors?: Function[]
 }
 
 const defaultHeaders = {
@@ -35,6 +36,12 @@ export class Client {
         ...defaultHeaders
       }
     })
+
+    if (options.responseInterceptors && options.responseInterceptors.length) {
+      options.responseInterceptors.forEach((interceptor: Function) => {
+        this.axiosInstance.interceptors.response.use(interceptor as (value: AxiosResponse) => AxiosResponse | Promise<AxiosResponse>)
+      })
+    }
   }
 
   static getInstance(options: ClientOptions): Client {
