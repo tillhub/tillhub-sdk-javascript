@@ -1,3 +1,10 @@
+# [3.56.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.55.0...v3.56.0) (2019-04-10)
+
+
+### Features
+
+* adds devices ([527f01c](https://github.com/tillhub/tillhub-sdk-javascript/commit/527f01c))
+
 # [3.55.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.54.0...v3.55.0) (2019-04-09)
 
 

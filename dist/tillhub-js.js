@@ -221,6 +221,13 @@ var TillhubClient = /** @class */ (function (_super) {
         return this.generateAuthenticatedInstance(v0.Branches);
     };
     /**
+     * Create an authenticated devices instance
+     *
+     */
+    TillhubClient.prototype.devices = function () {
+        return this.generateAuthenticatedInstance(v0.Devices);
+    };
+    /**
      * Create an authenticated discounts instance
      *
      */
