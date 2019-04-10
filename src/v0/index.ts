@@ -8,6 +8,7 @@ import { PaymentOptions } from './payment_options'
 import { Configurations } from './configurations'
 import { Users } from './users'
 import { Branches } from './branches'
+import { Devices } from './devices'
 import { Customers } from './customers'
 import { Vouchers, VoucherLogs } from './vouchers'
 import { Invoices } from './invoices'
@@ -35,6 +36,7 @@ export {
   Configurations,
   Users,
   Branches,
+  Devices,
   Customers,
   Discounts,
   Vouchers,
