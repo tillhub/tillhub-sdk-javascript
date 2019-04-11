@@ -1,3 +1,10 @@
+# [3.57.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.56.0...v3.57.0) (2019-04-11)
+
+
+### Features
+
+* **products_v1:** add stock_mode and stock_configuration_location ([4a85dec](https://github.com/tillhub/tillhub-sdk-javascript/commit/4a85dec))
+
 # [3.56.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.55.0...v3.56.0) (2019-04-10)
 
 
