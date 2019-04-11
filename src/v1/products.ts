@@ -62,6 +62,18 @@ export interface Product {
   insert_id?: number
   product_group?: string | null
   delegated_to?: string[] | null
+  stock_mode?: string | null
+  stock_configuration_location?: StockConfigurationLocation | null
+  reorder_point?: number | null
+  reorder_qty?: number | null
+}
+
+export interface StockConfigurationLocation {
+  location?: string | null
+  stockable?: boolean | null
+  stock_minimum?: number | null
+  reorder_qty?: number | null
+  reorder_point?: number | null
 }
 
 export interface ProductsOptions {
