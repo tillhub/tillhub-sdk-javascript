@@ -126,7 +126,7 @@ export class Devices {
     })
   }
 
-  put(deviceId: string, device: Device): Promise<DeviceResponse> {
+  patch(deviceId: string, device: Device): Promise<DeviceResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deviceId}`
       try {
