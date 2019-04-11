@@ -16,6 +16,12 @@ export interface DevicesQuery {
   }
 }
 
+export interface DeviceBindRequest {
+  token: string
+  register: string
+  client_account: string
+}
+
 export interface DevicesResponse {
   data: object[]
   metadata: object
@@ -152,6 +158,22 @@ export class Devices {
     })
   }
 
+  bind(deviceOrShortId: string, bindRequest: DeviceBindRequest): Promise<DeviceResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${deviceOrShortId}/bind`
+      try {
+        const response = await this.http.getClient().post(uri, bindRequest)
+
+        return resolve({
+          data: response.data.results[0] as Device,
+          metadata: { count: response.data.count }
+        } as DeviceResponse)
+      } catch (error) {
+        return reject(new DeviceBindingFailed(undefined, { error }))
+      }
+    })
+  }
+
   delete(deviceId: string): Promise<DeviceResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deviceId}`
@@ -207,6 +229,12 @@ export class DevicesCountFailed extends BaseError {
 export class DeviceDeleteFailed extends BaseError {
   public name = 'DeviceDeleteFailed'
   constructor(public message: string = 'Could not delete device', properties?: any) {
+    super(message, properties)
+  }
+}
+export class DeviceBindingFailed extends BaseError {
+  public name = 'DeviceBindingFailed'
+  constructor(public message: string = 'Could not bind device', properties?: any) {
     super(message, properties)
   }
 }
