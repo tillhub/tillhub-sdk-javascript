@@ -12,6 +12,11 @@ export interface DevicesQuery {
         deleted?: boolean;
     };
 }
+export interface DeviceBindRequest {
+    token: string;
+    register: string;
+    client_account: string;
+}
 export interface DevicesResponse {
     data: object[];
     metadata: object;
@@ -47,8 +52,9 @@ export declare class Devices {
     constructor(options: DevicesOptions, http: Client);
     getAll(queryOrOptions?: DevicesQuery | undefined): Promise<DevicesResponse>;
     get(deviceId: string): Promise<DeviceResponse>;
-    put(deviceId: string, device: Device): Promise<DeviceResponse>;
+    patch(deviceId: string, device: Device): Promise<DeviceResponse>;
     create(device: Device): Promise<DeviceResponse>;
+    bind(deviceOrShortId: string, bindRequest: DeviceBindRequest): Promise<DeviceResponse>;
     delete(deviceId: string): Promise<DeviceResponse>;
 }
 export declare class DevicesFetchFailed extends BaseError {
@@ -77,6 +83,11 @@ export declare class DevicesCountFailed extends BaseError {
     constructor(message?: string, properties?: any);
 }
 export declare class DeviceDeleteFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class DeviceBindingFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);

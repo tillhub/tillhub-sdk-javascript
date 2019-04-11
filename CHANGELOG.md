@@ -1,3 +1,15 @@
+# [3.58.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.57.0...v3.58.0) (2019-04-11)
+
+
+### Bug Fixes
+
+* **devices:** move put to patch ([e4903a9](https://github.com/tillhub/tillhub-sdk-javascript/commit/e4903a9))
+
+
+### Features
+
+* **devices:** adds device binding ([f081655](https://github.com/tillhub/tillhub-sdk-javascript/commit/f081655))
+
 # [3.57.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.56.0...v3.57.0) (2019-04-11)
 
 
