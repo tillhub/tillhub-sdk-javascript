@@ -1,3 +1,10 @@
+# [3.59.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.58.0...v3.59.0) (2019-04-12)
+
+
+### Features
+
+* added locations to products input ([8de8e26](https://github.com/tillhub/tillhub-sdk-javascript/commit/8de8e26))
+
 # [3.58.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.57.0...v3.58.0) (2019-04-11)
 
 
