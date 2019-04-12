@@ -66,6 +66,7 @@ export interface Product {
   stock_configuration_location?: StockConfigurationLocation | null
   reorder_point?: number | null
   reorder_qty?: number | null
+  locations?: string[] | null
 }
 
 export interface StockConfigurationLocation {
