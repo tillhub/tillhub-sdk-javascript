@@ -10,6 +10,7 @@ export interface StocksOptions {
 export interface StocksQuery {
   limit?: number
   uri?: string
+  deleted?: boolean
 }
 
 export interface StocksBookQuery {
@@ -57,6 +58,7 @@ export class Stocks {
   endpoint: string
   http: Client
   public options: StocksOptions
+  public uriHelper: UriHelper
 
   constructor(options: StocksOptions, http: Client) {
     this.options = options
@@ -64,6 +66,7 @@ export class Stocks {
 
     this.endpoint = '/api/v0/stock'
     this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
   getAll(query?: StocksQuery | undefined): Promise<StocksResponse> {
@@ -129,12 +132,8 @@ export class Stocks {
   getLocations(query?: StocksQuery | undefined): Promise<StocksResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        let uri
-        if (query && query.uri) {
-          uri = query.uri
-        } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}/locations`
-        }
+        const base = this.uriHelper.generateBaseUri(`/locations`)
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.StocksLocationsFetchFailed())
