@@ -160,7 +160,7 @@ export class Devices {
 
   bind(deviceOrShortId: string, bindRequest: DeviceBindRequest): Promise<DeviceResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${deviceOrShortId}/bind`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deviceOrShortId}/bind`
       try {
         const response = await this.http.getClient().post(uri, bindRequest)
 
