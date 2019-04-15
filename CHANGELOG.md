@@ -1,3 +1,10 @@
+# [3.60.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.59.1...v3.60.0) (2019-04-15)
+
+
+### Features
+
+* **stock:** add query params to stock-locations ([c76ce16](https://github.com/tillhub/tillhub-sdk-javascript/commit/c76ce16))
+
 ## [3.59.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.59.0...v3.59.1) (2019-04-15)
 
 

@@ -7,6 +7,7 @@ export interface StocksOptions {
 export interface StocksQuery {
     limit?: number;
     uri?: string;
+    deleted?: boolean;
 }
 export interface StocksBookQuery {
     limit?: number;
@@ -48,6 +49,7 @@ export declare class Stocks {
     endpoint: string;
     http: Client;
     options: StocksOptions;
+    uriHelper: UriHelper;
     constructor(options: StocksOptions, http: Client);
     getAll(query?: StocksQuery | undefined): Promise<StocksResponse>;
     create(stock: Stock): Promise<StocksResponse>;

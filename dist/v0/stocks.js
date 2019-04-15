@@ -50,6 +50,7 @@ var Stocks = /** @class */ (function () {
         this.http = http;
         this.endpoint = '/api/v0/stock';
         this.options.base = this.options.base || 'https://api.tillhub.com';
+        this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
     }
     Stocks.prototype.getAll = function (query) {
         var _this = this;
@@ -140,18 +141,13 @@ var Stocks = /** @class */ (function () {
     Stocks.prototype.getLocations = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_4;
+            var base, uri, response, err_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        uri = void 0;
-                        if (query && query.uri) {
-                            uri = query.uri;
-                        }
-                        else {
-                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/locations";
-                        }
+                        base = this.uriHelper.generateBaseUri("/locations");
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
