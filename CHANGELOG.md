@@ -1,3 +1,10 @@
+## [3.59.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.59.0...v3.59.1) (2019-04-15)
+
+
+### Bug Fixes
+
+* **devices:** fix url ref for binding ([d45b106](https://github.com/tillhub/tillhub-sdk-javascript/commit/d45b106))
+
 # [3.59.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.58.0...v3.59.0) (2019-04-12)
 
 
