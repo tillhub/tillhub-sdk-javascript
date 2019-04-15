@@ -1,4 +1,5 @@
 import * as dotenv from 'dotenv'
+import qs from 'qs'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
@@ -25,6 +26,12 @@ afterEach(() => {
   mock.reset()
 })
 
+const query = {
+  deleted: false
+}
+
+const queryString = qs.stringify(query)
+
 describe('v0: Stocks: can get all locations', () => {
   it("Tillhub's Stocks are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
@@ -42,7 +49,7 @@ describe('v0: Stocks: can get all locations', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/stock/${legacyId}/locations`)
+        .onGet(`https://api.tillhub.com/api/v0/stock/${legacyId}/locations?${queryString}`)
         .reply(function (config) {
           return [
             200,
@@ -74,7 +81,7 @@ describe('v0: Stocks: can get all locations', () => {
 
     expect(stocks).toBeInstanceOf(v0.Stocks)
 
-    const { data } = await stocks.getLocations()
+    const { data } = await stocks.getLocations(query)
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -94,7 +101,7 @@ describe('v0: Stocks: can get all locations', () => {
         ]
       })
       mock
-        .onGet(`https://api.tillhub.com/api/v0/stock/${legacyId}locations`)
+        .onGet(`https://api.tillhub.com/api/v0/stock/${legacyId}locations?${queryString}`)
         .reply(function (config) {
           return [205]
         })
@@ -117,7 +124,7 @@ describe('v0: Stocks: can get all locations', () => {
     })
 
     try {
-      await th.stocks().getLocations()
+      await th.stocks().getLocations(query)
     } catch (err) {
       expect(err.name).toBe('StocksLocationsFetchFailed')
     }
