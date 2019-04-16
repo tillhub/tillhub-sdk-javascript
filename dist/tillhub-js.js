@@ -108,7 +108,8 @@ var TillhubClient = /** @class */ (function (_super) {
                 user: this.user
             };
             var clientOptions = {
-                headers: {}
+                headers: {},
+                responseInterceptors: options.responseInterceptors
             };
             if (options.credentials.token && clientOptions.headers) {
                 clientOptions.headers['Authorization'] = "Bearer " + options.credentials.token;

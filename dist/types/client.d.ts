@@ -17,6 +17,7 @@ export interface ClientOptions {
 export declare class Client {
     private static instance;
     private axiosInstance;
+    private interceptorIds;
     private constructor();
     static getInstance(options: ClientOptions): Client;
     static clearInstance(): void;

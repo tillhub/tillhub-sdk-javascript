@@ -1,3 +1,10 @@
+# [3.61.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.60.0...v3.61.0) (2019-04-16)
+
+
+### Features
+
+* add ability to inject custom response interceptors ([19c3c8f](https://github.com/tillhub/tillhub-sdk-javascript/commit/19c3c8f))
+
 # [3.60.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.59.1...v3.60.0) (2019-04-15)
 
 
