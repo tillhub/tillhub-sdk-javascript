@@ -26,6 +26,7 @@ const defaultHeaders = {
 export class Client {
   private static instance: Client
   private axiosInstance: AxiosInstance
+  private interceptorIds: number[] = []
 
   private constructor(options: ClientOptions) {
     this.axiosInstance = axios.create({
@@ -36,12 +37,6 @@ export class Client {
         ...defaultHeaders
       }
     })
-
-    if (options.responseInterceptors && options.responseInterceptors.length) {
-      options.responseInterceptors.forEach((interceptor: Function) => {
-        this.axiosInstance.interceptors.response.use(interceptor as (value: AxiosResponse) => AxiosResponse | Promise<AxiosResponse>)
-      })
-    }
   }
 
   static getInstance(options: ClientOptions): Client {
@@ -75,6 +70,17 @@ export class Client {
     Client.instance.axiosInstance.defaults.headers = {
       ...this.axiosInstance.defaults.headers,
       ...options.headers
+    }
+
+    // NOTE not sure if this is the correct place to inject the interceptors, but it's the most reliable
+    if (options.responseInterceptors && options.responseInterceptors.length) {
+      // remove previous interceptors
+      this.interceptorIds.forEach(id => Client.instance.axiosInstance.interceptors.response.eject(id))
+
+      this.interceptorIds = options.responseInterceptors.map((interceptor: Function) => {
+        // first arg is on success, but we want to only listen for errors
+        return Client.instance.axiosInstance.interceptors.response.use(undefined, interceptor as (value: AxiosResponse) => AxiosResponse | Promise<AxiosResponse>)
+      })
     }
 
     return Client.instance
