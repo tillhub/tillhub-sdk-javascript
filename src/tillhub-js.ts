@@ -107,7 +107,8 @@ export class TillhubClient extends events.EventEmitter {
       }
 
       const clientOptions: ClientOptions = {
-        headers: {}
+        headers: {},
+        responseInterceptors: options.responseInterceptors
       }
 
       if ((options.credentials as TokenAuth).token && clientOptions.headers) {
