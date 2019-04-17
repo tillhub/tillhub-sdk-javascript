@@ -767,6 +767,13 @@ export class VouchersLogsCountFailed extends BaseError {
   }
 }
 
+export class VouchersUsersFailed extends BaseError {
+  public name = 'VouchersUsersFailed'
+  constructor(public message: string = 'Could not get authorized voucher users', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class InvoicesFetchAllFailed extends BaseError {
   public name = 'InvoicesFetchAllFailed'
   constructor(public message: string = 'Could not fetch invoices', properties?: any) {
