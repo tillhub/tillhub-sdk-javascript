@@ -306,6 +306,25 @@ export class Vouchers {
       }
     })
   }
+
+  getAllUsers(): Promise<UsersResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let uri = `${this.options.base}${this.endpoint}/${this.options.user}/users`
+
+        const response = await this.http.getClient().get(uri)
+        if (response.status !== 200) {
+          return reject(new errors.VouchersUsersFailed(undefined, { status: response.status }))
+        }
+
+        return resolve({
+          data: response.data.results
+        } as UsersResponse)
+      } catch (error) {
+        return reject(new errors.VouchersUsersFailed(undefined, { error }))
+      }
+    })
+  }
 }
 
 export class VoucherLogs {
@@ -382,25 +401,6 @@ export class VoucherLogs {
         } as VouchersResponse)
       } catch (error) {
         return reject(new errors.VoucherLogsMetaFailed(undefined, { error }))
-      }
-    })
-  }
-
-  getAllUsers(): Promise<UsersResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        let uri = `${this.options.base}${this.endpoint}/${this.options.user}/users`
-
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new errors.VouchersUsersFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results
-        } as UsersResponse)
-      } catch (error) {
-        return reject(new errors.VouchersUsersFailed(undefined, { error }))
       }
     })
   }
