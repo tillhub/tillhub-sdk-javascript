@@ -1298,6 +1298,18 @@ var VouchersLogsCountFailed = /** @class */ (function (_super) {
     return VouchersLogsCountFailed;
 }(baseError_1.BaseError));
 exports.VouchersLogsCountFailed = VouchersLogsCountFailed;
+var VouchersUsersFailed = /** @class */ (function (_super) {
+    __extends(VouchersUsersFailed, _super);
+    function VouchersUsersFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get authorized voucher users'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'VouchersUsersFailed';
+        return _this;
+    }
+    return VouchersUsersFailed;
+}(baseError_1.BaseError));
+exports.VouchersUsersFailed = VouchersUsersFailed;
 var InvoicesFetchAllFailed = /** @class */ (function (_super) {
     __extends(InvoicesFetchAllFailed, _super);
     function InvoicesFetchAllFailed(message, properties) {

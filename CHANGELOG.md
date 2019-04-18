@@ -1,3 +1,10 @@
+# [3.63.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.62.0...v3.63.0) (2019-04-18)
+
+
+### Features
+
+* **vouchers:** add getAllUser handler ([963c680](https://github.com/tillhub/tillhub-sdk-javascript/commit/963c680))
+
 # [3.62.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.61.0...v3.62.0) (2019-04-18)
 
 

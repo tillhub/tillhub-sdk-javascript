@@ -437,6 +437,32 @@ var VoucherLogs = /** @class */ (function () {
             });
         }); });
     };
+    VoucherLogs.prototype.getAllUsers = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_12;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/users";
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new errors.VouchersUsersFailed(undefined, { status: response.status }))];
+                        }
+                        return [2 /*return*/, resolve({
+                                data: response.data.results
+                            })];
+                    case 2:
+                        error_12 = _a.sent();
+                        return [2 /*return*/, reject(new errors.VouchersUsersFailed(undefined, { error: error_12 }))];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     return VoucherLogs;
 }());
 exports.VoucherLogs = VoucherLogs;

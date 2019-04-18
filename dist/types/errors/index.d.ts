@@ -535,6 +535,11 @@ export declare class VouchersLogsCountFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class VouchersUsersFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
 export declare class InvoicesFetchAllFailed extends BaseError {
     message: string;
     name: string;

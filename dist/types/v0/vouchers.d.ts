@@ -55,6 +55,9 @@ export interface Voucher {
     exchange_for_cash?: boolean;
     restriction_single_transaction?: boolean;
 }
+export interface UsersResponse {
+    data: object[];
+}
 export declare class Vouchers {
     endpoint: string;
     http: Client;
@@ -78,5 +81,6 @@ export declare class VoucherLogs {
     constructor(options: VouchersOptions, http: Client);
     getAll(optionsOrQuery?: VouchersQueryOptions | undefined): Promise<VoucherLogsResponse>;
     meta(): Promise<VoucherLogsResponse>;
+    getAllUsers(): Promise<UsersResponse>;
 }
 export {};
