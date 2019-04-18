@@ -74,7 +74,7 @@ describe('v0: vouchers: can get all users', () => {
 
     expect(vouchers).toBeInstanceOf(v0.Vouchers)
 
-    const { data } = await vouchers.logs.getAllUsers()
+    const { data } = await vouchers.getAllUsers()
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -118,7 +118,7 @@ describe('v0: vouchers: can get all users', () => {
     })
 
     try {
-      await th.vouchers().logs.getAllUsers()
+      await th.vouchers().getAllUsers()
     } catch (err) {
       expect(err.name).toBe('VouchersUsersFailed')
     }
