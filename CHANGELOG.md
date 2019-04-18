@@ -1,3 +1,10 @@
+# [3.65.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.64.0...v3.65.0) (2019-04-18)
+
+
+### Features
+
+* **products:** add delete options ([79e87fb](https://github.com/tillhub/tillhub-sdk-javascript/commit/79e87fb))
+
 # [3.64.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.63.0...v3.64.0) (2019-04-18)
 
 

@@ -72,6 +72,9 @@ export interface ProductsOptions {
         [key: string]: any;
     };
 }
+export interface ProductDeleteOptions {
+    delete_dependencies?: boolean;
+}
 export interface ProductsResponse {
     data: Product[];
     metadata: object;
@@ -125,7 +128,7 @@ export declare class Products {
     meta(): Promise<ProductsResponse>;
     put(productId: string, product: Product): Promise<ProductResponse>;
     count(): Promise<ProductsResponse>;
-    delete(productId: string): Promise<ProductsResponse>;
+    delete(productId: string, deleteOptions?: ProductDeleteOptions): Promise<ProductsResponse>;
     search(searchTerm: string): Promise<ProductsResponse>;
     bookStock(requestOptions: BookStockQuery): Promise<ProductResponse>;
 }

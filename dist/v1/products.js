@@ -307,19 +307,23 @@ var Products = /** @class */ (function () {
             });
         }); });
     };
-    Products.prototype.delete = function (productId) {
+    Products.prototype.delete = function (productId, deleteOptions) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, error_9;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + productId;
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
+                        _a.trys.push([0, 2, , 3]);
+                        uri = void 0;
+                        if (deleteOptions) {
+                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + productId + "?" + qs_1.default.stringify(deleteOptions);
+                        }
+                        else {
+                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + productId;
+                        }
                         return [4 /*yield*/, this.http.getClient().delete(uri)];
-                    case 2:
+                    case 1:
                         response = _a.sent();
                         if (response.status !== 200) {
                             return [2 /*return*/, reject(new errors.ProductsDeleteFailed(undefined, { status: response.status }))];
@@ -327,10 +331,10 @@ var Products = /** @class */ (function () {
                         return [2 /*return*/, resolve({
                                 msg: response.data.msg
                             })];
-                    case 3:
+                    case 2:
                         error_9 = _a.sent();
                         return [2 /*return*/, reject(new errors.ProductsDeleteFailed(undefined, { error: error_9 }))];
-                    case 4: return [2 /*return*/];
+                    case 3: return [2 /*return*/];
                 }
             });
         }); });
