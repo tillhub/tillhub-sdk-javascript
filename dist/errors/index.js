@@ -2375,4 +2375,40 @@ var BalancesMetaFailed = /** @class */ (function (_super) {
     return BalancesMetaFailed;
 }(baseError_1.BaseError));
 exports.BalancesMetaFailed = BalancesMetaFailed;
+var LegacySettingsFetchFailed = /** @class */ (function (_super) {
+    __extends(LegacySettingsFetchFailed, _super);
+    function LegacySettingsFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch legacy settings'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'LegacySettingsFetchFailed';
+        return _this;
+    }
+    return LegacySettingsFetchFailed;
+}(baseError_1.BaseError));
+exports.LegacySettingsFetchFailed = LegacySettingsFetchFailed;
+var LegacySettingFetchFailed = /** @class */ (function (_super) {
+    __extends(LegacySettingFetchFailed, _super);
+    function LegacySettingFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch one legacy settings object'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'LegacySettingFetchFailed';
+        return _this;
+    }
+    return LegacySettingFetchFailed;
+}(baseError_1.BaseError));
+exports.LegacySettingFetchFailed = LegacySettingFetchFailed;
+var LegacySettingUpdateFailed = /** @class */ (function (_super) {
+    __extends(LegacySettingUpdateFailed, _super);
+    function LegacySettingUpdateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not update one legacy settings object'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'LegacySettingUpdateFailed';
+        return _this;
+    }
+    return LegacySettingUpdateFailed;
+}(baseError_1.BaseError));
+exports.LegacySettingUpdateFailed = LegacySettingUpdateFailed;
 //# sourceMappingURL=index.js.map

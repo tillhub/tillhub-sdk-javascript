@@ -459,6 +459,13 @@ var TillhubClient = /** @class */ (function (_super) {
     TillhubClient.prototype.balances = function () {
         return this.generateAuthenticatedInstance(v1.Balances);
     };
+    /**
+     * Create an authenticated LegacySettings instance
+     *
+     */
+    TillhubClient.prototype.settings_old = function () {
+        return this.generateAuthenticatedInstance(v0.LegacySettings);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));

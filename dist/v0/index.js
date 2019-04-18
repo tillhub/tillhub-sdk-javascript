@@ -54,4 +54,6 @@ var messages_1 = require("./messages");
 exports.Messages = messages_1.Messages;
 var favourites_1 = require("./favourites");
 exports.Favourites = favourites_1.Favourites;
+var settings_old_1 = require("./settings_old");
+exports.LegacySettings = settings_old_1.LegacySettings;
 //# sourceMappingURL=index.js.map

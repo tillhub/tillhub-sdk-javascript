@@ -1,3 +1,10 @@
+# [3.62.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.61.0...v3.62.0) (2019-04-18)
+
+
+### Features
+
+* add `settings_old` endpoint ([0a46ec4](https://github.com/tillhub/tillhub-sdk-javascript/commit/0a46ec4))
+
 # [3.61.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.60.0...v3.61.0) (2019-04-16)
 
 

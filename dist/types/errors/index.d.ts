@@ -986,3 +986,18 @@ export declare class BalancesMetaFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class LegacySettingsFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class LegacySettingFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class LegacySettingUpdateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
