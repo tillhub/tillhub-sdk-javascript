@@ -552,6 +552,14 @@ export class TillhubClient extends events.EventEmitter {
   balances(): v1.Balances {
     return this.generateAuthenticatedInstance(v1.Balances)
   }
+
+  /**
+   * Create an authenticated LegacySettings instance
+   *
+   */
+  settings_old(): v0.LegacySettings {
+    return this.generateAuthenticatedInstance(v0.LegacySettings)
+  }
 }
 
 export class Tillhub extends TillhubClient {
