@@ -87,6 +87,10 @@ export interface ProductsOptions {
   }
 }
 
+export interface ProductDeleteOptions {
+  delete_dependencies?: boolean
+}
+
 export interface ProductsResponse {
   data: Product[]
   metadata: object
@@ -181,7 +185,7 @@ export class Products {
         } else {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             options && options.query ? `?${qs.stringify(options.query)}` : ''
-          }`
+            }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -250,7 +254,7 @@ export class Products {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${
         this.options.user
-      }/${productId}/children/details`
+        }/${productId}/children/details`
       try {
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
@@ -337,10 +341,16 @@ export class Products {
     })
   }
 
-  delete(productId: string): Promise<ProductsResponse> {
+  delete(productId: string, deleteOptions?: ProductDeleteOptions): Promise<ProductsResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productId}`
       try {
+        let uri
+        if (deleteOptions) {
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productId}?${qs.stringify(deleteOptions)}`
+        } else {
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productId}`
+        }
+
         const response = await this.http.getClient().delete(uri)
         if (response.status !== 200) {
           return reject(new errors.ProductsDeleteFailed(undefined, { status: response.status }))
@@ -378,7 +388,7 @@ export class Products {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${
         requestOptions.productId
-      }/stock/book`
+        }/stock/book`
       try {
         const response = await this.http.getClient().post(uri, requestOptions.body)
         response.status !== 200 && reject(new errors.ProductsBookStockFailed())
