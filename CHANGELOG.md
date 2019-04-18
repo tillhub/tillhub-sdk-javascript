@@ -1,3 +1,10 @@
+# [3.64.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.63.0...v3.64.0) (2019-04-18)
+
+
+### Features
+
+* **vouchers:** move getAllUsers from logs ([4c38a04](https://github.com/tillhub/tillhub-sdk-javascript/commit/4c38a04))
+
 # [3.63.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.62.0...v3.63.0) (2019-04-18)
 
 

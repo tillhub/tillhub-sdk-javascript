@@ -353,6 +353,32 @@ var Vouchers = /** @class */ (function () {
             });
         }); });
     };
+    Vouchers.prototype.getAllUsers = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_10;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/users";
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new errors.VouchersUsersFailed(undefined, { status: response.status }))];
+                        }
+                        return [2 /*return*/, resolve({
+                                data: response.data.results
+                            })];
+                    case 2:
+                        error_10 = _a.sent();
+                        return [2 /*return*/, reject(new errors.VouchersUsersFailed(undefined, { error: error_10 }))];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     return Vouchers;
 }());
 exports.Vouchers = Vouchers;
@@ -366,7 +392,7 @@ var VoucherLogs = /** @class */ (function () {
     VoucherLogs.prototype.getAll = function (optionsOrQuery) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var next, uri, queryString, response_3, error_10;
+            var next, uri, queryString, response_3, error_11;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -398,8 +424,8 @@ var VoucherLogs = /** @class */ (function () {
                                 next: next
                             })];
                     case 2:
-                        error_10 = _a.sent();
-                        return [2 /*return*/, reject(new errors.VouchersLogsFetchFailed(undefined, { error: error_10 }))];
+                        error_11 = _a.sent();
+                        return [2 /*return*/, reject(new errors.VouchersLogsFetchFailed(undefined, { error: error_11 }))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -408,7 +434,7 @@ var VoucherLogs = /** @class */ (function () {
     VoucherLogs.prototype.meta = function () {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, error_11;
+            var uri, response, error_12;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -430,35 +456,9 @@ var VoucherLogs = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        error_11 = _a.sent();
-                        return [2 /*return*/, reject(new errors.VoucherLogsMetaFailed(undefined, { error: error_11 }))];
-                    case 4: return [2 /*return*/];
-                }
-            });
-        }); });
-    };
-    VoucherLogs.prototype.getAllUsers = function () {
-        var _this = this;
-        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, error_12;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/users";
-                        return [4 /*yield*/, this.http.getClient().get(uri)];
-                    case 1:
-                        response = _a.sent();
-                        if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.VouchersUsersFailed(undefined, { status: response.status }))];
-                        }
-                        return [2 /*return*/, resolve({
-                                data: response.data.results
-                            })];
-                    case 2:
                         error_12 = _a.sent();
-                        return [2 /*return*/, reject(new errors.VouchersUsersFailed(undefined, { error: error_12 }))];
-                    case 3: return [2 /*return*/];
+                        return [2 /*return*/, reject(new errors.VoucherLogsMetaFailed(undefined, { error: error_12 }))];
+                    case 4: return [2 /*return*/];
                 }
             });
         }); });

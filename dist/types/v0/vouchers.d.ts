@@ -73,6 +73,7 @@ export declare class Vouchers {
     put(voucherId: string, voucher: Voucher): Promise<VoucherResponse>;
     patch(source: Voucher, target: Voucher): Promise<VoucherResponse>;
     create(voucher: Voucher): Promise<VoucherResponse>;
+    getAllUsers(): Promise<UsersResponse>;
 }
 export declare class VoucherLogs {
     endpoint: string;
@@ -81,6 +82,5 @@ export declare class VoucherLogs {
     constructor(options: VouchersOptions, http: Client);
     getAll(optionsOrQuery?: VouchersQueryOptions | undefined): Promise<VoucherLogsResponse>;
     meta(): Promise<VoucherLogsResponse>;
-    getAllUsers(): Promise<UsersResponse>;
 }
 export {};
