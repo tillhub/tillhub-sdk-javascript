@@ -1423,3 +1423,22 @@ export class BalancesMetaFailed extends BaseError {
     super(message, properties)
   }
 }
+
+export class LegacySettingsFetchFailed extends BaseError {
+  public name = 'LegacySettingsFetchFailed'
+  constructor(public message: string = 'Could not fetch legacy settings', properties?: any) {
+    super(message, properties)
+  }
+}
+export class LegacySettingFetchFailed extends BaseError {
+  public name = 'LegacySettingFetchFailed'
+  constructor(public message: string = 'Could not fetch one legacy settings object', properties?: any) {
+    super(message, properties)
+  }
+}
+export class LegacySettingUpdateFailed extends BaseError {
+  public name = 'LegacySettingUpdateFailed'
+  constructor(public message: string = 'Could not update one legacy settings object', properties?: any) {
+    super(message, properties)
+  }
+}

@@ -24,6 +24,7 @@ import { Print } from './print'
 import { Discounts } from './discounts'
 import { Messages } from './messages'
 import { Favourites } from './favourites'
+import { LegacySettings } from './settings_old'
 
 export {
   Auth,
@@ -53,5 +54,6 @@ export {
   Notifications,
   Print,
   Messages,
-  Favourites
+  Favourites,
+  LegacySettings
 }
