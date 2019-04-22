@@ -144,10 +144,38 @@ var Devices = /** @class */ (function () {
             });
         }); });
     };
-    Devices.prototype.patch = function (deviceId, device) {
+    Devices.prototype.contents = function (deviceId) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, error_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + deviceId + "/contents";
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 &&
+                            reject(new DeviceContentFetchFailed(undefined, { status: response.status }));
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                msg: response.data.msg
+                            })];
+                    case 3:
+                        error_3 = _a.sent();
+                        return [2 /*return*/, reject(new DeviceContentFetchFailed(undefined, { error: error_3 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Devices.prototype.patch = function (deviceId, device) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -163,8 +191,8 @@ var Devices = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        error_3 = _a.sent();
-                        return [2 /*return*/, reject(new DevicePutFailed(undefined, { error: error_3 }))];
+                        error_4 = _a.sent();
+                        return [2 /*return*/, reject(new DevicePutFailed(undefined, { error: error_4 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -173,7 +201,7 @@ var Devices = /** @class */ (function () {
     Devices.prototype.create = function (device) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, error_4;
+            var uri, response, error_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -189,8 +217,8 @@ var Devices = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        error_4 = _a.sent();
-                        return [2 /*return*/, reject(new DeviceCreationFailed(undefined, { error: error_4 }))];
+                        error_5 = _a.sent();
+                        return [2 /*return*/, reject(new DeviceCreationFailed(undefined, { error: error_5 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -199,7 +227,7 @@ var Devices = /** @class */ (function () {
     Devices.prototype.bind = function (deviceOrShortId, bindRequest) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, error_5;
+            var uri, response, error_6;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -215,8 +243,8 @@ var Devices = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        error_5 = _a.sent();
-                        return [2 /*return*/, reject(new DeviceBindingFailed(undefined, { error: error_5 }))];
+                        error_6 = _a.sent();
+                        return [2 /*return*/, reject(new DeviceBindingFailed(undefined, { error: error_6 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -275,6 +303,18 @@ var DeviceFetchFailed = /** @class */ (function (_super) {
     return DeviceFetchFailed;
 }(errors_1.BaseError));
 exports.DeviceFetchFailed = DeviceFetchFailed;
+var DeviceContentFetchFailed = /** @class */ (function (_super) {
+    __extends(DeviceContentFetchFailed, _super);
+    function DeviceContentFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch device content'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'DeviceContentFetchFailed';
+        return _this;
+    }
+    return DeviceContentFetchFailed;
+}(errors_1.BaseError));
+exports.DeviceContentFetchFailed = DeviceContentFetchFailed;
 var DevicePutFailed = /** @class */ (function (_super) {
     __extends(DevicePutFailed, _super);
     function DevicePutFailed(message, properties) {

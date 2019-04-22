@@ -1,3 +1,10 @@
+# [3.66.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.65.0...v3.66.0) (2019-04-22)
+
+
+### Features
+
+* **devices:** add device contents ([49ca29d](https://github.com/tillhub/tillhub-sdk-javascript/commit/49ca29d))
+
 # [3.65.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.64.0...v3.65.0) (2019-04-18)
 
 

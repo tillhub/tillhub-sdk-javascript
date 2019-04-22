@@ -30,6 +30,14 @@ export interface DeviceResponse {
     };
     msg?: string;
 }
+export interface DeviceContentResponse {
+    data: DeviceContent;
+    msg?: string;
+}
+export interface DeviceContent {
+    idle?: object;
+    welcome?: object;
+}
 export interface Device {
     id?: string;
 }
@@ -52,6 +60,7 @@ export declare class Devices {
     constructor(options: DevicesOptions, http: Client);
     getAll(queryOrOptions?: DevicesQuery | undefined): Promise<DevicesResponse>;
     get(deviceId: string): Promise<DeviceResponse>;
+    contents(deviceId: string): Promise<DeviceContentResponse>;
     patch(deviceId: string, device: Device): Promise<DeviceResponse>;
     create(device: Device): Promise<DeviceResponse>;
     bind(deviceOrShortId: string, bindRequest: DeviceBindRequest): Promise<DeviceResponse>;
@@ -63,6 +72,11 @@ export declare class DevicesFetchFailed extends BaseError {
     constructor(message?: string, properties?: any);
 }
 export declare class DeviceFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class DeviceContentFetchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);
