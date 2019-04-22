@@ -36,6 +36,16 @@ export interface DeviceResponse {
   }
   msg?: string
 }
+
+export interface DeviceContentResponse {
+  data: DeviceContent
+  msg?: string
+}
+export interface DeviceContent {
+  idle?: object
+  welcome?: object
+}
+
 export interface Device {
   id?: string
 }
@@ -126,6 +136,24 @@ export class Devices {
     })
   }
 
+  contents(deviceId: string): Promise<DeviceContentResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deviceId}/contents`
+      try {
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 &&
+          reject(new DeviceContentFetchFailed(undefined, { status: response.status }))
+
+        return resolve({
+          data: response.data.results[0] as DeviceContent,
+          msg: response.data.msg
+        } as DeviceContentResponse)
+      } catch (error) {
+        return reject(new DeviceContentFetchFailed(undefined, { error }))
+      }
+    })
+  }
+
   patch(deviceId: string, device: Device): Promise<DeviceResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deviceId}`
@@ -201,6 +229,13 @@ export class DevicesFetchFailed extends BaseError {
 export class DeviceFetchFailed extends BaseError {
   public name = 'DeviceFetchFailed'
   constructor(public message: string = 'Could not fetch device', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class DeviceContentFetchFailed extends BaseError {
+  public name = 'DeviceContentFetchFailed'
+  constructor(public message: string = 'Could not fetch device content', properties?: any) {
     super(message, properties)
   }
 }
