@@ -1,3 +1,10 @@
+# [3.67.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.66.0...v3.67.0) (2019-04-24)
+
+
+### Features
+
+* **stocks-book:** add query params for filters ([aff5ec8](https://github.com/tillhub/tillhub-sdk-javascript/commit/aff5ec8))
+
 # [3.66.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.65.0...v3.66.0) (2019-04-22)
 
 
