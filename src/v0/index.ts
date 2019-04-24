@@ -25,6 +25,7 @@ import { Discounts } from './discounts'
 import { Messages } from './messages'
 import { Favourites } from './favourites'
 import { LegacySettings } from './settings_old'
+import { Tags } from './tags'
 
 export {
   Auth,
@@ -55,5 +56,6 @@ export {
   Print,
   Messages,
   Favourites,
-  LegacySettings
+  LegacySettings,
+  Tags
 }

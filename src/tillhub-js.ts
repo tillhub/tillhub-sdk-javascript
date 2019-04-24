@@ -560,6 +560,14 @@ export class TillhubClient extends events.EventEmitter {
   settings_old(): v0.LegacySettings {
     return this.generateAuthenticatedInstance(v0.LegacySettings)
   }
+
+  /**
+   * Create an authenticated Tags instance
+   *
+   */
+  tags(): v0.Tags {
+    return this.generateAuthenticatedInstance(v0.Tags)
+  }
 }
 
 export class Tillhub extends TillhubClient {
