@@ -25,6 +25,8 @@ export interface StocksBookQuery {
   from?: string
   branch?: string
   format?: string
+  product_group?: string
+  q?: string
 }
 
 export interface StocksResponse {
