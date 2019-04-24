@@ -56,4 +56,6 @@ var favourites_1 = require("./favourites");
 exports.Favourites = favourites_1.Favourites;
 var settings_old_1 = require("./settings_old");
 exports.LegacySettings = settings_old_1.LegacySettings;
+var tags_1 = require("./tags");
+exports.Tags = tags_1.Tags;
 //# sourceMappingURL=index.js.map

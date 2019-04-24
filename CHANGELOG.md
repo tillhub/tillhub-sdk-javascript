@@ -1,3 +1,10 @@
+# [3.68.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.67.0...v3.68.0) (2019-04-24)
+
+
+### Features
+
+* **tags:** add tags handler and tests ([1b27a9c](https://github.com/tillhub/tillhub-sdk-javascript/commit/1b27a9c))
+
 # [3.67.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.66.0...v3.67.0) (2019-04-24)
 
 
