@@ -26,6 +26,18 @@ var TagsFetchAllFailed = /** @class */ (function (_super) {
     return TagsFetchAllFailed;
 }(baseError_1.BaseError));
 exports.TagsFetchAllFailed = TagsFetchAllFailed;
+var TagsFetchOneFailed = /** @class */ (function (_super) {
+    __extends(TagsFetchOneFailed, _super);
+    function TagsFetchOneFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch single tag'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TagsFetchOneFailed';
+        return _this;
+    }
+    return TagsFetchOneFailed;
+}(baseError_1.BaseError));
+exports.TagsFetchOneFailed = TagsFetchOneFailed;
 var TagsGetMetaFailed = /** @class */ (function (_super) {
     __extends(TagsGetMetaFailed, _super);
     function TagsGetMetaFailed(message, properties) {
@@ -38,4 +50,28 @@ var TagsGetMetaFailed = /** @class */ (function (_super) {
     return TagsGetMetaFailed;
 }(baseError_1.BaseError));
 exports.TagsGetMetaFailed = TagsGetMetaFailed;
+var TagsCreationFailed = /** @class */ (function (_super) {
+    __extends(TagsCreationFailed, _super);
+    function TagsCreationFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create tags'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TagsCreationFailed';
+        return _this;
+    }
+    return TagsCreationFailed;
+}(baseError_1.BaseError));
+exports.TagsCreationFailed = TagsCreationFailed;
+var TagsPutFailed = /** @class */ (function (_super) {
+    __extends(TagsPutFailed, _super);
+    function TagsPutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not update tags'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TagsPutFailed';
+        return _this;
+    }
+    return TagsPutFailed;
+}(baseError_1.BaseError));
+exports.TagsPutFailed = TagsPutFailed;
 //# sourceMappingURL=tags.js.map

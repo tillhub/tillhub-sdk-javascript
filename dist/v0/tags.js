@@ -82,32 +82,105 @@ var Tags = /** @class */ (function () {
             });
         }); });
     };
-    Tags.prototype.meta = function () {
+    Tags.prototype.get = function (tagId) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, base, uri_1, response, error_2;
+            var uri, response, error_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/meta";
-                        _a.label = 1;
+                        _a.trys.push([0, 2, , 3]);
+                        uri = this.uriHelper.generateBaseUri("/" + tagId);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        base = this.uriHelper.generateBaseUri("/meta");
-                        uri_1 = this.uriHelper.generateUriWithQuery(base);
-                        return [4 /*yield*/, this.http.getClient().get(uri_1)];
+                        response = _a.sent();
+                        response.status !== 200 &&
+                            reject(new errors.TagsFetchOneFailed(undefined, { status: response.status }));
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            })];
                     case 2:
+                        error_2 = _a.sent();
+                        return [2 /*return*/, reject(new errors.TagsFetchOneFailed(undefined, { error: error_2 }))];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Tags.prototype.meta = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = this.uriHelper.generateBaseUri("/meta");
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
                         response = _a.sent();
                         if (response.status !== 200)
                             reject(new errors.TagsGetMetaFailed());
                         return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 2:
+                        error_3 = _a.sent();
+                        return [2 /*return*/, reject(new errors.TagsGetMetaFailed(undefined, { error: error_3 }))];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Tags.prototype.create = function (tag) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = this.uriHelper.generateBaseUri();
+                        return [4 /*yield*/, this.http.getClient().post(uri, tag)];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count }
                             })];
-                    case 3:
-                        error_2 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TagsGetMetaFailed(undefined, { error: error_2 }))];
-                    case 4: return [2 /*return*/];
+                    case 2:
+                        error_4 = _a.sent();
+                        return [2 /*return*/, reject(new errors.TagsCreationFailed(undefined, { error: error_4 }))];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Tags.prototype.put = function (tagId, tag) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_5;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = this.uriHelper.generateBaseUri("/" + tagId);
+                        return [4 /*yield*/, this.http.getClient().put(uri, tag)];
+                    case 1:
+                        response = _a.sent();
+                        response.status !== 200 &&
+                            reject(new errors.TagsPutFailed(undefined, { status: response.status }));
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            })];
+                    case 2:
+                        error_5 = _a.sent();
+                        return [2 /*return*/, reject(new errors.TagsPutFailed(undefined, { error: error_5 }))];
+                    case 3: return [2 /*return*/];
                 }
             });
         }); });

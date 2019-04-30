@@ -1,3 +1,10 @@
+# [3.69.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.68.0...v3.69.0) (2019-04-30)
+
+
+### Features
+
+* **tags:** add get, create and put ([1b810b6](https://github.com/tillhub/tillhub-sdk-javascript/commit/1b810b6))
+
 # [3.68.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.67.0...v3.68.0) (2019-04-24)
 
 
