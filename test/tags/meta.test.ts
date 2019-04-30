@@ -76,7 +76,7 @@ describe('v0: Tags: can get count number of all tags', () => {
 
     const { data } = await tags.meta()
 
-    expect(data).toEqual({ count: 50 })
+    expect(data).toEqual([{ count: 50 }])
   })
 
   it('rejects on status codes that are not 200', async () => {
