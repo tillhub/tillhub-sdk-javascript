@@ -14,9 +14,25 @@ export interface TagsQuery {
   q?: string
 }
 
+export interface TagResponse {
+  data: TagsResponse
+  metadata?: {
+    count?: number
+    patch?: any
+  }
+  msg?: string
+}
+
 export interface TagsResponse {
   data: object[]
   metadata: object
+}
+
+export interface Tag {
+  name?: string
+  deleted?: boolean
+  legacy_id?: number
+  update_id?: number
 }
 
 export class Tags {
@@ -59,24 +75,73 @@ export class Tags {
     })
   }
 
+  get(tagId: string): Promise<TagResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const uri = this.uriHelper.generateBaseUri(`/${tagId}`)
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 &&
+          reject(new errors.TagsFetchOneFailed(undefined, { status: response.status }))
+
+        return resolve({
+          data: response.data.results[0] as Tag,
+          msg: response.data.msg,
+          metadata: { count: response.data.count }
+        } as TagResponse)
+      } catch (error) {
+        return reject(new errors.TagsFetchOneFailed(undefined, { error }))
+      }
+    })
+  }
+
   meta(): Promise<TagsResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
-
       try {
-        const base = this.uriHelper.generateBaseUri(`/meta`)
-        const uri = this.uriHelper.generateUriWithQuery(base)
-
+        const uri = this.uriHelper.generateBaseUri(`/meta`)
         const response = await this.http.getClient().get(uri)
 
         if (response.status !== 200) reject(new errors.TagsGetMetaFailed())
 
         return resolve({
-          data: response.data.results[0],
+          data: response.data.results,
           metadata: { count: response.data.count }
         } as TagsResponse)
       } catch (error) {
         return reject(new errors.TagsGetMetaFailed(undefined, { error }))
+      }
+    })
+  }
+
+  create(tag: Tag): Promise<TagResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const uri = this.uriHelper.generateBaseUri()
+        const response = await this.http.getClient().post(uri, tag)
+
+        return resolve({
+          data: response.data.results[0] as Tag,
+          metadata: { count: response.data.count }
+        } as TagResponse)
+      } catch (error) {
+        return reject(new errors.TagsCreationFailed(undefined, { error }))
+      }
+    })
+  }
+
+  put(tagId: string, tag: Tag): Promise<TagResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const uri = this.uriHelper.generateBaseUri(`/${tagId}`)
+        const response = await this.http.getClient().put(uri, tag)
+        response.status !== 200 &&
+          reject(new errors.TagsPutFailed(undefined, { status: response.status }))
+
+        return resolve({
+          data: response.data.results[0] as Tag,
+          metadata: { count: response.data.count }
+        } as TagResponse)
+      } catch (error) {
+        return reject(new errors.TagsPutFailed(undefined, { error }))
       }
     })
   }
