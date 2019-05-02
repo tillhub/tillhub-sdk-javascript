@@ -1,3 +1,10 @@
+# [3.70.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.69.0...v3.70.0) (2019-05-02)
+
+
+### Features
+
+* add contents api ([6d033c6](https://github.com/tillhub/tillhub-sdk-javascript/commit/6d033c6))
+
 # [3.69.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.68.0...v3.69.0) (2019-04-30)
 
 
