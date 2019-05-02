@@ -9,6 +9,7 @@ import { Configurations } from './configurations'
 import { Users } from './users'
 import { Branches } from './branches'
 import { Devices } from './devices'
+import { Contents } from './contents'
 import { Customers } from './customers'
 import { Vouchers, VoucherLogs } from './vouchers'
 import { Invoices } from './invoices'
@@ -39,6 +40,7 @@ export {
   Users,
   Branches,
   Devices,
+  Contents,
   Customers,
   Discounts,
   Vouchers,
