@@ -183,7 +183,7 @@ var Devices = /** @class */ (function () {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, this.http.getClient().put(uri, device)];
+                        return [4 /*yield*/, this.http.getClient().patch(uri, device)];
                     case 2:
                         response = _a.sent();
                         return [2 /*return*/, resolve({
@@ -192,7 +192,7 @@ var Devices = /** @class */ (function () {
                             })];
                     case 3:
                         error_4 = _a.sent();
-                        return [2 /*return*/, reject(new DevicePutFailed(undefined, { error: error_4 }))];
+                        return [2 /*return*/, reject(new DevicePatchFailed(undefined, { error: error_4 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -315,18 +315,18 @@ var DeviceContentFetchFailed = /** @class */ (function (_super) {
     return DeviceContentFetchFailed;
 }(errors_1.BaseError));
 exports.DeviceContentFetchFailed = DeviceContentFetchFailed;
-var DevicePutFailed = /** @class */ (function (_super) {
-    __extends(DevicePutFailed, _super);
-    function DevicePutFailed(message, properties) {
+var DevicePatchFailed = /** @class */ (function (_super) {
+    __extends(DevicePatchFailed, _super);
+    function DevicePatchFailed(message, properties) {
         if (message === void 0) { message = 'Could not alter device'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
-        _this.name = 'DevicePutFailed';
+        _this.name = 'DevicePatchFailed';
         return _this;
     }
-    return DevicePutFailed;
+    return DevicePatchFailed;
 }(errors_1.BaseError));
-exports.DevicePutFailed = DevicePutFailed;
+exports.DevicePatchFailed = DevicePatchFailed;
 var DeviceCreationFailed = /** @class */ (function (_super) {
     __extends(DeviceCreationFailed, _super);
     function DeviceCreationFailed(message, properties) {

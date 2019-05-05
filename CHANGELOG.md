@@ -1,3 +1,10 @@
+## [3.70.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.70.1...v3.70.2) (2019-05-05)
+
+
+### Bug Fixes
+
+* **devices:** fix http method ref ([37a2c86](https://github.com/tillhub/tillhub-sdk-javascript/commit/37a2c86))
+
 ## [3.70.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.70.0...v3.70.1) (2019-05-05)
 
 

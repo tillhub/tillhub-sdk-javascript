@@ -81,7 +81,7 @@ export declare class DeviceContentFetchFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
-export declare class DevicePutFailed extends BaseError {
+export declare class DevicePatchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);
