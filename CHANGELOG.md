@@ -1,3 +1,10 @@
+## [3.70.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.70.0...v3.70.1) (2019-05-05)
+
+
+### Bug Fixes
+
+* **contents:** fix ref to patch ([beeb504](https://github.com/tillhub/tillhub-sdk-javascript/commit/beeb504))
+
 # [3.70.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.69.0...v3.70.0) (2019-05-02)
 
 

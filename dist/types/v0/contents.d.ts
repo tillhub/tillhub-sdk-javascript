@@ -67,7 +67,7 @@ export declare class ContentFetchFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
-export declare class ContentPutFailed extends BaseError {
+export declare class ContentPatchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);

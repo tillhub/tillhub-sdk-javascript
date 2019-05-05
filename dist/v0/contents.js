@@ -155,7 +155,7 @@ var Contents = /** @class */ (function () {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, this.http.getClient().put(uri, content)];
+                        return [4 /*yield*/, this.http.getClient().patch(uri, content)];
                     case 2:
                         response = _a.sent();
                         return [2 /*return*/, resolve({
@@ -164,7 +164,7 @@ var Contents = /** @class */ (function () {
                             })];
                     case 3:
                         error_3 = _a.sent();
-                        return [2 /*return*/, reject(new ContentPutFailed(undefined, { error: error_3 }))];
+                        return [2 /*return*/, reject(new ContentPatchFailed(undefined, { error: error_3 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -249,18 +249,18 @@ var ContentFetchFailed = /** @class */ (function (_super) {
     return ContentFetchFailed;
 }(errors_1.BaseError));
 exports.ContentFetchFailed = ContentFetchFailed;
-var ContentPutFailed = /** @class */ (function (_super) {
-    __extends(ContentPutFailed, _super);
-    function ContentPutFailed(message, properties) {
+var ContentPatchFailed = /** @class */ (function (_super) {
+    __extends(ContentPatchFailed, _super);
+    function ContentPatchFailed(message, properties) {
         if (message === void 0) { message = 'Could not alter content'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
-        _this.name = 'ContentPutFailed';
+        _this.name = 'ContentPatchFailed';
         return _this;
     }
-    return ContentPutFailed;
+    return ContentPatchFailed;
 }(errors_1.BaseError));
-exports.ContentPutFailed = ContentPutFailed;
+exports.ContentPatchFailed = ContentPatchFailed;
 var ContentCreationFailed = /** @class */ (function (_super) {
     __extends(ContentCreationFailed, _super);
     function ContentCreationFailed(message, properties) {
