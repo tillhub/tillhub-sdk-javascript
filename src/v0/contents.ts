@@ -131,14 +131,14 @@ export class Contents {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${contentId}`
       try {
-        const response = await this.http.getClient().put(uri, content)
+        const response = await this.http.getClient().patch(uri, content)
 
         return resolve({
           data: response.data.results[0] as Content,
           metadata: { count: response.data.count }
         } as ContentResponse)
       } catch (error) {
-        return reject(new ContentPutFailed(undefined, { error }))
+        return reject(new ContentPatchFailed(undefined, { error }))
       }
     })
   }
@@ -190,8 +190,8 @@ export class ContentFetchFailed extends BaseError {
   }
 }
 
-export class ContentPutFailed extends BaseError {
-  public name = 'ContentPutFailed'
+export class ContentPatchFailed extends BaseError {
+  public name = 'ContentPatchFailed'
   constructor(public message: string = 'Could not alter content', properties?: any) {
     super(message, properties)
   }
