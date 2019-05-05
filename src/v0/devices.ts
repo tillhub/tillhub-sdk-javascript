@@ -158,14 +158,14 @@ export class Devices {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deviceId}`
       try {
-        const response = await this.http.getClient().put(uri, device)
+        const response = await this.http.getClient().patch(uri, device)
 
         return resolve({
           data: response.data.results[0] as Device,
           metadata: { count: response.data.count }
         } as DeviceResponse)
       } catch (error) {
-        return reject(new DevicePutFailed(undefined, { error }))
+        return reject(new DevicePatchFailed(undefined, { error }))
       }
     })
   }
@@ -240,8 +240,8 @@ export class DeviceContentFetchFailed extends BaseError {
   }
 }
 
-export class DevicePutFailed extends BaseError {
-  public name = 'DevicePutFailed'
+export class DevicePatchFailed extends BaseError {
+  public name = 'DevicePatchFailed'
   constructor(public message: string = 'Could not alter device', properties?: any) {
     super(message, properties)
   }
