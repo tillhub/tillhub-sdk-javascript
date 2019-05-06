@@ -158,7 +158,7 @@ export class ProductGroups {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${taxId}`
       try {
         const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new errors.CustomerDeleteFailed())
+        response.status !== 200 && reject(new errors.ProductGroupDeleteFailed())
 
         return resolve({
           msg: response.data.msg

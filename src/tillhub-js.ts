@@ -174,6 +174,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated product templates instance
+   *
+   */
+  productTemplates(): v0.ProductTemplates {
+    return this.generateAuthenticatedInstance(v0.ProductTemplates)
+  }
+
+  /**
    * Create an authenticated deliveries instance
    *
    */

@@ -2,6 +2,7 @@ import { Auth } from './auth'
 import { Taxes } from './taxes'
 import { Deliveries } from './deliveries'
 import { ProductGroups } from './product_groups'
+import { ProductTemplates } from './product_templates'
 import { Accounts } from './accounts'
 import { ExpenseAccounts } from './expense_accounts'
 import { PaymentOptions } from './payment_options'
@@ -33,6 +34,7 @@ export {
   Taxes,
   Deliveries,
   ProductGroups,
+  ProductTemplates,
   Accounts,
   ExpenseAccounts,
   PaymentOptions,
