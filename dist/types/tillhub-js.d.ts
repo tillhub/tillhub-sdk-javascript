@@ -55,6 +55,11 @@ export declare class TillhubClient extends events.EventEmitter {
      */
     productGroups(): v0.ProductGroups;
     /**
+     * Create an authenticated product templates instance
+     *
+     */
+    productTemplates(): v0.ProductTemplates;
+    /**
      * Create an authenticated deliveries instance
      *
      */

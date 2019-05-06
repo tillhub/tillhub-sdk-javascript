@@ -1,3 +1,10 @@
+# [3.71.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.70.2...v3.71.0) (2019-05-06)
+
+
+### Features
+
+* add product templates ([5b26e41](https://github.com/tillhub/tillhub-sdk-javascript/commit/5b26e41))
+
 ## [3.70.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.70.1...v3.70.2) (2019-05-05)
 
 
