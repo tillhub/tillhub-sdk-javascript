@@ -127,6 +127,25 @@ export class Contents {
     })
   }
 
+  search(searchTerm: string): Promise<ContentsResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}?q=${searchTerm}`
+      try {
+        const response = await this.http.getClient().get(uri)
+        if (response.status !== 200) {
+          return reject(new ContentsSearchFailed(undefined, { status: response.status }))
+        }
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as ContentsResponse)
+      } catch (error) {
+        return reject(new ContentsSearchFailed(undefined, { error }))
+      }
+    })
+  }
+
   patch(contentId: string, content: Content): Promise<ContentResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${contentId}`
@@ -207,6 +226,13 @@ export class ContentCreationFailed extends BaseError {
 export class ContentDeleteFailed extends BaseError {
   public name = 'ContentDeleteFailed'
   constructor(public message: string = 'Could not delete content', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ContentsSearchFailed extends BaseError {
+  public name = 'ContentDeleteFailed'
+  constructor(public message: string = 'Could not search contents', properties?: any) {
     super(message, properties)
   }
 }

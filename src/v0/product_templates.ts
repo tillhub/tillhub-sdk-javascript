@@ -115,6 +115,25 @@ export class ProductTemplates {
     })
   }
 
+  search(searchTerm: string): Promise<ProductTemplatesResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}?q=${searchTerm}`
+      try {
+        const response = await this.http.getClient().get(uri)
+        if (response.status !== 200) {
+          return reject(new ProductTemplatesSearchFailed(undefined, { status: response.status }))
+        }
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as ProductTemplatesResponse)
+      } catch (error) {
+        return reject(new ProductTemplatesSearchFailed(undefined, { error }))
+      }
+    })
+  }
+
   put(productTemplateId: string, productTemplate: ProductTemplate): Promise<ProductTemplateResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productTemplateId}`
@@ -202,6 +221,13 @@ export class ProuctTemplatesCountFailed extends BaseError {
 export class ProductTemplateDeleteFailed extends BaseError {
   public name = 'ProductTemplateDeleteFailed'
   constructor(public message: string = 'Could not delete product template', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ProductTemplatesSearchFailed extends BaseError {
+  public name = 'ProductTemplatesSearchFailed'
+  constructor(public message: string = 'Could not search for product template', properties?: any) {
     super(message, properties)
   }
 }
