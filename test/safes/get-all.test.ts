@@ -20,12 +20,13 @@ if (process.env.SYSTEM_TEST) {
 
 const legacyId = '4564'
 
-describe('v0: Safes: can get count number of all safes', () => {
-  const mock = new MockAdapter(axios)
-  afterEach(() => {
-    mock.reset()
-  })
-  it("Tillhub's safes are instantiable", async () => {
+const mock = new MockAdapter(axios)
+afterEach(() => {
+  mock.reset()
+})
+
+describe('v0: Tags: can get all', () => {
+  it("Tillhub's Tags are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
@@ -40,17 +41,15 @@ describe('v0: Safes: can get count number of all safes', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/safes/${legacyId}/meta`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              count: 50,
-              results: [{ count: 50 }]
-            }
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/tags/${legacyId}`).reply(function (config) {
+        return [
+          200,
+          {
+            count: 1,
+            results: [{}]
+          }
+        ]
+      })
     }
 
     const options = {
@@ -69,13 +68,13 @@ describe('v0: Safes: can get count number of all safes', () => {
       password: user.password
     })
 
-    const safes = th.safes()
+    const tags = th.tags()
 
-    expect(safes).toBeInstanceOf(v0.Safes)
+    expect(tags).toBeInstanceOf(v0.Tags)
 
-    const { data } = await safes.meta()
+    const { data } = await tags.getAll()
 
-    expect(data).toEqual([{ count: 50 }])
+    expect(Array.isArray(data)).toBe(true)
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -92,12 +91,9 @@ describe('v0: Safes: can get count number of all safes', () => {
           }
         ]
       })
-
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/safes/${legacyId}/meta`)
-        .reply(function (config) {
-          return [205]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/tags/${legacyId}`).reply(function (config) {
+        return [205]
+      })
     }
 
     const options = {
@@ -117,9 +113,9 @@ describe('v0: Safes: can get count number of all safes', () => {
     })
 
     try {
-      await th.safes().meta()
+      await th.tags().getAll()
     } catch (err) {
-      expect(err.name).toBe('SafesGetMetaFailed')
+      expect(err.name).toBe('TagsFetchAllFailed')
     }
   })
 })
