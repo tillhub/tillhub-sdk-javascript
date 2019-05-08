@@ -62,4 +62,6 @@ var settings_old_1 = require("./settings_old");
 exports.LegacySettings = settings_old_1.LegacySettings;
 var tags_1 = require("./tags");
 exports.Tags = tags_1.Tags;
+var safes_1 = require("./safes");
+exports.Safes = safes_1.Safes;
 //# sourceMappingURL=index.js.map

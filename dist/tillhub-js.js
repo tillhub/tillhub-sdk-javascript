@@ -487,6 +487,13 @@ var TillhubClient = /** @class */ (function (_super) {
     TillhubClient.prototype.tags = function () {
         return this.generateAuthenticatedInstance(v0.Tags);
     };
+    /**
+     * Create an authenticated Tags instance
+     *
+     */
+    TillhubClient.prototype.safes = function () {
+        return this.generateAuthenticatedInstance(v0.Safes);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));

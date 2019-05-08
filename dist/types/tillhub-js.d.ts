@@ -224,6 +224,11 @@ export declare class TillhubClient extends events.EventEmitter {
      *
      */
     tags(): v0.Tags;
+    /**
+     * Create an authenticated Tags instance
+     *
+     */
+    safes(): v0.Safes;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;

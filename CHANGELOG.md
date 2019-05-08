@@ -1,3 +1,10 @@
+# [3.72.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.71.0...v3.72.0) (2019-05-08)
+
+
+### Features
+
+* **safes:** Add new handlers for safes ([ac17743](https://github.com/tillhub/tillhub-sdk-javascript/commit/ac17743))
+
 # [3.71.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.70.2...v3.71.0) (2019-05-06)
 
 
