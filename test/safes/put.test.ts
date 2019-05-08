@@ -12,29 +12,13 @@ afterEach(() => {
   mock.reset()
 })
 
-const safe = {
-  name: 'Safe 1',
-  type: 'safe',
-  account_number: '123456789',
-  custom_id: 'xyz1',
-  cost_center: 'cc4',
-  location: '7b54cdc2-0b93-4af9-86ea-5541f53c8392',
-  limit_upper: 1000000,
-  limit_lower: 1000,
-  items: [
-    {
-      currency: 'EUR',
-      amount: 4456.39
-    },
-    {
-      currency: 'USD',
-      amount: 10.55
-    }
-  ]
+const tagId = '0505ce68-9cd9-4b0c-ac5c-7cb6804e8956'
+const tag = {
+  name: 'testName3'
 }
 
-describe('v0: Safes: can create one safe', () => {
-  it("Tillhub's safes are instantiable", async () => {
+describe('v0: Tags: can alter the Tags', () => {
+  it("Tillhub's tags are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
@@ -49,26 +33,28 @@ describe('v0: Safes: can create one safe', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/safes/${legacyId}`).reply(function (config) {
-        return [
-          200,
-          {
-            count: 1,
-            results: [safe]
-          }
-        ]
-      })
+      mock
+        .onPut(`https://api.tillhub.com/api/v0/tags/${legacyId}/${tagId}`)
+        .reply(function (config) {
+          return [
+            200,
+            {
+              count: 1,
+              results: [tag]
+            }
+          ]
+        })
     }
 
     const th = await initThInstance()
 
-    const safes = th.safes()
+    const tags = th.tags()
 
-    expect(safes).toBeInstanceOf(v0.Safes)
+    expect(tags).toBeInstanceOf(v0.Tags)
 
-    const { data } = await safes.create(safe)
+    const { data } = await tags.put(tagId, tag)
 
-    expect(data).toMatchObject(safe)
+    expect(data).toMatchObject(tag)
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -85,17 +71,19 @@ describe('v0: Safes: can create one safe', () => {
           }
         ]
       })
-
-      mock.onPost(`https://api.tillhub.com/api/v0/safes/${legacyId}`).reply(function (config) {
-        return [205]
-      })
+      mock
+        .onPut(`https://api.tillhub.com/api/v0/tags/${legacyId}/${tagId}`)
+        .reply(function (config) {
+          return [205]
+        })
     }
 
+    const th = await initThInstance()
+
     try {
-      const th = await initThInstance()
-      await th.safes().create(safe)
+      await th.tags().put(tagId, tag)
     } catch (err) {
-      expect(err.name).toBe('SafesCreationFailed')
+      expect(err.name).toBe('TagsPutFailed')
     }
   })
 })

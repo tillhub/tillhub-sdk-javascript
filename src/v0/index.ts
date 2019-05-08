@@ -28,6 +28,7 @@ import { Messages } from './messages'
 import { Favourites } from './favourites'
 import { LegacySettings } from './settings_old'
 import { Tags } from './tags'
+import { Safes } from './safes'
 
 export {
   Auth,
@@ -61,5 +62,6 @@ export {
   Messages,
   Favourites,
   LegacySettings,
-  Tags
+  Tags,
+  Safes
 }

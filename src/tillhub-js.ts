@@ -584,6 +584,14 @@ export class TillhubClient extends events.EventEmitter {
   tags(): v0.Tags {
     return this.generateAuthenticatedInstance(v0.Tags)
   }
+
+  /**
+   * Create an authenticated Tags instance
+   *
+   */
+  safes(): v0.Safes {
+    return this.generateAuthenticatedInstance(v0.Safes)
+  }
 }
 
 export class Tillhub extends TillhubClient {
