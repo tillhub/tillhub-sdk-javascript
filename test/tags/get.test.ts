@@ -12,13 +12,13 @@ afterEach(() => {
   mock.reset()
 })
 
-const safeId = 'f8314183-8199-4cb7-b152-04f6ad4ebc7e'
-const safe = {
+const tagId = 'f8314183-8199-4cb7-b152-04f6ad4ebc7e'
+const tag = {
   name: 'testName1'
 }
 
-describe('v0: Safes: can get one safe', () => {
-  it("Tillhub's safes are instantiable", async () => {
+describe('v0: Tags: can get one tag', () => {
+  it("Tillhub's tags are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
@@ -34,13 +34,13 @@ describe('v0: Safes: can get one safe', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/safes/${legacyId}/${safeId}`)
+        .onGet(`https://api.tillhub.com/api/v0/tags/${legacyId}/${tagId}`)
         .reply(function (config) {
           return [
             200,
             {
               count: 1,
-              results: [safe]
+              results: [tag]
             }
           ]
         })
@@ -48,13 +48,13 @@ describe('v0: Safes: can get one safe', () => {
 
     const th = await initThInstance()
 
-    const Safes = th.safes()
+    const Tags = th.tags()
 
-    expect(Safes).toBeInstanceOf(v0.Safes)
+    expect(Tags).toBeInstanceOf(v0.Tags)
 
-    const { data } = await Safes.get(safeId)
+    const { data } = await Tags.get(tagId)
 
-    expect(data).toMatchObject(safe)
+    expect(data).toMatchObject(tag)
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -73,7 +73,7 @@ describe('v0: Safes: can get one safe', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/safes/${legacyId}/${safeId}`)
+        .onGet(`https://api.tillhub.com/api/v0/tags/${legacyId}/${tagId}`)
         .reply(function (config) {
           return [205]
         })
@@ -81,9 +81,9 @@ describe('v0: Safes: can get one safe', () => {
 
     try {
       const th = await initThInstance()
-      await th.safes().get(safeId)
+      await th.tags().get(tagId)
     } catch (err) {
-      expect(err.name).toBe('SafesFetchOneFailed')
+      expect(err.name).toBe('TagsFetchOneFailed')
     }
   })
 })

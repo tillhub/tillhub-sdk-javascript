@@ -18,15 +18,14 @@ if (process.env.SYSTEM_TEST) {
   user.apiKey = process.env.SYSTEM_TEST_API_KEY || user.apiKey
 }
 
-const productId = '123456'
 const legacyId = '4564'
 
-describe('v0: Tags: can get count number of all tags', () => {
+describe('v0: Safes: can get count number of all safes', () => {
   const mock = new MockAdapter(axios)
   afterEach(() => {
     mock.reset()
   })
-  it("Tillhub's tags are instantiable", async () => {
+  it("Tillhub's safes are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
@@ -42,7 +41,7 @@ describe('v0: Tags: can get count number of all tags', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/tags/${legacyId}/meta`)
+        .onGet(`https://api.tillhub.com/api/v0/safes/${legacyId}/meta`)
         .reply(function (config) {
           return [
             200,
@@ -70,11 +69,11 @@ describe('v0: Tags: can get count number of all tags', () => {
       password: user.password
     })
 
-    const tags = th.tags()
+    const safes = th.safes()
 
-    expect(tags).toBeInstanceOf(v0.Tags)
+    expect(safes).toBeInstanceOf(v0.Safes)
 
-    const { data } = await tags.meta()
+    const { data } = await safes.meta()
 
     expect(data).toEqual([{ count: 50 }])
   })
@@ -95,7 +94,7 @@ describe('v0: Tags: can get count number of all tags', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/tags/${legacyId}/meta`)
+        .onGet(`https://api.tillhub.com/api/v0/safes/${legacyId}/meta`)
         .reply(function (config) {
           return [205]
         })
@@ -118,9 +117,9 @@ describe('v0: Tags: can get count number of all tags', () => {
     })
 
     try {
-      await th.tags().meta()
+      await th.safes().meta()
     } catch (err) {
-      expect(err.name).toBe('TagsGetMetaFailed')
+      expect(err.name).toBe('SafesGetMetaFailed')
     }
   })
 })

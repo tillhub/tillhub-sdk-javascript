@@ -12,13 +12,13 @@ afterEach(() => {
   mock.reset()
 })
 
-const tagId = '0505ce68-9cd9-4b0c-ac5c-7cb6804e8956'
-const tag = {
+const safeId = '0505ce68-9cd9-4b0c-ac5c-7cb6804e8956'
+const safe = {
   name: 'testName3'
 }
 
-describe('v0: Tags: can alter the Tags', () => {
-  it("Tillhub's tags are instantiable", async () => {
+describe('v0: Safes: can alter the Safes', () => {
+  it("Tillhub's safes are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
@@ -34,13 +34,13 @@ describe('v0: Tags: can alter the Tags', () => {
       })
 
       mock
-        .onPut(`https://api.tillhub.com/api/v0/tags/${legacyId}/${tagId}`)
+        .onPut(`https://api.tillhub.com/api/v0/safes/${legacyId}/${safeId}`)
         .reply(function (config) {
           return [
             200,
             {
               count: 1,
-              results: [tag]
+              results: [safe]
             }
           ]
         })
@@ -48,13 +48,13 @@ describe('v0: Tags: can alter the Tags', () => {
 
     const th = await initThInstance()
 
-    const tags = th.tags()
+    const safes = th.safes()
 
-    expect(tags).toBeInstanceOf(v0.Tags)
+    expect(safes).toBeInstanceOf(v0.Safes)
 
-    const { data } = await tags.put(tagId, tag)
+    const { data } = await safes.put(safeId, safe)
 
-    expect(data).toMatchObject(tag)
+    expect(data).toMatchObject(safe)
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -72,7 +72,7 @@ describe('v0: Tags: can alter the Tags', () => {
         ]
       })
       mock
-        .onPut(`https://api.tillhub.com/api/v0/tags/${legacyId}/${tagId}`)
+        .onPut(`https://api.tillhub.com/api/v0/safes/${legacyId}/${safeId}`)
         .reply(function (config) {
           return [205]
         })
@@ -81,9 +81,9 @@ describe('v0: Tags: can alter the Tags', () => {
     const th = await initThInstance()
 
     try {
-      await th.tags().put(tagId, tag)
+      await th.safes().put(safeId, safe)
     } catch (err) {
-      expect(err.name).toBe('TagsPutFailed')
+      expect(err.name).toBe('SafesPutFailed')
     }
   })
 })

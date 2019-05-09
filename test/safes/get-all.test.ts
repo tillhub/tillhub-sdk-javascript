@@ -25,8 +25,8 @@ afterEach(() => {
   mock.reset()
 })
 
-describe('v0: Tags: can get all', () => {
-  it("Tillhub's Tags are instantiable", async () => {
+describe('v0: Safes: can get all', () => {
+  it("Tillhub's Safes are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
@@ -41,7 +41,7 @@ describe('v0: Tags: can get all', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/tags/${legacyId}`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v0/safes/${legacyId}`).reply(function (config) {
         return [
           200,
           {
@@ -68,11 +68,11 @@ describe('v0: Tags: can get all', () => {
       password: user.password
     })
 
-    const tags = th.tags()
+    const safes = th.safes()
 
-    expect(tags).toBeInstanceOf(v0.Tags)
+    expect(safes).toBeInstanceOf(v0.Safes)
 
-    const { data } = await tags.getAll()
+    const { data } = await safes.getAll()
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -91,7 +91,7 @@ describe('v0: Tags: can get all', () => {
           }
         ]
       })
-      mock.onGet(`https://api.tillhub.com/api/v0/tags/${legacyId}`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v0/safes/${legacyId}`).reply(function (config) {
         return [205]
       })
     }
@@ -113,9 +113,9 @@ describe('v0: Tags: can get all', () => {
     })
 
     try {
-      await th.tags().getAll()
+      await th.safes().getAll()
     } catch (err) {
-      expect(err.name).toBe('TagsFetchAllFailed')
+      expect(err.name).toBe('SafesFetchAllFailed')
     }
   })
 })
