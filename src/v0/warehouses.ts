@@ -55,7 +55,6 @@ export class Warehouses {
       try {
         const base = this.uriHelper.generateBaseUri()
         const uri = this.uriHelper.generateUriWithQuery(base, query)
-        console.log('TCL: Warehouses -> uri', uri)
 
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
@@ -67,7 +66,6 @@ export class Warehouses {
           metadata: { cursor: response.data.cursor }
         } as WarehousesResponse)
       } catch (error) {
-        console.log('TCL: Warehouses -> error', error)
         return reject(new WarehousesFetchFailed(undefined, { error }))
       }
     })
