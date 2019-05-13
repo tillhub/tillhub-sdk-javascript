@@ -1,3 +1,16 @@
+# [3.73.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.72.0...v3.73.0) (2019-05-13)
+
+
+### Bug Fixes
+
+* **warehouses:** remove console logs ([37c1a00](https://github.com/tillhub/tillhub-sdk-javascript/commit/37c1a00))
+
+
+### Features
+
+* **warehouses:** add get all handler ([02c4ddf](https://github.com/tillhub/tillhub-sdk-javascript/commit/02c4ddf))
+* **warehouses:** init warehouses entity ([3a3eb9a](https://github.com/tillhub/tillhub-sdk-javascript/commit/3a3eb9a))
+
 # [3.72.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.71.0...v3.72.0) (2019-05-08)
 
 

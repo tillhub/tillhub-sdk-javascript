@@ -64,4 +64,6 @@ var tags_1 = require("./tags");
 exports.Tags = tags_1.Tags;
 var safes_1 = require("./safes");
 exports.Safes = safes_1.Safes;
+var warehouses_1 = require("./warehouses");
+exports.Warehouses = warehouses_1.Warehouses;
 //# sourceMappingURL=index.js.map
