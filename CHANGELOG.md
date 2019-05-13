@@ -1,3 +1,10 @@
+## [3.74.3](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.74.2...v3.74.3) (2019-05-13)
+
+
+### Bug Fixes
+
+* **videos:** use even higher timeout ([dea308d](https://github.com/tillhub/tillhub-sdk-javascript/commit/dea308d))
+
 ## [3.74.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.74.1...v3.74.2) (2019-05-13)
 
 

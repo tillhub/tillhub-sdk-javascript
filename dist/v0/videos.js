@@ -73,7 +73,7 @@ var Videos = /** @class */ (function () {
                         _a.trys.push([1, 3, , 4]);
                         return [4 /*yield*/, this.http
                                 .getClient()
-                                .put(uri, payload, { timeout: 20000, headers: { 'Content-Type': 'multipart/form-data' } })];
+                                .put(uri, payload, { timeout: 60000, headers: { 'Content-Type': 'multipart/form-data' } })];
                     case 2:
                         response = _a.sent();
                         return [2 /*return*/, resolve({
@@ -100,7 +100,7 @@ var Videos = /** @class */ (function () {
                         _a.trys.push([1, 3, , 4]);
                         return [4 /*yield*/, this.http
                                 .getClient()
-                                .post(uri, payload, { timeout: 20000, headers: { 'Content-Type': 'multipart/form-data' } })];
+                                .post(uri, payload, { timeout: 60000, headers: { 'Content-Type': 'multipart/form-data' } })];
                     case 2:
                         response = _a.sent();
                         return [2 /*return*/, resolve({
