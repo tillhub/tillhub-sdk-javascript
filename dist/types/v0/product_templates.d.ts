@@ -39,6 +39,7 @@ export declare class ProductTemplates {
     constructor(options: ProductTemplatesOptions, http: Client);
     getAll(queryOrOptions?: ProductTemplatesQuery | undefined): Promise<ProductTemplatesResponse>;
     get(productTemplateId: string, queryOrOptions?: ProductTemplatesQuery | undefined): Promise<ProductTemplateResponse>;
+    search(searchTerm: string): Promise<ProductTemplatesResponse>;
     put(productTemplateId: string, productTemplate: ProductTemplate): Promise<ProductTemplateResponse>;
     create(productTemplate: ProductTemplate): Promise<ProductTemplateResponse>;
     delete(taxId: string): Promise<ProductTemplateResponse>;
@@ -69,6 +70,11 @@ export declare class ProuctTemplatesCountFailed extends BaseError {
     constructor(message?: string, properties?: any);
 }
 export declare class ProductTemplateDeleteFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ProductTemplatesSearchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);

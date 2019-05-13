@@ -53,6 +53,7 @@ export declare class Contents {
     constructor(options: ContentOptions, http: Client);
     getAll(queryOrOptions?: ContentsQuery | undefined): Promise<ContentsResponse>;
     get(contentId: string): Promise<ContentResponse>;
+    search(searchTerm: string): Promise<ContentsResponse>;
     patch(contentId: string, content: Content): Promise<ContentResponse>;
     create(content: Content): Promise<ContentResponse>;
     delete(contentId: string): Promise<ContentResponse>;
@@ -78,6 +79,11 @@ export declare class ContentCreationFailed extends BaseError {
     constructor(message?: string, properties?: any);
 }
 export declare class ContentDeleteFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ContentsSearchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);

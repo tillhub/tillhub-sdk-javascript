@@ -144,10 +144,39 @@ var Contents = /** @class */ (function () {
             });
         }); });
     };
-    Contents.prototype.patch = function (contentId, content) {
+    Contents.prototype.search = function (searchTerm) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, error_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "?q=" + searchTerm;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new ContentsSearchFailed(undefined, { status: response.status }))];
+                        }
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_3 = _a.sent();
+                        return [2 /*return*/, reject(new ContentsSearchFailed(undefined, { error: error_3 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Contents.prototype.patch = function (contentId, content) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -163,8 +192,8 @@ var Contents = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        error_3 = _a.sent();
-                        return [2 /*return*/, reject(new ContentPatchFailed(undefined, { error: error_3 }))];
+                        error_4 = _a.sent();
+                        return [2 /*return*/, reject(new ContentPatchFailed(undefined, { error: error_4 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -173,7 +202,7 @@ var Contents = /** @class */ (function () {
     Contents.prototype.create = function (content) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, error_4;
+            var uri, response, error_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -189,8 +218,8 @@ var Contents = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        error_4 = _a.sent();
-                        return [2 /*return*/, reject(new ContentCreationFailed(undefined, { error: error_4 }))];
+                        error_5 = _a.sent();
+                        return [2 /*return*/, reject(new ContentCreationFailed(undefined, { error: error_5 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -285,4 +314,16 @@ var ContentDeleteFailed = /** @class */ (function (_super) {
     return ContentDeleteFailed;
 }(errors_1.BaseError));
 exports.ContentDeleteFailed = ContentDeleteFailed;
+var ContentsSearchFailed = /** @class */ (function (_super) {
+    __extends(ContentsSearchFailed, _super);
+    function ContentsSearchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not search contents'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ContentDeleteFailed';
+        return _this;
+    }
+    return ContentsSearchFailed;
+}(errors_1.BaseError));
+exports.ContentsSearchFailed = ContentsSearchFailed;
 //# sourceMappingURL=contents.js.map

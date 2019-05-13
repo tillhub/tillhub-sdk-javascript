@@ -1,3 +1,11 @@
+# [3.74.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.73.0...v3.74.0) (2019-05-13)
+
+
+### Features
+
+* add search handlers for product templates & contents ([3862993](https://github.com/tillhub/tillhub-sdk-javascript/commit/3862993))
+* add videos ([15f0fd5](https://github.com/tillhub/tillhub-sdk-javascript/commit/15f0fd5))
+
 # [3.73.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.72.0...v3.73.0) (2019-05-13)
 
 

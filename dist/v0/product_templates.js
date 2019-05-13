@@ -147,10 +147,39 @@ var ProductTemplates = /** @class */ (function () {
             });
         }); });
     };
-    ProductTemplates.prototype.put = function (productTemplateId, productTemplate) {
+    ProductTemplates.prototype.search = function (searchTerm) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, error_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "?q=" + searchTerm;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new ProductTemplatesSearchFailed(undefined, { status: response.status }))];
+                        }
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_3 = _a.sent();
+                        return [2 /*return*/, reject(new ProductTemplatesSearchFailed(undefined, { error: error_3 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    ProductTemplates.prototype.put = function (productTemplateId, productTemplate) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -166,8 +195,8 @@ var ProductTemplates = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        error_3 = _a.sent();
-                        return [2 /*return*/, reject(new ProductTemplatePutFailed(undefined, { error: error_3 }))];
+                        error_4 = _a.sent();
+                        return [2 /*return*/, reject(new ProductTemplatePutFailed(undefined, { error: error_4 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -176,7 +205,7 @@ var ProductTemplates = /** @class */ (function () {
     ProductTemplates.prototype.create = function (productTemplate) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, error_4;
+            var uri, response, error_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -192,8 +221,8 @@ var ProductTemplates = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        error_4 = _a.sent();
-                        return [2 /*return*/, reject(new ProductTemplateCreationFailed(undefined, { error: error_4 }))];
+                        error_5 = _a.sent();
+                        return [2 /*return*/, reject(new ProductTemplateCreationFailed(undefined, { error: error_5 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -300,4 +329,16 @@ var ProductTemplateDeleteFailed = /** @class */ (function (_super) {
     return ProductTemplateDeleteFailed;
 }(errors_1.BaseError));
 exports.ProductTemplateDeleteFailed = ProductTemplateDeleteFailed;
+var ProductTemplatesSearchFailed = /** @class */ (function (_super) {
+    __extends(ProductTemplatesSearchFailed, _super);
+    function ProductTemplatesSearchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not search for product template'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductTemplatesSearchFailed';
+        return _this;
+    }
+    return ProductTemplatesSearchFailed;
+}(errors_1.BaseError));
+exports.ProductTemplatesSearchFailed = ProductTemplatesSearchFailed;
 //# sourceMappingURL=product_templates.js.map

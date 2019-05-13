@@ -425,6 +425,13 @@ var TillhubClient = /** @class */ (function (_super) {
         return new v0.Images({ user: this.auth.user, base: this.options.base }, this.http);
     };
     /**
+     * Create an authenticated Videos instance
+     *
+     */
+    TillhubClient.prototype.videos = function () {
+        return this.generateAuthenticatedInstance(v0.Videos);
+    };
+    /**
      * Create an authenticated Notifications instance
      *
      */

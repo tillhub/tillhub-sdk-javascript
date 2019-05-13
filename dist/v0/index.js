@@ -66,4 +66,6 @@ var safes_1 = require("./safes");
 exports.Safes = safes_1.Safes;
 var warehouses_1 = require("./warehouses");
 exports.Warehouses = warehouses_1.Warehouses;
+var videos_1 = require("./videos");
+exports.Videos = videos_1.Videos;
 //# sourceMappingURL=index.js.map
