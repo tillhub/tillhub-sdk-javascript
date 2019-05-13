@@ -592,6 +592,14 @@ export class TillhubClient extends events.EventEmitter {
   safes(): v0.Safes {
     return this.generateAuthenticatedInstance(v0.Safes)
   }
+
+  /**
+   * Create an authenticated Warehouses instance
+   *
+   */
+  warehouses(): v0.Warehouses {
+    return this.generateAuthenticatedInstance(v0.Warehouses)
+  }
 }
 
 export class Tillhub extends TillhubClient {
