@@ -30,6 +30,7 @@ import { LegacySettings } from './settings_old'
 import { Tags } from './tags'
 import { Safes } from './safes'
 import { Warehouses } from './warehouses'
+import { Videos } from './videos'
 
 export {
   Auth,
@@ -65,5 +66,6 @@ export {
   LegacySettings,
   Tags,
   Safes,
-  Warehouses
+  Warehouses,
+  Videos
 }
