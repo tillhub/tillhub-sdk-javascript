@@ -20,7 +20,7 @@ export const defaultOptions: TillhubSDKOptions = {
 export interface TillhubSDKOptions {
   credentials?: UsernameAuth | KeyAuth | TokenAuth | undefined
   base?: string
-  user?: string,
+  user?: string
   responseInterceptors?: Function[]
 }
 
@@ -114,7 +114,7 @@ export class TillhubClient extends events.EventEmitter {
       if ((options.credentials as TokenAuth).token && clientOptions.headers) {
         clientOptions.headers['Authorization'] = `Bearer ${
           (options.credentials as TokenAuth).token
-          }`
+        }`
       }
 
       this.auth = new v1.Auth(authOptions)
@@ -126,7 +126,7 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   private generateAuthenticatedInstance<T>(
-    type: { new(options: object, http: Client): T },
+    type: { new (options: object, http: Client): T },
     maybeOptions?: MaybeOptions
   ): T {
     if (
@@ -591,6 +591,14 @@ export class TillhubClient extends events.EventEmitter {
    */
   safes(): v0.Safes {
     return this.generateAuthenticatedInstance(v0.Safes)
+  }
+
+  /**
+   * Create an authenticated Warehouses instance
+   *
+   */
+  warehouses(): v0.Warehouses {
+    return this.generateAuthenticatedInstance(v0.Warehouses)
   }
 }
 

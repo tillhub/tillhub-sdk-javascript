@@ -29,6 +29,7 @@ import { Favourites } from './favourites'
 import { LegacySettings } from './settings_old'
 import { Tags } from './tags'
 import { Safes } from './safes'
+import { Warehouses } from './warehouses'
 
 export {
   Auth,
@@ -63,5 +64,6 @@ export {
   Favourites,
   LegacySettings,
   Tags,
-  Safes
+  Safes,
+  Warehouses
 }
