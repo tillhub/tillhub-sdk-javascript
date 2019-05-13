@@ -38,7 +38,7 @@ export class Videos {
       try {
         const response = await this.http
           .getClient()
-          .put(uri, payload, { headers: { 'Content-Type': 'multipart/form-data' } })
+          .put(uri, payload, { timeout: 20000, headers: { 'Content-Type': 'multipart/form-data' } })
         return resolve({
           data: response.data.results
         } as VideosResponse)
@@ -56,7 +56,7 @@ export class Videos {
       try {
         const response = await this.http
           .getClient()
-          .post(uri, payload, { headers: { 'Content-Type': 'multipart/form-data' } })
+          .post(uri, payload, { timeout: 20000, headers: { 'Content-Type': 'multipart/form-data' } })
         return resolve({
           data: response.data.results
         } as VideosResponse)
