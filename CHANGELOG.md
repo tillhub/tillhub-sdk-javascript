@@ -1,3 +1,10 @@
+## [3.74.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.74.0...v3.74.1) (2019-05-13)
+
+
+### Bug Fixes
+
+* **videos:** use currect content type ([2eea92a](https://github.com/tillhub/tillhub-sdk-javascript/commit/2eea92a))
+
 # [3.74.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.73.0...v3.74.0) (2019-05-13)
 
 
