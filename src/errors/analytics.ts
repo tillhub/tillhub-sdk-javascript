@@ -61,3 +61,29 @@ export class VatReportFetchMetaFailed extends BaseError {
     super(message, properties)
   }
 }
+
+export class CustomerFetchFailed extends BaseError {
+  public name = 'CustomerFetchFailed'
+  constructor(public message: string = 'Could not fetch customer report', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class CustomerFilterFetchFailed extends BaseError {
+  public name = 'CustomerFilterFetchFailed'
+  constructor(public message: string = 'Could not fetch customer filters', properties?: any) {
+    super(message, properties)
+  }
+}
+export class CustomerTransactionFetchFailed extends BaseError {
+  public name = 'CustomerTransactionFetchFailed'
+  constructor(public message: string = 'Could not fetch customer report transactions', properties?: any) {
+    super(message, properties)
+  }
+}
+export class CustomerOverviewFetchFailed extends BaseError {
+  public name = 'CustomerOverviewFetchFailed'
+  constructor(public message: string = 'Could not fetch customer report overview', properties?: any) {
+    super(message, properties)
+  }
+}

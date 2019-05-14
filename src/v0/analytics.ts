@@ -6,6 +6,7 @@ import { Balances } from './analytics/reports/balances'
 import { PaymentOptions } from './analytics/reports/payment_options'
 import { Payments } from './analytics/reports/payments'
 import { Vat } from './analytics/reports/vat'
+import { Customers } from './analytics/reports/customers'
 
 export type StaffID = string | null
 
@@ -407,7 +408,7 @@ export class Analytics {
       }
     })
   }
-
+  // TODO: Remove when customers() is implemented
   getCustomersReport(query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -426,7 +427,7 @@ export class Analytics {
       }
     })
   }
-
+  // TODO: Remove when customers() is implemented
   getCustomersTransaction(query: CustomersTransactionOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -445,7 +446,7 @@ export class Analytics {
       }
     })
   }
-
+  // TODO: Remove when customers() is implemented
   getCustomersOverview(query: CustomersTransactionOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -536,5 +537,9 @@ export class Analytics {
 
   vat(): Vat {
     return new Vat(this.options, this.http, this.uriHelper)
+  }
+
+  customers(): Customers {
+    return new Customers(this.options, this.http, this.uriHelper)
   }
 }
