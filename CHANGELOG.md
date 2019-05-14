@@ -1,3 +1,10 @@
+# [3.76.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.75.0...v3.76.0) (2019-05-14)
+
+
+### Features
+
+* **analytics:** add customer sub function ([108c64c](https://github.com/tillhub/tillhub-sdk-javascript/commit/108c64c))
+
 # [3.75.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.74.3...v3.75.0) (2019-05-14)
 
 

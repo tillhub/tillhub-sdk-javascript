@@ -52,6 +52,7 @@ var balances_1 = require("./analytics/reports/balances");
 var payment_options_1 = require("./analytics/reports/payment_options");
 var payments_1 = require("./analytics/reports/payments");
 var vat_1 = require("./analytics/reports/vat");
+var customers_1 = require("./analytics/reports/customers");
 var Analytics = /** @class */ (function () {
     function Analytics(options, http) {
         this.options = options;
@@ -406,6 +407,7 @@ var Analytics = /** @class */ (function () {
             });
         }); });
     };
+    // TODO: Remove when customers() is implemented
     Analytics.prototype.getCustomersReport = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
@@ -432,6 +434,7 @@ var Analytics = /** @class */ (function () {
             });
         }); });
     };
+    // TODO: Remove when customers() is implemented
     Analytics.prototype.getCustomersTransaction = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
@@ -458,6 +461,7 @@ var Analytics = /** @class */ (function () {
             });
         }); });
     };
+    // TODO: Remove when customers() is implemented
     Analytics.prototype.getCustomersOverview = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
@@ -577,6 +581,9 @@ var Analytics = /** @class */ (function () {
     };
     Analytics.prototype.vat = function () {
         return new vat_1.Vat(this.options, this.http, this.uriHelper);
+    };
+    Analytics.prototype.customers = function () {
+        return new customers_1.Customers(this.options, this.http, this.uriHelper);
     };
     return Analytics;
 }());

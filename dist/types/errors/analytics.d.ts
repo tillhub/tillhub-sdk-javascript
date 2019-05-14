@@ -39,3 +39,23 @@ export declare class VatReportFetchMetaFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class CustomerFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class CustomerFilterFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class CustomerTransactionFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class CustomerOverviewFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}

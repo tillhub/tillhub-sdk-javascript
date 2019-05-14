@@ -110,4 +110,52 @@ var VatReportFetchMetaFailed = /** @class */ (function (_super) {
     return VatReportFetchMetaFailed;
 }(baseError_1.BaseError));
 exports.VatReportFetchMetaFailed = VatReportFetchMetaFailed;
+var CustomerFetchFailed = /** @class */ (function (_super) {
+    __extends(CustomerFetchFailed, _super);
+    function CustomerFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch customer report'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'CustomerFetchFailed';
+        return _this;
+    }
+    return CustomerFetchFailed;
+}(baseError_1.BaseError));
+exports.CustomerFetchFailed = CustomerFetchFailed;
+var CustomerFilterFetchFailed = /** @class */ (function (_super) {
+    __extends(CustomerFilterFetchFailed, _super);
+    function CustomerFilterFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch customer filters'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'CustomerFilterFetchFailed';
+        return _this;
+    }
+    return CustomerFilterFetchFailed;
+}(baseError_1.BaseError));
+exports.CustomerFilterFetchFailed = CustomerFilterFetchFailed;
+var CustomerTransactionFetchFailed = /** @class */ (function (_super) {
+    __extends(CustomerTransactionFetchFailed, _super);
+    function CustomerTransactionFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch customer report transactions'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'CustomerTransactionFetchFailed';
+        return _this;
+    }
+    return CustomerTransactionFetchFailed;
+}(baseError_1.BaseError));
+exports.CustomerTransactionFetchFailed = CustomerTransactionFetchFailed;
+var CustomerOverviewFetchFailed = /** @class */ (function (_super) {
+    __extends(CustomerOverviewFetchFailed, _super);
+    function CustomerOverviewFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch customer report overview'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'CustomerOverviewFetchFailed';
+        return _this;
+    }
+    return CustomerOverviewFetchFailed;
+}(baseError_1.BaseError));
+exports.CustomerOverviewFetchFailed = CustomerOverviewFetchFailed;
 //# sourceMappingURL=analytics.js.map

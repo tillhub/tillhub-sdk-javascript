@@ -4,6 +4,7 @@ import { Balances } from './analytics/reports/balances';
 import { PaymentOptions } from './analytics/reports/payment_options';
 import { Payments } from './analytics/reports/payments';
 import { Vat } from './analytics/reports/vat';
+import { Customers } from './analytics/reports/customers';
 export declare type StaffID = string | null;
 export interface AnalyticsOptions {
     user?: string;
@@ -131,4 +132,5 @@ export declare class Analytics {
     paymentOptions(): PaymentOptions;
     payments(): Payments;
     vat(): Vat;
+    customers(): Customers;
 }
