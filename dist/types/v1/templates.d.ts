@@ -46,6 +46,8 @@ export interface TemplatesPreviewBody {
 }
 export interface TemplatesQuery {
     format?: string;
+    deleted?: boolean;
+    active?: boolean;
 }
 export interface TemplatesOptions {
     user?: string;

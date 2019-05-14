@@ -1,3 +1,10 @@
+# [3.75.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.74.3...v3.75.0) (2019-05-14)
+
+
+### Features
+
+* make active queryable ([2b129a9](https://github.com/tillhub/tillhub-sdk-javascript/commit/2b129a9))
+
 ## [3.74.3](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.74.2...v3.74.3) (2019-05-13)
 
 

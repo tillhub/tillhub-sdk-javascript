@@ -9,6 +9,7 @@ export interface WarehousesQuery {
     uri?: string;
     query?: {
         deleted?: boolean;
+        active?: boolean;
     };
 }
 export interface WarehousesResponse {

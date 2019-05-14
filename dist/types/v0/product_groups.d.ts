@@ -10,6 +10,7 @@ export interface ProductGroupsQuery {
     query?: {
         embed?: ProductGroupsEmbedOptions | ProductGroupsEmbedOptions[];
         deleted?: boolean;
+        active?: boolean;
     };
 }
 export interface ProductGroupsResponse {

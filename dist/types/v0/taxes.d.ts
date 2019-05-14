@@ -8,6 +8,7 @@ export interface TaxesQuery {
     uri?: string;
     query?: {
         deleted?: boolean;
+        active?: boolean;
     };
 }
 export interface TaxesResponse {

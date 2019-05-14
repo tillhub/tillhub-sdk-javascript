@@ -9,6 +9,7 @@ export interface BranchesQuery {
     uri?: string;
     query?: {
         deleted?: boolean;
+        active?: boolean;
     };
 }
 export interface BranchesResponse {

@@ -8,6 +8,7 @@ export interface TagsQuery {
     limit?: number;
     uri?: string;
     name?: string;
+    active?: boolean;
     q?: string;
 }
 export interface TagResponse {

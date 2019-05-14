@@ -10,6 +10,7 @@ export interface AccountsQueryOrOptions {
     query?: {
         type?: AccountType;
         deleted?: boolean;
+        active?: boolean;
     };
 }
 export interface AccountsResponse {

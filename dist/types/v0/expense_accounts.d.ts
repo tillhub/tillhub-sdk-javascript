@@ -8,6 +8,7 @@ export interface ExpenseAccountsQuery {
     uri?: string;
     query?: {
         deleted?: boolean;
+        active?: boolean;
     };
 }
 export interface ExpenseAccountsResponse {

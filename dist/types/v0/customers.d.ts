@@ -9,6 +9,7 @@ export interface CustomersQuery {
     uri?: string;
     query?: {
         deleted?: boolean;
+        active?: boolean;
     };
 }
 export interface CustomersMetaQuery {

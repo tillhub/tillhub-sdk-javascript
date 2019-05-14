@@ -9,6 +9,7 @@ export interface ProductTemplatesQuery {
     uri?: string;
     query?: {
         deleted?: boolean;
+        active?: boolean;
     };
 }
 export interface ProductTemplatesResponse {

@@ -9,6 +9,7 @@ export interface StaffQueryOrOptions {
     uri?: string;
     query?: {
         deleted?: boolean;
+        active?: boolean;
     };
 }
 export interface StaffResponse {

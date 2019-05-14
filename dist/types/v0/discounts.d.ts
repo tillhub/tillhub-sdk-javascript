@@ -8,6 +8,7 @@ export interface DiscountsQuery {
     uri?: string;
     query?: {
         deleted?: boolean;
+        active?: boolean;
     };
 }
 export interface DiscountsResponse {

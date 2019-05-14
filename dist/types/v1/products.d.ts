@@ -69,6 +69,8 @@ export interface ProductsOptions {
     limit?: number;
     uri?: string;
     query?: {
+        deleted?: boolean;
+        active?: boolean;
         [key: string]: any;
     };
 }
