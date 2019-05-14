@@ -17,6 +17,8 @@ export interface OrdersQuery {
   auto?: boolean
   suggestion?: boolean
   order_qty?: number
+  active?: boolean
+  deleted?: boolean
 }
 
 export interface OrdersResponse {

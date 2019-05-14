@@ -13,6 +13,7 @@ export interface StaffQueryOrOptions {
   uri?: string
   query?: {
     deleted?: boolean
+    active?: boolean
   }
 }
 
@@ -129,7 +130,7 @@ export class Staff {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             queryString ? `?${queryString}` : ''
-          }`
+            }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -259,7 +260,7 @@ export class Staff {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${
         this.options.user
-      }/staff_number${queryString}`
+        }/staff_number${queryString}`
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&

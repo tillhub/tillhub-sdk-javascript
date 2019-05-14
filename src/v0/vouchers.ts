@@ -11,7 +11,10 @@ export interface VouchersOptions {
 export interface VouchersQueryOptions {
   limit?: number
   uri?: string
-  query?: any
+  query?: {
+    deleted?: boolean
+    active?: boolean
+  }
 }
 
 export interface VouchersResponse {

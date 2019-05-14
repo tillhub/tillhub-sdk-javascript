@@ -13,6 +13,7 @@ export interface BranchesQuery {
   uri?: string
   query?: {
     deleted?: boolean
+    active?: boolean
   }
 }
 
@@ -89,7 +90,7 @@ export class Branches {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             queryString ? `?${queryString}` : ''
-          }`
+            }`
         }
 
         const response = await this.http.getClient().get(uri)

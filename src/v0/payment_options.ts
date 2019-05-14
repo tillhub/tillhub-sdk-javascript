@@ -12,6 +12,7 @@ export interface PaymentOptionsQuery {
   uri?: string
   query?: {
     deleted?: boolean
+    active?: boolean
   }
 }
 

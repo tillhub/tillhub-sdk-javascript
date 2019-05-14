@@ -55,6 +55,8 @@ export interface TemplatesPreviewBody {
 
 export interface TemplatesQuery {
   format?: string
+  deleted?: boolean
+  active?: boolean
 }
 
 export interface TemplatesOptions {
@@ -121,7 +123,7 @@ export class Templates {
         } else {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             options && options.query ? `?${qs.stringify(options.query)}` : ''
-          }`
+            }`
         }
 
         const response = await this.http.getClient().get(uri)

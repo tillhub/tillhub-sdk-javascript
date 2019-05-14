@@ -13,6 +13,7 @@ export interface ContentsQuery {
   uri?: string
   query?: {
     deleted?: boolean
+    active?: boolean
   }
 }
 

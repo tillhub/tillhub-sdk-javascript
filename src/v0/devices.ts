@@ -13,6 +13,7 @@ export interface DevicesQuery {
   uri?: string
   query?: {
     deleted?: boolean
+    active?: boolean
   }
 }
 

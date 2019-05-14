@@ -12,6 +12,7 @@ export interface DiscountsQuery {
   uri?: string
   query?: {
     deleted?: boolean
+    active?: boolean
   }
 }
 
@@ -37,7 +38,7 @@ export interface Discount {
   id?: string
 }
 
-export interface Constraints {}
+export interface Constraints { }
 
 export interface Discount {
   amount?: number
@@ -79,7 +80,7 @@ export class Discounts {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             queryString ? `?${queryString}` : ''
-          }`
+            }`
         }
 
         const response = await this.http.getClient().get(uri)
