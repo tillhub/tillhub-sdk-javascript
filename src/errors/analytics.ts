@@ -87,3 +87,9 @@ export class CustomerOverviewFetchFailed extends BaseError {
     super(message, properties)
   }
 }
+export class CustomersMetaFailed extends BaseError {
+  public name = 'CustomersMetaFailed'
+  constructor(public message: string = 'Could not fetch customer report metadata', properties?: any) {
+    super(message, properties)
+  }
+}

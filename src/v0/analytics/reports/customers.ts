@@ -76,7 +76,7 @@ export class Customers {
         const { values } = response.data.results[0]
         let data = {
           customer_number: values.map((item: CustomersItem) => item.customer_number),
-          fistname: values.map((item: CustomersItem) => item.firstname),
+          firstname: values.map((item: CustomersItem) => item.firstname),
           lastname: values.map((item: CustomersItem) => item.lastname),
           company: values.map((item: CustomersItem) => item.company)
         }
@@ -125,6 +125,30 @@ export class Customers {
         } as AnalyticsResponse)
       } catch (err) {
         return reject(new errors.CustomerOverviewFetchFailed())
+      }
+    })
+  }
+
+  meta(query?: CustomersQuery | undefined): Promise<AnalyticsResponse> {
+    return new Promise(async (resolve, reject) => {
+      const base = this.uriHelper.generateBaseUri('/reports/customers/meta')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      try {
+        const response = await this.http.getClient().get(uri)
+        if (response.status !== 200) {
+          return reject(new errors.CustomersMetaFailed(undefined, { status: response.status }))
+        }
+        if (!response.data.results[0]) {
+          return reject(new errors.CustomersMetaFailed(undefined, { status: response.status }))
+        }
+
+        return resolve({
+          data: response.data.results[0],
+          metadata: { count: response.data.count }
+        } as AnalyticsResponse)
+      } catch (err) {
+        return reject(new errors.CustomersMetaFailed(undefined, { error: err }))
       }
     })
   }
