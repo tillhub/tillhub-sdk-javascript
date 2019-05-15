@@ -38,4 +38,5 @@ export declare class Customers {
     getFilters(): Promise<AnalyticsResponse>;
     getTransaction(query: CustomersOneQuery): Promise<AnalyticsResponse>;
     getOverview(query: CustomersOneQuery): Promise<AnalyticsResponse>;
+    meta(query?: CustomersQuery | undefined): Promise<AnalyticsResponse>;
 }

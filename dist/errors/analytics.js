@@ -158,4 +158,16 @@ var CustomerOverviewFetchFailed = /** @class */ (function (_super) {
     return CustomerOverviewFetchFailed;
 }(baseError_1.BaseError));
 exports.CustomerOverviewFetchFailed = CustomerOverviewFetchFailed;
+var CustomersMetaFailed = /** @class */ (function (_super) {
+    __extends(CustomersMetaFailed, _super);
+    function CustomersMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch customer report metadata'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'CustomersMetaFailed';
+        return _this;
+    }
+    return CustomersMetaFailed;
+}(baseError_1.BaseError));
+exports.CustomersMetaFailed = CustomersMetaFailed;
 //# sourceMappingURL=analytics.js.map

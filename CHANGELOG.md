@@ -1,3 +1,10 @@
+# [3.77.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.76.0...v3.77.0) (2019-05-15)
+
+
+### Features
+
+* **analytics-customers:** add meta ([5d85efe](https://github.com/tillhub/tillhub-sdk-javascript/commit/5d85efe))
+
 # [3.76.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.75.0...v3.76.0) (2019-05-14)
 
 
