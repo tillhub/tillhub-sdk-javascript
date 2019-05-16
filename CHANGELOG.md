@@ -1,3 +1,13 @@
+# [3.78.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.77.0...v3.78.0) (2019-05-16)
+
+
+### Features
+
+* **warehouses:** add create handler ([44dcd01](https://github.com/tillhub/tillhub-sdk-javascript/commit/44dcd01))
+* **warehouses:** add delete handler ([0ad45d9](https://github.com/tillhub/tillhub-sdk-javascript/commit/0ad45d9))
+* **warehouses:** add get one warehouse handler ([391b6a9](https://github.com/tillhub/tillhub-sdk-javascript/commit/391b6a9))
+* **warehouses:** add put handler ([34d10d4](https://github.com/tillhub/tillhub-sdk-javascript/commit/34d10d4))
+
 # [3.77.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.76.0...v3.77.0) (2019-05-15)
 
 

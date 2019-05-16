@@ -86,6 +86,117 @@ var Warehouses = /** @class */ (function () {
             });
         }); });
     };
+    Warehouses.prototype.getOne = function (warehouseId) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + warehouseId;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 &&
+                            reject(new WarehouseFetchOneFailed(undefined, { status: response.status }));
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_2 = _a.sent();
+                        return [2 /*return*/, reject(new WarehouseFetchOneFailed(undefined, { error: error_2 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Warehouses.prototype.create = function (warehouse) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri();
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().post(uri, warehouse)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 && reject(new WarehouseCreateFailed());
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count },
+                                errors: response.data.errors || []
+                            })];
+                    case 3:
+                        error_3 = _a.sent();
+                        return [2 /*return*/, reject(new WarehouseCreateFailed(undefined, { error: error_3 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Warehouses.prototype.put = function (warehouseId, warehouse) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri("/" + warehouseId);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().put(uri, warehouse)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new WarehousePutFailed(undefined, { status: response.status }))];
+                        }
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_4 = _a.sent();
+                        return [2 /*return*/, reject(new WarehousePutFailed(undefined, { error: error_4 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Warehouses.prototype.delete = function (warehouseId) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_5;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + warehouseId;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().delete(uri)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 &&
+                            reject(new WarehouseDeleteFailed(undefined, { status: response.status }));
+                        return [2 /*return*/, resolve({ msg: response.data.msg })];
+                    case 3:
+                        error_5 = _a.sent();
+                        return [2 /*return*/, reject(new WarehouseDeleteFailed(undefined, { error: error_5 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     return Warehouses;
 }());
 exports.Warehouses = Warehouses;
@@ -99,5 +210,49 @@ var WarehousesFetchFailed = /** @class */ (function (_super) {
         return _this;
     }
     return WarehousesFetchFailed;
+}(baseError_1.BaseError));
+var WarehouseFetchOneFailed = /** @class */ (function (_super) {
+    __extends(WarehouseFetchOneFailed, _super);
+    function WarehouseFetchOneFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch one warehouse'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'WarehouseFetchOneFailed';
+        return _this;
+    }
+    return WarehouseFetchOneFailed;
+}(baseError_1.BaseError));
+var WarehouseCreateFailed = /** @class */ (function (_super) {
+    __extends(WarehouseCreateFailed, _super);
+    function WarehouseCreateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create the warehouse'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'WarehouseCreateFailed';
+        return _this;
+    }
+    return WarehouseCreateFailed;
+}(baseError_1.BaseError));
+var WarehousePutFailed = /** @class */ (function (_super) {
+    __extends(WarehousePutFailed, _super);
+    function WarehousePutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not alter the warehouse'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'WarehousePutFailed';
+        return _this;
+    }
+    return WarehousePutFailed;
+}(baseError_1.BaseError));
+var WarehouseDeleteFailed = /** @class */ (function (_super) {
+    __extends(WarehouseDeleteFailed, _super);
+    function WarehouseDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete the warehouse'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'WarehouseDeleteFailed';
+        return _this;
+    }
+    return WarehouseDeleteFailed;
 }(baseError_1.BaseError));
 //# sourceMappingURL=warehouses.js.map

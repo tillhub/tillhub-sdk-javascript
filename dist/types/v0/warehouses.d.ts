@@ -7,14 +7,16 @@ export interface WarehousesOptions {
 export interface WarehousesQuery {
     limit?: number;
     uri?: string;
+    embed?: string[];
     query?: {
         deleted?: boolean;
         active?: boolean;
     };
 }
 export interface WarehousesResponse {
-    data: object[];
+    data: Warehouse;
     metadata: object;
+    msg?: string | null;
 }
 export interface WarehouseResponse {
     data: Warehouse;
@@ -24,8 +26,36 @@ export interface WarehouseResponse {
     };
     msg?: string;
 }
+export interface WarehousePhoneNumbers {
+    line_main?: number;
+    line_1?: number;
+    line_2?: number;
+}
+export declare type WarehouseAddressType = 'local' | 'delivery' | 'billing';
+export interface WarehouseAddress {
+    lines?: string[] | null;
+    street?: string | null;
+    street_number?: string | null;
+    locality?: string | null;
+    region?: string | null;
+    postal_code?: string | null;
+    country?: string | null;
+    type?: WarehouseAddressType;
+}
+export interface WarehouseImage {
+    '1x': string;
+    avatar: string;
+}
 export interface Warehouse {
     id?: string;
+    name: string;
+    short_name?: string | null;
+    custom_id?: string | null;
+    phonenumbers?: WarehousePhoneNumbers;
+    addresses?: WarehouseAddress[] | null;
+    images?: WarehouseImage | null;
+    capacity?: number | null;
+    barcode?: string | null;
 }
 export declare class Warehouses {
     endpoint: string;
@@ -34,4 +64,8 @@ export declare class Warehouses {
     uriHelper: UriHelper;
     constructor(options: WarehousesOptions, http: Client);
     getAll(query?: WarehousesQuery | undefined): Promise<WarehousesResponse>;
+    getOne(warehouseId: string): Promise<WarehousesResponse>;
+    create(warehouse: Warehouse): Promise<WarehousesResponse>;
+    put(warehouseId: string, warehouse: Warehouse): Promise<WarehousesResponse>;
+    delete(warehouseId: string): Promise<WarehousesResponse>;
 }
