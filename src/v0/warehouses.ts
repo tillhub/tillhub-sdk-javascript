@@ -20,7 +20,7 @@ export interface WarehousesQuery {
 }
 
 export interface WarehousesResponse {
-  data: object[]
+  data: Warehouse
   metadata: object
 }
 
@@ -33,7 +33,7 @@ export interface WarehouseResponse {
   msg?: string
 }
 
-export interface StaffPhoneNumbers {
+export interface WarehousePhoneNumbers {
   line_main?: number
   line_1?: number
   line_2?: number
@@ -62,7 +62,7 @@ export interface Warehouse {
   name: string
   short_name?: string | null
   custom_id?: string | null
-  phonenumbers?: StaffPhoneNumbers
+  phonenumbers?: WarehousePhoneNumbers
   addresses?: WarehouseAddress[] | null
   images?: WarehouseImage | null
   capacity?: number | null
@@ -114,12 +114,33 @@ export class Warehouses {
         response.status !== 200 && reject(new WarehouseCreateFailed())
 
         return resolve({
-          data: response.data.results[0],
+          data: response.data.results[0] as Warehouse,
           metadata: { count: response.data.count },
           errors: response.data.errors || []
         } as WarehousesResponse)
       } catch (error) {
         return reject(new WarehouseCreateFailed(undefined, { error }))
+      }
+    })
+  }
+
+  put(warehouseId: string, warehouse: Warehouse): Promise<WarehousesResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = this.uriHelper.generateBaseUri(`/${warehouseId}`)
+
+      try {
+        const response = await this.http.getClient().put(uri, warehouse)
+
+        if (response.status !== 200) {
+          return reject(new WarehousePutFailed(undefined, { status: response.status }))
+        }
+
+        return resolve({
+          data: response.data.results[0] as Warehouse,
+          metadata: { count: response.data.count }
+        } as WarehousesResponse)
+      } catch (error) {
+        return reject(new WarehousePutFailed(undefined, { error }))
       }
     })
   }
@@ -135,6 +156,13 @@ class WarehousesFetchFailed extends BaseError {
 class WarehouseCreateFailed extends BaseError {
   public name = 'WarehouseCreateFailed'
   constructor(public message: string = 'Could not create the warehouse', properties?: any) {
+    super(message, properties)
+  }
+}
+
+class WarehousePutFailed extends BaseError {
+  public name = 'WarehousePutFailed'
+  constructor(public message: string = 'Could not alter the warehouse', properties?: any) {
     super(message, properties)
   }
 }
