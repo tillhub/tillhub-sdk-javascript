@@ -49,7 +49,7 @@ export interface WarehouseAddress {
   region?: string | null
   postal_code?: string | null
   country?: string | null
-  type: WarehouseAddressType
+  type?: WarehouseAddressType
 }
 
 export interface WarehouseImage {
@@ -105,6 +105,25 @@ export class Warehouses {
     })
   }
 
+  getOne(warehouseId: string): Promise<WarehousesResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${warehouseId}`
+      try {
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 &&
+          reject(new WarehouseFetchOneFailed(undefined, { status: response.status }))
+
+        return resolve({
+          data: response.data.results[0] as Warehouse,
+          msg: response.data.msg,
+          metadata: { count: response.data.count }
+        } as WarehousesResponse)
+      } catch (error) {
+        return reject(new WarehouseFetchOneFailed(undefined, { error }))
+      }
+    })
+  }
+
   create(warehouse: Warehouse): Promise<WarehousesResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri()
@@ -149,6 +168,13 @@ export class Warehouses {
 class WarehousesFetchFailed extends BaseError {
   public name = 'WarehousesFetchFailed'
   constructor(public message: string = 'Could not fetch warehouses', properties?: any) {
+    super(message, properties)
+  }
+}
+
+class WarehouseFetchOneFailed extends BaseError {
+  public name = 'WarehouseFetchOneFailed'
+  constructor(public message: string = 'Could not fetch one warehouse', properties?: any) {
     super(message, properties)
   }
 }
