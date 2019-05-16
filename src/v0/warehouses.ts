@@ -22,6 +22,7 @@ export interface WarehousesQuery {
 export interface WarehousesResponse {
   data: Warehouse
   metadata: object
+  msg?: string | null
 }
 
 export interface WarehouseResponse {
@@ -163,6 +164,21 @@ export class Warehouses {
       }
     })
   }
+
+  delete(warehouseId: string): Promise<WarehousesResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${warehouseId}`
+      try {
+        const response = await this.http.getClient().delete(uri)
+        response.status !== 200 &&
+          reject(new WarehouseDeleteFailed(undefined, { status: response.status }))
+
+        return resolve({ msg: response.data.msg } as WarehousesResponse)
+      } catch (error) {
+        return reject(new WarehouseDeleteFailed(undefined, { error }))
+      }
+    })
+  }
 }
 
 class WarehousesFetchFailed extends BaseError {
@@ -189,6 +205,13 @@ class WarehouseCreateFailed extends BaseError {
 class WarehousePutFailed extends BaseError {
   public name = 'WarehousePutFailed'
   constructor(public message: string = 'Could not alter the warehouse', properties?: any) {
+    super(message, properties)
+  }
+}
+
+class WarehouseDeleteFailed extends BaseError {
+  public name = 'WarehouseDeleteFailed'
+  constructor(public message: string = 'Could not delete the warehouse', properties?: any) {
     super(message, properties)
   }
 }
