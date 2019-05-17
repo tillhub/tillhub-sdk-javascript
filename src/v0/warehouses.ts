@@ -63,7 +63,7 @@ export interface Warehouse {
   name: string
   short_name?: string | null
   custom_id?: string | null
-  phonenumbers?: WarehousePhoneNumbers
+  phonenumbers?: WarehousePhoneNumbers | null
   addresses?: WarehouseAddress[] | null
   images?: WarehouseImage | null
   capacity?: number | null
@@ -111,8 +111,9 @@ export class Warehouses {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${warehouseId}`
       try {
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new WarehouseFetchOneFailed(undefined, { status: response.status }))
+        if (response.status !== 200) {
+          return reject(new WarehouseFetchOneFailed(undefined, { status: response.status }))
+        }
 
         return resolve({
           data: response.data.results[0] as Warehouse,
@@ -131,7 +132,9 @@ export class Warehouses {
 
       try {
         const response = await this.http.getClient().post(uri, warehouse)
-        response.status !== 200 && reject(new WarehouseCreateFailed())
+        if (response.status !== 200) {
+          return reject(new WarehouseCreateFailed(undefined, { status: response.status }))
+        }
 
         return resolve({
           data: response.data.results[0] as Warehouse,
@@ -170,8 +173,10 @@ export class Warehouses {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${warehouseId}`
       try {
         const response = await this.http.getClient().delete(uri)
-        response.status !== 200 &&
-          reject(new WarehouseDeleteFailed(undefined, { status: response.status }))
+
+        if (response.status !== 200) {
+          return reject(new WarehouseDeleteFailed(undefined, { status: response.status }))
+        }
 
         return resolve({ msg: response.data.msg } as WarehousesResponse)
       } catch (error) {
