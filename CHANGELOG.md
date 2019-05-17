@@ -1,3 +1,10 @@
+## [3.78.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.78.0...v3.78.1) (2019-05-17)
+
+
+### Bug Fixes
+
+* **warehouses:** minor fixes ([d05fb58](https://github.com/tillhub/tillhub-sdk-javascript/commit/d05fb58))
+
 # [3.78.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.77.0...v3.78.0) (2019-05-16)
 
 

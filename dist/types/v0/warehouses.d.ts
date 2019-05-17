@@ -51,7 +51,7 @@ export interface Warehouse {
     name: string;
     short_name?: string | null;
     custom_id?: string | null;
-    phonenumbers?: WarehousePhoneNumbers;
+    phonenumbers?: WarehousePhoneNumbers | null;
     addresses?: WarehouseAddress[] | null;
     images?: WarehouseImage | null;
     capacity?: number | null;

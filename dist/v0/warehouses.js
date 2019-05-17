@@ -100,8 +100,9 @@ var Warehouses = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 &&
-                            reject(new WarehouseFetchOneFailed(undefined, { status: response.status }));
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new WarehouseFetchOneFailed(undefined, { status: response.status }))];
+                        }
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 msg: response.data.msg,
@@ -129,7 +130,9 @@ var Warehouses = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().post(uri, warehouse)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 && reject(new WarehouseCreateFailed());
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new WarehouseCreateFailed(undefined, { status: response.status }))];
+                        }
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count },
@@ -186,8 +189,9 @@ var Warehouses = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().delete(uri)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 &&
-                            reject(new WarehouseDeleteFailed(undefined, { status: response.status }));
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new WarehouseDeleteFailed(undefined, { status: response.status }))];
+                        }
                         return [2 /*return*/, resolve({ msg: response.data.msg })];
                     case 3:
                         error_5 = _a.sent();
