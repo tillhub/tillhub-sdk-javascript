@@ -34,3 +34,10 @@ export class SafesPutFailed extends BaseError {
     super(message, properties)
   }
 }
+
+export class SafesBookFailed extends BaseError {
+  public name = 'SafesBookFailed'
+  constructor(public message: string = 'Could not book transfer in safes', properties?: any) {
+    super(message, properties)
+  }
+}
