@@ -1,3 +1,10 @@
+# [3.80.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.79.0...v3.80.0) (2019-05-22)
+
+
+### Features
+
+* **safes:** Change the url for safes book handler ([dacf1c6](https://github.com/tillhub/tillhub-sdk-javascript/commit/dacf1c6))
+
 # [3.79.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.78.1...v3.79.0) (2019-05-22)
 
 
