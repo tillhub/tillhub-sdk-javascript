@@ -55,10 +55,6 @@ export interface BookRequestBody {
   initiated_at?: string
 }
 
-export interface BookResponse {
-  msg: string
-}
-
 export class Safes {
   endpoint: string
   http: Client
@@ -170,10 +166,10 @@ export class Safes {
     })
   }
 
-  book(body: BookRequestBody): Promise<SafeResponse> {
+  book(safeId: string, body: BookRequestBody): Promise<SafeResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const uri = this.uriHelper.generateBaseUri()
+        const uri = this.uriHelper.generateBaseUri(`/${safeId}/book`)
         const response = await this.http.getClient().post(uri, body)
 
         return resolve({
