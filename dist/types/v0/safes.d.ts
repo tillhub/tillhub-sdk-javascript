@@ -38,6 +38,17 @@ export interface Safe {
     deleted?: boolean;
     active?: boolean;
 }
+export interface BookRequestBody {
+    to: string;
+    from: string;
+    issuer: string;
+    items: Array<Object>;
+    comment?: string;
+    initiated_at?: string;
+}
+export interface BookResponse {
+    msg: string;
+}
 export declare class Safes {
     endpoint: string;
     http: Client;
@@ -49,4 +60,5 @@ export declare class Safes {
     meta(): Promise<SafesResponse>;
     create(safe: Safe): Promise<SafeResponse>;
     put(safeId: string, safe: Safe): Promise<SafeResponse>;
+    book(body: BookRequestBody): Promise<SafeResponse>;
 }

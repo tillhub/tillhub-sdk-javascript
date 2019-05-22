@@ -24,3 +24,8 @@ export declare class SafesPutFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class SafesBookFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}

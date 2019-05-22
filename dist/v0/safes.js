@@ -185,6 +185,30 @@ var Safes = /** @class */ (function () {
             });
         }); });
     };
+    Safes.prototype.book = function (body) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_6;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = this.uriHelper.generateBaseUri();
+                        return [4 /*yield*/, this.http.getClient().post(uri, body)];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, resolve({
+                                data: response.data,
+                                msg: response.data.msg
+                            })];
+                    case 2:
+                        error_6 = _a.sent();
+                        return [2 /*return*/, reject(new errors.SafesBookFailed(undefined, { error: error_6 }))];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     return Safes;
 }());
 exports.Safes = Safes;

@@ -74,4 +74,16 @@ var SafesPutFailed = /** @class */ (function (_super) {
     return SafesPutFailed;
 }(baseError_1.BaseError));
 exports.SafesPutFailed = SafesPutFailed;
+var SafesBookFailed = /** @class */ (function (_super) {
+    __extends(SafesBookFailed, _super);
+    function SafesBookFailed(message, properties) {
+        if (message === void 0) { message = 'Could not book transfer in safes'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'SafesBookFailed';
+        return _this;
+    }
+    return SafesBookFailed;
+}(baseError_1.BaseError));
+exports.SafesBookFailed = SafesBookFailed;
 //# sourceMappingURL=safes.js.map

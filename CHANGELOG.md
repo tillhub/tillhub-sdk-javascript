@@ -1,3 +1,10 @@
+# [3.79.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.78.1...v3.79.0) (2019-05-22)
+
+
+### Features
+
+* **safes:** add "book" handler ([23e06a3](https://github.com/tillhub/tillhub-sdk-javascript/commit/23e06a3))
+
 ## [3.78.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.78.0...v3.78.1) (2019-05-17)
 
 
