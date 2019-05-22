@@ -1,3 +1,10 @@
+# [3.81.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.80.0...v3.81.0) (2019-05-22)
+
+
+### Features
+
+* **safes:** change URL of "book" handler ([5332df9](https://github.com/tillhub/tillhub-sdk-javascript/commit/5332df9))
+
 # [3.80.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.79.0...v3.80.0) (2019-05-22)
 
 

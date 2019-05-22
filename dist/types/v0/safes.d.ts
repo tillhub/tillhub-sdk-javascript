@@ -57,5 +57,5 @@ export declare class Safes {
     meta(): Promise<SafesResponse>;
     create(safe: Safe): Promise<SafeResponse>;
     put(safeId: string, safe: Safe): Promise<SafeResponse>;
-    book(safeId: string, body: BookRequestBody): Promise<SafeResponse>;
+    book(body: BookRequestBody): Promise<SafeResponse>;
 }

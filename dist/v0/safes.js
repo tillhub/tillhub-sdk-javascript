@@ -185,7 +185,7 @@ var Safes = /** @class */ (function () {
             });
         }); });
     };
-    Safes.prototype.book = function (safeId, body) {
+    Safes.prototype.book = function (body) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, error_6;
@@ -193,7 +193,7 @@ var Safes = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        uri = this.uriHelper.generateBaseUri("/" + safeId + "/book");
+                        uri = this.uriHelper.generateBaseUri("/book");
                         return [4 /*yield*/, this.http.getClient().post(uri, body)];
                     case 1:
                         response = _a.sent();
