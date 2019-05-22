@@ -166,10 +166,10 @@ export class Safes {
     })
   }
 
-  book(safeId: string, body: BookRequestBody): Promise<SafeResponse> {
+  book(body: BookRequestBody): Promise<SafeResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const uri = this.uriHelper.generateBaseUri(`/${safeId}/book`)
+        const uri = this.uriHelper.generateBaseUri(`/book`)
         const response = await this.http.getClient().post(uri, body)
 
         return resolve({
