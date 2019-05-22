@@ -46,6 +46,19 @@ export interface Safe {
   active?: boolean
 }
 
+export interface BookRequestBody {
+  to: string,
+  from: string,
+  issuer: string
+  items: Array<Object>,
+  comment?: string,
+  initiated_at?: string
+}
+
+export interface BookResponse {
+  msg: string
+}
+
 export class Safes {
   endpoint: string
   http: Client
@@ -153,6 +166,22 @@ export class Safes {
         } as SafeResponse)
       } catch (error) {
         return reject(new errors.SafesPutFailed(undefined, { error }))
+      }
+    })
+  }
+
+  book(body: BookRequestBody): Promise<SafeResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const uri = this.uriHelper.generateBaseUri()
+        const response = await this.http.getClient().post(uri, body)
+
+        return resolve({
+          data: response.data,
+          msg: response.data.msg
+        } as SafeResponse)
+      } catch (error) {
+        return reject(new errors.SafesBookFailed(undefined, { error }))
       }
     })
   }
