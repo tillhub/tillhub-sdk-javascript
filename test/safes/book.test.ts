@@ -12,8 +12,6 @@ afterEach(() => {
   mock.reset()
 })
 
-const safeId = '86a57d34-a98e-4166-be3e-6e2b78c20fd1'
-
 const body = {
   'to': '4f98a8da-294a-4371-a970-901cae6b39f7',
   'items': [
@@ -44,7 +42,7 @@ describe('v0: Safes: book a transfer', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/safes/${legacyId}/${safeId}/book`).reply(function (config) {
+      mock.onPost(`https://api.tillhub.com/api/v0/safes/${legacyId}/book`).reply(function (config) {
         return [
           200,
           {
@@ -60,7 +58,7 @@ describe('v0: Safes: book a transfer', () => {
 
     expect(safes).toBeInstanceOf(v0.Safes)
 
-    const { data } = await safes.book(safeId, body)
+    const { data } = await safes.book(body)
 
     expect(data).toMatchObject({ msg: 'Safes transfer was booked.' })
   })
@@ -80,14 +78,14 @@ describe('v0: Safes: book a transfer', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/safes/${legacyId}${safeId}/book`).reply(function (config) {
+      mock.onPost(`https://api.tillhub.com/api/v0/safes/${legacyId}/book`).reply(function (config) {
         return [205]
       })
     }
 
     try {
       const th = await initThInstance()
-      await th.safes().book(safeId, body)
+      await th.safes().book(body)
     } catch (err) {
       expect(err.name).toBe('SafesBookFailed')
     }
