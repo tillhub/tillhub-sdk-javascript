@@ -203,7 +203,7 @@ var Safes = /** @class */ (function () {
                             })];
                     case 2:
                         error_6 = _a.sent();
-                        return [2 /*return*/, reject(new errors.SafesBookFailed(error_6.message, { error: error_6 }))];
+                        return [2 /*return*/, reject(new errors.SafesBookFailed(error_6.msg, { error: error_6 }))];
                     case 3: return [2 /*return*/];
                 }
             });

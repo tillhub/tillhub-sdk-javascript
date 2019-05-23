@@ -1,3 +1,10 @@
+# [3.83.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.82.0...v3.83.0) (2019-05-23)
+
+
+### Features
+
+* **safes:** pass through error message in "book" handler ([6ef4881](https://github.com/tillhub/tillhub-sdk-javascript/commit/6ef4881))
+
 # [3.82.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.81.0...v3.82.0) (2019-05-23)
 
 
