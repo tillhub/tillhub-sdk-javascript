@@ -177,7 +177,7 @@ export class Safes {
           msg: response.data.msg
         } as SafeResponse)
       } catch (error) {
-        return reject(new errors.SafesBookFailed(error.message, { error }))
+        return reject(new errors.SafesBookFailed(error.msg, { error }))
       }
     })
   }
