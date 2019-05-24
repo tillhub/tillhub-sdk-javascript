@@ -31,6 +31,7 @@ import { Tags } from './tags'
 import { Safes } from './safes'
 import { Warehouses } from './warehouses'
 import { Videos } from './videos'
+import { StaffGroups } from './staff_groups'
 
 export {
   Auth,
@@ -67,5 +68,6 @@ export {
   Tags,
   Safes,
   Warehouses,
-  Videos
+  Videos,
+  StaffGroups
 }
