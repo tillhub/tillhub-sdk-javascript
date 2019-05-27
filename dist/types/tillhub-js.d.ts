@@ -239,6 +239,11 @@ export declare class TillhubClient extends events.EventEmitter {
      *
      */
     warehouses(): v0.Warehouses;
+    /**
+     * Create an authenticated StaffGroups instance
+     *
+     */
+    staffGroups(): v0.StaffGroups;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;

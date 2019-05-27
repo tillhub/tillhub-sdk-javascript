@@ -508,6 +508,13 @@ var TillhubClient = /** @class */ (function (_super) {
     TillhubClient.prototype.warehouses = function () {
         return this.generateAuthenticatedInstance(v0.Warehouses);
     };
+    /**
+     * Create an authenticated StaffGroups instance
+     *
+     */
+    TillhubClient.prototype.staffGroups = function () {
+        return this.generateAuthenticatedInstance(v0.StaffGroups);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));

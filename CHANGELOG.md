@@ -1,3 +1,10 @@
+# [3.84.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.83.0...v3.84.0) (2019-05-27)
+
+
+### Features
+
+* **staffGroups:** add get and meta handler ([443b938](https://github.com/tillhub/tillhub-sdk-javascript/commit/443b938))
+
 # [3.83.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.82.0...v3.83.0) (2019-05-23)
 
 
