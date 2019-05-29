@@ -1,3 +1,10 @@
+# [3.85.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.84.0...v3.85.0) (2019-05-29)
+
+
+### Features
+
+* **products:** extend products ([e39a060](https://github.com/tillhub/tillhub-sdk-javascript/commit/e39a060))
+
 # [3.84.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.83.0...v3.84.0) (2019-05-27)
 
 
