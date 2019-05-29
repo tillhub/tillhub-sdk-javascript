@@ -67,6 +67,8 @@ export interface Product {
   reorder_point?: number | null
   reorder_qty?: number | null
   locations?: string[] | null
+  stock_info?: object | null
+  i18n?: object | null
 }
 
 export interface StockConfigurationLocation {
@@ -85,6 +87,7 @@ export interface ProductsOptions {
   query?: {
     deleted?: boolean
     active?: boolean
+    extended?: boolean
     [key: string]: any
   }
 }
