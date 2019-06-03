@@ -82,6 +82,13 @@ export interface StaffMember {
     short_code?: number;
     default?: boolean;
 }
+export interface StaffItem {
+    staff_number?: string;
+    firstname?: string;
+    lastname?: string;
+    email?: string;
+    phone?: object;
+}
 export declare class Staff {
     endpoint: string;
     http: Client;
@@ -95,4 +102,5 @@ export declare class Staff {
     delete(staffId: string): Promise<StaffMemberResponse>;
     getPin(providedPin?: PinRequest): Promise<StaffMemberResponse>;
     getStaffNumber(providedStaffNumber?: StaffNumberRequest): Promise<StaffMemberResponse>;
+    getFilters(queryOrOptions?: StaffQueryOrOptions): Promise<StaffResponse>;
 }

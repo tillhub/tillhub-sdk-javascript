@@ -1,3 +1,10 @@
+# [3.86.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.85.0...v3.86.0) (2019-06-03)
+
+
+### Features
+
+* **staff:** getFilters ([f64c6c6](https://github.com/tillhub/tillhub-sdk-javascript/commit/f64c6c6))
+
 # [3.85.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.84.0...v3.85.0) (2019-05-29)
 
 

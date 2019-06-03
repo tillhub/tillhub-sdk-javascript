@@ -292,6 +292,61 @@ var Staff = /** @class */ (function () {
             });
         }); });
     };
+    Staff.prototype.getFilters = function (queryOrOptions) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var base, uri, response, resp, resources_1, list, error_8;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri();
+                        uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new errors.StaffFetchFailed(undefined, { status: response.status }))];
+                        }
+                        resp = response.data.results || [];
+                        resources_1 = [
+                            'staff_number',
+                            'lastname',
+                            'firstname',
+                            'email',
+                            'phonenumbers'
+                        ];
+                        list = resp.reduce(function (acc, curr) {
+                            var obj = {};
+                            resources_1.forEach(function (key) {
+                                obj[key] = acc[key] || [];
+                                var currValue = curr[key];
+                                if (key === 'phonenumbers' && currValue) {
+                                    currValue = (currValue.mobile ||
+                                        currValue.main ||
+                                        currValue.home ||
+                                        currValue.work ||
+                                        currValue.any ||
+                                        null);
+                                }
+                                if (currValue && !obj[key].includes(currValue)) {
+                                    obj[key].push(currValue);
+                                }
+                            });
+                            return obj;
+                        }, {});
+                        return [2 /*return*/, resolve({
+                                data: list,
+                                metadata: { resources: resources_1 }
+                            })];
+                    case 2:
+                        error_8 = _a.sent();
+                        return [2 /*return*/, reject(new errors.StaffFetchFailed(undefined, { error: error_8 }))];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     return Staff;
 }());
 exports.Staff = Staff;
