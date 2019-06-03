@@ -99,6 +99,14 @@ export interface StaffMember {
   default?: boolean
 }
 
+export interface StaffItem {
+  staff_number?: string
+  firstname?: string
+  lastname?: string
+  email?: string
+  phone?: object
+}
+
 export class Staff {
   endpoint: string
   http: Client
@@ -285,6 +293,59 @@ export class Staff {
           )
         }
         return reject(new errors.StaffNumberGetFailed(undefined, { error }))
+      }
+    })
+  }
+
+  getFilters(queryOrOptions?: StaffQueryOrOptions): Promise<StaffResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const base = this.uriHelper.generateBaseUri()
+        const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
+
+        const response = await this.http.getClient().get(uri)
+        if (response.status !== 200) {
+          return reject(new errors.StaffFetchFailed(undefined, { status: response.status }))
+        }
+
+        const resp = response.data.results || []
+        const resources = [
+          'staff_number',
+          'lastname',
+          'firstname',
+          'email',
+          'phonenumbers'
+        ]
+
+        const list = resp.reduce((acc: any, curr: any) => {
+          let obj: { [key: string]: string[] } = {}
+
+          resources.forEach((key: string) => {
+            obj[key] = acc[key] || []
+            let currValue = curr[key]
+            if (key === 'phonenumbers' && currValue) {
+              currValue = (
+                currValue.mobile ||
+                currValue.main ||
+                currValue.home ||
+                currValue.work ||
+                currValue.any ||
+                null
+              )
+            }
+            if (currValue && !obj[key].includes(currValue)) {
+              obj[key].push(currValue)
+            }
+          })
+          return obj
+        }, {})
+
+        return resolve({
+          data: list,
+          metadata: { resources: resources }
+        } as StaffResponse)
+      } catch (error) {
+        return reject(new errors.StaffFetchFailed(undefined, { error }))
       }
     })
   }
