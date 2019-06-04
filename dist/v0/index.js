@@ -70,4 +70,6 @@ var videos_1 = require("./videos");
 exports.Videos = videos_1.Videos;
 var staff_groups_1 = require("./staff_groups");
 exports.StaffGroups = staff_groups_1.StaffGroups;
+var exports_1 = require("./exports");
+exports.Exports = exports_1.Exports;
 //# sourceMappingURL=index.js.map

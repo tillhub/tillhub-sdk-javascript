@@ -1,3 +1,10 @@
+# [3.87.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.86.0...v3.87.0) (2019-06-04)
+
+
+### Features
+
+* add exports ([3852b28](https://github.com/tillhub/tillhub-sdk-javascript/commit/3852b28))
+
 # [3.86.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.85.0...v3.86.0) (2019-06-03)
 
 
