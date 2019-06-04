@@ -616,6 +616,14 @@ export class TillhubClient extends events.EventEmitter {
   staffGroups(): v0.StaffGroups {
     return this.generateAuthenticatedInstance(v0.StaffGroups)
   }
+
+  /**
+   * Create an authenticated Exports instance
+   *
+   */
+  exports(): v0.Exports {
+    return this.generateAuthenticatedInstance(v0.Exports)
+  }
 }
 
 export class Tillhub extends TillhubClient {

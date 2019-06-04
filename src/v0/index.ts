@@ -32,6 +32,7 @@ import { Safes } from './safes'
 import { Warehouses } from './warehouses'
 import { Videos } from './videos'
 import { StaffGroups } from './staff_groups'
+import { Exports } from './exports'
 
 export {
   Auth,
@@ -69,5 +70,6 @@ export {
   Safes,
   Warehouses,
   Videos,
-  StaffGroups
+  StaffGroups,
+  Exports
 }
