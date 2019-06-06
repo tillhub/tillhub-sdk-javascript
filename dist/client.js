@@ -68,7 +68,7 @@ var Client = /** @class */ (function () {
         if (options.requestInterceptors && options.requestInterceptors.length) {
             this.requestInterceptorIds.forEach(function (id) { return Client.instance.axiosInstance.interceptors.request.eject(id); });
             this.requestInterceptorIds = options.requestInterceptors.map(function (interceptor) {
-                return Client.instance.axiosInstance.interceptors.request.use(undefined, interceptor);
+                return Client.instance.axiosInstance.interceptors.request.use(interceptor, undefined);
             });
         }
         return Client.instance;

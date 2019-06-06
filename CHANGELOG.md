@@ -1,3 +1,10 @@
+## [3.88.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.88.1...v3.88.2) (2019-06-06)
+
+
+### Bug Fixes
+
+* **client:** handle request config over error ([9ee59f0](https://github.com/tillhub/tillhub-sdk-javascript/commit/9ee59f0))
+
 ## [3.88.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.88.0...v3.88.1) (2019-06-06)
 
 
