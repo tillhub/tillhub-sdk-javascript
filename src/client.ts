@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosResponse } from 'axios'
+import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios'
 
 import { environment } from './environment'
 
@@ -89,7 +89,7 @@ export class Client {
       this.requestInterceptorIds.forEach(id => Client.instance.axiosInstance.interceptors.request.eject(id))
 
       this.requestInterceptorIds = options.requestInterceptors.map((interceptor: Function) => {
-        return Client.instance.axiosInstance.interceptors.request.use(undefined, interceptor as (value: AxiosResponse) => AxiosResponse | Promise<AxiosResponse>)
+        return Client.instance.axiosInstance.interceptors.request.use(interceptor as (value: AxiosRequestConfig) => AxiosRequestConfig | Promise<AxiosRequestConfig>, undefined)
       })
     }
 
