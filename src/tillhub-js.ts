@@ -22,6 +22,7 @@ export interface TillhubSDKOptions {
   base?: string
   user?: string
   responseInterceptors?: Function[]
+  requestInterceptors?: Function[]
 }
 
 type MaybeOptions = object
@@ -73,6 +74,10 @@ export class TillhubClient extends events.EventEmitter {
 
     if (options.responseInterceptors) {
       clientOptions.responseInterceptors = options.responseInterceptors
+    }
+
+    if (options.requestInterceptors) {
+      clientOptions.requestInterceptors = options.requestInterceptors
     }
 
     this.http = Client.getInstance(clientOptions).setDefaults(clientOptions)
