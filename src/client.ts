@@ -10,6 +10,7 @@ export interface ClientOptions {
   }
   token?: string,
   responseInterceptors?: Function[]
+  requestInterceptors?: Function[]
 }
 
 const defaultHeaders = {
@@ -26,7 +27,8 @@ const defaultHeaders = {
 export class Client {
   private static instance: Client
   private axiosInstance: AxiosInstance
-  private interceptorIds: number[] = []
+  private responseInterceptorIds: number[] = []
+  private requestInterceptorIds: number[] = []
 
   private constructor(options: ClientOptions) {
     this.axiosInstance = axios.create({
@@ -75,11 +77,19 @@ export class Client {
     // NOTE not sure if this is the correct place to inject the interceptors, but it's the most reliable
     if (options.responseInterceptors && options.responseInterceptors.length) {
       // remove previous interceptors
-      this.interceptorIds.forEach(id => Client.instance.axiosInstance.interceptors.response.eject(id))
+      this.responseInterceptorIds.forEach(id => Client.instance.axiosInstance.interceptors.response.eject(id))
 
-      this.interceptorIds = options.responseInterceptors.map((interceptor: Function) => {
+      this.responseInterceptorIds = options.responseInterceptors.map((interceptor: Function) => {
         // first arg is on success, but we want to only listen for errors
         return Client.instance.axiosInstance.interceptors.response.use(undefined, interceptor as (value: AxiosResponse) => AxiosResponse | Promise<AxiosResponse>)
+      })
+    }
+
+    if (options.requestInterceptors && options.requestInterceptors.length) {
+      this.requestInterceptorIds.forEach(id => Client.instance.axiosInstance.interceptors.request.eject(id))
+
+      this.requestInterceptorIds = options.requestInterceptors.map((interceptor: Function) => {
+        return Client.instance.axiosInstance.interceptors.request.use(undefined, interceptor as (value: AxiosResponse) => AxiosResponse | Promise<AxiosResponse>)
       })
     }
 
