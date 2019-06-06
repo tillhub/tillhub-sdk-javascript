@@ -82,6 +82,9 @@ var TillhubClient = /** @class */ (function (_super) {
         if (options.responseInterceptors) {
             clientOptions.responseInterceptors = options.responseInterceptors;
         }
+        if (options.requestInterceptors) {
+            clientOptions.requestInterceptors = options.requestInterceptors;
+        }
         this.http = client_1.Client.getInstance(clientOptions).setDefaults(clientOptions);
     };
     /**

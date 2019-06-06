@@ -1,3 +1,10 @@
+## [3.88.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.88.0...v3.88.1) (2019-06-06)
+
+
+### Bug Fixes
+
+* **sdk:** add missing option ([b52c3c5](https://github.com/tillhub/tillhub-sdk-javascript/commit/b52c3c5))
+
 # [3.88.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.87.0...v3.88.0) (2019-06-06)
 
 
