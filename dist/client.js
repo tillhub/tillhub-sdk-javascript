@@ -28,7 +28,8 @@ var defaultHeaders = {
  */
 var Client = /** @class */ (function () {
     function Client(options) {
-        this.interceptorIds = [];
+        this.responseInterceptorIds = [];
+        this.requestInterceptorIds = [];
         this.axiosInstance = axios_1.default.create({
             // baseURL: options.base || 'https://api.tillhub.com',
             timeout: options.timeout || 10000,
@@ -58,10 +59,16 @@ var Client = /** @class */ (function () {
         // NOTE not sure if this is the correct place to inject the interceptors, but it's the most reliable
         if (options.responseInterceptors && options.responseInterceptors.length) {
             // remove previous interceptors
-            this.interceptorIds.forEach(function (id) { return Client.instance.axiosInstance.interceptors.response.eject(id); });
-            this.interceptorIds = options.responseInterceptors.map(function (interceptor) {
+            this.responseInterceptorIds.forEach(function (id) { return Client.instance.axiosInstance.interceptors.response.eject(id); });
+            this.responseInterceptorIds = options.responseInterceptors.map(function (interceptor) {
                 // first arg is on success, but we want to only listen for errors
                 return Client.instance.axiosInstance.interceptors.response.use(undefined, interceptor);
+            });
+        }
+        if (options.requestInterceptors && options.requestInterceptors.length) {
+            this.requestInterceptorIds.forEach(function (id) { return Client.instance.axiosInstance.interceptors.request.eject(id); });
+            this.requestInterceptorIds = options.requestInterceptors.map(function (interceptor) {
+                return Client.instance.axiosInstance.interceptors.request.use(undefined, interceptor);
             });
         }
         return Client.instance;

@@ -7,6 +7,7 @@ export interface ClientOptions {
     };
     token?: string;
     responseInterceptors?: Function[];
+    requestInterceptors?: Function[];
 }
 /**
  * The Tillhub HTTP client is an axios instance that carries the state of of Authentication
@@ -17,7 +18,8 @@ export interface ClientOptions {
 export declare class Client {
     private static instance;
     private axiosInstance;
-    private interceptorIds;
+    private responseInterceptorIds;
+    private requestInterceptorIds;
     private constructor();
     static getInstance(options: ClientOptions): Client;
     static clearInstance(): void;

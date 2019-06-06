@@ -1,3 +1,10 @@
+# [3.88.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.87.0...v3.88.0) (2019-06-06)
+
+
+### Features
+
+* **client:** add request interceptors ([367ed38](https://github.com/tillhub/tillhub-sdk-javascript/commit/367ed38))
+
 # [3.87.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.86.0...v3.87.0) (2019-06-04)
 
 
