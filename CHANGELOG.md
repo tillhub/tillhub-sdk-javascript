@@ -1,3 +1,10 @@
+# [3.89.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.88.2...v3.89.0) (2019-06-11)
+
+
+### Features
+
+* **productV1:** add is_service param ([69a0a15](https://github.com/tillhub/tillhub-sdk-javascript/commit/69a0a15))
+
 ## [3.88.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.88.1...v3.88.2) (2019-06-06)
 
 
