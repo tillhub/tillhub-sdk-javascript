@@ -69,6 +69,7 @@ export interface Product {
   locations?: string[] | null
   stock_info?: object | null
   i18n?: object | null
+  is_service?: boolean
 }
 
 export interface StockConfigurationLocation {
