@@ -641,6 +641,13 @@ export class CustomerPutFailed extends BaseError {
   }
 }
 
+export class CustomerNoteCreationFailed extends BaseError {
+  public name = 'CustomerNoteCreationFailed'
+  constructor(public message: string = 'Could not create customer note', properties?: any) {
+    super(message, properties)
+  }
+}
+
 export class CustomerCreationFailed extends BaseError {
   public name = 'CustomerCreationFailed'
   constructor(public message: string = 'Could not create customer', properties?: any) {

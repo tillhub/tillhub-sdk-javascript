@@ -14,6 +14,7 @@ export interface CustomersQuery {
   query?: {
     deleted?: boolean
     active?: boolean
+    extended?: boolean
   }
 }
 
@@ -55,6 +56,11 @@ export interface CustomerPhonenumbers {
   home?: string
   mobile?: string
   work?: string
+}
+
+export interface CustomerNoteItem {
+  type: 'text',
+  payload: any
 }
 
 export interface CustomerContacts {
@@ -193,9 +199,22 @@ export class Customers {
     })
   }
 
-  get(customerId: string): Promise<CustomerResponse> {
+  get(customerId: string, queryOrOptions: CustomersQuery): Promise<CustomerResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${customerId}`
+      let uri
+      if (queryOrOptions && queryOrOptions.uri) {
+        uri = queryOrOptions.uri
+      } else {
+        let queryString = ''
+        if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
+          queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
+        }
+
+        uri = `${this.options.base}${this.endpoint}/${this.options.user}/${customerId}${
+          queryString ? `?${queryString}` : ''
+          }`
+      }
+
       try {
         const response = await this.http.getClient().get(uri)
 
@@ -209,6 +228,26 @@ export class Customers {
         } as CustomerResponse)
       } catch (error) {
         return reject(new errors.CustomerFetchFailed(undefined, { error }))
+      }
+    })
+  }
+
+  createNote(customerId: string, note: CustomerNoteItem): Promise<CustomerResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${customerId}/notes`
+      try {
+        const response = await this.http.getClient().post(uri, note)
+
+        if (response.status !== 200) {
+          return reject(new errors.CustomerNoteCreationFailed(undefined, { status: response.status }))
+        }
+        return resolve({
+          data: response.data.results[0] as Customer,
+          msg: response.data.msg,
+          metadata: { count: response.data.count }
+        } as CustomerResponse)
+      } catch (error) {
+        return reject(new errors.CustomerNoteCreationFailed(undefined, { error }))
       }
     })
   }
