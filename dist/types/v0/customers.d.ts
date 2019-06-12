@@ -10,6 +10,7 @@ export interface CustomersQuery {
     query?: {
         deleted?: boolean;
         active?: boolean;
+        extended?: boolean;
     };
 }
 export interface CustomersMetaQuery {
@@ -44,6 +45,10 @@ export interface CustomerPhonenumbers {
     home?: string;
     mobile?: string;
     work?: string;
+}
+export interface CustomerNoteItem {
+    type: 'text';
+    payload: any;
 }
 export interface CustomerContacts {
     email?: {
@@ -125,7 +130,8 @@ export declare class Customers {
     uriHelper: UriHelper;
     constructor(options: CustomersOptions, http: Client);
     getAll(queryOrOptions?: CustomersQuery | undefined): Promise<CustomersResponse>;
-    get(customerId: string): Promise<CustomerResponse>;
+    get(customerId: string, queryOrOptions: CustomersQuery): Promise<CustomerResponse>;
+    createNote(customerId: string, note: CustomerNoteItem): Promise<CustomerResponse>;
     put(customerId: string, customer: Customer): Promise<CustomerResponse>;
     create(customer: Customer, query?: HandlerCustomerQuery): Promise<CustomerResponse>;
     meta(q?: CustomersMetaQuery | undefined): Promise<CustomersResponse>;

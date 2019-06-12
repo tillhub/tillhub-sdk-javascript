@@ -1083,6 +1083,18 @@ var CustomerPutFailed = /** @class */ (function (_super) {
     return CustomerPutFailed;
 }(baseError_1.BaseError));
 exports.CustomerPutFailed = CustomerPutFailed;
+var CustomerNoteCreationFailed = /** @class */ (function (_super) {
+    __extends(CustomerNoteCreationFailed, _super);
+    function CustomerNoteCreationFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create customer note'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'CustomerNoteCreationFailed';
+        return _this;
+    }
+    return CustomerNoteCreationFailed;
+}(baseError_1.BaseError));
+exports.CustomerNoteCreationFailed = CustomerNoteCreationFailed;
 var CustomerCreationFailed = /** @class */ (function (_super) {
     __extends(CustomerCreationFailed, _super);
     function CustomerCreationFailed(message, properties) {

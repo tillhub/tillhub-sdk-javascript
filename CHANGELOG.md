@@ -1,3 +1,10 @@
+# [3.90.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.89.0...v3.90.0) (2019-06-12)
+
+
+### Features
+
+* **customers:** add customer notes creation; add extended ([e813bc6](https://github.com/tillhub/tillhub-sdk-javascript/commit/e813bc6))
+
 # [3.89.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.88.2...v3.89.0) (2019-06-11)
 
 

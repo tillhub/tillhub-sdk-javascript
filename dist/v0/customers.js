@@ -109,14 +109,23 @@ var Customers = /** @class */ (function () {
             });
         }); });
     };
-    Customers.prototype.get = function (customerId) {
+    Customers.prototype.get = function (customerId, queryOrOptions) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, error_1;
+            var uri, queryString, response, error_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + customerId;
+                        if (queryOrOptions && queryOrOptions.uri) {
+                            uri = queryOrOptions.uri;
+                        }
+                        else {
+                            queryString = '';
+                            if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
+                                queryString = qs_1.default.stringify(__assign({ limit: queryOrOptions.limit }, queryOrOptions.query));
+                            }
+                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + customerId + (queryString ? "?" + queryString : '');
+                        }
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -139,10 +148,40 @@ var Customers = /** @class */ (function () {
             });
         }); });
     };
-    Customers.prototype.put = function (customerId, customer) {
+    Customers.prototype.createNote = function (customerId, note) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + customerId + "/notes";
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().post(uri, note)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new errors.CustomerNoteCreationFailed(undefined, { status: response.status }))];
+                        }
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_2 = _a.sent();
+                        return [2 /*return*/, reject(new errors.CustomerNoteCreationFailed(undefined, { error: error_2 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Customers.prototype.put = function (customerId, customer) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -161,8 +200,8 @@ var Customers = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        error_2 = _a.sent();
-                        return [2 /*return*/, reject(new errors.CustomerPutFailed(undefined, { error: error_2 }))];
+                        error_3 = _a.sent();
+                        return [2 /*return*/, reject(new errors.CustomerPutFailed(undefined, { error: error_3 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -171,7 +210,7 @@ var Customers = /** @class */ (function () {
     Customers.prototype.create = function (customer, query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var base, uri, response, error_3;
+            var base, uri, response, error_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -192,8 +231,8 @@ var Customers = /** @class */ (function () {
                                 errors: response.data.errors || []
                             })];
                     case 3:
-                        error_3 = _a.sent();
-                        return [2 /*return*/, reject(new errors.CustomerCreationFailed(undefined, { error: error_3 }))];
+                        error_4 = _a.sent();
+                        return [2 /*return*/, reject(new errors.CustomerCreationFailed(undefined, { error: error_4 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -295,7 +334,7 @@ var Customers = /** @class */ (function () {
     Customers.prototype.search = function (searchTerm) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, error_4;
+            var uri, response, error_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -312,8 +351,8 @@ var Customers = /** @class */ (function () {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        error_4 = _a.sent();
-                        return [2 /*return*/, reject(new errors.CustomersSearchFailed(undefined, { error: error_4 }))];
+                        error_5 = _a.sent();
+                        return [2 /*return*/, reject(new errors.CustomersSearchFailed(undefined, { error: error_5 }))];
                     case 4: return [2 /*return*/];
                 }
             });
