@@ -1,3 +1,11 @@
+# [3.91.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.90.0...v3.91.0) (2019-06-14)
+
+
+### Features
+
+* **product_service_question_groups:** create handlers for new endpoint ([ddfc473](https://github.com/tillhub/tillhub-sdk-javascript/commit/ddfc473))
+* **product_service_questions:** add handlers for new endpoint ([5aebf12](https://github.com/tillhub/tillhub-sdk-javascript/commit/5aebf12))
+
 # [3.90.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.89.0...v3.90.0) (2019-06-12)
 
 

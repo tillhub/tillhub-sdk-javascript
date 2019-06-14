@@ -525,6 +525,20 @@ var TillhubClient = /** @class */ (function (_super) {
     TillhubClient.prototype.exports = function () {
         return this.generateAuthenticatedInstance(v0.Exports);
     };
+    /**
+     * Create an authenticated ProductServiceQuestionGroups instance
+     *
+     */
+    TillhubClient.prototype.productServiceQuestionGroups = function () {
+        return this.generateAuthenticatedInstance(v0.ProductServiceQuestionGroups);
+    };
+    /**
+     * Create an authenticated ProductServiceQuestionGroups instance
+     *
+     */
+    TillhubClient.prototype.productServiceQuestions = function () {
+        return this.generateAuthenticatedInstance(v0.ProductServiceQuestions);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));
