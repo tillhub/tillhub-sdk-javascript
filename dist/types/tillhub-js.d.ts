@@ -260,6 +260,11 @@ export declare class TillhubClient extends events.EventEmitter {
      *
      */
     productServiceQuestions(): v0.ProductServiceQuestions;
+    /**
+     * Create an authenticated Data instance
+     *
+     */
+    data(): v0.Data;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;

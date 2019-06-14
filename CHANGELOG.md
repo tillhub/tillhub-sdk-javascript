@@ -1,3 +1,10 @@
+# [3.92.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.91.0...v3.92.0) (2019-06-14)
+
+
+### Features
+
+* add data ([384c9dd](https://github.com/tillhub/tillhub-sdk-javascript/commit/384c9dd))
+
 # [3.91.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.90.0...v3.91.0) (2019-06-14)
 
 

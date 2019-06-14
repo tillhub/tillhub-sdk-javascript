@@ -539,6 +539,13 @@ var TillhubClient = /** @class */ (function (_super) {
     TillhubClient.prototype.productServiceQuestions = function () {
         return this.generateAuthenticatedInstance(v0.ProductServiceQuestions);
     };
+    /**
+     * Create an authenticated Data instance
+     *
+     */
+    TillhubClient.prototype.data = function () {
+        return this.generateAuthenticatedInstance(v0.Data);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));
