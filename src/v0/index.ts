@@ -34,6 +34,7 @@ import { Videos } from './videos'
 import { StaffGroups } from './staff_groups'
 import { Exports } from './exports'
 import { ProductServiceQuestionGroups } from './product_service_question_groups'
+import { ProductServiceQuestions } from './product_service_questions'
 
 export {
   Auth,
@@ -73,5 +74,6 @@ export {
   Videos,
   StaffGroups,
   Exports,
-  ProductServiceQuestionGroups
+  ProductServiceQuestionGroups,
+  ProductServiceQuestions
 }

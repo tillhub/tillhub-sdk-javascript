@@ -637,6 +637,14 @@ export class TillhubClient extends events.EventEmitter {
   productServiceQuestionGroups(): v0.ProductServiceQuestionGroups {
     return this.generateAuthenticatedInstance(v0.ProductServiceQuestionGroups)
   }
+
+  /**
+   * Create an authenticated ProductServiceQuestionGroups instance
+   *
+   */
+  productServiceQuestions(): v0.ProductServiceQuestions {
+    return this.generateAuthenticatedInstance(v0.ProductServiceQuestions)
+  }
 }
 
 export class Tillhub extends TillhubClient {
