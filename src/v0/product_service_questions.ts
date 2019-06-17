@@ -152,4 +152,20 @@ export class ProductServiceQuestions {
       }
     })
   }
+
+  delete(taxId: string): Promise<ProductServiceQuestionReponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${taxId}`
+      try {
+        const response = await this.http.getClient().delete(uri)
+        response.status !== 200 && reject(new errors.ProductServiceQuestionDeleteFailed())
+
+        return resolve({
+          msg: response.data.msg
+        } as ProductServiceQuestionReponse)
+      } catch (err) {
+        return reject(new errors.ProductServiceQuestionDeleteFailed())
+      }
+    })
+  }
 }
