@@ -1,3 +1,10 @@
+# [3.93.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.92.0...v3.93.0) (2019-06-17)
+
+
+### Features
+
+* **product-service-question:** add delete ([37fd600](https://github.com/tillhub/tillhub-sdk-javascript/commit/37fd600))
+
 # [3.92.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.91.0...v3.92.0) (2019-06-14)
 
 

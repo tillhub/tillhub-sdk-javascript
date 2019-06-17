@@ -24,6 +24,11 @@ export declare class ProductServiceQuestionsPutFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class ProductServiceQuestionDeleteFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
 export declare class ProductServiceQuestionsBookFailed extends BaseError {
     message: string;
     name: string;

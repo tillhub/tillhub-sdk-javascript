@@ -46,4 +46,5 @@ export declare class ProductServiceQuestions {
     meta(): Promise<ProductServiceQuestionsResponse>;
     create(productServiceQuestion: ProductServiceQuestion): Promise<ProductServiceQuestionReponse>;
     put(questionId: string, productServiceQuestion: ProductServiceQuestion): Promise<ProductServiceQuestionReponse>;
+    delete(taxId: string): Promise<ProductServiceQuestionReponse>;
 }

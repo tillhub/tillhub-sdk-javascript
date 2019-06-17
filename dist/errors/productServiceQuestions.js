@@ -17,7 +17,7 @@ var baseError_1 = require("./baseError");
 var ProductServiceQuestionsFetchAllFailed = /** @class */ (function (_super) {
     __extends(ProductServiceQuestionsFetchAllFailed, _super);
     function ProductServiceQuestionsFetchAllFailed(message, properties) {
-        if (message === void 0) { message = 'Could not fetch all product service questions'; }
+        if (message === void 0) { message = 'Could not fetch all product service question'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProductServiceQuestionsFetchAllFailed';
@@ -41,7 +41,7 @@ exports.ProductServiceQuestionsFetchOneFailed = ProductServiceQuestionsFetchOneF
 var ProductServiceQuestionsGetMetaFailed = /** @class */ (function (_super) {
     __extends(ProductServiceQuestionsGetMetaFailed, _super);
     function ProductServiceQuestionsGetMetaFailed(message, properties) {
-        if (message === void 0) { message = 'Could not fetch meta data for product service questions'; }
+        if (message === void 0) { message = 'Could not fetch meta data for product service question'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProductServiceQuestionsGetMetaFailed';
@@ -53,7 +53,7 @@ exports.ProductServiceQuestionsGetMetaFailed = ProductServiceQuestionsGetMetaFai
 var ProductServiceQuestionsCreationFailed = /** @class */ (function (_super) {
     __extends(ProductServiceQuestionsCreationFailed, _super);
     function ProductServiceQuestionsCreationFailed(message, properties) {
-        if (message === void 0) { message = 'Could not create product service questions'; }
+        if (message === void 0) { message = 'Could not create product service question'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProductServiceQuestionsCreationFailed';
@@ -65,7 +65,7 @@ exports.ProductServiceQuestionsCreationFailed = ProductServiceQuestionsCreationF
 var ProductServiceQuestionsPutFailed = /** @class */ (function (_super) {
     __extends(ProductServiceQuestionsPutFailed, _super);
     function ProductServiceQuestionsPutFailed(message, properties) {
-        if (message === void 0) { message = 'Could not update product service questions'; }
+        if (message === void 0) { message = 'Could not update product service question'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProductServiceQuestionsPutFailed';
@@ -74,6 +74,18 @@ var ProductServiceQuestionsPutFailed = /** @class */ (function (_super) {
     return ProductServiceQuestionsPutFailed;
 }(baseError_1.BaseError));
 exports.ProductServiceQuestionsPutFailed = ProductServiceQuestionsPutFailed;
+var ProductServiceQuestionDeleteFailed = /** @class */ (function (_super) {
+    __extends(ProductServiceQuestionDeleteFailed, _super);
+    function ProductServiceQuestionDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete product service question'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductServiceQuestionDeleteFailed';
+        return _this;
+    }
+    return ProductServiceQuestionDeleteFailed;
+}(baseError_1.BaseError));
+exports.ProductServiceQuestionDeleteFailed = ProductServiceQuestionDeleteFailed;
 var ProductServiceQuestionsBookFailed = /** @class */ (function (_super) {
     __extends(ProductServiceQuestionsBookFailed, _super);
     function ProductServiceQuestionsBookFailed(message, properties) {
