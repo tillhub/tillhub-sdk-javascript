@@ -29,7 +29,7 @@ export interface User {
   id?: string
 }
 
-export type UserRoles = 'admin' | 'manager' | 'serviceaccount' | 'franchisee' | 'franchise'
+export type UserRoles = 'admin' | 'manager' | 'serviceaccount' | 'franchisee' | 'franchise' | 'staff'
 
 export interface User {
   user: {

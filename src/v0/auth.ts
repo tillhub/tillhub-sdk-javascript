@@ -167,7 +167,7 @@ export class Auth {
     } catch (err) {
       const error = new errors.AuthenticationFailed()
       err.error = err
-      err.body = err.ressponse && err.response.data ? err.response.data : null
+      err.body = err.response && err.response.data ? err.response.data : null
 
       throw error
     }
