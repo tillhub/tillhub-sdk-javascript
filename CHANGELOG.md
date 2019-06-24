@@ -1,3 +1,18 @@
+# [3.94.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.93.0...v3.94.0) (2019-06-24)
+
+
+### Bug Fixes
+
+* **auth:** fix typo in destructured object ([e0dba14](https://github.com/tillhub/tillhub-sdk-javascript/commit/e0dba14))
+* **auth:** typo ([cf11757](https://github.com/tillhub/tillhub-sdk-javascript/commit/cf11757))
+* **users:** fix user roles staff declaration ([58c41a9](https://github.com/tillhub/tillhub-sdk-javascript/commit/58c41a9))
+
+
+### Features
+
+* **auth:** add role and scopes to org login ([5cba1dc](https://github.com/tillhub/tillhub-sdk-javascript/commit/5cba1dc))
+* **users:** add staff role ([1789186](https://github.com/tillhub/tillhub-sdk-javascript/commit/1789186))
+
 # [3.93.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.92.0...v3.93.0) (2019-06-17)
 
 

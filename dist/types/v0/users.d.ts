@@ -23,7 +23,7 @@ export interface UserResponse {
 export interface User {
     id?: string;
 }
-export declare type UserRoles = 'admin' | 'manager' | 'serviceaccount' | 'franchisee' | 'franchise';
+export declare type UserRoles = 'admin' | 'manager' | 'serviceaccount' | 'franchisee' | 'franchise' | 'staff';
 export interface User {
     user: {
         id?: string;

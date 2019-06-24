@@ -158,7 +158,7 @@ var Auth = /** @class */ (function () {
                         err_1 = _a.sent();
                         error = new errors.AuthenticationFailed();
                         err_1.error = err_1;
-                        err_1.body = err_1.ressponse && err_1.response.data ? err_1.response.data : null;
+                        err_1.body = err_1.response && err_1.response.data ? err_1.response.data : null;
                         throw error;
                     case 4: return [2 /*return*/];
                 }
