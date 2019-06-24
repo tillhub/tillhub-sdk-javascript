@@ -96,7 +96,7 @@ export class Auth extends v0.Auth {
         response.data.token
       )
 
-      const { sub_users: { role = null, scopes = [] } = {} } = response.data
+      const { sub_user: { role = null, scopes = [] } = {} } = response.data
 
       return {
         token: response.data.token,
