@@ -11,6 +11,8 @@ export interface AuthOptions {
     base?: string | undefined;
     user?: string;
     token?: string;
+    scopes?: string[];
+    role?: string;
 }
 export interface UsernameAuth {
     username: string;
