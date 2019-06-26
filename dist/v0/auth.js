@@ -153,8 +153,8 @@ var Auth = /** @class */ (function () {
                                 user: response.data.user.legacy_id || response.data.user.id,
                                 name: response.data.user.name,
                                 features: response.data.features || {},
-                                scopes: response.data.scopes,
-                                role: response.data.role
+                                scopes: response.data.user.scopes,
+                                role: response.data.user.role
                             }];
                     case 3:
                         err_1 = _a.sent();

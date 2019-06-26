@@ -1,3 +1,11 @@
+## [3.95.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.95.1...v3.95.2) (2019-06-26)
+
+
+### Bug Fixes
+
+* **auth:** fix test ([6d3c4b2](https://github.com/tillhub/tillhub-sdk-javascript/commit/6d3c4b2))
+* **auth:** get scopes, role from user obj res ([67248a0](https://github.com/tillhub/tillhub-sdk-javascript/commit/67248a0))
+
 ## [3.95.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.95.0...v3.95.1) (2019-06-26)
 
 
