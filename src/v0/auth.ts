@@ -16,6 +16,8 @@ export interface AuthOptions {
   base?: string | undefined
   user?: string
   token?: string
+  scopes?: string[]
+  role?: string
 }
 
 export interface UsernameAuth {
@@ -162,7 +164,9 @@ export class Auth {
         token: response.data.token,
         user: response.data.user.legacy_id || response.data.user.id,
         name: response.data.user.name,
-        features: response.data.features || {}
+        features: response.data.features || {},
+        scopes: response.data.scopes,
+        role: response.data.role
       } as AuthResponse
     } catch (err) {
       const error = new errors.AuthenticationFailed()
