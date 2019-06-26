@@ -11,8 +11,6 @@ export interface AuthOptions {
     base?: string | undefined;
     user?: string;
     token?: string;
-    scopes?: string[];
-    role?: string;
 }
 export interface UsernameAuth {
     username: string;
@@ -54,6 +52,8 @@ export interface AuthResponse {
     name?: string;
     features?: any;
     is_support?: boolean;
+    scopes?: string[];
+    role?: string;
 }
 /**
  * @class "v0.Auth"

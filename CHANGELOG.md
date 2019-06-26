@@ -1,3 +1,10 @@
+## [3.95.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.95.0...v3.95.1) (2019-06-26)
+
+
+### Bug Fixes
+
+* **auth:** add props to auth response interface ([4e8b6d2](https://github.com/tillhub/tillhub-sdk-javascript/commit/4e8b6d2))
+
 # [3.95.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.94.0...v3.95.0) (2019-06-26)
 
 
