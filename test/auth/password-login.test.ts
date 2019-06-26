@@ -38,13 +38,13 @@ describe('Auth: make auth flow', () => {
             token: '',
             user: {
               id: '123',
-              legacy_id: '4564'
+              legacy_id: '4564',
+              scopes: ['admin'],
+              role: 'manager'
             },
             features: {
               inventory: true
-            },
-            scopes: ['admin'],
-            role: 'manager'
+            }
           }
         ]
       })
