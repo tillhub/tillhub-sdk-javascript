@@ -42,7 +42,9 @@ describe('Auth: make auth flow', () => {
             },
             features: {
               inventory: true
-            }
+            },
+            scopes: ['admin'],
+            role: 'manager'
           }
         ]
       })
@@ -56,6 +58,8 @@ describe('Auth: make auth flow', () => {
       expect(typeof data.token === 'string').toBe(true)
       expect(typeof data.user === 'string').toBe(true)
       expect(typeof data.features === 'object').toBe(true)
+      expect(Array.isArray(data.scopes)).toBe(true)
+      expect(typeof data.role === 'string').toBe(true)
       expect(data.features).toEqual({ inventory: true })
     } catch (err) {
       throw err

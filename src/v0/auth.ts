@@ -16,8 +16,6 @@ export interface AuthOptions {
   base?: string | undefined
   user?: string
   token?: string
-  scopes?: string[]
-  role?: string
 }
 
 export interface UsernameAuth {
@@ -80,6 +78,8 @@ export interface AuthResponse {
   name?: string
   features?: any
   is_support?: boolean
+  scopes?: string[]
+  role?: string
 }
 
 /**
