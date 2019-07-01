@@ -107,6 +107,10 @@ export interface StaffItem {
   phone?: object
 }
 
+export interface MakeUserRequest {
+  user: string
+}
+
 export class Staff {
   endpoint: string
   http: Client
@@ -349,6 +353,24 @@ export class Staff {
       }
     })
   }
+
+  makeUser(staffID: string, makeUserObj: MakeUserRequest): Promise<StaffResponse> {
+    return new Promise(async (resolve, reject) => {
+      const base = this.uriHelper.generateBaseUri(`/${staffID}/make_user`)
+
+      try {
+        const response = await this.http.getClient().post(base, makeUserObj)
+        response.status !== 200 && reject(new MakeUserStaffFailed())
+
+        return resolve({
+          data: response.data.results[0] as StaffMember,
+          metadata: { count: response.data.count }
+        } as StaffResponse)
+      } catch (error) {
+        return reject(new MakeUserStaffFailed(undefined, { error }))
+      }
+    })
+  }
 }
 
 export class StaffFetchFailed extends BaseError {
@@ -399,6 +421,13 @@ export class StaffPinGetFailed extends BaseError {
 export class StaffNumberGetFailed extends BaseError {
   public name = 'StaffNumberGetFailed'
   constructor(public message: string = 'Could not get a unique Staff number', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class MakeUserStaffFailed extends BaseError {
+  public name = 'MakeUserStaffFailed'
+  constructor(public message: string = 'Could not make the staff member a user', properties?: any) {
     super(message, properties)
   }
 }
