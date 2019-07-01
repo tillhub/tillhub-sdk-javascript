@@ -1,6 +1,6 @@
 import qs from 'qs'
 import { Client } from '../client'
-import * as errors from '../errors'
+import { BaseError } from '../errors'
 import { UriHelper, HandlerQuery } from '../uri-helper'
 
 export interface StaffOptions {
@@ -143,7 +143,7 @@ export class Staff {
 
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(new errors.StaffFetchFailed(undefined, { status: response.status }))
+          return reject(new StaffFetchFailed(undefined, { status: response.status }))
         }
 
         return resolve({
@@ -152,7 +152,7 @@ export class Staff {
           next
         } as StaffResponse)
       } catch (error) {
-        return reject(new errors.StaffFetchFailed(undefined, { error }))
+        return reject(new StaffFetchFailed(undefined, { error }))
       }
     })
   }
@@ -164,7 +164,7 @@ export class Staff {
 
       try {
         const response = await this.http.getClient().post(uri, staffMember)
-        response.status !== 200 && reject(new errors.StaffMemberCreateFailed())
+        response.status !== 200 && reject(new StaffMemberCreateFailed())
 
         return resolve({
           data: response.data.results[0] as StaffMember,
@@ -172,7 +172,7 @@ export class Staff {
           errors: response.data.errors || []
         } as StaffResponse)
       } catch (error) {
-        return reject(new errors.StaffMemberCreateFailed(undefined, { error }))
+        return reject(new StaffMemberCreateFailed(undefined, { error }))
       }
     })
   }
@@ -183,7 +183,7 @@ export class Staff {
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
-          reject(new errors.StaffFetchOneFailed(undefined, { status: response.status }))
+          reject(new StaffFetchOneFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results[0] as StaffMember,
@@ -191,7 +191,7 @@ export class Staff {
           metadata: { count: response.data.count }
         } as StaffMemberResponse)
       } catch (error) {
-        return reject(new errors.StaffFetchOneFailed(undefined, { error }))
+        return reject(new StaffFetchOneFailed(undefined, { error }))
       }
     })
   }
@@ -202,14 +202,14 @@ export class Staff {
       try {
         const response = await this.http.getClient().put(uri, staff)
         response.status !== 200 &&
-          reject(new errors.StaffPutFailed(undefined, { status: response.status }))
+          reject(new StaffPutFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results[0] as StaffMember,
           metadata: { count: response.data.count }
         } as StaffMemberResponse)
       } catch (error) {
-        return reject(new errors.StaffPutFailed(undefined, { error }))
+        return reject(new StaffPutFailed(undefined, { error }))
       }
     })
   }
@@ -220,11 +220,11 @@ export class Staff {
       try {
         const response = await this.http.getClient().delete(uri)
         response.status !== 200 &&
-          reject(new errors.StaffDeleteFailed(undefined, { status: response.status }))
+          reject(new StaffDeleteFailed(undefined, { status: response.status }))
 
         return resolve({ msg: response.data.msg } as StaffMemberResponse)
       } catch (error) {
-        return reject(new errors.StaffDeleteFailed(undefined, { error }))
+        return reject(new StaffDeleteFailed(undefined, { error }))
       }
     })
   }
@@ -238,7 +238,7 @@ export class Staff {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
           reject(
-            new errors.StaffPinGetFailed(undefined, {
+            new StaffPinGetFailed(undefined, {
               status: response.status
             })
           )
@@ -251,13 +251,13 @@ export class Staff {
       } catch (error) {
         if (error.response && error.response.status === 409) {
           return reject(
-            new errors.StaffPinGetFailed(undefined, {
+            new StaffPinGetFailed(undefined, {
               status: error.response.status,
               name: error.response.data.name
             })
           )
         }
-        return reject(new errors.StaffPinGetFailed(undefined, { error }))
+        return reject(new StaffPinGetFailed(undefined, { error }))
       }
     })
   }
@@ -273,7 +273,7 @@ export class Staff {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
           reject(
-            new errors.StaffNumberGetFailed(undefined, {
+            new StaffNumberGetFailed(undefined, {
               status: response.status
             })
           )
@@ -286,13 +286,13 @@ export class Staff {
       } catch (error) {
         if (error.response && error.response.status === 409) {
           return reject(
-            new errors.StaffNumberGetFailed(undefined, {
+            new StaffNumberGetFailed(undefined, {
               status: error.response.status,
               name: error.response.data.name
             })
           )
         }
-        return reject(new errors.StaffNumberGetFailed(undefined, { error }))
+        return reject(new StaffNumberGetFailed(undefined, { error }))
       }
     })
   }
@@ -305,7 +305,7 @@ export class Staff {
 
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(new errors.StaffFetchFailed(undefined, { status: response.status }))
+          return reject(new StaffFetchFailed(undefined, { status: response.status }))
         }
 
         const resp = response.data.results || []
@@ -345,8 +345,60 @@ export class Staff {
           metadata: { resources: resources }
         } as StaffResponse)
       } catch (error) {
-        return reject(new errors.StaffFetchFailed(undefined, { error }))
+        return reject(new StaffFetchFailed(undefined, { error }))
       }
     })
+  }
+}
+
+export class StaffFetchFailed extends BaseError {
+  public name = 'StaffFetchFailed'
+  constructor(public message: string = 'Could not fetch all the Staff members', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class StaffFetchOneFailed extends BaseError {
+  public name = 'StaffFetchOneFailed'
+  constructor(public message: string = 'Could not fetch the Staff member', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class StaffPutFailed extends BaseError {
+  public name = 'StaffPutFailed'
+  constructor(public message: string = 'Could not alter the Staff member', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class StaffDeleteFailed extends BaseError {
+  public name = 'StaffDeleteFailed'
+  constructor(public message: string = 'Could not delete the Staff member', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class StaffMemberCreateFailed extends BaseError {
+  public name = 'StaffMemberCreateFailed'
+  constructor(public message: string = 'Could not create the Staff member', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class StaffPinGetFailed extends BaseError {
+  public name = 'StaffPinGetFailed'
+  constructor(
+    public message: string = 'Could not get a unique Staff pin number',
+    properties?: any
+  ) {
+    super(message, properties)
+  }
+}
+
+export class StaffNumberGetFailed extends BaseError {
+  public name = 'StaffNumberGetFailed'
+  constructor(public message: string = 'Could not get a unique Staff number', properties?: any) {
+    super(message, properties)
   }
 }
