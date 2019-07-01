@@ -980,58 +980,6 @@ export class RevenuesFetchFailed extends BaseError {
   }
 }
 
-export class StaffFetchFailed extends BaseError {
-  public name = 'StaffFetchFailed'
-  constructor(public message: string = 'Could not fetch all the Staff members', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class StaffFetchOneFailed extends BaseError {
-  public name = 'StaffFetchOneFailed'
-  constructor(public message: string = 'Could not fetch the Staff member', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class StaffPutFailed extends BaseError {
-  public name = 'StaffPutFailed'
-  constructor(public message: string = 'Could not alter the Staff member', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class StaffDeleteFailed extends BaseError {
-  public name = 'StaffDeleteFailed'
-  constructor(public message: string = 'Could not delete the Staff member', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class StaffMemberCreateFailed extends BaseError {
-  public name = 'StaffMemberCreateFailed'
-  constructor(public message: string = 'Could not create the Staff member', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class StaffPinGetFailed extends BaseError {
-  public name = 'StaffPinGetFailed'
-  constructor(
-    public message: string = 'Could not get a unique Staff pin number',
-    properties?: any
-  ) {
-    super(message, properties)
-  }
-}
-
-export class StaffNumberGetFailed extends BaseError {
-  public name = 'StaffNumberGetFailed'
-  constructor(public message: string = 'Could not get a unique Staff number', properties?: any) {
-    super(message, properties)
-  }
-}
-
 export class RegistersFetchFailed extends BaseError {
   public name = 'RegistersFetchFailed'
   constructor(public message: string = 'Could not fetch the Registers', properties?: any) {
