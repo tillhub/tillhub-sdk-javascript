@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { BaseError } from '../errors';
 import { UriHelper, HandlerQuery } from '../uri-helper';
 export interface StaffOptions {
     user?: string;
@@ -89,6 +90,9 @@ export interface StaffItem {
     email?: string;
     phone?: object;
 }
+export interface MakeUserRequest {
+    user: string;
+}
 export declare class Staff {
     endpoint: string;
     http: Client;
@@ -103,4 +107,45 @@ export declare class Staff {
     getPin(providedPin?: PinRequest): Promise<StaffMemberResponse>;
     getStaffNumber(providedStaffNumber?: StaffNumberRequest): Promise<StaffMemberResponse>;
     getFilters(queryOrOptions?: StaffQueryOrOptions): Promise<StaffResponse>;
+    makeUser(staffID: string, makeUserObj: MakeUserRequest): Promise<StaffResponse>;
+}
+export declare class StaffFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class StaffFetchOneFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class StaffPutFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class StaffDeleteFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class StaffMemberCreateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class StaffPinGetFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class StaffNumberGetFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class MakeUserStaffFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
 }

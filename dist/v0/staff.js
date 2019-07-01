@@ -1,4 +1,17 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -48,16 +61,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var qs_1 = __importDefault(require("qs"));
-var errors = __importStar(require("../errors"));
+var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
 var Staff = /** @class */ (function () {
     function Staff(options, http) {
@@ -90,7 +96,7 @@ var Staff = /** @class */ (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.StaffFetchFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new StaffFetchFailed(undefined, { status: response.status }))];
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
@@ -99,7 +105,7 @@ var Staff = /** @class */ (function () {
                             })];
                     case 2:
                         error_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.StaffFetchFailed(undefined, { error: error_1 }))];
+                        return [2 /*return*/, reject(new StaffFetchFailed(undefined, { error: error_1 }))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -120,7 +126,7 @@ var Staff = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().post(uri, staffMember)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 && reject(new errors.StaffMemberCreateFailed());
+                        response.status !== 200 && reject(new StaffMemberCreateFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count },
@@ -128,7 +134,7 @@ var Staff = /** @class */ (function () {
                             })];
                     case 3:
                         error_2 = _a.sent();
-                        return [2 /*return*/, reject(new errors.StaffMemberCreateFailed(undefined, { error: error_2 }))];
+                        return [2 /*return*/, reject(new StaffMemberCreateFailed(undefined, { error: error_2 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -149,7 +155,7 @@ var Staff = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         response.status !== 200 &&
-                            reject(new errors.StaffFetchOneFailed(undefined, { status: response.status }));
+                            reject(new StaffFetchOneFailed(undefined, { status: response.status }));
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 msg: response.data.msg,
@@ -157,7 +163,7 @@ var Staff = /** @class */ (function () {
                             })];
                     case 3:
                         error_3 = _a.sent();
-                        return [2 /*return*/, reject(new errors.StaffFetchOneFailed(undefined, { error: error_3 }))];
+                        return [2 /*return*/, reject(new StaffFetchOneFailed(undefined, { error: error_3 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -178,14 +184,14 @@ var Staff = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         response.status !== 200 &&
-                            reject(new errors.StaffPutFailed(undefined, { status: response.status }));
+                            reject(new StaffPutFailed(undefined, { status: response.status }));
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
                         error_4 = _a.sent();
-                        return [2 /*return*/, reject(new errors.StaffPutFailed(undefined, { error: error_4 }))];
+                        return [2 /*return*/, reject(new StaffPutFailed(undefined, { error: error_4 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -206,11 +212,11 @@ var Staff = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         response.status !== 200 &&
-                            reject(new errors.StaffDeleteFailed(undefined, { status: response.status }));
+                            reject(new StaffDeleteFailed(undefined, { status: response.status }));
                         return [2 /*return*/, resolve({ msg: response.data.msg })];
                     case 3:
                         error_5 = _a.sent();
-                        return [2 /*return*/, reject(new errors.StaffDeleteFailed(undefined, { error: error_5 }))];
+                        return [2 /*return*/, reject(new StaffDeleteFailed(undefined, { error: error_5 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -232,7 +238,7 @@ var Staff = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         response.status !== 200 &&
-                            reject(new errors.StaffPinGetFailed(undefined, {
+                            reject(new StaffPinGetFailed(undefined, {
                                 status: response.status
                             }));
                         return [2 /*return*/, resolve({
@@ -243,12 +249,12 @@ var Staff = /** @class */ (function () {
                     case 3:
                         error_6 = _a.sent();
                         if (error_6.response && error_6.response.status === 409) {
-                            return [2 /*return*/, reject(new errors.StaffPinGetFailed(undefined, {
+                            return [2 /*return*/, reject(new StaffPinGetFailed(undefined, {
                                     status: error_6.response.status,
                                     name: error_6.response.data.name
                                 }))];
                         }
-                        return [2 /*return*/, reject(new errors.StaffPinGetFailed(undefined, { error: error_6 }))];
+                        return [2 /*return*/, reject(new StaffPinGetFailed(undefined, { error: error_6 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -270,7 +276,7 @@ var Staff = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         response.status !== 200 &&
-                            reject(new errors.StaffNumberGetFailed(undefined, {
+                            reject(new StaffNumberGetFailed(undefined, {
                                 status: response.status
                             }));
                         return [2 /*return*/, resolve({
@@ -281,12 +287,12 @@ var Staff = /** @class */ (function () {
                     case 3:
                         error_7 = _a.sent();
                         if (error_7.response && error_7.response.status === 409) {
-                            return [2 /*return*/, reject(new errors.StaffNumberGetFailed(undefined, {
+                            return [2 /*return*/, reject(new StaffNumberGetFailed(undefined, {
                                     status: error_7.response.status,
                                     name: error_7.response.data.name
                                 }))];
                         }
-                        return [2 /*return*/, reject(new errors.StaffNumberGetFailed(undefined, { error: error_7 }))];
+                        return [2 /*return*/, reject(new StaffNumberGetFailed(undefined, { error: error_7 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -306,7 +312,7 @@ var Staff = /** @class */ (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.StaffFetchFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new StaffFetchFailed(undefined, { status: response.status }))];
                         }
                         resp = response.data.results || [];
                         resources_1 = [
@@ -341,8 +347,35 @@ var Staff = /** @class */ (function () {
                             })];
                     case 2:
                         error_8 = _a.sent();
-                        return [2 /*return*/, reject(new errors.StaffFetchFailed(undefined, { error: error_8 }))];
+                        return [2 /*return*/, reject(new StaffFetchFailed(undefined, { error: error_8 }))];
                     case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Staff.prototype.makeUser = function (staffID, makeUserObj) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var base, response, error_9;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        base = this.uriHelper.generateBaseUri("/" + staffID + "/make_user");
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().post(base, makeUserObj)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 && reject(new MakeUserStaffFailed());
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_9 = _a.sent();
+                        return [2 /*return*/, reject(new MakeUserStaffFailed(undefined, { error: error_9 }))];
+                    case 4: return [2 /*return*/];
                 }
             });
         }); });
@@ -350,4 +383,100 @@ var Staff = /** @class */ (function () {
     return Staff;
 }());
 exports.Staff = Staff;
+var StaffFetchFailed = /** @class */ (function (_super) {
+    __extends(StaffFetchFailed, _super);
+    function StaffFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch all the Staff members'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StaffFetchFailed';
+        return _this;
+    }
+    return StaffFetchFailed;
+}(errors_1.BaseError));
+exports.StaffFetchFailed = StaffFetchFailed;
+var StaffFetchOneFailed = /** @class */ (function (_super) {
+    __extends(StaffFetchOneFailed, _super);
+    function StaffFetchOneFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the Staff member'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StaffFetchOneFailed';
+        return _this;
+    }
+    return StaffFetchOneFailed;
+}(errors_1.BaseError));
+exports.StaffFetchOneFailed = StaffFetchOneFailed;
+var StaffPutFailed = /** @class */ (function (_super) {
+    __extends(StaffPutFailed, _super);
+    function StaffPutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not alter the Staff member'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StaffPutFailed';
+        return _this;
+    }
+    return StaffPutFailed;
+}(errors_1.BaseError));
+exports.StaffPutFailed = StaffPutFailed;
+var StaffDeleteFailed = /** @class */ (function (_super) {
+    __extends(StaffDeleteFailed, _super);
+    function StaffDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete the Staff member'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StaffDeleteFailed';
+        return _this;
+    }
+    return StaffDeleteFailed;
+}(errors_1.BaseError));
+exports.StaffDeleteFailed = StaffDeleteFailed;
+var StaffMemberCreateFailed = /** @class */ (function (_super) {
+    __extends(StaffMemberCreateFailed, _super);
+    function StaffMemberCreateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create the Staff member'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StaffMemberCreateFailed';
+        return _this;
+    }
+    return StaffMemberCreateFailed;
+}(errors_1.BaseError));
+exports.StaffMemberCreateFailed = StaffMemberCreateFailed;
+var StaffPinGetFailed = /** @class */ (function (_super) {
+    __extends(StaffPinGetFailed, _super);
+    function StaffPinGetFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get a unique Staff pin number'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StaffPinGetFailed';
+        return _this;
+    }
+    return StaffPinGetFailed;
+}(errors_1.BaseError));
+exports.StaffPinGetFailed = StaffPinGetFailed;
+var StaffNumberGetFailed = /** @class */ (function (_super) {
+    __extends(StaffNumberGetFailed, _super);
+    function StaffNumberGetFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get a unique Staff number'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StaffNumberGetFailed';
+        return _this;
+    }
+    return StaffNumberGetFailed;
+}(errors_1.BaseError));
+exports.StaffNumberGetFailed = StaffNumberGetFailed;
+var MakeUserStaffFailed = /** @class */ (function (_super) {
+    __extends(MakeUserStaffFailed, _super);
+    function MakeUserStaffFailed(message, properties) {
+        if (message === void 0) { message = 'Could not make the staff member a user'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'MakeUserStaffFailed';
+        return _this;
+    }
+    return MakeUserStaffFailed;
+}(errors_1.BaseError));
+exports.MakeUserStaffFailed = MakeUserStaffFailed;
 //# sourceMappingURL=staff.js.map

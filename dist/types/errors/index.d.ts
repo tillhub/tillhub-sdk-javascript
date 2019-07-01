@@ -685,41 +685,6 @@ export declare class RevenuesFetchFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
-export declare class StaffFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class StaffFetchOneFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class StaffPutFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class StaffDeleteFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class StaffMemberCreateFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class StaffPinGetFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class StaffNumberGetFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
 export declare class RegistersFetchFailed extends BaseError {
     message: string;
     name: string;
