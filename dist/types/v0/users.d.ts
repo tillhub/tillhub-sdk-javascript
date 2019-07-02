@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { UriHelper, HandlerQuery } from '../uri-helper';
 export interface UsersOptions {
     user?: string;
     base?: string;
@@ -7,6 +8,9 @@ export interface UsersOptions {
 export interface UsersQuery {
     limit?: number;
     uri?: string;
+}
+export interface HandleUsersQuery extends HandlerQuery {
+    query?: UsersQuery;
 }
 export interface UsersResponse {
     data: User[];
@@ -52,8 +56,9 @@ export declare class Users {
     http: Client;
     options: UsersOptions;
     configurationId?: string;
+    uriHelper: UriHelper;
     constructor(options: UsersOptions, http: Client);
-    getAll(query?: UsersQuery | undefined): Promise<UsersResponse>;
+    getAll(query?: HandleUsersQuery): Promise<UsersResponse>;
     get(userId: string): Promise<UserResponse>;
     put(userId: string, user: User): Promise<UserResponse>;
     create(user: User): Promise<UserResponse>;

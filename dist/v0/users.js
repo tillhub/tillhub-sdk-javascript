@@ -43,6 +43,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var errors = __importStar(require("../errors"));
+var uri_helper_1 = require("../uri-helper");
 var Users = /** @class */ (function () {
     function Users(options, http) {
         this.options = options;
@@ -52,24 +53,20 @@ var Users = /** @class */ (function () {
         }
         this.endpoint = "/api/v0/configurations";
         this.options.base = this.options.base || 'https://api.tillhub.com';
+        this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
     }
     Users.prototype.getAll = function (query) {
         var _this = this;
         if (!this.configurationId)
             throw new TypeError('fetching users requires configuration ID to be set.');
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var next, uri, response, error_1;
+            var next, base, uri, response, error_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        uri = void 0;
-                        if (query && query.uri) {
-                            uri = query.uri;
-                        }
-                        else {
-                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + this.configurationId + "/users";
-                        }
+                        base = this.uriHelper.generateBaseUri("/" + this.configurationId + "/users");
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();

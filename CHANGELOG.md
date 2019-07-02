@@ -1,3 +1,10 @@
+# [3.97.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.96.0...v3.97.0) (2019-07-02)
+
+
+### Features
+
+* **users/getAll:** handle provided query, add UriHelper ([b81ae42](https://github.com/tillhub/tillhub-sdk-javascript/commit/b81ae42))
+
 # [3.96.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.95.2...v3.96.0) (2019-07-01)
 
 
