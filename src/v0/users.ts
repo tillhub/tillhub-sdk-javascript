@@ -1,5 +1,6 @@
 import { Client } from '../client'
 import * as errors from '../errors'
+import { UriHelper, HandlerQuery } from '../uri-helper'
 
 export interface UsersOptions {
   user?: string
@@ -10,6 +11,10 @@ export interface UsersOptions {
 export interface UsersQuery {
   limit?: number
   uri?: string
+}
+
+export interface HandleUsersQuery extends HandlerQuery {
+  query?: UsersQuery
 }
 
 export interface UsersResponse {
@@ -60,6 +65,7 @@ export class Users {
   http: Client
   public options: UsersOptions
   public configurationId?: string
+  public uriHelper: UriHelper
 
   constructor(options: UsersOptions, http: Client) {
     this.options = options
@@ -72,20 +78,17 @@ export class Users {
     this.endpoint = `/api/v0/configurations`
 
     this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: UsersQuery | undefined): Promise<UsersResponse> {
+  getAll(query?: HandleUsersQuery): Promise<UsersResponse> {
     if (!this.configurationId) throw new TypeError('fetching users requires configuration ID to be set.')
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
-        let uri
-        if (query && query.uri) {
-          uri = query.uri
-        } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}/${this.configurationId}/users`
-        }
+        const base = this.uriHelper.generateBaseUri(`/${this.configurationId}/users`)
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
