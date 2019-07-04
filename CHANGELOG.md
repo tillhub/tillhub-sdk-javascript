@@ -1,3 +1,10 @@
+# [3.98.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.97.0...v3.98.0) (2019-07-04)
+
+
+### Features
+
+* **auth/v1:** add role, scopes to support login ([af8ba6b](https://github.com/tillhub/tillhub-sdk-javascript/commit/af8ba6b))
+
 # [3.97.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.96.0...v3.97.0) (2019-07-02)
 
 
