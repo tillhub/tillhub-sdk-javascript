@@ -133,6 +133,8 @@ export class Auth extends v0.Auth {
         token: response.data.token,
         user: response.data.user.legacy_id || response.data.user.id,
         name: response.data.user.name,
+        scopes: response.data.user.scopes,
+        role: response.data.user.role,
         is_support: true
       } as AuthResponse
     } catch (err) {
