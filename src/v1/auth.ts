@@ -96,14 +96,16 @@ export class Auth extends v0.Auth {
         response.data.token
       )
 
-      const { sub_user: { role = null, scopes = [] } = {} } = response.data
+      const { sub_user: subUser } = response.data
+      const { role = null, scopes = [] } = (subUser || {})
 
       return {
         token: response.data.token,
         user: response.data.user.legacy_id || response.data.user.id,
         name: response.data.user.name,
         role,
-        scopes
+        scopes,
+        subUser: subUser || null
       } as AuthResponse
     } catch (err) {
       const error = new errors.AuthenticationFailed()
