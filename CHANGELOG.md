@@ -1,3 +1,10 @@
+# [3.99.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.98.0...v3.99.0) (2019-07-06)
+
+
+### Features
+
+* **auth:** expose subuser ([2060d03](https://github.com/tillhub/tillhub-sdk-javascript/commit/2060d03))
+
 # [3.98.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.97.0...v3.98.0) (2019-07-04)
 
 

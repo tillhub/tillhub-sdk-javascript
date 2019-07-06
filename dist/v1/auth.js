@@ -131,29 +131,31 @@ var Auth = /** @class */ (function (_super) {
     };
     Auth.prototype.loginWithOrganisation = function (authData) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, _a, _b, _c, role, _d, scopes, err_2, error;
-            return __generator(this, function (_e) {
-                switch (_e.label) {
+            var response, subUser, _a, _b, role, _c, scopes, err_2, error;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
                     case 0:
-                        _e.trys.push([0, 2, , 3]);
+                        _d.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post(this.options.base + "/api/v1/users/auth/organisation/login", {
                                 organisation: authData.organisation,
                                 username: authData.username,
                                 password: authData.password
                             })];
                     case 1:
-                        response = _e.sent();
+                        response = _d.sent();
                         this.setDefaultHeader(response.data.user.legacy_id || response.data.user.id, response.data.token);
-                        _a = response.data.sub_user, _b = _a === void 0 ? {} : _a, _c = _b.role, role = _c === void 0 ? null : _c, _d = _b.scopes, scopes = _d === void 0 ? [] : _d;
+                        subUser = response.data.sub_user;
+                        _a = (subUser || {}), _b = _a.role, role = _b === void 0 ? null : _b, _c = _a.scopes, scopes = _c === void 0 ? [] : _c;
                         return [2 /*return*/, {
                                 token: response.data.token,
                                 user: response.data.user.legacy_id || response.data.user.id,
                                 name: response.data.user.name,
                                 role: role,
-                                scopes: scopes
+                                scopes: scopes,
+                                subUser: subUser || null
                             }];
                     case 2:
-                        err_2 = _e.sent();
+                        err_2 = _d.sent();
                         error = new errors.AuthenticationFailed();
                         err_2.error = err_2;
                         err_2.body = err_2.response && err_2.response.data ? err_2.response.data : null;

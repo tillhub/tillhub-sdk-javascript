@@ -54,6 +54,7 @@ export interface AuthResponse {
     is_support?: boolean;
     scopes?: string[];
     role?: string;
+    subUser?: object;
 }
 /**
  * @class "v0.Auth"
