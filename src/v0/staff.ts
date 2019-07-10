@@ -96,6 +96,7 @@ export interface StaffMember {
   discounts?: object
   date_of_birth?: string | null
   short_code?: number
+  locations?: string[]
   default?: boolean
 }
 
