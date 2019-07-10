@@ -1,3 +1,10 @@
+# [3.100.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.99.0...v3.100.0) (2019-07-10)
+
+
+### Features
+
+* **staff:** add locations to staff member interface ([2cc7ff9](https://github.com/tillhub/tillhub-sdk-javascript/commit/2cc7ff9))
+
 # [3.99.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.98.0...v3.99.0) (2019-07-06)
 
 
