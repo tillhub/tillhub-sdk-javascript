@@ -1,3 +1,10 @@
+# [3.101.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.100.0...v3.101.0) (2019-07-11)
+
+
+### Features
+
+* **expense_acc:** expanded interface ([803619b](https://github.com/tillhub/tillhub-sdk-javascript/commit/803619b))
+
 # [3.100.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.99.0...v3.100.0) (2019-07-10)
 
 
