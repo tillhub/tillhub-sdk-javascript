@@ -41,6 +41,7 @@ export interface ExpenseAccount {
   fa_account_number: number
   tax?: string
   type: ExpenseAccountType
+  accepts_booking_from_safe?: boolean
 }
 
 export class ExpenseAccounts {
