@@ -1,3 +1,10 @@
+# [3.102.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.101.0...v3.102.0) (2019-07-11)
+
+
+### Features
+
+* **customers:** add location ([b32d60f](https://github.com/tillhub/tillhub-sdk-javascript/commit/b32d60f))
+
 # [3.101.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.100.0...v3.101.0) (2019-07-11)
 
 
