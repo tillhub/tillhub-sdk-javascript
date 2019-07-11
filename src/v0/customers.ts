@@ -15,6 +15,7 @@ export interface CustomersQuery {
     deleted?: boolean
     active?: boolean
     extended?: boolean
+    location?: string
   }
 }
 
