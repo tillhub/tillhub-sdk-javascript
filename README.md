@@ -52,6 +52,10 @@ import Auth from '@tillhub/javascript-sdk/dist/lib/Auth'
 - `npm run lint`: Lints code
 - `npm run commit`: Commit using conventional commit style ([husky](https://github.com/typicode/husky) will tell you to use it if you haven't :wink:)
 
+### Utilities
+
+**TODO:** The SDK will rely on inherited base handlers as utilities.
+
 ## LICENSE
 
 Apache-2.0
