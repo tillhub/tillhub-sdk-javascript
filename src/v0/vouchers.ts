@@ -17,6 +17,11 @@ export interface VouchersQueryOptions {
   }
 }
 
+export interface VouchersMetaQuery {
+  deleted?: boolean
+  active?: boolean
+}
+
 export interface VouchersResponse {
   data: object[]
   metadata: object
@@ -128,11 +133,17 @@ export class Vouchers {
     })
   }
 
-  meta(): Promise<VouchersResponse> {
+  meta(q?: VouchersMetaQuery | undefined): Promise<VouchersResponse> {
     return new Promise(async (resolve, reject) => {
       let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
 
       try {
+        const queryString = qs.stringify(q)
+
+        if (queryString) {
+          uri = `${uri}?${queryString}`
+        }
+
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
           return reject(new errors.VouchersMetaFailed(undefined, { status: response.status }))
