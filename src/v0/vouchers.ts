@@ -1,7 +1,7 @@
 import { diff, jsonPatchPathConverter } from 'just-diff'
 import qs from 'qs'
 import { Client } from '../client'
-import * as errors from '../errors'
+import { BaseError } from '../errors'
 
 export interface VouchersOptions {
   user?: string
@@ -115,7 +115,7 @@ export class Vouchers {
 
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(new errors.VouchersFetchFailed(undefined, { status: response.status }))
+          return reject(new VouchersFetchFailed(undefined, { status: response.status }))
         }
 
         if (response.data.cursor && response.data.cursor.next) {
@@ -128,7 +128,7 @@ export class Vouchers {
           next
         } as VouchersResponse)
       } catch (error) {
-        return reject(new errors.VouchersFetchFailed(undefined, { error }))
+        return reject(new VouchersFetchFailed(undefined, { error }))
       }
     })
   }
@@ -146,12 +146,12 @@ export class Vouchers {
 
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(new errors.VouchersMetaFailed(undefined, { status: response.status }))
+          return reject(new VouchersMetaFailed(undefined, { status: response.status }))
         }
 
         if (!response.data.results[0]) {
           return reject(
-            new errors.VouchersMetaFailed('could not get voucher metadata unexpectedly')
+            new VouchersMetaFailed('could not get voucher metadata unexpectedly')
           )
         }
 
@@ -160,7 +160,7 @@ export class Vouchers {
           metadata: { count: response.data.count }
         } as VouchersResponse)
       } catch (error) {
-        return reject(new errors.VouchersMetaFailed(undefined, { error }))
+        return reject(new VouchersMetaFailed(undefined, { error }))
       }
     })
   }
@@ -171,14 +171,14 @@ export class Vouchers {
       try {
         const response = await this.http.getClient().delete(uri)
         if (response.status !== 200) {
-          return reject(new errors.VoucherDeleteFailed(undefined, { status: response.status }))
+          return reject(new VoucherDeleteFailed(undefined, { status: response.status }))
         }
 
         return resolve({
           msg: response.data.msg
         } as VouchersResponse)
       } catch (error) {
-        return reject(new errors.VoucherDeleteFailed(undefined, { error }))
+        return reject(new VoucherDeleteFailed(undefined, { error }))
       }
     })
   }
@@ -190,7 +190,7 @@ export class Vouchers {
       try {
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(new errors.VouchersCountFailed(undefined, { status: response.status }))
+          return reject(new VouchersCountFailed(undefined, { status: response.status }))
         }
 
         return resolve({
@@ -198,7 +198,7 @@ export class Vouchers {
           metadata: { count: response.data.count }
         } as VouchersResponse)
       } catch (error) {
-        return reject(new errors.VouchersCountFailed(undefined, { error }))
+        return reject(new VouchersCountFailed(undefined, { error }))
       }
     })
   }
@@ -208,7 +208,7 @@ export class Vouchers {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${voucherId}`
       try {
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.VoucherFetchFailed())
+        response.status !== 200 && reject(new VoucherFetchFailed())
 
         return resolve({
           data: response.data.results[0] as Voucher,
@@ -216,7 +216,7 @@ export class Vouchers {
           metadata: { count: response.data.count }
         } as VoucherResponse)
       } catch (error) {
-        return reject(new errors.VoucherFetchFailed(undefined, { error }))
+        return reject(new VoucherFetchFailed(undefined, { error }))
       }
     })
   }
@@ -238,7 +238,7 @@ export class Vouchers {
 
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(new errors.VoucherLogsFetchFailed(undefined, { status: response.status }))
+          return reject(new VoucherLogsFetchFailed(undefined, { status: response.status }))
         }
 
         if (response.data.cursor && response.data.cursor.next) {
@@ -251,7 +251,7 @@ export class Vouchers {
           next
         } as VouchersResponse)
       } catch (error) {
-        return reject(new errors.VoucherLogsFetchFailed(undefined, { error }))
+        return reject(new VoucherLogsFetchFailed(undefined, { error }))
       }
     })
   }
@@ -267,7 +267,7 @@ export class Vouchers {
           metadata: { count: response.data.count }
         } as VoucherResponse)
       } catch (error) {
-        return reject(new errors.VoucherPutFailed(undefined, { error }))
+        return reject(new VoucherPutFailed(undefined, { error }))
       }
     })
   }
@@ -276,7 +276,7 @@ export class Vouchers {
     return new Promise(async (resolve, reject) => {
       if (!source.id || !target.id || source.id !== target.id) {
         return reject(
-          new errors.VoucherTypeError(
+          new VoucherTypeError(
             'source and target object require ID to be set and be equal to each other'
           )
         )
@@ -300,7 +300,7 @@ export class Vouchers {
           metadata: { count: response.data.count, patch }
         } as VoucherResponse)
       } catch (error) {
-        return reject(new errors.VoucherPatchFailed(undefined, { error }))
+        return reject(new VoucherPatchFailed(undefined, { error }))
       }
     })
   }
@@ -316,7 +316,7 @@ export class Vouchers {
           metadata: { count: response.data.count }
         } as VoucherResponse)
       } catch (error) {
-        return reject(new errors.VoucherCreationFailed(undefined, { error }))
+        return reject(new VoucherCreationFailed(undefined, { error }))
       }
     })
   }
@@ -328,14 +328,14 @@ export class Vouchers {
 
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(new errors.VouchersUsersFailed(undefined, { status: response.status }))
+          return reject(new VouchersUsersFailed(undefined, { status: response.status }))
         }
 
         return resolve({
           data: response.data.results
         } as UsersResponse)
       } catch (error) {
-        return reject(new errors.VouchersUsersFailed(undefined, { error }))
+        return reject(new VouchersUsersFailed(undefined, { error }))
       }
     })
   }
@@ -375,7 +375,7 @@ export class VoucherLogs {
 
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(new errors.VouchersLogsFetchFailed(undefined, { status: response.status }))
+          return reject(new VouchersLogsFetchFailed(undefined, { status: response.status }))
         }
 
         if (response.data.cursor && response.data.cursor.next) {
@@ -388,7 +388,7 @@ export class VoucherLogs {
           next
         } as VouchersResponse)
       } catch (error) {
-        return reject(new errors.VouchersLogsFetchFailed(undefined, { error }))
+        return reject(new VouchersLogsFetchFailed(undefined, { error }))
       }
     })
   }
@@ -400,12 +400,12 @@ export class VoucherLogs {
       try {
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(new errors.VoucherLogsMetaFailed(undefined, { status: response.status }))
+          return reject(new VoucherLogsMetaFailed(undefined, { status: response.status }))
         }
 
         if (!response.data.results[0]) {
           return reject(
-            new errors.VouchersMetaFailed('could not get voucher metadata unexpectedly')
+            new VouchersMetaFailed('could not get voucher metadata unexpectedly')
           )
         }
 
@@ -414,8 +414,106 @@ export class VoucherLogs {
           metadata: { count: response.data.count }
         } as VouchersResponse)
       } catch (error) {
-        return reject(new errors.VoucherLogsMetaFailed(undefined, { error }))
+        return reject(new VoucherLogsMetaFailed(undefined, { error }))
       }
     })
+  }
+}
+
+export class VoucherTypeError extends BaseError {
+  public name = 'VouchersFetchFailed'
+  constructor(public message: string, properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class VouchersFetchFailed extends BaseError {
+  public name = 'VouchersFetchFailed'
+  constructor(public message: string = 'Could not fetch the vouchers', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class VoucherLogsFetchFailed extends BaseError {
+  public name = 'VoucherLogsFetchFailed'
+  constructor(public message: string = 'Could not fetch the voucher logs', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class VoucherFetchFailed extends BaseError {
+  public name = 'VoucherFetchFailed'
+  constructor(public message: string = 'Could not fetch voucher', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class VoucherPutFailed extends BaseError {
+  public name = 'VoucherPutFailed'
+  constructor(public message: string = 'Could not alter voucher', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class VoucherPatchFailed extends BaseError {
+  public name = 'VoucherPatchFailed'
+  constructor(public message: string = 'Could not alter voucher', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class VoucherCreationFailed extends BaseError {
+  public name = 'VoucherPostFailed'
+  constructor(public message: string = 'Could not create voucher', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class VouchersCountFailed extends BaseError {
+  public name = 'VouchersCountFailed'
+  constructor(public message: string = 'Could not count the vouchers', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class VouchersMetaFailed extends BaseError {
+  public name = 'VouchersMetaFailed'
+  constructor(public message: string = 'Could not get voucher metadata', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class VoucherLogsMetaFailed extends BaseError {
+  public name = 'VoucherLogsMetaFailed'
+  constructor(public message: string = 'Could not get voucher logs metadata', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class VoucherDeleteFailed extends BaseError {
+  public name = 'VoucherDeleteFailed'
+  constructor(public message: string = 'Could not delete the voucher', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class VouchersLogsFetchFailed extends BaseError {
+  public name = 'VouchersLogsFetchFailed'
+  constructor(public message: string = 'Could not fetch the vouchers logs', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class VouchersLogsCountFailed extends BaseError {
+  public name = 'VouchersLogsCountFailed'
+  constructor(public message: string = 'Could not count the vouchers logs', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class VouchersUsersFailed extends BaseError {
+  public name = 'VouchersUsersFailed'
+  constructor(public message: string = 'Could not get authorized voucher users', properties?: any) {
+    super(message, properties)
   }
 }
