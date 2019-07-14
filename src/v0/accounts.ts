@@ -152,7 +152,7 @@ export class Accounts {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${accountId}`
       try {
         const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new errors.CustomerDeleteFailed())
+        response.status !== 200 && reject(new errors.AccountDeleteFailed())
 
         return resolve({
           msg: response.data.msg

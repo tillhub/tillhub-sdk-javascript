@@ -1,6 +1,6 @@
 import qs from 'qs'
 import { Client } from '../client'
-import * as errors from '../errors'
+import { BaseError } from '../errors'
 import { UriHelper, HandlerQuery } from '../uri-helper'
 
 export interface CustomersOptions {
@@ -182,7 +182,7 @@ export class Customers {
 
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          reject(new errors.CustomersFetchFailed(undefined, { status: response.status }))
+          reject(new CustomersFetchFailed(undefined, { status: response.status }))
         }
 
         if (response.data.cursor && response.data.cursor.next) {
@@ -195,7 +195,7 @@ export class Customers {
           next
         } as CustomersResponse)
       } catch (err) {
-        return reject(new errors.CustomersFetchFailed(undefined, { error: err }))
+        return reject(new CustomersFetchFailed(undefined, { error: err }))
       }
     })
   }
@@ -220,7 +220,7 @@ export class Customers {
         const response = await this.http.getClient().get(uri)
 
         if (response.status !== 200) {
-          return reject(new errors.CustomerFetchFailed(undefined, { status: response.status }))
+          return reject(new CustomerFetchFailed(undefined, { status: response.status }))
         }
         return resolve({
           data: response.data.results[0] as Customer,
@@ -228,7 +228,7 @@ export class Customers {
           metadata: { count: response.data.count }
         } as CustomerResponse)
       } catch (error) {
-        return reject(new errors.CustomerFetchFailed(undefined, { error }))
+        return reject(new CustomerFetchFailed(undefined, { error }))
       }
     })
   }
@@ -240,7 +240,7 @@ export class Customers {
         const response = await this.http.getClient().post(uri, note)
 
         if (response.status !== 200) {
-          return reject(new errors.CustomerNoteCreationFailed(undefined, { status: response.status }))
+          return reject(new CustomerNoteCreationFailed(undefined, { status: response.status }))
         }
         return resolve({
           data: response.data.results[0] as Customer,
@@ -248,7 +248,7 @@ export class Customers {
           metadata: { count: response.data.count }
         } as CustomerResponse)
       } catch (error) {
-        return reject(new errors.CustomerNoteCreationFailed(undefined, { error }))
+        return reject(new CustomerNoteCreationFailed(undefined, { error }))
       }
     })
   }
@@ -260,14 +260,14 @@ export class Customers {
         const response = await this.http.getClient().put(uri, customer)
 
         if (response.status !== 200) {
-          return reject(new errors.CustomerPutFailed(undefined, { status: response.status }))
+          return reject(new CustomerPutFailed(undefined, { status: response.status }))
         }
         return resolve({
           data: response.data.results[0] as Customer,
           metadata: { count: response.data.count }
         } as CustomerResponse)
       } catch (error) {
-        return reject(new errors.CustomerPutFailed(undefined, { error }))
+        return reject(new CustomerPutFailed(undefined, { error }))
       }
     })
   }
@@ -280,7 +280,7 @@ export class Customers {
         const response = await this.http.getClient().post(uri, customer)
 
         if (response.status !== 200) {
-          return reject(new errors.CustomerCreationFailed(undefined, { status: response.status }))
+          return reject(new CustomerCreationFailed(undefined, { status: response.status }))
         }
         return resolve({
           data: response.data.results[0] as Customer,
@@ -288,7 +288,7 @@ export class Customers {
           errors: response.data.errors || []
         } as CustomerResponse)
       } catch (error) {
-        return reject(new errors.CustomerCreationFailed(undefined, { error }))
+        return reject(new CustomerCreationFailed(undefined, { error }))
       }
     })
   }
@@ -305,10 +305,10 @@ export class Customers {
 
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(new errors.CustomersMetaFailed(undefined, { status: response.status }))
+          return reject(new CustomersMetaFailed(undefined, { status: response.status }))
         }
         if (!response.data.results[0]) {
-          return reject(new errors.CustomersMetaFailed(undefined, { status: response.status }))
+          return reject(new CustomersMetaFailed(undefined, { status: response.status }))
         }
 
         return resolve({
@@ -316,7 +316,7 @@ export class Customers {
           metadata: { count: response.data.count }
         } as CustomersResponse)
       } catch (err) {
-        return reject(new errors.CustomersMetaFailed(undefined, { error: err }))
+        return reject(new CustomersMetaFailed(undefined, { error: err }))
       }
     })
   }
@@ -327,13 +327,13 @@ export class Customers {
       try {
         const response = await this.http.getClient().delete(uri)
         if (response.status !== 200) {
-          reject(new errors.CustomerDeleteFailed(undefined, { status: response.status }))
+          reject(new CustomerDeleteFailed(undefined, { status: response.status }))
         }
         return resolve({
           msg: response.data.msg
         } as CustomerResponse)
       } catch (err) {
-        return reject(new errors.CustomerDeleteFailed(undefined, { error: err }))
+        return reject(new CustomerDeleteFailed(undefined, { error: err }))
       }
     })
   }
@@ -345,14 +345,14 @@ export class Customers {
       try {
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          reject(new errors.CustomersCountFailed(undefined, { status: response.status }))
+          reject(new CustomersCountFailed(undefined, { status: response.status }))
         }
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
         } as CustomersResponse)
       } catch (err) {
-        return reject(new errors.CustomersCountFailed(undefined, { error: err }))
+        return reject(new CustomersCountFailed(undefined, { error: err }))
       }
     })
   }
@@ -362,15 +362,78 @@ export class Customers {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/search?q=${searchTerm}`
       try {
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.CustomersSearchFailed())
+        response.status !== 200 && reject(new CustomersSearchFailed())
 
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
         } as CustomersResponse)
       } catch (error) {
-        return reject(new errors.CustomersSearchFailed(undefined, { error }))
+        return reject(new CustomersSearchFailed(undefined, { error }))
       }
     })
+  }
+}
+
+export class CustomersFetchFailed extends BaseError {
+  public name = 'CustomersFetchFailed'
+  constructor(public message: string = 'Could not fetch customers', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class CustomerFetchFailed extends BaseError {
+  public name = 'CustomerFetchFailed'
+  constructor(public message: string = 'Could not fetch customer', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class CustomerPutFailed extends BaseError {
+  public name = 'CustomerPutFailed'
+  constructor(public message: string = 'Could not alter customer', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class CustomerNoteCreationFailed extends BaseError {
+  public name = 'CustomerNoteCreationFailed'
+  constructor(public message: string = 'Could not create customer note', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class CustomerCreationFailed extends BaseError {
+  public name = 'CustomerCreationFailed'
+  constructor(public message: string = 'Could not create customer', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class CustomersMetaFailed extends BaseError {
+  public name = 'CustomersMetaFailed'
+  constructor(public message: string = 'Could not get customers metadata', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class CustomersCountFailed extends BaseError {
+  public name = 'CustomersCountFailed'
+  constructor(public message: string = 'Could not count customers', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class CustomersSearchFailed extends BaseError {
+  public name = 'CustomersSearchFailed'
+  constructor(public message: string = 'Could not search for customer', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class CustomerDeleteFailed extends BaseError {
+  public name = 'CustomerDeleteFailed'
+  constructor(public message: string = 'Could not delete the customer', properties?: any) {
+    super(message, properties)
   }
 }

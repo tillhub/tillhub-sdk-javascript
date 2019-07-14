@@ -568,69 +568,6 @@ export class DiscountDeleteFailed extends BaseError {
   }
 }
 
-export class CustomersFetchFailed extends BaseError {
-  public name = 'CustomersFetchFailed'
-  constructor(public message: string = 'Could not fetch customers', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class CustomerFetchFailed extends BaseError {
-  public name = 'CustomerFetchFailed'
-  constructor(public message: string = 'Could not fetch customer', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class CustomerPutFailed extends BaseError {
-  public name = 'CustomerPutFailed'
-  constructor(public message: string = 'Could not alter customer', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class CustomerNoteCreationFailed extends BaseError {
-  public name = 'CustomerNoteCreationFailed'
-  constructor(public message: string = 'Could not create customer note', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class CustomerCreationFailed extends BaseError {
-  public name = 'CustomerCreationFailed'
-  constructor(public message: string = 'Could not create customer', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class CustomersMetaFailed extends BaseError {
-  public name = 'CustomersMetaFailed'
-  constructor(public message: string = 'Could not get customers metadata', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class CustomersCountFailed extends BaseError {
-  public name = 'CustomersCountFailed'
-  constructor(public message: string = 'Could not count customers', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class CustomersSearchFailed extends BaseError {
-  public name = 'CustomersSearchFailed'
-  constructor(public message: string = 'Could not search for customer', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class CustomerDeleteFailed extends BaseError {
-  public name = 'CustomerDeleteFailed'
-  constructor(public message: string = 'Could not delete the customer', properties?: any) {
-    super(message, properties)
-  }
-}
-
 export class InvoicesFetchAllFailed extends BaseError {
   public name = 'InvoicesFetchAllFailed'
   constructor(public message: string = 'Could not fetch invoices', properties?: any) {
@@ -823,13 +760,6 @@ export class OpenOrderFetchFailed extends BaseError {
   }
 }
 
-export class RevenuesFetchFailed extends BaseError {
-  public name = 'RevenuesFetchFailed'
-  constructor(public message: string = 'Could not fetch the Revenues', properties?: any) {
-    super(message, properties)
-  }
-}
-
 export class RegistersFetchFailed extends BaseError {
   public name = 'RegistersFetchFailed'
   constructor(public message: string = 'Could not fetch the Registers', properties?: any) {
@@ -864,91 +794,6 @@ export class RegisterDeviceConfigurationPutFailed extends BaseError {
     public message: string = 'Could not update the Device Configuration',
     properties?: any
   ) {
-    super(message, properties)
-  }
-}
-
-export class StatisticsProductFetchFailed extends BaseError {
-  public name = 'StatisticsProductFetchFailed'
-  constructor(
-    public message: string = 'Could not fetch the Statistics Products',
-    properties?: any
-  ) {
-    super(message, properties)
-  }
-}
-
-export class StatisticsProductChildrenFetchFailed extends BaseError {
-  public name = 'StatisticsProductChildrenFetchFailed'
-  constructor(
-    public message: string = 'Could not fetch the Statistics Products Children',
-    properties?: any
-  ) {
-    super(message, properties)
-  }
-}
-
-export class StaffOverviewFetchFailed extends BaseError {
-  public name = 'StaffOverviewFetchFailed'
-  constructor(
-    public message: string = 'Could not fetch the staff overview report',
-    properties?: any
-  ) {
-    super(message, properties)
-  }
-}
-
-export class ProductGroupsReportFetchFailed extends BaseError {
-  public name = 'ProductGroupsReportFetchFailed'
-  constructor(
-    public message: string = 'Could not fetch the product groups report',
-    properties?: any
-  ) {
-    super(message, properties)
-  }
-}
-
-export class RefundsReportFetchFailed extends BaseError {
-  public name = 'RefundsReportFetchFailed'
-  constructor(public message: string = 'Could not fetch the refunds report', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class VouchersReportFetchFailed extends BaseError {
-  public name = 'VouchersReportFetchFailed'
-  constructor(public message: string = 'Could not fetch the vouchers report', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class ProductsReportFetchFailed extends BaseError {
-  public name = 'ProductsReportFetchFailed'
-  constructor(public message: string = 'Could not fetch the products report', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class PaymentsReportFetchFailed extends BaseError {
-  public name = 'PaymentsReportFetchFailed'
-  constructor(public message: string = 'Could not fetch the payments report', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class SimpleSalesCartItemsReportFetchFailed extends BaseError {
-  public name = 'SimpleSalesCartItemsReportFetchFailed'
-  constructor(
-    public message: string = 'Could not fetch the sales cart items report',
-    properties?: any
-  ) {
-    super(message, properties)
-  }
-}
-
-export class StocksReportFetchFailed extends BaseError {
-  public name = 'StocksReportFetchFailed'
-  constructor(public message: string = 'Could not fetch the stocks report', properties?: any) {
     super(message, properties)
   }
 }

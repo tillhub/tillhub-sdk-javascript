@@ -3,21 +3,23 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 import * as errors from '../src/errors'
 
+import { VoucherFetchFailed } from '../src/v0/vouchers'
+
 describe('SDK: errors', () => {
   it('can instantiate error', () => {
-    expect(new errors.VoucherFetchFailed()).toBeDefined()
+    expect(new VoucherFetchFailed()).toBeDefined()
     expect(new errors.BaseError('some new eror')).toBeDefined()
   })
 
   it('can instantiate error with message', () => {
-    const err = new errors.VoucherFetchFailed()
+    const err = new VoucherFetchFailed()
     expect(err).toHaveProperty('name')
     expect(typeof err.name).toBe('string')
     expect(err).toHaveProperty('message')
     expect(typeof err.message).toBe('string')
     expect(err.name).toBe('VoucherFetchFailed')
 
-    const err2 = new errors.VoucherFetchFailed('something')
+    const err2 = new VoucherFetchFailed('something')
     expect(err2).toHaveProperty('name')
     expect(typeof err2.name).toBe('string')
     expect(err2).toHaveProperty('message')
@@ -29,7 +31,7 @@ describe('SDK: errors', () => {
 
   it('can instantiate error with injected properties', () => {
     const props = { some: 'property' }
-    const err = new errors.VoucherFetchFailed(undefined, props)
+    const err = new VoucherFetchFailed(undefined, props)
     expect(err.properties).toBeDefined()
     expect(err.properties).toEqual(props)
   })

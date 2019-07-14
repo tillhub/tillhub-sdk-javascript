@@ -146,7 +146,7 @@ export class ExpenseAccounts {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${expenseAccountId}`
       try {
         const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new errors.CustomerDeleteFailed())
+        response.status !== 200 && reject(new errors.ExpenseAccountDeleteFailed())
 
         return resolve({
           msg: response.data.msg

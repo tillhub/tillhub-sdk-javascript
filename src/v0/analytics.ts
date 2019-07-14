@@ -1,6 +1,6 @@
 import qs from 'qs'
 import { Client } from '../client'
-import * as errors from '../errors'
+import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
 import { Balances } from './analytics/reports/balances'
 import { PaymentOptions } from './analytics/reports/payment_options'
@@ -141,14 +141,14 @@ export class Analytics {
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.RevenuesFetchFailed())
+        response.status !== 200 && reject(new RevenuesFetchFailed())
 
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
         } as AnalyticsResponse)
       } catch (err) {
-        return reject(new errors.RevenuesFetchFailed())
+        return reject(new RevenuesFetchFailed())
       }
     })
   }
@@ -160,14 +160,14 @@ export class Analytics {
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.RevenuesFetchFailed())
+        response.status !== 200 && reject(new RevenuesFetchFailed())
 
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
         } as AnalyticsResponse)
       } catch (err) {
-        return reject(new errors.RevenuesFetchFailed())
+        return reject(new RevenuesFetchFailed())
       }
     })
   }
@@ -180,14 +180,14 @@ export class Analytics {
 
         const response = await this.http.getClient().get(uri)
 
-        response.status !== 200 && reject(new errors.RevenuesFetchFailed())
+        response.status !== 200 && reject(new RevenuesFetchFailed())
 
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
         } as AnalyticsResponse)
       } catch (err) {
-        return reject(new errors.RevenuesFetchFailed())
+        return reject(new RevenuesFetchFailed())
       }
     })
   }
@@ -199,14 +199,14 @@ export class Analytics {
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.RevenuesFetchFailed())
+        response.status !== 200 && reject(new RevenuesFetchFailed())
 
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
         } as AnalyticsResponse)
       } catch (err) {
-        return reject(new errors.RevenuesFetchFailed())
+        return reject(new RevenuesFetchFailed())
       }
     })
   }
@@ -218,7 +218,7 @@ export class Analytics {
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.StatisticsProductFetchFailed())
+        response.status !== 200 && reject(new StatisticsProductFetchFailed())
         return resolve({
           data: response.data.results,
           metadata: {
@@ -226,7 +226,7 @@ export class Analytics {
           }
         } as AnalyticsResponse)
       } catch (err) {
-        return reject(new errors.StatisticsProductFetchFailed())
+        return reject(new StatisticsProductFetchFailed())
       }
     })
   }
@@ -241,7 +241,7 @@ export class Analytics {
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.StatisticsProductChildrenFetchFailed())
+        response.status !== 200 && reject(new StatisticsProductChildrenFetchFailed())
         return resolve({
           data: response.data.results,
           metadata: {
@@ -249,7 +249,7 @@ export class Analytics {
           }
         } as AnalyticsResponse)
       } catch (err) {
-        return reject(new errors.StatisticsProductChildrenFetchFailed())
+        return reject(new StatisticsProductChildrenFetchFailed())
       }
     })
   }
@@ -259,17 +259,17 @@ export class Analytics {
       try {
         const uri = `${this.options.base}${this.endpoint}/${
           this.options.user
-        }/reports/staff/overview`
+          }/reports/staff/overview`
 
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.StaffOverviewFetchFailed())
+        response.status !== 200 && reject(new StaffOverviewFetchFailed())
 
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
         } as AnalyticsResponse)
       } catch (err) {
-        return reject(new errors.StaffOverviewFetchFailed())
+        return reject(new StaffOverviewFetchFailed())
       }
     })
   }
@@ -279,17 +279,17 @@ export class Analytics {
       try {
         const uri = `${this.options.base}${this.endpoint}/${
           this.options.user
-        }/reports/staff/product_groups/${staff || ''}`
+          }/reports/staff/product_groups/${staff || ''}`
 
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.ProductGroupsReportFetchFailed())
+        response.status !== 200 && reject(new ProductGroupsReportFetchFailed())
 
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
         } as AnalyticsResponse)
       } catch (err) {
-        return reject(new errors.ProductGroupsReportFetchFailed())
+        return reject(new ProductGroupsReportFetchFailed())
       }
     })
   }
@@ -299,17 +299,17 @@ export class Analytics {
       try {
         const uri = `${this.options.base}${this.endpoint}/${
           this.options.user
-        }/reports/staff/refunds/${staff || ''}`
+          }/reports/staff/refunds/${staff || ''}`
 
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.RefundsReportFetchFailed())
+        response.status !== 200 && reject(new RefundsReportFetchFailed())
 
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
         } as AnalyticsResponse)
       } catch (err) {
-        return reject(new errors.RefundsReportFetchFailed())
+        return reject(new RefundsReportFetchFailed())
       }
     })
   }
@@ -326,14 +326,14 @@ export class Analytics {
         }
 
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.VouchersReportFetchFailed())
+        response.status !== 200 && reject(new VouchersReportFetchFailed())
 
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
         } as AnalyticsResponse)
       } catch (err) {
-        return reject(new errors.VouchersReportFetchFailed())
+        return reject(new VouchersReportFetchFailed())
       }
     })
   }
@@ -343,17 +343,17 @@ export class Analytics {
       try {
         const uri = `${this.options.base}${this.endpoint}/${
           this.options.user
-        }/reports/staff/products/${staff || ''}`
+          }/reports/staff/products/${staff || ''}`
 
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.ProductsReportFetchFailed())
+        response.status !== 200 && reject(new ProductsReportFetchFailed())
 
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
         } as AnalyticsResponse)
       } catch (err) {
-        return reject(new errors.ProductsReportFetchFailed())
+        return reject(new ProductsReportFetchFailed())
       }
     })
   }
@@ -363,17 +363,17 @@ export class Analytics {
       try {
         const uri = `${this.options.base}${this.endpoint}/${
           this.options.user
-        }/reports/staff/payments/`
+          }/reports/staff/payments/`
 
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.PaymentsReportFetchFailed())
+        response.status !== 200 && reject(new PaymentsReportFetchFailed())
 
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
         } as AnalyticsResponse)
       } catch (err) {
-        return reject(new errors.PaymentsReportFetchFailed())
+        return reject(new PaymentsReportFetchFailed())
       }
     })
   }
@@ -385,7 +385,7 @@ export class Analytics {
       try {
         let uri = `${this.options.base}${this.endpoint}/${
           this.options.user
-        }/reports/transactions/simple`
+          }/reports/transactions/simple`
 
         const queryString = qs.stringify(query)
 
@@ -394,7 +394,7 @@ export class Analytics {
         }
 
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.SimpleSalesCartItemsReportFetchFailed())
+        response.status !== 200 && reject(new SimpleSalesCartItemsReportFetchFailed())
 
         return resolve({
           data: response.data.results[0].results,
@@ -404,7 +404,7 @@ export class Analytics {
           }
         } as AnalyticsResponse)
       } catch (err) {
-        return reject(new errors.SimpleSalesCartItemsReportFetchFailed())
+        return reject(new SimpleSalesCartItemsReportFetchFailed())
       }
     })
   }
@@ -416,14 +416,14 @@ export class Analytics {
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.CustomerFetchFailed())
+        response.status !== 200 && reject(new ReportsCustomerCustomersFailed())
 
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
         } as AnalyticsResponse)
       } catch (err) {
-        return reject(new errors.CustomerFetchFailed())
+        return reject(new ReportsCustomerCustomersFailed())
       }
     })
   }
@@ -435,14 +435,14 @@ export class Analytics {
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.CustomerFetchFailed())
+        response.status !== 200 && reject(new ReportsCustomerTransactionsFailed())
 
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
         } as AnalyticsResponse)
       } catch (err) {
-        return reject(new errors.CustomerFetchFailed())
+        return reject(new ReportsCustomerTransactionsFailed())
       }
     })
   }
@@ -454,14 +454,14 @@ export class Analytics {
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.CustomerFetchFailed())
+        response.status !== 200 && reject(new ReportsCustomerOverviewFailed())
 
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
         } as AnalyticsResponse)
       } catch (err) {
-        return reject(new errors.CustomerFetchFailed())
+        return reject(new ReportsCustomerOverviewFailed())
       }
     })
   }
@@ -472,15 +472,15 @@ export class Analytics {
         const queryString = qs.stringify(query, { addQueryPrefix: true })
         const uri = `${this.options.base}${this.endpoint}/${
           this.options.user
-        }/reports/stocks${queryString}`
+          }/reports/stocks${queryString}`
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.StocksReportFetchFailed())
+        response.status !== 200 && reject(new ReportsStocksFetchFailed())
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
         } as AnalyticsResponse)
       } catch (err) {
-        return reject(new errors.StocksReportFetchFailed())
+        return reject(new ReportsStocksFetchFailed())
       }
     })
   }
@@ -491,7 +491,7 @@ export class Analytics {
         const base = this.uriHelper.generateBaseUri('/reports/product_groups')
         const uri = this.uriHelper.generateUriWithQuery(base, query)
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.ProductGroupsFetchFailed())
+        response.status !== 200 && reject(new ReportsProductGroupsFetchFailed())
         return resolve({
           data: response.data.results,
           metadata: {
@@ -499,7 +499,7 @@ export class Analytics {
           }
         } as AnalyticsResponse)
       } catch (err) {
-        return reject(new errors.ProductGroupsFetchFailed())
+        return reject(new ReportsProductGroupsFetchFailed())
       }
     })
   }
@@ -510,7 +510,7 @@ export class Analytics {
         const base = this.uriHelper.generateBaseUri('/reports/product_groups/filters')
         const uri = this.uriHelper.generateUriWithQuery(base, query)
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.ProductGroupsFiltersFetchFailed())
+        response.status !== 200 && reject(new ReportsProductGroupsFiltersFetchFailed())
         return resolve({
           data: response.data.results,
           metadata: {
@@ -518,7 +518,7 @@ export class Analytics {
           }
         } as AnalyticsResponse)
       } catch (err) {
-        return reject(new errors.ProductGroupsFiltersFetchFailed())
+        return reject(new ReportsProductGroupsFiltersFetchFailed())
       }
     })
   }
@@ -541,5 +541,132 @@ export class Analytics {
 
   customers(): Customers {
     return new Customers(this.options, this.http, this.uriHelper)
+  }
+}
+
+export class ReportsStocksFetchFailed extends BaseError {
+  public name = 'ReportsStocksFetchFailed'
+  constructor(public message: string = 'Could not fetch the stocks report', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class RefundsReportFetchFailed extends BaseError {
+  public name = 'RefundsReportFetchFailed'
+  constructor(public message: string = 'Could not fetch the refunds report', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class VouchersReportFetchFailed extends BaseError {
+  public name = 'VouchersReportFetchFailed'
+  constructor(public message: string = 'Could not fetch the vouchers report', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ProductsReportFetchFailed extends BaseError {
+  public name = 'ProductsReportFetchFailed'
+  constructor(public message: string = 'Could not fetch the products report', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class PaymentsReportFetchFailed extends BaseError {
+  public name = 'PaymentsReportFetchFailed'
+  constructor(public message: string = 'Could not fetch the payments report', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class RevenuesFetchFailed extends BaseError {
+  public name = 'RevenuesFetchFailed'
+  constructor(public message: string = 'Could not fetch the Revenues', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ReportsProductGroupsFiltersFetchFailed extends BaseError {
+  public name = 'ReportsProductGroupsFiltersFetchFailed'
+  constructor(public message: string = 'Could not get products group filters', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ReportsProductGroupsFetchFailed extends BaseError {
+  public name = 'ReportsProductGroupsFetchFailed'
+  constructor(public message: string = 'Could not fetch product groups', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ReportsCustomerOverviewFailed extends BaseError {
+  public name = 'ReportsProductGroupsFetchFailed'
+  constructor(public message: string = 'Could not fetch customer overview', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ReportsCustomerTransactionsFailed extends BaseError {
+  public name = 'ReportsCustomerTransactionsFailed'
+  constructor(public message: string = 'Could not fetch customer transactions', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ReportsCustomerCustomersFailed extends BaseError {
+  public name = 'ReportsCustomerCustomersFailed'
+  constructor(public message: string = 'Could not fetch customer reports', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class SimpleSalesCartItemsReportFetchFailed extends BaseError {
+  public name = 'SimpleSalesCartItemsReportFetchFailed'
+  constructor(
+    public message: string = 'Could not fetch the sales cart items report',
+    properties?: any
+  ) {
+    super(message, properties)
+  }
+}
+
+export class ProductGroupsReportFetchFailed extends BaseError {
+  public name = 'ProductGroupsReportFetchFailed'
+  constructor(
+    public message: string = 'Could not fetch the product groups report',
+    properties?: any
+  ) {
+    super(message, properties)
+  }
+}
+
+export class StatisticsProductChildrenFetchFailed extends BaseError {
+  public name = 'StatisticsProductChildrenFetchFailed'
+  constructor(
+    public message: string = 'Could not fetch the Statistics Products Children',
+    properties?: any
+  ) {
+    super(message, properties)
+  }
+}
+
+export class StaffOverviewFetchFailed extends BaseError {
+  public name = 'StaffOverviewFetchFailed'
+  constructor(
+    public message: string = 'Could not fetch the staff overview report',
+    properties?: any
+  ) {
+    super(message, properties)
+  }
+}
+
+export class StatisticsProductFetchFailed extends BaseError {
+  public name = 'StatisticsProductFetchFailed'
+  constructor(
+    public message: string = 'Could not fetch the Statistics Products',
+    properties?: any
+  ) {
+    super(message, properties)
   }
 }

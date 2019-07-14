@@ -149,7 +149,7 @@ export class PaymentOptions {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${paymentOptionId}`
       try {
         const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new errors.CustomerDeleteFailed())
+        response.status !== 200 && reject(new errors.PaymentOptionDeleteFailed())
 
         return resolve({
           msg: response.data.msg
