@@ -1,6 +1,6 @@
 import qs from 'qs'
 import { Client } from '../client'
-import * as errors from '../errors'
+import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
 
 export interface BranchesOptions {
@@ -95,7 +95,7 @@ export class Branches {
 
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(new errors.BranchesFetchFailed(undefined, { status: response.status }))
+          return reject(new BranchesFetchFailed(undefined, { status: response.status }))
         }
 
         if (response.data.cursor && response.data.cursor.next) {
@@ -108,7 +108,7 @@ export class Branches {
           next
         } as BranchesResponse)
       } catch (error) {
-        return reject(new errors.BranchesFetchFailed(undefined, { error }))
+        return reject(new BranchesFetchFailed(undefined, { error }))
       }
     })
   }
@@ -119,7 +119,7 @@ export class Branches {
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
-          reject(new errors.BranchFetchFailed(undefined, { status: response.status }))
+          reject(new BranchFetchFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results[0] as Branch,
@@ -127,7 +127,7 @@ export class Branches {
           metadata: { count: response.data.count }
         } as BranchResponse)
       } catch (error) {
-        return reject(new errors.BranchFetchFailed(undefined, { error }))
+        return reject(new BranchFetchFailed(undefined, { error }))
       }
     })
   }
@@ -143,7 +143,7 @@ export class Branches {
           metadata: { count: response.data.count }
         } as BranchResponse)
       } catch (error) {
-        return reject(new errors.BranchPutFailed(undefined, { error }))
+        return reject(new BranchPutFailed(undefined, { error }))
       }
     })
   }
@@ -159,7 +159,7 @@ export class Branches {
           metadata: { count: response.data.count }
         } as BranchResponse)
       } catch (error) {
-        return reject(new errors.BranchCreationFailed(undefined, { error }))
+        return reject(new BranchCreationFailed(undefined, { error }))
       }
     })
   }
@@ -171,7 +171,7 @@ export class Branches {
       try {
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(new errors.BranchesCountFailed(undefined, { status: response.status }))
+          return reject(new BranchesCountFailed(undefined, { status: response.status }))
         }
 
         return resolve({
@@ -179,7 +179,7 @@ export class Branches {
           metadata: { count: response.data.count }
         } as BranchesResponse)
       } catch (error) {
-        return reject(new errors.BranchesCountFailed(undefined, { error }))
+        return reject(new BranchesCountFailed(undefined, { error }))
       }
     })
   }
@@ -189,13 +189,13 @@ export class Branches {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${branchId}`
       try {
         const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new errors.CustomerDeleteFailed())
+        response.status !== 200 && reject(new BranchDeleteFailed())
 
         return resolve({
           msg: response.data.msg
         } as BranchResponse)
       } catch (err) {
-        return reject(new errors.BranchDeleteFailed())
+        return reject(new BranchDeleteFailed())
       }
     })
   }
@@ -208,7 +208,7 @@ export class Branches {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
           reject(
-            new errors.ExternalCustomIdGetUniqueFailed(undefined, {
+            new ExternalCustomIdGetUniqueFailed(undefined, {
               status: response.status
             })
           )
@@ -221,14 +221,66 @@ export class Branches {
       } catch (error) {
         if (error.response && error.response.status === 409) {
           return reject(
-            new errors.ExternalCustomIdGetUniqueFailed(undefined, {
+            new ExternalCustomIdGetUniqueFailed(undefined, {
               status: error.response.status,
               name: error.response.data.name
             })
           )
         }
-        return reject(new errors.ExternalCustomIdGetUniqueFailed(undefined, { error }))
+        return reject(new ExternalCustomIdGetUniqueFailed(undefined, { error }))
       }
     })
+  }
+}
+
+export class BranchesFetchFailed extends BaseError {
+  public name = 'BranchesFetchFailed'
+  constructor(public message: string = 'Could not fetch branches', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class BranchFetchFailed extends BaseError {
+  public name = 'BrancheFetchFailed'
+  constructor(public message: string = 'Could not fetch branch', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class BranchPutFailed extends BaseError {
+  public name = 'BranchPutFailed'
+  constructor(public message: string = 'Could not alter branch', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class BranchCreationFailed extends BaseError {
+  public name = 'BranchCreationFailed'
+  constructor(public message: string = 'Could not create branch', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class BranchesCountFailed extends BaseError {
+  public name = 'BranchesCountFailed'
+  constructor(public message: string = 'Could not count the branches', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class BranchDeleteFailed extends BaseError {
+  public name = 'BranchDeleteFailed'
+  constructor(public message: string = 'Could not delete branch', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ExternalCustomIdGetUniqueFailed extends BaseError {
+  public name = 'ExternalCustomIdGetUniqueFailed'
+  constructor(
+    public message: string = 'Could not get a unique external_custom_id',
+    properties?: any
+  ) {
+    super(message, properties)
   }
 }
