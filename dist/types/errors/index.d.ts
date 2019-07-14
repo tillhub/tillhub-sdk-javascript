@@ -365,41 +365,6 @@ export declare class UserDeleteFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
-export declare class BranchesFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class BranchFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class BranchPutFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class BranchCreationFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class BranchesCountFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class BranchDeleteFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class ExternalCustomIdGetUniqueFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
 export declare class DiscountsFetchFailed extends BaseError {
     message: string;
     name: string;
@@ -426,121 +391,6 @@ export declare class DiscountsCountFailed extends BaseError {
     constructor(message?: string, properties?: any);
 }
 export declare class DiscountDeleteFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class CustomersFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class CustomerFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class CustomerPutFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class CustomerNoteCreationFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class CustomerCreationFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class CustomersMetaFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class CustomersCountFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class CustomersSearchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class CustomerDeleteFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class VoucherTypeError extends BaseError {
-    message: string;
-    name: string;
-    constructor(message: string, properties?: any);
-}
-export declare class VouchersFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class VoucherLogsFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class VoucherFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class VoucherPutFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class VoucherPatchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class VoucherCreationFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class VouchersCountFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class VouchersMetaFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class VoucherLogsMetaFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class VoucherDeleteFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class VouchersLogsFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class VouchersLogsCountFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class VouchersUsersFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);
@@ -680,11 +530,6 @@ export declare class OpenOrderFetchFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
-export declare class RevenuesFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
 export declare class RegistersFetchFailed extends BaseError {
     message: string;
     name: string;
@@ -706,56 +551,6 @@ export declare class RegisterNotificationCreateFailed extends BaseError {
     constructor(message?: string, properties?: any);
 }
 export declare class RegisterDeviceConfigurationPutFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class StatisticsProductFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class StatisticsProductChildrenFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class StaffOverviewFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class ProductGroupsReportFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class RefundsReportFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class VouchersReportFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class ProductsReportFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class PaymentsReportFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class SimpleSalesCartItemsReportFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class StocksReportFetchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);

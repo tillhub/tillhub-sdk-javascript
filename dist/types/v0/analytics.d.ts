@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { BaseError } from '../errors';
 import { UriHelper } from '../uri-helper';
 import { Balances } from './analytics/reports/balances';
 import { PaymentOptions } from './analytics/reports/payment_options';
@@ -133,4 +134,84 @@ export declare class Analytics {
     payments(): Payments;
     vat(): Vat;
     customers(): Customers;
+}
+export declare class ReportsStocksFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class RefundsReportFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class VouchersReportFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ProductsReportFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class PaymentsReportFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class RevenuesFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ReportsProductGroupsFiltersFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ReportsProductGroupsFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ReportsCustomerOverviewFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ReportsCustomerTransactionsFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ReportsCustomerCustomersFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class SimpleSalesCartItemsReportFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ProductGroupsReportFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class StatisticsProductChildrenFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class StaffOverviewFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class StatisticsProductFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
 }

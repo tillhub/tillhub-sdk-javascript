@@ -1,4 +1,17 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -48,16 +61,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var qs_1 = __importDefault(require("qs"));
-var errors = __importStar(require("../errors"));
+var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
 var Customers = /** @class */ (function () {
     function Customers(options, http) {
@@ -91,7 +97,7 @@ var Customers = /** @class */ (function () {
                     case 1:
                         response_1 = _a.sent();
                         if (response_1.status !== 200) {
-                            reject(new errors.CustomersFetchFailed(undefined, { status: response_1.status }));
+                            reject(new CustomersFetchFailed(undefined, { status: response_1.status }));
                         }
                         if (response_1.data.cursor && response_1.data.cursor.next) {
                             next = function () { return _this.getAll({ uri: response_1.data.cursor.next }); };
@@ -103,7 +109,7 @@ var Customers = /** @class */ (function () {
                             })];
                     case 2:
                         err_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.CustomersFetchFailed(undefined, { error: err_1 }))];
+                        return [2 /*return*/, reject(new CustomersFetchFailed(undefined, { error: err_1 }))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -133,7 +139,7 @@ var Customers = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.CustomerFetchFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new CustomerFetchFailed(undefined, { status: response.status }))];
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
@@ -142,7 +148,7 @@ var Customers = /** @class */ (function () {
                             })];
                     case 3:
                         error_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.CustomerFetchFailed(undefined, { error: error_1 }))];
+                        return [2 /*return*/, reject(new CustomerFetchFailed(undefined, { error: error_1 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -163,7 +169,7 @@ var Customers = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.CustomerNoteCreationFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new CustomerNoteCreationFailed(undefined, { status: response.status }))];
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
@@ -172,7 +178,7 @@ var Customers = /** @class */ (function () {
                             })];
                     case 3:
                         error_2 = _a.sent();
-                        return [2 /*return*/, reject(new errors.CustomerNoteCreationFailed(undefined, { error: error_2 }))];
+                        return [2 /*return*/, reject(new CustomerNoteCreationFailed(undefined, { error: error_2 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -193,7 +199,7 @@ var Customers = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.CustomerPutFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new CustomerPutFailed(undefined, { status: response.status }))];
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
@@ -201,7 +207,7 @@ var Customers = /** @class */ (function () {
                             })];
                     case 3:
                         error_3 = _a.sent();
-                        return [2 /*return*/, reject(new errors.CustomerPutFailed(undefined, { error: error_3 }))];
+                        return [2 /*return*/, reject(new CustomerPutFailed(undefined, { error: error_3 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -223,7 +229,7 @@ var Customers = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.CustomerCreationFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new CustomerCreationFailed(undefined, { status: response.status }))];
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
@@ -232,7 +238,7 @@ var Customers = /** @class */ (function () {
                             })];
                     case 3:
                         error_4 = _a.sent();
-                        return [2 /*return*/, reject(new errors.CustomerCreationFailed(undefined, { error: error_4 }))];
+                        return [2 /*return*/, reject(new CustomerCreationFailed(undefined, { error: error_4 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -257,10 +263,10 @@ var Customers = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.CustomersMetaFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new CustomersMetaFailed(undefined, { status: response.status }))];
                         }
                         if (!response.data.results[0]) {
-                            return [2 /*return*/, reject(new errors.CustomersMetaFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new CustomersMetaFailed(undefined, { status: response.status }))];
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
@@ -268,7 +274,7 @@ var Customers = /** @class */ (function () {
                             })];
                     case 3:
                         err_2 = _a.sent();
-                        return [2 /*return*/, reject(new errors.CustomersMetaFailed(undefined, { error: err_2 }))];
+                        return [2 /*return*/, reject(new CustomersMetaFailed(undefined, { error: err_2 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -289,14 +295,14 @@ var Customers = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            reject(new errors.CustomerDeleteFailed(undefined, { status: response.status }));
+                            reject(new CustomerDeleteFailed(undefined, { status: response.status }));
                         }
                         return [2 /*return*/, resolve({
                                 msg: response.data.msg
                             })];
                     case 3:
                         err_3 = _a.sent();
-                        return [2 /*return*/, reject(new errors.CustomerDeleteFailed(undefined, { error: err_3 }))];
+                        return [2 /*return*/, reject(new CustomerDeleteFailed(undefined, { error: err_3 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -317,7 +323,7 @@ var Customers = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            reject(new errors.CustomersCountFailed(undefined, { status: response.status }));
+                            reject(new CustomersCountFailed(undefined, { status: response.status }));
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
@@ -325,7 +331,7 @@ var Customers = /** @class */ (function () {
                             })];
                     case 3:
                         err_4 = _a.sent();
-                        return [2 /*return*/, reject(new errors.CustomersCountFailed(undefined, { error: err_4 }))];
+                        return [2 /*return*/, reject(new CustomersCountFailed(undefined, { error: err_4 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -345,14 +351,14 @@ var Customers = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 && reject(new errors.CustomersSearchFailed());
+                        response.status !== 200 && reject(new CustomersSearchFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
                         error_5 = _a.sent();
-                        return [2 /*return*/, reject(new errors.CustomersSearchFailed(undefined, { error: error_5 }))];
+                        return [2 /*return*/, reject(new CustomersSearchFailed(undefined, { error: error_5 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -361,4 +367,112 @@ var Customers = /** @class */ (function () {
     return Customers;
 }());
 exports.Customers = Customers;
+var CustomersFetchFailed = /** @class */ (function (_super) {
+    __extends(CustomersFetchFailed, _super);
+    function CustomersFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch customers'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'CustomersFetchFailed';
+        return _this;
+    }
+    return CustomersFetchFailed;
+}(errors_1.BaseError));
+exports.CustomersFetchFailed = CustomersFetchFailed;
+var CustomerFetchFailed = /** @class */ (function (_super) {
+    __extends(CustomerFetchFailed, _super);
+    function CustomerFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch customer'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'CustomerFetchFailed';
+        return _this;
+    }
+    return CustomerFetchFailed;
+}(errors_1.BaseError));
+exports.CustomerFetchFailed = CustomerFetchFailed;
+var CustomerPutFailed = /** @class */ (function (_super) {
+    __extends(CustomerPutFailed, _super);
+    function CustomerPutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not alter customer'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'CustomerPutFailed';
+        return _this;
+    }
+    return CustomerPutFailed;
+}(errors_1.BaseError));
+exports.CustomerPutFailed = CustomerPutFailed;
+var CustomerNoteCreationFailed = /** @class */ (function (_super) {
+    __extends(CustomerNoteCreationFailed, _super);
+    function CustomerNoteCreationFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create customer note'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'CustomerNoteCreationFailed';
+        return _this;
+    }
+    return CustomerNoteCreationFailed;
+}(errors_1.BaseError));
+exports.CustomerNoteCreationFailed = CustomerNoteCreationFailed;
+var CustomerCreationFailed = /** @class */ (function (_super) {
+    __extends(CustomerCreationFailed, _super);
+    function CustomerCreationFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create customer'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'CustomerCreationFailed';
+        return _this;
+    }
+    return CustomerCreationFailed;
+}(errors_1.BaseError));
+exports.CustomerCreationFailed = CustomerCreationFailed;
+var CustomersMetaFailed = /** @class */ (function (_super) {
+    __extends(CustomersMetaFailed, _super);
+    function CustomersMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get customers metadata'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'CustomersMetaFailed';
+        return _this;
+    }
+    return CustomersMetaFailed;
+}(errors_1.BaseError));
+exports.CustomersMetaFailed = CustomersMetaFailed;
+var CustomersCountFailed = /** @class */ (function (_super) {
+    __extends(CustomersCountFailed, _super);
+    function CustomersCountFailed(message, properties) {
+        if (message === void 0) { message = 'Could not count customers'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'CustomersCountFailed';
+        return _this;
+    }
+    return CustomersCountFailed;
+}(errors_1.BaseError));
+exports.CustomersCountFailed = CustomersCountFailed;
+var CustomersSearchFailed = /** @class */ (function (_super) {
+    __extends(CustomersSearchFailed, _super);
+    function CustomersSearchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not search for customer'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'CustomersSearchFailed';
+        return _this;
+    }
+    return CustomersSearchFailed;
+}(errors_1.BaseError));
+exports.CustomersSearchFailed = CustomersSearchFailed;
+var CustomerDeleteFailed = /** @class */ (function (_super) {
+    __extends(CustomerDeleteFailed, _super);
+    function CustomerDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete the customer'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'CustomerDeleteFailed';
+        return _this;
+    }
+    return CustomerDeleteFailed;
+}(errors_1.BaseError));
+exports.CustomerDeleteFailed = CustomerDeleteFailed;
 //# sourceMappingURL=customers.js.map

@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { BaseError } from '../errors';
 import { UriHelper, HandlerQuery } from '../uri-helper';
 export interface CustomersOptions {
     user?: string;
@@ -139,4 +140,49 @@ export declare class Customers {
     delete(customerId: string): Promise<CustomerResponse>;
     count(): Promise<CustomersResponse>;
     search(searchTerm: string): Promise<CustomersResponse>;
+}
+export declare class CustomersFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class CustomerFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class CustomerPutFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class CustomerNoteCreationFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class CustomerCreationFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class CustomersMetaFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class CustomersCountFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class CustomersSearchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class CustomerDeleteFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
 }

@@ -198,7 +198,7 @@ var Accounts = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().delete(uri)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 && reject(new errors.CustomerDeleteFailed());
+                        response.status !== 200 && reject(new errors.AccountDeleteFailed());
                         return [2 /*return*/, resolve({
                                 msg: response.data.msg
                             })];

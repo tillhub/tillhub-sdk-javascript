@@ -1,4 +1,17 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -48,16 +61,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var qs_1 = __importDefault(require("qs"));
-var errors = __importStar(require("../errors"));
+var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
 var Branches = /** @class */ (function () {
     function Branches(options, http) {
@@ -91,7 +97,7 @@ var Branches = /** @class */ (function () {
                     case 1:
                         response_1 = _a.sent();
                         if (response_1.status !== 200) {
-                            return [2 /*return*/, reject(new errors.BranchesFetchFailed(undefined, { status: response_1.status }))];
+                            return [2 /*return*/, reject(new BranchesFetchFailed(undefined, { status: response_1.status }))];
                         }
                         if (response_1.data.cursor && response_1.data.cursor.next) {
                             next = function () { return _this.getAll({ uri: response_1.data.cursor.next }); };
@@ -103,7 +109,7 @@ var Branches = /** @class */ (function () {
                             })];
                     case 2:
                         error_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.BranchesFetchFailed(undefined, { error: error_1 }))];
+                        return [2 /*return*/, reject(new BranchesFetchFailed(undefined, { error: error_1 }))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -124,7 +130,7 @@ var Branches = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         response.status !== 200 &&
-                            reject(new errors.BranchFetchFailed(undefined, { status: response.status }));
+                            reject(new BranchFetchFailed(undefined, { status: response.status }));
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 msg: response.data.msg,
@@ -132,7 +138,7 @@ var Branches = /** @class */ (function () {
                             })];
                     case 3:
                         error_2 = _a.sent();
-                        return [2 /*return*/, reject(new errors.BranchFetchFailed(undefined, { error: error_2 }))];
+                        return [2 /*return*/, reject(new BranchFetchFailed(undefined, { error: error_2 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -158,7 +164,7 @@ var Branches = /** @class */ (function () {
                             })];
                     case 3:
                         error_3 = _a.sent();
-                        return [2 /*return*/, reject(new errors.BranchPutFailed(undefined, { error: error_3 }))];
+                        return [2 /*return*/, reject(new BranchPutFailed(undefined, { error: error_3 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -184,7 +190,7 @@ var Branches = /** @class */ (function () {
                             })];
                     case 3:
                         error_4 = _a.sent();
-                        return [2 /*return*/, reject(new errors.BranchCreationFailed(undefined, { error: error_4 }))];
+                        return [2 /*return*/, reject(new BranchCreationFailed(undefined, { error: error_4 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -205,7 +211,7 @@ var Branches = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.BranchesCountFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new BranchesCountFailed(undefined, { status: response.status }))];
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
@@ -213,7 +219,7 @@ var Branches = /** @class */ (function () {
                             })];
                     case 3:
                         error_5 = _a.sent();
-                        return [2 /*return*/, reject(new errors.BranchesCountFailed(undefined, { error: error_5 }))];
+                        return [2 /*return*/, reject(new BranchesCountFailed(undefined, { error: error_5 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -233,13 +239,13 @@ var Branches = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().delete(uri)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 && reject(new errors.CustomerDeleteFailed());
+                        response.status !== 200 && reject(new BranchDeleteFailed());
                         return [2 /*return*/, resolve({
                                 msg: response.data.msg
                             })];
                     case 3:
                         err_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.BranchDeleteFailed())];
+                        return [2 /*return*/, reject(new BranchDeleteFailed())];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -261,7 +267,7 @@ var Branches = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         response.status !== 200 &&
-                            reject(new errors.ExternalCustomIdGetUniqueFailed(undefined, {
+                            reject(new ExternalCustomIdGetUniqueFailed(undefined, {
                                 status: response.status
                             }));
                         return [2 /*return*/, resolve({
@@ -272,12 +278,12 @@ var Branches = /** @class */ (function () {
                     case 3:
                         error_6 = _a.sent();
                         if (error_6.response && error_6.response.status === 409) {
-                            return [2 /*return*/, reject(new errors.ExternalCustomIdGetUniqueFailed(undefined, {
+                            return [2 /*return*/, reject(new ExternalCustomIdGetUniqueFailed(undefined, {
                                     status: error_6.response.status,
                                     name: error_6.response.data.name
                                 }))];
                         }
-                        return [2 /*return*/, reject(new errors.ExternalCustomIdGetUniqueFailed(undefined, { error: error_6 }))];
+                        return [2 /*return*/, reject(new ExternalCustomIdGetUniqueFailed(undefined, { error: error_6 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -286,4 +292,88 @@ var Branches = /** @class */ (function () {
     return Branches;
 }());
 exports.Branches = Branches;
+var BranchesFetchFailed = /** @class */ (function (_super) {
+    __extends(BranchesFetchFailed, _super);
+    function BranchesFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch branches'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'BranchesFetchFailed';
+        return _this;
+    }
+    return BranchesFetchFailed;
+}(errors_1.BaseError));
+exports.BranchesFetchFailed = BranchesFetchFailed;
+var BranchFetchFailed = /** @class */ (function (_super) {
+    __extends(BranchFetchFailed, _super);
+    function BranchFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch branch'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'BrancheFetchFailed';
+        return _this;
+    }
+    return BranchFetchFailed;
+}(errors_1.BaseError));
+exports.BranchFetchFailed = BranchFetchFailed;
+var BranchPutFailed = /** @class */ (function (_super) {
+    __extends(BranchPutFailed, _super);
+    function BranchPutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not alter branch'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'BranchPutFailed';
+        return _this;
+    }
+    return BranchPutFailed;
+}(errors_1.BaseError));
+exports.BranchPutFailed = BranchPutFailed;
+var BranchCreationFailed = /** @class */ (function (_super) {
+    __extends(BranchCreationFailed, _super);
+    function BranchCreationFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create branch'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'BranchCreationFailed';
+        return _this;
+    }
+    return BranchCreationFailed;
+}(errors_1.BaseError));
+exports.BranchCreationFailed = BranchCreationFailed;
+var BranchesCountFailed = /** @class */ (function (_super) {
+    __extends(BranchesCountFailed, _super);
+    function BranchesCountFailed(message, properties) {
+        if (message === void 0) { message = 'Could not count the branches'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'BranchesCountFailed';
+        return _this;
+    }
+    return BranchesCountFailed;
+}(errors_1.BaseError));
+exports.BranchesCountFailed = BranchesCountFailed;
+var BranchDeleteFailed = /** @class */ (function (_super) {
+    __extends(BranchDeleteFailed, _super);
+    function BranchDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete branch'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'BranchDeleteFailed';
+        return _this;
+    }
+    return BranchDeleteFailed;
+}(errors_1.BaseError));
+exports.BranchDeleteFailed = BranchDeleteFailed;
+var ExternalCustomIdGetUniqueFailed = /** @class */ (function (_super) {
+    __extends(ExternalCustomIdGetUniqueFailed, _super);
+    function ExternalCustomIdGetUniqueFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get a unique external_custom_id'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ExternalCustomIdGetUniqueFailed';
+        return _this;
+    }
+    return ExternalCustomIdGetUniqueFailed;
+}(errors_1.BaseError));
+exports.ExternalCustomIdGetUniqueFailed = ExternalCustomIdGetUniqueFailed;
 //# sourceMappingURL=branches.js.map

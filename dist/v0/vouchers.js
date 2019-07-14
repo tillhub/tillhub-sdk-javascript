@@ -1,4 +1,17 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -48,17 +61,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var just_diff_1 = require("just-diff");
 var qs_1 = __importDefault(require("qs"));
-var errors = __importStar(require("../errors"));
+var errors_1 = require("../errors");
 var Vouchers = /** @class */ (function () {
     function Vouchers(options, http) {
         this.options = options;
@@ -91,7 +97,7 @@ var Vouchers = /** @class */ (function () {
                     case 1:
                         response_1 = _a.sent();
                         if (response_1.status !== 200) {
-                            return [2 /*return*/, reject(new errors.VouchersFetchFailed(undefined, { status: response_1.status }))];
+                            return [2 /*return*/, reject(new VouchersFetchFailed(undefined, { status: response_1.status }))];
                         }
                         if (response_1.data.cursor && response_1.data.cursor.next) {
                             next = function () { return _this.getAll({ uri: response_1.data.cursor.next }); };
@@ -103,16 +109,16 @@ var Vouchers = /** @class */ (function () {
                             })];
                     case 2:
                         error_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.VouchersFetchFailed(undefined, { error: error_1 }))];
+                        return [2 /*return*/, reject(new VouchersFetchFailed(undefined, { error: error_1 }))];
                     case 3: return [2 /*return*/];
                 }
             });
         }); });
     };
-    Vouchers.prototype.meta = function () {
+    Vouchers.prototype.meta = function (q) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, error_2;
+            var uri, queryString, response, error_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -120,14 +126,18 @@ var Vouchers = /** @class */ (function () {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
+                        queryString = qs_1.default.stringify(q);
+                        if (queryString) {
+                            uri = uri + "?" + queryString;
+                        }
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.VouchersMetaFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new VouchersMetaFailed(undefined, { status: response.status }))];
                         }
                         if (!response.data.results[0]) {
-                            return [2 /*return*/, reject(new errors.VouchersMetaFailed('could not get voucher metadata unexpectedly'))];
+                            return [2 /*return*/, reject(new VouchersMetaFailed('could not get voucher metadata unexpectedly'))];
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
@@ -135,7 +145,7 @@ var Vouchers = /** @class */ (function () {
                             })];
                     case 3:
                         error_2 = _a.sent();
-                        return [2 /*return*/, reject(new errors.VouchersMetaFailed(undefined, { error: error_2 }))];
+                        return [2 /*return*/, reject(new VouchersMetaFailed(undefined, { error: error_2 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -156,14 +166,14 @@ var Vouchers = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.VoucherDeleteFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new VoucherDeleteFailed(undefined, { status: response.status }))];
                         }
                         return [2 /*return*/, resolve({
                                 msg: response.data.msg
                             })];
                     case 3:
                         error_3 = _a.sent();
-                        return [2 /*return*/, reject(new errors.VoucherDeleteFailed(undefined, { error: error_3 }))];
+                        return [2 /*return*/, reject(new VoucherDeleteFailed(undefined, { error: error_3 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -184,7 +194,7 @@ var Vouchers = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.VouchersCountFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new VouchersCountFailed(undefined, { status: response.status }))];
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
@@ -192,7 +202,7 @@ var Vouchers = /** @class */ (function () {
                             })];
                     case 3:
                         error_4 = _a.sent();
-                        return [2 /*return*/, reject(new errors.VouchersCountFailed(undefined, { error: error_4 }))];
+                        return [2 /*return*/, reject(new VouchersCountFailed(undefined, { error: error_4 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -212,7 +222,7 @@ var Vouchers = /** @class */ (function () {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 && reject(new errors.VoucherFetchFailed());
+                        response.status !== 200 && reject(new VoucherFetchFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 msg: response.data.msg,
@@ -220,7 +230,7 @@ var Vouchers = /** @class */ (function () {
                             })];
                     case 3:
                         error_5 = _a.sent();
-                        return [2 /*return*/, reject(new errors.VoucherFetchFailed(undefined, { error: error_5 }))];
+                        return [2 /*return*/, reject(new VoucherFetchFailed(undefined, { error: error_5 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -246,7 +256,7 @@ var Vouchers = /** @class */ (function () {
                     case 1:
                         response_2 = _a.sent();
                         if (response_2.status !== 200) {
-                            return [2 /*return*/, reject(new errors.VoucherLogsFetchFailed(undefined, { status: response_2.status }))];
+                            return [2 /*return*/, reject(new VoucherLogsFetchFailed(undefined, { status: response_2.status }))];
                         }
                         if (response_2.data.cursor && response_2.data.cursor.next) {
                             next = function () { return _this.getAll({ uri: response_2.data.cursor.next }); };
@@ -258,7 +268,7 @@ var Vouchers = /** @class */ (function () {
                             })];
                     case 2:
                         error_6 = _a.sent();
-                        return [2 /*return*/, reject(new errors.VoucherLogsFetchFailed(undefined, { error: error_6 }))];
+                        return [2 /*return*/, reject(new VoucherLogsFetchFailed(undefined, { error: error_6 }))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -284,7 +294,7 @@ var Vouchers = /** @class */ (function () {
                             })];
                     case 3:
                         error_7 = _a.sent();
-                        return [2 /*return*/, reject(new errors.VoucherPutFailed(undefined, { error: error_7 }))];
+                        return [2 /*return*/, reject(new VoucherPutFailed(undefined, { error: error_7 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -298,7 +308,7 @@ var Vouchers = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         if (!source.id || !target.id || source.id !== target.id) {
-                            return [2 /*return*/, reject(new errors.VoucherTypeError('source and target object require ID to be set and be equal to each other'))];
+                            return [2 /*return*/, reject(new VoucherTypeError('source and target object require ID to be set and be equal to each other'))];
                         }
                         uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + source.id;
                         _a.label = 1;
@@ -321,7 +331,7 @@ var Vouchers = /** @class */ (function () {
                             })];
                     case 3:
                         error_8 = _a.sent();
-                        return [2 /*return*/, reject(new errors.VoucherPatchFailed(undefined, { error: error_8 }))];
+                        return [2 /*return*/, reject(new VoucherPatchFailed(undefined, { error: error_8 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -347,7 +357,7 @@ var Vouchers = /** @class */ (function () {
                             })];
                     case 3:
                         error_9 = _a.sent();
-                        return [2 /*return*/, reject(new errors.VoucherCreationFailed(undefined, { error: error_9 }))];
+                        return [2 /*return*/, reject(new VoucherCreationFailed(undefined, { error: error_9 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -366,14 +376,14 @@ var Vouchers = /** @class */ (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.VouchersUsersFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new VouchersUsersFailed(undefined, { status: response.status }))];
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results
                             })];
                     case 2:
                         error_10 = _a.sent();
-                        return [2 /*return*/, reject(new errors.VouchersUsersFailed(undefined, { error: error_10 }))];
+                        return [2 /*return*/, reject(new VouchersUsersFailed(undefined, { error: error_10 }))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -413,7 +423,7 @@ var VoucherLogs = /** @class */ (function () {
                     case 1:
                         response_3 = _a.sent();
                         if (response_3.status !== 200) {
-                            return [2 /*return*/, reject(new errors.VouchersLogsFetchFailed(undefined, { status: response_3.status }))];
+                            return [2 /*return*/, reject(new VouchersLogsFetchFailed(undefined, { status: response_3.status }))];
                         }
                         if (response_3.data.cursor && response_3.data.cursor.next) {
                             next = function () { return _this.getAll({ uri: response_3.data.cursor.next }); };
@@ -425,7 +435,7 @@ var VoucherLogs = /** @class */ (function () {
                             })];
                     case 2:
                         error_11 = _a.sent();
-                        return [2 /*return*/, reject(new errors.VouchersLogsFetchFailed(undefined, { error: error_11 }))];
+                        return [2 /*return*/, reject(new VouchersLogsFetchFailed(undefined, { error: error_11 }))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -446,10 +456,10 @@ var VoucherLogs = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.VoucherLogsMetaFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new VoucherLogsMetaFailed(undefined, { status: response.status }))];
                         }
                         if (!response.data.results[0]) {
-                            return [2 /*return*/, reject(new errors.VouchersMetaFailed('could not get voucher metadata unexpectedly'))];
+                            return [2 /*return*/, reject(new VouchersMetaFailed('could not get voucher metadata unexpectedly'))];
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
@@ -457,7 +467,7 @@ var VoucherLogs = /** @class */ (function () {
                             })];
                     case 3:
                         error_12 = _a.sent();
-                        return [2 /*return*/, reject(new errors.VoucherLogsMetaFailed(undefined, { error: error_12 }))];
+                        return [2 /*return*/, reject(new VoucherLogsMetaFailed(undefined, { error: error_12 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -466,4 +476,171 @@ var VoucherLogs = /** @class */ (function () {
     return VoucherLogs;
 }());
 exports.VoucherLogs = VoucherLogs;
+var VoucherTypeError = /** @class */ (function (_super) {
+    __extends(VoucherTypeError, _super);
+    function VoucherTypeError(message, properties) {
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'VouchersFetchFailed';
+        return _this;
+    }
+    return VoucherTypeError;
+}(errors_1.BaseError));
+exports.VoucherTypeError = VoucherTypeError;
+var VouchersFetchFailed = /** @class */ (function (_super) {
+    __extends(VouchersFetchFailed, _super);
+    function VouchersFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the vouchers'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'VouchersFetchFailed';
+        return _this;
+    }
+    return VouchersFetchFailed;
+}(errors_1.BaseError));
+exports.VouchersFetchFailed = VouchersFetchFailed;
+var VoucherLogsFetchFailed = /** @class */ (function (_super) {
+    __extends(VoucherLogsFetchFailed, _super);
+    function VoucherLogsFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the voucher logs'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'VoucherLogsFetchFailed';
+        return _this;
+    }
+    return VoucherLogsFetchFailed;
+}(errors_1.BaseError));
+exports.VoucherLogsFetchFailed = VoucherLogsFetchFailed;
+var VoucherFetchFailed = /** @class */ (function (_super) {
+    __extends(VoucherFetchFailed, _super);
+    function VoucherFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch voucher'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'VoucherFetchFailed';
+        return _this;
+    }
+    return VoucherFetchFailed;
+}(errors_1.BaseError));
+exports.VoucherFetchFailed = VoucherFetchFailed;
+var VoucherPutFailed = /** @class */ (function (_super) {
+    __extends(VoucherPutFailed, _super);
+    function VoucherPutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not alter voucher'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'VoucherPutFailed';
+        return _this;
+    }
+    return VoucherPutFailed;
+}(errors_1.BaseError));
+exports.VoucherPutFailed = VoucherPutFailed;
+var VoucherPatchFailed = /** @class */ (function (_super) {
+    __extends(VoucherPatchFailed, _super);
+    function VoucherPatchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not alter voucher'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'VoucherPatchFailed';
+        return _this;
+    }
+    return VoucherPatchFailed;
+}(errors_1.BaseError));
+exports.VoucherPatchFailed = VoucherPatchFailed;
+var VoucherCreationFailed = /** @class */ (function (_super) {
+    __extends(VoucherCreationFailed, _super);
+    function VoucherCreationFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create voucher'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'VoucherPostFailed';
+        return _this;
+    }
+    return VoucherCreationFailed;
+}(errors_1.BaseError));
+exports.VoucherCreationFailed = VoucherCreationFailed;
+var VouchersCountFailed = /** @class */ (function (_super) {
+    __extends(VouchersCountFailed, _super);
+    function VouchersCountFailed(message, properties) {
+        if (message === void 0) { message = 'Could not count the vouchers'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'VouchersCountFailed';
+        return _this;
+    }
+    return VouchersCountFailed;
+}(errors_1.BaseError));
+exports.VouchersCountFailed = VouchersCountFailed;
+var VouchersMetaFailed = /** @class */ (function (_super) {
+    __extends(VouchersMetaFailed, _super);
+    function VouchersMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get voucher metadata'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'VouchersMetaFailed';
+        return _this;
+    }
+    return VouchersMetaFailed;
+}(errors_1.BaseError));
+exports.VouchersMetaFailed = VouchersMetaFailed;
+var VoucherLogsMetaFailed = /** @class */ (function (_super) {
+    __extends(VoucherLogsMetaFailed, _super);
+    function VoucherLogsMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get voucher logs metadata'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'VoucherLogsMetaFailed';
+        return _this;
+    }
+    return VoucherLogsMetaFailed;
+}(errors_1.BaseError));
+exports.VoucherLogsMetaFailed = VoucherLogsMetaFailed;
+var VoucherDeleteFailed = /** @class */ (function (_super) {
+    __extends(VoucherDeleteFailed, _super);
+    function VoucherDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete the voucher'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'VoucherDeleteFailed';
+        return _this;
+    }
+    return VoucherDeleteFailed;
+}(errors_1.BaseError));
+exports.VoucherDeleteFailed = VoucherDeleteFailed;
+var VouchersLogsFetchFailed = /** @class */ (function (_super) {
+    __extends(VouchersLogsFetchFailed, _super);
+    function VouchersLogsFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the vouchers logs'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'VouchersLogsFetchFailed';
+        return _this;
+    }
+    return VouchersLogsFetchFailed;
+}(errors_1.BaseError));
+exports.VouchersLogsFetchFailed = VouchersLogsFetchFailed;
+var VouchersLogsCountFailed = /** @class */ (function (_super) {
+    __extends(VouchersLogsCountFailed, _super);
+    function VouchersLogsCountFailed(message, properties) {
+        if (message === void 0) { message = 'Could not count the vouchers logs'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'VouchersLogsCountFailed';
+        return _this;
+    }
+    return VouchersLogsCountFailed;
+}(errors_1.BaseError));
+exports.VouchersLogsCountFailed = VouchersLogsCountFailed;
+var VouchersUsersFailed = /** @class */ (function (_super) {
+    __extends(VouchersUsersFailed, _super);
+    function VouchersUsersFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get authorized voucher users'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'VouchersUsersFailed';
+        return _this;
+    }
+    return VouchersUsersFailed;
+}(errors_1.BaseError));
+exports.VouchersUsersFailed = VouchersUsersFailed;
 //# sourceMappingURL=vouchers.js.map

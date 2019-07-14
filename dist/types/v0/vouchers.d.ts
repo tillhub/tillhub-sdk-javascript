@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { BaseError } from '../errors';
 export interface VouchersOptions {
     user?: string;
     base?: string;
@@ -10,6 +11,10 @@ export interface VouchersQueryOptions {
         deleted?: boolean;
         active?: boolean;
     };
+}
+export interface VouchersMetaQuery {
+    deleted?: boolean;
+    active?: boolean;
 }
 export interface VouchersResponse {
     data: object[];
@@ -68,7 +73,7 @@ export declare class Vouchers {
     options: VouchersOptions;
     constructor(options: VouchersOptions, http: Client);
     getAll(optionsOrQuery?: VouchersQueryOptions | undefined): Promise<VouchersResponse>;
-    meta(): Promise<VouchersResponse>;
+    meta(q?: VouchersMetaQuery | undefined): Promise<VouchersResponse>;
     delete(voucherId: string): Promise<VouchersResponse>;
     count(): Promise<VouchersResponse>;
     get(voucherId: string): Promise<VoucherResponse>;
@@ -85,5 +90,75 @@ export declare class VoucherLogs {
     constructor(options: VouchersOptions, http: Client);
     getAll(optionsOrQuery?: VouchersQueryOptions | undefined): Promise<VoucherLogsResponse>;
     meta(): Promise<VoucherLogsResponse>;
+}
+export declare class VoucherTypeError extends BaseError {
+    message: string;
+    name: string;
+    constructor(message: string, properties?: any);
+}
+export declare class VouchersFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class VoucherLogsFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class VoucherFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class VoucherPutFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class VoucherPatchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class VoucherCreationFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class VouchersCountFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class VouchersMetaFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class VoucherLogsMetaFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class VoucherDeleteFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class VouchersLogsFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class VouchersLogsCountFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class VouchersUsersFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
 }
 export {};

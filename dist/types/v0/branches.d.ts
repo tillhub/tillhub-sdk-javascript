@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { BaseError } from '../errors';
 import { UriHelper } from '../uri-helper';
 export interface BranchesOptions {
     user?: string;
@@ -62,4 +63,39 @@ export declare class Branches {
     count(): Promise<BranchesResponse>;
     delete(branchId: string): Promise<BranchResponse>;
     getUniqueExternalId(query: ExternalCustomIdQuery): Promise<BranchResponse>;
+}
+export declare class BranchesFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class BranchFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class BranchPutFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class BranchCreationFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class BranchesCountFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class BranchDeleteFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ExternalCustomIdGetUniqueFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
 }

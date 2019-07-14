@@ -1,3 +1,10 @@
+# [3.103.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.102.0...v3.103.0) (2019-07-14)
+
+
+### Features
+
+* **vouchers:** allow queries in meta ([4ff50ce](https://github.com/tillhub/tillhub-sdk-javascript/commit/4ff50ce))
+
 # [3.102.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.101.0...v3.102.0) (2019-07-11)
 
 
