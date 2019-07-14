@@ -1,6 +1,7 @@
 import { Client } from '../client'
 import * as errors from '../errors/tags'
 import { UriHelper } from '../uri-helper'
+import { ThBaseHandler } from '../base'
 
 export interface TagsOptions {
   user?: string
@@ -36,17 +37,19 @@ export interface Tag {
   update_id?: number
 }
 
-export class Tags {
+export class Tags extends ThBaseHandler {
+  public static baseEndpoint = '/api/v0/tags'
   endpoint: string
   http: Client
   public options: TagsOptions
   public uriHelper: UriHelper
 
   constructor(options: TagsOptions, http: Client) {
+    super(http, { endpoint: Tags.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
-    this.endpoint = '/api/v0/tags'
+    this.endpoint = Tags.baseEndpoint
     this.options.base = this.options.base || 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }

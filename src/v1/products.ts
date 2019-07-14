@@ -2,6 +2,7 @@ import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 import { UriHelper, HandlerQuery } from '../uri-helper'
+import { ThBaseHandler } from '../base'
 
 export interface Images {
   '1x'?: string
@@ -143,17 +144,19 @@ export interface BookStock {
   qty: number
 }
 
-export class Products {
+export class Products extends ThBaseHandler {
+  public static baseEndpoint = '/api/v1/products'
   endpoint: string
   http: Client
   public options: ProductsOptions
   public uriHelper: UriHelper
 
   constructor(options: ProductsOptions, http: Client) {
+    super(http, { endpoint: Products.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
-    this.endpoint = '/api/v1/products'
+    this.endpoint = Products.baseEndpoint
     this.options.base = this.options.base || 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }

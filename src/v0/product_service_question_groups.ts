@@ -1,6 +1,7 @@
 import { Client } from '../client'
 import * as errors from '../errors/productServiceQuestionGroups'
 import { UriHelper } from '../uri-helper'
+import { ThBaseHandler } from '../base'
 
 export interface ProductServiceQuestionGroupsOptions {
   user?: string
@@ -40,17 +41,19 @@ export interface ProductServiceQuestionGroup {
   active?: boolean
 }
 
-export class ProductServiceQuestionGroups {
+export class ProductServiceQuestionGroups extends ThBaseHandler {
+  public static baseEndpoint = '/api/v0/product_service_question_groups'
   endpoint: string
   http: Client
   public options: ProductServiceQuestionGroupsOptions
   public uriHelper: UriHelper
 
   constructor(options: ProductServiceQuestionGroupsOptions, http: Client) {
+    super(http, { endpoint: ProductServiceQuestionGroups.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
-    this.endpoint = '/api/v0/product_service_question_groups'
+    this.endpoint = ProductServiceQuestionGroups.baseEndpoint
     this.options.base = this.options.base || 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }

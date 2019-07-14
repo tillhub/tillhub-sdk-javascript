@@ -1,5 +1,6 @@
 import { Client } from '../client'
 import * as errors from '../errors'
+import { ThBaseHandler } from '../base'
 
 export interface DeliveriesOptions {
   user?: string
@@ -135,16 +136,18 @@ export interface DeliveriesResponse {
   msg?: string
 }
 
-export class Deliveries {
+export class Deliveries extends ThBaseHandler {
+  public static baseEndpoint = '/api/v0/deliveries'
   endpoint: string
   http: Client
   public options: DeliveriesOptions
 
   constructor(options: DeliveriesOptions, http: Client) {
+    super(http, { endpoint: Deliveries.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
-    this.endpoint = '/api/v0/deliveries'
+    this.endpoint = Deliveries.baseEndpoint
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 

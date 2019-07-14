@@ -1,6 +1,7 @@
 import { Client } from '../client'
 import { UriHelper } from '../uri-helper'
 import { BaseError } from '../errors/baseError'
+import { ThBaseHandler } from '../base'
 
 export interface StaffGroupsOptions {
   user?: string
@@ -21,17 +22,19 @@ export interface StaffGroupsResponse {
   metadata: object
 }
 
-export class StaffGroups {
+export class StaffGroups extends ThBaseHandler {
+  public static baseEndpoint = '/api/v0/staff_groups'
   endpoint: string
   http: Client
   public options: StaffGroupsOptions
   public uriHelper: UriHelper
 
   constructor(options: StaffGroupsOptions, http: Client) {
+    super(http, { endpoint: StaffGroups.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
-    this.endpoint = '/api/v0/staff_groups'
+    this.endpoint = StaffGroups.baseEndpoint
     this.options.base = this.options.base || 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }

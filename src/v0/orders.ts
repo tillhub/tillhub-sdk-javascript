@@ -1,6 +1,7 @@
 import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
+import { ThBaseHandler } from '../base'
 
 const allowedStatuses = [200, 204]
 
@@ -84,16 +85,18 @@ export interface BookStockRequest {
   uri?: string
 }
 
-export class Orders {
+export class Orders extends ThBaseHandler {
+  public static baseEndpoint = '/api/v0/orders'
   endpoint: string
   http: Client
   public options: OrdersOptions
 
   constructor(options: OrdersOptions, http: Client) {
+    super(http, { endpoint: Orders.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
-    this.endpoint = '/api/v0/orders'
+    this.endpoint = Orders.baseEndpoint
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 
@@ -255,7 +258,7 @@ export class Orders {
         } else {
           uri = `${this.options.base}${this.endpoint}/${
             this.options.user
-          }?embed=location&direction=incoming${query ? `${qs.stringify(query)}` : ''}`
+            }?embed=location&direction=incoming${query ? `${qs.stringify(query)}` : ''}`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -280,7 +283,7 @@ export class Orders {
         } else {
           uri = `${this.options.base}${this.endpoint}/${
             this.options.user
-          }?embed=location&direction=outgoing${query ? `${qs.stringify(query)}` : ''}`
+            }?embed=location&direction=outgoing${query ? `${qs.stringify(query)}` : ''}`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -324,7 +327,7 @@ export class Orders {
       try {
         const uri = `${this.options.base}${this.endpoint}/${
           this.options.user
-        }/${orderId}/order_items`
+          }/${orderId}/order_items`
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.HistoricOrderItemsFetchFailed())
@@ -349,7 +352,7 @@ export class Orders {
         } else {
           uri = `${this.options.base}${this.endpoint}/${
             this.options.user
-          }/order_items/${orderId}/book_stock`
+            }/order_items/${orderId}/book_stock`
         }
 
         const response = await this.http.getClient().post(uri, body)

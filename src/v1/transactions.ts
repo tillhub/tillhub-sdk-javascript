@@ -2,6 +2,7 @@ import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 import { UriHelper } from '../uri-helper'
+import { ThBaseHandler } from '../base'
 
 export interface PdfRequestObject {
   transactionId: string
@@ -40,7 +41,8 @@ interface FiskaltrustAuth {
   cashbox_auth: string
 }
 
-export class Transactions {
+export class Transactions extends ThBaseHandler {
+  public static baseEndpoint = '/api/v1/transactions'
   endpoint: string
   http: Client
   // signing: Signing
@@ -48,11 +50,12 @@ export class Transactions {
   public uriHelper: UriHelper
 
   constructor(options: TransactionsOptions, http: Client) {
+    super(http, { endpoint: Transactions.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
     this.options = options
     this.http = http
     // this.signing = new Signing(options, http)
 
-    this.endpoint = '/api/v1/transactions'
+    this.endpoint = Transactions.baseEndpoint
     this.options.base = this.options.base || 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }

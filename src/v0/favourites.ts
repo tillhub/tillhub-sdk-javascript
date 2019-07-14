@@ -1,6 +1,7 @@
 import { Client } from '../client'
 import { UriHelper } from '../uri-helper'
 import * as errors from '../errors'
+import { ThBaseHandler } from '../base'
 
 export interface Item {
   type?: string,
@@ -42,17 +43,19 @@ export interface FavouritesOptions {
   base?: string
 }
 
-export class Favourites {
+export class Favourites extends ThBaseHandler {
+  public static baseEndpoint = '/api/v0/favourites'
   endpoint: string
   http: Client
   public options: FavouritesOptions
   public uriHelper: UriHelper
 
   constructor(options: FavouritesOptions, http: Client) {
+    super(http, { endpoint: Favourites.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
-    this.endpoint = '/api/v0/favourites'
+    this.endpoint = Favourites.baseEndpoint
     this.options.base = this.options.base || 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }

@@ -1,6 +1,7 @@
 import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
+import { ThBaseHandler } from '../base'
 
 export interface ExpenseAccountsOptions {
   user?: string
@@ -44,16 +45,18 @@ export interface ExpenseAccount {
   accepts_booking_from_safe?: boolean
 }
 
-export class ExpenseAccounts {
+export class ExpenseAccounts extends ThBaseHandler {
+  public static baseEndpoint = '/api/v0/expense_accounts'
   endpoint: string
   http: Client
   public options: ExpenseAccountsOptions
 
   constructor(options: ExpenseAccountsOptions, http: Client) {
+    super(http, { endpoint: ExpenseAccounts.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
-    this.endpoint = '/api/v0/expense_accounts'
+    this.endpoint = ExpenseAccounts.baseEndpoint
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 

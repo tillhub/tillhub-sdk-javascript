@@ -1,6 +1,7 @@
 import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
+import { ThBaseHandler } from '../base'
 
 export interface AccountsOptions {
   user?: string
@@ -50,16 +51,18 @@ export interface Account {
   accounts: AccountsRefType[]
 }
 
-export class Accounts {
+export class Accounts extends ThBaseHandler {
+  public static baseEndpoint = '/api/v0/accounts'
   endpoint: string
   http: Client
   public options: AccountsOptions
 
   constructor(options: AccountsOptions, http: Client) {
+    super(http, { endpoint: Accounts.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
-    this.endpoint = '/api/v0/accounts'
+    this.endpoint = Accounts.baseEndpoint
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 

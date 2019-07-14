@@ -3,6 +3,7 @@ import { Client } from '../client'
 import * as errors from '../errors'
 import { UriHelper } from '../uri-helper'
 import { BaseError } from '../errors/baseError'
+import { ThBaseHandler } from '../base'
 
 export interface WarehousesOptions {
   user?: string
@@ -70,17 +71,19 @@ export interface Warehouse {
   barcode?: string | null
 }
 
-export class Warehouses {
+export class Warehouses extends ThBaseHandler {
+  public static baseEndpoint = '/api/v0/warehouses'
   endpoint: string
   http: Client
   public options: WarehousesOptions
   public uriHelper: UriHelper
 
   constructor(options: WarehousesOptions, http: Client) {
+    super(http, { endpoint: Warehouses.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
-    this.endpoint = '/api/v0/warehouses'
+    this.endpoint = Warehouses.baseEndpoint
     this.options.base = this.options.base || 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }

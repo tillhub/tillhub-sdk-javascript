@@ -3,6 +3,7 @@ import { Client } from '../client'
 import * as errors from '../errors'
 import { Users, UsersOptions } from './users'
 import { UriHelper } from '../uri-helper'
+import { ThBaseHandler } from '../base'
 
 export interface ConfigurationsOptions {
   user?: string
@@ -95,17 +96,19 @@ class ConfigurationReference {
   }
 }
 
-export class Configurations {
+export class Configurations extends ThBaseHandler {
+  public static baseEndpoint = '/api/v0/configurations'
   endpoint: string
   http: Client
   public options: ConfigurationsOptions
   public uriHelper: UriHelper
 
   constructor(options: ConfigurationsOptions, http: Client) {
+    super(http, { endpoint: Configurations.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
-    this.endpoint = '/api/v0/configurations'
+    this.endpoint = Configurations.baseEndpoint
     this.options.base = this.options.base || 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }

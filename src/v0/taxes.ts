@@ -1,6 +1,7 @@
 import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
+import { ThBaseHandler } from '../base'
 
 export interface TaxesOptions {
   user?: string
@@ -43,16 +44,18 @@ export interface Tax {
   is_fixed: boolean
 }
 
-export class Taxes {
+export class Taxes extends ThBaseHandler {
+  public static baseEndpoint = '/api/v0/taxes'
   endpoint: string
   http: Client
   public options: TaxesOptions
 
   constructor(options: TaxesOptions, http: Client) {
+    super(http, { endpoint: Taxes.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
-    this.endpoint = '/api/v0/taxes'
+    this.endpoint = Taxes.baseEndpoint
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 

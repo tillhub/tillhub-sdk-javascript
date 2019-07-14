@@ -1,6 +1,7 @@
 import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
+import { ThBaseHandler } from '../base'
 
 export interface ProductGroupsOptions {
   user?: string
@@ -46,16 +47,18 @@ export interface ProductGroup {
   color?: string
 }
 
-export class ProductGroups {
+export class ProductGroups extends ThBaseHandler {
+  public static baseEndpoint = '/api/v0/product_groups'
   endpoint: string
   http: Client
   public options: ProductGroupsOptions
 
   constructor(options: ProductGroupsOptions, http: Client) {
+    super(http, { endpoint: ProductGroups.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
-    this.endpoint = '/api/v0/product_groups'
+    this.endpoint = ProductGroups.baseEndpoint
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 

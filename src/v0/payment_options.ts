@@ -1,6 +1,7 @@
 import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
+import { ThBaseHandler } from '../base'
 
 export interface PaymentOptionsOptions {
   user?: string
@@ -47,16 +48,18 @@ export interface PaymentOption {
   summable: boolean
 }
 
-export class PaymentOptions {
+export class PaymentOptions extends ThBaseHandler {
+  public static baseEndpoint = '/api/v0/payment_options'
   endpoint: string
   http: Client
   public options: PaymentOptionsOptions
 
   constructor(options: PaymentOptionsOptions, http: Client) {
+    super(http, { endpoint: PaymentOptions.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
-    this.endpoint = '/api/v0/payment_options'
+    this.endpoint = PaymentOptions.baseEndpoint
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 

@@ -1,6 +1,7 @@
 import { Client } from '../client'
 import * as errors from '../errors/safes'
 import { UriHelper } from '../uri-helper'
+import { ThBaseHandler } from '../base'
 
 export interface SafesOptions {
   user?: string
@@ -55,17 +56,19 @@ export interface BookRequestBody {
   initiated_at?: string
 }
 
-export class Safes {
+export class Safes extends ThBaseHandler {
+  public static baseEndpoint = '/api/v0/safes'
   endpoint: string
   http: Client
   public options: SafesOptions
   public uriHelper: UriHelper
 
   constructor(options: SafesOptions, http: Client) {
+    super(http, { endpoint: Safes.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
-    this.endpoint = '/api/v0/safes'
+    this.endpoint = Safes.baseEndpoint
     this.options.base = this.options.base || 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }

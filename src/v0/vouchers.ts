@@ -2,6 +2,7 @@ import { diff, jsonPatchPathConverter } from 'just-diff'
 import qs from 'qs'
 import { Client } from '../client'
 import { BaseError } from '../errors'
+import { ThBaseHandler } from '../base'
 
 export interface VouchersOptions {
   user?: string
@@ -79,18 +80,20 @@ export interface UsersResponse {
   data: object[]
 }
 
-export class Vouchers {
+export class Vouchers extends ThBaseHandler {
+  public static baseEndpoint = '/api/v0/vouchers'
   endpoint: string
   http: Client
   logs: VoucherLogs
   public options: VouchersOptions
 
   constructor(options: VouchersOptions, http: Client) {
+    super(http, { endpoint: Vouchers.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
     this.options = options
     this.http = http
     this.logs = new VoucherLogs(options, http)
 
-    this.endpoint = '/api/v0/vouchers'
+    this.endpoint = Vouchers.baseEndpoint
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 
@@ -341,16 +344,18 @@ export class Vouchers {
   }
 }
 
-export class VoucherLogs {
+export class VoucherLogs extends ThBaseHandler {
+  public static baseEndpoint = '/api/v0/vouchers'
   endpoint: string
   http: Client
   public options: VouchersOptions
 
   constructor(options: VouchersOptions, http: Client) {
+    super(http, { endpoint: VoucherLogs.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
-    this.endpoint = '/api/v0/vouchers'
+    this.endpoint = VoucherLogs.baseEndpoint
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 

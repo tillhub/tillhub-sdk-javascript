@@ -2,6 +2,7 @@ import qs from 'qs'
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
+import { ThBaseHandler } from '../base'
 
 export interface BranchesOptions {
   user?: string
@@ -59,17 +60,19 @@ export interface Branch {
   currency_default?: string | null
 }
 
-export class Branches {
+export class Branches extends ThBaseHandler {
+  public static baseEndpoint = '/api/v0/branches'
   endpoint: string
   http: Client
   public options: BranchesOptions
   public uriHelper: UriHelper
 
   constructor(options: BranchesOptions, http: Client) {
+    super(http, { endpoint: Branches.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
-    this.endpoint = '/api/v0/branches'
+    this.endpoint = Branches.baseEndpoint
     this.options.base = this.options.base || 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }

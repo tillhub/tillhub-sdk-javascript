@@ -1,6 +1,7 @@
 import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
+import { ThBaseHandler } from '../base'
 
 export interface TemplatesOptions {
   limit?: number
@@ -69,16 +70,18 @@ export interface TemplatesResponse {
   metadata: object
 }
 
-export class Templates {
+export class Templates extends ThBaseHandler {
+  public static baseEndpoint = '/api/v1/templates'
   endpoint: string
   http: Client
   public options: TemplatesOptions
 
   constructor(options: TemplatesOptions, http: Client) {
+    super(http, { endpoint: Templates.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
-    this.endpoint = '/api/v1/templates'
+    this.endpoint = Templates.baseEndpoint
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 

@@ -1,6 +1,7 @@
 import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
+import { ThBaseHandler } from '../base'
 
 export interface DeviceConfigurationObject {
   device_token: string
@@ -58,16 +59,18 @@ export interface Register {
   register_number: number
 }
 
-export class Registers {
+export class Registers extends ThBaseHandler {
+  public static baseEndpoint = '/api/v1/registers'
   endpoint: string
   http: Client
   public options: RegistersOptions
 
   constructor(options: RegistersOptions, http: Client) {
+    super(http, { endpoint: Registers.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
-    this.endpoint = '/api/v1/registers'
+    this.endpoint = Registers.baseEndpoint
     this.options.base = this.options.base || 'https://api.tillhub.com'
   }
 
