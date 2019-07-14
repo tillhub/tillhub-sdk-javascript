@@ -1,5 +1,6 @@
 import { Client } from '../client';
 import { UriHelper } from '../uri-helper';
+import { ThBaseHandler } from '../base';
 export interface TagsOptions {
     user?: string;
     base?: string;
@@ -29,7 +30,8 @@ export interface Tag {
     legacy_id?: number;
     update_id?: number;
 }
-export declare class Tags {
+export declare class Tags extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: TagsOptions;

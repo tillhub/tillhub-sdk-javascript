@@ -65,13 +65,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var qs_1 = __importDefault(require("qs"));
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
-var Branches = /** @class */ (function () {
+var base_1 = require("../base");
+var Branches = /** @class */ (function (_super) {
+    __extends(Branches, _super);
     function Branches(options, http) {
-        this.options = options;
-        this.http = http;
-        this.endpoint = '/api/v0/branches';
-        this.options.base = this.options.base || 'https://api.tillhub.com';
-        this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
+        var _this = _super.call(this, http, { endpoint: Branches.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+        _this.options = options;
+        _this.http = http;
+        _this.endpoint = Branches.baseEndpoint;
+        _this.options.base = _this.options.base || 'https://api.tillhub.com';
+        _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
+        return _this;
     }
     Branches.prototype.getAll = function (queryOrOptions) {
         var _this = this;
@@ -289,8 +293,9 @@ var Branches = /** @class */ (function () {
             });
         }); });
     };
+    Branches.baseEndpoint = '/api/v0/branches';
     return Branches;
-}());
+}(base_1.ThBaseHandler));
 exports.Branches = Branches;
 var BranchesFetchFailed = /** @class */ (function (_super) {
     __extends(BranchesFetchFailed, _super);

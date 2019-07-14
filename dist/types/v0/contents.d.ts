@@ -1,6 +1,7 @@
 import { Client } from '../client';
 import { BaseError } from '../errors';
 import { UriHelper } from '../uri-helper';
+import { ThBaseHandler } from '../base';
 export interface ContentOptions {
     user?: string;
     base?: string;
@@ -46,7 +47,8 @@ export interface Content {
         [key: string]: any;
     } | null;
 }
-export declare class Contents {
+export declare class Contents extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: ContentOptions;

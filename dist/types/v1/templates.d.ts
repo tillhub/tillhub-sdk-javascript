@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { ThBaseHandler } from '../base';
 export interface TemplatesOptions {
     limit?: number;
     uri?: string;
@@ -57,7 +58,8 @@ export interface TemplatesResponse {
     data: object[];
     metadata: object;
 }
-export declare class Templates {
+export declare class Templates extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: TemplatesOptions;

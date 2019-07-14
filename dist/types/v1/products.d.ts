@@ -1,5 +1,6 @@
 import { Client } from '../client';
 import { UriHelper, HandlerQuery } from '../uri-helper';
+import { ThBaseHandler } from '../base';
 export interface Images {
     '1x'?: string;
     avatar?: string;
@@ -120,7 +121,8 @@ export interface BookStock {
     location: string;
     qty: number;
 }
-export declare class Products {
+export declare class Products extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: ProductsOptions;

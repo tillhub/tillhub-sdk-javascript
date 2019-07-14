@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { ThBaseHandler } from '../base';
 export interface ProductGroupsOptions {
     user?: string;
     base?: string;
@@ -37,7 +38,8 @@ export interface ProductGroup {
     images: object;
     color?: string;
 }
-export declare class ProductGroups {
+export declare class ProductGroups extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: ProductGroupsOptions;

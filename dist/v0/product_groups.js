@@ -1,4 +1,17 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -58,12 +71,16 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var qs_1 = __importDefault(require("qs"));
 var errors = __importStar(require("../errors"));
-var ProductGroups = /** @class */ (function () {
+var base_1 = require("../base");
+var ProductGroups = /** @class */ (function (_super) {
+    __extends(ProductGroups, _super);
     function ProductGroups(options, http) {
-        this.options = options;
-        this.http = http;
-        this.endpoint = '/api/v0/product_groups';
-        this.options.base = this.options.base || 'https://api.tillhub.com';
+        var _this = _super.call(this, http, { endpoint: ProductGroups.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+        _this.options = options;
+        _this.http = http;
+        _this.endpoint = ProductGroups.baseEndpoint;
+        _this.options.base = _this.options.base || 'https://api.tillhub.com';
+        return _this;
     }
     ProductGroups.prototype.getAll = function (queryOrOptions) {
         var _this = this;
@@ -219,7 +236,8 @@ var ProductGroups = /** @class */ (function () {
             });
         }); });
     };
+    ProductGroups.baseEndpoint = '/api/v0/product_groups';
     return ProductGroups;
-}());
+}(base_1.ThBaseHandler));
 exports.ProductGroups = ProductGroups;
 //# sourceMappingURL=product_groups.js.map

@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { ThBaseHandler } from '../base';
 export interface DeliveriesOptions {
     user?: string;
     base?: string;
@@ -118,7 +119,8 @@ export interface DeliveriesResponse {
     next?: () => Promise<DeliveriesResponse>;
     msg?: string;
 }
-export declare class Deliveries {
+export declare class Deliveries extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: DeliveriesOptions;

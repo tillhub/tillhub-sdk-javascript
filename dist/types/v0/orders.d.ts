@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { ThBaseHandler } from '../base';
 export interface OrdersOptions {
     user?: string;
     base?: string;
@@ -66,7 +67,8 @@ export interface BookStockRequest {
     body: BookStockBody;
     uri?: string;
 }
-export declare class Orders {
+export declare class Orders extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: OrdersOptions;

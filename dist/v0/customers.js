@@ -65,13 +65,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var qs_1 = __importDefault(require("qs"));
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
-var Customers = /** @class */ (function () {
+var base_1 = require("../base");
+var Customers = /** @class */ (function (_super) {
+    __extends(Customers, _super);
     function Customers(options, http) {
-        this.options = options;
-        this.http = http;
-        this.endpoint = '/api/v0/customers';
-        this.options.base = this.options.base || 'https://api.tillhub.com';
-        this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
+        var _this = _super.call(this, http, { endpoint: Customers.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+        _this.options = options;
+        _this.http = http;
+        _this.endpoint = Customers.baseEndpoint;
+        _this.options.base = _this.options.base || 'https://api.tillhub.com';
+        _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
+        return _this;
     }
     Customers.prototype.getAll = function (queryOrOptions) {
         var _this = this;
@@ -364,8 +368,9 @@ var Customers = /** @class */ (function () {
             });
         }); });
     };
+    Customers.baseEndpoint = '/api/v0/customers';
     return Customers;
-}());
+}(base_1.ThBaseHandler));
 exports.Customers = Customers;
 var CustomersFetchFailed = /** @class */ (function (_super) {
     __extends(CustomersFetchFailed, _super);

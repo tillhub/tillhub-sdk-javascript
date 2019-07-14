@@ -1,6 +1,7 @@
 import { Client } from '../client';
 import { BaseError } from '../errors';
 import { UriHelper, HandlerQuery } from '../uri-helper';
+import { ThBaseHandler } from '../base';
 export interface StaffOptions {
     user?: string;
     base?: string;
@@ -94,7 +95,8 @@ export interface StaffItem {
 export interface MakeUserRequest {
     user: string;
 }
-export declare class Staff {
+export declare class Staff extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: StaffOptions;

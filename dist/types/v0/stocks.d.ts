@@ -1,5 +1,6 @@
 import { Client } from '../client';
 import { UriHelper } from '../uri-helper';
+import { ThBaseHandler } from '../base';
 export interface StocksOptions {
     user?: string;
     base?: string;
@@ -47,7 +48,8 @@ export interface StocksUpdateRequestObject {
     stockId: string;
     body: Stock;
 }
-export declare class Stocks {
+export declare class Stocks extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: StocksOptions;

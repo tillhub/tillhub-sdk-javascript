@@ -50,13 +50,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var uri_helper_1 = require("../uri-helper");
 var baseError_1 = require("../errors/baseError");
-var StaffGroups = /** @class */ (function () {
+var base_1 = require("../base");
+var StaffGroups = /** @class */ (function (_super) {
+    __extends(StaffGroups, _super);
     function StaffGroups(options, http) {
-        this.options = options;
-        this.http = http;
-        this.endpoint = '/api/v0/staff_groups';
-        this.options.base = this.options.base || 'https://api.tillhub.com';
-        this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
+        var _this = _super.call(this, http, { endpoint: StaffGroups.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+        _this.options = options;
+        _this.http = http;
+        _this.endpoint = StaffGroups.baseEndpoint;
+        _this.options.base = _this.options.base || 'https://api.tillhub.com';
+        _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
+        return _this;
     }
     StaffGroups.prototype.getAll = function (query) {
         var _this = this;
@@ -114,8 +118,9 @@ var StaffGroups = /** @class */ (function () {
             });
         }); });
     };
+    StaffGroups.baseEndpoint = '/api/v0/staff_groups';
     return StaffGroups;
-}());
+}(base_1.ThBaseHandler));
 exports.StaffGroups = StaffGroups;
 var StaffGroupsFetchAllFailed = /** @class */ (function (_super) {
     __extends(StaffGroupsFetchAllFailed, _super);

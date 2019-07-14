@@ -1,5 +1,6 @@
 import { Client } from '../client';
 import { UriHelper } from '../uri-helper';
+import { ThBaseHandler } from '../base';
 export interface ProductServiceQuestionsOptions {
     user?: string;
     base?: string;
@@ -35,7 +36,8 @@ export interface ProductServiceQuestion {
     deleted?: boolean;
     active?: boolean;
 }
-export declare class ProductServiceQuestions {
+export declare class ProductServiceQuestions extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: ProductServiceQuestionsOptions;

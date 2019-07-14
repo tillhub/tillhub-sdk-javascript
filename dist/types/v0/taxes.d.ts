@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { ThBaseHandler } from '../base';
 export interface TaxesOptions {
     user?: string;
     base?: string;
@@ -35,7 +36,8 @@ export interface Tax {
     percentage?: string;
     is_fixed: boolean;
 }
-export declare class Taxes {
+export declare class Taxes extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: TaxesOptions;

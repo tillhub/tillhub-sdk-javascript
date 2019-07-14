@@ -1,4 +1,17 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -58,12 +71,16 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var qs_1 = __importDefault(require("qs"));
 var errors = __importStar(require("../errors"));
-var Accounts = /** @class */ (function () {
+var base_1 = require("../base");
+var Accounts = /** @class */ (function (_super) {
+    __extends(Accounts, _super);
     function Accounts(options, http) {
-        this.options = options;
-        this.http = http;
-        this.endpoint = '/api/v0/accounts';
-        this.options.base = this.options.base || 'https://api.tillhub.com';
+        var _this = _super.call(this, http, { endpoint: Accounts.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+        _this.options = options;
+        _this.http = http;
+        _this.endpoint = Accounts.baseEndpoint;
+        _this.options.base = _this.options.base || 'https://api.tillhub.com';
+        return _this;
     }
     Accounts.prototype.getAll = function (queryOrOptions) {
         var _this = this;
@@ -210,7 +227,8 @@ var Accounts = /** @class */ (function () {
             });
         }); });
     };
+    Accounts.baseEndpoint = '/api/v0/accounts';
     return Accounts;
-}());
+}(base_1.ThBaseHandler));
 exports.Accounts = Accounts;
 //# sourceMappingURL=accounts.js.map

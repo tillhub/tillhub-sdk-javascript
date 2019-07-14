@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { ThBaseHandler } from '../base';
 export interface InvoicesOptions {
     user?: string;
     base?: string;
@@ -87,7 +88,8 @@ export interface InvoicesResponse {
     next?: () => Promise<InvoicesResponse>;
     msg?: string;
 }
-export declare class Invoices {
+export declare class Invoices extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: InvoicesOptions;

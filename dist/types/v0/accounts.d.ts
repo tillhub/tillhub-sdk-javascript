@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { ThBaseHandler } from '../base';
 export interface AccountsOptions {
     user?: string;
     base?: string;
@@ -40,7 +41,8 @@ export interface Account {
     type: AccountType;
     accounts: AccountsRefType[];
 }
-export declare class Accounts {
+export declare class Accounts extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: AccountsOptions;

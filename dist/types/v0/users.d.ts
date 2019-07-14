@@ -1,5 +1,6 @@
 import { Client } from '../client';
 import { UriHelper, HandlerQuery } from '../uri-helper';
+import { ThBaseHandler } from '../base';
 export interface UsersOptions {
     user?: string;
     base?: string;
@@ -51,7 +52,8 @@ export interface User {
     secret?: string;
     username?: string;
 }
-export declare class Users {
+export declare class Users extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: UsersOptions;

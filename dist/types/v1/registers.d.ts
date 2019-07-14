@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { ThBaseHandler } from '../base';
 export interface DeviceConfigurationObject {
     device_token: string;
     bundle_id: string;
@@ -49,7 +50,8 @@ export interface Register {
     description?: string | null;
     register_number: number;
 }
-export declare class Registers {
+export declare class Registers extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: RegistersOptions;

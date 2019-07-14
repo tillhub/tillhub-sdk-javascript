@@ -1,5 +1,6 @@
 import { Client } from '../client';
 import { UriHelper } from '../uri-helper';
+import { ThBaseHandler } from '../base';
 export interface SafesOptions {
     user?: string;
     base?: string;
@@ -46,7 +47,8 @@ export interface BookRequestBody {
     comment?: string;
     initiated_at?: string;
 }
-export declare class Safes {
+export declare class Safes extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: SafesOptions;

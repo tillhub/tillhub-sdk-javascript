@@ -65,13 +65,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var qs_1 = __importDefault(require("qs"));
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
-var Staff = /** @class */ (function () {
+var base_1 = require("../base");
+var Staff = /** @class */ (function (_super) {
+    __extends(Staff, _super);
     function Staff(options, http) {
-        this.options = options;
-        this.http = http;
-        this.endpoint = '/api/v0/staff';
-        this.options.base = this.options.base || 'https://api.tillhub.com';
-        this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
+        var _this = _super.call(this, http, { endpoint: Staff.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+        _this.options = options;
+        _this.http = http;
+        _this.endpoint = Staff.baseEndpoint;
+        _this.options.base = _this.options.base || 'https://api.tillhub.com';
+        _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
+        return _this;
     }
     Staff.prototype.getAll = function (queryOrOptions) {
         var _this = this;
@@ -380,8 +384,9 @@ var Staff = /** @class */ (function () {
             });
         }); });
     };
+    Staff.baseEndpoint = '/api/v0/staff';
     return Staff;
-}());
+}(base_1.ThBaseHandler));
 exports.Staff = Staff;
 var StaffFetchFailed = /** @class */ (function (_super) {
     __extends(StaffFetchFailed, _super);

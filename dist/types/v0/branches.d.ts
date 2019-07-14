@@ -1,6 +1,7 @@
 import { Client } from '../client';
 import { BaseError } from '../errors';
 import { UriHelper } from '../uri-helper';
+import { ThBaseHandler } from '../base';
 export interface BranchesOptions {
     user?: string;
     base?: string;
@@ -50,7 +51,8 @@ export interface Branch {
     timezone_default?: string | null;
     currency_default?: string | null;
 }
-export declare class Branches {
+export declare class Branches extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: BranchesOptions;

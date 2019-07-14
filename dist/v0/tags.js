@@ -1,4 +1,17 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -44,13 +57,17 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var errors = __importStar(require("../errors/tags"));
 var uri_helper_1 = require("../uri-helper");
-var Tags = /** @class */ (function () {
+var base_1 = require("../base");
+var Tags = /** @class */ (function (_super) {
+    __extends(Tags, _super);
     function Tags(options, http) {
-        this.options = options;
-        this.http = http;
-        this.endpoint = '/api/v0/tags';
-        this.options.base = this.options.base || 'https://api.tillhub.com';
-        this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
+        var _this = _super.call(this, http, { endpoint: Tags.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+        _this.options = options;
+        _this.http = http;
+        _this.endpoint = Tags.baseEndpoint;
+        _this.options.base = _this.options.base || 'https://api.tillhub.com';
+        _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
+        return _this;
     }
     Tags.prototype.getAll = function (query) {
         var _this = this;
@@ -185,7 +202,8 @@ var Tags = /** @class */ (function () {
             });
         }); });
     };
+    Tags.baseEndpoint = '/api/v0/tags';
     return Tags;
-}());
+}(base_1.ThBaseHandler));
 exports.Tags = Tags;
 //# sourceMappingURL=tags.js.map

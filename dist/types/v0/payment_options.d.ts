@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { ThBaseHandler } from '../base';
 export interface PaymentOptionsOptions {
     user?: string;
     base?: string;
@@ -38,7 +39,8 @@ export interface PaymentOption {
     order_index: number;
     summable: boolean;
 }
-export declare class PaymentOptions {
+export declare class PaymentOptions extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: PaymentOptionsOptions;

@@ -1,4 +1,17 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -44,13 +57,17 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var uri_helper_1 = require("../uri-helper");
 var errors = __importStar(require("../errors"));
-var Favourites = /** @class */ (function () {
+var base_1 = require("../base");
+var Favourites = /** @class */ (function (_super) {
+    __extends(Favourites, _super);
     function Favourites(options, http) {
-        this.options = options;
-        this.http = http;
-        this.endpoint = '/api/v0/favourites';
-        this.options.base = this.options.base || 'https://api.tillhub.com';
-        this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
+        var _this = _super.call(this, http, { endpoint: Favourites.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+        _this.options = options;
+        _this.http = http;
+        _this.endpoint = Favourites.baseEndpoint;
+        _this.options.base = _this.options.base || 'https://api.tillhub.com';
+        _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
+        return _this;
     }
     Favourites.prototype.getAll = function (query) {
         return __awaiter(this, void 0, void 0, function () {
@@ -182,7 +199,8 @@ var Favourites = /** @class */ (function () {
             });
         });
     };
+    Favourites.baseEndpoint = '/api/v0/favourites';
     return Favourites;
-}());
+}(base_1.ThBaseHandler));
 exports.Favourites = Favourites;
 //# sourceMappingURL=favourites.js.map

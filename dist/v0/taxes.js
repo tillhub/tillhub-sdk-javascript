@@ -1,4 +1,17 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -58,12 +71,16 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var qs_1 = __importDefault(require("qs"));
 var errors = __importStar(require("../errors"));
-var Taxes = /** @class */ (function () {
+var base_1 = require("../base");
+var Taxes = /** @class */ (function (_super) {
+    __extends(Taxes, _super);
     function Taxes(options, http) {
-        this.options = options;
-        this.http = http;
-        this.endpoint = '/api/v0/taxes';
-        this.options.base = this.options.base || 'https://api.tillhub.com';
+        var _this = _super.call(this, http, { endpoint: Taxes.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+        _this.options = options;
+        _this.http = http;
+        _this.endpoint = Taxes.baseEndpoint;
+        _this.options.base = _this.options.base || 'https://api.tillhub.com';
+        return _this;
     }
     Taxes.prototype.getAll = function (queryOrOptions) {
         var _this = this;
@@ -210,7 +227,8 @@ var Taxes = /** @class */ (function () {
             });
         }); });
     };
+    Taxes.baseEndpoint = '/api/v0/taxes';
     return Taxes;
-}());
+}(base_1.ThBaseHandler));
 exports.Taxes = Taxes;
 //# sourceMappingURL=taxes.js.map

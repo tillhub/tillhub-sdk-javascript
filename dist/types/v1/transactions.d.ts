@@ -1,5 +1,6 @@
 import { Client } from '../client';
 import { UriHelper } from '../uri-helper';
+import { ThBaseHandler } from '../base';
 export interface PdfRequestObject {
     transactionId: string;
     template: string;
@@ -27,7 +28,8 @@ interface FiskaltrustAuth {
     cashbox: string;
     cashbox_auth: string;
 }
-export declare class Transactions {
+export declare class Transactions extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: TransactionsOptions;

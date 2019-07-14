@@ -65,13 +65,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var qs_1 = __importDefault(require("qs"));
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
-var Devices = /** @class */ (function () {
+var base_1 = require("../base");
+var Devices = /** @class */ (function (_super) {
+    __extends(Devices, _super);
     function Devices(options, http) {
-        this.options = options;
-        this.http = http;
-        this.endpoint = '/api/v0/devices';
-        this.options.base = this.options.base || 'https://api.tillhub.com';
-        this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
+        var _this = _super.call(this, http, { endpoint: Devices.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+        _this.options = options;
+        _this.http = http;
+        _this.endpoint = Devices.baseEndpoint;
+        _this.options.base = _this.options.base || 'https://api.tillhub.com';
+        _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
+        return _this;
     }
     Devices.prototype.getAll = function (queryOrOptions) {
         var _this = this;
@@ -276,8 +280,9 @@ var Devices = /** @class */ (function () {
             });
         }); });
     };
+    Devices.baseEndpoint = '/api/v0/devices';
     return Devices;
-}());
+}(base_1.ThBaseHandler));
 exports.Devices = Devices;
 var DevicesFetchFailed = /** @class */ (function (_super) {
     __extends(DevicesFetchFailed, _super);

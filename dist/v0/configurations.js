@@ -1,4 +1,17 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -60,6 +73,7 @@ var qs_1 = __importDefault(require("qs"));
 var errors = __importStar(require("../errors"));
 var users_1 = require("./users");
 var uri_helper_1 = require("../uri-helper");
+var base_1 = require("../base");
 var ConfigurationReference = /** @class */ (function () {
     function ConfigurationReference(response, http, options) {
         this.data = response.data;
@@ -74,13 +88,16 @@ var ConfigurationReference = /** @class */ (function () {
     };
     return ConfigurationReference;
 }());
-var Configurations = /** @class */ (function () {
+var Configurations = /** @class */ (function (_super) {
+    __extends(Configurations, _super);
     function Configurations(options, http) {
-        this.options = options;
-        this.http = http;
-        this.endpoint = '/api/v0/configurations';
-        this.options.base = this.options.base || 'https://api.tillhub.com';
-        this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
+        var _this = _super.call(this, http, { endpoint: Configurations.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+        _this.options = options;
+        _this.http = http;
+        _this.endpoint = Configurations.baseEndpoint;
+        _this.options.base = _this.options.base || 'https://api.tillhub.com';
+        _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
+        return _this;
     }
     Configurations.prototype.getAll = function (optionsOrQuery) {
         var _this = this;
@@ -248,7 +265,8 @@ var Configurations = /** @class */ (function () {
             });
         }); });
     };
+    Configurations.baseEndpoint = '/api/v0/configurations';
     return Configurations;
-}());
+}(base_1.ThBaseHandler));
 exports.Configurations = Configurations;
 //# sourceMappingURL=configurations.js.map

@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { ThBaseHandler } from '../base';
 export interface BalancesOptions {
     user?: string;
     base?: string;
@@ -22,7 +23,8 @@ export interface LatestQuery {
     branch_number: string;
     date_start: string;
 }
-export declare class Balances {
+export declare class Balances extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: BalancesOptions;

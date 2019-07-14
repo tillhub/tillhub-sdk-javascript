@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { ThBaseHandler } from '../base';
 export interface ExpenseAccountsOptions {
     user?: string;
     base?: string;
@@ -35,7 +36,8 @@ export interface ExpenseAccount {
     type: ExpenseAccountType;
     accepts_booking_from_safe?: boolean;
 }
-export declare class ExpenseAccounts {
+export declare class ExpenseAccounts extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: ExpenseAccountsOptions;

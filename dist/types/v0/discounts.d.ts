@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { ThBaseHandler } from '../base';
 export interface DiscountsOptions {
     user?: string;
     base?: string;
@@ -41,7 +42,8 @@ export interface Discount {
     deleted?: boolean;
     constraints?: Constraints | null;
 }
-export declare class Discounts {
+export declare class Discounts extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: DiscountsOptions;

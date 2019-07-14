@@ -1,5 +1,6 @@
 import { Client } from '../client';
 import { UriHelper } from '../uri-helper';
+import { ThBaseHandler } from '../base';
 export interface WarehousesOptions {
     user?: string;
     base?: string;
@@ -57,7 +58,8 @@ export interface Warehouse {
     capacity?: number | null;
     barcode?: string | null;
 }
-export declare class Warehouses {
+export declare class Warehouses extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: WarehousesOptions;

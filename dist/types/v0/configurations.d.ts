@@ -1,6 +1,7 @@
 import { Client } from '../client';
 import { Users } from './users';
 import { UriHelper } from '../uri-helper';
+import { ThBaseHandler } from '../base';
 export interface ConfigurationsOptions {
     user?: string;
     base?: string;
@@ -75,7 +76,8 @@ declare class ConfigurationReference {
     constructor(response: ConfigurationResponse, http: Client, options: ConfigurationsOptions);
     users(): Users;
 }
-export declare class Configurations {
+export declare class Configurations extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: ConfigurationsOptions;

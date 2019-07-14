@@ -1,5 +1,6 @@
 import { Client } from '../client';
 import { UriHelper } from '../uri-helper';
+import { ThBaseHandler } from '../base';
 export interface MessagesOptions {
     user?: string;
     base?: string;
@@ -29,7 +30,8 @@ export interface Message {
     progress?: object;
     client_account?: string;
 }
-export declare class Messages {
+export declare class Messages extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: MessagesOptions;

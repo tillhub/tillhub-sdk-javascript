@@ -1,5 +1,6 @@
 import { Client } from '../client';
 import { BaseError } from '../errors';
+import { ThBaseHandler } from '../base';
 export interface VouchersOptions {
     user?: string;
     base?: string;
@@ -66,7 +67,8 @@ export interface Voucher {
 export interface UsersResponse {
     data: object[];
 }
-export declare class Vouchers {
+export declare class Vouchers extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     logs: VoucherLogs;
@@ -83,7 +85,8 @@ export declare class Vouchers {
     create(voucher: Voucher): Promise<VoucherResponse>;
     getAllUsers(): Promise<UsersResponse>;
 }
-export declare class VoucherLogs {
+export declare class VoucherLogs extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: VouchersOptions;

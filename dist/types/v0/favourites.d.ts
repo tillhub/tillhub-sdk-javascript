@@ -1,5 +1,6 @@
 import { Client } from '../client';
 import { UriHelper } from '../uri-helper';
+import { ThBaseHandler } from '../base';
 export interface Item {
     type?: string;
     object_id: string;
@@ -34,7 +35,8 @@ export interface FavouritesOptions {
     user?: string;
     base?: string;
 }
-export declare class Favourites {
+export declare class Favourites extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: FavouritesOptions;

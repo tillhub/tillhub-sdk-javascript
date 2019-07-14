@@ -1,4 +1,17 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -48,18 +61,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var qs_1 = __importDefault(require("qs"));
 var errors = __importStar(require("../errors"));
 var uri_helper_1 = require("../uri-helper");
+var base_1 = require("../base");
 var SignatureTypes;
 (function (SignatureTypes) {
     SignatureTypes["Fiksaltrust"] = "fiskaltrust";
 })(SignatureTypes || (SignatureTypes = {}));
-var Transactions = /** @class */ (function () {
+var Transactions = /** @class */ (function (_super) {
+    __extends(Transactions, _super);
     function Transactions(options, http) {
-        this.options = options;
-        this.http = http;
+        var _this = _super.call(this, http, { endpoint: Transactions.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+        _this.options = options;
+        _this.http = http;
         // this.signing = new Signing(options, http)
-        this.endpoint = '/api/v1/transactions';
-        this.options.base = this.options.base || 'https://api.tillhub.com';
-        this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
+        _this.endpoint = Transactions.baseEndpoint;
+        _this.options.base = _this.options.base || 'https://api.tillhub.com';
+        _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
+        return _this;
     }
     Transactions.prototype.getAll = function (query) {
         var _this = this;
@@ -123,8 +140,9 @@ var Transactions = /** @class */ (function () {
             });
         }); });
     };
+    Transactions.baseEndpoint = '/api/v1/transactions';
     return Transactions;
-}());
+}(base_1.ThBaseHandler));
 exports.Transactions = Transactions;
 var TransactionsLegacy = /** @class */ (function () {
     function TransactionsLegacy(options, http) {

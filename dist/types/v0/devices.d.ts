@@ -1,6 +1,7 @@
 import { Client } from '../client';
 import { BaseError } from '../errors';
 import { UriHelper } from '../uri-helper';
+import { ThBaseHandler } from '../base';
 export interface DevicesOptions {
     user?: string;
     base?: string;
@@ -53,7 +54,8 @@ export interface Device {
     } | null;
     client_id?: string;
 }
-export declare class Devices {
+export declare class Devices extends ThBaseHandler {
+    static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: DevicesOptions;

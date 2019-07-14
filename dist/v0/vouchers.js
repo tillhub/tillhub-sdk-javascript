@@ -65,13 +65,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var just_diff_1 = require("just-diff");
 var qs_1 = __importDefault(require("qs"));
 var errors_1 = require("../errors");
-var Vouchers = /** @class */ (function () {
+var base_1 = require("../base");
+var Vouchers = /** @class */ (function (_super) {
+    __extends(Vouchers, _super);
     function Vouchers(options, http) {
-        this.options = options;
-        this.http = http;
-        this.logs = new VoucherLogs(options, http);
-        this.endpoint = '/api/v0/vouchers';
-        this.options.base = this.options.base || 'https://api.tillhub.com';
+        var _this = _super.call(this, http, { endpoint: Vouchers.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+        _this.options = options;
+        _this.http = http;
+        _this.logs = new VoucherLogs(options, http);
+        _this.endpoint = Vouchers.baseEndpoint;
+        _this.options.base = _this.options.base || 'https://api.tillhub.com';
+        return _this;
     }
     Vouchers.prototype.getAll = function (optionsOrQuery) {
         var _this = this;
@@ -389,15 +393,19 @@ var Vouchers = /** @class */ (function () {
             });
         }); });
     };
+    Vouchers.baseEndpoint = '/api/v0/vouchers';
     return Vouchers;
-}());
+}(base_1.ThBaseHandler));
 exports.Vouchers = Vouchers;
-var VoucherLogs = /** @class */ (function () {
+var VoucherLogs = /** @class */ (function (_super) {
+    __extends(VoucherLogs, _super);
     function VoucherLogs(options, http) {
-        this.options = options;
-        this.http = http;
-        this.endpoint = '/api/v0/vouchers';
-        this.options.base = this.options.base || 'https://api.tillhub.com';
+        var _this = _super.call(this, http, { endpoint: VoucherLogs.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+        _this.options = options;
+        _this.http = http;
+        _this.endpoint = VoucherLogs.baseEndpoint;
+        _this.options.base = _this.options.base || 'https://api.tillhub.com';
+        return _this;
     }
     VoucherLogs.prototype.getAll = function (optionsOrQuery) {
         var _this = this;
@@ -473,8 +481,9 @@ var VoucherLogs = /** @class */ (function () {
             });
         }); });
     };
+    VoucherLogs.baseEndpoint = '/api/v0/vouchers';
     return VoucherLogs;
-}());
+}(base_1.ThBaseHandler));
 exports.VoucherLogs = VoucherLogs;
 var VoucherTypeError = /** @class */ (function (_super) {
     __extends(VoucherTypeError, _super);
