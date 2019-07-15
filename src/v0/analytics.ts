@@ -121,7 +121,6 @@ export interface ProductGoupsFilters {
 
 export interface StaffQuery {
   branch_number?: number
-  staff?: StaffID
 }
 
 export interface ReportOptions {
@@ -285,8 +284,10 @@ export class Analytics {
 
   getProductGroupsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
+      const staff = options && options.staff
+
       try {
-        const base = this.uriHelper.generateBaseUri(`/reports/staff/product_groups/${options && options.staff || ''}`)
+        const base = this.uriHelper.generateBaseUri(`/reports/staff/product_groups${staff ? `/${staff}` : ''}`)
         const uri = this.uriHelper.generateUriWithQuery(base, options && options.query)
 
         const response = await this.http.getClient().get(uri)
@@ -304,8 +305,10 @@ export class Analytics {
 
   getRefundsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
+      const staff = options && options.staff
+
       try {
-        const base = this.uriHelper.generateBaseUri(`/reports/staff/refunds/${options && options.staff || ''}`)
+        const base = this.uriHelper.generateBaseUri(`/reports/staff/refunds${staff ? `/${staff}` : ''}`)
         const uri = this.uriHelper.generateUriWithQuery(base, options && options.query)
 
         const response = await this.http.getClient().get(uri)
@@ -347,8 +350,10 @@ export class Analytics {
 
   getProductsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
+      const staff = options && options.staff
+
       try {
-        const base = this.uriHelper.generateBaseUri(`/reports/staff/products/${options && options.staff || ''}`)
+        const base = this.uriHelper.generateBaseUri(`/reports/staff/products${staff ? `/${staff}` : ''}`)
         const uri = this.uriHelper.generateUriWithQuery(base, options && options.query)
 
         const response = await this.http.getClient().get(uri)

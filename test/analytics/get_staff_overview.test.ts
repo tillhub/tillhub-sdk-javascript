@@ -99,7 +99,7 @@ describe('v0: Analytics: gets staff overview report grouped by staff member', ()
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/overviewoverview?branch_number=112233`)
+        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/overview?branch_number=112233`)
         .reply(function (config) {
           return [205]
         })
