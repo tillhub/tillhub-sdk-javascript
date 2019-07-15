@@ -99,6 +99,7 @@ export interface ProductGoupsOptions {
     direction?: string;
     q?: string;
     format?: string;
+    branch_number?: number;
 }
 export interface ProductGoupsFilters {
     column: string;

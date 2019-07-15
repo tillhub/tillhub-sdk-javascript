@@ -1,3 +1,10 @@
+# [3.106.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.105.0...v3.106.0) (2019-07-15)
+
+
+### Features
+
+* **analytics:** add branch number to prod groups ([cb0ae30](https://github.com/tillhub/tillhub-sdk-javascript/commit/cb0ae30))
+
 # [3.105.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.104.0...v3.105.0) (2019-07-15)
 
 
