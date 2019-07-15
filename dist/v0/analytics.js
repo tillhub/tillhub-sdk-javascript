@@ -227,15 +227,16 @@ var Analytics = /** @class */ (function () {
             });
         }); });
     };
-    Analytics.prototype.getStaffOverviewReport = function () {
+    Analytics.prototype.getStaffOverviewReport = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_7;
+            var base, uri, response, err_7;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/reports/staff/overview";
+                        base = this.uriHelper.generateBaseUri('/reports/staff/overview');
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
@@ -252,15 +253,16 @@ var Analytics = /** @class */ (function () {
             });
         }); });
     };
-    Analytics.prototype.getProductGroupsReport = function (staff) {
+    Analytics.prototype.getProductGroupsReport = function (options) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_8;
+            var base, uri, response, err_8;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/reports/staff/product_groups/" + (staff || '');
+                        base = this.uriHelper.generateBaseUri("/reports/staff/product_groups/" + (options && options.staff || ''));
+                        uri = this.uriHelper.generateUriWithQuery(base, options && options.query);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
@@ -277,15 +279,16 @@ var Analytics = /** @class */ (function () {
             });
         }); });
     };
-    Analytics.prototype.getRefundsReport = function (staff) {
+    Analytics.prototype.getRefundsReport = function (options) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_9;
+            var base, uri, response, err_9;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/reports/staff/refunds/" + (staff || '');
+                        base = this.uriHelper.generateBaseUri("/reports/staff/refunds/" + (options && options.staff || ''));
+                        uri = this.uriHelper.generateUriWithQuery(base, options && options.query);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
@@ -331,15 +334,16 @@ var Analytics = /** @class */ (function () {
             });
         }); });
     };
-    Analytics.prototype.getProductsReport = function (staff) {
+    Analytics.prototype.getProductsReport = function (options) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, err_11;
+            var base, uri, response, err_11;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/reports/staff/products/" + (staff || '');
+                        base = this.uriHelper.generateBaseUri("/reports/staff/products/" + (options && options.staff || ''));
+                        uri = this.uriHelper.generateUriWithQuery(base, options && options.query);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();

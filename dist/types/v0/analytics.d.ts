@@ -104,6 +104,14 @@ export interface ProductGoupsFilters {
     column: string;
     type?: string;
 }
+export interface StaffQuery {
+    branch_number?: number;
+    staff?: StaffID;
+}
+export interface ReportOptions {
+    staff?: StaffID;
+    query?: StaffQuery;
+}
 export declare class Analytics {
     endpoint: string;
     http: Client;
@@ -116,11 +124,11 @@ export declare class Analytics {
     getRevenuesForHourOfDay(query: RevenuBasicOptions): Promise<AnalyticsResponse>;
     getReportsProducts(query?: ProductsOptions | undefined): Promise<AnalyticsResponse>;
     getProductsChildren(productNumber: String, query?: ProductsOptions | undefined): Promise<AnalyticsResponse>;
-    getStaffOverviewReport(): Promise<AnalyticsResponse>;
-    getProductGroupsReport(staff?: StaffID): Promise<AnalyticsResponse>;
-    getRefundsReport(staff?: StaffID): Promise<AnalyticsResponse>;
+    getStaffOverviewReport(query?: StaffQuery | undefined): Promise<AnalyticsResponse>;
+    getProductGroupsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse>;
+    getRefundsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse>;
     getVouchersReports(query?: VoucherOptions | undefined): Promise<AnalyticsResponse>;
-    getProductsReport(staff?: StaffID): Promise<AnalyticsResponse>;
+    getProductsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse>;
     getPaymentsReport(): Promise<AnalyticsResponse>;
     getSimpleSalesCartItems(query?: SimpleSalesCartItemsOptions | undefined): Promise<AnalyticsResponse>;
     getCustomersReport(query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse>;

@@ -1,3 +1,10 @@
+# [3.104.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.103.1...v3.104.0) (2019-07-15)
+
+
+### Features
+
+* **analytics:** add query to staff reports ([420302a](https://github.com/tillhub/tillhub-sdk-javascript/commit/420302a))
+
 ## [3.103.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.103.0...v3.103.1) (2019-07-14)
 
 
