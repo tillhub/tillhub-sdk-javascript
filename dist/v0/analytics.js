@@ -256,25 +256,28 @@ var Analytics = /** @class */ (function () {
     Analytics.prototype.getProductGroupsReport = function (options) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var base, uri, response, err_8;
+            var staff, base, uri, response, err_8;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        base = this.uriHelper.generateBaseUri("/reports/staff/product_groups/" + (options && options.staff || ''));
+                        staff = options && options.staff;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        base = this.uriHelper.generateBaseUri("/reports/staff/product_groups" + (staff ? "/" + staff : ''));
                         uri = this.uriHelper.generateUriWithQuery(base, options && options.query);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
-                    case 1:
+                    case 2:
                         response = _a.sent();
                         response.status !== 200 && reject(new ProductGroupsReportFetchFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             })];
-                    case 2:
+                    case 3:
                         err_8 = _a.sent();
                         return [2 /*return*/, reject(new ProductGroupsReportFetchFailed())];
-                    case 3: return [2 /*return*/];
+                    case 4: return [2 /*return*/];
                 }
             });
         }); });
@@ -282,25 +285,28 @@ var Analytics = /** @class */ (function () {
     Analytics.prototype.getRefundsReport = function (options) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var base, uri, response, err_9;
+            var staff, base, uri, response, err_9;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        base = this.uriHelper.generateBaseUri("/reports/staff/refunds/" + (options && options.staff || ''));
+                        staff = options && options.staff;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        base = this.uriHelper.generateBaseUri("/reports/staff/refunds" + (staff ? "/" + staff : ''));
                         uri = this.uriHelper.generateUriWithQuery(base, options && options.query);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
-                    case 1:
+                    case 2:
                         response = _a.sent();
                         response.status !== 200 && reject(new RefundsReportFetchFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             })];
-                    case 2:
+                    case 3:
                         err_9 = _a.sent();
                         return [2 /*return*/, reject(new RefundsReportFetchFailed())];
-                    case 3: return [2 /*return*/];
+                    case 4: return [2 /*return*/];
                 }
             });
         }); });
@@ -337,25 +343,28 @@ var Analytics = /** @class */ (function () {
     Analytics.prototype.getProductsReport = function (options) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var base, uri, response, err_11;
+            var staff, base, uri, response, err_11;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        base = this.uriHelper.generateBaseUri("/reports/staff/products/" + (options && options.staff || ''));
+                        staff = options && options.staff;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        base = this.uriHelper.generateBaseUri("/reports/staff/products" + (staff ? "/" + staff : ''));
                         uri = this.uriHelper.generateUriWithQuery(base, options && options.query);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
-                    case 1:
+                    case 2:
                         response = _a.sent();
                         response.status !== 200 && reject(new ProductsReportFetchFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             })];
-                    case 2:
+                    case 3:
                         err_11 = _a.sent();
                         return [2 /*return*/, reject(new ProductsReportFetchFailed())];
-                    case 3: return [2 /*return*/];
+                    case 4: return [2 /*return*/];
                 }
             });
         }); });

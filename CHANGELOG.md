@@ -1,3 +1,10 @@
+# [3.105.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.104.0...v3.105.0) (2019-07-15)
+
+
+### Features
+
+* **analytics:** remove trailing “/“ ([e48d6cc](https://github.com/tillhub/tillhub-sdk-javascript/commit/e48d6cc))
+
 # [3.104.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.103.1...v3.104.0) (2019-07-15)
 
 

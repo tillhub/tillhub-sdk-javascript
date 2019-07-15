@@ -106,7 +106,6 @@ export interface ProductGoupsFilters {
 }
 export interface StaffQuery {
     branch_number?: number;
-    staff?: StaffID;
 }
 export interface ReportOptions {
     staff?: StaffID;
