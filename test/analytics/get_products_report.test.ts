@@ -20,6 +20,14 @@ if (process.env.SYSTEM_TEST) {
 
 const legacyId = '4564'
 const staffMember = '963'
+const branchNumber = 112233
+
+const reportOptions = {
+  staff: staffMember,
+  query: {
+    branch_number: branchNumber
+  }
+}
 
 const mock = new MockAdapter(axios)
 afterEach(() => {
@@ -73,7 +81,7 @@ describe('v0: Analytics: gets product s transactions report', () => {
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/products/${staffMember}`
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/products/${staffMember}?branch_number=${branchNumber}`
         )
         .reply(function (config) {
           return [
@@ -100,7 +108,7 @@ describe('v0: Analytics: gets product s transactions report', () => {
 
     expect(analytics).toBeInstanceOf(v0.Analytics)
 
-    const { data } = await analytics.getProductsReport(staffMember)
+    const { data } = await analytics.getProductsReport(reportOptions)
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -122,7 +130,7 @@ describe('v0: Analytics: gets product s transactions report', () => {
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/products/${staffMember}`
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/products/${staffMember}?branch_number=${branchNumber}`
         )
         .reply(function (config) {
           return [205]
@@ -146,7 +154,7 @@ describe('v0: Analytics: gets product s transactions report', () => {
     })
 
     try {
-      await th.analytics().getProductsReport(staffMember)
+      await th.analytics().getProductsReport(reportOptions)
     } catch (err) {
       expect(err.name).toBe('ProductsReportFetchFailed')
     }

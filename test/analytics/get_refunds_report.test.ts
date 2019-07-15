@@ -20,6 +20,14 @@ if (process.env.SYSTEM_TEST) {
 
 const legacyId = '4564'
 const staffMember = '963'
+const branchNumber = 112233
+
+const reportOptions = {
+  staff: staffMember,
+  query: {
+    branch_number: branchNumber
+  }
+}
 
 const mock = new MockAdapter(axios)
 afterEach(() => {
@@ -97,7 +105,7 @@ describe('v0: Analytics: gets refunds report', () => {
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/refunds/${staffMember}`
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/refunds/${staffMember}?branch_number=${branchNumber}`
         )
         .reply(function (config) {
           return [
@@ -130,7 +138,7 @@ describe('v0: Analytics: gets refunds report', () => {
 
     expect(analytics).toBeInstanceOf(v0.Analytics)
 
-    const { data } = await analytics.getRefundsReport(staffMember)
+    const { data } = await analytics.getRefundsReport(reportOptions)
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -176,7 +184,7 @@ describe('v0: Analytics: gets refunds report', () => {
     })
 
     try {
-      await th.analytics().getRefundsReport(staffMember)
+      await th.analytics().getRefundsReport(reportOptions)
     } catch (err) {
       expect(err.name).toBe('RefundsReportFetchFailed')
     }

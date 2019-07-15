@@ -20,6 +20,10 @@ if (process.env.SYSTEM_TEST) {
 
 const legacyId = '4564'
 
+const query = {
+  branch_number: 112233
+}
+
 const mock = new MockAdapter(axios)
 afterEach(() => {
   mock.reset()
@@ -42,7 +46,7 @@ describe('v0: Analytics: gets staff overview report grouped by staff member', ()
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/overview`)
+        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/overview?branch_number=112233`)
         .reply(function (config) {
           return [
             200,
@@ -74,7 +78,7 @@ describe('v0: Analytics: gets staff overview report grouped by staff member', ()
 
     expect(analytics).toBeInstanceOf(v0.Analytics)
 
-    const { data } = await analytics.getStaffOverviewReport()
+    const { data } = await analytics.getStaffOverviewReport(query)
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -95,7 +99,7 @@ describe('v0: Analytics: gets staff overview report grouped by staff member', ()
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/overview`)
+        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/overviewoverview?branch_number=112233`)
         .reply(function (config) {
           return [205]
         })
@@ -118,7 +122,7 @@ describe('v0: Analytics: gets staff overview report grouped by staff member', ()
     })
 
     try {
-      await th.analytics().getStaffOverviewReport()
+      await th.analytics().getStaffOverviewReport(query)
     } catch (err) {
       expect(err.name).toBe('StaffOverviewFetchFailed')
     }

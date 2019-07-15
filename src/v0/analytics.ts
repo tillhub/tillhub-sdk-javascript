@@ -119,6 +119,16 @@ export interface ProductGoupsFilters {
   type?: string
 }
 
+export interface StaffQuery {
+  branch_number?: number
+  staff?: StaffID
+}
+
+export interface ReportOptions {
+  staff?: StaffID,
+  query?: StaffQuery
+}
+
 export class Analytics {
   endpoint: string
   http: Client
@@ -254,12 +264,11 @@ export class Analytics {
     })
   }
 
-  getStaffOverviewReport(): Promise<AnalyticsResponse> {
+  getStaffOverviewReport(query?: StaffQuery | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const uri = `${this.options.base}${this.endpoint}/${
-          this.options.user
-          }/reports/staff/overview`
+        const base = this.uriHelper.generateBaseUri('/reports/staff/overview')
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new StaffOverviewFetchFailed())
@@ -274,12 +283,11 @@ export class Analytics {
     })
   }
 
-  getProductGroupsReport(staff?: StaffID): Promise<AnalyticsResponse> {
+  getProductGroupsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const uri = `${this.options.base}${this.endpoint}/${
-          this.options.user
-          }/reports/staff/product_groups/${staff || ''}`
+        const base = this.uriHelper.generateBaseUri(`/reports/staff/product_groups/${options && options.staff || ''}`)
+        const uri = this.uriHelper.generateUriWithQuery(base, options && options.query)
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new ProductGroupsReportFetchFailed())
@@ -294,12 +302,11 @@ export class Analytics {
     })
   }
 
-  getRefundsReport(staff?: StaffID): Promise<AnalyticsResponse> {
+  getRefundsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const uri = `${this.options.base}${this.endpoint}/${
-          this.options.user
-          }/reports/staff/refunds/${staff || ''}`
+        const base = this.uriHelper.generateBaseUri(`/reports/staff/refunds/${options && options.staff || ''}`)
+        const uri = this.uriHelper.generateUriWithQuery(base, options && options.query)
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new RefundsReportFetchFailed())
@@ -338,12 +345,11 @@ export class Analytics {
     })
   }
 
-  getProductsReport(staff?: StaffID): Promise<AnalyticsResponse> {
+  getProductsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const uri = `${this.options.base}${this.endpoint}/${
-          this.options.user
-          }/reports/staff/products/${staff || ''}`
+        const base = this.uriHelper.generateBaseUri(`/reports/staff/products/${options && options.staff || ''}`)
+        const uri = this.uriHelper.generateUriWithQuery(base, options && options.query)
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new ProductsReportFetchFailed())
