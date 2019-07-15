@@ -51,7 +51,7 @@ describe('v0: Analytics: gets refunds report', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/refunds/`)
+        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/refunds`)
         .reply(function (config) {
           return [
             200,

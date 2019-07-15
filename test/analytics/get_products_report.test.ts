@@ -42,7 +42,7 @@ describe('v0: Analytics: gets product s transactions report', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/products/`)
+        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/products`)
         .reply(function (config) {
           return [
             200,
