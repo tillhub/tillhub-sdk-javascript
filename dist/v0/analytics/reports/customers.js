@@ -75,7 +75,7 @@ var Customers = /** @class */ (function () {
             });
         }); });
     };
-    Customers.prototype.getFilters = function () {
+    Customers.prototype.getFilters = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var base, uri, response, values, data, err_2;
@@ -84,7 +84,7 @@ var Customers = /** @class */ (function () {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/reports/customers');
-                        uri = this.uriHelper.generateUriWithQuery(base);
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();

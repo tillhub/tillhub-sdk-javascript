@@ -1,3 +1,10 @@
+# [3.107.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.106.0...v3.107.0) (2019-07-16)
+
+
+### Features
+
+* **analytics:** expand customer query ([7c62963](https://github.com/tillhub/tillhub-sdk-javascript/commit/7c62963))
+
 # [3.106.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.105.0...v3.106.0) (2019-07-15)
 
 

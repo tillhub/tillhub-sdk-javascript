@@ -18,6 +18,10 @@ export interface CustomersQuery {
     format?: string;
     legacy?: boolean;
     cursor_field?: string;
+    branch_number?: number;
+}
+export interface FiltersQuery {
+    branch_number?: number;
 }
 export interface CustomersItem {
     customer_number?: string;
@@ -28,6 +32,7 @@ export interface CustomersItem {
 export interface CustomersOneQuery {
     customer_id: string | null;
     currency?: string;
+    branch_number?: number;
 }
 export declare class Customers {
     http: Client;
@@ -35,7 +40,7 @@ export declare class Customers {
     uriHelper: UriHelper;
     constructor(options: AnalyticsOptions, http: Client, uriHelper: UriHelper);
     getAll(query?: CustomersQuery | undefined): Promise<AnalyticsResponse>;
-    getFilters(): Promise<AnalyticsResponse>;
+    getFilters(query?: FiltersQuery | undefined): Promise<AnalyticsResponse>;
     getTransaction(query: CustomersOneQuery): Promise<AnalyticsResponse>;
     getOverview(query: CustomersOneQuery): Promise<AnalyticsResponse>;
     meta(query?: CustomersQuery | undefined): Promise<AnalyticsResponse>;
