@@ -20,12 +20,12 @@ if (process.env.SYSTEM_TEST) {
 }
 
 const legacyId = '4564'
-const queryString = 'column=qty&type=range'
+const branchNumber = 112233
 
-const queryObject = {
-  column: 'qty',
-  type: 'range'
+const query = {
+  branch_number: branchNumber
 }
+
 const mock = new MockAdapter(axios)
 afterEach(() => {
   mock.reset()
@@ -49,7 +49,7 @@ describe('v0: Analytics Customers filters options', () => {
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/customers`
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/customers?branch_number=${branchNumber}`
         )
         .reply(function (config) {
           return [
@@ -87,7 +87,7 @@ describe('v0: Analytics Customers filters options', () => {
 
     expect(customers).toBeInstanceOf(Customers)
 
-    const { data } = await customers.getFilters()
+    const { data } = await customers.getFilters(query)
 
     expect(Array.isArray(data)).toBe(true)
   })

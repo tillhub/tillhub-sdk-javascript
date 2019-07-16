@@ -20,6 +20,7 @@ if (process.env.SYSTEM_TEST) {
 }
 
 const legacyId = '4564'
+const branchNumber = 112233
 
 const mock = new MockAdapter(axios)
 afterEach(() => {
@@ -67,10 +68,9 @@ describe('v0: Analytics: gets customers report', () => {
 
   it('takes a query string', async () => {
     const mockCustomersQuery = {
-      format: 'csv'
+      format: 'csv',
+      branch_number: branchNumber
     }
-
-    const mockString = 'format=csv'
 
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
@@ -87,7 +87,7 @@ describe('v0: Analytics: gets customers report', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/customers?${mockString}`)
+        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/customers?format=csv&branch_number=${branchNumber}`)
         .reply(function (config) {
           return [
             200,

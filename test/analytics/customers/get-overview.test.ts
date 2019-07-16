@@ -20,6 +20,7 @@ if (process.env.SYSTEM_TEST) {
 }
 
 const legacyId = '4564'
+const branchNumber = 112233
 
 const mock = new MockAdapter(axios)
 afterEach(() => {
@@ -27,17 +28,14 @@ afterEach(() => {
 })
 
 describe('v0: Analytics: gets customers overview report', () => {
-  const mockCustomersQuery = {
-    customer_id: '0001'
-  }
-
   it('takes a query string', async () => {
     const mockCustomersQuery = {
       customer_id: '0001',
-      currency: 'EUR'
+      currency: 'EUR',
+      branch_number: branchNumber
     }
 
-    const mockString = 'customer_id=0001&currency=EUR'
+    const mockString = `customer_id=0001&currency=EUR&branch_number=${branchNumber}`
 
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
