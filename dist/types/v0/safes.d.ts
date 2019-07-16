@@ -8,6 +8,7 @@ export interface SafesOptions {
 export interface SafesQuery {
     limit?: number;
     uri?: string;
+    location?: string;
 }
 export interface SafeResponse {
     data: SafesResponse;

@@ -64,6 +64,7 @@ export interface VoucherOptions {
 }
 export interface ExportFormatOptions {
     format?: string;
+    branch_number?: number;
 }
 export interface CustomersTransactionOptions {
     customer_id: string | null;

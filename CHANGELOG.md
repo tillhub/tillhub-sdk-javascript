@@ -1,3 +1,10 @@
+# [3.108.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.107.0...v3.108.0) (2019-07-16)
+
+
+### Features
+
+* **safes:** add location in query ([d6a37a0](https://github.com/tillhub/tillhub-sdk-javascript/commit/d6a37a0))
+
 # [3.107.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.106.0...v3.107.0) (2019-07-16)
 
 
