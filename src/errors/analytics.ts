@@ -31,6 +31,16 @@ export class ReportsPaymentOptionsFetchAllFailed extends BaseError {
   }
 }
 
+export class ReportsPaymentOptionsMetaFailed extends BaseError {
+  public name = 'ReportsPaymentOptionsMetaFailed'
+  constructor(
+    public message: string = 'Could not fetch meta the payment options',
+    properties?: any
+  ) {
+    super(message, properties)
+  }
+}
+
 export class ReportsPaymentsFetchAllFailed extends BaseError {
   public name = 'ReportsPaymentsFetchAllFailed'
   constructor(public message: string = 'Could not fetch all the payments', properties?: any) {
