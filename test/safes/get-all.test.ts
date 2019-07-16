@@ -25,6 +25,12 @@ afterEach(() => {
   mock.reset()
 })
 
+const locationId = '8f9a8dd4-d1c8-4f49-ab40-8cdcd9c90316'
+
+const query = {
+  location: locationId
+}
+
 describe('v0: Safes: can get all', () => {
   it("Tillhub's Safes are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
@@ -41,7 +47,7 @@ describe('v0: Safes: can get all', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/safes/${legacyId}`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v0/safes/${legacyId}?location=${locationId}`).reply(function (config) {
         return [
           200,
           {
@@ -72,7 +78,7 @@ describe('v0: Safes: can get all', () => {
 
     expect(safes).toBeInstanceOf(v0.Safes)
 
-    const { data } = await safes.getAll()
+    const { data } = await safes.getAll(query)
 
     expect(Array.isArray(data)).toBe(true)
   })
