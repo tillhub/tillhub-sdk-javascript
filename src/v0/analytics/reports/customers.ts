@@ -22,6 +22,11 @@ export interface CustomersQuery {
   format?: string
   legacy?: boolean
   cursor_field?: string
+  branch_number?: number
+}
+
+export interface FiltersQuery {
+  branch_number?: number
 }
 
 export interface CustomersItem {
@@ -34,6 +39,7 @@ export interface CustomersItem {
 export interface CustomersOneQuery {
   customer_id: string | null
   currency?: string
+  branch_number?: number
 }
 
 export class Customers {
@@ -65,11 +71,11 @@ export class Customers {
     })
   }
 
-  getFilters(): Promise<AnalyticsResponse> {
+  getFilters(query?: FiltersQuery | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const base = this.uriHelper.generateBaseUri('/reports/customers')
-        const uri = this.uriHelper.generateUriWithQuery(base)
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.CustomerFilterFetchFailed())

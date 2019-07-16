@@ -20,15 +20,17 @@ if (process.env.SYSTEM_TEST) {
   user.apiKey = process.env.SYSTEM_TEST_API_KEY || user.apiKey
 }
 
+const legacyId = '4564'
+const branchNumber = 112233
+
 const query = {
-  firstname: 'testName'
+  firstname: 'testName',
+  branch_number: branchNumber
 }
 
 function queryString() {
   return qs.stringify(query)
 }
-
-const legacyId = '4564'
 
 const mock = new MockAdapter(axios)
 afterEach(() => {
