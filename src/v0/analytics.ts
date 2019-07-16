@@ -73,7 +73,8 @@ export interface VoucherOptions {
 }
 
 export interface ExportFormatOptions {
-  format?: string
+  format?: string,
+  branch_number?: number
 }
 
 export interface CustomersTransactionOptions {
