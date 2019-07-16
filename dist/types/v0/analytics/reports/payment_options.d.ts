@@ -11,7 +11,7 @@ export interface PaymentOptionsResponse {
 export interface PaymentOptionsQuery {
     start?: string;
     end?: string;
-    branch_id?: string;
+    branch_number?: string;
     register_id?: string;
     payment_method?: string;
     uri?: string;
@@ -25,4 +25,5 @@ export declare class PaymentOptions {
     uriHelper: UriHelper;
     constructor(options: PaymentOptionsOptions, http: Client, uriHelper: UriHelper);
     getAll(query?: PaymentOptionsQuery): Promise<PaymentOptionsResponse>;
+    meta(query?: PaymentOptionsQuery): Promise<PaymentOptionsResponse>;
 }

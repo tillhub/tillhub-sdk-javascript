@@ -74,6 +74,36 @@ var PaymentOptions = /** @class */ (function () {
             });
         }); });
     };
+    PaymentOptions.prototype.meta = function (query) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var base, uri, response, err_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri('/reports/payment_options/meta');
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200)
+                            return [2 /*return*/, reject(new errors.ReportsPaymentOptionsMetaFailed(undefined, { status: response.status }))];
+                        if (!response.data.results[0]) {
+                            return [2 /*return*/, reject(new errors.ReportsPaymentOptionsMetaFailed('Could not get balances metadata unexpectedly'))];
+                        }
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            })];
+                    case 2:
+                        err_2 = _a.sent();
+                        return [2 /*return*/, reject(new errors.ReportsPaymentOptionsMetaFailed())];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     return PaymentOptions;
 }());
 exports.PaymentOptions = PaymentOptions;

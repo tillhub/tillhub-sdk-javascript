@@ -62,6 +62,18 @@ var ReportsPaymentOptionsFetchAllFailed = /** @class */ (function (_super) {
     return ReportsPaymentOptionsFetchAllFailed;
 }(baseError_1.BaseError));
 exports.ReportsPaymentOptionsFetchAllFailed = ReportsPaymentOptionsFetchAllFailed;
+var ReportsPaymentOptionsMetaFailed = /** @class */ (function (_super) {
+    __extends(ReportsPaymentOptionsMetaFailed, _super);
+    function ReportsPaymentOptionsMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch meta the payment options'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ReportsPaymentOptionsMetaFailed';
+        return _this;
+    }
+    return ReportsPaymentOptionsMetaFailed;
+}(baseError_1.BaseError));
+exports.ReportsPaymentOptionsMetaFailed = ReportsPaymentOptionsMetaFailed;
 var ReportsPaymentsFetchAllFailed = /** @class */ (function (_super) {
     __extends(ReportsPaymentsFetchAllFailed, _super);
     function ReportsPaymentsFetchAllFailed(message, properties) {
