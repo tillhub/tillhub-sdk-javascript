@@ -21,6 +21,16 @@ if (process.env.SYSTEM_TEST) {
 
 const legacyId = '4564'
 
+const query = {
+  legacy: true,
+  type: 'sale',
+  query: {
+    branch_custom_id: 192837
+  }
+}
+
+const queryString = 'legacy=true&type=sale&branch_custom_id=192837'
+
 const mock = new MockAdapter(axios)
 afterEach(() => {
   mock.reset()
@@ -44,7 +54,7 @@ describe('v1: TransactionsLegacy: can get meta', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v1/transactions/${legacyId}/meta/legacy`)
+        .onGet(`https://api.tillhub.com/api/v1/transactions/${legacyId}/meta/legacy?${queryString}`)
         .reply(function (config) {
           return [
             200,
@@ -75,7 +85,7 @@ describe('v1: TransactionsLegacy: can get meta', () => {
 
     expect(transactions).toBeInstanceOf(v1.TransactionsLegacy)
 
-    const { data } = await transactions.meta()
+    const { data } = await transactions.meta(query)
 
     expect(data).toEqual({ count: 50 })
   })

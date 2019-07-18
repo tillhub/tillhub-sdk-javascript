@@ -20,6 +20,7 @@ export interface TransactionsQuery {
 export interface TransactionsMetaQuery {
   type?: string | string[]
   legacy?: boolean
+  query?: object
 }
 
 export interface TransactionsOptions {
@@ -65,7 +66,6 @@ export class Transactions extends ThBaseHandler {
       let next
 
       try {
-
         const base = this.uriHelper.generateBaseUri()
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 
@@ -88,13 +88,9 @@ export class Transactions extends ThBaseHandler {
 
   meta(q?: TransactionsMetaQuery | undefined): Promise<TransactionResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
-
       try {
-        const queryString = qs.stringify(q)
-        if (queryString) {
-          uri = `${uri}?${queryString}`
-        }
+        const base = this.uriHelper.generateBaseUri('/meta')
+        const uri = this.uriHelper.generateUriWithQuery(base, q)
 
         const response = await this.http.getClient().get(uri)
 
@@ -116,6 +112,7 @@ export class TransactionsLegacy {
   http: Client
   signing: Signing
   public options: TransactionsOptions
+  public uriHelper: UriHelper
 
   constructor(options: TransactionsOptions, http: Client) {
     this.options = options
@@ -124,6 +121,7 @@ export class TransactionsLegacy {
 
     this.endpoint = '/api/v1/transactions'
     this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
   getAll(query?: TransactionsQuery | undefined): Promise<TransactionResponse> {
@@ -190,13 +188,9 @@ export class TransactionsLegacy {
 
   meta(q?: TransactionsMetaQuery | undefined): Promise<TransactionResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta/legacy`
-
       try {
-        const queryString = qs.stringify(q)
-        if (queryString) {
-          uri = `${uri}?${queryString}`
-        }
+        const base = this.uriHelper.generateBaseUri('/meta/legacy')
+        const uri = this.uriHelper.generateUriWithQuery(base, q)
 
         const response = await this.http.getClient().get(uri)
 

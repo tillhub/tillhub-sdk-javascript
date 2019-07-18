@@ -23,10 +23,13 @@ const legacyId = '4564'
 
 const query = {
   legacy: true,
-  type: 'sale'
+  type: 'sale',
+  query: {
+    branch_custom_id: 192837
+  }
 }
 
-const queryString = qs.stringify(query)
+const queryString = 'legacy=true&type=sale&branch_custom_id=192837'
 
 const mock = new MockAdapter(axios)
 afterEach(() => {
