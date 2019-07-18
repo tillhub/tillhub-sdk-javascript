@@ -1,3 +1,10 @@
+# [3.110.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.109.0...v3.110.0) (2019-07-18)
+
+
+### Features
+
+* **transactions:** fix meta query ([147af9f](https://github.com/tillhub/tillhub-sdk-javascript/commit/147af9f))
+
 # [3.109.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.108.0...v3.109.0) (2019-07-16)
 
 

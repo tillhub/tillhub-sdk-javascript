@@ -47,9 +47,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -58,7 +55,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var qs_1 = __importDefault(require("qs"));
 var errors = __importStar(require("../errors"));
 var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
@@ -111,20 +107,15 @@ var Transactions = /** @class */ (function (_super) {
     Transactions.prototype.meta = function (q) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, queryString, response, error_2;
+            var base, uri, response, error_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/meta";
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        queryString = qs_1.default.stringify(q);
-                        if (queryString) {
-                            uri = uri + "?" + queryString;
-                        }
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri('/meta');
+                        uri = this.uriHelper.generateUriWithQuery(base, q);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
-                    case 2:
+                    case 1:
                         response = _a.sent();
                         if (response.status !== 200)
                             reject(new errors.TransactionsGetMetaFailed());
@@ -132,10 +123,10 @@ var Transactions = /** @class */ (function (_super) {
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count }
                             })];
-                    case 3:
+                    case 2:
                         error_2 = _a.sent();
                         return [2 /*return*/, reject(new errors.TransactionsGetMetaFailed(undefined, { error: error_2 }))];
-                    case 4: return [2 /*return*/];
+                    case 3: return [2 /*return*/];
                 }
             });
         }); });
@@ -151,6 +142,7 @@ var TransactionsLegacy = /** @class */ (function () {
         this.signing = new Signing(options, http);
         this.endpoint = '/api/v1/transactions';
         this.options.base = this.options.base || 'https://api.tillhub.com';
+        this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
     }
     TransactionsLegacy.prototype.getAll = function (query) {
         var _this = this;
@@ -229,20 +221,15 @@ var TransactionsLegacy = /** @class */ (function () {
     TransactionsLegacy.prototype.meta = function (q) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, queryString, response, error_4;
+            var base, uri, response, error_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/meta/legacy";
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        queryString = qs_1.default.stringify(q);
-                        if (queryString) {
-                            uri = uri + "?" + queryString;
-                        }
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri('/meta/legacy');
+                        uri = this.uriHelper.generateUriWithQuery(base, q);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
-                    case 2:
+                    case 1:
                         response = _a.sent();
                         if (response.status !== 200)
                             reject(new errors.TransactionsGetMetaFailed());
@@ -250,10 +237,10 @@ var TransactionsLegacy = /** @class */ (function () {
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count }
                             })];
-                    case 3:
+                    case 2:
                         error_4 = _a.sent();
                         return [2 /*return*/, reject(new errors.TransactionsGetMetaFailed(undefined, { error: error_4 }))];
-                    case 4: return [2 /*return*/];
+                    case 3: return [2 /*return*/];
                 }
             });
         }); });

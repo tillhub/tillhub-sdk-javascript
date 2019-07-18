@@ -15,6 +15,7 @@ export interface TransactionsQuery {
 export interface TransactionsMetaQuery {
     type?: string | string[];
     legacy?: boolean;
+    query?: object;
 }
 export interface TransactionsOptions {
     user?: string;
@@ -43,6 +44,7 @@ export declare class TransactionsLegacy {
     http: Client;
     signing: Signing;
     options: TransactionsOptions;
+    uriHelper: UriHelper;
     constructor(options: TransactionsOptions, http: Client);
     getAll(query?: TransactionsQuery | undefined): Promise<TransactionResponse>;
     pdfUri(requestObject: PdfRequestObject): Promise<TransactionResponse>;
