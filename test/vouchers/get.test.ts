@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
-import { TillhubClient, v0 } from '../../src/tillhub-js'
+import { TillhubClient, v1 } from '../../src/tillhub-js'
 
 let user = {
   username: 'test@example.com',
@@ -77,7 +77,7 @@ describe('v0: vouchers: can get one', () => {
 
     const vouchers = th.vouchers()
 
-    expect(vouchers).toBeInstanceOf(v0.Vouchers)
+    expect(vouchers).toBeInstanceOf(v1.Vouchers)
 
     const { data } = await vouchers.get(voucherId)
 

@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
-import { TillhubClient, v0 } from '../../src/tillhub-js'
+import { TillhubClient, v1 } from '../../src/tillhub-js'
 
 let user = {
   username: 'test@example.com',
@@ -41,7 +41,7 @@ describe('v0: vouchers: can get all', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/vouchers/${legacyId}`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v1/vouchers/${legacyId}`).reply(function (config) {
         return [
           200,
           {
@@ -70,7 +70,7 @@ describe('v0: vouchers: can get all', () => {
 
     const vouchers = th.vouchers()
 
-    expect(vouchers).toBeInstanceOf(v0.Vouchers)
+    expect(vouchers).toBeInstanceOf(v1.Vouchers)
 
     const { data } = await vouchers.getAll()
 
@@ -93,7 +93,7 @@ describe('v0: vouchers: can get all', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/vouchers/${legacyId}?limit=10`)
+        .onGet(`https://api.tillhub.com/api/v1/vouchers/${legacyId}?limit=10`)
         .reply(function (config) {
           return [
             200,
@@ -123,7 +123,7 @@ describe('v0: vouchers: can get all', () => {
 
     const vouchers = th.vouchers()
 
-    expect(vouchers).toBeInstanceOf(v0.Vouchers)
+    expect(vouchers).toBeInstanceOf(v1.Vouchers)
 
     const { data } = await vouchers.getAll({ limit: 10 })
 
@@ -145,7 +145,7 @@ describe('v0: vouchers: can get all', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/vouchers/${legacyId}`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v1/vouchers/${legacyId}`).reply(function (config) {
         return [500]
       })
     }
