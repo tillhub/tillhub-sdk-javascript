@@ -1,3 +1,10 @@
+# [3.111.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.110.0...v3.111.0) (2019-07-20)
+
+
+### Features
+
+* **anaylitics:** allow query in getPaymentsReport ([1929b72](https://github.com/tillhub/tillhub-sdk-javascript/commit/1929b72))
+
 # [3.110.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.109.0...v3.110.0) (2019-07-18)
 
 

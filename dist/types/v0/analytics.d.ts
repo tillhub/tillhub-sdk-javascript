@@ -77,6 +77,9 @@ export interface SimpleSalesCartItemsOptions {
     embed?: string | string[];
     include?: string | string[];
 }
+export interface PaymentsReportOptions {
+    [key: string]: any;
+}
 export interface ProductGoupsOptions {
     description?: string;
     product_group_id?: string;
@@ -130,7 +133,7 @@ export declare class Analytics {
     getRefundsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse>;
     getVouchersReports(query?: VoucherOptions | undefined): Promise<AnalyticsResponse>;
     getProductsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse>;
-    getPaymentsReport(): Promise<AnalyticsResponse>;
+    getPaymentsReport(query?: PaymentsReportOptions): Promise<AnalyticsResponse>;
     getSimpleSalesCartItems(query?: SimpleSalesCartItemsOptions | undefined): Promise<AnalyticsResponse>;
     getCustomersReport(query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse>;
     getCustomersTransaction(query: CustomersTransactionOptions): Promise<AnalyticsResponse>;
