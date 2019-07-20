@@ -90,6 +90,10 @@ export interface SimpleSalesCartItemsOptions {
   include?: string | string[]
 }
 
+export interface PaymentsReportOptions {
+  [key: string]: any
+}
+
 export interface ProductGoupsOptions {
   description?: string
   product_group_id?: string
@@ -371,12 +375,14 @@ export class Analytics {
     })
   }
 
-  getPaymentsReport(): Promise<AnalyticsResponse> {
+  getPaymentsReport(query?: PaymentsReportOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const uri = `${this.options.base}${this.endpoint}/${
+        const base = `${this.options.base}${this.endpoint}/${
           this.options.user
-          }/reports/staff/payments/`
+          }/reports/staff/payments`
+
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new PaymentsReportFetchFailed())
