@@ -33,7 +33,7 @@ describe('v0: Analytics: gets payments report', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/payments/`)
+        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/payments`)
         .reply(function (config) {
           return [
             200,
