@@ -1,14 +1,13 @@
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
-import * as v0 from '../v0'
-
 import {
+  Vouchers as VoucherV0,
   VouchersOptions
 } from '../v0/vouchers'
 
 /**
- * @extends "v0.Vouchers"
+ * @extends "VoucherV0"
  */
 
 export interface VouchersQueryOptions {
@@ -40,7 +39,7 @@ export interface VouchersResponse {
   next?: () => Promise<VouchersResponse>
 }
 
-export class Vouchers extends v0.Vouchers {
+export class Vouchers extends VoucherV0 {
   public static baseEndpointV1 = '/api/v1/vouchers'
   public endpointV1: string
   public uriHelperV1: UriHelper
