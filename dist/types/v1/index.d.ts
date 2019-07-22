@@ -4,4 +4,5 @@ import { Templates } from './templates';
 import { Transactions, TransactionsLegacy } from './transactions';
 import { Registers } from './registers';
 import { Balances } from './balances';
-export { Auth, Products, Templates, Transactions, TransactionsLegacy, Registers, Balances };
+import { Vouchers } from './vouchers';
+export { Auth, Products, Templates, Transactions, TransactionsLegacy, Registers, Balances, Vouchers };

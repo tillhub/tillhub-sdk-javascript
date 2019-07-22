@@ -13,4 +13,6 @@ var registers_1 = require("./registers");
 exports.Registers = registers_1.Registers;
 var balances_1 = require("./balances");
 exports.Balances = balances_1.Balances;
+var vouchers_1 = require("./vouchers");
+exports.Vouchers = vouchers_1.Vouchers;
 //# sourceMappingURL=index.js.map

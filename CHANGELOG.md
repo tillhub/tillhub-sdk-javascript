@@ -1,3 +1,11 @@
+# [3.112.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.111.0...v3.112.0) (2019-07-22)
+
+
+### Features
+
+* **vouchers:** add v1 that extends v0 ([b409b31](https://github.com/tillhub/tillhub-sdk-javascript/commit/b409b31))
+* **vouchers:** removed import all v0 ([43de2fd](https://github.com/tillhub/tillhub-sdk-javascript/commit/43de2fd))
+
 # [3.111.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.110.0...v3.111.0) (2019-07-20)
 
 
