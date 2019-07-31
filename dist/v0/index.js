@@ -78,4 +78,6 @@ var product_service_question_groups_1 = require("./product_service_question_grou
 exports.ProductServiceQuestionGroups = product_service_question_groups_1.ProductServiceQuestionGroups;
 var product_service_questions_1 = require("./product_service_questions");
 exports.ProductServiceQuestions = product_service_questions_1.ProductServiceQuestions;
+var reasons_1 = require("./reasons");
+exports.Reasons = reasons_1.Reasons;
 //# sourceMappingURL=index.js.map

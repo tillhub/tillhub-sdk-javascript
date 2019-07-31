@@ -1,3 +1,10 @@
+# [3.113.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.112.0...v3.113.0) (2019-07-31)
+
+
+### Features
+
+* **reasons:** add handler v0 ([9961c2a](https://github.com/tillhub/tillhub-sdk-javascript/commit/9961c2a))
+
 # [3.112.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.111.0...v3.112.0) (2019-07-22)
 
 
