@@ -36,6 +36,7 @@ import { Exports } from './exports'
 import { Data } from './data'
 import { ProductServiceQuestionGroups } from './product_service_question_groups'
 import { ProductServiceQuestions } from './product_service_questions'
+import { Reasons } from './reasons'
 
 export {
   Auth,
@@ -77,5 +78,6 @@ export {
   Exports,
   ProductServiceQuestionGroups,
   ProductServiceQuestions,
-  Data
+  Data,
+  Reasons
 }

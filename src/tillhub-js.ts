@@ -653,6 +653,14 @@ export class TillhubClient extends events.EventEmitter {
   data(): v0.Data {
     return this.generateAuthenticatedInstance(v0.Data)
   }
+
+  /**
+   * Create an authenticated Reasons instance
+   *
+   */
+  reasons(): v0.Reasons {
+    return this.generateAuthenticatedInstance(v0.Reasons)
+  }
 }
 
 export class Tillhub extends TillhubClient {
