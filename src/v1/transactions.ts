@@ -33,6 +33,17 @@ export interface TransactionResponse {
   next?: () => Promise<TransactionResponse>
 }
 
+export interface TransactionImageResponse {
+  data: object
+}
+
+export interface TransactionImage {
+  'original': string,
+  '1x': string,
+  '2x': string,
+  '3x': string
+}
+
 enum SignatureTypes {
   Fiksaltrust = 'fiskaltrust'
 }
@@ -105,6 +116,58 @@ export class Transactions extends ThBaseHandler {
       }
     })
   }
+
+  getImages(transactionId: string): Promise<TransactionResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const uri = this.uriHelper.generateBaseUri(`/${transactionId}/images`)
+        const response = await this.http.getClient().get(uri)
+
+        if (response.status !== 200) reject(new TransactionsGetImageFailed(undefined, { status: response.status }))
+
+        return resolve({
+          data: response.data.results
+        } as TransactionResponse)
+      } catch (error) {
+        return reject(new TransactionsGetImageFailed(undefined, { error }))
+      }
+    })
+  }
+
+  putImage(transactionId: string, image: TransactionImage): Promise<TransactionImageResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const uri = this.uriHelper.generateBaseUri(`/${transactionId}/images`)
+        const response = await this.http.getClient().put(uri, image)
+
+        if (response.status !== 200) reject(new TransactionsImagePutFailed(undefined, { status: response.status }))
+
+        return resolve({
+          data: response.data.results
+        } as TransactionImageResponse)
+      } catch (error) {
+        return reject(new TransactionsImagePutFailed(undefined, { error }))
+      }
+    })
+  }
+
+  createImage(transactionId: string, image: TransactionImage): Promise<TransactionImageResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const uri = this.uriHelper.generateBaseUri(`/${transactionId}/images`)
+        const response = await this.http.getClient().post(uri, image)
+
+        if (response.status !== 200) reject(new TransactionsImageCreateFailed(undefined, { status: response.status }))
+
+        return resolve({
+          data: response.data.results
+        } as TransactionImageResponse)
+      } catch (error) {
+        return reject(new TransactionsImageCreateFailed(undefined, { error }))
+      }
+    })
+  }
+
 }
 
 export class TransactionsLegacy {
@@ -371,6 +434,27 @@ class TransactionSigningZeroReceiptFailed extends BaseError {
 class TransactionsGetMetaFailed extends BaseError {
   public name = 'TransactionsGetMetaFailed'
   constructor(public message: string = 'Could not get transactions meta', properties?: any) {
+    super(message, properties)
+  }
+}
+
+class TransactionsGetImageFailed extends BaseError {
+  public name = 'TransactionsGetImageFailed'
+  constructor(public message: string = 'Could not get transactions image', properties?: any) {
+    super(message, properties)
+  }
+}
+
+class TransactionsImagePutFailed extends BaseError {
+  public name = 'TransactionsImagePutFailed'
+  constructor(public message: string = 'Could not update transactions image', properties?: any) {
+    super(message, properties)
+  }
+}
+
+class TransactionsImageCreateFailed extends BaseError {
+  public name = 'TransactionsImageCreateFailed'
+  constructor(public message: string = 'Could not create transactions image', properties?: any) {
     super(message, properties)
   }
 }
