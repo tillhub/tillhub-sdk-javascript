@@ -1,8 +1,8 @@
 import qs from 'qs'
 import { Client } from '../client'
-import * as errors from '../errors'
 import { UriHelper } from '../uri-helper'
 import { ThBaseHandler } from '../base'
+import { BaseError } from '../errors/baseError'
 
 export interface PdfRequestObject {
   transactionId: string
@@ -81,7 +81,7 @@ export class Transactions extends ThBaseHandler {
           next
         } as TransactionResponse)
       } catch (error) {
-        return reject(new errors.TransactionFetchFailed(undefined, { error }))
+        return reject(new TransactionFetchFailed(undefined, { error }))
       }
     })
   }
@@ -94,14 +94,14 @@ export class Transactions extends ThBaseHandler {
 
         const response = await this.http.getClient().get(uri)
 
-        if (response.status !== 200) reject(new errors.TransactionsGetMetaFailed())
+        if (response.status !== 200) reject(new TransactionsGetMetaFailed())
 
         return resolve({
           data: response.data.results[0],
           metadata: { count: response.data.count }
         } as TransactionResponse)
       } catch (error) {
-        return reject(new errors.TransactionsGetMetaFailed(undefined, { error }))
+        return reject(new TransactionsGetMetaFailed(undefined, { error }))
       }
     })
   }
@@ -148,7 +148,7 @@ export class TransactionsLegacy {
           next
         } as TransactionResponse)
       } catch (error) {
-        return reject(new errors.TransactionFetchFailed(undefined, { error }))
+        return reject(new TransactionFetchFailed(undefined, { error }))
       }
     })
   }
@@ -181,7 +181,7 @@ export class TransactionsLegacy {
           data: response.data.results
         } as TransactionResponse)
       } catch (err) {
-        return reject(new errors.TransactionPdfFailed(err.message))
+        return reject(new TransactionPdfFailed(err.message))
       }
     })
   }
@@ -194,14 +194,14 @@ export class TransactionsLegacy {
 
         const response = await this.http.getClient().get(uri)
 
-        if (response.status !== 200) reject(new errors.TransactionsGetMetaFailed())
+        if (response.status !== 200) reject(new TransactionsGetMetaFailed())
 
         return resolve({
           data: response.data.results[0],
           metadata: { count: response.data.count }
         } as TransactionResponse)
       } catch (error) {
-        return reject(new errors.TransactionsGetMetaFailed(undefined, { error }))
+        return reject(new TransactionsGetMetaFailed(undefined, { error }))
       }
     })
   }
@@ -242,7 +242,7 @@ export class Signing {
           data: response.data.results
         } as any)
       } catch (err) {
-        return reject(new errors.TransactionSigningInitialisationFailed(err.message))
+        return reject(new TransactionSigningInitialisationFailed(err.message))
       }
     })
   }
@@ -268,7 +268,7 @@ export class Signing {
           data: response.data.results
         } as any)
       } catch (err) {
-        return reject(new errors.TransactionSigningYearlyReceiptFailed(err.message))
+        return reject(new TransactionSigningYearlyReceiptFailed(err.message))
       }
     })
   }
@@ -294,7 +294,7 @@ export class Signing {
           data: response.data.results
         } as any)
       } catch (err) {
-        return reject(new errors.TransactionSigningMonthlyReceiptFailed(err.message))
+        return reject(new TransactionSigningMonthlyReceiptFailed(err.message))
       }
     })
   }
@@ -320,8 +320,57 @@ export class Signing {
           data: response.data.results
         } as any)
       } catch (err) {
-        return reject(new errors.TransactionSigningZeroReceiptFailed(err.message))
+        return reject(new TransactionSigningZeroReceiptFailed(err.message))
       }
     })
+  }
+}
+
+class TransactionFetchFailed extends BaseError {
+  public name = 'TransactionFetchFailed'
+  constructor(public message: string = 'Could not fetch transaction', properties?: any) {
+    super(message, properties)
+  }
+}
+
+class TransactionPdfFailed extends BaseError {
+  public name = 'TransactionPdfFailed'
+  constructor(public message: string = 'Could not create pdf', properties?: any) {
+    super(message, properties)
+  }
+}
+
+class TransactionSigningInitialisationFailed extends BaseError {
+  public name = 'TransactionSigningInitialisationFailed'
+  constructor(public message: string = 'Could not initialise signing system', properties?: any) {
+    super(message, properties)
+  }
+}
+
+class TransactionSigningYearlyReceiptFailed extends BaseError {
+  public name = 'TransactionSigningYearlyReceiptFailed'
+  constructor(public message: string = 'Could not generate yearly receipt', properties?: any) {
+    super(message, properties)
+  }
+}
+
+class TransactionSigningMonthlyReceiptFailed extends BaseError {
+  public name = 'TransactionSigningMonthlyReceiptFailed'
+  constructor(public message: string = 'Could not generate monthly receipt', properties?: any) {
+    super(message, properties)
+  }
+}
+
+class TransactionSigningZeroReceiptFailed extends BaseError {
+  public name = 'TransactionSigningZeroReceiptFailed'
+  constructor(public message: string = 'Could not generate zero receipt', properties?: any) {
+    super(message, properties)
+  }
+}
+
+class TransactionsGetMetaFailed extends BaseError {
+  public name = 'TransactionsGetMetaFailed'
+  constructor(public message: string = 'Could not get transactions meta', properties?: any) {
+    super(message, properties)
   }
 }
