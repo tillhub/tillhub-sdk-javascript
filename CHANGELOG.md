@@ -1,3 +1,10 @@
+# [3.114.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.113.0...v3.114.0) (2019-08-07)
+
+
+### Features
+
+* **transactionsV1:** add image handlers ([b3506d4](https://github.com/tillhub/tillhub-sdk-javascript/commit/b3506d4))
+
 # [3.113.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.112.0...v3.113.0) (2019-07-31)
 
 

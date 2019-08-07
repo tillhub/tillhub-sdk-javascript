@@ -47,17 +47,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var errors = __importStar(require("../errors"));
 var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
+var baseError_1 = require("../errors/baseError");
 var SignatureTypes;
 (function (SignatureTypes) {
     SignatureTypes["Fiksaltrust"] = "fiskaltrust";
@@ -98,7 +91,7 @@ var Transactions = /** @class */ (function (_super) {
                             })];
                     case 2:
                         error_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TransactionFetchFailed(undefined, { error: error_1 }))];
+                        return [2 /*return*/, reject(new TransactionFetchFailed(undefined, { error: error_1 }))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -118,14 +111,89 @@ var Transactions = /** @class */ (function (_super) {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            reject(new errors.TransactionsGetMetaFailed());
+                            reject(new TransactionsGetMetaFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count }
                             })];
                     case 2:
                         error_2 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TransactionsGetMetaFailed(undefined, { error: error_2 }))];
+                        return [2 /*return*/, reject(new TransactionsGetMetaFailed(undefined, { error: error_2 }))];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Transactions.prototype.getImages = function (transactionId) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = this.uriHelper.generateBaseUri("/" + transactionId + "/images");
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200)
+                            reject(new TransactionsGetImageFailed(undefined, { status: response.status }));
+                        return [2 /*return*/, resolve({
+                                data: response.data.results
+                            })];
+                    case 2:
+                        error_3 = _a.sent();
+                        return [2 /*return*/, reject(new TransactionsGetImageFailed(undefined, { error: error_3 }))];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Transactions.prototype.putImage = function (transactionId, image) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = this.uriHelper.generateBaseUri("/" + transactionId + "/images");
+                        return [4 /*yield*/, this.http.getClient().put(uri, image)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200)
+                            reject(new TransactionsImagePutFailed(undefined, { status: response.status }));
+                        return [2 /*return*/, resolve({
+                                data: response.data.results
+                            })];
+                    case 2:
+                        error_4 = _a.sent();
+                        return [2 /*return*/, reject(new TransactionsImagePutFailed(undefined, { error: error_4 }))];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Transactions.prototype.createImage = function (transactionId, image) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_5;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = this.uriHelper.generateBaseUri("/" + transactionId + "/images");
+                        return [4 /*yield*/, this.http.getClient().post(uri, image)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200)
+                            reject(new TransactionsImageCreateFailed(undefined, { status: response.status }));
+                        return [2 /*return*/, resolve({
+                                data: response.data.results
+                            })];
+                    case 2:
+                        error_5 = _a.sent();
+                        return [2 /*return*/, reject(new TransactionsImageCreateFailed(undefined, { error: error_5 }))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -147,7 +215,7 @@ var TransactionsLegacy = /** @class */ (function () {
     TransactionsLegacy.prototype.getAll = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var next, uri, response_2, error_3;
+            var next, uri, response_2, error_6;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -172,8 +240,8 @@ var TransactionsLegacy = /** @class */ (function () {
                                 next: next
                             })];
                     case 2:
-                        error_3 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TransactionFetchFailed(undefined, { error: error_3 }))];
+                        error_6 = _a.sent();
+                        return [2 /*return*/, reject(new TransactionFetchFailed(undefined, { error: error_6 }))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -212,7 +280,7 @@ var TransactionsLegacy = /** @class */ (function () {
                             })];
                     case 3:
                         err_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TransactionPdfFailed(err_1.message))];
+                        return [2 /*return*/, reject(new TransactionPdfFailed(err_1.message))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -221,7 +289,7 @@ var TransactionsLegacy = /** @class */ (function () {
     TransactionsLegacy.prototype.meta = function (q) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var base, uri, response, error_4;
+            var base, uri, response, error_7;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -232,14 +300,14 @@ var TransactionsLegacy = /** @class */ (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            reject(new errors.TransactionsGetMetaFailed());
+                            reject(new TransactionsGetMetaFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count }
                             })];
                     case 2:
-                        error_4 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TransactionsGetMetaFailed(undefined, { error: error_4 }))];
+                        error_7 = _a.sent();
+                        return [2 /*return*/, reject(new TransactionsGetMetaFailed(undefined, { error: error_7 }))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -276,7 +344,7 @@ var Signing = /** @class */ (function () {
                             })];
                     case 2:
                         err_2 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TransactionSigningInitialisationFailed(err_2.message))];
+                        return [2 /*return*/, reject(new TransactionSigningInitialisationFailed(err_2.message))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -303,7 +371,7 @@ var Signing = /** @class */ (function () {
                             })];
                     case 2:
                         err_3 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TransactionSigningYearlyReceiptFailed(err_3.message))];
+                        return [2 /*return*/, reject(new TransactionSigningYearlyReceiptFailed(err_3.message))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -330,7 +398,7 @@ var Signing = /** @class */ (function () {
                             })];
                     case 2:
                         err_4 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TransactionSigningMonthlyReceiptFailed(err_4.message))];
+                        return [2 /*return*/, reject(new TransactionSigningMonthlyReceiptFailed(err_4.message))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -357,7 +425,7 @@ var Signing = /** @class */ (function () {
                             })];
                     case 2:
                         err_5 = _a.sent();
-                        return [2 /*return*/, reject(new errors.TransactionSigningZeroReceiptFailed(err_5.message))];
+                        return [2 /*return*/, reject(new TransactionSigningZeroReceiptFailed(err_5.message))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -366,4 +434,114 @@ var Signing = /** @class */ (function () {
     return Signing;
 }());
 exports.Signing = Signing;
+var TransactionFetchFailed = /** @class */ (function (_super) {
+    __extends(TransactionFetchFailed, _super);
+    function TransactionFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch transaction'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TransactionFetchFailed';
+        return _this;
+    }
+    return TransactionFetchFailed;
+}(baseError_1.BaseError));
+var TransactionPdfFailed = /** @class */ (function (_super) {
+    __extends(TransactionPdfFailed, _super);
+    function TransactionPdfFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create pdf'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TransactionPdfFailed';
+        return _this;
+    }
+    return TransactionPdfFailed;
+}(baseError_1.BaseError));
+var TransactionSigningInitialisationFailed = /** @class */ (function (_super) {
+    __extends(TransactionSigningInitialisationFailed, _super);
+    function TransactionSigningInitialisationFailed(message, properties) {
+        if (message === void 0) { message = 'Could not initialise signing system'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TransactionSigningInitialisationFailed';
+        return _this;
+    }
+    return TransactionSigningInitialisationFailed;
+}(baseError_1.BaseError));
+var TransactionSigningYearlyReceiptFailed = /** @class */ (function (_super) {
+    __extends(TransactionSigningYearlyReceiptFailed, _super);
+    function TransactionSigningYearlyReceiptFailed(message, properties) {
+        if (message === void 0) { message = 'Could not generate yearly receipt'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TransactionSigningYearlyReceiptFailed';
+        return _this;
+    }
+    return TransactionSigningYearlyReceiptFailed;
+}(baseError_1.BaseError));
+var TransactionSigningMonthlyReceiptFailed = /** @class */ (function (_super) {
+    __extends(TransactionSigningMonthlyReceiptFailed, _super);
+    function TransactionSigningMonthlyReceiptFailed(message, properties) {
+        if (message === void 0) { message = 'Could not generate monthly receipt'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TransactionSigningMonthlyReceiptFailed';
+        return _this;
+    }
+    return TransactionSigningMonthlyReceiptFailed;
+}(baseError_1.BaseError));
+var TransactionSigningZeroReceiptFailed = /** @class */ (function (_super) {
+    __extends(TransactionSigningZeroReceiptFailed, _super);
+    function TransactionSigningZeroReceiptFailed(message, properties) {
+        if (message === void 0) { message = 'Could not generate zero receipt'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TransactionSigningZeroReceiptFailed';
+        return _this;
+    }
+    return TransactionSigningZeroReceiptFailed;
+}(baseError_1.BaseError));
+var TransactionsGetMetaFailed = /** @class */ (function (_super) {
+    __extends(TransactionsGetMetaFailed, _super);
+    function TransactionsGetMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get transactions meta'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TransactionsGetMetaFailed';
+        return _this;
+    }
+    return TransactionsGetMetaFailed;
+}(baseError_1.BaseError));
+var TransactionsGetImageFailed = /** @class */ (function (_super) {
+    __extends(TransactionsGetImageFailed, _super);
+    function TransactionsGetImageFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get transactions image'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TransactionsGetImageFailed';
+        return _this;
+    }
+    return TransactionsGetImageFailed;
+}(baseError_1.BaseError));
+var TransactionsImagePutFailed = /** @class */ (function (_super) {
+    __extends(TransactionsImagePutFailed, _super);
+    function TransactionsImagePutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not update transactions image'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TransactionsImagePutFailed';
+        return _this;
+    }
+    return TransactionsImagePutFailed;
+}(baseError_1.BaseError));
+var TransactionsImageCreateFailed = /** @class */ (function (_super) {
+    __extends(TransactionsImageCreateFailed, _super);
+    function TransactionsImageCreateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create transactions image'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TransactionsImageCreateFailed';
+        return _this;
+    }
+    return TransactionsImageCreateFailed;
+}(baseError_1.BaseError));
 //# sourceMappingURL=transactions.js.map

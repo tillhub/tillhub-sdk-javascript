@@ -25,6 +25,15 @@ export interface TransactionResponse {
     data: object[];
     next?: () => Promise<TransactionResponse>;
 }
+export interface TransactionImageResponse {
+    data: object;
+}
+export interface TransactionImage {
+    'original': string;
+    '1x': string;
+    '2x': string;
+    '3x': string;
+}
 interface FiskaltrustAuth {
     cashbox: string;
     cashbox_auth: string;
@@ -38,6 +47,9 @@ export declare class Transactions extends ThBaseHandler {
     constructor(options: TransactionsOptions, http: Client);
     getAll(query?: TransactionsQuery | undefined): Promise<TransactionResponse>;
     meta(q?: TransactionsMetaQuery | undefined): Promise<TransactionResponse>;
+    getImages(transactionId: string): Promise<TransactionResponse>;
+    putImage(transactionId: string, image: TransactionImage): Promise<TransactionImageResponse>;
+    createImage(transactionId: string, image: TransactionImage): Promise<TransactionImageResponse>;
 }
 export declare class TransactionsLegacy {
     endpoint: string;
