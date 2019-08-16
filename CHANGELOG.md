@@ -1,3 +1,10 @@
+## [3.115.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.115.0...v3.115.1) (2019-08-16)
+
+
+### Bug Fixes
+
+* **me:** remove user id from uri ([088f0ca](https://github.com/tillhub/tillhub-sdk-javascript/commit/088f0ca))
+
 # [3.115.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.114.0...v3.115.0) (2019-08-16)
 
 
