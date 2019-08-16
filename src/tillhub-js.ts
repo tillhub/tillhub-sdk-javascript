@@ -668,6 +668,14 @@ export class TillhubClient extends events.EventEmitter {
   reasons(): v0.Reasons {
     return this.generateAuthenticatedInstance(v0.Reasons)
   }
+
+  /**
+   * Create an authenticated Processes instance
+   *
+   */
+  processes(): v0.Processes {
+    return this.generateAuthenticatedInstance(v0.Processes)
+  }
 }
 
 export class Tillhub extends TillhubClient {
