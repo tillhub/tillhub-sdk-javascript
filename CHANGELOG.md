@@ -1,3 +1,15 @@
+# [3.116.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.115.1...v3.116.0) (2019-08-16)
+
+
+### Bug Fixes
+
+* **processes:** pass error info into custom error classes ([7fc3472](https://github.com/tillhub/tillhub-sdk-javascript/commit/7fc3472))
+
+
+### Features
+
+* add processes ([40804ac](https://github.com/tillhub/tillhub-sdk-javascript/commit/40804ac))
+
 ## [3.115.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.115.0...v3.115.1) (2019-08-16)
 
 

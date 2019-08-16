@@ -559,6 +559,13 @@ var TillhubClient = /** @class */ (function (_super) {
     TillhubClient.prototype.reasons = function () {
         return this.generateAuthenticatedInstance(v0.Reasons);
     };
+    /**
+     * Create an authenticated Processes instance
+     *
+     */
+    TillhubClient.prototype.processes = function () {
+        return this.generateAuthenticatedInstance(v0.Processes);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));
