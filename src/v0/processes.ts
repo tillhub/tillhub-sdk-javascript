@@ -60,14 +60,14 @@ export class Processes extends ThBaseHandler {
         const uri = this.uriHelper.generateBaseUri()
 
         const response = await this.http.getClient().post(uri, process)
-        response.status !== 200 && reject(new ProcessesCreationFailed())
+        response.status !== 200 && reject(new ProcessesCreationFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results[0],
           metadata: { count: response.data.count }
         } as ProcessResponse)
-      } catch (err) {
-        return reject(new ProcessesCreationFailed())
+      } catch (error) {
+        return reject(new ProcessesCreationFailed(undefined, { error }))
       }
     })
   }
@@ -79,14 +79,14 @@ export class Processes extends ThBaseHandler {
         const uri = this.uriHelper.generateUriWithQuery(baseUri, query)
 
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new ProcessesFetchFailed())
+        response.status !== 200 && reject(new ProcessesFetchFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
         } as ProcessesResponse)
-      } catch (err) {
-        return reject(new ProcessesFetchFailed())
+      } catch (error) {
+        return reject(new ProcessesFetchFailed(undefined, { error }))
       }
     })
   }
@@ -98,14 +98,14 @@ export class Processes extends ThBaseHandler {
         const uri = this.uriHelper.generateUriWithQuery(baseUri, query)
 
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new ProcessesFetchOneFailed())
+        response.status !== 200 && reject(new ProcessesFetchOneFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results[0],
           metadata: { count: 1 }
         } as ProcessResponse)
-      } catch (err) {
-        return reject(new ProcessesFetchOneFailed())
+      } catch (error) {
+        return reject(new ProcessesFetchOneFailed(undefined, { error }))
       }
     })
   }
@@ -116,14 +116,14 @@ export class Processes extends ThBaseHandler {
         const uri = this.uriHelper.generateBaseUri(`/${processId}`)
 
         const response = await this.http.getClient().patch(uri, process)
-        response.status !== 200 && reject(new ProcessesUpdateFailed())
+        response.status !== 200 && reject(new ProcessesUpdateFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results[0] as Process,
           metadata: { count: response.data.count }
         } as ProcessResponse)
-      } catch (err) {
-        return reject(new ProcessesUpdateFailed())
+      } catch (error) {
+        return reject(new ProcessesUpdateFailed(undefined, { error }))
       }
     })
   }
