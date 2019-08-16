@@ -46,7 +46,7 @@ export class Me extends ThBaseHandler {
 
   get(): Promise<MeResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+      const uri = `${this.options.base}${this.endpoint}`
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&

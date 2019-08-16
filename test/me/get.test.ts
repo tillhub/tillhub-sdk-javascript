@@ -36,7 +36,7 @@ describe('v0: Me: can get me data', () => {
         })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/me/${legacyId}`)
+        .onGet(`https://api.tillhub.com/api/v0/me`)
         .reply(function (config) {
           return [
             200,
@@ -77,7 +77,7 @@ describe('v0: Me: can get me data', () => {
         })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/me/${legacyId}`)
+        .onGet(`https://api.tillhub.com/api/v0/me`)
         .reply(function (config) {
           return [205]
         })
