@@ -274,6 +274,12 @@ var TillhubClient = /** @class */ (function (_super) {
         return this.generateAuthenticatedInstance(v0.VoucherLogs);
     };
     /**
+     * Create an authenticated me instance
+     */
+    TillhubClient.prototype.me = function () {
+        return this.generateAuthenticatedInstance(v0.Me);
+    };
+    /**
      * Create an authenticated invoices instance
      *
      */

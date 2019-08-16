@@ -37,4 +37,5 @@ import { Data } from './data';
 import { ProductServiceQuestionGroups } from './product_service_question_groups';
 import { ProductServiceQuestions } from './product_service_questions';
 import { Reasons } from './reasons';
-export { Auth, Taxes, Deliveries, ProductGroups, ProductTemplates, Accounts, ExpenseAccounts, PaymentOptions, Configurations, Users, Branches, Devices, Contents, Customers, Discounts, Vouchers, VoucherLogs, Invoices, Stocks, StocksBook, Orders, Analytics, Staff, AuditActions, AuditLogs, Images, Notifications, Print, Messages, Favourites, LegacySettings, Tags, Safes, Warehouses, Videos, StaffGroups, Exports, ProductServiceQuestionGroups, ProductServiceQuestions, Data, Reasons };
+import { Me } from './me';
+export { Auth, Taxes, Deliveries, ProductGroups, ProductTemplates, Accounts, ExpenseAccounts, PaymentOptions, Configurations, Users, Branches, Devices, Contents, Customers, Discounts, Vouchers, VoucherLogs, Invoices, Stocks, StocksBook, Orders, Analytics, Staff, AuditActions, AuditLogs, Images, Notifications, Print, Messages, Favourites, LegacySettings, Tags, Safes, Warehouses, Videos, StaffGroups, Exports, ProductServiceQuestionGroups, ProductServiceQuestions, Data, Reasons, Me };

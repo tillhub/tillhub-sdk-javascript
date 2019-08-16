@@ -1,3 +1,10 @@
+# [3.115.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.114.0...v3.115.0) (2019-08-16)
+
+
+### Features
+
+* **me:** add new me handler ([7737e62](https://github.com/tillhub/tillhub-sdk-javascript/commit/7737e62))
+
 # [3.114.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.113.0...v3.114.0) (2019-08-07)
 
 
