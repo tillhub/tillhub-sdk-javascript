@@ -16,12 +16,19 @@ export interface MeResponse {
     patch?: any
   }
   msg?: string
+  errors?: ErrorObject[]
 }
 
 export interface Me {
   id: string
   role: string
   scopes: string[]
+}
+
+export interface ErrorObject {
+  id: string
+  label: string
+  errorDetails?: object
 }
 
 export class Me extends ThBaseHandler {
@@ -55,7 +62,8 @@ export class Me extends ThBaseHandler {
         return resolve({
           data: response.data.results[0] as Me,
           msg: response.data.msg,
-          metadata: { count: response.data.count }
+          metadata: { count: response.data.count },
+          errors: response.data.errors || []
         } as MeResponse)
       } catch (error) {
         return reject(new MeFetchFailed(undefined, { error }))
