@@ -1,3 +1,10 @@
+# [3.117.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.116.0...v3.117.0) (2019-08-19)
+
+
+### Features
+
+* **me:** add errors array ([40a52fd](https://github.com/tillhub/tillhub-sdk-javascript/commit/40a52fd))
+
 # [3.116.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.115.1...v3.116.0) (2019-08-16)
 
 

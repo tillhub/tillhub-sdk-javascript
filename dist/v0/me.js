@@ -84,7 +84,8 @@ var Me = /** @class */ (function (_super) {
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 msg: response.data.msg,
-                                metadata: { count: response.data.count }
+                                metadata: { count: response.data.count },
+                                errors: response.data.errors || []
                             })];
                     case 3:
                         error_1 = _a.sent();

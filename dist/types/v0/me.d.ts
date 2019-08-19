@@ -13,11 +13,17 @@ export interface MeResponse {
         patch?: any;
     };
     msg?: string;
+    errors?: ErrorObject[];
 }
 export interface Me {
     id: string;
     role: string;
     scopes: string[];
+}
+export interface ErrorObject {
+    id: string;
+    label: string;
+    errorDetails?: object;
 }
 export declare class Me extends ThBaseHandler {
     static baseEndpoint: string;
