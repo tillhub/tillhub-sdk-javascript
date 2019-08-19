@@ -90,4 +90,53 @@ describe('v0: Me: can get me data', () => {
       expect(err.name).toBe('MeFetchFailed')
     }
   })
+
+  it('can send errors attached to the response', async () => {
+    const errorsArr = [
+      {
+        id: '1234',
+        label: 'some.error.key',
+        errorDetails: { msg: 'Error message' }
+      }
+    ]
+
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock
+        .onPost('https://api.tillhub.com/api/v0/users/login')
+        .reply(function (config) {
+          return [
+            200,
+            {
+              token: '',
+              user: {
+                id: '123',
+                legacy_id: legacyId
+              }
+            }
+          ]
+        })
+
+      mock.onGet(`https://api.tillhub.com/api/v0/me`).reply(function (config) {
+        return [
+          200,
+          {
+            count: 1,
+            errors: errorsArr,
+            results: [meResponse]
+          }
+        ]
+      })
+    }
+
+    const th = await initThInstance()
+
+    const Me = th.me()
+
+    expect(Me).toBeInstanceOf(v0.Me)
+
+    const { data, errors } = await Me.get()
+
+    expect(data).toMatchObject(meResponse)
+    expect(errors).toMatchObject(errorsArr)
+  })
 })
