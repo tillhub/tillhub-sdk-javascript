@@ -1,3 +1,10 @@
+## [3.118.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.118.0...v3.118.1) (2019-08-21)
+
+
+### Bug Fixes
+
+* **deps:** move dep to regular dependencies ([ab118b1](https://github.com/tillhub/tillhub-sdk-javascript/commit/ab118b1))
+
 # [3.118.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.117.0...v3.118.0) (2019-08-21)
 
 
