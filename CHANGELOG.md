@@ -1,3 +1,10 @@
+# [3.118.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.117.0...v3.118.0) (2019-08-21)
+
+
+### Features
+
+* **base-error:** serialize error property ([1658ffd](https://github.com/tillhub/tillhub-sdk-javascript/commit/1658ffd))
+
 # [3.117.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.116.0...v3.117.0) (2019-08-19)
 
 
