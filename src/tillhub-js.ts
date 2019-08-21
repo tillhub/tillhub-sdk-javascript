@@ -676,6 +676,14 @@ export class TillhubClient extends events.EventEmitter {
   processes(): v0.Processes {
     return this.generateAuthenticatedInstance(v0.Processes)
   }
+
+  /**
+   * Create an authenticated Carts instance
+   *
+   */
+  carts(): v1.Carts {
+    return this.generateAuthenticatedInstance(v1.Carts)
+  }
 }
 
 export class Tillhub extends TillhubClient {
