@@ -279,6 +279,11 @@ export declare class TillhubClient extends events.EventEmitter {
      *
      */
     processes(): v0.Processes;
+    /**
+     * Create an authenticated Carts instance
+     *
+     */
+    carts(): v1.Carts;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;

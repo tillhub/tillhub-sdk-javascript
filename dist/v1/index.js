@@ -15,4 +15,6 @@ var balances_1 = require("./balances");
 exports.Balances = balances_1.Balances;
 var vouchers_1 = require("./vouchers");
 exports.Vouchers = vouchers_1.Vouchers;
+var carts_1 = require("./carts");
+exports.Carts = carts_1.Carts;
 //# sourceMappingURL=index.js.map
