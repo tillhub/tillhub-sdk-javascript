@@ -1,3 +1,10 @@
+## [3.119.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.119.0...v3.119.1) (2019-08-22)
+
+
+### Bug Fixes
+
+* remove serialise error ([e619d6b](https://github.com/tillhub/tillhub-sdk-javascript/commit/e619d6b))
+
 # [3.119.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.118.1...v3.119.0) (2019-08-21)
 
 
