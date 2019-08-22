@@ -1,4 +1,3 @@
-import serializeError from 'serialize-error'
 
 export class BaseError extends Error {
   public properties?: any
@@ -7,10 +6,6 @@ export class BaseError extends Error {
   constructor(message: string, properties?: any) {
     super()
     this.message = message
-
-    if (properties && properties.error && (properties.error instanceof Error)) {
-      properties.error = serializeError(properties.error)
-    }
 
     this.properties = properties
 
