@@ -1,3 +1,10 @@
+# [3.120.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.119.1...v3.120.0) (2019-08-22)
+
+
+### Features
+
+* **processes:** add format query option ([5fea05a](https://github.com/tillhub/tillhub-sdk-javascript/commit/5fea05a))
+
 ## [3.119.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.119.0...v3.119.1) (2019-08-22)
 
 

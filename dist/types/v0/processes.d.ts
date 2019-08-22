@@ -10,6 +10,7 @@ export interface ProcessesQueryOptions {
     read?: boolean;
     ignored?: boolean;
     min_updated_at?: string;
+    format?: string;
 }
 export interface ProcessesResponse {
     data: Process[];
