@@ -34,6 +34,7 @@ export interface GobdQuery {
   tz?: string
   password?: string
   emails?: string[]
+  client_name: string
 }
 
 export interface GobdQueryOrOptions {
