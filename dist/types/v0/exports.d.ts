@@ -21,6 +21,22 @@ export interface DatevQuery {
     password?: string;
     emails?: string[];
 }
+export interface GobdQuery {
+    start: string;
+    end: string;
+    tz?: string;
+    password?: string;
+    emails?: string[];
+    client_name: string;
+}
+export interface GobdQueryOrOptions {
+    limit?: number;
+    uri?: string;
+    query?: {
+        embed?: string[];
+        tz?: string;
+    };
+}
 export interface ExportsResponse {
     data: {
         uri: string;
@@ -34,5 +50,6 @@ export declare class Exports {
     options: ExportsOptions;
     uriHelper: UriHelper;
     constructor(options: ExportsOptions, http: Client);
-    datev(dateQuery: DatevQuery, queryOrOptions: ExportsQueryOrOptions): Promise<ExportsResponse>;
+    datev(datevQuery: DatevQuery, queryOrOptions: ExportsQueryOrOptions): Promise<ExportsResponse>;
+    gobd(gobdQuery: GobdQuery, queryOrOptions: GobdQueryOrOptions): Promise<ExportsResponse>;
 }

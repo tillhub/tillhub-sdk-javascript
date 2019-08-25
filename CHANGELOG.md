@@ -1,3 +1,15 @@
+# [3.121.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.120.0...v3.121.0) (2019-08-25)
+
+
+### Bug Fixes
+
+* **exports:** add missing query prop ([6c9ae8e](https://github.com/tillhub/tillhub-sdk-javascript/commit/6c9ae8e))
+
+
+### Features
+
+* **exports:** add gobd ([78e268b](https://github.com/tillhub/tillhub-sdk-javascript/commit/78e268b))
+
 # [3.120.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.119.1...v3.120.0) (2019-08-22)
 
 

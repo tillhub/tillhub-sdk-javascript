@@ -58,7 +58,7 @@ var Exports = /** @class */ (function () {
         this.options.base = this.options.base || 'https://api.tillhub.com';
         this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
     }
-    Exports.prototype.datev = function (dateQuery, queryOrOptions) {
+    Exports.prototype.datev = function (datevQuery, queryOrOptions) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var base, uri, response, error_1;
@@ -68,11 +68,11 @@ var Exports = /** @class */ (function () {
                         _a.trys.push([0, 2, , 3]);
                         base = this.options.base + "/" + this.endpoint + "/datev";
                         uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions);
-                        return [4 /*yield*/, this.http.getClient().post(uri, dateQuery)];
+                        return [4 /*yield*/, this.http.getClient().post(uri, datevQuery)];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new ExportFetchFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new ExportsDatevFetchFailed(undefined, { status: response.status }))];
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
@@ -80,7 +80,35 @@ var Exports = /** @class */ (function () {
                             })];
                     case 2:
                         error_1 = _a.sent();
-                        return [2 /*return*/, reject(new ExportFetchFailed(undefined, { error: error_1 }))];
+                        return [2 /*return*/, reject(new ExportsDatevFetchFailed(undefined, { error: error_1 }))];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Exports.prototype.gobd = function (gobdQuery, queryOrOptions) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var base, uri, response, error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.options.base + "/" + this.endpoint + "/gobd";
+                        uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions);
+                        return [4 /*yield*/, this.http.getClient().post(uri, gobdQuery)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new ExportsGobdFetchFailed(undefined, { status: response.status }))];
+                        }
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: {}
+                            })];
+                    case 2:
+                        error_2 = _a.sent();
+                        return [2 /*return*/, reject(new ExportsGobdFetchFailed(undefined, { error: error_2 }))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -89,15 +117,26 @@ var Exports = /** @class */ (function () {
     return Exports;
 }());
 exports.Exports = Exports;
-var ExportFetchFailed = /** @class */ (function (_super) {
-    __extends(ExportFetchFailed, _super);
-    function ExportFetchFailed(message, properties) {
-        if (message === void 0) { message = 'Could not fetch warehouses'; }
+var ExportsDatevFetchFailed = /** @class */ (function (_super) {
+    __extends(ExportsDatevFetchFailed, _super);
+    function ExportsDatevFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch datev export'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ExportFetchFailed';
         return _this;
     }
-    return ExportFetchFailed;
+    return ExportsDatevFetchFailed;
+}(baseError_1.BaseError));
+var ExportsGobdFetchFailed = /** @class */ (function (_super) {
+    __extends(ExportsGobdFetchFailed, _super);
+    function ExportsGobdFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch gobd export'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ExportsGobdFetchFailed';
+        return _this;
+    }
+    return ExportsGobdFetchFailed;
 }(baseError_1.BaseError));
 //# sourceMappingURL=exports.js.map
