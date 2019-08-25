@@ -28,6 +28,23 @@ export interface DatevQuery {
   emails?: string[]
 }
 
+export interface GobdQuery {
+  start: string
+  end: string
+  tz?: string
+  password?: string
+  emails?: string[]
+}
+
+export interface GobdQueryOrOptions {
+  limit?: number
+  uri?: string
+  query?: {
+    embed?: string[]
+    tz?: string
+  }
+}
+
 export interface ExportsResponse {
   data: {
     uri: string
@@ -51,15 +68,15 @@ export class Exports {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  datev(dateQuery: DatevQuery, queryOrOptions: ExportsQueryOrOptions): Promise<ExportsResponse> {
+  datev(datevQuery: DatevQuery, queryOrOptions: ExportsQueryOrOptions): Promise<ExportsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const base = `${this.options.base}/${this.endpoint}/datev`
         const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
 
-        const response = await this.http.getClient().post(uri, dateQuery)
+        const response = await this.http.getClient().post(uri, datevQuery)
         if (response.status !== 200) {
-          return reject(new ExportFetchFailed(undefined, { status: response.status }))
+          return reject(new ExportsDatevFetchFailed(undefined, { status: response.status }))
         }
 
         return resolve({
@@ -67,15 +84,43 @@ export class Exports {
           metadata: {}
         } as ExportsResponse)
       } catch (error) {
-        return reject(new ExportFetchFailed(undefined, { error }))
+        return reject(new ExportsDatevFetchFailed(undefined, { error }))
+      }
+    })
+  }
+
+  gobd(gobdQuery: GobdQuery, queryOrOptions: GobdQueryOrOptions): Promise<ExportsResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const base = `${this.options.base}/${this.endpoint}/gobd`
+        const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
+
+        const response = await this.http.getClient().post(uri, gobdQuery)
+        if (response.status !== 200) {
+          return reject(new ExportsGobdFetchFailed(undefined, { status: response.status }))
+        }
+
+        return resolve({
+          data: response.data.results,
+          metadata: {}
+        } as ExportsResponse)
+      } catch (error) {
+        return reject(new ExportsGobdFetchFailed(undefined, { error }))
       }
     })
   }
 }
 
-class ExportFetchFailed extends BaseError {
+class ExportsDatevFetchFailed extends BaseError {
   public name = 'ExportFetchFailed'
-  constructor(public message: string = 'Could not fetch warehouses', properties?: any) {
+  constructor(public message: string = 'Could not fetch datev export', properties?: any) {
+    super(message, properties)
+  }
+}
+
+class ExportsGobdFetchFailed extends BaseError {
+  public name = 'ExportsGobdFetchFailed'
+  constructor(public message: string = 'Could not fetch gobd export', properties?: any) {
     super(message, properties)
   }
 }
