@@ -72,7 +72,7 @@ export class Exports {
   datev(datevQuery: DatevQuery, queryOrOptions: ExportsQueryOrOptions): Promise<ExportsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const base = `${this.options.base}/${this.endpoint}/datev`
+        const base = `${this.options.base}${this.endpoint}/${this.options.user}/datev`
         const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
 
         const response = await this.http.getClient().post(uri, datevQuery)
@@ -93,7 +93,7 @@ export class Exports {
   gobd(gobdQuery: GobdQuery, queryOrOptions: GobdQueryOrOptions): Promise<ExportsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const base = `${this.options.base}/${this.endpoint}/gobd`
+        const base = `${this.options.base}${this.endpoint}/${this.options.user}/gobd`
         const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
 
         const response = await this.http.getClient().post(uri, gobdQuery)
@@ -113,7 +113,7 @@ export class Exports {
 }
 
 class ExportsDatevFetchFailed extends BaseError {
-  public name = 'ExportFetchFailed'
+  public name = 'ExportsDatevFetchFailed'
   constructor(public message: string = 'Could not fetch datev export', properties?: any) {
     super(message, properties)
   }
