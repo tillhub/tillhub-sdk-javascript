@@ -1,3 +1,10 @@
+## [3.121.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.121.0...v3.121.1) (2019-08-26)
+
+
+### Bug Fixes
+
+* **exports:** use correct base path ([0c42821](https://github.com/tillhub/tillhub-sdk-javascript/commit/0c42821))
+
 # [3.121.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.120.0...v3.121.0) (2019-08-25)
 
 

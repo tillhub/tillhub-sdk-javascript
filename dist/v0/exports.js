@@ -66,7 +66,7 @@ var Exports = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        base = this.options.base + "/" + this.endpoint + "/datev";
+                        base = "" + this.options.base + this.endpoint + "/" + this.options.user + "/datev";
                         uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions);
                         return [4 /*yield*/, this.http.getClient().post(uri, datevQuery)];
                     case 1:
@@ -94,7 +94,7 @@ var Exports = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        base = this.options.base + "/" + this.endpoint + "/gobd";
+                        base = "" + this.options.base + this.endpoint + "/" + this.options.user + "/gobd";
                         uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions);
                         return [4 /*yield*/, this.http.getClient().post(uri, gobdQuery)];
                     case 1:
@@ -123,7 +123,7 @@ var ExportsDatevFetchFailed = /** @class */ (function (_super) {
         if (message === void 0) { message = 'Could not fetch datev export'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
-        _this.name = 'ExportFetchFailed';
+        _this.name = 'ExportsDatevFetchFailed';
         return _this;
     }
     return ExportsDatevFetchFailed;
