@@ -164,6 +164,32 @@ var Processes = /** @class */ (function (_super) {
             });
         }); });
     };
+    Processes.prototype.getItems = function (processId, query) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var baseUri, uri, response, error_5;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        baseUri = this.uriHelper.generateBaseUri("/" + processId + "/items");
+                        uri = this.uriHelper.generateUriWithQuery(baseUri, query);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        response.status !== 200 && reject(new ProcessItemsFetchFailed(undefined, { state: response.status }));
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            })];
+                    case 2:
+                        error_5 = _a.sent();
+                        return [2 /*return*/, reject(new ProcessItemsFetchFailed(undefined, { error: error_5 }))];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     Processes.baseEndpoint = '/api/v0/processes';
     return Processes;
 }(base_1.ThBaseHandler));
@@ -228,4 +254,16 @@ var ProcessesDeleteFailed = /** @class */ (function (_super) {
     return ProcessesDeleteFailed;
 }(errors_1.BaseError));
 exports.ProcessesDeleteFailed = ProcessesDeleteFailed;
+var ProcessItemsFetchFailed = /** @class */ (function (_super) {
+    __extends(ProcessItemsFetchFailed, _super);
+    function ProcessItemsFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch one process\' items'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProcessItemsFetchFailed';
+        return _this;
+    }
+    return ProcessItemsFetchFailed;
+}(errors_1.BaseError));
+exports.ProcessItemsFetchFailed = ProcessItemsFetchFailed;
 //# sourceMappingURL=processes.js.map

@@ -12,6 +12,9 @@ export interface ProcessesQueryOptions {
     min_updated_at?: string;
     format?: string;
 }
+export interface ProcessItemsQueryOptions {
+    format?: string;
+}
 export interface ProcessesResponse {
     data: Process[];
     metadata: object;
@@ -20,17 +23,23 @@ export interface ProcessResponse {
     data: Process;
     metadata: object;
 }
+export interface ProcessItemsObject {
+    code: string;
+    amount: number;
+}
+export interface ProcessItems {
+    items: ProcessItemsObject[];
+}
+export interface ProcessesItemsResponse {
+    data: ProcessItems;
+    metadata: object;
+}
 export interface Process {
     started_at?: string;
     finished_at?: string;
     assigned_staff?: string;
     status?: string;
-    result?: object | {
-        items: {
-            code: string;
-            amount: number;
-        }[];
-    };
+    result?: object | ProcessItemsObject;
 }
 export declare class Processes extends ThBaseHandler {
     static baseEndpoint: string;
@@ -43,6 +52,7 @@ export declare class Processes extends ThBaseHandler {
     getAll(query?: ProcessesQueryOptions): Promise<ProcessesResponse>;
     get(processId: string, query?: ProcessesQueryOptions): Promise<ProcessResponse>;
     update(processId: string, process: Process): Promise<ProcessResponse>;
+    getItems(processId: string, query?: ProcessItemsQueryOptions): Promise<ProcessesItemsResponse>;
 }
 export declare class ProcessesFetchFailed extends BaseError {
     message: string;
@@ -65,6 +75,11 @@ export declare class ProcessesCreationFailed extends BaseError {
     constructor(message?: string, properties?: any);
 }
 export declare class ProcessesDeleteFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ProcessItemsFetchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);

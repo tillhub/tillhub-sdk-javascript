@@ -1,3 +1,10 @@
+# [3.122.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.121.1...v3.122.0) (2019-08-26)
+
+
+### Features
+
+* **processes:** add handler to get one process' items ([dbcd6ca](https://github.com/tillhub/tillhub-sdk-javascript/commit/dbcd6ca))
+
 ## [3.121.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.121.0...v3.121.1) (2019-08-26)
 
 
