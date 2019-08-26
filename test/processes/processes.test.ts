@@ -9,7 +9,9 @@ import { Processes,
   ProcessesFetchOneFailed,
   ProcessesCreationFailed,
   ProcessesUpdateFailed,
-  ProcessesDeleteFailed
+  ProcessesDeleteFailed,
+  ProcessItems,
+  ProcessItemsFetchFailed
 } from '../../src/v0/processes'
 
 let user = {
@@ -243,6 +245,58 @@ describe('v0: Processes', () => {
 
     const { data } = await processes.update(processId, mockProcess)
     expect(data).toEqual(mockProcess)
+  })
+
+  it('gets process items', async () => {
+    const mockItems = { items: [{ code: '1234', amount: 4 }] } as ProcessItems
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+
+      mock
+        .onGet(`https://api.tillhub.com/api/v0/processes/${legacyId}/${processId}/items`)
+        .reply((config) => {
+          return [
+            200,
+            {
+              count: 1,
+              results: [mockItems]
+            }
+          ]
+        })
+    }
+
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE
+    }
+
+    const th = new TillhubClient()
+
+    th.init(options)
+    await th.auth.loginUsername({
+      username: user.username,
+      password: user.password
+    })
+
+    const processes = th.processes()
+    expect(processes).toBeInstanceOf(Processes)
+
+    const { data } = await processes.getItems(processId)
+    expect(data).toEqual(mockItems)
   })
 
   // it('deletes one process', async () => {
@@ -484,6 +538,54 @@ describe('v0: Processes', () => {
       fail('should throw an error')
     } catch (e) {
       expect(e.name).toEqual(ProcessesUpdateFailed.name)
+    }
+  })
+
+  it('rejects getItems() if status code is not 200', async () => {
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+
+      mock
+        .onGet(`https://api.tillhub.com/api/v0/processes/${legacyId}/${processId}/items`)
+        .reply(function (config) {
+          return [
+            205
+          ]
+        })
+    }
+
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE
+    }
+
+    const th = new TillhubClient()
+
+    th.init(options)
+    await th.auth.loginUsername({
+      username: user.username,
+      password: user.password
+    })
+
+    try {
+      await th.processes().getItems(processId)
+      fail('should throw an error')
+    } catch (e) {
+      expect(e.name).toEqual(ProcessItemsFetchFailed.name)
     }
   })
 

@@ -15,6 +15,10 @@ export interface ProcessesQueryOptions {
   format?: string
 }
 
+export interface ProcessItemsQueryOptions {
+  format?: string
+}
+
 export interface ProcessesResponse {
   data: Process[]
   metadata: object
@@ -25,17 +29,26 @@ export interface ProcessResponse {
   metadata: object
 }
 
+export interface ProcessItemsObject {
+  code: string,
+  amount: number
+}
+
+export interface ProcessItems {
+  items: ProcessItemsObject[]
+}
+
+export interface ProcessesItemsResponse {
+  data: ProcessItems
+  metadata: object
+}
+
 export interface Process {
   started_at?: string
   finished_at?: string
   assigned_staff?: string
   status?: string
-  result?: object | {
-    items: {
-      code: string,
-      amount: number
-    }[]
-  }
+  result?: object | ProcessItemsObject
 }
 
 export class Processes extends ThBaseHandler {
@@ -128,6 +141,25 @@ export class Processes extends ThBaseHandler {
       }
     })
   }
+
+  getItems(processId: string, query?: ProcessItemsQueryOptions): Promise<ProcessesItemsResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const baseUri = this.uriHelper.generateBaseUri(`/${processId}/items`)
+        const uri = this.uriHelper.generateUriWithQuery(baseUri, query)
+
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new ProcessItemsFetchFailed(undefined, { state: response.status }))
+
+        return resolve({
+          data: response.data.results[0] as ProcessItems,
+          metadata: { count: response.data.count }
+        } as ProcessesItemsResponse)
+      } catch (error) {
+        return reject(new ProcessItemsFetchFailed(undefined, { error }))
+      }
+    })
+  }
 }
 
 export class ProcessesFetchFailed extends BaseError {
@@ -161,6 +193,13 @@ export class ProcessesCreationFailed extends BaseError {
 export class ProcessesDeleteFailed extends BaseError {
   public name = 'ProcessesDeleteFailed'
   constructor(public message: string = 'Could not delete process', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ProcessItemsFetchFailed extends BaseError {
+  public name = 'ProcessItemsFetchFailed'
+  constructor(public message: string = 'Could not fetch one process\' items', properties?: any) {
     super(message, properties)
   }
 }
