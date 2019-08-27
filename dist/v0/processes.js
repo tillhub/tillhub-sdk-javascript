@@ -179,7 +179,7 @@ var Processes = /** @class */ (function (_super) {
                         response = _a.sent();
                         response.status !== 200 && reject(new ProcessItemsFetchFailed(undefined, { state: response.status }));
                         return [2 /*return*/, resolve({
-                                data: response.data.results[0],
+                                data: response.data.results,
                                 metadata: { count: response.data.count }
                             })];
                     case 2:

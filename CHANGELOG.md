@@ -1,3 +1,11 @@
+## [3.122.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.122.0...v3.122.1) (2019-08-27)
+
+
+### Bug Fixes
+
+* **processes:** fix test ([5e5a0d9](https://github.com/tillhub/tillhub-sdk-javascript/commit/5e5a0d9))
+* **processes:** treat results as object instead array ([ae48051](https://github.com/tillhub/tillhub-sdk-javascript/commit/ae48051))
+
 # [3.122.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.121.1...v3.122.0) (2019-08-26)
 
 
