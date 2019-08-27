@@ -270,7 +270,7 @@ describe('v0: Processes', () => {
             200,
             {
               count: 1,
-              results: [mockItems]
+              results: mockItems
             }
           ]
         })
