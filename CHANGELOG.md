@@ -1,3 +1,10 @@
+# [3.123.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.122.1...v3.123.0) (2019-08-27)
+
+
+### Features
+
+* **proceses:** add name property ([3d05a0b](https://github.com/tillhub/tillhub-sdk-javascript/commit/3d05a0b))
+
 ## [3.122.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.122.0...v3.122.1) (2019-08-27)
 
 

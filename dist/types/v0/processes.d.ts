@@ -39,6 +39,7 @@ export interface Process {
     finished_at?: string;
     assigned_staff?: string;
     status?: string;
+    name?: string;
     result?: object | ProcessItemsObject;
 }
 export declare class Processes extends ThBaseHandler {
