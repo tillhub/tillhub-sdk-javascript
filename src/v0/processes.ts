@@ -152,7 +152,7 @@ export class Processes extends ThBaseHandler {
         response.status !== 200 && reject(new ProcessItemsFetchFailed(undefined, { state: response.status }))
 
         return resolve({
-          data: response.data.results[0] as ProcessItems,
+          data: response.data.results as ProcessItems,
           metadata: { count: response.data.count }
         } as ProcessesItemsResponse)
       } catch (error) {
