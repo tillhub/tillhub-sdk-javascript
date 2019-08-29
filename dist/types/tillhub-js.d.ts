@@ -255,6 +255,11 @@ export declare class TillhubClient extends events.EventEmitter {
      */
     exports(): v0.Exports;
     /**
+     * Create an authenticated Promotions instance
+     *
+     */
+    promotions(): v0.Promotions;
+    /**
      * Create an authenticated ProductServiceQuestionGroups instance
      *
      */

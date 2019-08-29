@@ -84,4 +84,6 @@ var me_1 = require("./me");
 exports.Me = me_1.Me;
 var processes_1 = require("./processes");
 exports.Processes = processes_1.Processes;
+var promotions_1 = require("./promotions");
+exports.Promotions = promotions_1.Promotions;
 //# sourceMappingURL=index.js.map

@@ -1,3 +1,15 @@
+# [3.124.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.123.0...v3.124.0) (2019-08-29)
+
+
+### Bug Fixes
+
+* **promotions:** handle linux filename correctly ([22d13ce](https://github.com/tillhub/tillhub-sdk-javascript/commit/22d13ce))
+
+
+### Features
+
+* add promotions ([d95c2c0](https://github.com/tillhub/tillhub-sdk-javascript/commit/d95c2c0))
+
 # [3.123.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.122.1...v3.123.0) (2019-08-27)
 
 
