@@ -39,7 +39,7 @@ import { ProductServiceQuestions } from './product_service_questions'
 import { Reasons } from './reasons'
 import { Me } from './me'
 import { Processes } from './processes'
-import { Promotions } from './Promotions'
+import { Promotions } from './promotions'
 
 export {
   Auth,
