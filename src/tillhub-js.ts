@@ -638,6 +638,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated Promotions instance
+   *
+   */
+  promotions(): v0.Promotions {
+    return this.generateAuthenticatedInstance(v0.Promotions)
+  }
+
+  /**
    * Create an authenticated ProductServiceQuestionGroups instance
    *
    */
