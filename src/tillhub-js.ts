@@ -287,6 +287,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated contents templates instance
+   *
+   */
+  contentsTemplates(): v0.ContentsTemplates {
+    return this.generateAuthenticatedInstance(v0.ContentsTemplates)
+  }
+
+  /**
    * Create an authenticated discounts instance
    *
    */
