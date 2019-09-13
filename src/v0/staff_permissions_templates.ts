@@ -22,7 +22,6 @@ export interface StaffPermissionsTemplateResponse {
 }
 
 export interface StaffPermissionsTemplate {
-  status?: string
   name?: string
   scopes?: string[]
   deleted?: boolean
