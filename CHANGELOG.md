@@ -1,3 +1,10 @@
+## [3.126.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.126.0...v3.126.1) (2019-09-13)
+
+
+### Bug Fixes
+
+* **staff-permissions-templates:** change patch to put ([a88d79e](https://github.com/tillhub/tillhub-sdk-javascript/commit/a88d79e))
+
 # [3.126.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.125.0...v3.126.0) (2019-09-13)
 
 

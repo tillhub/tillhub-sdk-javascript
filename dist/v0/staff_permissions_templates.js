@@ -160,7 +160,7 @@ var StaffPermissionsTemplates = /** @class */ (function (_super) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         uri = this.uriHelper.generateBaseUri("/" + templateId);
-                        return [4 /*yield*/, this.http.getClient().patch(uri, template)];
+                        return [4 /*yield*/, this.http.getClient().put(uri, template)];
                     case 1:
                         response = _a.sent();
                         response.status !== 200 &&
