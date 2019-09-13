@@ -692,6 +692,14 @@ export class TillhubClient extends events.EventEmitter {
   carts(): v1.Carts {
     return this.generateAuthenticatedInstance(v1.Carts)
   }
+
+  /**
+   * Create an authenticated StaffPermissionsTemplates instance
+   *
+   */
+  staffPermissionsTemplates(): v0.StaffPermissionsTemplates {
+    return this.generateAuthenticatedInstance(v0.StaffPermissionsTemplates)
+  }
 }
 
 export class Tillhub extends TillhubClient {

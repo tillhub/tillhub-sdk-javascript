@@ -40,6 +40,7 @@ import { Reasons } from './reasons'
 import { Me } from './me'
 import { Processes } from './processes'
 import { Promotions } from './promotions'
+import { StaffPermissionsTemplates } from './staff_permissions_templates'
 
 export {
   Auth,
@@ -85,5 +86,6 @@ export {
   Reasons,
   Me,
   Processes,
-  Promotions
+  Promotions,
+  StaffPermissionsTemplates
 }
