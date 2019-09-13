@@ -11,6 +11,7 @@ import { Users } from './users'
 import { Branches } from './branches'
 import { Devices } from './devices'
 import { Contents } from './contents'
+import { ContentsTemplates } from './contents_templates'
 import { Customers } from './customers'
 import { Vouchers, VoucherLogs } from './vouchers'
 import { Invoices } from './invoices'
@@ -55,6 +56,7 @@ export {
   Branches,
   Devices,
   Contents,
+  ContentsTemplates,
   Customers,
   Discounts,
   Vouchers,
