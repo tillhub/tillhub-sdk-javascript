@@ -1,3 +1,10 @@
+# [3.125.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.124.0...v3.125.0) (2019-09-13)
+
+
+### Features
+
+* **contents_templates:** add new handlers for new resource ([6e36378](https://github.com/tillhub/tillhub-sdk-javascript/commit/6e36378))
+
 # [3.124.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.123.0...v3.124.0) (2019-08-29)
 
 
