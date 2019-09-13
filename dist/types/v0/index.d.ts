@@ -41,4 +41,5 @@ import { Reasons } from './reasons';
 import { Me } from './me';
 import { Processes } from './processes';
 import { Promotions } from './promotions';
-export { Auth, Taxes, Deliveries, ProductGroups, ProductTemplates, Accounts, ExpenseAccounts, PaymentOptions, Configurations, Users, Branches, Devices, Contents, ContentsTemplates, Customers, Discounts, Vouchers, VoucherLogs, Invoices, Stocks, StocksBook, Orders, Analytics, Staff, AuditActions, AuditLogs, Images, Notifications, Print, Messages, Favourites, LegacySettings, Tags, Safes, Warehouses, Videos, StaffGroups, Exports, ProductServiceQuestionGroups, ProductServiceQuestions, Data, Reasons, Me, Processes, Promotions };
+import { StaffPermissionsTemplates } from './staff_permissions_templates';
+export { Auth, Taxes, Deliveries, ProductGroups, ProductTemplates, Accounts, ExpenseAccounts, PaymentOptions, Configurations, Users, Branches, Devices, Contents, ContentsTemplates, Customers, Discounts, Vouchers, VoucherLogs, Invoices, Stocks, StocksBook, Orders, Analytics, Staff, AuditActions, AuditLogs, Images, Notifications, Print, Messages, Favourites, LegacySettings, Tags, Safes, Warehouses, Videos, StaffGroups, Exports, ProductServiceQuestionGroups, ProductServiceQuestions, Data, Reasons, Me, Processes, Promotions, StaffPermissionsTemplates };

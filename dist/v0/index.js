@@ -88,4 +88,6 @@ var processes_1 = require("./processes");
 exports.Processes = processes_1.Processes;
 var promotions_1 = require("./promotions");
 exports.Promotions = promotions_1.Promotions;
+var staff_permissions_templates_1 = require("./staff_permissions_templates");
+exports.StaffPermissionsTemplates = staff_permissions_templates_1.StaffPermissionsTemplates;
 //# sourceMappingURL=index.js.map

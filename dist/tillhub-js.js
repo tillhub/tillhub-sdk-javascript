@@ -587,6 +587,13 @@ var TillhubClient = /** @class */ (function (_super) {
     TillhubClient.prototype.carts = function () {
         return this.generateAuthenticatedInstance(v1.Carts);
     };
+    /**
+     * Create an authenticated StaffPermissionsTemplates instance
+     *
+     */
+    TillhubClient.prototype.staffPermissionsTemplates = function () {
+        return this.generateAuthenticatedInstance(v0.StaffPermissionsTemplates);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));

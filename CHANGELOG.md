@@ -1,3 +1,15 @@
+# [3.126.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.125.0...v3.126.0) (2019-09-13)
+
+
+### Bug Fixes
+
+* **staff-permissions-templates:** remove status prop ([9a80c00](https://github.com/tillhub/tillhub-sdk-javascript/commit/9a80c00))
+
+
+### Features
+
+* **staff-permissions-templates:** add handler ([cdc92dd](https://github.com/tillhub/tillhub-sdk-javascript/commit/cdc92dd))
+
 # [3.125.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.124.0...v3.125.0) (2019-09-13)
 
 
