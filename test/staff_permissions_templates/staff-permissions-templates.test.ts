@@ -175,7 +175,7 @@ describe('v0: StaffPermissionsTemplates', () => {
         })
 
       mock
-        .onPatch(
+        .onPut(
           `https://api.tillhub.com/api/v0/staff_permission_templates/${legacyId}/${templateId}`
         )
         .reply(config => {

@@ -140,7 +140,7 @@ export class StaffPermissionsTemplates extends ThBaseHandler {
       try {
         const uri = this.uriHelper.generateBaseUri(`/${templateId}`)
 
-        const response = await this.http.getClient().patch(uri, template)
+        const response = await this.http.getClient().put(uri, template)
         response.status !== 200 &&
           reject(
             new StaffPermissionsTemplatesUpdateFailed(undefined, {
