@@ -66,18 +66,18 @@ var qs_1 = __importDefault(require("qs"));
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
-var ContentsTemplates = /** @class */ (function (_super) {
-    __extends(ContentsTemplates, _super);
-    function ContentsTemplates(options, http) {
-        var _this = _super.call(this, http, { endpoint: ContentsTemplates.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+var ContentTemplates = /** @class */ (function (_super) {
+    __extends(ContentTemplates, _super);
+    function ContentTemplates(options, http) {
+        var _this = _super.call(this, http, { endpoint: ContentTemplates.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
         _this.options = options;
         _this.http = http;
-        _this.endpoint = ContentsTemplates.baseEndpoint;
+        _this.endpoint = ContentTemplates.baseEndpoint;
         _this.options.base = _this.options.base || 'https://api.tillhub.com';
         _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
         return _this;
     }
-    ContentsTemplates.prototype.getAll = function (queryOrOptions) {
+    ContentTemplates.prototype.getAll = function (queryOrOptions) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var next, uri, queryString, response_1, error_1;
@@ -101,7 +101,7 @@ var ContentsTemplates = /** @class */ (function (_super) {
                     case 1:
                         response_1 = _a.sent();
                         if (response_1.status !== 200) {
-                            return [2 /*return*/, reject(new ContentsTemplatesFetchFailed(undefined, { status: response_1.status }))];
+                            return [2 /*return*/, reject(new ContentTemplatesFetchFailed(undefined, { status: response_1.status }))];
                         }
                         if (response_1.data.cursor && response_1.data.cursor.next) {
                             next = function () { return _this.getAll({ uri: response_1.data.cursor.next }); };
@@ -113,13 +113,13 @@ var ContentsTemplates = /** @class */ (function (_super) {
                             })];
                     case 2:
                         error_1 = _a.sent();
-                        return [2 /*return*/, reject(new ContentsTemplatesFetchFailed(undefined, { error: error_1 }))];
+                        return [2 /*return*/, reject(new ContentTemplatesFetchFailed(undefined, { error: error_1 }))];
                     case 3: return [2 /*return*/];
                 }
             });
         }); });
     };
-    ContentsTemplates.prototype.get = function (templateId) {
+    ContentTemplates.prototype.get = function (templateId) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, error_2;
@@ -148,7 +148,7 @@ var ContentsTemplates = /** @class */ (function (_super) {
             });
         }); });
     };
-    ContentsTemplates.prototype.search = function (searchTerm) {
+    ContentTemplates.prototype.search = function (searchTerm) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, error_3;
@@ -163,7 +163,7 @@ var ContentsTemplates = /** @class */ (function (_super) {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new ContentsTemplatesSearchFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new ContentTemplatesSearchFailed(undefined, { status: response.status }))];
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
@@ -171,13 +171,13 @@ var ContentsTemplates = /** @class */ (function (_super) {
                             })];
                     case 3:
                         error_3 = _a.sent();
-                        return [2 /*return*/, reject(new ContentsTemplatesSearchFailed(undefined, { error: error_3 }))];
+                        return [2 /*return*/, reject(new ContentTemplatesSearchFailed(undefined, { error: error_3 }))];
                     case 4: return [2 /*return*/];
                 }
             });
         }); });
     };
-    ContentsTemplates.prototype.patch = function (templateId, content) {
+    ContentTemplates.prototype.patch = function (templateId, content) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, error_4;
@@ -203,7 +203,7 @@ var ContentsTemplates = /** @class */ (function (_super) {
             });
         }); });
     };
-    ContentsTemplates.prototype.create = function (content) {
+    ContentTemplates.prototype.create = function (content) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, error_5;
@@ -229,7 +229,7 @@ var ContentsTemplates = /** @class */ (function (_super) {
             });
         }); });
     };
-    ContentsTemplates.prototype.delete = function (templateId) {
+    ContentTemplates.prototype.delete = function (templateId) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, err_1;
@@ -256,22 +256,22 @@ var ContentsTemplates = /** @class */ (function (_super) {
             });
         }); });
     };
-    ContentsTemplates.baseEndpoint = '/api/v0/contents_templates';
-    return ContentsTemplates;
+    ContentTemplates.baseEndpoint = '/api/v0/content_templates';
+    return ContentTemplates;
 }(base_1.ThBaseHandler));
-exports.ContentsTemplates = ContentsTemplates;
-var ContentsTemplatesFetchFailed = /** @class */ (function (_super) {
-    __extends(ContentsTemplatesFetchFailed, _super);
-    function ContentsTemplatesFetchFailed(message, properties) {
-        if (message === void 0) { message = 'Could not fetch contents templates'; }
+exports.ContentTemplates = ContentTemplates;
+var ContentTemplatesFetchFailed = /** @class */ (function (_super) {
+    __extends(ContentTemplatesFetchFailed, _super);
+    function ContentTemplatesFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch content templates'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
-        _this.name = 'ContentsTemplatesFetchFailed';
+        _this.name = 'ContentTemplatesFetchFailed';
         return _this;
     }
-    return ContentsTemplatesFetchFailed;
+    return ContentTemplatesFetchFailed;
 }(errors_1.BaseError));
-exports.ContentsTemplatesFetchFailed = ContentsTemplatesFetchFailed;
+exports.ContentTemplatesFetchFailed = ContentTemplatesFetchFailed;
 var ContentTemplateFetchFailed = /** @class */ (function (_super) {
     __extends(ContentTemplateFetchFailed, _super);
     function ContentTemplateFetchFailed(message, properties) {
@@ -320,16 +320,16 @@ var ContentTemplateDeleteFailed = /** @class */ (function (_super) {
     return ContentTemplateDeleteFailed;
 }(errors_1.BaseError));
 exports.ContentTemplateDeleteFailed = ContentTemplateDeleteFailed;
-var ContentsTemplatesSearchFailed = /** @class */ (function (_super) {
-    __extends(ContentsTemplatesSearchFailed, _super);
-    function ContentsTemplatesSearchFailed(message, properties) {
-        if (message === void 0) { message = 'Could not search contents templates'; }
+var ContentTemplatesSearchFailed = /** @class */ (function (_super) {
+    __extends(ContentTemplatesSearchFailed, _super);
+    function ContentTemplatesSearchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not search content templates'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
-        _this.name = 'ContentsTemplatesSearchFailed';
+        _this.name = 'ContentTemplatesSearchFailed';
         return _this;
     }
-    return ContentsTemplatesSearchFailed;
+    return ContentTemplatesSearchFailed;
 }(errors_1.BaseError));
-exports.ContentsTemplatesSearchFailed = ContentsTemplatesSearchFailed;
-//# sourceMappingURL=contents_templates.js.map
+exports.ContentTemplatesSearchFailed = ContentTemplatesSearchFailed;
+//# sourceMappingURL=content_templates.js.map

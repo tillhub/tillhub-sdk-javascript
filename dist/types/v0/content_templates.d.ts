@@ -6,7 +6,7 @@ export interface ContentTemplatesOptions {
     user?: string;
     base?: string;
 }
-export interface ContentsTemplatesQuery {
+export interface ContentTemplatesQuery {
     limit?: number;
     uri?: string;
     query?: {
@@ -14,10 +14,10 @@ export interface ContentsTemplatesQuery {
         active?: boolean;
     };
 }
-export interface ContentsTemplatesResponse {
+export interface ContentTemplatesResponse {
     data: object[];
     metadata: object;
-    next?: () => Promise<ContentsTemplatesResponse>;
+    next?: () => Promise<ContentTemplatesResponse>;
 }
 export interface ContentTemplateResponse {
     data: ContentTemplate;
@@ -48,21 +48,21 @@ export interface Contents {
     logo?: Array<string>;
     runtime?: Array<string>;
 }
-export declare class ContentsTemplates extends ThBaseHandler {
+export declare class ContentTemplates extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
     http: Client;
     options: ContentTemplatesOptions;
     uriHelper: UriHelper;
     constructor(options: ContentTemplatesOptions, http: Client);
-    getAll(queryOrOptions?: ContentsTemplatesQuery | undefined): Promise<ContentsTemplatesResponse>;
+    getAll(queryOrOptions?: ContentTemplatesQuery | undefined): Promise<ContentTemplatesResponse>;
     get(templateId: string): Promise<ContentTemplateResponse>;
-    search(searchTerm: string): Promise<ContentsTemplatesResponse>;
+    search(searchTerm: string): Promise<ContentTemplatesResponse>;
     patch(templateId: string, content: ContentTemplate): Promise<ContentTemplateResponse>;
     create(content: ContentTemplate): Promise<ContentTemplateResponse>;
     delete(templateId: string): Promise<ContentTemplateResponse>;
 }
-export declare class ContentsTemplatesFetchFailed extends BaseError {
+export declare class ContentTemplatesFetchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);
@@ -87,7 +87,7 @@ export declare class ContentTemplateDeleteFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
-export declare class ContentsTemplatesSearchFailed extends BaseError {
+export declare class ContentTemplatesSearchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);

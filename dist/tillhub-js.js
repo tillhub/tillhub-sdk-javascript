@@ -249,8 +249,8 @@ var TillhubClient = /** @class */ (function (_super) {
      * Create an authenticated contents templates instance
      *
      */
-    TillhubClient.prototype.contentsTemplates = function () {
-        return this.generateAuthenticatedInstance(v0.ContentsTemplates);
+    TillhubClient.prototype.contentTemplates = function () {
+        return this.generateAuthenticatedInstance(v0.ContentTemplates);
     };
     /**
      * Create an authenticated discounts instance

@@ -1,3 +1,10 @@
+# [3.127.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.126.1...v3.127.0) (2019-09-16)
+
+
+### Features
+
+* **contents_templates:** rename to content_templates ([0523fa5](https://github.com/tillhub/tillhub-sdk-javascript/commit/0523fa5))
+
 ## [3.126.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.126.0...v3.126.1) (2019-09-13)
 
 
