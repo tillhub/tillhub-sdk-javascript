@@ -14,8 +14,10 @@ afterEach(() => {
 
 const templateId = 'asdf5566'
 const updateObject = {
-  deleted: true,
-  active: false
+  name: 'my template 2',
+  contents: {
+    'idle': ['477474747']
+  }
 }
 
 describe('v0: Contents Templates: can alter the templates', () => {
@@ -35,7 +37,7 @@ describe('v0: Contents Templates: can alter the templates', () => {
       })
 
       mock
-        .onPatch(`https://api.tillhub.com/api/v0/contents_templates/${legacyId}/${templateId}`)
+        .onPatch(`https://api.tillhub.com/api/v0/content_templates/${legacyId}/${templateId}`)
         .reply(function (config) {
           return [
             200,
@@ -49,11 +51,11 @@ describe('v0: Contents Templates: can alter the templates', () => {
 
     const th = await initThInstance()
 
-    const contentsTemplates = th.contentsTemplates()
+    const contentTemplates = th.contentTemplates()
 
-    expect(contentsTemplates).toBeInstanceOf(v0.ContentsTemplates)
+    expect(contentTemplates).toBeInstanceOf(v0.ContentTemplates)
 
-    const { data } = await contentsTemplates.delete(templateId)
+    const { data } = await contentTemplates.patch(templateId, updateObject)
 
     expect(data).toMatchObject(updateObject)
   })
@@ -73,7 +75,7 @@ describe('v0: Contents Templates: can alter the templates', () => {
         ]
       })
       mock
-        .onPatch(`https://api.tillhub.com/api/v0/contents_templates/${legacyId}/${templateId}`)
+        .onPatch(`https://api.tillhub.com/api/v0/content_templates/${legacyId}/${templateId}`)
         .reply(function (config) {
           return [205]
         })
@@ -82,9 +84,9 @@ describe('v0: Contents Templates: can alter the templates', () => {
     const th = await initThInstance()
 
     try {
-      await th.contentsTemplates().delete(templateId)
+      await th.contentTemplates().patch(templateId, updateObject)
     } catch (err) {
-      expect(err.name).toBe('ContentTemplateDeleteFailed')
+      expect(err.name).toBe('ContentTemplatePatchFailed')
     }
   })
 })

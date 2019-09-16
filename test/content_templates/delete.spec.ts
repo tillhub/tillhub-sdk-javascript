@@ -13,15 +13,12 @@ afterEach(() => {
 })
 
 const templateId = 'asdf5566'
-const template = {
-  name: 'my template 1',
-  contents: {
-    idle: ['129837'],
-    welcome: ['293487']
-  }
+const updateObject = {
+  deleted: true,
+  active: false
 }
 
-describe('v0: Contents Templates: can get one template', () => {
+describe('v0: Contents Templates: can alter the templates', () => {
   it("Tillhub's contents templates are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
@@ -38,13 +35,13 @@ describe('v0: Contents Templates: can get one template', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/contents_templates/${legacyId}/${templateId}`)
+        .onPatch(`https://api.tillhub.com/api/v0/content_templates/${legacyId}/${templateId}`)
         .reply(function (config) {
           return [
             200,
             {
               count: 1,
-              results: [template]
+              results: [updateObject]
             }
           ]
         })
@@ -52,13 +49,13 @@ describe('v0: Contents Templates: can get one template', () => {
 
     const th = await initThInstance()
 
-    const contentTemplates = th.contentsTemplates()
+    const contentTemplates = th.contentTemplates()
 
-    expect(contentTemplates).toBeInstanceOf(v0.ContentsTemplates)
+    expect(contentTemplates).toBeInstanceOf(v0.ContentTemplates)
 
-    const { data } = await contentTemplates.get(templateId)
+    const { data } = await contentTemplates.delete(templateId)
 
-    expect(data).toMatchObject(template)
+    expect(data).toMatchObject(updateObject)
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -75,19 +72,19 @@ describe('v0: Contents Templates: can get one template', () => {
           }
         ]
       })
-
       mock
-        .onGet(`https://api.tillhub.com/api/v0/contents_templates/${legacyId}/${templateId}`)
+        .onPatch(`https://api.tillhub.com/api/v0/content_templates/${legacyId}/${templateId}`)
         .reply(function (config) {
           return [205]
         })
     }
 
+    const th = await initThInstance()
+
     try {
-      const th = await initThInstance()
-      await th.contentsTemplates().get(templateId)
+      await th.contentTemplates().delete(templateId)
     } catch (err) {
-      expect(err.name).toBe('ContentTemplateFetchFailed')
+      expect(err.name).toBe('ContentTemplateDeleteFailed')
     }
   })
 })
