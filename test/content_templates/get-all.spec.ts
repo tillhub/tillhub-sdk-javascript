@@ -28,7 +28,7 @@ describe('v0: Contents Templates: can get all the contents templates', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/contents_templates/${legacyId}`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v0/content_templates/${legacyId}`).reply(function (config) {
         return [
           200,
           {
@@ -41,11 +41,11 @@ describe('v0: Contents Templates: can get all the contents templates', () => {
 
     const th = await initThInstance()
 
-    const contentsTemplates = th.contentsTemplates()
+    const contentTemplates = th.contentTemplates()
 
-    expect(contentsTemplates).toBeInstanceOf(v0.ContentsTemplates)
+    expect(contentTemplates).toBeInstanceOf(v0.ContentTemplates)
 
-    const { data } = await contentsTemplates.getAll()
+    const { data } = await contentTemplates.getAll()
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -65,16 +65,16 @@ describe('v0: Contents Templates: can get all the contents templates', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/contents_templates/${legacyId}`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v0/content_templates/${legacyId}`).reply(function (config) {
         return [205]
       })
     }
 
     try {
       const th = await initThInstance()
-      await th.contentsTemplates().getAll()
+      await th.contentTemplates().getAll()
     } catch (err) {
-      expect(err.name).toBe('ContentsTemplatesFetchFailed')
+      expect(err.name).toBe('ContentTemplatesFetchFailed')
     }
   })
 })

@@ -12,16 +12,17 @@ afterEach(() => {
   mock.reset()
 })
 
+const templateId = 'asdf5566'
 const template = {
   name: 'my template 1',
   contents: {
-    idle: ['92384aslkjd03'],
-    welcome: ['182736asd3']
+    idle: ['129837'],
+    welcome: ['293487']
   }
 }
 
-describe('v0: ContentsTemplates: can create a contents_template', () => {
-  it("Tillhub's contents_templates are instantiable", async () => {
+describe('v0: Contents Templates: can get one template', () => {
+  it("Tillhub's contents templates are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
@@ -36,25 +37,26 @@ describe('v0: ContentsTemplates: can create a contents_template', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/contents_templates/${legacyId}`).reply(function (config) {
-        return [
-          200,
-          {
-            count: 1,
-            results: [template],
-            errors: []
-          }
-        ]
-      })
+      mock
+        .onGet(`https://api.tillhub.com/api/v0/content_templates/${legacyId}/${templateId}`)
+        .reply(function (config) {
+          return [
+            200,
+            {
+              count: 1,
+              results: [template]
+            }
+          ]
+        })
     }
 
     const th = await initThInstance()
 
-    const ContentsTemplates = th.contentsTemplates()
+    const contentTemplates = th.contentTemplates()
 
-    expect(ContentsTemplates).toBeInstanceOf(v0.ContentsTemplates)
+    expect(contentTemplates).toBeInstanceOf(v0.ContentTemplates)
 
-    const { data } = await ContentsTemplates.create(template)
+    const { data } = await contentTemplates.get(templateId)
 
     expect(data).toMatchObject(template)
   })
@@ -74,16 +76,18 @@ describe('v0: ContentsTemplates: can create a contents_template', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/contents_templates/${legacyId}`).reply(function (config) {
-        return [205]
-      })
+      mock
+        .onGet(`https://api.tillhub.com/api/v0/content_templates/${legacyId}/${templateId}`)
+        .reply(function (config) {
+          return [205]
+        })
     }
 
     try {
       const th = await initThInstance()
-      await th.contentsTemplates().create(template)
+      await th.contentTemplates().get(templateId)
     } catch (err) {
-      expect(err.name).toBe('ContentTemplateCreationFailed')
+      expect(err.name).toBe('ContentTemplateFetchFailed')
     }
   })
 })

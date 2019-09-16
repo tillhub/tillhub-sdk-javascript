@@ -9,7 +9,7 @@ export interface ContentTemplatesOptions {
   base?: string
 }
 
-export interface ContentsTemplatesQuery {
+export interface ContentTemplatesQuery {
   limit?: number
   uri?: string
   query?: {
@@ -18,10 +18,10 @@ export interface ContentsTemplatesQuery {
   }
 }
 
-export interface ContentsTemplatesResponse {
+export interface ContentTemplatesResponse {
   data: object[]
   metadata: object
-  next?: () => Promise<ContentsTemplatesResponse>
+  next?: () => Promise<ContentTemplatesResponse>
 }
 
 export interface ContentTemplateResponse {
@@ -58,24 +58,24 @@ export interface Contents {
   runtime?: Array<string>
 }
 
-export class ContentsTemplates extends ThBaseHandler {
-  public static baseEndpoint = '/api/v0/contents_templates'
+export class ContentTemplates extends ThBaseHandler {
+  public static baseEndpoint = '/api/v0/content_templates'
   endpoint: string
   http: Client
   public options: ContentTemplatesOptions
   public uriHelper: UriHelper
 
   constructor(options: ContentTemplatesOptions, http: Client) {
-    super(http, { endpoint: ContentsTemplates.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, { endpoint: ContentTemplates.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
-    this.endpoint = ContentsTemplates.baseEndpoint
+    this.endpoint = ContentTemplates.baseEndpoint
     this.options.base = this.options.base || 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(queryOrOptions?: ContentsTemplatesQuery | undefined): Promise<ContentsTemplatesResponse> {
+  getAll(queryOrOptions?: ContentTemplatesQuery | undefined): Promise<ContentTemplatesResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
@@ -96,20 +96,20 @@ export class ContentsTemplates extends ThBaseHandler {
 
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(new ContentsTemplatesFetchFailed(undefined, { status: response.status }))
+          return reject(new ContentTemplatesFetchFailed(undefined, { status: response.status }))
         }
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<ContentsTemplatesResponse> => this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<ContentTemplatesResponse> => this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({
           data: response.data.results,
           metadata: { cursor: response.data.cursor },
           next
-        } as ContentsTemplatesResponse)
+        } as ContentTemplatesResponse)
       } catch (error) {
-        return reject(new ContentsTemplatesFetchFailed(undefined, { error }))
+        return reject(new ContentTemplatesFetchFailed(undefined, { error }))
       }
     })
   }
@@ -133,21 +133,21 @@ export class ContentsTemplates extends ThBaseHandler {
     })
   }
 
-  search(searchTerm: string): Promise<ContentsTemplatesResponse> {
+  search(searchTerm: string): Promise<ContentTemplatesResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}?q=${searchTerm}`
       try {
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(new ContentsTemplatesSearchFailed(undefined, { status: response.status }))
+          return reject(new ContentTemplatesSearchFailed(undefined, { status: response.status }))
         }
 
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
-        } as ContentsTemplatesResponse)
+        } as ContentTemplatesResponse)
       } catch (error) {
-        return reject(new ContentsTemplatesSearchFailed(undefined, { error }))
+        return reject(new ContentTemplatesSearchFailed(undefined, { error }))
       }
     })
   }
@@ -202,9 +202,9 @@ export class ContentsTemplates extends ThBaseHandler {
   }
 }
 
-export class ContentsTemplatesFetchFailed extends BaseError {
-  public name = 'ContentsTemplatesFetchFailed'
-  constructor(public message: string = 'Could not fetch contents templates', properties?: any) {
+export class ContentTemplatesFetchFailed extends BaseError {
+  public name = 'ContentTemplatesFetchFailed'
+  constructor(public message: string = 'Could not fetch content templates', properties?: any) {
     super(message, properties)
   }
 }
@@ -237,9 +237,9 @@ export class ContentTemplateDeleteFailed extends BaseError {
   }
 }
 
-export class ContentsTemplatesSearchFailed extends BaseError {
-  public name = 'ContentsTemplatesSearchFailed'
-  constructor(public message: string = 'Could not search contents templates', properties?: any) {
+export class ContentTemplatesSearchFailed extends BaseError {
+  public name = 'ContentTemplatesSearchFailed'
+  constructor(public message: string = 'Could not search content templates', properties?: any) {
     super(message, properties)
   }
 }
