@@ -1,3 +1,10 @@
+# [3.128.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.127.0...v3.128.0) (2019-09-19)
+
+
+### Features
+
+* **products_v1:** add import handler ([c452f8d](https://github.com/tillhub/tillhub-sdk-javascript/commit/c452f8d))
+
 # [3.127.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.126.1...v3.127.0) (2019-09-16)
 
 

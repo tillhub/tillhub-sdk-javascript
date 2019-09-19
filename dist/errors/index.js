@@ -231,6 +231,18 @@ var ProductsFetchFailed = /** @class */ (function (_super) {
     return ProductsFetchFailed;
 }(baseError_1.BaseError));
 exports.ProductsFetchFailed = ProductsFetchFailed;
+var ProductsImportFailed = /** @class */ (function (_super) {
+    __extends(ProductsImportFailed, _super);
+    function ProductsImportFailed(message, properties) {
+        if (message === void 0) { message = 'Could not import the products'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductsImportFailed';
+        return _this;
+    }
+    return ProductsImportFailed;
+}(baseError_1.BaseError));
+exports.ProductsImportFailed = ProductsImportFailed;
 var ProductDetailsFetchFailed = /** @class */ (function (_super) {
     __extends(ProductDetailsFetchFailed, _super);
     function ProductDetailsFetchFailed(message, properties) {

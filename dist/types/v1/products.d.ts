@@ -59,6 +59,9 @@ export interface Product {
     stock_info?: object | null;
     i18n?: object | null;
     is_service?: boolean;
+    delegateable?: boolean;
+    delegateable_to?: object[];
+    delegated_from?: object;
 }
 export interface StockConfigurationLocation {
     location?: string | null;
@@ -130,6 +133,7 @@ export declare class Products extends ThBaseHandler {
     constructor(options: ProductsOptions, http: Client);
     create(product: Product, query?: HandlerProductsQuery): Promise<ProductResponse>;
     getAll(options?: ProductsOptions | undefined): Promise<ProductsResponse>;
+    import(options?: ProductsOptions | undefined): Promise<ProductsResponse>;
     get(productId: string): Promise<ProductResponse>;
     getDetails(productId: string): Promise<ProductResponse>;
     getChildrenDetails(productId: string): Promise<ProductResponse>;

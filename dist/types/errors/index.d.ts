@@ -90,6 +90,11 @@ export declare class ProductsFetchFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class ProductsImportFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
 export declare class ProductDetailsFetchFailed extends BaseError {
     message: string;
     name: string;
