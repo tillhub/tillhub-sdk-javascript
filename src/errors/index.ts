@@ -129,6 +129,12 @@ export class ProductsFetchFailed extends BaseError {
     super(message, properties)
   }
 }
+export class ProductsImportFailed extends BaseError {
+  public name = 'ProductsImportFailed'
+  constructor(public message: string = 'Could not import the products', properties?: any) {
+    super(message, properties)
+  }
+}
 
 export class ProductDetailsFetchFailed extends BaseError {
   public name = 'ProductDetailsFetchFailed'

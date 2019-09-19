@@ -71,6 +71,9 @@ export interface Product {
   stock_info?: object | null
   i18n?: object | null
   is_service?: boolean
+  delegateable?: boolean
+  delegateable_to?: object[]
+  delegated_from?: object
 }
 
 export interface StockConfigurationLocation {
@@ -213,6 +216,40 @@ export class Products extends ThBaseHandler {
         } as ProductsResponse)
       } catch (error) {
         return reject(new errors.ProductsFetchFailed(undefined, { error }))
+      }
+    })
+  }
+
+  import(options?: ProductsOptions | undefined): Promise<ProductsResponse> {
+    return new Promise(async (resolve, reject) => {
+      let next
+
+      try {
+        let uri
+        if (options && options.uri) {
+          uri = options.uri
+        } else {
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}/import${
+            options && options.query ? `?${qs.stringify(options.query)}` : ''
+            }`
+        }
+
+        const response = await this.http.getClient().get(uri)
+        if (response.status !== 200) {
+          return reject(new errors.ProductsImportFailed(undefined, { status: response.status }))
+        }
+
+        if (response.data.cursor && response.data.cursor.next) {
+          next = (): Promise<ProductsResponse> => this.getAll({ uri: response.data.cursor.next })
+        }
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count, cursor: response.data.cursor },
+          next
+        } as ProductsResponse)
+      } catch (error) {
+        return reject(new errors.ProductsImportFailed(undefined, { error }))
       }
     })
   }
