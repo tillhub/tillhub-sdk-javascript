@@ -1,3 +1,10 @@
+# [3.129.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.128.0...v3.129.0) (2019-09-19)
+
+
+### Features
+
+* **products_v1:** fix cursor next method ([ece1973](https://github.com/tillhub/tillhub-sdk-javascript/commit/ece1973))
+
 # [3.128.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.127.0...v3.128.0) (2019-09-19)
 
 

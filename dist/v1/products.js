@@ -165,7 +165,7 @@ var Products = /** @class */ (function (_super) {
                             return [2 /*return*/, reject(new errors.ProductsImportFailed(undefined, { status: response_2.status }))];
                         }
                         if (response_2.data.cursor && response_2.data.cursor.next) {
-                            next = function () { return _this.getAll({ uri: response_2.data.cursor.next }); };
+                            next = function () { return _this.import({ uri: response_2.data.cursor.next }); };
                         }
                         return [2 /*return*/, resolve({
                                 data: response_2.data.results,
