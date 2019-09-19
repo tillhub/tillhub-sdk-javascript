@@ -240,7 +240,7 @@ export class Products extends ThBaseHandler {
         }
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<ProductsResponse> => this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<ProductsResponse> => this.import({ uri: response.data.cursor.next })
         }
 
         return resolve({
