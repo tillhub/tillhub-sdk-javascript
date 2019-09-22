@@ -1,3 +1,10 @@
+## [3.129.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.129.0...v3.129.1) (2019-09-22)
+
+
+### Bug Fixes
+
+* **analytics:** fix query ref ([3b15a79](https://github.com/tillhub/tillhub-sdk-javascript/commit/3b15a79))
+
 # [3.129.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.128.0...v3.129.0) (2019-09-19)
 
 
