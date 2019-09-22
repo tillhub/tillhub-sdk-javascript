@@ -294,7 +294,7 @@ export class Analytics {
 
       try {
         const base = this.uriHelper.generateBaseUri(`/reports/staff/product_groups${staff ? `/${staff}` : ''}`)
-        const uri = this.uriHelper.generateUriWithQuery(base, options && options.query)
+        const uri = this.uriHelper.generateUriWithQuery(base, options && options.query ? options.query : undefined)
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new ProductGroupsReportFetchFailed())
@@ -315,7 +315,7 @@ export class Analytics {
 
       try {
         const base = this.uriHelper.generateBaseUri(`/reports/staff/refunds${staff ? `/${staff}` : ''}`)
-        const uri = this.uriHelper.generateUriWithQuery(base, options && options.query)
+        const uri = this.uriHelper.generateUriWithQuery(base, options && options.query ? options.query : undefined)
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new RefundsReportFetchFailed())
@@ -360,7 +360,7 @@ export class Analytics {
 
       try {
         const base = this.uriHelper.generateBaseUri(`/reports/staff/products${staff ? `/${staff}` : ''}`)
-        const uri = this.uriHelper.generateUriWithQuery(base, options && options.query)
+        const uri = this.uriHelper.generateUriWithQuery(base, options && options.query ? options.query : undefined)
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new ProductsReportFetchFailed())
