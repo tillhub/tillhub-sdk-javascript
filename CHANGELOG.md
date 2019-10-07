@@ -1,3 +1,10 @@
+# [3.130.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.129.1...v3.130.0) (2019-10-07)
+
+
+### Features
+
+* **stocks:** add transfer handler ([e697d94](https://github.com/tillhub/tillhub-sdk-javascript/commit/e697d94))
+
 ## [3.129.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.129.0...v3.129.1) (2019-09-22)
 
 

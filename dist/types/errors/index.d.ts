@@ -430,41 +430,6 @@ export declare class InvoicesGetMetaFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
-export declare class StocksFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class StocksCreateFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class StocksUpdateFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class StocksLocationsFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class StocksLocationFetchOneFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class StocksBookFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class StocksBookGetMetaFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
 export declare class OrdersFetchFailed extends BaseError {
     message: string;
     name: string;

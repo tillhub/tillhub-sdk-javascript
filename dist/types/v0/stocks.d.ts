@@ -48,6 +48,16 @@ export interface StocksUpdateRequestObject {
     stockId: string;
     body: Stock;
 }
+export interface TransferRequestObject {
+    product: string;
+    qty: number;
+    from: TransferLocation;
+    to: TransferLocation;
+}
+export interface TransferLocation {
+    id: string;
+    location_type?: string;
+}
 export declare class Stocks extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
@@ -60,6 +70,7 @@ export declare class Stocks extends ThBaseHandler {
     update(requestObject: StocksUpdateRequestObject): Promise<StocksResponse>;
     getLocations(query?: StocksQuery | undefined): Promise<StocksResponse>;
     getOneLocation(locationId: string): Promise<StocksResponse>;
+    transfer(body: TransferRequestObject): Promise<StocksResponse>;
 }
 export declare class StocksBook {
     endpoint: string;

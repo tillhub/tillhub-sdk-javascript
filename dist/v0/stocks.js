@@ -47,15 +47,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var errors = __importStar(require("../errors"));
+var baseError_1 = require("../errors/baseError");
 var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
 var Stocks = /** @class */ (function (_super) {
@@ -87,14 +80,14 @@ var Stocks = /** @class */ (function (_super) {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
-                        response.status !== 200 && reject(new errors.StocksFetchFailed());
+                        response.status !== 200 && reject(new StocksFetchFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             })];
                     case 2:
                         err_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.StocksFetchFailed())];
+                        return [2 /*return*/, reject(new StocksFetchFailed())];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -114,14 +107,14 @@ var Stocks = /** @class */ (function (_super) {
                         return [4 /*yield*/, this.http.getClient().post(uri, stock)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 && reject(new errors.StocksCreateFailed());
+                        response.status !== 200 && reject(new StocksCreateFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
                         err_2 = _a.sent();
-                        return [2 /*return*/, reject(new errors.StocksCreateFailed())];
+                        return [2 /*return*/, reject(new StocksCreateFailed())];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -142,14 +135,14 @@ var Stocks = /** @class */ (function (_super) {
                         return [4 /*yield*/, this.http.getClient().put(uri, body)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 && reject(new errors.StocksUpdateFailed());
+                        response.status !== 200 && reject(new StocksUpdateFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
                         err_3 = _a.sent();
-                        return [2 /*return*/, reject(new errors.StocksUpdateFailed())];
+                        return [2 /*return*/, reject(new StocksUpdateFailed())];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -168,14 +161,14 @@ var Stocks = /** @class */ (function (_super) {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
-                        response.status !== 200 && reject(new errors.StocksLocationsFetchFailed());
+                        response.status !== 200 && reject(new StocksLocationsFetchFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             })];
                     case 2:
                         err_4 = _a.sent();
-                        return [2 /*return*/, reject(new errors.StocksLocationsFetchFailed())];
+                        return [2 /*return*/, reject(new StocksLocationsFetchFailed())];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -196,7 +189,7 @@ var Stocks = /** @class */ (function (_super) {
                     case 2:
                         response = _a.sent();
                         response.status !== 200 &&
-                            reject(new errors.StocksLocationFetchOneFailed(undefined, { status: response.status }));
+                            reject(new StocksLocationFetchOneFailed(undefined, { status: response.status }));
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 msg: response.data.msg,
@@ -204,7 +197,36 @@ var Stocks = /** @class */ (function (_super) {
                             })];
                     case 3:
                         error_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.StocksLocationFetchOneFailed(undefined, { error: error_1 }))];
+                        return [2 /*return*/, reject(new StocksLocationFetchOneFailed(undefined, { error: error_1 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Stocks.prototype.transfer = function (body) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri('/transfer');
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().post(uri, body)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 &&
+                            reject(new StocksTransferFailed(undefined, { status: response.status }));
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_2 = _a.sent();
+                        return [2 /*return*/, reject(new StocksTransferFailed(undefined, { error: error_2 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -225,7 +247,7 @@ var StocksBook = /** @class */ (function () {
     StocksBook.prototype.getAll = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var next, base, uri, response_1, error_2;
+            var next, base, uri, response_1, error_3;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -245,8 +267,8 @@ var StocksBook = /** @class */ (function () {
                                 next: next
                             })];
                     case 2:
-                        error_2 = _a.sent();
-                        return [2 /*return*/, reject(new errors.StocksBookFetchFailed(undefined, { error: error_2 }))];
+                        error_3 = _a.sent();
+                        return [2 /*return*/, reject(new StocksBookFetchFailed(undefined, { error: error_3 }))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -255,7 +277,7 @@ var StocksBook = /** @class */ (function () {
     StocksBook.prototype.meta = function () {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, base, uri_1, response, error_3;
+            var uri, base, uri_1, response, error_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -269,14 +291,14 @@ var StocksBook = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200)
-                            reject(new errors.StocksBookGetMetaFailed());
+                            reject(new StocksBookGetMetaFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        error_3 = _a.sent();
-                        return [2 /*return*/, reject(new errors.StocksBookGetMetaFailed(undefined, { error: error_3 }))];
+                        error_4 = _a.sent();
+                        return [2 /*return*/, reject(new StocksBookGetMetaFailed(undefined, { error: error_4 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -285,4 +307,92 @@ var StocksBook = /** @class */ (function () {
     return StocksBook;
 }());
 exports.StocksBook = StocksBook;
+var StocksFetchFailed = /** @class */ (function (_super) {
+    __extends(StocksFetchFailed, _super);
+    function StocksFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the stocks'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StocksFetchFailed';
+        return _this;
+    }
+    return StocksFetchFailed;
+}(baseError_1.BaseError));
+var StocksCreateFailed = /** @class */ (function (_super) {
+    __extends(StocksCreateFailed, _super);
+    function StocksCreateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create the stock'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StocksCreateFailed';
+        return _this;
+    }
+    return StocksCreateFailed;
+}(baseError_1.BaseError));
+var StocksUpdateFailed = /** @class */ (function (_super) {
+    __extends(StocksUpdateFailed, _super);
+    function StocksUpdateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not update the stock'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StocksUpdateFailed';
+        return _this;
+    }
+    return StocksUpdateFailed;
+}(baseError_1.BaseError));
+var StocksLocationsFetchFailed = /** @class */ (function (_super) {
+    __extends(StocksLocationsFetchFailed, _super);
+    function StocksLocationsFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the stocks locations'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StocksLocationsFetchFailed';
+        return _this;
+    }
+    return StocksLocationsFetchFailed;
+}(baseError_1.BaseError));
+var StocksLocationFetchOneFailed = /** @class */ (function (_super) {
+    __extends(StocksLocationFetchOneFailed, _super);
+    function StocksLocationFetchOneFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch location'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StocksLocationFetchOneFailed';
+        return _this;
+    }
+    return StocksLocationFetchOneFailed;
+}(baseError_1.BaseError));
+var StocksBookFetchFailed = /** @class */ (function (_super) {
+    __extends(StocksBookFetchFailed, _super);
+    function StocksBookFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the stocks book'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StocksBookFetchFailed';
+        return _this;
+    }
+    return StocksBookFetchFailed;
+}(baseError_1.BaseError));
+var StocksBookGetMetaFailed = /** @class */ (function (_super) {
+    __extends(StocksBookGetMetaFailed, _super);
+    function StocksBookGetMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch stocks book meta'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StocksBookGetMetaFailed';
+        return _this;
+    }
+    return StocksBookGetMetaFailed;
+}(baseError_1.BaseError));
+var StocksTransferFailed = /** @class */ (function (_super) {
+    __extends(StocksTransferFailed, _super);
+    function StocksTransferFailed(message, properties) {
+        if (message === void 0) { message = 'Could not transfer the stock'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StocksTransferFailed';
+        return _this;
+    }
+    return StocksTransferFailed;
+}(baseError_1.BaseError));
 //# sourceMappingURL=stocks.js.map
