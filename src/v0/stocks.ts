@@ -57,6 +57,18 @@ export interface StocksUpdateRequestObject {
   body: Stock
 }
 
+export interface TransferRequestObject {
+  product: string
+  qty: number
+  from: TransferLocation
+  to: TransferLocation
+}
+
+export interface TransferLocation {
+  id: string
+  location_type?: string
+}
+
 export class Stocks extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/stock'
   endpoint: string
@@ -171,6 +183,27 @@ export class Stocks extends ThBaseHandler {
       }
     })
   }
+
+  transfer(body: TransferRequestObject): Promise<StocksResponse> {
+    return new Promise(async (resolve, reject) => {
+
+      const uri = this.uriHelper.generateBaseUri('/transfer')
+
+      try {
+        const response = await this.http.getClient().post(uri, body)
+        response.status !== 200 &&
+          reject(new StocksTransferFailed(undefined, { status: response.status }))
+
+        return resolve({
+          data: response.data.results[0],
+          msg: response.data.msg,
+          metadata: { count: response.data.count }
+        } as StocksResponse)
+      } catch (error) {
+        return reject(new StocksTransferFailed(undefined, { error }))
+      }
+    })
+  }
 }
 
 export class StocksBook {
@@ -281,6 +314,13 @@ class StocksBookFetchFailed extends BaseError {
 class StocksBookGetMetaFailed extends BaseError {
   public name = 'StocksBookGetMetaFailed'
   constructor(public message: string = 'Could not fetch stocks book meta', properties?: any) {
+    super(message, properties)
+  }
+}
+
+class StocksTransferFailed extends BaseError {
+  public name = 'StocksTransferFailed'
+  constructor(public message: string = 'Could not transfer the stock', properties?: any) {
     super(message, properties)
   }
 }
