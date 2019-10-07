@@ -616,55 +616,6 @@ export class InvoicesGetMetaFailed extends BaseError {
   }
 }
 
-export class StocksFetchFailed extends BaseError {
-  public name = 'StocksFetchFailed'
-  constructor(public message: string = 'Could not fetch the stocks', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class StocksCreateFailed extends BaseError {
-  public name = 'StocksCreateFailed'
-  constructor(public message: string = 'Could not create the stock', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class StocksUpdateFailed extends BaseError {
-  public name = 'StocksUpdateFailed'
-  constructor(public message: string = 'Could not update the stock', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class StocksLocationsFetchFailed extends BaseError {
-  public name = 'StocksLocationsFetchFailed'
-  constructor(public message: string = 'Could not fetch the stocks locations', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class StocksLocationFetchOneFailed extends BaseError {
-  public name = 'StocksLocationFetchOneFailed'
-  constructor(public message: string = 'Could not fetch location', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class StocksBookFetchFailed extends BaseError {
-  public name = 'StocksBookFetchFailed'
-  constructor(public message: string = 'Could not fetch the stocks book', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class StocksBookGetMetaFailed extends BaseError {
-  public name = 'StocksBookGetMetaFailed'
-  constructor(public message: string = 'Could not fetch stocks book meta', properties?: any) {
-    super(message, properties)
-  }
-}
-
 export class OrdersFetchFailed extends BaseError {
   public name = 'OrdersFetchFailed'
   constructor(public message: string = 'Could not fetch the orders', properties?: any) {
