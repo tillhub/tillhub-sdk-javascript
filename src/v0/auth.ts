@@ -21,7 +21,7 @@ export interface AuthOptions {
 export interface UsernameAuth {
   username: string
   password: string
-  recaptchaToken?: string
+  recaptcha_token?: string
 }
 
 export interface KeyAuth {
@@ -33,12 +33,13 @@ export interface OrgAuth {
   organisation: string
   username: string
   password: string
-  recaptchaToken?: string
+  recaptcha_token?: string
 }
 
 export interface SupportAuth {
   token: string
-  client_account: string
+  client_account: string,
+  recaptcha_token?: string
 }
 
 export interface PasswordResetRequest {
@@ -155,7 +156,9 @@ export class Auth {
     try {
       const response = await axios.post(`${this.options.base}/api/v0/users/login`, {
         email: username,
-        password: password
+        password: password,
+        recaptcha_token: authData.recaptcha_token
+
       })
 
       this.setDefaultHeader(

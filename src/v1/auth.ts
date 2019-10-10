@@ -87,7 +87,8 @@ export class Auth extends v0.Auth {
         {
           organisation: authData.organisation,
           username: authData.username,
-          password: authData.password
+          password: authData.password,
+          recaptcha_token: authData.recaptcha_token
         }
       )
 
@@ -122,7 +123,8 @@ export class Auth extends v0.Auth {
         `${this.options.base}/api/v1/users/auth/support/login`,
         {
           token: authData.token,
-          client_account: authData.client_account
+          client_account: authData.client_account,
+          recaptcha_token: authData.recaptcha_token
         }
       )
 
