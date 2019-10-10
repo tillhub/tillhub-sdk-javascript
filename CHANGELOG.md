@@ -1,3 +1,10 @@
+# [3.131.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.130.0...v3.131.0) (2019-10-10)
+
+
+### Features
+
+* **login:** add recaptchaToken to login auth data ([492fdad](https://github.com/tillhub/tillhub-sdk-javascript/commit/492fdad))
+
 # [3.130.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.129.1...v3.130.0) (2019-10-07)
 
 
