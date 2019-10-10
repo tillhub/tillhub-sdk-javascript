@@ -21,6 +21,7 @@ export interface AuthOptions {
 export interface UsernameAuth {
   username: string
   password: string
+  recaptchaToken?: string
 }
 
 export interface KeyAuth {
@@ -32,6 +33,7 @@ export interface OrgAuth {
   organisation: string
   username: string
   password: string
+  recaptchaToken?: string
 }
 
 export interface SupportAuth {
