@@ -143,7 +143,8 @@ var Auth = /** @class */ (function () {
                         _a.trys.push([1, 3, , 4]);
                         return [4 /*yield*/, axios_1.default.post(this.options.base + "/api/v0/users/login", {
                                 email: username,
-                                password: password
+                                password: password,
+                                recaptcha_token: authData.recaptcha_token
                             })];
                     case 2:
                         response = _a.sent();

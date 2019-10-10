@@ -139,7 +139,8 @@ var Auth = /** @class */ (function (_super) {
                         return [4 /*yield*/, axios_1.default.post(this.options.base + "/api/v1/users/auth/organisation/login", {
                                 organisation: authData.organisation,
                                 username: authData.username,
-                                password: authData.password
+                                password: authData.password,
+                                recaptcha_token: authData.recaptcha_token
                             })];
                     case 1:
                         response = _d.sent();
@@ -174,7 +175,8 @@ var Auth = /** @class */ (function (_super) {
                         _a.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post(this.options.base + "/api/v1/users/auth/support/login", {
                                 token: authData.token,
-                                client_account: authData.client_account
+                                client_account: authData.client_account,
+                                recaptcha_token: authData.recaptcha_token
                             })];
                     case 1:
                         response = _a.sent();

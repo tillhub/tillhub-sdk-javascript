@@ -1,3 +1,10 @@
+# [3.132.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.131.0...v3.132.0) (2019-10-10)
+
+
+### Features
+
+* **auth:** add recaptcha_token to all logins ([e232afa](https://github.com/tillhub/tillhub-sdk-javascript/commit/e232afa))
+
 # [3.131.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.130.0...v3.131.0) (2019-10-10)
 
 
