@@ -42,6 +42,9 @@ export interface PasswordResetNonce {
 export interface PasswordResetRequestResponse {
     msg: string;
 }
+export interface LogoutResponse {
+    msg: string;
+}
 export interface TokenAuth {
     token: string;
 }
@@ -79,4 +82,5 @@ export declare class Auth {
     requestPasswordReset(target: PasswordResetRequest): Promise<PasswordResetRequestResponse>;
     setNewPassword(nonce: PasswordResetNonce): Promise<PasswordResetRequestResponse>;
     protected setDefaultHeader(user: string, token: string): void;
+    logout(): Promise<LogoutResponse>;
 }

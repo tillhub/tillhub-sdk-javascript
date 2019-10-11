@@ -1,3 +1,10 @@
+# [3.133.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.132.0...v3.133.0) (2019-10-11)
+
+
+### Features
+
+* **auth:** add logout ([93eeedf](https://github.com/tillhub/tillhub-sdk-javascript/commit/93eeedf))
+
 # [3.132.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.131.0...v3.132.0) (2019-10-10)
 
 

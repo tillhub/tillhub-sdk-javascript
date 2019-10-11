@@ -15,6 +15,11 @@ export declare class PasswordSetRequestFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class LogoutFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
 export declare class UninstantiatedClient extends BaseError {
     message: string;
     name: string;

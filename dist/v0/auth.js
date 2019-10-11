@@ -227,6 +227,27 @@ var Auth = /** @class */ (function () {
         this.authenticated = true;
         client_1.Client.getInstance(clientOptions).setDefaults(clientOptions);
     };
+    Auth.prototype.logout = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var data, err_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.get(this.options.base + "/api/v0/users/logout")];
+                    case 1:
+                        data = (_a.sent()).data;
+                        return [2 /*return*/, {
+                                msg: data.msg
+                            }];
+                    case 2:
+                        err_4 = _a.sent();
+                        throw new errors.LogoutFailed(undefined, { error: err_4 });
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
     return Auth;
 }());
 exports.Auth = Auth;
