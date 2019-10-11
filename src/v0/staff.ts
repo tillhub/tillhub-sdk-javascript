@@ -15,6 +15,13 @@ export interface StaffQueryOrOptions {
   query?: {
     deleted?: boolean
     active?: boolean
+    start?: string
+    staff_number?: string
+    lastname?: string
+    firstname?: string
+    email?: string
+    q?: string
+    staff_groups?: string
   }
 }
 
@@ -375,6 +382,30 @@ export class Staff extends ThBaseHandler {
       }
     })
   }
+
+  meta(query?: StaffQueryOrOptions | undefined): Promise<StaffMemberResponse> {
+    return new Promise(async (resolve, reject) => {
+      const base = this.uriHelper.generateBaseUri('/meta')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      try {
+        const response = await this.http.getClient().get(uri)
+        if (response.status !== 200) {
+          return reject(new StaffMetaFailed(undefined, { status: response.status }))
+        }
+        if (!response.data.results[0]) {
+          return reject(new StaffMetaFailed(undefined, { status: response.status }))
+        }
+
+        return resolve({
+          data: response.data.results[0],
+          metadata: { count: response.data.count }
+        } as StaffMemberResponse)
+      } catch (err) {
+        return reject(new StaffMetaFailed(undefined, { error: err }))
+      }
+    })
+  }
 }
 
 export class StaffFetchFailed extends BaseError {
@@ -432,6 +463,12 @@ export class StaffNumberGetFailed extends BaseError {
 export class MakeUserStaffFailed extends BaseError {
   public name = 'MakeUserStaffFailed'
   constructor(public message: string = 'Could not make the staff member a user', properties?: any) {
+    super(message, properties)
+  }
+}
+export class StaffMetaFailed extends BaseError {
+  public name = 'StaffMetaFailed'
+  constructor(public message: string = 'Could not get meta of staff', properties?: any) {
     super(message, properties)
   }
 }
