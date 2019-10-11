@@ -54,6 +54,9 @@ export interface PasswordResetNonce {
 export interface PasswordResetRequestResponse {
   msg: string
 }
+export interface LogoutResponse {
+  msg: string
+}
 
 export interface TokenAuth {
   token: string
@@ -227,5 +230,18 @@ export class Auth {
     this.authenticated = true
 
     Client.getInstance(clientOptions).setDefaults(clientOptions)
+  }
+
+  async logout(): Promise<LogoutResponse> {
+    try {
+      const { data } = await axios.get(`${this.options.base}/api/v0/users/logout`)
+
+      return {
+        msg: data.msg
+      } as LogoutResponse
+    } catch (err) {
+
+      throw new errors.LogoutFailed(undefined, { error: err })
+    }
   }
 }
