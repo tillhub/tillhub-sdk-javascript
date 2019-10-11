@@ -1,3 +1,10 @@
+# [3.134.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.133.0...v3.134.0) (2019-10-11)
+
+
+### Features
+
+* **staff:** add meta query and query params ([181ce1a](https://github.com/tillhub/tillhub-sdk-javascript/commit/181ce1a))
+
 # [3.133.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.132.0...v3.133.0) (2019-10-11)
 
 

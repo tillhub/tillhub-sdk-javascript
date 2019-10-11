@@ -12,6 +12,13 @@ export interface StaffQueryOrOptions {
     query?: {
         deleted?: boolean;
         active?: boolean;
+        start?: string;
+        staff_number?: string;
+        lastname?: string;
+        firstname?: string;
+        email?: string;
+        q?: string;
+        staff_groups?: string;
     };
 }
 export interface StaffResponse {
@@ -111,6 +118,7 @@ export declare class Staff extends ThBaseHandler {
     getStaffNumber(providedStaffNumber?: StaffNumberRequest): Promise<StaffMemberResponse>;
     getFilters(queryOrOptions?: StaffQueryOrOptions): Promise<StaffResponse>;
     makeUser(staffID: string, makeUserObj: MakeUserRequest): Promise<StaffResponse>;
+    meta(query?: StaffQueryOrOptions | undefined): Promise<StaffMemberResponse>;
 }
 export declare class StaffFetchFailed extends BaseError {
     message: string;
@@ -148,6 +156,11 @@ export declare class StaffNumberGetFailed extends BaseError {
     constructor(message?: string, properties?: any);
 }
 export declare class MakeUserStaffFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class StaffMetaFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);

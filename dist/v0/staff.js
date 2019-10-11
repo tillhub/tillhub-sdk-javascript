@@ -384,6 +384,39 @@ var Staff = /** @class */ (function (_super) {
             });
         }); });
     };
+    Staff.prototype.meta = function (query) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var base, uri, response, err_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        base = this.uriHelper.generateBaseUri('/meta');
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new StaffMetaFailed(undefined, { status: response.status }))];
+                        }
+                        if (!response.data.results[0]) {
+                            return [2 /*return*/, reject(new StaffMetaFailed(undefined, { status: response.status }))];
+                        }
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        err_1 = _a.sent();
+                        return [2 /*return*/, reject(new StaffMetaFailed(undefined, { error: err_1 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     Staff.baseEndpoint = '/api/v0/staff';
     return Staff;
 }(base_1.ThBaseHandler));
@@ -484,4 +517,16 @@ var MakeUserStaffFailed = /** @class */ (function (_super) {
     return MakeUserStaffFailed;
 }(errors_1.BaseError));
 exports.MakeUserStaffFailed = MakeUserStaffFailed;
+var StaffMetaFailed = /** @class */ (function (_super) {
+    __extends(StaffMetaFailed, _super);
+    function StaffMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get meta of staff'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StaffMetaFailed';
+        return _this;
+    }
+    return StaffMetaFailed;
+}(errors_1.BaseError));
+exports.StaffMetaFailed = StaffMetaFailed;
 //# sourceMappingURL=staff.js.map
