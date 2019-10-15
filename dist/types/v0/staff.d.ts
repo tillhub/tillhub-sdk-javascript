@@ -112,6 +112,7 @@ export declare class Staff extends ThBaseHandler {
     getAll(queryOrOptions?: StaffQueryOrOptions): Promise<StaffResponse>;
     create(staffMember: StaffMember, query?: HandleStaffQuery): Promise<StaffResponse>;
     getOne(staffId: string): Promise<StaffMemberResponse>;
+    get(staffId: string): Promise<StaffMemberResponse>;
     put(staffId: string, staff: StaffMember): Promise<StaffMemberResponse>;
     delete(staffId: string): Promise<StaffMemberResponse>;
     getPin(providedPin?: PinRequest): Promise<StaffMemberResponse>;

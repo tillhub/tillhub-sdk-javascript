@@ -177,10 +177,41 @@ var Staff = /** @class */ (function (_super) {
             });
         }); });
     };
-    Staff.prototype.put = function (staffId, staff) {
+    // the following is a ducplicate of getOne, in order to stay consistent with the method names in other handlers;
+    // "get" is a method name expected by frontend components, e.g. remote-search-select
+    Staff.prototype.get = function (staffId) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, error_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + staffId;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 &&
+                            reject(new StaffFetchOneFailed(undefined, { status: response.status }));
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_4 = _a.sent();
+                        return [2 /*return*/, reject(new StaffFetchOneFailed(undefined, { error: error_4 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Staff.prototype.put = function (staffId, staff) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -198,8 +229,8 @@ var Staff = /** @class */ (function (_super) {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        error_4 = _a.sent();
-                        return [2 /*return*/, reject(new StaffPutFailed(undefined, { error: error_4 }))];
+                        error_5 = _a.sent();
+                        return [2 /*return*/, reject(new StaffPutFailed(undefined, { error: error_5 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -208,7 +239,7 @@ var Staff = /** @class */ (function (_super) {
     Staff.prototype.delete = function (staffId) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, error_5;
+            var uri, response, error_6;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -223,8 +254,8 @@ var Staff = /** @class */ (function (_super) {
                             reject(new StaffDeleteFailed(undefined, { status: response.status }));
                         return [2 /*return*/, resolve({ msg: response.data.msg })];
                     case 3:
-                        error_5 = _a.sent();
-                        return [2 /*return*/, reject(new StaffDeleteFailed(undefined, { error: error_5 }))];
+                        error_6 = _a.sent();
+                        return [2 /*return*/, reject(new StaffDeleteFailed(undefined, { error: error_6 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -234,7 +265,7 @@ var Staff = /** @class */ (function (_super) {
         var _this = this;
         var queryString = qs_1.default.stringify(providedPin, { addQueryPrefix: true });
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, error_6;
+            var uri, response, error_7;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -255,14 +286,14 @@ var Staff = /** @class */ (function (_super) {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        error_6 = _a.sent();
-                        if (error_6.response && error_6.response.status === 409) {
+                        error_7 = _a.sent();
+                        if (error_7.response && error_7.response.status === 409) {
                             return [2 /*return*/, reject(new StaffPinGetFailed(undefined, {
-                                    status: error_6.response.status,
-                                    name: error_6.response.data.name
+                                    status: error_7.response.status,
+                                    name: error_7.response.data.name
                                 }))];
                         }
-                        return [2 /*return*/, reject(new StaffPinGetFailed(undefined, { error: error_6 }))];
+                        return [2 /*return*/, reject(new StaffPinGetFailed(undefined, { error: error_7 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -272,7 +303,7 @@ var Staff = /** @class */ (function (_super) {
         var _this = this;
         var queryString = qs_1.default.stringify(providedStaffNumber, { addQueryPrefix: true });
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, error_7;
+            var uri, response, error_8;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -293,14 +324,14 @@ var Staff = /** @class */ (function (_super) {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        error_7 = _a.sent();
-                        if (error_7.response && error_7.response.status === 409) {
+                        error_8 = _a.sent();
+                        if (error_8.response && error_8.response.status === 409) {
                             return [2 /*return*/, reject(new StaffNumberGetFailed(undefined, {
-                                    status: error_7.response.status,
-                                    name: error_7.response.data.name
+                                    status: error_8.response.status,
+                                    name: error_8.response.data.name
                                 }))];
                         }
-                        return [2 /*return*/, reject(new StaffNumberGetFailed(undefined, { error: error_7 }))];
+                        return [2 /*return*/, reject(new StaffNumberGetFailed(undefined, { error: error_8 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -309,7 +340,7 @@ var Staff = /** @class */ (function (_super) {
     Staff.prototype.getFilters = function (queryOrOptions) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var base, uri, response, resp, resources_1, list, error_8;
+            var base, uri, response, resp, resources_1, list, error_9;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -354,8 +385,8 @@ var Staff = /** @class */ (function (_super) {
                                 metadata: { resources: resources_1 }
                             })];
                     case 2:
-                        error_8 = _a.sent();
-                        return [2 /*return*/, reject(new StaffFetchFailed(undefined, { error: error_8 }))];
+                        error_9 = _a.sent();
+                        return [2 /*return*/, reject(new StaffFetchFailed(undefined, { error: error_9 }))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -364,7 +395,7 @@ var Staff = /** @class */ (function (_super) {
     Staff.prototype.makeUser = function (staffID, makeUserObj) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var base, response, error_9;
+            var base, response, error_10;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -381,8 +412,8 @@ var Staff = /** @class */ (function (_super) {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        error_9 = _a.sent();
-                        return [2 /*return*/, reject(new MakeUserStaffFailed(undefined, { error: error_9 }))];
+                        error_10 = _a.sent();
+                        return [2 /*return*/, reject(new MakeUserStaffFailed(undefined, { error: error_10 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -424,7 +455,7 @@ var Staff = /** @class */ (function (_super) {
     Staff.prototype.search = function (searchTerm) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, error_10;
+            var uri, response, error_11;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -441,8 +472,8 @@ var Staff = /** @class */ (function (_super) {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        error_10 = _a.sent();
-                        return [2 /*return*/, reject(new StaffSearchFailed(undefined, { error: error_10 }))];
+                        error_11 = _a.sent();
+                        return [2 /*return*/, reject(new StaffSearchFailed(undefined, { error: error_11 }))];
                     case 4: return [2 /*return*/];
                 }
             });

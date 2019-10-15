@@ -1,3 +1,10 @@
+# [3.137.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.136.0...v3.137.0) (2019-10-15)
+
+
+### Features
+
+* **staff:** add "get" handler ([dbdd148](https://github.com/tillhub/tillhub-sdk-javascript/commit/dbdd148))
+
 # [3.136.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.135.0...v3.136.0) (2019-10-15)
 
 
