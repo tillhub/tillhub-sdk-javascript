@@ -161,6 +161,10 @@ export class Staff extends ThBaseHandler {
           return reject(new StaffFetchFailed(undefined, { status: response.status }))
         }
 
+        if (response.data.cursor && response.data.cursor.next) {
+          next = (): Promise<StaffResponse> => this.getAll({ uri: response.data.cursor.next })
+        }
+
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count },
