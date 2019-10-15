@@ -215,6 +215,27 @@ export class Staff extends ThBaseHandler {
     })
   }
 
+  // the following is a ducplicate of getOne, in order to stay consistent with the method names in other handlers;
+  // "get" is a method name expected by frontend components, e.g. remote-search-select
+  get(staffId: string): Promise<StaffMemberResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${staffId}`
+      try {
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 &&
+          reject(new StaffFetchOneFailed(undefined, { status: response.status }))
+
+        return resolve({
+          data: response.data.results[0] as StaffMember,
+          msg: response.data.msg,
+          metadata: { count: response.data.count }
+        } as StaffMemberResponse)
+      } catch (error) {
+        return reject(new StaffFetchOneFailed(undefined, { error }))
+      }
+    })
+  }
+
   put(staffId: string, staff: StaffMember): Promise<StaffMemberResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${staffId}`
