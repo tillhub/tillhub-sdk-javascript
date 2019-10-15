@@ -1,3 +1,10 @@
+# [3.135.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.134.0...v3.135.0) (2019-10-15)
+
+
+### Features
+
+* **staff:** add next handler in response ([be566b5](https://github.com/tillhub/tillhub-sdk-javascript/commit/be566b5))
+
 # [3.134.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.133.0...v3.134.0) (2019-10-11)
 
 
