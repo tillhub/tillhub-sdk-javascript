@@ -119,6 +119,7 @@ export declare class Staff extends ThBaseHandler {
     getFilters(queryOrOptions?: StaffQueryOrOptions): Promise<StaffResponse>;
     makeUser(staffID: string, makeUserObj: MakeUserRequest): Promise<StaffResponse>;
     meta(query?: StaffQueryOrOptions | undefined): Promise<StaffMemberResponse>;
+    search(searchTerm: string): Promise<StaffMemberResponse>;
 }
 export declare class StaffFetchFailed extends BaseError {
     message: string;
@@ -161,6 +162,11 @@ export declare class MakeUserStaffFailed extends BaseError {
     constructor(message?: string, properties?: any);
 }
 export declare class StaffMetaFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class StaffSearchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);

@@ -1,3 +1,10 @@
+# [3.136.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.135.0...v3.136.0) (2019-10-15)
+
+
+### Features
+
+* **staff:** add search handler ([70e52d1](https://github.com/tillhub/tillhub-sdk-javascript/commit/70e52d1))
+
 # [3.135.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.134.0...v3.135.0) (2019-10-15)
 
 
