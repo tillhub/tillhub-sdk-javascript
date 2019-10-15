@@ -410,6 +410,23 @@ export class Staff extends ThBaseHandler {
       }
     })
   }
+
+  search(searchTerm: string): Promise<StaffMemberResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/search?q=${searchTerm}`
+      try {
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new StaffSearchFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as StaffMemberResponse)
+      } catch (error) {
+        return reject(new StaffSearchFailed(undefined, { error }))
+      }
+    })
+  }
 }
 
 export class StaffFetchFailed extends BaseError {
@@ -473,6 +490,12 @@ export class MakeUserStaffFailed extends BaseError {
 export class StaffMetaFailed extends BaseError {
   public name = 'StaffMetaFailed'
   constructor(public message: string = 'Could not get meta of staff', properties?: any) {
+    super(message, properties)
+  }
+}
+export class StaffSearchFailed extends BaseError {
+  public name = 'StaffSearchFailed'
+  constructor(public message: string = 'Could not search for staff', properties?: any) {
     super(message, properties)
   }
 }
