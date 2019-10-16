@@ -1,3 +1,10 @@
+# [3.138.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.137.0...v3.138.0) (2019-10-16)
+
+
+### Features
+
+* **staff:** add search fields ([582c4ea](https://github.com/tillhub/tillhub-sdk-javascript/commit/582c4ea))
+
 # [3.137.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.136.0...v3.137.0) (2019-10-15)
 
 

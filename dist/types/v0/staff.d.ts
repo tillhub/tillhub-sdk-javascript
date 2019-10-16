@@ -102,6 +102,10 @@ export interface StaffItem {
 export interface MakeUserRequest {
     user: string;
 }
+export interface SearchQuery {
+    q: string;
+    fields?: string[];
+}
 export declare class Staff extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
@@ -120,7 +124,7 @@ export declare class Staff extends ThBaseHandler {
     getFilters(queryOrOptions?: StaffQueryOrOptions): Promise<StaffResponse>;
     makeUser(staffID: string, makeUserObj: MakeUserRequest): Promise<StaffResponse>;
     meta(query?: StaffQueryOrOptions | undefined): Promise<StaffMemberResponse>;
-    search(searchTerm: string): Promise<StaffMemberResponse>;
+    search(query: SearchQuery): Promise<StaffMemberResponse>;
 }
 export declare class StaffFetchFailed extends BaseError {
     message: string;

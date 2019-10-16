@@ -452,21 +452,22 @@ var Staff = /** @class */ (function (_super) {
             });
         }); });
     };
-    Staff.prototype.search = function (searchTerm) {
+    Staff.prototype.search = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, error_11;
+            var base, uri, response, error_11;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/search?q=" + searchTerm;
+                        base = this.uriHelper.generateBaseUri('/search');
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 && reject(new StaffSearchFailed());
+                        response.status !== 200 && reject(new StaffSearchFailed(undefined, { status: response.status }));
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
