@@ -120,6 +120,11 @@ export interface MakeUserRequest {
   user: string
 }
 
+export interface SearchQuery {
+  q: string,
+  fields?: string[]
+}
+
 export class Staff extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/staff'
   endpoint: string
@@ -432,12 +437,13 @@ export class Staff extends ThBaseHandler {
     })
   }
 
-  search(searchTerm: string): Promise<StaffMemberResponse> {
+  search(query: SearchQuery): Promise<StaffMemberResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/search?q=${searchTerm}`
+      const base = this.uriHelper.generateBaseUri('/search')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
       try {
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new StaffSearchFailed())
+        response.status !== 200 && reject(new StaffSearchFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results,

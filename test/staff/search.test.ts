@@ -1,6 +1,7 @@
 import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
+import qs from 'qs'
 dotenv.config()
 import { TillhubClient, v0 } from '../../src/tillhub-js'
 
@@ -19,7 +20,11 @@ if (process.env.SYSTEM_TEST) {
 }
 
 const legacyId = '4564'
-const searchTerm = 'asdf'
+const query = {
+  q: 'asdf',
+  fields: ['firstname', 'lastname', 'staff_number']
+}
+const queryString = qs.stringify(query, { addQueryPrefix: true })
 const mock = new MockAdapter(axios)
 afterEach(() => {
   mock.reset()
@@ -42,7 +47,7 @@ describe('v0: Staff: can search for staff', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/search?q=${searchTerm}`)
+        .onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/search${queryString}`)
         .reply(function (config) {
           return [
             200,
@@ -74,7 +79,7 @@ describe('v0: Staff: can search for staff', () => {
 
     expect(staff).toBeInstanceOf(v0.Staff)
 
-    const { data } = await staff.search(searchTerm)
+    const { data } = await staff.search(query)
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -95,7 +100,7 @@ describe('v0: Staff: can search for staff', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/search?q=${searchTerm}`)
+        .onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/search?${queryString}`)
         .reply(function (config) {
           return [205]
         })
@@ -118,7 +123,7 @@ describe('v0: Staff: can search for staff', () => {
     })
 
     try {
-      await th.staff().search(searchTerm)
+      await th.staff().search(query)
     } catch (err) {
       expect(err.name).toBe('StaffSearchFailed')
     }
