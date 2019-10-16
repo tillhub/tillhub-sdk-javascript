@@ -120,6 +120,11 @@ export interface MakeUserRequest {
   user: string
 }
 
+export interface SearchQuery {
+  q: string,
+  fields?: string[]
+}
+
 export class Staff extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/staff'
   endpoint: string
@@ -411,7 +416,7 @@ export class Staff extends ThBaseHandler {
     })
   }
 
-  search(query: { q: string, fields: string[] }): Promise<StaffMemberResponse> {
+  search(query: SearchQuery): Promise<StaffMemberResponse> {
     return new Promise(async (resolve, reject) => {
       const base = this.uriHelper.generateBaseUri('/search')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
