@@ -173,7 +173,7 @@ export class BranchGroups extends ThBaseHandler {
 
 export class BranchGroupsFetchFailed extends BaseError {
   public name = 'BranchGroupsFetchFailed'
-  constructor(public message: string = 'Could not fetch branches groups', properties?: any) {
+  constructor(public message: string = 'Could not fetch branch groups', properties?: any) {
     super(message, properties)
   }
 }
@@ -194,7 +194,7 @@ export class BranchGroupPutFailed extends BaseError {
 
 export class BranchGroupCreationFailed extends BaseError {
   public name = 'BranchGroupCreationFailed'
-  constructor(public message: string = 'Could not create branc group', properties?: any) {
+  constructor(public message: string = 'Could not create branch group', properties?: any) {
     super(message, properties)
   }
 }
