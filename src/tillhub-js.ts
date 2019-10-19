@@ -271,6 +271,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated branch groups instance
+   *
+   */
+  branchGroups(): v0.BranchGroups {
+    return this.generateAuthenticatedInstance(v0.BranchGroups)
+  }
+
+  /**
    * Create an authenticated devices instance
    *
    */

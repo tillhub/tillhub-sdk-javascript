@@ -9,6 +9,7 @@ import { PaymentOptions } from './payment_options'
 import { Configurations } from './configurations'
 import { Users } from './users'
 import { Branches } from './branches'
+import { BranchGroups } from './branch_groups'
 import { Devices } from './devices'
 import { Contents } from './contents'
 import { ContentTemplates } from './content_templates'
@@ -55,6 +56,7 @@ export {
   Configurations,
   Users,
   Branches,
+  BranchGroups,
   Devices,
   Contents,
   ContentTemplates,
