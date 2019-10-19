@@ -233,7 +233,7 @@ exports.BranchGroups = BranchGroups;
 var BranchGroupsFetchFailed = /** @class */ (function (_super) {
     __extends(BranchGroupsFetchFailed, _super);
     function BranchGroupsFetchFailed(message, properties) {
-        if (message === void 0) { message = 'Could not fetch branches groups'; }
+        if (message === void 0) { message = 'Could not fetch branch groups'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'BranchGroupsFetchFailed';
@@ -269,7 +269,7 @@ exports.BranchGroupPutFailed = BranchGroupPutFailed;
 var BranchGroupCreationFailed = /** @class */ (function (_super) {
     __extends(BranchGroupCreationFailed, _super);
     function BranchGroupCreationFailed(message, properties) {
-        if (message === void 0) { message = 'Could not create branc group'; }
+        if (message === void 0) { message = 'Could not create branch group'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'BranchGroupCreationFailed';

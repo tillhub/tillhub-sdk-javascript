@@ -1,3 +1,10 @@
+## [3.139.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.139.0...v3.139.1) (2019-10-19)
+
+
+### Bug Fixes
+
+* **branch_groups:** use correct error messages ([a14bdd7](https://github.com/tillhub/tillhub-sdk-javascript/commit/a14bdd7))
+
 # [3.139.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.138.0...v3.139.0) (2019-10-19)
 
 
