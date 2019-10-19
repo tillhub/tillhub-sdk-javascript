@@ -32,6 +32,7 @@ export interface BranchGroupResponse {
   }
   msg?: string
 }
+
 export interface BranchGroup {
   id?: string
 }
@@ -47,7 +48,7 @@ export interface BranchGroup {
 }
 
 export class BranchGroups extends ThBaseHandler {
-  public static baseEndpoint = '/api/v0/branches'
+  public static baseEndpoint = '/api/v0/branch_groups'
   endpoint: string
   http: Client
   public options: BranchGroupsOptions
