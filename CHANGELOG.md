@@ -1,3 +1,15 @@
+# [3.139.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.138.0...v3.139.0) (2019-10-19)
+
+
+### Bug Fixes
+
+* **branch_groups:** use correct resource refs ([a8b26d4](https://github.com/tillhub/tillhub-sdk-javascript/commit/a8b26d4))
+
+
+### Features
+
+* add branch groups ([30b49ad](https://github.com/tillhub/tillhub-sdk-javascript/commit/30b49ad))
+
 # [3.138.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.137.0...v3.138.0) (2019-10-16)
 
 
