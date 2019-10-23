@@ -51,18 +51,6 @@ var PasswordSetRequestFailed = /** @class */ (function (_super) {
     return PasswordSetRequestFailed;
 }(baseError_1.BaseError));
 exports.PasswordSetRequestFailed = PasswordSetRequestFailed;
-var LogoutFailed = /** @class */ (function (_super) {
-    __extends(LogoutFailed, _super);
-    function LogoutFailed(message, properties) {
-        if (message === void 0) { message = 'Could not log out.'; }
-        var _this = _super.call(this, message, properties) || this;
-        _this.message = message;
-        _this.name = 'LogoutFailed';
-        return _this;
-    }
-    return LogoutFailed;
-}(baseError_1.BaseError));
-exports.LogoutFailed = LogoutFailed;
 var UninstantiatedClient = /** @class */ (function (_super) {
     __extends(UninstantiatedClient, _super);
     function UninstantiatedClient(message, properties) {

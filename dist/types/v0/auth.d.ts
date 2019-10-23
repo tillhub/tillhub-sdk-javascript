@@ -1,3 +1,4 @@
+import * as errors from '../errors';
 export declare enum AuthTypes {
     username = 1,
     key = 2,
@@ -83,4 +84,14 @@ export declare class Auth {
     setNewPassword(nonce: PasswordResetNonce): Promise<PasswordResetRequestResponse>;
     protected setDefaultHeader(user: string, token: string): void;
     logout(): Promise<LogoutResponse>;
+}
+export declare class LogoutMissingToken extends errors.BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class LogoutFailed extends errors.BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
 }

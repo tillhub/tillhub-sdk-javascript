@@ -1,3 +1,10 @@
+## [3.139.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.139.1...v3.139.2) (2019-10-23)
+
+
+### Bug Fixes
+
+* **auth:** logout with actual token ([c567573](https://github.com/tillhub/tillhub-sdk-javascript/commit/c567573))
+
 ## [3.139.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.139.0...v3.139.1) (2019-10-19)
 
 

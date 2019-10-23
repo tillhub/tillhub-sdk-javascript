@@ -1,4 +1,17 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -148,6 +161,7 @@ var Auth = /** @class */ (function () {
                             })];
                     case 2:
                         response = _a.sent();
+                        console.log('came here');
                         this.setDefaultHeader(response.data.user.legacy_id || response.data.user.id, response.data.token);
                         return [2 /*return*/, {
                                 token: response.data.token,
@@ -233,17 +247,26 @@ var Auth = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.get(this.options.base + "/api/v0/users/logout")];
+                        if (!this.token) {
+                            throw new LogoutMissingToken();
+                        }
+                        _a.label = 1;
                     case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, axios_1.default.get(this.options.base + "/api/v0/users/logout", {
+                                headers: {
+                                    Authorization: "Bearer " + this.token
+                                }
+                            })];
+                    case 2:
                         data = (_a.sent()).data;
                         return [2 /*return*/, {
                                 msg: data.msg
                             }];
-                    case 2:
+                    case 3:
                         err_4 = _a.sent();
-                        throw new errors.LogoutFailed(undefined, { error: err_4 });
-                    case 3: return [2 /*return*/];
+                        throw new LogoutFailed(undefined, { error: err_4 });
+                    case 4: return [2 /*return*/];
                 }
             });
         });
@@ -251,4 +274,28 @@ var Auth = /** @class */ (function () {
     return Auth;
 }());
 exports.Auth = Auth;
+var LogoutMissingToken = /** @class */ (function (_super) {
+    __extends(LogoutMissingToken, _super);
+    function LogoutMissingToken(message, properties) {
+        if (message === void 0) { message = 'Could not log out due to missing token.'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'LogoutMissingToken';
+        return _this;
+    }
+    return LogoutMissingToken;
+}(errors.BaseError));
+exports.LogoutMissingToken = LogoutMissingToken;
+var LogoutFailed = /** @class */ (function (_super) {
+    __extends(LogoutFailed, _super);
+    function LogoutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not log out.'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'LogoutFailed';
+        return _this;
+    }
+    return LogoutFailed;
+}(errors.BaseError));
+exports.LogoutFailed = LogoutFailed;
 //# sourceMappingURL=auth.js.map
