@@ -126,7 +126,7 @@ export class Transactions extends ThBaseHandler {
         if (response.status !== 200) reject(new TransactionsGetImageFailed(undefined, { status: response.status }))
 
         return resolve({
-          data: response.data.results
+          data: response.data.results[0]
         } as TransactionResponse)
       } catch (error) {
         return reject(new TransactionsGetImageFailed(undefined, { error }))
