@@ -164,6 +164,8 @@ export class Auth {
 
       })
 
+      console.log('came here')
+
       this.setDefaultHeader(
         response.data.user.legacy_id || response.data.user.id,
         response.data.token
@@ -232,16 +234,37 @@ export class Auth {
     Client.getInstance(clientOptions).setDefaults(clientOptions)
   }
 
-  async logout(): Promise<LogoutResponse> {
+  public async logout(): Promise<LogoutResponse> {
+    if (!this.token) {
+      throw new LogoutMissingToken()
+    }
+
     try {
-      const { data } = await axios.get(`${this.options.base}/api/v0/users/logout`)
+      const { data } = await axios.get(`${this.options.base}/api/v0/users/logout`, {
+        headers: {
+          Authorization: `Bearer ${this.token}`
+        }
+      })
 
       return {
         msg: data.msg
       } as LogoutResponse
     } catch (err) {
-
-      throw new errors.LogoutFailed(undefined, { error: err })
+      throw new LogoutFailed(undefined, { error: err })
     }
+  }
+}
+
+export class LogoutMissingToken extends errors.BaseError {
+  public name = 'LogoutMissingToken'
+  constructor(public message: string = 'Could not log out due to missing token.', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class LogoutFailed extends errors.BaseError {
+  public name = 'LogoutFailed'
+  constructor(public message: string = 'Could not log out.', properties?: any) {
+    super(message, properties)
   }
 }

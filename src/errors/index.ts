@@ -22,12 +22,6 @@ export class PasswordSetRequestFailed extends BaseError {
     super(message, properties)
   }
 }
-export class LogoutFailed extends BaseError {
-  public name = 'LogoutFailed'
-  constructor(public message: string = 'Could not log out.', properties?: any) {
-    super(message, properties)
-  }
-}
 
 export class UninstantiatedClient extends BaseError {
   public name = 'UninstantiatedClient'

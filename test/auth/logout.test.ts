@@ -24,7 +24,7 @@ if (process.env.SYSTEM_TEST) {
 }
 
 describe('Auth: logout', () => {
-  it('can log out', async () => {
+  it('fails on missing token', async () => {
     const options = {
       credentials: {
         username: user.username,
@@ -35,6 +35,48 @@ describe('Auth: logout', () => {
 
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onGet('https://api.tillhub.com/api/v0/users/logout').reply(function (config) {
+        return [500]
+      })
+    }
+
+    const auth = new v0.Auth(options)
+
+    try {
+      let data = await auth.logout()
+    } catch (err) {
+      expect(err.name).toBe('LogoutMissingToken')
+    }
+  })
+
+  it('can log out', async () => {
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE
+    }
+
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+        return [
+          200,
+          {
+            token: 'something',
+            user: {
+              id: '123',
+              legacy_id: '4564',
+              scopes: ['admin'],
+              role: 'manager'
+            },
+            features: {
+              inventory: true
+            }
+          }
+        ]
+      })
+
+      mock.onGet('https://api.tillhub.com/api/v0/users/logout').reply(function (config) {
         return [
           200,
           {
@@ -42,11 +84,13 @@ describe('Auth: logout', () => {
           }
         ]
       })
+
     }
 
     const auth = new v0.Auth(options)
 
     try {
+      await auth.authenticate()
       let data = await auth.logout()
       expect(data).toBeTruthy()
       expect(data.msg === 'Logout successful.').toBe(true)
@@ -65,14 +109,34 @@ describe('Auth: logout', () => {
     }
 
     if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+        return [
+          200,
+          {
+            token: 'something',
+            user: {
+              id: '123',
+              legacy_id: '4564',
+              scopes: ['admin'],
+              role: 'manager'
+            },
+            features: {
+              inventory: true
+            }
+          }
+        ]
+      })
+
       mock.onGet('https://api.tillhub.com/api/v0/users/logout').reply(function (config) {
         return [500]
       })
+
     }
 
     const auth = new v0.Auth(options)
 
     try {
+      await auth.authenticate()
       let data = await auth.logout()
     } catch (err) {
       expect(err.name).toBe('LogoutFailed')
