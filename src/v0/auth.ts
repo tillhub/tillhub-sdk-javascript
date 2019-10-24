@@ -232,15 +232,15 @@ export class Auth {
     Client.getInstance(clientOptions).setDefaults(clientOptions)
   }
 
-  public async logout(): Promise<LogoutResponse> {
-    if (!this.token) {
+  public async logout(token?: string): Promise<LogoutResponse> {
+    if (!token && !this.token) {
       throw new LogoutMissingToken()
     }
 
     try {
       const { data } = await axios.get(`${this.options.base}/api/v0/users/logout`, {
         headers: {
-          Authorization: `Bearer ${this.token}`
+          Authorization: `Bearer ${token || this.token}`
         }
       })
 
