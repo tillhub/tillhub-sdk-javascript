@@ -1,3 +1,11 @@
+## [3.139.3](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.139.2...v3.139.3) (2019-10-24)
+
+
+### Bug Fixes
+
+* **images:** check return ([0b72088](https://github.com/tillhub/tillhub-sdk-javascript/commit/0b72088))
+* **images:** handle transactions image result correctly ([baa4d7c](https://github.com/tillhub/tillhub-sdk-javascript/commit/baa4d7c))
+
 ## [3.139.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.139.1...v3.139.2) (2019-10-23)
 
 

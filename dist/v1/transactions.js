@@ -138,6 +138,8 @@ var Transactions = /** @class */ (function (_super) {
                         response = _a.sent();
                         if (response.status !== 200)
                             reject(new TransactionsGetImageFailed(undefined, { status: response.status }));
+                        if (!response.data.results[0])
+                            reject(new TransactionsGetImageFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results
                             })];
