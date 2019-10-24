@@ -164,8 +164,6 @@ export class Auth {
 
       })
 
-      console.log('came here')
-
       this.setDefaultHeader(
         response.data.user.legacy_id || response.data.user.id,
         response.data.token
