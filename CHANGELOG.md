@@ -1,3 +1,15 @@
+# [3.140.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.139.3...v3.140.0) (2019-10-24)
+
+
+### Bug Fixes
+
+* **logout:** remove stray log ([4ca5ff1](https://github.com/tillhub/tillhub-sdk-javascript/commit/4ca5ff1))
+
+
+### Features
+
+* **logout:** allow setting token from param ([fd2a2ce](https://github.com/tillhub/tillhub-sdk-javascript/commit/fd2a2ce))
+
 ## [3.139.3](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.139.2...v3.139.3) (2019-10-24)
 
 

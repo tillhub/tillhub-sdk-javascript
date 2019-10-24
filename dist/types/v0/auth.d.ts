@@ -83,7 +83,7 @@ export declare class Auth {
     requestPasswordReset(target: PasswordResetRequest): Promise<PasswordResetRequestResponse>;
     setNewPassword(nonce: PasswordResetNonce): Promise<PasswordResetRequestResponse>;
     protected setDefaultHeader(user: string, token: string): void;
-    logout(): Promise<LogoutResponse>;
+    logout(token?: string): Promise<LogoutResponse>;
 }
 export declare class LogoutMissingToken extends errors.BaseError {
     message: string;

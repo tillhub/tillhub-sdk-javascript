@@ -161,7 +161,6 @@ var Auth = /** @class */ (function () {
                             })];
                     case 2:
                         response = _a.sent();
-                        console.log('came here');
                         this.setDefaultHeader(response.data.user.legacy_id || response.data.user.id, response.data.token);
                         return [2 /*return*/, {
                                 token: response.data.token,
@@ -241,13 +240,13 @@ var Auth = /** @class */ (function () {
         this.authenticated = true;
         client_1.Client.getInstance(clientOptions).setDefaults(clientOptions);
     };
-    Auth.prototype.logout = function () {
+    Auth.prototype.logout = function (token) {
         return __awaiter(this, void 0, void 0, function () {
             var data, err_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (!this.token) {
+                        if (!token && !this.token) {
                             throw new LogoutMissingToken();
                         }
                         _a.label = 1;
@@ -255,7 +254,7 @@ var Auth = /** @class */ (function () {
                         _a.trys.push([1, 3, , 4]);
                         return [4 /*yield*/, axios_1.default.get(this.options.base + "/api/v0/users/logout", {
                                 headers: {
-                                    Authorization: "Bearer " + this.token
+                                    Authorization: "Bearer " + (token || this.token)
                                 }
                             })];
                     case 2:
