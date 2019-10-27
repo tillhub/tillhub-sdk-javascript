@@ -43,6 +43,7 @@ import { Me } from './me'
 import { Processes } from './processes'
 import { Promotions } from './promotions'
 import { StaffPermissionsTemplates } from './staff_permissions_templates'
+import { VoucherSystems } from './voucher_systems'
 
 export {
   Auth,
@@ -91,5 +92,6 @@ export {
   Me,
   Processes,
   Promotions,
-  StaffPermissionsTemplates
+  StaffPermissionsTemplates,
+  VoucherSystems
 }

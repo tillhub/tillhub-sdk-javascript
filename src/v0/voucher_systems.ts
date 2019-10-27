@@ -4,12 +4,12 @@ import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
 import { ThBaseHandler } from '../base'
 
-export interface BranchGroupsOptions {
+export interface VoucherSystemsOptions {
   user?: string
   base?: string
 }
 
-export interface BranchGroupsQuery {
+export interface VoucherSystemsQuery {
   limit?: number
   uri?: string
   query?: {
@@ -18,14 +18,14 @@ export interface BranchGroupsQuery {
   }
 }
 
-export interface BranchGroupsResponse {
+export interface VoucherSystemsResponse {
   data: object[]
   metadata: object
-  next?: () => Promise<BranchGroupsResponse>
+  next?: () => Promise<VoucherSystemsResponse>
 }
 
-export interface BranchGroupResponse {
-  data: BranchGroup
+export interface VoucherSystemResponse {
+  data: VoucherSystem
   metadata?: {
     count?: number
     patch?: any
@@ -33,38 +33,36 @@ export interface BranchGroupResponse {
   msg?: string
 }
 
-export interface BranchGroup {
+export interface VoucherSystem {
   id?: string
 }
 
-export interface BranchGroup {
+export interface VoucherSystem {
   name: string
-  color?: string
   branches?: string[]
-  custom_id?: string
-  client_id?: string
+  hooks?: object
   active?: boolean
   deleted?: boolean
 }
 
-export class BranchGroups extends ThBaseHandler {
-  public static baseEndpoint = '/api/v0/branch_groups'
+export class VoucherSystems extends ThBaseHandler {
+  public static baseEndpoint = '/api/v0/voucher_systems'
   endpoint: string
   http: Client
-  public options: BranchGroupsOptions
+  public options: VoucherSystemsOptions
   public uriHelper: UriHelper
 
-  constructor(options: BranchGroupsOptions, http: Client) {
-    super(http, { endpoint: BranchGroups.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+  constructor(options: VoucherSystemsOptions, http: Client) {
+    super(http, { endpoint: VoucherSystems.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
-    this.endpoint = BranchGroups.baseEndpoint
+    this.endpoint = VoucherSystems.baseEndpoint
     this.options.base = this.options.base || 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(queryOrOptions?: BranchGroupsQuery | undefined): Promise<BranchGroupsResponse> {
+  getAll(queryOrOptions?: VoucherSystemsQuery | undefined): Promise<VoucherSystemsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
@@ -85,122 +83,122 @@ export class BranchGroups extends ThBaseHandler {
 
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(new BranchGroupsFetchFailed(undefined, { status: response.status }))
+          return reject(new VoucherSystemsFetchFailed(undefined, { status: response.status }))
         }
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<BranchGroupsResponse> => this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<VoucherSystemsResponse> => this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({
           data: response.data.results,
           metadata: { cursor: response.data.cursor },
           next
-        } as BranchGroupsResponse)
+        } as VoucherSystemsResponse)
       } catch (error) {
-        return reject(new BranchGroupsFetchFailed(undefined, { error }))
+        return reject(new VoucherSystemsFetchFailed(undefined, { error }))
       }
     })
   }
 
-  get(branchId: string): Promise<BranchGroupResponse> {
+  get(voucherSystemId: string): Promise<VoucherSystemResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${branchId}`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${voucherSystemId}`
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
-          reject(new BranchGroupFetchFailed(undefined, { status: response.status }))
+          reject(new VoucherSystemFetchFailed(undefined, { status: response.status }))
 
         return resolve({
-          data: response.data.results[0] as BranchGroup,
+          data: response.data.results[0] as VoucherSystem,
           msg: response.data.msg,
           metadata: { count: response.data.count }
-        } as BranchGroupResponse)
+        } as VoucherSystemResponse)
       } catch (error) {
-        return reject(new BranchGroupFetchFailed(undefined, { error }))
+        return reject(new VoucherSystemFetchFailed(undefined, { error }))
       }
     })
   }
 
-  put(branchId: string, branchGroup: BranchGroup): Promise<BranchGroupResponse> {
+  put(voucherSystemId: string, voucherSystemGroup: VoucherSystem): Promise<VoucherSystemResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${branchId}`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${voucherSystemId}`
       try {
-        const response = await this.http.getClient().put(uri, branchGroup)
+        const response = await this.http.getClient().put(uri, voucherSystemGroup)
 
         return resolve({
-          data: response.data.results[0] as BranchGroup,
+          data: response.data.results[0] as VoucherSystem,
           metadata: { count: response.data.count }
-        } as BranchGroupResponse)
+        } as VoucherSystemResponse)
       } catch (error) {
-        return reject(new BranchGroupPutFailed(undefined, { error }))
+        return reject(new VoucherSystemPutFailed(undefined, { error }))
       }
     })
   }
 
-  create(branchGroup: BranchGroup): Promise<BranchGroupResponse> {
+  create(voucherSystemGroup: VoucherSystem): Promise<VoucherSystemResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
-        const response = await this.http.getClient().post(uri, branchGroup)
+        const response = await this.http.getClient().post(uri, voucherSystemGroup)
 
         return resolve({
-          data: response.data.results[0] as BranchGroup,
+          data: response.data.results[0] as VoucherSystem,
           metadata: { count: response.data.count }
-        } as BranchGroupResponse)
+        } as VoucherSystemResponse)
       } catch (error) {
-        return reject(new BranchGroupCreationFailed(undefined, { error }))
+        return reject(new VoucherSystemCreationFailed(undefined, { error }))
       }
     })
   }
 
-  delete(branchId: string): Promise<BranchGroupResponse> {
+  delete(voucherSystemId: string): Promise<VoucherSystemResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${branchId}`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${voucherSystemId}`
       try {
         const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new BranchGroupDeleteFailed())
+        response.status !== 200 && reject(new VoucherSystemDeleteFailed())
 
         return resolve({
           msg: response.data.msg
-        } as BranchGroupResponse)
+        } as VoucherSystemResponse)
       } catch (err) {
-        return reject(new BranchGroupDeleteFailed())
+        return reject(new VoucherSystemDeleteFailed())
       }
     })
   }
 }
 
-export class BranchGroupsFetchFailed extends BaseError {
-  public name = 'BranchGroupsFetchFailed'
-  constructor(public message: string = 'Could not fetch branch groups', properties?: any) {
+export class VoucherSystemsFetchFailed extends BaseError {
+  public name = 'VoucherSystemsFetchFailed'
+  constructor(public message: string = 'Could not fetch voucher systems', properties?: any) {
     super(message, properties)
   }
 }
 
-export class BranchGroupFetchFailed extends BaseError {
+export class VoucherSystemFetchFailed extends BaseError {
   public name = 'BranchehGroupFetchFailed'
-  constructor(public message: string = 'Could not fetch branch group', properties?: any) {
+  constructor(public message: string = 'Could not fetch voucher system', properties?: any) {
     super(message, properties)
   }
 }
 
-export class BranchGroupPutFailed extends BaseError {
+export class VoucherSystemPutFailed extends BaseError {
   public name = 'BranchPutFailed'
   constructor(public message: string = 'Could not alter branch group', properties?: any) {
     super(message, properties)
   }
 }
 
-export class BranchGroupCreationFailed extends BaseError {
-  public name = 'BranchGroupCreationFailed'
+export class VoucherSystemCreationFailed extends BaseError {
+  public name = 'VoucherSystemCreationFailed'
   constructor(public message: string = 'Could not create branch group', properties?: any) {
     super(message, properties)
   }
 }
 
-export class BranchGroupDeleteFailed extends BaseError {
-  public name = 'BranchGroupDeleteFailed'
+export class VoucherSystemDeleteFailed extends BaseError {
+  public name = 'VoucherSystemDeleteFailed'
   constructor(public message: string = 'Could not delete branch group', properties?: any) {
     super(message, properties)
   }
