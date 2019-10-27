@@ -288,6 +288,13 @@ var TillhubClient = /** @class */ (function (_super) {
         return this.generateAuthenticatedInstance(v0.VoucherLogs);
     };
     /**
+     * Create an authenticated vouchers systems instance
+     *
+     */
+    TillhubClient.prototype.voucherSystems = function () {
+        return this.generateAuthenticatedInstance(v0.VoucherSystems);
+    };
+    /**
      * Create an authenticated me instance
      */
     TillhubClient.prototype.me = function () {

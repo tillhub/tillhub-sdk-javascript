@@ -141,6 +141,11 @@ export declare class TillhubClient extends events.EventEmitter {
      */
     voucherLogs(): v0.VoucherLogs;
     /**
+     * Create an authenticated vouchers systems instance
+     *
+     */
+    voucherSystems(): v0.VoucherSystems;
+    /**
      * Create an authenticated me instance
      */
     me(): v0.Me;

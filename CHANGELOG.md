@@ -1,3 +1,10 @@
+# [3.141.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.140.0...v3.141.0) (2019-10-27)
+
+
+### Features
+
+* add voucher system ([06e491a](https://github.com/tillhub/tillhub-sdk-javascript/commit/06e491a))
+
 # [3.140.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.139.3...v3.140.0) (2019-10-24)
 
 

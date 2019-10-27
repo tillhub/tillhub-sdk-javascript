@@ -92,4 +92,6 @@ var promotions_1 = require("./promotions");
 exports.Promotions = promotions_1.Promotions;
 var staff_permissions_templates_1 = require("./staff_permissions_templates");
 exports.StaffPermissionsTemplates = staff_permissions_templates_1.StaffPermissionsTemplates;
+var voucher_systems_1 = require("./voucher_systems");
+exports.VoucherSystems = voucher_systems_1.VoucherSystems;
 //# sourceMappingURL=index.js.map

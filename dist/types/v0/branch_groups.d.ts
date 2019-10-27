@@ -33,7 +33,7 @@ export interface BranchGroup {
 export interface BranchGroup {
     name: string;
     color?: string;
-    brannches?: string[];
+    branches?: string[];
     custom_id?: string;
     client_id?: string;
     active?: boolean;
