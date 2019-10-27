@@ -226,7 +226,7 @@ var VoucherSystems = /** @class */ (function (_super) {
             });
         }); });
     };
-    VoucherSystems.baseEndpoint = '/api/v0/voucher_systems';
+    VoucherSystems.baseEndpoint = '/api/v0/loyalty/voucher_systems';
     return VoucherSystems;
 }(base_1.ThBaseHandler));
 exports.VoucherSystems = VoucherSystems;

@@ -1,3 +1,10 @@
+## [3.141.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.141.0...v3.141.1) (2019-10-27)
+
+
+### Bug Fixes
+
+* **voucher-systems:** use correct base ref ([3bfe1c3](https://github.com/tillhub/tillhub-sdk-javascript/commit/3bfe1c3))
+
 # [3.141.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.140.0...v3.141.0) (2019-10-27)
 
 
