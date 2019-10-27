@@ -46,7 +46,7 @@ export interface VoucherSystem {
 }
 
 export class VoucherSystems extends ThBaseHandler {
-  public static baseEndpoint = '/api/v0/voucher_systems'
+  public static baseEndpoint = '/api/v0/loyalty/voucher_systems'
   endpoint: string
   http: Client
   public options: VoucherSystemsOptions
