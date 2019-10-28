@@ -1,3 +1,10 @@
+# [3.142.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.141.1...v3.142.0) (2019-10-28)
+
+
+### Features
+
+* **branch_groups:** add query params to getAll ([6dcc387](https://github.com/tillhub/tillhub-sdk-javascript/commit/6dcc387))
+
 ## [3.141.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.141.0...v3.141.1) (2019-10-27)
 
 
