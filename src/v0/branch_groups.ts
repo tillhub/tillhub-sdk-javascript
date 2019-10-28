@@ -15,6 +15,9 @@ export interface BranchGroupsQuery {
   query?: {
     deleted?: boolean
     active?: boolean
+    name?: string
+    branch?: string
+    start?: string
   }
 }
 
