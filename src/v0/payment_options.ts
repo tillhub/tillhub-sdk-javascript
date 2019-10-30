@@ -43,7 +43,7 @@ export interface PaymentOption {
   cost_center?: string
   currency: string
   accounts: string[]
-  diff_account: string
+  discrepancy_account: string
   order_index: number
   summable: boolean
 }
