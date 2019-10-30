@@ -57,6 +57,7 @@ export interface Register {
   name?: string | null
   description?: string | null
   register_number: number
+  cost_center: number | null
 }
 
 export class Registers extends ThBaseHandler {
