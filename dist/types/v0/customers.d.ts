@@ -18,6 +18,7 @@ export interface CustomersQuery {
 }
 export interface CustomersMetaQuery {
     deleted?: boolean;
+    location?: string;
 }
 export interface CustomersResponse {
     data: Customer[];

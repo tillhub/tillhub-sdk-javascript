@@ -1,3 +1,12 @@
+# [3.143.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.142.0...v3.143.0) (2019-10-30)
+
+
+### Features
+
+* **customers:** add location prop to meta call ([d2bf01b](https://github.com/tillhub/tillhub-sdk-javascript/commit/d2bf01b))
+* **payment-options:** rename prop - diff_account to discrepancy_account ([b89a11f](https://github.com/tillhub/tillhub-sdk-javascript/commit/b89a11f))
+* **registers:** add cost-center prop ([1281c3d](https://github.com/tillhub/tillhub-sdk-javascript/commit/1281c3d))
+
 # [3.142.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.141.1...v3.142.0) (2019-10-28)
 
 
