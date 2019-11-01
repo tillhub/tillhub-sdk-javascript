@@ -1,3 +1,10 @@
+# [3.144.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.143.0...v3.144.0) (2019-11-01)
+
+
+### Features
+
+* **users:** add locations property ([afbd073](https://github.com/tillhub/tillhub-sdk-javascript/commit/afbd073))
+
 # [3.143.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.142.0...v3.143.0) (2019-10-30)
 
 

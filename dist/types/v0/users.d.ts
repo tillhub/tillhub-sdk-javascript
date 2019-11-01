@@ -51,6 +51,7 @@ export interface User {
     key?: object | null;
     secret?: string;
     username?: string;
+    locations?: string[] | null;
 }
 export declare class Users extends ThBaseHandler {
     static baseEndpoint: string;
