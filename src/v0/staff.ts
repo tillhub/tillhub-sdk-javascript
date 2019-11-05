@@ -1,4 +1,5 @@
 import qs from 'qs'
+import typeOf from 'just-typeof'
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { UriHelper, HandlerQuery } from '../uri-helper'
@@ -437,10 +438,18 @@ export class Staff extends ThBaseHandler {
     })
   }
 
-  search(query: SearchQuery): Promise<StaffMemberResponse> {
+  search(query: string | SearchQuery): Promise<StaffMemberResponse> {
     return new Promise(async (resolve, reject) => {
-      const base = this.uriHelper.generateBaseUri('/search')
-      const uri = this.uriHelper.generateUriWithQuery(base, query)
+      let uri
+      if (typeof query === 'string') {
+        uri = this.uriHelper.generateBaseUri(`/search?q=${query}`)
+      } else if (typeOf(query) === 'object') {
+        const base = this.uriHelper.generateBaseUri('/search')
+        uri = this.uriHelper.generateUriWithQuery(base, query)
+      } else {
+        return reject(new StaffSearchFailed('Could not search for staff - query type is invalid'))
+      }
+
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new StaffSearchFailed(undefined, { status: response.status }))
