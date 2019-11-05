@@ -39,10 +39,13 @@ export interface VoucherSystem {
 
 export interface VoucherSystem {
   name: string
+  country?: string
+  region?: string
   branches?: string[]
   hooks?: object
   active?: boolean
-  deleted?: boolean
+  deleted?: boolean,
+  increments?: object[]
 }
 
 export class VoucherSystems extends ThBaseHandler {
@@ -177,29 +180,29 @@ export class VoucherSystemsFetchFailed extends BaseError {
 }
 
 export class VoucherSystemFetchFailed extends BaseError {
-  public name = 'BranchehGroupFetchFailed'
+  public name = 'VoucherSystemFetchFailed'
   constructor(public message: string = 'Could not fetch voucher system', properties?: any) {
     super(message, properties)
   }
 }
 
 export class VoucherSystemPutFailed extends BaseError {
-  public name = 'BranchPutFailed'
-  constructor(public message: string = 'Could not alter branch group', properties?: any) {
+  public name = 'VoucherSystemhPutFailed'
+  constructor(public message: string = 'Could not alter voucher system', properties?: any) {
     super(message, properties)
   }
 }
 
 export class VoucherSystemCreationFailed extends BaseError {
   public name = 'VoucherSystemCreationFailed'
-  constructor(public message: string = 'Could not create branch group', properties?: any) {
+  constructor(public message: string = 'Could not create voucher system', properties?: any) {
     super(message, properties)
   }
 }
 
 export class VoucherSystemDeleteFailed extends BaseError {
   public name = 'VoucherSystemDeleteFailed'
-  constructor(public message: string = 'Could not delete branch group', properties?: any) {
+  constructor(public message: string = 'Could not delete voucher system', properties?: any) {
     super(message, properties)
   }
 }
