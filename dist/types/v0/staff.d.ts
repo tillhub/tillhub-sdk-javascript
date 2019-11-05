@@ -124,7 +124,7 @@ export declare class Staff extends ThBaseHandler {
     getFilters(queryOrOptions?: StaffQueryOrOptions): Promise<StaffResponse>;
     makeUser(staffID: string, makeUserObj: MakeUserRequest): Promise<StaffResponse>;
     meta(query?: StaffQueryOrOptions | undefined): Promise<StaffMemberResponse>;
-    search(query: SearchQuery): Promise<StaffMemberResponse>;
+    search(query: string | SearchQuery): Promise<StaffMemberResponse>;
 }
 export declare class StaffFetchFailed extends BaseError {
     message: string;

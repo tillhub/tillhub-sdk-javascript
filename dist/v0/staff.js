@@ -63,6 +63,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var qs_1 = __importDefault(require("qs"));
+var just_typeof_1 = __importDefault(require("just-typeof"));
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
@@ -455,12 +456,20 @@ var Staff = /** @class */ (function (_super) {
     Staff.prototype.search = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var base, uri, response, error_11;
+            var uri, base, response, error_11;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        base = this.uriHelper.generateBaseUri('/search');
-                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        if (typeof query === 'string') {
+                            uri = this.uriHelper.generateBaseUri("/search?q=" + query);
+                        }
+                        else if (just_typeof_1.default(query) === 'object') {
+                            base = this.uriHelper.generateBaseUri('/search');
+                            uri = this.uriHelper.generateUriWithQuery(base, query);
+                        }
+                        else {
+                            return [2 /*return*/, reject(new StaffSearchFailed('Could not search for staff - query type is invalid'))];
+                        }
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);

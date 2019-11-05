@@ -1,3 +1,15 @@
+# [3.145.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.144.0...v3.145.0) (2019-11-05)
+
+
+### Bug Fixes
+
+* **staff:** change to better message on type error for search ([31eae64](https://github.com/tillhub/tillhub-sdk-javascript/commit/31eae64))
+
+
+### Features
+
+* **staff:** make search accept both string & object as args ([fed75bf](https://github.com/tillhub/tillhub-sdk-javascript/commit/fed75bf))
+
 # [3.144.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.143.0...v3.144.0) (2019-11-01)
 
 
