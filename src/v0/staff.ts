@@ -447,7 +447,7 @@ export class Staff extends ThBaseHandler {
         const base = this.uriHelper.generateBaseUri('/search')
         uri = this.uriHelper.generateUriWithQuery(base, query)
       } else {
-        return reject(new StaffSearchFailed(undefined, { error: 'query type is invalid' }))
+        return reject(new StaffSearchFailed('Could not search for staff - query type is invalid'))
       }
 
       try {
