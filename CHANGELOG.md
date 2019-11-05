@@ -1,3 +1,10 @@
+## [3.145.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.145.0...v3.145.1) (2019-11-05)
+
+
+### Bug Fixes
+
+* **voucher-system:** use correct errors, implement missing fields ([5bacd7d](https://github.com/tillhub/tillhub-sdk-javascript/commit/5bacd7d))
+
 # [3.145.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.144.0...v3.145.0) (2019-11-05)
 
 

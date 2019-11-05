@@ -248,7 +248,7 @@ var VoucherSystemFetchFailed = /** @class */ (function (_super) {
         if (message === void 0) { message = 'Could not fetch voucher system'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
-        _this.name = 'BranchehGroupFetchFailed';
+        _this.name = 'VoucherSystemFetchFailed';
         return _this;
     }
     return VoucherSystemFetchFailed;
@@ -257,10 +257,10 @@ exports.VoucherSystemFetchFailed = VoucherSystemFetchFailed;
 var VoucherSystemPutFailed = /** @class */ (function (_super) {
     __extends(VoucherSystemPutFailed, _super);
     function VoucherSystemPutFailed(message, properties) {
-        if (message === void 0) { message = 'Could not alter branch group'; }
+        if (message === void 0) { message = 'Could not alter voucher system'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
-        _this.name = 'BranchPutFailed';
+        _this.name = 'VoucherSystemhPutFailed';
         return _this;
     }
     return VoucherSystemPutFailed;
@@ -269,7 +269,7 @@ exports.VoucherSystemPutFailed = VoucherSystemPutFailed;
 var VoucherSystemCreationFailed = /** @class */ (function (_super) {
     __extends(VoucherSystemCreationFailed, _super);
     function VoucherSystemCreationFailed(message, properties) {
-        if (message === void 0) { message = 'Could not create branch group'; }
+        if (message === void 0) { message = 'Could not create voucher system'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'VoucherSystemCreationFailed';
@@ -281,7 +281,7 @@ exports.VoucherSystemCreationFailed = VoucherSystemCreationFailed;
 var VoucherSystemDeleteFailed = /** @class */ (function (_super) {
     __extends(VoucherSystemDeleteFailed, _super);
     function VoucherSystemDeleteFailed(message, properties) {
-        if (message === void 0) { message = 'Could not delete branch group'; }
+        if (message === void 0) { message = 'Could not delete voucher system'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'VoucherSystemDeleteFailed';

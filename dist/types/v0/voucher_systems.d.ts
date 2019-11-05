@@ -32,10 +32,13 @@ export interface VoucherSystem {
 }
 export interface VoucherSystem {
     name: string;
+    country?: string;
+    region?: string;
     branches?: string[];
     hooks?: object;
     active?: boolean;
     deleted?: boolean;
+    increments?: object[];
 }
 export declare class VoucherSystems extends ThBaseHandler {
     static baseEndpoint: string;
