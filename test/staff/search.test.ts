@@ -3,7 +3,8 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import qs from 'qs'
 dotenv.config()
-import { TillhubClient, v0 } from '../../src/tillhub-js'
+import { v0 } from '../../src/tillhub-js'
+import { initThInstance } from '../util'
 
 let user = {
   username: 'test@example.com',
@@ -31,7 +32,48 @@ afterEach(() => {
 })
 
 describe('v0: Staff: can search for staff', () => {
-  it("Tillhub's Staff are instantiable", async () => {
+  it('receives a search query of type string', async () => {
+    const searchTerm = 'asdf'
+
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+
+      mock
+        .onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/search?q=${searchTerm}`)
+        .reply(function (config) {
+          return [
+            200,
+            {
+              count: 1,
+              results: [{}]
+            }
+          ]
+        })
+    }
+
+    const th = await initThInstance()
+
+    const staff = th.staff()
+
+    expect(staff).toBeInstanceOf(v0.Staff)
+
+    const { data } = await staff.search(searchTerm)
+
+    expect(Array.isArray(data)).toBe(true)
+  })
+
+  it('receives a search query of type object', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
@@ -59,21 +101,7 @@ describe('v0: Staff: can search for staff', () => {
         })
     }
 
-    const options = {
-      credentials: {
-        username: user.username,
-        password: user.password
-      },
-      base: process.env.TILLHUB_BASE
-    }
-
-    const th = new TillhubClient()
-
-    th.init(options)
-    await th.auth.loginUsername({
-      username: user.username,
-      password: user.password
-    })
+    const th = await initThInstance()
 
     const staff = th.staff()
 
@@ -100,27 +128,13 @@ describe('v0: Staff: can search for staff', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/search?${queryString}`)
+        .onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/search${queryString}`)
         .reply(function (config) {
           return [205]
         })
     }
 
-    const options = {
-      credentials: {
-        username: user.username,
-        password: user.password
-      },
-      base: process.env.TILLHUB_BASE
-    }
-
-    const th = new TillhubClient()
-
-    th.init(options)
-    await th.auth.loginUsername({
-      username: user.username,
-      password: user.password
-    })
+    const th = await initThInstance()
 
     try {
       await th.staff().search(query)
