@@ -234,6 +234,24 @@ export class Branches extends ThBaseHandler {
       }
     })
   }
+
+  search(searchTerm: string): Promise<BranchResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = this.uriHelper.generateBaseUri(`/search?q=${searchTerm}`)
+
+      try {
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new BranchesSearchFailed(undefined, { status: response.status }))
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as BranchResponse)
+      } catch (error) {
+        return reject(new BranchesSearchFailed(undefined, { error }))
+      }
+    })
+  }
 }
 
 export class BranchesFetchFailed extends BaseError {
@@ -284,6 +302,13 @@ export class ExternalCustomIdGetUniqueFailed extends BaseError {
     public message: string = 'Could not get a unique external_custom_id',
     properties?: any
   ) {
+    super(message, properties)
+  }
+}
+
+export class BranchesSearchFailed extends BaseError {
+  public name = 'BranchesSearchFailed'
+  constructor(public message: string = 'Could not search for branch', properties?: any) {
     super(message, properties)
   }
 }
