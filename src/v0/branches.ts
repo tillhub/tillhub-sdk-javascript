@@ -1,3 +1,4 @@
+import typeOf from 'just-typeof'
 import qs from 'qs'
 import { Client } from '../client'
 import { BaseError } from '../errors'
@@ -43,6 +44,11 @@ export interface ExternalCustomIdQuery {
 
 export interface ExternalCustomIdResponse {
   external_custom_id: string
+}
+
+export interface SearchQuery {
+  q: string
+  fields?: string[]
 }
 
 export interface Branch {
@@ -235,9 +241,17 @@ export class Branches extends ThBaseHandler {
     })
   }
 
-  search(searchTerm: string): Promise<BranchResponse> {
+  search(query: string | SearchQuery): Promise<BranchResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/search?q=${searchTerm}`)
+      let uri
+      if (typeof query === 'string') {
+        uri = this.uriHelper.generateBaseUri(`/search?q=${query}`)
+      } else if (typeOf(query) === 'object') {
+        const base = this.uriHelper.generateBaseUri('/search')
+        uri = this.uriHelper.generateUriWithQuery(base, query)
+      } else {
+        return reject(new BranchesSearchFailed('Could not search for branch - query type is invalid'))
+      }
 
       try {
         const response = await this.http.getClient().get(uri)
