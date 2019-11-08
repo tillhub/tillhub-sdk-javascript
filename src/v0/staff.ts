@@ -122,7 +122,7 @@ export interface MakeUserRequest {
 }
 
 export interface SearchQuery {
-  q: string,
+  q: string
   fields?: string[]
 }
 
