@@ -1,3 +1,11 @@
+# [3.146.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.145.1...v3.146.0) (2019-11-08)
+
+
+### Features
+
+* **branches:** add optional fields prop to search method ([1a4b394](https://github.com/tillhub/tillhub-sdk-javascript/commit/1a4b394))
+* **branches:** add search handler ([5600e28](https://github.com/tillhub/tillhub-sdk-javascript/commit/5600e28))
+
 ## [3.145.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.145.0...v3.145.1) (2019-11-05)
 
 

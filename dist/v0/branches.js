@@ -62,6 +62,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var just_typeof_1 = __importDefault(require("just-typeof"));
 var qs_1 = __importDefault(require("qs"));
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -293,6 +294,42 @@ var Branches = /** @class */ (function (_super) {
             });
         }); });
     };
+    Branches.prototype.search = function (query) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, base, response, error_7;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (typeof query === 'string') {
+                            uri = this.uriHelper.generateBaseUri("/search?q=" + query);
+                        }
+                        else if (just_typeof_1.default(query) === 'object') {
+                            base = this.uriHelper.generateBaseUri('/search');
+                            uri = this.uriHelper.generateUriWithQuery(base, query);
+                        }
+                        else {
+                            return [2 /*return*/, reject(new BranchesSearchFailed('Could not search for branch - query type is invalid'))];
+                        }
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 && reject(new BranchesSearchFailed(undefined, { status: response.status }));
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_7 = _a.sent();
+                        return [2 /*return*/, reject(new BranchesSearchFailed(undefined, { error: error_7 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     Branches.baseEndpoint = '/api/v0/branches';
     return Branches;
 }(base_1.ThBaseHandler));
@@ -381,4 +418,16 @@ var ExternalCustomIdGetUniqueFailed = /** @class */ (function (_super) {
     return ExternalCustomIdGetUniqueFailed;
 }(errors_1.BaseError));
 exports.ExternalCustomIdGetUniqueFailed = ExternalCustomIdGetUniqueFailed;
+var BranchesSearchFailed = /** @class */ (function (_super) {
+    __extends(BranchesSearchFailed, _super);
+    function BranchesSearchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not search for branch'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'BranchesSearchFailed';
+        return _this;
+    }
+    return BranchesSearchFailed;
+}(errors_1.BaseError));
+exports.BranchesSearchFailed = BranchesSearchFailed;
 //# sourceMappingURL=branches.js.map

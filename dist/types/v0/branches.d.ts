@@ -37,6 +37,10 @@ export interface ExternalCustomIdQuery {
 export interface ExternalCustomIdResponse {
     external_custom_id: string;
 }
+export interface SearchQuery {
+    q: string;
+    fields?: string[];
+}
 export interface Branch {
     branch_number?: number;
     name: string;
@@ -65,6 +69,7 @@ export declare class Branches extends ThBaseHandler {
     count(): Promise<BranchesResponse>;
     delete(branchId: string): Promise<BranchResponse>;
     getUniqueExternalId(query: ExternalCustomIdQuery): Promise<BranchResponse>;
+    search(query: string | SearchQuery): Promise<BranchResponse>;
 }
 export declare class BranchesFetchFailed extends BaseError {
     message: string;
@@ -97,6 +102,11 @@ export declare class BranchDeleteFailed extends BaseError {
     constructor(message?: string, properties?: any);
 }
 export declare class ExternalCustomIdGetUniqueFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class BranchesSearchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);
