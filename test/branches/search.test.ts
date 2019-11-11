@@ -65,7 +65,7 @@ describe('v0: Branches: can search for branches', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/search${queryString}`)
+        .onGet(`https://api.tillhub.com/api/v0/branches/${legacyId}/search${queryString}`)
         .reply(function (config) {
           return [
             200,
@@ -79,11 +79,11 @@ describe('v0: Branches: can search for branches', () => {
 
     const th = await initThInstance()
 
-    const staff = th.staff()
+    const branches = th.branches()
 
-    expect(staff).toBeInstanceOf(v0.Staff)
+    expect(branches).toBeInstanceOf(v0.Branches)
 
-    const { data } = await staff.search(query)
+    const { data } = await branches.search(query)
 
     expect(Array.isArray(data)).toBe(true)
   })
