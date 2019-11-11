@@ -30,7 +30,7 @@
     "build": "npm run clean && npm run build:bundle && npm run build:docs",
     "clean": "rimraf dist docs",
     "start": "rollup -c rollup.config.ts -w",
-    "test": "jest",
+    "test": "jest --coverage",
     "test:watch": "jest --watchAll",
     "tdd": "npm run test:watch",
     "test:prod": "npm run lint && npm run test -- --coverage --no-cache --runInBand",
@@ -75,7 +75,7 @@
         "statements": 30
       }
     },
-    "collectCoverage": true
+    "collectCoverage": false
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
