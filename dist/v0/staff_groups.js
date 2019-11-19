@@ -118,6 +118,113 @@ var StaffGroups = /** @class */ (function (_super) {
             });
         }); });
     };
+    StaffGroups.prototype.get = function (staffGroupId) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri("/" + staffGroupId);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 &&
+                            reject(new StaffGroupFetchFailed(undefined, { status: response.status }));
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_3 = _a.sent();
+                        return [2 /*return*/, reject(new StaffGroupFetchFailed(undefined, { error: error_3 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    StaffGroups.prototype.put = function (staffGroupId, staffGroup) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri("/" + staffGroupId);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().put(uri, staffGroup)];
+                    case 2:
+                        response = _a.sent();
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_4 = _a.sent();
+                        return [2 /*return*/, reject(new StaffGroupPutFailed(undefined, { error: error_4 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    StaffGroups.prototype.create = function (staffGroup) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_5;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri();
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().post(uri, staffGroup)];
+                    case 2:
+                        response = _a.sent();
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_5 = _a.sent();
+                        return [2 /*return*/, reject(new StaffGroupCreationFailed(undefined, { error: error_5 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    StaffGroups.prototype.delete = function (staffGroupId) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, err_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri("/" + staffGroupId);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().delete(uri)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 && reject(new StaffGroupDeleteFailed());
+                        return [2 /*return*/, resolve({
+                                msg: response.data.msg
+                            })];
+                    case 3:
+                        err_1 = _a.sent();
+                        return [2 /*return*/, reject(new StaffGroupDeleteFailed())];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     StaffGroups.baseEndpoint = '/api/v0/staff_groups';
     return StaffGroups;
 }(base_1.ThBaseHandler));
@@ -144,4 +251,52 @@ var StaffGroupsMetaFailed = /** @class */ (function (_super) {
     }
     return StaffGroupsMetaFailed;
 }(baseError_1.BaseError));
+var StaffGroupFetchFailed = /** @class */ (function (_super) {
+    __extends(StaffGroupFetchFailed, _super);
+    function StaffGroupFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the staff group'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StaffGroupFetchFailed';
+        return _this;
+    }
+    return StaffGroupFetchFailed;
+}(baseError_1.BaseError));
+exports.StaffGroupFetchFailed = StaffGroupFetchFailed;
+var StaffGroupPutFailed = /** @class */ (function (_super) {
+    __extends(StaffGroupPutFailed, _super);
+    function StaffGroupPutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not alter the staff group'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StaffGroupPutFailed';
+        return _this;
+    }
+    return StaffGroupPutFailed;
+}(baseError_1.BaseError));
+exports.StaffGroupPutFailed = StaffGroupPutFailed;
+var StaffGroupCreationFailed = /** @class */ (function (_super) {
+    __extends(StaffGroupCreationFailed, _super);
+    function StaffGroupCreationFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create the staff group'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StaffGroupCreationFailed';
+        return _this;
+    }
+    return StaffGroupCreationFailed;
+}(baseError_1.BaseError));
+exports.StaffGroupCreationFailed = StaffGroupCreationFailed;
+var StaffGroupDeleteFailed = /** @class */ (function (_super) {
+    __extends(StaffGroupDeleteFailed, _super);
+    function StaffGroupDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete the staff group'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StaffGroupDeleteFailed';
+        return _this;
+    }
+    return StaffGroupDeleteFailed;
+}(baseError_1.BaseError));
+exports.StaffGroupDeleteFailed = StaffGroupDeleteFailed;
 //# sourceMappingURL=staff_groups.js.map

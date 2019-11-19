@@ -248,7 +248,7 @@ var BranchGroupFetchFailed = /** @class */ (function (_super) {
         if (message === void 0) { message = 'Could not fetch branch group'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
-        _this.name = 'BranchehGroupFetchFailed';
+        _this.name = 'BranchGroupFetchFailed';
         return _this;
     }
     return BranchGroupFetchFailed;

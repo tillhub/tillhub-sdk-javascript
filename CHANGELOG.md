@@ -1,3 +1,10 @@
+# [3.147.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.146.0...v3.147.0) (2019-11-19)
+
+
+### Features
+
+* **staff-groups:** add crate, get, put, delete a staff group methods ([f314da0](https://github.com/tillhub/tillhub-sdk-javascript/commit/f314da0))
+
 # [3.146.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.145.1...v3.146.0) (2019-11-08)
 
 
