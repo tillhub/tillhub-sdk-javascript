@@ -22,6 +22,26 @@ export interface StaffGroupsResponse {
   metadata: object
 }
 
+export interface StaffGroupResponse {
+  data: StaffGroup
+  metadata?: {
+    count?: number
+    patch?: any
+  }
+  msg?: string
+}
+
+export interface StaffGroup {
+  name: string
+  id?: string
+  color?: string
+  staffs?: string[]
+  custom_id?: string
+  client_id?: string
+  active?: boolean
+  deleted?: boolean
+}
+
 export class StaffGroups extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/staff_groups'
   endpoint: string
@@ -81,6 +101,73 @@ export class StaffGroups extends ThBaseHandler {
       }
     })
   }
+
+  get(staffGroupId: string): Promise<StaffGroupResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = this.uriHelper.generateBaseUri(`/${staffGroupId}`)
+      try {
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 &&
+          reject(new StaffGroupFetchFailed(undefined, { status: response.status }))
+
+        return resolve({
+          data: response.data.results[0] as StaffGroup,
+          msg: response.data.msg,
+          metadata: { count: response.data.count }
+        } as StaffGroupResponse)
+      } catch (error) {
+        return reject(new StaffGroupFetchFailed(undefined, { error }))
+      }
+    })
+  }
+
+  put(staffGroupId: string, staffGroup: StaffGroup): Promise<StaffGroupResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = this.uriHelper.generateBaseUri(`/${staffGroupId}`)
+      try {
+        const response = await this.http.getClient().put(uri, staffGroup)
+
+        return resolve({
+          data: response.data.results[0] as StaffGroup,
+          metadata: { count: response.data.count }
+        } as StaffGroupResponse)
+      } catch (error) {
+        return reject(new StaffGroupPutFailed(undefined, { error }))
+      }
+    })
+  }
+
+  create(staffGroup: StaffGroup): Promise<StaffGroupResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = this.uriHelper.generateBaseUri()
+      try {
+        const response = await this.http.getClient().post(uri, staffGroup)
+
+        return resolve({
+          data: response.data.results[0] as StaffGroup,
+          metadata: { count: response.data.count }
+        } as StaffGroupResponse)
+      } catch (error) {
+        return reject(new StaffGroupCreationFailed(undefined, { error }))
+      }
+    })
+  }
+
+  delete(staffGroupId: string): Promise<StaffGroupResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = this.uriHelper.generateBaseUri(`/${staffGroupId}`)
+      try {
+        const response = await this.http.getClient().delete(uri)
+        response.status !== 200 && reject(new StaffGroupDeleteFailed())
+
+        return resolve({
+          msg: response.data.msg
+        } as StaffGroupResponse)
+      } catch (err) {
+        return reject(new StaffGroupDeleteFailed())
+      }
+    })
+  }
 }
 
 class StaffGroupsFetchAllFailed extends BaseError {
@@ -93,6 +180,34 @@ class StaffGroupsFetchAllFailed extends BaseError {
 class StaffGroupsMetaFailed extends BaseError {
   public name = 'StaffGroupsMetaFailed'
   constructor(public message: string = 'Could not fetch staff groups meta call', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class StaffGroupFetchFailed extends BaseError {
+  public name = 'StaffGroupFetchFailed'
+  constructor(public message: string = 'Could not fetch the staff group', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class StaffGroupPutFailed extends BaseError {
+  public name = 'StaffGroupPutFailed'
+  constructor(public message: string = 'Could not alter the staff group', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class StaffGroupCreationFailed extends BaseError {
+  public name = 'StaffGroupCreationFailed'
+  constructor(public message: string = 'Could not create the staff group', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class StaffGroupDeleteFailed extends BaseError {
+  public name = 'StaffGroupDeleteFailed'
+  constructor(public message: string = 'Could not delete the staff group', properties?: any) {
     super(message, properties)
   }
 }
