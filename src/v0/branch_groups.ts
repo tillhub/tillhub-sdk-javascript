@@ -182,7 +182,7 @@ export class BranchGroupsFetchFailed extends BaseError {
 }
 
 export class BranchGroupFetchFailed extends BaseError {
-  public name = 'BranchehGroupFetchFailed'
+  public name = 'BranchGroupFetchFailed'
   constructor(public message: string = 'Could not fetch branch group', properties?: any) {
     super(message, properties)
   }
