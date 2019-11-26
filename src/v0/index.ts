@@ -44,6 +44,7 @@ import { Processes } from './processes'
 import { Promotions } from './promotions'
 import { StaffPermissionsTemplates } from './staff_permissions_templates'
 import { VoucherSystems } from './voucher_systems'
+import { Functions } from './functions'
 
 export {
   Auth,
@@ -93,5 +94,6 @@ export {
   Processes,
   Promotions,
   StaffPermissionsTemplates,
-  VoucherSystems
+  VoucherSystems,
+  Functions
 }
