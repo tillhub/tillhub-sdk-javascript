@@ -6,6 +6,7 @@ import { Balances } from './analytics/reports/balances'
 import { PaymentOptions } from './analytics/reports/payment_options'
 import { Payments } from './analytics/reports/payments'
 import { Vat } from './analytics/reports/vat'
+import { CashBook } from './analytics/reports/cash_book'
 import { Customers } from './analytics/reports/customers'
 
 export type StaffID = string | null
@@ -556,6 +557,10 @@ export class Analytics {
 
   vat(): Vat {
     return new Vat(this.options, this.http, this.uriHelper)
+  }
+
+  cashBook(): CashBook {
+    return new CashBook(this.options, this.http, this.uriHelper)
   }
 
   customers(): Customers {
