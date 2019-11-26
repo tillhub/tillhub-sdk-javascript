@@ -710,6 +710,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated Functions instance
+   *
+   */
+  functions(): v0.Functions {
+    return this.generateAuthenticatedInstance(v0.Functions)
+  }
+
+  /**
    * Create an authenticated Carts instance
    *
    */
