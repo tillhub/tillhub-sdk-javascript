@@ -595,6 +595,13 @@ var TillhubClient = /** @class */ (function (_super) {
         return this.generateAuthenticatedInstance(v0.Processes);
     };
     /**
+     * Create an authenticated Functions instance
+     *
+     */
+    TillhubClient.prototype.functions = function () {
+        return this.generateAuthenticatedInstance(v0.Functions);
+    };
+    /**
      * Create an authenticated Carts instance
      *
      */

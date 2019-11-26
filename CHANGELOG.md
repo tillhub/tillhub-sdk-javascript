@@ -1,3 +1,10 @@
+# [3.149.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.148.0...v3.149.0) (2019-11-26)
+
+
+### Features
+
+* add v0.functions ([745b9ac](https://github.com/tillhub/tillhub-sdk-javascript/commit/745b9ac))
+
 # [3.148.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.147.0...v3.148.0) (2019-11-26)
 
 

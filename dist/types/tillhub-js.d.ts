@@ -300,6 +300,11 @@ export declare class TillhubClient extends events.EventEmitter {
      */
     processes(): v0.Processes;
     /**
+     * Create an authenticated Functions instance
+     *
+     */
+    functions(): v0.Functions;
+    /**
      * Create an authenticated Carts instance
      *
      */

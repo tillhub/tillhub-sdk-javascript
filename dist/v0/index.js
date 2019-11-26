@@ -94,4 +94,6 @@ var staff_permissions_templates_1 = require("./staff_permissions_templates");
 exports.StaffPermissionsTemplates = staff_permissions_templates_1.StaffPermissionsTemplates;
 var voucher_systems_1 = require("./voucher_systems");
 exports.VoucherSystems = voucher_systems_1.VoucherSystems;
+var functions_1 = require("./functions");
+exports.Functions = functions_1.Functions;
 //# sourceMappingURL=index.js.map
