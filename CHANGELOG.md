@@ -1,3 +1,10 @@
+# [3.148.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.147.0...v3.148.0) (2019-11-26)
+
+
+### Features
+
+* **reports:** add cashbook ([ddb126a](https://github.com/tillhub/tillhub-sdk-javascript/commit/ddb126a))
+
 # [3.147.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.146.0...v3.147.0) (2019-11-19)
 
 

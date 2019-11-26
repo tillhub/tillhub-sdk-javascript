@@ -58,6 +58,7 @@ var balances_1 = require("./analytics/reports/balances");
 var payment_options_1 = require("./analytics/reports/payment_options");
 var payments_1 = require("./analytics/reports/payments");
 var vat_1 = require("./analytics/reports/vat");
+var cash_book_1 = require("./analytics/reports/cash_book");
 var customers_1 = require("./analytics/reports/customers");
 var Analytics = /** @class */ (function () {
     function Analytics(options, http) {
@@ -601,6 +602,9 @@ var Analytics = /** @class */ (function () {
     };
     Analytics.prototype.vat = function () {
         return new vat_1.Vat(this.options, this.http, this.uriHelper);
+    };
+    Analytics.prototype.cashBook = function () {
+        return new cash_book_1.CashBook(this.options, this.http, this.uriHelper);
     };
     Analytics.prototype.customers = function () {
         return new customers_1.Customers(this.options, this.http, this.uriHelper);
