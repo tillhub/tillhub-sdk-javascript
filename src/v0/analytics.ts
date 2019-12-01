@@ -95,6 +95,12 @@ export interface PaymentsReportOptions {
   [key: string]: any
 }
 
+export interface TopPaymentsReportOptions {
+  start?: string
+  end?: string
+  branch_number?: number
+}
+
 export interface ProductGoupsOptions {
   description?: string
   product_group_id?: string
@@ -398,6 +404,28 @@ export class Analytics {
     })
   }
 
+  getTopPaymentsReport(query?: TopPaymentsReportOptions): Promise<AnalyticsResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const base = `${this.options.base}${this.endpoint}/${
+          this.options.user
+          }/reports/payments/top`
+
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new TopPaymentsReportFetchFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as AnalyticsResponse)
+      } catch (err) {
+        return reject(new TopPaymentsReportFetchFailed())
+      }
+    })
+  }
+
   getSimpleSalesCartItems(
     query?: SimpleSalesCartItemsOptions | undefined
   ): Promise<AnalyticsResponse> {
@@ -598,7 +626,14 @@ export class ProductsReportFetchFailed extends BaseError {
 
 export class PaymentsReportFetchFailed extends BaseError {
   public name = 'PaymentsReportFetchFailed'
-  constructor(public message: string = 'Could not fetch the payments report', properties?: any) {
+  constructor(public message: string = 'Could not fetch payments report', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class TopPaymentsReportFetchFailed extends BaseError {
+  public name = 'TopPaymentsReportFetchFailed'
+  constructor(public message: string = 'Could not fetch top payments report', properties?: any) {
     super(message, properties)
   }
 }
