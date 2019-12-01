@@ -1,3 +1,10 @@
+# [3.150.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.149.0...v3.150.0) (2019-12-01)
+
+
+### Features
+
+* **reports:** add top payments ([ef6ddf5](https://github.com/tillhub/tillhub-sdk-javascript/commit/ef6ddf5))
+
 # [3.149.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.148.0...v3.149.0) (2019-11-26)
 
 

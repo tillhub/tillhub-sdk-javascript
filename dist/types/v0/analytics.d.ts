@@ -81,6 +81,11 @@ export interface SimpleSalesCartItemsOptions {
 export interface PaymentsReportOptions {
     [key: string]: any;
 }
+export interface TopPaymentsReportOptions {
+    start?: string;
+    end?: string;
+    branch_number?: number;
+}
 export interface ProductGoupsOptions {
     description?: string;
     product_group_id?: string;
@@ -135,6 +140,7 @@ export declare class Analytics {
     getVouchersReports(query?: VoucherOptions | undefined): Promise<AnalyticsResponse>;
     getProductsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse>;
     getPaymentsReport(query?: PaymentsReportOptions): Promise<AnalyticsResponse>;
+    getTopPaymentsReport(query?: TopPaymentsReportOptions): Promise<AnalyticsResponse>;
     getSimpleSalesCartItems(query?: SimpleSalesCartItemsOptions | undefined): Promise<AnalyticsResponse>;
     getCustomersReport(query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse>;
     getCustomersTransaction(query: CustomersTransactionOptions): Promise<AnalyticsResponse>;
@@ -170,6 +176,11 @@ export declare class ProductsReportFetchFailed extends BaseError {
     constructor(message?: string, properties?: any);
 }
 export declare class PaymentsReportFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class TopPaymentsReportFetchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);
