@@ -45,6 +45,7 @@ import { Promotions } from './promotions'
 import { StaffPermissionsTemplates } from './staff_permissions_templates'
 import { VoucherSystems } from './voucher_systems'
 import { Functions } from './functions'
+import { DeviceGroups } from './device_groups'
 
 export {
   Auth,
@@ -95,5 +96,6 @@ export {
   Promotions,
   StaffPermissionsTemplates,
   VoucherSystems,
-  Functions
+  Functions,
+  DeviceGroups
 }
