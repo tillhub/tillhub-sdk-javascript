@@ -1,3 +1,10 @@
+# [3.151.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.150.0...v3.151.0) (2019-12-03)
+
+
+### Features
+
+* add device groups ([35d5c85](https://github.com/tillhub/tillhub-sdk-javascript/commit/35d5c85))
+
 # [3.150.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.149.0...v3.150.0) (2019-12-01)
 
 

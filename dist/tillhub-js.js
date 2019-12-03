@@ -602,6 +602,13 @@ var TillhubClient = /** @class */ (function (_super) {
         return this.generateAuthenticatedInstance(v0.Functions);
     };
     /**
+     * Create an authenticated Device Groups instance
+     *
+     */
+    TillhubClient.prototype.deviceGroups = function () {
+        return this.generateAuthenticatedInstance(v0.DeviceGroups);
+    };
+    /**
      * Create an authenticated Carts instance
      *
      */

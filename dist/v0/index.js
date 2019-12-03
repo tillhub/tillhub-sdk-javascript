@@ -96,4 +96,6 @@ var voucher_systems_1 = require("./voucher_systems");
 exports.VoucherSystems = voucher_systems_1.VoucherSystems;
 var functions_1 = require("./functions");
 exports.Functions = functions_1.Functions;
+var device_groups_1 = require("./device_groups");
+exports.DeviceGroups = device_groups_1.DeviceGroups;
 //# sourceMappingURL=index.js.map
