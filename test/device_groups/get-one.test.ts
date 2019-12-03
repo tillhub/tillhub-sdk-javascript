@@ -19,7 +19,7 @@ if (process.env.SYSTEM_TEST) {
 }
 
 const legacyId = '4564'
-const functionId = 'abc123'
+const deviceGroupId = 'abc123'
 
 const mock = new MockAdapter(axios)
 afterEach(() => {
@@ -44,7 +44,7 @@ describe('v0: DeviceGroups: Actions: can get one', () => {
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v0/deviceGroups/${legacyId}/${functionId}`
+          `https://api.tillhub.com/api/v0/device_groups/${legacyId}/${deviceGroupId}`
         )
         .reply(function (config) {
           return [
@@ -77,7 +77,7 @@ describe('v0: DeviceGroups: Actions: can get one', () => {
 
     expect(deviceGroups).toBeInstanceOf(v0.DeviceGroups)
 
-    const { data } = await deviceGroups.get(functionId)
+    const { data } = await deviceGroups.get(deviceGroupId)
 
     expect(data).toEqual({ testKey: 'testKey' })
   })
@@ -99,7 +99,7 @@ describe('v0: DeviceGroups: Actions: can get one', () => {
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v0/deviceGroups/${legacyId}/${functionId}`
+          `https://api.tillhub.com/api/v0/device_groups/${legacyId}/${deviceGroupId}`
         )
         .reply(function (config) {
           return [400]
@@ -123,9 +123,9 @@ describe('v0: DeviceGroups: Actions: can get one', () => {
     })
 
     try {
-      await th.deviceGroups().get(functionId)
+      await th.deviceGroups().get(deviceGroupId)
     } catch (err) {
-      expect(err.name).toBe('FunctionFetchFailed')
+      expect(err.name).toBe('DeviceGroupFetchFailed')
     }
   })
 })
