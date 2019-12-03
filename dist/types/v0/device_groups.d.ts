@@ -12,6 +12,7 @@ export interface DeviceGroupsQuery {
     query?: {
         deleted?: boolean;
         active?: boolean;
+        name?: string;
     };
 }
 export interface DeviceGroupsResponse {

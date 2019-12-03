@@ -1,3 +1,10 @@
+## [3.151.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.151.0...v3.151.1) (2019-12-03)
+
+
+### Bug Fixes
+
+* **device_groups:** add `name` query support ([ef6ade8](https://github.com/tillhub/tillhub-sdk-javascript/commit/ef6ade8))
+
 # [3.151.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.150.0...v3.151.0) (2019-12-03)
 
 
