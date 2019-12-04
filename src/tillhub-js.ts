@@ -740,6 +740,13 @@ export class TillhubClient extends events.EventEmitter {
   staffPermissionsTemplates(): v0.StaffPermissionsTemplates {
     return this.generateAuthenticatedInstance(v0.StaffPermissionsTemplates)
   }
+
+  /**
+   * Create an authenticated pricebooks instance
+   */
+  pricebooks(): v0.Pricebooks {
+    return this.generateAuthenticatedInstance(v0.Pricebooks)
+  }
 }
 
 export class Tillhub extends TillhubClient {

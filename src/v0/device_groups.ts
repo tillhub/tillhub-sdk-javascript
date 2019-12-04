@@ -38,7 +38,7 @@ export interface DeviceGroup {
   description?: string
   devices?: string[]
   active?: boolean
-  deletec?: boolean
+  deleted?: boolean
 }
 
 export class DeviceGroups extends ThBaseHandler {
