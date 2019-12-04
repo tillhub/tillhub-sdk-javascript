@@ -1,3 +1,15 @@
+# [3.152.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.151.1...v3.152.0) (2019-12-04)
+
+
+### Bug Fixes
+
+* **device-groups:** fix typo ([898f7f0](https://github.com/tillhub/tillhub-sdk-javascript/commit/898f7f0))
+
+
+### Features
+
+* **pricebooks:** add pricebooks handlers ([6da6be3](https://github.com/tillhub/tillhub-sdk-javascript/commit/6da6be3))
+
 ## [3.151.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.151.0...v3.151.1) (2019-12-03)
 
 

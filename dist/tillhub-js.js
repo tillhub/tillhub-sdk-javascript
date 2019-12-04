@@ -622,6 +622,12 @@ var TillhubClient = /** @class */ (function (_super) {
     TillhubClient.prototype.staffPermissionsTemplates = function () {
         return this.generateAuthenticatedInstance(v0.StaffPermissionsTemplates);
     };
+    /**
+     * Create an authenticated pricebooks instance
+     */
+    TillhubClient.prototype.pricebooks = function () {
+        return this.generateAuthenticatedInstance(v0.Pricebooks);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));
