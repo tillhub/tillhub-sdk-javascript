@@ -35,6 +35,7 @@ export interface PricebookResponse {
 
 export interface Pricebook {
   name?: string
+  custom_id?: string
   constraints?: object
   active?: boolean
   deleted?: boolean
