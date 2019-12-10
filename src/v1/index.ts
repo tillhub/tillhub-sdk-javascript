@@ -1,4 +1,5 @@
 import { Auth } from './auth'
+import { Pricebooks } from './pricebooks'
 import { Products } from './products'
 import { Templates } from './templates'
 import { Transactions, TransactionsLegacy } from './transactions'
@@ -9,6 +10,7 @@ import { Carts } from './carts'
 
 export {
   Auth,
+  Pricebooks,
   Products,
   Templates,
   Transactions,

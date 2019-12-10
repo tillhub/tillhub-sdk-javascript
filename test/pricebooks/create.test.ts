@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
-import { v0 } from '../../src/tillhub-js'
+import { Pricebooks } from './../../src/v1/pricebooks'
 import { initThInstance } from '../util'
 
 const legacyId = '4564'
@@ -33,7 +33,7 @@ describe('v0: Pricebook: can create one pricebook', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/pricebooks/${legacyId}`).reply(function (config) {
+      mock.onPost(`https://api.tillhub.com/api/v1/products/${legacyId}/prices/book`).reply(function (config) {
         return [
           200,
           {
@@ -46,9 +46,9 @@ describe('v0: Pricebook: can create one pricebook', () => {
 
     const th = await initThInstance()
 
-    const pricebooks = th.pricebooks()
+    const pricebooks = th.products().pricebooks()
 
-    expect(pricebooks).toBeInstanceOf(v0.Pricebooks)
+    expect(pricebooks).toBeInstanceOf(Pricebooks)
 
     const { data } = await pricebooks.create(pricebook)
 
@@ -70,14 +70,14 @@ describe('v0: Pricebook: can create one pricebook', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/pricebooks/${legacyId}`).reply(function (config) {
+      mock.onPost(`https://api.tillhub.com/api/v1/products/${legacyId}/prices/book`).reply(function (config) {
         return [205]
       })
     }
 
     try {
       const th = await initThInstance()
-      await th.pricebooks().create(pricebook)
+      await th.products().pricebooks().create(pricebook)
     } catch (err) {
       expect(err.name).toBe('PricebookCreationFailed')
     }

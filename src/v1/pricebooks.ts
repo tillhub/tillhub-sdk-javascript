@@ -40,21 +40,15 @@ export interface Pricebook {
   deleted?: boolean
 }
 
-export class Pricebooks extends ThBaseHandler {
-  public static baseEndpoint = '/api/v0/pricebooks'
-  endpoint: string
+export class Pricebooks {
   http: Client
   public options: PricebooksOptions
   public uriHelper: UriHelper
 
-  constructor(options: PricebooksOptions, http: Client) {
-    super(http, { endpoint: Pricebooks.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+  constructor(options: PricebooksOptions, http: Client, uriHelper: UriHelper) {
     this.options = options
     this.http = http
-
-    this.endpoint = Pricebooks.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
-    this.uriHelper = new UriHelper(this.endpoint, this.options)
+    this.uriHelper = uriHelper
   }
 
   getAll(query?: PricebooksQuery | undefined): Promise<PricebooksResponse> {
@@ -62,7 +56,7 @@ export class Pricebooks extends ThBaseHandler {
       let next
 
       try {
-        const base = this.uriHelper.generateBaseUri()
+        const base = this.uriHelper.generateBaseUri('/prices/book')
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
@@ -85,7 +79,7 @@ export class Pricebooks extends ThBaseHandler {
   meta(): Promise<PricebooksResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const uri = this.uriHelper.generateBaseUri(`/meta`)
+        const uri = this.uriHelper.generateBaseUri(`/prices/book/meta`)
         const response = await this.http.getClient().get(uri)
 
         if (response.status !== 200) reject(new PricebooksMetaFailed())
@@ -102,7 +96,7 @@ export class Pricebooks extends ThBaseHandler {
 
   get(pricebookId: string): Promise<PricebookResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/${pricebookId}`)
+      const uri = this.uriHelper.generateBaseUri(`/prices/book/${pricebookId}`)
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
@@ -121,7 +115,7 @@ export class Pricebooks extends ThBaseHandler {
 
   put(pricebookId: string, pricebook: Pricebook): Promise<PricebookResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/${pricebookId}`)
+      const uri = this.uriHelper.generateBaseUri(`/prices/book/${pricebookId}`)
       try {
         const response = await this.http.getClient().put(uri, pricebook)
 
@@ -137,7 +131,7 @@ export class Pricebooks extends ThBaseHandler {
 
   create(pricebook: Pricebook): Promise<PricebookResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateBaseUri('/prices/book')
       try {
         const response = await this.http.getClient().post(uri, pricebook)
 
@@ -153,7 +147,7 @@ export class Pricebooks extends ThBaseHandler {
 
   delete(pricebookId: string): Promise<PricebookResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/${pricebookId}`)
+      const uri = this.uriHelper.generateBaseUri(`/prices/book/${pricebookId}`)
       try {
         const response = await this.http.getClient().delete(uri)
         response.status !== 200 && reject(new PricebookDeleteFailed())
