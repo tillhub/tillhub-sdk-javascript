@@ -1,3 +1,10 @@
+# [3.153.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.152.1...v3.153.0) (2019-12-10)
+
+
+### Features
+
+* **pricebooks:** add prop custom id ([1d1d48e](https://github.com/tillhub/tillhub-sdk-javascript/commit/1d1d48e))
+
 ## [3.152.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.152.0...v3.152.1) (2019-12-10)
 
 
