@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var auth_1 = require("./auth");
 exports.Auth = auth_1.Auth;
+var pricebooks_1 = require("./pricebooks");
+exports.Pricebooks = pricebooks_1.Pricebooks;
 var products_1 = require("./products");
 exports.Products = products_1.Products;
 var templates_1 = require("./templates");

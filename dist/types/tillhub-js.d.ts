@@ -319,10 +319,6 @@ export declare class TillhubClient extends events.EventEmitter {
      *
      */
     staffPermissionsTemplates(): v0.StaffPermissionsTemplates;
-    /**
-     * Create an authenticated pricebooks instance
-     */
-    pricebooks(): v0.Pricebooks;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;

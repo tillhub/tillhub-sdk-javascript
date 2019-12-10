@@ -1,7 +1,6 @@
 import { Client } from '../client';
 import { BaseError } from '../errors';
 import { UriHelper } from '../uri-helper';
-import { ThBaseHandler } from '../base';
 export interface PricebooksOptions {
     user?: string;
     base?: string;
@@ -34,13 +33,11 @@ export interface Pricebook {
     active?: boolean;
     deleted?: boolean;
 }
-export declare class Pricebooks extends ThBaseHandler {
-    static baseEndpoint: string;
-    endpoint: string;
+export declare class Pricebooks {
     http: Client;
     options: PricebooksOptions;
     uriHelper: UriHelper;
-    constructor(options: PricebooksOptions, http: Client);
+    constructor(options: PricebooksOptions, http: Client, uriHelper: UriHelper);
     getAll(query?: PricebooksQuery | undefined): Promise<PricebooksResponse>;
     meta(): Promise<PricebooksResponse>;
     get(pricebookId: string): Promise<PricebookResponse>;

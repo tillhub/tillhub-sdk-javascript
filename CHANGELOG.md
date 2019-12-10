@@ -1,3 +1,10 @@
+## [3.152.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.152.0...v3.152.1) (2019-12-10)
+
+
+### Bug Fixes
+
+* **pricebooks:** make pricebook a sub-class of procuts ([af55f45](https://github.com/tillhub/tillhub-sdk-javascript/commit/af55f45))
+
 # [3.152.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.151.1...v3.152.0) (2019-12-04)
 
 

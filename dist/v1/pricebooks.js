@@ -49,18 +49,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var errors_1 = require("../errors");
-var uri_helper_1 = require("../uri-helper");
-var base_1 = require("../base");
-var Pricebooks = /** @class */ (function (_super) {
-    __extends(Pricebooks, _super);
-    function Pricebooks(options, http) {
-        var _this = _super.call(this, http, { endpoint: Pricebooks.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
-        _this.options = options;
-        _this.http = http;
-        _this.endpoint = Pricebooks.baseEndpoint;
-        _this.options.base = _this.options.base || 'https://api.tillhub.com';
-        _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
-        return _this;
+var Pricebooks = /** @class */ (function () {
+    function Pricebooks(options, http, uriHelper) {
+        this.options = options;
+        this.http = http;
+        this.uriHelper = uriHelper;
     }
     Pricebooks.prototype.getAll = function (query) {
         var _this = this;
@@ -71,7 +64,7 @@ var Pricebooks = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        base = this.uriHelper.generateBaseUri();
+                        base = this.uriHelper.generateBaseUri('/prices/book');
                         uri = this.uriHelper.generateUriWithQuery(base, query);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
@@ -100,7 +93,7 @@ var Pricebooks = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        uri = this.uriHelper.generateBaseUri("/meta");
+                        uri = this.uriHelper.generateBaseUri("/prices/book/meta");
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
@@ -125,7 +118,7 @@ var Pricebooks = /** @class */ (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = this.uriHelper.generateBaseUri("/" + pricebookId);
+                        uri = this.uriHelper.generateBaseUri("/prices/book/" + pricebookId);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -154,7 +147,7 @@ var Pricebooks = /** @class */ (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = this.uriHelper.generateBaseUri("/" + pricebookId);
+                        uri = this.uriHelper.generateBaseUri("/prices/book/" + pricebookId);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -180,7 +173,7 @@ var Pricebooks = /** @class */ (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = this.uriHelper.generateBaseUri();
+                        uri = this.uriHelper.generateBaseUri('/prices/book');
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -206,7 +199,7 @@ var Pricebooks = /** @class */ (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = this.uriHelper.generateBaseUri("/" + pricebookId);
+                        uri = this.uriHelper.generateBaseUri("/prices/book/" + pricebookId);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -225,9 +218,8 @@ var Pricebooks = /** @class */ (function (_super) {
             });
         }); });
     };
-    Pricebooks.baseEndpoint = '/api/v0/pricebooks';
     return Pricebooks;
-}(base_1.ThBaseHandler));
+}());
 exports.Pricebooks = Pricebooks;
 var PricebooksFetchFailed = /** @class */ (function (_super) {
     __extends(PricebooksFetchFailed, _super);

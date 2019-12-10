@@ -1,6 +1,7 @@
 import { Client } from '../client';
 import { UriHelper, HandlerQuery } from '../uri-helper';
 import { ThBaseHandler } from '../base';
+import { Pricebooks } from './pricebooks';
 export interface Images {
     '1x'?: string;
     avatar?: string;
@@ -143,5 +144,6 @@ export declare class Products extends ThBaseHandler {
     delete(productId: string, deleteOptions?: ProductDeleteOptions): Promise<ProductsResponse>;
     search(searchTerm: string): Promise<ProductsResponse>;
     bookStock(requestOptions: BookStockQuery): Promise<ProductResponse>;
+    pricebooks(): Pricebooks;
 }
 export {};
