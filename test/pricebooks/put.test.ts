@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
-import { v0 } from '../../src/tillhub-js'
+import { Pricebooks } from './../../src/v1/pricebooks'
 import { initThInstance } from '../util'
 
 const legacyId = '4564'
@@ -34,7 +34,7 @@ describe('v0: Pricebooks: can alter the pricebooks', () => {
       })
 
       mock
-        .onPut(`https://api.tillhub.com/api/v0/pricebooks/${legacyId}/${pricebookId}`)
+        .onPut(`https://api.tillhub.com/api/v1/products/${legacyId}/prices/book/${pricebookId}`)
         .reply(function (config) {
           return [
             200,
@@ -48,9 +48,9 @@ describe('v0: Pricebooks: can alter the pricebooks', () => {
 
     const th = await initThInstance()
 
-    const pricebooks = th.pricebooks()
+    const pricebooks = th.products().pricebooks()
 
-    expect(pricebooks).toBeInstanceOf(v0.Pricebooks)
+    expect(pricebooks).toBeInstanceOf(Pricebooks)
 
     const { data } = await pricebooks.put(pricebookId, pricebook)
 
@@ -72,7 +72,7 @@ describe('v0: Pricebooks: can alter the pricebooks', () => {
         ]
       })
       mock
-        .onPut(`https://api.tillhub.com/api/v0/pricebooks/${legacyId}/${pricebookId}`)
+        .onPut(`https://api.tillhub.com/api/v1/products/${legacyId}/prices/book/${pricebookId}`)
         .reply(function (config) {
           return [205]
         })
@@ -81,7 +81,7 @@ describe('v0: Pricebooks: can alter the pricebooks', () => {
     const th = await initThInstance()
 
     try {
-      await th.pricebooks().put(pricebookId, pricebook)
+      await th.products().pricebooks().put(pricebookId, pricebook)
     } catch (err) {
       expect(err.name).toBe('PricebookPutFailed')
     }

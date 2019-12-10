@@ -3,6 +3,7 @@ import { Client } from '../client'
 import * as errors from '../errors'
 import { UriHelper, HandlerQuery } from '../uri-helper'
 import { ThBaseHandler } from '../base'
+import { Pricebooks } from './pricebooks'
 
 export interface Images {
   '1x'?: string
@@ -447,5 +448,9 @@ export class Products extends ThBaseHandler {
         return reject(new errors.ProductsBookStockFailed())
       }
     })
+  }
+
+  pricebooks(): Pricebooks {
+    return new Pricebooks(this.options, this.http, this.uriHelper)
   }
 }

@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
-import { v0 } from '../../src/tillhub-js'
+import { Pricebooks } from './../../src/v1/pricebooks'
 import { initThInstance } from '../util'
 
 const legacyId = '4564'
@@ -32,7 +32,7 @@ describe('v0: Pricebooks: can delete a pricebook', () => {
       })
 
       mock
-        .onDelete(`https://api.tillhub.com/api/v0/pricebooks/${legacyId}/${pricebookId}`)
+        .onDelete(`https://api.tillhub.com/api/v1/products/${legacyId}/prices/book/${pricebookId}`)
         .reply(function (config) {
           return [
             200,
@@ -45,9 +45,9 @@ describe('v0: Pricebooks: can delete a pricebook', () => {
 
     const th = await initThInstance()
 
-    const pricebooks = th.pricebooks()
+    const pricebooks = th.products().pricebooks()
 
-    expect(pricebooks).toBeInstanceOf(v0.Pricebooks)
+    expect(pricebooks).toBeInstanceOf(Pricebooks)
 
     const { msg } = await pricebooks.delete(pricebookId)
 
@@ -69,7 +69,7 @@ describe('v0: Pricebooks: can delete a pricebook', () => {
         ]
       })
       mock
-        .onDelete(`https://api.tillhub.com/api/v0/pricebooks/${legacyId}/${pricebookId}`)
+        .onDelete(`https://api.tillhub.com/api/v1/products/${legacyId}/prices/book/${pricebookId}`)
         .reply(function (config) {
           return [205]
         })
@@ -78,7 +78,7 @@ describe('v0: Pricebooks: can delete a pricebook', () => {
     const th = await initThInstance()
 
     try {
-      await th.pricebooks().delete(pricebookId)
+      await th.products().pricebooks().delete(pricebookId)
     } catch (err) {
       expect(err.name).toBe('PricebookDeleteFailed')
     }
