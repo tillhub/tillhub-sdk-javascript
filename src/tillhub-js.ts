@@ -740,6 +740,14 @@ export class TillhubClient extends events.EventEmitter {
   staffPermissionsTemplates(): v0.StaffPermissionsTemplates {
     return this.generateAuthenticatedInstance(v0.StaffPermissionsTemplates)
   }
+
+  /**
+   * Create an authenticated Correspondences instance
+   *
+   */
+  correspondences(): v0.Correspondences {
+    return this.generateAuthenticatedInstance(v0.Correspondences)
+  }
 }
 
 export class Tillhub extends TillhubClient {
