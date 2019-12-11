@@ -98,4 +98,6 @@ var functions_1 = require("./functions");
 exports.Functions = functions_1.Functions;
 var device_groups_1 = require("./device_groups");
 exports.DeviceGroups = device_groups_1.DeviceGroups;
+var correspondences_1 = require("./correspondences");
+exports.Correspondences = correspondences_1.Correspondences;
 //# sourceMappingURL=index.js.map

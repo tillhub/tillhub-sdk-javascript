@@ -622,6 +622,13 @@ var TillhubClient = /** @class */ (function (_super) {
     TillhubClient.prototype.staffPermissionsTemplates = function () {
         return this.generateAuthenticatedInstance(v0.StaffPermissionsTemplates);
     };
+    /**
+     * Create an authenticated Correspondences instance
+     *
+     */
+    TillhubClient.prototype.correspondences = function () {
+        return this.generateAuthenticatedInstance(v0.Correspondences);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));

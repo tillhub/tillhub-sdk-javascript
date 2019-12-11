@@ -1,3 +1,10 @@
+# [3.154.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.153.0...v3.154.0) (2019-12-11)
+
+
+### Features
+
+* **correspondences:** add correspondences library ([#258](https://github.com/tillhub/tillhub-sdk-javascript/issues/258)) ([1c3364a](https://github.com/tillhub/tillhub-sdk-javascript/commit/1c3364a))
+
 # [3.153.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.152.1...v3.153.0) (2019-12-10)
 
 

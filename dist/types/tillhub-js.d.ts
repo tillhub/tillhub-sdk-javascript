@@ -319,6 +319,11 @@ export declare class TillhubClient extends events.EventEmitter {
      *
      */
     staffPermissionsTemplates(): v0.StaffPermissionsTemplates;
+    /**
+     * Create an authenticated Correspondences instance
+     *
+     */
+    correspondences(): v0.Correspondences;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;
