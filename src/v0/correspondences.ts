@@ -67,24 +67,14 @@ export class Correspondences extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(queryOrOptions?: CorrespondencesQuery | undefined): Promise<CorrespondencesResponse> {
+  getAll(query?: CorrespondencesQuery | undefined): Promise<CorrespondencesResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
-        let uri
-        if (queryOrOptions && queryOrOptions.uri) {
-          uri = queryOrOptions.uri
-        } else {
-          let queryString = ''
-          if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
-            queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
-          }
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
-            queryString ? `?${queryString}` : ''
-            }`
-        }
+        const base = this.uriHelper.generateBaseUri()
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
@@ -108,7 +98,7 @@ export class Correspondences extends ThBaseHandler {
 
   get(correspondenceId: string): Promise<CorrespondenceResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${correspondenceId}`
+      const uri = this.uriHelper.generateBaseUri(`/${correspondenceId}`)
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
@@ -127,7 +117,7 @@ export class Correspondences extends ThBaseHandler {
 
   put(correspondenceId: string, correspondence: Correspondence): Promise<CorrespondenceResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${correspondenceId}`
+      const uri = this.uriHelper.generateBaseUri(`/${correspondenceId}`)
       try {
         const response = await this.http.getClient().put(uri, correspondence)
 
@@ -143,7 +133,7 @@ export class Correspondences extends ThBaseHandler {
 
   create(correspondence: Correspondence): Promise<CorrespondenceResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+      const uri = this.uriHelper.generateBaseUri()
       try {
         const response = await this.http.getClient().post(uri, correspondence)
 
@@ -182,13 +172,6 @@ export class CorrespondencePutFailed extends BaseError {
 export class CorrespondenceCreationFailed extends BaseError {
   public name = 'CorrespondenceCreationFailed'
   constructor(public message: string = 'Could not create correspondence', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class CorrespondencesCountFailed extends BaseError {
-  public name = 'CorrespondencesCountFailed'
-  constructor(public message: string = 'Could not count the Correspondences', properties?: any) {
     super(message, properties)
   }
 }
