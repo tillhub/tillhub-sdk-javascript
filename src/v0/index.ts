@@ -46,6 +46,7 @@ import { StaffPermissionsTemplates } from './staff_permissions_templates'
 import { VoucherSystems } from './voucher_systems'
 import { Functions } from './functions'
 import { DeviceGroups } from './device_groups'
+import { Correspondences } from './correspondences'
 
 export {
   Auth,
@@ -97,5 +98,6 @@ export {
   StaffPermissionsTemplates,
   VoucherSystems,
   Functions,
-  DeviceGroups
+  DeviceGroups,
+  Correspondences
 }
