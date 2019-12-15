@@ -141,7 +141,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "just-diff": "^2.2.0",
+    "just-diff": "^3.0.2",
     "just-typeof": "^2.0.0",
     "mqtt": "^2.18.8",
     "qs": "^6.6.0",
