@@ -1,7 +1,6 @@
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
-import { ThBaseHandler } from '../base'
 
 export interface PricebooksOptions {
   user?: string
