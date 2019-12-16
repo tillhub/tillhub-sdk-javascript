@@ -1,3 +1,10 @@
+## [3.155.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.155.0...v3.155.1) (2019-12-16)
+
+
+### Bug Fixes
+
+* **pricebook-entries:** small change for force update ([0869a00](https://github.com/tillhub/tillhub-sdk-javascript/commit/0869a00))
+
 # [3.155.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.154.0...v3.155.0) (2019-12-16)
 
 
