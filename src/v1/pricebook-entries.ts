@@ -114,7 +114,7 @@ export class PricebookEntries {
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
-        reject(new PricebookEntryFetchFailed(undefined, { status: response.status }))
+          reject(new PricebookEntryFetchFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results[0] as PricebookEntry,
