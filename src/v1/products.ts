@@ -4,6 +4,7 @@ import * as errors from '../errors'
 import { UriHelper, HandlerQuery } from '../uri-helper'
 import { ThBaseHandler } from '../base'
 import { Pricebooks } from './pricebooks'
+import { PricebookEntries } from './pricebook-entries'
 
 export interface Images {
   '1x'?: string
@@ -452,5 +453,9 @@ export class Products extends ThBaseHandler {
 
   pricebooks(): Pricebooks {
     return new Pricebooks(this.options, this.http, this.uriHelper)
+  }
+
+  pricebookEntries(): PricebookEntries {
+    return new PricebookEntries(this.options, this.http, this.uriHelper)
   }
 }
