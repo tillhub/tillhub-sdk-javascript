@@ -2,6 +2,7 @@ import { Client } from '../client';
 import { UriHelper, HandlerQuery } from '../uri-helper';
 import { ThBaseHandler } from '../base';
 import { Pricebooks } from './pricebooks';
+import { PricebookEntries } from './pricebook-entries';
 export interface Images {
     '1x'?: string;
     avatar?: string;
@@ -145,5 +146,6 @@ export declare class Products extends ThBaseHandler {
     search(searchTerm: string): Promise<ProductsResponse>;
     bookStock(requestOptions: BookStockQuery): Promise<ProductResponse>;
     pricebooks(): Pricebooks;
+    pricebookEntries(): PricebookEntries;
 }
 export {};

@@ -1,3 +1,10 @@
+# [3.155.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.154.0...v3.155.0) (2019-12-16)
+
+
+### Features
+
+* **pricebook-entries:** add crud handler for pricebook entries ([f8145f6](https://github.com/tillhub/tillhub-sdk-javascript/commit/f8145f6))
+
 # [3.154.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.153.0...v3.154.0) (2019-12-11)
 
 

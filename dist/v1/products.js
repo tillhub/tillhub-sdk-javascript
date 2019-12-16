@@ -63,6 +63,7 @@ var errors = __importStar(require("../errors"));
 var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
 var pricebooks_1 = require("./pricebooks");
+var pricebook_entries_1 = require("./pricebook-entries");
 var Products = /** @class */ (function (_super) {
     __extends(Products, _super);
     function Products(options, http) {
@@ -453,6 +454,9 @@ var Products = /** @class */ (function (_super) {
     };
     Products.prototype.pricebooks = function () {
         return new pricebooks_1.Pricebooks(this.options, this.http, this.uriHelper);
+    };
+    Products.prototype.pricebookEntries = function () {
+        return new pricebook_entries_1.PricebookEntries(this.options, this.http, this.uriHelper);
     };
     Products.baseEndpoint = '/api/v1/products';
     return Products;
