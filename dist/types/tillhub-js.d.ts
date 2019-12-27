@@ -329,6 +329,16 @@ export declare class TillhubClient extends events.EventEmitter {
      *
      */
     storefronts(): v0.Storefronts;
+    /**
+     * Create an authenticated CategoryTrees instance
+     *
+     */
+    categoryTrees(): v0.CategoryTrees;
+    /**
+     * Create an authenticated Categories instance
+     *
+     */
+    categories(): v0.Categories;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;

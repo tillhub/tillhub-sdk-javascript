@@ -636,6 +636,20 @@ var TillhubClient = /** @class */ (function (_super) {
     TillhubClient.prototype.storefronts = function () {
         return this.generateAuthenticatedInstance(v0.Storefronts);
     };
+    /**
+     * Create an authenticated CategoryTrees instance
+     *
+     */
+    TillhubClient.prototype.categoryTrees = function () {
+        return this.generateAuthenticatedInstance(v0.CategoryTrees);
+    };
+    /**
+     * Create an authenticated Categories instance
+     *
+     */
+    TillhubClient.prototype.categories = function () {
+        return this.generateAuthenticatedInstance(v0.Categories);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));
