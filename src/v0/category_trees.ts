@@ -139,6 +139,22 @@ export class CategoryTrees extends ThBaseHandler {
       }
     })
   }
+
+  delete(storefrontId: string): Promise<CategoryTreeResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${storefrontId}`
+      try {
+        const response = await this.http.getClient().delete(uri)
+        response.status !== 200 && reject(new CategortTreesDeleteFailed())
+
+        return resolve({
+          msg: response.data.msg
+        } as CategoryTreeResponse)
+      } catch (err) {
+        return reject(new CategortTreesDeleteFailed())
+      }
+    })
+  }
 }
 
 export class CategoryTreesFetchFailed extends BaseError {
@@ -165,6 +181,13 @@ export class CategoryTreePutFailed extends BaseError {
 export class CategoryTreeCreationFailed extends BaseError {
   public name = 'CategoryTreeCreationFailed'
   constructor(public message: string = 'Could not create category tree', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class CategortTreesDeleteFailed extends BaseError {
+  public name = 'CategortTreesDeleteFailed'
+  constructor(public message: string = 'Could not delete category tree', properties?: any) {
     super(message, properties)
   }
 }

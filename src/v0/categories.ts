@@ -140,6 +140,22 @@ export class Categories extends ThBaseHandler {
       }
     })
   }
+
+  delete(storefrontId: string): Promise<CategoryResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${storefrontId}`
+      try {
+        const response = await this.http.getClient().delete(uri)
+        response.status !== 200 && reject(new CategoriesDeleteFailed())
+
+        return resolve({
+          msg: response.data.msg
+        } as CategoryResponse)
+      } catch (err) {
+        return reject(new CategoriesDeleteFailed())
+      }
+    })
+  }
 }
 
 export class CategoriesFetchFailed extends BaseError {
@@ -166,6 +182,13 @@ export class CategoryPutFailed extends BaseError {
 export class CategoryCreationFailed extends BaseError {
   public name = 'CategoryCreationFailed'
   constructor(public message: string = 'Could not create category', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class CategoriesDeleteFailed extends BaseError {
+  public name = 'CategoriesDeleteFailed'
+  constructor(public message: string = 'Could not delete category', properties?: any) {
     super(message, properties)
   }
 }
