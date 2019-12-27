@@ -748,6 +748,14 @@ export class TillhubClient extends events.EventEmitter {
   correspondences(): v0.Correspondences {
     return this.generateAuthenticatedInstance(v0.Correspondences)
   }
+
+  /**
+   * Create an authenticated Storefronts instance
+   *
+   */
+  storefronts(): v0.Storefronts {
+    return this.generateAuthenticatedInstance(v0.Storefronts)
+  }
 }
 
 export class Tillhub extends TillhubClient {

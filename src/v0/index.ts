@@ -47,6 +47,7 @@ import { VoucherSystems } from './voucher_systems'
 import { Functions } from './functions'
 import { DeviceGroups } from './device_groups'
 import { Correspondences } from './correspondences'
+import { Storefronts } from './storefronts'
 
 export {
   Auth,
@@ -99,5 +100,6 @@ export {
   VoucherSystems,
   Functions,
   DeviceGroups,
-  Correspondences
+  Correspondences,
+  Storefronts
 }
