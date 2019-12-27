@@ -756,6 +756,22 @@ export class TillhubClient extends events.EventEmitter {
   storefronts(): v0.Storefronts {
     return this.generateAuthenticatedInstance(v0.Storefronts)
   }
+
+  /**
+   * Create an authenticated CategoryTrees instance
+   *
+   */
+  categoryTrees(): v0.CategoryTrees {
+    return this.generateAuthenticatedInstance(v0.CategoryTrees)
+  }
+
+  /**
+   * Create an authenticated Categories instance
+   *
+   */
+  categories(): v0.Categories {
+    return this.generateAuthenticatedInstance(v0.Categories)
+  }
 }
 
 export class Tillhub extends TillhubClient {

@@ -48,6 +48,8 @@ import { Functions } from './functions'
 import { DeviceGroups } from './device_groups'
 import { Correspondences } from './correspondences'
 import { Storefronts } from './storefronts'
+import { Categories } from './categories'
+import { CategoryTrees } from './category_trees'
 
 export {
   Auth,
@@ -101,5 +103,7 @@ export {
   Functions,
   DeviceGroups,
   Correspondences,
-  Storefronts
+  Storefronts,
+  Categories,
+  CategoryTrees
 }
