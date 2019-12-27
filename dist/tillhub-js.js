@@ -629,6 +629,13 @@ var TillhubClient = /** @class */ (function (_super) {
     TillhubClient.prototype.correspondences = function () {
         return this.generateAuthenticatedInstance(v0.Correspondences);
     };
+    /**
+     * Create an authenticated Storefronts instance
+     *
+     */
+    TillhubClient.prototype.storefronts = function () {
+        return this.generateAuthenticatedInstance(v0.Storefronts);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));

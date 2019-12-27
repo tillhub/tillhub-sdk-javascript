@@ -100,4 +100,6 @@ var device_groups_1 = require("./device_groups");
 exports.DeviceGroups = device_groups_1.DeviceGroups;
 var correspondences_1 = require("./correspondences");
 exports.Correspondences = correspondences_1.Correspondences;
+var storefronts_1 = require("./storefronts");
+exports.Storefronts = storefronts_1.Storefronts;
 //# sourceMappingURL=index.js.map

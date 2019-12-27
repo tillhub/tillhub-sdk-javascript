@@ -1,3 +1,10 @@
+# [3.156.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.155.1...v3.156.0) (2019-12-27)
+
+
+### Features
+
+* add storefronts ([692e3ef](https://github.com/tillhub/tillhub-sdk-javascript/commit/692e3ef))
+
 ## [3.155.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.155.0...v3.155.1) (2019-12-16)
 
 
