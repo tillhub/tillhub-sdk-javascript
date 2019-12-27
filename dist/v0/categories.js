@@ -176,6 +176,32 @@ var Categories = /** @class */ (function (_super) {
             });
         }); });
     };
+    Categories.prototype.delete = function (storefrontId) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, err_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + storefrontId;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().delete(uri)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 && reject(new CategoriesDeleteFailed());
+                        return [2 /*return*/, resolve({
+                                msg: response.data.msg
+                            })];
+                    case 3:
+                        err_1 = _a.sent();
+                        return [2 /*return*/, reject(new CategoriesDeleteFailed())];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     Categories.baseEndpoint = '/api/v0/categories';
     return Categories;
 }(base_1.ThBaseHandler));
@@ -228,4 +254,16 @@ var CategoryCreationFailed = /** @class */ (function (_super) {
     return CategoryCreationFailed;
 }(errors_1.BaseError));
 exports.CategoryCreationFailed = CategoryCreationFailed;
+var CategoriesDeleteFailed = /** @class */ (function (_super) {
+    __extends(CategoriesDeleteFailed, _super);
+    function CategoriesDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete category'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'CategoriesDeleteFailed';
+        return _this;
+    }
+    return CategoriesDeleteFailed;
+}(errors_1.BaseError));
+exports.CategoriesDeleteFailed = CategoriesDeleteFailed;
 //# sourceMappingURL=categories.js.map

@@ -48,6 +48,7 @@ export declare class Categories extends ThBaseHandler {
     get(categoryId: string): Promise<CategoryResponse>;
     put(categoryId: string, category: Category): Promise<CategoryResponse>;
     create(category: Category): Promise<CategoryResponse>;
+    delete(storefrontId: string): Promise<CategoryResponse>;
 }
 export declare class CategoriesFetchFailed extends BaseError {
     message: string;
@@ -65,6 +66,11 @@ export declare class CategoryPutFailed extends BaseError {
     constructor(message?: string, properties?: any);
 }
 export declare class CategoryCreationFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class CategoriesDeleteFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);

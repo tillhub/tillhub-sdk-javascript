@@ -1,3 +1,10 @@
+## [3.157.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.157.0...v3.157.1) (2019-12-27)
+
+
+### Bug Fixes
+
+* **categories:** add missing delete handlers ([80a642b](https://github.com/tillhub/tillhub-sdk-javascript/commit/80a642b))
+
 # [3.157.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.156.0...v3.157.0) (2019-12-27)
 
 

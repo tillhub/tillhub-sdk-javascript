@@ -176,6 +176,32 @@ var CategoryTrees = /** @class */ (function (_super) {
             });
         }); });
     };
+    CategoryTrees.prototype.delete = function (storefrontId) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, err_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + storefrontId;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().delete(uri)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 && reject(new CategortTreesDeleteFailed());
+                        return [2 /*return*/, resolve({
+                                msg: response.data.msg
+                            })];
+                    case 3:
+                        err_1 = _a.sent();
+                        return [2 /*return*/, reject(new CategortTreesDeleteFailed())];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     CategoryTrees.baseEndpoint = '/api/v0/category_trees';
     return CategoryTrees;
 }(base_1.ThBaseHandler));
@@ -228,4 +254,16 @@ var CategoryTreeCreationFailed = /** @class */ (function (_super) {
     return CategoryTreeCreationFailed;
 }(errors_1.BaseError));
 exports.CategoryTreeCreationFailed = CategoryTreeCreationFailed;
+var CategortTreesDeleteFailed = /** @class */ (function (_super) {
+    __extends(CategortTreesDeleteFailed, _super);
+    function CategortTreesDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete category tree'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'CategortTreesDeleteFailed';
+        return _this;
+    }
+    return CategortTreesDeleteFailed;
+}(errors_1.BaseError));
+exports.CategortTreesDeleteFailed = CategortTreesDeleteFailed;
 //# sourceMappingURL=category_trees.js.map

@@ -47,6 +47,7 @@ export declare class CategoryTrees extends ThBaseHandler {
     get(categoryTreeId: string): Promise<CategoryTreeResponse>;
     put(categoryTreeId: string, categoryTree: CategoryTree): Promise<CategoryTreeResponse>;
     create(categoryTree: CategoryTree): Promise<CategoryTreeResponse>;
+    delete(storefrontId: string): Promise<CategoryTreeResponse>;
 }
 export declare class CategoryTreesFetchFailed extends BaseError {
     message: string;
@@ -64,6 +65,11 @@ export declare class CategoryTreePutFailed extends BaseError {
     constructor(message?: string, properties?: any);
 }
 export declare class CategoryTreeCreationFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class CategortTreesDeleteFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);
