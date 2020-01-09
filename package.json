@@ -31,7 +31,7 @@
     "clean": "rimraf dist docs",
     "start": "rollup -c rollup.config.ts -w",
     "test": "jest --coverage",
-    "test:watch": "jest --watchAll",
+    "test:watch": "jest --watchAll --runInBand",
     "tdd": "npm run test:watch",
     "test:prod": "npm run lint && npm run test -- --coverage --no-cache --runInBand",
     "deploy-docs": "ts-node tools/gh-pages-publish",

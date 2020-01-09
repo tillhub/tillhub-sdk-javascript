@@ -518,10 +518,13 @@ export class Analytics {
     return new Promise(async (resolve, reject) => {
       try {
         const queryString = qs.stringify(query, { addQueryPrefix: true })
-        const uri = `${this.options.base}${this.endpoint}/${
+        // TODO: move this to proper v1. We cut a corner here not to require consumers refactoring for the report
+        const uri = `${this.options.base}/api/v1/analytics/${
           this.options.user
           }/reports/stocks${queryString}`
+
         const response = await this.http.getClient().get(uri)
+
         response.status !== 200 && reject(new ReportsStocksFetchFailed())
         return resolve({
           data: response.data.results,

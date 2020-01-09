@@ -21,7 +21,7 @@ describe('v0: Analytics: gets Stocks report', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/stocks`)
+        .onGet(`https://api.tillhub.com/api/v1/analytics/${legacyId}/reports/stocks`)
         .reply(function (config) {
           return [
             200,
@@ -66,7 +66,7 @@ describe('v0: Analytics: gets Stocks report', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/stocks${queryString}`)
+        .onGet(`https://api.tillhub.com/api/v1/analytics/${legacyId}/reports/stocks${queryString}`)
         .reply(function (config) {
           return [
             200,
@@ -105,7 +105,7 @@ describe('v0: Analytics: gets Stocks report', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/stocks`)
+        .onGet(`https://api.tillhub.com/api/v1/analytics/${legacyId}/reports/stocks`)
         .reply(function (config) {
           return [205]
         })
