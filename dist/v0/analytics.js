@@ -544,7 +544,7 @@ var Analytics = /** @class */ (function () {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         queryString = qs_1.default.stringify(query, { addQueryPrefix: true });
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/reports/stocks" + queryString;
+                        uri = this.options.base + "/api/v1/analytics/" + this.options.user + "/reports/stocks" + queryString;
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();

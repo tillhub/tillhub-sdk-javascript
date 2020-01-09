@@ -1,3 +1,10 @@
+# [3.158.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.157.1...v3.158.0) (2020-01-09)
+
+
+### Features
+
+* **analytics/stock:** move to v1 ([80a3d7d](https://github.com/tillhub/tillhub-sdk-javascript/commit/80a3d7d))
+
 ## [3.157.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.157.0...v3.157.1) (2019-12-27)
 
 
