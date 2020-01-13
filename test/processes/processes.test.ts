@@ -299,55 +299,55 @@ describe('v0: Processes', () => {
     expect(data).toEqual(mockItems)
   })
 
-  // it('deletes one process', async () => {
-  //   if (process.env.SYSTEM_TEST !== 'true') {
-  //     mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
-  //       return [
-  //         200,
-  //         {
-  //           token: '',
-  //           user: {
-  //             id: '123',
-  //             legacy_id: legacyId
-  //           }
-  //         }
-  //       ]
-  //     })
-  //
-  //     mock
-  //       .onDelete(`https://api.tillhub.com/api/v0/processes/${legacyId}/${processId}`)
-  //       .reply((config) => {
-  //         return [
-  //           200,
-  //           {
-  //             msg: mockMsg
-  //           }
-  //         ]
-  //       })
-  //   }
-  //
-  //   const options = {
-  //     credentials: {
-  //       username: user.username,
-  //       password: user.password
-  //     },
-  //     base: process.env.TILLHUB_BASE
-  //   }
-  //
-  //   const th = new TillhubClient()
-  //
-  //   th.init(options)
-  //   await th.auth.loginUsername({
-  //     username: user.username,
-  //     password: user.password
-  //   })
-  //
-  //   const processes = th.processes()
-  //   expect(processes).toBeInstanceOf(Processes)
-  //
-  //   const { msg } = await processes.delete(processId)
-  //   expect(msg).toEqual(mockMsg)
-  // })
+  it('deletes one process', async () => {
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+
+      mock
+        .onDelete(`https://api.tillhub.com/api/v0/processes/${legacyId}/${processId}`)
+        .reply((config) => {
+          return [
+            200,
+            {
+              msg: mockMsg
+            }
+          ]
+        })
+    }
+
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE
+    }
+
+    const th = new TillhubClient()
+
+    th.init(options)
+    await th.auth.loginUsername({
+      username: user.username,
+      password: user.password
+    })
+
+    const processes = th.processes()
+    expect(processes).toBeInstanceOf(Processes)
+
+    const { msg } = await processes.delete(processId)
+    expect(msg).toEqual(mockMsg)
+  })
 
   it('rejects getAll() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
@@ -589,51 +589,51 @@ describe('v0: Processes', () => {
     }
   })
 
-  // it('rejects delete() if status code is not 200', async () => {
-  //   if (process.env.SYSTEM_TEST !== 'true') {
-  //     mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
-  //       return [
-  //         200,
-  //         {
-  //           token: '',
-  //           user: {
-  //             id: '123',
-  //             legacy_id: legacyId
-  //           }
-  //         }
-  //       ]
-  //     })
-  //
-  //     mock
-  //       .onDelete(`https://api.tillhub.com/api/v0/processes/${legacyId}/${processId}`)
-  //       .reply((config) => {
-  //         return [
-  //           205
-  //         ]
-  //       })
-  //   }
-  //
-  //   const options = {
-  //     credentials: {
-  //       username: user.username,
-  //       password: user.password
-  //     },
-  //     base: process.env.TILLHUB_BASE
-  //   }
-  //
-  //   const th = new TillhubClient()
-  //
-  //   th.init(options)
-  //   await th.auth.loginUsername({
-  //     username: user.username,
-  //     password: user.password
-  //   })
-  //
-  //   try {
-  //     await th.processes().delete(processId)
-  //     fail('should throw an error')
-  //   } catch (e) {
-  //     expect(e.name).toEqual(ProcessesDeleteFailed.name)
-  //   }
-  // })
+  it('rejects delete() if status code is not 200', async () => {
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+
+      mock
+        .onDelete(`https://api.tillhub.com/api/v0/processes/${legacyId}/${processId}`)
+        .reply((config) => {
+          return [
+            205
+          ]
+        })
+    }
+
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE
+    }
+
+    const th = new TillhubClient()
+
+    th.init(options)
+    await th.auth.loginUsername({
+      username: user.username,
+      password: user.password
+    })
+
+    try {
+      await th.processes().delete(processId)
+      fail('should throw an error')
+    } catch (e) {
+      expect(e.name).toEqual(ProcessesDeleteFailed.name)
+    }
+  })
 })
