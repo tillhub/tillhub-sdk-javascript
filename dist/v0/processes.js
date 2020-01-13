@@ -164,10 +164,34 @@ var Processes = /** @class */ (function (_super) {
             });
         }); });
     };
+    Processes.prototype.delete = function (processId) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_5;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = this.uriHelper.generateBaseUri("/" + processId);
+                        return [4 /*yield*/, this.http.getClient().delete(uri)];
+                    case 1:
+                        response = _a.sent();
+                        response.status !== 200 && reject(new ProcessesDeleteFailed(undefined, { status: response.status }));
+                        return [2 /*return*/, resolve({
+                                msg: response.data.msg
+                            })];
+                    case 2:
+                        error_5 = _a.sent();
+                        return [2 /*return*/, reject(new ProcessesDeleteFailed(undefined, { error: error_5 }))];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     Processes.prototype.getItems = function (processId, query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var baseUri, uri, response, error_5;
+            var baseUri, uri, response, error_6;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -183,8 +207,8 @@ var Processes = /** @class */ (function (_super) {
                                 metadata: { count: response.data.count }
                             })];
                     case 2:
-                        error_5 = _a.sent();
-                        return [2 /*return*/, reject(new ProcessItemsFetchFailed(undefined, { error: error_5 }))];
+                        error_6 = _a.sent();
+                        return [2 /*return*/, reject(new ProcessItemsFetchFailed(undefined, { error: error_6 }))];
                     case 3: return [2 /*return*/];
                 }
             });

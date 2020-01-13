@@ -22,6 +22,7 @@ export interface ProcessesResponse {
 export interface ProcessResponse {
     data: Process;
     metadata: object;
+    msg?: string;
 }
 export interface ProcessItemsObject {
     code: string;
@@ -41,6 +42,7 @@ export interface Process {
     status?: string;
     name?: string;
     result?: object | ProcessItemsObject;
+    deleted?: boolean;
 }
 export declare class Processes extends ThBaseHandler {
     static baseEndpoint: string;
@@ -53,6 +55,7 @@ export declare class Processes extends ThBaseHandler {
     getAll(query?: ProcessesQueryOptions): Promise<ProcessesResponse>;
     get(processId: string, query?: ProcessesQueryOptions): Promise<ProcessResponse>;
     update(processId: string, process: Process): Promise<ProcessResponse>;
+    delete(processId: string): Promise<ProcessResponse>;
     getItems(processId: string, query?: ProcessItemsQueryOptions): Promise<ProcessesItemsResponse>;
 }
 export declare class ProcessesFetchFailed extends BaseError {

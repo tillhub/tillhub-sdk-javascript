@@ -1,3 +1,10 @@
+# [3.159.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.158.0...v3.159.0) (2020-01-13)
+
+
+### Features
+
+* **processes:** add process deletion ([2571778](https://github.com/tillhub/tillhub-sdk-javascript/commit/2571778))
+
 # [3.158.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.157.1...v3.158.0) (2020-01-09)
 
 
