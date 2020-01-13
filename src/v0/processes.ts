@@ -27,6 +27,7 @@ export interface ProcessesResponse {
 export interface ProcessResponse {
   data: Process
   metadata: object
+  msg?: string
 }
 
 export interface ProcessItemsObject {
@@ -50,6 +51,7 @@ export interface Process {
   status?: string
   name?: string
   result?: object | ProcessItemsObject
+  deleted?: boolean
 }
 
 export class Processes extends ThBaseHandler {
@@ -139,6 +141,23 @@ export class Processes extends ThBaseHandler {
         } as ProcessResponse)
       } catch (error) {
         return reject(new ProcessesUpdateFailed(undefined, { error }))
+      }
+    })
+  }
+
+  delete(processId: string): Promise<ProcessResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const uri = this.uriHelper.generateBaseUri(`/${processId}`)
+
+        const response = await this.http.getClient().delete(uri)
+        response.status !== 200 && reject(new ProcessesDeleteFailed(undefined, { status: response.status }))
+
+        return resolve({
+          msg: response.data.msg
+        } as ProcessResponse)
+      } catch (error) {
+        return reject(new ProcessesDeleteFailed(undefined, { error }))
       }
     })
   }
