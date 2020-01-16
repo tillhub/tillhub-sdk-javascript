@@ -18,8 +18,6 @@ const voucher = {
   code: '1234'
 }
 
-const errorMessage = 'This voucher code has already been used. Please use a different code.'
-
 describe('v0: Vouchers: can create a voucher', () => {
   it("Tillhub's Vouchers are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
@@ -92,11 +90,11 @@ describe('v0: Vouchers: can create a voucher', () => {
       await th.vouchers().create(voucher)
     } catch (err) {
       expect(err.name).toBe('VoucherPostFailed')
-      expect(err.message).toBe('Something broke unexpectedly')
+      expect(err.message).toBe('Could not create voucher')
     }
   })
 
-  it('rejects on status codes that are not 200 with custom message', async () => {
+  it('rejects on status codes that are not 409 with VoucherCodeConflict error', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
@@ -120,8 +118,8 @@ describe('v0: Vouchers: can create a voucher', () => {
               id: '1939cfba-5bd7-4535-9eb9-b98e11e45427'
             },
             error: {
-              name: 'VouchersCodeConflict',
-              message: errorMessage
+              name: 'VoucherCodeConflict',
+              message: 'some message'
             }
           }
         ]
@@ -132,9 +130,8 @@ describe('v0: Vouchers: can create a voucher', () => {
       const th = await initThInstance()
       await th.vouchers().create(voucher)
     } catch (err) {
-      console.log(err)
-      expect(err.name).toBe('VoucherPostFailed')
-      expect(err.message).toBe(errorMessage)
+      expect(err.name).toBe('VoucherCodeConflict')
+      expect(err.message).toBe('This voucher code is already in use. Please use another code.')
     }
   })
 })

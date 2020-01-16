@@ -318,9 +318,13 @@ export class Vouchers extends ThBaseHandler {
       try {
         response = await this.http.getClient().post(uri, voucher)
       } catch (error) {
-        const { response = {} } = error
-        const errorMessage = safeGet(response, 'data.error.message') || safeGet(response, 'data.msg')
-        return reject(new VoucherCreationFailed(errorMessage, { error }))
+        const responseStatus = safeGet(error, 'response.status')
+
+        if (responseStatus === 409) {
+          return reject(new VoucherCodeConflict(undefined, { error }))
+        } else {
+          return reject(new VoucherCreationFailed(undefined, { error }))
+        }
       }
 
       if (response.status !== 200) {
@@ -480,6 +484,13 @@ export class VoucherPatchFailed extends BaseError {
 export class VoucherCreationFailed extends BaseError {
   public name = 'VoucherPostFailed'
   constructor(public message: string = 'Could not create voucher', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class VoucherCodeConflict extends BaseError {
+  public name = 'VoucherCodeConflict'
+  constructor(public message: string = 'This voucher code is already in use. Please use another code.', properties?: any) {
     super(message, properties)
   }
 }
