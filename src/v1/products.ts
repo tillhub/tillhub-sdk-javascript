@@ -32,6 +32,7 @@ export interface Product {
   linked_products?: any[] | null
   prices?: object
   barcode?: string | null
+  codes?: any[] | null
   sku?: string | null
   stock_minimum?: number | null
   stock_maximum?: number | null
@@ -147,6 +148,13 @@ export interface BookStockQuery {
 export interface BookStock {
   location: string
   qty: number
+}
+
+export interface BarcodeResponse {
+  barcode?: string
+  id?: string
+  name?: string
+  codes?: object[]
 }
 
 export class Products extends ThBaseHandler {
@@ -451,6 +459,40 @@ export class Products extends ThBaseHandler {
     })
   }
 
+  checkBarcode(code: string): Promise<ProductResponse> {
+    const queryString = qs.stringify(code, { addQueryPrefix: true })
+
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/barcode${queryString}`
+      try {
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 &&
+          reject(
+            new BarcodeGetFailed(undefined, {
+              status: response.status
+            })
+          )
+
+        return resolve({
+          data: response.data.results as BarcodeResponse,
+          msg: response.data.msg,
+          name: response.data.name,
+          metadata: { count: response.data.count }
+        } as ProductResponse)
+      } catch (error) {
+        if (error.response && error.response.status === 409) {
+          return reject(
+            new BarcodeGetFailed(undefined, {
+              status: error.response.status,
+              name: error.response.data.name
+            })
+          )
+        }
+        return reject(new BarcodeGetFailed(undefined, { error }))
+      }
+    })
+  }
+
   pricebooks(): Pricebooks {
     return new Pricebooks(this.options, this.http, this.uriHelper)
   }
@@ -543,6 +585,13 @@ export class ProductsSearchFailed extends BaseError {
 export class ProductsBookStockFailed extends BaseError {
   public name = 'ProductsBookStockFailed'
   constructor(public message: string = 'Could not book stock for the product', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class BarcodeGetFailed extends BaseError {
+  public name = 'BarcodeGetFailed'
+  constructor(public message: string = 'Could not check for barcode collision', properties?: any) {
     super(message, properties)
   }
 }
