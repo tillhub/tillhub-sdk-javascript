@@ -1,6 +1,6 @@
 import qs from 'qs'
 import { Client } from '../client'
-import * as errors from '../errors'
+import { BaseError } from '../errors/baseError'
 import { UriHelper, HandlerQuery } from '../uri-helper'
 import { ThBaseHandler } from '../base'
 import { Pricebooks } from './pricebooks'
@@ -32,6 +32,7 @@ export interface Product {
   linked_products?: any[] | null
   prices?: object
   barcode?: string | null
+  codes?: any[] | null
   sku?: string | null
   stock_minimum?: number | null
   stock_maximum?: number | null
@@ -149,6 +150,13 @@ export interface BookStock {
   qty: number
 }
 
+export interface BarcodeResponse {
+  barcode?: string
+  id?: string
+  name?: string
+  codes?: object[]
+}
+
 export class Products extends ThBaseHandler {
   public static baseEndpoint = '/api/v1/products'
   endpoint: string
@@ -174,7 +182,7 @@ export class Products extends ThBaseHandler {
       try {
         const response = await this.http.getClient().post(uri, product)
         if (response.status !== 200) {
-          return reject(new errors.ProductsCreateFailed(undefined, { status: response.status }))
+          return reject(new ProductsCreateFailed(undefined, { status: response.status }))
         }
 
         return resolve({
@@ -183,7 +191,7 @@ export class Products extends ThBaseHandler {
           errors: response.data.errors || []
         } as ProductResponse)
       } catch (error) {
-        return reject(new errors.ProductsCreateFailed(undefined, { error }))
+        return reject(new ProductsCreateFailed(undefined, { error }))
       }
     })
   }
@@ -204,7 +212,7 @@ export class Products extends ThBaseHandler {
 
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(new errors.ProductsFetchFailed(undefined, { status: response.status }))
+          return reject(new ProductsFetchFailed(undefined, { status: response.status }))
         }
 
         if (response.data.cursor && response.data.cursor.next) {
@@ -217,7 +225,7 @@ export class Products extends ThBaseHandler {
           next
         } as ProductsResponse)
       } catch (error) {
-        return reject(new errors.ProductsFetchFailed(undefined, { error }))
+        return reject(new ProductsFetchFailed(undefined, { error }))
       }
     })
   }
@@ -238,7 +246,7 @@ export class Products extends ThBaseHandler {
 
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(new errors.ProductsImportFailed(undefined, { status: response.status }))
+          return reject(new ProductsImportFailed(undefined, { status: response.status }))
         }
 
         if (response.data.cursor && response.data.cursor.next) {
@@ -251,7 +259,7 @@ export class Products extends ThBaseHandler {
           next
         } as ProductsResponse)
       } catch (error) {
-        return reject(new errors.ProductsImportFailed(undefined, { error }))
+        return reject(new ProductsImportFailed(undefined, { error }))
       }
     })
   }
@@ -262,7 +270,7 @@ export class Products extends ThBaseHandler {
       try {
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(new errors.ProductFetchFailed(undefined, { status: response.status }))
+          return reject(new ProductFetchFailed(undefined, { status: response.status }))
         }
 
         return resolve({
@@ -271,7 +279,7 @@ export class Products extends ThBaseHandler {
           metadata: { count: response.data.count }
         } as ProductResponse)
       } catch (error) {
-        return reject(new errors.ProductFetchFailed(undefined, { error }))
+        return reject(new ProductFetchFailed(undefined, { error }))
       }
     })
   }
@@ -283,7 +291,7 @@ export class Products extends ThBaseHandler {
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
           return reject(
-            new errors.ProductDetailsFetchFailed(undefined, { status: response.status })
+            new ProductDetailsFetchFailed(undefined, { status: response.status })
           )
         }
 
@@ -293,7 +301,7 @@ export class Products extends ThBaseHandler {
           metadata: { count: response.data.count }
         } as ProductResponse)
       } catch (error) {
-        return reject(new errors.ProductDetailsFetchFailed(undefined, { error }))
+        return reject(new ProductDetailsFetchFailed(undefined, { error }))
       }
     })
   }
@@ -307,7 +315,7 @@ export class Products extends ThBaseHandler {
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
           return reject(
-            new errors.ProductChildrenDetailsFetchFailed(undefined, { status: response.status })
+            new ProductChildrenDetailsFetchFailed(undefined, { status: response.status })
           )
         }
 
@@ -317,7 +325,7 @@ export class Products extends ThBaseHandler {
           metadata: { count: response.data.count }
         } as ProductResponse)
       } catch (error) {
-        return reject(new errors.ProductChildrenDetailsFetchFailed(undefined, { error }))
+        return reject(new ProductChildrenDetailsFetchFailed(undefined, { error }))
       }
     })
   }
@@ -329,11 +337,11 @@ export class Products extends ThBaseHandler {
       try {
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(new errors.ProductsMetaFailed(undefined, { status: response.status }))
+          return reject(new ProductsMetaFailed(undefined, { status: response.status }))
         }
         if (!response.data.results[0]) {
           return reject(
-            new errors.ProductsMetaFailed('could not get product metadata unexpectedly', {
+            new ProductsMetaFailed('could not get product metadata unexpectedly', {
               status: response.status
             })
           )
@@ -344,7 +352,7 @@ export class Products extends ThBaseHandler {
           metadata: { count: response.data.count }
         } as ProductsResponse)
       } catch (error) {
-        return reject(new errors.ProductsMetaFailed(undefined, { error }))
+        return reject(new ProductsMetaFailed(undefined, { error }))
       }
     })
   }
@@ -356,7 +364,7 @@ export class Products extends ThBaseHandler {
       try {
         const response = await this.http.getClient().put(uri, product)
         if (response.status !== 200) {
-          return reject(new errors.ProductsUpdateFailed(undefined, { status: response.status }))
+          return reject(new ProductsUpdateFailed(undefined, { status: response.status }))
         }
 
         return resolve({
@@ -364,7 +372,7 @@ export class Products extends ThBaseHandler {
           metadata: { count: response.data.count }
         } as ProductResponse)
       } catch (error) {
-        return reject(new errors.ProductsUpdateFailed(undefined, { error }))
+        return reject(new ProductsUpdateFailed(undefined, { error }))
       }
     })
   }
@@ -376,7 +384,7 @@ export class Products extends ThBaseHandler {
       try {
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(new errors.ProductsCountFailed(undefined, { status: response.status }))
+          return reject(new ProductsCountFailed(undefined, { status: response.status }))
         }
 
         return resolve({
@@ -384,7 +392,7 @@ export class Products extends ThBaseHandler {
           metadata: { count: response.data.count }
         } as ProductsResponse)
       } catch (error) {
-        return reject(new errors.ProductsCountFailed(undefined, { error }))
+        return reject(new ProductsCountFailed(undefined, { error }))
       }
     })
   }
@@ -401,14 +409,14 @@ export class Products extends ThBaseHandler {
 
         const response = await this.http.getClient().delete(uri)
         if (response.status !== 200) {
-          return reject(new errors.ProductsDeleteFailed(undefined, { status: response.status }))
+          return reject(new ProductsDeleteFailed(undefined, { status: response.status }))
         }
 
         return resolve({
           msg: response.data.msg
         } as ProductsResponse)
       } catch (error) {
-        return reject(new errors.ProductsDeleteFailed(undefined, { error }))
+        return reject(new ProductsDeleteFailed(undefined, { error }))
       }
     })
   }
@@ -419,7 +427,7 @@ export class Products extends ThBaseHandler {
       try {
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(new errors.ProductsSearchFailed(undefined, { status: response.status }))
+          return reject(new ProductsSearchFailed(undefined, { status: response.status }))
         }
 
         return resolve({
@@ -427,7 +435,7 @@ export class Products extends ThBaseHandler {
           metadata: { count: response.data.count }
         } as ProductsResponse)
       } catch (error) {
-        return reject(new errors.ProductsSearchFailed(undefined, { error }))
+        return reject(new ProductsSearchFailed(undefined, { error }))
       }
     })
   }
@@ -439,14 +447,47 @@ export class Products extends ThBaseHandler {
         }/stock/book`
       try {
         const response = await this.http.getClient().post(uri, requestOptions.body)
-        response.status !== 200 && reject(new errors.ProductsBookStockFailed())
+        response.status !== 200 && reject(new ProductsBookStockFailed())
 
         return resolve({
           data: response.data.results[0],
           metadata: { count: response.data.count }
         } as ProductResponse)
       } catch (err) {
-        return reject(new errors.ProductsBookStockFailed())
+        return reject(new ProductsBookStockFailed())
+      }
+    })
+  }
+
+  checkBarcode(code: string): Promise<ProductResponse> {
+    const queryString = qs.stringify(code, { addQueryPrefix: true })
+
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/barcode${queryString}`
+      try {
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 &&
+          reject(
+            new BarcodeGetFailed(undefined, {
+              status: response.status
+            })
+          )
+
+        return resolve({
+          data: response.data.results as BarcodeResponse,
+          msg: response.data.msg,
+          metadata: { count: response.data.count }
+        } as ProductResponse)
+      } catch (error) {
+        if (error.response && error.response.status === 409) {
+          return reject(
+            new BarcodeGetFailed(undefined, {
+              status: error.response.status,
+              name: error.response.data.name
+            })
+          )
+        }
+        return reject(new BarcodeGetFailed(undefined, { error }))
       }
     })
   }
@@ -457,5 +498,99 @@ export class Products extends ThBaseHandler {
 
   pricebookEntries(): PricebookEntries {
     return new PricebookEntries(this.options, this.http, this.uriHelper)
+  }
+}
+
+export class ProductsCreateFailed extends BaseError {
+  public name = 'ProductsCreateFailed'
+  constructor(public message: string = 'Could not create the product', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ProductFetchFailed extends BaseError {
+  public name = 'ProductFetchFailed'
+  constructor(public message: string = 'Could not fetch the product', properties?: any) {
+    super(message, properties)
+  }
+}
+export class ProductsFetchFailed extends BaseError {
+  public name = 'ProductsFetchFailed'
+  constructor(public message: string = 'Could not fetch the products', properties?: any) {
+    super(message, properties)
+  }
+}
+export class ProductsImportFailed extends BaseError {
+  public name = 'ProductsImportFailed'
+  constructor(public message: string = 'Could not import the products', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ProductDetailsFetchFailed extends BaseError {
+  public name = 'ProductDetailsFetchFailed'
+  constructor(
+    public message: string = 'Could not fetch the details of the product',
+    properties?: any
+  ) {
+    super(message, properties)
+  }
+}
+export class ProductChildrenDetailsFetchFailed extends BaseError {
+  public name = 'ProductChildrenDetailsFetchFailed'
+  constructor(
+    public message: string = 'Could not fetch the details of the children products',
+    properties?: any
+  ) {
+    super(message, properties)
+  }
+}
+
+export class ProductsCountFailed extends BaseError {
+  public name = 'ProductsCountFailed'
+  constructor(public message: string = 'Could not count the products', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ProductsMetaFailed extends BaseError {
+  public name = 'ProductsMetaFailed'
+  constructor(public message: string = 'Could not get products metadata', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ProductsUpdateFailed extends BaseError {
+  public name = 'ProductsUpdateFailed'
+  constructor(public message: string = 'Could not update the product', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ProductsDeleteFailed extends BaseError {
+  public name = 'ProductsDeleteFailed'
+  constructor(public message: string = 'Could not delete the product', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ProductsSearchFailed extends BaseError {
+  public name = 'ProductsSearchFailed'
+  constructor(public message: string = 'Could not search for the product', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ProductsBookStockFailed extends BaseError {
+  public name = 'ProductsBookStockFailed'
+  constructor(public message: string = 'Could not book stock for the product', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class BarcodeGetFailed extends BaseError {
+  public name = 'BarcodeGetFailed'
+  constructor(public message: string = 'Could not check for barcode collision', properties?: any) {
+    super(message, properties)
   }
 }
