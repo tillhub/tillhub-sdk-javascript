@@ -102,19 +102,14 @@ var Products = /** @class */ (function (_super) {
     Products.prototype.getAll = function (options) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var next, uri, response_1, error_2;
+            var next, base, uri, response_1, error_2;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        uri = void 0;
-                        if (options && options.uri) {
-                            uri = options.uri;
-                        }
-                        else {
-                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user + (options && options.query ? "?" + qs_1.default.stringify(options.query) : '');
-                        }
+                        base = this.uriHelper.generateBaseUri();
+                        uri = this.uriHelper.generateUriWithQuery(base, options);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response_1 = _a.sent();
@@ -182,7 +177,7 @@ var Products = /** @class */ (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + productId;
+                        uri = this.uriHelper.generateBaseUri("/" + productId);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -212,7 +207,7 @@ var Products = /** @class */ (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + productId + "/details";
+                        uri = this.uriHelper.generateBaseUri("/" + productId + "/details");
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -242,7 +237,7 @@ var Products = /** @class */ (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + productId + "/children/details";
+                        uri = this.uriHelper.generateBaseUri("/" + productId + "/children/details");
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -272,7 +267,7 @@ var Products = /** @class */ (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/meta";
+                        uri = this.uriHelper.generateBaseUri('/meta');
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -306,7 +301,7 @@ var Products = /** @class */ (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + productId;
+                        uri = this.uriHelper.generateBaseUri("/" + productId);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -335,7 +330,7 @@ var Products = /** @class */ (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/meta";
+                        uri = this.uriHelper.generateBaseUri('/meta');
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -392,11 +387,12 @@ var Products = /** @class */ (function (_super) {
     Products.prototype.search = function (searchTerm) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, error_11;
+            var base, uri, response, error_11;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/search?q=" + searchTerm;
+                        base = this.uriHelper.generateBaseUri('/search');
+                        uri = this.uriHelper.generateUriWithQuery(base, { q: searchTerm });
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -425,7 +421,7 @@ var Products = /** @class */ (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + requestOptions.productId + "/stock/book";
+                        uri = this.uriHelper.generateBaseUri("/" + requestOptions.productId + "/stock/book");
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -447,13 +443,13 @@ var Products = /** @class */ (function (_super) {
     };
     Products.prototype.checkBarcode = function (code) {
         var _this = this;
-        var queryString = qs_1.default.stringify(code, { addQueryPrefix: true });
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, error_12;
+            var base, uri, response, error_12;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/barcode" + queryString;
+                        base = this.uriHelper.generateBaseUri('/barcode');
+                        uri = this.uriHelper.generateUriWithQuery(base, { code: code });
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);

@@ -1,3 +1,10 @@
+## [3.160.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.160.0...v3.160.1) (2020-01-16)
+
+
+### Bug Fixes
+
+* **products:** fix barcode check query param; refactor uris ([208f011](https://github.com/tillhub/tillhub-sdk-javascript/commit/208f011))
+
 # [3.160.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.159.0...v3.160.0) (2020-01-16)
 
 
