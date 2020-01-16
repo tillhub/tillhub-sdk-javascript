@@ -476,7 +476,6 @@ export class Products extends ThBaseHandler {
         return resolve({
           data: response.data.results as BarcodeResponse,
           msg: response.data.msg,
-          name: response.data.name,
           metadata: { count: response.data.count }
         } as ProductResponse)
       } catch (error) {
