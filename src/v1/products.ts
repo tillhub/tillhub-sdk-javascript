@@ -201,14 +201,8 @@ export class Products extends ThBaseHandler {
       let next
 
       try {
-        let uri
-        if (options && options.uri) {
-          uri = options.uri
-        } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
-            options && options.query ? `?${qs.stringify(options.query)}` : ''
-            }`
-        }
+        const base = this.uriHelper.generateBaseUri()
+        const uri = this.uriHelper.generateUriWithQuery(base, options)
 
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
@@ -266,7 +260,7 @@ export class Products extends ThBaseHandler {
 
   get(productId: string): Promise<ProductResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productId}`
+      const uri = this.uriHelper.generateBaseUri(`/${productId}`)
       try {
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
@@ -286,7 +280,7 @@ export class Products extends ThBaseHandler {
 
   getDetails(productId: string): Promise<ProductResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productId}/details`
+      const uri = this.uriHelper.generateBaseUri(`/${productId}/details`)
       try {
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
@@ -308,9 +302,7 @@ export class Products extends ThBaseHandler {
 
   getChildrenDetails(productId: string): Promise<ProductResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${
-        this.options.user
-        }/${productId}/children/details`
+      const uri = this.uriHelper.generateBaseUri(`/${productId}/children/details`)
       try {
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
@@ -332,7 +324,7 @@ export class Products extends ThBaseHandler {
 
   meta(): Promise<ProductsResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+      const uri = this.uriHelper.generateBaseUri('/meta')
 
       try {
         const response = await this.http.getClient().get(uri)
@@ -359,7 +351,7 @@ export class Products extends ThBaseHandler {
 
   put(productId: string, product: Product): Promise<ProductResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productId}`
+      const uri = this.uriHelper.generateBaseUri(`/${productId}`)
 
       try {
         const response = await this.http.getClient().put(uri, product)
@@ -379,7 +371,7 @@ export class Products extends ThBaseHandler {
 
   count(): Promise<ProductsResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+      const uri = this.uriHelper.generateBaseUri('/meta')
 
       try {
         const response = await this.http.getClient().get(uri)
@@ -423,7 +415,8 @@ export class Products extends ThBaseHandler {
 
   search(searchTerm: string): Promise<ProductsResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/search?q=${searchTerm}`
+      const base = this.uriHelper.generateBaseUri('/search')
+      const uri = this.uriHelper.generateUriWithQuery(base, { q: searchTerm })
       try {
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
@@ -442,9 +435,7 @@ export class Products extends ThBaseHandler {
 
   bookStock(requestOptions: BookStockQuery): Promise<ProductResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${
-        requestOptions.productId
-        }/stock/book`
+      const uri = this.uriHelper.generateBaseUri(`/${requestOptions.productId}/stock/book`)
       try {
         const response = await this.http.getClient().post(uri, requestOptions.body)
         response.status !== 200 && reject(new ProductsBookStockFailed())
@@ -460,10 +451,10 @@ export class Products extends ThBaseHandler {
   }
 
   checkBarcode(code: string): Promise<ProductResponse> {
-    const queryString = qs.stringify(code, { addQueryPrefix: true })
-
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/barcode${queryString}`
+      const base = this.uriHelper.generateBaseUri('/barcode')
+      const uri = this.uriHelper.generateUriWithQuery(base, { code })
+
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&

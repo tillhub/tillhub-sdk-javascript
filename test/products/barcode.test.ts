@@ -14,7 +14,7 @@ afterEach(() => {
 })
 
 const code = '12345678'
-const queryString = qs.stringify(code, { addQueryPrefix: true })
+const queryString = qs.stringify({ code }, { addQueryPrefix: true })
 
 describe('v1: Products: can check if a barcode is unique', () => {
   it("Tillhub's products are instantiable", async () => {
@@ -72,7 +72,7 @@ describe('v1: Products: can check if a barcode is unique', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/barcode`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/barcode${queryString}`).reply(function (config) {
         return [205]
       })
     }
