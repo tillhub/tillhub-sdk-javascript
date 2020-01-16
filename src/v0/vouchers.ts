@@ -1,5 +1,6 @@
 import { diff, jsonPatchPathConverter } from 'just-diff'
 import qs from 'qs'
+import safeGet from 'just-safe-get'
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { ThBaseHandler } from '../base'
@@ -74,6 +75,7 @@ export interface Voucher {
   mutable?: boolean
   exchange_for_cash?: boolean
   restriction_single_transaction?: boolean
+  code?: string
 }
 
 export interface UsersResponse {
@@ -311,16 +313,24 @@ export class Vouchers extends ThBaseHandler {
   create(voucher: Voucher): Promise<VoucherResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-      try {
-        const response = await this.http.getClient().post(uri, voucher)
 
-        return resolve({
-          data: response.data.results[0] as Voucher,
-          metadata: { count: response.data.count }
-        } as VoucherResponse)
+      let response
+      try {
+        response = await this.http.getClient().post(uri, voucher)
       } catch (error) {
-        return reject(new VoucherCreationFailed(undefined, { error }))
+        const { response = {} } = error
+        const errorMessage = safeGet(response, 'data.error.message') || safeGet(response, 'data.msg')
+        return reject(new VoucherCreationFailed(errorMessage, { error }))
       }
+
+      if (response.status !== 200) {
+        return reject(new VoucherCreationFailed(safeGet(response, 'error.message'), { status: response.status }))
+      }
+
+      return resolve({
+        data: response.data.results[0] as Voucher,
+        metadata: { count: response.data.count }
+      } as VoucherResponse)
     })
   }
 
