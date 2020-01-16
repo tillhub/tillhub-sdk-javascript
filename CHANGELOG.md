@@ -1,3 +1,15 @@
+# [3.160.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.159.0...v3.160.0) (2020-01-16)
+
+
+### Bug Fixes
+
+* **products:** remove unused barcode results prop ([148eac3](https://github.com/tillhub/tillhub-sdk-javascript/commit/148eac3))
+
+
+### Features
+
+* **products:** add handler for barcode collision check ([fd3f4ed](https://github.com/tillhub/tillhub-sdk-javascript/commit/fd3f4ed))
+
 # [3.159.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.158.0...v3.159.0) (2020-01-13)
 
 

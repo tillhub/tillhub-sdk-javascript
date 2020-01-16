@@ -50,16 +50,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var qs_1 = __importDefault(require("qs"));
-var errors = __importStar(require("../errors"));
+var baseError_1 = require("../errors/baseError");
 var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
 var pricebooks_1 = require("./pricebooks");
@@ -91,7 +84,7 @@ var Products = /** @class */ (function (_super) {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.ProductsCreateFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new ProductsCreateFailed(undefined, { status: response.status }))];
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
@@ -100,7 +93,7 @@ var Products = /** @class */ (function (_super) {
                             })];
                     case 3:
                         error_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductsCreateFailed(undefined, { error: error_1 }))];
+                        return [2 /*return*/, reject(new ProductsCreateFailed(undefined, { error: error_1 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -126,7 +119,7 @@ var Products = /** @class */ (function (_super) {
                     case 1:
                         response_1 = _a.sent();
                         if (response_1.status !== 200) {
-                            return [2 /*return*/, reject(new errors.ProductsFetchFailed(undefined, { status: response_1.status }))];
+                            return [2 /*return*/, reject(new ProductsFetchFailed(undefined, { status: response_1.status }))];
                         }
                         if (response_1.data.cursor && response_1.data.cursor.next) {
                             next = function () { return _this.getAll({ uri: response_1.data.cursor.next }); };
@@ -138,7 +131,7 @@ var Products = /** @class */ (function (_super) {
                             })];
                     case 2:
                         error_2 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductsFetchFailed(undefined, { error: error_2 }))];
+                        return [2 /*return*/, reject(new ProductsFetchFailed(undefined, { error: error_2 }))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -164,7 +157,7 @@ var Products = /** @class */ (function (_super) {
                     case 1:
                         response_2 = _a.sent();
                         if (response_2.status !== 200) {
-                            return [2 /*return*/, reject(new errors.ProductsImportFailed(undefined, { status: response_2.status }))];
+                            return [2 /*return*/, reject(new ProductsImportFailed(undefined, { status: response_2.status }))];
                         }
                         if (response_2.data.cursor && response_2.data.cursor.next) {
                             next = function () { return _this.import({ uri: response_2.data.cursor.next }); };
@@ -176,7 +169,7 @@ var Products = /** @class */ (function (_super) {
                             })];
                     case 2:
                         error_3 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductsImportFailed(undefined, { error: error_3 }))];
+                        return [2 /*return*/, reject(new ProductsImportFailed(undefined, { error: error_3 }))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -197,7 +190,7 @@ var Products = /** @class */ (function (_super) {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.ProductFetchFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new ProductFetchFailed(undefined, { status: response.status }))];
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
@@ -206,7 +199,7 @@ var Products = /** @class */ (function (_super) {
                             })];
                     case 3:
                         error_4 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductFetchFailed(undefined, { error: error_4 }))];
+                        return [2 /*return*/, reject(new ProductFetchFailed(undefined, { error: error_4 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -227,7 +220,7 @@ var Products = /** @class */ (function (_super) {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.ProductDetailsFetchFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new ProductDetailsFetchFailed(undefined, { status: response.status }))];
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
@@ -236,7 +229,7 @@ var Products = /** @class */ (function (_super) {
                             })];
                     case 3:
                         error_5 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductDetailsFetchFailed(undefined, { error: error_5 }))];
+                        return [2 /*return*/, reject(new ProductDetailsFetchFailed(undefined, { error: error_5 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -257,7 +250,7 @@ var Products = /** @class */ (function (_super) {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.ProductChildrenDetailsFetchFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new ProductChildrenDetailsFetchFailed(undefined, { status: response.status }))];
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
@@ -266,7 +259,7 @@ var Products = /** @class */ (function (_super) {
                             })];
                     case 3:
                         error_6 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductChildrenDetailsFetchFailed(undefined, { error: error_6 }))];
+                        return [2 /*return*/, reject(new ProductChildrenDetailsFetchFailed(undefined, { error: error_6 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -287,10 +280,10 @@ var Products = /** @class */ (function (_super) {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.ProductsMetaFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new ProductsMetaFailed(undefined, { status: response.status }))];
                         }
                         if (!response.data.results[0]) {
-                            return [2 /*return*/, reject(new errors.ProductsMetaFailed('could not get product metadata unexpectedly', {
+                            return [2 /*return*/, reject(new ProductsMetaFailed('could not get product metadata unexpectedly', {
                                     status: response.status
                                 }))];
                         }
@@ -300,7 +293,7 @@ var Products = /** @class */ (function (_super) {
                             })];
                     case 3:
                         error_7 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductsMetaFailed(undefined, { error: error_7 }))];
+                        return [2 /*return*/, reject(new ProductsMetaFailed(undefined, { error: error_7 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -321,7 +314,7 @@ var Products = /** @class */ (function (_super) {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.ProductsUpdateFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new ProductsUpdateFailed(undefined, { status: response.status }))];
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
@@ -329,7 +322,7 @@ var Products = /** @class */ (function (_super) {
                             })];
                     case 3:
                         error_8 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductsUpdateFailed(undefined, { error: error_8 }))];
+                        return [2 /*return*/, reject(new ProductsUpdateFailed(undefined, { error: error_8 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -350,7 +343,7 @@ var Products = /** @class */ (function (_super) {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.ProductsCountFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new ProductsCountFailed(undefined, { status: response.status }))];
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
@@ -358,7 +351,7 @@ var Products = /** @class */ (function (_super) {
                             })];
                     case 3:
                         error_9 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductsCountFailed(undefined, { error: error_9 }))];
+                        return [2 /*return*/, reject(new ProductsCountFailed(undefined, { error: error_9 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -383,14 +376,14 @@ var Products = /** @class */ (function (_super) {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.ProductsDeleteFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new ProductsDeleteFailed(undefined, { status: response.status }))];
                         }
                         return [2 /*return*/, resolve({
                                 msg: response.data.msg
                             })];
                     case 2:
                         error_10 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductsDeleteFailed(undefined, { error: error_10 }))];
+                        return [2 /*return*/, reject(new ProductsDeleteFailed(undefined, { error: error_10 }))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -411,7 +404,7 @@ var Products = /** @class */ (function (_super) {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.ProductsSearchFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new ProductsSearchFailed(undefined, { status: response.status }))];
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
@@ -419,7 +412,7 @@ var Products = /** @class */ (function (_super) {
                             })];
                     case 3:
                         error_11 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductsSearchFailed(undefined, { error: error_11 }))];
+                        return [2 /*return*/, reject(new ProductsSearchFailed(undefined, { error: error_11 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -439,14 +432,52 @@ var Products = /** @class */ (function (_super) {
                         return [4 /*yield*/, this.http.getClient().post(uri, requestOptions.body)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 && reject(new errors.ProductsBookStockFailed());
+                        response.status !== 200 && reject(new ProductsBookStockFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
                         err_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.ProductsBookStockFailed())];
+                        return [2 /*return*/, reject(new ProductsBookStockFailed())];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Products.prototype.checkBarcode = function (code) {
+        var _this = this;
+        var queryString = qs_1.default.stringify(code, { addQueryPrefix: true });
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_12;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/barcode" + queryString;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 &&
+                            reject(new BarcodeGetFailed(undefined, {
+                                status: response.status
+                            }));
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_12 = _a.sent();
+                        if (error_12.response && error_12.response.status === 409) {
+                            return [2 /*return*/, reject(new BarcodeGetFailed(undefined, {
+                                    status: error_12.response.status,
+                                    name: error_12.response.data.name
+                                }))];
+                        }
+                        return [2 /*return*/, reject(new BarcodeGetFailed(undefined, { error: error_12 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -462,4 +493,160 @@ var Products = /** @class */ (function (_super) {
     return Products;
 }(base_1.ThBaseHandler));
 exports.Products = Products;
+var ProductsCreateFailed = /** @class */ (function (_super) {
+    __extends(ProductsCreateFailed, _super);
+    function ProductsCreateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create the product'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductsCreateFailed';
+        return _this;
+    }
+    return ProductsCreateFailed;
+}(baseError_1.BaseError));
+exports.ProductsCreateFailed = ProductsCreateFailed;
+var ProductFetchFailed = /** @class */ (function (_super) {
+    __extends(ProductFetchFailed, _super);
+    function ProductFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the product'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductFetchFailed';
+        return _this;
+    }
+    return ProductFetchFailed;
+}(baseError_1.BaseError));
+exports.ProductFetchFailed = ProductFetchFailed;
+var ProductsFetchFailed = /** @class */ (function (_super) {
+    __extends(ProductsFetchFailed, _super);
+    function ProductsFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the products'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductsFetchFailed';
+        return _this;
+    }
+    return ProductsFetchFailed;
+}(baseError_1.BaseError));
+exports.ProductsFetchFailed = ProductsFetchFailed;
+var ProductsImportFailed = /** @class */ (function (_super) {
+    __extends(ProductsImportFailed, _super);
+    function ProductsImportFailed(message, properties) {
+        if (message === void 0) { message = 'Could not import the products'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductsImportFailed';
+        return _this;
+    }
+    return ProductsImportFailed;
+}(baseError_1.BaseError));
+exports.ProductsImportFailed = ProductsImportFailed;
+var ProductDetailsFetchFailed = /** @class */ (function (_super) {
+    __extends(ProductDetailsFetchFailed, _super);
+    function ProductDetailsFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the details of the product'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductDetailsFetchFailed';
+        return _this;
+    }
+    return ProductDetailsFetchFailed;
+}(baseError_1.BaseError));
+exports.ProductDetailsFetchFailed = ProductDetailsFetchFailed;
+var ProductChildrenDetailsFetchFailed = /** @class */ (function (_super) {
+    __extends(ProductChildrenDetailsFetchFailed, _super);
+    function ProductChildrenDetailsFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the details of the children products'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductChildrenDetailsFetchFailed';
+        return _this;
+    }
+    return ProductChildrenDetailsFetchFailed;
+}(baseError_1.BaseError));
+exports.ProductChildrenDetailsFetchFailed = ProductChildrenDetailsFetchFailed;
+var ProductsCountFailed = /** @class */ (function (_super) {
+    __extends(ProductsCountFailed, _super);
+    function ProductsCountFailed(message, properties) {
+        if (message === void 0) { message = 'Could not count the products'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductsCountFailed';
+        return _this;
+    }
+    return ProductsCountFailed;
+}(baseError_1.BaseError));
+exports.ProductsCountFailed = ProductsCountFailed;
+var ProductsMetaFailed = /** @class */ (function (_super) {
+    __extends(ProductsMetaFailed, _super);
+    function ProductsMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get products metadata'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductsMetaFailed';
+        return _this;
+    }
+    return ProductsMetaFailed;
+}(baseError_1.BaseError));
+exports.ProductsMetaFailed = ProductsMetaFailed;
+var ProductsUpdateFailed = /** @class */ (function (_super) {
+    __extends(ProductsUpdateFailed, _super);
+    function ProductsUpdateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not update the product'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductsUpdateFailed';
+        return _this;
+    }
+    return ProductsUpdateFailed;
+}(baseError_1.BaseError));
+exports.ProductsUpdateFailed = ProductsUpdateFailed;
+var ProductsDeleteFailed = /** @class */ (function (_super) {
+    __extends(ProductsDeleteFailed, _super);
+    function ProductsDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete the product'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductsDeleteFailed';
+        return _this;
+    }
+    return ProductsDeleteFailed;
+}(baseError_1.BaseError));
+exports.ProductsDeleteFailed = ProductsDeleteFailed;
+var ProductsSearchFailed = /** @class */ (function (_super) {
+    __extends(ProductsSearchFailed, _super);
+    function ProductsSearchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not search for the product'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductsSearchFailed';
+        return _this;
+    }
+    return ProductsSearchFailed;
+}(baseError_1.BaseError));
+exports.ProductsSearchFailed = ProductsSearchFailed;
+var ProductsBookStockFailed = /** @class */ (function (_super) {
+    __extends(ProductsBookStockFailed, _super);
+    function ProductsBookStockFailed(message, properties) {
+        if (message === void 0) { message = 'Could not book stock for the product'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductsBookStockFailed';
+        return _this;
+    }
+    return ProductsBookStockFailed;
+}(baseError_1.BaseError));
+exports.ProductsBookStockFailed = ProductsBookStockFailed;
+var BarcodeGetFailed = /** @class */ (function (_super) {
+    __extends(BarcodeGetFailed, _super);
+    function BarcodeGetFailed(message, properties) {
+        if (message === void 0) { message = 'Could not check for barcode collision'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'BarcodeGetFailed';
+        return _this;
+    }
+    return BarcodeGetFailed;
+}(baseError_1.BaseError));
+exports.BarcodeGetFailed = BarcodeGetFailed;
 //# sourceMappingURL=products.js.map

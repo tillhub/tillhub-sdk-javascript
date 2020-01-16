@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { BaseError } from '../errors/baseError';
 import { UriHelper, HandlerQuery } from '../uri-helper';
 import { ThBaseHandler } from '../base';
 import { Pricebooks } from './pricebooks';
@@ -20,6 +21,7 @@ export interface Product {
     linked_products?: any[] | null;
     prices?: object;
     barcode?: string | null;
+    codes?: any[] | null;
     sku?: string | null;
     stock_minimum?: number | null;
     stock_maximum?: number | null;
@@ -126,6 +128,12 @@ export interface BookStock {
     location: string;
     qty: number;
 }
+export interface BarcodeResponse {
+    barcode?: string;
+    id?: string;
+    name?: string;
+    codes?: object[];
+}
 export declare class Products extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
@@ -145,7 +153,73 @@ export declare class Products extends ThBaseHandler {
     delete(productId: string, deleteOptions?: ProductDeleteOptions): Promise<ProductsResponse>;
     search(searchTerm: string): Promise<ProductsResponse>;
     bookStock(requestOptions: BookStockQuery): Promise<ProductResponse>;
+    checkBarcode(code: string): Promise<ProductResponse>;
     pricebooks(): Pricebooks;
     pricebookEntries(): PricebookEntries;
+}
+export declare class ProductsCreateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ProductFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ProductsFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ProductsImportFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ProductDetailsFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ProductChildrenDetailsFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ProductsCountFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ProductsMetaFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ProductsUpdateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ProductsDeleteFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ProductsSearchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ProductsBookStockFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class BarcodeGetFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
 }
 export {};
