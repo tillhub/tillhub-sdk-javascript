@@ -63,6 +63,7 @@ export interface Voucher {
     mutable?: boolean;
     exchange_for_cash?: boolean;
     restriction_single_transaction?: boolean;
+    code?: string;
 }
 export interface UsersResponse {
     data: object[];
@@ -125,6 +126,11 @@ export declare class VoucherPatchFailed extends BaseError {
     constructor(message?: string, properties?: any);
 }
 export declare class VoucherCreationFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class VoucherCodeConflict extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);

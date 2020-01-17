@@ -1,3 +1,11 @@
+# [3.161.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.160.1...v3.161.0) (2020-01-17)
+
+
+### Features
+
+* **vouchers:** add VoucherCodeConlict error ([d096997](https://github.com/tillhub/tillhub-sdk-javascript/commit/d096997))
+* **vouchers:** expose response error message ([a4f9ab4](https://github.com/tillhub/tillhub-sdk-javascript/commit/a4f9ab4))
+
 ## [3.160.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.160.0...v3.160.1) (2020-01-16)
 
 

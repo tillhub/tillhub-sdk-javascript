@@ -64,6 +64,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var just_diff_1 = require("just-diff");
 var qs_1 = __importDefault(require("qs"));
+var just_safe_get_1 = __importDefault(require("just-safe-get"));
 var errors_1 = require("../errors");
 var base_1 = require("../base");
 var Vouchers = /** @class */ (function (_super) {
@@ -344,7 +345,7 @@ var Vouchers = /** @class */ (function (_super) {
     Vouchers.prototype.create = function (voucher) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, error_9;
+            var uri, response, error_9, responseStatus;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -355,14 +356,25 @@ var Vouchers = /** @class */ (function (_super) {
                         return [4 /*yield*/, this.http.getClient().post(uri, voucher)];
                     case 2:
                         response = _a.sent();
+                        return [3 /*break*/, 4];
+                    case 3:
+                        error_9 = _a.sent();
+                        responseStatus = just_safe_get_1.default(error_9, 'response.status');
+                        if (responseStatus === 409) {
+                            return [2 /*return*/, reject(new VoucherCodeConflict(undefined, { error: error_9 }))];
+                        }
+                        else {
+                            return [2 /*return*/, reject(new VoucherCreationFailed(undefined, { error: error_9 }))];
+                        }
+                        return [3 /*break*/, 4];
+                    case 4:
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new VoucherCreationFailed(just_safe_get_1.default(response, 'error.message'), { status: response.status }))];
+                        }
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count }
                             })];
-                    case 3:
-                        error_9 = _a.sent();
-                        return [2 /*return*/, reject(new VoucherCreationFailed(undefined, { error: error_9 }))];
-                    case 4: return [2 /*return*/];
                 }
             });
         }); });
@@ -568,6 +580,18 @@ var VoucherCreationFailed = /** @class */ (function (_super) {
     return VoucherCreationFailed;
 }(errors_1.BaseError));
 exports.VoucherCreationFailed = VoucherCreationFailed;
+var VoucherCodeConflict = /** @class */ (function (_super) {
+    __extends(VoucherCodeConflict, _super);
+    function VoucherCodeConflict(message, properties) {
+        if (message === void 0) { message = 'This voucher code is already in use. Please use another code.'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'VoucherCodeConflict';
+        return _this;
+    }
+    return VoucherCodeConflict;
+}(errors_1.BaseError));
+exports.VoucherCodeConflict = VoucherCodeConflict;
 var VouchersCountFailed = /** @class */ (function (_super) {
     __extends(VouchersCountFailed, _super);
     function VouchersCountFailed(message, properties) {
