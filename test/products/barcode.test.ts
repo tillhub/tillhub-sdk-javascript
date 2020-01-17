@@ -107,7 +107,8 @@ describe('v1: Products: can check if a barcode is unique', () => {
           return [
             409,
             {
-              name: errorName
+              name: errorName,
+              results: [{}]
             }
           ]
         })
@@ -120,6 +121,7 @@ describe('v1: Products: can check if a barcode is unique', () => {
       expect(err.name).toBe('BarcodeGetFailed')
       expect(err.properties.status).toBe(409)
       expect(err.properties.name).toBe(errorName)
+      expect(Array.isArray(err.properties.data)).toBeTruthy()
     }
   })
 })

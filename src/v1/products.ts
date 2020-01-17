@@ -474,7 +474,8 @@ export class Products extends ThBaseHandler {
           return reject(
             new BarcodeGetFailed(undefined, {
               status: error.response.status,
-              name: error.response.data.name
+              name: error.response.data.name,
+              data: error.response.data.results
             })
           )
         }
