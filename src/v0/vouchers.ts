@@ -1,5 +1,6 @@
 import { diff, jsonPatchPathConverter } from 'just-diff'
 import qs from 'qs'
+import safeGet from 'just-safe-get'
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { ThBaseHandler } from '../base'
@@ -74,6 +75,7 @@ export interface Voucher {
   mutable?: boolean
   exchange_for_cash?: boolean
   restriction_single_transaction?: boolean
+  code?: string
 }
 
 export interface UsersResponse {
@@ -311,16 +313,28 @@ export class Vouchers extends ThBaseHandler {
   create(voucher: Voucher): Promise<VoucherResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-      try {
-        const response = await this.http.getClient().post(uri, voucher)
 
-        return resolve({
-          data: response.data.results[0] as Voucher,
-          metadata: { count: response.data.count }
-        } as VoucherResponse)
+      let response
+      try {
+        response = await this.http.getClient().post(uri, voucher)
       } catch (error) {
-        return reject(new VoucherCreationFailed(undefined, { error }))
+        const responseStatus = safeGet(error, 'response.status')
+
+        if (responseStatus === 409) {
+          return reject(new VoucherCodeConflict(undefined, { error }))
+        } else {
+          return reject(new VoucherCreationFailed(undefined, { error }))
+        }
       }
+
+      if (response.status !== 200) {
+        return reject(new VoucherCreationFailed(safeGet(response, 'error.message'), { status: response.status }))
+      }
+
+      return resolve({
+        data: response.data.results[0] as Voucher,
+        metadata: { count: response.data.count }
+      } as VoucherResponse)
     })
   }
 
@@ -470,6 +484,13 @@ export class VoucherPatchFailed extends BaseError {
 export class VoucherCreationFailed extends BaseError {
   public name = 'VoucherPostFailed'
   constructor(public message: string = 'Could not create voucher', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class VoucherCodeConflict extends BaseError {
+  public name = 'VoucherCodeConflict'
+  constructor(public message: string = 'This voucher code is already in use. Please use another code.', properties?: any) {
     super(message, properties)
   }
 }
