@@ -470,7 +470,8 @@ var Products = /** @class */ (function (_super) {
                         if (error_12.response && error_12.response.status === 409) {
                             return [2 /*return*/, reject(new BarcodeGetFailed(undefined, {
                                     status: error_12.response.status,
-                                    name: error_12.response.data.name
+                                    name: error_12.response.data.name,
+                                    data: error_12.response.data.results
                                 }))];
                         }
                         return [2 /*return*/, reject(new BarcodeGetFailed(undefined, { error: error_12 }))];

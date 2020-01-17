@@ -1,3 +1,10 @@
+## [3.161.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.161.0...v3.161.1) (2020-01-17)
+
+
+### Bug Fixes
+
+* **products:** expose data results on expected 409 error ([5f575f9](https://github.com/tillhub/tillhub-sdk-javascript/commit/5f575f9))
+
 # [3.161.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.160.1...v3.161.0) (2020-01-17)
 
 
