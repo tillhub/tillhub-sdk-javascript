@@ -145,7 +145,7 @@
     "just-diff": "^2.2.0",
     "just-safe-get": "^2.0.0",
     "just-typeof": "^2.0.0",
-    "mqtt": "^2.18.8",
+    "mqtt": "^3.0.1",
     "qs": "^6.6.0",
     "serialize-error": "^4.1.0"
   },
