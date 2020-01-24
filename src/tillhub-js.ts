@@ -772,6 +772,14 @@ export class TillhubClient extends events.EventEmitter {
   categories(): v0.Categories {
     return this.generateAuthenticatedInstance(v0.Categories)
   }
+
+  /**
+   * Create an authenticated Dependencies instance
+   *
+   */
+  dependencies(): v0.Dependencies {
+    return this.generateAuthenticatedInstance(v0.Dependencies)
+  }
 }
 
 export class Tillhub extends TillhubClient {
