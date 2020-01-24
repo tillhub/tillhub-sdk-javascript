@@ -50,6 +50,7 @@ import { Correspondences } from './correspondences'
 import { Storefronts } from './storefronts'
 import { Categories } from './categories'
 import { CategoryTrees } from './category_trees'
+import { Dependencies } from './dependencies'
 
 export {
   Auth,
@@ -105,5 +106,6 @@ export {
   Correspondences,
   Storefronts,
   Categories,
-  CategoryTrees
+  CategoryTrees,
+  Dependencies
 }
