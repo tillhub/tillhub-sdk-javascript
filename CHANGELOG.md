@@ -1,3 +1,10 @@
+# [3.162.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.161.1...v3.162.0) (2020-01-24)
+
+
+### Features
+
+* **dependencies:** add dependencies resources and get handler ([988a09c](https://github.com/tillhub/tillhub-sdk-javascript/commit/988a09c))
+
 ## [3.161.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.161.0...v3.161.1) (2020-01-17)
 
 

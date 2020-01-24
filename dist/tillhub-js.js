@@ -650,6 +650,13 @@ var TillhubClient = /** @class */ (function (_super) {
     TillhubClient.prototype.categories = function () {
         return this.generateAuthenticatedInstance(v0.Categories);
     };
+    /**
+     * Create an authenticated Dependencies instance
+     *
+     */
+    TillhubClient.prototype.dependencies = function () {
+        return this.generateAuthenticatedInstance(v0.Dependencies);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));
