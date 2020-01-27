@@ -780,6 +780,14 @@ export class TillhubClient extends events.EventEmitter {
   dependencies(): v0.Dependencies {
     return this.generateAuthenticatedInstance(v0.Dependencies)
   }
+
+  /**
+   * Create an authenticated Trash instance
+   *
+   */
+  trash(): v0.Trash {
+    return this.generateAuthenticatedInstance(v0.Trash)
+  }
 }
 
 export class Tillhub extends TillhubClient {
