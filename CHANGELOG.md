@@ -1,3 +1,10 @@
+# [3.163.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.162.0...v3.163.0) (2020-01-27)
+
+
+### Features
+
+* **trash:** add trash handler - get and untrash ([c9e6077](https://github.com/tillhub/tillhub-sdk-javascript/commit/c9e6077))
+
 # [3.162.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.161.1...v3.162.0) (2020-01-24)
 
 

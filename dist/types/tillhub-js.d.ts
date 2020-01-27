@@ -344,6 +344,11 @@ export declare class TillhubClient extends events.EventEmitter {
      *
      */
     dependencies(): v0.Dependencies;
+    /**
+     * Create an authenticated Trash instance
+     *
+     */
+    trash(): v0.Trash;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;

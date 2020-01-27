@@ -657,6 +657,13 @@ var TillhubClient = /** @class */ (function (_super) {
     TillhubClient.prototype.dependencies = function () {
         return this.generateAuthenticatedInstance(v0.Dependencies);
     };
+    /**
+     * Create an authenticated Trash instance
+     *
+     */
+    TillhubClient.prototype.trash = function () {
+        return this.generateAuthenticatedInstance(v0.Trash);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));

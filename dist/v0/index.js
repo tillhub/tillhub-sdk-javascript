@@ -108,4 +108,6 @@ var category_trees_1 = require("./category_trees");
 exports.CategoryTrees = category_trees_1.CategoryTrees;
 var dependencies_1 = require("./dependencies");
 exports.Dependencies = dependencies_1.Dependencies;
+var trash_1 = require("./trash");
+exports.Trash = trash_1.Trash;
 //# sourceMappingURL=index.js.map
