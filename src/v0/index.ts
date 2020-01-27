@@ -51,6 +51,7 @@ import { Storefronts } from './storefronts'
 import { Categories } from './categories'
 import { CategoryTrees } from './category_trees'
 import { Dependencies } from './dependencies'
+import { Trash } from './trash'
 
 export {
   Auth,
@@ -107,5 +108,6 @@ export {
   Storefronts,
   Categories,
   CategoryTrees,
-  Dependencies
+  Dependencies,
+  Trash
 }
