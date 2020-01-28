@@ -9,20 +9,26 @@ export interface TrashOptions {
 }
 
 export interface TrashQuery {
-  type?: string
-  start?: string
-  end?: string
   limit?: number
+  uri?: string
+  query?: {
+    type?: string
+    start?: string
+    end?: string
+  }
 }
 
-export interface UntrashQuery {
-  resource: string
-  type: TrashedTypes
+export interface RecoverQuery {
+  query?: {
+    resource: string
+    type: TrashedTypes
+  }
 }
 
 export interface TrashResponse {
   data: TrashedObject[]
   metadata: object
+  next?: () => Promise<TrashResponse>
 }
 
 export interface TrashedObject {
@@ -84,8 +90,9 @@ export class Trash extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  get(query: TrashQuery): Promise<TrashResponse> {
+  getAll(query: TrashQuery): Promise<TrashResponse> {
     return new Promise(async (resolve, reject) => {
+      let next
       const base = this.uriHelper.generateBaseUri('/')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
@@ -96,9 +103,14 @@ export class Trash extends ThBaseHandler {
         response.status !== 200 &&
           reject(new TrashFetchFailed(undefined, { status: response.status }))
 
+        if (response.data.cursor && response.data.cursor.next) {
+          next = (): Promise<TrashResponse> => this.getAll({ uri: response.data.cursor.next })
+        }
+
         return resolve({
           data: response.data.results,
-          metadata: { count: response.data.count }
+          metadata: { count: response.data.count },
+          next
         } as TrashResponse)
       } catch (error) {
         return reject(new TrashFetchFailed(undefined, { error }))
@@ -106,7 +118,7 @@ export class Trash extends ThBaseHandler {
     })
   }
 
-  untrash(query: UntrashQuery): Promise<TrashResponse> {
+  recover(query: RecoverQuery): Promise<TrashResponse> {
     return new Promise(async (resolve, reject) => {
       const base = this.uriHelper.generateBaseUri('/untrash')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -116,14 +128,14 @@ export class Trash extends ThBaseHandler {
         const response = await this.http.getClient().put(uri)
 
         response.status !== 200 &&
-          reject(new UntrashFailed(undefined, { status: response.status }))
+          reject(new RecoverFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results,
           metadata: { count: response.data.count }
         } as TrashResponse)
       } catch (error) {
-        return reject(new UntrashFailed(undefined, { error }))
+        return reject(new RecoverFailed(undefined, { error }))
       }
     })
   }
@@ -136,9 +148,9 @@ export class TrashFetchFailed extends BaseError {
   }
 }
 
-export class UntrashFailed extends BaseError {
-  public name = 'UntrashFailed'
-  constructor(public message: string = 'Could not untrash the object', properties?: any) {
+export class RecoverFailed extends BaseError {
+  public name = 'RecoverFailed'
+  constructor(public message: string = 'Could not recover the object', properties?: any) {
     super(message, properties)
   }
 }
