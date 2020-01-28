@@ -14,8 +14,12 @@ afterEach(() => {
   mock.reset()
 })
 
-const trashQuery = { type: 'customers' as TrashedTypes, limit: 500 }
-const queryString = qs.stringify(trashQuery, { addQueryPrefix: true })
+const trashQuery = {
+  limit: 500,
+  query: { type: 'customers' as TrashedTypes }
+}
+
+const queryString = `?limit=${trashQuery.limit}&${qs.stringify(trashQuery.query)}`
 
 describe('v0: Trash: can get the trashed object', () => {
   it("Tillhub's products are instantiable", async () => {
@@ -53,7 +57,7 @@ describe('v0: Trash: can get the trashed object', () => {
 
     expect(Trash).toBeInstanceOf(v0.Trash)
 
-    const { data } = await Trash.get(trashQuery)
+    const { data } = await Trash.getAll(trashQuery)
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -80,7 +84,7 @@ describe('v0: Trash: can get the trashed object', () => {
 
     try {
       const th = await initThInstance()
-      await th.trash().get(trashQuery)
+      await th.trash().getAll(trashQuery)
     } catch (err) {
       expect(err.name).toBe('TrashFetchFailed')
     }

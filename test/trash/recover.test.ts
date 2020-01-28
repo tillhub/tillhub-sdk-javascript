@@ -14,10 +14,13 @@ afterEach(() => {
   mock.reset()
 })
 
-const untrashQuery = { type: 'customers' as TrashedTypes, resource: '123456' }
-const queryString = qs.stringify(untrashQuery, { addQueryPrefix: true })
+const recoverQuery = {
+  query: { type: 'customers' as TrashedTypes, resource: '123456' }
+}
 
-describe('v0: Trash: can untrash an object', () => {
+const queryString = qs.stringify(recoverQuery.query, { addQueryPrefix: true })
+
+describe('v0: Trash: can recover an object', () => {
   it("Tillhub's products are instantiable", async () => {
 
     if (process.env.SYSTEM_TEST !== 'true') {
@@ -53,7 +56,7 @@ describe('v0: Trash: can untrash an object', () => {
 
     expect(Trash).toBeInstanceOf(v0.Trash)
 
-    const { data } = await Trash.untrash(untrashQuery)
+    const { data } = await Trash.recover(recoverQuery)
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -73,16 +76,16 @@ describe('v0: Trash: can untrash an object', () => {
         ]
       })
 
-      mock.onPut(`https://api.tillhub.com/api/v0/products/${legacyId}/untrash${queryString}`).reply(function (config) {
+      mock.onPut(`https://api.tillhub.com/api/v0/trash/${legacyId}/untrash${queryString}`).reply(function (config) {
         return [205]
       })
     }
 
     try {
       const th = await initThInstance()
-      await th.trash().untrash(untrashQuery)
+      await th.trash().recover(recoverQuery)
     } catch (err) {
-      expect(err.name).toBe('UntrashFailed')
+      expect(err.name).toBe('RecoverFailed')
     }
   })
 })
