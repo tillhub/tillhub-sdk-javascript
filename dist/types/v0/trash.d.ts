@@ -7,18 +7,24 @@ export interface TrashOptions {
     base?: string;
 }
 export interface TrashQuery {
-    type?: string;
-    start?: string;
-    end?: string;
     limit?: number;
+    uri?: string;
+    query?: {
+        type?: string;
+        start?: string;
+        end?: string;
+    };
 }
-export interface UntrashQuery {
-    resource: string;
-    type: TrashedTypes;
+export interface RecoverQuery {
+    query?: {
+        resource: string;
+        type: TrashedTypes;
+    };
 }
 export interface TrashResponse {
     data: TrashedObject[];
     metadata: object;
+    next?: () => Promise<TrashResponse>;
 }
 export interface TrashedObject {
     id: string;
@@ -34,15 +40,15 @@ export declare class Trash extends ThBaseHandler {
     options: TrashOptions;
     uriHelper: UriHelper;
     constructor(options: TrashOptions, http: Client);
-    get(query: TrashQuery): Promise<TrashResponse>;
-    untrash(query: UntrashQuery): Promise<TrashResponse>;
+    getAll(query: TrashQuery): Promise<TrashResponse>;
+    recover(query: RecoverQuery): Promise<TrashResponse>;
 }
 export declare class TrashFetchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);
 }
-export declare class UntrashFailed extends BaseError {
+export declare class RecoverFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);

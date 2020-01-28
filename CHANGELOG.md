@@ -1,3 +1,10 @@
+## [3.163.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.163.0...v3.163.1) (2020-01-28)
+
+
+### Bug Fixes
+
+* **trash:** rename methods; add next; normalize query interface ([806bb56](https://github.com/tillhub/tillhub-sdk-javascript/commit/806bb56))
+
 # [3.163.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.162.0...v3.163.0) (2020-01-27)
 
 
