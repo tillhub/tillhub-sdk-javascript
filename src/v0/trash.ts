@@ -64,7 +64,7 @@ export type TrashedTypes =
   | 'regions'
   | 'safes'
   | 'seasons'
-  | 'staff'
+  | 'staffs'
   | 'staff_groups'
   | 'staff_permission_templates'
   | 'storefronts'
