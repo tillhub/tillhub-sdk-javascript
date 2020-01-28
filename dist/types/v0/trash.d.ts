@@ -32,7 +32,7 @@ export interface TrashedObject {
     type: TrashedTypes;
     updated_at: string;
 }
-export declare type TrashedTypes = 'accounts' | 'branch_groups' | 'branches' | 'categories' | 'category_trees' | 'clients' | 'customers' | 'device_groups' | 'discounts' | 'expense_accounts' | 'favourites' | 'functions' | 'manufacturers' | 'payment_options' | 'processes' | 'product_groups' | 'product_service_question_groups' | 'product_service_questions' | 'product_templates' | 'products_v1' | 'promotions' | 'reasons' | 'regions' | 'safes' | 'seasons' | 'staff' | 'staff_groups' | 'staff_permission_templates' | 'storefronts' | 'tags' | 'taxes' | 'templates' | 'warehouses';
+export declare type TrashedTypes = 'accounts' | 'branch_groups' | 'branches' | 'categories' | 'category_trees' | 'clients' | 'customers' | 'device_groups' | 'discounts' | 'expense_accounts' | 'favourites' | 'functions' | 'manufacturers' | 'payment_options' | 'processes' | 'product_groups' | 'product_service_question_groups' | 'product_service_questions' | 'product_templates' | 'products_v1' | 'promotions' | 'reasons' | 'regions' | 'safes' | 'seasons' | 'staffs' | 'staff_groups' | 'staff_permission_templates' | 'storefronts' | 'tags' | 'taxes' | 'templates' | 'warehouses';
 export declare class Trash extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;

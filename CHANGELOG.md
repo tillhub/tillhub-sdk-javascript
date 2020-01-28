@@ -1,3 +1,10 @@
+## [3.163.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.163.1...v3.163.2) (2020-01-28)
+
+
+### Bug Fixes
+
+* **trash:** change trashed type staff -> staffs ([0cad8ab](https://github.com/tillhub/tillhub-sdk-javascript/commit/0cad8ab))
+
 ## [3.163.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.163.0...v3.163.1) (2020-01-28)
 
 
