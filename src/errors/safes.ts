@@ -41,3 +41,15 @@ export class SafesBookFailed extends BaseError {
     super(message, properties)
   }
 }
+export class SafesLogBookFetchAllFailed extends BaseError {
+  public name = 'SafesLogBookFetchAllFailed'
+  constructor(public message: string = 'Could not get safes logs', properties?: any) {
+    super(message, properties)
+  }
+}
+export class SafesLogBookGetMetaFailed extends BaseError {
+  public name = 'SafesLogBookGetMetaFailed'
+  constructor(public message: string = 'Could not get meta of safes logs', properties?: any) {
+    super(message, properties)
+  }
+}
