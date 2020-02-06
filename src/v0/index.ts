@@ -30,7 +30,7 @@ import { Messages } from './messages'
 import { Favourites } from './favourites'
 import { LegacySettings } from './settings_old'
 import { Tags } from './tags'
-import { Safes } from './safes'
+import { Safes, SafesLogBook } from './safes'
 import { Warehouses } from './warehouses'
 import { Videos } from './videos'
 import { StaffGroups } from './staff_groups'
@@ -89,6 +89,7 @@ export {
   LegacySettings,
   Tags,
   Safes,
+  SafesLogBook,
   Warehouses,
   Videos,
   StaffGroups,

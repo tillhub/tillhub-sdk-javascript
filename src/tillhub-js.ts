@@ -638,6 +638,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated SafesLogBook instance
+   *
+   */
+  safesLogBook(): v0.SafesLogBook {
+    return this.generateAuthenticatedInstance(v0.SafesLogBook)
+  }
+
+  /**
    * Create an authenticated Warehouses instance
    *
    */

@@ -57,6 +57,28 @@ export interface BookRequestBody {
   initiated_at?: string
 }
 
+export interface SafesLogBookOptions {
+  user?: string
+  base?: string
+}
+
+export interface SafesLogBookQuery {
+  limit?: number
+  uri?: string
+  embed?: string | string[]
+  operation?: string | string[]
+  exclude_errors?: boolean
+  start?: string
+  end?: string
+  transaction_id?: string
+  transfer_party?: string
+}
+
+export interface SafesLogBookResponse {
+  data: object[]
+  next?: () => Promise<SafesLogBookResponse>
+}
+
 export class Safes extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/safes'
   endpoint: string
@@ -182,6 +204,69 @@ export class Safes extends ThBaseHandler {
         } as SafeResponse)
       } catch (error) {
         return reject(new errors.SafesBookFailed(error.msg, { error }))
+      }
+    })
+  }
+}
+
+export class SafesLogBook extends ThBaseHandler {
+  public static baseEndpoint = '/api/v0/safes'
+  endpoint: string
+  http: Client
+  public options: SafesLogBookOptions
+  public uriHelper: UriHelper
+
+  constructor(options: SafesLogBookOptions, http: Client) {
+    super(http, { endpoint: SafesLogBook.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    this.options = options
+    this.http = http
+
+    this.endpoint = SafesLogBook.baseEndpoint
+    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
+  }
+
+  getAll(query?: SafesLogBookQuery | undefined): Promise<SafesLogBookResponse> {
+    return new Promise(async (resolve, reject) => {
+      let next
+
+      try {
+        const base = this.uriHelper.generateBaseUri('/logs')
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+        const response = await this.http.getClient().get(uri)
+
+        if (response.data.cursor && response.data.cursor.next) {
+          next = (): Promise<SafesLogBookResponse> => this.getAll({ uri: response.data.cursor.next })
+        }
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count, cursor: response.data.cursor },
+          next
+        } as SafesLogBookResponse)
+      } catch (error) {
+        return reject(new errors.SafesLogBookFetchAllFailed(undefined, { error }))
+      }
+    })
+  }
+
+  meta(query?: SafesLogBookQuery | undefined): Promise<SafesLogBookResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const base = this.uriHelper.generateBaseUri('/logs/meta')
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+        const response = await this.http.getClient().get(uri)
+
+        if (response.status !== 200) reject(new errors.SafesLogBookGetMetaFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as SafesLogBookResponse)
+      } catch (error) {
+        return reject(new errors.SafesLogBookGetMetaFailed(undefined, { error }))
       }
     })
   }
