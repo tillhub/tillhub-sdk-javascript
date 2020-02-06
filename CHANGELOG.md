@@ -1,3 +1,10 @@
+# [3.166.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.165.0...v3.166.0) (2020-02-06)
+
+
+### Features
+
+* **safe_logs_book:** add count to meta metadata ([f9e04c7](https://github.com/tillhub/tillhub-sdk-javascript/commit/f9e04c7))
+
 # [3.165.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.164.0...v3.165.0) (2020-02-06)
 
 

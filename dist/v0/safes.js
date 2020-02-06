@@ -288,7 +288,7 @@ var SafesLogBook = /** @class */ (function (_super) {
                             reject(new errors.SafesLogBookGetMetaFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
-                                metadata: { count: response.data.count }
+                                metadata: { count: response.data.results[0].count }
                             })];
                     case 2:
                         error_8 = _a.sent();
