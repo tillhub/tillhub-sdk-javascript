@@ -1,3 +1,10 @@
+# [3.165.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.164.0...v3.165.0) (2020-02-06)
+
+
+### Features
+
+* **timetracking:** add entity and get handler ([1bfed8d](https://github.com/tillhub/tillhub-sdk-javascript/commit/1bfed8d))
+
 # [3.164.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.163.2...v3.164.0) (2020-02-06)
 
 

@@ -111,4 +111,6 @@ var dependencies_1 = require("./dependencies");
 exports.Dependencies = dependencies_1.Dependencies;
 var trash_1 = require("./trash");
 exports.Trash = trash_1.Trash;
+var timetracking_1 = require("./timetracking");
+exports.Timetracking = timetracking_1.Timetracking;
 //# sourceMappingURL=index.js.map

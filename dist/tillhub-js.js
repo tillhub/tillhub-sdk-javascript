@@ -671,6 +671,13 @@ var TillhubClient = /** @class */ (function (_super) {
     TillhubClient.prototype.trash = function () {
         return this.generateAuthenticatedInstance(v0.Trash);
     };
+    /**
+     * Create an authenticated TimetrackingReport instance
+     *
+     */
+    TillhubClient.prototype.timetracking = function () {
+        return this.generateAuthenticatedInstance(v0.Timetracking);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));
