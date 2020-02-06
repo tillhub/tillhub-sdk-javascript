@@ -262,7 +262,7 @@ export class SafesLogBook extends ThBaseHandler {
         if (response.status !== 200) reject(new errors.SafesLogBookGetMetaFailed())
 
         return resolve({
-          data: response.data.results,
+          data: response.data.results[0],
           metadata: { count: response.data.results[0].count }
         } as SafesLogBookResponse)
       } catch (error) {

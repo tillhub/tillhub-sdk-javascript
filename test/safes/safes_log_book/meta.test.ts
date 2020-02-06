@@ -84,7 +84,7 @@ describe('v0: SafesLogBook: can get count of all safes log book entries', () => 
 
     const { data } = await safesLogBook.meta(query)
 
-    expect(data).toEqual([{ count: 50 }])
+    expect(data).toEqual({ count: 50 })
   })
 
   it('rejects on status codes that are not 200', async () => {
