@@ -796,6 +796,14 @@ export class TillhubClient extends events.EventEmitter {
   trash(): v0.Trash {
     return this.generateAuthenticatedInstance(v0.Trash)
   }
+
+  /**
+   * Create an authenticated TimetrackingReport instance
+   *
+   */
+  timetracking(): v0.Timetracking {
+    return this.generateAuthenticatedInstance(v0.Timetracking)
+  }
 }
 
 export class Tillhub extends TillhubClient {
