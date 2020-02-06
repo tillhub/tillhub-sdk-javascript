@@ -532,6 +532,13 @@ var TillhubClient = /** @class */ (function (_super) {
         return this.generateAuthenticatedInstance(v0.Safes);
     };
     /**
+     * Create an authenticated SafesLogBook instance
+     *
+     */
+    TillhubClient.prototype.safesLogBook = function () {
+        return this.generateAuthenticatedInstance(v0.SafesLogBook);
+    };
+    /**
      * Create an authenticated Warehouses instance
      *
      */

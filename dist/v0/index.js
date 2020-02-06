@@ -68,6 +68,7 @@ var tags_1 = require("./tags");
 exports.Tags = tags_1.Tags;
 var safes_1 = require("./safes");
 exports.Safes = safes_1.Safes;
+exports.SafesLogBook = safes_1.SafesLogBook;
 var warehouses_1 = require("./warehouses");
 exports.Warehouses = warehouses_1.Warehouses;
 var videos_1 = require("./videos");

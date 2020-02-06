@@ -86,4 +86,28 @@ var SafesBookFailed = /** @class */ (function (_super) {
     return SafesBookFailed;
 }(baseError_1.BaseError));
 exports.SafesBookFailed = SafesBookFailed;
+var SafesLogBookFetchAllFailed = /** @class */ (function (_super) {
+    __extends(SafesLogBookFetchAllFailed, _super);
+    function SafesLogBookFetchAllFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get safes logs'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'SafesLogBookFetchAllFailed';
+        return _this;
+    }
+    return SafesLogBookFetchAllFailed;
+}(baseError_1.BaseError));
+exports.SafesLogBookFetchAllFailed = SafesLogBookFetchAllFailed;
+var SafesLogBookGetMetaFailed = /** @class */ (function (_super) {
+    __extends(SafesLogBookGetMetaFailed, _super);
+    function SafesLogBookGetMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get meta of safes logs'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'SafesLogBookGetMetaFailed';
+        return _this;
+    }
+    return SafesLogBookGetMetaFailed;
+}(baseError_1.BaseError));
+exports.SafesLogBookGetMetaFailed = SafesLogBookGetMetaFailed;
 //# sourceMappingURL=safes.js.map

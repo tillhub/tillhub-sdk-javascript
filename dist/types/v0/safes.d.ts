@@ -48,6 +48,25 @@ export interface BookRequestBody {
     comment?: string;
     initiated_at?: string;
 }
+export interface SafesLogBookOptions {
+    user?: string;
+    base?: string;
+}
+export interface SafesLogBookQuery {
+    limit?: number;
+    uri?: string;
+    embed?: string | string[];
+    operation?: string | string[];
+    exclude_errors?: boolean;
+    start?: string;
+    end?: string;
+    transaction_id?: string;
+    transfer_party?: string;
+}
+export interface SafesLogBookResponse {
+    data: object[];
+    next?: () => Promise<SafesLogBookResponse>;
+}
 export declare class Safes extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
@@ -61,4 +80,14 @@ export declare class Safes extends ThBaseHandler {
     create(safe: Safe): Promise<SafeResponse>;
     put(safeId: string, safe: Safe): Promise<SafeResponse>;
     book(body: BookRequestBody): Promise<SafeResponse>;
+}
+export declare class SafesLogBook extends ThBaseHandler {
+    static baseEndpoint: string;
+    endpoint: string;
+    http: Client;
+    options: SafesLogBookOptions;
+    uriHelper: UriHelper;
+    constructor(options: SafesLogBookOptions, http: Client);
+    getAll(query?: SafesLogBookQuery | undefined): Promise<SafesLogBookResponse>;
+    meta(query?: SafesLogBookQuery | undefined): Promise<SafesLogBookResponse>;
 }

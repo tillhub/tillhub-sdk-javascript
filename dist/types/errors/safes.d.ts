@@ -29,3 +29,13 @@ export declare class SafesBookFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class SafesLogBookFetchAllFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class SafesLogBookGetMetaFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}

@@ -230,4 +230,76 @@ var Safes = /** @class */ (function (_super) {
     return Safes;
 }(base_1.ThBaseHandler));
 exports.Safes = Safes;
+var SafesLogBook = /** @class */ (function (_super) {
+    __extends(SafesLogBook, _super);
+    function SafesLogBook(options, http) {
+        var _this = _super.call(this, http, { endpoint: SafesLogBook.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+        _this.options = options;
+        _this.http = http;
+        _this.endpoint = SafesLogBook.baseEndpoint;
+        _this.options.base = _this.options.base || 'https://api.tillhub.com';
+        _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
+        return _this;
+    }
+    SafesLogBook.prototype.getAll = function (query) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var next, base, uri, response_2, error_7;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri('/logs');
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
+                        response_2 = _a.sent();
+                        if (response_2.data.cursor && response_2.data.cursor.next) {
+                            next = function () { return _this.getAll({ uri: response_2.data.cursor.next }); };
+                        }
+                        return [2 /*return*/, resolve({
+                                data: response_2.data.results,
+                                metadata: { count: response_2.data.count, cursor: response_2.data.cursor },
+                                next: next
+                            })];
+                    case 2:
+                        error_7 = _a.sent();
+                        return [2 /*return*/, reject(new errors.SafesLogBookFetchAllFailed(undefined, { error: error_7 }))];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    SafesLogBook.prototype.meta = function (query) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var base, uri, response, error_8;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri('/logs/meta');
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200)
+                            reject(new errors.SafesLogBookGetMetaFailed());
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 2:
+                        error_8 = _a.sent();
+                        return [2 /*return*/, reject(new errors.SafesLogBookGetMetaFailed(undefined, { error: error_8 }))];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    SafesLogBook.baseEndpoint = '/api/v0/safes';
+    return SafesLogBook;
+}(base_1.ThBaseHandler));
+exports.SafesLogBook = SafesLogBook;
 //# sourceMappingURL=safes.js.map

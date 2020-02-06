@@ -1,3 +1,10 @@
+# [3.164.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.163.2...v3.164.0) (2020-02-06)
+
+
+### Features
+
+* **safes_log_book:** add new endpoints ([8f1573c](https://github.com/tillhub/tillhub-sdk-javascript/commit/8f1573c))
+
 ## [3.163.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.163.1...v3.163.2) (2020-01-28)
 
 

@@ -255,6 +255,11 @@ export declare class TillhubClient extends events.EventEmitter {
      */
     safes(): v0.Safes;
     /**
+     * Create an authenticated SafesLogBook instance
+     *
+     */
+    safesLogBook(): v0.SafesLogBook;
+    /**
      * Create an authenticated Warehouses instance
      *
      */
