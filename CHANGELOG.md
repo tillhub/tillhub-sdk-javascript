@@ -1,3 +1,10 @@
+# [3.167.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.166.0...v3.167.0) (2020-02-06)
+
+
+### Features
+
+* **safes_log_book:** change meta response ([aa4b377](https://github.com/tillhub/tillhub-sdk-javascript/commit/aa4b377))
+
 # [3.166.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.165.0...v3.166.0) (2020-02-06)
 
 
