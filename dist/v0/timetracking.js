@@ -80,7 +80,7 @@ var Timetracking = /** @class */ (function (_super) {
                         response.status !== 200 &&
                             reject(new TimetrackingReportFetchFailed(undefined, { status: response.status }));
                         return [2 /*return*/, resolve({
-                                data: response.data.results[0],
+                                data: response.data.results,
                                 msg: response.data.msg,
                                 metadata: { count: response.data.count }
                             })];

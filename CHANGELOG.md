@@ -1,3 +1,10 @@
+## [3.167.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.167.0...v3.167.1) (2020-02-07)
+
+
+### Bug Fixes
+
+* **timetracking:** return all results array on response ([9f7ab0a](https://github.com/tillhub/tillhub-sdk-javascript/commit/9f7ab0a))
+
 # [3.167.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.166.0...v3.167.0) (2020-02-06)
 
 

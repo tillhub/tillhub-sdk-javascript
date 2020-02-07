@@ -15,7 +15,7 @@ export interface TimetrackingQuery {
     };
 }
 export interface TimetrackingResponse {
-    data: TimetrackingReport;
+    data: TimetrackingReport[];
     metadata?: {
         count?: number;
         patch?: any;
