@@ -18,7 +18,7 @@ export interface TimetrackingQuery {
 }
 
 export interface TimetrackingResponse {
-  data: TimetrackingReport
+  data: TimetrackingReport[]
   metadata?: {
     count?: number
     patch?: any
@@ -68,7 +68,7 @@ export class Timetracking extends ThBaseHandler {
           reject(new TimetrackingReportFetchFailed(undefined, { status: response.status }))
 
         return resolve({
-          data: response.data.results[0] as TimetrackingReport,
+          data: response.data.results,
           msg: response.data.msg,
           metadata: { count: response.data.count }
         } as TimetrackingResponse)

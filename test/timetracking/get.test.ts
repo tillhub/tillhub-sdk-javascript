@@ -18,23 +18,25 @@ const query = { start: '31/12/1999', end: '01/01/2000' }
 const timetrackingQuery = { query }
 const queryString = qs.stringify(query, { addQueryPrefix: true })
 
-const timetrackingResponse = {
-  date: '01/01/2000',
-  clock_in: '123456468789',
-  clock_out: '89498498498',
-  total_break: {
-    hours: 0,
-    minutes: 55,
-    seconds: 5,
-    milliseconds: 5
-  },
-  total_worked: {
-    hours: 5,
-    minutes: 50,
-    seconds: 5,
-    milliseconds: 5
+const timetrackingResponse = [
+  {
+    date: '01/01/2000',
+    clock_in: '123456468789',
+    clock_out: '89498498498',
+    total_break: {
+      hours: 0,
+      minutes: 55,
+      seconds: 5,
+      milliseconds: 5
+    },
+    total_worked: {
+      hours: 5,
+      minutes: 50,
+      seconds: 5,
+      milliseconds: 5
+    }
   }
-}
+]
 
 describe('v0: Timetracking: can get the timetracking report for a specific staff member', () => {
   it("Tillhub's products are instantiable", async () => {
@@ -60,7 +62,7 @@ describe('v0: Timetracking: can get the timetracking report for a specific staff
             200,
             {
               count: 1,
-              results: [timetrackingResponse]
+              results: timetrackingResponse
             }
           ]
         })
