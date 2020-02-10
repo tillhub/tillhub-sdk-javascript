@@ -35,7 +35,8 @@ const query = {
   start: subMinutes(new Date(), 5).toISOString(),
   end: addMinutes(new Date(), 5).toISOString(),
   transfer_party: 'c2b68404-aa8c-4a5c-9172-ad1c2036ff93',
-  transaction_id: 'bcd81f9e-5e11-4021-b44f-4e9e48ad5768'
+  transaction_id: 'bcd81f9e-5e11-4021-b44f-4e9e48ad5768',
+  cursor_field: 'initiated_at'
 }
 
 describe('v0: SafesLogBook: can get all', () => {
