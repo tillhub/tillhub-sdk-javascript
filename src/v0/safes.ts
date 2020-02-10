@@ -72,6 +72,7 @@ export interface SafesLogBookQuery {
   end?: string
   transaction_id?: string
   transfer_party?: string
+  cursor_field?: string
 }
 
 export interface SafesLogBookResponse {
