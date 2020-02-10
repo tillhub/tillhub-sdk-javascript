@@ -1,3 +1,10 @@
+# [3.168.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.167.1...v3.168.0) (2020-02-10)
+
+
+### Features
+
+* **safes_log_book:** add cursor_field query param ([c044799](https://github.com/tillhub/tillhub-sdk-javascript/commit/c044799))
+
 ## [3.167.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.167.0...v3.167.1) (2020-02-07)
 
 
