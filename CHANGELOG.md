@@ -1,3 +1,10 @@
+# [3.170.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.169.0...v3.170.0) (2020-02-11)
+
+
+### Features
+
+* **timetracking:** add handler to get timetracking entries ([49efb28](https://github.com/tillhub/tillhub-sdk-javascript/commit/49efb28))
+
 # [3.169.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.168.0...v3.169.0) (2020-02-11)
 
 

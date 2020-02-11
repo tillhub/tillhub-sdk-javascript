@@ -43,8 +43,14 @@ export declare class Timetracking extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: TimetrackingOptions, http: Client);
     get(staffId: string, query?: TimetrackingQuery): Promise<TimetrackingResponse>;
+    getEntries(staffId: string, date?: string): Promise<TimetrackingResponse>;
 }
 export declare class TimetrackingReportFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class TimetrackingEntriesFetchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);
