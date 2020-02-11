@@ -1,3 +1,10 @@
+# [3.169.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.168.0...v3.169.0) (2020-02-11)
+
+
+### Features
+
+* **staff:** add cursor field query property ([e26bf17](https://github.com/tillhub/tillhub-sdk-javascript/commit/e26bf17))
+
 # [3.168.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.167.1...v3.168.0) (2020-02-10)
 
 

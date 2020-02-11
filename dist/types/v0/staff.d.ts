@@ -19,6 +19,7 @@ export interface StaffQueryOrOptions {
         email?: string;
         q?: string;
         staff_groups?: string;
+        cursor_field?: string;
     };
 }
 export interface StaffResponse {
