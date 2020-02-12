@@ -1,3 +1,10 @@
+# [3.171.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.170.0...v3.171.0) (2020-02-12)
+
+
+### Features
+
+* **safes_logs:** add query params ([93753de](https://github.com/tillhub/tillhub-sdk-javascript/commit/93753de))
+
 # [3.170.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.169.0...v3.170.0) (2020-02-11)
 
 

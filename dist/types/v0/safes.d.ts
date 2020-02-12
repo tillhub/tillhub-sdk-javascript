@@ -63,6 +63,13 @@ export interface SafesLogBookQuery {
     transaction_id?: string;
     transfer_party?: string;
     cursor_field?: string;
+    format?: string;
+    source_or_destination?: string;
+    source?: string;
+    destination?: string;
+    transfer_type?: string | string[];
+    transfer_value_range_start?: number;
+    transfer_value_range_end?: number;
 }
 export interface SafesLogBookResponse {
     data: object[];
