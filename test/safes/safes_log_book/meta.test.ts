@@ -27,7 +27,12 @@ const query = {
   exclude_errors: true,
   start: subMinutes(new Date(), 5).toISOString(),
   end: addMinutes(new Date(), 5).toISOString(),
-  transfer_party: 'c2b68404-aa8c-4a5c-9172-ad1c2036ff93'
+  source_or_destination: '8f0e62c2-e457-4485-9e9e-fe6628295f8d',
+  source: '5e9468f3-a064-498a-b0cf-69bc28a4aff3',
+  destination: '95e22525-38f7-4640-8402-632c7722c254',
+  transfer_type: ['safe_to_safe', 'pos_to_safe'],
+  transfer_value_range_start: 10.50,
+  transfer_value_range_end: 100
 }
 
 describe('v0: SafesLogBook: can get count of all safes log book entries', () => {
