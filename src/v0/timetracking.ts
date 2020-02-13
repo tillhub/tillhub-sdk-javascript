@@ -26,6 +26,15 @@ export interface TimetrackingResponse {
   msg?: string
 }
 
+export interface TimetrackingEntryResponse {
+  data: TimetrackingEntry
+  metadata?: {
+    count?: number
+    patch?: any
+  }
+  msg?: string
+}
+
 export interface TimetrackingReport {
   date: string
   clock_in: string
@@ -40,6 +49,17 @@ export interface Time {
   seconds: number
   milliseconds: number
 }
+
+export interface TimetrackingEntry {
+  id?: string
+  staff?: string
+  type?: TimetrackingEntryTypes
+  started_at?: string
+  ended_at?: string
+  client_id?: string
+}
+
+export type TimetrackingEntryTypes = 'day' | 'break'
 
 export class Timetracking extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/time_tracking'
@@ -97,6 +117,59 @@ export class Timetracking extends ThBaseHandler {
       }
     })
   }
+
+  createEntry(entry: TimetrackingEntry): Promise<TimetrackingEntryResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = this.uriHelper.generateBaseUri(`/entries`)
+      try {
+        const response = await this.http.getClient().post(uri, entry)
+        response.status !== 200 &&
+          reject(new TimetrackingEntryCreateFailed(undefined, { status: response.status }))
+
+        return resolve({
+          data: response.data.results[0] as TimetrackingEntry,
+          msg: response.data.msg,
+          metadata: { count: response.data.count }
+        } as TimetrackingEntryResponse)
+      } catch (error) {
+        return reject(new TimetrackingEntryCreateFailed(undefined, { error }))
+      }
+    })
+  }
+
+  updateEntry(entryId: string, data?: TimetrackingEntry): Promise<TimetrackingEntryResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = this.uriHelper.generateBaseUri(`/entries/${entryId}`)
+      try {
+        const response = await this.http.getClient().put(uri, data)
+        response.status !== 200 &&
+          reject(new TimetrackingEntryPutFailed(undefined, { status: response.status }))
+
+        return resolve({
+          data: response.data.results[0] as TimetrackingEntry,
+          msg: response.data.msg,
+          metadata: { count: response.data.count }
+        } as TimetrackingEntryResponse)
+      } catch (error) {
+        return reject(new TimetrackingEntryPutFailed(undefined, { error }))
+      }
+    })
+  }
+
+  deleteEntry(entryId: string): Promise<TimetrackingEntryResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = this.uriHelper.generateBaseUri(`/entries/${entryId}`)
+      try {
+        const response = await this.http.getClient().delete(uri)
+        response.status !== 200 &&
+          reject(new TimetrackingEntryDeleteFailed(undefined, { status: response.status }))
+
+        return resolve({ msg: response.data.msg } as TimetrackingEntryResponse)
+      } catch (error) {
+        return reject(new TimetrackingEntryDeleteFailed(undefined, { error }))
+      }
+    })
+  }
 }
 
 export class TimetrackingReportFetchFailed extends BaseError {
@@ -109,6 +182,27 @@ export class TimetrackingReportFetchFailed extends BaseError {
 export class TimetrackingEntriesFetchFailed extends BaseError {
   public name = 'TimetrackingEntriesFetchFailed'
   constructor(public message: string = 'Could not fetch the timetracking entries for the staff member', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class TimetrackingEntryCreateFailed extends BaseError {
+  public name = 'TimetrackingEntryCreateFailed'
+  constructor(public message: string = 'Could have not create the timetracking entry', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class TimetrackingEntryPutFailed extends BaseError {
+  public name = 'TimetrackingEntryPutFailed'
+  constructor(public message: string = 'Could have not update the timetracking entry', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class TimetrackingEntryDeleteFailed extends BaseError {
+  public name = 'TimetrackingEntryDeleteFailed'
+  constructor(public message: string = 'Could have not delete the timetracking entry', properties?: any) {
     super(message, properties)
   }
 }
