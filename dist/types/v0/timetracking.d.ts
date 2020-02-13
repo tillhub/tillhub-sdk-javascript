@@ -22,6 +22,14 @@ export interface TimetrackingResponse {
     };
     msg?: string;
 }
+export interface TimetrackingEntryResponse {
+    data: TimetrackingEntry;
+    metadata?: {
+        count?: number;
+        patch?: any;
+    };
+    msg?: string;
+}
 export interface TimetrackingReport {
     date: string;
     clock_in: string;
@@ -35,6 +43,15 @@ export interface Time {
     seconds: number;
     milliseconds: number;
 }
+export interface TimetrackingEntry {
+    id?: string;
+    staff?: string;
+    type?: TimetrackingEntryTypes;
+    started_at?: string;
+    ended_at?: string;
+    client_id?: string;
+}
+export declare type TimetrackingEntryTypes = 'day' | 'break';
 export declare class Timetracking extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
@@ -44,6 +61,9 @@ export declare class Timetracking extends ThBaseHandler {
     constructor(options: TimetrackingOptions, http: Client);
     get(staffId: string, query?: TimetrackingQuery): Promise<TimetrackingResponse>;
     getEntries(staffId: string, date?: string): Promise<TimetrackingResponse>;
+    createEntry(entry: TimetrackingEntry): Promise<TimetrackingEntryResponse>;
+    updateEntry(entryId: string, data?: TimetrackingEntry): Promise<TimetrackingEntryResponse>;
+    deleteEntry(entryId: string): Promise<TimetrackingEntryResponse>;
 }
 export declare class TimetrackingReportFetchFailed extends BaseError {
     message: string;
@@ -51,6 +71,21 @@ export declare class TimetrackingReportFetchFailed extends BaseError {
     constructor(message?: string, properties?: any);
 }
 export declare class TimetrackingEntriesFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class TimetrackingEntryCreateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class TimetrackingEntryPutFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class TimetrackingEntryDeleteFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);

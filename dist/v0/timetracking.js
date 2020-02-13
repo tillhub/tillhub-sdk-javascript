@@ -122,6 +122,89 @@ var Timetracking = /** @class */ (function (_super) {
             });
         }); });
     };
+    Timetracking.prototype.createEntry = function (entry) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri("/entries");
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().post(uri, entry)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 &&
+                            reject(new TimetrackingEntryCreateFailed(undefined, { status: response.status }));
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_3 = _a.sent();
+                        return [2 /*return*/, reject(new TimetrackingEntryCreateFailed(undefined, { error: error_3 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Timetracking.prototype.updateEntry = function (entryId, data) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri("/entries/" + entryId);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().put(uri, data)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 &&
+                            reject(new TimetrackingEntryPutFailed(undefined, { status: response.status }));
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_4 = _a.sent();
+                        return [2 /*return*/, reject(new TimetrackingEntryPutFailed(undefined, { error: error_4 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Timetracking.prototype.deleteEntry = function (entryId) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_5;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri("/entries/" + entryId);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().delete(uri)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 &&
+                            reject(new TimetrackingEntryDeleteFailed(undefined, { status: response.status }));
+                        return [2 /*return*/, resolve({ msg: response.data.msg })];
+                    case 3:
+                        error_5 = _a.sent();
+                        return [2 /*return*/, reject(new TimetrackingEntryDeleteFailed(undefined, { error: error_5 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     Timetracking.baseEndpoint = '/api/v0/time_tracking';
     return Timetracking;
 }(base_1.ThBaseHandler));
@@ -150,4 +233,40 @@ var TimetrackingEntriesFetchFailed = /** @class */ (function (_super) {
     return TimetrackingEntriesFetchFailed;
 }(errors_1.BaseError));
 exports.TimetrackingEntriesFetchFailed = TimetrackingEntriesFetchFailed;
+var TimetrackingEntryCreateFailed = /** @class */ (function (_super) {
+    __extends(TimetrackingEntryCreateFailed, _super);
+    function TimetrackingEntryCreateFailed(message, properties) {
+        if (message === void 0) { message = 'Could have not create the timetracking entry'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TimetrackingEntryCreateFailed';
+        return _this;
+    }
+    return TimetrackingEntryCreateFailed;
+}(errors_1.BaseError));
+exports.TimetrackingEntryCreateFailed = TimetrackingEntryCreateFailed;
+var TimetrackingEntryPutFailed = /** @class */ (function (_super) {
+    __extends(TimetrackingEntryPutFailed, _super);
+    function TimetrackingEntryPutFailed(message, properties) {
+        if (message === void 0) { message = 'Could have not update the timetracking entry'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TimetrackingEntryPutFailed';
+        return _this;
+    }
+    return TimetrackingEntryPutFailed;
+}(errors_1.BaseError));
+exports.TimetrackingEntryPutFailed = TimetrackingEntryPutFailed;
+var TimetrackingEntryDeleteFailed = /** @class */ (function (_super) {
+    __extends(TimetrackingEntryDeleteFailed, _super);
+    function TimetrackingEntryDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could have not delete the timetracking entry'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TimetrackingEntryDeleteFailed';
+        return _this;
+    }
+    return TimetrackingEntryDeleteFailed;
+}(errors_1.BaseError));
+exports.TimetrackingEntryDeleteFailed = TimetrackingEntryDeleteFailed;
 //# sourceMappingURL=timetracking.js.map

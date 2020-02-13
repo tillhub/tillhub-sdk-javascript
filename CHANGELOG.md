@@ -1,3 +1,10 @@
+# [3.172.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.171.0...v3.172.0) (2020-02-13)
+
+
+### Features
+
+* **timetracking:** add handler for  create, put, delete entry ([5bf4da5](https://github.com/tillhub/tillhub-sdk-javascript/commit/5bf4da5))
+
 # [3.171.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.170.0...v3.171.0) (2020-02-12)
 
 
