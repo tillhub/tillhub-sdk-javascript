@@ -12,6 +12,8 @@ export interface TimetrackingQuery {
   limit?: number
   uri?: string
   query?: {
+    deleted?: boolean
+    active?: boolean
     start?: string
     end?: string
   }
