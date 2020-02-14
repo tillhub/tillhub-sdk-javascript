@@ -92,7 +92,7 @@ var Timetracking = /** @class */ (function (_super) {
             });
         }); });
     };
-    Timetracking.prototype.getEntries = function (staffId, date) {
+    Timetracking.prototype.getEntries = function (staffId, query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var base, uri, response, error_2;
@@ -100,7 +100,7 @@ var Timetracking = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         base = this.uriHelper.generateBaseUri("/entries/staff/" + staffId);
-                        uri = this.uriHelper.generateUriWithQuery(base, { date: date });
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);

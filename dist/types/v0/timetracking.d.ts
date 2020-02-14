@@ -22,6 +22,15 @@ export interface TimetrackingResponse {
     };
     msg?: string;
 }
+export interface TimetrackingEntryQuery {
+    limit?: number;
+    uri?: string;
+    query?: {
+        deleted?: boolean;
+        active?: boolean;
+        date?: string;
+    };
+}
 export interface TimetrackingEntryResponse {
     data: TimetrackingEntry;
     metadata?: {
@@ -60,7 +69,7 @@ export declare class Timetracking extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: TimetrackingOptions, http: Client);
     get(staffId: string, query?: TimetrackingQuery): Promise<TimetrackingResponse>;
-    getEntries(staffId: string, date?: string): Promise<TimetrackingResponse>;
+    getEntries(staffId: string, query?: TimetrackingEntryQuery): Promise<TimetrackingResponse>;
     createEntry(entry: TimetrackingEntry): Promise<TimetrackingEntryResponse>;
     updateEntry(entryId: string, data?: TimetrackingEntry): Promise<TimetrackingEntryResponse>;
     deleteEntry(entryId: string): Promise<TimetrackingEntryResponse>;

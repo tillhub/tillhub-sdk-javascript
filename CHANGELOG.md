@@ -1,3 +1,10 @@
+## [3.172.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.172.0...v3.172.1) (2020-02-14)
+
+
+### Bug Fixes
+
+* **timetracking:** add missing query prarms to fetch entries ([3fe0288](https://github.com/tillhub/tillhub-sdk-javascript/commit/3fe0288))
+
 # [3.172.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.171.0...v3.172.0) (2020-02-13)
 
 
