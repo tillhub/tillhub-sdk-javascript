@@ -26,6 +26,16 @@ export interface TimetrackingResponse {
   msg?: string
 }
 
+export interface TimetrackingEntryQuery {
+  limit?: number
+  uri?: string
+  query?: {
+    deleted?: boolean
+    active?: boolean
+    date?: string
+  }
+}
+
 export interface TimetrackingEntryResponse {
   data: TimetrackingEntry
   metadata?: {
@@ -98,10 +108,10 @@ export class Timetracking extends ThBaseHandler {
     })
   }
 
-  getEntries(staffId: string, date?: string): Promise<TimetrackingResponse> {
+  getEntries(staffId: string, query?: TimetrackingEntryQuery): Promise<TimetrackingResponse> {
     return new Promise(async (resolve, reject) => {
       const base = this.uriHelper.generateBaseUri(`/entries/staff/${staffId}`)
-      const uri = this.uriHelper.generateUriWithQuery(base, { date })
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&

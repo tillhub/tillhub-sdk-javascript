@@ -15,7 +15,8 @@ afterEach(() => {
 
 const staffId = '1234'
 const date = '2000-01-01'
-const queryString = qs.stringify({ date }, { addQueryPrefix: true })
+const query = { date }
+const queryString = qs.stringify(query, { addQueryPrefix: true })
 
 const timetrackingResponse = [
   {
@@ -73,7 +74,7 @@ describe('v0: Timetracking: can get the timetracking entries for a specific staf
 
     expect(Timetracking).toBeInstanceOf(v0.Timetracking)
 
-    const { data } = await Timetracking.getEntries(staffId, date)
+    const { data } = await Timetracking.getEntries(staffId, { query })
 
     expect(data).toMatchObject(timetrackingResponse)
   })
@@ -100,7 +101,7 @@ describe('v0: Timetracking: can get the timetracking entries for a specific staf
 
     try {
       const th = await initThInstance()
-      await th.timetracking().getEntries(staffId, date)
+      await th.timetracking().getEntries(staffId, { query })
     } catch (err) {
       expect(err.name).toBe('TimetrackingEntriesFetchFailed')
     }
