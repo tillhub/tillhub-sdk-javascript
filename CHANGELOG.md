@@ -1,3 +1,15 @@
+# [3.173.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.172.1...v3.173.0) (2020-02-14)
+
+
+### Bug Fixes
+
+* **timetracking:** add missing query props for timetracking report ([d1ec284](https://github.com/tillhub/tillhub-sdk-javascript/commit/d1ec284))
+
+
+### Features
+
+* **safes_log_book:** add currency query param ([a711016](https://github.com/tillhub/tillhub-sdk-javascript/commit/a711016))
+
 ## [3.172.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.172.0...v3.172.1) (2020-02-14)
 
 
