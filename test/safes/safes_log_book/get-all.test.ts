@@ -42,7 +42,8 @@ const query = {
   destination: '95e22525-38f7-4640-8402-632c7722c254',
   transfer_type: ['safe_to_safe', 'pos_to_safe'],
   transfer_value_range_start: 10.50,
-  transfer_value_range_end: 100
+  transfer_value_range_end: 100,
+  currency: 'EUR'
 }
 
 describe('v0: SafesLogBook: can get all', () => {
