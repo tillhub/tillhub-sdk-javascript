@@ -80,6 +80,7 @@ export interface SafesLogBookQuery {
   transfer_type?: string | string[]
   transfer_value_range_start?: number
   transfer_value_range_end?: number
+  currency?: string
 }
 
 export interface SafesLogBookResponse {
