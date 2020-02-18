@@ -1,3 +1,10 @@
+# [3.174.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.173.0...v3.174.0) (2020-02-18)
+
+
+### Features
+
+* **product_groups:** add search() handler ([82a3caa](https://github.com/tillhub/tillhub-sdk-javascript/commit/82a3caa))
+
 # [3.173.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.172.1...v3.173.0) (2020-02-14)
 
 

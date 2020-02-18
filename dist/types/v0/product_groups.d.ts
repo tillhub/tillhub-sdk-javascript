@@ -49,4 +49,5 @@ export declare class ProductGroups extends ThBaseHandler {
     put(productGroupId: string, productGroup: ProductGroup): Promise<ProductGroupResponse>;
     create(productGroup: ProductGroup): Promise<ProductGroupResponse>;
     delete(taxId: string): Promise<ProductGroupResponse>;
+    search(searchTerm: string): Promise<ProductGroupsResponse>;
 }

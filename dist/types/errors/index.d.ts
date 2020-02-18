@@ -150,6 +150,11 @@ export declare class ProductGroupCreationFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
+export declare class ProductGroupsSearchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
 export declare class ProuctGroupsCountFailed extends BaseError {
     message: string;
     name: string;

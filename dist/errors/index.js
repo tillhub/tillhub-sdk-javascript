@@ -366,7 +366,7 @@ exports.ProductGroupPutFailed = ProductGroupPutFailed;
 var ProductGroupCreationFailed = /** @class */ (function (_super) {
     __extends(ProductGroupCreationFailed, _super);
     function ProductGroupCreationFailed(message, properties) {
-        if (message === void 0) { message = 'Could create product group'; }
+        if (message === void 0) { message = 'Could not create product group'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProductGroupCreationFailed';
@@ -375,6 +375,18 @@ var ProductGroupCreationFailed = /** @class */ (function (_super) {
     return ProductGroupCreationFailed;
 }(baseError_1.BaseError));
 exports.ProductGroupCreationFailed = ProductGroupCreationFailed;
+var ProductGroupsSearchFailed = /** @class */ (function (_super) {
+    __extends(ProductGroupsSearchFailed, _super);
+    function ProductGroupsSearchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not search product group'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductGroupsSearchFailed';
+        return _this;
+    }
+    return ProductGroupsSearchFailed;
+}(baseError_1.BaseError));
+exports.ProductGroupsSearchFailed = ProductGroupsSearchFailed;
 var ProuctGroupsCountFailed = /** @class */ (function (_super) {
     __extends(ProuctGroupsCountFailed, _super);
     function ProuctGroupsCountFailed(message, properties) {
