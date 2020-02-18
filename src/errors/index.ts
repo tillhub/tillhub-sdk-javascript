@@ -216,7 +216,14 @@ export class ProductGroupPutFailed extends BaseError {
 
 export class ProductGroupCreationFailed extends BaseError {
   public name = 'ProductGroupCreationFailed'
-  constructor(public message: string = 'Could create product group', properties?: any) {
+  constructor(public message: string = 'Could not create product group', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class ProductGroupsSearchFailed extends BaseError {
+  public name = 'ProductGroupsSearchFailed'
+  constructor(public message: string = 'Could not search product group', properties?: any) {
     super(message, properties)
   }
 }

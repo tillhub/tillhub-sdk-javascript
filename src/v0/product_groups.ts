@@ -172,4 +172,23 @@ export class ProductGroups extends ThBaseHandler {
       }
     })
   }
+
+  search(searchTerm: string): Promise<ProductGroupsResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/search?q=${searchTerm}`
+      try {
+        const response = await this.http.getClient().get(uri)
+        if (response.status !== 200) {
+          return reject(new errors.ProductGroupsSearchFailed(undefined, { status: response.status }))
+        }
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as ProductGroupsResponse)
+      } catch (error) {
+        return reject(new errors.ProductGroupsSearchFailed(undefined, { error }))
+      }
+    })
+  }
 }
