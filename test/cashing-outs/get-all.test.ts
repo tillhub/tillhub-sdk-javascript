@@ -41,11 +41,11 @@ describe('v0: CashingOut: can get all the cashingOut', () => {
 
     const th = await initThInstance()
 
-    const cashingOut = th.cashingOut()
+    const cashingOuts = th.cashingOuts()
 
-    expect(cashingOut).toBeInstanceOf(v0.CashingOut)
+    expect(cashingOuts).toBeInstanceOf(v0.CashingOuts)
 
-    const { data } = await cashingOut.getAll()
+    const { data } = await cashingOuts.getAll()
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -72,9 +72,9 @@ describe('v0: CashingOut: can get all the cashingOut', () => {
 
     try {
       const th = await initThInstance()
-      await th.cashingOut().getAll()
+      await th.cashingOuts().getAll()
     } catch (err) {
-      expect(err.name).toBe('CashingOutFetchFailed')
+      expect(err.name).toBe('CashingOutsFetchFailed')
     }
   })
 })

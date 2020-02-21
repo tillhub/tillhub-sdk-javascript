@@ -3,12 +3,12 @@ import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
 import { ThBaseHandler } from '../base'
 
-export interface CashingOutOptions {
+export interface CashingOutsOptions {
   user?: string
   base?: string
 }
 
-export interface CashingOutQuery {
+export interface CashingOutsQuery {
   limit?: number
   uri?: string
   query?: {
@@ -22,8 +22,8 @@ export interface CashingOutQuery {
   }
 }
 
-export interface CashingOutResponse {
-  data: CashingOutReport[]
+export interface CashingOutsResponse {
+  data: CashingOut[]
   metadata?: {
     count?: number
     patch?: any
@@ -31,7 +31,7 @@ export interface CashingOutResponse {
   msg?: string
 }
 
-export interface CashingOutReport {
+export interface CashingOut {
   id: string
   insert_id?: number
   custom_id?: string
@@ -65,46 +65,46 @@ export interface CashingOutReport {
   total_calculated?: string
 }
 
-export class CashingOut extends ThBaseHandler {
+export class CashingOuts extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/cashier_counting_protocol'
   endpoint: string
   http: Client
-  public options: CashingOutOptions
+  public options: CashingOutsOptions
   public uriHelper: UriHelper
 
-  constructor(options: CashingOutOptions, http: Client) {
-    super(http, { endpoint: CashingOut.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+  constructor(options: CashingOutsOptions, http: Client) {
+    super(http, { endpoint: CashingOuts.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
-    this.endpoint = CashingOut.baseEndpoint
+    this.endpoint = CashingOuts.baseEndpoint
     this.options.base = this.options.base || 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: CashingOutQuery): Promise<CashingOutResponse> {
+  getAll(query?: CashingOutsQuery): Promise<CashingOutsResponse> {
     return new Promise(async (resolve, reject) => {
       const base = this.uriHelper.generateBaseUri()
       const uri = this.uriHelper.generateUriWithQuery(base, query)
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
-          reject(new CashingOutFetchFailed(undefined, { status: response.status }))
+          reject(new CashingOutsFetchFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results,
           msg: response.data.msg,
           metadata: { count: response.data.count }
-        } as CashingOutResponse)
+        } as CashingOutsResponse)
       } catch (error) {
-        return reject(new CashingOutFetchFailed(undefined, { error }))
+        return reject(new CashingOutsFetchFailed(undefined, { error }))
       }
     })
   }
 }
 
-export class CashingOutFetchFailed extends BaseError {
-  public name = 'CashingOutFetchFailed'
+export class CashingOutsFetchFailed extends BaseError {
+  public name = 'CashingOutsFetchFailed'
   constructor(public message: string = 'Could not fetch the cashing out', properties?: any) {
     super(message, properties)
   }
