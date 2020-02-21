@@ -2,11 +2,11 @@ import { Client } from '../client';
 import { BaseError } from '../errors';
 import { UriHelper } from '../uri-helper';
 import { ThBaseHandler } from '../base';
-export interface CashingOutOptions {
+export interface CashingOutsOptions {
     user?: string;
     base?: string;
 }
-export interface CashingOutQuery {
+export interface CashingOutsQuery {
     limit?: number;
     uri?: string;
     query?: {
@@ -19,15 +19,15 @@ export interface CashingOutQuery {
         discrepancy?: boolean;
     };
 }
-export interface CashingOutResponse {
-    data: CashingOutReport[];
+export interface CashingOutsResponse {
+    data: CashingOut[];
     metadata?: {
         count?: number;
         patch?: any;
     };
     msg?: string;
 }
-export interface CashingOutReport {
+export interface CashingOut {
     id: string;
     insert_id?: number;
     custom_id?: string;
@@ -60,16 +60,16 @@ export interface CashingOutReport {
     total_counted?: string;
     total_calculated?: string;
 }
-export declare class CashingOut extends ThBaseHandler {
+export declare class CashingOuts extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
     http: Client;
-    options: CashingOutOptions;
+    options: CashingOutsOptions;
     uriHelper: UriHelper;
-    constructor(options: CashingOutOptions, http: Client);
-    getAll(query?: CashingOutQuery): Promise<CashingOutResponse>;
+    constructor(options: CashingOutsOptions, http: Client);
+    getAll(query?: CashingOutsQuery): Promise<CashingOutsResponse>;
 }
-export declare class CashingOutFetchFailed extends BaseError {
+export declare class CashingOutsFetchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);

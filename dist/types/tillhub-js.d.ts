@@ -360,10 +360,10 @@ export declare class TillhubClient extends events.EventEmitter {
      */
     timetracking(): v0.Timetracking;
     /**
-     * Create an authenticated CashingOut instance
+     * Create an authenticated CashingOuts instance
      *
      */
-    cashingOut(): v0.CashingOut;
+    cashingOuts(): v0.CashingOuts;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;

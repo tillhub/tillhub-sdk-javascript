@@ -51,18 +51,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
-var CashingOut = /** @class */ (function (_super) {
-    __extends(CashingOut, _super);
-    function CashingOut(options, http) {
-        var _this = _super.call(this, http, { endpoint: CashingOut.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+var CashingOuts = /** @class */ (function (_super) {
+    __extends(CashingOuts, _super);
+    function CashingOuts(options, http) {
+        var _this = _super.call(this, http, { endpoint: CashingOuts.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
         _this.options = options;
         _this.http = http;
-        _this.endpoint = CashingOut.baseEndpoint;
+        _this.endpoint = CashingOuts.baseEndpoint;
         _this.options.base = _this.options.base || 'https://api.tillhub.com';
         _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
         return _this;
     }
-    CashingOut.prototype.getAll = function (query) {
+    CashingOuts.prototype.getAll = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var base, uri, response, error_1;
@@ -78,7 +78,7 @@ var CashingOut = /** @class */ (function (_super) {
                     case 2:
                         response = _a.sent();
                         response.status !== 200 &&
-                            reject(new CashingOutFetchFailed(undefined, { status: response.status }));
+                            reject(new CashingOutsFetchFailed(undefined, { status: response.status }));
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 msg: response.data.msg,
@@ -86,26 +86,26 @@ var CashingOut = /** @class */ (function (_super) {
                             })];
                     case 3:
                         error_1 = _a.sent();
-                        return [2 /*return*/, reject(new CashingOutFetchFailed(undefined, { error: error_1 }))];
+                        return [2 /*return*/, reject(new CashingOutsFetchFailed(undefined, { error: error_1 }))];
                     case 4: return [2 /*return*/];
                 }
             });
         }); });
     };
-    CashingOut.baseEndpoint = '/api/v0/cashier_counting_protocol';
-    return CashingOut;
+    CashingOuts.baseEndpoint = '/api/v0/cashier_counting_protocol';
+    return CashingOuts;
 }(base_1.ThBaseHandler));
-exports.CashingOut = CashingOut;
-var CashingOutFetchFailed = /** @class */ (function (_super) {
-    __extends(CashingOutFetchFailed, _super);
-    function CashingOutFetchFailed(message, properties) {
-        if (message === void 0) { message = 'Could not fetch the cashing out'; }
+exports.CashingOuts = CashingOuts;
+var CashingOutsFetchFailed = /** @class */ (function (_super) {
+    __extends(CashingOutsFetchFailed, _super);
+    function CashingOutsFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the cashing outs'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
-        _this.name = 'CashingOutFetchFailed';
+        _this.name = 'CashingOutsFetchFailed';
         return _this;
     }
-    return CashingOutFetchFailed;
+    return CashingOutsFetchFailed;
 }(errors_1.BaseError));
-exports.CashingOutFetchFailed = CashingOutFetchFailed;
-//# sourceMappingURL=cashing-out.js.map
+exports.CashingOutsFetchFailed = CashingOutsFetchFailed;
+//# sourceMappingURL=cashing-outs.js.map
