@@ -804,6 +804,14 @@ export class TillhubClient extends events.EventEmitter {
   timetracking(): v0.Timetracking {
     return this.generateAuthenticatedInstance(v0.Timetracking)
   }
+
+  /**
+   * Create an authenticated CashingOut instance
+   *
+   */
+  cashingOut(): v0.CashingOut {
+    return this.generateAuthenticatedInstance(v0.CashingOut)
+  }
 }
 
 export class Tillhub extends TillhubClient {
