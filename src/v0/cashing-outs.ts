@@ -105,7 +105,7 @@ export class CashingOuts extends ThBaseHandler {
 
 export class CashingOutsFetchFailed extends BaseError {
   public name = 'CashingOutsFetchFailed'
-  constructor(public message: string = 'Could not fetch the cashing out', properties?: any) {
+  constructor(public message: string = 'Could not fetch the cashing outs', properties?: any) {
     super(message, properties)
   }
 }
