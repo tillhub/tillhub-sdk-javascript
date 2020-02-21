@@ -113,4 +113,6 @@ var trash_1 = require("./trash");
 exports.Trash = trash_1.Trash;
 var timetracking_1 = require("./timetracking");
 exports.Timetracking = timetracking_1.Timetracking;
+var cashing_out_1 = require("./cashing-out");
+exports.CashingOut = cashing_out_1.CashingOut;
 //# sourceMappingURL=index.js.map

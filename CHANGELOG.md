@@ -1,3 +1,10 @@
+# [3.175.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.174.0...v3.175.0) (2020-02-21)
+
+
+### Features
+
+* **cashing-out:** add cashing out entity with get all handler ([549458c](https://github.com/tillhub/tillhub-sdk-javascript/commit/549458c))
+
 # [3.174.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.173.0...v3.174.0) (2020-02-18)
 
 
