@@ -92,6 +92,32 @@ var CashingOuts = /** @class */ (function (_super) {
             });
         }); });
     };
+    CashingOuts.prototype.meta = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = this.uriHelper.generateBaseUri("/meta");
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200)
+                            reject(new CashingOutsMetaFailed());
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            })];
+                    case 2:
+                        error_2 = _a.sent();
+                        return [2 /*return*/, reject(new CashingOutsMetaFailed(undefined, { error: error_2 }))];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     CashingOuts.baseEndpoint = '/api/v0/cashier_counting_protocol';
     return CashingOuts;
 }(base_1.ThBaseHandler));
@@ -108,4 +134,16 @@ var CashingOutsFetchFailed = /** @class */ (function (_super) {
     return CashingOutsFetchFailed;
 }(errors_1.BaseError));
 exports.CashingOutsFetchFailed = CashingOutsFetchFailed;
+var CashingOutsMetaFailed = /** @class */ (function (_super) {
+    __extends(CashingOutsMetaFailed, _super);
+    function CashingOutsMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch metadata for cashing outs'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'CashingOutsMetaFailed';
+        return _this;
+    }
+    return CashingOutsMetaFailed;
+}(errors_1.BaseError));
+exports.CashingOutsMetaFailed = CashingOutsMetaFailed;
 //# sourceMappingURL=cashing-outs.js.map

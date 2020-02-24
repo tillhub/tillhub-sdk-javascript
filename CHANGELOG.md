@@ -1,3 +1,10 @@
+# [3.176.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.175.1...v3.176.0) (2020-02-24)
+
+
+### Features
+
+* **cashing-outs:** add meta handler ([05f1866](https://github.com/tillhub/tillhub-sdk-javascript/commit/05f1866))
+
 ## [3.175.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.175.0...v3.175.1) (2020-02-21)
 
 

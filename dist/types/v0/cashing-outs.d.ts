@@ -68,8 +68,14 @@ export declare class CashingOuts extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: CashingOutsOptions, http: Client);
     getAll(query?: CashingOutsQuery): Promise<CashingOutsResponse>;
+    meta(): Promise<CashingOutsResponse>;
 }
 export declare class CashingOutsFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class CashingOutsMetaFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);
