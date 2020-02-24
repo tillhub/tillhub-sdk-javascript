@@ -118,7 +118,7 @@ var CashingUps = /** @class */ (function (_super) {
             });
         }); });
     };
-    CashingUps.baseEndpoint = '/api/v0/cashier_counting_protocol';
+    CashingUps.baseEndpoint = '/api/v0/cashier_counting_protocols';
     return CashingUps;
 }(base_1.ThBaseHandler));
 exports.CashingUps = CashingUps;

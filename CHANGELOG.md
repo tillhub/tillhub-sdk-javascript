@@ -1,3 +1,10 @@
+## [3.176.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.176.1...v3.176.2) (2020-02-24)
+
+
+### Bug Fixes
+
+* **cashing-ups:** fix endpoint uri ([0cd1f2f](https://github.com/tillhub/tillhub-sdk-javascript/commit/0cd1f2f))
+
 ## [3.176.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.176.0...v3.176.1) (2020-02-24)
 
 
