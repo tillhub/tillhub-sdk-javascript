@@ -1,3 +1,11 @@
+## [3.176.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.176.0...v3.176.1) (2020-02-24)
+
+
+### Bug Fixes
+
+* **cashing-ups:** rename class, methods, errors ([ae4592e](https://github.com/tillhub/tillhub-sdk-javascript/commit/ae4592e))
+* **cashing-ups:** rename entity ([8ef7f5a](https://github.com/tillhub/tillhub-sdk-javascript/commit/8ef7f5a))
+
 # [3.176.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.175.1...v3.176.0) (2020-02-24)
 
 

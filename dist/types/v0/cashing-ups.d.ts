@@ -2,11 +2,11 @@ import { Client } from '../client';
 import { BaseError } from '../errors';
 import { UriHelper } from '../uri-helper';
 import { ThBaseHandler } from '../base';
-export interface CashingOutsOptions {
+export interface CashingUpsOptions {
     user?: string;
     base?: string;
 }
-export interface CashingOutsQuery {
+export interface CashingUpsQuery {
     limit?: number;
     uri?: string;
     query?: {
@@ -19,15 +19,15 @@ export interface CashingOutsQuery {
         discrepancy?: boolean;
     };
 }
-export interface CashingOutsResponse {
-    data: CashingOut[];
+export interface CashingUpsResponse {
+    data: CashingUp[];
     metadata?: {
         count?: number;
         patch?: any;
     };
     msg?: string;
 }
-export interface CashingOut {
+export interface CashingUp {
     id: string;
     insert_id?: number;
     custom_id?: string;
@@ -60,22 +60,22 @@ export interface CashingOut {
     total_counted?: string;
     total_calculated?: string;
 }
-export declare class CashingOuts extends ThBaseHandler {
+export declare class CashingUps extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
     http: Client;
-    options: CashingOutsOptions;
+    options: CashingUpsOptions;
     uriHelper: UriHelper;
-    constructor(options: CashingOutsOptions, http: Client);
-    getAll(query?: CashingOutsQuery): Promise<CashingOutsResponse>;
-    meta(): Promise<CashingOutsResponse>;
+    constructor(options: CashingUpsOptions, http: Client);
+    getAll(query?: CashingUpsQuery): Promise<CashingUpsResponse>;
+    meta(): Promise<CashingUpsResponse>;
 }
-export declare class CashingOutsFetchFailed extends BaseError {
+export declare class CashingUpsFetchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);
 }
-export declare class CashingOutsMetaFailed extends BaseError {
+export declare class CashingUpsMetaFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);
