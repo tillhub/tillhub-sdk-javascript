@@ -101,11 +101,36 @@ export class CashingOuts extends ThBaseHandler {
       }
     })
   }
+
+  meta(): Promise<CashingOutsResponse> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const uri = this.uriHelper.generateBaseUri(`/meta`)
+        const response = await this.http.getClient().get(uri)
+
+        if (response.status !== 200) reject(new CashingOutsMetaFailed())
+
+        return resolve({
+          data: response.data.results[0],
+          metadata: { count: response.data.count }
+        } as CashingOutsResponse)
+      } catch (error) {
+        return reject(new CashingOutsMetaFailed(undefined, { error }))
+      }
+    })
+  }
 }
 
 export class CashingOutsFetchFailed extends BaseError {
   public name = 'CashingOutsFetchFailed'
   constructor(public message: string = 'Could not fetch the cashing outs', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class CashingOutsMetaFailed extends BaseError {
+  public name = 'CashingOutsMetaFailed'
+  constructor(public message: string = 'Could not fetch metadata for cashing outs', properties?: any) {
     super(message, properties)
   }
 }
