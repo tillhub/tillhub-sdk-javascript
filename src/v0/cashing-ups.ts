@@ -66,7 +66,7 @@ export interface CashingUp {
 }
 
 export class CashingUps extends ThBaseHandler {
-  public static baseEndpoint = '/api/v0/cashier_counting_protocol'
+  public static baseEndpoint = '/api/v0/cashier_counting_protocols'
   endpoint: string
   http: Client
   public options: CashingUpsOptions

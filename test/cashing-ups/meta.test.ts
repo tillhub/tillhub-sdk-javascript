@@ -29,7 +29,7 @@ describe('v0: Cashing Outs: can get meta of cashing ups', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/cashier_counting_protocol/${legacyId}/meta`)
+        .onGet(`https://api.tillhub.com/api/v0/cashier_counting_protocols/${legacyId}/meta`)
         .reply(function (config) {
           return [
             200,
@@ -67,7 +67,7 @@ describe('v0: Cashing Outs: can get meta of cashing ups', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/cashier_counting_protocol/${legacyId}/meta`)
+        .onGet(`https://api.tillhub.com/api/v0/cashier_counting_protocols/${legacyId}/meta`)
         .reply(function (config) {
           return [205]
         })

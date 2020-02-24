@@ -28,7 +28,7 @@ describe('v0: CashingUps: can get all the cashing ups', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/cashier_counting_protocol/${legacyId}`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v0/cashier_counting_protocols/${legacyId}`).reply(function (config) {
         return [
           200,
           {
@@ -65,7 +65,7 @@ describe('v0: CashingUps: can get all the cashing ups', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/cashier_counting_protocol/${legacyId}`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v0/cashier_counting_protocols/${legacyId}`).reply(function (config) {
         return [205]
       })
     }
