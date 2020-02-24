@@ -43,7 +43,7 @@ describe('v0: CashingUps: can get all the cashing ups', () => {
 
     const cashingUps = th.cashingUps()
 
-    expect(cashingUps).toBeInstanceOf(v0.CashingUpss)
+    expect(cashingUps).toBeInstanceOf(v0.CashingUps)
 
     const { data } = await cashingUps.getAll()
 
@@ -74,7 +74,7 @@ describe('v0: CashingUps: can get all the cashing ups', () => {
       const th = await initThInstance()
       await th.cashingUps().getAll()
     } catch (err) {
-      expect(err.name).toBe('CashingUpssFetchFailed')
+      expect(err.name).toBe('CashingUpsFetchFailed')
     }
   })
 })

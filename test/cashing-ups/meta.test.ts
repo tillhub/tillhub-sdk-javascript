@@ -42,11 +42,11 @@ describe('v0: Cashing Outs: can get meta of cashing ups', () => {
 
     const th = await initThInstance()
 
-    const CashingOuts = th.cashingUps()
+    const CashingUps = th.cashingUps()
 
-    expect(CashingOuts).toBeInstanceOf(v0.CashingOuts)
+    expect(CashingUps).toBeInstanceOf(v0.CashingUps)
 
-    const { data } = await CashingOuts.meta()
+    const { data } = await CashingUps.meta()
 
     expect(data).toEqual({ count: 50 })
   })
@@ -77,7 +77,7 @@ describe('v0: Cashing Outs: can get meta of cashing ups', () => {
       const th = await initThInstance()
       await th.cashingUps().meta()
     } catch (err) {
-      expect(err.name).toBe('CashingOutsMetaFailed')
+      expect(err.name).toBe('CashingUpsMetaFailed')
     }
   })
 })
