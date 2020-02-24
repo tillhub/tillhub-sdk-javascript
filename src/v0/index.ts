@@ -53,7 +53,7 @@ import { CategoryTrees } from './category_trees'
 import { Dependencies } from './dependencies'
 import { Trash } from './trash'
 import { Timetracking } from './timetracking'
-import { CashingOuts } from './cashing-outs'
+import { CashingUps } from './cashing-ups'
 
 export {
   Auth,
@@ -114,5 +114,5 @@ export {
   Dependencies,
   Trash,
   Timetracking,
-  CashingOuts
+  CashingUps
 }

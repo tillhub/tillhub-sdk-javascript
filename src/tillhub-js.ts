@@ -806,11 +806,11 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
-   * Create an authenticated CashingOuts instance
+   * Create an authenticated CashingUps instance
    *
    */
-  cashingOuts(): v0.CashingOuts {
-    return this.generateAuthenticatedInstance(v0.CashingOuts)
+  cashingUps(): v0.CashingUps {
+    return this.generateAuthenticatedInstance(v0.CashingUps)
   }
 }
 

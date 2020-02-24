@@ -12,8 +12,8 @@ afterEach(() => {
   mock.reset()
 })
 
-describe('v0: CashingOut: can get all the cashing outs', () => {
-  it("Tillhub's cashingOuts are instantiable", async () => {
+describe('v0: CashingUps: can get all the cashing ups', () => {
+  it("Tillhub's cashingUps are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
@@ -41,11 +41,11 @@ describe('v0: CashingOut: can get all the cashing outs', () => {
 
     const th = await initThInstance()
 
-    const cashingOuts = th.cashingOuts()
+    const cashingUps = th.cashingUps()
 
-    expect(cashingOuts).toBeInstanceOf(v0.CashingOuts)
+    expect(cashingUps).toBeInstanceOf(v0.CashingUpss)
 
-    const { data } = await cashingOuts.getAll()
+    const { data } = await cashingUps.getAll()
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -72,9 +72,9 @@ describe('v0: CashingOut: can get all the cashing outs', () => {
 
     try {
       const th = await initThInstance()
-      await th.cashingOuts().getAll()
+      await th.cashingUps().getAll()
     } catch (err) {
-      expect(err.name).toBe('CashingOutsFetchFailed')
+      expect(err.name).toBe('CashingUpssFetchFailed')
     }
   })
 })

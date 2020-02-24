@@ -12,8 +12,8 @@ afterEach(() => {
   mock.reset()
 })
 
-describe('v0: Cashing Outs: can get meta of cashing outs', () => {
-  it("Tillhub's cashingOuts are instantiable", async () => {
+describe('v0: Cashing Outs: can get meta of cashing ups', () => {
+  it("Tillhub's cashingUps are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
@@ -42,7 +42,7 @@ describe('v0: Cashing Outs: can get meta of cashing outs', () => {
 
     const th = await initThInstance()
 
-    const CashingOuts = th.cashingOuts()
+    const CashingOuts = th.cashingUps()
 
     expect(CashingOuts).toBeInstanceOf(v0.CashingOuts)
 
@@ -75,7 +75,7 @@ describe('v0: Cashing Outs: can get meta of cashing outs', () => {
 
     try {
       const th = await initThInstance()
-      await th.cashingOuts().meta()
+      await th.cashingUps().meta()
     } catch (err) {
       expect(err.name).toBe('CashingOutsMetaFailed')
     }
