@@ -182,11 +182,37 @@ export class Timetracking extends ThBaseHandler {
       }
     })
   }
+
+  getStaffList(): Promise<TimetrackingResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = this.uriHelper.generateBaseUri(`/staff`)
+      try {
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 &&
+          reject(new TimetrackingStaffListFetchFailed(undefined, { status: response.status }))
+
+        return resolve({
+          data: response.data.results,
+          msg: response.data.msg,
+          metadata: { count: response.data.count }
+        } as TimetrackingResponse)
+      } catch (error) {
+        return reject(new TimetrackingStaffListFetchFailed(undefined, { error }))
+      }
+    })
+  }
 }
 
 export class TimetrackingReportFetchFailed extends BaseError {
   public name = 'TimetrackingReportFetchFailed'
   constructor(public message: string = 'Could not fetch the timetracking report for the staff member', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class TimetrackingStaffListFetchFailed extends BaseError {
+  public name = 'TimetrackingStaffListFetchFailed'
+  constructor(public message: string = 'Could not fetch the list of staff with timetracking entries', properties?: any) {
     super(message, properties)
   }
 }
