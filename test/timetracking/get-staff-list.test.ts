@@ -12,7 +12,7 @@ afterEach(() => {
   mock.reset()
 })
 
-describe('v0: Timetracking: can get the list of all staff members with at least one timetracking entry', () => {
+describe('v0: Timetracking: can get list of all staff members with at least one timetracking entry', () => {
   it("Tillhub's products are instantiable", async () => {
 
     if (process.env.SYSTEM_TEST !== 'true') {
