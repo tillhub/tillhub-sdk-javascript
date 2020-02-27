@@ -205,6 +205,35 @@ var Timetracking = /** @class */ (function (_super) {
             });
         }); });
     };
+    Timetracking.prototype.getStaffList = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_6;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri("/staff");
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        response.status !== 200 &&
+                            reject(new TimetrackingStaffListFetchFailed(undefined, { status: response.status }));
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_6 = _a.sent();
+                        return [2 /*return*/, reject(new TimetrackingStaffListFetchFailed(undefined, { error: error_6 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     Timetracking.baseEndpoint = '/api/v0/time_tracking';
     return Timetracking;
 }(base_1.ThBaseHandler));
@@ -221,6 +250,18 @@ var TimetrackingReportFetchFailed = /** @class */ (function (_super) {
     return TimetrackingReportFetchFailed;
 }(errors_1.BaseError));
 exports.TimetrackingReportFetchFailed = TimetrackingReportFetchFailed;
+var TimetrackingStaffListFetchFailed = /** @class */ (function (_super) {
+    __extends(TimetrackingStaffListFetchFailed, _super);
+    function TimetrackingStaffListFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the list of staff with timetracking entries'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TimetrackingStaffListFetchFailed';
+        return _this;
+    }
+    return TimetrackingStaffListFetchFailed;
+}(errors_1.BaseError));
+exports.TimetrackingStaffListFetchFailed = TimetrackingStaffListFetchFailed;
 var TimetrackingEntriesFetchFailed = /** @class */ (function (_super) {
     __extends(TimetrackingEntriesFetchFailed, _super);
     function TimetrackingEntriesFetchFailed(message, properties) {

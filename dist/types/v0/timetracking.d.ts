@@ -75,8 +75,14 @@ export declare class Timetracking extends ThBaseHandler {
     createEntry(entry: TimetrackingEntry): Promise<TimetrackingEntryResponse>;
     updateEntry(entryId: string, data?: TimetrackingEntry): Promise<TimetrackingEntryResponse>;
     deleteEntry(entryId: string): Promise<TimetrackingEntryResponse>;
+    getStaffList(): Promise<TimetrackingResponse>;
 }
 export declare class TimetrackingReportFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class TimetrackingStaffListFetchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);

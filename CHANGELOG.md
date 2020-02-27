@@ -1,3 +1,10 @@
+# [3.177.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.176.2...v3.177.0) (2020-02-27)
+
+
+### Features
+
+* **timetracking:** add handler to get staff list ([522aea8](https://github.com/tillhub/tillhub-sdk-javascript/commit/522aea8))
+
 ## [3.176.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.176.1...v3.176.2) (2020-02-24)
 
 
