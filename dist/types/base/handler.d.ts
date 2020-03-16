@@ -3,6 +3,13 @@ export interface ThBaseHandlerOptions {
     endpoint: string;
     base: string;
 }
+export interface HandlerQuery {
+    uri?: string;
+    limit?: number;
+    offset?: number;
+    query?: any;
+    [key: string]: any;
+}
 export declare class ThBaseHandler {
     private handlerOptions;
     private client;
@@ -31,5 +38,6 @@ export declare class ThAnalyticsBaseHandler {
     protected static generateAuthenticatedInstance<T>(type: {
         new (options: object, http: Client): T;
     }, options: ThAnalyticsBaseHandlerOptions, http: Client): T;
-    protected handleGet(url: string, query?: object, requestOptions?: object): Promise<ThAnalyticsBaseHandlerJsonReponseItem[]>;
+    private static generateUriWithQuery;
+    protected handleGet(url: string, query?: HandlerQuery, requestOptions?: object): Promise<ThAnalyticsBaseHandlerJsonReponseItem[]>;
 }

@@ -66,13 +66,31 @@ var ThAnalyticsBaseHandler = /** @class */ (function () {
     ThAnalyticsBaseHandler.generateAuthenticatedInstance = function (type, options, http) {
         return new type(options, http);
     };
+    ThAnalyticsBaseHandler.generateUriWithQuery = function (basePath, query) {
+        var uri;
+        if (!query) {
+            uri = "" + basePath;
+        }
+        else if (query.uri || (query.query && query.query.uri)) {
+            uri = query.uri || query.query.uri;
+        }
+        else if (query.query) {
+            var flattenedQuery = Object.assign({}, query, query.query);
+            flattenedQuery.query = undefined;
+            uri = "" + basePath + (flattenedQuery ? qs_1.default.stringify(flattenedQuery, { addQueryPrefix: true }) : '');
+        }
+        else {
+            uri = "" + basePath + (query ? qs_1.default.stringify(query, { addQueryPrefix: true }) : '');
+        }
+        return uri;
+    };
     ThAnalyticsBaseHandler.prototype.handleGet = function (url, query, requestOptions) {
         return __awaiter(this, void 0, void 0, function () {
             var opts, response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        opts = __assign({ method: 'GET', url: "" + url + (query ? qs_1.default.stringify(query, { addQueryPrefix: true }) : '') }, requestOptions);
+                        opts = __assign({ method: 'GET', url: ThAnalyticsBaseHandler.generateUriWithQuery(url, query) }, requestOptions);
                         return [4 /*yield*/, this.client.getClient()(opts)];
                     case 1:
                         response = _a.sent();

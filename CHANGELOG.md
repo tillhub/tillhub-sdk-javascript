@@ -1,3 +1,10 @@
+# [3.179.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.178.2...v3.179.0) (2020-03-16)
+
+
+### Features
+
+* **base-handlers:** add correct th query option handling ([b319619](https://github.com/tillhub/tillhub-sdk-javascript/commit/b319619))
+
 ## [3.178.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.178.1...v3.178.2) (2020-03-16)
 
 
