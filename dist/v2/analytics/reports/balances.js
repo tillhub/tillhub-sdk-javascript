@@ -50,18 +50,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var base_1 = require("../../../base");
 var errors_1 = require("../../../errors");
-var AnalyticsReportsBalancesOveview = /** @class */ (function (_super) {
-    __extends(AnalyticsReportsBalancesOveview, _super);
-    function AnalyticsReportsBalancesOveview(options, http) {
+var AnalyticsReportsBalancesOverview = /** @class */ (function (_super) {
+    __extends(AnalyticsReportsBalancesOverview, _super);
+    function AnalyticsReportsBalancesOverview(options, http) {
         var _this = _super.call(this, http, options) || this;
         _this.options = options;
         _this.http = http;
         return _this;
     }
-    AnalyticsReportsBalancesOveview.create = function (options, http) {
-        return base_1.ThAnalyticsBaseHandler.generateAuthenticatedInstance(AnalyticsReportsBalancesOveview, options, http);
+    AnalyticsReportsBalancesOverview.create = function (options, http) {
+        return base_1.ThAnalyticsBaseHandler.generateAuthenticatedInstance(AnalyticsReportsBalancesOverview, options, http);
     };
-    AnalyticsReportsBalancesOveview.prototype.getAll = function (query) {
+    AnalyticsReportsBalancesOverview.prototype.getAll = function (query) {
         return __awaiter(this, void 0, void 0, function () {
             var data, err_1;
             return __generator(this, function (_a) {
@@ -80,9 +80,9 @@ var AnalyticsReportsBalancesOveview = /** @class */ (function (_super) {
             });
         });
     };
-    return AnalyticsReportsBalancesOveview;
+    return AnalyticsReportsBalancesOverview;
 }(base_1.ThAnalyticsBaseHandler));
-exports.AnalyticsReportsBalancesOveview = AnalyticsReportsBalancesOveview;
+exports.AnalyticsReportsBalancesOverview = AnalyticsReportsBalancesOverview;
 var AnalyticsReportsBalancesDetail = /** @class */ (function (_super) {
     __extends(AnalyticsReportsBalancesDetail, _super);
     function AnalyticsReportsBalancesDetail(options, http) {

@@ -50,18 +50,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var base_1 = require("../../../base");
 var errors_1 = require("../../../errors");
-var AnalyticsReportsTransactionsOveview = /** @class */ (function (_super) {
-    __extends(AnalyticsReportsTransactionsOveview, _super);
-    function AnalyticsReportsTransactionsOveview(options, http) {
+var AnalyticsReportsTransactionsOverview = /** @class */ (function (_super) {
+    __extends(AnalyticsReportsTransactionsOverview, _super);
+    function AnalyticsReportsTransactionsOverview(options, http) {
         var _this = _super.call(this, http, options) || this;
         _this.options = options;
         _this.http = http;
         return _this;
     }
-    AnalyticsReportsTransactionsOveview.create = function (options, http) {
-        return base_1.ThAnalyticsBaseHandler.generateAuthenticatedInstance(AnalyticsReportsTransactionsOveview, options, http);
+    AnalyticsReportsTransactionsOverview.create = function (options, http) {
+        return base_1.ThAnalyticsBaseHandler.generateAuthenticatedInstance(AnalyticsReportsTransactionsOverview, options, http);
     };
-    AnalyticsReportsTransactionsOveview.prototype.getAll = function (query) {
+    AnalyticsReportsTransactionsOverview.prototype.getAll = function (query) {
         return __awaiter(this, void 0, void 0, function () {
             var data, err_1;
             return __generator(this, function (_a) {
@@ -80,9 +80,9 @@ var AnalyticsReportsTransactionsOveview = /** @class */ (function (_super) {
             });
         });
     };
-    return AnalyticsReportsTransactionsOveview;
+    return AnalyticsReportsTransactionsOverview;
 }(base_1.ThAnalyticsBaseHandler));
-exports.AnalyticsReportsTransactionsOveview = AnalyticsReportsTransactionsOveview;
+exports.AnalyticsReportsTransactionsOverview = AnalyticsReportsTransactionsOverview;
 var AnalyticsReportsTransactionsDetail = /** @class */ (function (_super) {
     __extends(AnalyticsReportsTransactionsDetail, _super);
     function AnalyticsReportsTransactionsDetail(options, http) {

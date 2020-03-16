@@ -9,11 +9,11 @@ export interface AnalyticsReportsBalancesOverviewResponseItem extends ThAnalytic
 }
 export interface AnalyticsReportsTransactionDetailResponsseItem extends ThAnalyticsBaseHandlerJsonReponseItem {
 }
-export declare class AnalyticsReportsBalancesOveview extends ThAnalyticsBaseHandler {
+export declare class AnalyticsReportsBalancesOverview extends ThAnalyticsBaseHandler {
     http: Client;
     options: BalancesHandlerOptions;
     constructor(options: BalancesHandlerOptions, http: Client);
-    static create(options: object, http: Client): AnalyticsReportsBalancesOveview;
+    static create(options: object, http: Client): AnalyticsReportsBalancesOverview;
     getAll(query?: object): Promise<AnalyticsReportsBalancesOverviewResponseItem[]>;
 }
 export declare class AnalyticsReportsBalancesDetail extends ThAnalyticsBaseHandler {

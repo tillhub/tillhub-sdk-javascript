@@ -1,3 +1,10 @@
+## [3.178.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.178.1...v3.178.2) (2020-03-16)
+
+
+### Bug Fixes
+
+* **analytics:** manage name typo ([9fde187](https://github.com/tillhub/tillhub-sdk-javascript/commit/9fde187))
+
 ## [3.178.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.178.0...v3.178.1) (2020-03-16)
 
 

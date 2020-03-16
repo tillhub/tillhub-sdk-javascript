@@ -1,9 +1,9 @@
-import { AnalyticsReportsTransactionsOveview, AnalyticsReportsTransactionsDetail } from './transactions';
-import { AnalyticsReportsBalancesOveview, AnalyticsReportsBalancesDetail } from './balances';
+import { AnalyticsReportsTransactionsOverview, AnalyticsReportsTransactionsDetail } from './transactions';
+import { AnalyticsReportsBalancesOverview, AnalyticsReportsBalancesDetail } from './balances';
 declare const _default: {
-    AnalyticsReportsTransactionsOveview: typeof AnalyticsReportsTransactionsOveview;
+    AnalyticsReportsTransactionsOverview: typeof AnalyticsReportsTransactionsOverview;
     AnalyticsReportsTransactionsDetail: typeof AnalyticsReportsTransactionsDetail;
-    AnalyticsReportsBalancesOveview: typeof AnalyticsReportsBalancesOveview;
+    AnalyticsReportsBalancesOverview: typeof AnalyticsReportsBalancesOverview;
     AnalyticsReportsBalancesDetail: typeof AnalyticsReportsBalancesDetail;
 };
 export default _default;

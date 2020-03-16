@@ -1,8 +1,8 @@
 declare const _default: {
     reports: {
-        AnalyticsReportsTransactionsOveview: typeof import("./reports/transactions").AnalyticsReportsTransactionsOveview;
+        AnalyticsReportsTransactionsOverview: typeof import("./reports/transactions").AnalyticsReportsTransactionsOverview;
         AnalyticsReportsTransactionsDetail: typeof import("./reports/transactions").AnalyticsReportsTransactionsDetail;
-        AnalyticsReportsBalancesOveview: typeof import("./reports/balances").AnalyticsReportsBalancesOveview;
+        AnalyticsReportsBalancesOverview: typeof import("./reports/balances").AnalyticsReportsBalancesOverview;
         AnalyticsReportsBalancesDetail: typeof import("./reports/balances").AnalyticsReportsBalancesDetail;
     };
 };
