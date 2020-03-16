@@ -6,6 +6,14 @@ export interface ThBaseHandlerOptions {
   base: string
 }
 
+export interface HandlerQuery {
+  uri?: string
+  limit?: number
+  offset?: number
+  query?: any
+  [key: string]: any
+}
+
 export class ThBaseHandler {
   private handlerOptions: ThBaseHandlerOptions
   private client: Client
@@ -54,10 +62,26 @@ export class ThAnalyticsBaseHandler {
     )
   }
 
-  protected async handleGet(url: string, query?: object, requestOptions?: object): Promise<ThAnalyticsBaseHandlerJsonReponseItem[]> {
+  private static generateUriWithQuery(basePath: string, query?: HandlerQuery): string {
+    let uri
+    if (!query) {
+      uri = `${basePath}`
+    } else if (query.uri || (query.query && query.query.uri)) {
+      uri = query.uri || query.query.uri
+    } else if (query.query) {
+      const flattenedQuery = Object.assign({}, query, query.query)
+      flattenedQuery.query = undefined
+      uri = `${basePath}${flattenedQuery ? qs.stringify(flattenedQuery, { addQueryPrefix: true }) : ''}`
+    } else {
+      uri = `${basePath}${query ? qs.stringify(query, { addQueryPrefix: true }) : ''}`
+    }
+    return uri
+  }
+
+  protected async handleGet(url: string, query?: HandlerQuery, requestOptions?: object): Promise<ThAnalyticsBaseHandlerJsonReponseItem[]> {
     const opts = {
       method: 'GET',
-      url: `${url}${query ? qs.stringify(query, { addQueryPrefix: true }) : ''}`,
+      url: ThAnalyticsBaseHandler.generateUriWithQuery(url, query),
       ...requestOptions
     }
     const response = await this.client.getClient()(opts)
