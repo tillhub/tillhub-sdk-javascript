@@ -4,8 +4,9 @@ import { UsernameAuth, KeyAuth, TokenAuth } from './v0/auth';
 import { Auth } from './v1/auth';
 import * as v0 from './v0';
 import * as v1 from './v1';
+import v2 from './v2';
 import { Client } from './client';
-export { v0, v1 };
+export { v0, v1, v2 };
 export declare const defaultOptions: TillhubSDKOptions;
 export interface TillhubSDKOptions {
     credentials?: UsernameAuth | KeyAuth | TokenAuth | undefined;
@@ -174,6 +175,11 @@ export declare class TillhubClient extends events.EventEmitter {
      *
      */
     analytics(): v0.Analytics;
+    /**
+     * Create an authenticated Analytics instance
+     *
+     */
+    analyticsHandlers(): object;
     /**
      * Create an authenticated TransactionsLegacy instance
      *

@@ -42,6 +42,8 @@ var v0 = __importStar(require("./v0"));
 exports.v0 = v0;
 var v1 = __importStar(require("./v1"));
 exports.v1 = v1;
+var v2_1 = __importDefault(require("./v2"));
+exports.v2 = v2_1.default;
 var client_1 = require("./client");
 var errors = __importStar(require("./errors"));
 var environment_1 = require("./environment");
@@ -369,6 +371,29 @@ var TillhubClient = /** @class */ (function (_super) {
             throw new errors.UninstantiatedClient();
         }
         return new v0.Analytics({ user: this.auth.user, base: this.options.base }, this.http);
+    };
+    /**
+     * Create an authenticated Analytics instance
+     *
+     */
+    TillhubClient.prototype.analyticsHandlers = function () {
+        if (!this.options ||
+            !this.options.base ||
+            !this.http ||
+            !this.auth ||
+            !this.auth.authenticated) {
+            throw new errors.UninstantiatedClient();
+        }
+        return {
+            analytics: {
+                reports: {
+                    AnalyticsReportsTransactionsOveview: v2_1.default.analytics.reports.AnalyticsReportsTransactionsOveview.create({ user: this.auth.user, base: this.options.base }, this.http),
+                    AnalyticsReportsTransactionsDetail: v2_1.default.analytics.reports.AnalyticsReportsTransactionsDetail.create({ user: this.auth.user, base: this.options.base }, this.http),
+                    AnalyticsReportsBalancesOveview: v2_1.default.analytics.reports.AnalyticsReportsBalancesOveview.create({ user: this.auth.user, base: this.options.base }, this.http),
+                    AnalyticsReportsBalancesDetail: v2_1.default.analytics.reports.AnalyticsReportsBalancesDetail.create({ user: this.auth.user, base: this.options.base }, this.http)
+                }
+            }
+        };
     };
     /**
      * Create an authenticated TransactionsLegacy instance

@@ -1,3 +1,10 @@
+# [3.178.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.177.0...v3.178.0) (2020-03-16)
+
+
+### Features
+
+* **analytics:** add tx, balances v2 handlers ([1817b51](https://github.com/tillhub/tillhub-sdk-javascript/commit/1817b51))
+
 # [3.177.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.176.2...v3.177.0) (2020-02-27)
 
 
