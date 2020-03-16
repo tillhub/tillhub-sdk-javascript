@@ -7,11 +7,12 @@ import { AuthOptions, AuthTypes, UsernameAuth, KeyAuth, TokenAuth } from './v0/a
 import { Auth } from './v1/auth'
 import * as v0 from './v0'
 import * as v1 from './v1'
+import v2 from './v2'
 import { Client, ClientOptions } from './client'
 import * as errors from './errors'
 import { environment } from './environment'
 
-export { v0, v1 }
+export { v0, v1, v2 }
 
 export const defaultOptions: TillhubSDKOptions = {
   base: 'https://api.tillhub.com'
@@ -437,6 +438,33 @@ export class TillhubClient extends events.EventEmitter {
     }
 
     return new v0.Analytics({ user: this.auth.user, base: this.options.base }, this.http)
+  }
+
+  /**
+   * Create an authenticated Analytics instance
+   *
+   */
+  analyticsHandlers(): object {
+    if (
+      !this.options ||
+      !this.options.base ||
+      !this.http ||
+      !this.auth ||
+      !this.auth.authenticated
+    ) {
+      throw new errors.UninstantiatedClient()
+    }
+
+    return {
+      analytics: {
+        reports: {
+          AnalyticsReportsTransactionsOveview: v2.analytics.reports.AnalyticsReportsTransactionsOveview.create({ user: this.auth.user, base: this.options.base }, this.http),
+          AnalyticsReportsTransactionsDetail: v2.analytics.reports.AnalyticsReportsTransactionsDetail.create({ user: this.auth.user, base: this.options.base }, this.http),
+          AnalyticsReportsBalancesOveview: v2.analytics.reports.AnalyticsReportsBalancesOveview.create({ user: this.auth.user, base: this.options.base }, this.http),
+          AnalyticsReportsBalancesDetail: v2.analytics.reports.AnalyticsReportsBalancesDetail.create({ user: this.auth.user, base: this.options.base }, this.http)
+        }
+      }
+    }
   }
 
   /**
