@@ -29,7 +29,7 @@ export class AnalyticsReportsTransactionsOveview extends ThAnalyticsBaseHandler 
     return ThAnalyticsBaseHandler.generateAuthenticatedInstance(AnalyticsReportsTransactionsOveview, options, http)
   }
 
-  public async get(query?: object): Promise<AnalyticsReportsTransactionsOverviewResponseItem[]> {
+  public async getAll(query?: object): Promise<AnalyticsReportsTransactionsOverviewResponseItem[]> {
     try {
       const data = await this.handleGet(`${this.options.base}/api/v2/analytics/${this.options.user}/reports/transactions/overview`, query)
       return data
