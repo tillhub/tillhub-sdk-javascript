@@ -15,7 +15,7 @@ export interface AnalyticsReportsTransactionDetailResponsseItem extends ThAnalyt
 
 }
 
-export class AnalyticsReportsTransactionsOveview extends ThAnalyticsBaseHandler {
+export class AnalyticsReportsTransactionsOverview extends ThAnalyticsBaseHandler {
   http: Client
   public options: TransactionsHandlerOptions
 
@@ -25,8 +25,8 @@ export class AnalyticsReportsTransactionsOveview extends ThAnalyticsBaseHandler 
     this.http = http
   }
 
-  static create(options: object, http: Client): AnalyticsReportsTransactionsOveview {
-    return ThAnalyticsBaseHandler.generateAuthenticatedInstance(AnalyticsReportsTransactionsOveview, options, http)
+  static create(options: object, http: Client): AnalyticsReportsTransactionsOverview {
+    return ThAnalyticsBaseHandler.generateAuthenticatedInstance(AnalyticsReportsTransactionsOverview, options, http)
   }
 
   public async getAll(query?: object): Promise<AnalyticsReportsTransactionsOverviewResponseItem[]> {

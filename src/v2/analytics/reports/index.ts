@@ -1,9 +1,9 @@
-import { AnalyticsReportsTransactionsOveview, AnalyticsReportsTransactionsDetail } from './transactions'
-import { AnalyticsReportsBalancesOveview, AnalyticsReportsBalancesDetail } from './balances'
+import { AnalyticsReportsTransactionsOverview, AnalyticsReportsTransactionsDetail } from './transactions'
+import { AnalyticsReportsBalancesOverview, AnalyticsReportsBalancesDetail } from './balances'
 
 export default {
-  AnalyticsReportsTransactionsOveview,
+  AnalyticsReportsTransactionsOverview,
   AnalyticsReportsTransactionsDetail,
-  AnalyticsReportsBalancesOveview,
+  AnalyticsReportsBalancesOverview,
   AnalyticsReportsBalancesDetail
 }
