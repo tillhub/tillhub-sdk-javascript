@@ -14,7 +14,7 @@ export declare class AnalyticsReportsTransactionsOveview extends ThAnalyticsBase
     options: TransactionsHandlerOptions;
     constructor(options: TransactionsHandlerOptions, http: Client);
     static create(options: object, http: Client): AnalyticsReportsTransactionsOveview;
-    get(query?: object): Promise<AnalyticsReportsTransactionsOverviewResponseItem[]>;
+    getAll(query?: object): Promise<AnalyticsReportsTransactionsOverviewResponseItem[]>;
 }
 export declare class AnalyticsReportsTransactionsDetail extends ThAnalyticsBaseHandler {
     http: Client;

@@ -61,7 +61,7 @@ var AnalyticsReportsBalancesOveview = /** @class */ (function (_super) {
     AnalyticsReportsBalancesOveview.create = function (options, http) {
         return base_1.ThAnalyticsBaseHandler.generateAuthenticatedInstance(AnalyticsReportsBalancesOveview, options, http);
     };
-    AnalyticsReportsBalancesOveview.prototype.get = function (query) {
+    AnalyticsReportsBalancesOveview.prototype.getAll = function (query) {
         return __awaiter(this, void 0, void 0, function () {
             var data, err_1;
             return __generator(this, function (_a) {

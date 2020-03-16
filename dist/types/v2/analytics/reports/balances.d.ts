@@ -14,7 +14,7 @@ export declare class AnalyticsReportsBalancesOveview extends ThAnalyticsBaseHand
     options: BalancesHandlerOptions;
     constructor(options: BalancesHandlerOptions, http: Client);
     static create(options: object, http: Client): AnalyticsReportsBalancesOveview;
-    get(query?: object): Promise<AnalyticsReportsBalancesOverviewResponseItem[]>;
+    getAll(query?: object): Promise<AnalyticsReportsBalancesOverviewResponseItem[]>;
 }
 export declare class AnalyticsReportsBalancesDetail extends ThAnalyticsBaseHandler {
     http: Client;

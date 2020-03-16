@@ -1,3 +1,10 @@
+## [3.178.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.178.0...v3.178.1) (2020-03-16)
+
+
+### Bug Fixes
+
+* **analytics:** move to get all handlers ([924ab02](https://github.com/tillhub/tillhub-sdk-javascript/commit/924ab02))
+
 # [3.178.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.177.0...v3.178.0) (2020-03-16)
 
 

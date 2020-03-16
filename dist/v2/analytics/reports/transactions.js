@@ -61,7 +61,7 @@ var AnalyticsReportsTransactionsOveview = /** @class */ (function (_super) {
     AnalyticsReportsTransactionsOveview.create = function (options, http) {
         return base_1.ThAnalyticsBaseHandler.generateAuthenticatedInstance(AnalyticsReportsTransactionsOveview, options, http);
     };
-    AnalyticsReportsTransactionsOveview.prototype.get = function (query) {
+    AnalyticsReportsTransactionsOveview.prototype.getAll = function (query) {
         return __awaiter(this, void 0, void 0, function () {
             var data, err_1;
             return __generator(this, function (_a) {
