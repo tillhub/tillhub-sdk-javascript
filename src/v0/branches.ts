@@ -153,7 +153,7 @@ export class Branches extends ThBaseHandler {
           metadata: { count: response.data.count }
         } as BranchResponse)
       } catch (error) {
-        return reject(new BranchPutFailed(undefined, { error }))
+        return reject(new BranchPutFailed(safeGet(error, 'response.data.msg'), { error }))
       }
     })
   }
