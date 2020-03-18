@@ -64,6 +64,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var just_typeof_1 = __importDefault(require("just-typeof"));
 var qs_1 = __importDefault(require("qs"));
+var just_safe_get_1 = __importDefault(require("just-safe-get"));
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
@@ -169,7 +170,7 @@ var Branches = /** @class */ (function (_super) {
                             })];
                     case 3:
                         error_3 = _a.sent();
-                        return [2 /*return*/, reject(new BranchPutFailed(undefined, { error: error_3 }))];
+                        return [2 /*return*/, reject(new BranchPutFailed(just_safe_get_1.default(error_3, 'response.data.msg'), { error: error_3 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -244,13 +245,13 @@ var Branches = /** @class */ (function (_super) {
                         return [4 /*yield*/, this.http.getClient().delete(uri)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 && reject(new BranchDeleteFailed());
+                        response.status !== 200 && reject(new BranchDeleteFailed(just_safe_get_1.default(response, 'data.msg')));
                         return [2 /*return*/, resolve({
                                 msg: response.data.msg
                             })];
                     case 3:
                         err_1 = _a.sent();
-                        return [2 /*return*/, reject(new BranchDeleteFailed())];
+                        return [2 /*return*/, reject(new BranchDeleteFailed(just_safe_get_1.default(err_1, 'response.data.msg')))];
                     case 4: return [2 /*return*/];
                 }
             });

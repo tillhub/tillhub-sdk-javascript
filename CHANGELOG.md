@@ -1,3 +1,10 @@
+# [3.180.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.179.0...v3.180.0) (2020-03-18)
+
+
+### Features
+
+* **staff:** fix typo in variable ([71e9784](https://github.com/tillhub/tillhub-sdk-javascript/commit/71e9784))
+
 # [3.179.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.178.2...v3.179.0) (2020-03-16)
 
 
