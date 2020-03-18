@@ -86,7 +86,7 @@ export class AnalyticsReportsTransactionsDetail extends ThAnalyticsBaseHandler {
 
   public async get(id?: string): Promise<AnalyticsReportsTransactionDetailResponseItem> {
     try {
-      const d = await this.handleGet(`${this.options.base}/api/v2/analytics/${this.options.user}/reports/transactions/${id}`)
+      const d = await this.handleGet(`${this.options.base}/api/v2/analytics/${this.options.user}/reports/transactions/${id}/detail`)
 
       // @ts-ignore
       const data = d.find((item: ThAnalyticsBaseResultItem) => (item.metric.job === 'reports_transactions_v2_transaction_detail_data')).values
