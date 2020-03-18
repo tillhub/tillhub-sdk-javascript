@@ -29,18 +29,43 @@ export interface ThAnalyticsBaseHandlerOptions {
   base?: string
 }
 
-export interface ThAnalyticsBaseHandlerJsonReponseItem {
+// export interface ThAnalyticsBaseHandlerJsonReponseItem {
+//   created_at: {
+//     iso: string
+//     unix: number
+//   },
+//   metric: {
+//     job: string,
+//     user: string
+//   }
+//   count: number
+//   results: any[]
+// }
+
+// export interface ThAnalyticsBaseResponse {
+//   data: object[]
+//   metadata: {
+//     count: number
+//     total_count: number
+//   }
+//   msg?: string
+// }
+
+export interface ThAnalyticsBaseResultItem {
   created_at: {
     iso: string
     unix: number
-  },
+  }
   metric: {
-    job: string,
+    job: string
     user: string
+    type?: string
   }
   count: number
-  results: any[]
+  values: object[]
 }
+
+export type ThAnalyticsBaseResponse = ThAnalyticsBaseResultItem[]
 
 export class ThAnalyticsBaseHandler {
   private handlerOptions: ThAnalyticsBaseHandlerOptions
@@ -78,7 +103,7 @@ export class ThAnalyticsBaseHandler {
     return uri
   }
 
-  protected async handleGet(url: string, query?: HandlerQuery, requestOptions?: object): Promise<ThAnalyticsBaseHandlerJsonReponseItem[]> {
+  protected async handleGet(url: string, query?: HandlerQuery, requestOptions?: object): Promise<ThAnalyticsBaseResponse> {
     const opts = {
       method: 'GET',
       url: ThAnalyticsBaseHandler.generateUriWithQuery(url, query),
@@ -86,6 +111,6 @@ export class ThAnalyticsBaseHandler {
     }
     const response = await this.client.getClient()(opts)
 
-    return response.data.results as ThAnalyticsBaseHandlerJsonReponseItem[]
+    return response.data.results as ThAnalyticsBaseResponse
   }
 }
