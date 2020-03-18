@@ -1,3 +1,10 @@
+## [3.180.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.180.1...v3.180.2) (2020-03-18)
+
+
+### Bug Fixes
+
+* **reports/v2:** add correct trailing path ([3fbea1e](https://github.com/tillhub/tillhub-sdk-javascript/commit/3fbea1e))
+
 ## [3.180.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.180.0...v3.180.1) (2020-03-18)
 
 

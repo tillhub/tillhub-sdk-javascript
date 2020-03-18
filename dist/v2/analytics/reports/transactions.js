@@ -117,7 +117,7 @@ var AnalyticsReportsTransactionsDetail = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.handleGet(this.options.base + "/api/v2/analytics/" + this.options.user + "/reports/transactions/" + id)
+                        return [4 /*yield*/, this.handleGet(this.options.base + "/api/v2/analytics/" + this.options.user + "/reports/transactions/" + id + "/detail")
                             // @ts-ignore
                         ];
                     case 1:
