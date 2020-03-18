@@ -12,7 +12,7 @@ afterEach(() => {
   mock.reset()
 })
 
-const orderId = 'asdf5566'
+const staffId = 'asdf5566'
 const updateObject = {
   firstname: 'Charlie',
   lastname: 'Chaplin',
@@ -36,7 +36,7 @@ describe('v0: Staff: can alter the Staff member', () => {
       })
 
       mock
-        .onPut(`https://api.tillhub.com/api/v0/staff/${legacyId}/${orderId}`)
+        .onPut(`https://api.tillhub.com/api/v0/staff/${legacyId}/${staffId}`)
         .reply(function (config) {
           return [
             200,
@@ -54,7 +54,7 @@ describe('v0: Staff: can alter the Staff member', () => {
 
     expect(staff).toBeInstanceOf(v0.Staff)
 
-    const { data } = await staff.put(orderId, updateObject)
+    const { data } = await staff.put(staffId, updateObject)
 
     expect(data).toMatchObject(updateObject)
   })
@@ -74,7 +74,7 @@ describe('v0: Staff: can alter the Staff member', () => {
         ]
       })
       mock
-        .onPut(`https://api.tillhub.com/api/v0/staff/${legacyId}/${orderId}`)
+        .onPut(`https://api.tillhub.com/api/v0/staff/${legacyId}/${staffId}`)
         .reply(function (config) {
           return [205]
         })
@@ -83,7 +83,7 @@ describe('v0: Staff: can alter the Staff member', () => {
     const th = await initThInstance()
 
     try {
-      await th.staff().put(orderId, updateObject)
+      await th.staff().put(staffId, updateObject)
     } catch (err) {
       expect(err.name).toBe('StaffPutFailed')
     }
