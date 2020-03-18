@@ -61,9 +61,8 @@ export class AnalyticsReportsTransactionsOverview extends ThAnalyticsBaseHandler
           // @ts-ignore
           count: count.count,
           // @ts-ignore
-          total_count: count.totalCount
+          total_count: totalCount.count
         }
-        // data: (d || []).find((item: ThAnalyticsBaseResultItem) => (item.metric.job === 'reports_transactions_v2_overview_summary')).values
       } as AnalyticsReportsTransactionsOverviewResponseItem
     } catch (err) {
       throw new AnalyticsReportsTransactionsOverviewFetchError(undefined, { error: err })
