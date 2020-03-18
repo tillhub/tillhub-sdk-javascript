@@ -1,5 +1,6 @@
 import typeOf from 'just-typeof'
 import qs from 'qs'
+import safeGet from 'just-safe-get'
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
@@ -152,7 +153,7 @@ export class Branches extends ThBaseHandler {
           metadata: { count: response.data.count }
         } as BranchResponse)
       } catch (error) {
-        return reject(new BranchPutFailed(undefined, { error }))
+        return reject(new BranchPutFailed(safeGet(error, 'response.data.msg'), { error }))
       }
     })
   }
@@ -198,13 +199,13 @@ export class Branches extends ThBaseHandler {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${branchId}`
       try {
         const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new BranchDeleteFailed())
+        response.status !== 200 && reject(new BranchDeleteFailed(safeGet(response, 'data.msg')))
 
         return resolve({
           msg: response.data.msg
         } as BranchResponse)
       } catch (err) {
-        return reject(new BranchDeleteFailed())
+        return reject(new BranchDeleteFailed(safeGet(err, 'response.data.msg')))
       }
     })
   }
