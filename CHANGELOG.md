@@ -1,3 +1,10 @@
+## [3.180.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.180.0...v3.180.1) (2020-03-18)
+
+
+### Bug Fixes
+
+* **reports/balances:** add correct typing ([cb5fe41](https://github.com/tillhub/tillhub-sdk-javascript/commit/cb5fe41))
+
 # [3.180.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.179.0...v3.180.0) (2020-03-18)
 
 

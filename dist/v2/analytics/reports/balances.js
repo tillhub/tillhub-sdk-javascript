@@ -63,15 +63,30 @@ var AnalyticsReportsBalancesOverview = /** @class */ (function (_super) {
     };
     AnalyticsReportsBalancesOverview.prototype.getAll = function (query) {
         return __awaiter(this, void 0, void 0, function () {
-            var data, err_1;
+            var d, data, summary, count, totalCount, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.handleGet(this.options.base + "/api/v2/analytics/" + this.options.user + "/reports/balances/overview", query)];
+                        return [4 /*yield*/, this.handleGet(this.options.base + "/api/v2/analytics/" + this.options.user + "/reports/balances/overview", query)
+                            // @ts-ignore
+                        ];
                     case 1:
-                        data = _a.sent();
-                        return [2 /*return*/, data];
+                        d = _a.sent();
+                        data = d.find(function (item) { return (item.metric.job === 'reports_balances_v2_overview_data'); }).values;
+                        summary = d.find(function (item) { return (item.metric.job === 'reports_balances_v2_overview_summary'); }).values;
+                        count = d.find(function (item) { return (item.metric.job === 'reports_balances_v2_overview_filtered_meta'); }).values[0];
+                        totalCount = d.find(function (item) { return (item.metric.job === 'reports_balances_v2_overview_meta'); }).values[0];
+                        return [2 /*return*/, {
+                                data: data,
+                                summary: summary,
+                                metaData: {
+                                    // @ts-ignore
+                                    count: count.count,
+                                    // @ts-ignore
+                                    total_count: totalCount.count
+                                }
+                            }];
                     case 2:
                         err_1 = _a.sent();
                         throw new AnalyticsReportsBalancesOverviewFetchError(undefined, { error: err_1 });
@@ -96,15 +111,24 @@ var AnalyticsReportsBalancesDetail = /** @class */ (function (_super) {
     };
     AnalyticsReportsBalancesDetail.prototype.get = function (id) {
         return __awaiter(this, void 0, void 0, function () {
-            var data, err_2;
+            var d, data, err_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.handleGet(this.options.base + "/api/v2/analytics/" + this.options.user + "/reports/balances/" + id)];
+                        return [4 /*yield*/, this.handleGet(this.options.base + "/api/v2/analytics/" + this.options.user + "/reports/balances/" + id)
+                            // @ts-ignore
+                        ];
                     case 1:
-                        data = _a.sent();
-                        return [2 /*return*/, data];
+                        d = _a.sent();
+                        data = d.find(function (item) { return (item.metric.job === 'reports_balances_v2_balance_detail_data'); }).values;
+                        return [2 /*return*/, {
+                                data: data[0],
+                                metaData: {
+                                    count: 1,
+                                    total_count: 1
+                                }
+                            }];
                     case 2:
                         err_2 = _a.sent();
                         throw new AnalyticsReportsTransactionDetailFetcshError(undefined, { error: err_2 });

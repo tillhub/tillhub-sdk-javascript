@@ -19,7 +19,7 @@ export interface ThAnalyticsBaseHandlerOptions {
     user?: string;
     base?: string;
 }
-export interface ThAnalyticsBaseHandlerJsonReponseItem {
+export interface ThAnalyticsBaseResultItem {
     created_at: {
         iso: string;
         unix: number;
@@ -27,10 +27,12 @@ export interface ThAnalyticsBaseHandlerJsonReponseItem {
     metric: {
         job: string;
         user: string;
+        type?: string;
     };
     count: number;
-    results: any[];
+    values: object[];
 }
+export declare type ThAnalyticsBaseResponse = ThAnalyticsBaseResultItem[];
 export declare class ThAnalyticsBaseHandler {
     private handlerOptions;
     private client;
@@ -39,5 +41,5 @@ export declare class ThAnalyticsBaseHandler {
         new (options: object, http: Client): T;
     }, options: ThAnalyticsBaseHandlerOptions, http: Client): T;
     private static generateUriWithQuery;
-    protected handleGet(url: string, query?: HandlerQuery, requestOptions?: object): Promise<ThAnalyticsBaseHandlerJsonReponseItem[]>;
+    protected handleGet(url: string, query?: HandlerQuery, requestOptions?: object): Promise<ThAnalyticsBaseResponse>;
 }

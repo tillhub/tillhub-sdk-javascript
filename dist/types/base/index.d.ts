@@ -1,3 +1,3 @@
-import { ThBaseHandler, ThAnalyticsBaseHandler, ThAnalyticsBaseHandlerJsonReponseItem } from './handler';
+import { ThBaseHandler, ThAnalyticsBaseHandler, ThAnalyticsBaseResponse, ThAnalyticsBaseResultItem } from './handler';
 import { ThBaseRequest } from './request';
-export { ThBaseHandler, ThBaseRequest, ThAnalyticsBaseHandler, ThAnalyticsBaseHandlerJsonReponseItem };
+export { ThBaseHandler, ThBaseRequest, ThAnalyticsBaseHandler, ThAnalyticsBaseResponse, ThAnalyticsBaseResultItem };
