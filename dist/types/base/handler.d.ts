@@ -32,7 +32,10 @@ export interface ThAnalyticsBaseResultItem {
     count: number;
     values: object[];
 }
-export declare type ThAnalyticsBaseResponse = ThAnalyticsBaseResultItem[];
+export interface ThAnalyticsBaseResponse {
+    results: ThAnalyticsBaseResultItem[];
+    next?: string;
+}
 export declare class ThAnalyticsBaseHandler {
     private handlerOptions;
     private client;

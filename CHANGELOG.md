@@ -1,3 +1,10 @@
+## [3.180.3](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.180.2...v3.180.3) (2020-03-19)
+
+
+### Bug Fixes
+
+* **reports/v2:** add missing next handlers ([0bab612](https://github.com/tillhub/tillhub-sdk-javascript/commit/0bab612))
+
 ## [3.180.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.180.1...v3.180.2) (2020-03-18)
 
 

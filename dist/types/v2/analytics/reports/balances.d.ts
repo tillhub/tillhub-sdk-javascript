@@ -12,6 +12,7 @@ export interface AnalyticsReportsBalancesOverviewResponseItem {
         count: number;
         total_count: number;
     };
+    next?: () => Promise<AnalyticsReportsBalancesOverviewResponseItem>;
 }
 export interface AnalyticsReportsBalancesDetailResponseItem {
     data: object;

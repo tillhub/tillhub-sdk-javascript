@@ -94,7 +94,10 @@ var ThAnalyticsBaseHandler = /** @class */ (function () {
                         return [4 /*yield*/, this.client.getClient()(opts)];
                     case 1:
                         response = _a.sent();
-                        return [2 /*return*/, response.data.results];
+                        return [2 /*return*/, {
+                                next: response.data.cursor && response.data.cursor.next ? response.data.cursor.next : undefined,
+                                results: response.data.results
+                            }];
                 }
             });
         });
