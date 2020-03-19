@@ -14,6 +14,7 @@ export interface AnalyticsReportsTransactionsOverviewResponseItem {
     count: number
     total_count: number
   }
+  next?: () => Promise<AnalyticsReportsTransactionsOverviewResponseItem>
 }
 
 export interface AnalyticsReportsTransactionDetailResponseItem {
@@ -40,7 +41,8 @@ export class AnalyticsReportsTransactionsOverview extends ThAnalyticsBaseHandler
 
   public async getAll(query?: object): Promise<AnalyticsReportsTransactionsOverviewResponseItem> {
     try {
-      const d = await this.handleGet(`${this.options.base}/api/v2/analytics/${this.options.user}/reports/transactions/overview`, query) as ThAnalyticsBaseResultItem[]
+      let nextFn
+      const { results: d, next } = await this.handleGet(`${this.options.base}/api/v2/analytics/${this.options.user}/reports/transactions/overview`, query)
       if (!d) {
         throw new TypeError('Unexpectedly did not return data.')
       }
@@ -54,6 +56,10 @@ export class AnalyticsReportsTransactionsOverview extends ThAnalyticsBaseHandler
       // @ts-ignore
       const totalCount = d.find((item: ThAnalyticsBaseResultItem) => (item.metric.job === 'reports_transactions_v2_overview_meta')).values[0]
 
+      if (next) {
+        nextFn = (): Promise<AnalyticsReportsTransactionsOverviewResponseItem> => this.getAll({ uri: next })
+      }
+
       return {
         data: data,
         summary: summary,
@@ -62,7 +68,8 @@ export class AnalyticsReportsTransactionsOverview extends ThAnalyticsBaseHandler
           count: count.count,
           // @ts-ignore
           total_count: totalCount.count
-        }
+        },
+        next: nextFn
       } as AnalyticsReportsTransactionsOverviewResponseItem
     } catch (err) {
       throw new AnalyticsReportsTransactionsOverviewFetchError(undefined, { error: err })

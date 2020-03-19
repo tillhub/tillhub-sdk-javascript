@@ -65,7 +65,10 @@ export interface ThAnalyticsBaseResultItem {
   values: object[]
 }
 
-export type ThAnalyticsBaseResponse = ThAnalyticsBaseResultItem[]
+export interface ThAnalyticsBaseResponse {
+  results: ThAnalyticsBaseResultItem[]
+  next?: string
+}
 
 export class ThAnalyticsBaseHandler {
   private handlerOptions: ThAnalyticsBaseHandlerOptions
@@ -111,6 +114,9 @@ export class ThAnalyticsBaseHandler {
     }
     const response = await this.client.getClient()(opts)
 
-    return response.data.results as ThAnalyticsBaseResponse
+    return {
+      next: response.data.cursor && response.data.cursor.next ? response.data.cursor.next : undefined,
+      results: response.data.results
+    } as ThAnalyticsBaseResponse
   }
 }

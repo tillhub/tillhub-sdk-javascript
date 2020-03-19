@@ -14,6 +14,7 @@ export interface AnalyticsReportsBalancesOverviewResponseItem {
     count: number
     total_count: number
   }
+  next?: () => Promise<AnalyticsReportsBalancesOverviewResponseItem>
 }
 
 export interface AnalyticsReportsBalancesDetailResponseItem {
@@ -40,7 +41,8 @@ export class AnalyticsReportsBalancesOverview extends ThAnalyticsBaseHandler {
 
   public async getAll(query?: object): Promise<AnalyticsReportsBalancesOverviewResponseItem> {
     try {
-      const d = await this.handleGet(`${this.options.base}/api/v2/analytics/${this.options.user}/reports/balances/overview`, query)
+      let nextFn
+      const { results: d, next } = await this.handleGet(`${this.options.base}/api/v2/analytics/${this.options.user}/reports/balances/overview`, query)
 
       // @ts-ignore
       const data = d.find((item: ThAnalyticsBaseResultItem) => (item.metric.job === 'reports_balances_v2_overview_data')).values
@@ -51,6 +53,10 @@ export class AnalyticsReportsBalancesOverview extends ThAnalyticsBaseHandler {
       // @ts-ignore
       const totalCount = d.find((item: ThAnalyticsBaseResultItem) => (item.metric.job === 'reports_balances_v2_overview_meta')).values[0]
 
+      if (next) {
+        nextFn = (): Promise<AnalyticsReportsBalancesOverviewResponseItem> => this.getAll({ uri: next })
+      }
+
       return {
         data: data,
         summary: summary,
@@ -59,7 +65,8 @@ export class AnalyticsReportsBalancesOverview extends ThAnalyticsBaseHandler {
           count: count.count,
           // @ts-ignore
           total_count: totalCount.count
-        }
+        },
+        next: nextFn
       }
     } catch (err) {
       throw new AnalyticsReportsBalancesOverviewFetchError(undefined, { error: err })
