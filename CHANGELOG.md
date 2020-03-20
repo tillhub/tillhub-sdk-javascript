@@ -1,3 +1,10 @@
+## [3.180.4](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.180.3...v3.180.4) (2020-03-20)
+
+
+### Bug Fixes
+
+* **reports/v2:** add correct results ref in singular resps ([75133aa](https://github.com/tillhub/tillhub-sdk-javascript/commit/75133aa))
+
 ## [3.180.3](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.180.2...v3.180.3) (2020-03-19)
 
 

@@ -126,7 +126,7 @@ var AnalyticsReportsBalancesDetail = /** @class */ (function (_super) {
                             // @ts-ignore
                         ];
                     case 1:
-                        d = _a.sent();
+                        d = (_a.sent()).results;
                         data = d.find(function (item) { return (item.metric.job === 'reports_balances_v2_balance_detail_data'); }).values;
                         return [2 /*return*/, {
                                 data: data[0],

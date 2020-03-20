@@ -127,7 +127,7 @@ var AnalyticsReportsTransactionsDetail = /** @class */ (function (_super) {
                             // @ts-ignore
                         ];
                     case 1:
-                        d = _a.sent();
+                        d = (_a.sent()).results;
                         data = d.find(function (item) { return (item.metric.job === 'reports_transactions_v2_transaction_detail_data'); }).values;
                         return [2 /*return*/, {
                                 data: data[0],
