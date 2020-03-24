@@ -181,6 +181,24 @@ export class Users extends ThBaseHandler {
       }
     })
   }
+
+  createToken(userId: string): Promise<UserResponse> {
+    if (!this.configurationId) throw new TypeError('fetching users requires configuration ID to be set.')
+    return new Promise(async (resolve, reject) => {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${this.configurationId}/users/${userId}/api/key`
+
+      try {
+        const response = await this.http.getClient().post(uri)
+
+        return resolve({
+          data: response.data.results[0] as User,
+          metadata: { count: response.data.count }
+        } as UserResponse)
+      } catch (error) {
+        return reject(new UserTokenCreationFailed(undefined, { error }))
+      }
+    })
+  }
 }
 
 export class UsersFetchFailed extends BaseError {
