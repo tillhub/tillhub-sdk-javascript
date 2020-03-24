@@ -711,66 +711,6 @@ var ConfigurationDeleteFailed = /** @class */ (function (_super) {
     return ConfigurationDeleteFailed;
 }(baseError_1.BaseError));
 exports.ConfigurationDeleteFailed = ConfigurationDeleteFailed;
-var UsersFetchFailed = /** @class */ (function (_super) {
-    __extends(UsersFetchFailed, _super);
-    function UsersFetchFailed(message, properties) {
-        if (message === void 0) { message = 'Could not fetch user'; }
-        var _this = _super.call(this, message, properties) || this;
-        _this.message = message;
-        _this.name = 'UsersFetchFailed';
-        return _this;
-    }
-    return UsersFetchFailed;
-}(baseError_1.BaseError));
-exports.UsersFetchFailed = UsersFetchFailed;
-var UserFetchFailed = /** @class */ (function (_super) {
-    __extends(UserFetchFailed, _super);
-    function UserFetchFailed(message, properties) {
-        if (message === void 0) { message = 'Could not fetch user'; }
-        var _this = _super.call(this, message, properties) || this;
-        _this.message = message;
-        _this.name = 'UserFetchFailed';
-        return _this;
-    }
-    return UserFetchFailed;
-}(baseError_1.BaseError));
-exports.UserFetchFailed = UserFetchFailed;
-var UserPutFailed = /** @class */ (function (_super) {
-    __extends(UserPutFailed, _super);
-    function UserPutFailed(message, properties) {
-        if (message === void 0) { message = 'Could not alter user'; }
-        var _this = _super.call(this, message, properties) || this;
-        _this.message = message;
-        _this.name = 'UserPutFailed';
-        return _this;
-    }
-    return UserPutFailed;
-}(baseError_1.BaseError));
-exports.UserPutFailed = UserPutFailed;
-var UserCreationFailed = /** @class */ (function (_super) {
-    __extends(UserCreationFailed, _super);
-    function UserCreationFailed(message, properties) {
-        if (message === void 0) { message = 'Could not create user'; }
-        var _this = _super.call(this, message, properties) || this;
-        _this.message = message;
-        _this.name = 'UserCreationFailed';
-        return _this;
-    }
-    return UserCreationFailed;
-}(baseError_1.BaseError));
-exports.UserCreationFailed = UserCreationFailed;
-var UserDeleteFailed = /** @class */ (function (_super) {
-    __extends(UserDeleteFailed, _super);
-    function UserDeleteFailed(message, properties) {
-        if (message === void 0) { message = 'Could not delete user'; }
-        var _this = _super.call(this, message, properties) || this;
-        _this.message = message;
-        _this.name = 'UserDeleteFailed';
-        return _this;
-    }
-    return UserDeleteFailed;
-}(baseError_1.BaseError));
-exports.UserDeleteFailed = UserDeleteFailed;
 var DiscountsFetchFailed = /** @class */ (function (_super) {
     __extends(DiscountsFetchFailed, _super);
     function DiscountsFetchFailed(message, properties) {

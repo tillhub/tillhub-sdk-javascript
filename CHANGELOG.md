@@ -1,3 +1,10 @@
+# [3.181.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.180.4...v3.181.0) (2020-03-24)
+
+
+### Features
+
+* **users:** add handler to create token ([502867a](https://github.com/tillhub/tillhub-sdk-javascript/commit/502867a))
+
 ## [3.180.4](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.180.3...v3.180.4) (2020-03-20)
 
 

@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { BaseError } from '../errors/baseError';
 import { UriHelper, HandlerQuery } from '../uri-helper';
 import { ThBaseHandler } from '../base';
 export interface UsersOptions {
@@ -66,4 +67,35 @@ export declare class Users extends ThBaseHandler {
     put(userId: string, user: User): Promise<UserResponse>;
     create(user: User): Promise<UserResponse>;
     delete(userId: string): Promise<UserResponse>;
+    createToken(userId: string): Promise<UserResponse>;
+}
+export declare class UsersFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class UserFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class UserPutFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class UserCreationFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class UserDeleteFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class UserTokenCreationFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
 }

@@ -47,15 +47,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var errors = __importStar(require("../errors"));
+var baseError_1 = require("../errors/baseError");
 var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
 var Users = /** @class */ (function (_super) {
@@ -88,7 +81,7 @@ var Users = /** @class */ (function (_super) {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.UsersFetchFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new UsersFetchFailed(undefined, { status: response.status }))];
                         }
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
@@ -97,7 +90,7 @@ var Users = /** @class */ (function (_super) {
                             })];
                     case 2:
                         error_1 = _a.sent();
-                        return [2 /*return*/, reject(new errors.UsersFetchFailed(undefined, { error: error_1 }))];
+                        return [2 /*return*/, reject(new UsersFetchFailed(undefined, { error: error_1 }))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -120,7 +113,7 @@ var Users = /** @class */ (function (_super) {
                     case 2:
                         response = _a.sent();
                         response.status !== 200 &&
-                            reject(new errors.UsersFetchFailed(undefined, { status: response.status }));
+                            reject(new UsersFetchFailed(undefined, { status: response.status }));
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 msg: response.data.msg,
@@ -128,7 +121,7 @@ var Users = /** @class */ (function (_super) {
                             })];
                     case 3:
                         error_2 = _a.sent();
-                        return [2 /*return*/, reject(new errors.UserFetchFailed(undefined, { error: error_2 }))];
+                        return [2 /*return*/, reject(new UserFetchFailed(undefined, { error: error_2 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -156,7 +149,7 @@ var Users = /** @class */ (function (_super) {
                             })];
                     case 3:
                         error_3 = _a.sent();
-                        return [2 /*return*/, reject(new errors.UserPutFailed(undefined, { error: error_3 }))];
+                        return [2 /*return*/, reject(new UserPutFailed(undefined, { error: error_3 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -184,7 +177,7 @@ var Users = /** @class */ (function (_super) {
                             })];
                     case 3:
                         error_4 = _a.sent();
-                        return [2 /*return*/, reject(new errors.UserCreationFailed(undefined, { error: error_4 }))];
+                        return [2 /*return*/, reject(new UserCreationFailed(undefined, { error: error_4 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -205,14 +198,42 @@ var Users = /** @class */ (function (_super) {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            return [2 /*return*/, reject(new errors.UserDeleteFailed(undefined, { status: response.status }))];
+                            return [2 /*return*/, reject(new UserDeleteFailed(undefined, { status: response.status }))];
                         }
                         return [2 /*return*/, resolve({
                                 msg: response.data.msg
                             })];
                     case 3:
                         error_5 = _a.sent();
-                        return [2 /*return*/, reject(new errors.UserDeleteFailed(undefined, { error: error_5 }))];
+                        return [2 /*return*/, reject(new UserDeleteFailed(undefined, { error: error_5 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Users.prototype.createToken = function (userId) {
+        var _this = this;
+        if (!this.configurationId)
+            throw new TypeError('fetching users requires configuration ID to be set.');
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_6;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + this.configurationId + "/users/" + userId + "/api/key";
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().post(uri)];
+                    case 2:
+                        response = _a.sent();
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_6 = _a.sent();
+                        return [2 /*return*/, reject(new UserTokenCreationFailed(undefined, { error: error_6 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -222,4 +243,76 @@ var Users = /** @class */ (function (_super) {
     return Users;
 }(base_1.ThBaseHandler));
 exports.Users = Users;
+var UsersFetchFailed = /** @class */ (function (_super) {
+    __extends(UsersFetchFailed, _super);
+    function UsersFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch user'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'UsersFetchFailed';
+        return _this;
+    }
+    return UsersFetchFailed;
+}(baseError_1.BaseError));
+exports.UsersFetchFailed = UsersFetchFailed;
+var UserFetchFailed = /** @class */ (function (_super) {
+    __extends(UserFetchFailed, _super);
+    function UserFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch user'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'UserFetchFailed';
+        return _this;
+    }
+    return UserFetchFailed;
+}(baseError_1.BaseError));
+exports.UserFetchFailed = UserFetchFailed;
+var UserPutFailed = /** @class */ (function (_super) {
+    __extends(UserPutFailed, _super);
+    function UserPutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not alter user'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'UserPutFailed';
+        return _this;
+    }
+    return UserPutFailed;
+}(baseError_1.BaseError));
+exports.UserPutFailed = UserPutFailed;
+var UserCreationFailed = /** @class */ (function (_super) {
+    __extends(UserCreationFailed, _super);
+    function UserCreationFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create user'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'UserCreationFailed';
+        return _this;
+    }
+    return UserCreationFailed;
+}(baseError_1.BaseError));
+exports.UserCreationFailed = UserCreationFailed;
+var UserDeleteFailed = /** @class */ (function (_super) {
+    __extends(UserDeleteFailed, _super);
+    function UserDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete user'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'UserDeleteFailed';
+        return _this;
+    }
+    return UserDeleteFailed;
+}(baseError_1.BaseError));
+exports.UserDeleteFailed = UserDeleteFailed;
+var UserTokenCreationFailed = /** @class */ (function (_super) {
+    __extends(UserTokenCreationFailed, _super);
+    function UserTokenCreationFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create token'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'UserTokenCreationFailed';
+        return _this;
+    }
+    return UserTokenCreationFailed;
+}(baseError_1.BaseError));
+exports.UserTokenCreationFailed = UserTokenCreationFailed;
 //# sourceMappingURL=users.js.map

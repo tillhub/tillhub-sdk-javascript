@@ -290,31 +290,6 @@ export declare class ConfigurationDeleteFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: any);
 }
-export declare class UsersFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class UserFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class UserPutFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class UserCreationFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
-export declare class UserDeleteFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: any);
-}
 export declare class DiscountsFetchFailed extends BaseError {
     message: string;
     name: string;
