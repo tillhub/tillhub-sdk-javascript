@@ -1,5 +1,5 @@
 import { Client } from '../client'
-import * as errors from '../errors'
+import { BaseError } from '../errors/baseError'
 import { UriHelper, HandlerQuery } from '../uri-helper'
 import { ThBaseHandler } from '../base'
 
@@ -96,7 +96,7 @@ export class Users extends ThBaseHandler {
 
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(new errors.UsersFetchFailed(undefined, { status: response.status }))
+          return reject(new UsersFetchFailed(undefined, { status: response.status }))
         }
 
         return resolve({
@@ -105,7 +105,7 @@ export class Users extends ThBaseHandler {
           next
         } as UsersResponse)
       } catch (error) {
-        return reject(new errors.UsersFetchFailed(undefined, { error }))
+        return reject(new UsersFetchFailed(undefined, { error }))
       }
     })
   }
@@ -117,7 +117,7 @@ export class Users extends ThBaseHandler {
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
-          reject(new errors.UsersFetchFailed(undefined, { status: response.status }))
+          reject(new UsersFetchFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results[0] as User,
@@ -125,7 +125,7 @@ export class Users extends ThBaseHandler {
           metadata: { count: response.data.count }
         } as UserResponse)
       } catch (error) {
-        return reject(new errors.UserFetchFailed(undefined, { error }))
+        return reject(new UserFetchFailed(undefined, { error }))
       }
     })
   }
@@ -142,7 +142,7 @@ export class Users extends ThBaseHandler {
           metadata: { count: response.data.count }
         } as UserResponse)
       } catch (error) {
-        return reject(new errors.UserPutFailed(undefined, { error }))
+        return reject(new UserPutFailed(undefined, { error }))
       }
     })
   }
@@ -159,7 +159,7 @@ export class Users extends ThBaseHandler {
           metadata: { count: response.data.count }
         } as UserResponse)
       } catch (error) {
-        return reject(new errors.UserCreationFailed(undefined, { error }))
+        return reject(new UserCreationFailed(undefined, { error }))
       }
     })
   }
@@ -170,15 +170,57 @@ export class Users extends ThBaseHandler {
       try {
         const response = await this.http.getClient().delete(uri)
         if (response.status !== 200) {
-          return reject(new errors.UserDeleteFailed(undefined, { status: response.status }))
+          return reject(new UserDeleteFailed(undefined, { status: response.status }))
         }
 
         return resolve({
           msg: response.data.msg
         } as UserResponse)
       } catch (error) {
-        return reject(new errors.UserDeleteFailed(undefined, { error }))
+        return reject(new UserDeleteFailed(undefined, { error }))
       }
     })
+  }
+}
+
+export class UsersFetchFailed extends BaseError {
+  public name = 'UsersFetchFailed'
+  constructor(public message: string = 'Could not fetch user', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class UserFetchFailed extends BaseError {
+  public name = 'UserFetchFailed'
+  constructor(public message: string = 'Could not fetch user', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class UserPutFailed extends BaseError {
+  public name = 'UserPutFailed'
+  constructor(public message: string = 'Could not alter user', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class UserCreationFailed extends BaseError {
+  public name = 'UserCreationFailed'
+  constructor(public message: string = 'Could not create user', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class UserDeleteFailed extends BaseError {
+  public name = 'UserDeleteFailed'
+  constructor(public message: string = 'Could not delete user', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class UserTokenCreationFailed extends BaseError {
+  public name = 'UserTokenCreationFailed'
+  constructor(public message: string = 'Could not create token', properties?: any) {
+    super(message, properties)
   }
 }
