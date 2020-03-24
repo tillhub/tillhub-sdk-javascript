@@ -417,41 +417,6 @@ export class ConfigurationDeleteFailed extends BaseError {
   }
 }
 
-export class UsersFetchFailed extends BaseError {
-  public name = 'UsersFetchFailed'
-  constructor(public message: string = 'Could not fetch user', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class UserFetchFailed extends BaseError {
-  public name = 'UserFetchFailed'
-  constructor(public message: string = 'Could not fetch user', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class UserPutFailed extends BaseError {
-  public name = 'UserPutFailed'
-  constructor(public message: string = 'Could not alter user', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class UserCreationFailed extends BaseError {
-  public name = 'UserCreationFailed'
-  constructor(public message: string = 'Could not create user', properties?: any) {
-    super(message, properties)
-  }
-}
-
-export class UserDeleteFailed extends BaseError {
-  public name = 'UserDeleteFailed'
-  constructor(public message: string = 'Could not delete user', properties?: any) {
-    super(message, properties)
-  }
-}
-
 export class DiscountsFetchFailed extends BaseError {
   public name = 'DiscountsFetchFailed'
   constructor(public message: string = 'Could not fetch discounts', properties?: any) {
