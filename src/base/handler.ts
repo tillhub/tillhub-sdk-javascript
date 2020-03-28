@@ -135,7 +135,7 @@ export class ThAnalyticsBaseHandler {
     const response = await this.client.getClient()(opts)
 
     return {
-      ...response.data[0]
+      ...response.data.results[0]
     } as ThAnalyticsExportsBaseResponse
   }
 }
