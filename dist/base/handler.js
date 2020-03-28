@@ -112,7 +112,7 @@ var ThAnalyticsBaseHandler = /** @class */ (function () {
                         return [4 /*yield*/, this.client.getClient()(opts)];
                     case 1:
                         response = _a.sent();
-                        return [2 /*return*/, __assign({}, response.data[0])];
+                        return [2 /*return*/, __assign({}, response.data.results[0])];
                 }
             });
         });

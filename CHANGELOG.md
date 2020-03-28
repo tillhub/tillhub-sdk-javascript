@@ -1,3 +1,10 @@
+## [3.182.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.182.0...v3.182.1) (2020-03-28)
+
+
+### Bug Fixes
+
+* **reports:** handle correct item in base ([ae0611d](https://github.com/tillhub/tillhub-sdk-javascript/commit/ae0611d))
+
 # [3.182.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.181.0...v3.182.0) (2020-03-28)
 
 
