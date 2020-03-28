@@ -70,6 +70,12 @@ export interface ThAnalyticsBaseResponse {
   next?: string
 }
 
+export interface ThAnalyticsExportsBaseResponse {
+  url: string
+  filename?: string
+  expires_at?: string
+}
+
 export class ThAnalyticsBaseHandler {
   private handlerOptions: ThAnalyticsBaseHandlerOptions
   private client: Client
@@ -118,5 +124,18 @@ export class ThAnalyticsBaseHandler {
       next: response.data.cursor && response.data.cursor.next ? response.data.cursor.next : undefined,
       results: response.data.results
     } as ThAnalyticsBaseResponse
+  }
+
+  protected async handleExport(url: string, query?: HandlerQuery, requestOptions?: object): Promise<ThAnalyticsExportsBaseResponse> {
+    const opts = {
+      method: 'GET',
+      url: ThAnalyticsBaseHandler.generateUriWithQuery(url, query),
+      ...requestOptions
+    }
+    const response = await this.client.getClient()(opts)
+
+    return {
+      ...response.data[0]
+    } as ThAnalyticsExportsBaseResponse
   }
 }

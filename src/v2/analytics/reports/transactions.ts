@@ -1,4 +1,4 @@
-import { ThAnalyticsBaseHandler, ThAnalyticsBaseResultItem } from '../../../base'
+import { ThAnalyticsBaseHandler, ThAnalyticsBaseResultItem, ThAnalyticsExportsBaseResponse } from '../../../base'
 import { Client } from '../../../client'
 import { BaseError } from '../../../errors'
 
@@ -23,6 +23,10 @@ export interface AnalyticsReportsTransactionDetailResponseItem {
     count: number
     total_count: number
   }
+}
+
+export interface AnalyticsReportsTraansactionsOverviewExportResponseItem extends ThAnalyticsExportsBaseResponse {
+
 }
 
 export class AnalyticsReportsTransactionsOverview extends ThAnalyticsBaseHandler {
@@ -75,6 +79,15 @@ export class AnalyticsReportsTransactionsOverview extends ThAnalyticsBaseHandler
       throw new AnalyticsReportsTransactionsOverviewFetchError(undefined, { error: err })
     }
   }
+
+  public async export(query?: object): Promise<AnalyticsReportsTraansactionsOverviewExportResponseItem> {
+    try {
+      const result = await this.handleExport(`${this.options.base}/api/v2/analytics/${this.options.user}/reports/balances/overview`, query)
+      return result
+    } catch (err) {
+      throw new AnalyticsReportsTransactionsOverviewExportFetchError(undefined, { error: err })
+    }
+  }
 }
 
 export class AnalyticsReportsTransactionsDetail extends ThAnalyticsBaseHandler {
@@ -121,6 +134,13 @@ export class AnalyticsReportsTransactionsOverviewFetchError extends BaseError {
 export class AnalyticsReportsTransactionDetailFetcshError extends BaseError {
   public name = 'AnalyticsReportsTransactionDetailFetcshError'
   constructor(public message: string = 'Could not fetch transaction detail. ', properties?: any) {
+    super(message, properties)
+  }
+}
+
+export class AnalyticsReportsTransactionsOverviewExportFetchError extends BaseError {
+  public name = 'AnalyticsReportsTransactionsOverviewExportFetchError'
+  constructor(public message: string = 'Could not fetch transaction overview export. ', properties?: any) {
     super(message, properties)
   }
 }
