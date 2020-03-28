@@ -1,4 +1,4 @@
-import { ThAnalyticsBaseHandler } from '../../../base';
+import { ThAnalyticsBaseHandler, ThAnalyticsExportsBaseResponse } from '../../../base';
 import { Client } from '../../../client';
 import { BaseError } from '../../../errors';
 export interface TransactionsHandlerOptions {
@@ -21,12 +21,15 @@ export interface AnalyticsReportsTransactionDetailResponseItem {
         total_count: number;
     };
 }
+export interface AnalyticsReportsTraansactionsOverviewExportResponseItem extends ThAnalyticsExportsBaseResponse {
+}
 export declare class AnalyticsReportsTransactionsOverview extends ThAnalyticsBaseHandler {
     http: Client;
     options: TransactionsHandlerOptions;
     constructor(options: TransactionsHandlerOptions, http: Client);
     static create(options: object, http: Client): AnalyticsReportsTransactionsOverview;
     getAll(query?: object): Promise<AnalyticsReportsTransactionsOverviewResponseItem>;
+    export(query?: object): Promise<AnalyticsReportsTraansactionsOverviewExportResponseItem>;
 }
 export declare class AnalyticsReportsTransactionsDetail extends ThAnalyticsBaseHandler {
     http: Client;
@@ -41,6 +44,11 @@ export declare class AnalyticsReportsTransactionsOverviewFetchError extends Base
     constructor(message?: string, properties?: any);
 }
 export declare class AnalyticsReportsTransactionDetailFetcshError extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class AnalyticsReportsTransactionsOverviewExportFetchError extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);

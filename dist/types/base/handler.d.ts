@@ -36,6 +36,11 @@ export interface ThAnalyticsBaseResponse {
     results: ThAnalyticsBaseResultItem[];
     next?: string;
 }
+export interface ThAnalyticsExportsBaseResponse {
+    url: string;
+    filename?: string;
+    expires_at?: string;
+}
 export declare class ThAnalyticsBaseHandler {
     private handlerOptions;
     private client;
@@ -45,4 +50,5 @@ export declare class ThAnalyticsBaseHandler {
     }, options: ThAnalyticsBaseHandlerOptions, http: Client): T;
     private static generateUriWithQuery;
     protected handleGet(url: string, query?: HandlerQuery, requestOptions?: object): Promise<ThAnalyticsBaseResponse>;
+    protected handleExport(url: string, query?: HandlerQuery, requestOptions?: object): Promise<ThAnalyticsExportsBaseResponse>;
 }

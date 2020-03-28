@@ -1,3 +1,10 @@
+# [3.182.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.181.0...v3.182.0) (2020-03-28)
+
+
+### Features
+
+* **analytics:** add exports handlers ([5fcd6af](https://github.com/tillhub/tillhub-sdk-javascript/commit/5fcd6af))
+
 # [3.181.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.180.4...v3.181.0) (2020-03-24)
 
 

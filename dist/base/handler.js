@@ -102,6 +102,21 @@ var ThAnalyticsBaseHandler = /** @class */ (function () {
             });
         });
     };
+    ThAnalyticsBaseHandler.prototype.handleExport = function (url, query, requestOptions) {
+        return __awaiter(this, void 0, void 0, function () {
+            var opts, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        opts = __assign({ method: 'GET', url: ThAnalyticsBaseHandler.generateUriWithQuery(url, query) }, requestOptions);
+                        return [4 /*yield*/, this.client.getClient()(opts)];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, __assign({}, response.data[0])];
+                }
+            });
+        });
+    };
     return ThAnalyticsBaseHandler;
 }());
 exports.ThAnalyticsBaseHandler = ThAnalyticsBaseHandler;

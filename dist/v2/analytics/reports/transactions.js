@@ -102,6 +102,25 @@ var AnalyticsReportsTransactionsOverview = /** @class */ (function (_super) {
             });
         });
     };
+    AnalyticsReportsTransactionsOverview.prototype.export = function (query) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result, err_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.handleExport(this.options.base + "/api/v2/analytics/" + this.options.user + "/reports/balances/overview", query)];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                    case 2:
+                        err_2 = _a.sent();
+                        throw new AnalyticsReportsTransactionsOverviewExportFetchError(undefined, { error: err_2 });
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
     return AnalyticsReportsTransactionsOverview;
 }(base_1.ThAnalyticsBaseHandler));
 exports.AnalyticsReportsTransactionsOverview = AnalyticsReportsTransactionsOverview;
@@ -118,7 +137,7 @@ var AnalyticsReportsTransactionsDetail = /** @class */ (function (_super) {
     };
     AnalyticsReportsTransactionsDetail.prototype.get = function (id) {
         return __awaiter(this, void 0, void 0, function () {
-            var d, data, err_2;
+            var d, data, err_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -137,8 +156,8 @@ var AnalyticsReportsTransactionsDetail = /** @class */ (function (_super) {
                                 }
                             }];
                     case 2:
-                        err_2 = _a.sent();
-                        throw new AnalyticsReportsTransactionDetailFetcshError(undefined, { error: err_2 });
+                        err_3 = _a.sent();
+                        throw new AnalyticsReportsTransactionDetailFetcshError(undefined, { error: err_3 });
                     case 3: return [2 /*return*/];
                 }
             });
@@ -171,4 +190,16 @@ var AnalyticsReportsTransactionDetailFetcshError = /** @class */ (function (_sup
     return AnalyticsReportsTransactionDetailFetcshError;
 }(errors_1.BaseError));
 exports.AnalyticsReportsTransactionDetailFetcshError = AnalyticsReportsTransactionDetailFetcshError;
+var AnalyticsReportsTransactionsOverviewExportFetchError = /** @class */ (function (_super) {
+    __extends(AnalyticsReportsTransactionsOverviewExportFetchError, _super);
+    function AnalyticsReportsTransactionsOverviewExportFetchError(message, properties) {
+        if (message === void 0) { message = 'Could not fetch transaction overview export. '; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'AnalyticsReportsTransactionsOverviewExportFetchError';
+        return _this;
+    }
+    return AnalyticsReportsTransactionsOverviewExportFetchError;
+}(errors_1.BaseError));
+exports.AnalyticsReportsTransactionsOverviewExportFetchError = AnalyticsReportsTransactionsOverviewExportFetchError;
 //# sourceMappingURL=transactions.js.map
