@@ -1,3 +1,10 @@
+## [3.183.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.183.0...v3.183.1) (2020-03-29)
+
+
+### Bug Fixes
+
+* **sdk:** expose datev ([a3388e0](https://github.com/tillhub/tillhub-sdk-javascript/commit/a3388e0))
+
 # [3.183.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.182.1...v3.183.0) (2020-03-29)
 
 
