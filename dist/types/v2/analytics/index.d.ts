@@ -4,6 +4,7 @@ declare const _default: {
         AnalyticsReportsTransactionsDetail: typeof import("./reports/transactions").AnalyticsReportsTransactionsDetail;
         AnalyticsReportsBalancesOverview: typeof import("./reports/balances").AnalyticsReportsBalancesOverview;
         AnalyticsReportsBalancesDetail: typeof import("./reports/balances").AnalyticsReportsBalancesDetail;
+        AnalyticsReportsDatev: typeof import("./reports/datev").AnalyticsReportsDatev;
     };
 };
 export default _default;

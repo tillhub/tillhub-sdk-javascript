@@ -1,3 +1,10 @@
+# [3.183.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.182.1...v3.183.0) (2020-03-29)
+
+
+### Features
+
+* **reports:** add datev ([a16b983](https://github.com/tillhub/tillhub-sdk-javascript/commit/a16b983))
+
 ## [3.182.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.182.0...v3.182.1) (2020-03-28)
 
 
