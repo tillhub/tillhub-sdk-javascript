@@ -82,7 +82,7 @@ export class AnalyticsReportsTransactionsOverview extends ThAnalyticsBaseHandler
 
   public async export(query?: object): Promise<AnalyticsReportsTraansactionsOverviewExportResponseItem> {
     try {
-      const result = await this.handleExport(`${this.options.base}/api/v2/analytics/${this.options.user}/reports/balances/overview`, query)
+      const result = await this.handleExport(`${this.options.base}/api/v2/analytics/${this.options.user}/reports/transactions/overview`, query)
       return result
     } catch (err) {
       throw new AnalyticsReportsTransactionsOverviewExportFetchError(undefined, { error: err })
