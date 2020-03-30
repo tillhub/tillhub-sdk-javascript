@@ -109,7 +109,7 @@ var AnalyticsReportsTransactionsOverview = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.handleExport(this.options.base + "/api/v2/analytics/" + this.options.user + "/reports/balances/overview", query)];
+                        return [4 /*yield*/, this.handleExport(this.options.base + "/api/v2/analytics/" + this.options.user + "/reports/transactions/overview", query)];
                     case 1:
                         result = _a.sent();
                         return [2 /*return*/, result];

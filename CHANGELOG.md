@@ -1,3 +1,10 @@
+## [3.183.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.183.1...v3.183.2) (2020-03-30)
+
+
+### Bug Fixes
+
+* **reports/v2:** reference transactions correctly ([934ac8d](https://github.com/tillhub/tillhub-sdk-javascript/commit/934ac8d))
+
 ## [3.183.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.183.0...v3.183.1) (2020-03-29)
 
 
