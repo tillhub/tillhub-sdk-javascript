@@ -835,11 +835,11 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
-   * Create an authenticated CashingUps instance
+   * Create an authenticated CountingProtocols instance
    *
    */
-  cashingUps(): v0.CashingUps {
-    return this.generateAuthenticatedInstance(v0.CashingUps)
+  countingProtocols(): v0.CountingProtocols {
+    return this.generateAuthenticatedInstance(v0.CountingProtocols)
   }
 }
 

@@ -3,12 +3,12 @@ import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
 import { ThBaseHandler } from '../base'
 
-export interface CashingUpsOptions {
+export interface CountingProtocolsOptions {
   user?: string
   base?: string
 }
 
-export interface CashingUpsQuery {
+export interface CountingProtocolsQuery {
   limit?: number
   uri?: string
   query?: {
@@ -22,8 +22,8 @@ export interface CashingUpsQuery {
   }
 }
 
-export interface CashingUpsResponse {
-  data: CashingUp[]
+export interface CountingProtocolsResponse {
+  data: CountingProtocol[]
   metadata?: {
     count?: number
     patch?: any
@@ -31,7 +31,7 @@ export interface CashingUpsResponse {
   msg?: string
 }
 
-export interface CashingUp {
+export interface CountingProtocol {
   id: string
   insert_id?: number
   custom_id?: string
@@ -65,72 +65,72 @@ export interface CashingUp {
   total_calculated?: string
 }
 
-export class CashingUps extends ThBaseHandler {
+export class CountingProtocols extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/cashier_counting_protocols'
   endpoint: string
   http: Client
-  public options: CashingUpsOptions
+  public options: CountingProtocolsOptions
   public uriHelper: UriHelper
 
-  constructor(options: CashingUpsOptions, http: Client) {
-    super(http, { endpoint: CashingUps.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+  constructor(options: CountingProtocolsOptions, http: Client) {
+    super(http, { endpoint: CountingProtocols.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
-    this.endpoint = CashingUps.baseEndpoint
+    this.endpoint = CountingProtocols.baseEndpoint
     this.options.base = this.options.base || 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: CashingUpsQuery): Promise<CashingUpsResponse> {
+  getAll(query?: CountingProtocolsQuery): Promise<CountingProtocolsResponse> {
     return new Promise(async (resolve, reject) => {
       const base = this.uriHelper.generateBaseUri()
       const uri = this.uriHelper.generateUriWithQuery(base, query)
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
-          reject(new CashingUpsFetchFailed(undefined, { status: response.status }))
+          reject(new CountingProtocolsFetchFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results,
           msg: response.data.msg,
           metadata: { count: response.data.count }
-        } as CashingUpsResponse)
+        } as CountingProtocolsResponse)
       } catch (error) {
-        return reject(new CashingUpsFetchFailed(undefined, { error }))
+        return reject(new CountingProtocolsFetchFailed(undefined, { error }))
       }
     })
   }
 
-  meta(): Promise<CashingUpsResponse> {
+  meta(): Promise<CountingProtocolsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri(`/meta`)
         const response = await this.http.getClient().get(uri)
 
-        if (response.status !== 200) reject(new CashingUpsMetaFailed())
+        if (response.status !== 200) reject(new CountingProtocolsMetaFailed())
 
         return resolve({
           data: response.data.results[0],
           metadata: { count: response.data.count }
-        } as CashingUpsResponse)
+        } as CountingProtocolsResponse)
       } catch (error) {
-        return reject(new CashingUpsMetaFailed(undefined, { error }))
+        return reject(new CountingProtocolsMetaFailed(undefined, { error }))
       }
     })
   }
 }
 
-export class CashingUpsFetchFailed extends BaseError {
-  public name = 'CashingUpsFetchFailed'
-  constructor(public message: string = 'Could not fetch the cashing ups', properties?: any) {
+export class CountingProtocolsFetchFailed extends BaseError {
+  public name = 'CountingProtocolsFetchFailed'
+  constructor(public message: string = 'Could not fetch the counting protocols', properties?: any) {
     super(message, properties)
   }
 }
 
-export class CashingUpsMetaFailed extends BaseError {
-  public name = 'CashingUpsMetaFailed'
-  constructor(public message: string = 'Could not fetch metadata for cashing ups', properties?: any) {
+export class CountingProtocolsMetaFailed extends BaseError {
+  public name = 'CountingProtocolsMetaFailed'
+  constructor(public message: string = 'Could not fetch metadata for counting protocols', properties?: any) {
     super(message, properties)
   }
 }

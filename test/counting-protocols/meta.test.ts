@@ -12,8 +12,8 @@ afterEach(() => {
   mock.reset()
 })
 
-describe('v0: CashingUps: can get all the cashing ups', () => {
-  it("Tillhub's cashingUps are instantiable", async () => {
+describe('v0: Counting Protocols: can get meta of counting protocols', () => {
+  it("Tillhub's countingProtocols are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
@@ -28,26 +28,27 @@ describe('v0: CashingUps: can get all the cashing ups', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/cashier_counting_protocols/${legacyId}`).reply(function (config) {
-        return [
-          200,
-          {
-            count: 1,
-            results: [{}]
-          }
-        ]
-      })
+      mock
+        .onGet(`https://api.tillhub.com/api/v0/cashier_counting_protocols/${legacyId}/meta`)
+        .reply(function (config) {
+          return [
+            200,
+            {
+              results: [{ count: 50 }]
+            }
+          ]
+        })
     }
 
     const th = await initThInstance()
 
-    const cashingUps = th.cashingUps()
+    const CountingProtocols = th.countingProtocols()
 
-    expect(cashingUps).toBeInstanceOf(v0.CashingUps)
+    expect(CountingProtocols).toBeInstanceOf(v0.CountingProtocols)
 
-    const { data } = await cashingUps.getAll()
+    const { data } = await CountingProtocols.meta()
 
-    expect(Array.isArray(data)).toBe(true)
+    expect(data).toEqual({ count: 50 })
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -65,16 +66,18 @@ describe('v0: CashingUps: can get all the cashing ups', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/cashier_counting_protocols/${legacyId}`).reply(function (config) {
-        return [205]
-      })
+      mock
+        .onGet(`https://api.tillhub.com/api/v0/cashier_counting_protocols/${legacyId}/meta`)
+        .reply(function (config) {
+          return [205]
+        })
     }
 
     try {
       const th = await initThInstance()
-      await th.cashingUps().getAll()
+      await th.countingProtocols().meta()
     } catch (err) {
-      expect(err.name).toBe('CashingUpsFetchFailed')
+      expect(err.name).toBe('CountingProtocolsMetaFailed')
     }
   })
 })
