@@ -51,18 +51,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
-var CashingUps = /** @class */ (function (_super) {
-    __extends(CashingUps, _super);
-    function CashingUps(options, http) {
-        var _this = _super.call(this, http, { endpoint: CashingUps.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+var CountingProtocols = /** @class */ (function (_super) {
+    __extends(CountingProtocols, _super);
+    function CountingProtocols(options, http) {
+        var _this = _super.call(this, http, { endpoint: CountingProtocols.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
         _this.options = options;
         _this.http = http;
-        _this.endpoint = CashingUps.baseEndpoint;
+        _this.endpoint = CountingProtocols.baseEndpoint;
         _this.options.base = _this.options.base || 'https://api.tillhub.com';
         _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
         return _this;
     }
-    CashingUps.prototype.getAll = function (query) {
+    CountingProtocols.prototype.getAll = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var base, uri, response, error_1;
@@ -78,7 +78,7 @@ var CashingUps = /** @class */ (function (_super) {
                     case 2:
                         response = _a.sent();
                         response.status !== 200 &&
-                            reject(new CashingUpsFetchFailed(undefined, { status: response.status }));
+                            reject(new CountingProtocolsFetchFailed(undefined, { status: response.status }));
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 msg: response.data.msg,
@@ -86,13 +86,13 @@ var CashingUps = /** @class */ (function (_super) {
                             })];
                     case 3:
                         error_1 = _a.sent();
-                        return [2 /*return*/, reject(new CashingUpsFetchFailed(undefined, { error: error_1 }))];
+                        return [2 /*return*/, reject(new CountingProtocolsFetchFailed(undefined, { error: error_1 }))];
                     case 4: return [2 /*return*/];
                 }
             });
         }); });
     };
-    CashingUps.prototype.meta = function () {
+    CountingProtocols.prototype.meta = function () {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, error_2;
@@ -105,45 +105,45 @@ var CashingUps = /** @class */ (function (_super) {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            reject(new CashingUpsMetaFailed());
+                            reject(new CountingProtocolsMetaFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count }
                             })];
                     case 2:
                         error_2 = _a.sent();
-                        return [2 /*return*/, reject(new CashingUpsMetaFailed(undefined, { error: error_2 }))];
+                        return [2 /*return*/, reject(new CountingProtocolsMetaFailed(undefined, { error: error_2 }))];
                     case 3: return [2 /*return*/];
                 }
             });
         }); });
     };
-    CashingUps.baseEndpoint = '/api/v0/cashier_counting_protocols';
-    return CashingUps;
+    CountingProtocols.baseEndpoint = '/api/v0/cashier_counting_protocols';
+    return CountingProtocols;
 }(base_1.ThBaseHandler));
-exports.CashingUps = CashingUps;
-var CashingUpsFetchFailed = /** @class */ (function (_super) {
-    __extends(CashingUpsFetchFailed, _super);
-    function CashingUpsFetchFailed(message, properties) {
-        if (message === void 0) { message = 'Could not fetch the cashing ups'; }
+exports.CountingProtocols = CountingProtocols;
+var CountingProtocolsFetchFailed = /** @class */ (function (_super) {
+    __extends(CountingProtocolsFetchFailed, _super);
+    function CountingProtocolsFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the counting protocols'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
-        _this.name = 'CashingUpsFetchFailed';
+        _this.name = 'CountingProtocolsFetchFailed';
         return _this;
     }
-    return CashingUpsFetchFailed;
+    return CountingProtocolsFetchFailed;
 }(errors_1.BaseError));
-exports.CashingUpsFetchFailed = CashingUpsFetchFailed;
-var CashingUpsMetaFailed = /** @class */ (function (_super) {
-    __extends(CashingUpsMetaFailed, _super);
-    function CashingUpsMetaFailed(message, properties) {
-        if (message === void 0) { message = 'Could not fetch metadata for cashing ups'; }
+exports.CountingProtocolsFetchFailed = CountingProtocolsFetchFailed;
+var CountingProtocolsMetaFailed = /** @class */ (function (_super) {
+    __extends(CountingProtocolsMetaFailed, _super);
+    function CountingProtocolsMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch metadata for counting protocols'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
-        _this.name = 'CashingUpsMetaFailed';
+        _this.name = 'CountingProtocolsMetaFailed';
         return _this;
     }
-    return CashingUpsMetaFailed;
+    return CountingProtocolsMetaFailed;
 }(errors_1.BaseError));
-exports.CashingUpsMetaFailed = CashingUpsMetaFailed;
-//# sourceMappingURL=cashing-ups.js.map
+exports.CountingProtocolsMetaFailed = CountingProtocolsMetaFailed;
+//# sourceMappingURL=counting-protocols.js.map

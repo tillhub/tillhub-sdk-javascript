@@ -705,11 +705,11 @@ var TillhubClient = /** @class */ (function (_super) {
         return this.generateAuthenticatedInstance(v0.Timetracking);
     };
     /**
-     * Create an authenticated CashingUps instance
+     * Create an authenticated CountingProtocols instance
      *
      */
-    TillhubClient.prototype.cashingUps = function () {
-        return this.generateAuthenticatedInstance(v0.CashingUps);
+    TillhubClient.prototype.countingProtocols = function () {
+        return this.generateAuthenticatedInstance(v0.CountingProtocols);
     };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;

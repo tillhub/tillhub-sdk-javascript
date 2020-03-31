@@ -2,11 +2,11 @@ import { Client } from '../client';
 import { BaseError } from '../errors';
 import { UriHelper } from '../uri-helper';
 import { ThBaseHandler } from '../base';
-export interface CashingUpsOptions {
+export interface CountingProtocolsOptions {
     user?: string;
     base?: string;
 }
-export interface CashingUpsQuery {
+export interface CountingProtocolsQuery {
     limit?: number;
     uri?: string;
     query?: {
@@ -19,15 +19,15 @@ export interface CashingUpsQuery {
         discrepancy?: boolean;
     };
 }
-export interface CashingUpsResponse {
-    data: CashingUp[];
+export interface CountingProtocolsResponse {
+    data: CountingProtocol[];
     metadata?: {
         count?: number;
         patch?: any;
     };
     msg?: string;
 }
-export interface CashingUp {
+export interface CountingProtocol {
     id: string;
     insert_id?: number;
     custom_id?: string;
@@ -60,22 +60,22 @@ export interface CashingUp {
     total_counted?: string;
     total_calculated?: string;
 }
-export declare class CashingUps extends ThBaseHandler {
+export declare class CountingProtocols extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
     http: Client;
-    options: CashingUpsOptions;
+    options: CountingProtocolsOptions;
     uriHelper: UriHelper;
-    constructor(options: CashingUpsOptions, http: Client);
-    getAll(query?: CashingUpsQuery): Promise<CashingUpsResponse>;
-    meta(): Promise<CashingUpsResponse>;
+    constructor(options: CountingProtocolsOptions, http: Client);
+    getAll(query?: CountingProtocolsQuery): Promise<CountingProtocolsResponse>;
+    meta(): Promise<CountingProtocolsResponse>;
 }
-export declare class CashingUpsFetchFailed extends BaseError {
+export declare class CountingProtocolsFetchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);
 }
-export declare class CashingUpsMetaFailed extends BaseError {
+export declare class CountingProtocolsMetaFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);

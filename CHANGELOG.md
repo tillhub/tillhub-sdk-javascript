@@ -1,3 +1,10 @@
+# [3.184.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.183.2...v3.184.0) (2020-03-31)
+
+
+### Features
+
+* **counting protocols:** rename cashing ups to counting protocols ([49ec41a](https://github.com/tillhub/tillhub-sdk-javascript/commit/49ec41a))
+
 ## [3.183.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.183.1...v3.183.2) (2020-03-30)
 
 
