@@ -106,7 +106,7 @@
     "jest-localstorage-mock": "^2.3.0",
     "lodash.camelcase": "^4.3.0",
     "node": "^10.15.1",
-    "prettier": "^1.15.3",
+    "prettier": "^2.0.4",
     "prismjs": "^1.15.0",
     "prompt": "^1.0.0",
     "react": "^16.5.1",
