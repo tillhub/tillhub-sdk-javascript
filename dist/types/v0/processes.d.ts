@@ -11,6 +11,7 @@ export interface ProcessesQueryOptions {
     ignored?: boolean;
     min_updated_at?: string;
     format?: string;
+    uri?: string;
 }
 export interface ProcessItemsQueryOptions {
     format?: string;

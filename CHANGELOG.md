@@ -1,3 +1,10 @@
+# [3.185.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.184.0...v3.185.0) (2020-04-07)
+
+
+### Features
+
+* **processes:** add next() function to getAll result ([9e7793f](https://github.com/tillhub/tillhub-sdk-javascript/commit/9e7793f))
+
 # [3.184.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.183.2...v3.184.0) (2020-03-31)
 
 

@@ -90,7 +90,8 @@ var Processes = /** @class */ (function (_super) {
     Processes.prototype.getAll = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var baseUri, uri, response, error_2;
+            var next, baseUri, uri, response_1, error_2;
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -99,11 +100,17 @@ var Processes = /** @class */ (function (_super) {
                         uri = this.uriHelper.generateUriWithQuery(baseUri, query);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
-                        response = _a.sent();
-                        response.status !== 200 && reject(new ProcessesFetchFailed(undefined, { status: response.status }));
+                        response_1 = _a.sent();
+                        if (response_1.status !== 200) {
+                            return [2 /*return*/, reject(new ProcessesFetchFailed(undefined, { status: response_1.status }))];
+                        }
+                        if (response_1.data.cursor && response_1.data.cursor.next) {
+                            next = function () { return _this.getAll({ uri: response_1.data.cursor.next }); };
+                        }
                         return [2 /*return*/, resolve({
-                                data: response.data.results,
-                                metadata: { count: response.data.count }
+                                data: response_1.data.results,
+                                metadata: { count: response_1.data.count },
+                                next: next
                             })];
                     case 2:
                         error_2 = _a.sent();
