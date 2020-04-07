@@ -13,6 +13,7 @@ export interface ProcessesQueryOptions {
   ignored?: boolean
   min_updated_at?: string
   format?: string
+  uri?: string
 }
 
 export interface ProcessItemsQueryOptions {
@@ -91,16 +92,25 @@ export class Processes extends ThBaseHandler {
 
   getAll(query?: ProcessesQueryOptions): Promise<ProcessesResponse> {
     return new Promise(async (resolve, reject) => {
+      let next
+
       try {
         const baseUri = this.uriHelper.generateBaseUri()
         const uri = this.uriHelper.generateUriWithQuery(baseUri, query)
 
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new ProcessesFetchFailed(undefined, { status: response.status }))
+        if (response.status !== 200) {
+          return reject(new ProcessesFetchFailed(undefined, { status: response.status }))
+        }
+
+        if (response.data.cursor && response.data.cursor.next) {
+          next = (): Promise<ProcessesResponse> => this.getAll({ uri: response.data.cursor.next })
+        }
 
         return resolve({
           data: response.data.results,
-          metadata: { count: response.data.count }
+          metadata: { count: response.data.count },
+          next
         } as ProcessesResponse)
       } catch (error) {
         return reject(new ProcessesFetchFailed(undefined, { error }))
