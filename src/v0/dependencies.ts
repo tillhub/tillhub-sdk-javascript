@@ -70,5 +70,6 @@ export class DependenciesFetchFailed extends BaseError {
   public name = 'DependenciesFetchFailed'
   constructor(public message: string = 'Could not fetch the dependencies', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, DependenciesFetchFailed.prototype)
   }
 }

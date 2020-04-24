@@ -383,6 +383,7 @@ export class CustomersFetchFailed extends BaseError {
   public name = 'CustomersFetchFailed'
   constructor(public message: string = 'Could not fetch customers', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, CustomersFetchFailed.prototype)
   }
 }
 
@@ -390,6 +391,7 @@ export class CustomerFetchFailed extends BaseError {
   public name = 'CustomerFetchFailed'
   constructor(public message: string = 'Could not fetch customer', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, CustomerFetchFailed.prototype)
   }
 }
 
@@ -397,6 +399,7 @@ export class CustomerPutFailed extends BaseError {
   public name = 'CustomerPutFailed'
   constructor(public message: string = 'Could not alter customer', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, CustomerPutFailed.prototype)
   }
 }
 
@@ -404,6 +407,7 @@ export class CustomerNoteCreationFailed extends BaseError {
   public name = 'CustomerNoteCreationFailed'
   constructor(public message: string = 'Could not create customer note', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, CustomerNoteCreationFailed.prototype)
   }
 }
 
@@ -411,6 +415,7 @@ export class CustomerCreationFailed extends BaseError {
   public name = 'CustomerCreationFailed'
   constructor(public message: string = 'Could not create customer', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, CustomerCreationFailed.prototype)
   }
 }
 
@@ -418,6 +423,7 @@ export class CustomersMetaFailed extends BaseError {
   public name = 'CustomersMetaFailed'
   constructor(public message: string = 'Could not get customers metadata', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, CustomersMetaFailed.prototype)
   }
 }
 
@@ -425,6 +431,7 @@ export class CustomersCountFailed extends BaseError {
   public name = 'CustomersCountFailed'
   constructor(public message: string = 'Could not count customers', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, CustomersCountFailed.prototype)
   }
 }
 
@@ -432,6 +439,7 @@ export class CustomersSearchFailed extends BaseError {
   public name = 'CustomersSearchFailed'
   constructor(public message: string = 'Could not search for customer', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, CustomersSearchFailed.prototype)
   }
 }
 
@@ -439,5 +447,6 @@ export class CustomerDeleteFailed extends BaseError {
   public name = 'CustomerDeleteFailed'
   constructor(public message: string = 'Could not delete the customer', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, CustomerDeleteFailed.prototype)
   }
 }

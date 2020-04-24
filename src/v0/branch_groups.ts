@@ -178,6 +178,7 @@ export class BranchGroupsFetchFailed extends BaseError {
   public name = 'BranchGroupsFetchFailed'
   constructor(public message: string = 'Could not fetch branch groups', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, BranchGroupsFetchFailed.prototype)
   }
 }
 
@@ -185,6 +186,7 @@ export class BranchGroupFetchFailed extends BaseError {
   public name = 'BranchGroupFetchFailed'
   constructor(public message: string = 'Could not fetch branch group', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, BranchGroupFetchFailed.prototype)
   }
 }
 
@@ -192,6 +194,7 @@ export class BranchGroupPutFailed extends BaseError {
   public name = 'BranchPutFailed'
   constructor(public message: string = 'Could not alter branch group', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, BranchGroupPutFailed.prototype)
   }
 }
 
@@ -199,6 +202,7 @@ export class BranchGroupCreationFailed extends BaseError {
   public name = 'BranchGroupCreationFailed'
   constructor(public message: string = 'Could not create branch group', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, BranchGroupCreationFailed.prototype)
   }
 }
 
@@ -206,5 +210,6 @@ export class BranchGroupDeleteFailed extends BaseError {
   public name = 'BranchGroupDeleteFailed'
   constructor(public message: string = 'Could not delete branch group', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, BranchGroupDeleteFailed.prototype)
   }
 }

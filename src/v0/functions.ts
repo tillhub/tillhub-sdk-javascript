@@ -184,6 +184,7 @@ export class FunctionsFetchFailed extends BaseError {
   public name = 'FunctionsFetchFailed'
   constructor(public message: string = 'Could not fetch functions', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, FunctionsFetchFailed.prototype)
   }
 }
 
@@ -191,6 +192,7 @@ export class FunctionFetchFailed extends BaseError {
   public name = 'FunctionFetchFailed'
   constructor(public message: string = 'Could not fetch function', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, FunctionFetchFailed.prototype)
   }
 }
 
@@ -198,6 +200,7 @@ export class FunctionPutFailed extends BaseError {
   public name = 'FunctionPutFailed'
   constructor(public message: string = 'Could not alter function', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, FunctionPutFailed.prototype)
   }
 }
 
@@ -205,6 +208,7 @@ export class FunctionCreationFailed extends BaseError {
   public name = 'FunctionCreationFailed'
   constructor(public message: string = 'Could not create function', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, FunctionCreationFailed.prototype)
   }
 }
 
@@ -212,5 +216,6 @@ export class FunctionDeleteFailed extends BaseError {
   public name = 'FunctionDeleteFailed'
   constructor(public message: string = 'Could not delete function', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, FunctionDeleteFailed.prototype)
   }
 }

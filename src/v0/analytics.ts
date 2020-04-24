@@ -603,6 +603,7 @@ export class ReportsStocksFetchFailed extends BaseError {
   public name = 'ReportsStocksFetchFailed'
   constructor(public message: string = 'Could not fetch the stocks report', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ReportsStocksFetchFailed.prototype)
   }
 }
 
@@ -610,6 +611,7 @@ export class RefundsReportFetchFailed extends BaseError {
   public name = 'RefundsReportFetchFailed'
   constructor(public message: string = 'Could not fetch the refunds report', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, RefundsReportFetchFailed.prototype)
   }
 }
 
@@ -617,6 +619,7 @@ export class VouchersReportFetchFailed extends BaseError {
   public name = 'VouchersReportFetchFailed'
   constructor(public message: string = 'Could not fetch the vouchers report', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, VouchersReportFetchFailed.prototype)
   }
 }
 
@@ -624,6 +627,7 @@ export class ProductsReportFetchFailed extends BaseError {
   public name = 'ProductsReportFetchFailed'
   constructor(public message: string = 'Could not fetch the products report', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProductsReportFetchFailed.prototype)
   }
 }
 
@@ -631,6 +635,7 @@ export class PaymentsReportFetchFailed extends BaseError {
   public name = 'PaymentsReportFetchFailed'
   constructor(public message: string = 'Could not fetch payments report', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, PaymentsReportFetchFailed.prototype)
   }
 }
 
@@ -638,6 +643,7 @@ export class TopPaymentsReportFetchFailed extends BaseError {
   public name = 'TopPaymentsReportFetchFailed'
   constructor(public message: string = 'Could not fetch top payments report', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, TopPaymentsReportFetchFailed.prototype)
   }
 }
 
@@ -645,6 +651,7 @@ export class RevenuesFetchFailed extends BaseError {
   public name = 'RevenuesFetchFailed'
   constructor(public message: string = 'Could not fetch the Revenues', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, RevenuesFetchFailed.prototype)
   }
 }
 
@@ -652,6 +659,7 @@ export class ReportsProductGroupsFiltersFetchFailed extends BaseError {
   public name = 'ReportsProductGroupsFiltersFetchFailed'
   constructor(public message: string = 'Could not get products group filters', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ReportsProductGroupsFiltersFetchFailed.prototype)
   }
 }
 
@@ -659,6 +667,7 @@ export class ReportsProductGroupsFetchFailed extends BaseError {
   public name = 'ReportsProductGroupsFetchFailed'
   constructor(public message: string = 'Could not fetch product groups', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ReportsProductGroupsFetchFailed.prototype)
   }
 }
 
@@ -666,6 +675,7 @@ export class ReportsCustomerOverviewFailed extends BaseError {
   public name = 'ReportsProductGroupsFetchFailed'
   constructor(public message: string = 'Could not fetch customer overview', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ReportsProductGroupsFetchFailed.prototype)
   }
 }
 
@@ -673,6 +683,7 @@ export class ReportsCustomerTransactionsFailed extends BaseError {
   public name = 'ReportsCustomerTransactionsFailed'
   constructor(public message: string = 'Could not fetch customer transactions', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ReportsCustomerTransactionsFailed.prototype)
   }
 }
 
@@ -680,6 +691,7 @@ export class ReportsCustomerCustomersFailed extends BaseError {
   public name = 'ReportsCustomerCustomersFailed'
   constructor(public message: string = 'Could not fetch customer reports', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ReportsCustomerCustomersFailed.prototype)
   }
 }
 
@@ -690,6 +702,7 @@ export class SimpleSalesCartItemsReportFetchFailed extends BaseError {
     properties?: any
   ) {
     super(message, properties)
+    Object.setPrototypeOf(this, SimpleSalesCartItemsReportFetchFailed.prototype)
   }
 }
 
@@ -698,8 +711,9 @@ export class ProductGroupsReportFetchFailed extends BaseError {
   constructor(
     public message: string = 'Could not fetch the product groups report',
     properties?: any
-  ) {
+    ) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProductGroupsReportFetchFailed.prototype)
   }
 }
 
@@ -708,8 +722,9 @@ export class StatisticsProductChildrenFetchFailed extends BaseError {
   constructor(
     public message: string = 'Could not fetch the Statistics Products Children',
     properties?: any
-  ) {
+    ) {
     super(message, properties)
+    Object.setPrototypeOf(this, StatisticsProductChildrenFetchFailed.prototype)
   }
 }
 
@@ -718,8 +733,9 @@ export class StaffOverviewFetchFailed extends BaseError {
   constructor(
     public message: string = 'Could not fetch the staff overview report',
     properties?: any
-  ) {
+    ) {
     super(message, properties)
+    Object.setPrototypeOf(this, StaffOverviewFetchFailed.prototype)
   }
 }
 
@@ -728,7 +744,8 @@ export class StatisticsProductFetchFailed extends BaseError {
   constructor(
     public message: string = 'Could not fetch the Statistics Products',
     properties?: any
-  ) {
+    ) {
     super(message, properties)
+    Object.setPrototypeOf(this, StatisticsProductFetchFailed.prototype)
   }
 }

@@ -145,6 +145,7 @@ export class TrashFetchFailed extends BaseError {
   public name = 'TrashFetchFailed'
   constructor(public message: string = 'Could not fetch the trashed objects', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, TrashFetchFailed.prototype)
   }
 }
 
@@ -152,5 +153,6 @@ export class RecoverFailed extends BaseError {
   public name = 'RecoverFailed'
   constructor(public message: string = 'Could not recover the object', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, RecoverFailed.prototype)
   }
 }

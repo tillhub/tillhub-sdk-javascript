@@ -395,6 +395,7 @@ class TransactionFetchFailed extends BaseError {
   public name = 'TransactionFetchFailed'
   constructor(public message: string = 'Could not fetch transaction', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, TransactionFetchFailed.prototype)
   }
 }
 
@@ -402,6 +403,7 @@ class TransactionPdfFailed extends BaseError {
   public name = 'TransactionPdfFailed'
   constructor(public message: string = 'Could not create pdf', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, TransactionPdfFailed.prototype)
   }
 }
 
@@ -409,6 +411,7 @@ class TransactionSigningInitialisationFailed extends BaseError {
   public name = 'TransactionSigningInitialisationFailed'
   constructor(public message: string = 'Could not initialise signing system', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, TransactionSigningInitialisationFailed.prototype)
   }
 }
 
@@ -416,6 +419,7 @@ class TransactionSigningYearlyReceiptFailed extends BaseError {
   public name = 'TransactionSigningYearlyReceiptFailed'
   constructor(public message: string = 'Could not generate yearly receipt', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, TransactionSigningYearlyReceiptFailed.prototype)
   }
 }
 
@@ -423,6 +427,7 @@ class TransactionSigningMonthlyReceiptFailed extends BaseError {
   public name = 'TransactionSigningMonthlyReceiptFailed'
   constructor(public message: string = 'Could not generate monthly receipt', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, TransactionSigningMonthlyReceiptFailed.prototype)
   }
 }
 
@@ -430,6 +435,7 @@ class TransactionSigningZeroReceiptFailed extends BaseError {
   public name = 'TransactionSigningZeroReceiptFailed'
   constructor(public message: string = 'Could not generate zero receipt', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, TransactionSigningZeroReceiptFailed.prototype)
   }
 }
 
@@ -437,6 +443,7 @@ class TransactionsGetMetaFailed extends BaseError {
   public name = 'TransactionsGetMetaFailed'
   constructor(public message: string = 'Could not get transactions meta', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, TransactionsGetMetaFailed.prototype)
   }
 }
 
@@ -444,6 +451,7 @@ class TransactionsGetImageFailed extends BaseError {
   public name = 'TransactionsGetImageFailed'
   constructor(public message: string = 'Could not get transactions image', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, TransactionsGetImageFailed.prototype)
   }
 }
 
@@ -451,6 +459,7 @@ class TransactionsImagePutFailed extends BaseError {
   public name = 'TransactionsImagePutFailed'
   constructor(public message: string = 'Could not update transactions image', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, TransactionsImagePutFailed.prototype)
   }
 }
 
@@ -458,5 +467,6 @@ class TransactionsImageCreateFailed extends BaseError {
   public name = 'TransactionsImageCreateFailed'
   constructor(public message: string = 'Could not create transactions image', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, TransactionsImageCreateFailed.prototype)
   }
 }

@@ -169,6 +169,7 @@ export class PromotionsFetchFailed extends BaseError {
   public name = 'PromotionsFetchFailed'
   constructor(public message: string = 'Could not fetch promotions', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, PromotionsFetchFailed.prototype)
   }
 }
 
@@ -176,6 +177,7 @@ export class PromotionFetchFailed extends BaseError {
   public name = 'PromotionFetchFailed'
   constructor(public message: string = 'Could not fetch promotion', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, PromotionFetchFailed.prototype)
   }
 }
 
@@ -183,6 +185,7 @@ export class PromotionPutFailed extends BaseError {
   public name = 'PromotionPutFailed'
   constructor(public message: string = 'Could not alter promotion', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, PromotionPutFailed.prototype)
   }
 }
 
@@ -190,6 +193,7 @@ export class PromotionCreationFailed extends BaseError {
   public name = 'PromotionCreationFailed'
   constructor(public message: string = 'Could not create promotion', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, PromotionCreationFailed.prototype)
   }
 }
 
@@ -197,5 +201,6 @@ export class PromotionDeleteFailed extends BaseError {
   public name = 'PromotionDeleteFailed'
   constructor(public message: string = 'Could not delete promotion', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, PromotionDeleteFailed.prototype)
   }
 }

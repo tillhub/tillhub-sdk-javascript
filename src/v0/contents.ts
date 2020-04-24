@@ -203,6 +203,7 @@ export class ContentsFetchFailed extends BaseError {
   public name = 'ContentsFetchFailed'
   constructor(public message: string = 'Could not fetch contents', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ContentsFetchFailed.prototype)
   }
 }
 
@@ -210,6 +211,7 @@ export class ContentFetchFailed extends BaseError {
   public name = 'ContentFetchFailed'
   constructor(public message: string = 'Could not fetch content', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ContentFetchFailed.prototype)
   }
 }
 
@@ -217,6 +219,7 @@ export class ContentPatchFailed extends BaseError {
   public name = 'ContentPatchFailed'
   constructor(public message: string = 'Could not alter content', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ContentPatchFailed.prototype)
   }
 }
 
@@ -224,6 +227,7 @@ export class ContentCreationFailed extends BaseError {
   public name = 'ContentCreationFailed'
   constructor(public message: string = 'Could not create content', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ContentCreationFailed.prototype)
   }
 }
 
@@ -231,6 +235,7 @@ export class ContentDeleteFailed extends BaseError {
   public name = 'ContentDeleteFailed'
   constructor(public message: string = 'Could not delete content', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ContentDeleteFailed.prototype)
   }
 }
 
@@ -238,5 +243,6 @@ export class ContentsSearchFailed extends BaseError {
   public name = 'ContentDeleteFailed'
   constructor(public message: string = 'Could not search contents', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ContentsSearchFailed.prototype)
   }
 }

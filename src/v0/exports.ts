@@ -116,6 +116,7 @@ class ExportsDatevFetchFailed extends BaseError {
   public name = 'ExportsDatevFetchFailed'
   constructor(public message: string = 'Could not fetch datev export', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ExportsDatevFetchFailed.prototype)
   }
 }
 
@@ -123,5 +124,6 @@ class ExportsGobdFetchFailed extends BaseError {
   public name = 'ExportsGobdFetchFailed'
   constructor(public message: string = 'Could not fetch gobd export', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ExportsGobdFetchFailed.prototype)
   }
 }

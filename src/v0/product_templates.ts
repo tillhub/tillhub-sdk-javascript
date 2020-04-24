@@ -188,6 +188,7 @@ export class ProductTemplatesFetchFailed extends BaseError {
   public name = 'ProductTemplatesFetchFailed'
   constructor(public message: string = 'Could not fetch product templates', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProductTemplatesFetchFailed.prototype)
   }
 }
 
@@ -195,6 +196,7 @@ export class ProductTemplateFetchFailed extends BaseError {
   public name = 'ProductTemplateFetchFailed'
   constructor(public message: string = 'Could not fetch product template', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProductTemplateFetchFailed.prototype)
   }
 }
 
@@ -202,6 +204,7 @@ export class ProductTemplatePutFailed extends BaseError {
   public name = 'ProductTemplatePutFailed'
   constructor(public message: string = 'Could not alter product template', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProductTemplatePutFailed.prototype)
   }
 }
 
@@ -209,6 +212,7 @@ export class ProductTemplateCreationFailed extends BaseError {
   public name = 'ProductTemplateCreationFailed'
   constructor(public message: string = 'Could create product template', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProductTemplateCreationFailed.prototype)
   }
 }
 
@@ -216,6 +220,7 @@ export class ProuctTemplatesCountFailed extends BaseError {
   public name = 'ProuctTemplatesCountFailed'
   constructor(public message: string = 'Could not get count of product templates', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProuctTemplatesCountFailed.prototype)
   }
 }
 
@@ -223,6 +228,7 @@ export class ProductTemplateDeleteFailed extends BaseError {
   public name = 'ProductTemplateDeleteFailed'
   constructor(public message: string = 'Could not delete product template', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProductTemplateDeleteFailed.prototype)
   }
 }
 
@@ -230,5 +236,6 @@ export class ProductTemplatesSearchFailed extends BaseError {
   public name = 'ProductTemplatesSearchFailed'
   constructor(public message: string = 'Could not search for product template', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProductTemplatesSearchFailed.prototype)
   }
 }

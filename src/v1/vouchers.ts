@@ -84,5 +84,6 @@ export class VouchersFetchFailed extends BaseError {
   public name = 'VouchersFetchFailed'
   constructor(public message: string = 'Could not fetch the vouchers', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, VouchersFetchFailed.prototype)
   }
 }

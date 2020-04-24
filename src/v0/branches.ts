@@ -273,6 +273,7 @@ export class BranchesFetchFailed extends BaseError {
   public name = 'BranchesFetchFailed'
   constructor(public message: string = 'Could not fetch branches', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, BranchesFetchFailed.prototype)
   }
 }
 
@@ -280,6 +281,7 @@ export class BranchFetchFailed extends BaseError {
   public name = 'BrancheFetchFailed'
   constructor(public message: string = 'Could not fetch branch', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, BranchFetchFailed.prototype)
   }
 }
 
@@ -287,6 +289,7 @@ export class BranchPutFailed extends BaseError {
   public name = 'BranchPutFailed'
   constructor(public message: string = 'Could not alter branch', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, BranchPutFailed.prototype)
   }
 }
 
@@ -294,6 +297,7 @@ export class BranchCreationFailed extends BaseError {
   public name = 'BranchCreationFailed'
   constructor(public message: string = 'Could not create branch', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, BranchCreationFailed.prototype)
   }
 }
 
@@ -301,6 +305,7 @@ export class BranchesCountFailed extends BaseError {
   public name = 'BranchesCountFailed'
   constructor(public message: string = 'Could not count the branches', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, BranchesCountFailed.prototype)
   }
 }
 
@@ -308,6 +313,7 @@ export class BranchDeleteFailed extends BaseError {
   public name = 'BranchDeleteFailed'
   constructor(public message: string = 'Could not delete branch', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, BranchDeleteFailed.prototype)
   }
 }
 
@@ -316,8 +322,9 @@ export class ExternalCustomIdGetUniqueFailed extends BaseError {
   constructor(
     public message: string = 'Could not get a unique external_custom_id',
     properties?: any
-  ) {
+    ) {
     super(message, properties)
+    Object.setPrototypeOf(this, ExternalCustomIdGetUniqueFailed.prototype)
   }
 }
 
@@ -325,5 +332,6 @@ export class BranchesSearchFailed extends BaseError {
   public name = 'BranchesSearchFailed'
   constructor(public message: string = 'Could not search for branch', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, BranchesSearchFailed.prototype)
   }
 }

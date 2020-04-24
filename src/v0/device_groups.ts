@@ -155,6 +155,7 @@ export class DeviceGroupsFetchFailed extends BaseError {
   public name = 'DeviceGroupsFetchFailed'
   constructor(public message: string = 'Could not fetch device groups', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, DeviceGroupsFetchFailed.prototype)
   }
 }
 
@@ -162,6 +163,7 @@ export class DeviceGroupFetchFailed extends BaseError {
   public name = 'DeviceGroupFetchFailed'
   constructor(public message: string = 'Could not fetch device group', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, DeviceGroupFetchFailed.prototype)
   }
 }
 
@@ -169,6 +171,7 @@ export class DeviceGroupPutFailed extends BaseError {
   public name = 'DeviceGroupPutFailed'
   constructor(public message: string = 'Could not alter device group', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, DeviceGroupPutFailed.prototype)
   }
 }
 
@@ -176,6 +179,7 @@ export class DeviceGroupCreationFailed extends BaseError {
   public name = 'DeviceGroupCreationFailed'
   constructor(public message: string = 'Could not create device group', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, DeviceGroupCreationFailed.prototype)
   }
 }
 
@@ -183,5 +187,6 @@ export class DeviceGroupDeleteFailed extends BaseError {
   public name = 'DeviceGroupDeleteFailed'
   constructor(public message: string = 'Could not delete device group', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, DeviceGroupDeleteFailed.prototype)
   }
 }

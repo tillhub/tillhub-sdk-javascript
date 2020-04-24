@@ -31,7 +31,7 @@ afterEach(() => {
   mock.reset()
 })
 
-describe('v0: Staff: can search for staff', () => {
+describe.only('v0: Staff: can search for staff', () => {
   it('receives a search query of type string', async () => {
     const searchTerm = 'asdf'
 

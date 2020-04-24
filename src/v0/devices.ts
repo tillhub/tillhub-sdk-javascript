@@ -227,6 +227,7 @@ export class DevicesFetchFailed extends BaseError {
   public name = 'DevicesFetchFailed'
   constructor(public message: string = 'Could not fetch devices', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, DevicesFetchFailed.prototype)
   }
 }
 
@@ -234,6 +235,7 @@ export class DeviceFetchFailed extends BaseError {
   public name = 'DeviceFetchFailed'
   constructor(public message: string = 'Could not fetch device', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, DeviceFetchFailed.prototype)
   }
 }
 
@@ -241,6 +243,7 @@ export class DeviceContentFetchFailed extends BaseError {
   public name = 'DeviceContentFetchFailed'
   constructor(public message: string = 'Could not fetch device content', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, DeviceContentFetchFailed.prototype)
   }
 }
 
@@ -248,6 +251,7 @@ export class DevicePatchFailed extends BaseError {
   public name = 'DevicePatchFailed'
   constructor(public message: string = 'Could not alter device', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, DevicePatchFailed.prototype)
   }
 }
 
@@ -255,6 +259,7 @@ export class DeviceCreationFailed extends BaseError {
   public name = 'DeviceCreationFailed'
   constructor(public message: string = 'Could not create device', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, DeviceCreationFailed.prototype)
   }
 }
 
@@ -262,6 +267,7 @@ export class DevicesCountFailed extends BaseError {
   public name = 'DevicesCountFailed'
   constructor(public message: string = 'Could not count the devices', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, DevicesCountFailed.prototype)
   }
 }
 
@@ -269,11 +275,13 @@ export class DeviceDeleteFailed extends BaseError {
   public name = 'DeviceDeleteFailed'
   constructor(public message: string = 'Could not delete device', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, DeviceDeleteFailed.prototype)
   }
 }
 export class DeviceBindingFailed extends BaseError {
   public name = 'DeviceBindingFailed'
   constructor(public message: string = 'Could not bind device', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, DeviceBindingFailed.prototype)
   }
 }

@@ -193,6 +193,7 @@ class WarehousesFetchFailed extends BaseError {
   public name = 'WarehousesFetchFailed'
   constructor(public message: string = 'Could not fetch warehouses', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, WarehousesFetchFailed.prototype)
   }
 }
 
@@ -200,6 +201,7 @@ class WarehouseFetchOneFailed extends BaseError {
   public name = 'WarehouseFetchOneFailed'
   constructor(public message: string = 'Could not fetch one warehouse', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, WarehouseFetchOneFailed.prototype)
   }
 }
 
@@ -207,6 +209,7 @@ class WarehouseCreateFailed extends BaseError {
   public name = 'WarehouseCreateFailed'
   constructor(public message: string = 'Could not create the warehouse', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, WarehouseCreateFailed.prototype)
   }
 }
 
@@ -214,6 +217,7 @@ class WarehousePutFailed extends BaseError {
   public name = 'WarehousePutFailed'
   constructor(public message: string = 'Could not alter the warehouse', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, WarehousePutFailed.prototype)
   }
 }
 
@@ -221,5 +225,6 @@ class WarehouseDeleteFailed extends BaseError {
   public name = 'WarehouseDeleteFailed'
   constructor(public message: string = 'Could not delete the warehouse', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, WarehouseDeleteFailed.prototype)
   }
 }

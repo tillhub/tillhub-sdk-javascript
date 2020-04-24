@@ -71,6 +71,7 @@ export class VideoCreationFailed extends BaseError {
   public name = 'VideoCreationFailed'
   constructor(public message: string = 'Could not create new video') {
     super(message)
+    Object.setPrototypeOf(this, VideoCreationFailed.prototype)
   }
 }
 
@@ -78,5 +79,6 @@ export class VideoPutFailed extends BaseError {
   public name = 'VideoPutFailed'
   constructor(public message: string = 'Could not update new video') {
     super(message)
+    Object.setPrototypeOf(this, VideoPutFailed.prototype)
   }
 }

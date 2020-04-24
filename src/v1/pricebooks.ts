@@ -166,6 +166,7 @@ export class PricebooksFetchFailed extends BaseError {
   public name = 'PricebooksFetchFailed'
   constructor(public message: string = 'Could not fetch pricebooks', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, PricebooksFetchFailed.prototype)
   }
 }
 
@@ -173,6 +174,7 @@ class PricebooksMetaFailed extends BaseError {
   public name = 'PricebooksMetaFailed'
   constructor(public message: string = 'Could not fetch pricebooks meta call', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, PricebooksMetaFailed.prototype)
   }
 }
 
@@ -180,6 +182,7 @@ export class PricebookFetchFailed extends BaseError {
   public name = 'PricebookFetchFailed'
   constructor(public message: string = 'Could not fetch pricebook', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, PricebookFetchFailed.prototype)
   }
 }
 
@@ -187,6 +190,7 @@ export class PricebookPutFailed extends BaseError {
   public name = 'PricebookPutFailed'
   constructor(public message: string = 'Could not alter pricebook', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, PricebookPutFailed.prototype)
   }
 }
 
@@ -194,6 +198,7 @@ export class PricebookCreationFailed extends BaseError {
   public name = 'PricebookCreationFailed'
   constructor(public message: string = 'Could not create pricebook', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, PricebookCreationFailed.prototype)
   }
 }
 
@@ -201,5 +206,6 @@ export class PricebookDeleteFailed extends BaseError {
   public name = 'PricebookDeleteFailed'
   constructor(public message: string = 'Could not delete pricebook', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, PricebookDeleteFailed.prototype)
   }
 }
