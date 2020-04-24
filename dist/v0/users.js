@@ -250,6 +250,7 @@ var UsersFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'UsersFetchFailed';
+        Object.setPrototypeOf(_this, UsersFetchFailed.prototype);
         return _this;
     }
     return UsersFetchFailed;
@@ -262,6 +263,7 @@ var UserFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'UserFetchFailed';
+        Object.setPrototypeOf(_this, UserFetchFailed.prototype);
         return _this;
     }
     return UserFetchFailed;
@@ -274,6 +276,7 @@ var UserPutFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'UserPutFailed';
+        Object.setPrototypeOf(_this, UserPutFailed.prototype);
         return _this;
     }
     return UserPutFailed;
@@ -286,6 +289,7 @@ var UserCreationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'UserCreationFailed';
+        Object.setPrototypeOf(_this, UserCreationFailed.prototype);
         return _this;
     }
     return UserCreationFailed;
@@ -298,6 +302,7 @@ var UserDeleteFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'UserDeleteFailed';
+        Object.setPrototypeOf(_this, UserDeleteFailed.prototype);
         return _this;
     }
     return UserDeleteFailed;
@@ -310,6 +315,7 @@ var UserTokenCreationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'UserTokenCreationFailed';
+        Object.setPrototypeOf(_this, UserTokenCreationFailed.prototype);
         return _this;
     }
     return UserTokenCreationFailed;

@@ -291,6 +291,7 @@ var DevicesFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'DevicesFetchFailed';
+        Object.setPrototypeOf(_this, DevicesFetchFailed.prototype);
         return _this;
     }
     return DevicesFetchFailed;
@@ -303,6 +304,7 @@ var DeviceFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'DeviceFetchFailed';
+        Object.setPrototypeOf(_this, DeviceFetchFailed.prototype);
         return _this;
     }
     return DeviceFetchFailed;
@@ -315,6 +317,7 @@ var DeviceContentFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'DeviceContentFetchFailed';
+        Object.setPrototypeOf(_this, DeviceContentFetchFailed.prototype);
         return _this;
     }
     return DeviceContentFetchFailed;
@@ -327,6 +330,7 @@ var DevicePatchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'DevicePatchFailed';
+        Object.setPrototypeOf(_this, DevicePatchFailed.prototype);
         return _this;
     }
     return DevicePatchFailed;
@@ -339,6 +343,7 @@ var DeviceCreationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'DeviceCreationFailed';
+        Object.setPrototypeOf(_this, DeviceCreationFailed.prototype);
         return _this;
     }
     return DeviceCreationFailed;
@@ -351,6 +356,7 @@ var DevicesCountFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'DevicesCountFailed';
+        Object.setPrototypeOf(_this, DevicesCountFailed.prototype);
         return _this;
     }
     return DevicesCountFailed;
@@ -363,6 +369,7 @@ var DeviceDeleteFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'DeviceDeleteFailed';
+        Object.setPrototypeOf(_this, DeviceDeleteFailed.prototype);
         return _this;
     }
     return DeviceDeleteFailed;
@@ -375,6 +382,7 @@ var DeviceBindingFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'DeviceBindingFailed';
+        Object.setPrototypeOf(_this, DeviceBindingFailed.prototype);
         return _this;
     }
     return DeviceBindingFailed;

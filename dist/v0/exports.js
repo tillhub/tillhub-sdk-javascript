@@ -124,6 +124,7 @@ var ExportsDatevFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ExportsDatevFetchFailed';
+        Object.setPrototypeOf(_this, ExportsDatevFetchFailed.prototype);
         return _this;
     }
     return ExportsDatevFetchFailed;
@@ -135,6 +136,7 @@ var ExportsGobdFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ExportsGobdFetchFailed';
+        Object.setPrototypeOf(_this, ExportsGobdFetchFailed.prototype);
         return _this;
     }
     return ExportsGobdFetchFailed;

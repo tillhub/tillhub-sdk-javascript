@@ -267,6 +267,7 @@ var ContentTemplatesFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ContentTemplatesFetchFailed';
+        Object.setPrototypeOf(_this, ContentTemplatesFetchFailed.prototype);
         return _this;
     }
     return ContentTemplatesFetchFailed;
@@ -279,6 +280,7 @@ var ContentTemplateFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ContentTemplateFetchFailed';
+        Object.setPrototypeOf(_this, ContentTemplateFetchFailed.prototype);
         return _this;
     }
     return ContentTemplateFetchFailed;
@@ -291,6 +293,7 @@ var ContentTemplatePatchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ContentTemplatePatchFailed';
+        Object.setPrototypeOf(_this, ContentTemplatePatchFailed.prototype);
         return _this;
     }
     return ContentTemplatePatchFailed;
@@ -303,6 +306,7 @@ var ContentTemplateCreationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ContentTemplateCreationFailed';
+        Object.setPrototypeOf(_this, ContentTemplateCreationFailed.prototype);
         return _this;
     }
     return ContentTemplateCreationFailed;
@@ -315,6 +319,7 @@ var ContentTemplateDeleteFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ContentTemplateDeleteFailed';
+        Object.setPrototypeOf(_this, ContentTemplateDeleteFailed.prototype);
         return _this;
     }
     return ContentTemplateDeleteFailed;
@@ -327,6 +332,7 @@ var ContentTemplatesSearchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ContentTemplatesSearchFailed';
+        Object.setPrototypeOf(_this, ContentTemplatesSearchFailed.prototype);
         return _this;
     }
     return ContentTemplatesSearchFailed;

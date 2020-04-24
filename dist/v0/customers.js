@@ -379,6 +379,7 @@ var CustomersFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CustomersFetchFailed';
+        Object.setPrototypeOf(_this, CustomersFetchFailed.prototype);
         return _this;
     }
     return CustomersFetchFailed;
@@ -391,6 +392,7 @@ var CustomerFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CustomerFetchFailed';
+        Object.setPrototypeOf(_this, CustomerFetchFailed.prototype);
         return _this;
     }
     return CustomerFetchFailed;
@@ -403,6 +405,7 @@ var CustomerPutFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CustomerPutFailed';
+        Object.setPrototypeOf(_this, CustomerPutFailed.prototype);
         return _this;
     }
     return CustomerPutFailed;
@@ -415,6 +418,7 @@ var CustomerNoteCreationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CustomerNoteCreationFailed';
+        Object.setPrototypeOf(_this, CustomerNoteCreationFailed.prototype);
         return _this;
     }
     return CustomerNoteCreationFailed;
@@ -427,6 +431,7 @@ var CustomerCreationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CustomerCreationFailed';
+        Object.setPrototypeOf(_this, CustomerCreationFailed.prototype);
         return _this;
     }
     return CustomerCreationFailed;
@@ -439,6 +444,7 @@ var CustomersMetaFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CustomersMetaFailed';
+        Object.setPrototypeOf(_this, CustomersMetaFailed.prototype);
         return _this;
     }
     return CustomersMetaFailed;
@@ -451,6 +457,7 @@ var CustomersCountFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CustomersCountFailed';
+        Object.setPrototypeOf(_this, CustomersCountFailed.prototype);
         return _this;
     }
     return CustomersCountFailed;
@@ -463,6 +470,7 @@ var CustomersSearchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CustomersSearchFailed';
+        Object.setPrototypeOf(_this, CustomersSearchFailed.prototype);
         return _this;
     }
     return CustomersSearchFailed;
@@ -475,6 +483,7 @@ var CustomerDeleteFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CustomerDeleteFailed';
+        Object.setPrototypeOf(_this, CustomerDeleteFailed.prototype);
         return _this;
     }
     return CustomerDeleteFailed;

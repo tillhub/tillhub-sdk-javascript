@@ -129,6 +129,7 @@ var CountingProtocolsFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CountingProtocolsFetchFailed';
+        Object.setPrototypeOf(_this, CountingProtocolsFetchFailed.prototype);
         return _this;
     }
     return CountingProtocolsFetchFailed;
@@ -141,6 +142,7 @@ var CountingProtocolsMetaFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CountingProtocolsMetaFailed';
+        Object.setPrototypeOf(_this, CountingProtocolsMetaFailed.prototype);
         return _this;
     }
     return CountingProtocolsMetaFailed;

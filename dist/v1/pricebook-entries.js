@@ -228,6 +228,7 @@ var PricebookEntriesFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'PricebookEntriesFetchFailed';
+        Object.setPrototypeOf(_this, PricebookEntriesFetchFailed.prototype);
         return _this;
     }
     return PricebookEntriesFetchFailed;
@@ -240,6 +241,7 @@ var PricebookEntriesMetaFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'PricebookEntriesMetaFailed';
+        Object.setPrototypeOf(_this, PricebookEntriesMetaFailed.prototype);
         return _this;
     }
     return PricebookEntriesMetaFailed;
@@ -251,6 +253,7 @@ var PricebookEntryFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'PricebookEntryFetchFailed';
+        Object.setPrototypeOf(_this, PricebookEntryFetchFailed.prototype);
         return _this;
     }
     return PricebookEntryFetchFailed;
@@ -263,6 +266,7 @@ var PricebookEntryPutFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'PricebookEntryPutFailed';
+        Object.setPrototypeOf(_this, PricebookEntryPutFailed.prototype);
         return _this;
     }
     return PricebookEntryPutFailed;
@@ -275,6 +279,7 @@ var PricebookEntryCreationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'PricebookEntryCreationFailed';
+        Object.setPrototypeOf(_this, PricebookEntryCreationFailed.prototype);
         return _this;
     }
     return PricebookEntryCreationFailed;
@@ -287,6 +292,7 @@ var PricebookEntryDeleteFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'PricebookEntryDeleteFailed';
+        Object.setPrototypeOf(_this, PricebookEntryDeleteFailed.prototype);
         return _this;
     }
     return PricebookEntryDeleteFailed;

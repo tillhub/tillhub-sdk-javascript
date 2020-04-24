@@ -231,6 +231,7 @@ var StorefrontsFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'StorefrontsFetchFailed';
+        Object.setPrototypeOf(_this, StorefrontsFetchFailed.prototype);
         return _this;
     }
     return StorefrontsFetchFailed;
@@ -243,6 +244,7 @@ var StorefrontsFetchOneFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'StorefrontsFetchOneFailed';
+        Object.setPrototypeOf(_this, StorefrontsFetchOneFailed.prototype);
         return _this;
     }
     return StorefrontsFetchOneFailed;
@@ -255,6 +257,7 @@ var StorefrontsPutFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'StorefrontsPutFailed';
+        Object.setPrototypeOf(_this, StorefrontsPutFailed.prototype);
         return _this;
     }
     return StorefrontsPutFailed;
@@ -267,6 +270,7 @@ var StorefrontsCreationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'StorefrontsCreationFailed';
+        Object.setPrototypeOf(_this, StorefrontsCreationFailed.prototype);
         return _this;
     }
     return StorefrontsCreationFailed;
@@ -279,6 +283,7 @@ var StorefrontsDeleteFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'StorefrontsDeleteFailed';
+        Object.setPrototypeOf(_this, StorefrontsDeleteFailed.prototype);
         return _this;
     }
     return StorefrontsDeleteFailed;

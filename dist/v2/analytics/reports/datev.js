@@ -90,6 +90,7 @@ var AnalyticsReportsDatevExportFetchError = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'AnalyticsReportsDatevExportFetchError';
+        Object.setPrototypeOf(_this, AnalyticsReportsDatevExportFetchError.prototype);
         return _this;
     }
     return AnalyticsReportsDatevExportFetchError;

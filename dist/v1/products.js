@@ -497,6 +497,7 @@ var ProductsCreateFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProductsCreateFailed';
+        Object.setPrototypeOf(_this, ProductsCreateFailed.prototype);
         return _this;
     }
     return ProductsCreateFailed;
@@ -509,6 +510,7 @@ var ProductFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProductFetchFailed';
+        Object.setPrototypeOf(_this, ProductFetchFailed.prototype);
         return _this;
     }
     return ProductFetchFailed;
@@ -521,6 +523,7 @@ var ProductsFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProductsFetchFailed';
+        Object.setPrototypeOf(_this, ProductsFetchFailed.prototype);
         return _this;
     }
     return ProductsFetchFailed;
@@ -533,6 +536,7 @@ var ProductsImportFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProductsImportFailed';
+        Object.setPrototypeOf(_this, ProductsImportFailed.prototype);
         return _this;
     }
     return ProductsImportFailed;
@@ -545,6 +549,7 @@ var ProductDetailsFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProductDetailsFetchFailed';
+        Object.setPrototypeOf(_this, ProductDetailsFetchFailed.prototype);
         return _this;
     }
     return ProductDetailsFetchFailed;
@@ -557,6 +562,7 @@ var ProductChildrenDetailsFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProductChildrenDetailsFetchFailed';
+        Object.setPrototypeOf(_this, ProductChildrenDetailsFetchFailed.prototype);
         return _this;
     }
     return ProductChildrenDetailsFetchFailed;
@@ -569,6 +575,7 @@ var ProductsCountFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProductsCountFailed';
+        Object.setPrototypeOf(_this, ProductsCountFailed.prototype);
         return _this;
     }
     return ProductsCountFailed;
@@ -581,6 +588,7 @@ var ProductsMetaFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProductsMetaFailed';
+        Object.setPrototypeOf(_this, ProductsMetaFailed.prototype);
         return _this;
     }
     return ProductsMetaFailed;
@@ -593,6 +601,7 @@ var ProductsUpdateFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProductsUpdateFailed';
+        Object.setPrototypeOf(_this, ProductsUpdateFailed.prototype);
         return _this;
     }
     return ProductsUpdateFailed;
@@ -605,6 +614,7 @@ var ProductsDeleteFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProductsDeleteFailed';
+        Object.setPrototypeOf(_this, ProductsDeleteFailed.prototype);
         return _this;
     }
     return ProductsDeleteFailed;
@@ -617,6 +627,7 @@ var ProductsSearchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProductsSearchFailed';
+        Object.setPrototypeOf(_this, ProductsSearchFailed.prototype);
         return _this;
     }
     return ProductsSearchFailed;
@@ -629,6 +640,7 @@ var ProductsBookStockFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProductsBookStockFailed';
+        Object.setPrototypeOf(_this, ProductsBookStockFailed.prototype);
         return _this;
     }
     return ProductsBookStockFailed;
@@ -641,6 +653,7 @@ var BarcodeGetFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'BarcodeGetFailed';
+        Object.setPrototypeOf(_this, BarcodeGetFailed.prototype);
         return _this;
     }
     return BarcodeGetFailed;

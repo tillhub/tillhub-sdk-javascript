@@ -232,6 +232,7 @@ var ProcessesFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProcessesFetchFailed';
+        Object.setPrototypeOf(_this, ProcessesFetchFailed.prototype);
         return _this;
     }
     return ProcessesFetchFailed;
@@ -244,6 +245,7 @@ var ProcessesFetchOneFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProcessesFetchOneFailed';
+        Object.setPrototypeOf(_this, ProcessesFetchOneFailed.prototype);
         return _this;
     }
     return ProcessesFetchOneFailed;
@@ -256,6 +258,7 @@ var ProcessesUpdateFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProcessesUpdateFailed';
+        Object.setPrototypeOf(_this, ProcessesUpdateFailed.prototype);
         return _this;
     }
     return ProcessesUpdateFailed;
@@ -268,6 +271,7 @@ var ProcessesCreationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProcessesCreationFailed';
+        Object.setPrototypeOf(_this, ProcessesCreationFailed.prototype);
         return _this;
     }
     return ProcessesCreationFailed;
@@ -280,6 +284,7 @@ var ProcessesDeleteFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProcessesDeleteFailed';
+        Object.setPrototypeOf(_this, ProcessesDeleteFailed.prototype);
         return _this;
     }
     return ProcessesDeleteFailed;
@@ -292,6 +297,7 @@ var ProcessItemsFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProcessItemsFetchFailed';
+        Object.setPrototypeOf(_this, ProcessItemsFetchFailed.prototype);
         return _this;
     }
     return ProcessItemsFetchFailed;

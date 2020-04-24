@@ -237,6 +237,7 @@ var BranchGroupsFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'BranchGroupsFetchFailed';
+        Object.setPrototypeOf(_this, BranchGroupsFetchFailed.prototype);
         return _this;
     }
     return BranchGroupsFetchFailed;
@@ -249,6 +250,7 @@ var BranchGroupFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'BranchGroupFetchFailed';
+        Object.setPrototypeOf(_this, BranchGroupFetchFailed.prototype);
         return _this;
     }
     return BranchGroupFetchFailed;
@@ -261,6 +263,7 @@ var BranchGroupPutFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'BranchPutFailed';
+        Object.setPrototypeOf(_this, BranchGroupPutFailed.prototype);
         return _this;
     }
     return BranchGroupPutFailed;
@@ -273,6 +276,7 @@ var BranchGroupCreationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'BranchGroupCreationFailed';
+        Object.setPrototypeOf(_this, BranchGroupCreationFailed.prototype);
         return _this;
     }
     return BranchGroupCreationFailed;
@@ -285,6 +289,7 @@ var BranchGroupDeleteFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'BranchGroupDeleteFailed';
+        Object.setPrototypeOf(_this, BranchGroupDeleteFailed.prototype);
         return _this;
     }
     return BranchGroupDeleteFailed;

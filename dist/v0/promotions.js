@@ -237,6 +237,7 @@ var PromotionsFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'PromotionsFetchFailed';
+        Object.setPrototypeOf(_this, PromotionsFetchFailed.prototype);
         return _this;
     }
     return PromotionsFetchFailed;
@@ -249,6 +250,7 @@ var PromotionFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'PromotionFetchFailed';
+        Object.setPrototypeOf(_this, PromotionFetchFailed.prototype);
         return _this;
     }
     return PromotionFetchFailed;
@@ -261,6 +263,7 @@ var PromotionPutFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'PromotionPutFailed';
+        Object.setPrototypeOf(_this, PromotionPutFailed.prototype);
         return _this;
     }
     return PromotionPutFailed;
@@ -273,6 +276,7 @@ var PromotionCreationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'PromotionCreationFailed';
+        Object.setPrototypeOf(_this, PromotionCreationFailed.prototype);
         return _this;
     }
     return PromotionCreationFailed;
@@ -285,6 +289,7 @@ var PromotionDeleteFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'PromotionDeleteFailed';
+        Object.setPrototypeOf(_this, PromotionDeleteFailed.prototype);
         return _this;
     }
     return PromotionDeleteFailed;

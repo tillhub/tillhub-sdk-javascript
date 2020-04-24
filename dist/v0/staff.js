@@ -500,6 +500,7 @@ var StaffFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'StaffFetchFailed';
+        Object.setPrototypeOf(_this, StaffFetchFailed.prototype);
         return _this;
     }
     return StaffFetchFailed;
@@ -512,6 +513,7 @@ var StaffFetchOneFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'StaffFetchOneFailed';
+        Object.setPrototypeOf(_this, StaffFetchOneFailed.prototype);
         return _this;
     }
     return StaffFetchOneFailed;
@@ -524,6 +526,7 @@ var StaffPutFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'StaffPutFailed';
+        Object.setPrototypeOf(_this, StaffPutFailed.prototype);
         return _this;
     }
     return StaffPutFailed;
@@ -536,6 +539,7 @@ var StaffDeleteFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'StaffDeleteFailed';
+        Object.setPrototypeOf(_this, StaffDeleteFailed.prototype);
         return _this;
     }
     return StaffDeleteFailed;
@@ -548,6 +552,7 @@ var StaffMemberCreateFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'StaffMemberCreateFailed';
+        Object.setPrototypeOf(_this, StaffMemberCreateFailed.prototype);
         return _this;
     }
     return StaffMemberCreateFailed;
@@ -560,6 +565,7 @@ var StaffPinGetFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'StaffPinGetFailed';
+        Object.setPrototypeOf(_this, StaffPinGetFailed.prototype);
         return _this;
     }
     return StaffPinGetFailed;
@@ -572,6 +578,7 @@ var StaffNumberGetFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'StaffNumberGetFailed';
+        Object.setPrototypeOf(_this, StaffNumberGetFailed.prototype);
         return _this;
     }
     return StaffNumberGetFailed;
@@ -584,6 +591,7 @@ var MakeUserStaffFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'MakeUserStaffFailed';
+        Object.setPrototypeOf(_this, MakeUserStaffFailed.prototype);
         return _this;
     }
     return MakeUserStaffFailed;
@@ -596,6 +604,7 @@ var StaffMetaFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'StaffMetaFailed';
+        Object.setPrototypeOf(_this, StaffMetaFailed.prototype);
         return _this;
     }
     return StaffMetaFailed;
@@ -608,6 +617,7 @@ var StaffSearchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'StaffSearchFailed';
+        Object.setPrototypeOf(_this, StaffSearchFailed.prototype);
         return _this;
     }
     return StaffSearchFailed;

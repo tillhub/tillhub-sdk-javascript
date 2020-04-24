@@ -187,6 +187,7 @@ var CorrespondencesFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CorrespondencesFetchFailed';
+        Object.setPrototypeOf(_this, CorrespondencesFetchFailed.prototype);
         return _this;
     }
     return CorrespondencesFetchFailed;
@@ -199,6 +200,7 @@ var CorrespondenceFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CorrespondenceFetchFailed';
+        Object.setPrototypeOf(_this, CorrespondenceFetchFailed.prototype);
         return _this;
     }
     return CorrespondenceFetchFailed;
@@ -211,6 +213,7 @@ var CorrespondencePutFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CorrespondencePutFailed';
+        Object.setPrototypeOf(_this, CorrespondencePutFailed.prototype);
         return _this;
     }
     return CorrespondencePutFailed;
@@ -223,6 +226,7 @@ var CorrespondenceCreationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CorrespondenceCreationFailed';
+        Object.setPrototypeOf(_this, CorrespondenceCreationFailed.prototype);
         return _this;
     }
     return CorrespondenceCreationFailed;

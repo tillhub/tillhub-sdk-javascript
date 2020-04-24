@@ -503,6 +503,7 @@ var VoucherTypeError = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'VouchersFetchFailed';
+        Object.setPrototypeOf(_this, VoucherTypeError.prototype);
         return _this;
     }
     return VoucherTypeError;
@@ -515,6 +516,7 @@ var VouchersFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'VouchersFetchFailed';
+        Object.setPrototypeOf(_this, VouchersFetchFailed.prototype);
         return _this;
     }
     return VouchersFetchFailed;
@@ -527,6 +529,7 @@ var VoucherLogsFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'VoucherLogsFetchFailed';
+        Object.setPrototypeOf(_this, VoucherLogsFetchFailed.prototype);
         return _this;
     }
     return VoucherLogsFetchFailed;
@@ -539,6 +542,7 @@ var VoucherFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'VoucherFetchFailed';
+        Object.setPrototypeOf(_this, VoucherFetchFailed.prototype);
         return _this;
     }
     return VoucherFetchFailed;
@@ -551,6 +555,7 @@ var VoucherPutFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'VoucherPutFailed';
+        Object.setPrototypeOf(_this, VoucherPutFailed.prototype);
         return _this;
     }
     return VoucherPutFailed;
@@ -563,6 +568,7 @@ var VoucherPatchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'VoucherPatchFailed';
+        Object.setPrototypeOf(_this, VoucherPatchFailed.prototype);
         return _this;
     }
     return VoucherPatchFailed;
@@ -575,6 +581,7 @@ var VoucherCreationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'VoucherPostFailed';
+        Object.setPrototypeOf(_this, VoucherCreationFailed.prototype);
         return _this;
     }
     return VoucherCreationFailed;
@@ -587,6 +594,7 @@ var VoucherCodeConflict = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'VoucherCodeConflict';
+        Object.setPrototypeOf(_this, VoucherCodeConflict.prototype);
         return _this;
     }
     return VoucherCodeConflict;
@@ -599,6 +607,7 @@ var VouchersCountFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'VouchersCountFailed';
+        Object.setPrototypeOf(_this, VouchersCountFailed.prototype);
         return _this;
     }
     return VouchersCountFailed;
@@ -611,6 +620,7 @@ var VouchersMetaFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'VouchersMetaFailed';
+        Object.setPrototypeOf(_this, VouchersMetaFailed.prototype);
         return _this;
     }
     return VouchersMetaFailed;
@@ -623,6 +633,7 @@ var VoucherLogsMetaFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'VoucherLogsMetaFailed';
+        Object.setPrototypeOf(_this, VoucherLogsMetaFailed.prototype);
         return _this;
     }
     return VoucherLogsMetaFailed;
@@ -635,6 +646,7 @@ var VoucherDeleteFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'VoucherDeleteFailed';
+        Object.setPrototypeOf(_this, VoucherDeleteFailed.prototype);
         return _this;
     }
     return VoucherDeleteFailed;
@@ -647,6 +659,7 @@ var VouchersLogsFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'VouchersLogsFetchFailed';
+        Object.setPrototypeOf(_this, VouchersLogsFetchFailed.prototype);
         return _this;
     }
     return VouchersLogsFetchFailed;
@@ -659,6 +672,7 @@ var VouchersLogsCountFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'VouchersLogsCountFailed';
+        Object.setPrototypeOf(_this, VouchersLogsCountFailed.prototype);
         return _this;
     }
     return VouchersLogsCountFailed;
@@ -671,6 +685,7 @@ var VouchersUsersFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'VouchersUsersFailed';
+        Object.setPrototypeOf(_this, VouchersUsersFailed.prototype);
         return _this;
     }
     return VouchersUsersFailed;

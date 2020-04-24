@@ -102,6 +102,7 @@ var DependenciesFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'DependenciesFetchFailed';
+        Object.setPrototypeOf(_this, DependenciesFetchFailed.prototype);
         return _this;
     }
     return DependenciesFetchFailed;

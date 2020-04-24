@@ -124,6 +124,7 @@ var VideoCreationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message) || this;
         _this.message = message;
         _this.name = 'VideoCreationFailed';
+        Object.setPrototypeOf(_this, VideoCreationFailed.prototype);
         return _this;
     }
     return VideoCreationFailed;
@@ -136,6 +137,7 @@ var VideoPutFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message) || this;
         _this.message = message;
         _this.name = 'VideoPutFailed';
+        Object.setPrototypeOf(_this, VideoPutFailed.prototype);
         return _this;
     }
     return VideoPutFailed;

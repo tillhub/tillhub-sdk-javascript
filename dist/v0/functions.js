@@ -210,6 +210,7 @@ var FunctionsFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'FunctionsFetchFailed';
+        Object.setPrototypeOf(_this, FunctionsFetchFailed.prototype);
         return _this;
     }
     return FunctionsFetchFailed;
@@ -222,6 +223,7 @@ var FunctionFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'FunctionFetchFailed';
+        Object.setPrototypeOf(_this, FunctionFetchFailed.prototype);
         return _this;
     }
     return FunctionFetchFailed;
@@ -234,6 +236,7 @@ var FunctionPutFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'FunctionPutFailed';
+        Object.setPrototypeOf(_this, FunctionPutFailed.prototype);
         return _this;
     }
     return FunctionPutFailed;
@@ -246,6 +249,7 @@ var FunctionCreationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'FunctionCreationFailed';
+        Object.setPrototypeOf(_this, FunctionCreationFailed.prototype);
         return _this;
     }
     return FunctionCreationFailed;
@@ -258,6 +262,7 @@ var FunctionDeleteFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'FunctionDeleteFailed';
+        Object.setPrototypeOf(_this, FunctionDeleteFailed.prototype);
         return _this;
     }
     return FunctionDeleteFailed;

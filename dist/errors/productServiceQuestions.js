@@ -21,6 +21,7 @@ var ProductServiceQuestionsFetchAllFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProductServiceQuestionsFetchAllFailed';
+        Object.setPrototypeOf(_this, ProductServiceQuestionsFetchAllFailed.prototype);
         return _this;
     }
     return ProductServiceQuestionsFetchAllFailed;
@@ -33,6 +34,7 @@ var ProductServiceQuestionsFetchOneFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProductServiceQuestionsFetchOneFailed';
+        Object.setPrototypeOf(_this, ProductServiceQuestionsFetchOneFailed.prototype);
         return _this;
     }
     return ProductServiceQuestionsFetchOneFailed;
@@ -45,6 +47,7 @@ var ProductServiceQuestionsGetMetaFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProductServiceQuestionsGetMetaFailed';
+        Object.setPrototypeOf(_this, ProductServiceQuestionsGetMetaFailed.prototype);
         return _this;
     }
     return ProductServiceQuestionsGetMetaFailed;
@@ -57,6 +60,7 @@ var ProductServiceQuestionsCreationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProductServiceQuestionsCreationFailed';
+        Object.setPrototypeOf(_this, ProductServiceQuestionsCreationFailed.prototype);
         return _this;
     }
     return ProductServiceQuestionsCreationFailed;
@@ -69,6 +73,7 @@ var ProductServiceQuestionsPutFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProductServiceQuestionsPutFailed';
+        Object.setPrototypeOf(_this, ProductServiceQuestionsPutFailed.prototype);
         return _this;
     }
     return ProductServiceQuestionsPutFailed;
@@ -81,6 +86,7 @@ var ProductServiceQuestionDeleteFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProductServiceQuestionDeleteFailed';
+        Object.setPrototypeOf(_this, ProductServiceQuestionDeleteFailed.prototype);
         return _this;
     }
     return ProductServiceQuestionDeleteFailed;
@@ -93,6 +99,7 @@ var ProductServiceQuestionsBookFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProductServiceQuestionsBookFailed';
+        Object.setPrototypeOf(_this, ProductServiceQuestionsBookFailed.prototype);
         return _this;
     }
     return ProductServiceQuestionsBookFailed;

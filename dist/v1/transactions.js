@@ -443,6 +443,7 @@ var TransactionFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'TransactionFetchFailed';
+        Object.setPrototypeOf(_this, TransactionFetchFailed.prototype);
         return _this;
     }
     return TransactionFetchFailed;
@@ -454,6 +455,7 @@ var TransactionPdfFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'TransactionPdfFailed';
+        Object.setPrototypeOf(_this, TransactionPdfFailed.prototype);
         return _this;
     }
     return TransactionPdfFailed;
@@ -465,6 +467,7 @@ var TransactionSigningInitialisationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'TransactionSigningInitialisationFailed';
+        Object.setPrototypeOf(_this, TransactionSigningInitialisationFailed.prototype);
         return _this;
     }
     return TransactionSigningInitialisationFailed;
@@ -476,6 +479,7 @@ var TransactionSigningYearlyReceiptFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'TransactionSigningYearlyReceiptFailed';
+        Object.setPrototypeOf(_this, TransactionSigningYearlyReceiptFailed.prototype);
         return _this;
     }
     return TransactionSigningYearlyReceiptFailed;
@@ -487,6 +491,7 @@ var TransactionSigningMonthlyReceiptFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'TransactionSigningMonthlyReceiptFailed';
+        Object.setPrototypeOf(_this, TransactionSigningMonthlyReceiptFailed.prototype);
         return _this;
     }
     return TransactionSigningMonthlyReceiptFailed;
@@ -498,6 +503,7 @@ var TransactionSigningZeroReceiptFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'TransactionSigningZeroReceiptFailed';
+        Object.setPrototypeOf(_this, TransactionSigningZeroReceiptFailed.prototype);
         return _this;
     }
     return TransactionSigningZeroReceiptFailed;
@@ -509,6 +515,7 @@ var TransactionsGetMetaFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'TransactionsGetMetaFailed';
+        Object.setPrototypeOf(_this, TransactionsGetMetaFailed.prototype);
         return _this;
     }
     return TransactionsGetMetaFailed;
@@ -520,6 +527,7 @@ var TransactionsGetImageFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'TransactionsGetImageFailed';
+        Object.setPrototypeOf(_this, TransactionsGetImageFailed.prototype);
         return _this;
     }
     return TransactionsGetImageFailed;
@@ -531,6 +539,7 @@ var TransactionsImagePutFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'TransactionsImagePutFailed';
+        Object.setPrototypeOf(_this, TransactionsImagePutFailed.prototype);
         return _this;
     }
     return TransactionsImagePutFailed;
@@ -542,6 +551,7 @@ var TransactionsImageCreateFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'TransactionsImageCreateFailed';
+        Object.setPrototypeOf(_this, TransactionsImageCreateFailed.prototype);
         return _this;
     }
     return TransactionsImageCreateFailed;

@@ -120,6 +120,7 @@ var DataCreateFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message) || this;
         _this.message = message;
         _this.name = 'DataCreateFailed';
+        Object.setPrototypeOf(_this, DataCreateFailed.prototype);
         return _this;
     }
     return DataCreateFailed;
@@ -132,6 +133,7 @@ var DataReplaceFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message) || this;
         _this.message = message;
         _this.name = 'DataReplaceFailed';
+        Object.setPrototypeOf(_this, DataReplaceFailed.prototype);
         return _this;
     }
     return DataReplaceFailed;

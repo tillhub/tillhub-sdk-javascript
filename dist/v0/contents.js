@@ -266,6 +266,7 @@ var ContentsFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ContentsFetchFailed';
+        Object.setPrototypeOf(_this, ContentsFetchFailed.prototype);
         return _this;
     }
     return ContentsFetchFailed;
@@ -278,6 +279,7 @@ var ContentFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ContentFetchFailed';
+        Object.setPrototypeOf(_this, ContentFetchFailed.prototype);
         return _this;
     }
     return ContentFetchFailed;
@@ -290,6 +292,7 @@ var ContentPatchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ContentPatchFailed';
+        Object.setPrototypeOf(_this, ContentPatchFailed.prototype);
         return _this;
     }
     return ContentPatchFailed;
@@ -302,6 +305,7 @@ var ContentCreationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ContentCreationFailed';
+        Object.setPrototypeOf(_this, ContentCreationFailed.prototype);
         return _this;
     }
     return ContentCreationFailed;
@@ -314,6 +318,7 @@ var ContentDeleteFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ContentDeleteFailed';
+        Object.setPrototypeOf(_this, ContentDeleteFailed.prototype);
         return _this;
     }
     return ContentDeleteFailed;
@@ -326,6 +331,7 @@ var ContentsSearchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ContentDeleteFailed';
+        Object.setPrototypeOf(_this, ContentsSearchFailed.prototype);
         return _this;
     }
     return ContentsSearchFailed;

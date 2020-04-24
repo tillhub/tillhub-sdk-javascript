@@ -237,6 +237,7 @@ var VoucherSystemsFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'VoucherSystemsFetchFailed';
+        Object.setPrototypeOf(_this, VoucherSystemsFetchFailed.prototype);
         return _this;
     }
     return VoucherSystemsFetchFailed;
@@ -249,6 +250,7 @@ var VoucherSystemFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'VoucherSystemFetchFailed';
+        Object.setPrototypeOf(_this, VoucherSystemFetchFailed.prototype);
         return _this;
     }
     return VoucherSystemFetchFailed;
@@ -261,6 +263,7 @@ var VoucherSystemPutFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'VoucherSystemhPutFailed';
+        Object.setPrototypeOf(_this, VoucherSystemPutFailed.prototype);
         return _this;
     }
     return VoucherSystemPutFailed;
@@ -273,6 +276,7 @@ var VoucherSystemCreationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'VoucherSystemCreationFailed';
+        Object.setPrototypeOf(_this, VoucherSystemCreationFailed.prototype);
         return _this;
     }
     return VoucherSystemCreationFailed;
@@ -285,6 +289,7 @@ var VoucherSystemDeleteFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'VoucherSystemDeleteFailed';
+        Object.setPrototypeOf(_this, VoucherSystemDeleteFailed.prototype);
         return _this;
     }
     return VoucherSystemDeleteFailed;

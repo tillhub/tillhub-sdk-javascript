@@ -1,3 +1,10 @@
+# [3.186.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.185.0...v3.186.0) (2020-04-24)
+
+
+### Features
+
+* **errors:** refactor errors ([84ff82f](https://github.com/tillhub/tillhub-sdk-javascript/commit/84ff82f))
+
 # [3.185.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.184.0...v3.185.0) (2020-04-07)
 
 

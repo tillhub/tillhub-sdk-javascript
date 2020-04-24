@@ -90,6 +90,7 @@ var CashBookReportFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CashBookReportFetchFailed';
+        Object.setPrototypeOf(_this, CashBookReportFetchFailed.prototype);
         return _this;
     }
     return CashBookReportFetchFailed;

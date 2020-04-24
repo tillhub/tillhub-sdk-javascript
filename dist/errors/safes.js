@@ -21,6 +21,7 @@ var SafesFetchAllFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'SafesFetchAllFailed';
+        Object.setPrototypeOf(_this, SafesFetchAllFailed.prototype);
         return _this;
     }
     return SafesFetchAllFailed;
@@ -33,6 +34,7 @@ var SafesFetchOneFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'SafesFetchOneFailed';
+        Object.setPrototypeOf(_this, SafesFetchOneFailed.prototype);
         return _this;
     }
     return SafesFetchOneFailed;
@@ -45,6 +47,7 @@ var SafesGetMetaFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'SafesGetMetaFailed';
+        Object.setPrototypeOf(_this, SafesGetMetaFailed.prototype);
         return _this;
     }
     return SafesGetMetaFailed;
@@ -57,6 +60,7 @@ var SafesCreationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'SafesCreationFailed';
+        Object.setPrototypeOf(_this, SafesCreationFailed.prototype);
         return _this;
     }
     return SafesCreationFailed;
@@ -69,6 +73,7 @@ var SafesPutFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'SafesPutFailed';
+        Object.setPrototypeOf(_this, SafesPutFailed.prototype);
         return _this;
     }
     return SafesPutFailed;
@@ -81,6 +86,7 @@ var SafesBookFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'SafesBookFailed';
+        Object.setPrototypeOf(_this, SafesBookFailed.prototype);
         return _this;
     }
     return SafesBookFailed;
@@ -93,6 +99,7 @@ var SafesLogBookFetchAllFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'SafesLogBookFetchAllFailed';
+        Object.setPrototypeOf(_this, SafesLogBookFetchAllFailed.prototype);
         return _this;
     }
     return SafesLogBookFetchAllFailed;
@@ -105,6 +112,7 @@ var SafesLogBookGetMetaFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'SafesLogBookGetMetaFailed';
+        Object.setPrototypeOf(_this, SafesLogBookGetMetaFailed.prototype);
         return _this;
     }
     return SafesLogBookGetMetaFailed;

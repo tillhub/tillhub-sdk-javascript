@@ -231,6 +231,7 @@ var ReasonsFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ReasonsFetchFailed';
+        Object.setPrototypeOf(_this, ReasonsFetchFailed.prototype);
         return _this;
     }
     return ReasonsFetchFailed;
@@ -243,6 +244,7 @@ var ReasonsFetchOneFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ReasonsFetchOneFailed';
+        Object.setPrototypeOf(_this, ReasonsFetchOneFailed.prototype);
         return _this;
     }
     return ReasonsFetchOneFailed;
@@ -255,6 +257,7 @@ var ReasonsPutFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ReasonsPutFailed';
+        Object.setPrototypeOf(_this, ReasonsPutFailed.prototype);
         return _this;
     }
     return ReasonsPutFailed;
@@ -267,6 +270,7 @@ var ReasonsCreationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ReasonsCreationFailed';
+        Object.setPrototypeOf(_this, ReasonsCreationFailed.prototype);
         return _this;
     }
     return ReasonsCreationFailed;
@@ -279,6 +283,7 @@ var ReasonsDeleteFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ReasonsDeleteFailed';
+        Object.setPrototypeOf(_this, ReasonsDeleteFailed.prototype);
         return _this;
     }
     return ReasonsDeleteFailed;

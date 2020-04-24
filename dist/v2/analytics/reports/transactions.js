@@ -173,6 +173,7 @@ var AnalyticsReportsTransactionsOverviewFetchError = /** @class */ (function (_s
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'AnalyticsReportsTransactionsOverviewFetchError';
+        Object.setPrototypeOf(_this, AnalyticsReportsTransactionsOverviewFetchError.prototype);
         return _this;
     }
     return AnalyticsReportsTransactionsOverviewFetchError;
@@ -185,6 +186,7 @@ var AnalyticsReportsTransactionDetailFetcshError = /** @class */ (function (_sup
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'AnalyticsReportsTransactionDetailFetcshError';
+        Object.setPrototypeOf(_this, AnalyticsReportsTransactionDetailFetcshError.prototype);
         return _this;
     }
     return AnalyticsReportsTransactionDetailFetcshError;
@@ -197,6 +199,7 @@ var AnalyticsReportsTransactionsOverviewExportFetchError = /** @class */ (functi
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'AnalyticsReportsTransactionsOverviewExportFetchError';
+        Object.setPrototypeOf(_this, AnalyticsReportsTransactionsOverviewExportFetchError.prototype);
         return _this;
     }
     return AnalyticsReportsTransactionsOverviewExportFetchError;

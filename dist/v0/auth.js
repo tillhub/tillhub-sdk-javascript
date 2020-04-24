@@ -280,6 +280,7 @@ var LogoutMissingToken = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'LogoutMissingToken';
+        Object.setPrototypeOf(_this, LogoutMissingToken.prototype);
         return _this;
     }
     return LogoutMissingToken;
@@ -292,6 +293,7 @@ var LogoutFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'LogoutFailed';
+        Object.setPrototypeOf(_this, LogoutFailed.prototype);
         return _this;
     }
     return LogoutFailed;

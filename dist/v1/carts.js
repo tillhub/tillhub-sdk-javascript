@@ -300,6 +300,7 @@ var CartFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CartFetchFailed';
+        Object.setPrototypeOf(_this, CartFetchFailed.prototype);
         return _this;
     }
     return CartFetchFailed;
@@ -312,6 +313,7 @@ var CartsSearchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CartsSearchFailed';
+        Object.setPrototypeOf(_this, CartsSearchFailed.prototype);
         return _this;
     }
     return CartsSearchFailed;
@@ -324,6 +326,7 @@ var CartsDeleteFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CartsDeleteFailed';
+        Object.setPrototypeOf(_this, CartsDeleteFailed.prototype);
         return _this;
     }
     return CartsDeleteFailed;
@@ -336,6 +339,7 @@ var CartsUpdateFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CartsUpdateFailed';
+        Object.setPrototypeOf(_this, CartsUpdateFailed.prototype);
         return _this;
     }
     return CartsUpdateFailed;
@@ -348,6 +352,7 @@ var CartsMetaFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CartsMetaFailed';
+        Object.setPrototypeOf(_this, CartsMetaFailed.prototype);
         return _this;
     }
     return CartsMetaFailed;
@@ -360,6 +365,7 @@ var CartsFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CartsFetchFailed';
+        Object.setPrototypeOf(_this, CartsFetchFailed.prototype);
         return _this;
     }
     return CartsFetchFailed;
@@ -372,6 +378,7 @@ var CartsCreateFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CartsCreateFailed';
+        Object.setPrototypeOf(_this, CartsCreateFailed.prototype);
         return _this;
     }
     return CartsCreateFailed;

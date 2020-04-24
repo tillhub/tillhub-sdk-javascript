@@ -103,6 +103,7 @@ var VouchersFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'VouchersFetchFailed';
+        Object.setPrototypeOf(_this, VouchersFetchFailed.prototype);
         return _this;
     }
     return VouchersFetchFailed;

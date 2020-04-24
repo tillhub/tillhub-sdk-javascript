@@ -228,6 +228,7 @@ var PricebooksFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'PricebooksFetchFailed';
+        Object.setPrototypeOf(_this, PricebooksFetchFailed.prototype);
         return _this;
     }
     return PricebooksFetchFailed;
@@ -240,6 +241,7 @@ var PricebooksMetaFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'PricebooksMetaFailed';
+        Object.setPrototypeOf(_this, PricebooksMetaFailed.prototype);
         return _this;
     }
     return PricebooksMetaFailed;
@@ -251,6 +253,7 @@ var PricebookFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'PricebookFetchFailed';
+        Object.setPrototypeOf(_this, PricebookFetchFailed.prototype);
         return _this;
     }
     return PricebookFetchFailed;
@@ -263,6 +266,7 @@ var PricebookPutFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'PricebookPutFailed';
+        Object.setPrototypeOf(_this, PricebookPutFailed.prototype);
         return _this;
     }
     return PricebookPutFailed;
@@ -275,6 +279,7 @@ var PricebookCreationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'PricebookCreationFailed';
+        Object.setPrototypeOf(_this, PricebookCreationFailed.prototype);
         return _this;
     }
     return PricebookCreationFailed;
@@ -287,6 +292,7 @@ var PricebookDeleteFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'PricebookDeleteFailed';
+        Object.setPrototypeOf(_this, PricebookDeleteFailed.prototype);
         return _this;
     }
     return PricebookDeleteFailed;

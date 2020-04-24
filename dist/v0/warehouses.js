@@ -216,6 +216,7 @@ var WarehousesFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'WarehousesFetchFailed';
+        Object.setPrototypeOf(_this, WarehousesFetchFailed.prototype);
         return _this;
     }
     return WarehousesFetchFailed;
@@ -227,6 +228,7 @@ var WarehouseFetchOneFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'WarehouseFetchOneFailed';
+        Object.setPrototypeOf(_this, WarehouseFetchOneFailed.prototype);
         return _this;
     }
     return WarehouseFetchOneFailed;
@@ -238,6 +240,7 @@ var WarehouseCreateFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'WarehouseCreateFailed';
+        Object.setPrototypeOf(_this, WarehouseCreateFailed.prototype);
         return _this;
     }
     return WarehouseCreateFailed;
@@ -249,6 +252,7 @@ var WarehousePutFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'WarehousePutFailed';
+        Object.setPrototypeOf(_this, WarehousePutFailed.prototype);
         return _this;
     }
     return WarehousePutFailed;
@@ -260,6 +264,7 @@ var WarehouseDeleteFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'WarehouseDeleteFailed';
+        Object.setPrototypeOf(_this, WarehouseDeleteFailed.prototype);
         return _this;
     }
     return WarehouseDeleteFailed;

@@ -136,6 +136,7 @@ var TrashFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'TrashFetchFailed';
+        Object.setPrototypeOf(_this, TrashFetchFailed.prototype);
         return _this;
     }
     return TrashFetchFailed;
@@ -148,6 +149,7 @@ var RecoverFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'RecoverFailed';
+        Object.setPrototypeOf(_this, RecoverFailed.prototype);
         return _this;
     }
     return RecoverFailed;

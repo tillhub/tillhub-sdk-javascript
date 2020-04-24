@@ -210,6 +210,7 @@ var DeviceGroupsFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'DeviceGroupsFetchFailed';
+        Object.setPrototypeOf(_this, DeviceGroupsFetchFailed.prototype);
         return _this;
     }
     return DeviceGroupsFetchFailed;
@@ -222,6 +223,7 @@ var DeviceGroupFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'DeviceGroupFetchFailed';
+        Object.setPrototypeOf(_this, DeviceGroupFetchFailed.prototype);
         return _this;
     }
     return DeviceGroupFetchFailed;
@@ -234,6 +236,7 @@ var DeviceGroupPutFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'DeviceGroupPutFailed';
+        Object.setPrototypeOf(_this, DeviceGroupPutFailed.prototype);
         return _this;
     }
     return DeviceGroupPutFailed;
@@ -246,6 +249,7 @@ var DeviceGroupCreationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'DeviceGroupCreationFailed';
+        Object.setPrototypeOf(_this, DeviceGroupCreationFailed.prototype);
         return _this;
     }
     return DeviceGroupCreationFailed;
@@ -258,6 +262,7 @@ var DeviceGroupDeleteFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'DeviceGroupDeleteFailed';
+        Object.setPrototypeOf(_this, DeviceGroupDeleteFailed.prototype);
         return _this;
     }
     return DeviceGroupDeleteFailed;

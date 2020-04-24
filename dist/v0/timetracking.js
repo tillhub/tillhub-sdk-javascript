@@ -245,6 +245,7 @@ var TimetrackingReportFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'TimetrackingReportFetchFailed';
+        Object.setPrototypeOf(_this, TimetrackingReportFetchFailed.prototype);
         return _this;
     }
     return TimetrackingReportFetchFailed;
@@ -257,6 +258,7 @@ var TimetrackingStaffListFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'TimetrackingStaffListFetchFailed';
+        Object.setPrototypeOf(_this, TimetrackingStaffListFetchFailed.prototype);
         return _this;
     }
     return TimetrackingStaffListFetchFailed;
@@ -269,6 +271,7 @@ var TimetrackingEntriesFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'TimetrackingEntriesFetchFailed';
+        Object.setPrototypeOf(_this, TimetrackingEntriesFetchFailed.prototype);
         return _this;
     }
     return TimetrackingEntriesFetchFailed;
@@ -281,6 +284,7 @@ var TimetrackingEntryCreateFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'TimetrackingEntryCreateFailed';
+        Object.setPrototypeOf(_this, TimetrackingEntryCreateFailed.prototype);
         return _this;
     }
     return TimetrackingEntryCreateFailed;
@@ -293,6 +297,7 @@ var TimetrackingEntryPutFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'TimetrackingEntryPutFailed';
+        Object.setPrototypeOf(_this, TimetrackingEntryPutFailed.prototype);
         return _this;
     }
     return TimetrackingEntryPutFailed;
@@ -305,6 +310,7 @@ var TimetrackingEntryDeleteFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'TimetrackingEntryDeleteFailed';
+        Object.setPrototypeOf(_this, TimetrackingEntryDeleteFailed.prototype);
         return _this;
     }
     return TimetrackingEntryDeleteFailed;

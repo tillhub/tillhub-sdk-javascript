@@ -342,6 +342,7 @@ var BranchesFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'BranchesFetchFailed';
+        Object.setPrototypeOf(_this, BranchesFetchFailed.prototype);
         return _this;
     }
     return BranchesFetchFailed;
@@ -354,6 +355,7 @@ var BranchFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'BrancheFetchFailed';
+        Object.setPrototypeOf(_this, BranchFetchFailed.prototype);
         return _this;
     }
     return BranchFetchFailed;
@@ -366,6 +368,7 @@ var BranchPutFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'BranchPutFailed';
+        Object.setPrototypeOf(_this, BranchPutFailed.prototype);
         return _this;
     }
     return BranchPutFailed;
@@ -378,6 +381,7 @@ var BranchCreationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'BranchCreationFailed';
+        Object.setPrototypeOf(_this, BranchCreationFailed.prototype);
         return _this;
     }
     return BranchCreationFailed;
@@ -390,6 +394,7 @@ var BranchesCountFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'BranchesCountFailed';
+        Object.setPrototypeOf(_this, BranchesCountFailed.prototype);
         return _this;
     }
     return BranchesCountFailed;
@@ -402,6 +407,7 @@ var BranchDeleteFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'BranchDeleteFailed';
+        Object.setPrototypeOf(_this, BranchDeleteFailed.prototype);
         return _this;
     }
     return BranchDeleteFailed;
@@ -414,6 +420,7 @@ var ExternalCustomIdGetUniqueFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ExternalCustomIdGetUniqueFailed';
+        Object.setPrototypeOf(_this, ExternalCustomIdGetUniqueFailed.prototype);
         return _this;
     }
     return ExternalCustomIdGetUniqueFailed;
@@ -426,6 +433,7 @@ var BranchesSearchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'BranchesSearchFailed';
+        Object.setPrototypeOf(_this, BranchesSearchFailed.prototype);
         return _this;
     }
     return BranchesSearchFailed;

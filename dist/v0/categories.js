@@ -213,6 +213,7 @@ var CategoriesFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CategoriesFetchFailed';
+        Object.setPrototypeOf(_this, CategoriesFetchFailed.prototype);
         return _this;
     }
     return CategoriesFetchFailed;
@@ -225,6 +226,7 @@ var CategoryFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CategoryFetchFailed';
+        Object.setPrototypeOf(_this, CategoryFetchFailed.prototype);
         return _this;
     }
     return CategoryFetchFailed;
@@ -237,6 +239,7 @@ var CategoryPutFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CategoryPutFailed';
+        Object.setPrototypeOf(_this, CategoryPutFailed.prototype);
         return _this;
     }
     return CategoryPutFailed;
@@ -249,6 +252,7 @@ var CategoryCreationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CategoryCreationFailed';
+        Object.setPrototypeOf(_this, CategoryCreationFailed.prototype);
         return _this;
     }
     return CategoryCreationFailed;
@@ -261,6 +265,7 @@ var CategoriesDeleteFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'CategoriesDeleteFailed';
+        Object.setPrototypeOf(_this, CategoriesDeleteFailed.prototype);
         return _this;
     }
     return CategoriesDeleteFailed;

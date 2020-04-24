@@ -21,6 +21,7 @@ var TagsFetchAllFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'TagsFetchAllFailed';
+        Object.setPrototypeOf(_this, TagsFetchAllFailed.prototype);
         return _this;
     }
     return TagsFetchAllFailed;
@@ -33,6 +34,7 @@ var TagsFetchOneFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'TagsFetchOneFailed';
+        Object.setPrototypeOf(_this, TagsFetchOneFailed.prototype);
         return _this;
     }
     return TagsFetchOneFailed;
@@ -45,6 +47,7 @@ var TagsGetMetaFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'TagsGetMetaFailed';
+        Object.setPrototypeOf(_this, TagsGetMetaFailed.prototype);
         return _this;
     }
     return TagsGetMetaFailed;
@@ -57,6 +60,7 @@ var TagsCreationFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'TagsCreationFailed';
+        Object.setPrototypeOf(_this, TagsCreationFailed.prototype);
         return _this;
     }
     return TagsCreationFailed;
@@ -69,6 +73,7 @@ var TagsPutFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'TagsPutFailed';
+        Object.setPrototypeOf(_this, TagsPutFailed.prototype);
         return _this;
     }
     return TagsPutFailed;

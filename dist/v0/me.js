@@ -106,6 +106,7 @@ var MeFetchFailed = /** @class */ (function (_super) {
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'MeFetchFailed';
+        Object.setPrototypeOf(_this, MeFetchFailed.prototype);
         return _this;
     }
     return MeFetchFailed;
