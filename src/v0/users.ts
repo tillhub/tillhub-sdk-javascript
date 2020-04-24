@@ -205,6 +205,7 @@ export class UsersFetchFailed extends BaseError {
   public name = 'UsersFetchFailed'
   constructor(public message: string = 'Could not fetch user', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, UsersFetchFailed.prototype)
   }
 }
 
@@ -212,6 +213,7 @@ export class UserFetchFailed extends BaseError {
   public name = 'UserFetchFailed'
   constructor(public message: string = 'Could not fetch user', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, UserFetchFailed.prototype)
   }
 }
 
@@ -219,6 +221,7 @@ export class UserPutFailed extends BaseError {
   public name = 'UserPutFailed'
   constructor(public message: string = 'Could not alter user', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, UserPutFailed.prototype)
   }
 }
 
@@ -226,6 +229,7 @@ export class UserCreationFailed extends BaseError {
   public name = 'UserCreationFailed'
   constructor(public message: string = 'Could not create user', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, UserCreationFailed.prototype)
   }
 }
 
@@ -233,6 +237,7 @@ export class UserDeleteFailed extends BaseError {
   public name = 'UserDeleteFailed'
   constructor(public message: string = 'Could not delete user', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, UserDeleteFailed.prototype)
   }
 }
 
@@ -240,5 +245,6 @@ export class UserTokenCreationFailed extends BaseError {
   public name = 'UserTokenCreationFailed'
   constructor(public message: string = 'Could not create token', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, UserTokenCreationFailed.prototype)
   }
 }

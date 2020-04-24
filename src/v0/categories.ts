@@ -162,6 +162,7 @@ export class CategoriesFetchFailed extends BaseError {
   public name = 'CategoriesFetchFailed'
   constructor(public message: string = 'Could not fetch categories', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, CategoriesFetchFailed.prototype)
   }
 }
 
@@ -169,6 +170,7 @@ export class CategoryFetchFailed extends BaseError {
   public name = 'CategoryFetchFailed'
   constructor(public message: string = 'Could not fetch category', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, CategoryFetchFailed.prototype)
   }
 }
 
@@ -176,6 +178,7 @@ export class CategoryPutFailed extends BaseError {
   public name = 'CategoryPutFailed'
   constructor(public message: string = 'Could not alter category', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, CategoryPutFailed.prototype)
   }
 }
 
@@ -183,6 +186,7 @@ export class CategoryCreationFailed extends BaseError {
   public name = 'CategoryCreationFailed'
   constructor(public message: string = 'Could not create category', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, CategoryCreationFailed.prototype)
   }
 }
 
@@ -190,5 +194,6 @@ export class CategoriesDeleteFailed extends BaseError {
   public name = 'CategoriesDeleteFailed'
   constructor(public message: string = 'Could not delete category', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, CategoriesDeleteFailed.prototype)
   }
 }

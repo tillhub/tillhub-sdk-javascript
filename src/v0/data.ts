@@ -60,6 +60,7 @@ export class DataCreateFailed extends BaseError {
   public name = 'DataCreateFailed'
   constructor(public message: string = 'Could not create data') {
     super(message)
+    Object.setPrototypeOf(this, DataCreateFailed.prototype)
   }
 }
 
@@ -67,5 +68,6 @@ export class DataReplaceFailed extends BaseError {
   public name = 'DataReplaceFailed'
   constructor(public message: string = 'Could not replace data') {
     super(message)
+    Object.setPrototypeOf(this, DataReplaceFailed.prototype)
   }
 }

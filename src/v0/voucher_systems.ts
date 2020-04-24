@@ -176,6 +176,7 @@ export class VoucherSystemsFetchFailed extends BaseError {
   public name = 'VoucherSystemsFetchFailed'
   constructor(public message: string = 'Could not fetch voucher systems', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, VoucherSystemsFetchFailed.prototype)
   }
 }
 
@@ -183,6 +184,7 @@ export class VoucherSystemFetchFailed extends BaseError {
   public name = 'VoucherSystemFetchFailed'
   constructor(public message: string = 'Could not fetch voucher system', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, VoucherSystemFetchFailed.prototype)
   }
 }
 
@@ -190,6 +192,7 @@ export class VoucherSystemPutFailed extends BaseError {
   public name = 'VoucherSystemhPutFailed'
   constructor(public message: string = 'Could not alter voucher system', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, VoucherSystemPutFailed.prototype)
   }
 }
 
@@ -197,6 +200,7 @@ export class VoucherSystemCreationFailed extends BaseError {
   public name = 'VoucherSystemCreationFailed'
   constructor(public message: string = 'Could not create voucher system', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, VoucherSystemCreationFailed.prototype)
   }
 }
 
@@ -204,5 +208,6 @@ export class VoucherSystemDeleteFailed extends BaseError {
   public name = 'VoucherSystemDeleteFailed'
   constructor(public message: string = 'Could not delete voucher system', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, VoucherSystemDeleteFailed.prototype)
   }
 }

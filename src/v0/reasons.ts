@@ -164,6 +164,7 @@ export class ReasonsFetchFailed extends BaseError {
   public name = 'ReasonsFetchFailed'
   constructor(public message: string = 'Could not fetch reasons', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ReasonsFetchFailed.prototype)
   }
 }
 
@@ -171,6 +172,7 @@ export class ReasonsFetchOneFailed extends BaseError {
   public name = 'ReasonsFetchOneFailed'
   constructor(public message: string = 'Could not fetch one reason', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ReasonsFetchOneFailed.prototype)
   }
 }
 
@@ -178,6 +180,7 @@ export class ReasonsPutFailed extends BaseError {
   public name = 'ReasonsPutFailed'
   constructor(public message: string = 'Could not update reason', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ReasonsPutFailed.prototype)
   }
 }
 
@@ -185,6 +188,7 @@ export class ReasonsCreationFailed extends BaseError {
   public name = 'ReasonsCreationFailed'
   constructor(public message: string = 'Could not create reasons', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ReasonsCreationFailed.prototype)
   }
 }
 
@@ -192,5 +196,6 @@ export class ReasonsDeleteFailed extends BaseError {
   public name = 'ReasonsDeleteFailed'
   constructor(public message: string = 'Could not delete reasons', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ReasonsDeleteFailed.prototype)
   }
 }

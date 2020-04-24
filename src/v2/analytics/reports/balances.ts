@@ -125,6 +125,7 @@ export class AnalyticsReportsBalancesOverviewFetchError extends BaseError {
   public name = 'AnalyticsReportsBalancesOverviewFetchError'
   constructor(public message: string = 'Could not fetch balance overview. ', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, AnalyticsReportsBalancesOverviewFetchError.prototype)
   }
 }
 
@@ -132,6 +133,7 @@ export class AnalyticsReportsTransactionDetailFetcshError extends BaseError {
   public name = 'AnalyticsReportsTransactionDetailFetcshError'
   constructor(public message: string = 'Could not fetch balance detail. ', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, AnalyticsReportsTransactionDetailFetcshError.prototype)
   }
 }
 
@@ -139,5 +141,6 @@ export class AnalyticsReportsBalancesOverviewExportFetchError extends BaseError 
   public name = 'AnalyticsReportsBalancesOverviewExportFetchError'
   constructor(public message: string = 'Could not fetch balance overview export. ', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, AnalyticsReportsBalancesOverviewExportFetchError.prototype)
   }
 }

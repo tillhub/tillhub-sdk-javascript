@@ -497,6 +497,7 @@ export class ProductsCreateFailed extends BaseError {
   public name = 'ProductsCreateFailed'
   constructor(public message: string = 'Could not create the product', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProductsCreateFailed.prototype)
   }
 }
 
@@ -504,18 +505,21 @@ export class ProductFetchFailed extends BaseError {
   public name = 'ProductFetchFailed'
   constructor(public message: string = 'Could not fetch the product', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProductFetchFailed.prototype)
   }
 }
 export class ProductsFetchFailed extends BaseError {
   public name = 'ProductsFetchFailed'
   constructor(public message: string = 'Could not fetch the products', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProductsFetchFailed.prototype)
   }
 }
 export class ProductsImportFailed extends BaseError {
   public name = 'ProductsImportFailed'
   constructor(public message: string = 'Could not import the products', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProductsImportFailed.prototype)
   }
 }
 
@@ -524,8 +528,9 @@ export class ProductDetailsFetchFailed extends BaseError {
   constructor(
     public message: string = 'Could not fetch the details of the product',
     properties?: any
-  ) {
+    ) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProductDetailsFetchFailed.prototype)
   }
 }
 export class ProductChildrenDetailsFetchFailed extends BaseError {
@@ -533,8 +538,9 @@ export class ProductChildrenDetailsFetchFailed extends BaseError {
   constructor(
     public message: string = 'Could not fetch the details of the children products',
     properties?: any
-  ) {
+    ) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProductChildrenDetailsFetchFailed.prototype)
   }
 }
 
@@ -542,6 +548,7 @@ export class ProductsCountFailed extends BaseError {
   public name = 'ProductsCountFailed'
   constructor(public message: string = 'Could not count the products', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProductsCountFailed.prototype)
   }
 }
 
@@ -549,6 +556,7 @@ export class ProductsMetaFailed extends BaseError {
   public name = 'ProductsMetaFailed'
   constructor(public message: string = 'Could not get products metadata', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProductsMetaFailed.prototype)
   }
 }
 
@@ -556,6 +564,7 @@ export class ProductsUpdateFailed extends BaseError {
   public name = 'ProductsUpdateFailed'
   constructor(public message: string = 'Could not update the product', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProductsUpdateFailed.prototype)
   }
 }
 
@@ -563,6 +572,7 @@ export class ProductsDeleteFailed extends BaseError {
   public name = 'ProductsDeleteFailed'
   constructor(public message: string = 'Could not delete the product', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProductsDeleteFailed.prototype)
   }
 }
 
@@ -570,6 +580,7 @@ export class ProductsSearchFailed extends BaseError {
   public name = 'ProductsSearchFailed'
   constructor(public message: string = 'Could not search for the product', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProductsSearchFailed.prototype)
   }
 }
 
@@ -577,6 +588,7 @@ export class ProductsBookStockFailed extends BaseError {
   public name = 'ProductsBookStockFailed'
   constructor(public message: string = 'Could not book stock for the product', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProductsBookStockFailed.prototype)
   }
 }
 
@@ -584,5 +596,6 @@ export class BarcodeGetFailed extends BaseError {
   public name = 'BarcodeGetFailed'
   constructor(public message: string = 'Could not check for barcode collision', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, BarcodeGetFailed.prototype)
   }
 }

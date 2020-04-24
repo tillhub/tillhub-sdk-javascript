@@ -79,5 +79,6 @@ export class MeFetchFailed extends BaseError {
     properties?: any
   ) {
     super(message, properties)
+    Object.setPrototypeOf(this, MeFetchFailed.prototype)
   }
 }

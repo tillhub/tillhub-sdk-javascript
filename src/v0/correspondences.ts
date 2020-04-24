@@ -152,6 +152,7 @@ export class CorrespondencesFetchFailed extends BaseError {
   public name = 'CorrespondencesFetchFailed'
   constructor(public message: string = 'Could not fetch Correspondences', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, CorrespondencesFetchFailed.prototype)
   }
 }
 
@@ -159,6 +160,7 @@ export class CorrespondenceFetchFailed extends BaseError {
   public name = 'CorrespondenceFetchFailed'
   constructor(public message: string = 'Could not fetch correspondence', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, CorrespondenceFetchFailed.prototype)
   }
 }
 
@@ -166,6 +168,7 @@ export class CorrespondencePutFailed extends BaseError {
   public name = 'CorrespondencePutFailed'
   constructor(public message: string = 'Could not alter correspondence', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, CorrespondencePutFailed.prototype)
   }
 }
 
@@ -173,5 +176,6 @@ export class CorrespondenceCreationFailed extends BaseError {
   public name = 'CorrespondenceCreationFailed'
   constructor(public message: string = 'Could not create correspondence', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, CorrespondenceCreationFailed.prototype)
   }
 }

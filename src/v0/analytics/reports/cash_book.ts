@@ -58,5 +58,6 @@ export class CashBookReportFetchFailed extends BaseError {
   public name = 'CashBookReportFetchFailed'
   constructor(public message: string = 'Could not fetch the cash book report', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, CashBookReportFetchFailed.prototype)
   }
 }

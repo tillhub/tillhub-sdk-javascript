@@ -196,6 +196,7 @@ export class ProcessesFetchFailed extends BaseError {
   public name = 'ProcessesFetchFailed'
   constructor(public message: string = 'Could not fetch processes', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProcessesFetchFailed.prototype)
   }
 }
 
@@ -203,6 +204,7 @@ export class ProcessesFetchOneFailed extends BaseError {
   public name = 'ProcessesFetchOneFailed'
   constructor(public message: string = 'Could not fetch one process', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProcessesFetchOneFailed.prototype)
   }
 }
 
@@ -210,6 +212,7 @@ export class ProcessesUpdateFailed extends BaseError {
   public name = 'ProcessesUpdateFailed'
   constructor(public message: string = 'Could not update process', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProcessesUpdateFailed.prototype)
   }
 }
 
@@ -217,6 +220,7 @@ export class ProcessesCreationFailed extends BaseError {
   public name = 'ProcessesCreationFailed'
   constructor(public message: string = 'Could not create process', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProcessesCreationFailed.prototype)
   }
 }
 
@@ -224,6 +228,7 @@ export class ProcessesDeleteFailed extends BaseError {
   public name = 'ProcessesDeleteFailed'
   constructor(public message: string = 'Could not delete process', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProcessesDeleteFailed.prototype)
   }
 }
 
@@ -231,5 +236,6 @@ export class ProcessItemsFetchFailed extends BaseError {
   public name = 'ProcessItemsFetchFailed'
   constructor(public message: string = 'Could not fetch one process\' items', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, ProcessItemsFetchFailed.prototype)
   }
 }

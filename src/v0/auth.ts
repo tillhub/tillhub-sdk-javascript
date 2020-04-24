@@ -257,6 +257,7 @@ export class LogoutMissingToken extends errors.BaseError {
   public name = 'LogoutMissingToken'
   constructor(public message: string = 'Could not log out due to missing token.', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, LogoutMissingToken.prototype)
   }
 }
 
@@ -264,5 +265,6 @@ export class LogoutFailed extends errors.BaseError {
   public name = 'LogoutFailed'
   constructor(public message: string = 'Could not log out.', properties?: any) {
     super(message, properties)
+    Object.setPrototypeOf(this, LogoutFailed.prototype)
   }
 }
