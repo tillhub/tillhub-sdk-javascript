@@ -58,6 +58,7 @@ export declare class Processes extends ThBaseHandler {
     update(processId: string, process: Process): Promise<ProcessResponse>;
     delete(processId: string): Promise<ProcessResponse>;
     getItems(processId: string, query?: ProcessItemsQueryOptions): Promise<ProcessesItemsResponse>;
+    meta(query?: ProcessesQueryOptions): Promise<ProcessesResponse>;
 }
 export declare class ProcessesFetchFailed extends BaseError {
     message: string;
@@ -85,6 +86,11 @@ export declare class ProcessesDeleteFailed extends BaseError {
     constructor(message?: string, properties?: any);
 }
 export declare class ProcessItemsFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ProcessesMetaFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);

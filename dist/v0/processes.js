@@ -221,6 +221,39 @@ var Processes = /** @class */ (function (_super) {
             });
         }); });
     };
+    Processes.prototype.meta = function (query) {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var base, uri, response, err_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        base = this.uriHelper.generateBaseUri('/meta');
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new ProcessesMetaFailed(undefined, { status: response.status }))];
+                        }
+                        if (!response.data.results[0]) {
+                            return [2 /*return*/, reject(new ProcessesMetaFailed(undefined, { status: response.status }))];
+                        }
+                        return [2 /*return*/, resolve({
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        err_1 = _a.sent();
+                        return [2 /*return*/, reject(new ProcessesMetaFailed(undefined, { error: err_1 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     Processes.baseEndpoint = '/api/v0/processes';
     return Processes;
 }(base_1.ThBaseHandler));
@@ -303,4 +336,17 @@ var ProcessItemsFetchFailed = /** @class */ (function (_super) {
     return ProcessItemsFetchFailed;
 }(errors_1.BaseError));
 exports.ProcessItemsFetchFailed = ProcessItemsFetchFailed;
+var ProcessesMetaFailed = /** @class */ (function (_super) {
+    __extends(ProcessesMetaFailed, _super);
+    function ProcessesMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get meta of Processes'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProcessesMetaFailed';
+        Object.setPrototypeOf(_this, ProcessesMetaFailed.prototype);
+        return _this;
+    }
+    return ProcessesMetaFailed;
+}(errors_1.BaseError));
+exports.ProcessesMetaFailed = ProcessesMetaFailed;
 //# sourceMappingURL=processes.js.map

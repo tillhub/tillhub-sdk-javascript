@@ -1,3 +1,10 @@
+# [3.187.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.186.0...v3.187.0) (2020-04-29)
+
+
+### Features
+
+* **processes:** add meta() ([eb51dfb](https://github.com/tillhub/tillhub-sdk-javascript/commit/eb51dfb))
+
 # [3.186.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.185.0...v3.186.0) (2020-04-24)
 
 
