@@ -190,6 +190,30 @@ export class Processes extends ThBaseHandler {
       }
     })
   }
+
+  meta(query?: ProcessesQueryOptions): Promise<ProcessesResponse> {
+    return new Promise(async (resolve, reject) => {
+      const base = this.uriHelper.generateBaseUri('/meta')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      try {
+        const response = await this.http.getClient().get(uri)
+        if (response.status !== 200) {
+          return reject(new ProcessesMetaFailed(undefined, { status: response.status }))
+        }
+        if (!response.data.results[0]) {
+          return reject(new ProcessesMetaFailed(undefined, { status: response.status }))
+        }
+
+        return resolve({
+          data: response.data.results[0],
+          metadata: { count: response.data.count }
+        } as ProcessesResponse)
+      } catch (err) {
+        return reject(new ProcessesMetaFailed(undefined, { error: err }))
+      }
+    })
+  }
 }
 
 export class ProcessesFetchFailed extends BaseError {
@@ -237,5 +261,13 @@ export class ProcessItemsFetchFailed extends BaseError {
   constructor(public message: string = 'Could not fetch one process\' items', properties?: any) {
     super(message, properties)
     Object.setPrototypeOf(this, ProcessItemsFetchFailed.prototype)
+  }
+}
+
+export class ProcessesMetaFailed extends BaseError {
+  public name = 'ProcessesMetaFailed'
+  constructor(public message: string = 'Could not get meta of Processes', properties?: any) {
+    super(message, properties)
+    Object.setPrototypeOf(this, ProcessesMetaFailed.prototype)
   }
 }
