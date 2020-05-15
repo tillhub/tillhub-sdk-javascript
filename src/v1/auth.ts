@@ -104,6 +104,7 @@ export class Auth extends v0.Auth {
         token: response.data.token,
         user: response.data.user.legacy_id || response.data.user.id,
         name: response.data.user.name,
+        errors: response.data.errors,
         role,
         scopes,
         subUser: subUser || null
