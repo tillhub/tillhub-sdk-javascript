@@ -1,3 +1,10 @@
+# [3.188.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.187.0...v3.188.0) (2020-05-15)
+
+
+### Features
+
+* **auth:** pass errors array in org login ([ab2fbaa](https://github.com/tillhub/tillhub-sdk-javascript/commit/ab2fbaa))
+
 # [3.187.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.186.0...v3.187.0) (2020-04-29)
 
 

@@ -151,6 +151,7 @@ var Auth = /** @class */ (function (_super) {
                                 token: response.data.token,
                                 user: response.data.user.legacy_id || response.data.user.id,
                                 name: response.data.user.name,
+                                errors: response.data.errors,
                                 role: role,
                                 scopes: scopes,
                                 subUser: subUser || null
