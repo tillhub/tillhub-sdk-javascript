@@ -1,3 +1,10 @@
+# [3.189.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.188.0...v3.189.0) (2020-05-20)
+
+
+### Features
+
+* **auth:** add features property to response from org auth ([446feb0](https://github.com/tillhub/tillhub-sdk-javascript/commit/446feb0))
+
 # [3.188.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.187.0...v3.188.0) (2020-05-15)
 
 
