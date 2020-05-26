@@ -1,3 +1,12 @@
+# [3.190.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.189.0...v3.190.0) (2020-05-26)
+
+
+### Features
+
+* **handler:** add status to analytics handler response ([c14f3bb](https://github.com/tillhub/tillhub-sdk-javascript/commit/c14f3bb))
+* **v2:** add type interface for analytics handler ([deb225f](https://github.com/tillhub/tillhub-sdk-javascript/commit/deb225f))
+* **v2/transactions-items:** add handler + test ([38e9b48](https://github.com/tillhub/tillhub-sdk-javascript/commit/38e9b48))
+
 # [3.189.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.188.0...v3.189.0) (2020-05-20)
 
 

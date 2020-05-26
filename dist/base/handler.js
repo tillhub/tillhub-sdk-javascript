@@ -95,6 +95,7 @@ var ThAnalyticsBaseHandler = /** @class */ (function () {
                     case 1:
                         response = _a.sent();
                         return [2 /*return*/, {
+                                status: response.status,
                                 next: response.data.cursor && response.data.cursor.next ? response.data.cursor.next : undefined,
                                 results: response.data.results
                             }];

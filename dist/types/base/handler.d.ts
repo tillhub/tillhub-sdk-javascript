@@ -34,6 +34,7 @@ export interface ThAnalyticsBaseResultItem {
 }
 export interface ThAnalyticsBaseResponse {
     results: ThAnalyticsBaseResultItem[];
+    status: number;
     next?: string;
 }
 export interface ThAnalyticsExportsBaseResponse {
