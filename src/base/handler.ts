@@ -67,6 +67,7 @@ export interface ThAnalyticsBaseResultItem {
 
 export interface ThAnalyticsBaseResponse {
   results: ThAnalyticsBaseResultItem[]
+  status: number
   next?: string
 }
 
@@ -121,6 +122,7 @@ export class ThAnalyticsBaseHandler {
     const response = await this.client.getClient()(opts)
 
     return {
+      status: response.status,
       next: response.data.cursor && response.data.cursor.next ? response.data.cursor.next : undefined,
       results: response.data.results
     } as ThAnalyticsBaseResponse
