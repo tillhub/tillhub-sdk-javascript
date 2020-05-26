@@ -7,7 +7,7 @@ import { AuthOptions, AuthTypes, UsernameAuth, KeyAuth, TokenAuth } from './v0/a
 import { Auth } from './v1/auth'
 import * as v0 from './v0'
 import * as v1 from './v1'
-import v2 from './v2'
+import v2, { AnalyticsHandlerTypes } from './v2'
 import { Client, ClientOptions } from './client'
 import * as errors from './errors'
 import { environment } from './environment'
@@ -444,7 +444,7 @@ export class TillhubClient extends events.EventEmitter {
    * Create an authenticated Analytics instance
    *
    */
-  analyticsHandlers(): object {
+  analyticsHandlers(): AnalyticsHandlerTypes {
     if (
       !this.options ||
       !this.options.base ||
@@ -460,6 +460,7 @@ export class TillhubClient extends events.EventEmitter {
         reports: {
           AnalyticsReportsTransactionsOverview: v2.analytics.reports.AnalyticsReportsTransactionsOverview.create({ user: this.auth.user, base: this.options.base }, this.http),
           AnalyticsReportsTransactionsDetail: v2.analytics.reports.AnalyticsReportsTransactionsDetail.create({ user: this.auth.user, base: this.options.base }, this.http),
+          AnalyticsReportsTransactionsItems: v2.analytics.reports.AnalyticsReportsTransactionsItems.create({ user: this.auth.user, base: this.options.base }, this.http),
           AnalyticsReportsBalancesOverview: v2.analytics.reports.AnalyticsReportsBalancesOverview.create({ user: this.auth.user, base: this.options.base }, this.http),
           AnalyticsReportsBalancesDetail: v2.analytics.reports.AnalyticsReportsBalancesDetail.create({ user: this.auth.user, base: this.options.base }, this.http),
           AnalyticsReportsDatev: v2.analytics.reports.AnalyticsReportsDatev.create({ user: this.auth.user, base: this.options.base }, this.http)
