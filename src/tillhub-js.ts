@@ -463,6 +463,7 @@ export class TillhubClient extends events.EventEmitter {
           AnalyticsReportsTransactionsItems: v2.analytics.reports.AnalyticsReportsTransactionsItems.create({ user: this.auth.user, base: this.options.base }, this.http),
           AnalyticsReportsBalancesOverview: v2.analytics.reports.AnalyticsReportsBalancesOverview.create({ user: this.auth.user, base: this.options.base }, this.http),
           AnalyticsReportsBalancesDetail: v2.analytics.reports.AnalyticsReportsBalancesDetail.create({ user: this.auth.user, base: this.options.base }, this.http),
+          AnalyticsReportsCountingProtocols: v2.analytics.reports.AnalyticsReportsCountingProtocols.create({ user: this.auth.user, base: this.options.base }, this.http),
           AnalyticsReportsDatev: v2.analytics.reports.AnalyticsReportsDatev.create({ user: this.auth.user, base: this.options.base }, this.http)
         }
       }

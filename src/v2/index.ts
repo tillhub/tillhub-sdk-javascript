@@ -8,6 +8,7 @@ export interface AnalyticsHandlerTypes {
       AnalyticsReportsTransactionsItems: any
       AnalyticsReportsBalancesOverview: any
       AnalyticsReportsBalancesDetail: any
+      AnalyticsReportsCountingProtocols: any
       AnalyticsReportsDatev: any
     }
   }
