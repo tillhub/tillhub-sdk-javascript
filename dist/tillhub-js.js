@@ -392,6 +392,7 @@ var TillhubClient = /** @class */ (function (_super) {
                     AnalyticsReportsTransactionsItems: v2_1.default.analytics.reports.AnalyticsReportsTransactionsItems.create({ user: this.auth.user, base: this.options.base }, this.http),
                     AnalyticsReportsBalancesOverview: v2_1.default.analytics.reports.AnalyticsReportsBalancesOverview.create({ user: this.auth.user, base: this.options.base }, this.http),
                     AnalyticsReportsBalancesDetail: v2_1.default.analytics.reports.AnalyticsReportsBalancesDetail.create({ user: this.auth.user, base: this.options.base }, this.http),
+                    AnalyticsReportsCountingProtocols: v2_1.default.analytics.reports.AnalyticsReportsCountingProtocols.create({ user: this.auth.user, base: this.options.base }, this.http),
                     AnalyticsReportsDatev: v2_1.default.analytics.reports.AnalyticsReportsDatev.create({ user: this.auth.user, base: this.options.base }, this.http)
                 }
             }

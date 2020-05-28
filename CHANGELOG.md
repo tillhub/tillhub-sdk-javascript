@@ -1,3 +1,10 @@
+# [3.191.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.190.0...v3.191.0) (2020-05-28)
+
+
+### Features
+
+* **analytics/v2:** add handler for counting protocols v2 report ([3509183](https://github.com/tillhub/tillhub-sdk-javascript/commit/3509183))
+
 # [3.190.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.189.0...v3.190.0) (2020-05-26)
 
 
