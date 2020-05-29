@@ -1,4 +1,4 @@
-import { ThAnalyticsBaseHandler } from '../../../base';
+import { ThAnalyticsBaseHandler, ThAnalyticsExportsBaseResponse } from '../../../base';
 import { Client } from '../../../client';
 import { BaseError } from '../../../errors';
 export interface CountingProtocolsHandlerOptions {
@@ -13,9 +13,15 @@ export interface CountingProtocolsQuery {
         active?: boolean;
         cashier?: string;
         branch?: string;
-        time?: string;
         amount?: string;
-        discrepancy?: boolean;
+        only_discrepancies?: boolean;
+        date_start?: string;
+        date_end?: string;
+        format?: string;
+        branch_custom_id?: string;
+        register_custom_id?: string;
+        cashier_staff?: string;
+        counting_type?: string;
     };
 }
 export interface AnalyticsReportsCountingProtocolsResponse {
@@ -60,14 +66,22 @@ export interface CountingProtocol {
     total_counted?: string;
     total_calculated?: string;
 }
+export interface AnalyticsReportsCountingProtocolsExportResponseItem extends ThAnalyticsExportsBaseResponse {
+}
 export declare class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
     http: Client;
     options: CountingProtocolsHandlerOptions;
     constructor(options: CountingProtocolsHandlerOptions, http: Client);
     static create(options: object, http: Client): AnalyticsReportsCountingProtocols;
     getAll(query?: CountingProtocolsQuery): Promise<AnalyticsReportsCountingProtocolsResponse>;
+    export(query?: object): Promise<AnalyticsReportsCountingProtocolsExportResponseItem>;
 }
 export declare class AnalyticsReportsCountingProtocolsFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class AnalyticsReportsCountingProtocolsExportFetchError extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);

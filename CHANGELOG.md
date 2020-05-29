@@ -1,3 +1,10 @@
+# [3.192.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.191.0...v3.192.0) (2020-05-29)
+
+
+### Features
+
+* **counting-protocols-v2:** add export method ([005484d](https://github.com/tillhub/tillhub-sdk-javascript/commit/005484d))
+
 # [3.191.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.190.0...v3.191.0) (2020-05-28)
 
 

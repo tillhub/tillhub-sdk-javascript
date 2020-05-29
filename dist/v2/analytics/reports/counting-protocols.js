@@ -101,6 +101,25 @@ var AnalyticsReportsCountingProtocols = /** @class */ (function (_super) {
             });
         });
     };
+    AnalyticsReportsCountingProtocols.prototype.export = function (query) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result, err_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.handleExport(this.options.base + "/api/v2/analytics/" + this.options.user + "/reports/cashier_counting_protocols/overview", query)];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                    case 2:
+                        err_2 = _a.sent();
+                        throw new AnalyticsReportsCountingProtocolsExportFetchError(undefined, { error: err_2 });
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
     return AnalyticsReportsCountingProtocols;
 }(base_1.ThAnalyticsBaseHandler));
 exports.AnalyticsReportsCountingProtocols = AnalyticsReportsCountingProtocols;
@@ -117,4 +136,17 @@ var AnalyticsReportsCountingProtocolsFetchFailed = /** @class */ (function (_sup
     return AnalyticsReportsCountingProtocolsFetchFailed;
 }(errors_1.BaseError));
 exports.AnalyticsReportsCountingProtocolsFetchFailed = AnalyticsReportsCountingProtocolsFetchFailed;
+var AnalyticsReportsCountingProtocolsExportFetchError = /** @class */ (function (_super) {
+    __extends(AnalyticsReportsCountingProtocolsExportFetchError, _super);
+    function AnalyticsReportsCountingProtocolsExportFetchError(message, properties) {
+        if (message === void 0) { message = 'Could not fetch counting protocols export. '; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'AnalyticsReportsCountingProtocolsExportFetchError';
+        Object.setPrototypeOf(_this, AnalyticsReportsCountingProtocolsExportFetchError.prototype);
+        return _this;
+    }
+    return AnalyticsReportsCountingProtocolsExportFetchError;
+}(errors_1.BaseError));
+exports.AnalyticsReportsCountingProtocolsExportFetchError = AnalyticsReportsCountingProtocolsExportFetchError;
 //# sourceMappingURL=counting-protocols.js.map
