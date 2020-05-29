@@ -1,4 +1,4 @@
-import { ThAnalyticsBaseHandler, ThAnalyticsBaseResultItem } from '../../../base'
+import { ThAnalyticsBaseHandler, ThAnalyticsBaseResultItem, ThAnalyticsExportsBaseResponse } from '../../../base'
 import { Client } from '../../../client'
 import { BaseError } from '../../../errors'
 
@@ -15,9 +15,15 @@ export interface CountingProtocolsQuery {
     active?: boolean
     cashier?: string
     branch?: string
-    time?: string
     amount?: string
-    discrepancy?: boolean
+    only_discrepancies?: boolean
+    date_start?: string
+    date_end?: string
+    format?: string
+    branch_custom_id?: string
+    register_custom_id?: string
+    cashier_staff?: string
+    counting_type?: string
   }
 }
 
@@ -64,6 +70,8 @@ export interface CountingProtocol {
   total_counted?: string
   total_calculated?: string
 }
+
+export interface AnalyticsReportsCountingProtocolsExportResponseItem extends ThAnalyticsExportsBaseResponse {}
 
 export class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
   http: Client
@@ -114,6 +122,15 @@ export class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
       throw new AnalyticsReportsCountingProtocolsFetchFailed(undefined, { error: err })
     }
   }
+
+  public async export(query?: object): Promise<AnalyticsReportsCountingProtocolsExportResponseItem> {
+    try {
+      const result = await this.handleExport(`${this.options.base}/api/v2/analytics/${this.options.user}/reports/cashier_counting_protocols/overview`, query)
+      return result
+    } catch (err) {
+      throw new AnalyticsReportsCountingProtocolsExportFetchError(undefined, { error: err })
+    }
+  }
 }
 
 export class AnalyticsReportsCountingProtocolsFetchFailed extends BaseError {
@@ -121,5 +138,13 @@ export class AnalyticsReportsCountingProtocolsFetchFailed extends BaseError {
   constructor(public message: string = 'Could not fetch the counting protocols report', properties?: any) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsReportsCountingProtocolsFetchFailed.prototype)
+  }
+}
+
+export class AnalyticsReportsCountingProtocolsExportFetchError extends BaseError {
+  public name = 'AnalyticsReportsCountingProtocolsExportFetchError'
+  constructor(public message: string = 'Could not fetch counting protocols export. ', properties?: any) {
+    super(message, properties)
+    Object.setPrototypeOf(this, AnalyticsReportsCountingProtocolsExportFetchError.prototype)
   }
 }
