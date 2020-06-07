@@ -1,10 +1,12 @@
 import { AnalyticsReportsTransactionsOverview, AnalyticsReportsTransactionsDetail } from './transactions';
+import { AnalyticsReportsRevenuesGrouped } from './revenues';
 import { AnalyticsReportsTransactionsItems } from './transactions-items';
 import { AnalyticsReportsBalancesOverview, AnalyticsReportsBalancesDetail } from './balances';
 import { AnalyticsReportsCountingProtocols } from './counting-protocols';
 import { AnalyticsReportsDatev } from './datev';
 declare const _default: {
     AnalyticsReportsTransactionsOverview: typeof AnalyticsReportsTransactionsOverview;
+    AnalyticsReportsRevenuesGrouped: typeof AnalyticsReportsRevenuesGrouped;
     AnalyticsReportsTransactionsDetail: typeof AnalyticsReportsTransactionsDetail;
     AnalyticsReportsBalancesOverview: typeof AnalyticsReportsBalancesOverview;
     AnalyticsReportsBalancesDetail: typeof AnalyticsReportsBalancesDetail;

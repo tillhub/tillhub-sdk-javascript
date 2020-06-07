@@ -1,3 +1,10 @@
+# [3.193.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.192.0...v3.193.0) (2020-06-07)
+
+
+### Features
+
+* **reports:** add revenue grouped ([920e744](https://github.com/tillhub/tillhub-sdk-javascript/commit/920e744))
+
 # [3.192.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.191.0...v3.192.0) (2020-05-29)
 
 

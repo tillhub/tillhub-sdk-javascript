@@ -1,12 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var transactions_1 = require("./transactions");
+var revenues_1 = require("./revenues");
 var transactions_items_1 = require("./transactions-items");
 var balances_1 = require("./balances");
 var counting_protocols_1 = require("./counting-protocols");
 var datev_1 = require("./datev");
 exports.default = {
     AnalyticsReportsTransactionsOverview: transactions_1.AnalyticsReportsTransactionsOverview,
+    AnalyticsReportsRevenuesGrouped: revenues_1.AnalyticsReportsRevenuesGrouped,
     AnalyticsReportsTransactionsDetail: transactions_1.AnalyticsReportsTransactionsDetail,
     AnalyticsReportsBalancesOverview: balances_1.AnalyticsReportsBalancesOverview,
     AnalyticsReportsBalancesDetail: balances_1.AnalyticsReportsBalancesDetail,
