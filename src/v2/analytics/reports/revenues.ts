@@ -44,7 +44,7 @@ export class AnalyticsReportsRevenuesGrouped extends ThAnalyticsBaseHandler {
       }
 
       // @ts-ignore
-      const data = d.find((item: ThAnalyticsBaseResultItem) => (item.metric.job === 'reports_revenues_items_v2_data')).values
+      const data = (d.find((item: ThAnalyticsBaseResultItem) => (item.metric.job === 'reports_revenues_items_v2_data')) || {}).values
       // @ts-ignore
       const summary = d.find((item: ThAnalyticsBaseResultItem) => (item.metric.job === 'reports_revenues_items_v2_summary')).values
 
