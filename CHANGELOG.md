@@ -1,3 +1,10 @@
+# [3.194.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.193.0...v3.194.0) (2020-06-08)
+
+
+### Features
+
+* **revenues:** allow sending only summary ([8e89304](https://github.com/tillhub/tillhub-sdk-javascript/commit/8e89304))
+
 # [3.193.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.192.0...v3.193.0) (2020-06-07)
 
 

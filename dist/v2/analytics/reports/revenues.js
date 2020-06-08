@@ -76,7 +76,7 @@ var AnalyticsReportsRevenuesGrouped = /** @class */ (function (_super) {
                         if (!d) {
                             throw new TypeError('Unexpectedly did not return data.');
                         }
-                        data = d.find(function (item) { return (item.metric.job === 'reports_revenues_items_v2_data'); }).values;
+                        data = (d.find(function (item) { return (item.metric.job === 'reports_revenues_items_v2_data'); }) || {}).values;
                         summary = d.find(function (item) { return (item.metric.job === 'reports_revenues_items_v2_summary'); }).values;
                         if (next_1) {
                             nextFn = function () { return _this.getAll({ uri: next_1 }); };
