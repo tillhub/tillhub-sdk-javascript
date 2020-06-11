@@ -369,6 +369,26 @@ export class Products extends ThBaseHandler {
     })
   }
 
+  bulkEdit(products: Product[]): Promise<ProductsResponse> {
+    return new Promise(async (resolve, reject) => {
+      const uri = this.uriHelper.generateBaseUri('/bulk')
+
+      try {
+        const response = await this.http.getClient().put(uri, products)
+        if (response.status !== 200) {
+          return reject(new ProductsBulkEditFailed(undefined, { status: response.status }))
+        }
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as ProductsResponse)
+      } catch (error) {
+        return reject(new ProductsBulkEditFailed(undefined, { error }))
+      }
+    })
+  }
+
   count(): Promise<ProductsResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri('/meta')
@@ -565,6 +585,14 @@ export class ProductsUpdateFailed extends BaseError {
   constructor(public message: string = 'Could not update the product', properties?: any) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsUpdateFailed.prototype)
+  }
+}
+
+export class ProductsBulkEditFailed extends BaseError {
+  public name = 'ProductsBulkEditFailed'
+  constructor(public message: string = 'Could not bulk edit the products', properties?: any) {
+    super(message, properties)
+    Object.setPrototypeOf(this, ProductsBulkEditFailed.prototype)
   }
 }
 
