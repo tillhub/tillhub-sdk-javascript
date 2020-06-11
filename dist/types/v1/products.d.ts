@@ -149,6 +149,7 @@ export declare class Products extends ThBaseHandler {
     getChildrenDetails(productId: string): Promise<ProductResponse>;
     meta(): Promise<ProductsResponse>;
     put(productId: string, product: Product): Promise<ProductResponse>;
+    bulkEdit(products: Product[]): Promise<ProductsResponse>;
     count(): Promise<ProductsResponse>;
     delete(productId: string, deleteOptions?: ProductDeleteOptions): Promise<ProductsResponse>;
     search(searchTerm: string): Promise<ProductsResponse>;
@@ -198,6 +199,11 @@ export declare class ProductsMetaFailed extends BaseError {
     constructor(message?: string, properties?: any);
 }
 export declare class ProductsUpdateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ProductsBulkEditFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);

@@ -323,10 +323,39 @@ var Products = /** @class */ (function (_super) {
             });
         }); });
     };
-    Products.prototype.count = function () {
+    Products.prototype.bulkEdit = function (products) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
             var uri, response, error_9;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri('/bulk');
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().put(uri, products)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            return [2 /*return*/, reject(new ProductsBulkEditFailed(undefined, { status: response.status }))];
+                        }
+                        return [2 /*return*/, resolve({
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            })];
+                    case 3:
+                        error_9 = _a.sent();
+                        return [2 /*return*/, reject(new ProductsBulkEditFailed(undefined, { error: error_9 }))];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
+    Products.prototype.count = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            var uri, response, error_10;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -345,8 +374,8 @@ var Products = /** @class */ (function (_super) {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        error_9 = _a.sent();
-                        return [2 /*return*/, reject(new ProductsCountFailed(undefined, { error: error_9 }))];
+                        error_10 = _a.sent();
+                        return [2 /*return*/, reject(new ProductsCountFailed(undefined, { error: error_10 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -355,7 +384,7 @@ var Products = /** @class */ (function (_super) {
     Products.prototype.delete = function (productId, deleteOptions) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, response, error_10;
+            var uri, response, error_11;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -377,8 +406,8 @@ var Products = /** @class */ (function (_super) {
                                 msg: response.data.msg
                             })];
                     case 2:
-                        error_10 = _a.sent();
-                        return [2 /*return*/, reject(new ProductsDeleteFailed(undefined, { error: error_10 }))];
+                        error_11 = _a.sent();
+                        return [2 /*return*/, reject(new ProductsDeleteFailed(undefined, { error: error_11 }))];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -387,7 +416,7 @@ var Products = /** @class */ (function (_super) {
     Products.prototype.search = function (searchTerm) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var base, uri, response, error_11;
+            var base, uri, response, error_12;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -407,8 +436,8 @@ var Products = /** @class */ (function (_super) {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        error_11 = _a.sent();
-                        return [2 /*return*/, reject(new ProductsSearchFailed(undefined, { error: error_11 }))];
+                        error_12 = _a.sent();
+                        return [2 /*return*/, reject(new ProductsSearchFailed(undefined, { error: error_12 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -444,7 +473,7 @@ var Products = /** @class */ (function (_super) {
     Products.prototype.checkBarcode = function (code) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var base, uri, response, error_12;
+            var base, uri, response, error_13;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -466,15 +495,15 @@ var Products = /** @class */ (function (_super) {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        error_12 = _a.sent();
-                        if (error_12.response && error_12.response.status === 409) {
+                        error_13 = _a.sent();
+                        if (error_13.response && error_13.response.status === 409) {
                             return [2 /*return*/, reject(new BarcodeGetFailed(undefined, {
-                                    status: error_12.response.status,
-                                    name: error_12.response.data.name,
-                                    data: error_12.response.data.results
+                                    status: error_13.response.status,
+                                    name: error_13.response.data.name,
+                                    data: error_13.response.data.results
                                 }))];
                         }
-                        return [2 /*return*/, reject(new BarcodeGetFailed(undefined, { error: error_12 }))];
+                        return [2 /*return*/, reject(new BarcodeGetFailed(undefined, { error: error_13 }))];
                     case 4: return [2 /*return*/];
                 }
             });
@@ -607,6 +636,19 @@ var ProductsUpdateFailed = /** @class */ (function (_super) {
     return ProductsUpdateFailed;
 }(baseError_1.BaseError));
 exports.ProductsUpdateFailed = ProductsUpdateFailed;
+var ProductsBulkEditFailed = /** @class */ (function (_super) {
+    __extends(ProductsBulkEditFailed, _super);
+    function ProductsBulkEditFailed(message, properties) {
+        if (message === void 0) { message = 'Could not bulk edit the products'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductsBulkEditFailed';
+        Object.setPrototypeOf(_this, ProductsBulkEditFailed.prototype);
+        return _this;
+    }
+    return ProductsBulkEditFailed;
+}(baseError_1.BaseError));
+exports.ProductsBulkEditFailed = ProductsBulkEditFailed;
 var ProductsDeleteFailed = /** @class */ (function (_super) {
     __extends(ProductsDeleteFailed, _super);
     function ProductsDeleteFailed(message, properties) {

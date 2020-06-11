@@ -1,3 +1,10 @@
+# [3.195.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.194.0...v3.195.0) (2020-06-11)
+
+
+### Features
+
+* **products:** add bulk edit products handler ([97f9a0f](https://github.com/tillhub/tillhub-sdk-javascript/commit/97f9a0f))
+
 # [3.194.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.193.0...v3.194.0) (2020-06-08)
 
 
