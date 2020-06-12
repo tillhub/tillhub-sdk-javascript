@@ -375,7 +375,7 @@ export class Products extends ThBaseHandler {
 
       try {
         const response = await this.http.getClient().put(uri, products)
-        if (response.status !== 200) {
+        if ([200, 202].includes(response.status) === false) {
           return reject(new ProductsBulkEditFailed(undefined, { status: response.status }))
         }
 

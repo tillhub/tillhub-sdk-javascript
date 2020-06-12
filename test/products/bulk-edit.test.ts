@@ -41,7 +41,7 @@ describe('v1: Products: can bulk edit multiple products', () => {
         .onPut(`https://api.tillhub.com/api/v1/products/${legacyId}/bulk`)
         .reply(function (config) {
           return [
-            200,
+            202,
             {
               count: 1,
               results: [{}]
