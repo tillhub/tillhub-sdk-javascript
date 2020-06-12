@@ -337,7 +337,7 @@ var Products = /** @class */ (function (_super) {
                         return [4 /*yield*/, this.http.getClient().put(uri, products)];
                     case 2:
                         response = _a.sent();
-                        if (response.status !== 200) {
+                        if ([200, 202].includes(response.status) === false) {
                             return [2 /*return*/, reject(new ProductsBulkEditFailed(undefined, { status: response.status }))];
                         }
                         return [2 /*return*/, resolve({

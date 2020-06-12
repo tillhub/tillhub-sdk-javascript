@@ -1,3 +1,10 @@
+# [3.196.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.195.0...v3.196.0) (2020-06-12)
+
+
+### Features
+
+* **products:** add 202 as valid statis response to bulk edit ([453c1bc](https://github.com/tillhub/tillhub-sdk-javascript/commit/453c1bc))
+
 # [3.195.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.194.0...v3.195.0) (2020-06-11)
 
 
