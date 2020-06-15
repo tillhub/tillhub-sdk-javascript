@@ -1,3 +1,10 @@
+## [3.197.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.197.0...v3.197.1) (2020-06-15)
+
+
+### Bug Fixes
+
+* **customers:** get the correct data on search + add tests ([dba3ca9](https://github.com/tillhub/tillhub-sdk-javascript/commit/dba3ca9))
+
 # [3.197.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.196.0...v3.197.0) (2020-06-15)
 
 
