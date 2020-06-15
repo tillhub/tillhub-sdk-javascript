@@ -51,9 +51,7 @@ describe('v0: Customers: can search for customers', () => {
             200,
             {
               count: 1,
-              results: {
-                search: [{}]
-              }
+              results: [{}]
             }
           ]
         })
