@@ -369,7 +369,7 @@ export class Customers extends ThBaseHandler {
         response.status !== 200 && reject(new CustomersSearchFailed())
 
         return resolve({
-          data: response.data.results,
+          data: response.data.results.search,
           metadata: { count: response.data.count }
         } as CustomersResponse)
       } catch (error) {
