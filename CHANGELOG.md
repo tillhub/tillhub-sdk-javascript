@@ -1,3 +1,10 @@
+## [3.197.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.197.1...v3.197.2) (2020-06-15)
+
+
+### Bug Fixes
+
+* **customers:** match search data response with convention for search ([4062e2f](https://github.com/tillhub/tillhub-sdk-javascript/commit/4062e2f))
+
 ## [3.197.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.197.0...v3.197.1) (2020-06-15)
 
 

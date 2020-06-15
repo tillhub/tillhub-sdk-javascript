@@ -357,7 +357,7 @@ var Customers = /** @class */ (function (_super) {
                         response = _a.sent();
                         response.status !== 200 && reject(new CustomersSearchFailed());
                         return [2 /*return*/, resolve({
-                                data: response.data.results.search,
+                                data: response.data.results,
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
