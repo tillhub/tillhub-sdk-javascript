@@ -1,3 +1,10 @@
+# [3.197.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.196.0...v3.197.0) (2020-06-15)
+
+
+### Features
+
+* **customers:** use v2 for search method ([35c246c](https://github.com/tillhub/tillhub-sdk-javascript/commit/35c246c))
+
 # [3.196.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.195.0...v3.196.0) (2020-06-12)
 
 

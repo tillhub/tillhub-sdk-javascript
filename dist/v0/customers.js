@@ -348,7 +348,7 @@ var Customers = /** @class */ (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/search?q=" + searchTerm;
+                        uri = this.options.base + "/api/v2/customers/" + this.options.user + "/search?q=" + searchTerm;
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
