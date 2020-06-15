@@ -363,7 +363,7 @@ export class Customers extends ThBaseHandler {
 
   search(searchTerm: string): Promise<CustomersResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/search?q=${searchTerm}`
+      const uri = `${this.options.base}/api/v2/customers/${this.options.user}/search?q=${searchTerm}`
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new CustomersSearchFailed())
