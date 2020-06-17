@@ -54,6 +54,7 @@ import { Dependencies } from './dependencies'
 import { Trash } from './trash'
 import { Timetracking } from './timetracking'
 import { CountingProtocols } from './counting-protocols'
+import { StockTakings } from './stock_takings'
 
 export {
   Auth,
@@ -114,5 +115,6 @@ export {
   Dependencies,
   Trash,
   Timetracking,
-  CountingProtocols
+  CountingProtocols,
+  StockTakings
 }

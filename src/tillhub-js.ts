@@ -844,6 +844,14 @@ export class TillhubClient extends events.EventEmitter {
   countingProtocols(): v0.CountingProtocols {
     return this.generateAuthenticatedInstance(v0.CountingProtocols)
   }
+
+  /**
+   * Create an authenticated StockTakings instance
+   *
+   */
+  stockTakings(): v0.StockTakings {
+    return this.generateAuthenticatedInstance(v0.StockTakings)
+  }
 }
 
 export class Tillhub extends TillhubClient {
