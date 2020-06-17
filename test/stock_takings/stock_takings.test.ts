@@ -28,7 +28,7 @@ if (process.env.SYSTEM_TEST) {
 
 const legacyId = '4564'
 const stockTakingId = '1337'
-const mockStockTaking = { status: 'started', result: { items: [{ code: '1337', amount: 1337 }] } } as StockTaking
+const mockStockTaking = { name: 'mock stock taking', description: 'some description' } as StockTaking
 const mockMsg = `Deleted stockTaking ${stockTakingId}`
 
 const mock = new MockAdapter(axios)
@@ -112,7 +112,7 @@ describe('v0: StockTakings', () => {
             200,
             {
               count: 1,
-              results: [{}]
+              results: [mockStockTaking]
             }
           ]
         })
@@ -140,7 +140,7 @@ describe('v0: StockTakings', () => {
 
     const { data } = await stockTakings.get(stockTakingId)
 
-    expect(Array.isArray(data)).toBe(false)
+    expect(data).toEqual(mockStockTaking)
   })
 
   it('creates one stockTaking', async () => {
