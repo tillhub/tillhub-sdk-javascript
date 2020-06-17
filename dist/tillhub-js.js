@@ -714,6 +714,13 @@ var TillhubClient = /** @class */ (function (_super) {
     TillhubClient.prototype.countingProtocols = function () {
         return this.generateAuthenticatedInstance(v0.CountingProtocols);
     };
+    /**
+     * Create an authenticated StockTakings instance
+     *
+     */
+    TillhubClient.prototype.stockTakings = function () {
+        return this.generateAuthenticatedInstance(v0.StockTakings);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));

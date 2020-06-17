@@ -1,3 +1,15 @@
+# [3.198.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.197.2...v3.198.0) (2020-06-17)
+
+
+### Bug Fixes
+
+* **stock_taking:** add format query for possible (future) csv export ([4095478](https://github.com/tillhub/tillhub-sdk-javascript/commit/4095478))
+
+
+### Features
+
+* add stock_takings ([b3566e4](https://github.com/tillhub/tillhub-sdk-javascript/commit/b3566e4))
+
 ## [3.197.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.197.1...v3.197.2) (2020-06-15)
 
 

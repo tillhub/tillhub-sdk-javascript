@@ -115,4 +115,6 @@ var timetracking_1 = require("./timetracking");
 exports.Timetracking = timetracking_1.Timetracking;
 var counting_protocols_1 = require("./counting-protocols");
 exports.CountingProtocols = counting_protocols_1.CountingProtocols;
+var stock_takings_1 = require("./stock_takings");
+exports.StockTakings = stock_takings_1.StockTakings;
 //# sourceMappingURL=index.js.map
