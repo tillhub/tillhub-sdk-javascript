@@ -17,6 +17,7 @@ export interface StockTakingsQueryOptions {
     q?: string
     cursor_field?: string
   }
+  format?: string
 }
 
 export interface StockTakingsResponse {
