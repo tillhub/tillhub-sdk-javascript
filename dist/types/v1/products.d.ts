@@ -120,6 +120,10 @@ export interface ProductsUpdateRequestObject {
     productId: string;
     body: Product;
 }
+export interface SearchQuery {
+    q: string;
+    types?: ProductTypes[];
+}
 export interface BookStockQuery {
     productId: string;
     body: BookStock;
@@ -152,7 +156,7 @@ export declare class Products extends ThBaseHandler {
     bulkEdit(products: Product[]): Promise<ProductsResponse>;
     count(): Promise<ProductsResponse>;
     delete(productId: string, deleteOptions?: ProductDeleteOptions): Promise<ProductsResponse>;
-    search(searchTerm: string): Promise<ProductsResponse>;
+    search(query: SearchQuery): Promise<ProductsResponse>;
     bookStock(requestOptions: BookStockQuery): Promise<ProductResponse>;
     checkBarcode(code: string): Promise<ProductResponse>;
     pricebooks(): Pricebooks;

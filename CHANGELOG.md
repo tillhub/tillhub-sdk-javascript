@@ -1,3 +1,15 @@
+# [3.199.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.198.0...v3.199.0) (2020-06-18)
+
+
+### Bug Fixes
+
+* **products:** fix search test + add type def to search query type ([0cc20b0](https://github.com/tillhub/tillhub-sdk-javascript/commit/0cc20b0))
+
+
+### Features
+
+* **products:** make search query an object with types property ([a81e059](https://github.com/tillhub/tillhub-sdk-javascript/commit/a81e059))
+
 # [3.198.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.197.2...v3.198.0) (2020-06-17)
 
 
