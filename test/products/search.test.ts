@@ -1,8 +1,10 @@
 import * as dotenv from 'dotenv'
+import qs from 'qs'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import { TillhubClient, v1 } from '../../src/tillhub-js'
+import { SearchQuery } from '../../src/v1/products'
 
 let user = {
   username: 'test@example.com',
@@ -19,7 +21,7 @@ if (process.env.SYSTEM_TEST) {
 }
 
 const legacyId = '4564'
-const searchTerm = 'asdf'
+const searchQuery = { q: 'asdf', types: ['variant'] } as SearchQuery
 const mock = new MockAdapter(axios)
 afterEach(() => {
   mock.reset()
@@ -42,7 +44,7 @@ describe('v1: Products: can search for products', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/search?q=${searchTerm}`)
+        .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/search?${qs.stringify(searchQuery)}`)
         .reply(function (config) {
           return [
             200,
@@ -74,7 +76,7 @@ describe('v1: Products: can search for products', () => {
 
     expect(products).toBeInstanceOf(v1.Products)
 
-    const { data } = await products.search(searchTerm)
+    const { data } = await products.search(searchQuery)
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -95,7 +97,7 @@ describe('v1: Products: can search for products', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/search?q=${searchTerm}`)
+        .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/search?${qs.stringify(searchQuery)}`)
         .reply(function (config) {
           return [205]
         })
@@ -118,7 +120,7 @@ describe('v1: Products: can search for products', () => {
     })
 
     try {
-      await th.products().search(searchTerm)
+      await th.products().search(searchQuery)
     } catch (err) {
       expect(err.name).toBe('ProductsSearchFailed')
     }

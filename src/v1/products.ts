@@ -143,7 +143,7 @@ export interface ProductsUpdateRequestObject {
 
 export interface SearchQuery {
   q: string
-  types?: string[]
+  types?: ProductTypes[]
 }
 
 export interface BookStockQuery {
@@ -553,7 +553,7 @@ export class ProductDetailsFetchFailed extends BaseError {
   constructor(
     public message: string = 'Could not fetch the details of the product',
     properties?: any
-    ) {
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductDetailsFetchFailed.prototype)
   }
@@ -563,7 +563,7 @@ export class ProductChildrenDetailsFetchFailed extends BaseError {
   constructor(
     public message: string = 'Could not fetch the details of the children products',
     properties?: any
-    ) {
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductChildrenDetailsFetchFailed.prototype)
   }
