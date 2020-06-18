@@ -141,6 +141,11 @@ export interface ProductsUpdateRequestObject {
   body: Product
 }
 
+export interface SearchQuery {
+  q: string
+  types?: string[]
+}
+
 export interface BookStockQuery {
   productId: string
   body: BookStock
@@ -433,10 +438,10 @@ export class Products extends ThBaseHandler {
     })
   }
 
-  search(searchTerm: string): Promise<ProductsResponse> {
+  search(query: SearchQuery): Promise<ProductsResponse> {
     return new Promise(async (resolve, reject) => {
       const base = this.uriHelper.generateBaseUri('/search')
-      const uri = this.uriHelper.generateUriWithQuery(base, { q: searchTerm })
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
       try {
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
