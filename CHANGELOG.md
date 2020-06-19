@@ -1,3 +1,10 @@
+## [3.199.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.199.0...v3.199.1) (2020-06-19)
+
+
+### Bug Fixes
+
+* **products:** search products takes either object or string ([2063f5c](https://github.com/tillhub/tillhub-sdk-javascript/commit/2063f5c))
+
 # [3.199.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.198.0...v3.199.0) (2020-06-18)
 
 

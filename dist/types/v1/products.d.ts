@@ -156,7 +156,7 @@ export declare class Products extends ThBaseHandler {
     bulkEdit(products: Product[]): Promise<ProductsResponse>;
     count(): Promise<ProductsResponse>;
     delete(productId: string, deleteOptions?: ProductDeleteOptions): Promise<ProductsResponse>;
-    search(query: SearchQuery): Promise<ProductsResponse>;
+    search(query: SearchQuery | string): Promise<ProductsResponse>;
     bookStock(requestOptions: BookStockQuery): Promise<ProductResponse>;
     checkBarcode(code: string): Promise<ProductResponse>;
     pricebooks(): Pricebooks;
