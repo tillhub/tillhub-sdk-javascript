@@ -438,10 +438,12 @@ export class Products extends ThBaseHandler {
     })
   }
 
-  search(query: SearchQuery): Promise<ProductsResponse> {
+  search(query: SearchQuery | string): Promise<ProductsResponse> {
+    const _query: SearchQuery = typeof query === 'string' ? { q: query } : query
+
     return new Promise(async (resolve, reject) => {
       const base = this.uriHelper.generateBaseUri('/search')
-      const uri = this.uriHelper.generateUriWithQuery(base, query)
+      const uri = this.uriHelper.generateUriWithQuery(base, _query)
       try {
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {

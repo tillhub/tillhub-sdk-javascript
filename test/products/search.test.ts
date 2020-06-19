@@ -21,14 +21,15 @@ if (process.env.SYSTEM_TEST) {
 }
 
 const legacyId = '4564'
-const searchQuery = { q: 'asdf', types: ['variant'] } as SearchQuery
+const searchTerm = 'asdf'
+const searchQuery = { q: searchTerm, types: ['variant'] } as SearchQuery
 const mock = new MockAdapter(axios)
 afterEach(() => {
   mock.reset()
 })
 
 describe('v1: Products: can search for products', () => {
-  it("Tillhub's Products are instantiable", async () => {
+  it('search by a search query object', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [
@@ -77,6 +78,58 @@ describe('v1: Products: can search for products', () => {
     expect(products).toBeInstanceOf(v1.Products)
 
     const { data } = await products.search(searchQuery)
+
+    expect(Array.isArray(data)).toBe(true)
+  })
+  it('search by a search query string', async () => {
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+
+      mock
+        .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/search?q=${searchTerm}`)
+        .reply(function (config) {
+          return [
+            200,
+            {
+              count: 1,
+              results: [{}]
+            }
+          ]
+        })
+    }
+
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE
+    }
+
+    const th = new TillhubClient()
+
+    th.init(options)
+    await th.auth.loginUsername({
+      username: user.username,
+      password: user.password
+    })
+
+    const products = th.products()
+
+    expect(products).toBeInstanceOf(v1.Products)
+
+    const { data } = await products.search(searchTerm)
 
     expect(Array.isArray(data)).toBe(true)
   })
