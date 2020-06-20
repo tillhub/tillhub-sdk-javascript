@@ -19,8 +19,8 @@ export interface VoucherSystemsQuery {
 }
 
 export interface VoucherSystemsResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   next?: () => Promise<VoucherSystemsResponse>
 }
 
@@ -42,10 +42,10 @@ export interface VoucherSystem {
   country?: string
   region?: string
   branches?: string[]
-  hooks?: object
+  hooks?: Record<string, unknown>
   active?: boolean
-  deleted?: boolean,
-  increments?: object[]
+  deleted?: boolean
+  increments?: Record<string, unknown>[]
 }
 
 export class VoucherSystems extends ThBaseHandler {
@@ -56,7 +56,10 @@ export class VoucherSystems extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: VoucherSystemsOptions, http: Client) {
-    super(http, { endpoint: VoucherSystems.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: VoucherSystems.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -81,7 +84,7 @@ export class VoucherSystems extends ThBaseHandler {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             queryString ? `?${queryString}` : ''
-            }`
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -90,7 +93,8 @@ export class VoucherSystems extends ThBaseHandler {
         }
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<VoucherSystemsResponse> => this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<VoucherSystemsResponse> =>
+            this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({

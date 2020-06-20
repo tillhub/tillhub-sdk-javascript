@@ -20,7 +20,7 @@ export interface PricebookEntriesQuery {
 
 export interface PricebookEntriesResponse {
   data: PricebookEntry[]
-  metadata: object
+  metadata: Record<string, unknown>
   next?: () => Promise<PricebookEntriesResponse>
 }
 
@@ -41,13 +41,13 @@ export interface PricebookEntry {
   locations?: string[]
   clients?: string[]
   external_reference_id?: string
-  constraints?: object
+  constraints?: Record<string, unknown>
   value_type?: string
   amount_net?: number
   amount_gross?: number
   rate?: number
   discounted_by?: number
-  metadata?: object
+  metadata?: Record<string, unknown>
   active?: boolean
   deleted?: boolean
   updated_at?: string
@@ -76,7 +76,8 @@ export class PricebookEntries {
         const response = await this.http.getClient().get(uri)
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<PricebookEntriesResponse> => this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<PricebookEntriesResponse> =>
+            this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({
@@ -186,7 +187,10 @@ export class PricebookEntriesFetchFailed extends BaseError {
 
 class PricebookEntriesMetaFailed extends BaseError {
   public name = 'PricebookEntriesMetaFailed'
-  constructor(public message: string = 'Could not fetch pricebook entries meta call', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch pricebook entries meta call',
+    properties?: any
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PricebookEntriesMetaFailed.prototype)
   }

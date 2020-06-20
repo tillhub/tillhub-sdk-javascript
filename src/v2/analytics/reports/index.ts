@@ -1,4 +1,7 @@
-import { AnalyticsReportsTransactionsOverview, AnalyticsReportsTransactionsDetail } from './transactions'
+import {
+  AnalyticsReportsTransactionsOverview,
+  AnalyticsReportsTransactionsDetail
+} from './transactions'
 import { AnalyticsReportsRevenuesGrouped } from './revenues'
 import { AnalyticsReportsTransactionsItems } from './transactions-items'
 import { AnalyticsReportsBalancesOverview, AnalyticsReportsBalancesDetail } from './balances'

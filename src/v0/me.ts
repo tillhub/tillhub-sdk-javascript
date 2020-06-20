@@ -28,7 +28,7 @@ export interface Me {
 export interface ErrorObject {
   id: string
   label: string
-  errorDetails?: object
+  errorDetails?: Record<string, unknown>
 }
 
 export class Me extends ThBaseHandler {
@@ -56,8 +56,7 @@ export class Me extends ThBaseHandler {
       const uri = `${this.options.base}${this.endpoint}`
       try {
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new MeFetchFailed(undefined, { status: response.status }))
+        response.status !== 200 && reject(new MeFetchFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results[0] as Me,
@@ -74,10 +73,7 @@ export class Me extends ThBaseHandler {
 
 export class MeFetchFailed extends BaseError {
   public name = 'MeFetchFailed'
-  constructor(
-    public message: string = 'Could not fetch me data',
-    properties?: any
-  ) {
+  constructor(public message: string = 'Could not fetch me data', properties?: any) {
     super(message, properties)
     Object.setPrototypeOf(this, MeFetchFailed.prototype)
   }

@@ -17,7 +17,7 @@ export interface MessagesQueryOptions {
 
 export interface MessagesResponse {
   data: Message[]
-  metadata: object
+  metadata: Record<string, unknown>
 }
 
 export interface Message {
@@ -26,14 +26,14 @@ export interface Message {
   channel?: string
   level?: string
   type?: string
-  payload?: object
-  metadata?: object
+  payload?: Record<string, unknown>
+  metadata?: Record<string, unknown>
   ignorable?: boolean
   ignored?: boolean
   read?: boolean
   read_at?: string
   deleted?: boolean
-  progress?: object
+  progress?: Record<string, unknown>
   client_account?: string
 }
 
@@ -45,7 +45,10 @@ export class Messages extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: MessagesOptions, http: Client) {
-    super(http, { endpoint: Messages.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Messages.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 

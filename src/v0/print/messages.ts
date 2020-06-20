@@ -8,23 +8,23 @@ export interface PrintMessage {
   printer?: string
   message?: {
     type: string
-    body?: string | object
+    body?: string | Record<string, unknown>
   }
   response?: {
     status: number
-    msg?: string | object
+    msg?: string | Record<string, unknown>
   }
 }
 
 export interface PrintMessagesResponse {
   data: PrintMessage[]
-  metadata: object
+  metadata: Record<string, unknown>
   msg?: string
 }
 
 export interface PrintMessageResponse {
   data: PrintMessage
-  metadata: object
+  metadata: Record<string, unknown>
   msg?: string
 }
 

@@ -7,7 +7,7 @@ export interface ImagesOptions {
 }
 
 export interface ImagesResponse {
-  data: object
+  data: Record<string, unknown>
 }
 
 export interface ImagesQuery {
@@ -30,9 +30,7 @@ export class Images {
 
   put(query: ImagesQuery, payload: FormData): Promise<ImagesResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${query.subsystem}/${
-        query.prefix
-      }`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${query.subsystem}/${query.prefix}`
       try {
         const response = await this.http
           .getClient()
@@ -48,9 +46,7 @@ export class Images {
 
   create(query: ImagesQuery, payload: FormData): Promise<ImagesResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${query.subsystem}/${
-        query.prefix
-      }`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${query.subsystem}/${query.prefix}`
       try {
         const response = await this.http
           .getClient()

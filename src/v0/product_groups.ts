@@ -22,7 +22,7 @@ export interface ProductGroupsQuery {
 
 export interface ProductGroupsResponse {
   data: ProductGroup[]
-  metadata: object
+  metadata: Record<string, unknown>
 }
 
 export interface ProductGroupResponse {
@@ -43,7 +43,7 @@ export interface ProductGroup {
   tax: string
   active?: boolean
   account: string
-  images: object
+  images: Record<string, unknown>
   color?: string
 }
 
@@ -54,7 +54,10 @@ export class ProductGroups extends ThBaseHandler {
   public options: ProductGroupsOptions
 
   constructor(options: ProductGroupsOptions, http: Client) {
-    super(http, { endpoint: ProductGroups.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: ProductGroups.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -76,7 +79,9 @@ export class ProductGroups extends ThBaseHandler {
             queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
           }
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${queryString ? `?${queryString}` : ''}`
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
+            queryString ? `?${queryString}` : ''
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -95,7 +100,10 @@ export class ProductGroups extends ThBaseHandler {
     })
   }
 
-  get(productGroupId: string, queryOrOptions?: ProductGroupsQuery | undefined): Promise<ProductGroupResponse> {
+  get(
+    productGroupId: string,
+    queryOrOptions?: ProductGroupsQuery | undefined
+  ): Promise<ProductGroupResponse> {
     return new Promise(async (resolve, reject) => {
       let uri
       if (queryOrOptions && queryOrOptions.uri) {
@@ -106,7 +114,9 @@ export class ProductGroups extends ThBaseHandler {
           queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
         }
 
-        uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productGroupId}${queryString ? `?${queryString}` : ''}`
+        uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productGroupId}${
+          queryString ? `?${queryString}` : ''
+        }`
       }
 
       try {
@@ -179,7 +189,9 @@ export class ProductGroups extends ThBaseHandler {
       try {
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(new errors.ProductGroupsSearchFailed(undefined, { status: response.status }))
+          return reject(
+            new errors.ProductGroupsSearchFailed(undefined, { status: response.status })
+          )
         }
 
         return resolve({

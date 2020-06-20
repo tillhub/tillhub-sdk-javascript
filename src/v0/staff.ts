@@ -29,7 +29,7 @@ export interface StaffQueryOrOptions {
 
 export interface StaffResponse {
   data: StaffMember[]
-  metadata: object
+  metadata: Record<string, unknown>
   errors?: ErrorObject[]
 }
 
@@ -89,7 +89,7 @@ export interface HandleStaffQuery extends HandlerQuery {
 export interface ErrorObject {
   id: string
   label: string
-  errorDetails: object
+  errorDetails: Record<string, unknown>
 }
 
 export interface StaffMember {
@@ -100,10 +100,10 @@ export interface StaffMember {
   email?: string
   addresses?: StaffAddress
   pin?: number
-  metadata?: object
+  metadata?: Record<string, unknown>
   scopes?: string[]
   staff_number?: number
-  discounts?: object
+  discounts?: Record<string, unknown>
   date_of_birth?: string | null
   short_code?: number
   locations?: string[]
@@ -115,7 +115,7 @@ export interface StaffItem {
   firstname?: string
   lastname?: string
   email?: string
-  phone?: object
+  phone?: Record<string, unknown>
 }
 
 export interface MakeUserRequest {
@@ -160,7 +160,7 @@ export class Staff extends ThBaseHandler {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             queryString ? `?${queryString}` : ''
-            }`
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -313,9 +313,7 @@ export class Staff extends ThBaseHandler {
     const queryString = qs.stringify(providedStaffNumber, { addQueryPrefix: true })
 
     return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${
-        this.options.user
-        }/staff_number${queryString}`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/staff_number${queryString}`
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
@@ -356,29 +354,22 @@ export class Staff extends ThBaseHandler {
         }
 
         const resp = response.data.results || []
-        const resources = [
-          'staff_number',
-          'lastname',
-          'firstname',
-          'email',
-          'phonenumbers'
-        ]
+        const resources = ['staff_number', 'lastname', 'firstname', 'email', 'phonenumbers']
 
         const list = resp.reduce((acc: any, curr: any) => {
-          let obj: { [key: string]: string[] } = {}
+          const obj: { [key: string]: string[] } = {}
 
           resources.forEach((key: string) => {
             obj[key] = acc[key] || []
             let currValue = curr[key]
             if (key === 'phonenumbers' && currValue) {
-              currValue = (
+              currValue =
                 currValue.mobile ||
                 currValue.main ||
                 currValue.home ||
                 currValue.work ||
                 currValue.any ||
                 null
-              )
             }
             if (currValue && !obj[key].includes(currValue)) {
               obj[key].push(currValue)
@@ -444,7 +435,7 @@ export class Staff extends ThBaseHandler {
       let uri
       if (typeof query === 'string') {
         uri = this.uriHelper.generateBaseUri(`/search?q=${query}`)
-      } else if (typeOf(query) === 'object') {
+      } else if (typeOf(query) === 'Record<string, unknown>') {
         const base = this.uriHelper.generateBaseUri('/search')
         uri = this.uriHelper.generateUriWithQuery(base, query)
       } else {
@@ -453,7 +444,8 @@ export class Staff extends ThBaseHandler {
 
       try {
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new StaffSearchFailed(undefined, { status: response.status }))
+        response.status !== 200 &&
+          reject(new StaffSearchFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results,

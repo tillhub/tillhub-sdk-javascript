@@ -12,12 +12,12 @@ export interface StaffPermissionsTemplatesQueryOptions {}
 
 export interface StaffPermissionsTemplatesResponse {
   data: StaffPermissionsTemplate[]
-  metadata: object
+  metadata: Record<string, unknown>
 }
 
 export interface StaffPermissionsTemplateResponse {
   data: StaffPermissionsTemplate
-  metadata: object
+  metadata: Record<string, unknown>
   msg?: string
 }
 
@@ -48,9 +48,7 @@ export class StaffPermissionsTemplates extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  create(
-    template: StaffPermissionsTemplate
-  ): Promise<StaffPermissionsTemplateResponse> {
+  create(template: StaffPermissionsTemplate): Promise<StaffPermissionsTemplateResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri()
@@ -68,9 +66,7 @@ export class StaffPermissionsTemplates extends ThBaseHandler {
           metadata: { count: response.data.count }
         } as StaffPermissionsTemplateResponse)
       } catch (error) {
-        return reject(
-          new StaffPermissionsTemplatesCreationFailed(undefined, { error })
-        )
+        return reject(new StaffPermissionsTemplatesCreationFailed(undefined, { error }))
       }
     })
   }
@@ -96,9 +92,7 @@ export class StaffPermissionsTemplates extends ThBaseHandler {
           metadata: { count: response.data.count }
         } as StaffPermissionsTemplatesResponse)
       } catch (error) {
-        return reject(
-          new StaffPermissionsTemplatesFetchFailed(undefined, { error })
-        )
+        return reject(new StaffPermissionsTemplatesFetchFailed(undefined, { error }))
       }
     })
   }
@@ -125,9 +119,7 @@ export class StaffPermissionsTemplates extends ThBaseHandler {
           metadata: { count: 1 }
         } as StaffPermissionsTemplateResponse)
       } catch (error) {
-        return reject(
-          new StaffPermissionsTemplatesFetchOneFailed(undefined, { error })
-        )
+        return reject(new StaffPermissionsTemplatesFetchOneFailed(undefined, { error }))
       }
     })
   }
@@ -153,9 +145,7 @@ export class StaffPermissionsTemplates extends ThBaseHandler {
           metadata: { count: response.data.count }
         } as StaffPermissionsTemplateResponse)
       } catch (error) {
-        return reject(
-          new StaffPermissionsTemplatesUpdateFailed(undefined, { error })
-        )
+        return reject(new StaffPermissionsTemplatesUpdateFailed(undefined, { error }))
       }
     })
   }

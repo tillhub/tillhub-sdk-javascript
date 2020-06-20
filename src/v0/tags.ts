@@ -26,8 +26,8 @@ export interface TagResponse {
 }
 
 export interface TagsResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
 }
 
 export interface Tag {

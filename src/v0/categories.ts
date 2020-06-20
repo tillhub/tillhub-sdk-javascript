@@ -18,8 +18,8 @@ export interface CategoriesQuery {
 }
 
 export interface CategoriesResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   next?: () => Promise<CategoriesResponse>
 }
 
@@ -33,13 +33,13 @@ export interface CategoryResponse {
 }
 
 export interface Category {
-  metadata?: object
+  metadata?: Record<string, unknown>
   name?: string
   summary?: string
   description?: string
   comments?: string
   color?: string
-  images?: object
+  images?: Record<string, unknown>
   active?: boolean
   deleted?: boolean
 }
@@ -52,7 +52,10 @@ export class Categories extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: CategoriesOptions, http: Client) {
-    super(http, { endpoint: Categories.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Categories.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -66,7 +69,6 @@ export class Categories extends ThBaseHandler {
       let next
 
       try {
-
         const base = this.uriHelper.generateBaseUri()
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 

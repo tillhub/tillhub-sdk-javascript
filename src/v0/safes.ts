@@ -23,8 +23,8 @@ export interface SafeResponse {
 }
 
 export interface SafesResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
 }
 
 export interface AmountItem {
@@ -43,17 +43,17 @@ export interface Safe {
   limit_upper?: number
   limit_lower?: number
   items?: Array<AmountItem> | null
-  metadata?: object
+  metadata?: Record<string, unknown>
   deleted?: boolean
   active?: boolean
 }
 
 export interface BookRequestBody {
-  to: string,
-  from: string,
+  to: string
+  from: string
   issuer: string
-  items: Array<Object>,
-  comment?: string,
+  items: Array<Object>
+  comment?: string
   initiated_at?: string
 }
 
@@ -84,7 +84,7 @@ export interface SafesLogBookQuery {
 }
 
 export interface SafesLogBookResponse {
-  data: object[]
+  data: Record<string, unknown>[]
   next?: () => Promise<SafesLogBookResponse>
 }
 
@@ -226,7 +226,10 @@ export class SafesLogBook extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: SafesLogBookOptions, http: Client) {
-    super(http, { endpoint: SafesLogBook.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: SafesLogBook.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -246,7 +249,8 @@ export class SafesLogBook extends ThBaseHandler {
         const response = await this.http.getClient().get(uri)
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<SafesLogBookResponse> => this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<SafesLogBookResponse> =>
+            this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({

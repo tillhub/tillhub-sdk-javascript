@@ -15,7 +15,7 @@ export interface NotificationResponse {
 
 export interface Notification {
   aps?: {
-    alert: string | object
+    alert: string | Record<string, unknown>
     sound?: string
     badge?: string
   }
@@ -46,7 +46,7 @@ export interface RegisterResponse {
 
 export interface RegistersResponse {
   data: Register[]
-  metadata: object
+  metadata: Record<string, unknown>
   next?: () => Promise<RegistersResponse>
 }
 export interface Register {
@@ -67,7 +67,10 @@ export class Registers extends ThBaseHandler {
   public options: RegistersOptions
 
   constructor(options: RegistersOptions, http: Client) {
-    super(http, { endpoint: Registers.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Registers.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -135,7 +138,10 @@ export class Registers extends ThBaseHandler {
     }
   }
 
-  async updateDeviceConfiguration(registerId: string, deviceConfiguration: DeviceConfigurationObject): Promise<RegisterResponse> {
+  async updateDeviceConfiguration(
+    registerId: string,
+    deviceConfiguration: DeviceConfigurationObject
+  ): Promise<RegisterResponse> {
     try {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${registerId}/device_configuration`
 

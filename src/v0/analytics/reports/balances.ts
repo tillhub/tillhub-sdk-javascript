@@ -18,8 +18,8 @@ export interface BalancesGetOneRequestObject {
 }
 
 export interface BalancesResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
 }
 
 export interface BalancesQuery {
@@ -62,7 +62,6 @@ export class Balances {
           metadata: { count: response.data.count },
           next
         } as BalancesResponse)
-
       } catch (err) {
         return reject(new errors.ReportsBalancesFetchAllFailed())
       }
@@ -76,7 +75,10 @@ export class Balances {
         const uri = this.uriHelper.generateUriWithQuery(base, query)
         const response = await this.http.getClient().get(uri)
 
-        if (response.status !== 200) return reject(new errors.ReportsBalancesMetaFailed(undefined, { status: response.status }))
+        if (response.status !== 200)
+          return reject(
+            new errors.ReportsBalancesMetaFailed(undefined, { status: response.status })
+          )
 
         if (!response.data.results[0]) {
           return reject(
@@ -88,7 +90,6 @@ export class Balances {
           data: response.data.results[0],
           metadata: { count: response.data.count }
         } as BalancesResponse)
-
       } catch (err) {
         return reject(new errors.ReportsBalancesMetaFailed())
       }
@@ -112,7 +113,6 @@ export class Balances {
           metadata: { count: response.data.count },
           next
         } as BalancesResponse)
-
       } catch (err) {
         return reject(new errors.ReportsBalancesFetchOneFailed())
       }

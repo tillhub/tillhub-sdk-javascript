@@ -19,7 +19,7 @@ export interface PaymentOptionsQuery {
 
 export interface PaymentOptionsResponse {
   data: PaymentOption[]
-  metadata: object
+  metadata: Record<string, unknown>
 }
 
 export interface PaymentOptionResponse {
@@ -55,7 +55,10 @@ export class PaymentOptions extends ThBaseHandler {
   public options: PaymentOptionsOptions
 
   constructor(options: PaymentOptionsOptions, http: Client) {
-    super(http, { endpoint: PaymentOptions.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: PaymentOptions.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -77,12 +80,16 @@ export class PaymentOptions extends ThBaseHandler {
             queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
           }
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${queryString ? `?${queryString}` : ''}`
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
+            queryString ? `?${queryString}` : ''
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(new errors.PaymentOptionsFetchFailed(undefined, { status: response.status }))
+          return reject(
+            new errors.PaymentOptionsFetchFailed(undefined, { status: response.status })
+          )
         }
 
         return resolve({

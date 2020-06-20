@@ -31,8 +31,8 @@ export interface StocksBookQuery {
 }
 
 export interface StocksResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
 }
 
 export interface Stock {
@@ -186,7 +186,6 @@ export class Stocks extends ThBaseHandler {
 
   transfer(body: TransferRequestObject): Promise<StocksResponse> {
     return new Promise(async (resolve, reject) => {
-
       const uri = this.uriHelper.generateBaseUri('/transfer')
 
       try {
@@ -248,7 +247,7 @@ export class StocksBook {
 
   meta(): Promise<StocksResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
 
       try {
         const base = this.uriHelper.generateBaseUri(`/book/meta`)

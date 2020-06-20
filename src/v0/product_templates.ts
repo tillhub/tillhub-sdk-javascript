@@ -18,7 +18,7 @@ export interface ProductTemplatesQuery {
 
 export interface ProductTemplatesResponse {
   data: ProductTemplate[]
-  metadata: object
+  metadata: Record<string, unknown>
 }
 
 export interface ProductTemplateResponse {
@@ -36,7 +36,7 @@ export interface ProductTemplate {
 export interface ProductTemplate {
   name: string
   option_template?: {
-    [key: string]: any;
+    [key: string]: any
   }
 }
 
@@ -67,7 +67,9 @@ export class ProductTemplates {
             queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
           }
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${queryString ? `?${queryString}` : ''}`
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
+            queryString ? `?${queryString}` : ''
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -86,7 +88,10 @@ export class ProductTemplates {
     })
   }
 
-  get(productTemplateId: string, queryOrOptions?: ProductTemplatesQuery | undefined): Promise<ProductTemplateResponse> {
+  get(
+    productTemplateId: string,
+    queryOrOptions?: ProductTemplatesQuery | undefined
+  ): Promise<ProductTemplateResponse> {
     return new Promise(async (resolve, reject) => {
       let uri
       if (queryOrOptions && queryOrOptions.uri) {
@@ -97,7 +102,9 @@ export class ProductTemplates {
           queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
         }
 
-        uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productTemplateId}${queryString ? `?${queryString}` : ''}`
+        uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productTemplateId}${
+          queryString ? `?${queryString}` : ''
+        }`
       }
 
       try {
@@ -135,7 +142,10 @@ export class ProductTemplates {
     })
   }
 
-  put(productTemplateId: string, productTemplate: ProductTemplate): Promise<ProductTemplateResponse> {
+  put(
+    productTemplateId: string,
+    productTemplate: ProductTemplate
+  ): Promise<ProductTemplateResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productTemplateId}`
       try {
@@ -218,7 +228,10 @@ export class ProductTemplateCreationFailed extends BaseError {
 
 export class ProuctTemplatesCountFailed extends BaseError {
   public name = 'ProuctTemplatesCountFailed'
-  constructor(public message: string = 'Could not get count of product templates', properties?: any) {
+  constructor(
+    public message: string = 'Could not get count of product templates',
+    properties?: any
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProuctTemplatesCountFailed.prototype)
   }

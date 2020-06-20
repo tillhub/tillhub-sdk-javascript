@@ -25,8 +25,8 @@ export interface DeviceBindRequest {
 }
 
 export interface DevicesResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   next?: () => Promise<DevicesResponse>
 }
 
@@ -44,8 +44,8 @@ export interface DeviceContentResponse {
   msg?: string
 }
 export interface DeviceContent {
-  idle?: object
-  welcome?: object
+  idle?: Record<string, unknown>
+  welcome?: Record<string, unknown>
 }
 
 export interface Device {
@@ -58,10 +58,10 @@ export type DeviceTypeType = 'cfd' | 'printer'
 export interface Device {
   status?: DeviceStatusType
   register?: string
-  type: DeviceTypeType,
+  type: DeviceTypeType
   device_configuration: {
     [key: string]: any
-  } | null,
+  } | null
   client_id?: string
 }
 
@@ -98,7 +98,7 @@ export class Devices extends ThBaseHandler {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             queryString ? `?${queryString}` : ''
-            }`
+          }`
         }
 
         const response = await this.http.getClient().get(uri)

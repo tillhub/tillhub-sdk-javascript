@@ -12,10 +12,10 @@ export interface ProductServiceQuestionGroupsQuery {
   limit?: number
   uri?: string
   query?: {
-    deleted?: boolean;
-    active?: boolean;
-    start?: string;
-    end?: string;
+    deleted?: boolean
+    active?: boolean
+    start?: string
+    end?: string
   }
 }
 
@@ -28,15 +28,15 @@ export interface ProductServiceQuestionGroupReponse {
 }
 
 export interface ProductServiceQuestionGroupsResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
 }
 
 export interface ProductServiceQuestionGroup {
   name?: string
   custom_id?: string
   description?: string
-  service_questions?: Array<String>
+  service_questions?: Array<string>
   deleted?: boolean
   active?: boolean
 }
@@ -49,7 +49,10 @@ export class ProductServiceQuestionGroups extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: ProductServiceQuestionGroupsOptions, http: Client) {
-    super(http, { endpoint: ProductServiceQuestionGroups.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: ProductServiceQuestionGroups.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -58,7 +61,9 @@ export class ProductServiceQuestionGroups extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: ProductServiceQuestionGroupsQuery | undefined): Promise<ProductServiceQuestionGroupsResponse> {
+  getAll(
+    query?: ProductServiceQuestionGroupsQuery | undefined
+  ): Promise<ProductServiceQuestionGroupsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
@@ -69,7 +74,8 @@ export class ProductServiceQuestionGroups extends ThBaseHandler {
         const response = await this.http.getClient().get(uri)
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<ProductServiceQuestionGroupsResponse> => this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<ProductServiceQuestionGroupsResponse> =>
+            this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({
@@ -89,7 +95,11 @@ export class ProductServiceQuestionGroups extends ThBaseHandler {
         const uri = this.uriHelper.generateBaseUri(`/${groupId}`)
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
-          reject(new errors.ProductServiceQuestionGroupsFetchOneFailed(undefined, { status: response.status }))
+          reject(
+            new errors.ProductServiceQuestionGroupsFetchOneFailed(undefined, {
+              status: response.status
+            })
+          )
 
         return resolve({
           data: response.data.results[0] as ProductServiceQuestionGroup,
@@ -120,7 +130,9 @@ export class ProductServiceQuestionGroups extends ThBaseHandler {
     })
   }
 
-  create(productServiceQuestionGroup: ProductServiceQuestionGroup): Promise<ProductServiceQuestionGroupReponse> {
+  create(
+    productServiceQuestionGroup: ProductServiceQuestionGroup
+  ): Promise<ProductServiceQuestionGroupReponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri()
@@ -136,13 +148,18 @@ export class ProductServiceQuestionGroups extends ThBaseHandler {
     })
   }
 
-  put(groupId: string, productServiceQuestionGroup: ProductServiceQuestionGroup): Promise<ProductServiceQuestionGroupReponse> {
+  put(
+    groupId: string,
+    productServiceQuestionGroup: ProductServiceQuestionGroup
+  ): Promise<ProductServiceQuestionGroupReponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri(`/${groupId}`)
         const response = await this.http.getClient().put(uri, productServiceQuestionGroup)
         response.status !== 200 &&
-          reject(new errors.ProductServiceQuestionGroupsPutFailed(undefined, { status: response.status }))
+          reject(
+            new errors.ProductServiceQuestionGroupsPutFailed(undefined, { status: response.status })
+          )
 
         return resolve({
           data: response.data.results[0] as ProductServiceQuestionGroup,

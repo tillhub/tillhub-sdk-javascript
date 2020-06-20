@@ -8,7 +8,7 @@ export interface CashBookOptions {
 }
 
 export interface CashBookResponse {
-  data: object[]
+  data: Record<string, unknown>[]
 }
 
 export interface CashBookQuery {

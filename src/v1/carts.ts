@@ -17,10 +17,6 @@ export interface Cart {
   name?: string
 }
 
-export interface HandlerCartsQuery {
-
-}
-
 export interface CartsOptions {
   user?: string
   base?: string
@@ -33,13 +29,11 @@ export interface CartsOptions {
   }
 }
 
-export interface CartDeleteOptions {
-
-}
+export interface CartDeleteOptions {}
 
 export interface CartsResponse {
   data: Cart[]
-  metadata: object
+  metadata: Record<string, unknown>
   msg?: string
   next?: () => Promise<CartsResponse>
 }
@@ -57,12 +51,10 @@ export interface CartResponse {
 export interface ErrorObject {
   id: string
   label: string
-  errorDetails: object
+  errorDetails: Record<string, unknown>
 }
 
-export interface CartsCreateQuery {
-
-}
+export interface CartsCreateQuery {}
 
 export interface HandlerProductsQuery extends HandlerQuery {
   query?: CartsCreateQuery
@@ -90,7 +82,7 @@ export class Carts extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  create(cart: Cart, query?: HandlerCartsQuery): Promise<CartResponse> {
+  create(cart: Cart, query?: Record<string, unknown>): Promise<CartResponse> {
     return new Promise(async (resolve, reject) => {
       const base = this.uriHelper.generateBaseUri()
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -123,7 +115,7 @@ export class Carts extends ThBaseHandler {
         } else {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             options && options.query ? `?${qs.stringify(options.query)}` : ''
-            }`
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -168,7 +160,7 @@ export class Carts extends ThBaseHandler {
 
   meta(): Promise<CartsResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
 
       try {
         const response = await this.http.getClient().get(uri)
@@ -195,7 +187,7 @@ export class Carts extends ThBaseHandler {
 
   put(cartId: string, cart: Cart): Promise<CartResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${cartId}`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${cartId}`
 
       try {
         const response = await this.http.getClient().put(uri, cart)
@@ -218,7 +210,9 @@ export class Carts extends ThBaseHandler {
       try {
         let uri
         if (deleteOptions) {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}/${cartId}?${qs.stringify(deleteOptions)}`
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}/${cartId}?${qs.stringify(
+            deleteOptions
+          )}`
         } else {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}/${cartId}`
         }

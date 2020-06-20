@@ -19,8 +19,8 @@ export interface ContentsQuery {
 }
 
 export interface ContentsResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   next?: () => Promise<ContentsResponse>
 }
 
@@ -41,19 +41,19 @@ export type ContentTypeType = 'video' | 'image' | 'text' | 'transition'
 
 export interface Content {
   name?: string
-  type: ContentTypeType,
-  payload: string | null,
+  type: ContentTypeType
+  payload: string | null
   content_configuration: {
     [key: string]: any
-  } | null,
+  } | null
   payload_configuration: {
     [key: string]: any
-  } | null,
+  } | null
   active?: boolean
   deleted?: boolean
   metadata: {
     [key: string]: any
-  } | null,
+  } | null
 }
 
 export class Contents extends ThBaseHandler {
@@ -64,7 +64,10 @@ export class Contents extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: ContentOptions, http: Client) {
-    super(http, { endpoint: Contents.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Contents.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -89,7 +92,7 @@ export class Contents extends ThBaseHandler {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             queryString ? `?${queryString}` : ''
-            }`
+          }`
         }
 
         const response = await this.http.getClient().get(uri)

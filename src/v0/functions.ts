@@ -19,8 +19,8 @@ export interface FunctionsQuery {
 }
 
 export interface FunctionsResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   next?: () => Promise<FunctionsResponse>
 }
 
@@ -36,11 +36,15 @@ export interface FunctionResponse {
 export type FunctionRuntime = 'pos' | 'nodejs8x' | 'python27'
 export type FunctionType = 'local' | 'http' | 'pubsub'
 export type FunctionConfigurationClass = 'instant_checkout' | 'add_to_cart'
-export type FunctionConfigurationResourceType = 'product' | 'discount' | 'voucher_action' | 'customer'
+export type FunctionConfigurationResourceType =
+  | 'product'
+  | 'discount'
+  | 'voucher_action'
+  | 'customer'
 
 export interface FunctionConfigurationResource {
   type?: FunctionConfigurationResourceType
-  object_id?: string
+  Record<string, unknown>_id?: string
 }
 
 export interface FunctionConfigurationImages {
@@ -78,7 +82,10 @@ export class Functions extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: FunctionsOptions, http: Client) {
-    super(http, { endpoint: Functions.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Functions.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -118,7 +125,7 @@ export class Functions extends ThBaseHandler {
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
-        reject(new FunctionFetchFailed(undefined, { status: response.status }))
+          reject(new FunctionFetchFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results[0] as Function,

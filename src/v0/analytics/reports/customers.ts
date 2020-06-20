@@ -8,8 +8,8 @@ export interface AnalyticsOptions {
 }
 
 export interface AnalyticsResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   msg?: string
 }
 
@@ -80,7 +80,7 @@ export class Customers {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.CustomerFilterFetchFailed())
         const { values } = response.data.results[0]
-        let data = {
+        const data = {
           customer_number: values.map((item: CustomersItem) => item.customer_number),
           firstname: values.map((item: CustomersItem) => item.firstname),
           lastname: values.map((item: CustomersItem) => item.lastname),

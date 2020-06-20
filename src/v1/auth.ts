@@ -16,7 +16,7 @@ import {
  * @extends "v0.Auth"
  */
 export class Auth extends v0.Auth {
-  authenticated: boolean = false
+  authenticated = false
   public options: AuthOptions
 
   constructor(options: AuthOptions) {
@@ -98,7 +98,7 @@ export class Auth extends v0.Auth {
       )
 
       const { sub_user: subUser } = response.data
-      const { role = null, scopes = [] } = (subUser || {})
+      const { role = null, scopes = [] } = subUser || {}
 
       return {
         token: response.data.token,
@@ -121,14 +121,11 @@ export class Auth extends v0.Auth {
 
   async loginAsSupport(authData: SupportAuth): Promise<AuthResponse> {
     try {
-      const response = await axios.post(
-        `${this.options.base}/api/v1/users/auth/support/login`,
-        {
-          token: authData.token,
-          client_account: authData.client_account,
-          recaptcha_token: authData.recaptcha_token
-        }
-      )
+      const response = await axios.post(`${this.options.base}/api/v1/users/auth/support/login`, {
+        token: authData.token,
+        client_account: authData.client_account,
+        recaptcha_token: authData.recaptcha_token
+      })
 
       this.setDefaultHeader(
         response.data.user.legacy_id || response.data.user.id,

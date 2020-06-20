@@ -19,8 +19,8 @@ export interface PromotionsQuery {
 }
 
 export interface PromotionsResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   next?: () => Promise<PromotionsResponse>
 }
 
@@ -37,9 +37,7 @@ export interface Promotion {
   id?: string
 }
 
-export interface Promotion {
-
-}
+export interface Promotion {}
 
 export class Promotions extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/promotions'
@@ -49,7 +47,10 @@ export class Promotions extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: PromotionsOptions, http: Client) {
-    super(http, { endpoint: Promotions.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Promotions.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -74,7 +75,7 @@ export class Promotions extends ThBaseHandler {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             queryString ? `?${queryString}` : ''
-            }`
+          }`
         }
 
         const response = await this.http.getClient().get(uri)

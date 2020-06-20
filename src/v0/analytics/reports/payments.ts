@@ -8,8 +8,8 @@ export interface PaymentsOptions {
 }
 
 export interface PaymentsResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
 }
 
 export interface PaymentsQuery {

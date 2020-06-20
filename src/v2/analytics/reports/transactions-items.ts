@@ -8,8 +8,8 @@ export interface TransactionsItemsHandlerOptions {
 }
 
 export interface AnalyticsReportsTransactionsItemsResponse {
-  data: object[]
-  summary: object[]
+  data: Record<string, unknown>[]
+  summary: Record<string, unknown>[]
   metaData: {
     count: number
     total_count: number
@@ -27,28 +27,51 @@ export class AnalyticsReportsTransactionsItems extends ThAnalyticsBaseHandler {
     this.http = http
   }
 
-  static create(options: object, http: Client): AnalyticsReportsTransactionsItems {
-    return ThAnalyticsBaseHandler.generateAuthenticatedInstance(AnalyticsReportsTransactionsItems, options, http)
+  static create(options: Record<string, unknown>, http: Client): AnalyticsReportsTransactionsItems {
+    return ThAnalyticsBaseHandler.generateAuthenticatedInstance(
+      AnalyticsReportsTransactionsItems,
+      options,
+      http
+    )
   }
 
-  public async getAll(query?: object): Promise<AnalyticsReportsTransactionsItemsResponse> {
+  public async getAll(
+    query?: Record<string, unknown>
+  ): Promise<AnalyticsReportsTransactionsItemsResponse> {
     try {
       let nextFn
-      const { results: d, next, status } = await this.handleGet(`${this.options.base}/api/v2/analytics/${this.options.user}/reports/transactions/items`, query)
+      const { results: d, next, status } = await this.handleGet(
+        `${this.options.base}/api/v2/analytics/${this.options.user}/reports/transactions/items`,
+        query
+      )
 
-      if (status !== 200) throw new AnalyticsReportsTransactionsItemsFetchError(undefined, { status: status })
+      if (status !== 200)
+        throw new AnalyticsReportsTransactionsItemsFetchError(undefined, { status: status })
 
       // @ts-ignore
-      const data = d.find((item: ThAnalyticsBaseResultItem) => (item.metric.job === 'reports_transactions_items_v2_overview_data')).values
+      const data = d.find(
+        (item: ThAnalyticsBaseResultItem) =>
+          item.metric.job === 'reports_transactions_items_v2_overview_data'
+      ).values
       // @ts-ignore
-      const summary = d.find((item: ThAnalyticsBaseResultItem) => (item.metric.job === 'reports_transactions_items_v2_overview_summary')).values
+      const summary = d.find(
+        (item: ThAnalyticsBaseResultItem) =>
+          item.metric.job === 'reports_transactions_items_v2_overview_summary'
+      ).values
       // @ts-ignore
-      const count = d.find((item: ThAnalyticsBaseResultItem) => (item.metric.job === 'reports_transactions_items_v2_overview_filtered_meta')).values[0]
+      const count = d.find(
+        (item: ThAnalyticsBaseResultItem) =>
+          item.metric.job === 'reports_transactions_items_v2_overview_filtered_meta'
+      ).values[0]
       // @ts-ignore
-      const totalCount = d.find((item: ThAnalyticsBaseResultItem) => (item.metric.job === 'reports_transactions_items_v2_overview_meta')).values[0]
+      const totalCount = d.find(
+        (item: ThAnalyticsBaseResultItem) =>
+          item.metric.job === 'reports_transactions_items_v2_overview_meta'
+      ).values[0]
 
       if (next) {
-        nextFn = (): Promise<AnalyticsReportsTransactionsItemsResponse> => this.getAll({ uri: next })
+        nextFn = (): Promise<AnalyticsReportsTransactionsItemsResponse> =>
+          this.getAll({ uri: next })
       }
 
       return {

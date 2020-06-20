@@ -17,7 +17,7 @@ export interface DependenciesQuery {
 
 export interface DependenciesResponse {
   data: Dependents[]
-  metadata: object
+  metadata: Record<string, unknown>
 }
 
 export interface Dependents {
@@ -34,7 +34,10 @@ export class Dependencies extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: DependenciesOptions, http: Client) {
-    super(http, { endpoint: Dependencies.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Dependencies.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -49,7 +52,6 @@ export class Dependencies extends ThBaseHandler {
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       try {
-
         const response = await this.http.getClient().get(uri)
 
         response.status !== 200 &&

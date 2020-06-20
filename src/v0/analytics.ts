@@ -17,8 +17,8 @@ export interface AnalyticsOptions {
 }
 
 export interface AnalyticsResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   msg?: string
 }
 
@@ -74,7 +74,7 @@ export interface VoucherOptions {
 }
 
 export interface ExportFormatOptions {
-  format?: string,
+  format?: string
   branch_number?: number
 }
 
@@ -137,7 +137,7 @@ export interface StaffQuery {
 }
 
 export interface ReportOptions {
-  staff?: StaffID,
+  staff?: StaffID
   query?: StaffQuery
 }
 
@@ -254,7 +254,7 @@ export class Analytics {
   }
 
   getProductsChildren(
-    productNumber: String,
+    productNumber: string,
     query?: ProductsOptions | undefined
   ): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
@@ -300,8 +300,13 @@ export class Analytics {
       const staff = options && options.staff
 
       try {
-        const base = this.uriHelper.generateBaseUri(`/reports/staff/product_groups${staff ? `/${staff}` : ''}`)
-        const uri = this.uriHelper.generateUriWithQuery(base, options && options.query ? options.query : undefined)
+        const base = this.uriHelper.generateBaseUri(
+          `/reports/staff/product_groups${staff ? `/${staff}` : ''}`
+        )
+        const uri = this.uriHelper.generateUriWithQuery(
+          base,
+          options && options.query ? options.query : undefined
+        )
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new ProductGroupsReportFetchFailed())
@@ -321,8 +326,13 @@ export class Analytics {
       const staff = options && options.staff
 
       try {
-        const base = this.uriHelper.generateBaseUri(`/reports/staff/refunds${staff ? `/${staff}` : ''}`)
-        const uri = this.uriHelper.generateUriWithQuery(base, options && options.query ? options.query : undefined)
+        const base = this.uriHelper.generateBaseUri(
+          `/reports/staff/refunds${staff ? `/${staff}` : ''}`
+        )
+        const uri = this.uriHelper.generateUriWithQuery(
+          base,
+          options && options.query ? options.query : undefined
+        )
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new RefundsReportFetchFailed())
@@ -366,8 +376,13 @@ export class Analytics {
       const staff = options && options.staff
 
       try {
-        const base = this.uriHelper.generateBaseUri(`/reports/staff/products${staff ? `/${staff}` : ''}`)
-        const uri = this.uriHelper.generateUriWithQuery(base, options && options.query ? options.query : undefined)
+        const base = this.uriHelper.generateBaseUri(
+          `/reports/staff/products${staff ? `/${staff}` : ''}`
+        )
+        const uri = this.uriHelper.generateUriWithQuery(
+          base,
+          options && options.query ? options.query : undefined
+        )
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new ProductsReportFetchFailed())
@@ -385,9 +400,7 @@ export class Analytics {
   getPaymentsReport(query?: PaymentsReportOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const base = `${this.options.base}${this.endpoint}/${
-          this.options.user
-          }/reports/staff/payments`
+        const base = `${this.options.base}${this.endpoint}/${this.options.user}/reports/staff/payments`
 
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 
@@ -407,9 +420,7 @@ export class Analytics {
   getTopPaymentsReport(query?: TopPaymentsReportOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const base = `${this.options.base}${this.endpoint}/${
-          this.options.user
-          }/reports/payments/top`
+        const base = `${this.options.base}${this.endpoint}/${this.options.user}/reports/payments/top`
 
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 
@@ -431,9 +442,7 @@ export class Analytics {
   ): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        let uri = `${this.options.base}${this.endpoint}/${
-          this.options.user
-          }/reports/transactions/simple`
+        let uri = `${this.options.base}${this.endpoint}/${this.options.user}/reports/transactions/simple`
 
         const queryString = qs.stringify(query)
 
@@ -519,9 +528,7 @@ export class Analytics {
       try {
         const queryString = qs.stringify(query, { addQueryPrefix: true })
         // TODO: move this to proper v1. We cut a corner here not to require consumers refactoring for the report
-        const uri = `${this.options.base}/api/v1/analytics/${
-          this.options.user
-          }/reports/stocks${queryString}`
+        const uri = `${this.options.base}/api/v1/analytics/${this.options.user}/reports/stocks${queryString}`
 
         const response = await this.http.getClient().get(uri)
 
@@ -711,7 +718,7 @@ export class ProductGroupsReportFetchFailed extends BaseError {
   constructor(
     public message: string = 'Could not fetch the product groups report',
     properties?: any
-    ) {
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductGroupsReportFetchFailed.prototype)
   }
@@ -722,7 +729,7 @@ export class StatisticsProductChildrenFetchFailed extends BaseError {
   constructor(
     public message: string = 'Could not fetch the Statistics Products Children',
     properties?: any
-    ) {
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StatisticsProductChildrenFetchFailed.prototype)
   }
@@ -733,7 +740,7 @@ export class StaffOverviewFetchFailed extends BaseError {
   constructor(
     public message: string = 'Could not fetch the staff overview report',
     properties?: any
-    ) {
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StaffOverviewFetchFailed.prototype)
   }
@@ -744,7 +751,7 @@ export class StatisticsProductFetchFailed extends BaseError {
   constructor(
     public message: string = 'Could not fetch the Statistics Products',
     properties?: any
-    ) {
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StatisticsProductFetchFailed.prototype)
   }

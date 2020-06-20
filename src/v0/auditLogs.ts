@@ -27,8 +27,8 @@ export interface AuditLogsGetOneRequestObject {
 }
 
 export interface AuditsResponse {
-  data?: object[]
-  metadata?: object
+  data?: Record<string, unknown>[]
+  metadata?: Record<string, unknown>
   msg?: string
   next?: () => Promise<AuditsResponse>
 }
@@ -60,7 +60,8 @@ export class AuditLogs {
         const response = await this.http.getClient().get(uri)
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<AuditsResponse> => this.getAll({ ...q, uri: response.data.cursor.next })
+          next = (): Promise<AuditsResponse> =>
+            this.getAll({ ...q, uri: response.data.cursor.next })
         }
 
         return resolve({

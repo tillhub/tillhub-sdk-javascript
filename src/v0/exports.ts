@@ -50,7 +50,7 @@ export interface ExportsResponse {
   data: {
     uri: string
   }[]
-  metadata: object
+  metadata: Record<string, unknown>
   msg?: string | null
 }
 

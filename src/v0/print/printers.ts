@@ -14,13 +14,13 @@ export interface Printer {
 
 export interface PrintersResponse {
   data: Printer[]
-  metadata: object
+  metadata: Record<string, unknown>
   msg?: string
 }
 
 export interface PrinterResponse {
   data: Printer
-  metadata: object
+  metadata: Record<string, unknown>
   msg?: string
 }
 

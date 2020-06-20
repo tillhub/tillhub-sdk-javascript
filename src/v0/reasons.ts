@@ -19,7 +19,7 @@ export interface ReasonsQuery {
 
 export interface ReasonsResponse {
   data: Reason[]
-  metadata: object
+  metadata: Record<string, unknown>
 }
 
 export interface ReasonResponse {
@@ -74,7 +74,9 @@ export class Reasons extends ThBaseHandler {
             queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
           }
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${queryString ? `?${queryString}` : ''}`
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
+            queryString ? `?${queryString}` : ''
+          }`
         }
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {

@@ -6,9 +6,9 @@ export interface ClientOptions {
   base?: string
   timeout?: number
   headers?: {
-    [key: string]: any;
+    [key: string]: any
   }
-  token?: string,
+  token?: string
   responseInterceptors?: Function[]
   requestInterceptors?: Function[]
 }
@@ -77,19 +77,31 @@ export class Client {
     // NOTE not sure if this is the correct place to inject the interceptors, but it's the most reliable
     if (options.responseInterceptors && options.responseInterceptors.length) {
       // remove previous interceptors
-      this.responseInterceptorIds.forEach(id => Client.instance.axiosInstance.interceptors.response.eject(id))
+      this.responseInterceptorIds.forEach(id =>
+        Client.instance.axiosInstance.interceptors.response.eject(id)
+      )
 
       this.responseInterceptorIds = options.responseInterceptors.map((interceptor: Function) => {
         // first arg is on success, but we want to only listen for errors
-        return Client.instance.axiosInstance.interceptors.response.use(undefined, interceptor as (value: AxiosResponse) => AxiosResponse | Promise<AxiosResponse>)
+        return Client.instance.axiosInstance.interceptors.response.use(
+          undefined,
+          interceptor as (value: AxiosResponse) => AxiosResponse | Promise<AxiosResponse>
+        )
       })
     }
 
     if (options.requestInterceptors && options.requestInterceptors.length) {
-      this.requestInterceptorIds.forEach(id => Client.instance.axiosInstance.interceptors.request.eject(id))
+      this.requestInterceptorIds.forEach(id =>
+        Client.instance.axiosInstance.interceptors.request.eject(id)
+      )
 
       this.requestInterceptorIds = options.requestInterceptors.map((interceptor: Function) => {
-        return Client.instance.axiosInstance.interceptors.request.use(interceptor as (value: AxiosRequestConfig) => AxiosRequestConfig | Promise<AxiosRequestConfig>, undefined)
+        return Client.instance.axiosInstance.interceptors.request.use(
+          interceptor as (
+            value: AxiosRequestConfig
+          ) => AxiosRequestConfig | Promise<AxiosRequestConfig>,
+          undefined
+        )
       })
     }
 

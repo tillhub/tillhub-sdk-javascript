@@ -8,7 +8,7 @@ export interface PrintJob {
   data?: string
   printer?: string
   type?: string
-  options?: object
+  options?: Record<string, unknown>
   amount?: number
   status?: string
   status_message?: string
@@ -16,13 +16,13 @@ export interface PrintJob {
 
 export interface PrintJobsResponse {
   data: PrintJob[]
-  metadata: object
+  metadata: Record<string, unknown>
   msg?: string
 }
 
 export interface PrintJobResponse {
   data: PrintJob
-  metadata: object
+  metadata: Record<string, unknown>
   msg?: string
 }
 
