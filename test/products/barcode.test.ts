@@ -18,9 +18,8 @@ const queryString = qs.stringify({ code }, { addQueryPrefix: true })
 
 describe('v1: Products: can check if a barcode is unique', () => {
   it("Tillhub's products are instantiable", async () => {
-
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -35,7 +34,7 @@ describe('v1: Products: can check if a barcode is unique', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/barcode${queryString}`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -59,36 +58,7 @@ describe('v1: Products: can check if a barcode is unique', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
-        return [
-          200,
-          {
-            token: '',
-            user: {
-              id: '123',
-              legacy_id: legacyId
-            }
-          }
-        ]
-      })
-
-      mock.onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/barcode${queryString}`).reply(function (config) {
-        return [205]
-      })
-    }
-
-    try {
-      const th = await initThInstance()
-      await th.products().checkBarcode(code)
-    } catch (err) {
-      expect(err.name).toBe('BarcodeGetFailed')
-    }
-  })
-
-  it('rejects on status code 409 - barcode is not unique', async () => {
-    const errorName = 'BarcodeNotUnique'
-    if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -103,7 +73,38 @@ describe('v1: Products: can check if a barcode is unique', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/barcode${queryString}`)
-        .reply(function (config) {
+        .reply(() => {
+          return [205]
+        })
+    }
+
+    try {
+      const th = await initThInstance()
+      await th.products().checkBarcode(code)
+    } catch (err) {
+      expect(err.name).toBe('BarcodeGetFailed')
+    }
+  })
+
+  it('rejects on status code 409 - barcode is not unique', async () => {
+    const errorName = 'BarcodeNotUnique'
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+
+      mock
+        .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/barcode${queryString}`)
+        .reply(() => {
           return [
             409,
             {

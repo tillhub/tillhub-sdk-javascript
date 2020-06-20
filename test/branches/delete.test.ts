@@ -18,7 +18,7 @@ const respMsg = `Deleted branch ${branchId}`
 describe('v0: Staff: can delete the branch', () => {
   it("Tillhub's branch are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -31,16 +31,14 @@ describe('v0: Staff: can delete the branch', () => {
         ]
       })
 
-      mock
-        .onDelete(`https://api.tillhub.com/api/v0/branches/${legacyId}/${branchId}`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              msg: respMsg
-            }
-          ]
-        })
+      mock.onDelete(`https://api.tillhub.com/api/v0/branches/${legacyId}/${branchId}`).reply(() => {
+        return [
+          200,
+          {
+            msg: respMsg
+          }
+        ]
+      })
     }
 
     const th = await initThInstance()
@@ -56,7 +54,7 @@ describe('v0: Staff: can delete the branch', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -68,16 +66,14 @@ describe('v0: Staff: can delete the branch', () => {
           }
         ]
       })
-      mock
-        .onDelete(`https://api.tillhub.com/api/v0/branches/${legacyId}/${branchId}`)
-        .reply(function (config) {
-          return [
-            400,
-            {
-              msg: 'Branch could not be deleted because it has 2 active registers.'
-            }
-          ]
-        })
+      mock.onDelete(`https://api.tillhub.com/api/v0/branches/${legacyId}/${branchId}`).reply(() => {
+        return [
+          400,
+          {
+            msg: 'Branch could not be deleted because it has 2 active registers.'
+          }
+        ]
+      })
     }
 
     const th = await initThInstance()

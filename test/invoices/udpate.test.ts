@@ -4,7 +4,7 @@ import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import th, { v0 } from '../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -72,7 +72,7 @@ describe('v0: Invoices', () => {
     const { body, query } = requestObject
 
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -87,11 +87,9 @@ describe('v0: Invoices', () => {
 
       mock
         .onPut(
-          `https://api.tillhub.com/api/v0/invoices/${legacyId}/${
-            requestObject.invoiceId
-          }?${queryString}`
+          `https://api.tillhub.com/api/v0/invoices/${legacyId}/${requestObject.invoiceId}?${queryString}`
         )
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -126,7 +124,7 @@ describe('v0: Invoices', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -140,11 +138,9 @@ describe('v0: Invoices', () => {
       })
       mock
         .onPut(
-          `https://api.tillhub.com/api/v0/invoices/${legacyId}/${
-            requestObject.invoiceId
-          }?${queryString}`
+          `https://api.tillhub.com/api/v0/invoices/${legacyId}/${requestObject.invoiceId}?${queryString}`
         )
-        .reply(function (config) {
+        .reply(() => {
           return [400]
         })
     }

@@ -4,7 +4,7 @@ import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import { TillhubClient, v0 } from '../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -24,7 +24,7 @@ describe('v0: Branches: can get count number of all branches', () => {
       const mock = new MockAdapter(axios)
       const legacyId = '4564'
 
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -37,17 +37,15 @@ describe('v0: Branches: can get count number of all branches', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/branches/${legacyId}/meta`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              count: 50,
-              results: [{ count: 50 }]
-            }
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/branches/${legacyId}/meta`).reply(() => {
+        return [
+          200,
+          {
+            count: 50,
+            results: [{ count: 50 }]
+          }
+        ]
+      })
     }
 
     const options = {
@@ -80,7 +78,7 @@ describe('v0: Branches: can get count number of all branches', () => {
       const mock = new MockAdapter(axios)
       const legacyId = '4564'
 
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -93,11 +91,9 @@ describe('v0: Branches: can get count number of all branches', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/branches/${legacyId}/meta`)
-        .reply(function (config) {
-          return [205]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/branches/${legacyId}/meta`).reply(() => {
+        return [205]
+      })
     }
 
     const options = {

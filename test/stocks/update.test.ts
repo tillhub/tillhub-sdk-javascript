@@ -4,7 +4,7 @@ import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import th, { TillhubClient, v0 } from '../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -40,7 +40,7 @@ describe('v0: Stocks', () => {
     const { body, stockId } = requestObject
 
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -53,16 +53,14 @@ describe('v0: Stocks', () => {
         ]
       })
 
-      mock
-        .onPut(`https://api.tillhub.com/api/v0/stock/${legacyId}/${stockId}`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              results: body
-            }
-          ]
-        })
+      mock.onPut(`https://api.tillhub.com/api/v0/stock/${legacyId}/${stockId}`).reply(() => {
+        return [
+          200,
+          {
+            results: body
+          }
+        ]
+      })
     }
 
     const options = {
@@ -94,7 +92,7 @@ describe('v0: Stocks', () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
         .onPost('https://api.tillhub.com/api/v0/users/login')
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -108,7 +106,7 @@ describe('v0: Stocks', () => {
         })
 
         .onPut(`https://api.tillhub.com/api/v0/stock/${legacyId}/${stockId}`)
-        .reply(function (config) {
+        .reply(() => {
           return [205]
         })
     }

@@ -20,7 +20,7 @@ const updateObject = {
 describe('v0: Messages: can alter a message', () => {
   it("Tillhub's messages are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -33,17 +33,15 @@ describe('v0: Messages: can alter a message', () => {
         ]
       })
 
-      mock
-        .onPut(`https://api.tillhub.com/api/v0/messages/${legacyId}/${messageId}`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              count: 1,
-              results: [updateObject]
-            }
-          ]
-        })
+      mock.onPut(`https://api.tillhub.com/api/v0/messages/${legacyId}/${messageId}`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [updateObject]
+          }
+        ]
+      })
     }
 
     const th = await initThInstance()
@@ -59,7 +57,7 @@ describe('v0: Messages: can alter a message', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -71,11 +69,9 @@ describe('v0: Messages: can alter a message', () => {
           }
         ]
       })
-      mock
-        .onPut(`https://api.tillhub.com/api/v0/message/${legacyId}/${messageId}`)
-        .reply(function (config) {
-          return [205]
-        })
+      mock.onPut(`https://api.tillhub.com/api/v0/message/${legacyId}/${messageId}`).reply(() => {
+        return [205]
+      })
     }
 
     const th = await initThInstance()

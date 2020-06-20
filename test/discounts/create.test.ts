@@ -26,7 +26,7 @@ const discount = {
 describe('v0: Discounts: can create one discount', () => {
   it("Tillhub's discounts are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -39,7 +39,7 @@ describe('v0: Discounts: can create one discount', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/discounts/${legacyId}`).reply(function (config) {
+      mock.onPost(`https://api.tillhub.com/api/v0/discounts/${legacyId}`).reply(() => {
         return [
           200,
           {
@@ -63,7 +63,7 @@ describe('v0: Discounts: can create one discount', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -76,7 +76,7 @@ describe('v0: Discounts: can create one discount', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/discounts/${legacyId}`).reply(function (config) {
+      mock.onPost(`https://api.tillhub.com/api/v0/discounts/${legacyId}`).reply(() => {
         return [205]
       })
     }

@@ -5,7 +5,7 @@ dotenv.config()
 import { Customers } from '../../../src/v0/analytics/reports/customers'
 import { TillhubClient } from '../../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -28,7 +28,6 @@ afterEach(() => {
 })
 
 describe('v0: Analytics: gets customers transactions report', () => {
-
   it('takes a query string', async () => {
     const mockCustomersQuery = {
       customer_id: '0001',
@@ -39,7 +38,7 @@ describe('v0: Analytics: gets customers transactions report', () => {
     const mockString = `customer_id=0001&currency=EUR&branch_number=${branchNumber}`
 
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -53,8 +52,10 @@ describe('v0: Analytics: gets customers transactions report', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/customers/transactions?${mockString}`)
-        .reply(function (config) {
+        .onGet(
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/customers/transactions?${mockString}`
+        )
+        .reply(() => {
           return [
             200,
             {
@@ -96,7 +97,7 @@ describe('v0: Analytics: gets customers transactions report', () => {
       currency: 'EUR'
     }
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -111,7 +112,7 @@ describe('v0: Analytics: gets customers transactions report', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/customers/transations`)
-        .reply(function (config) {
+        .reply(() => {
           return [205]
         })
     }
@@ -133,7 +134,10 @@ describe('v0: Analytics: gets customers transactions report', () => {
     })
 
     try {
-      await th.analytics().customers().getTransaction(mockCustomersQuery)
+      await th
+        .analytics()
+        .customers()
+        .getTransaction(mockCustomersQuery)
     } catch (err) {
       expect(err.name).toBe('CustomerTransactionFetchFailed')
     }

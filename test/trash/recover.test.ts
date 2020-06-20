@@ -22,9 +22,8 @@ const queryString = qs.stringify(recoverQuery.query, { addQueryPrefix: true })
 
 describe('v0: Trash: can recover an object', () => {
   it("Tillhub's products are instantiable", async () => {
-
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function () {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -39,7 +38,7 @@ describe('v0: Trash: can recover an object', () => {
 
       mock
         .onPut(`https://api.tillhub.com/api/v0/trash/${legacyId}/untrash${queryString}`)
-        .reply(function () {
+        .reply(() => {
           return [
             200,
             {
@@ -63,7 +62,7 @@ describe('v0: Trash: can recover an object', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -76,9 +75,11 @@ describe('v0: Trash: can recover an object', () => {
         ]
       })
 
-      mock.onPut(`https://api.tillhub.com/api/v0/trash/${legacyId}/untrash${queryString}`).reply(function (config) {
-        return [205]
-      })
+      mock
+        .onPut(`https://api.tillhub.com/api/v0/trash/${legacyId}/untrash${queryString}`)
+        .reply(() => {
+          return [205]
+        })
     }
 
     try {

@@ -4,7 +4,7 @@ import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import { v0 } from '../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -34,7 +34,7 @@ describe('Auth: logout', () => {
     }
 
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onGet('https://api.tillhub.com/api/v0/users/logout').reply(function (config) {
+      mock.onGet('https://api.tillhub.com/api/v0/users/logout').reply(() => {
         return [500]
       })
     }
@@ -42,7 +42,7 @@ describe('Auth: logout', () => {
     const auth = new v0.Auth(options)
 
     try {
-      let data = await auth.logout()
+      const data = await auth.logout()
     } catch (err) {
       expect(err.name).toBe('LogoutMissingToken')
     }
@@ -58,7 +58,7 @@ describe('Auth: logout', () => {
     }
 
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -76,7 +76,7 @@ describe('Auth: logout', () => {
         ]
       })
 
-      mock.onGet('https://api.tillhub.com/api/v0/users/logout').reply(function (config) {
+      mock.onGet('https://api.tillhub.com/api/v0/users/logout').reply(() => {
         return [
           200,
           {
@@ -84,14 +84,13 @@ describe('Auth: logout', () => {
           }
         ]
       })
-
     }
 
     const auth = new v0.Auth(options)
 
     try {
       await auth.authenticate()
-      let data = await auth.logout()
+      const data = await auth.logout()
       expect(data).toBeTruthy()
       expect(data.msg === 'Logout successful.').toBe(true)
     } catch (err) {
@@ -109,7 +108,7 @@ describe('Auth: logout', () => {
     }
 
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -127,17 +126,16 @@ describe('Auth: logout', () => {
         ]
       })
 
-      mock.onGet('https://api.tillhub.com/api/v0/users/logout').reply(function (config) {
+      mock.onGet('https://api.tillhub.com/api/v0/users/logout').reply(() => {
         return [500]
       })
-
     }
 
     const auth = new v0.Auth(options)
 
     try {
       await auth.authenticate()
-      let data = await auth.logout()
+      const data = await auth.logout()
     } catch (err) {
       expect(err.name).toBe('LogoutFailed')
     }

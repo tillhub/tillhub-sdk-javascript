@@ -23,9 +23,8 @@ const queryString = `?limit=${trashQuery.limit}&${qs.stringify(trashQuery.query)
 
 describe('v0: Trash: can get the trashed object', () => {
   it("Tillhub's products are instantiable", async () => {
-
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function () {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -38,17 +37,15 @@ describe('v0: Trash: can get the trashed object', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/trash/${legacyId}/${queryString}`)
-        .reply(function () {
-          return [
-            200,
-            {
-              count: 1,
-              results: [{}]
-            }
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/trash/${legacyId}/${queryString}`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [{}]
+          }
+        ]
+      })
     }
 
     const th = await initThInstance()
@@ -64,7 +61,7 @@ describe('v0: Trash: can get the trashed object', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -77,7 +74,7 @@ describe('v0: Trash: can get the trashed object', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/products/${legacyId}/${queryString}`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v0/products/${legacyId}/${queryString}`).reply(() => {
         return [205]
       })
     }

@@ -18,7 +18,7 @@ const respMsg = `Deleted warehouse ${warehouseId}`
 describe('v0: Warehouses: can delete a warehouse', () => {
   it("Tillhub's warehouses are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -33,7 +33,7 @@ describe('v0: Warehouses: can delete a warehouse', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/warehouses/${legacyId}/${warehouseId}`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -56,7 +56,7 @@ describe('v0: Warehouses: can delete a warehouse', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -70,7 +70,7 @@ describe('v0: Warehouses: can delete a warehouse', () => {
       })
       mock
         .onDelete(`https://api.tillhub.com/api/v0/warehouses/${legacyId}/${warehouseId}`)
-        .reply(function (config) {
+        .reply(() => {
           return [205]
         })
     }

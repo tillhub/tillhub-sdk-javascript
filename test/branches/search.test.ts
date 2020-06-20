@@ -22,20 +22,26 @@ afterEach(() => {
 describe('v0: Branches: can search for branches', () => {
   it('receives a search query of type string', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => [200, {
-        token: '',
-        user: {
-          id: '123',
-          legacy_id: legacyId
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => [
+        200,
+        {
+          token: '',
+          user: {
+            id: '123',
+            legacy_id: legacyId
+          }
         }
-      }])
+      ])
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/branches/${legacyId}/search?q=${searchTerm}`)
-        .reply(() => [200, {
-          count: 1,
-          results: [{}]
-        }])
+        .reply(() => [
+          200,
+          {
+            count: 1,
+            results: [{}]
+          }
+        ])
     }
 
     const th = await initThInstance()
@@ -51,7 +57,7 @@ describe('v0: Branches: can search for branches', () => {
 
   it('receives a search query of type object', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -66,7 +72,7 @@ describe('v0: Branches: can search for branches', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/branches/${legacyId}/search${queryString}`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -90,13 +96,16 @@ describe('v0: Branches: can search for branches', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => [200, {
-        token: '',
-        user: {
-          id: '123',
-          legacy_id: legacyId
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => [
+        200,
+        {
+          token: '',
+          user: {
+            id: '123',
+            legacy_id: legacyId
+          }
         }
-      }])
+      ])
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/branches/${legacyId}/search?q=${searchTerm}`)

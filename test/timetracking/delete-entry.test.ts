@@ -18,7 +18,7 @@ const respMsg = `Deleted time track entry ${timetrackingEntryId}`
 describe('v0: Timetracking: can alter the timetracking entry', () => {
   it("Tillhub's Timetracking is instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -32,8 +32,10 @@ describe('v0: Timetracking: can alter the timetracking entry', () => {
       })
 
       mock
-        .onDelete(`https://api.tillhub.com/api/v0/time_tracking/${legacyId}/entries/${timetrackingEntryId}`)
-        .reply(function (config) {
+        .onDelete(
+          `https://api.tillhub.com/api/v0/time_tracking/${legacyId}/entries/${timetrackingEntryId}`
+        )
+        .reply(() => {
           return [
             200,
             {
@@ -56,7 +58,7 @@ describe('v0: Timetracking: can alter the timetracking entry', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -69,8 +71,10 @@ describe('v0: Timetracking: can alter the timetracking entry', () => {
         ]
       })
       mock
-        .onDelete(`https://api.tillhub.com/api/v0/time_tracking/${legacyId}/entries/${timetrackingEntryId}`)
-        .reply(function (config) {
+        .onDelete(
+          `https://api.tillhub.com/api/v0/time_tracking/${legacyId}/entries/${timetrackingEntryId}`
+        )
+        .reply(() => {
           return [205]
         })
     }

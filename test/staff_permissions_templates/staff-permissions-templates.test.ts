@@ -30,26 +30,22 @@ afterEach(() => {
 describe('v0: StaffPermissionsTemplates', () => {
   it('retrieves all staffPermissionsTemplates', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock
-        .onPost('https://api.tillhub.com/api/v0/users/login')
-        .reply(function (config) {
-          return [
-            200,
-            {
-              token: '',
-              user: {
-                id: '123',
-                legacy_id: legacyId
-              }
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
             }
-          ]
-        })
+          }
+        ]
+      })
 
       mock
-        .onGet(
-          `https://api.tillhub.com/api/v0/staff_permission_templates/${legacyId}`
-        )
-        .reply(function (config) {
+        .onGet(`https://api.tillhub.com/api/v0/staff_permission_templates/${legacyId}`)
+        .reply(() => {
           return [
             200,
             {
@@ -73,26 +69,24 @@ describe('v0: StaffPermissionsTemplates', () => {
 
   it('retrieves one staff permissions template', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock
-        .onPost('https://api.tillhub.com/api/v0/users/login')
-        .reply(function (config) {
-          return [
-            200,
-            {
-              token: '',
-              user: {
-                id: '123',
-                legacy_id: legacyId
-              }
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
             }
-          ]
-        })
+          }
+        ]
+      })
 
       mock
         .onGet(
           `https://api.tillhub.com/api/v0/staff_permission_templates/${legacyId}/${templateId}`
         )
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -116,25 +110,21 @@ describe('v0: StaffPermissionsTemplates', () => {
 
   it('creates one staff permissions template', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock
-        .onPost('https://api.tillhub.com/api/v0/users/login')
-        .reply(function (config) {
-          return [
-            200,
-            {
-              token: '',
-              user: {
-                id: '123',
-                legacy_id: legacyId
-              }
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
             }
-          ]
-        })
+          }
+        ]
+      })
 
       mock
-        .onPost(
-          `https://api.tillhub.com/api/v0/staff_permission_templates/${legacyId}`
-        )
+        .onPost(`https://api.tillhub.com/api/v0/staff_permission_templates/${legacyId}`)
         .reply(config => {
           return [
             200,
@@ -151,28 +141,24 @@ describe('v0: StaffPermissionsTemplates', () => {
     const staffPermissionsTemplates = th.staffPermissionsTemplates()
     expect(staffPermissionsTemplates).toBeInstanceOf(StaffPermissionsTemplates)
 
-    const { data } = await staffPermissionsTemplates.create(
-      mockStaffPermissionsTemplate
-    )
+    const { data } = await staffPermissionsTemplates.create(mockStaffPermissionsTemplate)
     expect(data).toEqual(mockStaffPermissionsTemplate)
   })
 
   it('updates one staff permissions template', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock
-        .onPost('https://api.tillhub.com/api/v0/users/login')
-        .reply(function (config) {
-          return [
-            200,
-            {
-              token: '',
-              user: {
-                id: '123',
-                legacy_id: legacyId
-              }
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
             }
-          ]
-        })
+          }
+        ]
+      })
 
       mock
         .onPut(
@@ -203,20 +189,18 @@ describe('v0: StaffPermissionsTemplates', () => {
 
   it('deletes one staff permissions template', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock
-        .onPost('https://api.tillhub.com/api/v0/users/login')
-        .reply(function (config) {
-          return [
-            200,
-            {
-              token: '',
-              user: {
-                id: '123',
-                legacy_id: legacyId
-              }
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
             }
-          ]
-        })
+          }
+        ]
+      })
 
       mock
         .onDelete(
@@ -243,26 +227,22 @@ describe('v0: StaffPermissionsTemplates', () => {
 
   it('rejects getAll() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock
-        .onPost('https://api.tillhub.com/api/v0/users/login')
-        .reply(function (config) {
-          return [
-            200,
-            {
-              token: '',
-              user: {
-                id: '123',
-                legacy_id: legacyId
-              }
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
             }
-          ]
-        })
+          }
+        ]
+      })
 
       mock
-        .onGet(
-          `https://api.tillhub.com/api/v0/staff_permission_templates/${legacyId}`
-        )
-        .reply(function (config) {
+        .onGet(`https://api.tillhub.com/api/v0/staff_permission_templates/${legacyId}`)
+        .reply(() => {
           return [205]
         })
     }
@@ -279,26 +259,24 @@ describe('v0: StaffPermissionsTemplates', () => {
 
   it('rejects get() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock
-        .onPost('https://api.tillhub.com/api/v0/users/login')
-        .reply(function (config) {
-          return [
-            200,
-            {
-              token: '',
-              user: {
-                id: '123',
-                legacy_id: legacyId
-              }
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
             }
-          ]
-        })
+          }
+        ]
+      })
 
       mock
         .onGet(
           `https://api.tillhub.com/api/v0/staff_permission_templates/${legacyId}/${templateId}`
         )
-        .reply(function (config) {
+        .reply(() => {
           return [205]
         })
     }
@@ -315,20 +293,18 @@ describe('v0: StaffPermissionsTemplates', () => {
 
   it('rejects create() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock
-        .onPost('https://api.tillhub.com/api/v0/users/login')
-        .reply(function (config) {
-          return [
-            200,
-            {
-              token: '',
-              user: {
-                id: '123',
-                legacy_id: legacyId
-              }
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
             }
-          ]
-        })
+          }
+        ]
+      })
 
       mock
         .onPost(
@@ -351,20 +327,18 @@ describe('v0: StaffPermissionsTemplates', () => {
 
   it('rejects update() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock
-        .onPost('https://api.tillhub.com/api/v0/users/login')
-        .reply(function (config) {
-          return [
-            200,
-            {
-              token: '',
-              user: {
-                id: '123',
-                legacy_id: legacyId
-              }
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
             }
-          ]
-        })
+          }
+        ]
+      })
 
       mock
         .onPatch(
@@ -378,9 +352,7 @@ describe('v0: StaffPermissionsTemplates', () => {
     const th = await initThInstance()
 
     try {
-      await th
-        .staffPermissionsTemplates()
-        .update(templateId, mockStaffPermissionsTemplate)
+      await th.staffPermissionsTemplates().update(templateId, mockStaffPermissionsTemplate)
       fail('should throw an error')
     } catch (e) {
       expect(e.name).toEqual(StaffPermissionsTemplatesUpdateFailed.name)
@@ -389,20 +361,18 @@ describe('v0: StaffPermissionsTemplates', () => {
 
   it('rejects delete() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock
-        .onPost('https://api.tillhub.com/api/v0/users/login')
-        .reply(function (config) {
-          return [
-            200,
-            {
-              token: '',
-              user: {
-                id: '123',
-                legacy_id: legacyId
-              }
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
             }
-          ]
-        })
+          }
+        ]
+      })
 
       mock
         .onDelete(

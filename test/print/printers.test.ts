@@ -12,7 +12,7 @@ import {
   PrinterDeleteFailed
 } from '../../src/errors'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -39,7 +39,7 @@ afterEach(() => {
 describe('v0: Print.Printers', () => {
   it('retrieves all printers', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -52,17 +52,15 @@ describe('v0: Print.Printers', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/print/${legacyId}/printers`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              count: 1,
-              results: [{}]
-            }
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/print/${legacyId}/printers`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [{}]
+          }
+        ]
+      })
     }
 
     const options = {
@@ -92,7 +90,7 @@ describe('v0: Print.Printers', () => {
 
   it('retrieves one printer', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -107,7 +105,7 @@ describe('v0: Print.Printers', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/print/${legacyId}/printers/${printerId}`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -145,7 +143,7 @@ describe('v0: Print.Printers', () => {
 
   it('creates one printer', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -158,17 +156,15 @@ describe('v0: Print.Printers', () => {
         ]
       })
 
-      mock
-        .onPost(`https://api.tillhub.com/api/v0/print/${legacyId}/printers`)
-        .reply((config) => {
-          return [
-            200,
-            {
-              count: 1,
-              results: [mockPrinter]
-            }
-          ]
-        })
+      mock.onPost(`https://api.tillhub.com/api/v0/print/${legacyId}/printers`).reply(config => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [mockPrinter]
+          }
+        ]
+      })
     }
 
     const options = {
@@ -196,7 +192,7 @@ describe('v0: Print.Printers', () => {
 
   it('updates one printer', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -211,7 +207,7 @@ describe('v0: Print.Printers', () => {
 
       mock
         .onPatch(`https://api.tillhub.com/api/v0/print/${legacyId}/printers/${printerId}`)
-        .reply((config) => {
+        .reply(config => {
           return [
             200,
             {
@@ -247,7 +243,7 @@ describe('v0: Print.Printers', () => {
 
   it('deletes one printer', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -262,7 +258,7 @@ describe('v0: Print.Printers', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/print/${legacyId}/printers/${printerId}`)
-        .reply((config) => {
+        .reply(config => {
           return [
             200,
             {
@@ -297,7 +293,7 @@ describe('v0: Print.Printers', () => {
 
   it('rejects getAll() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -310,13 +306,9 @@ describe('v0: Print.Printers', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/print/${legacyId}/printers`)
-        .reply(function (config) {
-          return [
-            205
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/print/${legacyId}/printers`).reply(() => {
+        return [205]
+      })
     }
 
     const options = {
@@ -336,7 +328,10 @@ describe('v0: Print.Printers', () => {
     })
 
     try {
-      await th.print().printers().getAll()
+      await th
+        .print()
+        .printers()
+        .getAll()
       fail('should throw an error')
     } catch (e) {
       expect(e.name).toEqual(PrintersFetchFailed.name)
@@ -345,7 +340,7 @@ describe('v0: Print.Printers', () => {
 
   it('rejects get() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -360,10 +355,8 @@ describe('v0: Print.Printers', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/print/${legacyId}/printers/${printerId}`)
-        .reply(function (config) {
-          return [
-            205
-          ]
+        .reply(() => {
+          return [205]
         })
     }
 
@@ -384,7 +377,10 @@ describe('v0: Print.Printers', () => {
     })
 
     try {
-      await th.print().printers().get(printerId)
+      await th
+        .print()
+        .printers()
+        .get(printerId)
       fail('should throw an error')
     } catch (e) {
       expect(e.name).toEqual(PrinterFetchFailed.name)
@@ -393,7 +389,7 @@ describe('v0: Print.Printers', () => {
 
   it('rejects create() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -408,10 +404,8 @@ describe('v0: Print.Printers', () => {
 
       mock
         .onPost(`https://api.tillhub.com/api/v0/print/${legacyId}/printers/${printerId}`)
-        .reply((config) => {
-          return [
-            205
-          ]
+        .reply(config => {
+          return [205]
         })
     }
 
@@ -432,7 +426,10 @@ describe('v0: Print.Printers', () => {
     })
 
     try {
-      await th.print().printers().create(mockPrinter)
+      await th
+        .print()
+        .printers()
+        .create(mockPrinter)
       fail('should throw an error')
     } catch (e) {
       expect(e.name).toEqual(PrinterCreateFailed.name)
@@ -441,7 +438,7 @@ describe('v0: Print.Printers', () => {
 
   it('rejects update() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -456,10 +453,8 @@ describe('v0: Print.Printers', () => {
 
       mock
         .onPatch(`https://api.tillhub.com/api/v0/print/${legacyId}/printers/${printerId}`)
-        .reply((config) => {
-          return [
-            205
-          ]
+        .reply(config => {
+          return [205]
         })
     }
 
@@ -480,7 +475,10 @@ describe('v0: Print.Printers', () => {
     })
 
     try {
-      await th.print().printers().update(printerId, mockPrinter)
+      await th
+        .print()
+        .printers()
+        .update(printerId, mockPrinter)
       fail('should throw an error')
     } catch (e) {
       expect(e.name).toEqual(PrinterUpdateFailed.name)
@@ -489,7 +487,7 @@ describe('v0: Print.Printers', () => {
 
   it('rejects delete() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -504,10 +502,8 @@ describe('v0: Print.Printers', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/print/${legacyId}/printers/${printerId}`)
-        .reply((config) => {
-          return [
-            205
-          ]
+        .reply(config => {
+          return [205]
         })
     }
 
@@ -528,7 +524,10 @@ describe('v0: Print.Printers', () => {
     })
 
     try {
-      await th.print().printers().delete(printerId)
+      await th
+        .print()
+        .printers()
+        .delete(printerId)
       fail('should throw an error')
     } catch (e) {
       expect(e.name).toEqual(PrinterDeleteFailed.name)

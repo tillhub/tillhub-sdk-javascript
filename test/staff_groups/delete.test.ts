@@ -18,7 +18,7 @@ const respMsg = `Deleted staff group ${staffGroupId}`
 describe('v0: Staff Groups: can delete a staff group', () => {
   it("Tillhub's staff groups are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -33,7 +33,7 @@ describe('v0: Staff Groups: can delete a staff group', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/staff_groups/${legacyId}/${staffGroupId}`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -56,7 +56,7 @@ describe('v0: Staff Groups: can delete a staff group', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -70,7 +70,7 @@ describe('v0: Staff Groups: can delete a staff group', () => {
       })
       mock
         .onDelete(`https://api.tillhub.com/api/v0/staff_groups/${legacyId}/${staffGroupId}`)
-        .reply(function (config) {
+        .reply(() => {
           return [205]
         })
     }

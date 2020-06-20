@@ -5,7 +5,7 @@ import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import { TillhubClient, v0, v1 } from '../../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -38,9 +38,8 @@ afterEach(() => {
 
 describe('v1: TransactionsLegacy: can get meta', () => {
   it("Tillhub's transactions are instantiable", async () => {
-
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -55,7 +54,7 @@ describe('v1: TransactionsLegacy: can get meta', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v1/transactions/${legacyId}/meta/legacy?${queryString}`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -92,7 +91,7 @@ describe('v1: TransactionsLegacy: can get meta', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -106,7 +105,7 @@ describe('v1: TransactionsLegacy: can get meta', () => {
       })
       mock
         .onGet(`https://api.tillhub.com/api/v1/transactions/${legacyId}/meta/legacy`)
-        .reply(function (config) {
+        .reply(() => {
           return [400]
         })
     }

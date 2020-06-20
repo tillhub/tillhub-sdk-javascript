@@ -28,7 +28,7 @@ afterEach(() => {
 describe('v0: TransactionsLegacy: can get all', () => {
   it('Tillhub is transaction is instantiable', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() =>  {
         return [
           200,
           {
@@ -43,7 +43,7 @@ describe('v0: TransactionsLegacy: can get all', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v1/transactions/${legacyId}/legacy`)
-        .reply(function (config) {
+        .reply(() =>  {
           return [
             200,
             {
@@ -81,7 +81,7 @@ describe('v0: TransactionsLegacy: can get all', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() =>  {
         return [
           200,
           {
@@ -95,7 +95,7 @@ describe('v0: TransactionsLegacy: can get all', () => {
       })
       mock
         .onGet(`https://api.tillhub.com/api/v1/transactions/${legacyId}/legacy`)
-        .reply(function (config) {
+        .reply(() =>  {
           return [400]
         })
     }

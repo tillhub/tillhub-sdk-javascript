@@ -14,7 +14,7 @@ describe('v0: PricebookEntries: can get count number of all pricebook entries', 
   })
   it("Tillhub's pricebook entries are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -29,7 +29,7 @@ describe('v0: PricebookEntries: can get count number of all pricebook entries', 
 
       mock
         .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/prices/book/entry/meta`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -53,7 +53,7 @@ describe('v0: PricebookEntries: can get count number of all pricebook entries', 
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -68,7 +68,7 @@ describe('v0: PricebookEntries: can get count number of all pricebook entries', 
 
       mock
         .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/prices/book/entry/meta`)
-        .reply(function (config) {
+        .reply(() => {
           return [205]
         })
     }
@@ -76,7 +76,10 @@ describe('v0: PricebookEntries: can get count number of all pricebook entries', 
     const th = await initThInstance()
 
     try {
-      await th.products().pricebookEntries().meta()
+      await th
+        .products()
+        .pricebookEntries()
+        .meta()
     } catch (err) {
       expect(err.name).toBe('PricebookEntriesMetaFailed')
     }

@@ -4,7 +4,7 @@ import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import { TillhubClient, v1, v0 } from '../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -39,7 +39,7 @@ const combinedConf = { ...baseConf, ...patchConf }
 describe('v0: Configurations: patch existing config', () => {
   it('can patch an existing config', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -54,14 +54,12 @@ describe('v0: Configurations: patch existing config', () => {
 
       mock
         .onPatch(`https://api.tillhub.com/api/v0/configurations/${legacyId}/${configId}`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
               count: 1,
-              results: [
-                combinedConf
-              ]
+              results: [combinedConf]
             }
           ]
         })

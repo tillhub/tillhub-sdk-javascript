@@ -4,7 +4,7 @@ import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import th, { TillhubClient, v1 } from '../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -35,7 +35,7 @@ afterEach(() => {
 describe('v1: Products', () => {
   it('can update one', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -48,21 +48,19 @@ describe('v1: Products', () => {
         ]
       })
 
-      mock
-        .onPut(`https://api.tillhub.com/api/v1/products/${legacyId}/${productId}`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              results: [
-                {
-                  id: productId,
-                  ...requestObject
-                }
-              ]
-            }
-          ]
-        })
+      mock.onPut(`https://api.tillhub.com/api/v1/products/${legacyId}/${productId}`).reply(() => {
+        return [
+          200,
+          {
+            results: [
+              {
+                id: productId,
+                ...requestObject
+              }
+            ]
+          }
+        ]
+      })
     }
 
     const options = {
@@ -92,7 +90,7 @@ describe('v1: Products', () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
         .onPost('https://api.tillhub.com/api/v0/users/login')
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -106,7 +104,7 @@ describe('v1: Products', () => {
         })
 
         .onPut(`https://api.tillhub.com/api/v1/products/${legacyId}/${productId}`)
-        .reply(function (config) {
+        .reply(() => {
           return [205]
         })
     }

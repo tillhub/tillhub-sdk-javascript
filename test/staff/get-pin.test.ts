@@ -21,7 +21,7 @@ const queryString = qs.stringify(pin, { addQueryPrefix: true })
 describe('v0: Staff: can get a unique pin number', () => {
   it("Tillhub's staff are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -34,7 +34,7 @@ describe('v0: Staff: can get a unique pin number', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/pin`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/pin`).reply(() => {
         return [
           200,
           {
@@ -58,21 +58,19 @@ describe('v0: Staff: can get a unique pin number', () => {
 
   it('can send a user provided pin to determine if unique', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [200, { token: '', user: { id: '123', legacy_id: legacyId } }]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/pin${queryString}`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              count: 1,
-              results: [{}]
-            }
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/pin${queryString}`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [{}]
+          }
+        ]
+      })
     }
 
     const th = await initThInstance()
@@ -88,7 +86,7 @@ describe('v0: Staff: can get a unique pin number', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -101,7 +99,7 @@ describe('v0: Staff: can get a unique pin number', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/pin`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/pin`).reply(() => {
         return [205]
       })
     }
@@ -117,7 +115,7 @@ describe('v0: Staff: can get a unique pin number', () => {
   it('rejects on status code 409', async () => {
     const errorName = 'ErrorName'
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -130,16 +128,14 @@ describe('v0: Staff: can get a unique pin number', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/pin${queryString}`)
-        .reply(function (config) {
-          return [
-            409,
-            {
-              name: 'ErrorName'
-            }
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/pin${queryString}`).reply(() => {
+        return [
+          409,
+          {
+            name: 'ErrorName'
+          }
+        ]
+      })
     }
 
     try {

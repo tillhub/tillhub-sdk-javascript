@@ -5,7 +5,7 @@ import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import th, { TillhubClient, v1 } from '../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -32,7 +32,7 @@ afterEach(() => {
 describe('Create a new Product', () => {
   it('create', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -45,7 +45,7 @@ describe('Create a new Product', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v1/products/${userId}`).reply(function (config) {
+      mock.onPost(`https://api.tillhub.com/api/v1/products/${userId}`).reply(() => {
         return [
           200,
           {
@@ -89,7 +89,7 @@ describe('Create a new Product', () => {
     }
 
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -102,7 +102,7 @@ describe('Create a new Product', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v1/products/${userId}`).reply(function (config) {
+      mock.onPost(`https://api.tillhub.com/api/v1/products/${userId}`).reply(() => {
         return [
           200,
           {
@@ -143,7 +143,7 @@ describe('Create a new Product', () => {
     }
 
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -158,7 +158,7 @@ describe('Create a new Product', () => {
 
       mock
         .onPost(`https://api.tillhub.com/api/v1/products/${userId}?${qs.stringify(query)}`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -195,7 +195,7 @@ describe('Create a new Product', () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       const mock = new MockAdapter(axios)
 
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -208,7 +208,7 @@ describe('Create a new Product', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v1/products/${userId}`).reply(function (config) {
+      mock.onPost(`https://api.tillhub.com/api/v1/products/${userId}`).reply(() => {
         return [205]
       })
     }

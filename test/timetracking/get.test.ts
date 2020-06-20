@@ -40,9 +40,8 @@ const timetrackingResponse = [
 
 describe('v0: Timetracking: can get the timetracking report for a specific staff member', () => {
   it("Tillhub's products are instantiable", async () => {
-
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function () {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -56,8 +55,10 @@ describe('v0: Timetracking: can get the timetracking report for a specific staff
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/time_tracking/${legacyId}/reports/staff/${staffId}${queryString}`)
-        .reply(function () {
+        .onGet(
+          `https://api.tillhub.com/api/v0/time_tracking/${legacyId}/reports/staff/${staffId}${queryString}`
+        )
+        .reply(() => {
           return [
             200,
             {
@@ -81,7 +82,7 @@ describe('v0: Timetracking: can get the timetracking report for a specific staff
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -94,9 +95,13 @@ describe('v0: Timetracking: can get the timetracking report for a specific staff
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/time_tracking/${legacyId}/reports/staff/${staffId}${queryString}`).reply(function (config) {
-        return [205]
-      })
+      mock
+        .onGet(
+          `https://api.tillhub.com/api/v0/time_tracking/${legacyId}/reports/staff/${staffId}${queryString}`
+        )
+        .reply(() => {
+          return [205]
+        })
     }
 
     try {

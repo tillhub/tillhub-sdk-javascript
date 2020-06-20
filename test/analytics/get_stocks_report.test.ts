@@ -16,13 +16,13 @@ afterEach(() => {
 describe('v0: Analytics: gets Stocks report', () => {
   it('gets Stocks report', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [200, { token: '', user: { id: '123', legacy_id: legacyId } }]
       })
 
       mock
         .onGet(`https://api.tillhub.com/api/v1/analytics/${legacyId}/reports/stocks`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -52,7 +52,7 @@ describe('v0: Analytics: gets Stocks report', () => {
     const queryString = qs.stringify(mockStocksQuery, { addQueryPrefix: true })
 
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -67,7 +67,7 @@ describe('v0: Analytics: gets Stocks report', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v1/analytics/${legacyId}/reports/stocks${queryString}`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -91,7 +91,7 @@ describe('v0: Analytics: gets Stocks report', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -106,7 +106,7 @@ describe('v0: Analytics: gets Stocks report', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v1/analytics/${legacyId}/reports/stocks`)
-        .reply(function (config) {
+        .reply(() => {
           return [205]
         })
     }

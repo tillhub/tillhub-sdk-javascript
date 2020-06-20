@@ -4,7 +4,7 @@ import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import { TillhubClient, v1 } from '../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -29,7 +29,7 @@ afterEach(() => {
 describe('v1: Products: can get details of product children', () => {
   it("Tillhub's products are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -44,7 +44,7 @@ describe('v1: Products: can get details of product children', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/${productId}/children/details`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -83,7 +83,7 @@ describe('v1: Products: can get details of product children', () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
         .onPost('https://api.tillhub.com/api/v0/users/login')
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -97,7 +97,7 @@ describe('v1: Products: can get details of product children', () => {
         })
 
         .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/${productId}/children/details`)
-        .reply(function (config) {
+        .reply(() => {
           return [404]
         })
     }
