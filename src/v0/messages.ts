@@ -20,6 +20,11 @@ export interface MessagesResponse {
   metadata: Record<string, unknown>
 }
 
+export interface MessageResponse {
+  data: Message
+  metadata: Record<string, unknown>
+}
+
 export interface Message {
   message?: string
   consumer_type?: string
@@ -76,7 +81,7 @@ export class Messages extends ThBaseHandler {
     })
   }
 
-  update(messageId: string, messageRequest: Message): Promise<MessagesResponse> {
+  update(messageId: string, messageRequest: Message): Promise<MessageResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri(`/${messageId}`)
@@ -87,7 +92,7 @@ export class Messages extends ThBaseHandler {
         return resolve({
           data: response.data.results[0] as Message,
           metadata: { count: response.data.count }
-        } as MessagesResponse)
+        } as MessageResponse)
       } catch (err) {
         return reject(new errors.MessagesUpdateFailed())
       }

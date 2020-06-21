@@ -3,7 +3,7 @@
 // import * as EventEmitter from 'events'
 import events from 'events'
 // import { AxiosError } from 'axios'
-import { AuthOptions, AuthTypes, UsernameAuth, KeyAuth, TokenAuth } from './v0/auth'
+import { AuthOptions, UsernameAuth, KeyAuth, TokenAuth } from './v0/auth'
 import { Auth } from './v1/auth'
 import * as v0 from './v0'
 import * as v1 from './v1'
@@ -18,19 +18,21 @@ export const defaultOptions: TillhubSDKOptions = {
   base: 'https://api.tillhub.com'
 }
 
+type Fn = () => any
+
 export interface TillhubSDKOptions {
   credentials?: UsernameAuth | KeyAuth | TokenAuth | undefined
   base?: string
   user?: string
-  responseInterceptors?: Function[]
-  requestInterceptors?: Function[]
+  responseInterceptors?: Fn[]
+  requestInterceptors?: Fn[]
 }
 
 type MaybeOptions = Record<string, unknown>
 
 export declare interface TillhubClient {
   on(event: 'raw-error' | 'error', listener: (error: Error) => void): this
-  on(event: string, listener: Function): this
+  on(event: string, listener: Fn): this
 }
 
 export class TillhubClient extends events.EventEmitter {

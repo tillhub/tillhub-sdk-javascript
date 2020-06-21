@@ -52,8 +52,7 @@ export interface BookRequestBody {
   to: string
   from: string
   issuer: string
-  items: Array<Object>
-  comment?: string
+  items: Record<string, unknown>[]
   initiated_at?: string
 }
 

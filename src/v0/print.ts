@@ -45,7 +45,7 @@ export class Print {
    * @param {Object} [query] - query Record<string, unknown>
    * @returns {EventSource} - event source notifying of server-sent events
    */
-  subscribeTo(eventName: string, query?: Object): EventSource {
+  subscribeTo(eventName: string, query?: Record<string, unknown>): EventSource {
     const base = this.uriHelper.generateBaseUri(`/events/${eventName}`)
     const uri = this.uriHelper.generateUriWithQuery(base, query)
 

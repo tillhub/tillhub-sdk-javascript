@@ -102,6 +102,8 @@ export class AnalyticsReportsTransactionsOverview extends ThAnalyticsBaseHandler
         data: data,
         summary: summary,
         metaData: {
+          // eslint-disable-next-line
+          // @ts-ignore
           count: count.count,
           total_count: totalCount.count
         },
@@ -153,7 +155,8 @@ export class AnalyticsReportsTransactionsDetail extends ThAnalyticsBaseHandler {
       const { results: d } = await this.handleGet(
         `${this.options.base}/api/v2/analytics/${this.options.user}/reports/transactions/${id}/detail`
       )
-
+      // eslint-disable-next-line
+      // @ts-ignore
       const data = d.find(
         (item: ThAnalyticsBaseResultItem) =>
           item.metric.job === 'reports_transactions_v2_transaction_detail_data'

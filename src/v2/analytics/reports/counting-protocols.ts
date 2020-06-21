@@ -108,21 +108,25 @@ export class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
       if (status !== 200)
         throw new AnalyticsReportsCountingProtocolsFetchFailed(undefined, { status: status })
 
+      // eslint-disable-next-line
       // @ts-ignore
       const data = d.find(
         (item: ThAnalyticsBaseResultItem) =>
           item.metric.job === 'reports_counting_protocols_v2_overview_data'
       ).values
+      // eslint-disable-next-line
       // @ts-ignore
       const summary = d.find(
         (item: ThAnalyticsBaseResultItem) =>
           item.metric.job === 'reports_counting_protocols_v2_overview_summary'
       ).values
+      // eslint-disable-next-line
       // @ts-ignore
       const count = d.find(
         (item: ThAnalyticsBaseResultItem) =>
           item.metric.job === 'reports_counting_protocols_v2_overview_filtered_meta'
       ).values[0]
+      // eslint-disable-next-line
       // @ts-ignore
       const totalCount = d.find(
         (item: ThAnalyticsBaseResultItem) =>
@@ -138,8 +142,10 @@ export class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
         data,
         summary,
         metaData: {
+          // eslint-disable-next-line
           // @ts-ignore
           count: count.count,
+          // eslint-disable-next-line
           // @ts-ignore
           total_count: totalCount.count
         },

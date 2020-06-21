@@ -39,7 +39,7 @@ export class Messages {
     this.uriHelper = uriHelper
   }
 
-  async getAll(query?: Object): Promise<PrintMessagesResponse> {
+  async getAll(query?: Record<string, unknown>): Promise<PrintMessagesResponse> {
     try {
       const base = this.uriHelper.generateBaseUri('/messages')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -74,7 +74,7 @@ export class Messages {
     }
   }
 
-  async create(message: Object): Promise<PrintMessageResponse> {
+  async create(message: Record<string, unknown>): Promise<PrintMessageResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/messages`)
       const uri = this.uriHelper.generateUriWithQuery(base)
@@ -91,7 +91,7 @@ export class Messages {
     }
   }
 
-  async update(messageId: string, message: Object): Promise<PrintMessageResponse> {
+  async update(messageId: string, message: Record<string, unknown>): Promise<PrintMessageResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/messages/${messageId}`)
       const uri = this.uriHelper.generateUriWithQuery(base)

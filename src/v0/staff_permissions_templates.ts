@@ -8,7 +8,9 @@ export interface StaffPermissionsTemplatesOptions {
   base?: string
 }
 
-export interface StaffPermissionsTemplatesQueryOptions {}
+export interface StaffPermissionsTemplatesQueryOptions {
+  [key: string]: any
+}
 
 export interface StaffPermissionsTemplatesResponse {
   data: StaffPermissionsTemplate[]

@@ -54,12 +54,14 @@ export class AnalyticsReportsRevenuesGrouped extends ThAnalyticsBaseHandler {
         throw new TypeError('Unexpectedly did not return data.')
       }
 
+      // eslint-disable-next-line
       // @ts-ignore
       const data = (
         d.find(
           (item: ThAnalyticsBaseResultItem) => item.metric.job === 'reports_revenues_items_v2_data'
         ) || {}
       ).values
+      // eslint-disable-next-line
       // @ts-ignore
       const summary = d.find(
         (item: ThAnalyticsBaseResultItem) => item.metric.job === 'reports_revenues_items_v2_summary'

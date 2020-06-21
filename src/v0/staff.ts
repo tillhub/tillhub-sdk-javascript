@@ -183,7 +183,7 @@ export class Staff extends ThBaseHandler {
     })
   }
 
-  create(staffMember: StaffMember, query?: HandleStaffQuery): Promise<StaffResponse> {
+  create(staffMember: StaffMember, query?: HandleStaffQuery): Promise<StaffMemberResponse> {
     return new Promise(async (resolve, reject) => {
       const base = this.uriHelper.generateBaseUri()
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -196,7 +196,7 @@ export class Staff extends ThBaseHandler {
           data: response.data.results[0] as StaffMember,
           metadata: { count: response.data.count },
           errors: response.data.errors || []
-        } as StaffResponse)
+        } as StaffMemberResponse)
       } catch (error) {
         return reject(new StaffMemberCreateFailed(undefined, { error }))
       }
@@ -388,7 +388,7 @@ export class Staff extends ThBaseHandler {
     })
   }
 
-  makeUser(staffID: string, makeUserObj: MakeUserRequest): Promise<StaffResponse> {
+  makeUser(staffID: string, makeUserObj: MakeUserRequest): Promise<StaffMemberResponse> {
     return new Promise(async (resolve, reject) => {
       const base = this.uriHelper.generateBaseUri(`/${staffID}/make_user`)
 
@@ -399,7 +399,7 @@ export class Staff extends ThBaseHandler {
         return resolve({
           data: response.data.results[0] as StaffMember,
           metadata: { count: response.data.count }
-        } as StaffResponse)
+        } as StaffMemberResponse)
       } catch (error) {
         return reject(new MakeUserStaffFailed(undefined, { error }))
       }

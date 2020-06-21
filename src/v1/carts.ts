@@ -29,7 +29,9 @@ export interface CartsOptions {
   }
 }
 
-export interface CartDeleteOptions {}
+export interface CartDeleteOptions {
+  [key: string]: any
+}
 
 export interface CartsResponse {
   data: Cart[]
@@ -54,7 +56,9 @@ export interface ErrorObject {
   errorDetails: Record<string, unknown>
 }
 
-export interface CartsCreateQuery {}
+export interface CartsCreateQuery {
+  [key: string]: any
+}
 
 export interface HandlerProductsQuery extends HandlerQuery {
   query?: CartsCreateQuery

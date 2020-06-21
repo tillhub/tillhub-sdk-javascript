@@ -42,7 +42,7 @@ export class Jobs {
     this.uriHelper = uriHelper
   }
 
-  async getAll(query?: Object): Promise<PrintJobsResponse> {
+  async getAll(query?: Record<string, unknown>): Promise<PrintJobsResponse> {
     try {
       const base = this.uriHelper.generateBaseUri('/jobs')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -77,7 +77,10 @@ export class Jobs {
     }
   }
 
-  async create(job: Object, query?: Object): Promise<PrintJobResponse> {
+  async create(
+    job: Record<string, unknown>,
+    query?: Record<string, unknown>
+  ): Promise<PrintJobResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/jobs`)
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -93,7 +96,7 @@ export class Jobs {
     }
   }
 
-  async update(jobId: string, job: Object): Promise<PrintJobResponse> {
+  async update(jobId: string, job: Record<string, unknown>): Promise<PrintJobResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/jobs/${jobId}`)
       const uri = this.uriHelper.generateUriWithQuery(base)

@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
@@ -25,7 +24,7 @@ export interface FunctionsResponse {
 }
 
 export interface FunctionResponse {
-  data: Function
+  data: () => any
   metadata?: {
     count?: number
     patch?: any
@@ -44,7 +43,7 @@ export type FunctionConfigurationResourceType =
 
 export interface FunctionConfigurationResource {
   type?: FunctionConfigurationResourceType
-  Record<string, unknown>_id?: string
+  obj?: string
 }
 
 export interface FunctionConfigurationImages {
@@ -61,7 +60,7 @@ export interface FunctionConfiguration {
   // TODO: not sure what to do with instantCheckoutPayload
 }
 
-export interface Function {
+export interface FunctionInterface {
   name?: string
   runtime?: FunctionRuntime
   type?: FunctionType
@@ -128,7 +127,7 @@ export class Functions extends ThBaseHandler {
           reject(new FunctionFetchFailed(undefined, { status: response.status }))
 
         return resolve({
-          data: response.data.results[0] as Function,
+          data: response.data.results[0] as FunctionInterface,
           msg: response.data.msg,
           metadata: { count: response.data.count }
         } as FunctionResponse)
@@ -138,14 +137,14 @@ export class Functions extends ThBaseHandler {
     })
   }
 
-  put(functionId: string, fn: Function): Promise<FunctionResponse> {
+  put(functionId: string, fn: FunctionInterface): Promise<FunctionResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri(`/${functionId}`)
       try {
         const response = await this.http.getClient().put(uri, fn)
 
         return resolve({
-          data: response.data.results[0] as Function,
+          data: response.data.results[0] as FunctionInterface,
           metadata: { count: response.data.count }
         } as FunctionResponse)
       } catch (error) {
@@ -154,14 +153,14 @@ export class Functions extends ThBaseHandler {
     })
   }
 
-  create(fn: Function): Promise<FunctionResponse> {
+  create(fn: FunctionInterface): Promise<FunctionResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri()
       try {
         const response = await this.http.getClient().post(uri, fn)
 
         return resolve({
-          data: response.data.results[0] as Function,
+          data: response.data.results[0] as FunctionInterface,
           metadata: { count: response.data.count }
         } as FunctionResponse)
       } catch (error) {

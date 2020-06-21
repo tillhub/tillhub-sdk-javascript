@@ -62,20 +62,20 @@ export interface TokenAuth {
   token: string
 }
 
-export function isUsernameAuth(Record<string, unknown>: any): Record < string, unknown > is UsernameAuth {
-  return 'password' in Record<string, unknown>
+export function isUsernameAuth(obj: any): obj is UsernameAuth {
+  return 'password' in obj
 }
 
-export function isKeyAuth(Record<string, unknown>: any): Record < string, unknown > is KeyAuth {
-  return 'apiKey' in Record<string, unknown>
+export function isKeyAuth(obj: any): obj is KeyAuth {
+  return 'apiKey' in obj
 }
 
-export function isTokenAuth(Record<string, unknown>: any): Record < string, unknown > is KeyAuth {
-  return 'token' in Record<string, unknown>
+export function isTokenAuth(obj: any): obj is KeyAuth {
+  return 'token' in obj
 }
 
-export function isOrgAuth(Record<string, unknown>: any): Record < string, unknown > is KeyAuth {
-  return 'organisation' in Record<string, unknown>
+export function isOrgAuth(obj: any): obj is KeyAuth {
+  return 'organisation' in obj
 }
 
 export interface AuthResponse {
@@ -124,7 +124,7 @@ export class Auth {
     this.options.type = undefined
   }
 
-  protected determineAuthType() {
+  protected determineAuthType(): void {
     if (isUsernameAuth(this.options.credentials)) this.options.type = AuthTypes.username
     if (isKeyAuth(this.options.credentials)) this.options.type = AuthTypes.key
     if (isTokenAuth(this.options.credentials)) this.options.type = AuthTypes.token

@@ -37,7 +37,9 @@ export interface Promotion {
   id?: string
 }
 
-export interface Promotion {}
+export interface Promotion {
+  [key: string]: any
+}
 
 export class Promotions extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/promotions'

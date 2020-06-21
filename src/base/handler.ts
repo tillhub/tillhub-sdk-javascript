@@ -87,7 +87,7 @@ export class ThAnalyticsBaseHandler {
   }
 
   protected static generateAuthenticatedInstance<T>(
-    type: { new (options: object, http: Client): T },
+    type: { new (options: ThAnalyticsBaseHandlerOptions, http: Client): T },
     options: ThAnalyticsBaseHandlerOptions,
     http: Client
   ): T {
