@@ -265,8 +265,8 @@ var Analytics = /** @class */ (function () {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        base = this.uriHelper.generateBaseUri("/reports/staff/product_groups" + (staff ? "/" + staff : ''));
-                        uri = this.uriHelper.generateUriWithQuery(base, options && options.query ? options.query : undefined);
+                        base = this.uriHelper.generateBaseUri("/reports/staff/product_groups");
+                        uri = this.uriHelper.generateUriWithQuery(base, options);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();
@@ -320,8 +320,8 @@ var Analytics = /** @class */ (function () {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        base = this.uriHelper.generateBaseUri("/reports/staff/refunds" + (staff ? "/" + staff : ''));
-                        uri = this.uriHelper.generateUriWithQuery(base, options && options.query ? options.query : undefined);
+                        base = this.uriHelper.generateBaseUri("/reports/staff/refunds");
+                        uri = this.uriHelper.generateUriWithQuery(base, options);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();
@@ -378,8 +378,8 @@ var Analytics = /** @class */ (function () {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        base = this.uriHelper.generateBaseUri("/reports/staff/products" + (staff ? "/" + staff : ''));
-                        uri = this.uriHelper.generateUriWithQuery(base, options && options.query ? options.query : undefined);
+                        base = this.uriHelper.generateBaseUri("/reports/staff/products");
+                        uri = this.uriHelper.generateUriWithQuery(base, options);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();

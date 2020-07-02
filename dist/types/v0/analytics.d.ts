@@ -116,11 +116,12 @@ export interface ProductGoupsFilters {
     type?: string;
 }
 export interface StaffQuery {
-    branch_number?: number;
+    branch_number?: string;
+    start?: string;
+    end?: string;
 }
-export interface ReportOptions {
+export interface ReportOptions extends StaffQuery {
     staff?: StaffID;
-    query?: StaffQuery;
 }
 export declare class Analytics {
     endpoint: string;

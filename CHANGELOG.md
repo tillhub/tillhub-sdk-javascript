@@ -1,3 +1,10 @@
+## [3.200.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.200.0...v3.200.1) (2020-07-02)
+
+
+### Bug Fixes
+
+* **analytics:** fix staff reports analytics ([d07da62](https://github.com/tillhub/tillhub-sdk-javascript/commit/d07da62))
+
 # [3.200.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.199.1...v3.200.0) (2020-07-02)
 
 
