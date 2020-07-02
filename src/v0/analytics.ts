@@ -316,12 +316,12 @@ export class Analytics {
     })
   }
 
-  getProductGroupsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
+  getProductGroupsReport(query?: RevenuBasicOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
 
       try {
         const base = this.uriHelper.generateBaseUri('/aggregates/product_groups')
-        const uri = this.uriHelper.generateUriWithQuery(base, options && options.query ? options.query : undefined)
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new ProductGroupsReportFetchFailed())
