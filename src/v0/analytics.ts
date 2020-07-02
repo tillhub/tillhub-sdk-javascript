@@ -295,12 +295,32 @@ export class Analytics {
     })
   }
 
-  getProductGroupsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
+  getProductGroupsStaffReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       const staff = options && options.staff
 
       try {
         const base = this.uriHelper.generateBaseUri(`/reports/staff/product_groups${staff ? `/${staff}` : ''}`)
+        const uri = this.uriHelper.generateUriWithQuery(base, options && options.query ? options.query : undefined)
+
+        const response = await this.http.getClient().get(uri)
+        response.status !== 200 && reject(new ProductGroupsStaffReportFetchFailed())
+
+        return resolve({
+          data: response.data.results,
+          metadata: { count: response.data.count }
+        } as AnalyticsResponse)
+      } catch (err) {
+        return reject(new ProductGroupsStaffReportFetchFailed())
+      }
+    })
+  }
+
+  getProductGroupsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
+    return new Promise(async (resolve, reject) => {
+
+      try {
+        const base = this.uriHelper.generateBaseUri('/aggregates/product_groups')
         const uri = this.uriHelper.generateUriWithQuery(base, options && options.query ? options.query : undefined)
 
         const response = await this.http.getClient().get(uri)
@@ -703,6 +723,17 @@ export class SimpleSalesCartItemsReportFetchFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, SimpleSalesCartItemsReportFetchFailed.prototype)
+  }
+}
+
+export class ProductGroupsStaffReportFetchFailed extends BaseError {
+  public name = 'ProductGroupsStaffReportFetchFailed'
+  constructor(
+    public message: string = 'Could not fetch the product groups staff report',
+    properties?: any
+    ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, ProductGroupsStaffReportFetchFailed.prototype)
   }
 }
 
