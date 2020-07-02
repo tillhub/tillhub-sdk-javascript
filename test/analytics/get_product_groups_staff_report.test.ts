@@ -1,7 +1,6 @@
 import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
-import qs from 'qs'
 dotenv.config()
 import { TillhubClient, v0 } from '../../src/tillhub-js'
 
@@ -20,15 +19,15 @@ if (process.env.SYSTEM_TEST) {
 }
 
 const legacyId = '4564'
-const branchNumber = '112233'
+const staffMember = '963'
+const branchNumber = 112233
 
 const reportOptions = {
-  branch_number: branchNumber,
-  start: '12/12/12',
-  end: '12/12/13'
+  staff: staffMember,
+  query: {
+    branch_number: branchNumber
+  }
 }
-
-const query = qs.stringify(reportOptions)
 
 const mock = new MockAdapter(axios)
 afterEach(() => {
@@ -36,14 +35,14 @@ afterEach(() => {
 })
 
 describe('v0: Analytics: gets product groups transactions report', () => {
-  it('gets product groups transactions report', async () => {
+  it('gets product groups transactions report grouped by all staff', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [200, { token: '', user: { id: '123', legacy_id: legacyId } }]
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/aggregates/product_groups`)
+        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/product_groups`)
         .reply(function (config) {
           return [
             200,
@@ -69,12 +68,12 @@ describe('v0: Analytics: gets product groups transactions report', () => {
 
     expect(analytics).toBeInstanceOf(v0.Analytics)
 
-    const { data } = await analytics.getProductGroupsReport()
+    const { data } = await analytics.getProductGroupsStaffReport()
 
     expect(Array.isArray(data)).toBe(true)
   })
 
-  it('gets product groups transactions report', async () => {
+  it('gets product groups transactions report grouped by one staff member', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
         return [200, { token: '', user: { id: '123', legacy_id: legacyId } }]
@@ -82,7 +81,7 @@ describe('v0: Analytics: gets product groups transactions report', () => {
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v0/analytics/${legacyId}/aggregates/product_groups?${query}`
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/product_groups/${staffMember}?branch_number=${branchNumber}`
         )
         .reply(function (config) {
           return [
@@ -109,7 +108,7 @@ describe('v0: Analytics: gets product groups transactions report', () => {
 
     expect(analytics).toBeInstanceOf(v0.Analytics)
 
-    const { data } = await analytics.getProductGroupsReport(reportOptions)
+    const { data } = await analytics.getProductGroupsStaffReport(reportOptions)
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -131,7 +130,7 @@ describe('v0: Analytics: gets product groups transactions report', () => {
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v0/analytics/${legacyId}/aggregates/product_groups${query}`
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/product_groups/${staffMember}?branch_number=${branchNumber}`
         )
         .reply(function (config) {
           return [205]
@@ -155,9 +154,9 @@ describe('v0: Analytics: gets product groups transactions report', () => {
     })
 
     try {
-      await th.analytics().getProductGroupsReport(reportOptions)
+      await th.analytics().getProductGroupsStaffReport(reportOptions)
     } catch (err) {
-      expect(err.name).toBe('ProductGroupsReportFetchFailed')
+      expect(err.name).toBe('ProductGroupsStaffReportFetchFailed')
     }
   })
 })
