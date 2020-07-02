@@ -21,7 +21,7 @@ if (process.env.SYSTEM_TEST) {
 const legacyId = '4564'
 
 const query = {
-  branch_number: 112233
+  branch_number: '112233'
 }
 
 const mock = new MockAdapter(axios)
