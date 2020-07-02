@@ -1,3 +1,15 @@
+# [3.200.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.199.1...v3.200.0) (2020-07-02)
+
+
+### Bug Fixes
+
+* **analytics:** fix query interface for product groups reports ([db0a94e](https://github.com/tillhub/tillhub-sdk-javascript/commit/db0a94e))
+
+
+### Features
+
+* **analytics:** add handler for products group report without staff ([83032ff](https://github.com/tillhub/tillhub-sdk-javascript/commit/83032ff))
+
 ## [3.199.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.199.0...v3.199.1) (2020-06-19)
 
 

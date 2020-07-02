@@ -135,7 +135,8 @@ export declare class Analytics {
     getReportsProducts(query?: ProductsOptions | undefined): Promise<AnalyticsResponse>;
     getProductsChildren(productNumber: String, query?: ProductsOptions | undefined): Promise<AnalyticsResponse>;
     getStaffOverviewReport(query?: StaffQuery | undefined): Promise<AnalyticsResponse>;
-    getProductGroupsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse>;
+    getProductGroupsStaffReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse>;
+    getProductGroupsReport(query?: RevenuBasicOptions | undefined): Promise<AnalyticsResponse>;
     getRefundsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse>;
     getVouchersReports(query?: VoucherOptions | undefined): Promise<AnalyticsResponse>;
     getProductsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse>;
@@ -216,6 +217,11 @@ export declare class ReportsCustomerCustomersFailed extends BaseError {
     constructor(message?: string, properties?: any);
 }
 export declare class SimpleSalesCartItemsReportFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class ProductGroupsStaffReportFetchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: any);
