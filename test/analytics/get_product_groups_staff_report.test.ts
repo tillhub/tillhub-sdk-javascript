@@ -1,6 +1,7 @@
 import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
+import qs from 'qs'
 dotenv.config()
 import { TillhubClient, v0 } from '../../src/tillhub-js'
 
@@ -20,14 +21,14 @@ if (process.env.SYSTEM_TEST) {
 
 const legacyId = '4564'
 const staffMember = '963'
-const branchNumber = 112233
+const branchNumber = '112233'
 
 const reportOptions = {
   staff: staffMember,
-  query: {
-    branch_number: branchNumber
-  }
+  branch_number: branchNumber
 }
+
+const query = qs.stringify(reportOptions)
 
 const mock = new MockAdapter(axios)
 afterEach(() => {
@@ -81,7 +82,7 @@ describe('v0: Analytics: gets product groups transactions report', () => {
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/product_groups/${staffMember}?branch_number=${branchNumber}`
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/product_groups?${query}`
         )
         .reply(function (config) {
           return [
@@ -130,7 +131,7 @@ describe('v0: Analytics: gets product groups transactions report', () => {
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/product_groups/${staffMember}?branch_number=${branchNumber}`
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/product_groups/?${query}`
         )
         .reply(function (config) {
           return [205]

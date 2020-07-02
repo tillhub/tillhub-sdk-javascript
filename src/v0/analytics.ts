@@ -133,12 +133,13 @@ export interface ProductGoupsFilters {
 }
 
 export interface StaffQuery {
-  branch_number?: number
+  branch_number?: string
+  start?: string
+  end?: string
 }
 
-export interface ReportOptions {
+export interface ReportOptions extends StaffQuery {
   staff?: StaffID,
-  query?: StaffQuery
 }
 
 export class Analytics {
@@ -300,8 +301,8 @@ export class Analytics {
       const staff = options && options.staff
 
       try {
-        const base = this.uriHelper.generateBaseUri(`/reports/staff/product_groups${staff ? `/${staff}` : ''}`)
-        const uri = this.uriHelper.generateUriWithQuery(base, options && options.query ? options.query : undefined)
+        const base = this.uriHelper.generateBaseUri(`/reports/staff/product_groups`)
+        const uri = this.uriHelper.generateUriWithQuery(base, options)
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new ProductGroupsStaffReportFetchFailed())
@@ -341,8 +342,8 @@ export class Analytics {
       const staff = options && options.staff
 
       try {
-        const base = this.uriHelper.generateBaseUri(`/reports/staff/refunds${staff ? `/${staff}` : ''}`)
-        const uri = this.uriHelper.generateUriWithQuery(base, options && options.query ? options.query : undefined)
+        const base = this.uriHelper.generateBaseUri(`/reports/staff/refunds`)
+        const uri = this.uriHelper.generateUriWithQuery(base, options)
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new RefundsReportFetchFailed())
@@ -386,8 +387,8 @@ export class Analytics {
       const staff = options && options.staff
 
       try {
-        const base = this.uriHelper.generateBaseUri(`/reports/staff/products${staff ? `/${staff}` : ''}`)
-        const uri = this.uriHelper.generateUriWithQuery(base, options && options.query ? options.query : undefined)
+        const base = this.uriHelper.generateBaseUri(`/reports/staff/products`)
+        const uri = this.uriHelper.generateUriWithQuery(base, options)
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new ProductsReportFetchFailed())
