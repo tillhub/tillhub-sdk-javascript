@@ -25,6 +25,11 @@ export interface StorefrontResponse {
     };
     msg?: string;
 }
+export interface StorefrontProfile {
+    currency?: string;
+    language?: string;
+    tax?: number;
+}
 export interface Storefront {
     id?: string;
     name?: string;
@@ -38,6 +43,7 @@ export interface Storefront {
     external_api_base?: string;
     auth?: object;
     metadata?: object;
+    profile?: StorefrontProfile;
 }
 export declare class Storefronts extends ThBaseHandler {
     static baseEndpoint: string;

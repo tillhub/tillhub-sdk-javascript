@@ -1,3 +1,10 @@
+# [3.201.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.200.1...v3.201.0) (2020-07-08)
+
+
+### Features
+
+* **storefronts:** add profile property to storefront ([02fa5c8](https://github.com/tillhub/tillhub-sdk-javascript/commit/02fa5c8))
+
 ## [3.200.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.200.0...v3.200.1) (2020-07-02)
 
 
