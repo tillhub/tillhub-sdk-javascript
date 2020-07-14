@@ -59,6 +59,8 @@ export interface User {
   key?: object | null
   secret?: string
   username?: string
+  firstname?: string
+  lastname?: string
   locations?: string[] | null
 }
 
