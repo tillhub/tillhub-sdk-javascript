@@ -40,7 +40,8 @@ describe('Auth: make auth flow', () => {
               id: '123',
               legacy_id: '4564',
               scopes: ['admin'],
-              role: 'manager'
+              role: 'manager',
+              display_name: 'big org'
             },
             features: {
               inventory: true
@@ -60,6 +61,7 @@ describe('Auth: make auth flow', () => {
       expect(typeof data.features === 'object').toBe(true)
       expect(Array.isArray(data.scopes)).toBe(true)
       expect(typeof data.role === 'string').toBe(true)
+      expect(typeof data.orgName === 'string').toBe(true)
       expect(data.features).toEqual({ inventory: true })
     } catch (err) {
       throw err

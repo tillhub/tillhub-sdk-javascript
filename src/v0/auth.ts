@@ -87,6 +87,7 @@ export interface AuthResponse {
   scopes?: string[]
   role?: string
   subUser?: object
+  orgName?: string
 }
 
 /**
@@ -175,7 +176,8 @@ export class Auth {
         name: response.data.user.name,
         features: response.data.features || {},
         scopes: response.data.user.scopes,
-        role: response.data.user.role
+        role: response.data.user.role,
+        orgName: response.data.user.display_name
       } as AuthResponse
     } catch (err) {
       const error = new errors.AuthenticationFailed()
