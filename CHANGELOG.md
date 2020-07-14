@@ -1,3 +1,10 @@
+# [3.203.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.202.0...v3.203.0) (2020-07-14)
+
+
+### Features
+
+* **users:** add firstname, lastname ([6cead51](https://github.com/tillhub/tillhub-sdk-javascript/commit/6cead51))
+
 # [3.202.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.201.0...v3.202.0) (2020-07-14)
 
 
