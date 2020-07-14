@@ -1,3 +1,10 @@
+# [3.202.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.201.0...v3.202.0) (2020-07-14)
+
+
+### Features
+
+* **auth:** add org name property to login response ([0cc691b](https://github.com/tillhub/tillhub-sdk-javascript/commit/0cc691b))
+
 # [3.201.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.200.1...v3.201.0) (2020-07-08)
 
 

@@ -62,6 +62,7 @@ export interface AuthResponse {
     scopes?: string[];
     role?: string;
     subUser?: object;
+    orgName?: string;
 }
 /**
  * @class "v0.Auth"
