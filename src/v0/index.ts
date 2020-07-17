@@ -55,6 +55,7 @@ import { Trash } from './trash'
 import { Timetracking } from './timetracking'
 import { CountingProtocols } from './counting-protocols'
 import { StockTakings } from './stock_takings'
+import { UserPermissionsTemplates } from './user_permissions_templates'
 
 export {
   Auth,
@@ -116,5 +117,6 @@ export {
   Trash,
   Timetracking,
   CountingProtocols,
-  StockTakings
+  StockTakings,
+  UserPermissionsTemplates
 }

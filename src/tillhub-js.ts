@@ -852,6 +852,14 @@ export class TillhubClient extends events.EventEmitter {
   stockTakings(): v0.StockTakings {
     return this.generateAuthenticatedInstance(v0.StockTakings)
   }
+
+  /**
+   * Create an authenticated UserPermissionsTemplates instance
+   *
+   */
+  userPermissionsTemplates(): v0.UserPermissionsTemplates {
+    return this.generateAuthenticatedInstance(v0.UserPermissionsTemplates)
+  }
 }
 
 export class Tillhub extends TillhubClient {
