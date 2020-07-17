@@ -117,4 +117,6 @@ var counting_protocols_1 = require("./counting-protocols");
 exports.CountingProtocols = counting_protocols_1.CountingProtocols;
 var stock_takings_1 = require("./stock_takings");
 exports.StockTakings = stock_takings_1.StockTakings;
+var user_permissions_templates_1 = require("./user_permissions_templates");
+exports.UserPermissionsTemplates = user_permissions_templates_1.UserPermissionsTemplates;
 //# sourceMappingURL=index.js.map

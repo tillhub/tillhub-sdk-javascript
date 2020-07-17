@@ -721,6 +721,13 @@ var TillhubClient = /** @class */ (function (_super) {
     TillhubClient.prototype.stockTakings = function () {
         return this.generateAuthenticatedInstance(v0.StockTakings);
     };
+    /**
+     * Create an authenticated UserPermissionsTemplates instance
+     *
+     */
+    TillhubClient.prototype.userPermissionsTemplates = function () {
+        return this.generateAuthenticatedInstance(v0.UserPermissionsTemplates);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));

@@ -375,6 +375,11 @@ export declare class TillhubClient extends events.EventEmitter {
      *
      */
     stockTakings(): v0.StockTakings;
+    /**
+     * Create an authenticated UserPermissionsTemplates instance
+     *
+     */
+    userPermissionsTemplates(): v0.UserPermissionsTemplates;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;

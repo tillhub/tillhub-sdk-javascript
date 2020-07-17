@@ -1,3 +1,10 @@
+# [3.204.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.203.0...v3.204.0) (2020-07-17)
+
+
+### Features
+
+* **user-permissions-templates:** add new handler ([0fc6857](https://github.com/tillhub/tillhub-sdk-javascript/commit/0fc6857))
+
 # [3.203.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.202.0...v3.203.0) (2020-07-14)
 
 
