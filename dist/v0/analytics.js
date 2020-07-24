@@ -175,13 +175,13 @@ var Analytics = /** @class */ (function () {
     Analytics.prototype.getReportsProducts = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var base, uri, response, err_5;
+            var queryString, uri, response, err_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        base = this.uriHelper.generateBaseUri('/reports/products');
-                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        queryString = qs_1.default.stringify(query, { addQueryPrefix: true });
+                        uri = this.options.base + "/api/v1/analytics/" + this.options.user + "/reports/products" + queryString;
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
@@ -203,13 +203,13 @@ var Analytics = /** @class */ (function () {
     Analytics.prototype.getProductsChildren = function (productNumber, query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var base, uri, response, err_6;
+            var queryString, uri, response, err_6;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        base = this.uriHelper.generateBaseUri("/reports/products/" + productNumber);
-                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        queryString = qs_1.default.stringify(query, { addQueryPrefix: true });
+                        uri = this.options.base + "/api/v1/analytics/" + this.options.user + "/reports/products/" + productNumber + queryString;
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();

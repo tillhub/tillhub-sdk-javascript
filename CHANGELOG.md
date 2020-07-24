@@ -1,3 +1,10 @@
+# [3.205.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.204.0...v3.205.0) (2020-07-24)
+
+
+### Features
+
+* **analytics/products:** bump to v1 ([0e5b1c3](https://github.com/tillhub/tillhub-sdk-javascript/commit/0e5b1c3))
+
 # [3.204.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.203.0...v3.204.0) (2020-07-17)
 
 
