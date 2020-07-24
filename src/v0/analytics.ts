@@ -263,11 +263,8 @@ export class Analytics {
   ): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const queryString = qs.stringify(query, { addQueryPrefix: true })
-        // TODO: move this to proper v1. We cut a corner here not to require consumers refactoring for the report
-        const uri = `${this.options.base}/api/v1/analytics/${
-          this.options.user
-          }/reports/products/${productNumber}${queryString}`
+        const base = this.uriHelper.generateBaseUri(`/reports/products/${productNumber}`)
+        const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new StatisticsProductChildrenFetchFailed())

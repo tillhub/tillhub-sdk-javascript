@@ -55,7 +55,7 @@ describe('v0: Analytics Products Children- getProductsChildren', () => {
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v1/analytics/${legacyId}/reports/products/${productNumber}?${queryString}`
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/products/${productNumber}?${queryString}`
         )
         .reply(function (config) {
           return [
@@ -115,7 +115,7 @@ describe('v0: Analytics Products Children- getProductsChildren', () => {
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v1/analytics/${legacyId}/reports/products/${productNumber}?${queryString}`
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/products/${productNumber}?${queryString}`
         )
         .reply(function (config) {
           return [205]
