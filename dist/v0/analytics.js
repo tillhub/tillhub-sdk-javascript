@@ -203,13 +203,13 @@ var Analytics = /** @class */ (function () {
     Analytics.prototype.getProductsChildren = function (productNumber, query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var queryString, uri, response, err_6;
+            var base, uri, response, err_6;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        queryString = qs_1.default.stringify(query, { addQueryPrefix: true });
-                        uri = this.options.base + "/api/v1/analytics/" + this.options.user + "/reports/products/" + productNumber + queryString;
+                        base = this.uriHelper.generateBaseUri("/reports/products/" + productNumber);
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();

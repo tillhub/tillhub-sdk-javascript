@@ -1,3 +1,10 @@
+## [3.205.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.205.0...v3.205.1) (2020-07-24)
+
+
+### Bug Fixes
+
+* **analytics/products:** revert version bump for products children ([6ac9f68](https://github.com/tillhub/tillhub-sdk-javascript/commit/6ac9f68))
+
 # [3.205.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.204.0...v3.205.0) (2020-07-24)
 
 
