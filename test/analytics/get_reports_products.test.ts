@@ -54,7 +54,7 @@ describe('v0: Analytics Reports Products - getReportsProducts', () => {
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/products?${queryString}`
+          `https://api.tillhub.com/api/v1/analytics/${legacyId}/reports/products?${queryString}`
         )
         .reply(function (config) {
           return [
@@ -114,7 +114,7 @@ describe('v0: Analytics Reports Products - getReportsProducts', () => {
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/products?${queryString}`
+          `https://api.tillhub.com/api/v1/analytics/${legacyId}/reports/products?${queryString}`
         )
         .reply(function (config) {
           return [205]
