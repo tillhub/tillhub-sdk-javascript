@@ -1,3 +1,10 @@
+## [3.205.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.205.1...v3.205.2) (2020-07-29)
+
+
+### Bug Fixes
+
+* **customers:** user uri helper for params ([cdb034b](https://github.com/tillhub/tillhub-sdk-javascript/commit/cdb034b))
+
 ## [3.205.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.205.0...v3.205.1) (2020-07-24)
 
 

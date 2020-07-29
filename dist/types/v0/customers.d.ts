@@ -134,8 +134,8 @@ export declare class Customers extends ThBaseHandler {
     options: CustomersOptions;
     uriHelper: UriHelper;
     constructor(options: CustomersOptions, http: Client);
-    getAll(queryOrOptions?: CustomersQuery | undefined): Promise<CustomersResponse>;
-    get(customerId: string, queryOrOptions: CustomersQuery): Promise<CustomerResponse>;
+    getAll(query?: CustomersQuery | undefined): Promise<CustomersResponse>;
+    get(customerId: string, query: CustomersQuery): Promise<CustomerResponse>;
     createNote(customerId: string, note: CustomerNoteItem): Promise<CustomerResponse>;
     put(customerId: string, customer: Customer): Promise<CustomerResponse>;
     create(customer: Customer, query?: HandlerCustomerQuery): Promise<CustomerResponse>;

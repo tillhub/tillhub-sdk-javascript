@@ -12,17 +12,6 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -77,28 +66,21 @@ var Customers = /** @class */ (function (_super) {
         _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
         return _this;
     }
-    Customers.prototype.getAll = function (queryOrOptions) {
+    Customers.prototype.getAll = function (query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var next, uri, queryString, response_1, err_1;
+            var next, base, uri, response_1, err_1;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        uri = void 0;
-                        if (queryOrOptions && queryOrOptions.uri) {
-                            uri = queryOrOptions.uri;
-                        }
-                        else {
-                            queryString = '';
-                            if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
-                                queryString = qs_1.default.stringify(__assign({ limit: queryOrOptions.limit }, queryOrOptions.query));
-                            }
-                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user + (queryString ? "?" + queryString : '');
-                        }
-                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                        base = this.uriHelper.generateBaseUri();
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        _a.label = 1;
                     case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 2:
                         response_1 = _a.sent();
                         if (response_1.status !== 200) {
                             reject(new CustomersFetchFailed(undefined, { status: response_1.status }));
@@ -111,31 +93,23 @@ var Customers = /** @class */ (function (_super) {
                                 metadata: { cursor: response_1.data.cursor },
                                 next: next
                             })];
-                    case 2:
+                    case 3:
                         err_1 = _a.sent();
                         return [2 /*return*/, reject(new CustomersFetchFailed(undefined, { error: err_1 }))];
-                    case 3: return [2 /*return*/];
+                    case 4: return [2 /*return*/];
                 }
             });
         }); });
     };
-    Customers.prototype.get = function (customerId, queryOrOptions) {
+    Customers.prototype.get = function (customerId, query) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, queryString, response, error_1;
+            var base, uri, response, error_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (queryOrOptions && queryOrOptions.uri) {
-                            uri = queryOrOptions.uri;
-                        }
-                        else {
-                            queryString = '';
-                            if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
-                                queryString = qs_1.default.stringify(__assign({ limit: queryOrOptions.limit }, queryOrOptions.query));
-                            }
-                            uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + customerId + (queryString ? "?" + queryString : '');
-                        }
+                        base = this.uriHelper.generateBaseUri("/" + customerId);
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
