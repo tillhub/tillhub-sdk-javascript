@@ -165,25 +165,13 @@ export class Customers extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(queryOrOptions?: CustomersQuery | undefined): Promise<CustomersResponse> {
+  getAll(query?: CustomersQuery | undefined): Promise<CustomersResponse> {
     return new Promise(async (resolve, reject) => {
       let next
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       try {
-        let uri
-        if (queryOrOptions && queryOrOptions.uri) {
-          uri = queryOrOptions.uri
-        } else {
-          let queryString = ''
-          if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
-            queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
-          }
-
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
-            queryString ? `?${queryString}` : ''
-            }`
-        }
-
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
           reject(new CustomersFetchFailed(undefined, { status: response.status }))
@@ -204,21 +192,10 @@ export class Customers extends ThBaseHandler {
     })
   }
 
-  get(customerId: string, queryOrOptions: CustomersQuery): Promise<CustomerResponse> {
+  get(customerId: string, query: CustomersQuery): Promise<CustomerResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri
-      if (queryOrOptions && queryOrOptions.uri) {
-        uri = queryOrOptions.uri
-      } else {
-        let queryString = ''
-        if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
-          queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
-        }
-
-        uri = `${this.options.base}${this.endpoint}/${this.options.user}/${customerId}${
-          queryString ? `?${queryString}` : ''
-          }`
-      }
+      const base = this.uriHelper.generateBaseUri(`/${customerId}`)
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       try {
         const response = await this.http.getClient().get(uri)
