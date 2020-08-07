@@ -1,3 +1,10 @@
+## [3.205.3](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.205.2...v3.205.3) (2020-08-07)
+
+
+### Bug Fixes
+
+* **taxes:** small change to force a release ([bd88d4f](https://github.com/tillhub/tillhub-sdk-javascript/commit/bd88d4f))
+
 ## [3.205.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.205.1...v3.205.2) (2020-07-29)
 
 

@@ -30,12 +30,17 @@ export interface Tax {
 export interface Tax {
     name: string;
     fa_account_number?: string;
-    type: 'vat';
+    type: TaxType;
     account: string;
     rate?: string;
     percentage?: string;
     is_fixed: boolean;
+    jurisdiction?: Jurisdictions;
+    rate_class: RateClasses;
 }
+export declare type TaxType = 'vat';
+export declare type RateClasses = 'normal' | 'reduced' | 'super_reduced';
+export declare type Jurisdictions = 'austria' | 'czech_republic' | 'france' | 'germany' | 'hungary' | 'italy' | 'ireland' | 'jungholz' | 'mittelberg' | 'monaco' | 'spain' | 'switzerland';
 export declare class Taxes extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
