@@ -22,7 +22,7 @@ const updateObject = {
   account: faker.finance.account(),
   is_fixed: faker.random.boolean(),
   jurisdiction: 'austria' as Jurisdictions,
-  rate_class: 'reduced' as RateClasses
+  rate_class: 'super_reduced' as RateClasses
 }
 
 describe('v0: Taxes: can alter the tax class', () => {
