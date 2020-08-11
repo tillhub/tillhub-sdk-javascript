@@ -1,3 +1,10 @@
+# [3.206.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.205.3...v3.206.0) (2020-08-11)
+
+
+### Features
+
+* **auth:** add expires at property to auth reponse ([#318](https://github.com/tillhub/tillhub-sdk-javascript/issues/318)) ([d9e6d39](https://github.com/tillhub/tillhub-sdk-javascript/commit/d9e6d39))
+
 ## [3.205.3](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.205.2...v3.205.3) (2020-08-07)
 
 

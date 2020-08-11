@@ -63,6 +63,7 @@ export interface AuthResponse {
     role?: string;
     subUser?: object;
     orgName?: string;
+    expiresAt?: string;
 }
 /**
  * @class "v0.Auth"
