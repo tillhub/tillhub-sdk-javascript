@@ -139,7 +139,7 @@ export interface StaffQuery {
 }
 
 export interface ReportOptions extends StaffQuery {
-  staff?: StaffID,
+  staff?: StaffID
 }
 
 export class Analytics {
@@ -239,9 +239,7 @@ export class Analytics {
       try {
         const queryString = qs.stringify(query, { addQueryPrefix: true })
         // TODO: move this to proper v1. We cut a corner here not to require consumers refactoring for the report
-        const uri = `${this.options.base}/api/v1/analytics/${
-          this.options.user
-          }/reports/products${queryString}`
+        const uri = `${this.options.base}/api/v1/analytics/${this.options.user}/reports/products${queryString}`
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new StatisticsProductFetchFailed())
@@ -322,7 +320,6 @@ export class Analytics {
 
   getProductGroupsReport(query?: RevenuBasicOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
-
       try {
         const base = this.uriHelper.generateBaseUri('/aggregates/product_groups')
         const uri = this.uriHelper.generateUriWithQuery(base, query)

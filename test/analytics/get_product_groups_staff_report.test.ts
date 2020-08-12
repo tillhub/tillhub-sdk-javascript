@@ -5,7 +5,7 @@ import qs from 'qs'
 dotenv.config()
 import { TillhubClient, v0 } from '../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',

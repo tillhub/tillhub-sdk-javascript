@@ -42,17 +42,15 @@ describe('v0: Taxes: can create one tax class', () => {
         ]
       })
 
-      mock
-        .onPost(`https://api.tillhub.com/api/v0/taxes/${legacyId}`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              count: 1,
-              results: [taxObj]
-            }
-          ]
-        })
+      mock.onPost(`https://api.tillhub.com/api/v0/taxes/${legacyId}`).reply(function (config) {
+        return [
+          200,
+          {
+            count: 1,
+            results: [taxObj]
+          }
+        ]
+      })
     }
 
     const th = await initThInstance()
@@ -81,10 +79,9 @@ describe('v0: Taxes: can create one tax class', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/taxes/${legacyId}`)
-        .reply(function (config) {
-          return [205]
-        })
+      mock.onPost(`https://api.tillhub.com/api/v0/taxes/${legacyId}`).reply(function (config) {
+        return [205]
+      })
     }
 
     try {

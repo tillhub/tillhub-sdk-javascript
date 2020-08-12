@@ -32,7 +32,7 @@ export interface StorefrontResponse {
 }
 
 export interface StorefrontProfile {
-  currency?: string,
+  currency?: string
   language?: string
   tax?: number
 }
@@ -87,7 +87,7 @@ export class Storefronts extends ThBaseHandler {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             queryString ? `?${queryString}` : ''
-            }`
+          }`
         }
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
