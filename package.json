@@ -22,7 +22,7 @@
     "node": ">=6.0.0"
   },
   "scripts": {
-    "lint": "eslint 'src/**/*.ts' 'test/**/*.test.ts' --quiet --fix",
+    "lint": "eslint 'src/**/*.ts' 'test/**/*.test.ts' --quiet",
     "prebuild": "rimraf dist",
     "build:main": "tsc -p tsconfig.json",
     "build:docs": "typedoc --out docs --target es6 --theme minimal --mode file src",
