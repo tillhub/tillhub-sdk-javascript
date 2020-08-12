@@ -115,7 +115,7 @@ export class ThAnalyticsBaseHandler {
   protected async handleGet(
     url: string,
     query?: HandlerQuery,
-    requestOptions?: Record<string, unknown>
+    requestOptions?: any
   ): Promise<ThAnalyticsBaseResponse> {
     const opts = {
       method: 'GET',
@@ -135,7 +135,7 @@ export class ThAnalyticsBaseHandler {
   protected async handleExport(
     url: string,
     query?: HandlerQuery,
-    requestOptions?: Record<string, unknown>
+    requestOptions?: any
   ): Promise<ThAnalyticsExportsBaseResponse> {
     const opts = {
       method: 'GET',
