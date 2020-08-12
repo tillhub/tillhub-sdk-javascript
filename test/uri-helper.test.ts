@@ -10,7 +10,6 @@ const mockOptions = {
 const expectedBaseUriResult = 'http://localTesting:3000/v1/testEndpoint/12345'
 
 describe('UriHelper constructor', () => {
-
   it('will create a base uri', () => {
     const uriHelper = new UriHelper(mockEndpoint, mockOptions)
     expect(uriHelper.baseUri).toBe(expectedBaseUriResult)
@@ -32,7 +31,6 @@ describe('UriHelper constructor', () => {
 })
 
 describe('UriHelper generateBaseUri()', () => {
-
   it('will return the base url if no additon path is inputed', () => {
     const uriHelper = new UriHelper(mockEndpoint, mockOptions)
     const result = uriHelper.generateBaseUri()
@@ -46,11 +44,9 @@ describe('UriHelper generateBaseUri()', () => {
     const expected = expectedBaseUriResult + mockPath
     expect(result).toBe(expected)
   })
-
 })
 
 describe('UriHelper generateUriWithQuery()', () => {
-
   it('will return the base url if no query is inputed', () => {
     const uriHelper = new UriHelper(mockEndpoint, mockOptions)
     const result = uriHelper.generateUriWithQuery('http://localTesting:4000')
@@ -94,7 +90,7 @@ describe('UriHelper generateUriWithQuery()', () => {
   it('will return flatten query stringified', () => {
     const uriHelper = new UriHelper(mockEndpoint, mockOptions)
     const baseUrl = 'http://localTesting:8000'
-    const query = { key1: 'value1', query: {  key2: 'value2', key3: 'value3' } }
+    const query = { key1: 'value1', query: { key2: 'value2', key3: 'value3' } }
     const expectedUri = `${baseUrl}?key1=value1&key2=value2&key3=value3`
     const result = uriHelper.generateUriWithQuery(baseUrl, query)
     expect(result).toBe(expectedUri)

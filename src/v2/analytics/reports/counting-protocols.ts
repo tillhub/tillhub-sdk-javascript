@@ -1,4 +1,8 @@
-import { ThAnalyticsBaseHandler, ThAnalyticsBaseResultItem, ThAnalyticsExportsBaseResponse } from '../../../base'
+import {
+  ThAnalyticsBaseHandler,
+  ThAnalyticsBaseResultItem,
+  ThAnalyticsExportsBaseResponse
+} from '../../../base'
 import { Client } from '../../../client'
 import { BaseError } from '../../../errors'
 
@@ -29,7 +33,7 @@ export interface CountingProtocolsQuery {
 
 export interface AnalyticsReportsCountingProtocolsResponse {
   data: CountingProtocol[]
-  summary: object[]
+  summary: Record<string, unknown>[]
   metaData: {
     count: number
     total_count: number
@@ -53,7 +57,7 @@ export interface CountingProtocol {
   context?: string
   comments?: string
   location?: string
-  cash_units?: object[]
+  cash_units?: Record<string, unknown>[]
   timezone?: string
   discrepancy?: boolean
   discrepancy_total?: string
@@ -71,7 +75,7 @@ export interface CountingProtocol {
   total_calculated?: string
 }
 
-export interface AnalyticsReportsCountingProtocolsExportResponseItem extends ThAnalyticsExportsBaseResponse {}
+export type AnalyticsReportsCountingProtocolsExportResponseItem = ThAnalyticsExportsBaseResponse
 
 export class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
   http: Client
@@ -83,36 +87,65 @@ export class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
     this.http = http
   }
 
-  static create(options: object, http: Client): AnalyticsReportsCountingProtocols {
-    return ThAnalyticsBaseHandler.generateAuthenticatedInstance(AnalyticsReportsCountingProtocols, options, http)
+  static create(options: Record<string, unknown>, http: Client): AnalyticsReportsCountingProtocols {
+    return ThAnalyticsBaseHandler.generateAuthenticatedInstance(
+      AnalyticsReportsCountingProtocols,
+      options,
+      http
+    )
   }
 
-  public async getAll(query?: CountingProtocolsQuery): Promise<AnalyticsReportsCountingProtocolsResponse> {
+  public async getAll(
+    query?: CountingProtocolsQuery
+  ): Promise<AnalyticsReportsCountingProtocolsResponse> {
     try {
       let nextFn
-      const { results: d, next, status } = await this.handleGet(`${this.options.base}/api/v2/analytics/${this.options.user}/reports/cashier_counting_protocols/overview`, query)
+      const { results: d, next, status } = await this.handleGet(
+        `${this.options.base}/api/v2/analytics/${this.options.user}/reports/cashier_counting_protocols/overview`,
+        query
+      )
 
-      if (status !== 200) throw new AnalyticsReportsCountingProtocolsFetchFailed(undefined, { status: status })
+      if (status !== 200)
+        throw new AnalyticsReportsCountingProtocolsFetchFailed(undefined, { status: status })
 
+      // eslint-disable-next-line
       // @ts-ignore
-      const data = d.find((item: ThAnalyticsBaseResultItem) => (item.metric.job === 'reports_counting_protocols_v2_overview_data')).values
+      const data = d.find(
+        (item: ThAnalyticsBaseResultItem) =>
+          item.metric.job === 'reports_counting_protocols_v2_overview_data'
+      ).values
+      // eslint-disable-next-line
       // @ts-ignore
-      const summary = d.find((item: ThAnalyticsBaseResultItem) => (item.metric.job === 'reports_counting_protocols_v2_overview_summary')).values
+      const summary = d.find(
+        (item: ThAnalyticsBaseResultItem) =>
+          item.metric.job === 'reports_counting_protocols_v2_overview_summary'
+      ).values
+      // eslint-disable-next-line
       // @ts-ignore
-      const count = d.find((item: ThAnalyticsBaseResultItem) => (item.metric.job === 'reports_counting_protocols_v2_overview_filtered_meta')).values[0]
+      const count = d.find(
+        (item: ThAnalyticsBaseResultItem) =>
+          item.metric.job === 'reports_counting_protocols_v2_overview_filtered_meta'
+      ).values[0]
+      // eslint-disable-next-line
       // @ts-ignore
-      const totalCount = d.find((item: ThAnalyticsBaseResultItem) => (item.metric.job === 'reports_counting_protocols_v2_overview_meta')).values[0]
+      const totalCount = d.find(
+        (item: ThAnalyticsBaseResultItem) =>
+          item.metric.job === 'reports_counting_protocols_v2_overview_meta'
+      ).values[0]
 
       if (next) {
-        nextFn = (): Promise<AnalyticsReportsCountingProtocolsResponse> => this.getAll({ uri: next })
+        nextFn = (): Promise<AnalyticsReportsCountingProtocolsResponse> =>
+          this.getAll({ uri: next })
       }
 
       return {
         data,
         summary,
         metaData: {
+          // eslint-disable-next-line
           // @ts-ignore
           count: count.count,
+          // eslint-disable-next-line
           // @ts-ignore
           total_count: totalCount.count
         },
@@ -123,9 +156,14 @@ export class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
     }
   }
 
-  public async export(query?: object): Promise<AnalyticsReportsCountingProtocolsExportResponseItem> {
+  public async export(
+    query?: Record<string, unknown>
+  ): Promise<AnalyticsReportsCountingProtocolsExportResponseItem> {
     try {
-      const result = await this.handleExport(`${this.options.base}/api/v2/analytics/${this.options.user}/reports/cashier_counting_protocols/overview`, query)
+      const result = await this.handleExport(
+        `${this.options.base}/api/v2/analytics/${this.options.user}/reports/cashier_counting_protocols/overview`,
+        query
+      )
       return result
     } catch (err) {
       throw new AnalyticsReportsCountingProtocolsExportFetchError(undefined, { error: err })
@@ -135,7 +173,10 @@ export class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
 
 export class AnalyticsReportsCountingProtocolsFetchFailed extends BaseError {
   public name = 'AnalyticsReportsCountingProtocolsFetchFailed'
-  constructor(public message: string = 'Could not fetch the counting protocols report', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the counting protocols report',
+    properties?: any
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsReportsCountingProtocolsFetchFailed.prototype)
   }
@@ -143,7 +184,10 @@ export class AnalyticsReportsCountingProtocolsFetchFailed extends BaseError {
 
 export class AnalyticsReportsCountingProtocolsExportFetchError extends BaseError {
   public name = 'AnalyticsReportsCountingProtocolsExportFetchError'
-  constructor(public message: string = 'Could not fetch counting protocols export. ', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch counting protocols export. ',
+    properties?: any
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsReportsCountingProtocolsExportFetchError.prototype)
   }

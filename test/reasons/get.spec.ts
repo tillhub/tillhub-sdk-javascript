@@ -22,7 +22,7 @@ const reason = {
 describe('v0: Reasons: can get one reason', () => {
   it("Tillhub's reasons are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() =>  {
         return [
           200,
           {
@@ -37,7 +37,7 @@ describe('v0: Reasons: can get one reason', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/reasons/${legacyId}/${reasonsId}`)
-        .reply(function (config) {
+        .reply(() =>  {
           return [
             200,
             {
@@ -61,7 +61,7 @@ describe('v0: Reasons: can get one reason', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() =>  {
         return [
           200,
           {
@@ -76,7 +76,7 @@ describe('v0: Reasons: can get one reason', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/reasons/${legacyId}/${reasonsId}`)
-        .reply(function (config) {
+        .reply(() =>  {
           return [205]
         })
     }

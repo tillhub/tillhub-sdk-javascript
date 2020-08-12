@@ -21,7 +21,7 @@ const voucher = {
 describe('v0: Vouchers: can create a voucher', () => {
   it("Tillhub's Vouchers are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -34,7 +34,7 @@ describe('v0: Vouchers: can create a voucher', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/vouchers/${legacyId}`).reply(function (config) {
+      mock.onPost(`https://api.tillhub.com/api/v0/vouchers/${legacyId}`).reply(() => {
         return [
           200,
           {
@@ -59,7 +59,7 @@ describe('v0: Vouchers: can create a voucher', () => {
 
   it('rejects on status codes that are not 200 with default message', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -72,7 +72,7 @@ describe('v0: Vouchers: can create a voucher', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/vouchers/${legacyId}`).reply(function (config) {
+      mock.onPost(`https://api.tillhub.com/api/v0/vouchers/${legacyId}`).reply(() => {
         return [
           500,
           {
@@ -96,7 +96,7 @@ describe('v0: Vouchers: can create a voucher', () => {
 
   it('rejects on status codes that are not 409 with VoucherCodeConflict error', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -109,7 +109,7 @@ describe('v0: Vouchers: can create a voucher', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/vouchers/${legacyId}`).reply(function (config) {
+      mock.onPost(`https://api.tillhub.com/api/v0/vouchers/${legacyId}`).reply(() => {
         return [
           409,
           {

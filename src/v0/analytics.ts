@@ -17,8 +17,8 @@ export interface AnalyticsOptions {
 }
 
 export interface AnalyticsResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   msg?: string
 }
 
@@ -74,7 +74,7 @@ export interface VoucherOptions {
 }
 
 export interface ExportFormatOptions {
-  format?: string,
+  format?: string
   branch_number?: number
 }
 
@@ -258,7 +258,7 @@ export class Analytics {
   }
 
   getProductsChildren(
-    productNumber: String,
+    productNumber: string,
     query?: ProductsOptions | undefined
   ): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
@@ -409,9 +409,7 @@ export class Analytics {
   getPaymentsReport(query?: PaymentsReportOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const base = `${this.options.base}${this.endpoint}/${
-          this.options.user
-          }/reports/staff/payments`
+        const base = `${this.options.base}${this.endpoint}/${this.options.user}/reports/staff/payments`
 
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 
@@ -431,9 +429,7 @@ export class Analytics {
   getTopPaymentsReport(query?: TopPaymentsReportOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const base = `${this.options.base}${this.endpoint}/${
-          this.options.user
-          }/reports/payments/top`
+        const base = `${this.options.base}${this.endpoint}/${this.options.user}/reports/payments/top`
 
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 
@@ -455,9 +451,7 @@ export class Analytics {
   ): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        let uri = `${this.options.base}${this.endpoint}/${
-          this.options.user
-          }/reports/transactions/simple`
+        let uri = `${this.options.base}${this.endpoint}/${this.options.user}/reports/transactions/simple`
 
         const queryString = qs.stringify(query)
 
@@ -543,9 +537,7 @@ export class Analytics {
       try {
         const queryString = qs.stringify(query, { addQueryPrefix: true })
         // TODO: move this to proper v1. We cut a corner here not to require consumers refactoring for the report
-        const uri = `${this.options.base}/api/v1/analytics/${
-          this.options.user
-          }/reports/stocks${queryString}`
+        const uri = `${this.options.base}/api/v1/analytics/${this.options.user}/reports/stocks${queryString}`
 
         const response = await this.http.getClient().get(uri)
 

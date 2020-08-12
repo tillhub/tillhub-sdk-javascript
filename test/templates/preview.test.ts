@@ -4,7 +4,7 @@ import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import th, { v1 } from '../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -50,7 +50,7 @@ describe('v0: Templates', () => {
     const { body, templateId } = requestObject
 
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -67,7 +67,7 @@ describe('v0: Templates', () => {
         .onPost(
           `https://api.tillhub.com/api/v1/templates/${legacyId}/${templateId}/preview?format=uri`
         )
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -103,7 +103,7 @@ describe('v0: Templates', () => {
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       const { templateId } = requestObject
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -119,7 +119,7 @@ describe('v0: Templates', () => {
         .onPost(
           `https://api.tillhub.com/api/v1/templates/${legacyId}/${templateId}/preview?format=uri`
         )
-        .reply(function (config) {
+        .reply(() => {
           return [400]
         })
     }

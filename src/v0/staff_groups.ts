@@ -18,8 +18,8 @@ export interface StaffGroupsQuery {
 }
 
 export interface StaffGroupsResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
 }
 
 export interface StaffGroupResponse {
@@ -50,7 +50,10 @@ export class StaffGroups extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: StaffGroupsOptions, http: Client) {
-    super(http, { endpoint: StaffGroups.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: StaffGroups.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 

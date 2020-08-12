@@ -6,8 +6,8 @@ interface RealtimeOptions {
 }
 
 export default class Realtime extends events.EventEmitter {
-  private initialized: boolean = false
-  private connected: boolean = false
+  private initialized = false
+  private connected = false
   private client?: MqttClient
   public options: RealtimeOptions
 
@@ -39,7 +39,8 @@ export default class Realtime extends events.EventEmitter {
   }
 
   destroy(): void {
-    if (!this.client) throw new Error('cannot destroy instance, because a client is not initialized')
+    if (!this.client)
+      throw new Error('cannot destroy instance, because a client is not initialized')
 
     this.client.end()
     this.initialized = false

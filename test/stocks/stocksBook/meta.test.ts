@@ -16,7 +16,7 @@ afterEach(() => {
 describe('v0: StocksBook: can get meta', () => {
   it("Tillhub's stocksBook is instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -29,16 +29,14 @@ describe('v0: StocksBook: can get meta', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/stock/${legacyId}/book/meta`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              results: [{ count: 900 }]
-            }
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/stock/${legacyId}/book/meta`).reply(() => {
+        return [
+          200,
+          {
+            results: [{ count: 900 }]
+          }
+        ]
+      })
     }
 
     const th = await initThInstance()
@@ -54,7 +52,7 @@ describe('v0: StocksBook: can get meta', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -66,11 +64,9 @@ describe('v0: StocksBook: can get meta', () => {
           }
         ]
       })
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/stock/${legacyId}/book/meta`)
-        .reply(function (config) {
-          return [400]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/stock/${legacyId}/book/meta`).reply(() => {
+        return [400]
+      })
     }
 
     try {

@@ -22,7 +22,7 @@ const staffMember = {
 describe('v0: Staff: can get one staff member', () => {
   it("Tillhub's staff are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -35,17 +35,15 @@ describe('v0: Staff: can get one staff member', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/${staffId}`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              count: 1,
-              results: [staffMember]
-            }
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/${staffId}`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [staffMember]
+          }
+        ]
+      })
     }
 
     const th = await initThInstance()
@@ -61,7 +59,7 @@ describe('v0: Staff: can get one staff member', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -74,11 +72,9 @@ describe('v0: Staff: can get one staff member', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/${staffId}`)
-        .reply(function (config) {
-          return [205]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/${staffId}`).reply(() => {
+        return [205]
+      })
     }
 
     try {
@@ -93,7 +89,7 @@ describe('v0: Staff: can get one staff member', () => {
 describe('v0: Staff: can get one staff member', () => {
   it("Tillhub's staff are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -106,17 +102,15 @@ describe('v0: Staff: can get one staff member', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/${staffId}`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              count: 1,
-              results: [staffMember]
-            }
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/${staffId}`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [staffMember]
+          }
+        ]
+      })
     }
 
     const th = await initThInstance()
@@ -132,7 +126,7 @@ describe('v0: Staff: can get one staff member', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -145,11 +139,9 @@ describe('v0: Staff: can get one staff member', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/${staffId}`)
-        .reply(function (config) {
-          return [205]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/${staffId}`).reply(() => {
+        return [205]
+      })
     }
 
     try {

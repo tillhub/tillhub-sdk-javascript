@@ -34,7 +34,7 @@ export class UriHelper {
     } else if (query.uri || (query.query && query.query.uri)) {
       uri = query.uri || query.query.uri
     } else if (query.query) {
-      let flattenQuery = { ...query, ...query.query }
+      const flattenQuery = { ...query, ...query.query }
       delete flattenQuery.query
       uri = `${basePath}?${qs.stringify(flattenQuery)}`
     } else {

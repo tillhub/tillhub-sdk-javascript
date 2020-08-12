@@ -3,7 +3,7 @@
 // import * as EventEmitter from 'events'
 import events from 'events'
 // import { AxiosError } from 'axios'
-import { AuthOptions, AuthTypes, UsernameAuth, KeyAuth, TokenAuth } from './v0/auth'
+import { AuthOptions, UsernameAuth, KeyAuth, TokenAuth } from './v0/auth'
 import { Auth } from './v1/auth'
 import * as v0 from './v0'
 import * as v1 from './v1'
@@ -18,19 +18,21 @@ export const defaultOptions: TillhubSDKOptions = {
   base: 'https://api.tillhub.com'
 }
 
+type Fn = () => any
+
 export interface TillhubSDKOptions {
   credentials?: UsernameAuth | KeyAuth | TokenAuth | undefined
   base?: string
   user?: string
-  responseInterceptors?: Function[]
-  requestInterceptors?: Function[]
+  responseInterceptors?: Fn[]
+  requestInterceptors?: Fn[]
 }
 
-type MaybeOptions = object
+type MaybeOptions = Record<string, unknown>
 
 export declare interface TillhubClient {
   on(event: 'raw-error' | 'error', listener: (error: Error) => void): this
-  on(event: string, listener: Function): this
+  on(event: string, listener: Fn): this
 }
 
 export class TillhubClient extends events.EventEmitter {
@@ -120,7 +122,7 @@ export class TillhubClient extends events.EventEmitter {
       if ((options.credentials as TokenAuth).token && clientOptions.headers) {
         clientOptions.headers['Authorization'] = `Bearer ${
           (options.credentials as TokenAuth).token
-          }`
+        }`
       }
 
       this.auth = new v1.Auth(authOptions)
@@ -132,7 +134,7 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   private generateAuthenticatedInstance<T>(
-    type: { new(options: object, http: Client): T },
+    type: { new (options: Record<string, unknown>, http: Client): T },
     maybeOptions?: MaybeOptions
   ): T {
     if (
@@ -458,14 +460,38 @@ export class TillhubClient extends events.EventEmitter {
     return {
       analytics: {
         reports: {
-          AnalyticsReportsRevenuesGrouped: v2.analytics.reports.AnalyticsReportsRevenuesGrouped.create({ user: this.auth.user, base: this.options.base }, this.http),
-          AnalyticsReportsTransactionsOverview: v2.analytics.reports.AnalyticsReportsTransactionsOverview.create({ user: this.auth.user, base: this.options.base }, this.http),
-          AnalyticsReportsTransactionsDetail: v2.analytics.reports.AnalyticsReportsTransactionsDetail.create({ user: this.auth.user, base: this.options.base }, this.http),
-          AnalyticsReportsTransactionsItems: v2.analytics.reports.AnalyticsReportsTransactionsItems.create({ user: this.auth.user, base: this.options.base }, this.http),
-          AnalyticsReportsBalancesOverview: v2.analytics.reports.AnalyticsReportsBalancesOverview.create({ user: this.auth.user, base: this.options.base }, this.http),
-          AnalyticsReportsBalancesDetail: v2.analytics.reports.AnalyticsReportsBalancesDetail.create({ user: this.auth.user, base: this.options.base }, this.http),
-          AnalyticsReportsCountingProtocols: v2.analytics.reports.AnalyticsReportsCountingProtocols.create({ user: this.auth.user, base: this.options.base }, this.http),
-          AnalyticsReportsDatev: v2.analytics.reports.AnalyticsReportsDatev.create({ user: this.auth.user, base: this.options.base }, this.http)
+          AnalyticsReportsRevenuesGrouped: v2.analytics.reports.AnalyticsReportsRevenuesGrouped.create(
+            { user: this.auth.user, base: this.options.base },
+            this.http
+          ),
+          AnalyticsReportsTransactionsOverview: v2.analytics.reports.AnalyticsReportsTransactionsOverview.create(
+            { user: this.auth.user, base: this.options.base },
+            this.http
+          ),
+          AnalyticsReportsTransactionsDetail: v2.analytics.reports.AnalyticsReportsTransactionsDetail.create(
+            { user: this.auth.user, base: this.options.base },
+            this.http
+          ),
+          AnalyticsReportsTransactionsItems: v2.analytics.reports.AnalyticsReportsTransactionsItems.create(
+            { user: this.auth.user, base: this.options.base },
+            this.http
+          ),
+          AnalyticsReportsBalancesOverview: v2.analytics.reports.AnalyticsReportsBalancesOverview.create(
+            { user: this.auth.user, base: this.options.base },
+            this.http
+          ),
+          AnalyticsReportsBalancesDetail: v2.analytics.reports.AnalyticsReportsBalancesDetail.create(
+            { user: this.auth.user, base: this.options.base },
+            this.http
+          ),
+          AnalyticsReportsCountingProtocols: v2.analytics.reports.AnalyticsReportsCountingProtocols.create(
+            { user: this.auth.user, base: this.options.base },
+            this.http
+          ),
+          AnalyticsReportsDatev: v2.analytics.reports.AnalyticsReportsDatev.create(
+            { user: this.auth.user, base: this.options.base },
+            this.http
+          )
         }
       }
     }

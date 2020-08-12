@@ -12,10 +12,10 @@ export interface ProductServiceQuestionsQuery {
   limit?: number
   uri?: string
   query?: {
-    deleted?: boolean;
-    active?: boolean;
-    start?: string;
-    end?: string;
+    deleted?: boolean
+    active?: boolean
+    start?: string
+    end?: string
   }
 }
 
@@ -28,16 +28,16 @@ export interface ProductServiceQuestionReponse {
 }
 
 export interface ProductServiceQuestionsResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
 }
 
 export interface ProductServiceQuestion {
   name?: string
   content?: string
   description?: string
-  service_questions?: Array<String>
-  answer_validation?: object
+  service_questions?: Array<string>
+  answer_validation?: Record<string, unknown>
   required?: boolean
   deleted?: boolean
   active?: boolean
@@ -51,7 +51,10 @@ export class ProductServiceQuestions extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: ProductServiceQuestionsOptions, http: Client) {
-    super(http, { endpoint: ProductServiceQuestions.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: ProductServiceQuestions.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -60,7 +63,9 @@ export class ProductServiceQuestions extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: ProductServiceQuestionsQuery | undefined): Promise<ProductServiceQuestionsResponse> {
+  getAll(
+    query?: ProductServiceQuestionsQuery | undefined
+  ): Promise<ProductServiceQuestionsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
@@ -71,7 +76,8 @@ export class ProductServiceQuestions extends ThBaseHandler {
         const response = await this.http.getClient().get(uri)
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<ProductServiceQuestionsResponse> => this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<ProductServiceQuestionsResponse> =>
+            this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({
@@ -91,7 +97,9 @@ export class ProductServiceQuestions extends ThBaseHandler {
         const uri = this.uriHelper.generateBaseUri(`/${questionId}`)
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
-          reject(new errors.ProductServiceQuestionsFetchOneFailed(undefined, { status: response.status }))
+          reject(
+            new errors.ProductServiceQuestionsFetchOneFailed(undefined, { status: response.status })
+          )
 
         return resolve({
           data: response.data.results[0] as ProductServiceQuestion,
@@ -138,13 +146,18 @@ export class ProductServiceQuestions extends ThBaseHandler {
     })
   }
 
-  put(questionId: string, productServiceQuestion: ProductServiceQuestion): Promise<ProductServiceQuestionReponse> {
+  put(
+    questionId: string,
+    productServiceQuestion: ProductServiceQuestion
+  ): Promise<ProductServiceQuestionReponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri(`/${questionId}`)
         const response = await this.http.getClient().put(uri, productServiceQuestion)
         response.status !== 200 &&
-          reject(new errors.ProductServiceQuestionsPutFailed(undefined, { status: response.status }))
+          reject(
+            new errors.ProductServiceQuestionsPutFailed(undefined, { status: response.status })
+          )
 
         return resolve({
           data: response.data.results[0] as ProductServiceQuestion,

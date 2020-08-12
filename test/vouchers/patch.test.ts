@@ -4,7 +4,7 @@ import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import { TillhubClient, v1 } from '../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -39,7 +39,7 @@ afterEach(() => {
 describe('v0: vouchers: can patch one', () => {
   it("Tillhub's vouchers are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -52,22 +52,20 @@ describe('v0: vouchers: can patch one', () => {
         ]
       })
 
-      mock
-        .onPatch(`https://api.tillhub.com/api/v0/vouchers/${legacyId}/${voucherId}`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              count: 1,
-              results: [
-                {
-                  id: voucherId,
-                  amount: 10.99
-                }
-              ]
-            }
-          ]
-        })
+      mock.onPatch(`https://api.tillhub.com/api/v0/vouchers/${legacyId}/${voucherId}`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [
+              {
+                id: voucherId,
+                amount: 10.99
+              }
+            ]
+          }
+        ]
+      })
     }
 
     const options = {
@@ -102,7 +100,7 @@ describe('v0: vouchers: can patch one', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -115,11 +113,9 @@ describe('v0: vouchers: can patch one', () => {
         ]
       })
 
-      mock
-        .onPatch(`https://api.tillhub.com/api/v0/vouchers/${legacyId}/${voucherId}`)
-        .reply(function (config) {
-          return [500]
-        })
+      mock.onPatch(`https://api.tillhub.com/api/v0/vouchers/${legacyId}/${voucherId}`).reply(() => {
+        return [500]
+      })
     }
 
     const options = {

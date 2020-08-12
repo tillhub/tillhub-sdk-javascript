@@ -22,17 +22,17 @@ export interface ProcessItemsQueryOptions {
 
 export interface ProcessesResponse {
   data: Process[]
-  metadata: object
+  metadata: Record<string, unknown>
 }
 
 export interface ProcessResponse {
   data: Process
-  metadata: object
+  metadata: Record<string, unknown>
   msg?: string
 }
 
 export interface ProcessItemsObject {
-  code: string,
+  code: string
   amount: number
 }
 
@@ -42,7 +42,7 @@ export interface ProcessItems {
 
 export interface ProcessesItemsResponse {
   data: ProcessItems
-  metadata: object
+  metadata: Record<string, unknown>
 }
 
 export interface Process {
@@ -51,7 +51,7 @@ export interface Process {
   assigned_staff?: string
   status?: string
   name?: string
-  result?: object | ProcessItemsObject
+  result?: Record<string, unknown> | ProcessItemsObject
   deleted?: boolean
 }
 
@@ -63,7 +63,10 @@ export class Processes extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: ProcessesOptions, http: Client) {
-    super(http, { endpoint: Processes.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Processes.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -78,7 +81,8 @@ export class Processes extends ThBaseHandler {
         const uri = this.uriHelper.generateBaseUri()
 
         const response = await this.http.getClient().post(uri, process)
-        response.status !== 200 && reject(new ProcessesCreationFailed(undefined, { status: response.status }))
+        response.status !== 200 &&
+          reject(new ProcessesCreationFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results[0],
@@ -125,7 +129,8 @@ export class Processes extends ThBaseHandler {
         const uri = this.uriHelper.generateUriWithQuery(baseUri, query)
 
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new ProcessesFetchOneFailed(undefined, { status: response.status }))
+        response.status !== 200 &&
+          reject(new ProcessesFetchOneFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results[0],
@@ -143,7 +148,8 @@ export class Processes extends ThBaseHandler {
         const uri = this.uriHelper.generateBaseUri(`/${processId}`)
 
         const response = await this.http.getClient().patch(uri, process)
-        response.status !== 200 && reject(new ProcessesUpdateFailed(undefined, { status: response.status }))
+        response.status !== 200 &&
+          reject(new ProcessesUpdateFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results[0] as Process,
@@ -161,7 +167,8 @@ export class Processes extends ThBaseHandler {
         const uri = this.uriHelper.generateBaseUri(`/${processId}`)
 
         const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new ProcessesDeleteFailed(undefined, { status: response.status }))
+        response.status !== 200 &&
+          reject(new ProcessesDeleteFailed(undefined, { status: response.status }))
 
         return resolve({
           msg: response.data.msg
@@ -179,7 +186,8 @@ export class Processes extends ThBaseHandler {
         const uri = this.uriHelper.generateUriWithQuery(baseUri, query)
 
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new ProcessItemsFetchFailed(undefined, { state: response.status }))
+        response.status !== 200 &&
+          reject(new ProcessItemsFetchFailed(undefined, { state: response.status }))
 
         return resolve({
           data: response.data.results as ProcessItems,
@@ -258,7 +266,7 @@ export class ProcessesDeleteFailed extends BaseError {
 
 export class ProcessItemsFetchFailed extends BaseError {
   public name = 'ProcessItemsFetchFailed'
-  constructor(public message: string = 'Could not fetch one process\' items', properties?: any) {
+  constructor(public message: string = "Could not fetch one process' items", properties?: any) {
     super(message, properties)
     Object.setPrototypeOf(this, ProcessItemsFetchFailed.prototype)
   }

@@ -22,9 +22,8 @@ const products = [
 
 describe('v1: Products: can bulk edit multiple products', () => {
   it("Tillhub's products are instantiable", async () => {
-
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -37,17 +36,15 @@ describe('v1: Products: can bulk edit multiple products', () => {
         ]
       })
 
-      mock
-        .onPut(`https://api.tillhub.com/api/v1/products/${legacyId}/bulk`)
-        .reply(function (config) {
-          return [
-            202,
-            {
-              count: 1,
-              results: [{}]
-            }
-          ]
-        })
+      mock.onPut(`https://api.tillhub.com/api/v1/products/${legacyId}/bulk`).reply(() => {
+        return [
+          202,
+          {
+            count: 1,
+            results: [{}]
+          }
+        ]
+      })
     }
 
     const th = await initThInstance()
@@ -63,7 +60,7 @@ describe('v1: Products: can bulk edit multiple products', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -76,7 +73,7 @@ describe('v1: Products: can bulk edit multiple products', () => {
         ]
       })
 
-      mock.onPut(`https://api.tillhub.com/api/v1/products/${legacyId}/bulk`).reply(function (config) {
+      mock.onPut(`https://api.tillhub.com/api/v1/products/${legacyId}/bulk`).reply(() => {
         return [205]
       })
     }

@@ -4,7 +4,7 @@ import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import { TillhubClient, v1 } from '../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -27,7 +27,7 @@ describe('v1: Balances: can get count number of all balances', () => {
   })
   it("Tillhub's balances are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -40,17 +40,15 @@ describe('v1: Balances: can get count number of all balances', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v1/balances/${legacyId}/meta`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              count: 50,
-              results: [{ count: 50 }]
-            }
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v1/balances/${legacyId}/meta`).reply(() => {
+        return [
+          200,
+          {
+            count: 50,
+            results: [{ count: 50 }]
+          }
+        ]
+      })
     }
 
     const options = {
@@ -80,7 +78,7 @@ describe('v1: Balances: can get count number of all balances', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -93,11 +91,9 @@ describe('v1: Balances: can get count number of all balances', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v1/balances/${legacyId}/meta`)
-        .reply(function (config) {
-          return [205]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v1/balances/${legacyId}/meta`).reply(() => {
+        return [205]
+      })
     }
 
     const options = {

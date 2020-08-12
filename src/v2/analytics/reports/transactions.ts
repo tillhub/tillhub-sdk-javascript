@@ -1,4 +1,8 @@
-import { ThAnalyticsBaseHandler, ThAnalyticsBaseResultItem, ThAnalyticsExportsBaseResponse } from '../../../base'
+import {
+  ThAnalyticsBaseHandler,
+  ThAnalyticsBaseResultItem,
+  ThAnalyticsExportsBaseResponse
+} from '../../../base'
 import { Client } from '../../../client'
 import { BaseError } from '../../../errors'
 
@@ -8,8 +12,8 @@ export interface TransactionsHandlerOptions {
 }
 
 export interface AnalyticsReportsTransactionsOverviewResponseItem {
-  data: object[]
-  summary: object[]
+  data: Record<string, unknown>[]
+  summary: Record<string, unknown>[]
   metaData: {
     count: number
     total_count: number
@@ -18,16 +22,14 @@ export interface AnalyticsReportsTransactionsOverviewResponseItem {
 }
 
 export interface AnalyticsReportsTransactionDetailResponseItem {
-  data: object
+  data: Record<string, unknown>
   metaData: {
     count: number
     total_count: number
   }
 }
 
-export interface AnalyticsReportsTraansactionsOverviewExportResponseItem extends ThAnalyticsExportsBaseResponse {
-
-}
+export type AnalyticsReportsTraansactionsOverviewExportResponseItem = ThAnalyticsExportsBaseResponse
 
 export class AnalyticsReportsTransactionsOverview extends ThAnalyticsBaseHandler {
   http: Client
@@ -39,38 +41,70 @@ export class AnalyticsReportsTransactionsOverview extends ThAnalyticsBaseHandler
     this.http = http
   }
 
-  static create(options: object, http: Client): AnalyticsReportsTransactionsOverview {
-    return ThAnalyticsBaseHandler.generateAuthenticatedInstance(AnalyticsReportsTransactionsOverview, options, http)
+  static create(
+    options: Record<string, unknown>,
+    http: Client
+  ): AnalyticsReportsTransactionsOverview {
+    return ThAnalyticsBaseHandler.generateAuthenticatedInstance(
+      AnalyticsReportsTransactionsOverview,
+      options,
+      http
+    )
   }
 
-  public async getAll(query?: object): Promise<AnalyticsReportsTransactionsOverviewResponseItem> {
+  public async getAll(
+    query?: Record<string, unknown>
+  ): Promise<AnalyticsReportsTransactionsOverviewResponseItem> {
     try {
       let nextFn
-      const { results: d, next } = await this.handleGet(`${this.options.base}/api/v2/analytics/${this.options.user}/reports/transactions/overview`, query)
-      if (!d) {
+      const { results: d, next } = await this.handleGet(
+        `${this.options.base}/api/v2/analytics/${this.options.user}/reports/transactions/overview`,
+        query
+      )
+      if (!d || !Array.isArray(d) || !d.length) {
         throw new TypeError('Unexpectedly did not return data.')
       }
 
-      // @ts-ignore
-      const data = d.find((item: ThAnalyticsBaseResultItem) => (item.metric.job === 'reports_transactions_v2_overview_data')).values
-      // @ts-ignore
-      const summary = d.find((item: ThAnalyticsBaseResultItem) => (item.metric.job === 'reports_transactions_v2_overview_summary')).values
-      // @ts-ignore
-      const count = d.find((item: ThAnalyticsBaseResultItem) => (item.metric.job === 'reports_transactions_v2_overview_filtered_meta')).values[0]
-      // @ts-ignore
-      const totalCount = d.find((item: ThAnalyticsBaseResultItem) => (item.metric.job === 'reports_transactions_v2_overview_meta')).values[0]
+      const data = (
+        d.find(
+          (item: ThAnalyticsBaseResultItem) =>
+            item.metric.job === 'reports_transactions_v2_overview_data'
+        ) || {}
+      ).values
+
+      const summary = (
+        d.find(
+          (item: ThAnalyticsBaseResultItem) =>
+            item.metric.job === 'reports_transactions_v2_overview_summary'
+        ) || {}
+      ).values
+
+      const count = (
+        d.find(
+          (item: ThAnalyticsBaseResultItem) =>
+            item.metric.job === 'reports_transactions_v2_overview_filtered_meta'
+        ) || { values: [] }
+      )?.values[0]?.count
+
+      const totalCount = (
+        d.find(
+          (item: ThAnalyticsBaseResultItem) =>
+            item.metric.job === 'reports_transactions_v2_overview_meta'
+        ) || { values: [] }
+      ).values[0]
 
       if (next) {
-        nextFn = (): Promise<AnalyticsReportsTransactionsOverviewResponseItem> => this.getAll({ uri: next })
+        nextFn = (): Promise<AnalyticsReportsTransactionsOverviewResponseItem> =>
+          this.getAll({ uri: next })
       }
 
       return {
         data: data,
         summary: summary,
         metaData: {
+          // eslint-disable-next-line
           // @ts-ignore
           count: count.count,
-          // @ts-ignore
           total_count: totalCount.count
         },
         next: nextFn
@@ -80,9 +114,14 @@ export class AnalyticsReportsTransactionsOverview extends ThAnalyticsBaseHandler
     }
   }
 
-  public async export(query?: object): Promise<AnalyticsReportsTraansactionsOverviewExportResponseItem> {
+  public async export(
+    query?: Record<string, unknown>
+  ): Promise<AnalyticsReportsTraansactionsOverviewExportResponseItem> {
     try {
-      const result = await this.handleExport(`${this.options.base}/api/v2/analytics/${this.options.user}/reports/transactions/overview`, query)
+      const result = await this.handleExport(
+        `${this.options.base}/api/v2/analytics/${this.options.user}/reports/transactions/overview`,
+        query
+      )
       return result
     } catch (err) {
       throw new AnalyticsReportsTransactionsOverviewExportFetchError(undefined, { error: err })
@@ -100,16 +139,28 @@ export class AnalyticsReportsTransactionsDetail extends ThAnalyticsBaseHandler {
     this.http = http
   }
 
-  static create(options: object, http: Client): AnalyticsReportsTransactionsDetail {
-    return ThAnalyticsBaseHandler.generateAuthenticatedInstance(AnalyticsReportsTransactionsDetail, options, http)
+  static create(
+    options: Record<string, unknown>,
+    http: Client
+  ): AnalyticsReportsTransactionsDetail {
+    return ThAnalyticsBaseHandler.generateAuthenticatedInstance(
+      AnalyticsReportsTransactionsDetail,
+      options,
+      http
+    )
   }
 
   public async get(id?: string): Promise<AnalyticsReportsTransactionDetailResponseItem> {
     try {
-      const { results: d } = await this.handleGet(`${this.options.base}/api/v2/analytics/${this.options.user}/reports/transactions/${id}/detail`)
-
+      const { results: d } = await this.handleGet(
+        `${this.options.base}/api/v2/analytics/${this.options.user}/reports/transactions/${id}/detail`
+      )
+      // eslint-disable-next-line
       // @ts-ignore
-      const data = d.find((item: ThAnalyticsBaseResultItem) => (item.metric.job === 'reports_transactions_v2_transaction_detail_data')).values
+      const data = d.find(
+        (item: ThAnalyticsBaseResultItem) =>
+          item.metric.job === 'reports_transactions_v2_transaction_detail_data'
+      ).values
 
       return {
         data: data[0],
@@ -142,7 +193,10 @@ export class AnalyticsReportsTransactionDetailFetcshError extends BaseError {
 
 export class AnalyticsReportsTransactionsOverviewExportFetchError extends BaseError {
   public name = 'AnalyticsReportsTransactionsOverviewExportFetchError'
-  constructor(public message: string = 'Could not fetch transaction overview export. ', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch transaction overview export. ',
+    properties?: any
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsReportsTransactionsOverviewExportFetchError.prototype)
   }

@@ -4,7 +4,7 @@ import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import { TillhubClient, v0 } from '../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -29,7 +29,7 @@ afterEach(() => {
 describe('v0: Orders: can get all historic order items', () => {
   it("Tillhub's orders are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -44,7 +44,7 @@ describe('v0: Orders: can get all historic order items', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/orders/${legacyId}/${orderId}/order_items`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -82,7 +82,7 @@ describe('v0: Orders: can get all historic order items', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -96,7 +96,7 @@ describe('v0: Orders: can get all historic order items', () => {
       })
       mock
         .onGet(`https://api.tillhub.com/api/v0/orders/${legacyId}/${orderId}/order_items`)
-        .reply(function (config) {
+        .reply(() => {
           return [205]
         })
     }

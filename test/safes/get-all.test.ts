@@ -4,7 +4,7 @@ import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import { TillhubClient, v0 } from '../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -34,7 +34,7 @@ const query = {
 describe('v0: Safes: can get all', () => {
   it("Tillhub's Safes are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -47,15 +47,17 @@ describe('v0: Safes: can get all', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/safes/${legacyId}?location=${locationId}`).reply(function (config) {
-        return [
-          200,
-          {
-            count: 1,
-            results: [{}]
-          }
-        ]
-      })
+      mock
+        .onGet(`https://api.tillhub.com/api/v0/safes/${legacyId}?location=${locationId}`)
+        .reply(() => {
+          return [
+            200,
+            {
+              count: 1,
+              results: [{}]
+            }
+          ]
+        })
     }
 
     const options = {
@@ -85,7 +87,7 @@ describe('v0: Safes: can get all', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -97,7 +99,7 @@ describe('v0: Safes: can get all', () => {
           }
         ]
       })
-      mock.onGet(`https://api.tillhub.com/api/v0/safes/${legacyId}`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v0/safes/${legacyId}`).reply(() => {
         return [205]
       })
     }

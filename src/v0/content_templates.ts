@@ -19,8 +19,8 @@ export interface ContentTemplatesQuery {
 }
 
 export interface ContentTemplatesResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   next?: () => Promise<ContentTemplatesResponse>
 }
 
@@ -66,7 +66,10 @@ export class ContentTemplates extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: ContentTemplatesOptions, http: Client) {
-    super(http, { endpoint: ContentTemplates.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: ContentTemplates.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -91,7 +94,7 @@ export class ContentTemplates extends ThBaseHandler {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             queryString ? `?${queryString}` : ''
-            }`
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -100,7 +103,8 @@ export class ContentTemplates extends ThBaseHandler {
         }
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<ContentTemplatesResponse> => this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<ContentTemplatesResponse> =>
+            this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({

@@ -14,13 +14,13 @@ export interface Printer {
 
 export interface PrintersResponse {
   data: Printer[]
-  metadata: object
+  metadata: Record<string, unknown>
   msg?: string
 }
 
 export interface PrinterResponse {
   data: Printer
-  metadata: object
+  metadata: Record<string, unknown>
   msg?: string
 }
 
@@ -35,7 +35,7 @@ export class Printers {
     this.uriHelper = uriHelper
   }
 
-  async getAll(query?: Object): Promise<PrintersResponse> {
+  async getAll(query?: Record<string, unknown>): Promise<PrintersResponse> {
     try {
       const base = this.uriHelper.generateBaseUri('/printers')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -70,7 +70,7 @@ export class Printers {
     }
   }
 
-  async create(printer: Object): Promise<PrinterResponse> {
+  async create(printer: Record<string, unknown>): Promise<PrinterResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/printers`)
       const uri = this.uriHelper.generateUriWithQuery(base)
@@ -87,7 +87,7 @@ export class Printers {
     }
   }
 
-  async update(printerId: string, printer: Object): Promise<PrinterResponse> {
+  async update(printerId: string, printer: Record<string, unknown>): Promise<PrinterResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/printers/${printerId}`)
       const uri = this.uriHelper.generateUriWithQuery(base)

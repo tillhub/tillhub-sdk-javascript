@@ -22,7 +22,7 @@ export interface WarehousesQuery {
 
 export interface WarehousesResponse {
   data: Warehouse
-  metadata: object
+  metadata: Record<string, unknown>
   msg?: string | null
 }
 
@@ -79,7 +79,10 @@ export class Warehouses extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: WarehousesOptions, http: Client) {
-    super(http, { endpoint: Warehouses.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Warehouses.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 

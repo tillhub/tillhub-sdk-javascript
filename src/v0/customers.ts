@@ -27,7 +27,7 @@ export interface CustomersMetaQuery {
 
 export interface CustomersResponse {
   data: Customer[]
-  metadata: object
+  metadata: Record<string, unknown>
   next?: () => Promise<CustomersResponse>
 }
 
@@ -62,7 +62,7 @@ export interface CustomerPhonenumbers {
 }
 
 export interface CustomerNoteItem {
-  type: 'text',
+  type: 'text'
   payload: any
 }
 
@@ -84,7 +84,7 @@ export interface CustomerContacts {
 export interface ErrorObject {
   id: string
   label: string
-  errorDetails: object
+  errorDetails: Record<string, unknown>
 }
 
 export type CustomerAddressType = 'delivery' | 'billing'
@@ -140,7 +140,7 @@ export interface Customer {
   image?: CustomerImage | null
   active?: boolean
   contacts?: CustomerContacts | null
-  metadata?: object | null
+  metadata?: Record<string, unknown> | null
   addresses?: CustomerAddress[] | null
   comment?: string | null
   discounts?: Array<CustomerInternalDiscount | CustomerDiscount> | null
@@ -156,7 +156,10 @@ export class Customers extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: CustomersOptions, http: Client) {
-    super(http, { endpoint: Customers.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Customers.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -321,7 +324,7 @@ export class Customers extends ThBaseHandler {
 
   count(): Promise<CustomersResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
 
       try {
         const response = await this.http.getClient().get(uri)

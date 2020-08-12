@@ -4,7 +4,7 @@ import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import { TillhubClient, v0 } from '../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -34,7 +34,7 @@ const createObject = {
 
 beforeEach(async () => {
   if (process.env.SYSTEM_TEST !== 'true') {
-    mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+    mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
       return [
         200,
         {
@@ -47,17 +47,15 @@ beforeEach(async () => {
       ]
     })
 
-    mock
-      .onPost(`https://api.tillhub.com/api/v0/orders/${legacyId}/${orderId}`)
-      .reply(function (config) {
-        return [
-          200,
-          {
-            count: 1,
-            results: [{}]
-          }
-        ]
-      })
+    mock.onPost(`https://api.tillhub.com/api/v0/orders/${legacyId}/${orderId}`).reply(() => {
+      return [
+        200,
+        {
+          count: 1,
+          results: [{}]
+        }
+      ]
+    })
   }
 
   options = {

@@ -20,7 +20,7 @@ const productServiceQuestionGroup = {
 describe('v0: Product Service Question Groups: can get one productServiceQuestionGroup', () => {
   it("Tillhub's product service question groups are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -34,8 +34,10 @@ describe('v0: Product Service Question Groups: can get one productServiceQuestio
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/product_service_question_groups/${legacyId}/${groupId}`)
-        .reply(function (config) {
+        .onGet(
+          `https://api.tillhub.com/api/v0/product_service_question_groups/${legacyId}/${groupId}`
+        )
+        .reply(() => {
           return [
             200,
             {
@@ -59,7 +61,7 @@ describe('v0: Product Service Question Groups: can get one productServiceQuestio
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -73,8 +75,10 @@ describe('v0: Product Service Question Groups: can get one productServiceQuestio
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/product_service_question_groups/${legacyId}/${groupId}`)
-        .reply(function (config) {
+        .onGet(
+          `https://api.tillhub.com/api/v0/product_service_question_groups/${legacyId}/${groupId}`
+        )
+        .reply(() => {
           return [205]
         })
     }

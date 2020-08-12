@@ -19,7 +19,7 @@ export interface PricebooksQuery {
 
 export interface PricebooksResponse {
   data: Pricebook[]
-  metadata: object
+  metadata: Record<string, unknown>
   next?: () => Promise<PricebooksResponse>
 }
 
@@ -35,7 +35,7 @@ export interface PricebookResponse {
 export interface Pricebook {
   name?: string
   custom_id?: string
-  constraints?: object
+  constraints?: Record<string, unknown>
   active?: boolean
   deleted?: boolean
 }
@@ -100,7 +100,7 @@ export class Pricebooks {
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
-        reject(new PricebookFetchFailed(undefined, { status: response.status }))
+          reject(new PricebookFetchFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results[0] as Pricebook,

@@ -4,15 +4,15 @@ import * as errors from '../errors'
 import { ThBaseHandler } from '../base'
 
 export interface Item {
-  type?: string,
-  object_id: string,
-  client_id: string,
+  type?: string
+  object_id: string
+  client_id: string
   order_index: number
 }
 
 export interface Tab {
-  name?: string,
-  order_index: number,
+  name?: string
+  order_index: number
   items: Item[]
 }
 
@@ -22,19 +22,19 @@ export interface Favourite {
   name?: string
   tabs?: Tab[]
   client_id?: string
-  created_at?: Date,
+  created_at?: Date
   updated_at?: Date
 }
 
 export interface FavouritesResponse {
   data: Favourite[]
-  metadata: object
+  metadata: Record<string, unknown>
   msg?: string
 }
 
 export interface FavouriteResponse {
   data: Favourite
-  metadata: object
+  metadata: Record<string, unknown>
   msg?: string
 }
 
@@ -51,7 +51,10 @@ export class Favourites extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: FavouritesOptions, http: Client) {
-    super(http, { endpoint: Favourites.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Favourites.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -60,7 +63,7 @@ export class Favourites extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async getAll(query?: Object): Promise<FavouritesResponse> {
+  async getAll(query?: Record<string, unknown>): Promise<FavouritesResponse> {
     try {
       const base = this.uriHelper.generateBaseUri()
       const uri = this.uriHelper.generateUriWithQuery(base, query)

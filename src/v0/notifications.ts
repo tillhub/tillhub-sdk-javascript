@@ -9,7 +9,7 @@ export interface NotificationsOpions {
 
 export interface EmailOptions {
   type: string
-  body?: object
+  body?: Record<string, unknown>
 }
 
 export interface NotificationsResponse {

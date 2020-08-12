@@ -1,4 +1,3 @@
-
 export class BaseError extends Error {
   public properties?: any
   public message: string

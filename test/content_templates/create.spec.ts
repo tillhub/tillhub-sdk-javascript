@@ -23,7 +23,7 @@ const template = {
 describe('v0: ContentTemplates: can create a contents_template', () => {
   it("Tillhub's content_templates are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() =>  {
         return [
           200,
           {
@@ -36,7 +36,7 @@ describe('v0: ContentTemplates: can create a contents_template', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/content_templates/${legacyId}`).reply(function (config) {
+      mock.onPost(`https://api.tillhub.com/api/v0/content_templates/${legacyId}`).reply(() =>  {
         return [
           200,
           {
@@ -61,7 +61,7 @@ describe('v0: ContentTemplates: can create a contents_template', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() =>  {
         return [
           200,
           {
@@ -74,7 +74,7 @@ describe('v0: ContentTemplates: can create a contents_template', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/content_templates/${legacyId}`).reply(function (config) {
+      mock.onPost(`https://api.tillhub.com/api/v0/content_templates/${legacyId}`).reply(() =>  {
         return [205]
       })
     }

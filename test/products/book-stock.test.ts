@@ -4,7 +4,7 @@ import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import th, { TillhubClient, v1 } from '../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -40,7 +40,7 @@ afterEach(() => {
 describe('Book stock for a product', () => {
   it('create', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -53,16 +53,18 @@ describe('Book stock for a product', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v1/products/${userId}/${requestOptions.productId}/stock/book`).reply(function (config) {
-        return [
-          200,
-          {
-            results: [
-              productObj
-            ]
-          }
-        ]
-      })
+      mock
+        .onPost(
+          `https://api.tillhub.com/api/v1/products/${userId}/${requestOptions.productId}/stock/book`
+        )
+        .reply(() => {
+          return [
+            200,
+            {
+              results: [productObj]
+            }
+          ]
+        })
     }
 
     const options = {
@@ -93,7 +95,7 @@ describe('Book stock for a product', () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       const mock = new MockAdapter(axios)
 
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -106,9 +108,13 @@ describe('Book stock for a product', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v1/products/${userId}/${requestOptions.productId}/stock/book`).reply(function (config) {
-        return [205]
-      })
+      mock
+        .onPost(
+          `https://api.tillhub.com/api/v1/products/${userId}/${requestOptions.productId}/stock/book`
+        )
+        .reply(() => {
+          return [205]
+        })
     }
 
     const options = {

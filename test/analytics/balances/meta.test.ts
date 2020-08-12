@@ -5,7 +5,7 @@ dotenv.config()
 import { Balances } from '../../../src/v0/analytics/reports/balances'
 import { TillhubClient } from '../../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -28,7 +28,7 @@ describe('v0: Analytics Reports Balances: can get count number of all balances',
   })
   it("Tillhub's balances are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -43,7 +43,7 @@ describe('v0: Analytics Reports Balances: can get count number of all balances',
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/balances/meta`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -81,7 +81,7 @@ describe('v0: Analytics Reports Balances: can get count number of all balances',
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -96,7 +96,7 @@ describe('v0: Analytics Reports Balances: can get count number of all balances',
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/balances/meta`)
-        .reply(function (config) {
+        .reply(() => {
           return [205]
         })
     }

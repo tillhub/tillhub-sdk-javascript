@@ -18,7 +18,7 @@ const respMsg = `Deleted pricebook entry ${pricebookEntryId}`
 describe('v0: PricebookEntries: can delete a pricebook', () => {
   it("Tillhub's pricebook entries are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -32,8 +32,10 @@ describe('v0: PricebookEntries: can delete a pricebook', () => {
       })
 
       mock
-        .onDelete(`https://api.tillhub.com/api/v1/products/${legacyId}/prices/book/entry/${pricebookEntryId}`)
-        .reply(function (config) {
+        .onDelete(
+          `https://api.tillhub.com/api/v1/products/${legacyId}/prices/book/entry/${pricebookEntryId}`
+        )
+        .reply(() => {
           return [
             200,
             {
@@ -56,7 +58,7 @@ describe('v0: PricebookEntries: can delete a pricebook', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -69,8 +71,10 @@ describe('v0: PricebookEntries: can delete a pricebook', () => {
         ]
       })
       mock
-        .onDelete(`https://api.tillhub.com/api/v1/products/${legacyId}/prices/book/entry/${pricebookEntryId}`)
-        .reply(function (config) {
+        .onDelete(
+          `https://api.tillhub.com/api/v1/products/${legacyId}/prices/book/entry/${pricebookEntryId}`
+        )
+        .reply(() => {
           return [205]
         })
     }
@@ -78,7 +82,10 @@ describe('v0: PricebookEntries: can delete a pricebook', () => {
     const th = await initThInstance()
 
     try {
-      await th.products().pricebookEntries().delete(pricebookEntryId)
+      await th
+        .products()
+        .pricebookEntries()
+        .delete(pricebookEntryId)
     } catch (err) {
       expect(err.name).toBe('PricebookEntryDeleteFailed')
     }

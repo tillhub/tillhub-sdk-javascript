@@ -20,7 +20,7 @@ export interface DeviceGroupsQuery {
 
 export interface DeviceGroupsResponse {
   data: DeviceGroup[]
-  metadata: object
+  metadata: Record<string, unknown>
   next?: () => Promise<DeviceGroupsResponse>
 }
 
@@ -49,7 +49,10 @@ export class DeviceGroups extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: DeviceGroupsOptions, http: Client) {
-    super(http, { endpoint: DeviceGroups.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: DeviceGroups.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -69,7 +72,8 @@ export class DeviceGroups extends ThBaseHandler {
         const response = await this.http.getClient().get(uri)
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<DeviceGroupsResponse> => this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<DeviceGroupsResponse> =>
+            this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({
@@ -89,7 +93,7 @@ export class DeviceGroups extends ThBaseHandler {
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
-        reject(new DeviceGroupFetchFailed(undefined, { status: response.status }))
+          reject(new DeviceGroupFetchFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results[0] as DeviceGroup,

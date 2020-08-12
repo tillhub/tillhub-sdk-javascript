@@ -4,7 +4,7 @@ import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import { TillhubClient, v1, v0 } from '../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -28,7 +28,7 @@ afterEach(() => {
 describe('v0: Configurations: can get client account config', () => {
   it("Tillhub's CLient Account Configurations are instantiable from query", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -43,7 +43,7 @@ describe('v0: Configurations: can get client account config', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/configurations/${legacyId}?owner=self`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -86,7 +86,7 @@ describe('v0: Configurations: can get client account config', () => {
 
   it("Tillhub's CLient Account Configurations are instantiable from option", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -101,7 +101,7 @@ describe('v0: Configurations: can get client account config', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/configurations/${legacyId}?owner=self`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {

@@ -14,7 +14,7 @@ describe('v0: Analytics: gets vat report metadata', () => {
   })
   it('get metadata', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -29,7 +29,7 @@ describe('v0: Analytics: gets vat report metadata', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/vat/meta`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -53,7 +53,7 @@ describe('v0: Analytics: gets vat report metadata', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -68,7 +68,7 @@ describe('v0: Analytics: gets vat report metadata', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/vat/meta`)
-        .reply(function (config) {
+        .reply(() => {
           return [205]
         })
     }

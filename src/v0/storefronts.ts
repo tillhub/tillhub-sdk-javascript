@@ -19,7 +19,7 @@ export interface StorefrontsQuery {
 
 export interface StorefrontsResponse {
   data: Storefront[]
-  metadata: object
+  metadata: Record<string, unknown>
 }
 
 export interface StorefrontResponse {
@@ -48,8 +48,8 @@ export interface Storefront {
   link?: string
   external_reference_id?: string
   external_api_base?: string
-  auth?: object
-  metadata?: object
+  auth?: Record<string, unknown>
+  metadata?: Record<string, unknown>
   profile?: StorefrontProfile
 }
 
@@ -60,7 +60,10 @@ export class Storefronts extends ThBaseHandler {
   public options: StorefrontsOptions
 
   constructor(options: StorefrontsOptions, http: Client) {
-    super(http, { endpoint: Storefronts.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Storefronts.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -82,7 +85,9 @@ export class Storefronts extends ThBaseHandler {
             queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
           }
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${queryString ? `?${queryString}` : ''}`
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
+            queryString ? `?${queryString}` : ''
+            }`
         }
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {

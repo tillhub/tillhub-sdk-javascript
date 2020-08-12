@@ -13,18 +13,21 @@ afterEach(() => {
 })
 
 const productServiceQuestionGroup = {
-  'name': 'Hair Treatment Questions',
-  'custom_id': 'ex1',
-  'description': 'All the questions about hair treatments like coloring',
-  'deleted': false,
-  'active': true,
-  'service_questions': ['c126c421-83ab-4020-8ec9-18fb279d535c', 'b538ac9b-492c-4aa3-b8fc-bcbc67762c16']
+  name: 'Hair Treatment Questions',
+  custom_id: 'ex1',
+  description: 'All the questions about hair treatments like coloring',
+  deleted: false,
+  active: true,
+  service_questions: [
+    'c126c421-83ab-4020-8ec9-18fb279d535c',
+    'b538ac9b-492c-4aa3-b8fc-bcbc67762c16'
+  ]
 }
 
 describe('v0: Product Service Question Groups: can create one product service question group', () => {
   it("Tillhub's product service question groups are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -37,15 +40,17 @@ describe('v0: Product Service Question Groups: can create one product service qu
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/product_service_question_groups/${legacyId}`).reply(function (config) {
-        return [
-          200,
-          {
-            count: 1,
-            results: [productServiceQuestionGroup]
-          }
-        ]
-      })
+      mock
+        .onPost(`https://api.tillhub.com/api/v0/product_service_question_groups/${legacyId}`)
+        .reply(() => {
+          return [
+            200,
+            {
+              count: 1,
+              results: [productServiceQuestionGroup]
+            }
+          ]
+        })
     }
 
     const th = await initThInstance()
@@ -61,7 +66,7 @@ describe('v0: Product Service Question Groups: can create one product service qu
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -74,9 +79,11 @@ describe('v0: Product Service Question Groups: can create one product service qu
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/product_service_question_groups/${legacyId}`).reply(function (config) {
-        return [205]
-      })
+      mock
+        .onPost(`https://api.tillhub.com/api/v0/product_service_question_groups/${legacyId}`)
+        .reply(() => {
+          return [205]
+        })
     }
 
     try {

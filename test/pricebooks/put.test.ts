@@ -20,7 +20,7 @@ const pricebook = {
 describe('v0: Pricebooks: can alter the pricebooks', () => {
   it("Tillhub's pricebooks are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -35,7 +35,7 @@ describe('v0: Pricebooks: can alter the pricebooks', () => {
 
       mock
         .onPut(`https://api.tillhub.com/api/v1/products/${legacyId}/prices/book/${pricebookId}`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -59,7 +59,7 @@ describe('v0: Pricebooks: can alter the pricebooks', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -73,7 +73,7 @@ describe('v0: Pricebooks: can alter the pricebooks', () => {
       })
       mock
         .onPut(`https://api.tillhub.com/api/v1/products/${legacyId}/prices/book/${pricebookId}`)
-        .reply(function (config) {
+        .reply(() => {
           return [205]
         })
     }
@@ -81,7 +81,10 @@ describe('v0: Pricebooks: can alter the pricebooks', () => {
     const th = await initThInstance()
 
     try {
-      await th.products().pricebooks().put(pricebookId, pricebook)
+      await th
+        .products()
+        .pricebooks()
+        .put(pricebookId, pricebook)
     } catch (err) {
       expect(err.name).toBe('PricebookPutFailed')
     }

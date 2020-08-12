@@ -47,7 +47,7 @@ export interface CountingProtocol {
   context?: string
   comments?: string
   location?: string
-  cash_units?: object[]
+  cash_units?: Record<string, unknown>[]
   timezone?: string
   discrepancy?: boolean
   discrepancy_total?: string
@@ -73,7 +73,10 @@ export class CountingProtocols extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: CountingProtocolsOptions, http: Client) {
-    super(http, { endpoint: CountingProtocols.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: CountingProtocols.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -131,7 +134,10 @@ export class CountingProtocolsFetchFailed extends BaseError {
 
 export class CountingProtocolsMetaFailed extends BaseError {
   public name = 'CountingProtocolsMetaFailed'
-  constructor(public message: string = 'Could not fetch metadata for counting protocols', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch metadata for counting protocols',
+    properties?: any
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CountingProtocolsMetaFailed.prototype)
   }

@@ -22,7 +22,7 @@ const queryParams = {
 describe('v0: Messages: can get all messages', () => {
   it("Tillhub's messages are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -35,7 +35,7 @@ describe('v0: Messages: can get all messages', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/messages/${legacyId}`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v0/messages/${legacyId}`).reply(() => {
         return [
           200,
           {
@@ -59,7 +59,7 @@ describe('v0: Messages: can get all messages', () => {
 
   it('Can get all messges with filters', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -74,7 +74,7 @@ describe('v0: Messages: can get all messages', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/messages/${legacyId}?${qs.stringify(queryParams)}`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -98,7 +98,7 @@ describe('v0: Messages: can get all messages', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -111,7 +111,7 @@ describe('v0: Messages: can get all messages', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/messages/${legacyId}`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v0/messages/${legacyId}`).reply(() => {
         return [205]
       })
     }

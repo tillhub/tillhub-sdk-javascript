@@ -62,7 +62,7 @@ export interface ThAnalyticsBaseResultItem {
     type?: string
   }
   count: number
-  values: object[]
+  values: Record<string, unknown>[]
 }
 
 export interface ThAnalyticsBaseResponse {
@@ -87,14 +87,11 @@ export class ThAnalyticsBaseHandler {
   }
 
   protected static generateAuthenticatedInstance<T>(
-    type: { new(options: object, http: Client): T },
+    type: { new (options: ThAnalyticsBaseHandlerOptions, http: Client): T },
     options: ThAnalyticsBaseHandlerOptions,
     http: Client
   ): T {
-    return new type(
-      options,
-      http
-    )
+    return new type(options, http)
   }
 
   private static generateUriWithQuery(basePath: string, query?: HandlerQuery): string {
@@ -106,14 +103,20 @@ export class ThAnalyticsBaseHandler {
     } else if (query.query) {
       const flattenedQuery = Object.assign({}, query, query.query)
       flattenedQuery.query = undefined
-      uri = `${basePath}${flattenedQuery ? qs.stringify(flattenedQuery, { addQueryPrefix: true }) : ''}`
+      uri = `${basePath}${
+        flattenedQuery ? qs.stringify(flattenedQuery, { addQueryPrefix: true }) : ''
+      }`
     } else {
       uri = `${basePath}${query ? qs.stringify(query, { addQueryPrefix: true }) : ''}`
     }
     return uri
   }
 
-  protected async handleGet(url: string, query?: HandlerQuery, requestOptions?: object): Promise<ThAnalyticsBaseResponse> {
+  protected async handleGet(
+    url: string,
+    query?: HandlerQuery,
+    requestOptions?: Record<string, unknown>
+  ): Promise<ThAnalyticsBaseResponse> {
     const opts = {
       method: 'GET',
       url: ThAnalyticsBaseHandler.generateUriWithQuery(url, query),
@@ -123,12 +126,17 @@ export class ThAnalyticsBaseHandler {
 
     return {
       status: response.status,
-      next: response.data.cursor && response.data.cursor.next ? response.data.cursor.next : undefined,
+      next:
+        response.data.cursor && response.data.cursor.next ? response.data.cursor.next : undefined,
       results: response.data.results
     } as ThAnalyticsBaseResponse
   }
 
-  protected async handleExport(url: string, query?: HandlerQuery, requestOptions?: object): Promise<ThAnalyticsExportsBaseResponse> {
+  protected async handleExport(
+    url: string,
+    query?: HandlerQuery,
+    requestOptions?: Record<string, unknown>
+  ): Promise<ThAnalyticsExportsBaseResponse> {
     const opts = {
       method: 'GET',
       url: ThAnalyticsBaseHandler.generateUriWithQuery(url, query),

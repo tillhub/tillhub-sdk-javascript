@@ -3,7 +3,8 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import { TillhubClient } from '../../src/tillhub-js'
-import { Processes,
+import {
+  Processes,
   Process,
   ProcessesFetchFailed,
   ProcessesFetchOneFailed,
@@ -14,7 +15,7 @@ import { Processes,
   ProcessItemsFetchFailed
 } from '../../src/v0/processes'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -30,7 +31,10 @@ if (process.env.SYSTEM_TEST) {
 
 const legacyId = '4564'
 const processId = '1337'
-const mockProcess = { status: 'started', result: { items: [{ code: '1337', amount: 1337 }] } } as Process
+const mockProcess = {
+  status: 'started',
+  result: { items: [{ code: '1337', amount: 1337 }] }
+} as Process
 const mockMsg = `Deleted process ${processId}`
 
 const mock = new MockAdapter(axios)
@@ -41,7 +45,7 @@ afterEach(() => {
 describe('v0: Processes', () => {
   it('retrieves all processes', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -54,17 +58,15 @@ describe('v0: Processes', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/processes/${legacyId}`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              count: 1,
-              results: [{}]
-            }
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/processes/${legacyId}`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [{}]
+          }
+        ]
+      })
     }
 
     const options = {
@@ -94,7 +96,7 @@ describe('v0: Processes', () => {
 
   it('retrieves one process', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -107,17 +109,15 @@ describe('v0: Processes', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/processes/${legacyId}/${processId}`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              count: 1,
-              results: [{}]
-            }
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/processes/${legacyId}/${processId}`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [{}]
+          }
+        ]
+      })
     }
 
     const options = {
@@ -147,7 +147,7 @@ describe('v0: Processes', () => {
 
   it('creates one process', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -160,17 +160,15 @@ describe('v0: Processes', () => {
         ]
       })
 
-      mock
-        .onPost(`https://api.tillhub.com/api/v0/processes/${legacyId}`)
-        .reply((config) => {
-          return [
-            200,
-            {
-              count: 1,
-              results: [mockProcess]
-            }
-          ]
-        })
+      mock.onPost(`https://api.tillhub.com/api/v0/processes/${legacyId}`).reply(config => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [mockProcess]
+          }
+        ]
+      })
     }
 
     const options = {
@@ -198,7 +196,7 @@ describe('v0: Processes', () => {
 
   it('updates one process', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -213,7 +211,7 @@ describe('v0: Processes', () => {
 
       mock
         .onPatch(`https://api.tillhub.com/api/v0/processes/${legacyId}/${processId}`)
-        .reply((config) => {
+        .reply(config => {
           return [
             200,
             {
@@ -250,7 +248,7 @@ describe('v0: Processes', () => {
   it('gets process items', async () => {
     const mockItems = { items: [{ code: '1234', amount: 4 }] } as ProcessItems
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -265,7 +263,7 @@ describe('v0: Processes', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/processes/${legacyId}/${processId}/items`)
-        .reply((config) => {
+        .reply(config => {
           return [
             200,
             {
@@ -301,7 +299,7 @@ describe('v0: Processes', () => {
 
   it('deletes one process', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -316,7 +314,7 @@ describe('v0: Processes', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/processes/${legacyId}/${processId}`)
-        .reply((config) => {
+        .reply(config => {
           return [
             200,
             {
@@ -351,7 +349,7 @@ describe('v0: Processes', () => {
 
   it('rejects getAll() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -364,13 +362,9 @@ describe('v0: Processes', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/processes/${legacyId}`)
-        .reply(function (config) {
-          return [
-            205
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/processes/${legacyId}`).reply(() => {
+        return [205]
+      })
     }
 
     const options = {
@@ -399,7 +393,7 @@ describe('v0: Processes', () => {
 
   it('rejects get() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -412,13 +406,9 @@ describe('v0: Processes', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/processes/${legacyId}/${processId}`)
-        .reply(function (config) {
-          return [
-            205
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/processes/${legacyId}/${processId}`).reply(() => {
+        return [205]
+      })
     }
 
     const options = {
@@ -447,7 +437,7 @@ describe('v0: Processes', () => {
 
   it('rejects create() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -462,10 +452,8 @@ describe('v0: Processes', () => {
 
       mock
         .onPost(`https://api.tillhub.com/api/v0/processes/${legacyId}/${processId}`)
-        .reply((config) => {
-          return [
-            205
-          ]
+        .reply(config => {
+          return [205]
         })
     }
 
@@ -495,7 +483,7 @@ describe('v0: Processes', () => {
 
   it('rejects update() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -510,10 +498,8 @@ describe('v0: Processes', () => {
 
       mock
         .onPatch(`https://api.tillhub.com/api/v0/processes/${legacyId}/${processId}`)
-        .reply((config) => {
-          return [
-            205
-          ]
+        .reply(config => {
+          return [205]
         })
     }
 
@@ -543,7 +529,7 @@ describe('v0: Processes', () => {
 
   it('rejects getItems() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -558,10 +544,8 @@ describe('v0: Processes', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/processes/${legacyId}/${processId}/items`)
-        .reply(function (config) {
-          return [
-            205
-          ]
+        .reply(() => {
+          return [205]
         })
     }
 
@@ -591,7 +575,7 @@ describe('v0: Processes', () => {
 
   it('rejects delete() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -606,10 +590,8 @@ describe('v0: Processes', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/processes/${legacyId}/${processId}`)
-        .reply((config) => {
-          return [
-            205
-          ]
+        .reply(config => {
+          return [205]
         })
     }
 

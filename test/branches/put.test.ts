@@ -20,7 +20,7 @@ const updateObject = {
 describe('v0: Branches: can alter a branch', () => {
   it("Tillhub's branches are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -33,17 +33,15 @@ describe('v0: Branches: can alter a branch', () => {
         ]
       })
 
-      mock
-        .onPut(`https://api.tillhub.com/api/v0/branches/${legacyId}/${branchId}`)
-        .reply(function () {
-          return [
-            200,
-            {
-              count: 1,
-              results: [updateObject]
-            }
-          ]
-        })
+      mock.onPut(`https://api.tillhub.com/api/v0/branches/${legacyId}/${branchId}`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [updateObject]
+          }
+        ]
+      })
     }
 
     const th = await initThInstance()
@@ -59,7 +57,7 @@ describe('v0: Branches: can alter a branch', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function () {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -71,16 +69,14 @@ describe('v0: Branches: can alter a branch', () => {
           }
         ]
       })
-      mock
-        .onPut(`https://api.tillhub.com/api/v0/branches/${legacyId}/${branchId}`)
-        .reply(function () {
-          return [
-            400,
-            {
-              msg: 'Branch could not be deleted because it has 2 active registers.'
-            }
-          ]
-        })
+      mock.onPut(`https://api.tillhub.com/api/v0/branches/${legacyId}/${branchId}`).reply(() => {
+        return [
+          400,
+          {
+            msg: 'Branch could not be deleted because it has 2 active registers.'
+          }
+        ]
+      })
     }
 
     const th = await initThInstance()

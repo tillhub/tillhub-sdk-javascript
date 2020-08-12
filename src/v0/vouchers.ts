@@ -25,15 +25,15 @@ export interface VouchersMetaQuery {
 }
 
 export interface VouchersResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   msg?: string
   next?: () => Promise<VouchersResponse>
 }
 
 export interface VoucherLogsResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   msg?: string
   next?: () => Promise<VoucherLogsResponse>
 }
@@ -79,7 +79,7 @@ export interface Voucher {
 }
 
 export interface UsersResponse {
-  data: object[]
+  data: Record<string, unknown>[]
 }
 
 export class Vouchers extends ThBaseHandler {
@@ -90,7 +90,10 @@ export class Vouchers extends ThBaseHandler {
   public options: VouchersOptions
 
   constructor(options: VouchersOptions, http: Client) {
-    super(http, { endpoint: Vouchers.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Vouchers.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
     this.logs = new VoucherLogs(options, http)
@@ -115,7 +118,7 @@ export class Vouchers extends ThBaseHandler {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             queryString ? `?${queryString}` : ''
-            }`
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -155,9 +158,7 @@ export class Vouchers extends ThBaseHandler {
         }
 
         if (!response.data.results[0]) {
-          return reject(
-            new VouchersMetaFailed('could not get voucher metadata unexpectedly')
-          )
+          return reject(new VouchersMetaFailed('could not get voucher metadata unexpectedly'))
         }
 
         return resolve({
@@ -190,7 +191,7 @@ export class Vouchers extends ThBaseHandler {
 
   count(): Promise<VouchersResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
 
       try {
         const response = await this.http.getClient().get(uri)
@@ -282,7 +283,7 @@ export class Vouchers extends ThBaseHandler {
       if (!source.id || !target.id || source.id !== target.id) {
         return reject(
           new VoucherTypeError(
-            'source and target object require ID to be set and be equal to each other'
+            'source and target Record<string, unknown> require ID to be set and be equal to each other'
           )
         )
       }
@@ -328,7 +329,9 @@ export class Vouchers extends ThBaseHandler {
       }
 
       if (response.status !== 200) {
-        return reject(new VoucherCreationFailed(safeGet(response, 'error.message'), { status: response.status }))
+        return reject(
+          new VoucherCreationFailed(safeGet(response, 'error.message'), { status: response.status })
+        )
       }
 
       return resolve({
@@ -341,7 +344,7 @@ export class Vouchers extends ThBaseHandler {
   getAllUsers(): Promise<UsersResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        let uri = `${this.options.base}${this.endpoint}/${this.options.user}/users`
+        const uri = `${this.options.base}${this.endpoint}/${this.options.user}/users`
 
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
@@ -365,7 +368,10 @@ export class VoucherLogs extends ThBaseHandler {
   public options: VouchersOptions
 
   constructor(options: VouchersOptions, http: Client) {
-    super(http, { endpoint: VoucherLogs.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: VoucherLogs.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -389,7 +395,7 @@ export class VoucherLogs extends ThBaseHandler {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}/logs${
             queryString ? `?${queryString}` : ''
-            }`
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -414,7 +420,7 @@ export class VoucherLogs extends ThBaseHandler {
 
   meta(): Promise<VoucherLogsResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/logs/meta`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/logs/meta`
 
       try {
         const response = await this.http.getClient().get(uri)
@@ -423,9 +429,7 @@ export class VoucherLogs extends ThBaseHandler {
         }
 
         if (!response.data.results[0]) {
-          return reject(
-            new VouchersMetaFailed('could not get voucher metadata unexpectedly')
-          )
+          return reject(new VouchersMetaFailed('could not get voucher metadata unexpectedly'))
         }
 
         return resolve({
@@ -497,7 +501,10 @@ export class VoucherCreationFailed extends BaseError {
 
 export class VoucherCodeConflict extends BaseError {
   public name = 'VoucherCodeConflict'
-  constructor(public message: string = 'This voucher code is already in use. Please use another code.', properties?: any) {
+  constructor(
+    public message: string = 'This voucher code is already in use. Please use another code.',
+    properties?: any
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherCodeConflict.prototype)
   }

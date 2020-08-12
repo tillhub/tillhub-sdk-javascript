@@ -20,7 +20,7 @@ const pricebook = {
 describe('v0: Pricebooks: can get one pricebook', () => {
   it("Tillhub's pricebooks are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -35,7 +35,7 @@ describe('v0: Pricebooks: can get one pricebook', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/prices/book/${pricebookId}`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -59,7 +59,7 @@ describe('v0: Pricebooks: can get one pricebook', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -74,14 +74,17 @@ describe('v0: Pricebooks: can get one pricebook', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/prices/book/${pricebookId}`)
-        .reply(function (config) {
+        .reply(() => {
           return [205]
         })
     }
 
     try {
       const th = await initThInstance()
-      await th.products().pricebooks().get(pricebookId)
+      await th
+        .products()
+        .pricebooks()
+        .get(pricebookId)
     } catch (err) {
       expect(err.name).toBe('PricebookFetchFailed')
     }

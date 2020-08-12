@@ -18,8 +18,8 @@ export interface CategoryTreesQuery {
 }
 
 export interface CategoryTreesResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   next?: () => Promise<CategoryTreesResponse>
 }
 
@@ -33,12 +33,12 @@ export interface CategoryTreeResponse {
 }
 
 export interface CategoryTree {
-  metadata?: object
+  metadata?: Record<string, unknown>
   name?: string
   summary?: string
   description?: string
   comments?: string
-  children?: object[]
+  children?: Record<string, unknown>[]
   active?: boolean
   deleted?: boolean
 }
@@ -51,7 +51,10 @@ export class CategoryTrees extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: CategoryTreesOptions, http: Client) {
-    super(http, { endpoint: CategoryTrees.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: CategoryTrees.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -65,7 +68,6 @@ export class CategoryTrees extends ThBaseHandler {
       let next
 
       try {
-
         const base = this.uriHelper.generateBaseUri()
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 
@@ -75,7 +77,8 @@ export class CategoryTrees extends ThBaseHandler {
         }
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<CategoryTreesResponse> => this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<CategoryTreesResponse> =>
+            this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({

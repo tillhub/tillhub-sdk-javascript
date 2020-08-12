@@ -5,7 +5,7 @@ dotenv.config()
 import th, { TillhubClient, v1 } from '../../src/tillhub-js'
 import { TemplateTypes } from '../../src/v1/templates'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -34,7 +34,7 @@ afterEach(() => {
 describe('v1: Templates: can craete template', () => {
   it('create', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -47,7 +47,7 @@ describe('v1: Templates: can craete template', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v1/templates/${legacyId}`).reply(function (config) {
+      mock.onPost(`https://api.tillhub.com/api/v1/templates/${legacyId}`).reply(() => {
         return [
           200,
           {
@@ -82,7 +82,7 @@ describe('v1: Templates: can craete template', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -94,7 +94,7 @@ describe('v1: Templates: can craete template', () => {
           }
         ]
       })
-      mock.onPost(`https://api.tillhub.com/api/v1/templates/${legacyId}`).reply(function (config) {
+      mock.onPost(`https://api.tillhub.com/api/v1/templates/${legacyId}`).reply(() => {
         return [400]
       })
     }

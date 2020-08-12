@@ -4,7 +4,7 @@ import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import { TillhubClient, v0 } from '../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -28,13 +28,13 @@ afterEach(() => {
 describe('v0: Analytics: gets customers report', () => {
   it('gets customers report', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [200, { token: '', user: { id: '123', legacy_id: legacyId } }]
       })
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/customers`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -72,7 +72,7 @@ describe('v0: Analytics: gets customers report', () => {
     const mockString = 'format=csv'
 
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -86,8 +86,10 @@ describe('v0: Analytics: gets customers report', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/customers?${mockString}`)
-        .reply(function (config) {
+        .onGet(
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/customers?${mockString}`
+        )
+        .reply(() => {
           return [
             200,
             {
@@ -125,7 +127,7 @@ describe('v0: Analytics: gets customers report', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -140,7 +142,7 @@ describe('v0: Analytics: gets customers report', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/customers`)
-        .reply(function (config) {
+        .reply(() => {
           return [205]
         })
     }

@@ -5,7 +5,7 @@ dotenv.config()
 import { Customers } from '../../../src/v0/analytics/reports/customers'
 import { TillhubClient } from '../../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -38,7 +38,7 @@ describe('v0: Analytics: gets customers overview report', () => {
     const mockString = `customer_id=0001&currency=EUR&branch_number=${branchNumber}`
 
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -52,8 +52,10 @@ describe('v0: Analytics: gets customers overview report', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/customers/overview?${mockString}`)
-        .reply(function (config) {
+        .onGet(
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/customers/overview?${mockString}`
+        )
+        .reply(() => {
           return [
             200,
             {
@@ -95,7 +97,7 @@ describe('v0: Analytics: gets customers overview report', () => {
       currency: 'EUR'
     }
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -110,7 +112,7 @@ describe('v0: Analytics: gets customers overview report', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/customers/overview`)
-        .reply(function (config) {
+        .reply(() => {
           return [205]
         })
     }
@@ -132,7 +134,10 @@ describe('v0: Analytics: gets customers overview report', () => {
     })
 
     try {
-      await th.analytics().customers().getOverview(mockCustomersQuery)
+      await th
+        .analytics()
+        .customers()
+        .getOverview(mockCustomersQuery)
     } catch (err) {
       expect(err.name).toBe('CustomerOverviewFetchFailed')
     }

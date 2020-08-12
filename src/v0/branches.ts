@@ -21,8 +21,8 @@ export interface BranchesQuery {
 }
 
 export interface BranchesResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   next?: () => Promise<BranchesResponse>
 }
 
@@ -75,7 +75,10 @@ export class Branches extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: BranchesOptions, http: Client) {
-    super(http, { endpoint: Branches.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Branches.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -100,7 +103,7 @@ export class Branches extends ThBaseHandler {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             queryString ? `?${queryString}` : ''
-            }`
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -176,7 +179,7 @@ export class Branches extends ThBaseHandler {
 
   count(): Promise<BranchesResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
 
       try {
         const response = await this.http.getClient().get(uri)
@@ -247,16 +250,19 @@ export class Branches extends ThBaseHandler {
       let uri
       if (typeof query === 'string') {
         uri = this.uriHelper.generateBaseUri(`/search?q=${query}`)
-      } else if (typeOf(query) === 'object') {
+      } else if (typeOf(query) === 'Record<string, unknown>') {
         const base = this.uriHelper.generateBaseUri('/search')
         uri = this.uriHelper.generateUriWithQuery(base, query)
       } else {
-        return reject(new BranchesSearchFailed('Could not search for branch - query type is invalid'))
+        return reject(
+          new BranchesSearchFailed('Could not search for branch - query type is invalid')
+        )
       }
 
       try {
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new BranchesSearchFailed(undefined, { status: response.status }))
+        response.status !== 200 &&
+          reject(new BranchesSearchFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results,
@@ -322,7 +328,7 @@ export class ExternalCustomIdGetUniqueFailed extends BaseError {
   constructor(
     public message: string = 'Could not get a unique external_custom_id',
     properties?: any
-    ) {
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ExternalCustomIdGetUniqueFailed.prototype)
   }

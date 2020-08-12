@@ -9,10 +9,11 @@ import {
   PrintJobFetchFailed,
   PrintJobCreateFailed,
   PrintJobUpdateFailed,
-  PrintJobDeleteFailed, PrintJobDataFetchFailed
+  PrintJobDeleteFailed,
+  PrintJobDataFetchFailed
 } from '../../src/errors'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -40,7 +41,7 @@ afterEach(() => {
 describe('v0: Print.Jobs', () => {
   it('retrieves all jobs', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -53,17 +54,15 @@ describe('v0: Print.Jobs', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              count: 1,
-              results: [{}]
-            }
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [{}]
+          }
+        ]
+      })
     }
 
     const options = {
@@ -93,7 +92,7 @@ describe('v0: Print.Jobs', () => {
 
   it('retrieves one job', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -106,17 +105,15 @@ describe('v0: Print.Jobs', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs/${jobId}`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              count: 1,
-              results: [{}]
-            }
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs/${jobId}`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [{}]
+          }
+        ]
+      })
     }
 
     const options = {
@@ -146,7 +143,7 @@ describe('v0: Print.Jobs', () => {
 
   it('creates one job', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -159,17 +156,15 @@ describe('v0: Print.Jobs', () => {
         ]
       })
 
-      mock
-        .onPost(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs`)
-        .reply((config) => {
-          return [
-            200,
-            {
-              count: 1,
-              results: [mockJob]
-            }
-          ]
-        })
+      mock.onPost(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs`).reply(config => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [mockJob]
+          }
+        ]
+      })
     }
 
     const options = {
@@ -197,7 +192,7 @@ describe('v0: Print.Jobs', () => {
 
   it('updates one job', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -212,7 +207,7 @@ describe('v0: Print.Jobs', () => {
 
       mock
         .onPatch(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs/${jobId}`)
-        .reply((config) => {
+        .reply(config => {
           return [
             200,
             {
@@ -248,7 +243,7 @@ describe('v0: Print.Jobs', () => {
 
   it('deletes one job', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -263,7 +258,7 @@ describe('v0: Print.Jobs', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs/${jobId}`)
-        .reply((config) => {
+        .reply(config => {
           return [
             200,
             {
@@ -298,7 +293,7 @@ describe('v0: Print.Jobs', () => {
 
   it('retrieves job data', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -313,7 +308,7 @@ describe('v0: Print.Jobs', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs/${jobId}/data`)
-        .reply((config) => {
+        .reply(config => {
           return [
             200,
             {
@@ -348,7 +343,7 @@ describe('v0: Print.Jobs', () => {
 
   it('rejects getAll() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -361,13 +356,9 @@ describe('v0: Print.Jobs', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs`)
-        .reply(function (config) {
-          return [
-            205
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs`).reply(() => {
+        return [205]
+      })
     }
 
     const options = {
@@ -387,7 +378,10 @@ describe('v0: Print.Jobs', () => {
     })
 
     try {
-      await th.print().jobs().getAll()
+      await th
+        .print()
+        .jobs()
+        .getAll()
       fail('should throw an error')
     } catch (e) {
       expect(e.name).toEqual(PrintJobsFetchFailed.name)
@@ -396,7 +390,7 @@ describe('v0: Print.Jobs', () => {
 
   it('rejects get() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -409,13 +403,9 @@ describe('v0: Print.Jobs', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs/${jobId}`)
-        .reply(function (config) {
-          return [
-            205
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs/${jobId}`).reply(() => {
+        return [205]
+      })
     }
 
     const options = {
@@ -435,7 +425,10 @@ describe('v0: Print.Jobs', () => {
     })
 
     try {
-      await th.print().jobs().get(jobId)
+      await th
+        .print()
+        .jobs()
+        .get(jobId)
       fail('should throw an error')
     } catch (e) {
       expect(e.name).toEqual(PrintJobFetchFailed.name)
@@ -444,7 +437,7 @@ describe('v0: Print.Jobs', () => {
 
   it('rejects create() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -459,10 +452,8 @@ describe('v0: Print.Jobs', () => {
 
       mock
         .onPost(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs/${jobId}`)
-        .reply((config) => {
-          return [
-            205
-          ]
+        .reply(config => {
+          return [205]
         })
     }
 
@@ -483,7 +474,10 @@ describe('v0: Print.Jobs', () => {
     })
 
     try {
-      await th.print().jobs().create(mockJob)
+      await th
+        .print()
+        .jobs()
+        .create(mockJob)
       fail('should throw an error')
     } catch (e) {
       expect(e.name).toEqual(PrintJobCreateFailed.name)
@@ -492,7 +486,7 @@ describe('v0: Print.Jobs', () => {
 
   it('rejects update() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -507,10 +501,8 @@ describe('v0: Print.Jobs', () => {
 
       mock
         .onPatch(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs/${jobId}`)
-        .reply((config) => {
-          return [
-            205
-          ]
+        .reply(config => {
+          return [205]
         })
     }
 
@@ -531,7 +523,10 @@ describe('v0: Print.Jobs', () => {
     })
 
     try {
-      await th.print().jobs().update(jobId, mockJob)
+      await th
+        .print()
+        .jobs()
+        .update(jobId, mockJob)
       fail('should throw an error')
     } catch (e) {
       expect(e.name).toEqual(PrintJobUpdateFailed.name)
@@ -540,7 +535,7 @@ describe('v0: Print.Jobs', () => {
 
   it('rejects delete() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -555,10 +550,8 @@ describe('v0: Print.Jobs', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs/${jobId}`)
-        .reply((config) => {
-          return [
-            205
-          ]
+        .reply(config => {
+          return [205]
         })
     }
 
@@ -579,7 +572,10 @@ describe('v0: Print.Jobs', () => {
     })
 
     try {
-      await th.print().jobs().delete(jobId)
+      await th
+        .print()
+        .jobs()
+        .delete(jobId)
       fail('should throw an error')
     } catch (e) {
       expect(e.name).toEqual(PrintJobDeleteFailed.name)
@@ -588,7 +584,7 @@ describe('v0: Print.Jobs', () => {
 
   it('rejects getData() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -603,10 +599,8 @@ describe('v0: Print.Jobs', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs/${jobId}/data`)
-        .reply((config) => {
-          return [
-            205
-          ]
+        .reply(config => {
+          return [205]
         })
     }
 
@@ -627,11 +621,13 @@ describe('v0: Print.Jobs', () => {
     })
 
     try {
-      await th.print().jobs().getData(jobId)
+      await th
+        .print()
+        .jobs()
+        .getData(jobId)
       fail('should throw an error')
     } catch (e) {
       expect(e.name).toEqual(PrintJobDataFetchFailed.name)
     }
   })
-
 })

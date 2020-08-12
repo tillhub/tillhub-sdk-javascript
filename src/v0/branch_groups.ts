@@ -22,8 +22,8 @@ export interface BranchGroupsQuery {
 }
 
 export interface BranchGroupsResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   next?: () => Promise<BranchGroupsResponse>
 }
 
@@ -58,7 +58,10 @@ export class BranchGroups extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: BranchGroupsOptions, http: Client) {
-    super(http, { endpoint: BranchGroups.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: BranchGroups.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -83,7 +86,7 @@ export class BranchGroups extends ThBaseHandler {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             queryString ? `?${queryString}` : ''
-            }`
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -92,7 +95,8 @@ export class BranchGroups extends ThBaseHandler {
         }
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<BranchGroupsResponse> => this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<BranchGroupsResponse> =>
+            this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({

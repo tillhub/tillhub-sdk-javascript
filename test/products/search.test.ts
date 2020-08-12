@@ -6,7 +6,7 @@ dotenv.config()
 import { TillhubClient, v1 } from '../../src/tillhub-js'
 import { SearchQuery } from '../../src/v1/products'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -31,7 +31,7 @@ afterEach(() => {
 describe('v1: Products: can search for products', () => {
   it('search by a search query object', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -45,8 +45,10 @@ describe('v1: Products: can search for products', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/search?${qs.stringify(searchQuery)}`)
-        .reply(function (config) {
+        .onGet(
+          `https://api.tillhub.com/api/v1/products/${legacyId}/search?${qs.stringify(searchQuery)}`
+        )
+        .reply(() => {
           return [
             200,
             {
@@ -83,7 +85,7 @@ describe('v1: Products: can search for products', () => {
   })
   it('search by a search query string', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -98,7 +100,7 @@ describe('v1: Products: can search for products', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/search?q=${searchTerm}`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -136,7 +138,7 @@ describe('v1: Products: can search for products', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -150,8 +152,10 @@ describe('v1: Products: can search for products', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/search?${qs.stringify(searchQuery)}`)
-        .reply(function (config) {
+        .onGet(
+          `https://api.tillhub.com/api/v1/products/${legacyId}/search?${qs.stringify(searchQuery)}`
+        )
+        .reply(() => {
           return [205]
         })
     }

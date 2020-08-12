@@ -38,7 +38,7 @@ export interface OrgAuth {
 
 export interface SupportAuth {
   token: string
-  client_account: string,
+  client_account: string
   recaptcha_token?: string
 }
 
@@ -62,20 +62,20 @@ export interface TokenAuth {
   token: string
 }
 
-export function isUsernameAuth(object: any): object is UsernameAuth {
-  return 'password' in object
+export function isUsernameAuth(obj: any): obj is UsernameAuth {
+  return 'password' in obj
 }
 
-export function isKeyAuth(object: any): object is KeyAuth {
-  return 'apiKey' in object
+export function isKeyAuth(obj: any): obj is KeyAuth {
+  return 'apiKey' in obj
 }
 
-export function isTokenAuth(object: any): object is KeyAuth {
-  return 'token' in object
+export function isTokenAuth(obj: any): obj is KeyAuth {
+  return 'token' in obj
 }
 
-export function isOrgAuth(object: any): object is KeyAuth {
-  return 'organisation' in object
+export function isOrgAuth(obj: any): obj is KeyAuth {
+  return 'organisation' in obj
 }
 
 export interface AuthResponse {
@@ -86,7 +86,7 @@ export interface AuthResponse {
   is_support?: boolean
   scopes?: string[]
   role?: string
-  subUser?: object
+  subUser?: Record<string, unknown>
   orgName?: string
   expiresAt?: string
 }
@@ -95,7 +95,7 @@ export interface AuthResponse {
  * @class "v0.Auth"
  */
 export class Auth {
-  authenticated: boolean = false
+  authenticated = false
   public options: AuthOptions
   public token?: string
   public user?: string
@@ -126,7 +126,7 @@ export class Auth {
     this.options.type = undefined
   }
 
-  protected determineAuthType() {
+  protected determineAuthType(): void {
     if (isUsernameAuth(this.options.credentials)) this.options.type = AuthTypes.username
     if (isKeyAuth(this.options.credentials)) this.options.type = AuthTypes.key
     if (isTokenAuth(this.options.credentials)) this.options.type = AuthTypes.token
@@ -163,7 +163,6 @@ export class Auth {
         email: username,
         password: password,
         recaptcha_token: authData.recaptcha_token
-
       })
 
       this.setDefaultHeader(
@@ -200,7 +199,6 @@ export class Auth {
         msg: data.msg
       } as PasswordResetRequestResponse
     } catch (err) {
-
       throw new errors.PasswordResetRequestFailed(undefined, { error: err })
     }
   }
@@ -216,7 +214,6 @@ export class Auth {
         msg: data.msg
       } as PasswordResetRequestResponse
     } catch (err) {
-
       throw new errors.PasswordSetRequestFailed(undefined, { error: err })
     }
   }
@@ -259,7 +256,10 @@ export class Auth {
 
 export class LogoutMissingToken extends errors.BaseError {
   public name = 'LogoutMissingToken'
-  constructor(public message: string = 'Could not log out due to missing token.', properties?: any) {
+  constructor(
+    public message: string = 'Could not log out due to missing token.',
+    properties?: any
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, LogoutMissingToken.prototype)
   }

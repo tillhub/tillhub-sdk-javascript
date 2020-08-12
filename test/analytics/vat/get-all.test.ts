@@ -15,21 +15,19 @@ afterEach(() => {
 describe('v0: Analytics: gets vat report', () => {
   it('gets vat report', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [200, { token: '', user: { id: '123', legacy_id: legacyId } }]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/vat`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              count: 1,
-              results: [{}]
-            }
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/vat`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [{}]
+          }
+        ]
+      })
     }
 
     const th = await initThInstance()
@@ -51,7 +49,7 @@ describe('v0: Analytics: gets vat report', () => {
     const mockString = 'format=csv'
 
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -66,7 +64,7 @@ describe('v0: Analytics: gets vat report', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/vat?${mockString}`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -90,7 +88,7 @@ describe('v0: Analytics: gets vat report', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -103,11 +101,9 @@ describe('v0: Analytics: gets vat report', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/vat`)
-        .reply(function (config) {
-          return [205]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/vat`).reply(() => {
+        return [205]
+      })
     }
 
     const th = await initThInstance()
