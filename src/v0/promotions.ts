@@ -170,7 +170,10 @@ export class Promotions extends ThBaseHandler {
 
 export class PromotionsFetchFailed extends BaseError {
   public name = 'PromotionsFetchFailed'
-  constructor(public message: string = 'Could not fetch promotions', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch promotions',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PromotionsFetchFailed.prototype)
   }
@@ -178,7 +181,10 @@ export class PromotionsFetchFailed extends BaseError {
 
 export class PromotionFetchFailed extends BaseError {
   public name = 'PromotionFetchFailed'
-  constructor(public message: string = 'Could not fetch promotion', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch promotion',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PromotionFetchFailed.prototype)
   }
@@ -186,7 +192,10 @@ export class PromotionFetchFailed extends BaseError {
 
 export class PromotionPutFailed extends BaseError {
   public name = 'PromotionPutFailed'
-  constructor(public message: string = 'Could not alter promotion', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter promotion',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PromotionPutFailed.prototype)
   }
@@ -194,7 +203,10 @@ export class PromotionPutFailed extends BaseError {
 
 export class PromotionCreationFailed extends BaseError {
   public name = 'PromotionCreationFailed'
-  constructor(public message: string = 'Could not create promotion', properties?: any) {
+  constructor(
+    public message: string = 'Could not create promotion',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PromotionCreationFailed.prototype)
   }
@@ -202,7 +214,10 @@ export class PromotionCreationFailed extends BaseError {
 
 export class PromotionDeleteFailed extends BaseError {
   public name = 'PromotionDeleteFailed'
-  constructor(public message: string = 'Could not delete promotion', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete promotion',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PromotionDeleteFailed.prototype)
   }

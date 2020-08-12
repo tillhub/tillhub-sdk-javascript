@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { Client } from '../client'
 import { UriHelper } from '../uri-helper'
 import { ThBaseHandler } from '../base'
@@ -42,10 +41,6 @@ export interface TransactionImage {
   '1x': string
   '2x': string
   '3x': string
-}
-
-enum SignatureTypes {
-  Fiksaltrust = 'fiskaltrust'
 }
 
 interface FiskaltrustAuth {
@@ -388,7 +383,10 @@ export class Signing {
 
 class TransactionFetchFailed extends BaseError {
   public name = 'TransactionFetchFailed'
-  constructor(public message: string = 'Could not fetch transaction', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch transaction',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionFetchFailed.prototype)
   }
@@ -396,7 +394,10 @@ class TransactionFetchFailed extends BaseError {
 
 class TransactionPdfFailed extends BaseError {
   public name = 'TransactionPdfFailed'
-  constructor(public message: string = 'Could not create pdf', properties?: any) {
+  constructor(
+    public message: string = 'Could not create pdf',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionPdfFailed.prototype)
   }
@@ -404,7 +405,10 @@ class TransactionPdfFailed extends BaseError {
 
 class TransactionSigningInitialisationFailed extends BaseError {
   public name = 'TransactionSigningInitialisationFailed'
-  constructor(public message: string = 'Could not initialise signing system', properties?: any) {
+  constructor(
+    public message: string = 'Could not initialise signing system',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionSigningInitialisationFailed.prototype)
   }
@@ -412,7 +416,10 @@ class TransactionSigningInitialisationFailed extends BaseError {
 
 class TransactionSigningYearlyReceiptFailed extends BaseError {
   public name = 'TransactionSigningYearlyReceiptFailed'
-  constructor(public message: string = 'Could not generate yearly receipt', properties?: any) {
+  constructor(
+    public message: string = 'Could not generate yearly receipt',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionSigningYearlyReceiptFailed.prototype)
   }
@@ -420,7 +427,10 @@ class TransactionSigningYearlyReceiptFailed extends BaseError {
 
 class TransactionSigningMonthlyReceiptFailed extends BaseError {
   public name = 'TransactionSigningMonthlyReceiptFailed'
-  constructor(public message: string = 'Could not generate monthly receipt', properties?: any) {
+  constructor(
+    public message: string = 'Could not generate monthly receipt',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionSigningMonthlyReceiptFailed.prototype)
   }
@@ -428,7 +438,10 @@ class TransactionSigningMonthlyReceiptFailed extends BaseError {
 
 class TransactionSigningZeroReceiptFailed extends BaseError {
   public name = 'TransactionSigningZeroReceiptFailed'
-  constructor(public message: string = 'Could not generate zero receipt', properties?: any) {
+  constructor(
+    public message: string = 'Could not generate zero receipt',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionSigningZeroReceiptFailed.prototype)
   }
@@ -436,7 +449,10 @@ class TransactionSigningZeroReceiptFailed extends BaseError {
 
 class TransactionsGetMetaFailed extends BaseError {
   public name = 'TransactionsGetMetaFailed'
-  constructor(public message: string = 'Could not get transactions meta', properties?: any) {
+  constructor(
+    public message: string = 'Could not get transactions meta',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionsGetMetaFailed.prototype)
   }
@@ -444,7 +460,10 @@ class TransactionsGetMetaFailed extends BaseError {
 
 class TransactionsGetImageFailed extends BaseError {
   public name = 'TransactionsGetImageFailed'
-  constructor(public message: string = 'Could not get transactions image', properties?: any) {
+  constructor(
+    public message: string = 'Could not get transactions image',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionsGetImageFailed.prototype)
   }
@@ -452,7 +471,10 @@ class TransactionsGetImageFailed extends BaseError {
 
 class TransactionsImagePutFailed extends BaseError {
   public name = 'TransactionsImagePutFailed'
-  constructor(public message: string = 'Could not update transactions image', properties?: any) {
+  constructor(
+    public message: string = 'Could not update transactions image',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionsImagePutFailed.prototype)
   }
@@ -460,7 +482,10 @@ class TransactionsImagePutFailed extends BaseError {
 
 class TransactionsImageCreateFailed extends BaseError {
   public name = 'TransactionsImageCreateFailed'
-  constructor(public message: string = 'Could not create transactions image', properties?: any) {
+  constructor(
+    public message: string = 'Could not create transactions image',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionsImageCreateFailed.prototype)
   }

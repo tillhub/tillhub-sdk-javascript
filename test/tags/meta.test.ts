@@ -18,7 +18,6 @@ if (process.env.SYSTEM_TEST) {
   user.apiKey = process.env.SYSTEM_TEST_API_KEY || user.apiKey
 }
 
-const productId = '123456'
 const legacyId = '4564'
 
 describe('v0: Tags: can get count number of all tags', () => {

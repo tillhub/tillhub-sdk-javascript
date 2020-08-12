@@ -44,7 +44,10 @@ export class AnalyticsReportsDatev extends ThAnalyticsBaseHandler {
 
 export class AnalyticsReportsDatevExportFetchError extends BaseError {
   public name = 'AnalyticsReportsDatevExportFetchError'
-  constructor(public message: string = 'Could not fetch datev report. ', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch datev report. ',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsReportsDatevExportFetchError.prototype)
   }

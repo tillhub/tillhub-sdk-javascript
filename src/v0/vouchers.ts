@@ -445,7 +445,7 @@ export class VoucherLogs extends ThBaseHandler {
 
 export class VoucherTypeError extends BaseError {
   public name = 'VouchersFetchFailed'
-  constructor(public message: string, properties?: any) {
+  constructor(public message: string, properties?: Record<string, unknown>) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherTypeError.prototype)
   }
@@ -453,7 +453,10 @@ export class VoucherTypeError extends BaseError {
 
 export class VouchersFetchFailed extends BaseError {
   public name = 'VouchersFetchFailed'
-  constructor(public message: string = 'Could not fetch the vouchers', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the vouchers',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VouchersFetchFailed.prototype)
   }
@@ -461,7 +464,10 @@ export class VouchersFetchFailed extends BaseError {
 
 export class VoucherLogsFetchFailed extends BaseError {
   public name = 'VoucherLogsFetchFailed'
-  constructor(public message: string = 'Could not fetch the voucher logs', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the voucher logs',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherLogsFetchFailed.prototype)
   }
@@ -469,7 +475,10 @@ export class VoucherLogsFetchFailed extends BaseError {
 
 export class VoucherFetchFailed extends BaseError {
   public name = 'VoucherFetchFailed'
-  constructor(public message: string = 'Could not fetch voucher', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch voucher',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherFetchFailed.prototype)
   }
@@ -477,7 +486,10 @@ export class VoucherFetchFailed extends BaseError {
 
 export class VoucherPutFailed extends BaseError {
   public name = 'VoucherPutFailed'
-  constructor(public message: string = 'Could not alter voucher', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter voucher',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherPutFailed.prototype)
   }
@@ -485,7 +497,10 @@ export class VoucherPutFailed extends BaseError {
 
 export class VoucherPatchFailed extends BaseError {
   public name = 'VoucherPatchFailed'
-  constructor(public message: string = 'Could not alter voucher', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter voucher',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherPatchFailed.prototype)
   }
@@ -493,7 +508,10 @@ export class VoucherPatchFailed extends BaseError {
 
 export class VoucherCreationFailed extends BaseError {
   public name = 'VoucherPostFailed'
-  constructor(public message: string = 'Could not create voucher', properties?: any) {
+  constructor(
+    public message: string = 'Could not create voucher',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherCreationFailed.prototype)
   }
@@ -503,7 +521,7 @@ export class VoucherCodeConflict extends BaseError {
   public name = 'VoucherCodeConflict'
   constructor(
     public message: string = 'This voucher code is already in use. Please use another code.',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherCodeConflict.prototype)
@@ -512,7 +530,10 @@ export class VoucherCodeConflict extends BaseError {
 
 export class VouchersCountFailed extends BaseError {
   public name = 'VouchersCountFailed'
-  constructor(public message: string = 'Could not count the vouchers', properties?: any) {
+  constructor(
+    public message: string = 'Could not count the vouchers',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VouchersCountFailed.prototype)
   }
@@ -520,7 +541,10 @@ export class VouchersCountFailed extends BaseError {
 
 export class VouchersMetaFailed extends BaseError {
   public name = 'VouchersMetaFailed'
-  constructor(public message: string = 'Could not get voucher metadata', properties?: any) {
+  constructor(
+    public message: string = 'Could not get voucher metadata',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VouchersMetaFailed.prototype)
   }
@@ -528,7 +552,10 @@ export class VouchersMetaFailed extends BaseError {
 
 export class VoucherLogsMetaFailed extends BaseError {
   public name = 'VoucherLogsMetaFailed'
-  constructor(public message: string = 'Could not get voucher logs metadata', properties?: any) {
+  constructor(
+    public message: string = 'Could not get voucher logs metadata',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherLogsMetaFailed.prototype)
   }
@@ -536,7 +563,10 @@ export class VoucherLogsMetaFailed extends BaseError {
 
 export class VoucherDeleteFailed extends BaseError {
   public name = 'VoucherDeleteFailed'
-  constructor(public message: string = 'Could not delete the voucher', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete the voucher',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherDeleteFailed.prototype)
   }
@@ -544,7 +574,10 @@ export class VoucherDeleteFailed extends BaseError {
 
 export class VouchersLogsFetchFailed extends BaseError {
   public name = 'VouchersLogsFetchFailed'
-  constructor(public message: string = 'Could not fetch the vouchers logs', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the vouchers logs',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VouchersLogsFetchFailed.prototype)
   }
@@ -552,7 +585,10 @@ export class VouchersLogsFetchFailed extends BaseError {
 
 export class VouchersLogsCountFailed extends BaseError {
   public name = 'VouchersLogsCountFailed'
-  constructor(public message: string = 'Could not count the vouchers logs', properties?: any) {
+  constructor(
+    public message: string = 'Could not count the vouchers logs',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VouchersLogsCountFailed.prototype)
   }
@@ -560,7 +596,10 @@ export class VouchersLogsCountFailed extends BaseError {
 
 export class VouchersUsersFailed extends BaseError {
   public name = 'VouchersUsersFailed'
-  constructor(public message: string = 'Could not get authorized voucher users', properties?: any) {
+  constructor(
+    public message: string = 'Could not get authorized voucher users',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VouchersUsersFailed.prototype)
   }

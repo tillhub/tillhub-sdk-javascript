@@ -188,7 +188,10 @@ export class Functions extends ThBaseHandler {
 
 export class FunctionsFetchFailed extends BaseError {
   public name = 'FunctionsFetchFailed'
-  constructor(public message: string = 'Could not fetch functions', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch functions',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, FunctionsFetchFailed.prototype)
   }
@@ -196,7 +199,10 @@ export class FunctionsFetchFailed extends BaseError {
 
 export class FunctionFetchFailed extends BaseError {
   public name = 'FunctionFetchFailed'
-  constructor(public message: string = 'Could not fetch function', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch function',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, FunctionFetchFailed.prototype)
   }
@@ -204,7 +210,10 @@ export class FunctionFetchFailed extends BaseError {
 
 export class FunctionPutFailed extends BaseError {
   public name = 'FunctionPutFailed'
-  constructor(public message: string = 'Could not alter function', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter function',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, FunctionPutFailed.prototype)
   }
@@ -212,7 +221,10 @@ export class FunctionPutFailed extends BaseError {
 
 export class FunctionCreationFailed extends BaseError {
   public name = 'FunctionCreationFailed'
-  constructor(public message: string = 'Could not create function', properties?: any) {
+  constructor(
+    public message: string = 'Could not create function',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, FunctionCreationFailed.prototype)
   }
@@ -220,7 +232,10 @@ export class FunctionCreationFailed extends BaseError {
 
 export class FunctionDeleteFailed extends BaseError {
   public name = 'FunctionDeleteFailed'
-  constructor(public message: string = 'Could not delete function', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete function',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, FunctionDeleteFailed.prototype)
   }

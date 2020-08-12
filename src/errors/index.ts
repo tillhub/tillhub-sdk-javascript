@@ -4,7 +4,10 @@ export { BaseError }
 
 export class AuthenticationFailed extends BaseError {
   public name = 'AuthenticationFailed'
-  constructor(public message: string = 'Authentication was not successful', properties?: any) {
+  constructor(
+    public message: string = 'Authentication was not successful',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, AuthenticationFailed.prototype)
   }
@@ -12,7 +15,10 @@ export class AuthenticationFailed extends BaseError {
 
 export class PasswordResetRequestFailed extends BaseError {
   public name = 'PasswordResetRequestFailed'
-  constructor(public message: string = 'Could not reset password', properties?: any) {
+  constructor(
+    public message: string = 'Could not reset password',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PasswordResetRequestFailed.prototype)
   }
@@ -20,7 +26,10 @@ export class PasswordResetRequestFailed extends BaseError {
 
 export class PasswordSetRequestFailed extends BaseError {
   public name = 'PasswordSetRequestFailed'
-  constructor(public message: string = 'Could not set password', properties?: any) {
+  constructor(
+    public message: string = 'Could not set password',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PasswordSetRequestFailed.prototype)
   }
@@ -30,7 +39,7 @@ export class UninstantiatedClient extends BaseError {
   public name = 'UninstantiatedClient'
   constructor(
     public message: string = 'Cannot instantiate API without instantiated HTTP client',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, UninstantiatedClient.prototype)
@@ -39,7 +48,10 @@ export class UninstantiatedClient extends BaseError {
 
 export class TransactionFetchFailed extends BaseError {
   public name = 'TransactionFetchFailed'
-  constructor(public message: string = 'Could not fetch transaction', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch transaction',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionFetchFailed.prototype)
   }
@@ -47,7 +59,10 @@ export class TransactionFetchFailed extends BaseError {
 
 export class TransactionPdfFailed extends BaseError {
   public name = 'TransactionPdfFailed'
-  constructor(public message: string = 'Could not create pdf', properties?: any) {
+  constructor(
+    public message: string = 'Could not create pdf',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionPdfFailed.prototype)
   }
@@ -55,7 +70,10 @@ export class TransactionPdfFailed extends BaseError {
 
 export class TransactionSigningInitialisationFailed extends BaseError {
   public name = 'TransactionSigningInitialisationFailed'
-  constructor(public message: string = 'Could not initialise signing system', properties?: any) {
+  constructor(
+    public message: string = 'Could not initialise signing system',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionSigningInitialisationFailed.prototype)
   }
@@ -63,7 +81,10 @@ export class TransactionSigningInitialisationFailed extends BaseError {
 
 export class TransactionSigningYearlyReceiptFailed extends BaseError {
   public name = 'TransactionSigningYearlyReceiptFailed'
-  constructor(public message: string = 'Could not generate yearly receipt', properties?: any) {
+  constructor(
+    public message: string = 'Could not generate yearly receipt',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionSigningYearlyReceiptFailed.prototype)
   }
@@ -71,7 +92,10 @@ export class TransactionSigningYearlyReceiptFailed extends BaseError {
 
 export class TransactionSigningMonthlyReceiptFailed extends BaseError {
   public name = 'TransactionSigningMonthlyReceiptFailed'
-  constructor(public message: string = 'Could not generate monthly receipt', properties?: any) {
+  constructor(
+    public message: string = 'Could not generate monthly receipt',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionSigningMonthlyReceiptFailed.prototype)
   }
@@ -79,7 +103,10 @@ export class TransactionSigningMonthlyReceiptFailed extends BaseError {
 
 export class TransactionSigningZeroReceiptFailed extends BaseError {
   public name = 'TransactionSigningZeroReceiptFailed'
-  constructor(public message: string = 'Could not generate zero receipt', properties?: any) {
+  constructor(
+    public message: string = 'Could not generate zero receipt',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionSigningZeroReceiptFailed.prototype)
   }
@@ -87,7 +114,10 @@ export class TransactionSigningZeroReceiptFailed extends BaseError {
 
 export class TransactionsGetMetaFailed extends BaseError {
   public name = 'TransactionsGetMetaFailed'
-  constructor(public message: string = 'Could not get transactions meta', properties?: any) {
+  constructor(
+    public message: string = 'Could not get transactions meta',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionsGetMetaFailed.prototype)
   }
@@ -95,7 +125,10 @@ export class TransactionsGetMetaFailed extends BaseError {
 
 export class TaxesFetchFailed extends BaseError {
   public name = 'TaxesFetchFailed'
-  constructor(public message: string = 'Could not fetch taxes', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch taxes',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TaxesFetchFailed.prototype)
   }
@@ -103,7 +136,10 @@ export class TaxesFetchFailed extends BaseError {
 
 export class TaxesPutFailed extends BaseError {
   public name = 'TaxesPutFailed'
-  constructor(public message: string = 'Could not alter tax', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter tax',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TaxesPutFailed.prototype)
   }
@@ -111,7 +147,10 @@ export class TaxesPutFailed extends BaseError {
 
 export class TaxesCreationFailed extends BaseError {
   public name = 'TaxesCreationFailed'
-  constructor(public message: string = 'Could not create tax', properties?: any) {
+  constructor(
+    public message: string = 'Could not create tax',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TaxesCreationFailed.prototype)
   }
@@ -119,7 +158,10 @@ export class TaxesCreationFailed extends BaseError {
 
 export class TaxDeleteFailed extends BaseError {
   public name = 'TaxDeleteFailed'
-  constructor(public message: string = 'Could not delete tax', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete tax',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TaxDeleteFailed.prototype)
   }
@@ -127,7 +169,10 @@ export class TaxDeleteFailed extends BaseError {
 
 export class DeliveriesFetchAllFailed extends BaseError {
   public name = 'DeliveriesFetchAllFailed'
-  constructor(public message: string = 'Could not fetch deliveries', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch deliveries',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DeliveriesFetchAllFailed.prototype)
   }
@@ -135,7 +180,10 @@ export class DeliveriesFetchAllFailed extends BaseError {
 
 export class DeliveriesFetchOneFailed extends BaseError {
   public name = 'DeliveriesFetchOneFailed'
-  constructor(public message: string = 'Could not fetch delivery', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch delivery',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DeliveriesFetchOneFailed.prototype)
   }
@@ -143,7 +191,10 @@ export class DeliveriesFetchOneFailed extends BaseError {
 
 export class DeliveriesCreateFailed extends BaseError {
   public name = 'DeliveriesCreateFailed'
-  constructor(public message: string = 'Could not create delivery', properties?: any) {
+  constructor(
+    public message: string = 'Could not create delivery',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DeliveriesCreateFailed.prototype)
   }
@@ -151,7 +202,10 @@ export class DeliveriesCreateFailed extends BaseError {
 
 export class DeliveriesPDFFailed extends BaseError {
   public name = 'DeliveriesPDFFailed'
-  constructor(public message: string = 'Could not create PDF for delivery', properties?: any) {
+  constructor(
+    public message: string = 'Could not create PDF for delivery',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DeliveriesPDFFailed.prototype)
   }
@@ -159,7 +213,10 @@ export class DeliveriesPDFFailed extends BaseError {
 
 export class DeliveriesUpdateFailed extends BaseError {
   public name = 'DeliveriesUpdateFailed'
-  constructor(public message: string = 'Could not update delivery', properties?: any) {
+  constructor(
+    public message: string = 'Could not update delivery',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DeliveriesUpdateFailed.prototype)
   }
@@ -169,7 +226,7 @@ export class DeliveriesInProgressFailed extends BaseError {
   public name = 'DeliveriesInProgressFailed'
   constructor(
     public message: string = 'Could not change delivery status to "in_progress',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, DeliveriesInProgressFailed.prototype)
@@ -180,7 +237,7 @@ export class DeliveriesDispatchFailed extends BaseError {
   public name = 'DeliveriesDispatchFailed'
   constructor(
     public message: string = 'Could not change delivery status to "in_progress',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, DeliveriesDispatchFailed.prototype)
@@ -189,7 +246,10 @@ export class DeliveriesDispatchFailed extends BaseError {
 
 export class DeliveriesDeleteFailed extends BaseError {
   public name = 'DeliveriesDeleteFailed'
-  constructor(public message: string = 'Could not delete delivery', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete delivery',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DeliveriesDeleteFailed.prototype)
   }
@@ -197,7 +257,10 @@ export class DeliveriesDeleteFailed extends BaseError {
 
 export class DeliveryItemsCreateFailed extends BaseError {
   public name = 'DeliveryItemsCreateFailed'
-  constructor(public message: string = 'Could not create delivery items', properties?: any) {
+  constructor(
+    public message: string = 'Could not create delivery items',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DeliveryItemsCreateFailed.prototype)
   }
@@ -205,7 +268,10 @@ export class DeliveryItemsCreateFailed extends BaseError {
 
 export class DeliveryItemsFetchAllFailed extends BaseError {
   public name = 'DeliveryItemsFetchAllFailed'
-  constructor(public message: string = 'Could not fetch delivery items', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch delivery items',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DeliveryItemsFetchAllFailed.prototype)
   }
@@ -213,7 +279,10 @@ export class DeliveryItemsFetchAllFailed extends BaseError {
 
 export class DeliveryItemUpdateFailed extends BaseError {
   public name = 'DeliveryItemUpdateFailed'
-  constructor(public message: string = 'Could not update delivery', properties?: any) {
+  constructor(
+    public message: string = 'Could not update delivery',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DeliveryItemUpdateFailed.prototype)
   }
@@ -221,7 +290,10 @@ export class DeliveryItemUpdateFailed extends BaseError {
 
 export class ProductGroupsFetchFailed extends BaseError {
   public name = 'ProductGroupsFetchFailed'
-  constructor(public message: string = 'Could not fetch product groups', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch product groups',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductGroupsFetchFailed.prototype)
   }
@@ -229,7 +301,10 @@ export class ProductGroupsFetchFailed extends BaseError {
 
 export class ProductGroupFetchFailed extends BaseError {
   public name = 'ProductGroupFetchFailed'
-  constructor(public message: string = 'Could not fetch product group', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch product group',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductGroupFetchFailed.prototype)
   }
@@ -237,7 +312,10 @@ export class ProductGroupFetchFailed extends BaseError {
 
 export class ProductGroupPutFailed extends BaseError {
   public name = 'ProductGroupPutFailed'
-  constructor(public message: string = 'Could not alter product group', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter product group',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductGroupPutFailed.prototype)
   }
@@ -245,7 +323,10 @@ export class ProductGroupPutFailed extends BaseError {
 
 export class ProductGroupCreationFailed extends BaseError {
   public name = 'ProductGroupCreationFailed'
-  constructor(public message: string = 'Could not create product group', properties?: any) {
+  constructor(
+    public message: string = 'Could not create product group',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductGroupCreationFailed.prototype)
   }
@@ -253,7 +334,10 @@ export class ProductGroupCreationFailed extends BaseError {
 
 export class ProductGroupsSearchFailed extends BaseError {
   public name = 'ProductGroupsSearchFailed'
-  constructor(public message: string = 'Could not search product group', properties?: any) {
+  constructor(
+    public message: string = 'Could not search product group',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductGroupsSearchFailed.prototype)
   }
@@ -261,7 +345,10 @@ export class ProductGroupsSearchFailed extends BaseError {
 
 export class ProuctGroupsCountFailed extends BaseError {
   public name = 'ProuctGroupsCountFailed'
-  constructor(public message: string = 'Could not get count of product groups', properties?: any) {
+  constructor(
+    public message: string = 'Could not get count of product groups',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProuctGroupsCountFailed.prototype)
   }
@@ -269,7 +356,10 @@ export class ProuctGroupsCountFailed extends BaseError {
 
 export class ProductGroupDeleteFailed extends BaseError {
   public name = 'ProductGroupDeleteFailed'
-  constructor(public message: string = 'Could not delete product group', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete product group',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductGroupDeleteFailed.prototype)
   }
@@ -277,7 +367,10 @@ export class ProductGroupDeleteFailed extends BaseError {
 
 export class AccountsFetchFailed extends BaseError {
   public name = 'AccountsFetchFailed'
-  constructor(public message: string = 'Could not fetch accounts', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch accounts',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, AccountsFetchFailed.prototype)
   }
@@ -285,7 +378,10 @@ export class AccountsFetchFailed extends BaseError {
 
 export class AccountFetchFailed extends BaseError {
   public name = 'AccountFetchFailed'
-  constructor(public message: string = 'Could not fetch account', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch account',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, AccountFetchFailed.prototype)
   }
@@ -293,7 +389,10 @@ export class AccountFetchFailed extends BaseError {
 
 export class AccountPutFailed extends BaseError {
   public name = 'AccountPutFailed'
-  constructor(public message: string = 'Could not alter account', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter account',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, AccountPutFailed.prototype)
   }
@@ -301,7 +400,10 @@ export class AccountPutFailed extends BaseError {
 
 export class AccountCreationFailed extends BaseError {
   public name = 'AccountCreationFailed'
-  constructor(public message: string = 'Could not create account', properties?: any) {
+  constructor(
+    public message: string = 'Could not create account',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, AccountCreationFailed.prototype)
   }
@@ -309,7 +411,10 @@ export class AccountCreationFailed extends BaseError {
 
 export class AccountDeleteFailed extends BaseError {
   public name = 'AccountDeleteFailed'
-  constructor(public message: string = 'Could not delete account', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete account',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, AccountDeleteFailed.prototype)
   }
@@ -317,7 +422,10 @@ export class AccountDeleteFailed extends BaseError {
 
 export class ExpenseAccountsFetchFailed extends BaseError {
   public name = 'ExpenseAccountsFetchFailed'
-  constructor(public message: string = 'Could not fetch expense accounts', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch expense accounts',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ExpenseAccountsFetchFailed.prototype)
   }
@@ -325,7 +433,10 @@ export class ExpenseAccountsFetchFailed extends BaseError {
 
 export class ExpenseAccountFetchFailed extends BaseError {
   public name = 'ExpenseAccountFetchFailed'
-  constructor(public message: string = 'Could not fetch expense account', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch expense account',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ExpenseAccountFetchFailed.prototype)
   }
@@ -333,7 +444,10 @@ export class ExpenseAccountFetchFailed extends BaseError {
 
 export class ExpenseAccountPutFailed extends BaseError {
   public name = 'ExpenseAccountPutFailed'
-  constructor(public message: string = 'Could not alter expense account', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter expense account',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ExpenseAccountPutFailed.prototype)
   }
@@ -341,7 +455,10 @@ export class ExpenseAccountPutFailed extends BaseError {
 
 export class ExpenseAccountCreationFailed extends BaseError {
   public name = 'ExpenseAccountCreationFailed'
-  constructor(public message: string = 'Could not create expense account', properties?: any) {
+  constructor(
+    public message: string = 'Could not create expense account',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ExpenseAccountCreationFailed.prototype)
   }
@@ -349,7 +466,10 @@ export class ExpenseAccountCreationFailed extends BaseError {
 
 export class PaymentOptionsFetchFailed extends BaseError {
   public name = 'PaymentOptionsFetchFailed'
-  constructor(public message: string = 'Could not fetch payment option', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch payment option',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PaymentOptionsFetchFailed.prototype)
   }
@@ -357,7 +477,10 @@ export class PaymentOptionsFetchFailed extends BaseError {
 
 export class ExpenseAccountDeleteFailed extends BaseError {
   public name = 'ExpenseAccountDeleteFailed'
-  constructor(public message: string = 'Could not delete expense account', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete expense account',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ExpenseAccountDeleteFailed.prototype)
   }
@@ -365,7 +488,10 @@ export class ExpenseAccountDeleteFailed extends BaseError {
 
 export class PaymentOptionFetchFailed extends BaseError {
   public name = 'PaymentOptionFetchFailed'
-  constructor(public message: string = 'Could not fetch payment option', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch payment option',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PaymentOptionFetchFailed.prototype)
   }
@@ -373,7 +499,10 @@ export class PaymentOptionFetchFailed extends BaseError {
 
 export class PaymentOptionPutFailed extends BaseError {
   public name = 'PaymentOptionPutFailed'
-  constructor(public message: string = 'Could not alter payment option', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter payment option',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PaymentOptionPutFailed.prototype)
   }
@@ -381,7 +510,10 @@ export class PaymentOptionPutFailed extends BaseError {
 
 export class PaymentOptionCreationFailed extends BaseError {
   public name = 'PaymentOptionCreationFailed'
-  constructor(public message: string = 'Could not create payment option', properties?: any) {
+  constructor(
+    public message: string = 'Could not create payment option',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PaymentOptionCreationFailed.prototype)
   }
@@ -389,7 +521,10 @@ export class PaymentOptionCreationFailed extends BaseError {
 
 export class PaymentOptionDeleteFailed extends BaseError {
   public name = 'PaymentOptionDeleteFailed'
-  constructor(public message: string = 'Could not delete payment option', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete payment option',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PaymentOptionDeleteFailed.prototype)
   }
@@ -397,7 +532,10 @@ export class PaymentOptionDeleteFailed extends BaseError {
 
 export class TemplatesCreationFailed extends BaseError {
   public name = 'TemplatesCreationFailed'
-  constructor(public message: string = 'Could not create template', properties?: any) {
+  constructor(
+    public message: string = 'Could not create template',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TemplatesCreationFailed.prototype)
   }
@@ -405,7 +543,10 @@ export class TemplatesCreationFailed extends BaseError {
 
 export class TemplatesPutFailed extends BaseError {
   public name = 'TemplatesPutFailed'
-  constructor(public message: string = 'Could not replace template', properties?: any) {
+  constructor(
+    public message: string = 'Could not replace template',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TemplatesPutFailed.prototype)
   }
@@ -413,7 +554,10 @@ export class TemplatesPutFailed extends BaseError {
 
 export class TemplatesFetchFailed extends BaseError {
   public name = 'TemplatesFetchFailed'
-  constructor(public message: string = 'Could not fetch templates', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch templates',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TemplatesFetchFailed.prototype)
   }
@@ -421,7 +565,10 @@ export class TemplatesFetchFailed extends BaseError {
 
 export class TemplatesPreviewFailed extends BaseError {
   public name = 'TemplatesPreviewFailed'
-  constructor(public message: string = 'Could not preview template', properties?: any) {
+  constructor(
+    public message: string = 'Could not preview template',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TemplatesPreviewFailed.prototype)
   }
@@ -429,7 +576,10 @@ export class TemplatesPreviewFailed extends BaseError {
 
 export class ConfigurationsFetchFailed extends BaseError {
   public name = 'ConfigurationsFetchFailed'
-  constructor(public message: string = 'Could not fetch configurations', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch configurations',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ConfigurationsFetchFailed.prototype)
   }
@@ -437,7 +587,10 @@ export class ConfigurationsFetchFailed extends BaseError {
 
 export class ConfigurationFetchFailed extends BaseError {
   public name = 'ConfigurationFetchFailed'
-  constructor(public message: string = 'Could not fetch configuration', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch configuration',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ConfigurationFetchFailed.prototype)
   }
@@ -445,7 +598,10 @@ export class ConfigurationFetchFailed extends BaseError {
 
 export class ConfigurationPutFailed extends BaseError {
   public name = 'ConfigurationPutFailed'
-  constructor(public message: string = 'Could not alter configuration', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter configuration',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ConfigurationPutFailed.prototype)
   }
@@ -453,7 +609,10 @@ export class ConfigurationPutFailed extends BaseError {
 
 export class ConfigurationPatchFailed extends BaseError {
   public name = 'ConfigurationPatchFailed'
-  constructor(public message: string = 'Could not patch configuration', properties?: any) {
+  constructor(
+    public message: string = 'Could not patch configuration',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ConfigurationPatchFailed.prototype)
   }
@@ -461,7 +620,10 @@ export class ConfigurationPatchFailed extends BaseError {
 
 export class ConfigurationCreationFailed extends BaseError {
   public name = 'ConfigurationCreationFailed'
-  constructor(public message: string = 'Could not create configuration', properties?: any) {
+  constructor(
+    public message: string = 'Could not create configuration',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ConfigurationCreationFailed.prototype)
   }
@@ -469,7 +631,10 @@ export class ConfigurationCreationFailed extends BaseError {
 
 export class ConfigurationDeleteFailed extends BaseError {
   public name = 'ConfigurationDeleteFailed'
-  constructor(public message: string = 'Could not delete configuration', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete configuration',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ConfigurationDeleteFailed.prototype)
   }
@@ -477,7 +642,10 @@ export class ConfigurationDeleteFailed extends BaseError {
 
 export class DiscountsFetchFailed extends BaseError {
   public name = 'DiscountsFetchFailed'
-  constructor(public message: string = 'Could not fetch discounts', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch discounts',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DiscountsFetchFailed.prototype)
   }
@@ -485,7 +653,10 @@ export class DiscountsFetchFailed extends BaseError {
 
 export class DiscountFetchFailed extends BaseError {
   public name = 'DiscountFetchFailed'
-  constructor(public message: string = 'Could not fetch discount', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch discount',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DiscountFetchFailed.prototype)
   }
@@ -493,7 +664,10 @@ export class DiscountFetchFailed extends BaseError {
 
 export class DiscountPutFailed extends BaseError {
   public name = 'DiscountPutFailed'
-  constructor(public message: string = 'Could not alter discount', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter discount',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DiscountPutFailed.prototype)
   }
@@ -501,7 +675,10 @@ export class DiscountPutFailed extends BaseError {
 
 export class DiscountCreationFailed extends BaseError {
   public name = 'DiscountCreationFailed'
-  constructor(public message: string = 'Could not create discount', properties?: any) {
+  constructor(
+    public message: string = 'Could not create discount',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DiscountCreationFailed.prototype)
   }
@@ -509,7 +686,10 @@ export class DiscountCreationFailed extends BaseError {
 
 export class DiscountsCountFailed extends BaseError {
   public name = 'DiscountsCountFailed'
-  constructor(public message: string = 'Could not count discounts', properties?: any) {
+  constructor(
+    public message: string = 'Could not count discounts',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DiscountsCountFailed.prototype)
   }
@@ -517,7 +697,10 @@ export class DiscountsCountFailed extends BaseError {
 
 export class DiscountDeleteFailed extends BaseError {
   public name = 'DiscountDeleteFailed'
-  constructor(public message: string = 'Could not delete discount', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete discount',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DiscountDeleteFailed.prototype)
   }
@@ -525,7 +708,10 @@ export class DiscountDeleteFailed extends BaseError {
 
 export class InvoicesFetchAllFailed extends BaseError {
   public name = 'InvoicesFetchAllFailed'
-  constructor(public message: string = 'Could not fetch invoices', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch invoices',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, InvoicesFetchAllFailed.prototype)
   }
@@ -533,7 +719,10 @@ export class InvoicesFetchAllFailed extends BaseError {
 
 export class InvoicesFetchOneFailed extends BaseError {
   public name = 'InvoicesFetchOneFailed'
-  constructor(public message: string = 'Could not fetch the invoice', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the invoice',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, InvoicesFetchOneFailed.prototype)
   }
@@ -541,7 +730,10 @@ export class InvoicesFetchOneFailed extends BaseError {
 
 export class InvoicesCreateFailed extends BaseError {
   public name = 'InvoicesCreateFailed'
-  constructor(public message: string = 'Could not create invoice', properties?: any) {
+  constructor(
+    public message: string = 'Could not create invoice',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, InvoicesCreateFailed.prototype)
   }
@@ -549,7 +741,10 @@ export class InvoicesCreateFailed extends BaseError {
 
 export class InvoicesUpdateFailed extends BaseError {
   public name = 'InvoicesUpdateFailed'
-  constructor(public message: string = 'Could not update invoice', properties?: any) {
+  constructor(
+    public message: string = 'Could not update invoice',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, InvoicesUpdateFailed.prototype)
   }
@@ -557,7 +752,10 @@ export class InvoicesUpdateFailed extends BaseError {
 
 export class InvoicesDeleteFailed extends BaseError {
   public name = 'InvoicesDeleteFailed'
-  constructor(public message: string = 'Could not delete invoice', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete invoice',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, InvoicesDeleteFailed.prototype)
   }
@@ -565,7 +763,10 @@ export class InvoicesDeleteFailed extends BaseError {
 
 export class InvoicesGetMetaFailed extends BaseError {
   public name = 'InvoicesGetMetaFailed'
-  constructor(public message: string = 'Could not get invoice meta', properties?: any) {
+  constructor(
+    public message: string = 'Could not get invoice meta',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, InvoicesGetMetaFailed.prototype)
   }
@@ -573,7 +774,10 @@ export class InvoicesGetMetaFailed extends BaseError {
 
 export class OrdersFetchFailed extends BaseError {
   public name = 'OrdersFetchFailed'
-  constructor(public message: string = 'Could not fetch the orders', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the orders',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, OrdersFetchFailed.prototype)
   }
@@ -581,7 +785,10 @@ export class OrdersFetchFailed extends BaseError {
 
 export class OrdersCreateFailed extends BaseError {
   public name = 'OrdersCreateFailed'
-  constructor(public message: string = 'Could not create the orders', properties?: any) {
+  constructor(
+    public message: string = 'Could not create the orders',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, OrdersCreateFailed.prototype)
   }
@@ -589,7 +796,10 @@ export class OrdersCreateFailed extends BaseError {
 
 export class OrdersUpdateFailed extends BaseError {
   public name = 'OrdersUpdateFailed'
-  constructor(public message: string = 'Could not update the orders', properties?: any) {
+  constructor(
+    public message: string = 'Could not update the orders',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, OrdersUpdateFailed.prototype)
   }
@@ -597,7 +807,10 @@ export class OrdersUpdateFailed extends BaseError {
 
 export class IncomingOrdersFetchFailed extends BaseError {
   public name = 'IncomingOrdersFetchFailed'
-  constructor(public message: string = 'Could not fetch incoming orders', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch incoming orders',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, IncomingOrdersFetchFailed.prototype)
   }
@@ -605,7 +818,10 @@ export class IncomingOrdersFetchFailed extends BaseError {
 
 export class OutgoingOrdersFetchFailed extends BaseError {
   public name = 'OutgoingOrdersFetchFailed'
-  constructor(public message: string = 'Could not fetch outgoing orders', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch outgoing orders',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, OutgoingOrdersFetchFailed.prototype)
   }
@@ -613,7 +829,10 @@ export class OutgoingOrdersFetchFailed extends BaseError {
 
 export class OrderItemsFetchFailed extends BaseError {
   public name = 'OrderItemsFetchFailed'
-  constructor(public message: string = 'Could not fetch the order items', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the order items',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, OrderItemsFetchFailed.prototype)
   }
@@ -621,7 +840,10 @@ export class OrderItemsFetchFailed extends BaseError {
 
 export class OrderItemsCreateFailed extends BaseError {
   public name = 'OrderItemsCreateFailed'
-  constructor(public message: string = 'Could not create the order items', properties?: any) {
+  constructor(
+    public message: string = 'Could not create the order items',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, OrderItemsCreateFailed.prototype)
   }
@@ -629,7 +851,10 @@ export class OrderItemsCreateFailed extends BaseError {
 
 export class OrderItemUpdateFailed extends BaseError {
   public name = 'OrderItemUpdateFailed'
-  constructor(public message: string = 'Could not update the order item', properties?: any) {
+  constructor(
+    public message: string = 'Could not update the order item',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, OrderItemUpdateFailed.prototype)
   }
@@ -637,7 +862,10 @@ export class OrderItemUpdateFailed extends BaseError {
 
 export class OrderItemsUpdateFailed extends BaseError {
   public name = 'OrderItemsUpdateFailed'
-  constructor(public message: string = 'Could not update the order items', properties?: any) {
+  constructor(
+    public message: string = 'Could not update the order items',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, OrderItemsUpdateFailed.prototype)
   }
@@ -645,7 +873,10 @@ export class OrderItemsUpdateFailed extends BaseError {
 
 export class OrderItemsDeleteFailed extends BaseError {
   public name = 'OrderItemsDeleteFailed'
-  constructor(public message: string = 'Could not delete the order items', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete the order items',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, OrderItemsDeleteFailed.prototype)
   }
@@ -653,7 +884,10 @@ export class OrderItemsDeleteFailed extends BaseError {
 
 export class OrderSuggestionsFetchFailed extends BaseError {
   public name = 'OrderSuggestionsFetchFailed'
-  constructor(public message: string = 'Could not fetch the orders suggestions', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the orders suggestions',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, OrderSuggestionsFetchFailed.prototype)
   }
@@ -663,7 +897,7 @@ export class HistoricOrderItemsFetchFailed extends BaseError {
   public name = 'HistoricOrderItemsFetchFailed'
   constructor(
     public message: string = 'Could not fetch the historic order items',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, HistoricOrderItemsFetchFailed.prototype)
@@ -672,7 +906,10 @@ export class HistoricOrderItemsFetchFailed extends BaseError {
 
 export class BookStockFailed extends BaseError {
   public name = 'BookStockFailed'
-  constructor(public message: string = 'Could not book the stocks', properties?: any) {
+  constructor(
+    public message: string = 'Could not book the stocks',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, BookStockFailed.prototype)
   }
@@ -680,7 +917,10 @@ export class BookStockFailed extends BaseError {
 
 export class OpenOrderFetchFailed extends BaseError {
   public name = 'OpenOrderFetchFailed'
-  constructor(public message: string = 'Could not fetch open order', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch open order',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, OpenOrderFetchFailed.prototype)
   }
@@ -688,7 +928,10 @@ export class OpenOrderFetchFailed extends BaseError {
 
 export class RegistersFetchFailed extends BaseError {
   public name = 'RegistersFetchFailed'
-  constructor(public message: string = 'Could not fetch the Registers', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the Registers',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, RegistersFetchFailed.prototype)
   }
@@ -696,7 +939,10 @@ export class RegistersFetchFailed extends BaseError {
 
 export class RegisterFetchFailed extends BaseError {
   public name = 'RegisterFetchFailed'
-  constructor(public message: string = 'Could not fetch the Register', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the Register',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, RegisterFetchFailed.prototype)
   }
@@ -704,7 +950,10 @@ export class RegisterFetchFailed extends BaseError {
 
 export class RegisterPutFailed extends BaseError {
   public name = 'RegisterPutFailed'
-  constructor(public message: string = 'Could not alter register', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter register',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, RegisterPutFailed.prototype)
   }
@@ -712,7 +961,10 @@ export class RegisterPutFailed extends BaseError {
 
 export class RegisterNotificationCreateFailed extends BaseError {
   public name = 'RegisterNotificationCreateFailed'
-  constructor(public message: string = 'Could not create the Notification', properties?: any) {
+  constructor(
+    public message: string = 'Could not create the Notification',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, RegisterNotificationCreateFailed.prototype)
   }
@@ -722,7 +974,7 @@ export class RegisterDeviceConfigurationPutFailed extends BaseError {
   public name = 'RegisterDeviceConfigurationPutFailed'
   constructor(
     public message: string = 'Could not update the Device Configuration',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, RegisterDeviceConfigurationPutFailed.prototype)
@@ -731,7 +983,10 @@ export class RegisterDeviceConfigurationPutFailed extends BaseError {
 
 export class AuditActionsFetchAllFailed extends BaseError {
   public name = 'AuditActionsFetchAllFailed'
-  constructor(public message: string = 'Could not fetch audit actions', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch audit actions',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, AuditActionsFetchAllFailed.prototype)
   }
@@ -739,7 +994,10 @@ export class AuditActionsFetchAllFailed extends BaseError {
 
 export class AuditActionsFetchOneFailed extends BaseError {
   public name = 'AuditActionsFetchOneFailed'
-  constructor(public message: string = 'Could not fetch audit action', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch audit action',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, AuditActionsFetchOneFailed.prototype)
   }
@@ -747,7 +1005,10 @@ export class AuditActionsFetchOneFailed extends BaseError {
 
 export class AuditActionsGetMetaFailed extends BaseError {
   public name = 'AuditActionsGetMetaFailed'
-  constructor(public message: string = 'Could not fetch audit actions meta', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch audit actions meta',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, AuditActionsGetMetaFailed.prototype)
   }
@@ -755,14 +1016,20 @@ export class AuditActionsGetMetaFailed extends BaseError {
 
 export class AuditActionsCreateFailed extends BaseError {
   public name = 'AuditActionsCreateFailed'
-  constructor(public message: string = 'Could not create audit action', properties?: any) {
+  constructor(
+    public message: string = 'Could not create audit action',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, AuditActionsCreateFailed.prototype)
   }
 }
 export class AuditActionsTypesFetchFailed extends BaseError {
   public name = 'AuditActionsTypesFetchFailed'
-  constructor(public message: string = 'Could not fetch audit action types', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch audit action types',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, AuditActionsTypesFetchFailed.prototype)
   }
@@ -770,7 +1037,10 @@ export class AuditActionsTypesFetchFailed extends BaseError {
 
 export class AuditLogsFetchAllFailed extends BaseError {
   public name = 'AuditLogsFetchAllFailed'
-  constructor(public message: string = 'Could not fetch audit logs', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch audit logs',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, AuditLogsFetchAllFailed.prototype)
   }
@@ -778,7 +1048,10 @@ export class AuditLogsFetchAllFailed extends BaseError {
 
 export class AuditLogsFetchOneFailed extends BaseError {
   public name = 'AuditLogsFetchOneFailed'
-  constructor(public message: string = 'Could not fetch audit log', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch audit log',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, AuditLogsFetchOneFailed.prototype)
   }
@@ -786,7 +1059,10 @@ export class AuditLogsFetchOneFailed extends BaseError {
 
 export class AuditLogsGetMetaFailed extends BaseError {
   public name = 'AuditLogsGetMetaFailed'
-  constructor(public message: string = 'Could not fetch audit logs meta', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch audit logs meta',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, AuditLogsGetMetaFailed.prototype)
   }
@@ -808,7 +1084,10 @@ export class ImagePutFailed extends BaseError {
 
 export class StaffCountFailed extends BaseError {
   public name = 'StaffCountFailed'
-  constructor(public message: string = 'Could not count the staff', properties?: any) {
+  constructor(
+    public message: string = 'Could not count the staff',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StaffCountFailed.prototype)
   }
@@ -816,7 +1095,10 @@ export class StaffCountFailed extends BaseError {
 
 export class NotificationsEmailError extends BaseError {
   public name = 'NotificationsEmailError'
-  constructor(public message: string = 'Could not send email', properties?: any) {
+  constructor(
+    public message: string = 'Could not send email',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, NotificationsEmailError.prototype)
   }
@@ -824,7 +1106,10 @@ export class NotificationsEmailError extends BaseError {
 
 export class ProductGroupsFiltersFetchFailed extends BaseError {
   public name = 'ProductGroupsFiltersFetchFailed'
-  constructor(public message: string = 'Could not get products group filters', properties?: any) {
+  constructor(
+    public message: string = 'Could not get products group filters',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductGroupsFiltersFetchFailed.prototype)
   }
@@ -837,7 +1122,10 @@ export class ProductGroupsFiltersFetchFailed extends BaseError {
 /* Jobs */
 export class PrintJobsFetchFailed extends BaseError {
   public name = 'PrintJobsFetchFailed'
-  constructor(public message: string = 'Could not fetch print jobs', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch print jobs',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PrintJobsFetchFailed.prototype)
   }
@@ -845,7 +1133,10 @@ export class PrintJobsFetchFailed extends BaseError {
 
 export class PrintJobFetchFailed extends BaseError {
   public name = 'PrintJobFetchFailed'
-  constructor(public message: string = 'Could not fetch print job', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch print job',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PrintJobFetchFailed.prototype)
   }
@@ -853,7 +1144,10 @@ export class PrintJobFetchFailed extends BaseError {
 
 export class PrintJobCreateFailed extends BaseError {
   public name = 'PrintJobCreateFailed'
-  constructor(public message: string = 'Could not create print job', properties?: any) {
+  constructor(
+    public message: string = 'Could not create print job',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PrintJobCreateFailed.prototype)
   }
@@ -861,7 +1155,10 @@ export class PrintJobCreateFailed extends BaseError {
 
 export class PrintJobDeleteFailed extends BaseError {
   public name = 'PrintJobDeleteFailed'
-  constructor(public message: string = 'Could not delete print job', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete print job',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PrintJobDeleteFailed.prototype)
   }
@@ -869,7 +1166,10 @@ export class PrintJobDeleteFailed extends BaseError {
 
 export class PrintJobUpdateFailed extends BaseError {
   public name = 'PrintJobUpdateFailed'
-  constructor(public message: string = 'Could not update print job', properties?: any) {
+  constructor(
+    public message: string = 'Could not update print job',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PrintJobUpdateFailed.prototype)
   }
@@ -877,7 +1177,10 @@ export class PrintJobUpdateFailed extends BaseError {
 
 export class PrintJobDataFetchFailed extends BaseError {
   public name = 'PrintJobDataFetchFailed'
-  constructor(public message: string = 'Could not fetch print job data', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch print job data',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PrintJobDataFetchFailed.prototype)
   }
@@ -886,7 +1189,10 @@ export class PrintJobDataFetchFailed extends BaseError {
 /* Messages */
 export class PrintMessagesFetchFailed extends BaseError {
   public name = 'PrintMessagesFetchFailed'
-  constructor(public message: string = 'Could not fetch print messages', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch print messages',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PrintMessagesFetchFailed.prototype)
   }
@@ -894,7 +1200,10 @@ export class PrintMessagesFetchFailed extends BaseError {
 
 export class PrintMessageFetchFailed extends BaseError {
   public name = 'PrintMessageFetchFailed'
-  constructor(public message: string = 'Could not fetch print message', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch print message',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PrintMessageFetchFailed.prototype)
   }
@@ -902,7 +1211,10 @@ export class PrintMessageFetchFailed extends BaseError {
 
 export class PrintMessageCreateFailed extends BaseError {
   public name = 'PrintMessageCreateFailed'
-  constructor(public message: string = 'Could not create print message', properties?: any) {
+  constructor(
+    public message: string = 'Could not create print message',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PrintMessageCreateFailed.prototype)
   }
@@ -910,7 +1222,10 @@ export class PrintMessageCreateFailed extends BaseError {
 
 export class PrintMessageDeleteFailed extends BaseError {
   public name = 'PrintMessageDeleteFailed'
-  constructor(public message: string = 'Could not delete print message', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete print message',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PrintMessageDeleteFailed.prototype)
   }
@@ -918,7 +1233,10 @@ export class PrintMessageDeleteFailed extends BaseError {
 
 export class PrintMessageUpdateFailed extends BaseError {
   public name = 'PrintMessageUpdateFailed'
-  constructor(public message: string = 'Could not update print message', properties?: any) {
+  constructor(
+    public message: string = 'Could not update print message',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PrintMessageUpdateFailed.prototype)
   }
@@ -927,7 +1245,10 @@ export class PrintMessageUpdateFailed extends BaseError {
 /* Printers */
 export class PrintersFetchFailed extends BaseError {
   public name = 'PrintersFetchFailed'
-  constructor(public message: string = 'Could not fetch printers', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch printers',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PrintersFetchFailed.prototype)
   }
@@ -935,7 +1256,10 @@ export class PrintersFetchFailed extends BaseError {
 
 export class PrinterFetchFailed extends BaseError {
   public name = 'PrinterFetchFailed'
-  constructor(public message: string = 'Could not fetch printer', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch printer',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PrinterFetchFailed.prototype)
   }
@@ -943,7 +1267,10 @@ export class PrinterFetchFailed extends BaseError {
 
 export class PrinterCreateFailed extends BaseError {
   public name = 'PrinterCreateFailed'
-  constructor(public message: string = 'Could not create printer', properties?: any) {
+  constructor(
+    public message: string = 'Could not create printer',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PrinterCreateFailed.prototype)
   }
@@ -951,7 +1278,10 @@ export class PrinterCreateFailed extends BaseError {
 
 export class PrinterDeleteFailed extends BaseError {
   public name = 'PrinterDeleteFailed'
-  constructor(public message: string = 'Could not delete printer', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete printer',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PrinterDeleteFailed.prototype)
   }
@@ -959,7 +1289,10 @@ export class PrinterDeleteFailed extends BaseError {
 
 export class PrinterUpdateFailed extends BaseError {
   public name = 'PrinterUpdateFailed'
-  constructor(public message: string = 'Could not update printer', properties?: any) {
+  constructor(
+    public message: string = 'Could not update printer',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PrinterUpdateFailed.prototype)
   }
@@ -967,7 +1300,10 @@ export class PrinterUpdateFailed extends BaseError {
 
 export class MessagesFetchFailed extends BaseError {
   public name = 'MessagesFetchFailed'
-  constructor(public message: string = 'Could not fetch the messages', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the messages',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, MessagesFetchFailed.prototype)
   }
@@ -979,7 +1315,10 @@ export class MessagesFetchFailed extends BaseError {
 
 export class FavouritesFetchFailed extends BaseError {
   public name = 'FavouritesFetchFailed'
-  constructor(public message: string = 'Could not fetch favourites set', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch favourites set',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, FavouritesFetchFailed.prototype)
   }
@@ -987,7 +1326,10 @@ export class FavouritesFetchFailed extends BaseError {
 
 export class FavouriteFetchFailed extends BaseError {
   public name = 'FavouriteFetchFailed'
-  constructor(public message: string = 'Could not fetch favourite', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch favourite',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, FavouriteFetchFailed.prototype)
   }
@@ -995,7 +1337,10 @@ export class FavouriteFetchFailed extends BaseError {
 
 export class FavouriteCreateFailed extends BaseError {
   public name = 'FavouriteCreateFailed'
-  constructor(public message: string = 'Could not create favourite', properties?: any) {
+  constructor(
+    public message: string = 'Could not create favourite',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, FavouriteCreateFailed.prototype)
   }
@@ -1003,7 +1348,10 @@ export class FavouriteCreateFailed extends BaseError {
 
 export class FavouriteDeleteFailed extends BaseError {
   public name = 'FavouriteDeleteFailed'
-  constructor(public message: string = 'Could not delete favourite', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete favourite',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, FavouriteDeleteFailed.prototype)
   }
@@ -1011,7 +1359,10 @@ export class FavouriteDeleteFailed extends BaseError {
 
 export class FavouriteUpdateFailed extends BaseError {
   public name = 'FavouriteUpdateFailed'
-  constructor(public message: string = 'Could not update favourite', properties?: any) {
+  constructor(
+    public message: string = 'Could not update favourite',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, FavouriteUpdateFailed.prototype)
   }
@@ -1019,7 +1370,10 @@ export class FavouriteUpdateFailed extends BaseError {
 
 export class MessagesUpdateFailed extends BaseError {
   public name = 'MessagesUpdateFailed'
-  constructor(public message: string = 'Could not update the message', properties?: any) {
+  constructor(
+    public message: string = 'Could not update the message',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, MessagesUpdateFailed.prototype)
   }
@@ -1027,7 +1381,10 @@ export class MessagesUpdateFailed extends BaseError {
 
 export class BalancesFetchFailed extends BaseError {
   public name = 'BalancesFetchFailed'
-  constructor(public message: string = 'Could not fetch the balances', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the balances',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, BalancesFetchFailed.prototype)
   }
@@ -1035,7 +1392,10 @@ export class BalancesFetchFailed extends BaseError {
 
 export class BalancesFetchOneFailed extends BaseError {
   public name = 'BalancesFetchOneFailed'
-  constructor(public message: string = 'Could not fetch the balance', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the balance',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, BalancesFetchOneFailed.prototype)
   }
@@ -1043,7 +1403,10 @@ export class BalancesFetchOneFailed extends BaseError {
 
 export class BalancesMetaFailed extends BaseError {
   public name = 'BalancesMetaFailed'
-  constructor(public message: string = 'Could not fetch meta data for balances', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch meta data for balances',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, BalancesMetaFailed.prototype)
   }
@@ -1051,7 +1414,10 @@ export class BalancesMetaFailed extends BaseError {
 
 export class LegacySettingsFetchFailed extends BaseError {
   public name = 'LegacySettingsFetchFailed'
-  constructor(public message: string = 'Could not fetch legacy settings', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch legacy settings',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, LegacySettingsFetchFailed.prototype)
   }
@@ -1060,7 +1426,7 @@ export class LegacySettingFetchFailed extends BaseError {
   public name = 'LegacySettingFetchFailed'
   constructor(
     public message: string = 'Could not fetch one legacy settings object',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, LegacySettingFetchFailed.prototype)
@@ -1070,7 +1436,7 @@ export class LegacySettingUpdateFailed extends BaseError {
   public name = 'LegacySettingUpdateFailed'
   constructor(
     public message: string = 'Could not update one legacy settings object',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, LegacySettingUpdateFailed.prototype)

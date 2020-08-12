@@ -525,7 +525,10 @@ export class Products extends ThBaseHandler {
 
 export class ProductsCreateFailed extends BaseError {
   public name = 'ProductsCreateFailed'
-  constructor(public message: string = 'Could not create the product', properties?: any) {
+  constructor(
+    public message: string = 'Could not create the product',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsCreateFailed.prototype)
   }
@@ -533,21 +536,30 @@ export class ProductsCreateFailed extends BaseError {
 
 export class ProductFetchFailed extends BaseError {
   public name = 'ProductFetchFailed'
-  constructor(public message: string = 'Could not fetch the product', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the product',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductFetchFailed.prototype)
   }
 }
 export class ProductsFetchFailed extends BaseError {
   public name = 'ProductsFetchFailed'
-  constructor(public message: string = 'Could not fetch the products', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the products',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsFetchFailed.prototype)
   }
 }
 export class ProductsImportFailed extends BaseError {
   public name = 'ProductsImportFailed'
-  constructor(public message: string = 'Could not import the products', properties?: any) {
+  constructor(
+    public message: string = 'Could not import the products',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsImportFailed.prototype)
   }
@@ -557,7 +569,7 @@ export class ProductDetailsFetchFailed extends BaseError {
   public name = 'ProductDetailsFetchFailed'
   constructor(
     public message: string = 'Could not fetch the details of the product',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductDetailsFetchFailed.prototype)
@@ -567,7 +579,7 @@ export class ProductChildrenDetailsFetchFailed extends BaseError {
   public name = 'ProductChildrenDetailsFetchFailed'
   constructor(
     public message: string = 'Could not fetch the details of the children products',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductChildrenDetailsFetchFailed.prototype)
@@ -576,7 +588,10 @@ export class ProductChildrenDetailsFetchFailed extends BaseError {
 
 export class ProductsCountFailed extends BaseError {
   public name = 'ProductsCountFailed'
-  constructor(public message: string = 'Could not count the products', properties?: any) {
+  constructor(
+    public message: string = 'Could not count the products',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsCountFailed.prototype)
   }
@@ -584,7 +599,10 @@ export class ProductsCountFailed extends BaseError {
 
 export class ProductsMetaFailed extends BaseError {
   public name = 'ProductsMetaFailed'
-  constructor(public message: string = 'Could not get products metadata', properties?: any) {
+  constructor(
+    public message: string = 'Could not get products metadata',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsMetaFailed.prototype)
   }
@@ -592,7 +610,10 @@ export class ProductsMetaFailed extends BaseError {
 
 export class ProductsUpdateFailed extends BaseError {
   public name = 'ProductsUpdateFailed'
-  constructor(public message: string = 'Could not update the product', properties?: any) {
+  constructor(
+    public message: string = 'Could not update the product',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsUpdateFailed.prototype)
   }
@@ -600,7 +621,10 @@ export class ProductsUpdateFailed extends BaseError {
 
 export class ProductsBulkEditFailed extends BaseError {
   public name = 'ProductsBulkEditFailed'
-  constructor(public message: string = 'Could not bulk edit the products', properties?: any) {
+  constructor(
+    public message: string = 'Could not bulk edit the products',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsBulkEditFailed.prototype)
   }
@@ -608,7 +632,10 @@ export class ProductsBulkEditFailed extends BaseError {
 
 export class ProductsDeleteFailed extends BaseError {
   public name = 'ProductsDeleteFailed'
-  constructor(public message: string = 'Could not delete the product', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete the product',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsDeleteFailed.prototype)
   }
@@ -616,7 +643,10 @@ export class ProductsDeleteFailed extends BaseError {
 
 export class ProductsSearchFailed extends BaseError {
   public name = 'ProductsSearchFailed'
-  constructor(public message: string = 'Could not search for the product', properties?: any) {
+  constructor(
+    public message: string = 'Could not search for the product',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsSearchFailed.prototype)
   }
@@ -624,7 +654,10 @@ export class ProductsSearchFailed extends BaseError {
 
 export class ProductsBookStockFailed extends BaseError {
   public name = 'ProductsBookStockFailed'
-  constructor(public message: string = 'Could not book stock for the product', properties?: any) {
+  constructor(
+    public message: string = 'Could not book stock for the product',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsBookStockFailed.prototype)
   }
@@ -632,7 +665,10 @@ export class ProductsBookStockFailed extends BaseError {
 
 export class BarcodeGetFailed extends BaseError {
   public name = 'BarcodeGetFailed'
-  constructor(public message: string = 'Could not check for barcode collision', properties?: any) {
+  constructor(
+    public message: string = 'Could not check for barcode collision',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, BarcodeGetFailed.prototype)
   }

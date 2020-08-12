@@ -1,9 +1,8 @@
-import qs from 'qs'
 import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
-import { TillhubClient, v0, v1 } from '../../../src/tillhub-js'
+import { TillhubClient, v1 } from '../../../src/tillhub-js'
 
 const user = {
   username: 'test@example.com',

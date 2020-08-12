@@ -156,7 +156,7 @@ describe('v0: Print.Printers', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/print/${legacyId}/printers`).reply(config => {
+      mock.onPost(`https://api.tillhub.com/api/v0/print/${legacyId}/printers`).reply(() => {
         return [
           200,
           {
@@ -207,7 +207,7 @@ describe('v0: Print.Printers', () => {
 
       mock
         .onPatch(`https://api.tillhub.com/api/v0/print/${legacyId}/printers/${printerId}`)
-        .reply(config => {
+        .reply(() => {
           return [
             200,
             {
@@ -258,7 +258,7 @@ describe('v0: Print.Printers', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/print/${legacyId}/printers/${printerId}`)
-        .reply(config => {
+        .reply(() => {
           return [
             200,
             {
@@ -404,7 +404,7 @@ describe('v0: Print.Printers', () => {
 
       mock
         .onPost(`https://api.tillhub.com/api/v0/print/${legacyId}/printers/${printerId}`)
-        .reply(config => {
+        .reply(() => {
           return [205]
         })
     }
@@ -453,7 +453,7 @@ describe('v0: Print.Printers', () => {
 
       mock
         .onPatch(`https://api.tillhub.com/api/v0/print/${legacyId}/printers/${printerId}`)
-        .reply(config => {
+        .reply(() => {
           return [205]
         })
     }
@@ -502,7 +502,7 @@ describe('v0: Print.Printers', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/print/${legacyId}/printers/${printerId}`)
-        .reply(config => {
+        .reply(() => {
           return [205]
         })
     }

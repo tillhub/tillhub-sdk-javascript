@@ -257,7 +257,10 @@ export class Carts extends ThBaseHandler {
 
 export class CartFetchFailed extends BaseError {
   public name = 'CartFetchFailed'
-  constructor(public message: string = 'Could not fetch cart', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch cart',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CartFetchFailed.prototype)
   }
@@ -265,7 +268,10 @@ export class CartFetchFailed extends BaseError {
 
 export class CartsSearchFailed extends BaseError {
   public name = 'CartsSearchFailed'
-  constructor(public message: string = 'Could complete carts search', properties?: any) {
+  constructor(
+    public message: string = 'Could complete carts search',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CartsSearchFailed.prototype)
   }
@@ -273,7 +279,7 @@ export class CartsSearchFailed extends BaseError {
 
 export class CartsDeleteFailed extends BaseError {
   public name = 'CartsDeleteFailed'
-  constructor(public message: string = 'Could delete cart', properties?: any) {
+  constructor(public message: string = 'Could delete cart', properties?: Record<string, unknown>) {
     super(message, properties)
     Object.setPrototypeOf(this, CartsDeleteFailed.prototype)
   }
@@ -281,7 +287,7 @@ export class CartsDeleteFailed extends BaseError {
 
 export class CartsUpdateFailed extends BaseError {
   public name = 'CartsUpdateFailed'
-  constructor(public message: string = 'Could update cart', properties?: any) {
+  constructor(public message: string = 'Could update cart', properties?: Record<string, unknown>) {
     super(message, properties)
     Object.setPrototypeOf(this, CartsUpdateFailed.prototype)
   }
@@ -289,7 +295,10 @@ export class CartsUpdateFailed extends BaseError {
 
 export class CartsMetaFailed extends BaseError {
   public name = 'CartsMetaFailed'
-  constructor(public message: string = 'Could fetch carts metadata', properties?: any) {
+  constructor(
+    public message: string = 'Could fetch carts metadata',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CartsMetaFailed.prototype)
   }
@@ -297,7 +306,7 @@ export class CartsMetaFailed extends BaseError {
 
 export class CartsFetchFailed extends BaseError {
   public name = 'CartsFetchFailed'
-  constructor(public message: string = 'Could fetch carts', properties?: any) {
+  constructor(public message: string = 'Could fetch carts', properties?: Record<string, unknown>) {
     super(message, properties)
     Object.setPrototypeOf(this, CartsFetchFailed.prototype)
   }
@@ -305,7 +314,7 @@ export class CartsFetchFailed extends BaseError {
 
 export class CartsCreateFailed extends BaseError {
   public name = 'CartsCreateFailed'
-  constructor(public message: string = 'Could create cart', properties?: any) {
+  constructor(public message: string = 'Could create cart', properties?: Record<string, unknown>) {
     super(message, properties)
     Object.setPrototypeOf(this, CartsCreateFailed.prototype)
   }

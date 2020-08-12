@@ -190,7 +190,10 @@ export class StockTakings extends ThBaseHandler {
 
 export class StockTakingsFetchFailed extends BaseError {
   public name = 'StockTakingsFetchFailed'
-  constructor(public message: string = 'Could not fetch stock takings', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch stock takings',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StockTakingsFetchFailed.prototype)
   }
@@ -198,7 +201,10 @@ export class StockTakingsFetchFailed extends BaseError {
 
 export class StockTakingsFetchOneFailed extends BaseError {
   public name = 'StockTakingsFetchOneFailed'
-  constructor(public message: string = 'Could not fetch one stock taking', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch one stock taking',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StockTakingsFetchOneFailed.prototype)
   }
@@ -206,7 +212,10 @@ export class StockTakingsFetchOneFailed extends BaseError {
 
 export class StockTakingsUpdateFailed extends BaseError {
   public name = 'StockTakingsUpdateFailed'
-  constructor(public message: string = 'Could not update stock taking', properties?: any) {
+  constructor(
+    public message: string = 'Could not update stock taking',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StockTakingsUpdateFailed.prototype)
   }
@@ -214,7 +223,10 @@ export class StockTakingsUpdateFailed extends BaseError {
 
 export class StockTakingsCreationFailed extends BaseError {
   public name = 'StockTakingsCreationFailed'
-  constructor(public message: string = 'Could not create stock taking', properties?: any) {
+  constructor(
+    public message: string = 'Could not create stock taking',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StockTakingsCreationFailed.prototype)
   }
@@ -222,7 +234,10 @@ export class StockTakingsCreationFailed extends BaseError {
 
 export class StockTakingsDeleteFailed extends BaseError {
   public name = 'StockTakingsDeleteFailed'
-  constructor(public message: string = 'Could not delete stock taking', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete stock taking',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StockTakingsDeleteFailed.prototype)
   }
@@ -230,7 +245,10 @@ export class StockTakingsDeleteFailed extends BaseError {
 
 export class StockTakingsMetaFailed extends BaseError {
   public name = 'StockTakingsMetaFailed'
-  constructor(public message: string = 'Could not get meta of stock takings', properties?: any) {
+  constructor(
+    public message: string = 'Could not get meta of stock takings',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StockTakingsMetaFailed.prototype)
   }

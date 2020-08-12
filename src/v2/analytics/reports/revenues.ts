@@ -100,7 +100,10 @@ export class AnalyticsReportsRevenuesGrouped extends ThAnalyticsBaseHandler {
 
 export class AnalyticsReportsRevenuesGroupedFetchError extends BaseError {
   public name = 'AnalyticsReportsRevenuesGroupedFetchError'
-  constructor(public message: string = 'Could not fetch revenue items. ', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch revenue items. ',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsReportsRevenuesGroupedFetchError.prototype)
   }
@@ -110,7 +113,7 @@ export class AnalyticsReportsRevenuesGroupedExportFetchError extends BaseError {
   public name = 'AnalyticsReportsRevenuesGroupedExportFetchError'
   constructor(
     public message: string = 'Could not fetch revenue grouped export. ',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsReportsRevenuesGroupedExportFetchError.prototype)

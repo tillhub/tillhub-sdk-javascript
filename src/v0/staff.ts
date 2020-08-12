@@ -40,6 +40,7 @@ export interface StaffMemberResponse {
     patch?: any
   }
   msg?: string
+  errors?: Record<string, unknown>
 }
 
 export interface StaffAddress {
@@ -435,7 +436,7 @@ export class Staff extends ThBaseHandler {
       let uri
       if (typeof query === 'string') {
         uri = this.uriHelper.generateBaseUri(`/search?q=${query}`)
-      } else if (typeOf(query) === 'Record<string, unknown>') {
+      } else if (typeOf(query) === 'object') {
         const base = this.uriHelper.generateBaseUri('/search')
         uri = this.uriHelper.generateUriWithQuery(base, query)
       } else {
@@ -460,7 +461,10 @@ export class Staff extends ThBaseHandler {
 
 export class StaffFetchFailed extends BaseError {
   public name = 'StaffFetchFailed'
-  constructor(public message: string = 'Could not fetch all the Staff members', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch all the Staff members',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StaffFetchFailed.prototype)
   }
@@ -468,7 +472,10 @@ export class StaffFetchFailed extends BaseError {
 
 export class StaffFetchOneFailed extends BaseError {
   public name = 'StaffFetchOneFailed'
-  constructor(public message: string = 'Could not fetch the Staff member', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the Staff member',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StaffFetchOneFailed.prototype)
   }
@@ -476,7 +483,10 @@ export class StaffFetchOneFailed extends BaseError {
 
 export class StaffPutFailed extends BaseError {
   public name = 'StaffPutFailed'
-  constructor(public message: string = 'Could not alter the Staff member', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter the Staff member',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StaffPutFailed.prototype)
   }
@@ -484,7 +494,10 @@ export class StaffPutFailed extends BaseError {
 
 export class StaffDeleteFailed extends BaseError {
   public name = 'StaffDeleteFailed'
-  constructor(public message: string = 'Could not delete the Staff member', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete the Staff member',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StaffDeleteFailed.prototype)
   }
@@ -492,7 +505,10 @@ export class StaffDeleteFailed extends BaseError {
 
 export class StaffMemberCreateFailed extends BaseError {
   public name = 'StaffMemberCreateFailed'
-  constructor(public message: string = 'Could not create the Staff member', properties?: any) {
+  constructor(
+    public message: string = 'Could not create the Staff member',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StaffMemberCreateFailed.prototype)
   }
@@ -502,7 +518,7 @@ export class StaffPinGetFailed extends BaseError {
   public name = 'StaffPinGetFailed'
   constructor(
     public message: string = 'Could not get a unique Staff pin number',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, StaffPinGetFailed.prototype)
@@ -511,7 +527,10 @@ export class StaffPinGetFailed extends BaseError {
 
 export class StaffNumberGetFailed extends BaseError {
   public name = 'StaffNumberGetFailed'
-  constructor(public message: string = 'Could not get a unique Staff number', properties?: any) {
+  constructor(
+    public message: string = 'Could not get a unique Staff number',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StaffNumberGetFailed.prototype)
   }
@@ -519,21 +538,30 @@ export class StaffNumberGetFailed extends BaseError {
 
 export class MakeUserStaffFailed extends BaseError {
   public name = 'MakeUserStaffFailed'
-  constructor(public message: string = 'Could not make the staff member a user', properties?: any) {
+  constructor(
+    public message: string = 'Could not make the staff member a user',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, MakeUserStaffFailed.prototype)
   }
 }
 export class StaffMetaFailed extends BaseError {
   public name = 'StaffMetaFailed'
-  constructor(public message: string = 'Could not get meta of staff', properties?: any) {
+  constructor(
+    public message: string = 'Could not get meta of staff',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StaffMetaFailed.prototype)
   }
 }
 export class StaffSearchFailed extends BaseError {
   public name = 'StaffSearchFailed'
-  constructor(public message: string = 'Could not search for staff', properties?: any) {
+  constructor(
+    public message: string = 'Could not search for staff',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StaffSearchFailed.prototype)
   }

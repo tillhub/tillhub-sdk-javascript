@@ -26,10 +26,6 @@ afterEach(() => {
 })
 
 describe('v0: Analytics: gets customers overview report', () => {
-  const mockCustomersQuery = {
-    customer_id: '0001'
-  }
-
   it('takes a query string', async () => {
     const mockCustomersQuery = {
       customer_id: '0001',

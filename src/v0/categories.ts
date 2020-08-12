@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
@@ -162,7 +161,10 @@ export class Categories extends ThBaseHandler {
 
 export class CategoriesFetchFailed extends BaseError {
   public name = 'CategoriesFetchFailed'
-  constructor(public message: string = 'Could not fetch categories', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch categories',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CategoriesFetchFailed.prototype)
   }
@@ -170,7 +172,10 @@ export class CategoriesFetchFailed extends BaseError {
 
 export class CategoryFetchFailed extends BaseError {
   public name = 'CategoryFetchFailed'
-  constructor(public message: string = 'Could not fetch category', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch category',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CategoryFetchFailed.prototype)
   }
@@ -178,7 +183,10 @@ export class CategoryFetchFailed extends BaseError {
 
 export class CategoryPutFailed extends BaseError {
   public name = 'CategoryPutFailed'
-  constructor(public message: string = 'Could not alter category', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter category',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CategoryPutFailed.prototype)
   }
@@ -186,7 +194,10 @@ export class CategoryPutFailed extends BaseError {
 
 export class CategoryCreationFailed extends BaseError {
   public name = 'CategoryCreationFailed'
-  constructor(public message: string = 'Could not create category', properties?: any) {
+  constructor(
+    public message: string = 'Could not create category',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CategoryCreationFailed.prototype)
   }
@@ -194,7 +205,10 @@ export class CategoryCreationFailed extends BaseError {
 
 export class CategoriesDeleteFailed extends BaseError {
   public name = 'CategoriesDeleteFailed'
-  constructor(public message: string = 'Could not delete category', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete category',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CategoriesDeleteFailed.prototype)
   }

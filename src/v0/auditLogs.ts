@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 import { UriHelper } from '../uri-helper'
@@ -51,7 +50,6 @@ export class AuditLogs {
   getAll(q?: AuditsQuery | undefined): Promise<AuditsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
-      let uri
 
       try {
         const base = this.uriHelper.generateBaseUri('/logs')

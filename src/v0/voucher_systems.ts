@@ -178,7 +178,10 @@ export class VoucherSystems extends ThBaseHandler {
 
 export class VoucherSystemsFetchFailed extends BaseError {
   public name = 'VoucherSystemsFetchFailed'
-  constructor(public message: string = 'Could not fetch voucher systems', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch voucher systems',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherSystemsFetchFailed.prototype)
   }
@@ -186,7 +189,10 @@ export class VoucherSystemsFetchFailed extends BaseError {
 
 export class VoucherSystemFetchFailed extends BaseError {
   public name = 'VoucherSystemFetchFailed'
-  constructor(public message: string = 'Could not fetch voucher system', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch voucher system',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherSystemFetchFailed.prototype)
   }
@@ -194,7 +200,10 @@ export class VoucherSystemFetchFailed extends BaseError {
 
 export class VoucherSystemPutFailed extends BaseError {
   public name = 'VoucherSystemhPutFailed'
-  constructor(public message: string = 'Could not alter voucher system', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter voucher system',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherSystemPutFailed.prototype)
   }
@@ -202,7 +211,10 @@ export class VoucherSystemPutFailed extends BaseError {
 
 export class VoucherSystemCreationFailed extends BaseError {
   public name = 'VoucherSystemCreationFailed'
-  constructor(public message: string = 'Could not create voucher system', properties?: any) {
+  constructor(
+    public message: string = 'Could not create voucher system',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherSystemCreationFailed.prototype)
   }
@@ -210,7 +222,10 @@ export class VoucherSystemCreationFailed extends BaseError {
 
 export class VoucherSystemDeleteFailed extends BaseError {
   public name = 'VoucherSystemDeleteFailed'
-  constructor(public message: string = 'Could not delete voucher system', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete voucher system',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherSystemDeleteFailed.prototype)
   }

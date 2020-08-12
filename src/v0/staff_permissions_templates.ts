@@ -179,7 +179,7 @@ export class StaffPermissionsTemplatesFetchFailed extends BaseError {
   public name = 'StaffPermissionsTemplatesFetchFailed'
   constructor(
     public message: string = 'Could not fetch all staff permissions templates',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
   }
@@ -189,7 +189,7 @@ export class StaffPermissionsTemplatesFetchOneFailed extends BaseError {
   public name = 'StaffPermissionsTemplatesFetchOneFailed'
   constructor(
     public message: string = 'Could not fetch one staff permissions template',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
   }
@@ -199,7 +199,7 @@ export class StaffPermissionsTemplatesUpdateFailed extends BaseError {
   public name = 'StaffPermissionsTemplatesUpdateFailed'
   constructor(
     public message: string = 'Could not update staff permissions template',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
   }
@@ -209,7 +209,7 @@ export class StaffPermissionsTemplatesCreationFailed extends BaseError {
   public name = 'StaffPermissionsTemplatesCreationFailed'
   constructor(
     public message: string = 'Could not create staff permissions template',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
   }
@@ -219,7 +219,7 @@ export class StaffPermissionsTemplatesDeleteFailed extends BaseError {
   public name = 'StaffPermissionsTemplatesDeleteFailed'
   constructor(
     public message: string = 'Could not delete staff permissions template',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
   }

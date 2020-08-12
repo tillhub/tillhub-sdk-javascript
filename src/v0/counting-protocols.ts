@@ -126,7 +126,10 @@ export class CountingProtocols extends ThBaseHandler {
 
 export class CountingProtocolsFetchFailed extends BaseError {
   public name = 'CountingProtocolsFetchFailed'
-  constructor(public message: string = 'Could not fetch the counting protocols', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the counting protocols',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CountingProtocolsFetchFailed.prototype)
   }
@@ -136,7 +139,7 @@ export class CountingProtocolsMetaFailed extends BaseError {
   public name = 'CountingProtocolsMetaFailed'
   constructor(
     public message: string = 'Could not fetch metadata for counting protocols',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, CountingProtocolsMetaFailed.prototype)

@@ -138,15 +138,13 @@ export class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
           this.getAll({ uri: next })
       }
 
+      // eslint-disable-next-line
+      // @ts-ignore
       return {
         data,
         summary,
         metaData: {
-          // eslint-disable-next-line
-          // @ts-ignore
           count: count.count,
-          // eslint-disable-next-line
-          // @ts-ignore
           total_count: totalCount.count
         },
         next: nextFn
@@ -175,7 +173,7 @@ export class AnalyticsReportsCountingProtocolsFetchFailed extends BaseError {
   public name = 'AnalyticsReportsCountingProtocolsFetchFailed'
   constructor(
     public message: string = 'Could not fetch the counting protocols report',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsReportsCountingProtocolsFetchFailed.prototype)
@@ -186,7 +184,7 @@ export class AnalyticsReportsCountingProtocolsExportFetchError extends BaseError
   public name = 'AnalyticsReportsCountingProtocolsExportFetchError'
   constructor(
     public message: string = 'Could not fetch counting protocols export. ',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsReportsCountingProtocolsExportFetchError.prototype)

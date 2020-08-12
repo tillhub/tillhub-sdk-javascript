@@ -14,7 +14,7 @@ export interface ConfigurationsQueryOptions {
   limit?: number
   uri?: string
   owner?: string
-  query?: any
+  query?: Record<string, unknown>
 }
 
 export interface ConfigurationsResponse {

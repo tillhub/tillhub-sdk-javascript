@@ -175,7 +175,10 @@ export class Storefronts extends ThBaseHandler {
 
 export class StorefrontsFetchFailed extends BaseError {
   public name = 'StorefrontsFetchFailed'
-  constructor(public message: string = 'Could not fetch storefronts', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch storefronts',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StorefrontsFetchFailed.prototype)
   }
@@ -183,7 +186,10 @@ export class StorefrontsFetchFailed extends BaseError {
 
 export class StorefrontsFetchOneFailed extends BaseError {
   public name = 'StorefrontsFetchOneFailed'
-  constructor(public message: string = 'Could not fetch one storefront', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch one storefront',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StorefrontsFetchOneFailed.prototype)
   }
@@ -191,7 +197,10 @@ export class StorefrontsFetchOneFailed extends BaseError {
 
 export class StorefrontsPutFailed extends BaseError {
   public name = 'StorefrontsPutFailed'
-  constructor(public message: string = 'Could not update storefront', properties?: any) {
+  constructor(
+    public message: string = 'Could not update storefront',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StorefrontsPutFailed.prototype)
   }
@@ -199,7 +208,10 @@ export class StorefrontsPutFailed extends BaseError {
 
 export class StorefrontsCreationFailed extends BaseError {
   public name = 'StorefrontsCreationFailed'
-  constructor(public message: string = 'Could not create storefronts', properties?: any) {
+  constructor(
+    public message: string = 'Could not create storefronts',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StorefrontsCreationFailed.prototype)
   }
@@ -207,7 +219,10 @@ export class StorefrontsCreationFailed extends BaseError {
 
 export class StorefrontsDeleteFailed extends BaseError {
   public name = 'StorefrontsDeleteFailed'
-  constructor(public message: string = 'Could not delete storefronts', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete storefronts',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StorefrontsDeleteFailed.prototype)
   }

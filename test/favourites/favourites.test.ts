@@ -156,7 +156,7 @@ describe('v0: Favourites', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/favourites/${legacyId}`).reply(config => {
+      mock.onPost(`https://api.tillhub.com/api/v0/favourites/${legacyId}`).reply(() => {
         return [
           200,
           {
@@ -207,7 +207,7 @@ describe('v0: Favourites', () => {
 
       mock
         .onPut(`https://api.tillhub.com/api/v0/favourites/${legacyId}/${favouriteId}`)
-        .reply(config => {
+        .reply(() => {
           return [
             200,
             {
@@ -258,7 +258,7 @@ describe('v0: Favourites', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/favourites/${legacyId}/${favouriteId}`)
-        .reply(config => {
+        .reply(() => {
           return [
             200,
             {
@@ -398,7 +398,7 @@ describe('v0: Favourites', () => {
 
       mock
         .onPost(`https://api.tillhub.com/api/v0/favourites/${legacyId}/${favouriteId}`)
-        .reply(config => {
+        .reply(() => {
           return [205]
         })
     }
@@ -444,7 +444,7 @@ describe('v0: Favourites', () => {
 
       mock
         .onPut(`https://api.tillhub.com/api/v0/favourites/${legacyId}/${favouriteId}`)
-        .reply(config => {
+        .reply(() => {
           return [205]
         })
     }
@@ -490,7 +490,7 @@ describe('v0: Favourites', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/favourites/${legacyId}/${favouriteId}`)
-        .reply(config => {
+        .reply(() => {
           return [205]
         })
     }

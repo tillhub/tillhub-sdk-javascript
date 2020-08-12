@@ -156,7 +156,7 @@ describe('v0: Print.Messages', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/print/${legacyId}/messages`).reply(config => {
+      mock.onPost(`https://api.tillhub.com/api/v0/print/${legacyId}/messages`).reply(() => {
         return [
           200,
           {
@@ -207,7 +207,7 @@ describe('v0: Print.Messages', () => {
 
       mock
         .onPatch(`https://api.tillhub.com/api/v0/print/${legacyId}/messages/${messageId}`)
-        .reply(config => {
+        .reply(() => {
           return [
             200,
             {
@@ -258,7 +258,7 @@ describe('v0: Print.Messages', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/print/${legacyId}/messages/${messageId}`)
-        .reply(config => {
+        .reply(() => {
           return [
             200,
             {
@@ -404,7 +404,7 @@ describe('v0: Print.Messages', () => {
 
       mock
         .onPost(`https://api.tillhub.com/api/v0/print/${legacyId}/messages/${messageId}`)
-        .reply(config => {
+        .reply(() => {
           return [205]
         })
     }
@@ -453,7 +453,7 @@ describe('v0: Print.Messages', () => {
 
       mock
         .onPatch(`https://api.tillhub.com/api/v0/print/${legacyId}/messages/${messageId}`)
-        .reply(config => {
+        .reply(() => {
           return [205]
         })
     }
@@ -502,7 +502,7 @@ describe('v0: Print.Messages', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/print/${legacyId}/messages/${messageId}`)
-        .reply(config => {
+        .reply(() => {
           return [205]
         })
     }

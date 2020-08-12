@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
@@ -153,7 +152,10 @@ export class Correspondences extends ThBaseHandler {
 
 export class CorrespondencesFetchFailed extends BaseError {
   public name = 'CorrespondencesFetchFailed'
-  constructor(public message: string = 'Could not fetch Correspondences', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch Correspondences',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CorrespondencesFetchFailed.prototype)
   }
@@ -161,7 +163,10 @@ export class CorrespondencesFetchFailed extends BaseError {
 
 export class CorrespondenceFetchFailed extends BaseError {
   public name = 'CorrespondenceFetchFailed'
-  constructor(public message: string = 'Could not fetch correspondence', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch correspondence',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CorrespondenceFetchFailed.prototype)
   }
@@ -169,7 +174,10 @@ export class CorrespondenceFetchFailed extends BaseError {
 
 export class CorrespondencePutFailed extends BaseError {
   public name = 'CorrespondencePutFailed'
-  constructor(public message: string = 'Could not alter correspondence', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter correspondence',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CorrespondencePutFailed.prototype)
   }
@@ -177,7 +185,10 @@ export class CorrespondencePutFailed extends BaseError {
 
 export class CorrespondenceCreationFailed extends BaseError {
   public name = 'CorrespondenceCreationFailed'
-  constructor(public message: string = 'Could not create correspondence', properties?: any) {
+  constructor(
+    public message: string = 'Could not create correspondence',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CorrespondenceCreationFailed.prototype)
   }

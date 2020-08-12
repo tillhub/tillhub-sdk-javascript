@@ -19,7 +19,7 @@ const respMsg = `Deleted tax ${taxId}`
 describe('v0: Taxes: can delete the tax', () => {
   it("Tillhub's Taxes is instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function() {
         return [
           200,
           {
@@ -32,16 +32,14 @@ describe('v0: Taxes: can delete the tax', () => {
         ]
       })
 
-      mock
-        .onDelete(`https://api.tillhub.com/api/v0/taxes/${legacyId}/${taxId}`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              msg: respMsg
-            }
-          ]
-        })
+      mock.onDelete(`https://api.tillhub.com/api/v0/taxes/${legacyId}/${taxId}`).reply(function() {
+        return [
+          200,
+          {
+            msg: respMsg
+          }
+        ]
+      })
     }
 
     const th = await initThInstance()
@@ -57,7 +55,7 @@ describe('v0: Taxes: can delete the tax', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function() {
         return [
           200,
           {
@@ -69,11 +67,9 @@ describe('v0: Taxes: can delete the tax', () => {
           }
         ]
       })
-      mock
-        .onDelete(`https://api.tillhub.com/api/v0/taxes/${legacyId}/${taxId}`)
-        .reply(function (config) {
-          return [205]
-        })
+      mock.onDelete(`https://api.tillhub.com/api/v0/taxes/${legacyId}/${taxId}`).reply(function() {
+        return [205]
+      })
     }
 
     const th = await initThInstance()

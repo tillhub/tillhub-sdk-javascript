@@ -2,7 +2,6 @@ import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
-import { TillhubClient } from '../../src/tillhub-js'
 import {
   UserPermissionsTemplate,
   UserPermissionsTemplates,
@@ -30,7 +29,7 @@ afterEach(() => {
 describe('v0: UserPermissionsTemplates', () => {
   it('retrieves all userPermissionsTemplates', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function() {
         return [
           200,
           {
@@ -45,7 +44,7 @@ describe('v0: UserPermissionsTemplates', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/user_permission_templates/${legacyId}`)
-        .reply(function (config) {
+        .reply(function() {
           return [
             200,
             {
@@ -69,7 +68,7 @@ describe('v0: UserPermissionsTemplates', () => {
 
   it('retrieves one user permissions template', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function() {
         return [
           200,
           {
@@ -84,7 +83,7 @@ describe('v0: UserPermissionsTemplates', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/user_permission_templates/${legacyId}/${templateId}`)
-        .reply(function (config) {
+        .reply(function() {
           return [
             200,
             {
@@ -108,7 +107,7 @@ describe('v0: UserPermissionsTemplates', () => {
 
   it('creates one user permissions template', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function() {
         return [
           200,
           {
@@ -123,7 +122,7 @@ describe('v0: UserPermissionsTemplates', () => {
 
       mock
         .onPost(`https://api.tillhub.com/api/v0/user_permission_templates/${legacyId}`)
-        .reply(config => {
+        .reply(() => {
           return [
             200,
             {
@@ -145,7 +144,7 @@ describe('v0: UserPermissionsTemplates', () => {
 
   it('updates one user permissions template', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function() {
         return [
           200,
           {
@@ -160,7 +159,7 @@ describe('v0: UserPermissionsTemplates', () => {
 
       mock
         .onPut(`https://api.tillhub.com/api/v0/user_permission_templates/${legacyId}/${templateId}`)
-        .reply(config => {
+        .reply(() => {
           return [
             200,
             {
@@ -182,7 +181,7 @@ describe('v0: UserPermissionsTemplates', () => {
 
   it('deletes one user permissions template', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function() {
         return [
           200,
           {
@@ -199,7 +198,7 @@ describe('v0: UserPermissionsTemplates', () => {
         .onDelete(
           `https://api.tillhub.com/api/v0/user_permission_templates/${legacyId}/${templateId}`
         )
-        .reply(config => {
+        .reply(() => {
           return [
             200,
             {
@@ -220,7 +219,7 @@ describe('v0: UserPermissionsTemplates', () => {
 
   it('rejects getAll() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function() {
         return [
           200,
           {
@@ -235,7 +234,7 @@ describe('v0: UserPermissionsTemplates', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/user_permission_templates/${legacyId}`)
-        .reply(function (config) {
+        .reply(function() {
           return [205]
         })
     }
@@ -252,7 +251,7 @@ describe('v0: UserPermissionsTemplates', () => {
 
   it('rejects get() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function() {
         return [
           200,
           {
@@ -267,7 +266,7 @@ describe('v0: UserPermissionsTemplates', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/user_permission_templates/${legacyId}/${templateId}`)
-        .reply(function (config) {
+        .reply(function() {
           return [205]
         })
     }
@@ -284,7 +283,7 @@ describe('v0: UserPermissionsTemplates', () => {
 
   it('rejects create() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function() {
         return [
           200,
           {
@@ -301,7 +300,7 @@ describe('v0: UserPermissionsTemplates', () => {
         .onPost(
           `https://api.tillhub.com/api/v0/user_permission_templates/${legacyId}/${templateId}`
         )
-        .reply(config => {
+        .reply(() => {
           return [205]
         })
     }
@@ -318,7 +317,7 @@ describe('v0: UserPermissionsTemplates', () => {
 
   it('rejects update() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function() {
         return [
           200,
           {
@@ -335,7 +334,7 @@ describe('v0: UserPermissionsTemplates', () => {
         .onPatch(
           `https://api.tillhub.com/api/v0/user_permission_templates/${legacyId}/${templateId}`
         )
-        .reply(config => {
+        .reply(() => {
           return [205]
         })
     }
@@ -352,7 +351,7 @@ describe('v0: UserPermissionsTemplates', () => {
 
   it('rejects delete() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function() {
         return [
           200,
           {
@@ -369,7 +368,7 @@ describe('v0: UserPermissionsTemplates', () => {
         .onDelete(
           `https://api.tillhub.com/api/v0/user_permission_templates/${legacyId}/${templateId}`
         )
-        .reply(config => {
+        .reply(() => {
           return [205]
         })
     }

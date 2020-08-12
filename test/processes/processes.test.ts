@@ -160,7 +160,7 @@ describe('v0: Processes', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/processes/${legacyId}`).reply(config => {
+      mock.onPost(`https://api.tillhub.com/api/v0/processes/${legacyId}`).reply(() => {
         return [
           200,
           {
@@ -211,7 +211,7 @@ describe('v0: Processes', () => {
 
       mock
         .onPatch(`https://api.tillhub.com/api/v0/processes/${legacyId}/${processId}`)
-        .reply(config => {
+        .reply(() => {
           return [
             200,
             {
@@ -263,7 +263,7 @@ describe('v0: Processes', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/processes/${legacyId}/${processId}/items`)
-        .reply(config => {
+        .reply(() => {
           return [
             200,
             {
@@ -314,7 +314,7 @@ describe('v0: Processes', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/processes/${legacyId}/${processId}`)
-        .reply(config => {
+        .reply(() => {
           return [
             200,
             {
@@ -450,11 +450,9 @@ describe('v0: Processes', () => {
         ]
       })
 
-      mock
-        .onPost(`https://api.tillhub.com/api/v0/processes/${legacyId}/${processId}`)
-        .reply(config => {
-          return [205]
-        })
+      mock.onPost(`https://api.tillhub.com/api/v0/processes/${legacyId}/${processId}`).reply(() => {
+        return [205]
+      })
     }
 
     const options = {
@@ -498,7 +496,7 @@ describe('v0: Processes', () => {
 
       mock
         .onPatch(`https://api.tillhub.com/api/v0/processes/${legacyId}/${processId}`)
-        .reply(config => {
+        .reply(() => {
           return [205]
         })
     }
@@ -590,7 +588,7 @@ describe('v0: Processes', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/processes/${legacyId}/${processId}`)
-        .reply(config => {
+        .reply(() => {
           return [205]
         })
     }

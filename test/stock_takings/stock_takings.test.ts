@@ -160,7 +160,7 @@ describe('v0: StockTakings', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/stock_takings/${legacyId}`).reply(config => {
+      mock.onPost(`https://api.tillhub.com/api/v0/stock_takings/${legacyId}`).reply(() => {
         return [
           200,
           {
@@ -211,7 +211,7 @@ describe('v0: StockTakings', () => {
 
       mock
         .onPatch(`https://api.tillhub.com/api/v0/stock_takings/${legacyId}/${stockTakingId}`)
-        .reply(config => {
+        .reply(() => {
           return [
             200,
             {
@@ -262,7 +262,7 @@ describe('v0: StockTakings', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/stock_takings/${legacyId}/${stockTakingId}`)
-        .reply(config => {
+        .reply(() => {
           return [
             200,
             {
@@ -402,7 +402,7 @@ describe('v0: StockTakings', () => {
 
       mock
         .onPost(`https://api.tillhub.com/api/v0/stock_takings/${legacyId}/${stockTakingId}`)
-        .reply(config => {
+        .reply(() => {
           return [205]
         })
     }
@@ -448,7 +448,7 @@ describe('v0: StockTakings', () => {
 
       mock
         .onPatch(`https://api.tillhub.com/api/v0/stock_takings/${legacyId}/${stockTakingId}`)
-        .reply(config => {
+        .reply(() => {
           return [205]
         })
     }
@@ -494,7 +494,7 @@ describe('v0: StockTakings', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/stock_takings/${legacyId}/${stockTakingId}`)
-        .reply(config => {
+        .reply(() => {
           return [205]
         })
     }

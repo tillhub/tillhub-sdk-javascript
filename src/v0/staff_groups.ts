@@ -175,42 +175,60 @@ export class StaffGroups extends ThBaseHandler {
 
 class StaffGroupsFetchAllFailed extends BaseError {
   public name = 'StaffGroupsFetchAllFailed'
-  constructor(public message: string = 'Could not fetch all staff groups', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch all staff groups',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
   }
 }
 
 class StaffGroupsMetaFailed extends BaseError {
   public name = 'StaffGroupsMetaFailed'
-  constructor(public message: string = 'Could not fetch staff groups meta call', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch staff groups meta call',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
   }
 }
 
 export class StaffGroupFetchFailed extends BaseError {
   public name = 'StaffGroupFetchFailed'
-  constructor(public message: string = 'Could not fetch the staff group', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the staff group',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
   }
 }
 
 export class StaffGroupPutFailed extends BaseError {
   public name = 'StaffGroupPutFailed'
-  constructor(public message: string = 'Could not alter the staff group', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter the staff group',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
   }
 }
 
 export class StaffGroupCreationFailed extends BaseError {
   public name = 'StaffGroupCreationFailed'
-  constructor(public message: string = 'Could not create the staff group', properties?: any) {
+  constructor(
+    public message: string = 'Could not create the staff group',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
   }
 }
 
 export class StaffGroupDeleteFailed extends BaseError {
   public name = 'StaffGroupDeleteFailed'
-  constructor(public message: string = 'Could not delete the staff group', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete the staff group',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
   }
 }

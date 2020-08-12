@@ -250,7 +250,7 @@ export class Branches extends ThBaseHandler {
       let uri
       if (typeof query === 'string') {
         uri = this.uriHelper.generateBaseUri(`/search?q=${query}`)
-      } else if (typeOf(query) === 'Record<string, unknown>') {
+      } else if (typeOf(query) === 'object') {
         const base = this.uriHelper.generateBaseUri('/search')
         uri = this.uriHelper.generateUriWithQuery(base, query)
       } else {
@@ -277,7 +277,10 @@ export class Branches extends ThBaseHandler {
 
 export class BranchesFetchFailed extends BaseError {
   public name = 'BranchesFetchFailed'
-  constructor(public message: string = 'Could not fetch branches', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch branches',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, BranchesFetchFailed.prototype)
   }
@@ -285,7 +288,10 @@ export class BranchesFetchFailed extends BaseError {
 
 export class BranchFetchFailed extends BaseError {
   public name = 'BrancheFetchFailed'
-  constructor(public message: string = 'Could not fetch branch', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch branch',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, BranchFetchFailed.prototype)
   }
@@ -293,7 +299,10 @@ export class BranchFetchFailed extends BaseError {
 
 export class BranchPutFailed extends BaseError {
   public name = 'BranchPutFailed'
-  constructor(public message: string = 'Could not alter branch', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter branch',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, BranchPutFailed.prototype)
   }
@@ -301,7 +310,10 @@ export class BranchPutFailed extends BaseError {
 
 export class BranchCreationFailed extends BaseError {
   public name = 'BranchCreationFailed'
-  constructor(public message: string = 'Could not create branch', properties?: any) {
+  constructor(
+    public message: string = 'Could not create branch',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, BranchCreationFailed.prototype)
   }
@@ -309,7 +321,10 @@ export class BranchCreationFailed extends BaseError {
 
 export class BranchesCountFailed extends BaseError {
   public name = 'BranchesCountFailed'
-  constructor(public message: string = 'Could not count the branches', properties?: any) {
+  constructor(
+    public message: string = 'Could not count the branches',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, BranchesCountFailed.prototype)
   }
@@ -317,7 +332,10 @@ export class BranchesCountFailed extends BaseError {
 
 export class BranchDeleteFailed extends BaseError {
   public name = 'BranchDeleteFailed'
-  constructor(public message: string = 'Could not delete branch', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete branch',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, BranchDeleteFailed.prototype)
   }
@@ -327,7 +345,7 @@ export class ExternalCustomIdGetUniqueFailed extends BaseError {
   public name = 'ExternalCustomIdGetUniqueFailed'
   constructor(
     public message: string = 'Could not get a unique external_custom_id',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, ExternalCustomIdGetUniqueFailed.prototype)
@@ -336,7 +354,10 @@ export class ExternalCustomIdGetUniqueFailed extends BaseError {
 
 export class BranchesSearchFailed extends BaseError {
   public name = 'BranchesSearchFailed'
-  constructor(public message: string = 'Could not search for branch', properties?: any) {
+  constructor(
+    public message: string = 'Could not search for branch',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, BranchesSearchFailed.prototype)
   }

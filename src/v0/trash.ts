@@ -142,7 +142,7 @@ export class TrashFetchFailed extends BaseError {
   public name = 'TrashFetchFailed'
   constructor(
     public message: string = 'Could not fetch the trashed Record<string, unknown>s',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, TrashFetchFailed.prototype)
@@ -153,7 +153,7 @@ export class RecoverFailed extends BaseError {
   public name = 'RecoverFailed'
   constructor(
     public message: string = 'Could not recover the Record<string, unknown>',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, RecoverFailed.prototype)

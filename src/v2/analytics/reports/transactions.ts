@@ -177,7 +177,10 @@ export class AnalyticsReportsTransactionsDetail extends ThAnalyticsBaseHandler {
 
 export class AnalyticsReportsTransactionsOverviewFetchError extends BaseError {
   public name = 'AnalyticsReportsTransactionsOverviewFetchError'
-  constructor(public message: string = 'Could not fetch transaction overview. ', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch transaction overview. ',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsReportsTransactionsOverviewFetchError.prototype)
   }
@@ -185,7 +188,10 @@ export class AnalyticsReportsTransactionsOverviewFetchError extends BaseError {
 
 export class AnalyticsReportsTransactionDetailFetcshError extends BaseError {
   public name = 'AnalyticsReportsTransactionDetailFetcshError'
-  constructor(public message: string = 'Could not fetch transaction detail. ', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch transaction detail. ',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsReportsTransactionDetailFetcshError.prototype)
   }
@@ -195,7 +201,7 @@ export class AnalyticsReportsTransactionsOverviewExportFetchError extends BaseEr
   public name = 'AnalyticsReportsTransactionsOverviewExportFetchError'
   constructor(
     public message: string = 'Could not fetch transaction overview export. ',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsReportsTransactionsOverviewExportFetchError.prototype)

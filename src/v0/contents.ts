@@ -204,7 +204,10 @@ export class Contents extends ThBaseHandler {
 
 export class ContentsFetchFailed extends BaseError {
   public name = 'ContentsFetchFailed'
-  constructor(public message: string = 'Could not fetch contents', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch contents',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ContentsFetchFailed.prototype)
   }
@@ -212,7 +215,10 @@ export class ContentsFetchFailed extends BaseError {
 
 export class ContentFetchFailed extends BaseError {
   public name = 'ContentFetchFailed'
-  constructor(public message: string = 'Could not fetch content', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch content',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ContentFetchFailed.prototype)
   }
@@ -220,7 +226,10 @@ export class ContentFetchFailed extends BaseError {
 
 export class ContentPatchFailed extends BaseError {
   public name = 'ContentPatchFailed'
-  constructor(public message: string = 'Could not alter content', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter content',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ContentPatchFailed.prototype)
   }
@@ -228,7 +237,10 @@ export class ContentPatchFailed extends BaseError {
 
 export class ContentCreationFailed extends BaseError {
   public name = 'ContentCreationFailed'
-  constructor(public message: string = 'Could not create content', properties?: any) {
+  constructor(
+    public message: string = 'Could not create content',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ContentCreationFailed.prototype)
   }
@@ -236,7 +248,10 @@ export class ContentCreationFailed extends BaseError {
 
 export class ContentDeleteFailed extends BaseError {
   public name = 'ContentDeleteFailed'
-  constructor(public message: string = 'Could not delete content', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete content',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ContentDeleteFailed.prototype)
   }
@@ -244,7 +259,10 @@ export class ContentDeleteFailed extends BaseError {
 
 export class ContentsSearchFailed extends BaseError {
   public name = 'ContentDeleteFailed'
-  constructor(public message: string = 'Could not search contents', properties?: any) {
+  constructor(
+    public message: string = 'Could not search contents',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ContentsSearchFailed.prototype)
   }

@@ -70,7 +70,10 @@ export class Dependencies extends ThBaseHandler {
 
 export class DependenciesFetchFailed extends BaseError {
   public name = 'DependenciesFetchFailed'
-  constructor(public message: string = 'Could not fetch the dependencies', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the dependencies',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DependenciesFetchFailed.prototype)
   }

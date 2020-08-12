@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
@@ -73,7 +72,10 @@ export class Me extends ThBaseHandler {
 
 export class MeFetchFailed extends BaseError {
   public name = 'MeFetchFailed'
-  constructor(public message: string = 'Could not fetch me data', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch me data',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, MeFetchFailed.prototype)
   }

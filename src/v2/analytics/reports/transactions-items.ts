@@ -98,7 +98,10 @@ export class AnalyticsReportsTransactionsItems extends ThAnalyticsBaseHandler {
 
 export class AnalyticsReportsTransactionsItemsFetchError extends BaseError {
   public name = 'AnalyticsReportsTransactionsItemsFetchError'
-  constructor(public message: string = 'Could not fetch transactions items. ', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch transactions items. ',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsReportsTransactionsItemsFetchError.prototype)
   }

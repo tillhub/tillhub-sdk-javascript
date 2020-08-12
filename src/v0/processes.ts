@@ -226,7 +226,10 @@ export class Processes extends ThBaseHandler {
 
 export class ProcessesFetchFailed extends BaseError {
   public name = 'ProcessesFetchFailed'
-  constructor(public message: string = 'Could not fetch processes', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch processes',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProcessesFetchFailed.prototype)
   }
@@ -234,7 +237,10 @@ export class ProcessesFetchFailed extends BaseError {
 
 export class ProcessesFetchOneFailed extends BaseError {
   public name = 'ProcessesFetchOneFailed'
-  constructor(public message: string = 'Could not fetch one process', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch one process',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProcessesFetchOneFailed.prototype)
   }
@@ -242,7 +248,10 @@ export class ProcessesFetchOneFailed extends BaseError {
 
 export class ProcessesUpdateFailed extends BaseError {
   public name = 'ProcessesUpdateFailed'
-  constructor(public message: string = 'Could not update process', properties?: any) {
+  constructor(
+    public message: string = 'Could not update process',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProcessesUpdateFailed.prototype)
   }
@@ -250,7 +259,10 @@ export class ProcessesUpdateFailed extends BaseError {
 
 export class ProcessesCreationFailed extends BaseError {
   public name = 'ProcessesCreationFailed'
-  constructor(public message: string = 'Could not create process', properties?: any) {
+  constructor(
+    public message: string = 'Could not create process',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProcessesCreationFailed.prototype)
   }
@@ -258,7 +270,10 @@ export class ProcessesCreationFailed extends BaseError {
 
 export class ProcessesDeleteFailed extends BaseError {
   public name = 'ProcessesDeleteFailed'
-  constructor(public message: string = 'Could not delete process', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete process',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProcessesDeleteFailed.prototype)
   }
@@ -266,7 +281,10 @@ export class ProcessesDeleteFailed extends BaseError {
 
 export class ProcessItemsFetchFailed extends BaseError {
   public name = 'ProcessItemsFetchFailed'
-  constructor(public message: string = "Could not fetch one process' items", properties?: any) {
+  constructor(
+    public message: string = "Could not fetch one process' items",
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProcessItemsFetchFailed.prototype)
   }
@@ -274,7 +292,10 @@ export class ProcessItemsFetchFailed extends BaseError {
 
 export class ProcessesMetaFailed extends BaseError {
   public name = 'ProcessesMetaFailed'
-  constructor(public message: string = 'Could not get meta of Processes', properties?: any) {
+  constructor(
+    public message: string = 'Could not get meta of Processes',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProcessesMetaFailed.prototype)
   }

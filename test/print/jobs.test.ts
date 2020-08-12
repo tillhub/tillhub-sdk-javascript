@@ -156,7 +156,7 @@ describe('v0: Print.Jobs', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs`).reply(config => {
+      mock.onPost(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs`).reply(() => {
         return [
           200,
           {
@@ -205,17 +205,15 @@ describe('v0: Print.Jobs', () => {
         ]
       })
 
-      mock
-        .onPatch(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs/${jobId}`)
-        .reply(config => {
-          return [
-            200,
-            {
-              count: 1,
-              results: [mockJob]
-            }
-          ]
-        })
+      mock.onPatch(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs/${jobId}`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [mockJob]
+          }
+        ]
+      })
     }
 
     const options = {
@@ -256,16 +254,14 @@ describe('v0: Print.Jobs', () => {
         ]
       })
 
-      mock
-        .onDelete(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs/${jobId}`)
-        .reply(config => {
-          return [
-            200,
-            {
-              msg: mockMsg
-            }
-          ]
-        })
+      mock.onDelete(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs/${jobId}`).reply(() => {
+        return [
+          200,
+          {
+            msg: mockMsg
+          }
+        ]
+      })
     }
 
     const options = {
@@ -308,7 +304,7 @@ describe('v0: Print.Jobs', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs/${jobId}/data`)
-        .reply(config => {
+        .reply(() => {
           return [
             200,
             {
@@ -450,11 +446,9 @@ describe('v0: Print.Jobs', () => {
         ]
       })
 
-      mock
-        .onPost(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs/${jobId}`)
-        .reply(config => {
-          return [205]
-        })
+      mock.onPost(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs/${jobId}`).reply(() => {
+        return [205]
+      })
     }
 
     const options = {
@@ -499,11 +493,9 @@ describe('v0: Print.Jobs', () => {
         ]
       })
 
-      mock
-        .onPatch(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs/${jobId}`)
-        .reply(config => {
-          return [205]
-        })
+      mock.onPatch(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs/${jobId}`).reply(() => {
+        return [205]
+      })
     }
 
     const options = {
@@ -548,11 +540,9 @@ describe('v0: Print.Jobs', () => {
         ]
       })
 
-      mock
-        .onDelete(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs/${jobId}`)
-        .reply(config => {
-          return [205]
-        })
+      mock.onDelete(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs/${jobId}`).reply(() => {
+        return [205]
+      })
     }
 
     const options = {
@@ -599,7 +589,7 @@ describe('v0: Print.Jobs', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/print/${legacyId}/jobs/${jobId}/data`)
-        .reply(config => {
+        .reply(() => {
           return [205]
         })
     }

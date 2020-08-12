@@ -38,13 +38,13 @@ afterEach(() => {
 describe('v0: Analytics: gets product groups transactions report', () => {
   it('gets product groups transactions report grouped by all staff', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function() {
         return [200, { token: '', user: { id: '123', legacy_id: legacyId } }]
       })
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/product_groups`)
-        .reply(function (config) {
+        .reply(function() {
           return [
             200,
             {
@@ -76,7 +76,7 @@ describe('v0: Analytics: gets product groups transactions report', () => {
 
   it('gets product groups transactions report grouped by one staff member', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function() {
         return [200, { token: '', user: { id: '123', legacy_id: legacyId } }]
       })
 
@@ -84,7 +84,7 @@ describe('v0: Analytics: gets product groups transactions report', () => {
         .onGet(
           `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/product_groups?${query}`
         )
-        .reply(function (config) {
+        .reply(function() {
           return [
             200,
             {
@@ -116,7 +116,7 @@ describe('v0: Analytics: gets product groups transactions report', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function() {
         return [
           200,
           {
@@ -133,7 +133,7 @@ describe('v0: Analytics: gets product groups transactions report', () => {
         .onGet(
           `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/staff/product_groups/?${query}`
         )
-        .reply(function (config) {
+        .reply(function() {
           return [205]
         })
     }

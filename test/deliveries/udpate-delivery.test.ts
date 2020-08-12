@@ -38,7 +38,7 @@ afterEach(() => {
 
 describe('v0: Deliveries', () => {
   it('can update one', async () => {
-    const { body, query } = requestObject
+    const { body } = requestObject
 
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {

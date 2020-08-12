@@ -1,6 +1,5 @@
 import * as dotenv from 'dotenv'
 import axios from 'axios'
-import qs from 'qs'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import { v1 } from '../../src/tillhub-js'
@@ -12,8 +11,6 @@ const mock = new MockAdapter(axios)
 afterEach(() => {
   mock.reset()
 })
-
-const code = '12345678'
 
 const products = [
   { id: '12345', product_group: 'good one' },

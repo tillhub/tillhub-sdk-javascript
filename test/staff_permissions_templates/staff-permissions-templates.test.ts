@@ -2,7 +2,6 @@ import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
-import { TillhubClient } from '../../src/tillhub-js'
 import {
   StaffPermissionsTemplate,
   StaffPermissionsTemplates,
@@ -125,7 +124,7 @@ describe('v0: StaffPermissionsTemplates', () => {
 
       mock
         .onPost(`https://api.tillhub.com/api/v0/staff_permission_templates/${legacyId}`)
-        .reply(config => {
+        .reply(() => {
           return [
             200,
             {
@@ -164,7 +163,7 @@ describe('v0: StaffPermissionsTemplates', () => {
         .onPut(
           `https://api.tillhub.com/api/v0/staff_permission_templates/${legacyId}/${templateId}`
         )
-        .reply(config => {
+        .reply(() => {
           return [
             200,
             {
@@ -206,7 +205,7 @@ describe('v0: StaffPermissionsTemplates', () => {
         .onDelete(
           `https://api.tillhub.com/api/v0/staff_permission_templates/${legacyId}/${templateId}`
         )
-        .reply(config => {
+        .reply(() => {
           return [
             200,
             {
@@ -310,7 +309,7 @@ describe('v0: StaffPermissionsTemplates', () => {
         .onPost(
           `https://api.tillhub.com/api/v0/staff_permission_templates/${legacyId}/${templateId}`
         )
-        .reply(config => {
+        .reply(() => {
           return [205]
         })
     }
@@ -344,7 +343,7 @@ describe('v0: StaffPermissionsTemplates', () => {
         .onPatch(
           `https://api.tillhub.com/api/v0/staff_permission_templates/${legacyId}/${templateId}`
         )
-        .reply(config => {
+        .reply(() => {
           return [205]
         })
     }
@@ -378,7 +377,7 @@ describe('v0: StaffPermissionsTemplates', () => {
         .onDelete(
           `https://api.tillhub.com/api/v0/staff_permission_templates/${legacyId}/${templateId}`
         )
-        .reply(config => {
+        .reply(() => {
           return [205]
         })
     }
