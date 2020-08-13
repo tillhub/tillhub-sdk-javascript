@@ -1,3 +1,10 @@
+# [3.208.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.207.0...v3.208.0) (2020-08-13)
+
+
+### Features
+
+* upgrade deps ([3de1f35](https://github.com/tillhub/tillhub-sdk-javascript/commit/3de1f3549ad7e44eb879c9209c3e2e0329105b51))
+
 # [3.207.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.206.0...v3.207.0) (2020-08-13)
 
 
