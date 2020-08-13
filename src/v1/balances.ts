@@ -9,8 +9,8 @@ export interface BalancesOptions {
 }
 
 export interface BalancesResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
 }
 
 export interface BalancesQuery {
@@ -25,8 +25,8 @@ export interface BalancesQuery {
 }
 
 export interface LatestQuery {
-  register_number: string,
-  branch_number: string,
+  register_number: string
+  branch_number: string
   date_start: string
 }
 
@@ -37,7 +37,10 @@ export class Balances extends ThBaseHandler {
   public options: BalancesOptions
 
   constructor(options: BalancesOptions, http: Client) {
-    super(http, { endpoint: Balances.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Balances.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -82,11 +85,12 @@ export class Balances extends ThBaseHandler {
 
   meta(): Promise<BalancesResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
 
       try {
         const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) return reject(new errors.BalancesMetaFailed(undefined, { status: response.status }))
+        if (response.status !== 200)
+          return reject(new errors.BalancesMetaFailed(undefined, { status: response.status }))
 
         if (!response.data.results[0]) {
           return reject(

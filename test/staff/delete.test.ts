@@ -18,7 +18,7 @@ const respMsg = `Deleted staff ${staffId}`
 describe('v0: Staff: can alter the Staff member', () => {
   it("Tillhub's staff are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -31,16 +31,14 @@ describe('v0: Staff: can alter the Staff member', () => {
         ]
       })
 
-      mock
-        .onDelete(`https://api.tillhub.com/api/v0/staff/${legacyId}/${staffId}`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              msg: respMsg
-            }
-          ]
-        })
+      mock.onDelete(`https://api.tillhub.com/api/v0/staff/${legacyId}/${staffId}`).reply(() => {
+        return [
+          200,
+          {
+            msg: respMsg
+          }
+        ]
+      })
     }
 
     const th = await initThInstance()
@@ -56,7 +54,7 @@ describe('v0: Staff: can alter the Staff member', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -68,11 +66,9 @@ describe('v0: Staff: can alter the Staff member', () => {
           }
         ]
       })
-      mock
-        .onDelete(`https://api.tillhub.com/api/v0/staff/${legacyId}/${staffId}`)
-        .reply(function (config) {
-          return [205]
-        })
+      mock.onDelete(`https://api.tillhub.com/api/v0/staff/${legacyId}/${staffId}`).reply(() => {
+        return [205]
+      })
     }
 
     const th = await initThInstance()

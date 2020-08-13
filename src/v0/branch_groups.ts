@@ -22,8 +22,8 @@ export interface BranchGroupsQuery {
 }
 
 export interface BranchGroupsResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   next?: () => Promise<BranchGroupsResponse>
 }
 
@@ -58,7 +58,10 @@ export class BranchGroups extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: BranchGroupsOptions, http: Client) {
-    super(http, { endpoint: BranchGroups.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: BranchGroups.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -83,7 +86,7 @@ export class BranchGroups extends ThBaseHandler {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             queryString ? `?${queryString}` : ''
-            }`
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -92,7 +95,8 @@ export class BranchGroups extends ThBaseHandler {
         }
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<BranchGroupsResponse> => this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<BranchGroupsResponse> =>
+            this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({
@@ -176,7 +180,10 @@ export class BranchGroups extends ThBaseHandler {
 
 export class BranchGroupsFetchFailed extends BaseError {
   public name = 'BranchGroupsFetchFailed'
-  constructor(public message: string = 'Could not fetch branch groups', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch branch groups',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, BranchGroupsFetchFailed.prototype)
   }
@@ -184,7 +191,10 @@ export class BranchGroupsFetchFailed extends BaseError {
 
 export class BranchGroupFetchFailed extends BaseError {
   public name = 'BranchGroupFetchFailed'
-  constructor(public message: string = 'Could not fetch branch group', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch branch group',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, BranchGroupFetchFailed.prototype)
   }
@@ -192,7 +202,10 @@ export class BranchGroupFetchFailed extends BaseError {
 
 export class BranchGroupPutFailed extends BaseError {
   public name = 'BranchPutFailed'
-  constructor(public message: string = 'Could not alter branch group', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter branch group',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, BranchGroupPutFailed.prototype)
   }
@@ -200,7 +213,10 @@ export class BranchGroupPutFailed extends BaseError {
 
 export class BranchGroupCreationFailed extends BaseError {
   public name = 'BranchGroupCreationFailed'
-  constructor(public message: string = 'Could not create branch group', properties?: any) {
+  constructor(
+    public message: string = 'Could not create branch group',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, BranchGroupCreationFailed.prototype)
   }
@@ -208,7 +224,10 @@ export class BranchGroupCreationFailed extends BaseError {
 
 export class BranchGroupDeleteFailed extends BaseError {
   public name = 'BranchGroupDeleteFailed'
-  constructor(public message: string = 'Could not delete branch group', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete branch group',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, BranchGroupDeleteFailed.prototype)
   }

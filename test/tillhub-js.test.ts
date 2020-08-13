@@ -3,10 +3,9 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import th, { TillhubClient } from '../src/tillhub-js'
-import { Client } from '../src/client'
 import { Auth } from '../src/v1/auth'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -50,7 +49,7 @@ describe('SDK: can instantiate SDK', () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       const mock = new MockAdapter(axios)
 
-      mock.onPost('https://staging-api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://staging-api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -65,7 +64,7 @@ describe('SDK: can instantiate SDK', () => {
     }
 
     try {
-      let data = await th.auth.loginUsername(options)
+      const data = await th.auth.loginUsername(options)
       expect(data).toBeTruthy()
       expect(typeof data.token === 'string').toBe(true)
       expect(data.token).toBe('sometoken')

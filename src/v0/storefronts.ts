@@ -19,7 +19,7 @@ export interface StorefrontsQuery {
 
 export interface StorefrontsResponse {
   data: Storefront[]
-  metadata: object
+  metadata: Record<string, unknown>
 }
 
 export interface StorefrontResponse {
@@ -32,7 +32,7 @@ export interface StorefrontResponse {
 }
 
 export interface StorefrontProfile {
-  currency?: string,
+  currency?: string
   language?: string
   tax?: number
 }
@@ -48,8 +48,8 @@ export interface Storefront {
   link?: string
   external_reference_id?: string
   external_api_base?: string
-  auth?: object
-  metadata?: object
+  auth?: Record<string, unknown>
+  metadata?: Record<string, unknown>
   profile?: StorefrontProfile
 }
 
@@ -60,7 +60,10 @@ export class Storefronts extends ThBaseHandler {
   public options: StorefrontsOptions
 
   constructor(options: StorefrontsOptions, http: Client) {
-    super(http, { endpoint: Storefronts.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Storefronts.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -82,7 +85,9 @@ export class Storefronts extends ThBaseHandler {
             queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
           }
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${queryString ? `?${queryString}` : ''}`
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
+            queryString ? `?${queryString}` : ''
+          }`
         }
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
@@ -170,7 +175,10 @@ export class Storefronts extends ThBaseHandler {
 
 export class StorefrontsFetchFailed extends BaseError {
   public name = 'StorefrontsFetchFailed'
-  constructor(public message: string = 'Could not fetch storefronts', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch storefronts',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StorefrontsFetchFailed.prototype)
   }
@@ -178,7 +186,10 @@ export class StorefrontsFetchFailed extends BaseError {
 
 export class StorefrontsFetchOneFailed extends BaseError {
   public name = 'StorefrontsFetchOneFailed'
-  constructor(public message: string = 'Could not fetch one storefront', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch one storefront',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StorefrontsFetchOneFailed.prototype)
   }
@@ -186,7 +197,10 @@ export class StorefrontsFetchOneFailed extends BaseError {
 
 export class StorefrontsPutFailed extends BaseError {
   public name = 'StorefrontsPutFailed'
-  constructor(public message: string = 'Could not update storefront', properties?: any) {
+  constructor(
+    public message: string = 'Could not update storefront',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StorefrontsPutFailed.prototype)
   }
@@ -194,7 +208,10 @@ export class StorefrontsPutFailed extends BaseError {
 
 export class StorefrontsCreationFailed extends BaseError {
   public name = 'StorefrontsCreationFailed'
-  constructor(public message: string = 'Could not create storefronts', properties?: any) {
+  constructor(
+    public message: string = 'Could not create storefronts',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StorefrontsCreationFailed.prototype)
   }
@@ -202,7 +219,10 @@ export class StorefrontsCreationFailed extends BaseError {
 
 export class StorefrontsDeleteFailed extends BaseError {
   public name = 'StorefrontsDeleteFailed'
-  constructor(public message: string = 'Could not delete storefronts', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete storefronts',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StorefrontsDeleteFailed.prototype)
   }

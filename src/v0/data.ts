@@ -7,7 +7,7 @@ export interface DataOptions {
 }
 
 export interface DataResponse {
-  data: object
+  data: Record<string, unknown>
 }
 
 export class Data {
@@ -43,9 +43,10 @@ export class Data {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
-        const response = await this.http
-          .getClient()
-          .post(uri, payload, { timeout: 60000, headers: { 'Content-Type': 'multipart/form-data' } })
+        const response = await this.http.getClient().post(uri, payload, {
+          timeout: 60000,
+          headers: { 'Content-Type': 'multipart/form-data' }
+        })
         return resolve({
           data: response.data.results
         } as DataResponse)

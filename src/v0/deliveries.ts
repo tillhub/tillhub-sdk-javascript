@@ -24,7 +24,7 @@ export interface DeliveriesCreateRequestObject {
 }
 
 export interface DeliveriesCreateBody {
-  items: object[]
+  items: Record<string, unknown>[]
   order?: string | null
   open?: boolean
   deleted?: boolean
@@ -40,11 +40,11 @@ export interface DeliveriesCreateBody {
   comments?: string | null
   from?: string | null
   to?: string | null
-  recipient?: object | null
-  sender?: object | null
-  metadata?: object
-  orders?: object[]
-  issuer?: object
+  recipient?: Record<string, unknown> | null
+  sender?: Record<string, unknown> | null
+  metadata?: Record<string, unknown>
+  orders?: Record<string, unknown>[]
+  issuer?: Record<string, unknown>
   stock_mode?: string | null
   status?: string | null
 }
@@ -71,11 +71,11 @@ export interface DeliveriesUpdateBody {
   comments?: string | null
   from?: string | null
   to?: string | null
-  recipient?: object | null
-  sender?: object | null
-  metadata?: object
-  orders?: object[]
-  issuer?: object
+  recipient?: Record<string, unknown> | null
+  sender?: Record<string, unknown> | null
+  metadata?: Record<string, unknown>
+  orders?: Record<string, unknown>[]
+  issuer?: Record<string, unknown>
   stock_mode?: string | null
   status?: string | null
 }
@@ -91,7 +91,7 @@ export interface DeliveryItemsCreateRequestObject {
 }
 
 export interface DeliveryItemsCreateBody {
-  items: object[]
+  items: Record<string, unknown>[]
 }
 
 export interface DeliveryItemsCreateBodyItem {
@@ -130,8 +130,8 @@ export interface DeliveryItemsUpdateBody {
 }
 
 export interface DeliveriesResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   next?: () => Promise<DeliveriesResponse>
   msg?: string
 }
@@ -143,7 +143,10 @@ export class Deliveries extends ThBaseHandler {
   public options: DeliveriesOptions
 
   constructor(options: DeliveriesOptions, http: Client) {
-    super(http, { endpoint: Deliveries.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Deliveries.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -165,7 +168,7 @@ export class Deliveries extends ThBaseHandler {
 
         if (query && query.embed) {
           const queryString = query.embed
-            .map(item => {
+            .map((item) => {
               return `embed[]=${item}`
             })
             .join('&')
@@ -198,7 +201,7 @@ export class Deliveries extends ThBaseHandler {
       try {
         if (query && query.embed) {
           const queryString = query.embed
-            .map(item => {
+            .map((item) => {
               return `embed[]=${item}`
             })
             .join('&')
@@ -227,7 +230,7 @@ export class Deliveries extends ThBaseHandler {
       try {
         if (query && query.embed) {
           const queryString = query.embed
-            .map(item => {
+            .map((item) => {
               return `embed[]=${item}`
             })
             .join('&')
@@ -249,9 +252,7 @@ export class Deliveries extends ThBaseHandler {
 
   createDeliveryPDF(deliveryId: string): Promise<DeliveriesResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${
-        this.options.user
-        }/${deliveryId}/pdf?format=uri`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deliveryId}/pdf?format=uri`
 
       try {
         const response = await this.http.getClient().post(uri, null, {
@@ -278,7 +279,7 @@ export class Deliveries extends ThBaseHandler {
 
       if (query && query.embed) {
         const queryString = query.embed
-          .map(item => {
+          .map((item) => {
             return `embed[]=${item}`
           })
           .join('&')
@@ -303,13 +304,11 @@ export class Deliveries extends ThBaseHandler {
     return new Promise(async (resolve, reject) => {
       const { deliveryId, query } = requestObject
 
-      let uri = `${this.options.base}${this.endpoint}/${
-        this.options.user
-        }/${deliveryId}/in_progress`
+      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deliveryId}/in_progress`
 
       if (query && query.embed) {
         const queryString = query.embed
-          .map(item => {
+          .map((item) => {
             return `embed[]=${item}`
           })
           .join('&')
@@ -338,7 +337,7 @@ export class Deliveries extends ThBaseHandler {
 
       if (query && query.embed) {
         const queryString = query.embed
-          .map(item => {
+          .map((item) => {
             return `embed[]=${item}`
           })
           .join('&')
@@ -385,7 +384,7 @@ export class Deliveries extends ThBaseHandler {
       try {
         if (query && query.embed) {
           const queryString = query.embed
-            .map(item => {
+            .map((item) => {
               return `embed[]=${item}`
             })
             .join('&')
@@ -416,7 +415,7 @@ export class Deliveries extends ThBaseHandler {
       try {
         if (query && query.embed) {
           const queryString = query.embed
-            .map(item => {
+            .map((item) => {
               return `embed[]=${item}`
             })
             .join('&')
@@ -444,7 +443,7 @@ export class Deliveries extends ThBaseHandler {
 
       if (query && query.embed) {
         const queryString = query.embed
-          .map(item => {
+          .map((item) => {
             return `embed[]=${item}`
           })
           .join('&')

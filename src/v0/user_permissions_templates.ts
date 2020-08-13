@@ -8,16 +8,14 @@ export interface UserPermissionsTemplatesOptions {
   base?: string
 }
 
-export interface UserPermissionsTemplatesQueryOptions {}
-
 export interface UserPermissionsTemplatesResponse {
   data: UserPermissionsTemplate[]
-  metadata: object
+  metadata: Record<string, unknown>
 }
 
 export interface UserPermissionsTemplateResponse {
   data: UserPermissionsTemplate
-  metadata: object
+  metadata: Record<string, unknown>
   msg?: string
 }
 
@@ -48,9 +46,7 @@ export class UserPermissionsTemplates extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  create(
-    template: UserPermissionsTemplate
-  ): Promise<UserPermissionsTemplateResponse> {
+  create(template: UserPermissionsTemplate): Promise<UserPermissionsTemplateResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri()
@@ -68,16 +64,12 @@ export class UserPermissionsTemplates extends ThBaseHandler {
           metadata: { count: response.data.count }
         } as UserPermissionsTemplateResponse)
       } catch (error) {
-        return reject(
-          new UserPermissionsTemplatesCreationFailed(undefined, { error })
-        )
+        return reject(new UserPermissionsTemplatesCreationFailed(undefined, { error }))
       }
     })
   }
 
-  getAll(
-    query?: UserPermissionsTemplatesQueryOptions
-  ): Promise<UserPermissionsTemplatesResponse> {
+  getAll(query?: Record<string, unknown>): Promise<UserPermissionsTemplatesResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const baseUri = this.uriHelper.generateBaseUri()
@@ -96,16 +88,14 @@ export class UserPermissionsTemplates extends ThBaseHandler {
           metadata: { count: response.data.count }
         } as UserPermissionsTemplatesResponse)
       } catch (error) {
-        return reject(
-          new UserPermissionsTemplatesFetchFailed(undefined, { error })
-        )
+        return reject(new UserPermissionsTemplatesFetchFailed(undefined, { error }))
       }
     })
   }
 
   get(
     templateId: string,
-    query?: UserPermissionsTemplatesQueryOptions
+    query?: Record<string, unknown>
   ): Promise<UserPermissionsTemplateResponse> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -125,9 +115,7 @@ export class UserPermissionsTemplates extends ThBaseHandler {
           metadata: { count: 1 }
         } as UserPermissionsTemplateResponse)
       } catch (error) {
-        return reject(
-          new UserPermissionsTemplatesFetchOneFailed(undefined, { error })
-        )
+        return reject(new UserPermissionsTemplatesFetchOneFailed(undefined, { error }))
       }
     })
   }
@@ -153,9 +141,7 @@ export class UserPermissionsTemplates extends ThBaseHandler {
           metadata: { count: response.data.count }
         } as UserPermissionsTemplateResponse)
       } catch (error) {
-        return reject(
-          new UserPermissionsTemplatesUpdateFailed(undefined, { error })
-        )
+        return reject(new UserPermissionsTemplatesUpdateFailed(undefined, { error }))
       }
     })
   }
@@ -187,7 +173,7 @@ export class UserPermissionsTemplatesFetchFailed extends BaseError {
   public name = 'UserPermissionsTemplatesFetchFailed'
   constructor(
     public message: string = 'Could not fetch all user permissions templates',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
   }
@@ -197,7 +183,7 @@ export class UserPermissionsTemplatesFetchOneFailed extends BaseError {
   public name = 'UserPermissionsTemplatesFetchOneFailed'
   constructor(
     public message: string = 'Could not fetch one user permissions template',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
   }
@@ -207,7 +193,7 @@ export class UserPermissionsTemplatesUpdateFailed extends BaseError {
   public name = 'UserPermissionsTemplatesUpdateFailed'
   constructor(
     public message: string = 'Could not update user permissions template',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
   }
@@ -217,7 +203,7 @@ export class UserPermissionsTemplatesCreationFailed extends BaseError {
   public name = 'UserPermissionsTemplatesCreationFailed'
   constructor(
     public message: string = 'Could not create user permissions template',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
   }
@@ -227,7 +213,7 @@ export class UserPermissionsTemplatesDeleteFailed extends BaseError {
   public name = 'UserPermissionsTemplatesDeleteFailed'
   constructor(
     public message: string = 'Could not delete user permissions template',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
   }

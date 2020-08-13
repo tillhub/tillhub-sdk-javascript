@@ -20,7 +20,7 @@ export interface DeviceGroupsQuery {
 
 export interface DeviceGroupsResponse {
   data: DeviceGroup[]
-  metadata: object
+  metadata: Record<string, unknown>
   next?: () => Promise<DeviceGroupsResponse>
 }
 
@@ -49,7 +49,10 @@ export class DeviceGroups extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: DeviceGroupsOptions, http: Client) {
-    super(http, { endpoint: DeviceGroups.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: DeviceGroups.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -69,7 +72,8 @@ export class DeviceGroups extends ThBaseHandler {
         const response = await this.http.getClient().get(uri)
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<DeviceGroupsResponse> => this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<DeviceGroupsResponse> =>
+            this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({
@@ -89,7 +93,7 @@ export class DeviceGroups extends ThBaseHandler {
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
-        reject(new DeviceGroupFetchFailed(undefined, { status: response.status }))
+          reject(new DeviceGroupFetchFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results[0] as DeviceGroup,
@@ -153,7 +157,10 @@ export class DeviceGroups extends ThBaseHandler {
 
 export class DeviceGroupsFetchFailed extends BaseError {
   public name = 'DeviceGroupsFetchFailed'
-  constructor(public message: string = 'Could not fetch device groups', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch device groups',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DeviceGroupsFetchFailed.prototype)
   }
@@ -161,7 +168,10 @@ export class DeviceGroupsFetchFailed extends BaseError {
 
 export class DeviceGroupFetchFailed extends BaseError {
   public name = 'DeviceGroupFetchFailed'
-  constructor(public message: string = 'Could not fetch device group', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch device group',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DeviceGroupFetchFailed.prototype)
   }
@@ -169,7 +179,10 @@ export class DeviceGroupFetchFailed extends BaseError {
 
 export class DeviceGroupPutFailed extends BaseError {
   public name = 'DeviceGroupPutFailed'
-  constructor(public message: string = 'Could not alter device group', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter device group',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DeviceGroupPutFailed.prototype)
   }
@@ -177,7 +190,10 @@ export class DeviceGroupPutFailed extends BaseError {
 
 export class DeviceGroupCreationFailed extends BaseError {
   public name = 'DeviceGroupCreationFailed'
-  constructor(public message: string = 'Could not create device group', properties?: any) {
+  constructor(
+    public message: string = 'Could not create device group',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DeviceGroupCreationFailed.prototype)
   }
@@ -185,7 +201,10 @@ export class DeviceGroupCreationFailed extends BaseError {
 
 export class DeviceGroupDeleteFailed extends BaseError {
   public name = 'DeviceGroupDeleteFailed'
-  constructor(public message: string = 'Could not delete device group', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete device group',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DeviceGroupDeleteFailed.prototype)
   }

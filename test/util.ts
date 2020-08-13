@@ -33,7 +33,7 @@ export const initThInstance = async () => {
   return instance
 }
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',

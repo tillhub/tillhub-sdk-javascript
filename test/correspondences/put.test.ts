@@ -14,17 +14,21 @@ afterEach(() => {
 
 const correspondenceId = 'f8314183-8199-4cb7-b152-04f6ad4ebc7e'
 const correspondence = {
-  recipient: { address: { type: 'billing',
-    lines: null,
-    region: 'Berlin',
-    street: 'Neue Flora Str',
-    country: 'DE',
-    locality: 'Berlin',
-    postal_code: '11223',
-    street_number: '28a' },
+  recipient: {
+    address: {
+      type: 'billing',
+      lines: null,
+      region: 'Berlin',
+      street: 'Neue Flora Str',
+      country: 'DE',
+      locality: 'Berlin',
+      postal_code: '11223',
+      street_number: '28a'
+    },
     company: 'Floristika',
     lastname: 'Schmidt',
-    firstname: 'Annemarie' },
+    firstname: 'Annemarie'
+  },
   customer: 'c0ec105d-df1c-47e4-81a5-9939ea95d968',
   status: 'sent'
 }
@@ -32,7 +36,7 @@ const correspondence = {
 describe('v0: Correspondences: can alter the correspondences', () => {
   it("Tillhub's correspondences are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -47,7 +51,7 @@ describe('v0: Correspondences: can alter the correspondences', () => {
 
       mock
         .onPut(`https://api.tillhub.com/api/v0/correspondences/${legacyId}/${correspondenceId}`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -71,7 +75,7 @@ describe('v0: Correspondences: can alter the correspondences', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -85,7 +89,7 @@ describe('v0: Correspondences: can alter the correspondences', () => {
       })
       mock
         .onPut(`https://api.tillhub.com/api/v0/correspondences/${legacyId}/${correspondenceId}`)
-        .reply(function (config) {
+        .reply(() => {
           return [205]
         })
     }

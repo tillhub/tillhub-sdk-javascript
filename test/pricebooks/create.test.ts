@@ -20,7 +20,7 @@ const pricebook = {
 describe('v0: Pricebook: can create one pricebook', () => {
   it("Tillhub's pricebooks are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -33,7 +33,7 @@ describe('v0: Pricebook: can create one pricebook', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v1/products/${legacyId}/prices/book`).reply(function (config) {
+      mock.onPost(`https://api.tillhub.com/api/v1/products/${legacyId}/prices/book`).reply(() => {
         return [
           200,
           {
@@ -57,7 +57,7 @@ describe('v0: Pricebook: can create one pricebook', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -70,7 +70,7 @@ describe('v0: Pricebook: can create one pricebook', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v1/products/${legacyId}/prices/book`).reply(function (config) {
+      mock.onPost(`https://api.tillhub.com/api/v1/products/${legacyId}/prices/book`).reply(() => {
         return [205]
       })
     }

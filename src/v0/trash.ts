@@ -27,7 +27,7 @@ export interface RecoverQuery {
 
 export interface TrashResponse {
   data: TrashedObject[]
-  metadata: object
+  metadata: Record<string, unknown>
   next?: () => Promise<TrashResponse>
 }
 
@@ -97,7 +97,6 @@ export class Trash extends ThBaseHandler {
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       try {
-
         const response = await this.http.getClient().get(uri)
 
         response.status !== 200 &&
@@ -124,11 +123,9 @@ export class Trash extends ThBaseHandler {
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       try {
-
         const response = await this.http.getClient().put(uri)
 
-        response.status !== 200 &&
-          reject(new RecoverFailed(undefined, { status: response.status }))
+        response.status !== 200 && reject(new RecoverFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results,
@@ -143,7 +140,10 @@ export class Trash extends ThBaseHandler {
 
 export class TrashFetchFailed extends BaseError {
   public name = 'TrashFetchFailed'
-  constructor(public message: string = 'Could not fetch the trashed objects', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the trashed Record<string, unknown>s',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TrashFetchFailed.prototype)
   }
@@ -151,7 +151,10 @@ export class TrashFetchFailed extends BaseError {
 
 export class RecoverFailed extends BaseError {
   public name = 'RecoverFailed'
-  constructor(public message: string = 'Could not recover the object', properties?: any) {
+  constructor(
+    public message: string = 'Could not recover the Record<string, unknown>',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, RecoverFailed.prototype)
   }

@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { Client } from '../client'
 import { UriHelper } from '../uri-helper'
 import { ThBaseHandler } from '../base'
@@ -14,13 +13,13 @@ export interface TransactionsQuery {
   uri?: string
   format?: string
   legacy?: boolean
-  query?: object
+  query?: Record<string, unknown>
 }
 
 export interface TransactionsMetaQuery {
   type?: string | string[]
   legacy?: boolean
-  query?: object
+  query?: Record<string, unknown>
 }
 
 export interface TransactionsOptions {
@@ -29,23 +28,19 @@ export interface TransactionsOptions {
 }
 
 export interface TransactionResponse {
-  data: object[]
+  data: Record<string, unknown>[]
   next?: () => Promise<TransactionResponse>
 }
 
 export interface TransactionImageResponse {
-  data: object
+  data: Record<string, unknown>
 }
 
 export interface TransactionImage {
-  'original': string,
-  '1x': string,
-  '2x': string,
+  original: string
+  '1x': string
+  '2x': string
   '3x': string
-}
-
-enum SignatureTypes {
-  Fiksaltrust = 'fiskaltrust'
 }
 
 interface FiskaltrustAuth {
@@ -62,7 +57,10 @@ export class Transactions extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: TransactionsOptions, http: Client) {
-    super(http, { endpoint: Transactions.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Transactions.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
     // this.signing = new Signing(options, http)
@@ -123,7 +121,8 @@ export class Transactions extends ThBaseHandler {
         const uri = this.uriHelper.generateBaseUri(`/${transactionId}/images`)
         const response = await this.http.getClient().get(uri)
 
-        if (response.status !== 200) reject(new TransactionsGetImageFailed(undefined, { status: response.status }))
+        if (response.status !== 200)
+          reject(new TransactionsGetImageFailed(undefined, { status: response.status }))
 
         if (!response.data.results[0]) reject(new TransactionsGetImageFailed())
 
@@ -142,7 +141,8 @@ export class Transactions extends ThBaseHandler {
         const uri = this.uriHelper.generateBaseUri(`/${transactionId}/images`)
         const response = await this.http.getClient().put(uri, image)
 
-        if (response.status !== 200) reject(new TransactionsImagePutFailed(undefined, { status: response.status }))
+        if (response.status !== 200)
+          reject(new TransactionsImagePutFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results
@@ -159,7 +159,8 @@ export class Transactions extends ThBaseHandler {
         const uri = this.uriHelper.generateBaseUri(`/${transactionId}/images`)
         const response = await this.http.getClient().post(uri, image)
 
-        if (response.status !== 200) reject(new TransactionsImageCreateFailed(undefined, { status: response.status }))
+        if (response.status !== 200)
+          reject(new TransactionsImageCreateFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results
@@ -169,7 +170,6 @@ export class Transactions extends ThBaseHandler {
       }
     })
   }
-
 }
 
 export class TransactionsLegacy {
@@ -227,9 +227,7 @@ export class TransactionsLegacy {
         if (query && query.uri) {
           uri = query.uri
         } else {
-          uri = `${this.options.base}${this.endpoint}/${
-            this.options.user
-            }/${transactionId}/legacy/${template}/pdf`
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}/${transactionId}/legacy/${template}/pdf`
         }
 
         if (query && query.format) {
@@ -293,9 +291,7 @@ export class Signing {
   ): Promise<TransactionResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        let uri = `${this.options.base}${this.endpoint}/${
-          this.options.user
-          }/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/initialise`
+        const uri = `${this.options.base}${this.endpoint}/${this.options.user}/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/initialise`
 
         const response = await this.http.getClient().post(uri, signingConfiguration, {
           headers: {
@@ -319,9 +315,7 @@ export class Signing {
   ): Promise<TransactionResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        let uri = `${this.options.base}${this.endpoint}/${
-          this.options.user
-          }/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/yearly`
+        const uri = `${this.options.base}${this.endpoint}/${this.options.user}/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/yearly`
 
         const response = await this.http.getClient().post(uri, undefined, {
           headers: {
@@ -345,9 +339,7 @@ export class Signing {
   ): Promise<TransactionResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        let uri = `${this.options.base}${this.endpoint}/${
-          this.options.user
-          }/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/monthly`
+        const uri = `${this.options.base}${this.endpoint}/${this.options.user}/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/monthly`
 
         const response = await this.http.getClient().post(uri, undefined, {
           headers: {
@@ -371,9 +363,7 @@ export class Signing {
   ): Promise<TransactionResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        let uri = `${this.options.base}${this.endpoint}/${
-          this.options.user
-          }/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/zero`
+        const uri = `${this.options.base}${this.endpoint}/${this.options.user}/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/zero`
 
         const response = await this.http.getClient().post(uri, undefined, {
           headers: {
@@ -393,7 +383,10 @@ export class Signing {
 
 class TransactionFetchFailed extends BaseError {
   public name = 'TransactionFetchFailed'
-  constructor(public message: string = 'Could not fetch transaction', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch transaction',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionFetchFailed.prototype)
   }
@@ -401,7 +394,10 @@ class TransactionFetchFailed extends BaseError {
 
 class TransactionPdfFailed extends BaseError {
   public name = 'TransactionPdfFailed'
-  constructor(public message: string = 'Could not create pdf', properties?: any) {
+  constructor(
+    public message: string = 'Could not create pdf',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionPdfFailed.prototype)
   }
@@ -409,7 +405,10 @@ class TransactionPdfFailed extends BaseError {
 
 class TransactionSigningInitialisationFailed extends BaseError {
   public name = 'TransactionSigningInitialisationFailed'
-  constructor(public message: string = 'Could not initialise signing system', properties?: any) {
+  constructor(
+    public message: string = 'Could not initialise signing system',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionSigningInitialisationFailed.prototype)
   }
@@ -417,7 +416,10 @@ class TransactionSigningInitialisationFailed extends BaseError {
 
 class TransactionSigningYearlyReceiptFailed extends BaseError {
   public name = 'TransactionSigningYearlyReceiptFailed'
-  constructor(public message: string = 'Could not generate yearly receipt', properties?: any) {
+  constructor(
+    public message: string = 'Could not generate yearly receipt',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionSigningYearlyReceiptFailed.prototype)
   }
@@ -425,7 +427,10 @@ class TransactionSigningYearlyReceiptFailed extends BaseError {
 
 class TransactionSigningMonthlyReceiptFailed extends BaseError {
   public name = 'TransactionSigningMonthlyReceiptFailed'
-  constructor(public message: string = 'Could not generate monthly receipt', properties?: any) {
+  constructor(
+    public message: string = 'Could not generate monthly receipt',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionSigningMonthlyReceiptFailed.prototype)
   }
@@ -433,7 +438,10 @@ class TransactionSigningMonthlyReceiptFailed extends BaseError {
 
 class TransactionSigningZeroReceiptFailed extends BaseError {
   public name = 'TransactionSigningZeroReceiptFailed'
-  constructor(public message: string = 'Could not generate zero receipt', properties?: any) {
+  constructor(
+    public message: string = 'Could not generate zero receipt',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionSigningZeroReceiptFailed.prototype)
   }
@@ -441,7 +449,10 @@ class TransactionSigningZeroReceiptFailed extends BaseError {
 
 class TransactionsGetMetaFailed extends BaseError {
   public name = 'TransactionsGetMetaFailed'
-  constructor(public message: string = 'Could not get transactions meta', properties?: any) {
+  constructor(
+    public message: string = 'Could not get transactions meta',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionsGetMetaFailed.prototype)
   }
@@ -449,7 +460,10 @@ class TransactionsGetMetaFailed extends BaseError {
 
 class TransactionsGetImageFailed extends BaseError {
   public name = 'TransactionsGetImageFailed'
-  constructor(public message: string = 'Could not get transactions image', properties?: any) {
+  constructor(
+    public message: string = 'Could not get transactions image',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionsGetImageFailed.prototype)
   }
@@ -457,7 +471,10 @@ class TransactionsGetImageFailed extends BaseError {
 
 class TransactionsImagePutFailed extends BaseError {
   public name = 'TransactionsImagePutFailed'
-  constructor(public message: string = 'Could not update transactions image', properties?: any) {
+  constructor(
+    public message: string = 'Could not update transactions image',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionsImagePutFailed.prototype)
   }
@@ -465,7 +482,10 @@ class TransactionsImagePutFailed extends BaseError {
 
 class TransactionsImageCreateFailed extends BaseError {
   public name = 'TransactionsImageCreateFailed'
-  constructor(public message: string = 'Could not create transactions image', properties?: any) {
+  constructor(
+    public message: string = 'Could not create transactions image',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionsImageCreateFailed.prototype)
   }

@@ -36,7 +36,7 @@ export interface InvoicesCreateBody {
   comments?: string | null
   customer?: string | null
   customer_external_reference_id?: string | null
-  amount?: object | null
+  amount?: Record<string, unknown> | null
   currency?: string | null
   issued_at?: string | null
   balance?: number | null
@@ -46,8 +46,8 @@ export interface InvoicesCreateBody {
   archived_at?: string | null
   custom_id?: string | null
   external_reference_id?: string | null
-  external_reference?: object | null
-  metadata?: object | null
+  external_reference?: Record<string, unknown> | null
+  metadata?: Record<string, unknown> | null
   origins?: string[] | null
   related_to?: string[] | null
   depends_on?: string[] | null
@@ -67,7 +67,7 @@ export interface InvoicesUpdateBody {
   comments?: string | null
   customer?: string | null
   customer_external_reference_id?: string | null
-  amount?: object | null
+  amount?: Record<string, unknown> | null
   currency?: string | null
   issued_at?: string | null
   balance?: number | null
@@ -77,8 +77,8 @@ export interface InvoicesUpdateBody {
   archived_at?: string | null
   custom_id?: string | null
   external_reference_id?: string | null
-  external_reference?: object | null
-  metadata?: object | null
+  external_reference?: Record<string, unknown> | null
+  metadata?: Record<string, unknown> | null
   origins?: string[] | null
   related_to?: string[] | null
   depends_on?: string[] | null
@@ -94,8 +94,8 @@ export interface InvoicesSimpleUpdateRequestBody {
 }
 
 export interface InvoicesResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   next?: () => Promise<InvoicesResponse>
   msg?: string
 }
@@ -107,7 +107,10 @@ export class Invoices extends ThBaseHandler {
   public options: InvoicesOptions
 
   constructor(options: InvoicesOptions, http: Client) {
-    super(http, { endpoint: Invoices.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Invoices.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -152,7 +155,7 @@ export class Invoices extends ThBaseHandler {
 
   getMeta(): Promise<InvoicesResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
 
       try {
         const response = await this.http.getClient().get(uri)
@@ -176,7 +179,7 @@ export class Invoices extends ThBaseHandler {
       try {
         if (query && query.embed) {
           const queryString = query.embed
-            .map(item => {
+            .map((item) => {
               return `embed[]=${item}`
             })
             .join('&')
@@ -205,7 +208,7 @@ export class Invoices extends ThBaseHandler {
       try {
         if (query && query.embed) {
           const queryString = query.embed
-            .map(item => {
+            .map((item) => {
               return `embed[]=${item}`
             })
             .join('&')
@@ -233,7 +236,7 @@ export class Invoices extends ThBaseHandler {
 
       if (query && query.embed) {
         const queryString = query.embed
-          .map(item => {
+          .map((item) => {
             return `embed[]=${item}`
           })
           .join('&')

@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
@@ -18,8 +17,8 @@ export interface CategoryTreesQuery {
 }
 
 export interface CategoryTreesResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   next?: () => Promise<CategoryTreesResponse>
 }
 
@@ -33,12 +32,12 @@ export interface CategoryTreeResponse {
 }
 
 export interface CategoryTree {
-  metadata?: object
+  metadata?: Record<string, unknown>
   name?: string
   summary?: string
   description?: string
   comments?: string
-  children?: object[]
+  children?: Record<string, unknown>[]
   active?: boolean
   deleted?: boolean
 }
@@ -51,7 +50,10 @@ export class CategoryTrees extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: CategoryTreesOptions, http: Client) {
-    super(http, { endpoint: CategoryTrees.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: CategoryTrees.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -65,7 +67,6 @@ export class CategoryTrees extends ThBaseHandler {
       let next
 
       try {
-
         const base = this.uriHelper.generateBaseUri()
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 
@@ -75,7 +76,8 @@ export class CategoryTrees extends ThBaseHandler {
         }
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<CategoryTreesResponse> => this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<CategoryTreesResponse> =>
+            this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({
@@ -159,7 +161,10 @@ export class CategoryTrees extends ThBaseHandler {
 
 export class CategoryTreesFetchFailed extends BaseError {
   public name = 'CategoryTreesFetchFailed'
-  constructor(public message: string = 'Could not fetch category trees', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch category trees',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CategoryTreesFetchFailed.prototype)
   }
@@ -167,7 +172,10 @@ export class CategoryTreesFetchFailed extends BaseError {
 
 export class CategoryTreeFetchFailed extends BaseError {
   public name = 'CategoryTreeFetchFailed'
-  constructor(public message: string = 'Could not fetch category tree', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch category tree',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CategoryTreeFetchFailed.prototype)
   }
@@ -175,7 +183,10 @@ export class CategoryTreeFetchFailed extends BaseError {
 
 export class CategoryTreePutFailed extends BaseError {
   public name = 'CategoryTreePutFailed'
-  constructor(public message: string = 'Could not alter category tree', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter category tree',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CategoryTreePutFailed.prototype)
   }
@@ -183,7 +194,10 @@ export class CategoryTreePutFailed extends BaseError {
 
 export class CategoryTreeCreationFailed extends BaseError {
   public name = 'CategoryTreeCreationFailed'
-  constructor(public message: string = 'Could not create category tree', properties?: any) {
+  constructor(
+    public message: string = 'Could not create category tree',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CategoryTreeCreationFailed.prototype)
   }
@@ -191,7 +205,10 @@ export class CategoryTreeCreationFailed extends BaseError {
 
 export class CategortTreesDeleteFailed extends BaseError {
   public name = 'CategortTreesDeleteFailed'
-  constructor(public message: string = 'Could not delete category tree', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete category tree',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CategortTreesDeleteFailed.prototype)
   }

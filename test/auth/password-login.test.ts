@@ -4,7 +4,7 @@ import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import { v0, v1 } from '../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -31,7 +31,7 @@ describe('Auth: make auth flow', () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       const mock = new MockAdapter(axios)
 
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -54,7 +54,7 @@ describe('Auth: make auth flow', () => {
     const auth = new v0.Auth(options)
 
     try {
-      let data = await auth.authenticate()
+      const data = await auth.authenticate()
       expect(data).toBeTruthy()
       expect(typeof data.token === 'string').toBe(true)
       expect(typeof data.user === 'string').toBe(true)
@@ -80,7 +80,7 @@ describe('Auth: make auth flow', () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       const mock = new MockAdapter(axios)
 
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -100,7 +100,7 @@ describe('Auth: make auth flow', () => {
     const auth = new v1.Auth(options)
 
     try {
-      let data = await auth.authenticate()
+      const data = await auth.authenticate()
       expect(data).toBeTruthy()
       expect(typeof data.token === 'string').toBe(true)
       expect(typeof data.user === 'string').toBe(true)

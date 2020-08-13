@@ -8,8 +8,8 @@ export interface VatOptions {
 }
 
 export interface VatResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
 }
 
 export interface VatQuery {

@@ -17,10 +17,6 @@ export interface Cart {
   name?: string
 }
 
-export interface HandlerCartsQuery {
-
-}
-
 export interface CartsOptions {
   user?: string
   base?: string
@@ -34,12 +30,12 @@ export interface CartsOptions {
 }
 
 export interface CartDeleteOptions {
-
+  [key: string]: any
 }
 
 export interface CartsResponse {
   data: Cart[]
-  metadata: object
+  metadata: Record<string, unknown>
   msg?: string
   next?: () => Promise<CartsResponse>
 }
@@ -57,11 +53,11 @@ export interface CartResponse {
 export interface ErrorObject {
   id: string
   label: string
-  errorDetails: object
+  errorDetails: Record<string, unknown>
 }
 
 export interface CartsCreateQuery {
-
+  [key: string]: any
 }
 
 export interface HandlerProductsQuery extends HandlerQuery {
@@ -90,7 +86,7 @@ export class Carts extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  create(cart: Cart, query?: HandlerCartsQuery): Promise<CartResponse> {
+  create(cart: Cart, query?: Record<string, unknown>): Promise<CartResponse> {
     return new Promise(async (resolve, reject) => {
       const base = this.uriHelper.generateBaseUri()
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -123,7 +119,7 @@ export class Carts extends ThBaseHandler {
         } else {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             options && options.query ? `?${qs.stringify(options.query)}` : ''
-            }`
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -168,7 +164,7 @@ export class Carts extends ThBaseHandler {
 
   meta(): Promise<CartsResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
 
       try {
         const response = await this.http.getClient().get(uri)
@@ -195,7 +191,7 @@ export class Carts extends ThBaseHandler {
 
   put(cartId: string, cart: Cart): Promise<CartResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${cartId}`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${cartId}`
 
       try {
         const response = await this.http.getClient().put(uri, cart)
@@ -218,7 +214,9 @@ export class Carts extends ThBaseHandler {
       try {
         let uri
         if (deleteOptions) {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}/${cartId}?${qs.stringify(deleteOptions)}`
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}/${cartId}?${qs.stringify(
+            deleteOptions
+          )}`
         } else {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}/${cartId}`
         }
@@ -259,7 +257,10 @@ export class Carts extends ThBaseHandler {
 
 export class CartFetchFailed extends BaseError {
   public name = 'CartFetchFailed'
-  constructor(public message: string = 'Could not fetch cart', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch cart',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CartFetchFailed.prototype)
   }
@@ -267,7 +268,10 @@ export class CartFetchFailed extends BaseError {
 
 export class CartsSearchFailed extends BaseError {
   public name = 'CartsSearchFailed'
-  constructor(public message: string = 'Could complete carts search', properties?: any) {
+  constructor(
+    public message: string = 'Could complete carts search',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CartsSearchFailed.prototype)
   }
@@ -275,7 +279,7 @@ export class CartsSearchFailed extends BaseError {
 
 export class CartsDeleteFailed extends BaseError {
   public name = 'CartsDeleteFailed'
-  constructor(public message: string = 'Could delete cart', properties?: any) {
+  constructor(public message: string = 'Could delete cart', properties?: Record<string, unknown>) {
     super(message, properties)
     Object.setPrototypeOf(this, CartsDeleteFailed.prototype)
   }
@@ -283,7 +287,7 @@ export class CartsDeleteFailed extends BaseError {
 
 export class CartsUpdateFailed extends BaseError {
   public name = 'CartsUpdateFailed'
-  constructor(public message: string = 'Could update cart', properties?: any) {
+  constructor(public message: string = 'Could update cart', properties?: Record<string, unknown>) {
     super(message, properties)
     Object.setPrototypeOf(this, CartsUpdateFailed.prototype)
   }
@@ -291,7 +295,10 @@ export class CartsUpdateFailed extends BaseError {
 
 export class CartsMetaFailed extends BaseError {
   public name = 'CartsMetaFailed'
-  constructor(public message: string = 'Could fetch carts metadata', properties?: any) {
+  constructor(
+    public message: string = 'Could fetch carts metadata',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CartsMetaFailed.prototype)
   }
@@ -299,7 +306,7 @@ export class CartsMetaFailed extends BaseError {
 
 export class CartsFetchFailed extends BaseError {
   public name = 'CartsFetchFailed'
-  constructor(public message: string = 'Could fetch carts', properties?: any) {
+  constructor(public message: string = 'Could fetch carts', properties?: Record<string, unknown>) {
     super(message, properties)
     Object.setPrototypeOf(this, CartsFetchFailed.prototype)
   }
@@ -307,7 +314,7 @@ export class CartsFetchFailed extends BaseError {
 
 export class CartsCreateFailed extends BaseError {
   public name = 'CartsCreateFailed'
-  constructor(public message: string = 'Could create cart', properties?: any) {
+  constructor(public message: string = 'Could create cart', properties?: Record<string, unknown>) {
     super(message, properties)
     Object.setPrototypeOf(this, CartsCreateFailed.prototype)
   }

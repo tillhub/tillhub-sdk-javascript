@@ -1,9 +1,8 @@
-
 export class BaseError extends Error {
-  public properties?: any
+  public properties?: Record<string, unknown>
   public message: string
 
-  constructor(message: string, properties?: any) {
+  constructor(message: string, properties?: Record<string, unknown>) {
     super()
     this.message = message
 

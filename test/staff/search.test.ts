@@ -6,7 +6,7 @@ dotenv.config()
 import { v0 } from '../../src/tillhub-js'
 import { initThInstance } from '../util'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -36,7 +36,7 @@ describe('v0: Staff: can search for staff', () => {
     const searchTerm = 'asdf'
 
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -51,7 +51,7 @@ describe('v0: Staff: can search for staff', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/search?q=${searchTerm}`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -75,7 +75,7 @@ describe('v0: Staff: can search for staff', () => {
 
   it('receives a search query of type object', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -90,7 +90,7 @@ describe('v0: Staff: can search for staff', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/search${queryString}`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -114,7 +114,7 @@ describe('v0: Staff: can search for staff', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -129,7 +129,7 @@ describe('v0: Staff: can search for staff', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/search${queryString}`)
-        .reply(function (config) {
+        .reply(() => {
           return [205]
         })
     }

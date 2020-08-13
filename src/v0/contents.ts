@@ -19,8 +19,8 @@ export interface ContentsQuery {
 }
 
 export interface ContentsResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   next?: () => Promise<ContentsResponse>
 }
 
@@ -41,19 +41,19 @@ export type ContentTypeType = 'video' | 'image' | 'text' | 'transition'
 
 export interface Content {
   name?: string
-  type: ContentTypeType,
-  payload: string | null,
+  type: ContentTypeType
+  payload: string | null
   content_configuration: {
     [key: string]: any
-  } | null,
+  } | null
   payload_configuration: {
     [key: string]: any
-  } | null,
+  } | null
   active?: boolean
   deleted?: boolean
   metadata: {
     [key: string]: any
-  } | null,
+  } | null
 }
 
 export class Contents extends ThBaseHandler {
@@ -64,7 +64,10 @@ export class Contents extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: ContentOptions, http: Client) {
-    super(http, { endpoint: Contents.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Contents.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -89,7 +92,7 @@ export class Contents extends ThBaseHandler {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             queryString ? `?${queryString}` : ''
-            }`
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -201,7 +204,10 @@ export class Contents extends ThBaseHandler {
 
 export class ContentsFetchFailed extends BaseError {
   public name = 'ContentsFetchFailed'
-  constructor(public message: string = 'Could not fetch contents', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch contents',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ContentsFetchFailed.prototype)
   }
@@ -209,7 +215,10 @@ export class ContentsFetchFailed extends BaseError {
 
 export class ContentFetchFailed extends BaseError {
   public name = 'ContentFetchFailed'
-  constructor(public message: string = 'Could not fetch content', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch content',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ContentFetchFailed.prototype)
   }
@@ -217,7 +226,10 @@ export class ContentFetchFailed extends BaseError {
 
 export class ContentPatchFailed extends BaseError {
   public name = 'ContentPatchFailed'
-  constructor(public message: string = 'Could not alter content', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter content',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ContentPatchFailed.prototype)
   }
@@ -225,7 +237,10 @@ export class ContentPatchFailed extends BaseError {
 
 export class ContentCreationFailed extends BaseError {
   public name = 'ContentCreationFailed'
-  constructor(public message: string = 'Could not create content', properties?: any) {
+  constructor(
+    public message: string = 'Could not create content',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ContentCreationFailed.prototype)
   }
@@ -233,7 +248,10 @@ export class ContentCreationFailed extends BaseError {
 
 export class ContentDeleteFailed extends BaseError {
   public name = 'ContentDeleteFailed'
-  constructor(public message: string = 'Could not delete content', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete content',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ContentDeleteFailed.prototype)
   }
@@ -241,7 +259,10 @@ export class ContentDeleteFailed extends BaseError {
 
 export class ContentsSearchFailed extends BaseError {
   public name = 'ContentDeleteFailed'
-  constructor(public message: string = 'Could not search contents', properties?: any) {
+  constructor(
+    public message: string = 'Could not search contents',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ContentsSearchFailed.prototype)
   }

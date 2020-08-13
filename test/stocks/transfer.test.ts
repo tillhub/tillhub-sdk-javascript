@@ -31,32 +31,28 @@ const transferResponse = {
 describe('v0: Stocks: can transfer stocks from one location to another', () => {
   it("Tillhub's stocks are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock
-        .onPost('https://api.tillhub.com/api/v0/users/login')
-        .reply(function (config) {
-          return [
-            200,
-            {
-              token: '',
-              user: {
-                id: '123',
-                legacy_id: legacyId
-              }
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
             }
-          ]
-        })
+          }
+        ]
+      })
 
-      mock
-        .onPost(`https://api.tillhub.com/api/v0/stock/${legacyId}/transfer`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              count: 1,
-              results: [transferResponse]
-            }
-          ]
-        })
+      mock.onPost(`https://api.tillhub.com/api/v0/stock/${legacyId}/transfer`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [transferResponse]
+          }
+        ]
+      })
     }
 
     const th = await initThInstance()
@@ -72,26 +68,22 @@ describe('v0: Stocks: can transfer stocks from one location to another', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock
-        .onPost('https://api.tillhub.com/api/v0/users/login')
-        .reply(function (config) {
-          return [
-            200,
-            {
-              token: '',
-              user: {
-                id: '123',
-                legacy_id: legacyId
-              }
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
             }
-          ]
-        })
+          }
+        ]
+      })
 
-      mock
-        .onPost(`https://api.tillhub.com/api/v0/stock/${legacyId}/transfer`)
-        .reply(function (config) {
-          return [205]
-        })
+      mock.onPost(`https://api.tillhub.com/api/v0/stock/${legacyId}/transfer`).reply(() => {
+        return [205]
+      })
     }
 
     try {

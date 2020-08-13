@@ -3,9 +3,9 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 
 dotenv.config()
-import { TillhubClient, v1, v0 } from '../../src/tillhub-js'
+import { TillhubClient, v1 } from '../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -21,33 +21,33 @@ if (process.env.SYSTEM_TEST) {
 
 const legacyId = '4564'
 const mockRegister = {
-  'id': '1337',
-  'created_at': { 'iso': '2018-04-23T08:46:16.012Z', 'unix': 1524473176012 },
-  'updated_at': { 'iso': '2019-01-18T12:44:41.261Z', 'unix': 1547815481261 },
-  'device_id': 'someDeviceId',
-  'token_id': 'someTokenId',
-  'active': true,
-  'deleted': false,
-  'shop': null,
-  'name': null,
-  'description': null,
-  'metadata': null,
-  'register_number': 16,
-  'branch': 'someBranch',
-  'custom_ids': null,
-  'custom_id': null,
-  'configuration': null,
-  'client': null,
-  'external_custom_id': null,
-  'currency_default': null,
-  'timezone_default': null,
-  'device_configuration': {
-    'network': { 'ip': '192.168.13.37' },
-    'bundle_id': 'someBundle',
-    'device_token': 'someToken'
+  id: '1337',
+  created_at: { iso: '2018-04-23T08:46:16.012Z', unix: 1524473176012 },
+  updated_at: { iso: '2019-01-18T12:44:41.261Z', unix: 1547815481261 },
+  device_id: 'someDeviceId',
+  token_id: 'someTokenId',
+  active: true,
+  deleted: false,
+  shop: null,
+  name: null,
+  description: null,
+  metadata: null,
+  register_number: 16,
+  branch: 'someBranch',
+  custom_ids: null,
+  custom_id: null,
+  configuration: null,
+  client: null,
+  external_custom_id: null,
+  currency_default: null,
+  timezone_default: null,
+  device_configuration: {
+    network: { ip: '192.168.13.37' },
+    bundle_id: 'someBundle',
+    device_token: 'someToken'
   },
-  'devices': null,
-  'branch_number': 1
+  devices: null,
+  branch_number: 1
 }
 const mockNotification = { aps: { alert: 'Hello, World!' } }
 const notificationSuccessMsg = 'Sent notification to 1 device(s).'
@@ -60,7 +60,7 @@ afterEach(() => {
 describe('v1: Register', () => {
   it('queries the remote state of a register', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -73,15 +73,17 @@ describe('v1: Register', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v1/registers/${legacyId}/${mockRegister.id}`).reply(function (config) {
-        return [
-          200,
-          {
-            count: 1,
-            results: [mockRegister]
-          }
-        ]
-      })
+      mock
+        .onGet(`https://api.tillhub.com/api/v1/registers/${legacyId}/${mockRegister.id}`)
+        .reply(() => {
+          return [
+            200,
+            {
+              count: 1,
+              results: [mockRegister]
+            }
+          ]
+        })
     }
 
     const options = {
@@ -111,7 +113,7 @@ describe('v1: Register', () => {
 
   it('sends a notification to a register', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -124,15 +126,20 @@ describe('v1: Register', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v1/registers/${legacyId}/${mockRegister.id}/notification`, mockNotification).reply(function (config) {
-        return [
-          200,
-          {
-            status: 200,
-            msg: notificationSuccessMsg
-          }
-        ]
-      })
+      mock
+        .onPost(
+          `https://api.tillhub.com/api/v1/registers/${legacyId}/${mockRegister.id}/notification`,
+          mockNotification
+        )
+        .reply(() => {
+          return [
+            200,
+            {
+              status: 200,
+              msg: notificationSuccessMsg
+            }
+          ]
+        })
     }
 
     const options = {
@@ -162,7 +169,7 @@ describe('v1: Register', () => {
 
   it('updates the device configuration of a register', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -175,15 +182,20 @@ describe('v1: Register', () => {
         ]
       })
 
-      mock.onPut(`https://api.tillhub.com/api/v1/registers/${legacyId}/${mockRegister.id}/device_configuration`, mockRegister.device_configuration).reply(function (config) {
-        return [
-          200,
-          {
-            count: 1,
-            results: [mockRegister]
-          }
-        ]
-      })
+      mock
+        .onPut(
+          `https://api.tillhub.com/api/v1/registers/${legacyId}/${mockRegister.id}/device_configuration`,
+          mockRegister.device_configuration
+        )
+        .reply(() => {
+          return [
+            200,
+            {
+              count: 1,
+              results: [mockRegister]
+            }
+          ]
+        })
     }
 
     const options = {
@@ -206,14 +218,17 @@ describe('v1: Register', () => {
 
     expect(registers).toBeInstanceOf(v1.Registers)
 
-    const { data } = await registers.updateDeviceConfiguration(mockRegister.id, mockRegister.device_configuration)
+    const { data } = await registers.updateDeviceConfiguration(
+      mockRegister.id,
+      mockRegister.device_configuration
+    )
 
     expect(data).toEqual(mockRegister)
   })
 
   it('rejects on status codes that are not 200 when querying a register', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -226,9 +241,11 @@ describe('v1: Register', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v1/registers/${legacyId}/${mockRegister.id}`).reply(function (config) {
-        return [404]
-      })
+      mock
+        .onGet(`https://api.tillhub.com/api/v1/registers/${legacyId}/${mockRegister.id}`)
+        .reply(() => {
+          return [404]
+        })
     }
 
     const options = {

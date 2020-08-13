@@ -8,7 +8,7 @@ export interface CashBookOptions {
 }
 
 export interface CashBookResponse {
-  data: object[]
+  data: Record<string, unknown>[]
 }
 
 export interface CashBookQuery {
@@ -56,7 +56,10 @@ export class CashBook {
 
 export class CashBookReportFetchFailed extends BaseError {
   public name = 'CashBookReportFetchFailed'
-  constructor(public message: string = 'Could not fetch the cash book report', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the cash book report',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CashBookReportFetchFailed.prototype)
   }

@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
@@ -19,13 +18,13 @@ export interface FunctionsQuery {
 }
 
 export interface FunctionsResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   next?: () => Promise<FunctionsResponse>
 }
 
 export interface FunctionResponse {
-  data: Function
+  data: () => any
   metadata?: {
     count?: number
     patch?: any
@@ -36,11 +35,15 @@ export interface FunctionResponse {
 export type FunctionRuntime = 'pos' | 'nodejs8x' | 'python27'
 export type FunctionType = 'local' | 'http' | 'pubsub'
 export type FunctionConfigurationClass = 'instant_checkout' | 'add_to_cart'
-export type FunctionConfigurationResourceType = 'product' | 'discount' | 'voucher_action' | 'customer'
+export type FunctionConfigurationResourceType =
+  | 'product'
+  | 'discount'
+  | 'voucher_action'
+  | 'customer'
 
 export interface FunctionConfigurationResource {
   type?: FunctionConfigurationResourceType
-  object_id?: string
+  obj?: string
 }
 
 export interface FunctionConfigurationImages {
@@ -57,7 +60,7 @@ export interface FunctionConfiguration {
   // TODO: not sure what to do with instantCheckoutPayload
 }
 
-export interface Function {
+export interface FunctionInterface {
   name?: string
   runtime?: FunctionRuntime
   type?: FunctionType
@@ -78,7 +81,10 @@ export class Functions extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: FunctionsOptions, http: Client) {
-    super(http, { endpoint: Functions.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Functions.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -118,10 +124,10 @@ export class Functions extends ThBaseHandler {
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
-        reject(new FunctionFetchFailed(undefined, { status: response.status }))
+          reject(new FunctionFetchFailed(undefined, { status: response.status }))
 
         return resolve({
-          data: response.data.results[0] as Function,
+          data: response.data.results[0] as FunctionInterface,
           msg: response.data.msg,
           metadata: { count: response.data.count }
         } as FunctionResponse)
@@ -131,14 +137,14 @@ export class Functions extends ThBaseHandler {
     })
   }
 
-  put(functionId: string, fn: Function): Promise<FunctionResponse> {
+  put(functionId: string, fn: FunctionInterface): Promise<FunctionResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri(`/${functionId}`)
       try {
         const response = await this.http.getClient().put(uri, fn)
 
         return resolve({
-          data: response.data.results[0] as Function,
+          data: response.data.results[0] as FunctionInterface,
           metadata: { count: response.data.count }
         } as FunctionResponse)
       } catch (error) {
@@ -147,14 +153,14 @@ export class Functions extends ThBaseHandler {
     })
   }
 
-  create(fn: Function): Promise<FunctionResponse> {
+  create(fn: FunctionInterface): Promise<FunctionResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri()
       try {
         const response = await this.http.getClient().post(uri, fn)
 
         return resolve({
-          data: response.data.results[0] as Function,
+          data: response.data.results[0] as FunctionInterface,
           metadata: { count: response.data.count }
         } as FunctionResponse)
       } catch (error) {
@@ -182,7 +188,10 @@ export class Functions extends ThBaseHandler {
 
 export class FunctionsFetchFailed extends BaseError {
   public name = 'FunctionsFetchFailed'
-  constructor(public message: string = 'Could not fetch functions', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch functions',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, FunctionsFetchFailed.prototype)
   }
@@ -190,7 +199,10 @@ export class FunctionsFetchFailed extends BaseError {
 
 export class FunctionFetchFailed extends BaseError {
   public name = 'FunctionFetchFailed'
-  constructor(public message: string = 'Could not fetch function', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch function',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, FunctionFetchFailed.prototype)
   }
@@ -198,7 +210,10 @@ export class FunctionFetchFailed extends BaseError {
 
 export class FunctionPutFailed extends BaseError {
   public name = 'FunctionPutFailed'
-  constructor(public message: string = 'Could not alter function', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter function',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, FunctionPutFailed.prototype)
   }
@@ -206,7 +221,10 @@ export class FunctionPutFailed extends BaseError {
 
 export class FunctionCreationFailed extends BaseError {
   public name = 'FunctionCreationFailed'
-  constructor(public message: string = 'Could not create function', properties?: any) {
+  constructor(
+    public message: string = 'Could not create function',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, FunctionCreationFailed.prototype)
   }
@@ -214,7 +232,10 @@ export class FunctionCreationFailed extends BaseError {
 
 export class FunctionDeleteFailed extends BaseError {
   public name = 'FunctionDeleteFailed'
-  constructor(public message: string = 'Could not delete function', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete function',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, FunctionDeleteFailed.prototype)
   }

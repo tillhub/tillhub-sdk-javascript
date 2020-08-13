@@ -81,7 +81,10 @@ export class Timetracking extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: TimetrackingOptions, http: Client) {
-    super(http, { endpoint: Timetracking.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Timetracking.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -205,7 +208,10 @@ export class Timetracking extends ThBaseHandler {
 
 export class TimetrackingReportFetchFailed extends BaseError {
   public name = 'TimetrackingReportFetchFailed'
-  constructor(public message: string = 'Could not fetch the timetracking report for the staff member', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the timetracking report for the staff member',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TimetrackingReportFetchFailed.prototype)
   }
@@ -213,7 +219,10 @@ export class TimetrackingReportFetchFailed extends BaseError {
 
 export class TimetrackingStaffListFetchFailed extends BaseError {
   public name = 'TimetrackingStaffListFetchFailed'
-  constructor(public message: string = 'Could not fetch the list of staff with timetracking entries', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the list of staff with timetracking entries',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TimetrackingStaffListFetchFailed.prototype)
   }
@@ -221,7 +230,10 @@ export class TimetrackingStaffListFetchFailed extends BaseError {
 
 export class TimetrackingEntriesFetchFailed extends BaseError {
   public name = 'TimetrackingEntriesFetchFailed'
-  constructor(public message: string = 'Could not fetch the timetracking entries for the staff member', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the timetracking entries for the staff member',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TimetrackingEntriesFetchFailed.prototype)
   }
@@ -229,7 +241,10 @@ export class TimetrackingEntriesFetchFailed extends BaseError {
 
 export class TimetrackingEntryCreateFailed extends BaseError {
   public name = 'TimetrackingEntryCreateFailed'
-  constructor(public message: string = 'Could have not create the timetracking entry', properties?: any) {
+  constructor(
+    public message: string = 'Could have not create the timetracking entry',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TimetrackingEntryCreateFailed.prototype)
   }
@@ -237,7 +252,10 @@ export class TimetrackingEntryCreateFailed extends BaseError {
 
 export class TimetrackingEntryPutFailed extends BaseError {
   public name = 'TimetrackingEntryPutFailed'
-  constructor(public message: string = 'Could have not update the timetracking entry', properties?: any) {
+  constructor(
+    public message: string = 'Could have not update the timetracking entry',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TimetrackingEntryPutFailed.prototype)
   }
@@ -245,7 +263,10 @@ export class TimetrackingEntryPutFailed extends BaseError {
 
 export class TimetrackingEntryDeleteFailed extends BaseError {
   public name = 'TimetrackingEntryDeleteFailed'
-  constructor(public message: string = 'Could have not delete the timetracking entry', properties?: any) {
+  constructor(
+    public message: string = 'Could have not delete the timetracking entry',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TimetrackingEntryDeleteFailed.prototype)
   }

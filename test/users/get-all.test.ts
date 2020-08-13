@@ -17,7 +17,7 @@ const configID = 'asdf'
 describe('v0: Users: can get all users members', () => {
   it("Tillhub's users are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -30,15 +30,17 @@ describe('v0: Users: can get all users members', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/configurations/${legacyId}/${configID}/users`).reply(function (config) {
-        return [
-          200,
-          {
-            count: 1,
-            results: [{}]
-          }
-        ]
-      })
+      mock
+        .onGet(`https://api.tillhub.com/api/v0/configurations/${legacyId}/${configID}/users`)
+        .reply(() => {
+          return [
+            200,
+            {
+              count: 1,
+              results: [{}]
+            }
+          ]
+        })
     }
 
     const th = await initThInstance()
@@ -54,7 +56,7 @@ describe('v0: Users: can get all users members', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -67,9 +69,11 @@ describe('v0: Users: can get all users members', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/configurations/${legacyId}/${configID}/users`).reply(function (config) {
-        return [205]
-      })
+      mock
+        .onGet(`https://api.tillhub.com/api/v0/configurations/${legacyId}/${configID}/users`)
+        .reply(() => {
+          return [205]
+        })
     }
 
     try {

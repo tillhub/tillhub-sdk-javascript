@@ -15,7 +15,7 @@ afterEach(() => {
 describe('v0: Staff: can get all staff members', () => {
   it("Tillhub's staff are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -28,7 +28,7 @@ describe('v0: Staff: can get all staff members', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}`).reply(() => {
         return [
           200,
           {
@@ -52,7 +52,7 @@ describe('v0: Staff: can get all staff members', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -65,7 +65,7 @@ describe('v0: Staff: can get all staff members', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}`).reply(() => {
         return [205]
       })
     }

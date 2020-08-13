@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
@@ -18,8 +17,8 @@ export interface CorrespondencesQuery {
 }
 
 export interface CorrespondencesResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   next?: () => Promise<CorrespondencesResponse>
 }
 
@@ -33,20 +32,20 @@ export interface CorrespondenceResponse {
 }
 
 export interface Correspondence {
-  metadata?: object
-  channel?: string,
-  recipient?: object,
-  sender?: object,
-  payload_type?: string,
-  payload?: object,
-  channel_message?: object,
-  customer: string,
-  resource_type?: string,
-  resource?: string,
-  sent_at?: string,
-  delivered_at?: string,
-  status?: string,
-  status_details?: object,
+  metadata?: Record<string, unknown>
+  channel?: string
+  recipient?: Record<string, unknown>
+  sender?: Record<string, unknown>
+  payload_type?: string
+  payload?: Record<string, unknown>
+  channel_message?: Record<string, unknown>
+  customer: string
+  resource_type?: string
+  resource?: string
+  sent_at?: string
+  delivered_at?: string
+  status?: string
+  status_details?: Record<string, unknown>
   type?: string
 }
 
@@ -58,7 +57,10 @@ export class Correspondences extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: CorrespondencesOptions, http: Client) {
-    super(http, { endpoint: Correspondences.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Correspondences.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -72,7 +74,6 @@ export class Correspondences extends ThBaseHandler {
       let next
 
       try {
-
         const base = this.uriHelper.generateBaseUri()
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 
@@ -82,7 +83,8 @@ export class Correspondences extends ThBaseHandler {
         }
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<CorrespondencesResponse> => this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<CorrespondencesResponse> =>
+            this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({
@@ -150,7 +152,10 @@ export class Correspondences extends ThBaseHandler {
 
 export class CorrespondencesFetchFailed extends BaseError {
   public name = 'CorrespondencesFetchFailed'
-  constructor(public message: string = 'Could not fetch Correspondences', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch Correspondences',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CorrespondencesFetchFailed.prototype)
   }
@@ -158,7 +163,10 @@ export class CorrespondencesFetchFailed extends BaseError {
 
 export class CorrespondenceFetchFailed extends BaseError {
   public name = 'CorrespondenceFetchFailed'
-  constructor(public message: string = 'Could not fetch correspondence', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch correspondence',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CorrespondenceFetchFailed.prototype)
   }
@@ -166,7 +174,10 @@ export class CorrespondenceFetchFailed extends BaseError {
 
 export class CorrespondencePutFailed extends BaseError {
   public name = 'CorrespondencePutFailed'
-  constructor(public message: string = 'Could not alter correspondence', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter correspondence',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CorrespondencePutFailed.prototype)
   }
@@ -174,7 +185,10 @@ export class CorrespondencePutFailed extends BaseError {
 
 export class CorrespondenceCreationFailed extends BaseError {
   public name = 'CorrespondenceCreationFailed'
-  constructor(public message: string = 'Could not create correspondence', properties?: any) {
+  constructor(
+    public message: string = 'Could not create correspondence',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CorrespondenceCreationFailed.prototype)
   }

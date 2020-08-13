@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 import { UriHelper } from '../uri-helper'
@@ -31,12 +30,12 @@ export interface AuditActionsGetOneRequestObject {
 }
 
 export interface AuditActionsCreateBody {
-  actions: object[]
+  actions: Record<string, unknown>[]
 }
 
 export interface AuditsResponse {
-  data?: object[]
-  metadata?: object
+  data?: Record<string, unknown>[]
+  metadata?: Record<string, unknown>
   msg?: string
   next?: () => Promise<AuditsResponse>
 }
@@ -63,7 +62,6 @@ export class AuditActions {
   getAll(q?: AuditsQuery | undefined): Promise<AuditsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
-      let uri
 
       try {
         const base = this.uriHelper.generateBaseUri('/actions')
@@ -72,7 +70,8 @@ export class AuditActions {
         const response = await this.http.getClient().get(uri)
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<AuditsResponse> => this.getAll({ ...q, uri: response.data.cursor.next })
+          next = (): Promise<AuditsResponse> =>
+            this.getAll({ ...q, uri: response.data.cursor.next })
         }
 
         return resolve({

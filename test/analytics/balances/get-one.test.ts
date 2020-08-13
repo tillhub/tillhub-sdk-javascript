@@ -5,7 +5,7 @@ dotenv.config()
 import { Balances } from '../../../src/v0/analytics/reports/balances'
 import { TillhubClient } from '../../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -32,7 +32,7 @@ afterEach(() => {
 describe('v0: Analytics Reports Balances: can get one', () => {
   it("Tillhub's balances are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -46,8 +46,10 @@ describe('v0: Analytics Reports Balances: can get one', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/balances/${balanceId}${queryString}`)
-        .reply(function (config) {
+        .onGet(
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/balances/${balanceId}${queryString}`
+        )
+        .reply(() => {
           return [
             200,
             {
@@ -87,7 +89,7 @@ describe('v0: Analytics Reports Balances: can get one', () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
         .onPost('https://api.tillhub.com/api/v0/users/login')
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -100,8 +102,10 @@ describe('v0: Analytics Reports Balances: can get one', () => {
           ]
         })
 
-        .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/balances/${balanceId}${queryString}`)
-        .reply(function (config) {
+        .onGet(
+          `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/balances/${balanceId}${queryString}`
+        )
+        .reply(() => {
           return [404]
         })
     }

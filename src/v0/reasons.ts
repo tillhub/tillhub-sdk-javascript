@@ -19,7 +19,7 @@ export interface ReasonsQuery {
 
 export interface ReasonsResponse {
   data: Reason[]
-  metadata: object
+  metadata: Record<string, unknown>
 }
 
 export interface ReasonResponse {
@@ -74,7 +74,9 @@ export class Reasons extends ThBaseHandler {
             queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
           }
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${queryString ? `?${queryString}` : ''}`
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
+            queryString ? `?${queryString}` : ''
+          }`
         }
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
@@ -162,7 +164,10 @@ export class Reasons extends ThBaseHandler {
 
 export class ReasonsFetchFailed extends BaseError {
   public name = 'ReasonsFetchFailed'
-  constructor(public message: string = 'Could not fetch reasons', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch reasons',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ReasonsFetchFailed.prototype)
   }
@@ -170,7 +175,10 @@ export class ReasonsFetchFailed extends BaseError {
 
 export class ReasonsFetchOneFailed extends BaseError {
   public name = 'ReasonsFetchOneFailed'
-  constructor(public message: string = 'Could not fetch one reason', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch one reason',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ReasonsFetchOneFailed.prototype)
   }
@@ -178,7 +186,10 @@ export class ReasonsFetchOneFailed extends BaseError {
 
 export class ReasonsPutFailed extends BaseError {
   public name = 'ReasonsPutFailed'
-  constructor(public message: string = 'Could not update reason', properties?: any) {
+  constructor(
+    public message: string = 'Could not update reason',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ReasonsPutFailed.prototype)
   }
@@ -186,7 +197,10 @@ export class ReasonsPutFailed extends BaseError {
 
 export class ReasonsCreationFailed extends BaseError {
   public name = 'ReasonsCreationFailed'
-  constructor(public message: string = 'Could not create reasons', properties?: any) {
+  constructor(
+    public message: string = 'Could not create reasons',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ReasonsCreationFailed.prototype)
   }
@@ -194,7 +208,10 @@ export class ReasonsCreationFailed extends BaseError {
 
 export class ReasonsDeleteFailed extends BaseError {
   public name = 'ReasonsDeleteFailed'
-  constructor(public message: string = 'Could not delete reasons', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete reasons',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ReasonsDeleteFailed.prototype)
   }

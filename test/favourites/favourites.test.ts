@@ -12,7 +12,7 @@ import {
 } from '../../src/errors'
 import { Favourites, Favourite } from '../../src/v0/favourites'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -39,7 +39,7 @@ afterEach(() => {
 describe('v0: Favourites', () => {
   it('retrieves all favourites', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -52,17 +52,15 @@ describe('v0: Favourites', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/favourites/${legacyId}`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              count: 1,
-              results: [{}]
-            }
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/favourites/${legacyId}`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [{}]
+          }
+        ]
+      })
     }
 
     const options = {
@@ -92,7 +90,7 @@ describe('v0: Favourites', () => {
 
   it('retrieves one favourite', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -107,7 +105,7 @@ describe('v0: Favourites', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/favourites/${legacyId}/${favouriteId}`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -145,7 +143,7 @@ describe('v0: Favourites', () => {
 
   it('creates one favourite', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -158,17 +156,15 @@ describe('v0: Favourites', () => {
         ]
       })
 
-      mock
-        .onPost(`https://api.tillhub.com/api/v0/favourites/${legacyId}`)
-        .reply((config) => {
-          return [
-            200,
-            {
-              count: 1,
-              results: [mockFavourite]
-            }
-          ]
-        })
+      mock.onPost(`https://api.tillhub.com/api/v0/favourites/${legacyId}`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [mockFavourite]
+          }
+        ]
+      })
     }
 
     const options = {
@@ -196,7 +192,7 @@ describe('v0: Favourites', () => {
 
   it('updates one favourite', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -211,7 +207,7 @@ describe('v0: Favourites', () => {
 
       mock
         .onPut(`https://api.tillhub.com/api/v0/favourites/${legacyId}/${favouriteId}`)
-        .reply((config) => {
+        .reply(() => {
           return [
             200,
             {
@@ -247,7 +243,7 @@ describe('v0: Favourites', () => {
 
   it('deletes one favourite', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -262,7 +258,7 @@ describe('v0: Favourites', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/favourites/${legacyId}/${favouriteId}`)
-        .reply((config) => {
+        .reply(() => {
           return [
             200,
             {
@@ -297,7 +293,7 @@ describe('v0: Favourites', () => {
 
   it('rejects getAll() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -310,13 +306,9 @@ describe('v0: Favourites', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/favourites/${legacyId}`)
-        .reply(function (config) {
-          return [
-            205
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/favourites/${legacyId}`).reply(() => {
+        return [205]
+      })
     }
 
     const options = {
@@ -345,7 +337,7 @@ describe('v0: Favourites', () => {
 
   it('rejects get() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -360,10 +352,8 @@ describe('v0: Favourites', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/favourites/${legacyId}/${favouriteId}`)
-        .reply(function (config) {
-          return [
-            205
-          ]
+        .reply(() => {
+          return [205]
         })
     }
 
@@ -393,7 +383,7 @@ describe('v0: Favourites', () => {
 
   it('rejects create() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -408,10 +398,8 @@ describe('v0: Favourites', () => {
 
       mock
         .onPost(`https://api.tillhub.com/api/v0/favourites/${legacyId}/${favouriteId}`)
-        .reply((config) => {
-          return [
-            205
-          ]
+        .reply(() => {
+          return [205]
         })
     }
 
@@ -441,7 +429,7 @@ describe('v0: Favourites', () => {
 
   it('rejects update() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -456,10 +444,8 @@ describe('v0: Favourites', () => {
 
       mock
         .onPut(`https://api.tillhub.com/api/v0/favourites/${legacyId}/${favouriteId}`)
-        .reply((config) => {
-          return [
-            205
-          ]
+        .reply(() => {
+          return [205]
         })
     }
 
@@ -489,7 +475,7 @@ describe('v0: Favourites', () => {
 
   it('rejects delete() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -504,10 +490,8 @@ describe('v0: Favourites', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/favourites/${legacyId}/${favouriteId}`)
-        .reply((config) => {
-          return [
-            205
-          ]
+        .reply(() => {
+          return [205]
         })
     }
 

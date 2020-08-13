@@ -17,8 +17,8 @@ export interface AnalyticsOptions {
 }
 
 export interface AnalyticsResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   msg?: string
 }
 
@@ -74,7 +74,7 @@ export interface VoucherOptions {
 }
 
 export interface ExportFormatOptions {
-  format?: string,
+  format?: string
   branch_number?: number
 }
 
@@ -139,7 +139,7 @@ export interface StaffQuery {
 }
 
 export interface ReportOptions extends StaffQuery {
-  staff?: StaffID,
+  staff?: StaffID
 }
 
 export class Analytics {
@@ -239,9 +239,7 @@ export class Analytics {
       try {
         const queryString = qs.stringify(query, { addQueryPrefix: true })
         // TODO: move this to proper v1. We cut a corner here not to require consumers refactoring for the report
-        const uri = `${this.options.base}/api/v1/analytics/${
-          this.options.user
-          }/reports/products${queryString}`
+        const uri = `${this.options.base}/api/v1/analytics/${this.options.user}/reports/products${queryString}`
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new StatisticsProductFetchFailed())
@@ -258,7 +256,7 @@ export class Analytics {
   }
 
   getProductsChildren(
-    productNumber: String,
+    productNumber: string,
     query?: ProductsOptions | undefined
   ): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
@@ -301,8 +299,6 @@ export class Analytics {
 
   getProductGroupsStaffReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
-      const staff = options && options.staff
-
       try {
         const base = this.uriHelper.generateBaseUri(`/reports/staff/product_groups`)
         const uri = this.uriHelper.generateUriWithQuery(base, options)
@@ -322,7 +318,6 @@ export class Analytics {
 
   getProductGroupsReport(query?: RevenuBasicOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
-
       try {
         const base = this.uriHelper.generateBaseUri('/aggregates/product_groups')
         const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -342,8 +337,6 @@ export class Analytics {
 
   getRefundsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
-      const staff = options && options.staff
-
       try {
         const base = this.uriHelper.generateBaseUri(`/reports/staff/refunds`)
         const uri = this.uriHelper.generateUriWithQuery(base, options)
@@ -387,8 +380,6 @@ export class Analytics {
 
   getProductsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
-      const staff = options && options.staff
-
       try {
         const base = this.uriHelper.generateBaseUri(`/reports/staff/products`)
         const uri = this.uriHelper.generateUriWithQuery(base, options)
@@ -409,9 +400,7 @@ export class Analytics {
   getPaymentsReport(query?: PaymentsReportOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const base = `${this.options.base}${this.endpoint}/${
-          this.options.user
-          }/reports/staff/payments`
+        const base = `${this.options.base}${this.endpoint}/${this.options.user}/reports/staff/payments`
 
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 
@@ -431,9 +420,7 @@ export class Analytics {
   getTopPaymentsReport(query?: TopPaymentsReportOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const base = `${this.options.base}${this.endpoint}/${
-          this.options.user
-          }/reports/payments/top`
+        const base = `${this.options.base}${this.endpoint}/${this.options.user}/reports/payments/top`
 
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 
@@ -455,9 +442,7 @@ export class Analytics {
   ): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        let uri = `${this.options.base}${this.endpoint}/${
-          this.options.user
-          }/reports/transactions/simple`
+        let uri = `${this.options.base}${this.endpoint}/${this.options.user}/reports/transactions/simple`
 
         const queryString = qs.stringify(query)
 
@@ -543,9 +528,7 @@ export class Analytics {
       try {
         const queryString = qs.stringify(query, { addQueryPrefix: true })
         // TODO: move this to proper v1. We cut a corner here not to require consumers refactoring for the report
-        const uri = `${this.options.base}/api/v1/analytics/${
-          this.options.user
-          }/reports/stocks${queryString}`
+        const uri = `${this.options.base}/api/v1/analytics/${this.options.user}/reports/stocks${queryString}`
 
         const response = await this.http.getClient().get(uri)
 
@@ -625,7 +608,10 @@ export class Analytics {
 
 export class ReportsStocksFetchFailed extends BaseError {
   public name = 'ReportsStocksFetchFailed'
-  constructor(public message: string = 'Could not fetch the stocks report', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the stocks report',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ReportsStocksFetchFailed.prototype)
   }
@@ -633,7 +619,10 @@ export class ReportsStocksFetchFailed extends BaseError {
 
 export class RefundsReportFetchFailed extends BaseError {
   public name = 'RefundsReportFetchFailed'
-  constructor(public message: string = 'Could not fetch the refunds report', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the refunds report',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, RefundsReportFetchFailed.prototype)
   }
@@ -641,7 +630,10 @@ export class RefundsReportFetchFailed extends BaseError {
 
 export class VouchersReportFetchFailed extends BaseError {
   public name = 'VouchersReportFetchFailed'
-  constructor(public message: string = 'Could not fetch the vouchers report', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the vouchers report',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VouchersReportFetchFailed.prototype)
   }
@@ -649,7 +641,10 @@ export class VouchersReportFetchFailed extends BaseError {
 
 export class ProductsReportFetchFailed extends BaseError {
   public name = 'ProductsReportFetchFailed'
-  constructor(public message: string = 'Could not fetch the products report', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the products report',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsReportFetchFailed.prototype)
   }
@@ -657,7 +652,10 @@ export class ProductsReportFetchFailed extends BaseError {
 
 export class PaymentsReportFetchFailed extends BaseError {
   public name = 'PaymentsReportFetchFailed'
-  constructor(public message: string = 'Could not fetch payments report', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch payments report',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PaymentsReportFetchFailed.prototype)
   }
@@ -665,7 +663,10 @@ export class PaymentsReportFetchFailed extends BaseError {
 
 export class TopPaymentsReportFetchFailed extends BaseError {
   public name = 'TopPaymentsReportFetchFailed'
-  constructor(public message: string = 'Could not fetch top payments report', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch top payments report',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, TopPaymentsReportFetchFailed.prototype)
   }
@@ -673,7 +674,10 @@ export class TopPaymentsReportFetchFailed extends BaseError {
 
 export class RevenuesFetchFailed extends BaseError {
   public name = 'RevenuesFetchFailed'
-  constructor(public message: string = 'Could not fetch the Revenues', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the Revenues',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, RevenuesFetchFailed.prototype)
   }
@@ -681,7 +685,10 @@ export class RevenuesFetchFailed extends BaseError {
 
 export class ReportsProductGroupsFiltersFetchFailed extends BaseError {
   public name = 'ReportsProductGroupsFiltersFetchFailed'
-  constructor(public message: string = 'Could not get products group filters', properties?: any) {
+  constructor(
+    public message: string = 'Could not get products group filters',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ReportsProductGroupsFiltersFetchFailed.prototype)
   }
@@ -689,7 +696,10 @@ export class ReportsProductGroupsFiltersFetchFailed extends BaseError {
 
 export class ReportsProductGroupsFetchFailed extends BaseError {
   public name = 'ReportsProductGroupsFetchFailed'
-  constructor(public message: string = 'Could not fetch product groups', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch product groups',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ReportsProductGroupsFetchFailed.prototype)
   }
@@ -697,7 +707,10 @@ export class ReportsProductGroupsFetchFailed extends BaseError {
 
 export class ReportsCustomerOverviewFailed extends BaseError {
   public name = 'ReportsProductGroupsFetchFailed'
-  constructor(public message: string = 'Could not fetch customer overview', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch customer overview',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ReportsProductGroupsFetchFailed.prototype)
   }
@@ -705,7 +718,10 @@ export class ReportsCustomerOverviewFailed extends BaseError {
 
 export class ReportsCustomerTransactionsFailed extends BaseError {
   public name = 'ReportsCustomerTransactionsFailed'
-  constructor(public message: string = 'Could not fetch customer transactions', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch customer transactions',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ReportsCustomerTransactionsFailed.prototype)
   }
@@ -713,7 +729,10 @@ export class ReportsCustomerTransactionsFailed extends BaseError {
 
 export class ReportsCustomerCustomersFailed extends BaseError {
   public name = 'ReportsCustomerCustomersFailed'
-  constructor(public message: string = 'Could not fetch customer reports', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch customer reports',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ReportsCustomerCustomersFailed.prototype)
   }
@@ -723,7 +742,7 @@ export class SimpleSalesCartItemsReportFetchFailed extends BaseError {
   public name = 'SimpleSalesCartItemsReportFetchFailed'
   constructor(
     public message: string = 'Could not fetch the sales cart items report',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, SimpleSalesCartItemsReportFetchFailed.prototype)
@@ -734,7 +753,7 @@ export class ProductGroupsStaffReportFetchFailed extends BaseError {
   public name = 'ProductGroupsStaffReportFetchFailed'
   constructor(
     public message: string = 'Could not fetch the product groups staff report',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductGroupsStaffReportFetchFailed.prototype)
@@ -745,7 +764,7 @@ export class ProductGroupsReportFetchFailed extends BaseError {
   public name = 'ProductGroupsReportFetchFailed'
   constructor(
     public message: string = 'Could not fetch the product groups report',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductGroupsReportFetchFailed.prototype)
@@ -756,7 +775,7 @@ export class StatisticsProductChildrenFetchFailed extends BaseError {
   public name = 'StatisticsProductChildrenFetchFailed'
   constructor(
     public message: string = 'Could not fetch the Statistics Products Children',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, StatisticsProductChildrenFetchFailed.prototype)
@@ -767,7 +786,7 @@ export class StaffOverviewFetchFailed extends BaseError {
   public name = 'StaffOverviewFetchFailed'
   constructor(
     public message: string = 'Could not fetch the staff overview report',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, StaffOverviewFetchFailed.prototype)
@@ -778,7 +797,7 @@ export class StatisticsProductFetchFailed extends BaseError {
   public name = 'StatisticsProductFetchFailed'
   constructor(
     public message: string = 'Could not fetch the Statistics Products',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, StatisticsProductFetchFailed.prototype)

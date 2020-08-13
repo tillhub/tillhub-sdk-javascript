@@ -20,7 +20,7 @@ export interface HandleUsersQuery extends HandlerQuery {
 
 export interface UsersResponse {
   data: User[]
-  metadata: object
+  metadata: Record<string, unknown>
 }
 
 export interface UserResponse {
@@ -35,7 +35,13 @@ export interface User {
   id?: string
 }
 
-export type UserRoles = 'admin' | 'manager' | 'serviceaccount' | 'franchisee' | 'franchise' | 'staff'
+export type UserRoles =
+  | 'admin'
+  | 'manager'
+  | 'serviceaccount'
+  | 'franchisee'
+  | 'franchise'
+  | 'staff'
 
 export interface User {
   user: {
@@ -46,17 +52,17 @@ export interface User {
   blocked?: boolean
   deleted?: boolean
   active?: boolean
-  metadata?: object
+  metadata?: Record<string, unknown>
   role: UserRoles
   user_id?: string
   configuration_id: string
-  groups?: object | null
+  groups?: Record<string, unknown> | null
   scopes?: string[] | null
-  attributes?: object | null
+  attributes?: Record<string, unknown> | null
   parents?: string[] | null
   children?: string[] | null
   api_key?: string | null
-  key?: object | null
+  key?: Record<string, unknown> | null
   secret?: string
   username?: string
   firstname?: string
@@ -88,7 +94,8 @@ export class Users extends ThBaseHandler {
   }
 
   getAll(query?: HandleUsersQuery): Promise<UsersResponse> {
-    if (!this.configurationId) throw new TypeError('fetching users requires configuration ID to be set.')
+    if (!this.configurationId)
+      throw new TypeError('fetching users requires configuration ID to be set.')
     return new Promise(async (resolve, reject) => {
       let next
 
@@ -113,7 +120,8 @@ export class Users extends ThBaseHandler {
   }
 
   get(userId: string): Promise<UserResponse> {
-    if (!this.configurationId) throw new TypeError('fetching users requires configuration ID to be set.')
+    if (!this.configurationId)
+      throw new TypeError('fetching users requires configuration ID to be set.')
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${this.configurationId}/users/${userId}`
       try {
@@ -133,7 +141,8 @@ export class Users extends ThBaseHandler {
   }
 
   put(userId: string, user: User): Promise<UserResponse> {
-    if (!this.configurationId) throw new TypeError('fetching users requires configuration ID to be set.')
+    if (!this.configurationId)
+      throw new TypeError('fetching users requires configuration ID to be set.')
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${this.configurationId}/users/${userId}`
       try {
@@ -150,7 +159,8 @@ export class Users extends ThBaseHandler {
   }
 
   create(user: User): Promise<UserResponse> {
-    if (!this.configurationId) throw new TypeError('fetching users requires configuration ID to be set.')
+    if (!this.configurationId)
+      throw new TypeError('fetching users requires configuration ID to be set.')
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${this.configurationId}/users`
       try {
@@ -185,7 +195,8 @@ export class Users extends ThBaseHandler {
   }
 
   createToken(userId: string): Promise<UserResponse> {
-    if (!this.configurationId) throw new TypeError('fetching users requires configuration ID to be set.')
+    if (!this.configurationId)
+      throw new TypeError('fetching users requires configuration ID to be set.')
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${this.configurationId}/users/${userId}/api/key`
 
@@ -205,7 +216,10 @@ export class Users extends ThBaseHandler {
 
 export class UsersFetchFailed extends BaseError {
   public name = 'UsersFetchFailed'
-  constructor(public message: string = 'Could not fetch user', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch user',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, UsersFetchFailed.prototype)
   }
@@ -213,7 +227,10 @@ export class UsersFetchFailed extends BaseError {
 
 export class UserFetchFailed extends BaseError {
   public name = 'UserFetchFailed'
-  constructor(public message: string = 'Could not fetch user', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch user',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, UserFetchFailed.prototype)
   }
@@ -221,7 +238,10 @@ export class UserFetchFailed extends BaseError {
 
 export class UserPutFailed extends BaseError {
   public name = 'UserPutFailed'
-  constructor(public message: string = 'Could not alter user', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter user',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, UserPutFailed.prototype)
   }
@@ -229,7 +249,10 @@ export class UserPutFailed extends BaseError {
 
 export class UserCreationFailed extends BaseError {
   public name = 'UserCreationFailed'
-  constructor(public message: string = 'Could not create user', properties?: any) {
+  constructor(
+    public message: string = 'Could not create user',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, UserCreationFailed.prototype)
   }
@@ -237,7 +260,10 @@ export class UserCreationFailed extends BaseError {
 
 export class UserDeleteFailed extends BaseError {
   public name = 'UserDeleteFailed'
-  constructor(public message: string = 'Could not delete user', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete user',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, UserDeleteFailed.prototype)
   }
@@ -245,7 +271,10 @@ export class UserDeleteFailed extends BaseError {
 
 export class UserTokenCreationFailed extends BaseError {
   public name = 'UserTokenCreationFailed'
-  constructor(public message: string = 'Could not create token', properties?: any) {
+  constructor(
+    public message: string = 'Could not create token',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, UserTokenCreationFailed.prototype)
   }

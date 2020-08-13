@@ -21,7 +21,7 @@ const pricebookEntry = {
 describe('v0: PricebookEntries: can alter the pricebookEntries', () => {
   it("Tillhub's pricebookEntries are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -35,8 +35,10 @@ describe('v0: PricebookEntries: can alter the pricebookEntries', () => {
       })
 
       mock
-        .onPut(`https://api.tillhub.com/api/v1/products/${legacyId}/prices/book/entry/${pricebookEntryId}`)
-        .reply(function (config) {
+        .onPut(
+          `https://api.tillhub.com/api/v1/products/${legacyId}/prices/book/entry/${pricebookEntryId}`
+        )
+        .reply(() => {
           return [
             200,
             {
@@ -60,7 +62,7 @@ describe('v0: PricebookEntries: can alter the pricebookEntries', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -73,8 +75,10 @@ describe('v0: PricebookEntries: can alter the pricebookEntries', () => {
         ]
       })
       mock
-        .onPut(`https://api.tillhub.com/api/v1/products/${legacyId}/prices/book/entry/${pricebookEntryId}`)
-        .reply(function (config) {
+        .onPut(
+          `https://api.tillhub.com/api/v1/products/${legacyId}/prices/book/entry/${pricebookEntryId}`
+        )
+        .reply(() => {
           return [205]
         })
     }

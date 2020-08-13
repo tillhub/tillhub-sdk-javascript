@@ -18,7 +18,7 @@ export interface ProductTemplatesQuery {
 
 export interface ProductTemplatesResponse {
   data: ProductTemplate[]
-  metadata: object
+  metadata: Record<string, unknown>
 }
 
 export interface ProductTemplateResponse {
@@ -36,7 +36,7 @@ export interface ProductTemplate {
 export interface ProductTemplate {
   name: string
   option_template?: {
-    [key: string]: any;
+    [key: string]: any
   }
 }
 
@@ -67,7 +67,9 @@ export class ProductTemplates {
             queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
           }
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${queryString ? `?${queryString}` : ''}`
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
+            queryString ? `?${queryString}` : ''
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -86,7 +88,10 @@ export class ProductTemplates {
     })
   }
 
-  get(productTemplateId: string, queryOrOptions?: ProductTemplatesQuery | undefined): Promise<ProductTemplateResponse> {
+  get(
+    productTemplateId: string,
+    queryOrOptions?: ProductTemplatesQuery | undefined
+  ): Promise<ProductTemplateResponse> {
     return new Promise(async (resolve, reject) => {
       let uri
       if (queryOrOptions && queryOrOptions.uri) {
@@ -97,7 +102,9 @@ export class ProductTemplates {
           queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
         }
 
-        uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productTemplateId}${queryString ? `?${queryString}` : ''}`
+        uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productTemplateId}${
+          queryString ? `?${queryString}` : ''
+        }`
       }
 
       try {
@@ -135,7 +142,10 @@ export class ProductTemplates {
     })
   }
 
-  put(productTemplateId: string, productTemplate: ProductTemplate): Promise<ProductTemplateResponse> {
+  put(
+    productTemplateId: string,
+    productTemplate: ProductTemplate
+  ): Promise<ProductTemplateResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productTemplateId}`
       try {
@@ -186,7 +196,10 @@ export class ProductTemplates {
 
 export class ProductTemplatesFetchFailed extends BaseError {
   public name = 'ProductTemplatesFetchFailed'
-  constructor(public message: string = 'Could not fetch product templates', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch product templates',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductTemplatesFetchFailed.prototype)
   }
@@ -194,7 +207,10 @@ export class ProductTemplatesFetchFailed extends BaseError {
 
 export class ProductTemplateFetchFailed extends BaseError {
   public name = 'ProductTemplateFetchFailed'
-  constructor(public message: string = 'Could not fetch product template', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch product template',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductTemplateFetchFailed.prototype)
   }
@@ -202,7 +218,10 @@ export class ProductTemplateFetchFailed extends BaseError {
 
 export class ProductTemplatePutFailed extends BaseError {
   public name = 'ProductTemplatePutFailed'
-  constructor(public message: string = 'Could not alter product template', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter product template',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductTemplatePutFailed.prototype)
   }
@@ -210,7 +229,10 @@ export class ProductTemplatePutFailed extends BaseError {
 
 export class ProductTemplateCreationFailed extends BaseError {
   public name = 'ProductTemplateCreationFailed'
-  constructor(public message: string = 'Could create product template', properties?: any) {
+  constructor(
+    public message: string = 'Could create product template',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductTemplateCreationFailed.prototype)
   }
@@ -218,7 +240,10 @@ export class ProductTemplateCreationFailed extends BaseError {
 
 export class ProuctTemplatesCountFailed extends BaseError {
   public name = 'ProuctTemplatesCountFailed'
-  constructor(public message: string = 'Could not get count of product templates', properties?: any) {
+  constructor(
+    public message: string = 'Could not get count of product templates',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProuctTemplatesCountFailed.prototype)
   }
@@ -226,7 +251,10 @@ export class ProuctTemplatesCountFailed extends BaseError {
 
 export class ProductTemplateDeleteFailed extends BaseError {
   public name = 'ProductTemplateDeleteFailed'
-  constructor(public message: string = 'Could not delete product template', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete product template',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductTemplateDeleteFailed.prototype)
   }
@@ -234,7 +262,10 @@ export class ProductTemplateDeleteFailed extends BaseError {
 
 export class ProductTemplatesSearchFailed extends BaseError {
   public name = 'ProductTemplatesSearchFailed'
-  constructor(public message: string = 'Could not search for product template', properties?: any) {
+  constructor(
+    public message: string = 'Could not search for product template',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductTemplatesSearchFailed.prototype)
   }

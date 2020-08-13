@@ -19,8 +19,8 @@ export interface ContentTemplatesQuery {
 }
 
 export interface ContentTemplatesResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   next?: () => Promise<ContentTemplatesResponse>
 }
 
@@ -66,7 +66,10 @@ export class ContentTemplates extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: ContentTemplatesOptions, http: Client) {
-    super(http, { endpoint: ContentTemplates.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: ContentTemplates.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -91,7 +94,7 @@ export class ContentTemplates extends ThBaseHandler {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             queryString ? `?${queryString}` : ''
-            }`
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -100,7 +103,8 @@ export class ContentTemplates extends ThBaseHandler {
         }
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<ContentTemplatesResponse> => this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<ContentTemplatesResponse> =>
+            this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({
@@ -204,7 +208,10 @@ export class ContentTemplates extends ThBaseHandler {
 
 export class ContentTemplatesFetchFailed extends BaseError {
   public name = 'ContentTemplatesFetchFailed'
-  constructor(public message: string = 'Could not fetch content templates', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch content templates',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ContentTemplatesFetchFailed.prototype)
   }
@@ -212,7 +219,10 @@ export class ContentTemplatesFetchFailed extends BaseError {
 
 export class ContentTemplateFetchFailed extends BaseError {
   public name = 'ContentTemplateFetchFailed'
-  constructor(public message: string = 'Could not fetch content template', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch content template',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ContentTemplateFetchFailed.prototype)
   }
@@ -220,7 +230,10 @@ export class ContentTemplateFetchFailed extends BaseError {
 
 export class ContentTemplatePatchFailed extends BaseError {
   public name = 'ContentTemplatePatchFailed'
-  constructor(public message: string = 'Could not alter content template', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter content template',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ContentTemplatePatchFailed.prototype)
   }
@@ -228,7 +241,10 @@ export class ContentTemplatePatchFailed extends BaseError {
 
 export class ContentTemplateCreationFailed extends BaseError {
   public name = 'ContentTemplateCreationFailed'
-  constructor(public message: string = 'Could not create content template', properties?: any) {
+  constructor(
+    public message: string = 'Could not create content template',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ContentTemplateCreationFailed.prototype)
   }
@@ -236,7 +252,10 @@ export class ContentTemplateCreationFailed extends BaseError {
 
 export class ContentTemplateDeleteFailed extends BaseError {
   public name = 'ContentTemplateDeleteFailed'
-  constructor(public message: string = 'Could not delete content template', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete content template',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ContentTemplateDeleteFailed.prototype)
   }
@@ -244,7 +263,10 @@ export class ContentTemplateDeleteFailed extends BaseError {
 
 export class ContentTemplatesSearchFailed extends BaseError {
   public name = 'ContentTemplatesSearchFailed'
-  constructor(public message: string = 'Could not search content templates', properties?: any) {
+  constructor(
+    public message: string = 'Could not search content templates',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ContentTemplatesSearchFailed.prototype)
   }

@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
@@ -18,8 +17,8 @@ export interface CategoriesQuery {
 }
 
 export interface CategoriesResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   next?: () => Promise<CategoriesResponse>
 }
 
@@ -33,13 +32,13 @@ export interface CategoryResponse {
 }
 
 export interface Category {
-  metadata?: object
+  metadata?: Record<string, unknown>
   name?: string
   summary?: string
   description?: string
   comments?: string
   color?: string
-  images?: object
+  images?: Record<string, unknown>
   active?: boolean
   deleted?: boolean
 }
@@ -52,7 +51,10 @@ export class Categories extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: CategoriesOptions, http: Client) {
-    super(http, { endpoint: Categories.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Categories.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -66,7 +68,6 @@ export class Categories extends ThBaseHandler {
       let next
 
       try {
-
         const base = this.uriHelper.generateBaseUri()
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 
@@ -160,7 +161,10 @@ export class Categories extends ThBaseHandler {
 
 export class CategoriesFetchFailed extends BaseError {
   public name = 'CategoriesFetchFailed'
-  constructor(public message: string = 'Could not fetch categories', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch categories',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CategoriesFetchFailed.prototype)
   }
@@ -168,7 +172,10 @@ export class CategoriesFetchFailed extends BaseError {
 
 export class CategoryFetchFailed extends BaseError {
   public name = 'CategoryFetchFailed'
-  constructor(public message: string = 'Could not fetch category', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch category',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CategoryFetchFailed.prototype)
   }
@@ -176,7 +183,10 @@ export class CategoryFetchFailed extends BaseError {
 
 export class CategoryPutFailed extends BaseError {
   public name = 'CategoryPutFailed'
-  constructor(public message: string = 'Could not alter category', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter category',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CategoryPutFailed.prototype)
   }
@@ -184,7 +194,10 @@ export class CategoryPutFailed extends BaseError {
 
 export class CategoryCreationFailed extends BaseError {
   public name = 'CategoryCreationFailed'
-  constructor(public message: string = 'Could not create category', properties?: any) {
+  constructor(
+    public message: string = 'Could not create category',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CategoryCreationFailed.prototype)
   }
@@ -192,7 +205,10 @@ export class CategoryCreationFailed extends BaseError {
 
 export class CategoriesDeleteFailed extends BaseError {
   public name = 'CategoriesDeleteFailed'
-  constructor(public message: string = 'Could not delete category', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete category',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, CategoriesDeleteFailed.prototype)
   }

@@ -1,6 +1,4 @@
-import qs from 'qs'
 import { Client } from '../client'
-import * as errors from '../errors'
 import { UriHelper } from '../uri-helper'
 import { BaseError } from '../errors/baseError'
 import { ThBaseHandler } from '../base'
@@ -22,7 +20,7 @@ export interface WarehousesQuery {
 
 export interface WarehousesResponse {
   data: Warehouse
-  metadata: object
+  metadata: Record<string, unknown>
   msg?: string | null
 }
 
@@ -79,7 +77,10 @@ export class Warehouses extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: WarehousesOptions, http: Client) {
-    super(http, { endpoint: Warehouses.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Warehouses.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -191,7 +192,10 @@ export class Warehouses extends ThBaseHandler {
 
 class WarehousesFetchFailed extends BaseError {
   public name = 'WarehousesFetchFailed'
-  constructor(public message: string = 'Could not fetch warehouses', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch warehouses',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, WarehousesFetchFailed.prototype)
   }
@@ -199,7 +203,10 @@ class WarehousesFetchFailed extends BaseError {
 
 class WarehouseFetchOneFailed extends BaseError {
   public name = 'WarehouseFetchOneFailed'
-  constructor(public message: string = 'Could not fetch one warehouse', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch one warehouse',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, WarehouseFetchOneFailed.prototype)
   }
@@ -207,7 +214,10 @@ class WarehouseFetchOneFailed extends BaseError {
 
 class WarehouseCreateFailed extends BaseError {
   public name = 'WarehouseCreateFailed'
-  constructor(public message: string = 'Could not create the warehouse', properties?: any) {
+  constructor(
+    public message: string = 'Could not create the warehouse',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, WarehouseCreateFailed.prototype)
   }
@@ -215,7 +225,10 @@ class WarehouseCreateFailed extends BaseError {
 
 class WarehousePutFailed extends BaseError {
   public name = 'WarehousePutFailed'
-  constructor(public message: string = 'Could not alter the warehouse', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter the warehouse',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, WarehousePutFailed.prototype)
   }
@@ -223,7 +236,10 @@ class WarehousePutFailed extends BaseError {
 
 class WarehouseDeleteFailed extends BaseError {
   public name = 'WarehouseDeleteFailed'
-  constructor(public message: string = 'Could not delete the warehouse', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete the warehouse',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, WarehouseDeleteFailed.prototype)
   }

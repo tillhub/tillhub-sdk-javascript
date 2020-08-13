@@ -21,7 +21,7 @@ const reasons = {
 describe('v0: Reasons: can create a reasons', () => {
   it("Tillhub's reasons are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -34,7 +34,7 @@ describe('v0: Reasons: can create a reasons', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/reasons/${legacyId}`).reply(function (config) {
+      mock.onPost(`https://api.tillhub.com/api/v0/reasons/${legacyId}`).reply(() => {
         return [
           200,
           {
@@ -59,7 +59,7 @@ describe('v0: Reasons: can create a reasons', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -72,7 +72,7 @@ describe('v0: Reasons: can create a reasons', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/reasons/${legacyId}`).reply(function (config) {
+      mock.onPost(`https://api.tillhub.com/api/v0/reasons/${legacyId}`).reply(() => {
         return [205]
       })
     }

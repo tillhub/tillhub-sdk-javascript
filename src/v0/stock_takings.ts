@@ -22,12 +22,12 @@ export interface StockTakingsQueryOptions {
 
 export interface StockTakingsResponse {
   data: StockTaking[]
-  metadata: object
+  metadata: Record<string, unknown>
 }
 
 export interface StockTakingResponse {
   data: StockTaking
-  metadata: object
+  metadata: Record<string, unknown>
   msg?: string
 }
 
@@ -46,7 +46,10 @@ export class StockTakings extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: StockTakingsOptions, http: Client) {
-    super(http, { endpoint: StockTakings.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: StockTakings.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -61,7 +64,8 @@ export class StockTakings extends ThBaseHandler {
         const uri = this.uriHelper.generateBaseUri()
 
         const response = await this.http.getClient().post(uri, stockTaking)
-        response.status !== 200 && reject(new StockTakingsCreationFailed(undefined, { status: response.status }))
+        response.status !== 200 &&
+          reject(new StockTakingsCreationFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results[0],
@@ -87,7 +91,8 @@ export class StockTakings extends ThBaseHandler {
         }
 
         if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<StockTakingsResponse> => this.getAll({ uri: response.data.cursor.next })
+          next = (): Promise<StockTakingsResponse> =>
+            this.getAll({ uri: response.data.cursor.next })
         }
 
         return resolve({
@@ -108,7 +113,8 @@ export class StockTakings extends ThBaseHandler {
         const uri = this.uriHelper.generateUriWithQuery(baseUri, query)
 
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new StockTakingsFetchOneFailed(undefined, { status: response.status }))
+        response.status !== 200 &&
+          reject(new StockTakingsFetchOneFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results[0],
@@ -126,7 +132,8 @@ export class StockTakings extends ThBaseHandler {
         const uri = this.uriHelper.generateBaseUri(`/${stockTakingId}`)
 
         const response = await this.http.getClient().patch(uri, stockTaking)
-        response.status !== 200 && reject(new StockTakingsUpdateFailed(undefined, { status: response.status }))
+        response.status !== 200 &&
+          reject(new StockTakingsUpdateFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results[0] as StockTaking,
@@ -144,7 +151,8 @@ export class StockTakings extends ThBaseHandler {
         const uri = this.uriHelper.generateBaseUri(`/${stockTakingId}`)
 
         const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new StockTakingsDeleteFailed(undefined, { status: response.status }))
+        response.status !== 200 &&
+          reject(new StockTakingsDeleteFailed(undefined, { status: response.status }))
 
         return resolve({
           msg: response.data.msg
@@ -182,7 +190,10 @@ export class StockTakings extends ThBaseHandler {
 
 export class StockTakingsFetchFailed extends BaseError {
   public name = 'StockTakingsFetchFailed'
-  constructor(public message: string = 'Could not fetch stock takings', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch stock takings',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StockTakingsFetchFailed.prototype)
   }
@@ -190,7 +201,10 @@ export class StockTakingsFetchFailed extends BaseError {
 
 export class StockTakingsFetchOneFailed extends BaseError {
   public name = 'StockTakingsFetchOneFailed'
-  constructor(public message: string = 'Could not fetch one stock taking', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch one stock taking',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StockTakingsFetchOneFailed.prototype)
   }
@@ -198,7 +212,10 @@ export class StockTakingsFetchOneFailed extends BaseError {
 
 export class StockTakingsUpdateFailed extends BaseError {
   public name = 'StockTakingsUpdateFailed'
-  constructor(public message: string = 'Could not update stock taking', properties?: any) {
+  constructor(
+    public message: string = 'Could not update stock taking',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StockTakingsUpdateFailed.prototype)
   }
@@ -206,7 +223,10 @@ export class StockTakingsUpdateFailed extends BaseError {
 
 export class StockTakingsCreationFailed extends BaseError {
   public name = 'StockTakingsCreationFailed'
-  constructor(public message: string = 'Could not create stock taking', properties?: any) {
+  constructor(
+    public message: string = 'Could not create stock taking',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StockTakingsCreationFailed.prototype)
   }
@@ -214,7 +234,10 @@ export class StockTakingsCreationFailed extends BaseError {
 
 export class StockTakingsDeleteFailed extends BaseError {
   public name = 'StockTakingsDeleteFailed'
-  constructor(public message: string = 'Could not delete stock taking', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete stock taking',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StockTakingsDeleteFailed.prototype)
   }
@@ -222,7 +245,10 @@ export class StockTakingsDeleteFailed extends BaseError {
 
 export class StockTakingsMetaFailed extends BaseError {
   public name = 'StockTakingsMetaFailed'
-  constructor(public message: string = 'Could not get meta of stock takings', properties?: any) {
+  constructor(
+    public message: string = 'Could not get meta of stock takings',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StockTakingsMetaFailed.prototype)
   }

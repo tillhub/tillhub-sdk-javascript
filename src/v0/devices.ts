@@ -25,8 +25,8 @@ export interface DeviceBindRequest {
 }
 
 export interface DevicesResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   next?: () => Promise<DevicesResponse>
 }
 
@@ -44,8 +44,8 @@ export interface DeviceContentResponse {
   msg?: string
 }
 export interface DeviceContent {
-  idle?: object
-  welcome?: object
+  idle?: Record<string, unknown>
+  welcome?: Record<string, unknown>
 }
 
 export interface Device {
@@ -58,10 +58,10 @@ export type DeviceTypeType = 'cfd' | 'printer'
 export interface Device {
   status?: DeviceStatusType
   register?: string
-  type: DeviceTypeType,
+  type: DeviceTypeType
   device_configuration: {
     [key: string]: any
-  } | null,
+  } | null
   client_id?: string
 }
 
@@ -98,7 +98,7 @@ export class Devices extends ThBaseHandler {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             queryString ? `?${queryString}` : ''
-            }`
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -225,7 +225,10 @@ export class Devices extends ThBaseHandler {
 
 export class DevicesFetchFailed extends BaseError {
   public name = 'DevicesFetchFailed'
-  constructor(public message: string = 'Could not fetch devices', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch devices',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DevicesFetchFailed.prototype)
   }
@@ -233,7 +236,10 @@ export class DevicesFetchFailed extends BaseError {
 
 export class DeviceFetchFailed extends BaseError {
   public name = 'DeviceFetchFailed'
-  constructor(public message: string = 'Could not fetch device', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch device',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DeviceFetchFailed.prototype)
   }
@@ -241,7 +247,10 @@ export class DeviceFetchFailed extends BaseError {
 
 export class DeviceContentFetchFailed extends BaseError {
   public name = 'DeviceContentFetchFailed'
-  constructor(public message: string = 'Could not fetch device content', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch device content',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DeviceContentFetchFailed.prototype)
   }
@@ -249,7 +258,10 @@ export class DeviceContentFetchFailed extends BaseError {
 
 export class DevicePatchFailed extends BaseError {
   public name = 'DevicePatchFailed'
-  constructor(public message: string = 'Could not alter device', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter device',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DevicePatchFailed.prototype)
   }
@@ -257,7 +269,10 @@ export class DevicePatchFailed extends BaseError {
 
 export class DeviceCreationFailed extends BaseError {
   public name = 'DeviceCreationFailed'
-  constructor(public message: string = 'Could not create device', properties?: any) {
+  constructor(
+    public message: string = 'Could not create device',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DeviceCreationFailed.prototype)
   }
@@ -265,7 +280,10 @@ export class DeviceCreationFailed extends BaseError {
 
 export class DevicesCountFailed extends BaseError {
   public name = 'DevicesCountFailed'
-  constructor(public message: string = 'Could not count the devices', properties?: any) {
+  constructor(
+    public message: string = 'Could not count the devices',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DevicesCountFailed.prototype)
   }
@@ -273,14 +291,20 @@ export class DevicesCountFailed extends BaseError {
 
 export class DeviceDeleteFailed extends BaseError {
   public name = 'DeviceDeleteFailed'
-  constructor(public message: string = 'Could not delete device', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete device',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DeviceDeleteFailed.prototype)
   }
 }
 export class DeviceBindingFailed extends BaseError {
   public name = 'DeviceBindingFailed'
-  constructor(public message: string = 'Could not bind device', properties?: any) {
+  constructor(
+    public message: string = 'Could not bind device',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, DeviceBindingFailed.prototype)
   }

@@ -7,7 +7,7 @@ import { Client } from '../src/client'
 import { Auth } from '../src/v1'
 import { LocalStorageMock } from './util'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -52,7 +52,7 @@ describe('SDK: can destroy SDK', () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       const mock = new MockAdapter(axios)
 
-      mock.onPost('https://staging-api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://staging-api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -67,7 +67,7 @@ describe('SDK: can destroy SDK', () => {
     }
 
     try {
-      let { token, user } = await th.auth.loginUsername(options)
+      const { token, user } = await th.auth.loginUsername(options)
 
       localStorage.setItem('token', 'mockToken')
       localStorage.setItem('user', 'mockUser')
@@ -134,7 +134,7 @@ describe('SDK: can destroy SDK', () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       const mock = new MockAdapter(axios)
 
-      mock.onPost('https://staging-api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://staging-api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -149,7 +149,7 @@ describe('SDK: can destroy SDK', () => {
     }
 
     try {
-      let { token, user } = await th.auth.loginUsername(options)
+      const { token, user } = await th.auth.loginUsername(options)
 
       expect(typeof token === 'string').toBe(true)
       expect(token).toBe('sometoken')

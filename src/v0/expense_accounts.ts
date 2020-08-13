@@ -19,7 +19,7 @@ export interface ExpenseAccountsQuery {
 
 export interface ExpenseAccountsResponse {
   data: ExpenseAccount[]
-  metadata: object
+  metadata: Record<string, unknown>
 }
 
 export interface ExpenseAccountResponse {
@@ -52,7 +52,10 @@ export class ExpenseAccounts extends ThBaseHandler {
   public options: ExpenseAccountsOptions
 
   constructor(options: ExpenseAccountsOptions, http: Client) {
-    super(http, { endpoint: ExpenseAccounts.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: ExpenseAccounts.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -74,12 +77,16 @@ export class ExpenseAccounts extends ThBaseHandler {
             queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
           }
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${queryString ? `?${queryString}` : ''}`
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
+            queryString ? `?${queryString}` : ''
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(new errors.ExpenseAccountsFetchFailed(undefined, { status: response.status }))
+          return reject(
+            new errors.ExpenseAccountsFetchFailed(undefined, { status: response.status })
+          )
         }
 
         return resolve({

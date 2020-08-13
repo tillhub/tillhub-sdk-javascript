@@ -31,8 +31,8 @@ export interface StocksBookQuery {
 }
 
 export interface StocksResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
 }
 
 export interface Stock {
@@ -47,7 +47,7 @@ export interface Location {
   name?: string
   insert_id?: number
   type?: string
-  created_at?: Object
+  created_at?: Record<string, unknown>
   location_type?: string | null
   qty?: number
 }
@@ -186,7 +186,6 @@ export class Stocks extends ThBaseHandler {
 
   transfer(body: TransferRequestObject): Promise<StocksResponse> {
     return new Promise(async (resolve, reject) => {
-
       const uri = this.uriHelper.generateBaseUri('/transfer')
 
       try {
@@ -248,8 +247,6 @@ export class StocksBook {
 
   meta(): Promise<StocksResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
-
       try {
         const base = this.uriHelper.generateBaseUri(`/book/meta`)
         const uri = this.uriHelper.generateUriWithQuery(base)
@@ -271,7 +268,10 @@ export class StocksBook {
 
 class StocksFetchFailed extends BaseError {
   public name = 'StocksFetchFailed'
-  constructor(public message: string = 'Could not fetch the stocks', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the stocks',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StocksFetchFailed.prototype)
   }
@@ -279,7 +279,10 @@ class StocksFetchFailed extends BaseError {
 
 class StocksCreateFailed extends BaseError {
   public name = 'StocksCreateFailed'
-  constructor(public message: string = 'Could not create the stock', properties?: any) {
+  constructor(
+    public message: string = 'Could not create the stock',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StocksCreateFailed.prototype)
   }
@@ -287,7 +290,10 @@ class StocksCreateFailed extends BaseError {
 
 class StocksUpdateFailed extends BaseError {
   public name = 'StocksUpdateFailed'
-  constructor(public message: string = 'Could not update the stock', properties?: any) {
+  constructor(
+    public message: string = 'Could not update the stock',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StocksUpdateFailed.prototype)
   }
@@ -295,7 +301,10 @@ class StocksUpdateFailed extends BaseError {
 
 class StocksLocationsFetchFailed extends BaseError {
   public name = 'StocksLocationsFetchFailed'
-  constructor(public message: string = 'Could not fetch the stocks locations', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the stocks locations',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StocksLocationsFetchFailed.prototype)
   }
@@ -303,7 +312,10 @@ class StocksLocationsFetchFailed extends BaseError {
 
 class StocksLocationFetchOneFailed extends BaseError {
   public name = 'StocksLocationFetchOneFailed'
-  constructor(public message: string = 'Could not fetch location', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch location',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StocksLocationFetchOneFailed.prototype)
   }
@@ -311,7 +323,10 @@ class StocksLocationFetchOneFailed extends BaseError {
 
 class StocksBookFetchFailed extends BaseError {
   public name = 'StocksBookFetchFailed'
-  constructor(public message: string = 'Could not fetch the stocks book', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the stocks book',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StocksBookFetchFailed.prototype)
   }
@@ -319,7 +334,10 @@ class StocksBookFetchFailed extends BaseError {
 
 class StocksBookGetMetaFailed extends BaseError {
   public name = 'StocksBookGetMetaFailed'
-  constructor(public message: string = 'Could not fetch stocks book meta', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch stocks book meta',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StocksBookGetMetaFailed.prototype)
   }
@@ -327,7 +345,10 @@ class StocksBookGetMetaFailed extends BaseError {
 
 class StocksTransferFailed extends BaseError {
   public name = 'StocksTransferFailed'
-  constructor(public message: string = 'Could not transfer the stock', properties?: any) {
+  constructor(
+    public message: string = 'Could not transfer the stock',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, StocksTransferFailed.prototype)
   }

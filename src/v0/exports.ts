@@ -1,6 +1,4 @@
-import qs from 'qs'
 import { Client } from '../client'
-import * as errors from '../errors'
 import { UriHelper } from '../uri-helper'
 import { BaseError } from '../errors/baseError'
 
@@ -50,7 +48,7 @@ export interface ExportsResponse {
   data: {
     uri: string
   }[]
-  metadata: object
+  metadata: Record<string, unknown>
   msg?: string | null
 }
 
@@ -114,7 +112,10 @@ export class Exports {
 
 class ExportsDatevFetchFailed extends BaseError {
   public name = 'ExportsDatevFetchFailed'
-  constructor(public message: string = 'Could not fetch datev export', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch datev export',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ExportsDatevFetchFailed.prototype)
   }
@@ -122,7 +123,10 @@ class ExportsDatevFetchFailed extends BaseError {
 
 class ExportsGobdFetchFailed extends BaseError {
   public name = 'ExportsGobdFetchFailed'
-  constructor(public message: string = 'Could not fetch gobd export', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch gobd export',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ExportsGobdFetchFailed.prototype)
   }

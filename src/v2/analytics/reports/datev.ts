@@ -7,9 +7,7 @@ export interface DatevHandlerOptions {
   base?: string
 }
 
-export interface AnalyticsReportsDatevExportResponseItem extends ThAnalyticsExportsBaseResponse {
-
-}
+export type AnalyticsReportsDatevExportResponseItem = ThAnalyticsExportsBaseResponse
 
 export class AnalyticsReportsDatev extends ThAnalyticsBaseHandler {
   http: Client
@@ -21,13 +19,22 @@ export class AnalyticsReportsDatev extends ThAnalyticsBaseHandler {
     this.http = http
   }
 
-  static create(options: object, http: Client): AnalyticsReportsDatev {
-    return ThAnalyticsBaseHandler.generateAuthenticatedInstance(AnalyticsReportsDatev, options, http)
+  static create(options: Record<string, unknown>, http: Client): AnalyticsReportsDatev {
+    return ThAnalyticsBaseHandler.generateAuthenticatedInstance(
+      AnalyticsReportsDatev,
+      options,
+      http
+    )
   }
 
-  public async export(query?: object): Promise<AnalyticsReportsDatevExportResponseItem> {
+  public async export(
+    query?: Record<string, unknown>
+  ): Promise<AnalyticsReportsDatevExportResponseItem> {
     try {
-      const result = await this.handleExport(`${this.options.base}/api/v2/analytics/${this.options.user}/reports/datev`, query)
+      const result = await this.handleExport(
+        `${this.options.base}/api/v2/analytics/${this.options.user}/reports/datev`,
+        query
+      )
       return result
     } catch (err) {
       throw new AnalyticsReportsDatevExportFetchError(undefined, { error: err })
@@ -37,7 +44,10 @@ export class AnalyticsReportsDatev extends ThAnalyticsBaseHandler {
 
 export class AnalyticsReportsDatevExportFetchError extends BaseError {
   public name = 'AnalyticsReportsDatevExportFetchError'
-  constructor(public message: string = 'Could not fetch datev report. ', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch datev report. ',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsReportsDatevExportFetchError.prototype)
   }

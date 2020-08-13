@@ -8,16 +8,18 @@ export interface StaffPermissionsTemplatesOptions {
   base?: string
 }
 
-export interface StaffPermissionsTemplatesQueryOptions {}
+export interface StaffPermissionsTemplatesQueryOptions {
+  [key: string]: any
+}
 
 export interface StaffPermissionsTemplatesResponse {
   data: StaffPermissionsTemplate[]
-  metadata: object
+  metadata: Record<string, unknown>
 }
 
 export interface StaffPermissionsTemplateResponse {
   data: StaffPermissionsTemplate
-  metadata: object
+  metadata: Record<string, unknown>
   msg?: string
 }
 
@@ -48,9 +50,7 @@ export class StaffPermissionsTemplates extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  create(
-    template: StaffPermissionsTemplate
-  ): Promise<StaffPermissionsTemplateResponse> {
+  create(template: StaffPermissionsTemplate): Promise<StaffPermissionsTemplateResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri()
@@ -68,9 +68,7 @@ export class StaffPermissionsTemplates extends ThBaseHandler {
           metadata: { count: response.data.count }
         } as StaffPermissionsTemplateResponse)
       } catch (error) {
-        return reject(
-          new StaffPermissionsTemplatesCreationFailed(undefined, { error })
-        )
+        return reject(new StaffPermissionsTemplatesCreationFailed(undefined, { error }))
       }
     })
   }
@@ -96,9 +94,7 @@ export class StaffPermissionsTemplates extends ThBaseHandler {
           metadata: { count: response.data.count }
         } as StaffPermissionsTemplatesResponse)
       } catch (error) {
-        return reject(
-          new StaffPermissionsTemplatesFetchFailed(undefined, { error })
-        )
+        return reject(new StaffPermissionsTemplatesFetchFailed(undefined, { error }))
       }
     })
   }
@@ -125,9 +121,7 @@ export class StaffPermissionsTemplates extends ThBaseHandler {
           metadata: { count: 1 }
         } as StaffPermissionsTemplateResponse)
       } catch (error) {
-        return reject(
-          new StaffPermissionsTemplatesFetchOneFailed(undefined, { error })
-        )
+        return reject(new StaffPermissionsTemplatesFetchOneFailed(undefined, { error }))
       }
     })
   }
@@ -153,9 +147,7 @@ export class StaffPermissionsTemplates extends ThBaseHandler {
           metadata: { count: response.data.count }
         } as StaffPermissionsTemplateResponse)
       } catch (error) {
-        return reject(
-          new StaffPermissionsTemplatesUpdateFailed(undefined, { error })
-        )
+        return reject(new StaffPermissionsTemplatesUpdateFailed(undefined, { error }))
       }
     })
   }
@@ -187,7 +179,7 @@ export class StaffPermissionsTemplatesFetchFailed extends BaseError {
   public name = 'StaffPermissionsTemplatesFetchFailed'
   constructor(
     public message: string = 'Could not fetch all staff permissions templates',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
   }
@@ -197,7 +189,7 @@ export class StaffPermissionsTemplatesFetchOneFailed extends BaseError {
   public name = 'StaffPermissionsTemplatesFetchOneFailed'
   constructor(
     public message: string = 'Could not fetch one staff permissions template',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
   }
@@ -207,7 +199,7 @@ export class StaffPermissionsTemplatesUpdateFailed extends BaseError {
   public name = 'StaffPermissionsTemplatesUpdateFailed'
   constructor(
     public message: string = 'Could not update staff permissions template',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
   }
@@ -217,7 +209,7 @@ export class StaffPermissionsTemplatesCreationFailed extends BaseError {
   public name = 'StaffPermissionsTemplatesCreationFailed'
   constructor(
     public message: string = 'Could not create staff permissions template',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
   }
@@ -227,7 +219,7 @@ export class StaffPermissionsTemplatesDeleteFailed extends BaseError {
   public name = 'StaffPermissionsTemplatesDeleteFailed'
   constructor(
     public message: string = 'Could not delete staff permissions template',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
   }

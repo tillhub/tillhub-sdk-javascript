@@ -33,9 +33,8 @@ const taxesResponse = [
 
 describe('v0: Taxes: can get a tax', () => {
   it("Tillhub's products are instantiable", async () => {
-
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function () {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -48,17 +47,15 @@ describe('v0: Taxes: can get a tax', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/taxes/${legacyId}/${taxId}`)
-        .reply(function () {
-          return [
-            200,
-            {
-              count: 1,
-              results: [taxesResponse]
-            }
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/taxes/${legacyId}/${taxId}`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [taxesResponse]
+          }
+        ]
+      })
     }
 
     const th = await initThInstance()
@@ -74,7 +71,7 @@ describe('v0: Taxes: can get a tax', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -87,7 +84,7 @@ describe('v0: Taxes: can get a tax', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/taxes/${legacyId}/${taxId}`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v0/taxes/${legacyId}/${taxId}`).reply(() => {
         return [205]
       })
     }

@@ -12,7 +12,7 @@ import {
   PrintMessageDeleteFailed
 } from '../../src/errors'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -39,7 +39,7 @@ afterEach(() => {
 describe('v0: Print.Messages', () => {
   it('retrieves all messages', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -52,17 +52,15 @@ describe('v0: Print.Messages', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/print/${legacyId}/messages`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              count: 1,
-              results: [{}]
-            }
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/print/${legacyId}/messages`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [{}]
+          }
+        ]
+      })
     }
 
     const options = {
@@ -92,7 +90,7 @@ describe('v0: Print.Messages', () => {
 
   it('retrieves one message', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -107,7 +105,7 @@ describe('v0: Print.Messages', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/print/${legacyId}/messages/${messageId}`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -145,7 +143,7 @@ describe('v0: Print.Messages', () => {
 
   it('creates one message', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -158,17 +156,15 @@ describe('v0: Print.Messages', () => {
         ]
       })
 
-      mock
-        .onPost(`https://api.tillhub.com/api/v0/print/${legacyId}/messages`)
-        .reply((config) => {
-          return [
-            200,
-            {
-              count: 1,
-              results: [mockMessage]
-            }
-          ]
-        })
+      mock.onPost(`https://api.tillhub.com/api/v0/print/${legacyId}/messages`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [mockMessage]
+          }
+        ]
+      })
     }
 
     const options = {
@@ -196,7 +192,7 @@ describe('v0: Print.Messages', () => {
 
   it('updates one message', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -211,7 +207,7 @@ describe('v0: Print.Messages', () => {
 
       mock
         .onPatch(`https://api.tillhub.com/api/v0/print/${legacyId}/messages/${messageId}`)
-        .reply((config) => {
+        .reply(() => {
           return [
             200,
             {
@@ -247,7 +243,7 @@ describe('v0: Print.Messages', () => {
 
   it('deletes one message', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -262,7 +258,7 @@ describe('v0: Print.Messages', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/print/${legacyId}/messages/${messageId}`)
-        .reply((config) => {
+        .reply(() => {
           return [
             200,
             {
@@ -297,7 +293,7 @@ describe('v0: Print.Messages', () => {
 
   it('rejects getAll() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -310,13 +306,9 @@ describe('v0: Print.Messages', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/print/${legacyId}/messages`)
-        .reply(function (config) {
-          return [
-            205
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/print/${legacyId}/messages`).reply(() => {
+        return [205]
+      })
     }
 
     const options = {
@@ -345,7 +337,7 @@ describe('v0: Print.Messages', () => {
 
   it('rejects get() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -360,10 +352,8 @@ describe('v0: Print.Messages', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/print/${legacyId}/messages/${messageId}`)
-        .reply(function (config) {
-          return [
-            205
-          ]
+        .reply(() => {
+          return [205]
         })
     }
 
@@ -393,7 +383,7 @@ describe('v0: Print.Messages', () => {
 
   it('rejects create() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -408,10 +398,8 @@ describe('v0: Print.Messages', () => {
 
       mock
         .onPost(`https://api.tillhub.com/api/v0/print/${legacyId}/messages/${messageId}`)
-        .reply((config) => {
-          return [
-            205
-          ]
+        .reply(() => {
+          return [205]
         })
     }
 
@@ -441,7 +429,7 @@ describe('v0: Print.Messages', () => {
 
   it('rejects update() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -456,10 +444,8 @@ describe('v0: Print.Messages', () => {
 
       mock
         .onPatch(`https://api.tillhub.com/api/v0/print/${legacyId}/messages/${messageId}`)
-        .reply((config) => {
-          return [
-            205
-          ]
+        .reply(() => {
+          return [205]
         })
     }
 
@@ -489,7 +475,7 @@ describe('v0: Print.Messages', () => {
 
   it('rejects delete() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -504,10 +490,8 @@ describe('v0: Print.Messages', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/print/${legacyId}/messages/${messageId}`)
-        .reply((config) => {
-          return [
-            205
-          ]
+        .reply(() => {
+          return [205]
         })
     }
 

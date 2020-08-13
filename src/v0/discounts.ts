@@ -19,7 +19,7 @@ export interface DiscountsQuery {
 
 export interface DiscountsResponse {
   data: Discount[]
-  metadata: object
+  metadata: Record<string, unknown>
   next?: () => Promise<DiscountsResponse>
 }
 
@@ -39,8 +39,6 @@ export interface Discount {
   id?: string
 }
 
-export interface Constraints { }
-
 export interface Discount {
   amount?: number
   type: DiscountType
@@ -49,7 +47,7 @@ export interface Discount {
   group: DiscountGroupType
   active?: boolean
   deleted?: boolean
-  constraints?: Constraints | null
+  constraints?: Record<string, unknown> | null
 }
 
 export class Discounts extends ThBaseHandler {
@@ -59,7 +57,10 @@ export class Discounts extends ThBaseHandler {
   public options: DiscountsOptions
 
   constructor(options: DiscountsOptions, http: Client) {
-    super(http, { endpoint: Discounts.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Discounts.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -83,7 +84,7 @@ export class Discounts extends ThBaseHandler {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             queryString ? `?${queryString}` : ''
-            }`
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -159,7 +160,7 @@ export class Discounts extends ThBaseHandler {
 
   count(): Promise<DiscountsResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
 
       try {
         const response = await this.http.getClient().get(uri)

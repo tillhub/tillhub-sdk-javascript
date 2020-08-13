@@ -25,15 +25,15 @@ export interface VouchersMetaQuery {
 }
 
 export interface VouchersResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   msg?: string
   next?: () => Promise<VouchersResponse>
 }
 
 export interface VoucherLogsResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   msg?: string
   next?: () => Promise<VoucherLogsResponse>
 }
@@ -79,7 +79,7 @@ export interface Voucher {
 }
 
 export interface UsersResponse {
-  data: object[]
+  data: Record<string, unknown>[]
 }
 
 export class Vouchers extends ThBaseHandler {
@@ -90,7 +90,10 @@ export class Vouchers extends ThBaseHandler {
   public options: VouchersOptions
 
   constructor(options: VouchersOptions, http: Client) {
-    super(http, { endpoint: Vouchers.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Vouchers.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
     this.logs = new VoucherLogs(options, http)
@@ -115,7 +118,7 @@ export class Vouchers extends ThBaseHandler {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             queryString ? `?${queryString}` : ''
-            }`
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -155,9 +158,7 @@ export class Vouchers extends ThBaseHandler {
         }
 
         if (!response.data.results[0]) {
-          return reject(
-            new VouchersMetaFailed('could not get voucher metadata unexpectedly')
-          )
+          return reject(new VouchersMetaFailed('could not get voucher metadata unexpectedly'))
         }
 
         return resolve({
@@ -190,7 +191,7 @@ export class Vouchers extends ThBaseHandler {
 
   count(): Promise<VouchersResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
 
       try {
         const response = await this.http.getClient().get(uri)
@@ -282,7 +283,7 @@ export class Vouchers extends ThBaseHandler {
       if (!source.id || !target.id || source.id !== target.id) {
         return reject(
           new VoucherTypeError(
-            'source and target object require ID to be set and be equal to each other'
+            'source and target Record<string, unknown> require ID to be set and be equal to each other'
           )
         )
       }
@@ -328,7 +329,9 @@ export class Vouchers extends ThBaseHandler {
       }
 
       if (response.status !== 200) {
-        return reject(new VoucherCreationFailed(safeGet(response, 'error.message'), { status: response.status }))
+        return reject(
+          new VoucherCreationFailed(safeGet(response, 'error.message'), { status: response.status })
+        )
       }
 
       return resolve({
@@ -341,7 +344,7 @@ export class Vouchers extends ThBaseHandler {
   getAllUsers(): Promise<UsersResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        let uri = `${this.options.base}${this.endpoint}/${this.options.user}/users`
+        const uri = `${this.options.base}${this.endpoint}/${this.options.user}/users`
 
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
@@ -365,7 +368,10 @@ export class VoucherLogs extends ThBaseHandler {
   public options: VouchersOptions
 
   constructor(options: VouchersOptions, http: Client) {
-    super(http, { endpoint: VoucherLogs.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: VoucherLogs.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -389,7 +395,7 @@ export class VoucherLogs extends ThBaseHandler {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}/logs${
             queryString ? `?${queryString}` : ''
-            }`
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -414,7 +420,7 @@ export class VoucherLogs extends ThBaseHandler {
 
   meta(): Promise<VoucherLogsResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/logs/meta`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/logs/meta`
 
       try {
         const response = await this.http.getClient().get(uri)
@@ -423,9 +429,7 @@ export class VoucherLogs extends ThBaseHandler {
         }
 
         if (!response.data.results[0]) {
-          return reject(
-            new VouchersMetaFailed('could not get voucher metadata unexpectedly')
-          )
+          return reject(new VouchersMetaFailed('could not get voucher metadata unexpectedly'))
         }
 
         return resolve({
@@ -441,7 +445,7 @@ export class VoucherLogs extends ThBaseHandler {
 
 export class VoucherTypeError extends BaseError {
   public name = 'VouchersFetchFailed'
-  constructor(public message: string, properties?: any) {
+  constructor(public message: string, properties?: Record<string, unknown>) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherTypeError.prototype)
   }
@@ -449,7 +453,10 @@ export class VoucherTypeError extends BaseError {
 
 export class VouchersFetchFailed extends BaseError {
   public name = 'VouchersFetchFailed'
-  constructor(public message: string = 'Could not fetch the vouchers', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the vouchers',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VouchersFetchFailed.prototype)
   }
@@ -457,7 +464,10 @@ export class VouchersFetchFailed extends BaseError {
 
 export class VoucherLogsFetchFailed extends BaseError {
   public name = 'VoucherLogsFetchFailed'
-  constructor(public message: string = 'Could not fetch the voucher logs', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the voucher logs',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherLogsFetchFailed.prototype)
   }
@@ -465,7 +475,10 @@ export class VoucherLogsFetchFailed extends BaseError {
 
 export class VoucherFetchFailed extends BaseError {
   public name = 'VoucherFetchFailed'
-  constructor(public message: string = 'Could not fetch voucher', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch voucher',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherFetchFailed.prototype)
   }
@@ -473,7 +486,10 @@ export class VoucherFetchFailed extends BaseError {
 
 export class VoucherPutFailed extends BaseError {
   public name = 'VoucherPutFailed'
-  constructor(public message: string = 'Could not alter voucher', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter voucher',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherPutFailed.prototype)
   }
@@ -481,7 +497,10 @@ export class VoucherPutFailed extends BaseError {
 
 export class VoucherPatchFailed extends BaseError {
   public name = 'VoucherPatchFailed'
-  constructor(public message: string = 'Could not alter voucher', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter voucher',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherPatchFailed.prototype)
   }
@@ -489,7 +508,10 @@ export class VoucherPatchFailed extends BaseError {
 
 export class VoucherCreationFailed extends BaseError {
   public name = 'VoucherPostFailed'
-  constructor(public message: string = 'Could not create voucher', properties?: any) {
+  constructor(
+    public message: string = 'Could not create voucher',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherCreationFailed.prototype)
   }
@@ -497,7 +519,10 @@ export class VoucherCreationFailed extends BaseError {
 
 export class VoucherCodeConflict extends BaseError {
   public name = 'VoucherCodeConflict'
-  constructor(public message: string = 'This voucher code is already in use. Please use another code.', properties?: any) {
+  constructor(
+    public message: string = 'This voucher code is already in use. Please use another code.',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherCodeConflict.prototype)
   }
@@ -505,7 +530,10 @@ export class VoucherCodeConflict extends BaseError {
 
 export class VouchersCountFailed extends BaseError {
   public name = 'VouchersCountFailed'
-  constructor(public message: string = 'Could not count the vouchers', properties?: any) {
+  constructor(
+    public message: string = 'Could not count the vouchers',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VouchersCountFailed.prototype)
   }
@@ -513,7 +541,10 @@ export class VouchersCountFailed extends BaseError {
 
 export class VouchersMetaFailed extends BaseError {
   public name = 'VouchersMetaFailed'
-  constructor(public message: string = 'Could not get voucher metadata', properties?: any) {
+  constructor(
+    public message: string = 'Could not get voucher metadata',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VouchersMetaFailed.prototype)
   }
@@ -521,7 +552,10 @@ export class VouchersMetaFailed extends BaseError {
 
 export class VoucherLogsMetaFailed extends BaseError {
   public name = 'VoucherLogsMetaFailed'
-  constructor(public message: string = 'Could not get voucher logs metadata', properties?: any) {
+  constructor(
+    public message: string = 'Could not get voucher logs metadata',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherLogsMetaFailed.prototype)
   }
@@ -529,7 +563,10 @@ export class VoucherLogsMetaFailed extends BaseError {
 
 export class VoucherDeleteFailed extends BaseError {
   public name = 'VoucherDeleteFailed'
-  constructor(public message: string = 'Could not delete the voucher', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete the voucher',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherDeleteFailed.prototype)
   }
@@ -537,7 +574,10 @@ export class VoucherDeleteFailed extends BaseError {
 
 export class VouchersLogsFetchFailed extends BaseError {
   public name = 'VouchersLogsFetchFailed'
-  constructor(public message: string = 'Could not fetch the vouchers logs', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the vouchers logs',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VouchersLogsFetchFailed.prototype)
   }
@@ -545,7 +585,10 @@ export class VouchersLogsFetchFailed extends BaseError {
 
 export class VouchersLogsCountFailed extends BaseError {
   public name = 'VouchersLogsCountFailed'
-  constructor(public message: string = 'Could not count the vouchers logs', properties?: any) {
+  constructor(
+    public message: string = 'Could not count the vouchers logs',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VouchersLogsCountFailed.prototype)
   }
@@ -553,7 +596,10 @@ export class VouchersLogsCountFailed extends BaseError {
 
 export class VouchersUsersFailed extends BaseError {
   public name = 'VouchersUsersFailed'
-  constructor(public message: string = 'Could not get authorized voucher users', properties?: any) {
+  constructor(
+    public message: string = 'Could not get authorized voucher users',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VouchersUsersFailed.prototype)
   }

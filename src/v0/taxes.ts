@@ -19,7 +19,7 @@ export interface TaxesQuery {
 
 export interface TaxesResponse {
   data: Tax[]
-  metadata: object
+  metadata: Record<string, unknown>
 }
 
 export interface TaxResponse {
@@ -91,7 +91,9 @@ export class Taxes extends ThBaseHandler {
             queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
           }
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${queryString ? `?${queryString}` : ''}`
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
+            queryString ? `?${queryString}` : ''
+          }`
         }
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {

@@ -26,18 +26,18 @@ export interface Product {
 export interface Product {
   name?: string
   description?: string | null
-  attributes?: object | null
+  attributes?: Record<string, unknown> | null
   parent?: string | null
   tags?: any[] | null
   linked_products?: any[] | null
-  prices?: object
+  prices?: Record<string, unknown>
   barcode?: string | null
   codes?: any[] | null
   sku?: string | null
   stock_minimum?: number | null
   stock_maximum?: number | null
   stockable?: boolean | null
-  metadata?: object | null
+  metadata?: Record<string, unknown> | null
   audiences?: any[] | null
   keywords?: any[] | null
   categories?: any[] | null
@@ -48,9 +48,9 @@ export interface Product {
   produced_at?: string | null
   custom_id?: string | null
   tax?: string
-  taxes_options?: any[] | object | null
+  taxes_options?: any[] | Record<string, unknown> | null
   season?: string | null
-  seasons?: object | null
+  seasons?: Record<string, unknown> | null
   account?: string
   vat_class?: string | null
   category?: string | null
@@ -58,8 +58,8 @@ export interface Product {
   active?: boolean
   deleted?: boolean
   type?: ProductTypes
-  manufacturer?: object | null
-  supplier?: object | null
+  manufacturer?: Record<string, unknown> | null
+  supplier?: Record<string, unknown> | null
   condition?: string | null
   images?: Images | null
   summary?: string | null
@@ -71,12 +71,12 @@ export interface Product {
   reorder_point?: number | null
   reorder_qty?: number | null
   locations?: string[] | null
-  stock_info?: object | null
-  i18n?: object | null
+  stock_info?: Record<string, unknown> | null
+  i18n?: Record<string, unknown> | null
   is_service?: boolean
   delegateable?: boolean
-  delegateable_to?: object[]
-  delegated_from?: object
+  delegateable_to?: Record<string, unknown>[]
+  delegated_from?: Record<string, unknown>
 }
 
 export interface StockConfigurationLocation {
@@ -106,7 +106,7 @@ export interface ProductDeleteOptions {
 
 export interface ProductsResponse {
   data: Product[]
-  metadata: object
+  metadata: Record<string, unknown>
   msg?: string
   next?: () => Promise<ProductsResponse>
 }
@@ -124,7 +124,7 @@ export interface ProductResponse {
 export interface ErrorObject {
   id: string
   label: string
-  errorDetails: object
+  errorDetails: Record<string, unknown>
 }
 
 export interface ProductsCreateQuery {
@@ -159,7 +159,7 @@ export interface BarcodeResponse {
   barcode?: string
   id?: string
   name?: string
-  codes?: object[]
+  codes?: Record<string, unknown>[]
 }
 
 export class Products extends ThBaseHandler {
@@ -170,7 +170,10 @@ export class Products extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: ProductsOptions, http: Client) {
-    super(http, { endpoint: Products.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Products.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -240,7 +243,7 @@ export class Products extends ThBaseHandler {
         } else {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}/import${
             options && options.query ? `?${qs.stringify(options.query)}` : ''
-            }`
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -289,9 +292,7 @@ export class Products extends ThBaseHandler {
       try {
         const response = await this.http.getClient().get(uri)
         if (response.status !== 200) {
-          return reject(
-            new ProductDetailsFetchFailed(undefined, { status: response.status })
-          )
+          return reject(new ProductDetailsFetchFailed(undefined, { status: response.status }))
         }
 
         return resolve({
@@ -419,7 +420,9 @@ export class Products extends ThBaseHandler {
       try {
         let uri
         if (deleteOptions) {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productId}?${qs.stringify(deleteOptions)}`
+          uri = `${this.options.base}${this.endpoint}/${
+            this.options.user
+          }/${productId}?${qs.stringify(deleteOptions)}`
         } else {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productId}`
         }
@@ -522,7 +525,10 @@ export class Products extends ThBaseHandler {
 
 export class ProductsCreateFailed extends BaseError {
   public name = 'ProductsCreateFailed'
-  constructor(public message: string = 'Could not create the product', properties?: any) {
+  constructor(
+    public message: string = 'Could not create the product',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsCreateFailed.prototype)
   }
@@ -530,21 +536,30 @@ export class ProductsCreateFailed extends BaseError {
 
 export class ProductFetchFailed extends BaseError {
   public name = 'ProductFetchFailed'
-  constructor(public message: string = 'Could not fetch the product', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the product',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductFetchFailed.prototype)
   }
 }
 export class ProductsFetchFailed extends BaseError {
   public name = 'ProductsFetchFailed'
-  constructor(public message: string = 'Could not fetch the products', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the products',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsFetchFailed.prototype)
   }
 }
 export class ProductsImportFailed extends BaseError {
   public name = 'ProductsImportFailed'
-  constructor(public message: string = 'Could not import the products', properties?: any) {
+  constructor(
+    public message: string = 'Could not import the products',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsImportFailed.prototype)
   }
@@ -554,7 +569,7 @@ export class ProductDetailsFetchFailed extends BaseError {
   public name = 'ProductDetailsFetchFailed'
   constructor(
     public message: string = 'Could not fetch the details of the product',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductDetailsFetchFailed.prototype)
@@ -564,7 +579,7 @@ export class ProductChildrenDetailsFetchFailed extends BaseError {
   public name = 'ProductChildrenDetailsFetchFailed'
   constructor(
     public message: string = 'Could not fetch the details of the children products',
-    properties?: any
+    properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductChildrenDetailsFetchFailed.prototype)
@@ -573,7 +588,10 @@ export class ProductChildrenDetailsFetchFailed extends BaseError {
 
 export class ProductsCountFailed extends BaseError {
   public name = 'ProductsCountFailed'
-  constructor(public message: string = 'Could not count the products', properties?: any) {
+  constructor(
+    public message: string = 'Could not count the products',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsCountFailed.prototype)
   }
@@ -581,7 +599,10 @@ export class ProductsCountFailed extends BaseError {
 
 export class ProductsMetaFailed extends BaseError {
   public name = 'ProductsMetaFailed'
-  constructor(public message: string = 'Could not get products metadata', properties?: any) {
+  constructor(
+    public message: string = 'Could not get products metadata',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsMetaFailed.prototype)
   }
@@ -589,7 +610,10 @@ export class ProductsMetaFailed extends BaseError {
 
 export class ProductsUpdateFailed extends BaseError {
   public name = 'ProductsUpdateFailed'
-  constructor(public message: string = 'Could not update the product', properties?: any) {
+  constructor(
+    public message: string = 'Could not update the product',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsUpdateFailed.prototype)
   }
@@ -597,7 +621,10 @@ export class ProductsUpdateFailed extends BaseError {
 
 export class ProductsBulkEditFailed extends BaseError {
   public name = 'ProductsBulkEditFailed'
-  constructor(public message: string = 'Could not bulk edit the products', properties?: any) {
+  constructor(
+    public message: string = 'Could not bulk edit the products',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsBulkEditFailed.prototype)
   }
@@ -605,7 +632,10 @@ export class ProductsBulkEditFailed extends BaseError {
 
 export class ProductsDeleteFailed extends BaseError {
   public name = 'ProductsDeleteFailed'
-  constructor(public message: string = 'Could not delete the product', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete the product',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsDeleteFailed.prototype)
   }
@@ -613,7 +643,10 @@ export class ProductsDeleteFailed extends BaseError {
 
 export class ProductsSearchFailed extends BaseError {
   public name = 'ProductsSearchFailed'
-  constructor(public message: string = 'Could not search for the product', properties?: any) {
+  constructor(
+    public message: string = 'Could not search for the product',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsSearchFailed.prototype)
   }
@@ -621,7 +654,10 @@ export class ProductsSearchFailed extends BaseError {
 
 export class ProductsBookStockFailed extends BaseError {
   public name = 'ProductsBookStockFailed'
-  constructor(public message: string = 'Could not book stock for the product', properties?: any) {
+  constructor(
+    public message: string = 'Could not book stock for the product',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsBookStockFailed.prototype)
   }
@@ -629,7 +665,10 @@ export class ProductsBookStockFailed extends BaseError {
 
 export class BarcodeGetFailed extends BaseError {
   public name = 'BarcodeGetFailed'
-  constructor(public message: string = 'Could not check for barcode collision', properties?: any) {
+  constructor(
+    public message: string = 'Could not check for barcode collision',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, BarcodeGetFailed.prototype)
   }

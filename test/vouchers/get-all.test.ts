@@ -4,7 +4,7 @@ import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import { TillhubClient, v1 } from '../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -28,7 +28,7 @@ afterEach(() => {
 describe('v0: vouchers: can get all', () => {
   it("Tillhub's vouchers are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -41,7 +41,7 @@ describe('v0: vouchers: can get all', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v1/vouchers/${legacyId}`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v1/vouchers/${legacyId}`).reply(() => {
         return [
           200,
           {
@@ -79,7 +79,7 @@ describe('v0: vouchers: can get all', () => {
 
   it("Tillhub's vouchers queryable with limit", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -92,17 +92,15 @@ describe('v0: vouchers: can get all', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v1/vouchers/${legacyId}?limit=10`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              count: 1,
-              results: [{}]
-            }
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v1/vouchers/${legacyId}?limit=10`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [{}]
+          }
+        ]
+      })
     }
 
     const options = {
@@ -132,7 +130,7 @@ describe('v0: vouchers: can get all', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -145,7 +143,7 @@ describe('v0: vouchers: can get all', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v1/vouchers/${legacyId}`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v1/vouchers/${legacyId}`).reply(() => {
         return [500]
       })
     }

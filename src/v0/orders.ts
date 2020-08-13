@@ -23,8 +23,8 @@ export interface OrdersQuery {
 }
 
 export interface OrdersResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   msg?: string
 }
 
@@ -44,7 +44,7 @@ export interface OrdersRequest {
 
 export interface OrderItem {
   added_at?: string
-  issuer?: object
+  issuer?: Record<string, unknown>
   order_qty: number
   auto?: boolean
   suggestion?: boolean
@@ -258,7 +258,7 @@ export class Orders extends ThBaseHandler {
         } else {
           uri = `${this.options.base}${this.endpoint}/${
             this.options.user
-            }?embed=location&direction=incoming${query ? `${qs.stringify(query)}` : ''}`
+          }?embed=location&direction=incoming${query ? `${qs.stringify(query)}` : ''}`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -283,7 +283,7 @@ export class Orders extends ThBaseHandler {
         } else {
           uri = `${this.options.base}${this.endpoint}/${
             this.options.user
-            }?embed=location&direction=outgoing${query ? `${qs.stringify(query)}` : ''}`
+          }?embed=location&direction=outgoing${query ? `${qs.stringify(query)}` : ''}`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -325,9 +325,7 @@ export class Orders extends ThBaseHandler {
   getHistoricOrderItems(orderId?: string | undefined): Promise<OrdersResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const uri = `${this.options.base}${this.endpoint}/${
-          this.options.user
-          }/${orderId}/order_items`
+        const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${orderId}/order_items`
 
         const response = await this.http.getClient().get(uri)
         response.status !== 200 && reject(new errors.HistoricOrderItemsFetchFailed())
@@ -350,9 +348,7 @@ export class Orders extends ThBaseHandler {
         if (query && query.uri) {
           uri = query.uri
         } else {
-          uri = `${this.options.base}${this.endpoint}/${
-            this.options.user
-            }/order_items/${orderId}/book_stock`
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}/order_items/${orderId}/book_stock`
         }
 
         const response = await this.http.getClient().post(uri, body)

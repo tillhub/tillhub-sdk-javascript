@@ -20,7 +20,7 @@ const safe = {
 describe('v0: Safes: can get one safe', () => {
   it("Tillhub's safes are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -33,17 +33,15 @@ describe('v0: Safes: can get one safe', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/safes/${legacyId}/${safeId}`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              count: 1,
-              results: [safe]
-            }
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/safes/${legacyId}/${safeId}`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [safe]
+          }
+        ]
+      })
     }
 
     const th = await initThInstance()
@@ -59,7 +57,7 @@ describe('v0: Safes: can get one safe', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -72,11 +70,9 @@ describe('v0: Safes: can get one safe', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/safes/${legacyId}/${safeId}`)
-        .reply(function (config) {
-          return [205]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/safes/${legacyId}/${safeId}`).reply(() => {
+        return [205]
+      })
     }
 
     try {

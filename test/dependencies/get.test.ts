@@ -19,9 +19,8 @@ const queryString = qs.stringify(dependenciesQuery, { addQueryPrefix: true })
 
 describe('v0: Dependencies: can get the number of dependencies for a specific resource', () => {
   it("Tillhub's products are instantiable", async () => {
-
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function () {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -36,7 +35,7 @@ describe('v0: Dependencies: can get the number of dependencies for a specific re
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/dependencies/${legacyId}/${queryString}`)
-        .reply(function () {
+        .reply(() => {
           return [
             200,
             {
@@ -60,7 +59,7 @@ describe('v0: Dependencies: can get the number of dependencies for a specific re
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -73,7 +72,7 @@ describe('v0: Dependencies: can get the number of dependencies for a specific re
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/products/${legacyId}/${queryString}`).reply(function (config) {
+      mock.onGet(`https://api.tillhub.com/api/v0/products/${legacyId}/${queryString}`).reply(() => {
         return [205]
       })
     }

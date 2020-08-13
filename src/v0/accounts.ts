@@ -22,7 +22,7 @@ export interface AccountsQueryOrOptions {
 
 export interface AccountsResponse {
   data: Account[]
-  metadata: object
+  metadata: Record<string, unknown>
 }
 
 export interface AccountResponse {
@@ -58,7 +58,10 @@ export class Accounts extends ThBaseHandler {
   public options: AccountsOptions
 
   constructor(options: AccountsOptions, http: Client) {
-    super(http, { endpoint: Accounts.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Accounts.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -80,7 +83,9 @@ export class Accounts extends ThBaseHandler {
             queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
           }
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${queryString ? `?${queryString}` : ''}`
+          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
+            queryString ? `?${queryString}` : ''
+          }`
         }
 
         const response = await this.http.getClient().get(uri)

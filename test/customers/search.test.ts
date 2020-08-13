@@ -1,12 +1,11 @@
 import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
-import qs from 'qs'
 dotenv.config()
 import { v0 } from '../../src/tillhub-js'
 import { initThInstance } from '../util'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -29,9 +28,8 @@ afterEach(() => {
 
 describe('v0: Customers: can search for customers', () => {
   it('receives a search query of type string', async () => {
-
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -46,7 +44,7 @@ describe('v0: Customers: can search for customers', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v2/customers/${legacyId}/search?q=${query}`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -70,7 +68,7 @@ describe('v0: Customers: can search for customers', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -85,7 +83,7 @@ describe('v0: Customers: can search for customers', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v2/customers/${legacyId}/search?q=${query}`)
-        .reply(function (config) {
+        .reply(() => {
           return [205]
         })
     }

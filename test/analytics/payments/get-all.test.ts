@@ -16,13 +16,13 @@ afterEach(() => {
 describe('v0: Analytics: gets Payments report', () => {
   it('gets Payments report', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [200, { token: '', user: { id: '123', legacy_id: legacyId } }]
       })
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/payments`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -66,7 +66,7 @@ describe('v0: Analytics: gets Payments report', () => {
     const queryString = qs.stringify(paymentsQuery, { addQueryPrefix: true })
 
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -83,7 +83,7 @@ describe('v0: Analytics: gets Payments report', () => {
         .onGet(
           `https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/payments${queryString}`
         )
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -107,7 +107,7 @@ describe('v0: Analytics: gets Payments report', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -122,7 +122,7 @@ describe('v0: Analytics: gets Payments report', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/reports/payments`)
-        .reply(function (config) {
+        .reply(() => {
           return [205]
         })
     }

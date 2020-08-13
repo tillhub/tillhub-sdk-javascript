@@ -21,8 +21,8 @@ export interface BranchesQuery {
 }
 
 export interface BranchesResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   next?: () => Promise<BranchesResponse>
 }
 
@@ -75,7 +75,10 @@ export class Branches extends ThBaseHandler {
   public uriHelper: UriHelper
 
   constructor(options: BranchesOptions, http: Client) {
-    super(http, { endpoint: Branches.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Branches.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -100,7 +103,7 @@ export class Branches extends ThBaseHandler {
 
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             queryString ? `?${queryString}` : ''
-            }`
+          }`
         }
 
         const response = await this.http.getClient().get(uri)
@@ -176,7 +179,7 @@ export class Branches extends ThBaseHandler {
 
   count(): Promise<BranchesResponse> {
     return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
 
       try {
         const response = await this.http.getClient().get(uri)
@@ -251,12 +254,15 @@ export class Branches extends ThBaseHandler {
         const base = this.uriHelper.generateBaseUri('/search')
         uri = this.uriHelper.generateUriWithQuery(base, query)
       } else {
-        return reject(new BranchesSearchFailed('Could not search for branch - query type is invalid'))
+        return reject(
+          new BranchesSearchFailed('Could not search for branch - query type is invalid')
+        )
       }
 
       try {
         const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new BranchesSearchFailed(undefined, { status: response.status }))
+        response.status !== 200 &&
+          reject(new BranchesSearchFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results,
@@ -271,7 +277,10 @@ export class Branches extends ThBaseHandler {
 
 export class BranchesFetchFailed extends BaseError {
   public name = 'BranchesFetchFailed'
-  constructor(public message: string = 'Could not fetch branches', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch branches',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, BranchesFetchFailed.prototype)
   }
@@ -279,7 +288,10 @@ export class BranchesFetchFailed extends BaseError {
 
 export class BranchFetchFailed extends BaseError {
   public name = 'BrancheFetchFailed'
-  constructor(public message: string = 'Could not fetch branch', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch branch',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, BranchFetchFailed.prototype)
   }
@@ -287,7 +299,10 @@ export class BranchFetchFailed extends BaseError {
 
 export class BranchPutFailed extends BaseError {
   public name = 'BranchPutFailed'
-  constructor(public message: string = 'Could not alter branch', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter branch',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, BranchPutFailed.prototype)
   }
@@ -295,7 +310,10 @@ export class BranchPutFailed extends BaseError {
 
 export class BranchCreationFailed extends BaseError {
   public name = 'BranchCreationFailed'
-  constructor(public message: string = 'Could not create branch', properties?: any) {
+  constructor(
+    public message: string = 'Could not create branch',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, BranchCreationFailed.prototype)
   }
@@ -303,7 +321,10 @@ export class BranchCreationFailed extends BaseError {
 
 export class BranchesCountFailed extends BaseError {
   public name = 'BranchesCountFailed'
-  constructor(public message: string = 'Could not count the branches', properties?: any) {
+  constructor(
+    public message: string = 'Could not count the branches',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, BranchesCountFailed.prototype)
   }
@@ -311,7 +332,10 @@ export class BranchesCountFailed extends BaseError {
 
 export class BranchDeleteFailed extends BaseError {
   public name = 'BranchDeleteFailed'
-  constructor(public message: string = 'Could not delete branch', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete branch',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, BranchDeleteFailed.prototype)
   }
@@ -321,8 +345,8 @@ export class ExternalCustomIdGetUniqueFailed extends BaseError {
   public name = 'ExternalCustomIdGetUniqueFailed'
   constructor(
     public message: string = 'Could not get a unique external_custom_id',
-    properties?: any
-    ) {
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, ExternalCustomIdGetUniqueFailed.prototype)
   }
@@ -330,7 +354,10 @@ export class ExternalCustomIdGetUniqueFailed extends BaseError {
 
 export class BranchesSearchFailed extends BaseError {
   public name = 'BranchesSearchFailed'
-  constructor(public message: string = 'Could not search for branch', properties?: any) {
+  constructor(
+    public message: string = 'Could not search for branch',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, BranchesSearchFailed.prototype)
   }

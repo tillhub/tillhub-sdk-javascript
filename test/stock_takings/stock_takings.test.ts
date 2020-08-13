@@ -3,7 +3,8 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
 import { TillhubClient } from '../../src/tillhub-js'
-import { StockTakings,
+import {
+  StockTakings,
   StockTaking,
   StockTakingsFetchFailed,
   StockTakingsFetchOneFailed,
@@ -12,7 +13,7 @@ import { StockTakings,
   StockTakingsDeleteFailed
 } from '../../src/v0/stock_takings'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -28,7 +29,10 @@ if (process.env.SYSTEM_TEST) {
 
 const legacyId = '4564'
 const stockTakingId = '1337'
-const mockStockTaking = { name: 'mock stock taking', description: 'some description' } as StockTaking
+const mockStockTaking = {
+  name: 'mock stock taking',
+  description: 'some description'
+} as StockTaking
 const mockMsg = `Deleted stockTaking ${stockTakingId}`
 
 const mock = new MockAdapter(axios)
@@ -39,7 +43,7 @@ afterEach(() => {
 describe('v0: StockTakings', () => {
   it('retrieves all stockTakings', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -52,17 +56,15 @@ describe('v0: StockTakings', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/stock_takings/${legacyId}`)
-        .reply(function (config) {
-          return [
-            200,
-            {
-              count: 1,
-              results: [{}]
-            }
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/stock_takings/${legacyId}`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [{}]
+          }
+        ]
+      })
     }
 
     const options = {
@@ -92,7 +94,7 @@ describe('v0: StockTakings', () => {
 
   it('retrieves one stockTaking', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -107,7 +109,7 @@ describe('v0: StockTakings', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/stock_takings/${legacyId}/${stockTakingId}`)
-        .reply(function (config) {
+        .reply(() => {
           return [
             200,
             {
@@ -145,7 +147,7 @@ describe('v0: StockTakings', () => {
 
   it('creates one stockTaking', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -158,17 +160,15 @@ describe('v0: StockTakings', () => {
         ]
       })
 
-      mock
-        .onPost(`https://api.tillhub.com/api/v0/stock_takings/${legacyId}`)
-        .reply((config) => {
-          return [
-            200,
-            {
-              count: 1,
-              results: [mockStockTaking]
-            }
-          ]
-        })
+      mock.onPost(`https://api.tillhub.com/api/v0/stock_takings/${legacyId}`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [mockStockTaking]
+          }
+        ]
+      })
     }
 
     const options = {
@@ -196,7 +196,7 @@ describe('v0: StockTakings', () => {
 
   it('updates one stockTaking', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -211,7 +211,7 @@ describe('v0: StockTakings', () => {
 
       mock
         .onPatch(`https://api.tillhub.com/api/v0/stock_takings/${legacyId}/${stockTakingId}`)
-        .reply((config) => {
+        .reply(() => {
           return [
             200,
             {
@@ -247,7 +247,7 @@ describe('v0: StockTakings', () => {
 
   it('deletes one stockTaking', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -262,7 +262,7 @@ describe('v0: StockTakings', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/stock_takings/${legacyId}/${stockTakingId}`)
-        .reply((config) => {
+        .reply(() => {
           return [
             200,
             {
@@ -297,7 +297,7 @@ describe('v0: StockTakings', () => {
 
   it('rejects getAll() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -310,13 +310,9 @@ describe('v0: StockTakings', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/stock_takings/${legacyId}`)
-        .reply(function (config) {
-          return [
-            205
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/stock_takings/${legacyId}`).reply(() => {
+        return [205]
+      })
     }
 
     const options = {
@@ -345,7 +341,7 @@ describe('v0: StockTakings', () => {
 
   it('rejects get() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -360,10 +356,8 @@ describe('v0: StockTakings', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/stock_takings/${legacyId}/${stockTakingId}`)
-        .reply(function (config) {
-          return [
-            205
-          ]
+        .reply(() => {
+          return [205]
         })
     }
 
@@ -393,7 +387,7 @@ describe('v0: StockTakings', () => {
 
   it('rejects create() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -408,10 +402,8 @@ describe('v0: StockTakings', () => {
 
       mock
         .onPost(`https://api.tillhub.com/api/v0/stock_takings/${legacyId}/${stockTakingId}`)
-        .reply((config) => {
-          return [
-            205
-          ]
+        .reply(() => {
+          return [205]
         })
     }
 
@@ -441,7 +433,7 @@ describe('v0: StockTakings', () => {
 
   it('rejects update() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -456,10 +448,8 @@ describe('v0: StockTakings', () => {
 
       mock
         .onPatch(`https://api.tillhub.com/api/v0/stock_takings/${legacyId}/${stockTakingId}`)
-        .reply((config) => {
-          return [
-            205
-          ]
+        .reply(() => {
+          return [205]
         })
     }
 
@@ -489,7 +479,7 @@ describe('v0: StockTakings', () => {
 
   it('rejects delete() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -504,10 +494,8 @@ describe('v0: StockTakings', () => {
 
       mock
         .onDelete(`https://api.tillhub.com/api/v0/stock_takings/${legacyId}/${stockTakingId}`)
-        .reply((config) => {
-          return [
-            205
-          ]
+        .reply(() => {
+          return [205]
         })
     }
 

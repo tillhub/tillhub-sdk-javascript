@@ -16,7 +16,7 @@ export type Font = 'Open Sans'
 interface TemplateOptions {
   title?: string
   logo?: string
-  main_text?: String
+  main_text?: string
   addresses?: {
     self?: {
       enabled: boolean
@@ -25,7 +25,7 @@ interface TemplateOptions {
       enabled: boolean
     } | null
   } | null
-  font_color?: String
+  font_color?: string
   font?: Font
   paper_size?: PaperSize
 }
@@ -47,7 +47,7 @@ export interface TemplatesPreviewRequestObject {
 export interface TemplatesPreviewBody {
   paper_size?: string
   title?: string
-  addresses?: object
+  addresses?: Record<string, unknown>
   main_text?: string
   attention?: string
   font_color?: string
@@ -66,8 +66,8 @@ export interface TemplatesOptions {
 }
 
 export interface TemplatesResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
 }
 
 export class Templates extends ThBaseHandler {
@@ -77,7 +77,10 @@ export class Templates extends ThBaseHandler {
   public options: TemplatesOptions
 
   constructor(options: TemplatesOptions, http: Client) {
-    super(http, { endpoint: Templates.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+    super(http, {
+      endpoint: Templates.baseEndpoint,
+      base: options.base || 'https://api.tillhub.com'
+    })
     this.options = options
     this.http = http
 
@@ -126,7 +129,7 @@ export class Templates extends ThBaseHandler {
         } else {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
             options && options.query ? `?${qs.stringify(options.query)}` : ''
-            }`
+          }`
         }
 
         const response = await this.http.getClient().get(uri)

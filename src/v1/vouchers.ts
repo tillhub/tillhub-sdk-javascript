@@ -1,10 +1,7 @@
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
-import {
-  Vouchers as VoucherV0,
-  VouchersOptions
-} from '../v0/vouchers'
+import { Vouchers as VoucherV0, VouchersOptions } from '../v0/vouchers'
 
 /**
  * @extends "VoucherV0"
@@ -33,8 +30,8 @@ export interface VouchersQueryOptions {
 }
 
 export interface VouchersResponse {
-  data: object[]
-  metadata: object
+  data: Record<string, unknown>[]
+  metadata: Record<string, unknown>
   msg?: string
   next?: () => Promise<VouchersResponse>
 }
@@ -82,7 +79,10 @@ export class Vouchers extends VoucherV0 {
 
 export class VouchersFetchFailed extends BaseError {
   public name = 'VouchersFetchFailed'
-  constructor(public message: string = 'Could not fetch the vouchers', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch the vouchers',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, VouchersFetchFailed.prototype)
   }

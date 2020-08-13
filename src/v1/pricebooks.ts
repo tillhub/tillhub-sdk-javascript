@@ -19,7 +19,7 @@ export interface PricebooksQuery {
 
 export interface PricebooksResponse {
   data: Pricebook[]
-  metadata: object
+  metadata: Record<string, unknown>
   next?: () => Promise<PricebooksResponse>
 }
 
@@ -35,7 +35,7 @@ export interface PricebookResponse {
 export interface Pricebook {
   name?: string
   custom_id?: string
-  constraints?: object
+  constraints?: Record<string, unknown>
   active?: boolean
   deleted?: boolean
 }
@@ -100,7 +100,7 @@ export class Pricebooks {
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
-        reject(new PricebookFetchFailed(undefined, { status: response.status }))
+          reject(new PricebookFetchFailed(undefined, { status: response.status }))
 
         return resolve({
           data: response.data.results[0] as Pricebook,
@@ -164,7 +164,10 @@ export class Pricebooks {
 
 export class PricebooksFetchFailed extends BaseError {
   public name = 'PricebooksFetchFailed'
-  constructor(public message: string = 'Could not fetch pricebooks', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch pricebooks',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PricebooksFetchFailed.prototype)
   }
@@ -172,7 +175,10 @@ export class PricebooksFetchFailed extends BaseError {
 
 class PricebooksMetaFailed extends BaseError {
   public name = 'PricebooksMetaFailed'
-  constructor(public message: string = 'Could not fetch pricebooks meta call', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch pricebooks meta call',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PricebooksMetaFailed.prototype)
   }
@@ -180,7 +186,10 @@ class PricebooksMetaFailed extends BaseError {
 
 export class PricebookFetchFailed extends BaseError {
   public name = 'PricebookFetchFailed'
-  constructor(public message: string = 'Could not fetch pricebook', properties?: any) {
+  constructor(
+    public message: string = 'Could not fetch pricebook',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PricebookFetchFailed.prototype)
   }
@@ -188,7 +197,10 @@ export class PricebookFetchFailed extends BaseError {
 
 export class PricebookPutFailed extends BaseError {
   public name = 'PricebookPutFailed'
-  constructor(public message: string = 'Could not alter pricebook', properties?: any) {
+  constructor(
+    public message: string = 'Could not alter pricebook',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PricebookPutFailed.prototype)
   }
@@ -196,7 +208,10 @@ export class PricebookPutFailed extends BaseError {
 
 export class PricebookCreationFailed extends BaseError {
   public name = 'PricebookCreationFailed'
-  constructor(public message: string = 'Could not create pricebook', properties?: any) {
+  constructor(
+    public message: string = 'Could not create pricebook',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PricebookCreationFailed.prototype)
   }
@@ -204,7 +219,10 @@ export class PricebookCreationFailed extends BaseError {
 
 export class PricebookDeleteFailed extends BaseError {
   public name = 'PricebookDeleteFailed'
-  constructor(public message: string = 'Could not delete pricebook', properties?: any) {
+  constructor(
+    public message: string = 'Could not delete pricebook',
+    properties?: Record<string, unknown>
+  ) {
     super(message, properties)
     Object.setPrototypeOf(this, PricebookDeleteFailed.prototype)
   }

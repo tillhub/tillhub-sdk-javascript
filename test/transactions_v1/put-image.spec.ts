@@ -14,10 +14,14 @@ afterEach(() => {
 })
 
 const mockImage = {
-  '1x': 'https://storage.googleapis.com/tillhub-api-private-images-staging/FE9900870C4D328/transactions/bd3d1812-db1c-45fe-3cde-05dafa985a6c_1x.png',
-  '2x': 'https://storage.googleapis.com/tillhub-api-private-images-staging/FE9900870C4D328/transactions/bd3d1812-db1c-45fe-3cde-05dafa985a6c_2x.png',
-  '3x': 'https://storage.googleapis.com/tillhub-api-private-images-staging/FE9900870C4D328/transactions/bd3d1812-db1c-45fe-3cde-05dafa985a6c_3x.png',
-  'original': 'https://storage.googleapis.com/tillhub-api-private-images-staging/FE9900870C4D328/transactions/bd3d1812-db1c-45fe-3cde-05dafa985a6c_original.png'
+  '1x':
+    'https://storage.googleapis.com/tillhub-api-private-images-staging/FE9900870C4D328/transactions/bd3d1812-db1c-45fe-3cde-05dafa985a6c_1x.png',
+  '2x':
+    'https://storage.googleapis.com/tillhub-api-private-images-staging/FE9900870C4D328/transactions/bd3d1812-db1c-45fe-3cde-05dafa985a6c_2x.png',
+  '3x':
+    'https://storage.googleapis.com/tillhub-api-private-images-staging/FE9900870C4D328/transactions/bd3d1812-db1c-45fe-3cde-05dafa985a6c_3x.png',
+  original:
+    'https://storage.googleapis.com/tillhub-api-private-images-staging/FE9900870C4D328/transactions/bd3d1812-db1c-45fe-3cde-05dafa985a6c_original.png'
 }
 
 const updateObject = {
@@ -28,7 +32,7 @@ const updateObject = {
 describe('v0: Transactions: can alter the image', () => {
   it("Tillhub's transactions are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -42,8 +46,10 @@ describe('v0: Transactions: can alter the image', () => {
       })
 
       mock
-        .onPut(`https://api.tillhub.com/api/v1/transactions/${legacyId}/${mockTransactionId}/images`)
-        .reply(function (config) {
+        .onPut(
+          `https://api.tillhub.com/api/v1/transactions/${legacyId}/${mockTransactionId}/images`
+        )
+        .reply(() => {
           return [
             200,
             {
@@ -66,7 +72,7 @@ describe('v0: Transactions: can alter the image', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -79,8 +85,10 @@ describe('v0: Transactions: can alter the image', () => {
         ]
       })
       mock
-        .onPut(`https://api.tillhub.com/api/v1/transactions/${legacyId}/${mockTransactionId}/images`)
-        .reply(function (config) {
+        .onPut(
+          `https://api.tillhub.com/api/v1/transactions/${legacyId}/${mockTransactionId}/images`
+        )
+        .reply(() => {
           return [205]
         })
     }

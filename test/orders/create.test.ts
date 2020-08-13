@@ -2,9 +2,10 @@ import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 dotenv.config()
-import { TillhubClient, v0 } from '../../src/tillhub-js'
+import { initThInstance } from '../util'
+import { v0 } from '../../src/tillhub-js'
 
-let user = {
+const user = {
   username: 'test@example.com',
   password: '12345678',
   clientAccount: 'someuuid',
@@ -18,8 +19,6 @@ if (process.env.SYSTEM_TEST) {
   user.apiKey = process.env.SYSTEM_TEST_API_KEY || user.apiKey
 }
 
-let th: any
-let options
 const mock = new MockAdapter(axios)
 const legacyId = '4564'
 const orderId = 'asdf5566'
@@ -34,7 +33,7 @@ const createObject = {
 
 beforeEach(async () => {
   if (process.env.SYSTEM_TEST !== 'true') {
-    mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function (config) {
+    mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
       return [
         200,
         {
@@ -47,34 +46,16 @@ beforeEach(async () => {
       ]
     })
 
-    mock
-      .onPost(`https://api.tillhub.com/api/v0/orders/${legacyId}/${orderId}`)
-      .reply(function (config) {
-        return [
-          200,
-          {
-            count: 1,
-            results: [{}]
-          }
-        ]
-      })
+    mock.onPost(`https://api.tillhub.com/api/v0/orders/${legacyId}/${orderId}`).reply(() => {
+      return [
+        200,
+        {
+          count: 1,
+          results: [{}]
+        }
+      ]
+    })
   }
-
-  options = {
-    credentials: {
-      username: user.username,
-      password: user.password
-    },
-    base: process.env.TILLHUB_BASE
-  }
-
-  th = new TillhubClient()
-
-  th.init(options)
-  await th.auth.loginUsername({
-    username: user.username,
-    password: user.password
-  })
 })
 
 afterEach(() => {
@@ -83,7 +64,8 @@ afterEach(() => {
 
 describe('v0: Orders: can create Orders', () => {
   it("Tillhub's orders are instantiable", async () => {
-    const orders: any = th.orders()
+    const th = await initThInstance()
+    const orders = th.orders()
     expect(orders).toBeInstanceOf(v0.Orders)
     const { data } = await orders.create(createObject)
     expect(Array.isArray(data)).toBe(true)
@@ -91,6 +73,7 @@ describe('v0: Orders: can create Orders', () => {
 
   it('rejects on status codes that are not 200', async () => {
     try {
+      const th = await initThInstance()
       await th.orders().create(createObject)
     } catch (err) {
       expect(err.name).toBe('OrdersCreateFailed')
