@@ -64,33 +64,32 @@ var AnalyticsReportsTransactionsOverview = /** @class */ (function (_super) {
         return base_1.ThAnalyticsBaseHandler.generateAuthenticatedInstance(AnalyticsReportsTransactionsOverview, options, http);
     };
     AnalyticsReportsTransactionsOverview.prototype.getAll = function (query) {
-        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var nextFn, _c, d, next_1, data, summary, count, totalCount, err_1;
+            var nextFn, _a, d, next_1, data, summary, count, totalCount, err_1;
             var _this = this;
-            return __generator(this, function (_d) {
-                switch (_d.label) {
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
-                        _d.trys.push([0, 2, , 3]);
+                        _b.trys.push([0, 2, , 3]);
                         nextFn = void 0;
                         return [4 /*yield*/, this.handleGet(this.options.base + "/api/v2/analytics/" + this.options.user + "/reports/transactions/overview", query)];
                     case 1:
-                        _c = _d.sent(), d = _c.results, next_1 = _c.next;
-                        if (!d || !Array.isArray(d) || !d.length) {
+                        _a = _b.sent(), d = _a.results, next_1 = _a.next;
+                        if (!d) {
                             throw new TypeError('Unexpectedly did not return data.');
                         }
-                        data = (d.find(function (item) {
+                        data = d.find(function (item) {
                             return item.metric.job === 'reports_transactions_v2_overview_data';
-                        }) || {}).values;
-                        summary = (d.find(function (item) {
+                        }).values;
+                        summary = d.find(function (item) {
                             return item.metric.job === 'reports_transactions_v2_overview_summary';
-                        }) || {}).values;
-                        count = (_b = (_a = (d.find(function (item) {
+                        }).values;
+                        count = d.find(function (item) {
                             return item.metric.job === 'reports_transactions_v2_overview_filtered_meta';
-                        }) || { values: [] })) === null || _a === void 0 ? void 0 : _a.values[0]) === null || _b === void 0 ? void 0 : _b.count;
-                        totalCount = (d.find(function (item) {
+                        }).values[0];
+                        totalCount = d.find(function (item) {
                             return item.metric.job === 'reports_transactions_v2_overview_meta';
-                        }) || { values: [] }).values[0];
+                        }).values[0];
                         if (next_1) {
                             nextFn = function () {
                                 return _this.getAll({ uri: next_1 });
@@ -100,15 +99,13 @@ var AnalyticsReportsTransactionsOverview = /** @class */ (function (_super) {
                                 data: data,
                                 summary: summary,
                                 metaData: {
-                                    // eslint-disable-next-line
-                                    // @ts-ignore
                                     count: count.count,
                                     total_count: totalCount.count
                                 },
                                 next: nextFn
                             }];
                     case 2:
-                        err_1 = _d.sent();
+                        err_1 = _b.sent();
                         throw new AnalyticsReportsTransactionsOverviewFetchError(undefined, { error: err_1 });
                     case 3: return [2 /*return*/];
                 }

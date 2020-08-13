@@ -1,3 +1,10 @@
+## [3.208.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.208.0...v3.208.1) (2020-08-13)
+
+
+### Bug Fixes
+
+* **transactions:** revert type handling - back to ts-ignore hack ([caeb1b5](https://github.com/tillhub/tillhub-sdk-javascript/commit/caeb1b5c62e0655b7962be937da4197bcbee620f))
+
 # [3.208.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.207.0...v3.208.0) (2020-08-13)
 
 
