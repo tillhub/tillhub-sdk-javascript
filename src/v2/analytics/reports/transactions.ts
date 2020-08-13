@@ -61,36 +61,33 @@ export class AnalyticsReportsTransactionsOverview extends ThAnalyticsBaseHandler
         `${this.options.base}/api/v2/analytics/${this.options.user}/reports/transactions/overview`,
         query
       )
-      if (!d || !Array.isArray(d) || !d.length) {
+      if (!d) {
         throw new TypeError('Unexpectedly did not return data.')
       }
 
-      const data = (
-        d.find(
-          (item: ThAnalyticsBaseResultItem) =>
-            item.metric.job === 'reports_transactions_v2_overview_data'
-        ) || {}
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const data = d.find(
+        (item: ThAnalyticsBaseResultItem) =>
+          item.metric.job === 'reports_transactions_v2_overview_data'
       ).values
-
-      const summary = (
-        d.find(
-          (item: ThAnalyticsBaseResultItem) =>
-            item.metric.job === 'reports_transactions_v2_overview_summary'
-        ) || {}
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const summary = d.find(
+        (item: ThAnalyticsBaseResultItem) =>
+          item.metric.job === 'reports_transactions_v2_overview_summary'
       ).values
-
-      const count = (
-        d.find(
-          (item: ThAnalyticsBaseResultItem) =>
-            item.metric.job === 'reports_transactions_v2_overview_filtered_meta'
-        ) || { values: [] }
-      )?.values[0]?.count
-
-      const totalCount = (
-        d.find(
-          (item: ThAnalyticsBaseResultItem) =>
-            item.metric.job === 'reports_transactions_v2_overview_meta'
-        ) || { values: [] }
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const count = d.find(
+        (item: ThAnalyticsBaseResultItem) =>
+          item.metric.job === 'reports_transactions_v2_overview_filtered_meta'
+      ).values[0]
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const totalCount = d.find(
+        (item: ThAnalyticsBaseResultItem) =>
+          item.metric.job === 'reports_transactions_v2_overview_meta'
       ).values[0]
 
       if (next) {
@@ -102,8 +99,6 @@ export class AnalyticsReportsTransactionsOverview extends ThAnalyticsBaseHandler
         data: data,
         summary: summary,
         metaData: {
-          // eslint-disable-next-line
-          // @ts-ignore
           count: count.count,
           total_count: totalCount.count
         },
