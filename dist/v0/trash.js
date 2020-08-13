@@ -13,10 +13,11 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -48,6 +49,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.RecoverFailed = exports.TrashFetchFailed = exports.Trash = void 0;
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
@@ -111,8 +113,7 @@ var Trash = /** @class */ (function (_super) {
                         return [4 /*yield*/, this.http.getClient().put(uri)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 &&
-                            reject(new RecoverFailed(undefined, { status: response.status }));
+                        response.status !== 200 && reject(new RecoverFailed(undefined, { status: response.status }));
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
@@ -132,7 +133,7 @@ exports.Trash = Trash;
 var TrashFetchFailed = /** @class */ (function (_super) {
     __extends(TrashFetchFailed, _super);
     function TrashFetchFailed(message, properties) {
-        if (message === void 0) { message = 'Could not fetch the trashed objects'; }
+        if (message === void 0) { message = 'Could not fetch the trashed Record<string, unknown>s'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'TrashFetchFailed';
@@ -145,7 +146,7 @@ exports.TrashFetchFailed = TrashFetchFailed;
 var RecoverFailed = /** @class */ (function (_super) {
     __extends(RecoverFailed, _super);
     function RecoverFailed(message, properties) {
-        if (message === void 0) { message = 'Could not recover the object'; }
+        if (message === void 0) { message = 'Could not recover the Record<string, unknown>'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'RecoverFailed';

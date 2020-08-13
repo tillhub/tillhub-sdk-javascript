@@ -15,8 +15,8 @@ export interface PromotionsQuery {
     };
 }
 export interface PromotionsResponse {
-    data: object[];
-    metadata: object;
+    data: Record<string, unknown>[];
+    metadata: Record<string, unknown>;
     next?: () => Promise<PromotionsResponse>;
 }
 export interface PromotionResponse {
@@ -31,6 +31,7 @@ export interface Promotion {
     id?: string;
 }
 export interface Promotion {
+    [key: string]: any;
 }
 export declare class Promotions extends ThBaseHandler {
     static baseEndpoint: string;
@@ -48,25 +49,25 @@ export declare class Promotions extends ThBaseHandler {
 export declare class PromotionsFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class PromotionFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class PromotionPutFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class PromotionCreationFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class PromotionDeleteFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

@@ -14,7 +14,7 @@ export interface PaymentOptionsQuery {
 }
 export interface PaymentOptionsResponse {
     data: PaymentOption[];
-    metadata: object;
+    metadata: Record<string, unknown>;
 }
 export interface PaymentOptionResponse {
     data: PaymentOption;

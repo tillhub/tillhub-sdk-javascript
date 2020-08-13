@@ -13,10 +13,11 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -48,6 +49,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.StocksBook = exports.Stocks = void 0;
 var baseError_1 = require("../errors/baseError");
 var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
@@ -277,18 +279,15 @@ var StocksBook = /** @class */ (function () {
     StocksBook.prototype.meta = function () {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var uri, base, uri_1, response, error_4;
+            var base, uri, response, error_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/meta";
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
+                        _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri("/book/meta");
-                        uri_1 = this.uriHelper.generateUriWithQuery(base);
-                        return [4 /*yield*/, this.http.getClient().get(uri_1)];
-                    case 2:
+                        uri = this.uriHelper.generateUriWithQuery(base);
+                        return [4 /*yield*/, this.http.getClient().get(uri)];
+                    case 1:
                         response = _a.sent();
                         if (response.status !== 200)
                             reject(new StocksBookGetMetaFailed());
@@ -296,10 +295,10 @@ var StocksBook = /** @class */ (function () {
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count }
                             })];
-                    case 3:
+                    case 2:
                         error_4 = _a.sent();
                         return [2 /*return*/, reject(new StocksBookGetMetaFailed(undefined, { error: error_4 }))];
-                    case 4: return [2 /*return*/];
+                    case 3: return [2 /*return*/];
                 }
             });
         }); });

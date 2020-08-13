@@ -26,8 +26,8 @@ export interface StocksBookQuery {
     q?: string;
 }
 export interface StocksResponse {
-    data: object[];
-    metadata: object;
+    data: Record<string, unknown>[];
+    metadata: Record<string, unknown>;
 }
 export interface Stock {
     product: string;
@@ -40,7 +40,7 @@ export interface Location {
     name?: string;
     insert_id?: number;
     type?: string;
-    created_at?: Object;
+    created_at?: Record<string, unknown>;
     location_type?: string | null;
     qty?: number;
 }

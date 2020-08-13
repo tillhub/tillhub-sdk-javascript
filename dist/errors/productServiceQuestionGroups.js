@@ -13,6 +13,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ProductServiceQuestionGroupsBookFailed = exports.ProductServiceQuestionGroupsPutFailed = exports.ProductServiceQuestionGroupsCreationFailed = exports.ProductServiceQuestionGroupsGetMetaFailed = exports.ProductServiceQuestionGroupsFetchOneFailed = exports.ProductServiceQuestionGroupsFetchAllFailed = void 0;
 var baseError_1 = require("./baseError");
 var ProductServiceQuestionGroupsFetchAllFailed = /** @class */ (function (_super) {
     __extends(ProductServiceQuestionGroupsFetchAllFailed, _super);

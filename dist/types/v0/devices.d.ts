@@ -20,8 +20,8 @@ export interface DeviceBindRequest {
     client_account: string;
 }
 export interface DevicesResponse {
-    data: object[];
-    metadata: object;
+    data: Record<string, unknown>[];
+    metadata: Record<string, unknown>;
     next?: () => Promise<DevicesResponse>;
 }
 export interface DeviceResponse {
@@ -37,8 +37,8 @@ export interface DeviceContentResponse {
     msg?: string;
 }
 export interface DeviceContent {
-    idle?: object;
-    welcome?: object;
+    idle?: Record<string, unknown>;
+    welcome?: Record<string, unknown>;
 }
 export interface Device {
     id?: string;
@@ -72,40 +72,40 @@ export declare class Devices extends ThBaseHandler {
 export declare class DevicesFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class DeviceFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class DeviceContentFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class DevicePatchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class DeviceCreationFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class DevicesCountFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class DeviceDeleteFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class DeviceBindingFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

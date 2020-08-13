@@ -19,11 +19,11 @@ export interface StockTakingsQueryOptions {
 }
 export interface StockTakingsResponse {
     data: StockTaking[];
-    metadata: object;
+    metadata: Record<string, unknown>;
 }
 export interface StockTakingResponse {
     data: StockTaking;
-    metadata: object;
+    metadata: Record<string, unknown>;
     msg?: string;
 }
 export interface StockTaking {
@@ -49,30 +49,30 @@ export declare class StockTakings extends ThBaseHandler {
 export declare class StockTakingsFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StockTakingsFetchOneFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StockTakingsUpdateFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StockTakingsCreationFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StockTakingsDeleteFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StockTakingsMetaFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

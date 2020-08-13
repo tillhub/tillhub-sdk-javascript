@@ -26,7 +26,7 @@ export interface CountingProtocolsQuery {
 }
 export interface AnalyticsReportsCountingProtocolsResponse {
     data: CountingProtocol[];
-    summary: object[];
+    summary: Record<string, unknown>[];
     metaData: {
         count: number;
         total_count: number;
@@ -49,7 +49,7 @@ export interface CountingProtocol {
     context?: string;
     comments?: string;
     location?: string;
-    cash_units?: object[];
+    cash_units?: Record<string, unknown>[];
     timezone?: string;
     discrepancy?: boolean;
     discrepancy_total?: string;
@@ -66,23 +66,22 @@ export interface CountingProtocol {
     total_counted?: string;
     total_calculated?: string;
 }
-export interface AnalyticsReportsCountingProtocolsExportResponseItem extends ThAnalyticsExportsBaseResponse {
-}
+export declare type AnalyticsReportsCountingProtocolsExportResponseItem = ThAnalyticsExportsBaseResponse;
 export declare class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
     http: Client;
     options: CountingProtocolsHandlerOptions;
     constructor(options: CountingProtocolsHandlerOptions, http: Client);
-    static create(options: object, http: Client): AnalyticsReportsCountingProtocols;
+    static create(options: Record<string, unknown>, http: Client): AnalyticsReportsCountingProtocols;
     getAll(query?: CountingProtocolsQuery): Promise<AnalyticsReportsCountingProtocolsResponse>;
-    export(query?: object): Promise<AnalyticsReportsCountingProtocolsExportResponseItem>;
+    export(query?: Record<string, unknown>): Promise<AnalyticsReportsCountingProtocolsExportResponseItem>;
 }
 export declare class AnalyticsReportsCountingProtocolsFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class AnalyticsReportsCountingProtocolsExportFetchError extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

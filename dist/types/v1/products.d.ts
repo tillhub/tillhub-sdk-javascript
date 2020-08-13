@@ -15,18 +15,18 @@ export interface Product {
 export interface Product {
     name?: string;
     description?: string | null;
-    attributes?: object | null;
+    attributes?: Record<string, unknown> | null;
     parent?: string | null;
     tags?: any[] | null;
     linked_products?: any[] | null;
-    prices?: object;
+    prices?: Record<string, unknown>;
     barcode?: string | null;
     codes?: any[] | null;
     sku?: string | null;
     stock_minimum?: number | null;
     stock_maximum?: number | null;
     stockable?: boolean | null;
-    metadata?: object | null;
+    metadata?: Record<string, unknown> | null;
     audiences?: any[] | null;
     keywords?: any[] | null;
     categories?: any[] | null;
@@ -37,9 +37,9 @@ export interface Product {
     produced_at?: string | null;
     custom_id?: string | null;
     tax?: string;
-    taxes_options?: any[] | object | null;
+    taxes_options?: any[] | Record<string, unknown> | null;
     season?: string | null;
-    seasons?: object | null;
+    seasons?: Record<string, unknown> | null;
     account?: string;
     vat_class?: string | null;
     category?: string | null;
@@ -47,8 +47,8 @@ export interface Product {
     active?: boolean;
     deleted?: boolean;
     type?: ProductTypes;
-    manufacturer?: object | null;
-    supplier?: object | null;
+    manufacturer?: Record<string, unknown> | null;
+    supplier?: Record<string, unknown> | null;
     condition?: string | null;
     images?: Images | null;
     summary?: string | null;
@@ -60,12 +60,12 @@ export interface Product {
     reorder_point?: number | null;
     reorder_qty?: number | null;
     locations?: string[] | null;
-    stock_info?: object | null;
-    i18n?: object | null;
+    stock_info?: Record<string, unknown> | null;
+    i18n?: Record<string, unknown> | null;
     is_service?: boolean;
     delegateable?: boolean;
-    delegateable_to?: object[];
-    delegated_from?: object;
+    delegateable_to?: Record<string, unknown>[];
+    delegated_from?: Record<string, unknown>;
 }
 export interface StockConfigurationLocation {
     location?: string | null;
@@ -91,7 +91,7 @@ export interface ProductDeleteOptions {
 }
 export interface ProductsResponse {
     data: Product[];
-    metadata: object;
+    metadata: Record<string, unknown>;
     msg?: string;
     next?: () => Promise<ProductsResponse>;
 }
@@ -107,7 +107,7 @@ export interface ProductResponse {
 export interface ErrorObject {
     id: string;
     label: string;
-    errorDetails: object;
+    errorDetails: Record<string, unknown>;
 }
 export interface ProductsCreateQuery {
     product_id_template?: string;
@@ -136,7 +136,7 @@ export interface BarcodeResponse {
     barcode?: string;
     id?: string;
     name?: string;
-    codes?: object[];
+    codes?: Record<string, unknown>[];
 }
 export declare class Products extends ThBaseHandler {
     static baseEndpoint: string;
@@ -165,71 +165,71 @@ export declare class Products extends ThBaseHandler {
 export declare class ProductsCreateFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ProductFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ProductsFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ProductsImportFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ProductDetailsFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ProductChildrenDetailsFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ProductsCountFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ProductsMetaFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ProductsUpdateFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ProductsBulkEditFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ProductsDeleteFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ProductsSearchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ProductsBookStockFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class BarcodeGetFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export {};

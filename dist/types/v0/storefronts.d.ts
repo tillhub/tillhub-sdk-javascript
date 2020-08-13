@@ -15,7 +15,7 @@ export interface StorefrontsQuery {
 }
 export interface StorefrontsResponse {
     data: Storefront[];
-    metadata: object;
+    metadata: Record<string, unknown>;
 }
 export interface StorefrontResponse {
     data: Storefront;
@@ -41,8 +41,8 @@ export interface Storefront {
     link?: string;
     external_reference_id?: string;
     external_api_base?: string;
-    auth?: object;
-    metadata?: object;
+    auth?: Record<string, unknown>;
+    metadata?: Record<string, unknown>;
     profile?: StorefrontProfile;
 }
 export declare class Storefronts extends ThBaseHandler {
@@ -60,25 +60,25 @@ export declare class Storefronts extends ThBaseHandler {
 export declare class StorefrontsFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StorefrontsFetchOneFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StorefrontsPutFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StorefrontsCreationFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StorefrontsDeleteFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

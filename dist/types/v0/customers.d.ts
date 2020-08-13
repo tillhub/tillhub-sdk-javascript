@@ -22,7 +22,7 @@ export interface CustomersMetaQuery {
 }
 export interface CustomersResponse {
     data: Customer[];
-    metadata: object;
+    metadata: Record<string, unknown>;
     next?: () => Promise<CustomersResponse>;
 }
 export interface CustomerResponse {
@@ -71,7 +71,7 @@ export interface CustomerContacts {
 export interface ErrorObject {
     id: string;
     label: string;
-    errorDetails: object;
+    errorDetails: Record<string, unknown>;
 }
 export declare type CustomerAddressType = 'delivery' | 'billing';
 export interface CustomerAddress {
@@ -120,7 +120,7 @@ export interface Customer {
     image?: CustomerImage | null;
     active?: boolean;
     contacts?: CustomerContacts | null;
-    metadata?: object | null;
+    metadata?: Record<string, unknown> | null;
     addresses?: CustomerAddress[] | null;
     comment?: string | null;
     discounts?: Array<CustomerInternalDiscount | CustomerDiscount> | null;
@@ -147,45 +147,45 @@ export declare class Customers extends ThBaseHandler {
 export declare class CustomersFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class CustomerFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class CustomerPutFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class CustomerNoteCreationFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class CustomerCreationFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class CustomersMetaFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class CustomersCountFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class CustomersSearchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class CustomerDeleteFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

@@ -7,14 +7,15 @@ export interface StaffPermissionsTemplatesOptions {
     base?: string;
 }
 export interface StaffPermissionsTemplatesQueryOptions {
+    [key: string]: any;
 }
 export interface StaffPermissionsTemplatesResponse {
     data: StaffPermissionsTemplate[];
-    metadata: object;
+    metadata: Record<string, unknown>;
 }
 export interface StaffPermissionsTemplateResponse {
     data: StaffPermissionsTemplate;
-    metadata: object;
+    metadata: Record<string, unknown>;
     msg?: string;
 }
 export interface StaffPermissionsTemplate {
@@ -39,25 +40,25 @@ export declare class StaffPermissionsTemplates extends ThBaseHandler {
 export declare class StaffPermissionsTemplatesFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StaffPermissionsTemplatesFetchOneFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StaffPermissionsTemplatesUpdateFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StaffPermissionsTemplatesCreationFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StaffPermissionsTemplatesDeleteFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

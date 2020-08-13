@@ -23,12 +23,12 @@ export interface Favourite {
 }
 export interface FavouritesResponse {
     data: Favourite[];
-    metadata: object;
+    metadata: Record<string, unknown>;
     msg?: string;
 }
 export interface FavouriteResponse {
     data: Favourite;
-    metadata: object;
+    metadata: Record<string, unknown>;
     msg?: string;
 }
 export interface FavouritesOptions {
@@ -42,7 +42,7 @@ export declare class Favourites extends ThBaseHandler {
     options: FavouritesOptions;
     uriHelper: UriHelper;
     constructor(options: FavouritesOptions, http: Client);
-    getAll(query?: Object): Promise<FavouritesResponse>;
+    getAll(query?: Record<string, unknown>): Promise<FavouritesResponse>;
     get(favouriteId: string): Promise<FavouriteResponse>;
     create(favourite: Favourite): Promise<FavouriteResponse>;
     update(favouriteId: string, favourite: Favourite): Promise<FavouriteResponse>;

@@ -21,8 +21,8 @@ export interface TagResponse {
     msg?: string;
 }
 export interface TagsResponse {
-    data: object[];
-    metadata: object;
+    data: Record<string, unknown>[];
+    metadata: Record<string, unknown>;
 }
 export interface Tag {
     name?: string;

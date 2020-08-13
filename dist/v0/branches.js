@@ -24,10 +24,11 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -62,6 +63,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.BranchesSearchFailed = exports.ExternalCustomIdGetUniqueFailed = exports.BranchDeleteFailed = exports.BranchesCountFailed = exports.BranchCreationFailed = exports.BranchPutFailed = exports.BranchFetchFailed = exports.BranchesFetchFailed = exports.Branches = void 0;
 var just_typeof_1 = __importDefault(require("just-typeof"));
 var qs_1 = __importDefault(require("qs"));
 var just_safe_get_1 = __importDefault(require("just-safe-get"));
@@ -71,7 +73,10 @@ var base_1 = require("../base");
 var Branches = /** @class */ (function (_super) {
     __extends(Branches, _super);
     function Branches(options, http) {
-        var _this = _super.call(this, http, { endpoint: Branches.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+        var _this = _super.call(this, http, {
+            endpoint: Branches.baseEndpoint,
+            base: options.base || 'https://api.tillhub.com'
+        }) || this;
         _this.options = options;
         _this.http = http;
         _this.endpoint = Branches.baseEndpoint;
@@ -318,7 +323,8 @@ var Branches = /** @class */ (function (_super) {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 && reject(new BranchesSearchFailed(undefined, { status: response.status }));
+                        response.status !== 200 &&
+                            reject(new BranchesSearchFailed(undefined, { status: response.status }));
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }

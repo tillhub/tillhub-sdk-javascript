@@ -20,8 +20,8 @@ export interface AuditLogsGetOneRequestObject {
     query?: AuditsQuery;
 }
 export interface AuditsResponse {
-    data?: object[];
-    metadata?: object;
+    data?: Record<string, unknown>[];
+    metadata?: Record<string, unknown>;
     msg?: string;
     next?: () => Promise<AuditsResponse>;
 }

@@ -20,8 +20,8 @@ export declare class Print {
      * Returns an EventSource instance as an endpoint to receive events for the given event name.
      * Subscription state and event handling can be handled via setting `onmessage`, `onopen`, and `onerror` callbacks on the EventSource instance.
      * @param {string} eventName - name of the event to subscribe to (e.g. `jobs`, `messages`, `printers`)
-     * @param {Object} [query] - query object
+     * @param {Object} [query] - query Record<string, unknown>
      * @returns {EventSource} - event source notifying of server-sent events
      */
-    subscribeTo(eventName: string, query?: Object): EventSource;
+    subscribeTo(eventName: string, query?: Record<string, unknown>): EventSource;
 }

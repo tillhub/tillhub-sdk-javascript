@@ -18,8 +18,8 @@ export interface SafeResponse {
     msg?: string;
 }
 export interface SafesResponse {
-    data: object[];
-    metadata: object;
+    data: Record<string, unknown>[];
+    metadata: Record<string, unknown>;
 }
 export interface AmountItem {
     currency: string;
@@ -36,7 +36,7 @@ export interface Safe {
     limit_upper?: number;
     limit_lower?: number;
     items?: Array<AmountItem> | null;
-    metadata?: object;
+    metadata?: Record<string, unknown>;
     deleted?: boolean;
     active?: boolean;
 }
@@ -44,8 +44,7 @@ export interface BookRequestBody {
     to: string;
     from: string;
     issuer: string;
-    items: Array<Object>;
-    comment?: string;
+    items: Record<string, unknown>[];
     initiated_at?: string;
 }
 export interface SafesLogBookOptions {
@@ -73,7 +72,7 @@ export interface SafesLogBookQuery {
     currency?: string;
 }
 export interface SafesLogBookResponse {
-    data: object[];
+    data: Record<string, unknown>[];
     next?: () => Promise<SafesLogBookResponse>;
 }
 export declare class Safes extends ThBaseHandler {

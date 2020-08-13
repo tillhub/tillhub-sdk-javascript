@@ -13,10 +13,11 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -48,13 +49,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.DeviceGroupDeleteFailed = exports.DeviceGroupCreationFailed = exports.DeviceGroupPutFailed = exports.DeviceGroupFetchFailed = exports.DeviceGroupsFetchFailed = exports.DeviceGroups = void 0;
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
 var DeviceGroups = /** @class */ (function (_super) {
     __extends(DeviceGroups, _super);
     function DeviceGroups(options, http) {
-        var _this = _super.call(this, http, { endpoint: DeviceGroups.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+        var _this = _super.call(this, http, {
+            endpoint: DeviceGroups.baseEndpoint,
+            base: options.base || 'https://api.tillhub.com'
+        }) || this;
         _this.options = options;
         _this.http = http;
         _this.endpoint = DeviceGroups.baseEndpoint;
@@ -77,7 +82,9 @@ var DeviceGroups = /** @class */ (function (_super) {
                     case 1:
                         response_1 = _a.sent();
                         if (response_1.data.cursor && response_1.data.cursor.next) {
-                            next = function () { return _this.getAll({ uri: response_1.data.cursor.next }); };
+                            next = function () {
+                                return _this.getAll({ uri: response_1.data.cursor.next });
+                            };
                         }
                         return [2 /*return*/, resolve({
                                 data: response_1.data.results,

@@ -13,10 +13,11 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -48,6 +49,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.AnalyticsReportsTransactionsOverviewExportFetchError = exports.AnalyticsReportsTransactionDetailFetcshError = exports.AnalyticsReportsTransactionsOverviewFetchError = exports.AnalyticsReportsTransactionsDetail = exports.AnalyticsReportsTransactionsOverview = void 0;
 var base_1 = require("../../../base");
 var errors_1 = require("../../../errors");
 var AnalyticsReportsTransactionsOverview = /** @class */ (function (_super) {
@@ -62,40 +64,51 @@ var AnalyticsReportsTransactionsOverview = /** @class */ (function (_super) {
         return base_1.ThAnalyticsBaseHandler.generateAuthenticatedInstance(AnalyticsReportsTransactionsOverview, options, http);
     };
     AnalyticsReportsTransactionsOverview.prototype.getAll = function (query) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var nextFn, _a, d, next_1, data, summary, count, totalCount, err_1;
+            var nextFn, _c, d, next_1, data, summary, count, totalCount, err_1;
             var _this = this;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            return __generator(this, function (_d) {
+                switch (_d.label) {
                     case 0:
-                        _b.trys.push([0, 2, , 3]);
+                        _d.trys.push([0, 2, , 3]);
                         nextFn = void 0;
                         return [4 /*yield*/, this.handleGet(this.options.base + "/api/v2/analytics/" + this.options.user + "/reports/transactions/overview", query)];
                     case 1:
-                        _a = _b.sent(), d = _a.results, next_1 = _a.next;
-                        if (!d) {
+                        _c = _d.sent(), d = _c.results, next_1 = _c.next;
+                        if (!d || !Array.isArray(d) || !d.length) {
                             throw new TypeError('Unexpectedly did not return data.');
                         }
-                        data = d.find(function (item) { return (item.metric.job === 'reports_transactions_v2_overview_data'); }).values;
-                        summary = d.find(function (item) { return (item.metric.job === 'reports_transactions_v2_overview_summary'); }).values;
-                        count = d.find(function (item) { return (item.metric.job === 'reports_transactions_v2_overview_filtered_meta'); }).values[0];
-                        totalCount = d.find(function (item) { return (item.metric.job === 'reports_transactions_v2_overview_meta'); }).values[0];
+                        data = (d.find(function (item) {
+                            return item.metric.job === 'reports_transactions_v2_overview_data';
+                        }) || {}).values;
+                        summary = (d.find(function (item) {
+                            return item.metric.job === 'reports_transactions_v2_overview_summary';
+                        }) || {}).values;
+                        count = (_b = (_a = (d.find(function (item) {
+                            return item.metric.job === 'reports_transactions_v2_overview_filtered_meta';
+                        }) || { values: [] })) === null || _a === void 0 ? void 0 : _a.values[0]) === null || _b === void 0 ? void 0 : _b.count;
+                        totalCount = (d.find(function (item) {
+                            return item.metric.job === 'reports_transactions_v2_overview_meta';
+                        }) || { values: [] }).values[0];
                         if (next_1) {
-                            nextFn = function () { return _this.getAll({ uri: next_1 }); };
+                            nextFn = function () {
+                                return _this.getAll({ uri: next_1 });
+                            };
                         }
                         return [2 /*return*/, {
                                 data: data,
                                 summary: summary,
                                 metaData: {
+                                    // eslint-disable-next-line
                                     // @ts-ignore
                                     count: count.count,
-                                    // @ts-ignore
                                     total_count: totalCount.count
                                 },
                                 next: nextFn
                             }];
                     case 2:
-                        err_1 = _b.sent();
+                        err_1 = _d.sent();
                         throw new AnalyticsReportsTransactionsOverviewFetchError(undefined, { error: err_1 });
                     case 3: return [2 /*return*/];
                 }
@@ -143,11 +156,14 @@ var AnalyticsReportsTransactionsDetail = /** @class */ (function (_super) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, this.handleGet(this.options.base + "/api/v2/analytics/" + this.options.user + "/reports/transactions/" + id + "/detail")
+                            // eslint-disable-next-line
                             // @ts-ignore
                         ];
                     case 1:
                         d = (_a.sent()).results;
-                        data = d.find(function (item) { return (item.metric.job === 'reports_transactions_v2_transaction_detail_data'); }).values;
+                        data = d.find(function (item) {
+                            return item.metric.job === 'reports_transactions_v2_transaction_detail_data';
+                        }).values;
                         return [2 /*return*/, {
                                 data: data[0],
                                 metaData: {

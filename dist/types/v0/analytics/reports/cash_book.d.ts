@@ -6,7 +6,7 @@ export interface CashBookOptions {
     base?: string;
 }
 export interface CashBookResponse {
-    data: object[];
+    data: Record<string, unknown>[];
 }
 export interface CashBookQuery {
     format?: string;
@@ -31,5 +31,5 @@ export declare class CashBook {
 export declare class CashBookReportFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

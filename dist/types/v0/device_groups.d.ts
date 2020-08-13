@@ -17,7 +17,7 @@ export interface DeviceGroupsQuery {
 }
 export interface DeviceGroupsResponse {
     data: DeviceGroup[];
-    metadata: object;
+    metadata: Record<string, unknown>;
     next?: () => Promise<DeviceGroupsResponse>;
 }
 export interface DeviceGroupResponse {
@@ -51,25 +51,25 @@ export declare class DeviceGroups extends ThBaseHandler {
 export declare class DeviceGroupsFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class DeviceGroupFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class DeviceGroupPutFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class DeviceGroupCreationFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class DeviceGroupDeleteFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

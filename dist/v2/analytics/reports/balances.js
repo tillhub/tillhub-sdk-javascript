@@ -13,10 +13,11 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -48,6 +49,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.AnalyticsReportsBalancesOverviewExportFetchError = exports.AnalyticsReportsTransactionDetailFetcshError = exports.AnalyticsReportsBalancesOverviewFetchError = exports.AnalyticsReportsBalancesDetail = exports.AnalyticsReportsBalancesOverview = void 0;
 var base_1 = require("../../../base");
 var errors_1 = require("../../../errors");
 var AnalyticsReportsBalancesOverview = /** @class */ (function (_super) {
@@ -71,23 +73,32 @@ var AnalyticsReportsBalancesOverview = /** @class */ (function (_super) {
                         _b.trys.push([0, 2, , 3]);
                         nextFn = void 0;
                         return [4 /*yield*/, this.handleGet(this.options.base + "/api/v2/analytics/" + this.options.user + "/reports/balances/overview", query)
+                            // eslint-disable-next-line
                             // @ts-ignore
                         ];
                     case 1:
                         _a = _b.sent(), d = _a.results, next_1 = _a.next;
-                        data = d.find(function (item) { return (item.metric.job === 'reports_balances_v2_overview_data'); }).values;
-                        summary = d.find(function (item) { return (item.metric.job === 'reports_balances_v2_overview_summary'); }).values;
-                        count = d.find(function (item) { return (item.metric.job === 'reports_balances_v2_overview_filtered_meta'); }).values[0];
-                        totalCount = d.find(function (item) { return (item.metric.job === 'reports_balances_v2_overview_meta'); }).values[0];
+                        data = d.find(function (item) { return item.metric.job === 'reports_balances_v2_overview_data'; }).values;
+                        summary = d.find(function (item) {
+                            return item.metric.job === 'reports_balances_v2_overview_summary';
+                        }).values;
+                        count = d.find(function (item) {
+                            return item.metric.job === 'reports_balances_v2_overview_filtered_meta';
+                        }).values[0];
+                        totalCount = d.find(function (item) { return item.metric.job === 'reports_balances_v2_overview_meta'; }).values[0];
                         if (next_1) {
-                            nextFn = function () { return _this.getAll({ uri: next_1 }); };
+                            nextFn = function () {
+                                return _this.getAll({ uri: next_1 });
+                            };
                         }
                         return [2 /*return*/, {
                                 data: data,
                                 summary: summary,
                                 metaData: {
+                                    // eslint-disable-next-line
                                     // @ts-ignore
                                     count: count.count,
+                                    // eslint-disable-next-line
                                     // @ts-ignore
                                     total_count: totalCount.count
                                 },
@@ -142,11 +153,14 @@ var AnalyticsReportsBalancesDetail = /** @class */ (function (_super) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, this.handleGet(this.options.base + "/api/v2/analytics/" + this.options.user + "/reports/balances/" + id + "/detail")
+                            // eslint-disable-next-line
                             // @ts-ignore
                         ];
                     case 1:
                         d = (_a.sent()).results;
-                        data = d.find(function (item) { return (item.metric.job === 'reports_balances_v2_balance_detail_data'); }).values;
+                        data = d.find(function (item) {
+                            return item.metric.job === 'reports_balances_v2_balance_detail_data';
+                        }).values;
                         return [2 /*return*/, {
                                 data: data[0],
                                 metaData: {

@@ -14,7 +14,7 @@ export interface TaxesQuery {
 }
 export interface TaxesResponse {
     data: Tax[];
-    metadata: object;
+    metadata: Record<string, unknown>;
 }
 export interface TaxResponse {
     data: Tax;

@@ -24,10 +24,11 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -62,6 +63,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.VouchersUsersFailed = exports.VouchersLogsCountFailed = exports.VouchersLogsFetchFailed = exports.VoucherDeleteFailed = exports.VoucherLogsMetaFailed = exports.VouchersMetaFailed = exports.VouchersCountFailed = exports.VoucherCodeConflict = exports.VoucherCreationFailed = exports.VoucherPatchFailed = exports.VoucherPutFailed = exports.VoucherFetchFailed = exports.VoucherLogsFetchFailed = exports.VouchersFetchFailed = exports.VoucherTypeError = exports.VoucherLogs = exports.Vouchers = void 0;
 var just_diff_1 = require("just-diff");
 var qs_1 = __importDefault(require("qs"));
 var just_safe_get_1 = __importDefault(require("just-safe-get"));
@@ -70,7 +72,10 @@ var base_1 = require("../base");
 var Vouchers = /** @class */ (function (_super) {
     __extends(Vouchers, _super);
     function Vouchers(options, http) {
-        var _this = _super.call(this, http, { endpoint: Vouchers.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+        var _this = _super.call(this, http, {
+            endpoint: Vouchers.baseEndpoint,
+            base: options.base || 'https://api.tillhub.com'
+        }) || this;
         _this.options = options;
         _this.http = http;
         _this.logs = new VoucherLogs(options, http);
@@ -313,7 +318,7 @@ var Vouchers = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         if (!source.id || !target.id || source.id !== target.id) {
-                            return [2 /*return*/, reject(new VoucherTypeError('source and target object require ID to be set and be equal to each other'))];
+                            return [2 /*return*/, reject(new VoucherTypeError('source and target Record<string, unknown> require ID to be set and be equal to each other'))];
                         }
                         uri = "" + this.options.base + this.endpoint + "/" + this.options.user + "/" + source.id;
                         _a.label = 1;
@@ -412,7 +417,10 @@ exports.Vouchers = Vouchers;
 var VoucherLogs = /** @class */ (function (_super) {
     __extends(VoucherLogs, _super);
     function VoucherLogs(options, http) {
-        var _this = _super.call(this, http, { endpoint: VoucherLogs.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+        var _this = _super.call(this, http, {
+            endpoint: VoucherLogs.baseEndpoint,
+            base: options.base || 'https://api.tillhub.com'
+        }) || this;
         _this.options = options;
         _this.http = http;
         _this.endpoint = VoucherLogs.baseEndpoint;

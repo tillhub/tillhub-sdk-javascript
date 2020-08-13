@@ -12,7 +12,11 @@ export interface MessagesQueryOptions {
 }
 export interface MessagesResponse {
     data: Message[];
-    metadata: object;
+    metadata: Record<string, unknown>;
+}
+export interface MessageResponse {
+    data: Message;
+    metadata: Record<string, unknown>;
 }
 export interface Message {
     message?: string;
@@ -20,14 +24,14 @@ export interface Message {
     channel?: string;
     level?: string;
     type?: string;
-    payload?: object;
-    metadata?: object;
+    payload?: Record<string, unknown>;
+    metadata?: Record<string, unknown>;
     ignorable?: boolean;
     ignored?: boolean;
     read?: boolean;
     read_at?: string;
     deleted?: boolean;
-    progress?: object;
+    progress?: Record<string, unknown>;
     client_account?: string;
 }
 export declare class Messages extends ThBaseHandler {
@@ -38,5 +42,5 @@ export declare class Messages extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: MessagesOptions, http: Client);
     getAll(query?: MessagesQueryOptions | undefined): Promise<MessagesResponse>;
-    update(messageId: string, messageRequest: Message): Promise<MessagesResponse>;
+    update(messageId: string, messageRequest: Message): Promise<MessageResponse>;
 }

@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Client = void 0;
 var axios_1 = __importDefault(require("axios"));
 var environment_1 = require("./environment");
 var defaultHeaders = {
@@ -33,7 +34,7 @@ var Client = /** @class */ (function () {
         this.axiosInstance = axios_1.default.create({
             // baseURL: options.base || 'https://api.tillhub.com',
             timeout: options.timeout || 10000,
-            headers: __assign({}, options.headers, defaultHeaders)
+            headers: __assign(__assign({}, options.headers), defaultHeaders)
         });
     }
     Client.getInstance = function (options) {
@@ -54,19 +55,23 @@ var Client = /** @class */ (function () {
         return Client.instance.axiosInstance;
     };
     Client.prototype.setDefaults = function (options) {
-        Client.instance.axiosInstance.defaults.headers.common = __assign({}, this.axiosInstance.defaults.headers.common, options.headers);
-        Client.instance.axiosInstance.defaults.headers = __assign({}, this.axiosInstance.defaults.headers, options.headers);
+        Client.instance.axiosInstance.defaults.headers.common = __assign(__assign({}, this.axiosInstance.defaults.headers.common), options.headers);
+        Client.instance.axiosInstance.defaults.headers = __assign(__assign({}, this.axiosInstance.defaults.headers), options.headers);
         // NOTE not sure if this is the correct place to inject the interceptors, but it's the most reliable
         if (options.responseInterceptors && options.responseInterceptors.length) {
             // remove previous interceptors
-            this.responseInterceptorIds.forEach(function (id) { return Client.instance.axiosInstance.interceptors.response.eject(id); });
+            this.responseInterceptorIds.forEach(function (id) {
+                return Client.instance.axiosInstance.interceptors.response.eject(id);
+            });
             this.responseInterceptorIds = options.responseInterceptors.map(function (interceptor) {
                 // first arg is on success, but we want to only listen for errors
                 return Client.instance.axiosInstance.interceptors.response.use(undefined, interceptor);
             });
         }
         if (options.requestInterceptors && options.requestInterceptors.length) {
-            this.requestInterceptorIds.forEach(function (id) { return Client.instance.axiosInstance.interceptors.request.eject(id); });
+            this.requestInterceptorIds.forEach(function (id) {
+                return Client.instance.axiosInstance.interceptors.request.eject(id);
+            });
             this.requestInterceptorIds = options.requestInterceptors.map(function (interceptor) {
                 return Client.instance.axiosInstance.interceptors.request.use(interceptor, undefined);
             });

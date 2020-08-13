@@ -13,8 +13,8 @@ export interface AnalyticsOptions {
     base?: string;
 }
 export interface AnalyticsResponse {
-    data: object[];
-    metadata: object;
+    data: Record<string, unknown>[];
+    metadata: Record<string, unknown>;
     msg?: string;
 }
 export interface RevenuBasicOptions {
@@ -134,7 +134,7 @@ export declare class Analytics {
     getRevenues(query: RevenuesOptions): Promise<AnalyticsResponse>;
     getRevenuesForHourOfDay(query: RevenuBasicOptions): Promise<AnalyticsResponse>;
     getReportsProducts(query?: ProductsOptions | undefined): Promise<AnalyticsResponse>;
-    getProductsChildren(productNumber: String, query?: ProductsOptions | undefined): Promise<AnalyticsResponse>;
+    getProductsChildren(productNumber: string, query?: ProductsOptions | undefined): Promise<AnalyticsResponse>;
     getStaffOverviewReport(query?: StaffQuery | undefined): Promise<AnalyticsResponse>;
     getProductGroupsStaffReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse>;
     getProductGroupsReport(query?: RevenuBasicOptions | undefined): Promise<AnalyticsResponse>;
@@ -160,90 +160,90 @@ export declare class Analytics {
 export declare class ReportsStocksFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class RefundsReportFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class VouchersReportFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ProductsReportFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class PaymentsReportFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class TopPaymentsReportFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class RevenuesFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ReportsProductGroupsFiltersFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ReportsProductGroupsFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ReportsCustomerOverviewFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ReportsCustomerTransactionsFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ReportsCustomerCustomersFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class SimpleSalesCartItemsReportFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ProductGroupsStaffReportFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ProductGroupsReportFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StatisticsProductChildrenFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StaffOverviewFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StatisticsProductFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

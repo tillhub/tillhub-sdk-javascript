@@ -13,6 +13,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.TagsPutFailed = exports.TagsCreationFailed = exports.TagsGetMetaFailed = exports.TagsFetchOneFailed = exports.TagsFetchAllFailed = void 0;
 var baseError_1 = require("./baseError");
 var TagsFetchAllFailed = /** @class */ (function (_super) {
     __extends(TagsFetchAllFailed, _super);

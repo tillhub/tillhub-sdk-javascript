@@ -4,7 +4,7 @@ export interface ImagesOptions {
     base?: string;
 }
 export interface ImagesResponse {
-    data: object;
+    data: Record<string, unknown>;
 }
 export interface ImagesQuery {
     subsystem: 'products' | 'customers' | 'branches' | 'staff';

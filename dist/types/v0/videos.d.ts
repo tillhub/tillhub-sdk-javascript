@@ -5,7 +5,7 @@ export interface VideosOptions {
     base?: string;
 }
 export interface VideosResponse {
-    data: object;
+    data: Record<string, unknown>;
 }
 export interface VideosQuery {
     subsystem: 'contentVideos';

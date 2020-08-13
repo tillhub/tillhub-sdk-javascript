@@ -13,10 +13,11 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -48,13 +49,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.CategortTreesDeleteFailed = exports.CategoryTreeCreationFailed = exports.CategoryTreePutFailed = exports.CategoryTreeFetchFailed = exports.CategoryTreesFetchFailed = exports.CategoryTrees = void 0;
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
 var CategoryTrees = /** @class */ (function (_super) {
     __extends(CategoryTrees, _super);
     function CategoryTrees(options, http) {
-        var _this = _super.call(this, http, { endpoint: CategoryTrees.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+        var _this = _super.call(this, http, {
+            endpoint: CategoryTrees.baseEndpoint,
+            base: options.base || 'https://api.tillhub.com'
+        }) || this;
         _this.options = options;
         _this.http = http;
         _this.endpoint = CategoryTrees.baseEndpoint;
@@ -80,7 +85,9 @@ var CategoryTrees = /** @class */ (function (_super) {
                             return [2 /*return*/, reject(new CategoryTreesFetchFailed(undefined, { status: response_1.status }))];
                         }
                         if (response_1.data.cursor && response_1.data.cursor.next) {
-                            next = function () { return _this.getAll({ uri: response_1.data.cursor.next }); };
+                            next = function () {
+                                return _this.getAll({ uri: response_1.data.cursor.next });
+                            };
                         }
                         return [2 /*return*/, resolve({
                                 data: response_1.data.results,

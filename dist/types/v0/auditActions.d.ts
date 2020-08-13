@@ -24,11 +24,11 @@ export interface AuditActionsGetOneRequestObject {
     query?: AuditsQuery;
 }
 export interface AuditActionsCreateBody {
-    actions: object[];
+    actions: Record<string, unknown>[];
 }
 export interface AuditsResponse {
-    data?: object[];
-    metadata?: object;
+    data?: Record<string, unknown>[];
+    metadata?: Record<string, unknown>;
     msg?: string;
     next?: () => Promise<AuditsResponse>;
 }

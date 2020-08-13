@@ -29,7 +29,7 @@ export interface InvoicesCreateBody {
     comments?: string | null;
     customer?: string | null;
     customer_external_reference_id?: string | null;
-    amount?: object | null;
+    amount?: Record<string, unknown> | null;
     currency?: string | null;
     issued_at?: string | null;
     balance?: number | null;
@@ -39,8 +39,8 @@ export interface InvoicesCreateBody {
     archived_at?: string | null;
     custom_id?: string | null;
     external_reference_id?: string | null;
-    external_reference?: object | null;
-    metadata?: object | null;
+    external_reference?: Record<string, unknown> | null;
+    metadata?: Record<string, unknown> | null;
     origins?: string[] | null;
     related_to?: string[] | null;
     depends_on?: string[] | null;
@@ -58,7 +58,7 @@ export interface InvoicesUpdateBody {
     comments?: string | null;
     customer?: string | null;
     customer_external_reference_id?: string | null;
-    amount?: object | null;
+    amount?: Record<string, unknown> | null;
     currency?: string | null;
     issued_at?: string | null;
     balance?: number | null;
@@ -68,8 +68,8 @@ export interface InvoicesUpdateBody {
     archived_at?: string | null;
     custom_id?: string | null;
     external_reference_id?: string | null;
-    external_reference?: object | null;
-    metadata?: object | null;
+    external_reference?: Record<string, unknown> | null;
+    metadata?: Record<string, unknown> | null;
     origins?: string[] | null;
     related_to?: string[] | null;
     depends_on?: string[] | null;
@@ -83,8 +83,8 @@ export interface InvoicesSimpleUpdateRequestBody {
     query?: InvoicesQuery;
 }
 export interface InvoicesResponse {
-    data: object[];
-    metadata: object;
+    data: Record<string, unknown>[];
+    metadata: Record<string, unknown>;
     next?: () => Promise<InvoicesResponse>;
     msg?: string;
 }

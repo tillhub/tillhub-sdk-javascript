@@ -16,7 +16,7 @@ export interface ProductGroupsQuery {
 }
 export interface ProductGroupsResponse {
     data: ProductGroup[];
-    metadata: object;
+    metadata: Record<string, unknown>;
 }
 export interface ProductGroupResponse {
     data: ProductGroup;
@@ -35,7 +35,7 @@ export interface ProductGroup {
     tax: string;
     active?: boolean;
     account: string;
-    images: object;
+    images: Record<string, unknown>;
     color?: string;
 }
 export declare class ProductGroups extends ThBaseHandler {

@@ -13,10 +13,11 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -48,6 +49,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.AnalyticsReportsCountingProtocolsExportFetchError = exports.AnalyticsReportsCountingProtocolsFetchFailed = exports.AnalyticsReportsCountingProtocols = void 0;
 var base_1 = require("../../../base");
 var errors_1 = require("../../../errors");
 var AnalyticsReportsCountingProtocols = /** @class */ (function (_super) {
@@ -75,20 +77,30 @@ var AnalyticsReportsCountingProtocols = /** @class */ (function (_super) {
                         _a = _b.sent(), d = _a.results, next_1 = _a.next, status_1 = _a.status;
                         if (status_1 !== 200)
                             throw new AnalyticsReportsCountingProtocolsFetchFailed(undefined, { status: status_1 });
-                        data = d.find(function (item) { return (item.metric.job === 'reports_counting_protocols_v2_overview_data'); }).values;
-                        summary = d.find(function (item) { return (item.metric.job === 'reports_counting_protocols_v2_overview_summary'); }).values;
-                        count = d.find(function (item) { return (item.metric.job === 'reports_counting_protocols_v2_overview_filtered_meta'); }).values[0];
-                        totalCount = d.find(function (item) { return (item.metric.job === 'reports_counting_protocols_v2_overview_meta'); }).values[0];
+                        data = d.find(function (item) {
+                            return item.metric.job === 'reports_counting_protocols_v2_overview_data';
+                        }).values;
+                        summary = d.find(function (item) {
+                            return item.metric.job === 'reports_counting_protocols_v2_overview_summary';
+                        }).values;
+                        count = d.find(function (item) {
+                            return item.metric.job === 'reports_counting_protocols_v2_overview_filtered_meta';
+                        }).values[0];
+                        totalCount = d.find(function (item) {
+                            return item.metric.job === 'reports_counting_protocols_v2_overview_meta';
+                        }).values[0];
                         if (next_1) {
-                            nextFn = function () { return _this.getAll({ uri: next_1 }); };
+                            nextFn = function () {
+                                return _this.getAll({ uri: next_1 });
+                            };
                         }
+                        // eslint-disable-next-line
+                        // @ts-ignore
                         return [2 /*return*/, {
                                 data: data,
                                 summary: summary,
                                 metaData: {
-                                    // @ts-ignore
                                     count: count.count,
-                                    // @ts-ignore
                                     total_count: totalCount.count
                                 },
                                 next: nextFn

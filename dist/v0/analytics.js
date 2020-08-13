@@ -13,10 +13,11 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -51,6 +52,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.StatisticsProductFetchFailed = exports.StaffOverviewFetchFailed = exports.StatisticsProductChildrenFetchFailed = exports.ProductGroupsReportFetchFailed = exports.ProductGroupsStaffReportFetchFailed = exports.SimpleSalesCartItemsReportFetchFailed = exports.ReportsCustomerCustomersFailed = exports.ReportsCustomerTransactionsFailed = exports.ReportsCustomerOverviewFailed = exports.ReportsProductGroupsFetchFailed = exports.ReportsProductGroupsFiltersFetchFailed = exports.RevenuesFetchFailed = exports.TopPaymentsReportFetchFailed = exports.PaymentsReportFetchFailed = exports.ProductsReportFetchFailed = exports.VouchersReportFetchFailed = exports.RefundsReportFetchFailed = exports.ReportsStocksFetchFailed = exports.Analytics = void 0;
 var qs_1 = __importDefault(require("qs"));
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -257,28 +259,25 @@ var Analytics = /** @class */ (function () {
     Analytics.prototype.getProductGroupsStaffReport = function (options) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var staff, base, uri, response, err_8;
+            var base, uri, response, err_8;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        staff = options && options.staff;
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
+                        _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri("/reports/staff/product_groups");
                         uri = this.uriHelper.generateUriWithQuery(base, options);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
-                    case 2:
+                    case 1:
                         response = _a.sent();
                         response.status !== 200 && reject(new ProductGroupsStaffReportFetchFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             })];
-                    case 3:
+                    case 2:
                         err_8 = _a.sent();
                         return [2 /*return*/, reject(new ProductGroupsStaffReportFetchFailed())];
-                    case 4: return [2 /*return*/];
+                    case 3: return [2 /*return*/];
                 }
             });
         }); });
@@ -312,28 +311,25 @@ var Analytics = /** @class */ (function () {
     Analytics.prototype.getRefundsReport = function (options) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var staff, base, uri, response, err_10;
+            var base, uri, response, err_10;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        staff = options && options.staff;
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
+                        _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri("/reports/staff/refunds");
                         uri = this.uriHelper.generateUriWithQuery(base, options);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
-                    case 2:
+                    case 1:
                         response = _a.sent();
                         response.status !== 200 && reject(new RefundsReportFetchFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             })];
-                    case 3:
+                    case 2:
                         err_10 = _a.sent();
                         return [2 /*return*/, reject(new RefundsReportFetchFailed())];
-                    case 4: return [2 /*return*/];
+                    case 3: return [2 /*return*/];
                 }
             });
         }); });
@@ -370,28 +366,25 @@ var Analytics = /** @class */ (function () {
     Analytics.prototype.getProductsReport = function (options) {
         var _this = this;
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-            var staff, base, uri, response, err_12;
+            var base, uri, response, err_12;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        staff = options && options.staff;
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
+                        _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri("/reports/staff/products");
                         uri = this.uriHelper.generateUriWithQuery(base, options);
                         return [4 /*yield*/, this.http.getClient().get(uri)];
-                    case 2:
+                    case 1:
                         response = _a.sent();
                         response.status !== 200 && reject(new ProductsReportFetchFailed());
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             })];
-                    case 3:
+                    case 2:
                         err_12 = _a.sent();
                         return [2 /*return*/, reject(new ProductsReportFetchFailed())];
-                    case 4: return [2 /*return*/];
+                    case 3: return [2 /*return*/];
                 }
             });
         }); });

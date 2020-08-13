@@ -5,8 +5,8 @@ export interface VatOptions {
     base?: string;
 }
 export interface VatResponse {
-    data: object[];
-    metadata: object;
+    data: Record<string, unknown>[];
+    metadata: Record<string, unknown>;
 }
 export interface VatQuery {
     format?: string;

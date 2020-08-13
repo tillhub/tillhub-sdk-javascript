@@ -5,8 +5,8 @@ export interface AnalyticsOptions {
     base?: string;
 }
 export interface AnalyticsResponse {
-    data: object[];
-    metadata: object;
+    data: Record<string, unknown>[];
+    metadata: Record<string, unknown>;
     msg?: string;
 }
 export interface CustomersQuery {

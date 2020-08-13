@@ -10,26 +10,26 @@ export interface TransactionsQuery {
     uri?: string;
     format?: string;
     legacy?: boolean;
-    query?: object;
+    query?: Record<string, unknown>;
 }
 export interface TransactionsMetaQuery {
     type?: string | string[];
     legacy?: boolean;
-    query?: object;
+    query?: Record<string, unknown>;
 }
 export interface TransactionsOptions {
     user?: string;
     base?: string;
 }
 export interface TransactionResponse {
-    data: object[];
+    data: Record<string, unknown>[];
     next?: () => Promise<TransactionResponse>;
 }
 export interface TransactionImageResponse {
-    data: object;
+    data: Record<string, unknown>;
 }
 export interface TransactionImage {
-    'original': string;
+    original: string;
     '1x': string;
     '2x': string;
     '3x': string;

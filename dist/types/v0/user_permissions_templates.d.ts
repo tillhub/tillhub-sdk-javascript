@@ -6,15 +6,13 @@ export interface UserPermissionsTemplatesOptions {
     user?: string;
     base?: string;
 }
-export interface UserPermissionsTemplatesQueryOptions {
-}
 export interface UserPermissionsTemplatesResponse {
     data: UserPermissionsTemplate[];
-    metadata: object;
+    metadata: Record<string, unknown>;
 }
 export interface UserPermissionsTemplateResponse {
     data: UserPermissionsTemplate;
-    metadata: object;
+    metadata: Record<string, unknown>;
     msg?: string;
 }
 export interface UserPermissionsTemplate {
@@ -31,33 +29,33 @@ export declare class UserPermissionsTemplates extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: UserPermissionsTemplatesOptions, http: Client);
     create(template: UserPermissionsTemplate): Promise<UserPermissionsTemplateResponse>;
-    getAll(query?: UserPermissionsTemplatesQueryOptions): Promise<UserPermissionsTemplatesResponse>;
-    get(templateId: string, query?: UserPermissionsTemplatesQueryOptions): Promise<UserPermissionsTemplateResponse>;
+    getAll(query?: Record<string, unknown>): Promise<UserPermissionsTemplatesResponse>;
+    get(templateId: string, query?: Record<string, unknown>): Promise<UserPermissionsTemplateResponse>;
     update(templateId: string, template: UserPermissionsTemplate): Promise<UserPermissionsTemplateResponse>;
     delete(templateId: string): Promise<UserPermissionsTemplateResponse>;
 }
 export declare class UserPermissionsTemplatesFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class UserPermissionsTemplatesFetchOneFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class UserPermissionsTemplatesUpdateFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class UserPermissionsTemplatesCreationFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class UserPermissionsTemplatesDeleteFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

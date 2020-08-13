@@ -23,15 +23,15 @@ export interface ProductServiceQuestionReponse {
     msg?: string;
 }
 export interface ProductServiceQuestionsResponse {
-    data: object[];
-    metadata: object;
+    data: Record<string, unknown>[];
+    metadata: Record<string, unknown>;
 }
 export interface ProductServiceQuestion {
     name?: string;
     content?: string;
     description?: string;
-    service_questions?: Array<String>;
-    answer_validation?: object;
+    service_questions?: Array<string>;
+    answer_validation?: Record<string, unknown>;
     required?: boolean;
     deleted?: boolean;
     active?: boolean;

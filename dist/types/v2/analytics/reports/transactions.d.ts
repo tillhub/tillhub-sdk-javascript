@@ -6,8 +6,8 @@ export interface TransactionsHandlerOptions {
     base?: string;
 }
 export interface AnalyticsReportsTransactionsOverviewResponseItem {
-    data: object[];
-    summary: object[];
+    data: Record<string, unknown>[];
+    summary: Record<string, unknown>[];
     metaData: {
         count: number;
         total_count: number;
@@ -15,41 +15,40 @@ export interface AnalyticsReportsTransactionsOverviewResponseItem {
     next?: () => Promise<AnalyticsReportsTransactionsOverviewResponseItem>;
 }
 export interface AnalyticsReportsTransactionDetailResponseItem {
-    data: object;
+    data: Record<string, unknown>;
     metaData: {
         count: number;
         total_count: number;
     };
 }
-export interface AnalyticsReportsTraansactionsOverviewExportResponseItem extends ThAnalyticsExportsBaseResponse {
-}
+export declare type AnalyticsReportsTraansactionsOverviewExportResponseItem = ThAnalyticsExportsBaseResponse;
 export declare class AnalyticsReportsTransactionsOverview extends ThAnalyticsBaseHandler {
     http: Client;
     options: TransactionsHandlerOptions;
     constructor(options: TransactionsHandlerOptions, http: Client);
-    static create(options: object, http: Client): AnalyticsReportsTransactionsOverview;
-    getAll(query?: object): Promise<AnalyticsReportsTransactionsOverviewResponseItem>;
-    export(query?: object): Promise<AnalyticsReportsTraansactionsOverviewExportResponseItem>;
+    static create(options: Record<string, unknown>, http: Client): AnalyticsReportsTransactionsOverview;
+    getAll(query?: Record<string, unknown>): Promise<AnalyticsReportsTransactionsOverviewResponseItem>;
+    export(query?: Record<string, unknown>): Promise<AnalyticsReportsTraansactionsOverviewExportResponseItem>;
 }
 export declare class AnalyticsReportsTransactionsDetail extends ThAnalyticsBaseHandler {
     http: Client;
     options: TransactionsHandlerOptions;
     constructor(options: TransactionsHandlerOptions, http: Client);
-    static create(options: object, http: Client): AnalyticsReportsTransactionsDetail;
+    static create(options: Record<string, unknown>, http: Client): AnalyticsReportsTransactionsDetail;
     get(id?: string): Promise<AnalyticsReportsTransactionDetailResponseItem>;
 }
 export declare class AnalyticsReportsTransactionsOverviewFetchError extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class AnalyticsReportsTransactionDetailFetcshError extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class AnalyticsReportsTransactionsOverviewExportFetchError extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

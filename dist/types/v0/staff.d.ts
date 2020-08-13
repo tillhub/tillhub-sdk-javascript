@@ -24,7 +24,7 @@ export interface StaffQueryOrOptions {
 }
 export interface StaffResponse {
     data: StaffMember[];
-    metadata: object;
+    metadata: Record<string, unknown>;
     errors?: ErrorObject[];
 }
 export interface StaffMemberResponse {
@@ -34,6 +34,7 @@ export interface StaffMemberResponse {
         patch?: any;
     };
     msg?: string;
+    errors?: Record<string, unknown>;
 }
 export interface StaffAddress {
     street?: string;
@@ -74,7 +75,7 @@ export interface HandleStaffQuery extends HandlerQuery {
 export interface ErrorObject {
     id: string;
     label: string;
-    errorDetails: object;
+    errorDetails: Record<string, unknown>;
 }
 export interface StaffMember {
     firstname?: string;
@@ -84,10 +85,10 @@ export interface StaffMember {
     email?: string;
     addresses?: StaffAddress;
     pin?: number;
-    metadata?: object;
+    metadata?: Record<string, unknown>;
     scopes?: string[];
     staff_number?: number;
-    discounts?: object;
+    discounts?: Record<string, unknown>;
     date_of_birth?: string | null;
     short_code?: number;
     locations?: string[];
@@ -98,7 +99,7 @@ export interface StaffItem {
     firstname?: string;
     lastname?: string;
     email?: string;
-    phone?: object;
+    phone?: Record<string, unknown>;
 }
 export interface MakeUserRequest {
     user: string;
@@ -115,7 +116,7 @@ export declare class Staff extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: StaffOptions, http: Client);
     getAll(queryOrOptions?: StaffQueryOrOptions): Promise<StaffResponse>;
-    create(staffMember: StaffMember, query?: HandleStaffQuery): Promise<StaffResponse>;
+    create(staffMember: StaffMember, query?: HandleStaffQuery): Promise<StaffMemberResponse>;
     getOne(staffId: string): Promise<StaffMemberResponse>;
     get(staffId: string): Promise<StaffMemberResponse>;
     put(staffId: string, staff: StaffMember): Promise<StaffMemberResponse>;
@@ -123,57 +124,57 @@ export declare class Staff extends ThBaseHandler {
     getPin(providedPin?: PinRequest): Promise<StaffMemberResponse>;
     getStaffNumber(providedStaffNumber?: StaffNumberRequest): Promise<StaffMemberResponse>;
     getFilters(queryOrOptions?: StaffQueryOrOptions): Promise<StaffResponse>;
-    makeUser(staffID: string, makeUserObj: MakeUserRequest): Promise<StaffResponse>;
+    makeUser(staffID: string, makeUserObj: MakeUserRequest): Promise<StaffMemberResponse>;
     meta(query?: StaffQueryOrOptions | undefined): Promise<StaffMemberResponse>;
     search(query: string | SearchQuery): Promise<StaffMemberResponse>;
 }
 export declare class StaffFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StaffFetchOneFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StaffPutFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StaffDeleteFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StaffMemberCreateFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StaffPinGetFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StaffNumberGetFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class MakeUserStaffFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StaffMetaFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StaffSearchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

@@ -15,8 +15,8 @@ export interface VoucherSystemsQuery {
     };
 }
 export interface VoucherSystemsResponse {
-    data: object[];
-    metadata: object;
+    data: Record<string, unknown>[];
+    metadata: Record<string, unknown>;
     next?: () => Promise<VoucherSystemsResponse>;
 }
 export interface VoucherSystemResponse {
@@ -35,10 +35,10 @@ export interface VoucherSystem {
     country?: string;
     region?: string;
     branches?: string[];
-    hooks?: object;
+    hooks?: Record<string, unknown>;
     active?: boolean;
     deleted?: boolean;
-    increments?: object[];
+    increments?: Record<string, unknown>[];
 }
 export declare class VoucherSystems extends ThBaseHandler {
     static baseEndpoint: string;
@@ -56,25 +56,25 @@ export declare class VoucherSystems extends ThBaseHandler {
 export declare class VoucherSystemsFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class VoucherSystemFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class VoucherSystemPutFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class VoucherSystemCreationFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class VoucherSystemDeleteFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

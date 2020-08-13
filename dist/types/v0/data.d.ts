@@ -5,7 +5,7 @@ export interface DataOptions {
     base?: string;
 }
 export interface DataResponse {
-    data: object;
+    data: Record<string, unknown>;
 }
 export declare class Data {
     endpoint: string;

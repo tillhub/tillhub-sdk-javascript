@@ -15,7 +15,7 @@ export interface ReasonsQuery {
 }
 export interface ReasonsResponse {
     data: Reason[];
-    metadata: object;
+    metadata: Record<string, unknown>;
 }
 export interface ReasonResponse {
     data: Reason;
@@ -52,25 +52,25 @@ export declare class Reasons extends ThBaseHandler {
 export declare class ReasonsFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ReasonsFetchOneFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ReasonsPutFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ReasonsCreationFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ReasonsDeleteFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

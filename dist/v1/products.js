@@ -13,10 +13,11 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -51,6 +52,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.BarcodeGetFailed = exports.ProductsBookStockFailed = exports.ProductsSearchFailed = exports.ProductsDeleteFailed = exports.ProductsBulkEditFailed = exports.ProductsUpdateFailed = exports.ProductsMetaFailed = exports.ProductsCountFailed = exports.ProductChildrenDetailsFetchFailed = exports.ProductDetailsFetchFailed = exports.ProductsImportFailed = exports.ProductsFetchFailed = exports.ProductFetchFailed = exports.ProductsCreateFailed = exports.Products = void 0;
 var qs_1 = __importDefault(require("qs"));
 var baseError_1 = require("../errors/baseError");
 var uri_helper_1 = require("../uri-helper");
@@ -60,7 +62,10 @@ var pricebook_entries_1 = require("./pricebook-entries");
 var Products = /** @class */ (function (_super) {
     __extends(Products, _super);
     function Products(options, http) {
-        var _this = _super.call(this, http, { endpoint: Products.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+        var _this = _super.call(this, http, {
+            endpoint: Products.baseEndpoint,
+            base: options.base || 'https://api.tillhub.com'
+        }) || this;
         _this.options = options;
         _this.http = http;
         _this.endpoint = Products.baseEndpoint;

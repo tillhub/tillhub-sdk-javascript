@@ -15,12 +15,12 @@ export interface FunctionsQuery {
     };
 }
 export interface FunctionsResponse {
-    data: object[];
-    metadata: object;
+    data: Record<string, unknown>[];
+    metadata: Record<string, unknown>;
     next?: () => Promise<FunctionsResponse>;
 }
 export interface FunctionResponse {
-    data: Function;
+    data: () => any;
     metadata?: {
         count?: number;
         patch?: any;
@@ -33,7 +33,7 @@ export declare type FunctionConfigurationClass = 'instant_checkout' | 'add_to_ca
 export declare type FunctionConfigurationResourceType = 'product' | 'discount' | 'voucher_action' | 'customer';
 export interface FunctionConfigurationResource {
     type?: FunctionConfigurationResourceType;
-    object_id?: string;
+    obj?: string;
 }
 export interface FunctionConfigurationImages {
     original?: string;
@@ -46,7 +46,7 @@ export interface FunctionConfiguration {
     resources?: FunctionConfigurationResource[];
     images?: FunctionConfigurationImages;
 }
-export interface Function {
+export interface FunctionInterface {
     name?: string;
     runtime?: FunctionRuntime;
     type?: FunctionType;
@@ -67,32 +67,32 @@ export declare class Functions extends ThBaseHandler {
     constructor(options: FunctionsOptions, http: Client);
     getAll(query?: FunctionsQuery | undefined): Promise<FunctionsResponse>;
     get(functionId: string): Promise<FunctionResponse>;
-    put(functionId: string, fn: Function): Promise<FunctionResponse>;
-    create(fn: Function): Promise<FunctionResponse>;
+    put(functionId: string, fn: FunctionInterface): Promise<FunctionResponse>;
+    create(fn: FunctionInterface): Promise<FunctionResponse>;
     delete(functionId: string): Promise<FunctionResponse>;
 }
 export declare class FunctionsFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class FunctionFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class FunctionPutFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class FunctionCreationFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class FunctionDeleteFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

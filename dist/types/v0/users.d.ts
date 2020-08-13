@@ -16,7 +16,7 @@ export interface HandleUsersQuery extends HandlerQuery {
 }
 export interface UsersResponse {
     data: User[];
-    metadata: object;
+    metadata: Record<string, unknown>;
 }
 export interface UserResponse {
     data: User;
@@ -39,17 +39,17 @@ export interface User {
     blocked?: boolean;
     deleted?: boolean;
     active?: boolean;
-    metadata?: object;
+    metadata?: Record<string, unknown>;
     role: UserRoles;
     user_id?: string;
     configuration_id: string;
-    groups?: object | null;
+    groups?: Record<string, unknown> | null;
     scopes?: string[] | null;
-    attributes?: object | null;
+    attributes?: Record<string, unknown> | null;
     parents?: string[] | null;
     children?: string[] | null;
     api_key?: string | null;
-    key?: object | null;
+    key?: Record<string, unknown> | null;
     secret?: string;
     username?: string;
     firstname?: string;
@@ -74,30 +74,30 @@ export declare class Users extends ThBaseHandler {
 export declare class UsersFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class UserFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class UserPutFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class UserCreationFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class UserDeleteFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class UserTokenCreationFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

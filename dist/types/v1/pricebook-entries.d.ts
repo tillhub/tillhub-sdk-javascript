@@ -17,7 +17,7 @@ export interface PricebookEntriesQuery {
 }
 export interface PricebookEntriesResponse {
     data: PricebookEntry[];
-    metadata: object;
+    metadata: Record<string, unknown>;
     next?: () => Promise<PricebookEntriesResponse>;
 }
 export interface PricebookEntryResponse {
@@ -36,13 +36,13 @@ export interface PricebookEntry {
     locations?: string[];
     clients?: string[];
     external_reference_id?: string;
-    constraints?: object;
+    constraints?: Record<string, unknown>;
     value_type?: string;
     amount_net?: number;
     amount_gross?: number;
     rate?: number;
     discounted_by?: number;
-    metadata?: object;
+    metadata?: Record<string, unknown>;
     active?: boolean;
     deleted?: boolean;
     updated_at?: string;
@@ -63,25 +63,25 @@ export declare class PricebookEntries {
 export declare class PricebookEntriesFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class PricebookEntryFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class PricebookEntryPutFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class PricebookEntryCreationFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class PricebookEntryDeleteFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

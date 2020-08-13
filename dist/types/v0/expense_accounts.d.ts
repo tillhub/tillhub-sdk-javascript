@@ -14,7 +14,7 @@ export interface ExpenseAccountsQuery {
 }
 export interface ExpenseAccountsResponse {
     data: ExpenseAccount[];
-    metadata: object;
+    metadata: Record<string, unknown>;
 }
 export interface ExpenseAccountResponse {
     data: ExpenseAccount;

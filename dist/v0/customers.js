@@ -13,10 +13,11 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -51,6 +52,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.CustomerDeleteFailed = exports.CustomersSearchFailed = exports.CustomersCountFailed = exports.CustomersMetaFailed = exports.CustomerCreationFailed = exports.CustomerNoteCreationFailed = exports.CustomerPutFailed = exports.CustomerFetchFailed = exports.CustomersFetchFailed = exports.Customers = void 0;
 var qs_1 = __importDefault(require("qs"));
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -58,7 +60,10 @@ var base_1 = require("../base");
 var Customers = /** @class */ (function (_super) {
     __extends(Customers, _super);
     function Customers(options, http) {
-        var _this = _super.call(this, http, { endpoint: Customers.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+        var _this = _super.call(this, http, {
+            endpoint: Customers.baseEndpoint,
+            base: options.base || 'https://api.tillhub.com'
+        }) || this;
         _this.options = options;
         _this.http = http;
         _this.endpoint = Customers.baseEndpoint;

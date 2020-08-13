@@ -6,8 +6,8 @@ export interface TransactionsItemsHandlerOptions {
     base?: string;
 }
 export interface AnalyticsReportsTransactionsItemsResponse {
-    data: object[];
-    summary: object[];
+    data: Record<string, unknown>[];
+    summary: Record<string, unknown>[];
     metaData: {
         count: number;
         total_count: number;
@@ -18,11 +18,11 @@ export declare class AnalyticsReportsTransactionsItems extends ThAnalyticsBaseHa
     http: Client;
     options: TransactionsItemsHandlerOptions;
     constructor(options: TransactionsItemsHandlerOptions, http: Client);
-    static create(options: object, http: Client): AnalyticsReportsTransactionsItems;
-    getAll(query?: object): Promise<AnalyticsReportsTransactionsItemsResponse>;
+    static create(options: Record<string, unknown>, http: Client): AnalyticsReportsTransactionsItems;
+    getAll(query?: Record<string, unknown>): Promise<AnalyticsReportsTransactionsItemsResponse>;
 }
 export declare class AnalyticsReportsTransactionsItemsFetchError extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

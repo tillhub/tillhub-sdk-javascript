@@ -16,7 +16,7 @@ export interface WarehousesQuery {
 }
 export interface WarehousesResponse {
     data: Warehouse;
-    metadata: object;
+    metadata: Record<string, unknown>;
     msg?: string | null;
 }
 export interface WarehouseResponse {

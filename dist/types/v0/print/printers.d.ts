@@ -11,12 +11,12 @@ export interface Printer {
 }
 export interface PrintersResponse {
     data: Printer[];
-    metadata: object;
+    metadata: Record<string, unknown>;
     msg?: string;
 }
 export interface PrinterResponse {
     data: Printer;
-    metadata: object;
+    metadata: Record<string, unknown>;
     msg?: string;
 }
 export declare class Printers {
@@ -24,9 +24,9 @@ export declare class Printers {
     options: PrintOptions;
     uriHelper: UriHelper;
     constructor(options: PrintOptions, http: Client, uriHelper: UriHelper);
-    getAll(query?: Object): Promise<PrintersResponse>;
+    getAll(query?: Record<string, unknown>): Promise<PrintersResponse>;
     get(printerId: string): Promise<PrinterResponse>;
-    create(printer: Object): Promise<PrinterResponse>;
-    update(printerId: string, printer: Object): Promise<PrinterResponse>;
+    create(printer: Record<string, unknown>): Promise<PrinterResponse>;
+    update(printerId: string, printer: Record<string, unknown>): Promise<PrinterResponse>;
     delete(printerId: string): Promise<PrinterResponse>;
 }

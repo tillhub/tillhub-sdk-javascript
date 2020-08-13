@@ -1,3 +1,10 @@
+# [3.207.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.206.0...v3.207.0) (2020-08-13)
+
+
+### Features
+
+* TM-7218 - typescript upgrade ([#319](https://github.com/tillhub/tillhub-sdk-javascript/issues/319)) ([67637ba](https://github.com/tillhub/tillhub-sdk-javascript/commit/67637ba9839f332b2ab0cc351859f651649307cf))
+
 # [3.206.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.205.3...v3.206.0) (2020-08-11)
 
 

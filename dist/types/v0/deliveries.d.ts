@@ -18,7 +18,7 @@ export interface DeliveriesCreateRequestObject {
     query?: DeliveriesQuery;
 }
 export interface DeliveriesCreateBody {
-    items: object[];
+    items: Record<string, unknown>[];
     order?: string | null;
     open?: boolean;
     deleted?: boolean;
@@ -34,11 +34,11 @@ export interface DeliveriesCreateBody {
     comments?: string | null;
     from?: string | null;
     to?: string | null;
-    recipient?: object | null;
-    sender?: object | null;
-    metadata?: object;
-    orders?: object[];
-    issuer?: object;
+    recipient?: Record<string, unknown> | null;
+    sender?: Record<string, unknown> | null;
+    metadata?: Record<string, unknown>;
+    orders?: Record<string, unknown>[];
+    issuer?: Record<string, unknown>;
     stock_mode?: string | null;
     status?: string | null;
 }
@@ -63,11 +63,11 @@ export interface DeliveriesUpdateBody {
     comments?: string | null;
     from?: string | null;
     to?: string | null;
-    recipient?: object | null;
-    sender?: object | null;
-    metadata?: object;
-    orders?: object[];
-    issuer?: object;
+    recipient?: Record<string, unknown> | null;
+    sender?: Record<string, unknown> | null;
+    metadata?: Record<string, unknown>;
+    orders?: Record<string, unknown>[];
+    issuer?: Record<string, unknown>;
     stock_mode?: string | null;
     status?: string | null;
 }
@@ -80,7 +80,7 @@ export interface DeliveryItemsCreateRequestObject {
     query?: DeliveriesQuery;
 }
 export interface DeliveryItemsCreateBody {
-    items: object[];
+    items: Record<string, unknown>[];
 }
 export interface DeliveryItemsCreateBodyItem {
     product: string;
@@ -114,8 +114,8 @@ export interface DeliveryItemsUpdateBody {
     comments?: string | null;
 }
 export interface DeliveriesResponse {
-    data: object[];
-    metadata: object;
+    data: Record<string, unknown>[];
+    metadata: Record<string, unknown>;
     next?: () => Promise<DeliveriesResponse>;
     msg?: string;
 }

@@ -18,11 +18,11 @@ export interface ProcessItemsQueryOptions {
 }
 export interface ProcessesResponse {
     data: Process[];
-    metadata: object;
+    metadata: Record<string, unknown>;
 }
 export interface ProcessResponse {
     data: Process;
-    metadata: object;
+    metadata: Record<string, unknown>;
     msg?: string;
 }
 export interface ProcessItemsObject {
@@ -34,7 +34,7 @@ export interface ProcessItems {
 }
 export interface ProcessesItemsResponse {
     data: ProcessItems;
-    metadata: object;
+    metadata: Record<string, unknown>;
 }
 export interface Process {
     started_at?: string;
@@ -42,7 +42,7 @@ export interface Process {
     assigned_staff?: string;
     status?: string;
     name?: string;
-    result?: object | ProcessItemsObject;
+    result?: Record<string, unknown> | ProcessItemsObject;
     deleted?: boolean;
 }
 export declare class Processes extends ThBaseHandler {
@@ -63,35 +63,35 @@ export declare class Processes extends ThBaseHandler {
 export declare class ProcessesFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ProcessesFetchOneFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ProcessesUpdateFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ProcessesCreationFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ProcessesDeleteFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ProcessItemsFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ProcessesMetaFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

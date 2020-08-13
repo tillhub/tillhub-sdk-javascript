@@ -16,8 +16,8 @@ export interface OrdersQuery {
     deleted?: boolean;
 }
 export interface OrdersResponse {
-    data: object[];
-    metadata: object;
+    data: Record<string, unknown>[];
+    metadata: Record<string, unknown>;
     msg?: string;
 }
 export interface OrdersUpdateValues {
@@ -34,7 +34,7 @@ export interface OrdersRequest {
 }
 export interface OrderItem {
     added_at?: string;
-    issuer?: object;
+    issuer?: Record<string, unknown>;
     order_qty: number;
     auto?: boolean;
     suggestion?: boolean;

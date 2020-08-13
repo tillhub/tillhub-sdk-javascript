@@ -11,7 +11,7 @@ export declare type Font = 'Open Sans';
 interface TemplateOptions {
     title?: string;
     logo?: string;
-    main_text?: String;
+    main_text?: string;
     addresses?: {
         self?: {
             enabled: boolean;
@@ -20,7 +20,7 @@ interface TemplateOptions {
             enabled: boolean;
         } | null;
     } | null;
-    font_color?: String;
+    font_color?: string;
     font?: Font;
     paper_size?: PaperSize;
 }
@@ -39,7 +39,7 @@ export interface TemplatesPreviewRequestObject {
 export interface TemplatesPreviewBody {
     paper_size?: string;
     title?: string;
-    addresses?: object;
+    addresses?: Record<string, unknown>;
     main_text?: string;
     attention?: string;
     font_color?: string;
@@ -55,8 +55,8 @@ export interface TemplatesOptions {
     base?: string;
 }
 export interface TemplatesResponse {
-    data: object[];
-    metadata: object;
+    data: Record<string, unknown>[];
+    metadata: Record<string, unknown>;
 }
 export declare class Templates extends ThBaseHandler {
     static baseEndpoint: string;

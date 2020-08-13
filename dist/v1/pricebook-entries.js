@@ -13,10 +13,11 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -48,6 +49,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.PricebookEntryDeleteFailed = exports.PricebookEntryCreationFailed = exports.PricebookEntryPutFailed = exports.PricebookEntryFetchFailed = exports.PricebookEntriesFetchFailed = exports.PricebookEntries = void 0;
 var errors_1 = require("../errors");
 var PricebookEntries = /** @class */ (function () {
     function PricebookEntries(options, http, uriHelper) {
@@ -70,7 +72,9 @@ var PricebookEntries = /** @class */ (function () {
                     case 1:
                         response_1 = _a.sent();
                         if (response_1.data.cursor && response_1.data.cursor.next) {
-                            next = function () { return _this.getAll({ uri: response_1.data.cursor.next }); };
+                            next = function () {
+                                return _this.getAll({ uri: response_1.data.cursor.next });
+                            };
                         }
                         return [2 /*return*/, resolve({
                                 data: response_1.data.results,

@@ -13,10 +13,11 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -48,13 +49,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ProcessesMetaFailed = exports.ProcessItemsFetchFailed = exports.ProcessesDeleteFailed = exports.ProcessesCreationFailed = exports.ProcessesUpdateFailed = exports.ProcessesFetchOneFailed = exports.ProcessesFetchFailed = exports.Processes = void 0;
 var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
 var errors_1 = require("../errors");
 var Processes = /** @class */ (function (_super) {
     __extends(Processes, _super);
     function Processes(options, http) {
-        var _this = _super.call(this, http, { endpoint: Processes.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+        var _this = _super.call(this, http, {
+            endpoint: Processes.baseEndpoint,
+            base: options.base || 'https://api.tillhub.com'
+        }) || this;
         _this.options = options;
         _this.http = http;
         _this.endpoint = Processes.baseEndpoint;
@@ -74,7 +79,8 @@ var Processes = /** @class */ (function (_super) {
                         return [4 /*yield*/, this.http.getClient().post(uri, process)];
                     case 1:
                         response = _a.sent();
-                        response.status !== 200 && reject(new ProcessesCreationFailed(undefined, { status: response.status }));
+                        response.status !== 200 &&
+                            reject(new ProcessesCreationFailed(undefined, { status: response.status }));
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count }
@@ -133,7 +139,8 @@ var Processes = /** @class */ (function (_super) {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
-                        response.status !== 200 && reject(new ProcessesFetchOneFailed(undefined, { status: response.status }));
+                        response.status !== 200 &&
+                            reject(new ProcessesFetchOneFailed(undefined, { status: response.status }));
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 metadata: { count: 1 }
@@ -158,7 +165,8 @@ var Processes = /** @class */ (function (_super) {
                         return [4 /*yield*/, this.http.getClient().patch(uri, process)];
                     case 1:
                         response = _a.sent();
-                        response.status !== 200 && reject(new ProcessesUpdateFailed(undefined, { status: response.status }));
+                        response.status !== 200 &&
+                            reject(new ProcessesUpdateFailed(undefined, { status: response.status }));
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count }
@@ -183,7 +191,8 @@ var Processes = /** @class */ (function (_super) {
                         return [4 /*yield*/, this.http.getClient().delete(uri)];
                     case 1:
                         response = _a.sent();
-                        response.status !== 200 && reject(new ProcessesDeleteFailed(undefined, { status: response.status }));
+                        response.status !== 200 &&
+                            reject(new ProcessesDeleteFailed(undefined, { status: response.status }));
                         return [2 /*return*/, resolve({
                                 msg: response.data.msg
                             })];
@@ -208,7 +217,8 @@ var Processes = /** @class */ (function (_super) {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
-                        response.status !== 200 && reject(new ProcessItemsFetchFailed(undefined, { state: response.status }));
+                        response.status !== 200 &&
+                            reject(new ProcessItemsFetchFailed(undefined, { state: response.status }));
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
@@ -326,7 +336,7 @@ exports.ProcessesDeleteFailed = ProcessesDeleteFailed;
 var ProcessItemsFetchFailed = /** @class */ (function (_super) {
     __extends(ProcessItemsFetchFailed, _super);
     function ProcessItemsFetchFailed(message, properties) {
-        if (message === void 0) { message = 'Could not fetch one process\' items'; }
+        if (message === void 0) { message = "Could not fetch one process' items"; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'ProcessItemsFetchFailed';

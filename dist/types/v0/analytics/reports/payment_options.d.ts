@@ -5,8 +5,8 @@ export interface PaymentOptionsOptions {
     base?: string;
 }
 export interface PaymentOptionsResponse {
-    data: object[];
-    metadata: object;
+    data: Record<string, unknown>[];
+    metadata: Record<string, unknown>;
 }
 export interface PaymentOptionsQuery {
     start?: string;

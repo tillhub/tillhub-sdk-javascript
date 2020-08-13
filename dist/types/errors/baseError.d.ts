@@ -1,5 +1,5 @@
 export declare class BaseError extends Error {
-    properties?: any;
+    properties?: Record<string, unknown>;
     message: string;
-    constructor(message: string, properties?: any);
+    constructor(message: string, properties?: Record<string, unknown>);
 }

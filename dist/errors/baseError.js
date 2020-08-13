@@ -13,6 +13,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.BaseError = void 0;
 var BaseError = /** @class */ (function (_super) {
     __extends(BaseError, _super);
     function BaseError(message, properties) {

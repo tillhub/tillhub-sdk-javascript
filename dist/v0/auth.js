@@ -12,11 +12,31 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -50,14 +70,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.LogoutFailed = exports.LogoutMissingToken = exports.Auth = exports.isOrgAuth = exports.isTokenAuth = exports.isKeyAuth = exports.isUsernameAuth = exports.AuthTypes = void 0;
 var axios_1 = __importDefault(require("axios"));
 var errors = __importStar(require("../errors"));
 var client_1 = require("../client");
@@ -69,20 +83,20 @@ var AuthTypes;
     AuthTypes[AuthTypes["org"] = 4] = "org";
     AuthTypes[AuthTypes["support"] = 5] = "support";
 })(AuthTypes = exports.AuthTypes || (exports.AuthTypes = {}));
-function isUsernameAuth(object) {
-    return 'password' in object;
+function isUsernameAuth(obj) {
+    return 'password' in obj;
 }
 exports.isUsernameAuth = isUsernameAuth;
-function isKeyAuth(object) {
-    return 'apiKey' in object;
+function isKeyAuth(obj) {
+    return 'apiKey' in obj;
 }
 exports.isKeyAuth = isKeyAuth;
-function isTokenAuth(object) {
-    return 'token' in object;
+function isTokenAuth(obj) {
+    return 'token' in obj;
 }
 exports.isTokenAuth = isTokenAuth;
-function isOrgAuth(object) {
-    return 'organisation' in object;
+function isOrgAuth(obj) {
+    return 'organisation' in obj;
 }
 exports.isOrgAuth = isOrgAuth;
 /**

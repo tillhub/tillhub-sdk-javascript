@@ -23,7 +23,7 @@ export interface RecoverQuery {
 }
 export interface TrashResponse {
     data: TrashedObject[];
-    metadata: object;
+    metadata: Record<string, unknown>;
     next?: () => Promise<TrashResponse>;
 }
 export interface TrashedObject {
@@ -46,10 +46,10 @@ export declare class Trash extends ThBaseHandler {
 export declare class TrashFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class RecoverFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

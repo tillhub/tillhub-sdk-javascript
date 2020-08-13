@@ -13,7 +13,7 @@ export interface DependenciesQuery {
 }
 export interface DependenciesResponse {
     data: Dependents[];
-    metadata: object;
+    metadata: Record<string, unknown>;
 }
 export interface Dependents {
     products?: number;
@@ -32,5 +32,5 @@ export declare class Dependencies extends ThBaseHandler {
 export declare class DependenciesFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

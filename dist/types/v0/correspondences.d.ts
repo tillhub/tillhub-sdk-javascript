@@ -14,8 +14,8 @@ export interface CorrespondencesQuery {
     };
 }
 export interface CorrespondencesResponse {
-    data: object[];
-    metadata: object;
+    data: Record<string, unknown>[];
+    metadata: Record<string, unknown>;
     next?: () => Promise<CorrespondencesResponse>;
 }
 export interface CorrespondenceResponse {
@@ -27,20 +27,20 @@ export interface CorrespondenceResponse {
     msg?: string;
 }
 export interface Correspondence {
-    metadata?: object;
+    metadata?: Record<string, unknown>;
     channel?: string;
-    recipient?: object;
-    sender?: object;
+    recipient?: Record<string, unknown>;
+    sender?: Record<string, unknown>;
     payload_type?: string;
-    payload?: object;
-    channel_message?: object;
+    payload?: Record<string, unknown>;
+    channel_message?: Record<string, unknown>;
     customer: string;
     resource_type?: string;
     resource?: string;
     sent_at?: string;
     delivered_at?: string;
     status?: string;
-    status_details?: object;
+    status_details?: Record<string, unknown>;
     type?: string;
 }
 export declare class Correspondences extends ThBaseHandler {
@@ -58,20 +58,20 @@ export declare class Correspondences extends ThBaseHandler {
 export declare class CorrespondencesFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class CorrespondenceFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class CorrespondencePutFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class CorrespondenceCreationFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

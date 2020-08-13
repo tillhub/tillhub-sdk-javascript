@@ -49,10 +49,10 @@ export interface LogoutResponse {
 export interface TokenAuth {
     token: string;
 }
-export declare function isUsernameAuth(object: any): object is UsernameAuth;
-export declare function isKeyAuth(object: any): object is KeyAuth;
-export declare function isTokenAuth(object: any): object is KeyAuth;
-export declare function isOrgAuth(object: any): object is KeyAuth;
+export declare function isUsernameAuth(obj: any): obj is UsernameAuth;
+export declare function isKeyAuth(obj: any): obj is KeyAuth;
+export declare function isTokenAuth(obj: any): obj is KeyAuth;
+export declare function isOrgAuth(obj: any): obj is KeyAuth;
 export interface AuthResponse {
     token: string;
     user: string;
@@ -61,7 +61,7 @@ export interface AuthResponse {
     is_support?: boolean;
     scopes?: string[];
     role?: string;
-    subUser?: object;
+    subUser?: Record<string, unknown>;
     orgName?: string;
     expiresAt?: string;
 }
@@ -90,10 +90,10 @@ export declare class Auth {
 export declare class LogoutMissingToken extends errors.BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class LogoutFailed extends errors.BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

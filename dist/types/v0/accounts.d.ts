@@ -16,7 +16,7 @@ export interface AccountsQueryOrOptions {
 }
 export interface AccountsResponse {
     data: Account[];
-    metadata: object;
+    metadata: Record<string, unknown>;
 }
 export interface AccountResponse {
     data: Account;

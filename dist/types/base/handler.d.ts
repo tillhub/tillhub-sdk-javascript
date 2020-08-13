@@ -30,7 +30,7 @@ export interface ThAnalyticsBaseResultItem {
         type?: string;
     };
     count: number;
-    values: object[];
+    values: Record<string, unknown>[];
 }
 export interface ThAnalyticsBaseResponse {
     results: ThAnalyticsBaseResultItem[];
@@ -47,9 +47,9 @@ export declare class ThAnalyticsBaseHandler {
     private client;
     constructor(http: Client, handlerOptions: ThAnalyticsBaseHandlerOptions);
     protected static generateAuthenticatedInstance<T>(type: {
-        new (options: object, http: Client): T;
+        new (options: ThAnalyticsBaseHandlerOptions, http: Client): T;
     }, options: ThAnalyticsBaseHandlerOptions, http: Client): T;
     private static generateUriWithQuery;
-    protected handleGet(url: string, query?: HandlerQuery, requestOptions?: object): Promise<ThAnalyticsBaseResponse>;
-    protected handleExport(url: string, query?: HandlerQuery, requestOptions?: object): Promise<ThAnalyticsExportsBaseResponse>;
+    protected handleGet(url: string, query?: HandlerQuery, requestOptions?: any): Promise<ThAnalyticsBaseResponse>;
+    protected handleExport(url: string, query?: HandlerQuery, requestOptions?: any): Promise<ThAnalyticsExportsBaseResponse>;
 }

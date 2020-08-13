@@ -5,8 +5,8 @@ export interface BalancesOptions {
     base?: string;
 }
 export interface BalancesResponse {
-    data: object[];
-    metadata: object;
+    data: Record<string, unknown>[];
+    metadata: Record<string, unknown>;
 }
 export interface BalancesQuery {
     start?: string | null;

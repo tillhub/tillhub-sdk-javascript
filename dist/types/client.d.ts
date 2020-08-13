@@ -1,4 +1,5 @@
 import { AxiosInstance } from 'axios';
+declare type Fn = () => any;
 export interface ClientOptions {
     base?: string;
     timeout?: number;
@@ -6,8 +7,8 @@ export interface ClientOptions {
         [key: string]: any;
     };
     token?: string;
-    responseInterceptors?: Function[];
-    requestInterceptors?: Function[];
+    responseInterceptors?: Fn[];
+    requestInterceptors?: Fn[];
 }
 /**
  * The Tillhub HTTP client is an axios instance that carries the state of of Authentication
@@ -27,3 +28,4 @@ export declare class Client {
     setDefaults(options: ClientOptions): Client;
     clearDefaults(): void;
 }
+export {};

@@ -27,8 +27,8 @@ export interface VouchersQueryOptions {
     is_campaign?: boolean;
 }
 export interface VouchersResponse {
-    data: object[];
-    metadata: object;
+    data: Record<string, unknown>[];
+    metadata: Record<string, unknown>;
     msg?: string;
     next?: () => Promise<VouchersResponse>;
 }
@@ -42,5 +42,5 @@ export declare class Vouchers extends VoucherV0 {
 export declare class VouchersFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

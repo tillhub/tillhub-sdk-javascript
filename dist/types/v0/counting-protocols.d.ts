@@ -43,7 +43,7 @@ export interface CountingProtocol {
     context?: string;
     comments?: string;
     location?: string;
-    cash_units?: object[];
+    cash_units?: Record<string, unknown>[];
     timezone?: string;
     discrepancy?: boolean;
     discrepancy_total?: string;
@@ -73,10 +73,10 @@ export declare class CountingProtocols extends ThBaseHandler {
 export declare class CountingProtocolsFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class CountingProtocolsMetaFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

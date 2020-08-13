@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UriHelper = void 0;
 var qs_1 = __importDefault(require("qs"));
 var UriHelper = /** @class */ (function () {
     function UriHelper(endpoint, options) {
@@ -34,7 +35,7 @@ var UriHelper = /** @class */ (function () {
             uri = query.uri || query.query.uri;
         }
         else if (query.query) {
-            var flattenQuery = __assign({}, query, query.query);
+            var flattenQuery = __assign(__assign({}, query), query.query);
             delete flattenQuery.query;
             uri = basePath + "?" + qs_1.default.stringify(flattenQuery);
         }

@@ -13,10 +13,11 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -48,6 +49,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.MeFetchFailed = exports.Me = void 0;
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
@@ -79,8 +81,7 @@ var Me = /** @class */ (function (_super) {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 &&
-                            reject(new MeFetchFailed(undefined, { status: response.status }));
+                        response.status !== 200 && reject(new MeFetchFailed(undefined, { status: response.status }));
                         return [2 /*return*/, resolve({
                                 data: response.data.results[0],
                                 msg: response.data.msg,

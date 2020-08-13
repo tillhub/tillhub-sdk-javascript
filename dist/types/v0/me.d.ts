@@ -23,7 +23,7 @@ export interface Me {
 export interface ErrorObject {
     id: string;
     label: string;
-    errorDetails?: object;
+    errorDetails?: Record<string, unknown>;
 }
 export declare class Me extends ThBaseHandler {
     static baseEndpoint: string;
@@ -37,5 +37,5 @@ export declare class Me extends ThBaseHandler {
 export declare class MeFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

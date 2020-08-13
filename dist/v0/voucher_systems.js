@@ -24,10 +24,11 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -62,6 +63,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.VoucherSystemDeleteFailed = exports.VoucherSystemCreationFailed = exports.VoucherSystemPutFailed = exports.VoucherSystemFetchFailed = exports.VoucherSystemsFetchFailed = exports.VoucherSystems = void 0;
 var qs_1 = __importDefault(require("qs"));
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -69,7 +71,10 @@ var base_1 = require("../base");
 var VoucherSystems = /** @class */ (function (_super) {
     __extends(VoucherSystems, _super);
     function VoucherSystems(options, http) {
-        var _this = _super.call(this, http, { endpoint: VoucherSystems.baseEndpoint, base: options.base || 'https://api.tillhub.com' }) || this;
+        var _this = _super.call(this, http, {
+            endpoint: VoucherSystems.baseEndpoint,
+            base: options.base || 'https://api.tillhub.com'
+        }) || this;
         _this.options = options;
         _this.http = http;
         _this.endpoint = VoucherSystems.baseEndpoint;
@@ -104,7 +109,9 @@ var VoucherSystems = /** @class */ (function (_super) {
                             return [2 /*return*/, reject(new VoucherSystemsFetchFailed(undefined, { status: response_1.status }))];
                         }
                         if (response_1.data.cursor && response_1.data.cursor.next) {
-                            next = function () { return _this.getAll({ uri: response_1.data.cursor.next }); };
+                            next = function () {
+                                return _this.getAll({ uri: response_1.data.cursor.next });
+                            };
                         }
                         return [2 /*return*/, resolve({
                                 data: response_1.data.results,

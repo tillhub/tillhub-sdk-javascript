@@ -23,14 +23,14 @@ export interface ProductServiceQuestionGroupReponse {
     msg?: string;
 }
 export interface ProductServiceQuestionGroupsResponse {
-    data: object[];
-    metadata: object;
+    data: Record<string, unknown>[];
+    metadata: Record<string, unknown>;
 }
 export interface ProductServiceQuestionGroup {
     name?: string;
     custom_id?: string;
     description?: string;
-    service_questions?: Array<String>;
+    service_questions?: Array<string>;
     deleted?: boolean;
     active?: boolean;
 }

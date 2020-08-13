@@ -8,16 +8,17 @@ import v2, { AnalyticsHandlerTypes } from './v2';
 import { Client } from './client';
 export { v0, v1, v2 };
 export declare const defaultOptions: TillhubSDKOptions;
+declare type Fn = () => any;
 export interface TillhubSDKOptions {
     credentials?: UsernameAuth | KeyAuth | TokenAuth | undefined;
     base?: string;
     user?: string;
-    responseInterceptors?: Function[];
-    requestInterceptors?: Function[];
+    responseInterceptors?: Fn[];
+    requestInterceptors?: Fn[];
 }
 export declare interface TillhubClient {
     on(event: 'raw-error' | 'error', listener: (error: Error) => void): this;
-    on(event: string, listener: Function): this;
+    on(event: string, listener: Fn): this;
 }
 export declare class TillhubClient extends events.EventEmitter {
     user?: string;

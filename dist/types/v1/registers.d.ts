@@ -12,7 +12,7 @@ export interface NotificationResponse {
 }
 export interface Notification {
     aps?: {
-        alert: string | object;
+        alert: string | Record<string, unknown>;
         sound?: string;
         badge?: string;
     };
@@ -39,7 +39,7 @@ export interface RegisterResponse {
 }
 export interface RegistersResponse {
     data: Register[];
-    metadata: object;
+    metadata: Record<string, unknown>;
     next?: () => Promise<RegistersResponse>;
 }
 export interface Register {

@@ -10,11 +10,11 @@ export interface ConfigurationsQueryOptions {
     limit?: number;
     uri?: string;
     owner?: string;
-    query?: any;
+    query?: Record<string, unknown>;
 }
 export interface ConfigurationsResponse {
     data: Configuration[];
-    metadata: object;
+    metadata: Record<string, unknown>;
 }
 export interface ConfigurationResponse {
     data: Configuration;
@@ -28,40 +28,40 @@ export interface Configuration {
     id?: string;
 }
 export interface Configuration {
-    vouchers?: object;
-    scan_prefixes?: object[];
-    voucher_actions?: object[];
-    settings?: object;
-    hooks?: object[];
-    themes?: object;
+    vouchers?: Record<string, unknown>;
+    scan_prefixes?: Record<string, unknown>[];
+    voucher_actions?: Record<string, unknown>[];
+    settings?: Record<string, unknown>;
+    hooks?: Record<string, unknown>[];
+    themes?: Record<string, unknown>;
     name?: string;
     client_id?: string;
-    metadata?: object;
-    registers?: object;
-    branches?: object;
+    metadata?: Record<string, unknown>;
+    registers?: Record<string, unknown>;
+    branches?: Record<string, unknown>;
     owner?: string;
-    franchise?: object;
-    staff?: object;
-    financials?: object | null;
-    features?: object | null;
-    stock?: object | null;
-    transactions?: object | null;
-    products?: object;
-    customers?: object;
-    crm?: object | null;
-    datev?: object | null;
-    label_printer?: object | null;
-    delivery_note?: object | null;
-    togo?: object | null;
-    receipts?: object | null;
-    orders?: object | null;
-    carts?: object | null;
-    tips?: object | null;
-    emails?: object | null;
+    franchise?: Record<string, unknown>;
+    staff?: Record<string, unknown>;
+    financials?: Record<string, unknown> | null;
+    features?: Record<string, unknown> | null;
+    stock?: Record<string, unknown> | null;
+    transactions?: Record<string, unknown> | null;
+    products?: Record<string, unknown>;
+    customers?: Record<string, unknown>;
+    crm?: Record<string, unknown> | null;
+    datev?: Record<string, unknown> | null;
+    label_printer?: Record<string, unknown> | null;
+    delivery_note?: Record<string, unknown> | null;
+    togo?: Record<string, unknown> | null;
+    receipts?: Record<string, unknown> | null;
+    orders?: Record<string, unknown> | null;
+    carts?: Record<string, unknown> | null;
+    tips?: Record<string, unknown> | null;
+    emails?: Record<string, unknown> | null;
     level?: 'client_account' | 'registers' | 'branches';
-    taxes?: object | null;
-    analytics?: object;
-    custom_dashboards?: object;
+    taxes?: Record<string, unknown> | null;
+    analytics?: Record<string, unknown>;
+    custom_dashboards?: Record<string, unknown>;
 }
 declare class ConfigurationReference {
     data: Configuration;

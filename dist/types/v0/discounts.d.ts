@@ -14,7 +14,7 @@ export interface DiscountsQuery {
 }
 export interface DiscountsResponse {
     data: Discount[];
-    metadata: object;
+    metadata: Record<string, unknown>;
     next?: () => Promise<DiscountsResponse>;
 }
 export interface DiscountResponse {
@@ -30,8 +30,6 @@ export declare type DiscountGroupType = 'cart' | 'customer';
 export interface Discount {
     id?: string;
 }
-export interface Constraints {
-}
 export interface Discount {
     amount?: number;
     type: DiscountType;
@@ -40,7 +38,7 @@ export interface Discount {
     group: DiscountGroupType;
     active?: boolean;
     deleted?: boolean;
-    constraints?: Constraints | null;
+    constraints?: Record<string, unknown> | null;
 }
 export declare class Discounts extends ThBaseHandler {
     static baseEndpoint: string;

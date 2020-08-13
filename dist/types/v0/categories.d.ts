@@ -14,8 +14,8 @@ export interface CategoriesQuery {
     };
 }
 export interface CategoriesResponse {
-    data: object[];
-    metadata: object;
+    data: Record<string, unknown>[];
+    metadata: Record<string, unknown>;
     next?: () => Promise<CategoriesResponse>;
 }
 export interface CategoryResponse {
@@ -27,13 +27,13 @@ export interface CategoryResponse {
     msg?: string;
 }
 export interface Category {
-    metadata?: object;
+    metadata?: Record<string, unknown>;
     name?: string;
     summary?: string;
     description?: string;
     comments?: string;
     color?: string;
-    images?: object;
+    images?: Record<string, unknown>;
     active?: boolean;
     deleted?: boolean;
 }
@@ -53,25 +53,25 @@ export declare class Categories extends ThBaseHandler {
 export declare class CategoriesFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class CategoryFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class CategoryPutFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class CategoryCreationFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class CategoriesDeleteFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

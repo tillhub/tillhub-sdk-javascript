@@ -12,8 +12,6 @@ export interface Cart {
 export interface Cart {
     name?: string;
 }
-export interface HandlerCartsQuery {
-}
 export interface CartsOptions {
     user?: string;
     base?: string;
@@ -26,10 +24,11 @@ export interface CartsOptions {
     };
 }
 export interface CartDeleteOptions {
+    [key: string]: any;
 }
 export interface CartsResponse {
     data: Cart[];
-    metadata: object;
+    metadata: Record<string, unknown>;
     msg?: string;
     next?: () => Promise<CartsResponse>;
 }
@@ -45,9 +44,10 @@ export interface CartResponse {
 export interface ErrorObject {
     id: string;
     label: string;
-    errorDetails: object;
+    errorDetails: Record<string, unknown>;
 }
 export interface CartsCreateQuery {
+    [key: string]: any;
 }
 export interface HandlerProductsQuery extends HandlerQuery {
     query?: CartsCreateQuery;
@@ -63,7 +63,7 @@ export declare class Carts extends ThBaseHandler {
     options: CartsOptions;
     uriHelper: UriHelper;
     constructor(options: CartsOptions, http: Client);
-    create(cart: Cart, query?: HandlerCartsQuery): Promise<CartResponse>;
+    create(cart: Cart, query?: Record<string, unknown>): Promise<CartResponse>;
     getAll(options?: CartsOptions | undefined): Promise<CartsResponse>;
     get(cartId: string): Promise<CartResponse>;
     meta(): Promise<CartsResponse>;
@@ -74,35 +74,35 @@ export declare class Carts extends ThBaseHandler {
 export declare class CartFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class CartsSearchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class CartsDeleteFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class CartsUpdateFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class CartsMetaFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class CartsFetchFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class CartsCreateFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string, properties?: any);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

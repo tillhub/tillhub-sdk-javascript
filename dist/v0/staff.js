@@ -24,10 +24,11 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -62,6 +63,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.StaffSearchFailed = exports.StaffMetaFailed = exports.MakeUserStaffFailed = exports.StaffNumberGetFailed = exports.StaffPinGetFailed = exports.StaffMemberCreateFailed = exports.StaffDeleteFailed = exports.StaffPutFailed = exports.StaffFetchOneFailed = exports.StaffFetchFailed = exports.Staff = void 0;
 var qs_1 = __importDefault(require("qs"));
 var just_typeof_1 = __importDefault(require("just-typeof"));
 var errors_1 = require("../errors");
@@ -355,25 +357,20 @@ var Staff = /** @class */ (function (_super) {
                             return [2 /*return*/, reject(new StaffFetchFailed(undefined, { status: response.status }))];
                         }
                         resp = response.data.results || [];
-                        resources_1 = [
-                            'staff_number',
-                            'lastname',
-                            'firstname',
-                            'email',
-                            'phonenumbers'
-                        ];
+                        resources_1 = ['staff_number', 'lastname', 'firstname', 'email', 'phonenumbers'];
                         list = resp.reduce(function (acc, curr) {
                             var obj = {};
                             resources_1.forEach(function (key) {
                                 obj[key] = acc[key] || [];
                                 var currValue = curr[key];
                                 if (key === 'phonenumbers' && currValue) {
-                                    currValue = (currValue.mobile ||
-                                        currValue.main ||
-                                        currValue.home ||
-                                        currValue.work ||
-                                        currValue.any ||
-                                        null);
+                                    currValue =
+                                        currValue.mobile ||
+                                            currValue.main ||
+                                            currValue.home ||
+                                            currValue.work ||
+                                            currValue.any ||
+                                            null;
                                 }
                                 if (currValue && !obj[key].includes(currValue)) {
                                     obj[key].push(currValue);
@@ -476,7 +473,8 @@ var Staff = /** @class */ (function (_super) {
                         return [4 /*yield*/, this.http.getClient().get(uri)];
                     case 2:
                         response = _a.sent();
-                        response.status !== 200 && reject(new StaffSearchFailed(undefined, { status: response.status }));
+                        response.status !== 200 &&
+                            reject(new StaffSearchFailed(undefined, { status: response.status }));
                         return [2 /*return*/, resolve({
                                 data: response.data.results,
                                 metadata: { count: response.data.count }

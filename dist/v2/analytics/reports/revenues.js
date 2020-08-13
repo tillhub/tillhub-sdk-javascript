@@ -13,10 +13,11 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -48,6 +49,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.AnalyticsReportsRevenuesGroupedExportFetchError = exports.AnalyticsReportsRevenuesGroupedFetchError = exports.AnalyticsReportsRevenuesGrouped = void 0;
 var base_1 = require("../../../base");
 var errors_1 = require("../../../errors");
 var AnalyticsReportsRevenuesGrouped = /** @class */ (function (_super) {
@@ -76,10 +78,12 @@ var AnalyticsReportsRevenuesGrouped = /** @class */ (function (_super) {
                         if (!d) {
                             throw new TypeError('Unexpectedly did not return data.');
                         }
-                        data = (d.find(function (item) { return (item.metric.job === 'reports_revenues_items_v2_data'); }) || {}).values;
-                        summary = d.find(function (item) { return (item.metric.job === 'reports_revenues_items_v2_summary'); }).values;
+                        data = (d.find(function (item) { return item.metric.job === 'reports_revenues_items_v2_data'; }) || {}).values;
+                        summary = d.find(function (item) { return item.metric.job === 'reports_revenues_items_v2_summary'; }).values;
                         if (next_1) {
-                            nextFn = function () { return _this.getAll({ uri: next_1 }); };
+                            nextFn = function () {
+                                return _this.getAll({ uri: next_1 });
+                            };
                         }
                         return [2 /*return*/, {
                                 data: data,

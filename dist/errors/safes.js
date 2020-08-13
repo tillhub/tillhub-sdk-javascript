@@ -13,6 +13,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SafesLogBookGetMetaFailed = exports.SafesLogBookFetchAllFailed = exports.SafesBookFailed = exports.SafesPutFailed = exports.SafesCreationFailed = exports.SafesGetMetaFailed = exports.SafesFetchOneFailed = exports.SafesFetchAllFailed = void 0;
 var baseError_1 = require("./baseError");
 var SafesFetchAllFailed = /** @class */ (function (_super) {
     __extends(SafesFetchAllFailed, _super);
