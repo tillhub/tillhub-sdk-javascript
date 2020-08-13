@@ -44,7 +44,7 @@ describe('v0: Analytics: gets product groups transactions report', () => {
 
       mock
         .onGet(`https://api.tillhub.com/api/v0/analytics/${legacyId}/aggregates/product_groups`)
-        .reply(function() {
+        .reply(() => {
           return [
             200,
             {

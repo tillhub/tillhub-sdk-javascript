@@ -55,7 +55,10 @@ describe('v0: Analytics: gets customers report', () => {
     const th = new TillhubClient()
 
     th.init(options)
-    await th.auth.loginUsername({ username: user.username, password: user.password })
+    await th.auth.loginUsername({
+      username: user.username,
+      password: user.password
+    })
 
     const customers = th.analytics().customers()
 
@@ -165,10 +168,7 @@ describe('v0: Analytics: gets customers report', () => {
     })
 
     try {
-      await th
-        .analytics()
-        .customers()
-        .getAll()
+      await th.analytics().customers().getAll()
     } catch (err) {
       expect(err.name).toBe('CustomerFetchFailed')
     }

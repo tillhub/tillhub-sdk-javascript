@@ -133,10 +133,7 @@ describe('v0: Branches: can get count number of all customers reports', () => {
     })
 
     try {
-      await th
-        .analytics()
-        .customers()
-        .meta(query)
+      await th.analytics().customers().meta(query)
     } catch (err) {
       expect(err.name).toBe('CustomersMetaFailed')
     }

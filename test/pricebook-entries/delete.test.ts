@@ -82,10 +82,7 @@ describe('v0: PricebookEntries: can delete a pricebook', () => {
     const th = await initThInstance()
 
     try {
-      await th
-        .products()
-        .pricebookEntries()
-        .delete(pricebookEntryId)
+      await th.products().pricebookEntries().delete(pricebookEntryId)
     } catch (err) {
       expect(err.name).toBe('PricebookEntryDeleteFailed')
     }

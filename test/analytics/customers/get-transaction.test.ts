@@ -134,10 +134,7 @@ describe('v0: Analytics: gets customers transactions report', () => {
     })
 
     try {
-      await th
-        .analytics()
-        .customers()
-        .getTransaction(mockCustomersQuery)
+      await th.analytics().customers().getTransaction(mockCustomersQuery)
     } catch (err) {
       expect(err.name).toBe('CustomerTransactionFetchFailed')
     }

@@ -118,10 +118,7 @@ describe('v0:  Analytics Reports Balances: can get all', () => {
     })
 
     try {
-      await th
-        .analytics()
-        .balances()
-        .getAll()
+      await th.analytics().balances().getAll()
     } catch (err) {
       expect(err.name).toBe('ReportsBalancesFetchAllFailed')
     }

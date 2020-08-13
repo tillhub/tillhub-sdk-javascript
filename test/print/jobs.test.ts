@@ -374,10 +374,7 @@ describe('v0: Print.Jobs', () => {
     })
 
     try {
-      await th
-        .print()
-        .jobs()
-        .getAll()
+      await th.print().jobs().getAll()
       fail('should throw an error')
     } catch (e) {
       expect(e.name).toEqual(PrintJobsFetchFailed.name)
@@ -421,10 +418,7 @@ describe('v0: Print.Jobs', () => {
     })
 
     try {
-      await th
-        .print()
-        .jobs()
-        .get(jobId)
+      await th.print().jobs().get(jobId)
       fail('should throw an error')
     } catch (e) {
       expect(e.name).toEqual(PrintJobFetchFailed.name)
@@ -468,10 +462,7 @@ describe('v0: Print.Jobs', () => {
     })
 
     try {
-      await th
-        .print()
-        .jobs()
-        .create(mockJob)
+      await th.print().jobs().create(mockJob)
       fail('should throw an error')
     } catch (e) {
       expect(e.name).toEqual(PrintJobCreateFailed.name)
@@ -515,10 +506,7 @@ describe('v0: Print.Jobs', () => {
     })
 
     try {
-      await th
-        .print()
-        .jobs()
-        .update(jobId, mockJob)
+      await th.print().jobs().update(jobId, mockJob)
       fail('should throw an error')
     } catch (e) {
       expect(e.name).toEqual(PrintJobUpdateFailed.name)
@@ -562,10 +550,7 @@ describe('v0: Print.Jobs', () => {
     })
 
     try {
-      await th
-        .print()
-        .jobs()
-        .delete(jobId)
+      await th.print().jobs().delete(jobId)
       fail('should throw an error')
     } catch (e) {
       expect(e.name).toEqual(PrintJobDeleteFailed.name)
@@ -611,10 +596,7 @@ describe('v0: Print.Jobs', () => {
     })
 
     try {
-      await th
-        .print()
-        .jobs()
-        .getData(jobId)
+      await th.print().jobs().getData(jobId)
       fail('should throw an error')
     } catch (e) {
       expect(e.name).toEqual(PrintJobDataFetchFailed.name)

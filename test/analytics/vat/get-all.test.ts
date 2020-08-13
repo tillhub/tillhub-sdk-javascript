@@ -109,10 +109,7 @@ describe('v0: Analytics: gets vat report', () => {
     const th = await initThInstance()
 
     try {
-      await th
-        .analytics()
-        .vat()
-        .getAll()
+      await th.analytics().vat().getAll()
     } catch (err) {
       expect(err.name).toBe('VatReportFetchFailed')
     }

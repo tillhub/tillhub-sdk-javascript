@@ -29,7 +29,7 @@ const taxObj = {
 describe('v0: Taxes: can create one tax class', () => {
   it("Tillhub's taxes is instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function() {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -42,7 +42,7 @@ describe('v0: Taxes: can create one tax class', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/taxes/${legacyId}`).reply(function() {
+      mock.onPost(`https://api.tillhub.com/api/v0/taxes/${legacyId}`).reply(() => {
         return [
           200,
           {
@@ -66,7 +66,7 @@ describe('v0: Taxes: can create one tax class', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function() {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -79,7 +79,7 @@ describe('v0: Taxes: can create one tax class', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/taxes/${legacyId}`).reply(function() {
+      mock.onPost(`https://api.tillhub.com/api/v0/taxes/${legacyId}`).reply(() => {
         return [205]
       })
     }

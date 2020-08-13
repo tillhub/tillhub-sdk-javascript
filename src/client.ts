@@ -79,7 +79,7 @@ export class Client {
     // NOTE not sure if this is the correct place to inject the interceptors, but it's the most reliable
     if (options.responseInterceptors && options.responseInterceptors.length) {
       // remove previous interceptors
-      this.responseInterceptorIds.forEach(id =>
+      this.responseInterceptorIds.forEach((id) =>
         Client.instance.axiosInstance.interceptors.response.eject(id)
       )
 
@@ -93,7 +93,7 @@ export class Client {
     }
 
     if (options.requestInterceptors && options.requestInterceptors.length) {
-      this.requestInterceptorIds.forEach(id =>
+      this.requestInterceptorIds.forEach((id) =>
         Client.instance.axiosInstance.interceptors.request.eject(id)
       )
 

@@ -118,10 +118,7 @@ describe('v0: Analytics Reports PaymentOptions: can get count number of all paym
     })
 
     try {
-      await th
-        .analytics()
-        .paymentOptions()
-        .meta()
+      await th.analytics().paymentOptions().meta()
     } catch (err) {
       expect(err.name).toBe('ReportsPaymentOptionsMetaFailed')
     }

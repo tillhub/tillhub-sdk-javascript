@@ -85,10 +85,7 @@ describe('v0: PricebookEntries: can get one pricebook entry', () => {
 
     try {
       const th = await initThInstance()
-      await th
-        .products()
-        .pricebookEntries()
-        .get(pricebookId)
+      await th.products().pricebookEntries().get(pricebookId)
     } catch (err) {
       expect(err.name).toBe('PricebookEntryFetchFailed')
     }

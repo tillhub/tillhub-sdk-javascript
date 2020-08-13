@@ -131,10 +131,7 @@ describe('v0: Analytics Customers filters options', () => {
     })
 
     try {
-      await th
-        .analytics()
-        .customers()
-        .getFilters()
+      await th.analytics().customers().getFilters()
     } catch (err) {
       expect(err.name).toBe('CustomerFilterFetchFailed')
     }

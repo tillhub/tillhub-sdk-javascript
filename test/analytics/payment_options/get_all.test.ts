@@ -118,10 +118,7 @@ describe('v0:  Analytics Reports Payment Options: can get all', () => {
     })
 
     try {
-      await th
-        .analytics()
-        .paymentOptions()
-        .getAll()
+      await th.analytics().paymentOptions().getAll()
     } catch (err) {
       expect(err.name).toBe('ReportsPaymentOptionsFetchAllFailed')
     }

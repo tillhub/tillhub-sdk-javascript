@@ -127,10 +127,7 @@ describe('v0: Analytics Reports Balances: can get one', () => {
     })
 
     try {
-      await th
-        .analytics()
-        .balances()
-        .get({ balanceId, query })
+      await th.analytics().balances().get({ balanceId, query })
     } catch (err) {
       expect(err.name).toBe('ReportsBalancesFetchOneFailed')
     }

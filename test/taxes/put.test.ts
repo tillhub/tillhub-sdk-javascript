@@ -28,7 +28,7 @@ const updateObject = {
 describe('v0: Taxes: can alter the tax class', () => {
   it("Tillhub's taxes are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function() {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -41,7 +41,7 @@ describe('v0: Taxes: can alter the tax class', () => {
         ]
       })
 
-      mock.onPut(`https://api.tillhub.com/api/v0/taxes/${legacyId}/${taxId}`).reply(function() {
+      mock.onPut(`https://api.tillhub.com/api/v0/taxes/${legacyId}/${taxId}`).reply(() => {
         return [
           200,
           {
@@ -65,7 +65,7 @@ describe('v0: Taxes: can alter the tax class', () => {
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(function() {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
           200,
           {
@@ -77,7 +77,7 @@ describe('v0: Taxes: can alter the tax class', () => {
           }
         ]
       })
-      mock.onPut(`https://api.tillhub.com/api/v0/taxes/${legacyId}/${taxId}`).reply(function() {
+      mock.onPut(`https://api.tillhub.com/api/v0/taxes/${legacyId}/${taxId}`).reply(() => {
         return [205]
       })
     }

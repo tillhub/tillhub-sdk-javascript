@@ -86,10 +86,7 @@ describe('v0: PricebookEntries: can alter the pricebookEntries', () => {
     const th = await initThInstance()
 
     try {
-      await th
-        .products()
-        .pricebookEntries()
-        .put(pricebookEntryId, pricebookEntry)
+      await th.products().pricebookEntries().put(pricebookEntryId, pricebookEntry)
     } catch (err) {
       expect(err.name).toBe('PricebookEntryPutFailed')
     }

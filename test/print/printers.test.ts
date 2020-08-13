@@ -328,10 +328,7 @@ describe('v0: Print.Printers', () => {
     })
 
     try {
-      await th
-        .print()
-        .printers()
-        .getAll()
+      await th.print().printers().getAll()
       fail('should throw an error')
     } catch (e) {
       expect(e.name).toEqual(PrintersFetchFailed.name)
@@ -377,10 +374,7 @@ describe('v0: Print.Printers', () => {
     })
 
     try {
-      await th
-        .print()
-        .printers()
-        .get(printerId)
+      await th.print().printers().get(printerId)
       fail('should throw an error')
     } catch (e) {
       expect(e.name).toEqual(PrinterFetchFailed.name)
@@ -426,10 +420,7 @@ describe('v0: Print.Printers', () => {
     })
 
     try {
-      await th
-        .print()
-        .printers()
-        .create(mockPrinter)
+      await th.print().printers().create(mockPrinter)
       fail('should throw an error')
     } catch (e) {
       expect(e.name).toEqual(PrinterCreateFailed.name)
@@ -475,10 +466,7 @@ describe('v0: Print.Printers', () => {
     })
 
     try {
-      await th
-        .print()
-        .printers()
-        .update(printerId, mockPrinter)
+      await th.print().printers().update(printerId, mockPrinter)
       fail('should throw an error')
     } catch (e) {
       expect(e.name).toEqual(PrinterUpdateFailed.name)
@@ -524,10 +512,7 @@ describe('v0: Print.Printers', () => {
     })
 
     try {
-      await th
-        .print()
-        .printers()
-        .delete(printerId)
+      await th.print().printers().delete(printerId)
       fail('should throw an error')
     } catch (e) {
       expect(e.name).toEqual(PrinterDeleteFailed.name)

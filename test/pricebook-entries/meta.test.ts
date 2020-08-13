@@ -76,10 +76,7 @@ describe('v0: PricebookEntries: can get count number of all pricebook entries', 
     const th = await initThInstance()
 
     try {
-      await th
-        .products()
-        .pricebookEntries()
-        .meta()
+      await th.products().pricebookEntries().meta()
     } catch (err) {
       expect(err.name).toBe('PricebookEntriesMetaFailed')
     }

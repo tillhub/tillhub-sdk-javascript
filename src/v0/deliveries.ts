@@ -168,7 +168,7 @@ export class Deliveries extends ThBaseHandler {
 
         if (query && query.embed) {
           const queryString = query.embed
-            .map(item => {
+            .map((item) => {
               return `embed[]=${item}`
             })
             .join('&')
@@ -201,7 +201,7 @@ export class Deliveries extends ThBaseHandler {
       try {
         if (query && query.embed) {
           const queryString = query.embed
-            .map(item => {
+            .map((item) => {
               return `embed[]=${item}`
             })
             .join('&')
@@ -230,7 +230,7 @@ export class Deliveries extends ThBaseHandler {
       try {
         if (query && query.embed) {
           const queryString = query.embed
-            .map(item => {
+            .map((item) => {
               return `embed[]=${item}`
             })
             .join('&')
@@ -279,7 +279,7 @@ export class Deliveries extends ThBaseHandler {
 
       if (query && query.embed) {
         const queryString = query.embed
-          .map(item => {
+          .map((item) => {
             return `embed[]=${item}`
           })
           .join('&')
@@ -308,7 +308,7 @@ export class Deliveries extends ThBaseHandler {
 
       if (query && query.embed) {
         const queryString = query.embed
-          .map(item => {
+          .map((item) => {
             return `embed[]=${item}`
           })
           .join('&')
@@ -337,7 +337,7 @@ export class Deliveries extends ThBaseHandler {
 
       if (query && query.embed) {
         const queryString = query.embed
-          .map(item => {
+          .map((item) => {
             return `embed[]=${item}`
           })
           .join('&')
@@ -384,7 +384,7 @@ export class Deliveries extends ThBaseHandler {
       try {
         if (query && query.embed) {
           const queryString = query.embed
-            .map(item => {
+            .map((item) => {
               return `embed[]=${item}`
             })
             .join('&')
@@ -415,7 +415,7 @@ export class Deliveries extends ThBaseHandler {
       try {
         if (query && query.embed) {
           const queryString = query.embed
-            .map(item => {
+            .map((item) => {
               return `embed[]=${item}`
             })
             .join('&')
@@ -443,7 +443,7 @@ export class Deliveries extends ThBaseHandler {
 
       if (query && query.embed) {
         const queryString = query.embed
-          .map(item => {
+          .map((item) => {
             return `embed[]=${item}`
           })
           .join('&')

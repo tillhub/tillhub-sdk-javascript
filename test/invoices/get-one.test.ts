@@ -26,7 +26,7 @@ const requestObject = {
 }
 
 const queryString = requestObject.query.embed
-  .map(item => {
+  .map((item) => {
     return `embed[]=${item}`
   })
   .join('&')

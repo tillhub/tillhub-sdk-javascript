@@ -77,10 +77,7 @@ describe('v0: Pricebook: can create one pricebook', () => {
 
     try {
       const th = await initThInstance()
-      await th
-        .products()
-        .pricebooks()
-        .create(pricebook)
+      await th.products().pricebooks().create(pricebook)
     } catch (err) {
       expect(err.name).toBe('PricebookCreationFailed')
     }

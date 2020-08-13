@@ -75,10 +75,7 @@ describe('v0: Analytics: gets vat report metadata', () => {
     const th = await initThInstance()
 
     try {
-      await th
-        .analytics()
-        .vat()
-        .meta()
+      await th.analytics().vat().meta()
     } catch (err) {
       expect(err.name).toBe('VatReportFetchMetaFailed')
     }

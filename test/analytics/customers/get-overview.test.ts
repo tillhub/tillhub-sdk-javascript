@@ -134,10 +134,7 @@ describe('v0: Analytics: gets customers overview report', () => {
     })
 
     try {
-      await th
-        .analytics()
-        .customers()
-        .getOverview(mockCustomersQuery)
+      await th.analytics().customers().getOverview(mockCustomersQuery)
     } catch (err) {
       expect(err.name).toBe('CustomerOverviewFetchFailed')
     }
