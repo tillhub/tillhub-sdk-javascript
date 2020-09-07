@@ -1,22 +1,10 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CustomersMetaFailed = exports.CustomerOverviewFetchFailed = exports.CustomerTransactionFetchFailed = exports.CustomerFilterFetchFailed = exports.CustomerFetchFailed = exports.VatReportFetchMetaFailed = exports.VatReportFetchFailed = exports.ReportsPaymentsMetaFailed = exports.ReportsPaymentsFetchAllFailed = exports.ReportsPaymentOptionsMetaFailed = exports.ReportsPaymentOptionsFetchAllFailed = exports.ReportsBalancesMetaFailed = exports.ReportsBalancesFetchOneFailed = exports.ReportsBalancesFetchAllFailed = void 0;
+var tslib_1 = require("tslib");
 var baseError_1 = require("./baseError");
-var ReportsBalancesFetchAllFailed = /** @class */ (function (_super) {
-    __extends(ReportsBalancesFetchAllFailed, _super);
+var ReportsBalancesFetchAllFailed = (function (_super) {
+    tslib_1.__extends(ReportsBalancesFetchAllFailed, _super);
     function ReportsBalancesFetchAllFailed(message, properties) {
         if (message === void 0) { message = 'Could not fetch all the balances'; }
         var _this = _super.call(this, message, properties) || this;
@@ -28,8 +16,8 @@ var ReportsBalancesFetchAllFailed = /** @class */ (function (_super) {
     return ReportsBalancesFetchAllFailed;
 }(baseError_1.BaseError));
 exports.ReportsBalancesFetchAllFailed = ReportsBalancesFetchAllFailed;
-var ReportsBalancesFetchOneFailed = /** @class */ (function (_super) {
-    __extends(ReportsBalancesFetchOneFailed, _super);
+var ReportsBalancesFetchOneFailed = (function (_super) {
+    tslib_1.__extends(ReportsBalancesFetchOneFailed, _super);
     function ReportsBalancesFetchOneFailed(message, properties) {
         if (message === void 0) { message = 'Could not fetch one balance'; }
         var _this = _super.call(this, message, properties) || this;
@@ -41,8 +29,8 @@ var ReportsBalancesFetchOneFailed = /** @class */ (function (_super) {
     return ReportsBalancesFetchOneFailed;
 }(baseError_1.BaseError));
 exports.ReportsBalancesFetchOneFailed = ReportsBalancesFetchOneFailed;
-var ReportsBalancesMetaFailed = /** @class */ (function (_super) {
-    __extends(ReportsBalancesMetaFailed, _super);
+var ReportsBalancesMetaFailed = (function (_super) {
+    tslib_1.__extends(ReportsBalancesMetaFailed, _super);
     function ReportsBalancesMetaFailed(message, properties) {
         if (message === void 0) { message = 'Could not fetch meta data for balances'; }
         var _this = _super.call(this, message, properties) || this;
@@ -54,8 +42,8 @@ var ReportsBalancesMetaFailed = /** @class */ (function (_super) {
     return ReportsBalancesMetaFailed;
 }(baseError_1.BaseError));
 exports.ReportsBalancesMetaFailed = ReportsBalancesMetaFailed;
-var ReportsPaymentOptionsFetchAllFailed = /** @class */ (function (_super) {
-    __extends(ReportsPaymentOptionsFetchAllFailed, _super);
+var ReportsPaymentOptionsFetchAllFailed = (function (_super) {
+    tslib_1.__extends(ReportsPaymentOptionsFetchAllFailed, _super);
     function ReportsPaymentOptionsFetchAllFailed(message, properties) {
         if (message === void 0) { message = 'Could not fetch all the payment options'; }
         var _this = _super.call(this, message, properties) || this;
@@ -67,8 +55,8 @@ var ReportsPaymentOptionsFetchAllFailed = /** @class */ (function (_super) {
     return ReportsPaymentOptionsFetchAllFailed;
 }(baseError_1.BaseError));
 exports.ReportsPaymentOptionsFetchAllFailed = ReportsPaymentOptionsFetchAllFailed;
-var ReportsPaymentOptionsMetaFailed = /** @class */ (function (_super) {
-    __extends(ReportsPaymentOptionsMetaFailed, _super);
+var ReportsPaymentOptionsMetaFailed = (function (_super) {
+    tslib_1.__extends(ReportsPaymentOptionsMetaFailed, _super);
     function ReportsPaymentOptionsMetaFailed(message, properties) {
         if (message === void 0) { message = 'Could not fetch meta the payment options'; }
         var _this = _super.call(this, message, properties) || this;
@@ -80,8 +68,8 @@ var ReportsPaymentOptionsMetaFailed = /** @class */ (function (_super) {
     return ReportsPaymentOptionsMetaFailed;
 }(baseError_1.BaseError));
 exports.ReportsPaymentOptionsMetaFailed = ReportsPaymentOptionsMetaFailed;
-var ReportsPaymentsFetchAllFailed = /** @class */ (function (_super) {
-    __extends(ReportsPaymentsFetchAllFailed, _super);
+var ReportsPaymentsFetchAllFailed = (function (_super) {
+    tslib_1.__extends(ReportsPaymentsFetchAllFailed, _super);
     function ReportsPaymentsFetchAllFailed(message, properties) {
         if (message === void 0) { message = 'Could not fetch all the payments'; }
         var _this = _super.call(this, message, properties) || this;
@@ -93,8 +81,8 @@ var ReportsPaymentsFetchAllFailed = /** @class */ (function (_super) {
     return ReportsPaymentsFetchAllFailed;
 }(baseError_1.BaseError));
 exports.ReportsPaymentsFetchAllFailed = ReportsPaymentsFetchAllFailed;
-var ReportsPaymentsMetaFailed = /** @class */ (function (_super) {
-    __extends(ReportsPaymentsMetaFailed, _super);
+var ReportsPaymentsMetaFailed = (function (_super) {
+    tslib_1.__extends(ReportsPaymentsMetaFailed, _super);
     function ReportsPaymentsMetaFailed(message, properties) {
         if (message === void 0) { message = 'Could not fetch meta data for payments'; }
         var _this = _super.call(this, message, properties) || this;
@@ -106,8 +94,8 @@ var ReportsPaymentsMetaFailed = /** @class */ (function (_super) {
     return ReportsPaymentsMetaFailed;
 }(baseError_1.BaseError));
 exports.ReportsPaymentsMetaFailed = ReportsPaymentsMetaFailed;
-var VatReportFetchFailed = /** @class */ (function (_super) {
-    __extends(VatReportFetchFailed, _super);
+var VatReportFetchFailed = (function (_super) {
+    tslib_1.__extends(VatReportFetchFailed, _super);
     function VatReportFetchFailed(message, properties) {
         if (message === void 0) { message = 'Could not fetch the vat report'; }
         var _this = _super.call(this, message, properties) || this;
@@ -119,8 +107,8 @@ var VatReportFetchFailed = /** @class */ (function (_super) {
     return VatReportFetchFailed;
 }(baseError_1.BaseError));
 exports.VatReportFetchFailed = VatReportFetchFailed;
-var VatReportFetchMetaFailed = /** @class */ (function (_super) {
-    __extends(VatReportFetchMetaFailed, _super);
+var VatReportFetchMetaFailed = (function (_super) {
+    tslib_1.__extends(VatReportFetchMetaFailed, _super);
     function VatReportFetchMetaFailed(message, properties) {
         if (message === void 0) { message = 'Could not fetch meta data for vat report'; }
         var _this = _super.call(this, message, properties) || this;
@@ -132,8 +120,8 @@ var VatReportFetchMetaFailed = /** @class */ (function (_super) {
     return VatReportFetchMetaFailed;
 }(baseError_1.BaseError));
 exports.VatReportFetchMetaFailed = VatReportFetchMetaFailed;
-var CustomerFetchFailed = /** @class */ (function (_super) {
-    __extends(CustomerFetchFailed, _super);
+var CustomerFetchFailed = (function (_super) {
+    tslib_1.__extends(CustomerFetchFailed, _super);
     function CustomerFetchFailed(message, properties) {
         if (message === void 0) { message = 'Could not fetch customer report'; }
         var _this = _super.call(this, message, properties) || this;
@@ -145,8 +133,8 @@ var CustomerFetchFailed = /** @class */ (function (_super) {
     return CustomerFetchFailed;
 }(baseError_1.BaseError));
 exports.CustomerFetchFailed = CustomerFetchFailed;
-var CustomerFilterFetchFailed = /** @class */ (function (_super) {
-    __extends(CustomerFilterFetchFailed, _super);
+var CustomerFilterFetchFailed = (function (_super) {
+    tslib_1.__extends(CustomerFilterFetchFailed, _super);
     function CustomerFilterFetchFailed(message, properties) {
         if (message === void 0) { message = 'Could not fetch customer filters'; }
         var _this = _super.call(this, message, properties) || this;
@@ -158,8 +146,8 @@ var CustomerFilterFetchFailed = /** @class */ (function (_super) {
     return CustomerFilterFetchFailed;
 }(baseError_1.BaseError));
 exports.CustomerFilterFetchFailed = CustomerFilterFetchFailed;
-var CustomerTransactionFetchFailed = /** @class */ (function (_super) {
-    __extends(CustomerTransactionFetchFailed, _super);
+var CustomerTransactionFetchFailed = (function (_super) {
+    tslib_1.__extends(CustomerTransactionFetchFailed, _super);
     function CustomerTransactionFetchFailed(message, properties) {
         if (message === void 0) { message = 'Could not fetch customer report transactions'; }
         var _this = _super.call(this, message, properties) || this;
@@ -171,8 +159,8 @@ var CustomerTransactionFetchFailed = /** @class */ (function (_super) {
     return CustomerTransactionFetchFailed;
 }(baseError_1.BaseError));
 exports.CustomerTransactionFetchFailed = CustomerTransactionFetchFailed;
-var CustomerOverviewFetchFailed = /** @class */ (function (_super) {
-    __extends(CustomerOverviewFetchFailed, _super);
+var CustomerOverviewFetchFailed = (function (_super) {
+    tslib_1.__extends(CustomerOverviewFetchFailed, _super);
     function CustomerOverviewFetchFailed(message, properties) {
         if (message === void 0) { message = 'Could not fetch customer report overview'; }
         var _this = _super.call(this, message, properties) || this;
@@ -184,8 +172,8 @@ var CustomerOverviewFetchFailed = /** @class */ (function (_super) {
     return CustomerOverviewFetchFailed;
 }(baseError_1.BaseError));
 exports.CustomerOverviewFetchFailed = CustomerOverviewFetchFailed;
-var CustomersMetaFailed = /** @class */ (function (_super) {
-    __extends(CustomersMetaFailed, _super);
+var CustomersMetaFailed = (function (_super) {
+    tslib_1.__extends(CustomersMetaFailed, _super);
     function CustomersMetaFailed(message, properties) {
         if (message === void 0) { message = 'Could not fetch customer report metadata'; }
         var _this = _super.call(this, message, properties) || this;

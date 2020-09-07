@@ -510,9 +510,6 @@ export declare class ProductGroupsFiltersFetchFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
 }
-/**
- * PRINT API
- */
 export declare class PrintJobsFetchFailed extends BaseError {
     message: string;
     name: string;
@@ -598,9 +595,6 @@ export declare class MessagesFetchFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
 }
-/**
- * FAVOURITES
- */
 export declare class FavouritesFetchFailed extends BaseError {
     message: string;
     name: string;

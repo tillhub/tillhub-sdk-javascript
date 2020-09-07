@@ -1,22 +1,10 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductServiceQuestionsBookFailed = exports.ProductServiceQuestionDeleteFailed = exports.ProductServiceQuestionsPutFailed = exports.ProductServiceQuestionsCreationFailed = exports.ProductServiceQuestionsGetMetaFailed = exports.ProductServiceQuestionsFetchOneFailed = exports.ProductServiceQuestionsFetchAllFailed = void 0;
+var tslib_1 = require("tslib");
 var baseError_1 = require("./baseError");
-var ProductServiceQuestionsFetchAllFailed = /** @class */ (function (_super) {
-    __extends(ProductServiceQuestionsFetchAllFailed, _super);
+var ProductServiceQuestionsFetchAllFailed = (function (_super) {
+    tslib_1.__extends(ProductServiceQuestionsFetchAllFailed, _super);
     function ProductServiceQuestionsFetchAllFailed(message, properties) {
         if (message === void 0) { message = 'Could not fetch all product service question'; }
         var _this = _super.call(this, message, properties) || this;
@@ -28,8 +16,8 @@ var ProductServiceQuestionsFetchAllFailed = /** @class */ (function (_super) {
     return ProductServiceQuestionsFetchAllFailed;
 }(baseError_1.BaseError));
 exports.ProductServiceQuestionsFetchAllFailed = ProductServiceQuestionsFetchAllFailed;
-var ProductServiceQuestionsFetchOneFailed = /** @class */ (function (_super) {
-    __extends(ProductServiceQuestionsFetchOneFailed, _super);
+var ProductServiceQuestionsFetchOneFailed = (function (_super) {
+    tslib_1.__extends(ProductServiceQuestionsFetchOneFailed, _super);
     function ProductServiceQuestionsFetchOneFailed(message, properties) {
         if (message === void 0) { message = 'Could not fetch single product service question'; }
         var _this = _super.call(this, message, properties) || this;
@@ -41,8 +29,8 @@ var ProductServiceQuestionsFetchOneFailed = /** @class */ (function (_super) {
     return ProductServiceQuestionsFetchOneFailed;
 }(baseError_1.BaseError));
 exports.ProductServiceQuestionsFetchOneFailed = ProductServiceQuestionsFetchOneFailed;
-var ProductServiceQuestionsGetMetaFailed = /** @class */ (function (_super) {
-    __extends(ProductServiceQuestionsGetMetaFailed, _super);
+var ProductServiceQuestionsGetMetaFailed = (function (_super) {
+    tslib_1.__extends(ProductServiceQuestionsGetMetaFailed, _super);
     function ProductServiceQuestionsGetMetaFailed(message, properties) {
         if (message === void 0) { message = 'Could not fetch meta data for product service question'; }
         var _this = _super.call(this, message, properties) || this;
@@ -54,8 +42,8 @@ var ProductServiceQuestionsGetMetaFailed = /** @class */ (function (_super) {
     return ProductServiceQuestionsGetMetaFailed;
 }(baseError_1.BaseError));
 exports.ProductServiceQuestionsGetMetaFailed = ProductServiceQuestionsGetMetaFailed;
-var ProductServiceQuestionsCreationFailed = /** @class */ (function (_super) {
-    __extends(ProductServiceQuestionsCreationFailed, _super);
+var ProductServiceQuestionsCreationFailed = (function (_super) {
+    tslib_1.__extends(ProductServiceQuestionsCreationFailed, _super);
     function ProductServiceQuestionsCreationFailed(message, properties) {
         if (message === void 0) { message = 'Could not create product service question'; }
         var _this = _super.call(this, message, properties) || this;
@@ -67,8 +55,8 @@ var ProductServiceQuestionsCreationFailed = /** @class */ (function (_super) {
     return ProductServiceQuestionsCreationFailed;
 }(baseError_1.BaseError));
 exports.ProductServiceQuestionsCreationFailed = ProductServiceQuestionsCreationFailed;
-var ProductServiceQuestionsPutFailed = /** @class */ (function (_super) {
-    __extends(ProductServiceQuestionsPutFailed, _super);
+var ProductServiceQuestionsPutFailed = (function (_super) {
+    tslib_1.__extends(ProductServiceQuestionsPutFailed, _super);
     function ProductServiceQuestionsPutFailed(message, properties) {
         if (message === void 0) { message = 'Could not update product service question'; }
         var _this = _super.call(this, message, properties) || this;
@@ -80,8 +68,8 @@ var ProductServiceQuestionsPutFailed = /** @class */ (function (_super) {
     return ProductServiceQuestionsPutFailed;
 }(baseError_1.BaseError));
 exports.ProductServiceQuestionsPutFailed = ProductServiceQuestionsPutFailed;
-var ProductServiceQuestionDeleteFailed = /** @class */ (function (_super) {
-    __extends(ProductServiceQuestionDeleteFailed, _super);
+var ProductServiceQuestionDeleteFailed = (function (_super) {
+    tslib_1.__extends(ProductServiceQuestionDeleteFailed, _super);
     function ProductServiceQuestionDeleteFailed(message, properties) {
         if (message === void 0) { message = 'Could not delete product service question'; }
         var _this = _super.call(this, message, properties) || this;
@@ -93,8 +81,8 @@ var ProductServiceQuestionDeleteFailed = /** @class */ (function (_super) {
     return ProductServiceQuestionDeleteFailed;
 }(baseError_1.BaseError));
 exports.ProductServiceQuestionDeleteFailed = ProductServiceQuestionDeleteFailed;
-var ProductServiceQuestionsBookFailed = /** @class */ (function (_super) {
-    __extends(ProductServiceQuestionsBookFailed, _super);
+var ProductServiceQuestionsBookFailed = (function (_super) {
+    tslib_1.__extends(ProductServiceQuestionsBookFailed, _super);
     function ProductServiceQuestionsBookFailed(message, properties) {
         if (message === void 0) { message = 'Could not book transfer in product service questions'; }
         var _this = _super.call(this, message, properties) || this;

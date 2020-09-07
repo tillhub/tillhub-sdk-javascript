@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ThBaseRequest = void 0;
-var ThBaseRequest = /** @class */ (function () {
+var ThBaseRequest = (function () {
     function ThBaseRequest(http) {
         this.client = http;
     }

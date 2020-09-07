@@ -2,9 +2,6 @@ import { Client } from '../client';
 import { BaseError } from '../errors';
 import { UriHelper } from '../uri-helper';
 import { Vouchers as VoucherV0, VouchersOptions } from '../v0/vouchers';
-/**
- * @extends "VoucherV0"
- */
 export interface VouchersQueryOptions {
     limit?: number;
     uri?: string;

@@ -1,22 +1,10 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductServiceQuestionGroupsBookFailed = exports.ProductServiceQuestionGroupsPutFailed = exports.ProductServiceQuestionGroupsCreationFailed = exports.ProductServiceQuestionGroupsGetMetaFailed = exports.ProductServiceQuestionGroupsFetchOneFailed = exports.ProductServiceQuestionGroupsFetchAllFailed = void 0;
+var tslib_1 = require("tslib");
 var baseError_1 = require("./baseError");
-var ProductServiceQuestionGroupsFetchAllFailed = /** @class */ (function (_super) {
-    __extends(ProductServiceQuestionGroupsFetchAllFailed, _super);
+var ProductServiceQuestionGroupsFetchAllFailed = (function (_super) {
+    tslib_1.__extends(ProductServiceQuestionGroupsFetchAllFailed, _super);
     function ProductServiceQuestionGroupsFetchAllFailed(message, properties) {
         if (message === void 0) { message = 'Could not fetch all product service question groups'; }
         var _this = _super.call(this, message, properties) || this;
@@ -28,8 +16,8 @@ var ProductServiceQuestionGroupsFetchAllFailed = /** @class */ (function (_super
     return ProductServiceQuestionGroupsFetchAllFailed;
 }(baseError_1.BaseError));
 exports.ProductServiceQuestionGroupsFetchAllFailed = ProductServiceQuestionGroupsFetchAllFailed;
-var ProductServiceQuestionGroupsFetchOneFailed = /** @class */ (function (_super) {
-    __extends(ProductServiceQuestionGroupsFetchOneFailed, _super);
+var ProductServiceQuestionGroupsFetchOneFailed = (function (_super) {
+    tslib_1.__extends(ProductServiceQuestionGroupsFetchOneFailed, _super);
     function ProductServiceQuestionGroupsFetchOneFailed(message, properties) {
         if (message === void 0) { message = 'Could not fetch single product service question group'; }
         var _this = _super.call(this, message, properties) || this;
@@ -41,8 +29,8 @@ var ProductServiceQuestionGroupsFetchOneFailed = /** @class */ (function (_super
     return ProductServiceQuestionGroupsFetchOneFailed;
 }(baseError_1.BaseError));
 exports.ProductServiceQuestionGroupsFetchOneFailed = ProductServiceQuestionGroupsFetchOneFailed;
-var ProductServiceQuestionGroupsGetMetaFailed = /** @class */ (function (_super) {
-    __extends(ProductServiceQuestionGroupsGetMetaFailed, _super);
+var ProductServiceQuestionGroupsGetMetaFailed = (function (_super) {
+    tslib_1.__extends(ProductServiceQuestionGroupsGetMetaFailed, _super);
     function ProductServiceQuestionGroupsGetMetaFailed(message, properties) {
         if (message === void 0) { message = 'Could not fetch meta data for product service question groups'; }
         var _this = _super.call(this, message, properties) || this;
@@ -54,8 +42,8 @@ var ProductServiceQuestionGroupsGetMetaFailed = /** @class */ (function (_super)
     return ProductServiceQuestionGroupsGetMetaFailed;
 }(baseError_1.BaseError));
 exports.ProductServiceQuestionGroupsGetMetaFailed = ProductServiceQuestionGroupsGetMetaFailed;
-var ProductServiceQuestionGroupsCreationFailed = /** @class */ (function (_super) {
-    __extends(ProductServiceQuestionGroupsCreationFailed, _super);
+var ProductServiceQuestionGroupsCreationFailed = (function (_super) {
+    tslib_1.__extends(ProductServiceQuestionGroupsCreationFailed, _super);
     function ProductServiceQuestionGroupsCreationFailed(message, properties) {
         if (message === void 0) { message = 'Could not create product service question groups'; }
         var _this = _super.call(this, message, properties) || this;
@@ -67,8 +55,8 @@ var ProductServiceQuestionGroupsCreationFailed = /** @class */ (function (_super
     return ProductServiceQuestionGroupsCreationFailed;
 }(baseError_1.BaseError));
 exports.ProductServiceQuestionGroupsCreationFailed = ProductServiceQuestionGroupsCreationFailed;
-var ProductServiceQuestionGroupsPutFailed = /** @class */ (function (_super) {
-    __extends(ProductServiceQuestionGroupsPutFailed, _super);
+var ProductServiceQuestionGroupsPutFailed = (function (_super) {
+    tslib_1.__extends(ProductServiceQuestionGroupsPutFailed, _super);
     function ProductServiceQuestionGroupsPutFailed(message, properties) {
         if (message === void 0) { message = 'Could not update product service question groups'; }
         var _this = _super.call(this, message, properties) || this;
@@ -80,8 +68,8 @@ var ProductServiceQuestionGroupsPutFailed = /** @class */ (function (_super) {
     return ProductServiceQuestionGroupsPutFailed;
 }(baseError_1.BaseError));
 exports.ProductServiceQuestionGroupsPutFailed = ProductServiceQuestionGroupsPutFailed;
-var ProductServiceQuestionGroupsBookFailed = /** @class */ (function (_super) {
-    __extends(ProductServiceQuestionGroupsBookFailed, _super);
+var ProductServiceQuestionGroupsBookFailed = (function (_super) {
+    tslib_1.__extends(ProductServiceQuestionGroupsBookFailed, _super);
     function ProductServiceQuestionGroupsBookFailed(message, properties) {
         if (message === void 0) { message = 'Could not book transfer in product service question groups'; }
         var _this = _super.call(this, message, properties) || this;

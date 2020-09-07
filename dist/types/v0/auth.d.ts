@@ -65,19 +65,12 @@ export interface AuthResponse {
     orgName?: string;
     expiresAt?: string;
 }
-/**
- * @class "v0.Auth"
- */
 export declare class Auth {
     authenticated: boolean;
     options: AuthOptions;
     token?: string;
     user?: string;
     constructor(options: AuthOptions);
-    /**
-     * Initialise the SDK instance by authenticating the client
-     *
-     */
     clearInstance(): void;
     protected determineAuthType(): void;
     authenticate(): Promise<AuthResponse>;
