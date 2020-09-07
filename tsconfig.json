@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "rootDir": "src",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "traceResolution": false,
@@ -9,6 +8,7 @@
     "pretty": true,
     "target": "es5",
     "module": "es2015",
+    "importHelpers": true,
     "lib": [
       "es2015",
       "es2016",
@@ -28,7 +28,8 @@
     ]
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "test/**/*.ts"
   ],
   "exclude": [
     "node_modules/**"
