@@ -19,7 +19,7 @@ export interface PromotionsQuery {
 }
 
 export interface PromotionsResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   next?: () => Promise<PromotionsResponse>
 }
@@ -48,26 +48,26 @@ export class Promotions extends ThBaseHandler {
   public options: PromotionsOptions
   public uriHelper: UriHelper
 
-  constructor(options: PromotionsOptions, http: Client) {
+  constructor (options: PromotionsOptions, http: Client) {
     super(http, {
       endpoint: Promotions.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Promotions.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(queryOrOptions?: PromotionsQuery | undefined): Promise<PromotionsResponse> {
+  getAll (queryOrOptions?: PromotionsQuery | undefined): Promise<PromotionsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
         let uri
-        if (queryOrOptions && queryOrOptions.uri) {
+        if (queryOrOptions?.uri) {
           uri = queryOrOptions.uri
         } else {
           let queryString = ''
@@ -100,7 +100,7 @@ export class Promotions extends ThBaseHandler {
     })
   }
 
-  get(promotionId: string): Promise<PromotionResponse> {
+  get (promotionId: string): Promise<PromotionResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${promotionId}`
       try {
@@ -119,7 +119,7 @@ export class Promotions extends ThBaseHandler {
     })
   }
 
-  put(promotionId: string, promotion: Promotion): Promise<PromotionResponse> {
+  put (promotionId: string, promotion: Promotion): Promise<PromotionResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${promotionId}`
       try {
@@ -135,7 +135,7 @@ export class Promotions extends ThBaseHandler {
     })
   }
 
-  create(promotion: Promotion): Promise<PromotionResponse> {
+  create (promotion: Promotion): Promise<PromotionResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
@@ -151,7 +151,7 @@ export class Promotions extends ThBaseHandler {
     })
   }
 
-  delete(promotionId: string): Promise<PromotionResponse> {
+  delete (promotionId: string): Promise<PromotionResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${promotionId}`
       try {
@@ -170,7 +170,7 @@ export class Promotions extends ThBaseHandler {
 
 export class PromotionsFetchFailed extends BaseError {
   public name = 'PromotionsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch promotions',
     properties?: Record<string, unknown>
   ) {
@@ -181,7 +181,7 @@ export class PromotionsFetchFailed extends BaseError {
 
 export class PromotionFetchFailed extends BaseError {
   public name = 'PromotionFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch promotion',
     properties?: Record<string, unknown>
   ) {
@@ -192,7 +192,7 @@ export class PromotionFetchFailed extends BaseError {
 
 export class PromotionPutFailed extends BaseError {
   public name = 'PromotionPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter promotion',
     properties?: Record<string, unknown>
   ) {
@@ -203,7 +203,7 @@ export class PromotionPutFailed extends BaseError {
 
 export class PromotionCreationFailed extends BaseError {
   public name = 'PromotionCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create promotion',
     properties?: Record<string, unknown>
   ) {
@@ -214,7 +214,7 @@ export class PromotionCreationFailed extends BaseError {
 
 export class PromotionDeleteFailed extends BaseError {
   public name = 'PromotionDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete promotion',
     properties?: Record<string, unknown>
   ) {

@@ -45,9 +45,9 @@ export interface GobdQueryOrOptions {
 }
 
 export interface ExportsResponse {
-  data: {
+  data: Array<{
     uri: string
-  }[]
+  }>
   metadata: Record<string, unknown>
   msg?: string | null
 }
@@ -58,16 +58,16 @@ export class Exports {
   public options: ExportsOptions
   public uriHelper: UriHelper
 
-  constructor(options: ExportsOptions, http: Client) {
+  constructor (options: ExportsOptions, http: Client) {
     this.options = options
     this.http = http
 
     this.endpoint = '/api/v0/exports'
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  datev(datevQuery: DatevQuery, queryOrOptions: ExportsQueryOrOptions): Promise<ExportsResponse> {
+  datev (datevQuery: DatevQuery, queryOrOptions: ExportsQueryOrOptions): Promise<ExportsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const base = `${this.options.base}${this.endpoint}/${this.options.user}/datev`
@@ -88,7 +88,7 @@ export class Exports {
     })
   }
 
-  gobd(gobdQuery: GobdQuery, queryOrOptions: GobdQueryOrOptions): Promise<ExportsResponse> {
+  gobd (gobdQuery: GobdQuery, queryOrOptions: GobdQueryOrOptions): Promise<ExportsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const base = `${this.options.base}${this.endpoint}/${this.options.user}/gobd`
@@ -112,7 +112,7 @@ export class Exports {
 
 class ExportsDatevFetchFailed extends BaseError {
   public name = 'ExportsDatevFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch datev export',
     properties?: Record<string, unknown>
   ) {
@@ -123,7 +123,7 @@ class ExportsDatevFetchFailed extends BaseError {
 
 class ExportsGobdFetchFailed extends BaseError {
   public name = 'ExportsGobdFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch gobd export',
     properties?: Record<string, unknown>
   ) {

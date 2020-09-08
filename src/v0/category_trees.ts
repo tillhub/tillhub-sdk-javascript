@@ -17,7 +17,7 @@ export interface CategoryTreesQuery {
 }
 
 export interface CategoryTreesResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   next?: () => Promise<CategoryTreesResponse>
 }
@@ -37,7 +37,7 @@ export interface CategoryTree {
   summary?: string
   description?: string
   comments?: string
-  children?: Record<string, unknown>[]
+  children?: Array<Record<string, unknown>>
   active?: boolean
   deleted?: boolean
 }
@@ -49,20 +49,20 @@ export class CategoryTrees extends ThBaseHandler {
   public options: CategoryTreesOptions
   public uriHelper: UriHelper
 
-  constructor(options: CategoryTreesOptions, http: Client) {
+  constructor (options: CategoryTreesOptions, http: Client) {
     super(http, {
       endpoint: CategoryTrees.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = CategoryTrees.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: CategoryTreesQuery | undefined): Promise<CategoryTreesResponse> {
+  getAll (query?: CategoryTreesQuery | undefined): Promise<CategoryTreesResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
@@ -91,7 +91,7 @@ export class CategoryTrees extends ThBaseHandler {
     })
   }
 
-  get(categoryTreeId: string): Promise<CategoryTreeResponse> {
+  get (categoryTreeId: string): Promise<CategoryTreeResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri(`/${categoryTreeId}`)
       try {
@@ -110,7 +110,7 @@ export class CategoryTrees extends ThBaseHandler {
     })
   }
 
-  put(categoryTreeId: string, categoryTree: CategoryTree): Promise<CategoryTreeResponse> {
+  put (categoryTreeId: string, categoryTree: CategoryTree): Promise<CategoryTreeResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri(`/${categoryTreeId}`)
       try {
@@ -126,7 +126,7 @@ export class CategoryTrees extends ThBaseHandler {
     })
   }
 
-  create(categoryTree: CategoryTree): Promise<CategoryTreeResponse> {
+  create (categoryTree: CategoryTree): Promise<CategoryTreeResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri()
       try {
@@ -142,7 +142,7 @@ export class CategoryTrees extends ThBaseHandler {
     })
   }
 
-  delete(storefrontId: string): Promise<CategoryTreeResponse> {
+  delete (storefrontId: string): Promise<CategoryTreeResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${storefrontId}`
       try {
@@ -161,7 +161,7 @@ export class CategoryTrees extends ThBaseHandler {
 
 export class CategoryTreesFetchFailed extends BaseError {
   public name = 'CategoryTreesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch category trees',
     properties?: Record<string, unknown>
   ) {
@@ -172,7 +172,7 @@ export class CategoryTreesFetchFailed extends BaseError {
 
 export class CategoryTreeFetchFailed extends BaseError {
   public name = 'CategoryTreeFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch category tree',
     properties?: Record<string, unknown>
   ) {
@@ -183,7 +183,7 @@ export class CategoryTreeFetchFailed extends BaseError {
 
 export class CategoryTreePutFailed extends BaseError {
   public name = 'CategoryTreePutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter category tree',
     properties?: Record<string, unknown>
   ) {
@@ -194,7 +194,7 @@ export class CategoryTreePutFailed extends BaseError {
 
 export class CategoryTreeCreationFailed extends BaseError {
   public name = 'CategoryTreeCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create category tree',
     properties?: Record<string, unknown>
   ) {
@@ -205,7 +205,7 @@ export class CategoryTreeCreationFailed extends BaseError {
 
 export class CategortTreesDeleteFailed extends BaseError {
   public name = 'CategortTreesDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete category tree',
     properties?: Record<string, unknown>
   ) {

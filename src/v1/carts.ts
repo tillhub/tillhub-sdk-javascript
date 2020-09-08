@@ -76,17 +76,17 @@ export class Carts extends ThBaseHandler {
   public options: CartsOptions
   public uriHelper: UriHelper
 
-  constructor(options: CartsOptions, http: Client) {
-    super(http, { endpoint: Carts.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+  constructor (options: CartsOptions, http: Client) {
+    super(http, { endpoint: Carts.baseEndpoint, base: options.base ?? 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
     this.endpoint = Carts.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  create(cart: Cart, query?: Record<string, unknown>): Promise<CartResponse> {
+  create (cart: Cart, query?: Record<string, unknown>): Promise<CartResponse> {
     return new Promise(async (resolve, reject) => {
       const base = this.uriHelper.generateBaseUri()
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -108,17 +108,17 @@ export class Carts extends ThBaseHandler {
     })
   }
 
-  getAll(options?: CartsOptions | undefined): Promise<CartsResponse> {
+  getAll (options?: CartsOptions | undefined): Promise<CartsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
         let uri
-        if (options && options.uri) {
+        if (options?.uri) {
           uri = options.uri
         } else {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}${
-            options && options.query ? `?${qs.stringify(options.query)}` : ''
+            options?.query ? `?${qs.stringify(options.query)}` : ''
           }`
         }
 
@@ -142,7 +142,7 @@ export class Carts extends ThBaseHandler {
     })
   }
 
-  get(cartId: string): Promise<CartResponse> {
+  get (cartId: string): Promise<CartResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${cartId}`
       try {
@@ -162,7 +162,7 @@ export class Carts extends ThBaseHandler {
     })
   }
 
-  meta(): Promise<CartsResponse> {
+  meta (): Promise<CartsResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
 
@@ -189,7 +189,7 @@ export class Carts extends ThBaseHandler {
     })
   }
 
-  put(cartId: string, cart: Cart): Promise<CartResponse> {
+  put (cartId: string, cart: Cart): Promise<CartResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${cartId}`
 
@@ -209,7 +209,7 @@ export class Carts extends ThBaseHandler {
     })
   }
 
-  delete(cartId: string, deleteOptions?: CartDeleteOptions): Promise<CartsResponse> {
+  delete (cartId: string, deleteOptions?: CartDeleteOptions): Promise<CartsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         let uri
@@ -235,7 +235,7 @@ export class Carts extends ThBaseHandler {
     })
   }
 
-  search(searchTerm: string): Promise<CartsResponse> {
+  search (searchTerm: string): Promise<CartsResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/search?q=${searchTerm}`
       try {
@@ -257,7 +257,7 @@ export class Carts extends ThBaseHandler {
 
 export class CartFetchFailed extends BaseError {
   public name = 'CartFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch cart',
     properties?: Record<string, unknown>
   ) {
@@ -268,7 +268,7 @@ export class CartFetchFailed extends BaseError {
 
 export class CartsSearchFailed extends BaseError {
   public name = 'CartsSearchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could complete carts search',
     properties?: Record<string, unknown>
   ) {
@@ -279,7 +279,7 @@ export class CartsSearchFailed extends BaseError {
 
 export class CartsDeleteFailed extends BaseError {
   public name = 'CartsDeleteFailed'
-  constructor(public message: string = 'Could delete cart', properties?: Record<string, unknown>) {
+  constructor (public message: string = 'Could delete cart', properties?: Record<string, unknown>) {
     super(message, properties)
     Object.setPrototypeOf(this, CartsDeleteFailed.prototype)
   }
@@ -287,7 +287,7 @@ export class CartsDeleteFailed extends BaseError {
 
 export class CartsUpdateFailed extends BaseError {
   public name = 'CartsUpdateFailed'
-  constructor(public message: string = 'Could update cart', properties?: Record<string, unknown>) {
+  constructor (public message: string = 'Could update cart', properties?: Record<string, unknown>) {
     super(message, properties)
     Object.setPrototypeOf(this, CartsUpdateFailed.prototype)
   }
@@ -295,7 +295,7 @@ export class CartsUpdateFailed extends BaseError {
 
 export class CartsMetaFailed extends BaseError {
   public name = 'CartsMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could fetch carts metadata',
     properties?: Record<string, unknown>
   ) {
@@ -306,7 +306,7 @@ export class CartsMetaFailed extends BaseError {
 
 export class CartsFetchFailed extends BaseError {
   public name = 'CartsFetchFailed'
-  constructor(public message: string = 'Could fetch carts', properties?: Record<string, unknown>) {
+  constructor (public message: string = 'Could fetch carts', properties?: Record<string, unknown>) {
     super(message, properties)
     Object.setPrototypeOf(this, CartsFetchFailed.prototype)
   }
@@ -314,7 +314,7 @@ export class CartsFetchFailed extends BaseError {
 
 export class CartsCreateFailed extends BaseError {
   public name = 'CartsCreateFailed'
-  constructor(public message: string = 'Could create cart', properties?: Record<string, unknown>) {
+  constructor (public message: string = 'Could create cart', properties?: Record<string, unknown>) {
     super(message, properties)
     Object.setPrototypeOf(this, CartsCreateFailed.prototype)
   }

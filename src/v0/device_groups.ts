@@ -48,20 +48,20 @@ export class DeviceGroups extends ThBaseHandler {
   public options: DeviceGroupsOptions
   public uriHelper: UriHelper
 
-  constructor(options: DeviceGroupsOptions, http: Client) {
+  constructor (options: DeviceGroupsOptions, http: Client) {
     super(http, {
       endpoint: DeviceGroups.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = DeviceGroups.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: DeviceGroupsQuery | undefined): Promise<DeviceGroupsResponse> {
+  getAll (query?: DeviceGroupsQuery | undefined): Promise<DeviceGroupsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
@@ -87,7 +87,7 @@ export class DeviceGroups extends ThBaseHandler {
     })
   }
 
-  get(deviceGroupId: string): Promise<DeviceGroupResponse> {
+  get (deviceGroupId: string): Promise<DeviceGroupResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri(`/${deviceGroupId}`)
       try {
@@ -106,7 +106,7 @@ export class DeviceGroups extends ThBaseHandler {
     })
   }
 
-  put(deviceGroupId: string, deviceGroup: DeviceGroup): Promise<DeviceGroupResponse> {
+  put (deviceGroupId: string, deviceGroup: DeviceGroup): Promise<DeviceGroupResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri(`/${deviceGroupId}`)
       try {
@@ -122,7 +122,7 @@ export class DeviceGroups extends ThBaseHandler {
     })
   }
 
-  create(deviceGroup: DeviceGroup): Promise<DeviceGroupResponse> {
+  create (deviceGroup: DeviceGroup): Promise<DeviceGroupResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri()
       try {
@@ -138,7 +138,7 @@ export class DeviceGroups extends ThBaseHandler {
     })
   }
 
-  delete(deviceGroupId: string): Promise<DeviceGroupResponse> {
+  delete (deviceGroupId: string): Promise<DeviceGroupResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri(`/${deviceGroupId}`)
       try {
@@ -157,7 +157,7 @@ export class DeviceGroups extends ThBaseHandler {
 
 export class DeviceGroupsFetchFailed extends BaseError {
   public name = 'DeviceGroupsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch device groups',
     properties?: Record<string, unknown>
   ) {
@@ -168,7 +168,7 @@ export class DeviceGroupsFetchFailed extends BaseError {
 
 export class DeviceGroupFetchFailed extends BaseError {
   public name = 'DeviceGroupFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch device group',
     properties?: Record<string, unknown>
   ) {
@@ -179,7 +179,7 @@ export class DeviceGroupFetchFailed extends BaseError {
 
 export class DeviceGroupPutFailed extends BaseError {
   public name = 'DeviceGroupPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter device group',
     properties?: Record<string, unknown>
   ) {
@@ -190,7 +190,7 @@ export class DeviceGroupPutFailed extends BaseError {
 
 export class DeviceGroupCreationFailed extends BaseError {
   public name = 'DeviceGroupCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create device group',
     properties?: Record<string, unknown>
   ) {
@@ -201,7 +201,7 @@ export class DeviceGroupCreationFailed extends BaseError {
 
 export class DeviceGroupDeleteFailed extends BaseError {
   public name = 'DeviceGroupDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete device group',
     properties?: Record<string, unknown>
   ) {

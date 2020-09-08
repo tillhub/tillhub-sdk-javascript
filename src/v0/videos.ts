@@ -22,15 +22,15 @@ export class Videos {
   http: Client
   public options: VideosOptions
 
-  constructor(options: VideosOptions, http: Client) {
+  constructor (options: VideosOptions, http: Client) {
     this.options = options
     this.http = http
 
     this.endpoint = '/api/v0/videos'
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
   }
 
-  put(query: VideosQuery, payload: FormData): Promise<VideosResponse> {
+  put (query: VideosQuery, payload: FormData): Promise<VideosResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${query.subsystem}/${
         query.prefix
@@ -48,7 +48,7 @@ export class Videos {
     })
   }
 
-  create(query: VideosQuery, payload: FormData): Promise<VideosResponse> {
+  create (query: VideosQuery, payload: FormData): Promise<VideosResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${query.subsystem}/${
         query.prefix
@@ -70,7 +70,7 @@ export class Videos {
 
 export class VideoCreationFailed extends BaseError {
   public name = 'VideoCreationFailed'
-  constructor(public message: string = 'Could not create new video') {
+  constructor (public message: string = 'Could not create new video') {
     super(message)
     Object.setPrototypeOf(this, VideoCreationFailed.prototype)
   }
@@ -78,7 +78,7 @@ export class VideoCreationFailed extends BaseError {
 
 export class VideoPutFailed extends BaseError {
   public name = 'VideoPutFailed'
-  constructor(public message: string = 'Could not update new video') {
+  constructor (public message: string = 'Could not update new video') {
     super(message)
     Object.setPrototypeOf(this, VideoPutFailed.prototype)
   }

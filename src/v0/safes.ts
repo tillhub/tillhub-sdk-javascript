@@ -23,7 +23,7 @@ export interface SafeResponse {
 }
 
 export interface SafesResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
 }
 
@@ -42,7 +42,7 @@ export interface Safe {
   state?: string
   limit_upper?: number
   limit_lower?: number
-  items?: Array<AmountItem> | null
+  items?: AmountItem[] | null
   metadata?: Record<string, unknown>
   deleted?: boolean
   active?: boolean
@@ -52,7 +52,7 @@ export interface BookRequestBody {
   to: string
   from: string
   issuer: string
-  items: Record<string, unknown>[]
+  items: Array<Record<string, unknown>>
   initiated_at?: string
 }
 
@@ -83,7 +83,7 @@ export interface SafesLogBookQuery {
 }
 
 export interface SafesLogBookResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   next?: () => Promise<SafesLogBookResponse>
 }
 
@@ -94,17 +94,17 @@ export class Safes extends ThBaseHandler {
   public options: SafesOptions
   public uriHelper: UriHelper
 
-  constructor(options: SafesOptions, http: Client) {
-    super(http, { endpoint: Safes.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+  constructor (options: SafesOptions, http: Client) {
+    super(http, { endpoint: Safes.baseEndpoint, base: options.base ?? 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
     this.endpoint = Safes.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: SafesQuery | undefined): Promise<SafesResponse> {
+  getAll (query?: SafesQuery | undefined): Promise<SafesResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
@@ -129,7 +129,7 @@ export class Safes extends ThBaseHandler {
     })
   }
 
-  get(safeId: string): Promise<SafeResponse> {
+  get (safeId: string): Promise<SafeResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri(`/${safeId}`)
@@ -148,10 +148,10 @@ export class Safes extends ThBaseHandler {
     })
   }
 
-  meta(): Promise<SafesResponse> {
+  meta (): Promise<SafesResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const uri = this.uriHelper.generateBaseUri(`/meta`)
+        const uri = this.uriHelper.generateBaseUri('/meta')
         const response = await this.http.getClient().get(uri)
 
         if (response.status !== 200) reject(new errors.SafesGetMetaFailed())
@@ -166,7 +166,7 @@ export class Safes extends ThBaseHandler {
     })
   }
 
-  create(safe: Safe): Promise<SafeResponse> {
+  create (safe: Safe): Promise<SafeResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri()
@@ -182,7 +182,7 @@ export class Safes extends ThBaseHandler {
     })
   }
 
-  put(safeId: string, safe: Safe): Promise<SafeResponse> {
+  put (safeId: string, safe: Safe): Promise<SafeResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri(`/${safeId}`)
@@ -200,10 +200,10 @@ export class Safes extends ThBaseHandler {
     })
   }
 
-  book(body: BookRequestBody): Promise<SafeResponse> {
+  book (body: BookRequestBody): Promise<SafeResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const uri = this.uriHelper.generateBaseUri(`/book`)
+        const uri = this.uriHelper.generateBaseUri('/book')
         const response = await this.http.getClient().post(uri, body)
 
         return resolve({
@@ -224,20 +224,20 @@ export class SafesLogBook extends ThBaseHandler {
   public options: SafesLogBookOptions
   public uriHelper: UriHelper
 
-  constructor(options: SafesLogBookOptions, http: Client) {
+  constructor (options: SafesLogBookOptions, http: Client) {
     super(http, {
       endpoint: SafesLogBook.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = SafesLogBook.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: SafesLogBookQuery | undefined): Promise<SafesLogBookResponse> {
+  getAll (query?: SafesLogBookQuery | undefined): Promise<SafesLogBookResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
@@ -263,7 +263,7 @@ export class SafesLogBook extends ThBaseHandler {
     })
   }
 
-  meta(query?: SafesLogBookQuery | undefined): Promise<SafesLogBookResponse> {
+  meta (query?: SafesLogBookQuery | undefined): Promise<SafesLogBookResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const base = this.uriHelper.generateBaseUri('/logs/meta')

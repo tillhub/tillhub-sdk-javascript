@@ -17,7 +17,7 @@ export interface CorrespondencesQuery {
 }
 
 export interface CorrespondencesResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   next?: () => Promise<CorrespondencesResponse>
 }
@@ -56,20 +56,20 @@ export class Correspondences extends ThBaseHandler {
   public options: CorrespondencesOptions
   public uriHelper: UriHelper
 
-  constructor(options: CorrespondencesOptions, http: Client) {
+  constructor (options: CorrespondencesOptions, http: Client) {
     super(http, {
       endpoint: Correspondences.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Correspondences.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: CorrespondencesQuery | undefined): Promise<CorrespondencesResponse> {
+  getAll (query?: CorrespondencesQuery | undefined): Promise<CorrespondencesResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
@@ -98,7 +98,7 @@ export class Correspondences extends ThBaseHandler {
     })
   }
 
-  get(correspondenceId: string): Promise<CorrespondenceResponse> {
+  get (correspondenceId: string): Promise<CorrespondenceResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri(`/${correspondenceId}`)
       try {
@@ -117,7 +117,7 @@ export class Correspondences extends ThBaseHandler {
     })
   }
 
-  put(correspondenceId: string, correspondence: Correspondence): Promise<CorrespondenceResponse> {
+  put (correspondenceId: string, correspondence: Correspondence): Promise<CorrespondenceResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri(`/${correspondenceId}`)
       try {
@@ -133,7 +133,7 @@ export class Correspondences extends ThBaseHandler {
     })
   }
 
-  create(correspondence: Correspondence): Promise<CorrespondenceResponse> {
+  create (correspondence: Correspondence): Promise<CorrespondenceResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri()
       try {
@@ -152,7 +152,7 @@ export class Correspondences extends ThBaseHandler {
 
 export class CorrespondencesFetchFailed extends BaseError {
   public name = 'CorrespondencesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch Correspondences',
     properties?: Record<string, unknown>
   ) {
@@ -163,7 +163,7 @@ export class CorrespondencesFetchFailed extends BaseError {
 
 export class CorrespondenceFetchFailed extends BaseError {
   public name = 'CorrespondenceFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch correspondence',
     properties?: Record<string, unknown>
   ) {
@@ -174,7 +174,7 @@ export class CorrespondenceFetchFailed extends BaseError {
 
 export class CorrespondencePutFailed extends BaseError {
   public name = 'CorrespondencePutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter correspondence',
     properties?: Record<string, unknown>
   ) {
@@ -185,7 +185,7 @@ export class CorrespondencePutFailed extends BaseError {
 
 export class CorrespondenceCreationFailed extends BaseError {
   public name = 'CorrespondenceCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create correspondence',
     properties?: Record<string, unknown>
   ) {

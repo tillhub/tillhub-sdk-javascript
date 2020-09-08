@@ -30,11 +30,11 @@ export interface AuditActionsGetOneRequestObject {
 }
 
 export interface AuditActionsCreateBody {
-  actions: Record<string, unknown>[]
+  actions: Array<Record<string, unknown>>
 }
 
 export interface AuditsResponse {
-  data?: Record<string, unknown>[]
+  data?: Array<Record<string, unknown>>
   metadata?: Record<string, unknown>
   msg?: string
   next?: () => Promise<AuditsResponse>
@@ -50,16 +50,16 @@ export class AuditActions {
   public options: AuditsOptions
   public uriHelper: UriHelper
 
-  constructor(options: AuditsOptions, http: Client) {
+  constructor (options: AuditsOptions, http: Client) {
     this.options = options
     this.http = http
 
     this.endpoint = '/api/v0/audits'
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(q?: AuditsQuery | undefined): Promise<AuditsResponse> {
+  getAll (q?: AuditsQuery | undefined): Promise<AuditsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
@@ -85,7 +85,7 @@ export class AuditActions {
     })
   }
 
-  meta(q?: AuditsMetaQuery | undefined): Promise<AuditsResponse> {
+  meta (q?: AuditsMetaQuery | undefined): Promise<AuditsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const base = this.uriHelper.generateBaseUri('/actions/meta')
@@ -104,7 +104,7 @@ export class AuditActions {
     })
   }
 
-  get(requestObject: AuditActionsGetOneRequestObject): Promise<AuditsResponse> {
+  get (requestObject: AuditActionsGetOneRequestObject): Promise<AuditsResponse> {
     return new Promise(async (resolve, reject) => {
       const { auditActionId, query } = requestObject
 
@@ -124,7 +124,7 @@ export class AuditActions {
     })
   }
 
-  create(body: AuditActionsCreateBody): Promise<AuditsResponse> {
+  create (body: AuditActionsCreateBody): Promise<AuditsResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/actions`
 
@@ -140,10 +140,10 @@ export class AuditActions {
     })
   }
 
-  getTypes(query: AuditsTypesQuery): Promise<AuditsResponse> {
+  getTypes (query: AuditsTypesQuery): Promise<AuditsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const base = this.uriHelper.generateBaseUri(`/actions/types`)
+        const base = this.uriHelper.generateBaseUri('/actions/types')
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)

@@ -2,7 +2,7 @@ export class BaseError extends Error {
   public properties?: Record<string, unknown>
   public message: string
 
-  constructor(message: string, properties?: Record<string, unknown>) {
+  constructor (message: string, properties?: Record<string, unknown>) {
     super()
     this.message = message
 

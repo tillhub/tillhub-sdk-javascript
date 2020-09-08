@@ -1,7 +1,6 @@
 import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
-dotenv.config()
 import {
   UserPermissionsTemplate,
   UserPermissionsTemplates,
@@ -12,6 +11,7 @@ import {
   UserPermissionsTemplatesDeleteFailed
 } from '../../src/v0/user_permissions_templates'
 import { initThInstance } from '../util'
+dotenv.config()
 
 const legacyId = '4564'
 const templateId = '1337'

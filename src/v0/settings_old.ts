@@ -61,15 +61,15 @@ export class LegacySettings {
   http: Client
   public options: LegacySettingsOptions
 
-  constructor(options: LegacySettingsOptions, http: Client) {
+  constructor (options: LegacySettingsOptions, http: Client) {
     this.options = options
     this.http = http
 
     this.endpoint = '/api/v0/settings_old'
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
   }
 
-  getAll(): Promise<LegacySettingsResponse> {
+  getAll (): Promise<LegacySettingsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
@@ -89,7 +89,7 @@ export class LegacySettings {
     })
   }
 
-  get(LegacySettingId: string): Promise<LegacySettingResponse> {
+  get (LegacySettingId: string): Promise<LegacySettingResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${LegacySettingId}`
 
@@ -109,7 +109,7 @@ export class LegacySettings {
     })
   }
 
-  update(LegacySettingId: string, LegacySetting: LegacySetting): Promise<LegacySettingResponse> {
+  update (LegacySettingId: string, LegacySetting: LegacySetting): Promise<LegacySettingResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${LegacySettingId}`
       try {

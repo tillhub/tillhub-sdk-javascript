@@ -56,25 +56,25 @@ export class Discounts extends ThBaseHandler {
   http: Client
   public options: DiscountsOptions
 
-  constructor(options: DiscountsOptions, http: Client) {
+  constructor (options: DiscountsOptions, http: Client) {
     super(http, {
       endpoint: Discounts.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Discounts.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
   }
 
-  getAll(queryOrOptions?: DiscountsQuery | undefined): Promise<DiscountsResponse> {
+  getAll (queryOrOptions?: DiscountsQuery | undefined): Promise<DiscountsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
         let uri
-        if (queryOrOptions && queryOrOptions.uri) {
+        if (queryOrOptions?.uri) {
           uri = queryOrOptions.uri
         } else {
           let queryString = ''
@@ -107,7 +107,7 @@ export class Discounts extends ThBaseHandler {
     })
   }
 
-  get(discountId: string): Promise<DiscountResponse> {
+  get (discountId: string): Promise<DiscountResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${discountId}`
       try {
@@ -126,7 +126,7 @@ export class Discounts extends ThBaseHandler {
     })
   }
 
-  put(discountId: string, discount: Discount): Promise<DiscountResponse> {
+  put (discountId: string, discount: Discount): Promise<DiscountResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${discountId}`
       try {
@@ -142,7 +142,7 @@ export class Discounts extends ThBaseHandler {
     })
   }
 
-  create(discount: Discount): Promise<DiscountResponse> {
+  create (discount: Discount): Promise<DiscountResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
@@ -158,7 +158,7 @@ export class Discounts extends ThBaseHandler {
     })
   }
 
-  count(): Promise<DiscountsResponse> {
+  count (): Promise<DiscountsResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
 
@@ -178,7 +178,7 @@ export class Discounts extends ThBaseHandler {
     })
   }
 
-  delete(discountId: string): Promise<DiscountResponse> {
+  delete (discountId: string): Promise<DiscountResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${discountId}`
       try {

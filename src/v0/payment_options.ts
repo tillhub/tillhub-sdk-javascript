@@ -54,25 +54,25 @@ export class PaymentOptions extends ThBaseHandler {
   http: Client
   public options: PaymentOptionsOptions
 
-  constructor(options: PaymentOptionsOptions, http: Client) {
+  constructor (options: PaymentOptionsOptions, http: Client) {
     super(http, {
       endpoint: PaymentOptions.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = PaymentOptions.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
   }
 
-  getAll(queryOrOptions?: PaymentOptionsQuery | undefined): Promise<PaymentOptionsResponse> {
+  getAll (queryOrOptions?: PaymentOptionsQuery | undefined): Promise<PaymentOptionsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
         let uri
-        if (queryOrOptions && queryOrOptions.uri) {
+        if (queryOrOptions?.uri) {
           uri = queryOrOptions.uri
         } else {
           let queryString = ''
@@ -103,7 +103,7 @@ export class PaymentOptions extends ThBaseHandler {
     })
   }
 
-  get(paymentOptionId: string): Promise<PaymentOptionResponse> {
+  get (paymentOptionId: string): Promise<PaymentOptionResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${paymentOptionId}`
       try {
@@ -122,7 +122,7 @@ export class PaymentOptions extends ThBaseHandler {
     })
   }
 
-  put(paymentOptionId: string, paymentOption: PaymentOption): Promise<PaymentOptionResponse> {
+  put (paymentOptionId: string, paymentOption: PaymentOption): Promise<PaymentOptionResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${paymentOptionId}`
       try {
@@ -138,7 +138,7 @@ export class PaymentOptions extends ThBaseHandler {
     })
   }
 
-  create(paymentOption: PaymentOption): Promise<PaymentOptionResponse> {
+  create (paymentOption: PaymentOption): Promise<PaymentOptionResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
@@ -154,7 +154,7 @@ export class PaymentOptions extends ThBaseHandler {
     })
   }
 
-  delete(paymentOptionId: string): Promise<PaymentOptionResponse> {
+  delete (paymentOptionId: string): Promise<PaymentOptionResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${paymentOptionId}`
       try {

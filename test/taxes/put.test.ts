@@ -2,10 +2,10 @@ import * as dotenv from 'dotenv'
 import axios from 'axios'
 import faker from 'faker'
 import MockAdapter from 'axios-mock-adapter'
-dotenv.config()
 import { v0 } from '../../src/tillhub-js'
 import { initThInstance } from '../util'
 import { TaxType, Jurisdictions, RateClasses } from '../../src/v0/taxes'
+dotenv.config()
 
 const legacyId = '4564'
 

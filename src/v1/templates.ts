@@ -66,7 +66,7 @@ export interface TemplatesOptions {
 }
 
 export interface TemplatesResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
 }
 
@@ -76,98 +76,90 @@ export class Templates extends ThBaseHandler {
   http: Client
   public options: TemplatesOptions
 
-  constructor(options: TemplatesOptions, http: Client) {
+  constructor (options: TemplatesOptions, http: Client) {
     super(http, {
       endpoint: Templates.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Templates.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
   }
 
-  create(template: Template): Promise<TemplatesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-      try {
-        const response = await this.http.getClient().post(uri, template)
+  async create (template: Template): Promise<TemplatesResponse> {
+    const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+    try {
+      const response = await this.http.getClient().post(uri, template)
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as TemplatesResponse)
-      } catch (err) {
-        return reject(new errors.TemplatesCreationFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new errors.TemplatesCreationFailed()
+    }
   }
 
-  put(templateId: string, template: Template): Promise<TemplatesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${templateId}`
-      try {
-        const response = await this.http.getClient().put(uri, template)
+  async put (templateId: string, template: Template): Promise<TemplatesResponse> {
+    const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${templateId}`
+    try {
+      const response = await this.http.getClient().put(uri, template)
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as TemplatesResponse)
-      } catch (err) {
-        return reject(new errors.TemplatesPutFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new errors.TemplatesPutFailed()
+    }
   }
 
-  getAll(options?: TemplatesOptions | undefined): Promise<TemplatesResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        let uri
-        if (options && options.uri) {
-          uri = options.uri
-        } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
-            options && options.query ? `?${qs.stringify(options.query)}` : ''
+  async getAll (options?: TemplatesOptions | undefined): Promise<TemplatesResponse> {
+    try {
+      let uri
+      if (options?.uri) {
+        uri = options.uri
+      } else {
+        uri = `${this.options.base}${this.endpoint}/${this.options.user}${
+          options?.query ? `?${qs.stringify(options.query)}` : ''
           }`
-        }
-
-        const response = await this.http.getClient().get(uri)
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count, cursor: response.data.cursor }
-        } as TemplatesResponse)
-      } catch (err) {
-        return reject(new errors.TemplatesFetchFailed())
       }
-    })
+
+      const response = await this.http.getClient().get(uri)
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count, cursor: response.data.cursor }
+      }
+    } catch (err) {
+      throw new errors.TemplatesFetchFailed()
+    }
   }
 
-  preview(requestObject: TemplatesPreviewRequestObject): Promise<TemplatesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const { body, query, templateId } = requestObject
+  async preview (requestObject: TemplatesPreviewRequestObject): Promise<TemplatesResponse> {
+    const { body, query, templateId } = requestObject
 
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${templateId}/preview`
+    let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${templateId}/preview`
 
-      try {
-        if (query && query.format) {
-          uri = `${uri}?format=${query.format}`
-        }
-
-        const response = await this.http.getClient().post(uri, body, {
-          headers: {
-            Accept: 'application/json' // not needed for tillhub-api, but axios sets default headers { 'accept': 'application/json, text/plain, */*' } if not specified
-          }
-        })
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as TemplatesResponse)
-      } catch (err) {
-        return reject(new errors.TemplatesPreviewFailed())
+    try {
+      if (query?.format) {
+        uri = `${uri}?format=${query.format}`
       }
-    })
+
+      const response = await this.http.getClient().post(uri, body, {
+        headers: {
+          Accept: 'application/json' // not needed for tillhub-api, but axios sets default headers { 'accept': 'application/json, text/plain, */*' } if not specified
+        }
+      })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new errors.TemplatesPreviewFailed()
+    }
   }
 }

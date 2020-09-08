@@ -18,7 +18,7 @@ export interface FunctionsQuery {
 }
 
 export interface FunctionsResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   next?: () => Promise<FunctionsResponse>
 }
@@ -80,20 +80,20 @@ export class Functions extends ThBaseHandler {
   public options: FunctionsOptions
   public uriHelper: UriHelper
 
-  constructor(options: FunctionsOptions, http: Client) {
+  constructor (options: FunctionsOptions, http: Client) {
     super(http, {
       endpoint: Functions.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Functions.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: FunctionsQuery | undefined): Promise<FunctionsResponse> {
+  getAll (query?: FunctionsQuery | undefined): Promise<FunctionsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
@@ -118,7 +118,7 @@ export class Functions extends ThBaseHandler {
     })
   }
 
-  get(functionId: string): Promise<FunctionResponse> {
+  get (functionId: string): Promise<FunctionResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri(`/${functionId}`)
       try {
@@ -137,7 +137,7 @@ export class Functions extends ThBaseHandler {
     })
   }
 
-  put(functionId: string, fn: FunctionInterface): Promise<FunctionResponse> {
+  put (functionId: string, fn: FunctionInterface): Promise<FunctionResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri(`/${functionId}`)
       try {
@@ -153,7 +153,7 @@ export class Functions extends ThBaseHandler {
     })
   }
 
-  create(fn: FunctionInterface): Promise<FunctionResponse> {
+  create (fn: FunctionInterface): Promise<FunctionResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri()
       try {
@@ -169,7 +169,7 @@ export class Functions extends ThBaseHandler {
     })
   }
 
-  delete(functionId: string): Promise<FunctionResponse> {
+  delete (functionId: string): Promise<FunctionResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri(`/${functionId}`)
       try {
@@ -188,7 +188,7 @@ export class Functions extends ThBaseHandler {
 
 export class FunctionsFetchFailed extends BaseError {
   public name = 'FunctionsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch functions',
     properties?: Record<string, unknown>
   ) {
@@ -199,7 +199,7 @@ export class FunctionsFetchFailed extends BaseError {
 
 export class FunctionFetchFailed extends BaseError {
   public name = 'FunctionFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch function',
     properties?: Record<string, unknown>
   ) {
@@ -210,7 +210,7 @@ export class FunctionFetchFailed extends BaseError {
 
 export class FunctionPutFailed extends BaseError {
   public name = 'FunctionPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter function',
     properties?: Record<string, unknown>
   ) {
@@ -221,7 +221,7 @@ export class FunctionPutFailed extends BaseError {
 
 export class FunctionCreationFailed extends BaseError {
   public name = 'FunctionCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create function',
     properties?: Record<string, unknown>
   ) {
@@ -232,7 +232,7 @@ export class FunctionCreationFailed extends BaseError {
 
 export class FunctionDeleteFailed extends BaseError {
   public name = 'FunctionDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete function',
     properties?: Record<string, unknown>
   ) {

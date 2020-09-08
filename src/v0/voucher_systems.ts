@@ -19,7 +19,7 @@ export interface VoucherSystemsQuery {
 }
 
 export interface VoucherSystemsResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   next?: () => Promise<VoucherSystemsResponse>
 }
@@ -45,7 +45,7 @@ export interface VoucherSystem {
   hooks?: Record<string, unknown>
   active?: boolean
   deleted?: boolean
-  increments?: Record<string, unknown>[]
+  increments?: Array<Record<string, unknown>>
 }
 
 export class VoucherSystems extends ThBaseHandler {
@@ -55,26 +55,26 @@ export class VoucherSystems extends ThBaseHandler {
   public options: VoucherSystemsOptions
   public uriHelper: UriHelper
 
-  constructor(options: VoucherSystemsOptions, http: Client) {
+  constructor (options: VoucherSystemsOptions, http: Client) {
     super(http, {
       endpoint: VoucherSystems.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = VoucherSystems.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(queryOrOptions?: VoucherSystemsQuery | undefined): Promise<VoucherSystemsResponse> {
+  getAll (queryOrOptions?: VoucherSystemsQuery | undefined): Promise<VoucherSystemsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
         let uri
-        if (queryOrOptions && queryOrOptions.uri) {
+        if (queryOrOptions?.uri) {
           uri = queryOrOptions.uri
         } else {
           let queryString = ''
@@ -108,7 +108,7 @@ export class VoucherSystems extends ThBaseHandler {
     })
   }
 
-  get(voucherSystemId: string): Promise<VoucherSystemResponse> {
+  get (voucherSystemId: string): Promise<VoucherSystemResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${voucherSystemId}`
       try {
@@ -127,7 +127,7 @@ export class VoucherSystems extends ThBaseHandler {
     })
   }
 
-  put(voucherSystemId: string, voucherSystemGroup: VoucherSystem): Promise<VoucherSystemResponse> {
+  put (voucherSystemId: string, voucherSystemGroup: VoucherSystem): Promise<VoucherSystemResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${voucherSystemId}`
       try {
@@ -143,7 +143,7 @@ export class VoucherSystems extends ThBaseHandler {
     })
   }
 
-  create(voucherSystemGroup: VoucherSystem): Promise<VoucherSystemResponse> {
+  create (voucherSystemGroup: VoucherSystem): Promise<VoucherSystemResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
@@ -159,7 +159,7 @@ export class VoucherSystems extends ThBaseHandler {
     })
   }
 
-  delete(voucherSystemId: string): Promise<VoucherSystemResponse> {
+  delete (voucherSystemId: string): Promise<VoucherSystemResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${voucherSystemId}`
       try {
@@ -178,7 +178,7 @@ export class VoucherSystems extends ThBaseHandler {
 
 export class VoucherSystemsFetchFailed extends BaseError {
   public name = 'VoucherSystemsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch voucher systems',
     properties?: Record<string, unknown>
   ) {
@@ -189,7 +189,7 @@ export class VoucherSystemsFetchFailed extends BaseError {
 
 export class VoucherSystemFetchFailed extends BaseError {
   public name = 'VoucherSystemFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch voucher system',
     properties?: Record<string, unknown>
   ) {
@@ -200,7 +200,7 @@ export class VoucherSystemFetchFailed extends BaseError {
 
 export class VoucherSystemPutFailed extends BaseError {
   public name = 'VoucherSystemhPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter voucher system',
     properties?: Record<string, unknown>
   ) {
@@ -211,7 +211,7 @@ export class VoucherSystemPutFailed extends BaseError {
 
 export class VoucherSystemCreationFailed extends BaseError {
   public name = 'VoucherSystemCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create voucher system',
     properties?: Record<string, unknown>
   ) {
@@ -222,7 +222,7 @@ export class VoucherSystemCreationFailed extends BaseError {
 
 export class VoucherSystemDeleteFailed extends BaseError {
   public name = 'VoucherSystemDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete voucher system',
     properties?: Record<string, unknown>
   ) {

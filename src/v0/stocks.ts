@@ -31,7 +31,7 @@ export interface StocksBookQuery {
 }
 
 export interface StocksResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
 }
 
@@ -76,21 +76,21 @@ export class Stocks extends ThBaseHandler {
   public options: StocksOptions
   public uriHelper: UriHelper
 
-  constructor(options: StocksOptions, http: Client) {
-    super(http, { endpoint: Stocks.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+  constructor (options: StocksOptions, http: Client) {
+    super(http, { endpoint: Stocks.baseEndpoint, base: options.base ?? 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
     this.endpoint = Stocks.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: StocksQuery | undefined): Promise<StocksResponse> {
+  getAll (query?: StocksQuery | undefined): Promise<StocksResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         let uri
-        if (query && query.uri) {
+        if (query?.uri) {
           uri = query.uri
         } else {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}`
@@ -109,7 +109,7 @@ export class Stocks extends ThBaseHandler {
     })
   }
 
-  create(stock: Stock): Promise<StocksResponse> {
+  create (stock: Stock): Promise<StocksResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
@@ -126,7 +126,7 @@ export class Stocks extends ThBaseHandler {
     })
   }
 
-  update(requestObject: StocksUpdateRequestObject): Promise<StocksResponse> {
+  update (requestObject: StocksUpdateRequestObject): Promise<StocksResponse> {
     return new Promise(async (resolve, reject) => {
       const { body, stockId } = requestObject
 
@@ -146,10 +146,10 @@ export class Stocks extends ThBaseHandler {
     })
   }
 
-  getLocations(query?: StocksQuery | undefined): Promise<StocksResponse> {
+  getLocations (query?: StocksQuery | undefined): Promise<StocksResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const base = this.uriHelper.generateBaseUri(`/locations`)
+        const base = this.uriHelper.generateBaseUri('/locations')
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
@@ -165,7 +165,7 @@ export class Stocks extends ThBaseHandler {
     })
   }
 
-  getOneLocation(locationId: string): Promise<StocksResponse> {
+  getOneLocation (locationId: string): Promise<StocksResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/locations/${locationId}`
       try {
@@ -184,7 +184,7 @@ export class Stocks extends ThBaseHandler {
     })
   }
 
-  transfer(body: TransferRequestObject): Promise<StocksResponse> {
+  transfer (body: TransferRequestObject): Promise<StocksResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri('/transfer')
 
@@ -211,21 +211,21 @@ export class StocksBook {
   public options: StocksOptions
   public uriHelper: UriHelper
 
-  constructor(options: StocksOptions, http: Client) {
+  constructor (options: StocksOptions, http: Client) {
     this.options = options
     this.http = http
 
     this.endpoint = '/api/v0/stock'
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: StocksBookQuery | undefined): Promise<StocksResponse> {
+  getAll (query?: StocksBookQuery | undefined): Promise<StocksResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
-        const base = this.uriHelper.generateBaseUri(`/book`)
+        const base = this.uriHelper.generateBaseUri('/book')
         const uri = this.uriHelper.generateUriWithQuery(base, query)
 
         const response = await this.http.getClient().get(uri)
@@ -245,10 +245,10 @@ export class StocksBook {
     })
   }
 
-  meta(): Promise<StocksResponse> {
+  meta (): Promise<StocksResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const base = this.uriHelper.generateBaseUri(`/book/meta`)
+        const base = this.uriHelper.generateBaseUri('/book/meta')
         const uri = this.uriHelper.generateUriWithQuery(base)
 
         const response = await this.http.getClient().get(uri)
@@ -268,7 +268,7 @@ export class StocksBook {
 
 class StocksFetchFailed extends BaseError {
   public name = 'StocksFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the stocks',
     properties?: Record<string, unknown>
   ) {
@@ -279,7 +279,7 @@ class StocksFetchFailed extends BaseError {
 
 class StocksCreateFailed extends BaseError {
   public name = 'StocksCreateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create the stock',
     properties?: Record<string, unknown>
   ) {
@@ -290,7 +290,7 @@ class StocksCreateFailed extends BaseError {
 
 class StocksUpdateFailed extends BaseError {
   public name = 'StocksUpdateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update the stock',
     properties?: Record<string, unknown>
   ) {
@@ -301,7 +301,7 @@ class StocksUpdateFailed extends BaseError {
 
 class StocksLocationsFetchFailed extends BaseError {
   public name = 'StocksLocationsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the stocks locations',
     properties?: Record<string, unknown>
   ) {
@@ -312,7 +312,7 @@ class StocksLocationsFetchFailed extends BaseError {
 
 class StocksLocationFetchOneFailed extends BaseError {
   public name = 'StocksLocationFetchOneFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch location',
     properties?: Record<string, unknown>
   ) {
@@ -323,7 +323,7 @@ class StocksLocationFetchOneFailed extends BaseError {
 
 class StocksBookFetchFailed extends BaseError {
   public name = 'StocksBookFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the stocks book',
     properties?: Record<string, unknown>
   ) {
@@ -334,7 +334,7 @@ class StocksBookFetchFailed extends BaseError {
 
 class StocksBookGetMetaFailed extends BaseError {
   public name = 'StocksBookGetMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch stocks book meta',
     properties?: Record<string, unknown>
   ) {
@@ -345,7 +345,7 @@ class StocksBookGetMetaFailed extends BaseError {
 
 class StocksTransferFailed extends BaseError {
   public name = 'StocksTransferFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not transfer the stock',
     properties?: Record<string, unknown>
   ) {

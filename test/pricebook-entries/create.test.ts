@@ -1,9 +1,9 @@
 import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
-dotenv.config()
 import { PricebookEntries } from '../../src/v1/pricebook-entries'
 import { initThInstance } from '../util'
+dotenv.config()
 
 const legacyId = '4564'
 

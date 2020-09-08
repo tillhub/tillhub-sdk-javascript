@@ -25,7 +25,7 @@ export interface DeviceBindRequest {
 }
 
 export interface DevicesResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   next?: () => Promise<DevicesResponse>
 }
@@ -72,23 +72,23 @@ export class Devices extends ThBaseHandler {
   public options: DevicesOptions
   public uriHelper: UriHelper
 
-  constructor(options: DevicesOptions, http: Client) {
-    super(http, { endpoint: Devices.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+  constructor (options: DevicesOptions, http: Client) {
+    super(http, { endpoint: Devices.baseEndpoint, base: options.base ?? 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
     this.endpoint = Devices.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(queryOrOptions?: DevicesQuery | undefined): Promise<DevicesResponse> {
+  getAll (queryOrOptions?: DevicesQuery | undefined): Promise<DevicesResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
         let uri
-        if (queryOrOptions && queryOrOptions.uri) {
+        if (queryOrOptions?.uri) {
           uri = queryOrOptions.uri
         } else {
           let queryString = ''
@@ -121,7 +121,7 @@ export class Devices extends ThBaseHandler {
     })
   }
 
-  get(deviceId: string): Promise<DeviceResponse> {
+  get (deviceId: string): Promise<DeviceResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deviceId}`
       try {
@@ -140,7 +140,7 @@ export class Devices extends ThBaseHandler {
     })
   }
 
-  contents(deviceId: string): Promise<DeviceContentResponse> {
+  contents (deviceId: string): Promise<DeviceContentResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deviceId}/contents`
       try {
@@ -158,7 +158,7 @@ export class Devices extends ThBaseHandler {
     })
   }
 
-  patch(deviceId: string, device: Device): Promise<DeviceResponse> {
+  patch (deviceId: string, device: Device): Promise<DeviceResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deviceId}`
       try {
@@ -174,7 +174,7 @@ export class Devices extends ThBaseHandler {
     })
   }
 
-  create(device: Device): Promise<DeviceResponse> {
+  create (device: Device): Promise<DeviceResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
@@ -190,7 +190,7 @@ export class Devices extends ThBaseHandler {
     })
   }
 
-  bind(deviceOrShortId: string, bindRequest: DeviceBindRequest): Promise<DeviceResponse> {
+  bind (deviceOrShortId: string, bindRequest: DeviceBindRequest): Promise<DeviceResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deviceOrShortId}/bind`
       try {
@@ -206,7 +206,7 @@ export class Devices extends ThBaseHandler {
     })
   }
 
-  delete(deviceId: string): Promise<DeviceResponse> {
+  delete (deviceId: string): Promise<DeviceResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deviceId}`
       try {
@@ -225,7 +225,7 @@ export class Devices extends ThBaseHandler {
 
 export class DevicesFetchFailed extends BaseError {
   public name = 'DevicesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch devices',
     properties?: Record<string, unknown>
   ) {
@@ -236,7 +236,7 @@ export class DevicesFetchFailed extends BaseError {
 
 export class DeviceFetchFailed extends BaseError {
   public name = 'DeviceFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch device',
     properties?: Record<string, unknown>
   ) {
@@ -247,7 +247,7 @@ export class DeviceFetchFailed extends BaseError {
 
 export class DeviceContentFetchFailed extends BaseError {
   public name = 'DeviceContentFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch device content',
     properties?: Record<string, unknown>
   ) {
@@ -258,7 +258,7 @@ export class DeviceContentFetchFailed extends BaseError {
 
 export class DevicePatchFailed extends BaseError {
   public name = 'DevicePatchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter device',
     properties?: Record<string, unknown>
   ) {
@@ -269,7 +269,7 @@ export class DevicePatchFailed extends BaseError {
 
 export class DeviceCreationFailed extends BaseError {
   public name = 'DeviceCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create device',
     properties?: Record<string, unknown>
   ) {
@@ -280,7 +280,7 @@ export class DeviceCreationFailed extends BaseError {
 
 export class DevicesCountFailed extends BaseError {
   public name = 'DevicesCountFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not count the devices',
     properties?: Record<string, unknown>
   ) {
@@ -291,7 +291,7 @@ export class DevicesCountFailed extends BaseError {
 
 export class DeviceDeleteFailed extends BaseError {
   public name = 'DeviceDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete device',
     properties?: Record<string, unknown>
   ) {
@@ -301,7 +301,7 @@ export class DeviceDeleteFailed extends BaseError {
 }
 export class DeviceBindingFailed extends BaseError {
   public name = 'DeviceBindingFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not bind device',
     properties?: Record<string, unknown>
   ) {

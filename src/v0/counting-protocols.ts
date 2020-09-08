@@ -47,7 +47,7 @@ export interface CountingProtocol {
   context?: string
   comments?: string
   location?: string
-  cash_units?: Record<string, unknown>[]
+  cash_units?: Array<Record<string, unknown>>
   timezone?: string
   discrepancy?: boolean
   discrepancy_total?: string
@@ -72,20 +72,20 @@ export class CountingProtocols extends ThBaseHandler {
   public options: CountingProtocolsOptions
   public uriHelper: UriHelper
 
-  constructor(options: CountingProtocolsOptions, http: Client) {
+  constructor (options: CountingProtocolsOptions, http: Client) {
     super(http, {
       endpoint: CountingProtocols.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = CountingProtocols.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: CountingProtocolsQuery): Promise<CountingProtocolsResponse> {
+  getAll (query?: CountingProtocolsQuery): Promise<CountingProtocolsResponse> {
     return new Promise(async (resolve, reject) => {
       const base = this.uriHelper.generateBaseUri()
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -105,10 +105,10 @@ export class CountingProtocols extends ThBaseHandler {
     })
   }
 
-  meta(): Promise<CountingProtocolsResponse> {
+  meta (): Promise<CountingProtocolsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const uri = this.uriHelper.generateBaseUri(`/meta`)
+        const uri = this.uriHelper.generateBaseUri('/meta')
         const response = await this.http.getClient().get(uri)
 
         if (response.status !== 200) reject(new CountingProtocolsMetaFailed())
@@ -126,7 +126,7 @@ export class CountingProtocols extends ThBaseHandler {
 
 export class CountingProtocolsFetchFailed extends BaseError {
   public name = 'CountingProtocolsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the counting protocols',
     properties?: Record<string, unknown>
   ) {
@@ -137,7 +137,7 @@ export class CountingProtocolsFetchFailed extends BaseError {
 
 export class CountingProtocolsMetaFailed extends BaseError {
   public name = 'CountingProtocolsMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch metadata for counting protocols',
     properties?: Record<string, unknown>
   ) {

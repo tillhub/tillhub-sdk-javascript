@@ -51,22 +51,22 @@ export class Reasons extends ThBaseHandler {
   http: Client
   public options: ReasonsOptions
 
-  constructor(options: ReasonsOptions, http: Client) {
-    super(http, { endpoint: Reasons.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+  constructor (options: ReasonsOptions, http: Client) {
+    super(http, { endpoint: Reasons.baseEndpoint, base: options.base ?? 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
     this.endpoint = Reasons.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
   }
 
-  getAll(queryOrOptions?: ReasonsQuery | undefined): Promise<ReasonsResponse> {
+  getAll (queryOrOptions?: ReasonsQuery | undefined): Promise<ReasonsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
         let uri
-        if (queryOrOptions && queryOrOptions.uri) {
+        if (queryOrOptions?.uri) {
           uri = queryOrOptions.uri
         } else {
           let queryString = ''
@@ -94,7 +94,7 @@ export class Reasons extends ThBaseHandler {
     })
   }
 
-  get(reasonId: string): Promise<ReasonResponse> {
+  get (reasonId: string): Promise<ReasonResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${reasonId}`
       try {
@@ -113,7 +113,7 @@ export class Reasons extends ThBaseHandler {
     })
   }
 
-  put(reasonId: string, reason: Reason): Promise<ReasonResponse> {
+  put (reasonId: string, reason: Reason): Promise<ReasonResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${reasonId}`
       try {
@@ -129,7 +129,7 @@ export class Reasons extends ThBaseHandler {
     })
   }
 
-  create(reason: Reason): Promise<ReasonResponse> {
+  create (reason: Reason): Promise<ReasonResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
@@ -145,7 +145,7 @@ export class Reasons extends ThBaseHandler {
     })
   }
 
-  delete(reasonId: string): Promise<ReasonResponse> {
+  delete (reasonId: string): Promise<ReasonResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${reasonId}`
       try {
@@ -164,7 +164,7 @@ export class Reasons extends ThBaseHandler {
 
 export class ReasonsFetchFailed extends BaseError {
   public name = 'ReasonsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch reasons',
     properties?: Record<string, unknown>
   ) {
@@ -175,7 +175,7 @@ export class ReasonsFetchFailed extends BaseError {
 
 export class ReasonsFetchOneFailed extends BaseError {
   public name = 'ReasonsFetchOneFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch one reason',
     properties?: Record<string, unknown>
   ) {
@@ -186,7 +186,7 @@ export class ReasonsFetchOneFailed extends BaseError {
 
 export class ReasonsPutFailed extends BaseError {
   public name = 'ReasonsPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update reason',
     properties?: Record<string, unknown>
   ) {
@@ -197,7 +197,7 @@ export class ReasonsPutFailed extends BaseError {
 
 export class ReasonsCreationFailed extends BaseError {
   public name = 'ReasonsCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create reasons',
     properties?: Record<string, unknown>
   ) {
@@ -208,7 +208,7 @@ export class ReasonsCreationFailed extends BaseError {
 
 export class ReasonsDeleteFailed extends BaseError {
   public name = 'ReasonsDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete reasons',
     properties?: Record<string, unknown>
   ) {

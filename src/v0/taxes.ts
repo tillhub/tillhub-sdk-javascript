@@ -68,22 +68,22 @@ export class Taxes extends ThBaseHandler {
   http: Client
   public options: TaxesOptions
 
-  constructor(options: TaxesOptions, http: Client) {
-    super(http, { endpoint: Taxes.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+  constructor (options: TaxesOptions, http: Client) {
+    super(http, { endpoint: Taxes.baseEndpoint, base: options.base ?? 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
     this.endpoint = Taxes.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
   }
 
-  getAll(queryOrOptions?: TaxesQuery | undefined): Promise<TaxesResponse> {
+  getAll (queryOrOptions?: TaxesQuery | undefined): Promise<TaxesResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
         let uri
-        if (queryOrOptions && queryOrOptions.uri) {
+        if (queryOrOptions?.uri) {
           uri = queryOrOptions.uri
         } else {
           let queryString = ''
@@ -111,7 +111,7 @@ export class Taxes extends ThBaseHandler {
     })
   }
 
-  get(taxId: string): Promise<TaxResponse> {
+  get (taxId: string): Promise<TaxResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${taxId}`
       try {
@@ -130,7 +130,7 @@ export class Taxes extends ThBaseHandler {
     })
   }
 
-  put(taxId: string, tax: Tax): Promise<TaxResponse> {
+  put (taxId: string, tax: Tax): Promise<TaxResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${taxId}`
       try {
@@ -146,7 +146,7 @@ export class Taxes extends ThBaseHandler {
     })
   }
 
-  create(tax: Tax): Promise<TaxResponse> {
+  create (tax: Tax): Promise<TaxResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
@@ -162,7 +162,7 @@ export class Taxes extends ThBaseHandler {
     })
   }
 
-  delete(taxId: string): Promise<TaxResponse> {
+  delete (taxId: string): Promise<TaxResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${taxId}`
       try {

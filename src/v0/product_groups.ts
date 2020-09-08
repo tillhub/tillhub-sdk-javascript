@@ -53,25 +53,25 @@ export class ProductGroups extends ThBaseHandler {
   http: Client
   public options: ProductGroupsOptions
 
-  constructor(options: ProductGroupsOptions, http: Client) {
+  constructor (options: ProductGroupsOptions, http: Client) {
     super(http, {
       endpoint: ProductGroups.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = ProductGroups.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
   }
 
-  getAll(queryOrOptions?: ProductGroupsQuery | undefined): Promise<ProductGroupsResponse> {
+  getAll (queryOrOptions?: ProductGroupsQuery | undefined): Promise<ProductGroupsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
         let uri
-        if (queryOrOptions && queryOrOptions.uri) {
+        if (queryOrOptions?.uri) {
           uri = queryOrOptions.uri
         } else {
           let queryString = ''
@@ -100,13 +100,13 @@ export class ProductGroups extends ThBaseHandler {
     })
   }
 
-  get(
+  get (
     productGroupId: string,
     queryOrOptions?: ProductGroupsQuery | undefined
   ): Promise<ProductGroupResponse> {
     return new Promise(async (resolve, reject) => {
       let uri
-      if (queryOrOptions && queryOrOptions.uri) {
+      if (queryOrOptions?.uri) {
         uri = queryOrOptions.uri
       } else {
         let queryString = ''
@@ -135,7 +135,7 @@ export class ProductGroups extends ThBaseHandler {
     })
   }
 
-  put(productGroupId: string, productGroup: ProductGroup): Promise<ProductGroupResponse> {
+  put (productGroupId: string, productGroup: ProductGroup): Promise<ProductGroupResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productGroupId}`
       try {
@@ -151,7 +151,7 @@ export class ProductGroups extends ThBaseHandler {
     })
   }
 
-  create(productGroup: ProductGroup): Promise<ProductGroupResponse> {
+  create (productGroup: ProductGroup): Promise<ProductGroupResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
@@ -167,7 +167,7 @@ export class ProductGroups extends ThBaseHandler {
     })
   }
 
-  delete(taxId: string): Promise<ProductGroupResponse> {
+  delete (taxId: string): Promise<ProductGroupResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${taxId}`
       try {
@@ -183,7 +183,7 @@ export class ProductGroups extends ThBaseHandler {
     })
   }
 
-  search(searchTerm: string): Promise<ProductGroupsResponse> {
+  search (searchTerm: string): Promise<ProductGroupsResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/search?q=${searchTerm}`
       try {

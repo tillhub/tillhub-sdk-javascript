@@ -15,15 +15,15 @@ export class Data {
   http: Client
   public options: DataOptions
 
-  constructor(options: DataOptions, http: Client) {
+  constructor (options: DataOptions, http: Client) {
     this.options = options
     this.http = http
 
     this.endpoint = '/api/v0/data'
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
   }
 
-  replace(dataId: string, payload: FormData): Promise<DataResponse> {
+  replace (dataId: string, payload: FormData): Promise<DataResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${dataId}`
       try {
@@ -39,7 +39,7 @@ export class Data {
     })
   }
 
-  create(payload: FormData): Promise<DataResponse> {
+  create (payload: FormData): Promise<DataResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
@@ -59,7 +59,7 @@ export class Data {
 
 export class DataCreateFailed extends BaseError {
   public name = 'DataCreateFailed'
-  constructor(public message: string = 'Could not create data') {
+  constructor (public message: string = 'Could not create data') {
     super(message)
     Object.setPrototypeOf(this, DataCreateFailed.prototype)
   }
@@ -67,7 +67,7 @@ export class DataCreateFailed extends BaseError {
 
 export class DataReplaceFailed extends BaseError {
   public name = 'DataReplaceFailed'
-  constructor(public message: string = 'Could not replace data') {
+  constructor (public message: string = 'Could not replace data') {
     super(message)
     Object.setPrototypeOf(this, DataReplaceFailed.prototype)
   }

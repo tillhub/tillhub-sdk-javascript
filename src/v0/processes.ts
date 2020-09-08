@@ -62,20 +62,20 @@ export class Processes extends ThBaseHandler {
   public options: ProcessesOptions
   public uriHelper: UriHelper
 
-  constructor(options: ProcessesOptions, http: Client) {
+  constructor (options: ProcessesOptions, http: Client) {
     super(http, {
       endpoint: Processes.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Processes.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  create(process: Process): Promise<ProcessResponse> {
+  create (process: Process): Promise<ProcessResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri()
@@ -94,7 +94,7 @@ export class Processes extends ThBaseHandler {
     })
   }
 
-  getAll(query?: ProcessesQueryOptions): Promise<ProcessesResponse> {
+  getAll (query?: ProcessesQueryOptions): Promise<ProcessesResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
@@ -122,7 +122,7 @@ export class Processes extends ThBaseHandler {
     })
   }
 
-  get(processId: string, query?: ProcessesQueryOptions): Promise<ProcessResponse> {
+  get (processId: string, query?: ProcessesQueryOptions): Promise<ProcessResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const baseUri = this.uriHelper.generateBaseUri(`/${processId}`)
@@ -142,7 +142,7 @@ export class Processes extends ThBaseHandler {
     })
   }
 
-  update(processId: string, process: Process): Promise<ProcessResponse> {
+  update (processId: string, process: Process): Promise<ProcessResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri(`/${processId}`)
@@ -161,7 +161,7 @@ export class Processes extends ThBaseHandler {
     })
   }
 
-  delete(processId: string): Promise<ProcessResponse> {
+  delete (processId: string): Promise<ProcessResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri(`/${processId}`)
@@ -179,7 +179,7 @@ export class Processes extends ThBaseHandler {
     })
   }
 
-  getItems(processId: string, query?: ProcessItemsQueryOptions): Promise<ProcessesItemsResponse> {
+  getItems (processId: string, query?: ProcessItemsQueryOptions): Promise<ProcessesItemsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const baseUri = this.uriHelper.generateBaseUri(`/${processId}/items`)
@@ -199,7 +199,7 @@ export class Processes extends ThBaseHandler {
     })
   }
 
-  meta(query?: ProcessesQueryOptions): Promise<ProcessesResponse> {
+  meta (query?: ProcessesQueryOptions): Promise<ProcessesResponse> {
     return new Promise(async (resolve, reject) => {
       const base = this.uriHelper.generateBaseUri('/meta')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -226,7 +226,7 @@ export class Processes extends ThBaseHandler {
 
 export class ProcessesFetchFailed extends BaseError {
   public name = 'ProcessesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch processes',
     properties?: Record<string, unknown>
   ) {
@@ -237,7 +237,7 @@ export class ProcessesFetchFailed extends BaseError {
 
 export class ProcessesFetchOneFailed extends BaseError {
   public name = 'ProcessesFetchOneFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch one process',
     properties?: Record<string, unknown>
   ) {
@@ -248,7 +248,7 @@ export class ProcessesFetchOneFailed extends BaseError {
 
 export class ProcessesUpdateFailed extends BaseError {
   public name = 'ProcessesUpdateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update process',
     properties?: Record<string, unknown>
   ) {
@@ -259,7 +259,7 @@ export class ProcessesUpdateFailed extends BaseError {
 
 export class ProcessesCreationFailed extends BaseError {
   public name = 'ProcessesCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create process',
     properties?: Record<string, unknown>
   ) {
@@ -270,7 +270,7 @@ export class ProcessesCreationFailed extends BaseError {
 
 export class ProcessesDeleteFailed extends BaseError {
   public name = 'ProcessesDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete process',
     properties?: Record<string, unknown>
   ) {
@@ -281,7 +281,7 @@ export class ProcessesDeleteFailed extends BaseError {
 
 export class ProcessItemsFetchFailed extends BaseError {
   public name = 'ProcessItemsFetchFailed'
-  constructor(
+  constructor (
     public message: string = "Could not fetch one process' items",
     properties?: Record<string, unknown>
   ) {
@@ -292,7 +292,7 @@ export class ProcessItemsFetchFailed extends BaseError {
 
 export class ProcessesMetaFailed extends BaseError {
   public name = 'ProcessesMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get meta of Processes',
     properties?: Record<string, unknown>
   ) {

@@ -21,7 +21,7 @@ export interface BranchesQuery {
 }
 
 export interface BranchesResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   next?: () => Promise<BranchesResponse>
 }
@@ -74,26 +74,26 @@ export class Branches extends ThBaseHandler {
   public options: BranchesOptions
   public uriHelper: UriHelper
 
-  constructor(options: BranchesOptions, http: Client) {
+  constructor (options: BranchesOptions, http: Client) {
     super(http, {
       endpoint: Branches.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Branches.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(queryOrOptions?: BranchesQuery | undefined): Promise<BranchesResponse> {
+  getAll (queryOrOptions?: BranchesQuery | undefined): Promise<BranchesResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
         let uri
-        if (queryOrOptions && queryOrOptions.uri) {
+        if (queryOrOptions?.uri) {
           uri = queryOrOptions.uri
         } else {
           let queryString = ''
@@ -126,7 +126,7 @@ export class Branches extends ThBaseHandler {
     })
   }
 
-  get(branchId: string): Promise<BranchResponse> {
+  get (branchId: string): Promise<BranchResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${branchId}`
       try {
@@ -145,7 +145,7 @@ export class Branches extends ThBaseHandler {
     })
   }
 
-  put(branchId: string, branch: Branch): Promise<BranchResponse> {
+  put (branchId: string, branch: Branch): Promise<BranchResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${branchId}`
       try {
@@ -161,7 +161,7 @@ export class Branches extends ThBaseHandler {
     })
   }
 
-  create(branch: Branch): Promise<BranchResponse> {
+  create (branch: Branch): Promise<BranchResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
@@ -177,7 +177,7 @@ export class Branches extends ThBaseHandler {
     })
   }
 
-  count(): Promise<BranchesResponse> {
+  count (): Promise<BranchesResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
 
@@ -197,7 +197,7 @@ export class Branches extends ThBaseHandler {
     })
   }
 
-  delete(branchId: string): Promise<BranchResponse> {
+  delete (branchId: string): Promise<BranchResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${branchId}`
       try {
@@ -213,9 +213,9 @@ export class Branches extends ThBaseHandler {
     })
   }
 
-  getUniqueExternalId(query: ExternalCustomIdQuery): Promise<BranchResponse> {
+  getUniqueExternalId (query: ExternalCustomIdQuery): Promise<BranchResponse> {
     return new Promise(async (resolve, reject) => {
-      const base = this.uriHelper.generateBaseUri(`/external_id`)
+      const base = this.uriHelper.generateBaseUri('/external_id')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
       try {
         const response = await this.http.getClient().get(uri)
@@ -245,7 +245,7 @@ export class Branches extends ThBaseHandler {
     })
   }
 
-  search(query: string | SearchQuery): Promise<BranchResponse> {
+  search (query: string | SearchQuery): Promise<BranchResponse> {
     return new Promise(async (resolve, reject) => {
       let uri
       if (typeof query === 'string') {
@@ -277,7 +277,7 @@ export class Branches extends ThBaseHandler {
 
 export class BranchesFetchFailed extends BaseError {
   public name = 'BranchesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch branches',
     properties?: Record<string, unknown>
   ) {
@@ -288,7 +288,7 @@ export class BranchesFetchFailed extends BaseError {
 
 export class BranchFetchFailed extends BaseError {
   public name = 'BrancheFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch branch',
     properties?: Record<string, unknown>
   ) {
@@ -299,7 +299,7 @@ export class BranchFetchFailed extends BaseError {
 
 export class BranchPutFailed extends BaseError {
   public name = 'BranchPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter branch',
     properties?: Record<string, unknown>
   ) {
@@ -310,7 +310,7 @@ export class BranchPutFailed extends BaseError {
 
 export class BranchCreationFailed extends BaseError {
   public name = 'BranchCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create branch',
     properties?: Record<string, unknown>
   ) {
@@ -321,7 +321,7 @@ export class BranchCreationFailed extends BaseError {
 
 export class BranchesCountFailed extends BaseError {
   public name = 'BranchesCountFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not count the branches',
     properties?: Record<string, unknown>
   ) {
@@ -332,7 +332,7 @@ export class BranchesCountFailed extends BaseError {
 
 export class BranchDeleteFailed extends BaseError {
   public name = 'BranchDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete branch',
     properties?: Record<string, unknown>
   ) {
@@ -343,7 +343,7 @@ export class BranchDeleteFailed extends BaseError {
 
 export class ExternalCustomIdGetUniqueFailed extends BaseError {
   public name = 'ExternalCustomIdGetUniqueFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get a unique external_custom_id',
     properties?: Record<string, unknown>
   ) {
@@ -354,7 +354,7 @@ export class ExternalCustomIdGetUniqueFailed extends BaseError {
 
 export class BranchesSearchFailed extends BaseError {
   public name = 'BranchesSearchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not search for branch',
     properties?: Record<string, unknown>
   ) {

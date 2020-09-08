@@ -26,7 +26,7 @@ export interface AuditLogsGetOneRequestObject {
 }
 
 export interface AuditsResponse {
-  data?: Record<string, unknown>[]
+  data?: Array<Record<string, unknown>>
   metadata?: Record<string, unknown>
   msg?: string
   next?: () => Promise<AuditsResponse>
@@ -38,16 +38,16 @@ export class AuditLogs {
   public options: AuditsOptions
   public uriHelper: UriHelper
 
-  constructor(options: AuditsOptions, http: Client) {
+  constructor (options: AuditsOptions, http: Client) {
     this.options = options
     this.http = http
 
     this.endpoint = '/api/v0/audits'
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(q?: AuditsQuery | undefined): Promise<AuditsResponse> {
+  getAll (q?: AuditsQuery | undefined): Promise<AuditsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
@@ -73,7 +73,7 @@ export class AuditLogs {
     })
   }
 
-  meta(q?: AuditsMetaQuery | undefined): Promise<AuditsResponse> {
+  meta (q?: AuditsMetaQuery | undefined): Promise<AuditsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const base = this.uriHelper.generateBaseUri('/logs/meta')
@@ -92,7 +92,7 @@ export class AuditLogs {
     })
   }
 
-  get(requestObject: AuditLogsGetOneRequestObject): Promise<AuditsResponse> {
+  get (requestObject: AuditLogsGetOneRequestObject): Promise<AuditsResponse> {
     return new Promise(async (resolve, reject) => {
       const { auditLogId, query } = requestObject
 

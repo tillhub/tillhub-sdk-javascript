@@ -49,20 +49,20 @@ export class Messages extends ThBaseHandler {
   public options: MessagesOptions
   public uriHelper: UriHelper
 
-  constructor(options: MessagesOptions, http: Client) {
+  constructor (options: MessagesOptions, http: Client) {
     super(http, {
       endpoint: Messages.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Messages.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: MessagesQueryOptions | undefined): Promise<MessagesResponse> {
+  getAll (query?: MessagesQueryOptions | undefined): Promise<MessagesResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const queryString = qs.stringify(query, { addQueryPrefix: true })
@@ -81,7 +81,7 @@ export class Messages extends ThBaseHandler {
     })
   }
 
-  update(messageId: string, messageRequest: Message): Promise<MessageResponse> {
+  update (messageId: string, messageRequest: Message): Promise<MessageResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri(`/${messageId}`)

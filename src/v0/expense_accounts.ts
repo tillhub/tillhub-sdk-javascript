@@ -51,25 +51,25 @@ export class ExpenseAccounts extends ThBaseHandler {
   http: Client
   public options: ExpenseAccountsOptions
 
-  constructor(options: ExpenseAccountsOptions, http: Client) {
+  constructor (options: ExpenseAccountsOptions, http: Client) {
     super(http, {
       endpoint: ExpenseAccounts.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = ExpenseAccounts.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
   }
 
-  getAll(queryOrOptions?: ExpenseAccountsQuery | undefined): Promise<ExpenseAccountsResponse> {
+  getAll (queryOrOptions?: ExpenseAccountsQuery | undefined): Promise<ExpenseAccountsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
         let uri
-        if (queryOrOptions && queryOrOptions.uri) {
+        if (queryOrOptions?.uri) {
           uri = queryOrOptions.uri
         } else {
           let queryString = ''
@@ -100,7 +100,7 @@ export class ExpenseAccounts extends ThBaseHandler {
     })
   }
 
-  get(expenseAccountId: string): Promise<ExpenseAccountResponse> {
+  get (expenseAccountId: string): Promise<ExpenseAccountResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${expenseAccountId}`
       try {
@@ -119,7 +119,7 @@ export class ExpenseAccounts extends ThBaseHandler {
     })
   }
 
-  put(expenseAccountId: string, expenseAccount: ExpenseAccount): Promise<ExpenseAccountResponse> {
+  put (expenseAccountId: string, expenseAccount: ExpenseAccount): Promise<ExpenseAccountResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${expenseAccountId}`
       try {
@@ -135,7 +135,7 @@ export class ExpenseAccounts extends ThBaseHandler {
     })
   }
 
-  create(expenseAccount: ExpenseAccount): Promise<ExpenseAccountResponse> {
+  create (expenseAccount: ExpenseAccount): Promise<ExpenseAccountResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
@@ -151,7 +151,7 @@ export class ExpenseAccounts extends ThBaseHandler {
     })
   }
 
-  delete(expenseAccountId: string): Promise<ExpenseAccountResponse> {
+  delete (expenseAccountId: string): Promise<ExpenseAccountResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${expenseAccountId}`
       try {

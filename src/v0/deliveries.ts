@@ -24,7 +24,7 @@ export interface DeliveriesCreateRequestObject {
 }
 
 export interface DeliveriesCreateBody {
-  items: Record<string, unknown>[]
+  items: Array<Record<string, unknown>>
   order?: string | null
   open?: boolean
   deleted?: boolean
@@ -43,7 +43,7 @@ export interface DeliveriesCreateBody {
   recipient?: Record<string, unknown> | null
   sender?: Record<string, unknown> | null
   metadata?: Record<string, unknown>
-  orders?: Record<string, unknown>[]
+  orders?: Array<Record<string, unknown>>
   issuer?: Record<string, unknown>
   stock_mode?: string | null
   status?: string | null
@@ -74,7 +74,7 @@ export interface DeliveriesUpdateBody {
   recipient?: Record<string, unknown> | null
   sender?: Record<string, unknown> | null
   metadata?: Record<string, unknown>
-  orders?: Record<string, unknown>[]
+  orders?: Array<Record<string, unknown>>
   issuer?: Record<string, unknown>
   stock_mode?: string | null
   status?: string | null
@@ -91,7 +91,7 @@ export interface DeliveryItemsCreateRequestObject {
 }
 
 export interface DeliveryItemsCreateBody {
-  items: Record<string, unknown>[]
+  items: Array<Record<string, unknown>>
 }
 
 export interface DeliveryItemsCreateBodyItem {
@@ -130,7 +130,7 @@ export interface DeliveryItemsUpdateBody {
 }
 
 export interface DeliveriesResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   next?: () => Promise<DeliveriesResponse>
   msg?: string
@@ -142,31 +142,31 @@ export class Deliveries extends ThBaseHandler {
   http: Client
   public options: DeliveriesOptions
 
-  constructor(options: DeliveriesOptions, http: Client) {
+  constructor (options: DeliveriesOptions, http: Client) {
     super(http, {
       endpoint: Deliveries.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Deliveries.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
   }
 
-  getAll(query?: DeliveriesQuery | undefined): Promise<DeliveriesResponse> {
+  getAll (query?: DeliveriesQuery | undefined): Promise<DeliveriesResponse> {
     return new Promise(async (resolve, reject) => {
       let uri
       let next
 
       try {
-        if (query && query.uri) {
+        if (query?.uri) {
           uri = query.uri
         } else {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}`
         }
 
-        if (query && query.embed) {
+        if (query?.embed) {
           const queryString = query.embed
             .map((item) => {
               return `embed[]=${item}`
@@ -193,13 +193,13 @@ export class Deliveries extends ThBaseHandler {
     })
   }
 
-  getOne(requestObject: DeliveriesGetOneRequestObject): Promise<DeliveriesResponse> {
+  getOne (requestObject: DeliveriesGetOneRequestObject): Promise<DeliveriesResponse> {
     return new Promise(async (resolve, reject) => {
       const { deliveryId, query } = requestObject
       let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deliveryId}`
 
       try {
-        if (query && query.embed) {
+        if (query?.embed) {
           const queryString = query.embed
             .map((item) => {
               return `embed[]=${item}`
@@ -221,14 +221,14 @@ export class Deliveries extends ThBaseHandler {
     })
   }
 
-  createDelivery(requestObject: DeliveriesCreateRequestObject): Promise<DeliveriesResponse> {
+  createDelivery (requestObject: DeliveriesCreateRequestObject): Promise<DeliveriesResponse> {
     return new Promise(async (resolve, reject) => {
       const { body, query } = requestObject
 
       let uri = `${this.options.base}${this.endpoint}/${this.options.user}`
 
       try {
-        if (query && query.embed) {
+        if (query?.embed) {
           const queryString = query.embed
             .map((item) => {
               return `embed[]=${item}`
@@ -250,7 +250,7 @@ export class Deliveries extends ThBaseHandler {
     })
   }
 
-  createDeliveryPDF(deliveryId: string): Promise<DeliveriesResponse> {
+  createDeliveryPDF (deliveryId: string): Promise<DeliveriesResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deliveryId}/pdf?format=uri`
 
@@ -271,13 +271,13 @@ export class Deliveries extends ThBaseHandler {
     })
   }
 
-  updateDelivery(requestObject: DeliveriesUpdateRequestObject): Promise<DeliveriesResponse> {
+  updateDelivery (requestObject: DeliveriesUpdateRequestObject): Promise<DeliveriesResponse> {
     return new Promise(async (resolve, reject) => {
       const { body, query, deliveryId } = requestObject
 
       let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deliveryId}`
 
-      if (query && query.embed) {
+      if (query?.embed) {
         const queryString = query.embed
           .map((item) => {
             return `embed[]=${item}`
@@ -300,13 +300,13 @@ export class Deliveries extends ThBaseHandler {
     })
   }
 
-  setInProgress(requestObject: DeliveriesSimpleUpdateRequestBody): Promise<DeliveriesResponse> {
+  setInProgress (requestObject: DeliveriesSimpleUpdateRequestBody): Promise<DeliveriesResponse> {
     return new Promise(async (resolve, reject) => {
       const { deliveryId, query } = requestObject
 
       let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deliveryId}/in_progress`
 
-      if (query && query.embed) {
+      if (query?.embed) {
         const queryString = query.embed
           .map((item) => {
             return `embed[]=${item}`
@@ -329,13 +329,13 @@ export class Deliveries extends ThBaseHandler {
     })
   }
 
-  dispatchDelivery(requestObject: DeliveriesSimpleUpdateRequestBody): Promise<DeliveriesResponse> {
+  dispatchDelivery (requestObject: DeliveriesSimpleUpdateRequestBody): Promise<DeliveriesResponse> {
     return new Promise(async (resolve, reject) => {
       const { deliveryId, query } = requestObject
 
       let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deliveryId}/dispatch`
 
-      if (query && query.embed) {
+      if (query?.embed) {
         const queryString = query.embed
           .map((item) => {
             return `embed[]=${item}`
@@ -358,7 +358,7 @@ export class Deliveries extends ThBaseHandler {
     })
   }
 
-  deleteDelivery(deliveryId: string): Promise<DeliveriesResponse> {
+  deleteDelivery (deliveryId: string): Promise<DeliveriesResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deliveryId}`
       try {
@@ -373,7 +373,7 @@ export class Deliveries extends ThBaseHandler {
     })
   }
 
-  createDeliveryItems(
+  createDeliveryItems (
     requestObject: DeliveryItemsCreateRequestObject
   ): Promise<DeliveriesResponse> {
     return new Promise(async (resolve, reject) => {
@@ -382,7 +382,7 @@ export class Deliveries extends ThBaseHandler {
       let uri = `${this.options.base}${this.endpoint}/${this.options.user}/items`
 
       try {
-        if (query && query.embed) {
+        if (query?.embed) {
           const queryString = query.embed
             .map((item) => {
               return `embed[]=${item}`
@@ -404,7 +404,7 @@ export class Deliveries extends ThBaseHandler {
     })
   }
 
-  getAllDeliveryItems(
+  getAllDeliveryItems (
     requestObject: DeliveryItemsGetAllRequestObject
   ): Promise<DeliveriesResponse> {
     return new Promise(async (resolve, reject) => {
@@ -413,7 +413,7 @@ export class Deliveries extends ThBaseHandler {
       let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deliveryId}/items`
 
       try {
-        if (query && query.embed) {
+        if (query?.embed) {
           const queryString = query.embed
             .map((item) => {
               return `embed[]=${item}`
@@ -435,13 +435,13 @@ export class Deliveries extends ThBaseHandler {
     })
   }
 
-  updateDeliveryItem(requestObject: DeliveryItemUpdateRequestObject): Promise<DeliveriesResponse> {
+  updateDeliveryItem (requestObject: DeliveryItemUpdateRequestObject): Promise<DeliveriesResponse> {
     return new Promise(async (resolve, reject) => {
       const { body, query, itemId } = requestObject
 
       let uri = `${this.options.base}${this.endpoint}/${this.options.user}/items/${itemId}`
 
-      if (query && query.embed) {
+      if (query?.embed) {
         const queryString = query.embed
           .map((item) => {
             return `embed[]=${item}`
@@ -464,7 +464,7 @@ export class Deliveries extends ThBaseHandler {
     })
   }
 
-  deleteDeliveryItem(itemId: string): Promise<DeliveriesResponse> {
+  deleteDeliveryItem (itemId: string): Promise<DeliveriesResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/items/${itemId}`
       try {

@@ -18,7 +18,7 @@ export interface StaffGroupsQuery {
 }
 
 export interface StaffGroupsResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
 }
 
@@ -49,20 +49,20 @@ export class StaffGroups extends ThBaseHandler {
   public options: StaffGroupsOptions
   public uriHelper: UriHelper
 
-  constructor(options: StaffGroupsOptions, http: Client) {
+  constructor (options: StaffGroupsOptions, http: Client) {
     super(http, {
       endpoint: StaffGroups.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = StaffGroups.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: StaffGroupsQuery | undefined): Promise<StaffGroupsResponse> {
+  getAll (query?: StaffGroupsQuery | undefined): Promise<StaffGroupsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
@@ -87,10 +87,10 @@ export class StaffGroups extends ThBaseHandler {
     })
   }
 
-  meta(): Promise<StaffGroupsResponse> {
+  meta (): Promise<StaffGroupsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const uri = this.uriHelper.generateBaseUri(`/meta`)
+        const uri = this.uriHelper.generateBaseUri('/meta')
         const response = await this.http.getClient().get(uri)
 
         if (response.status !== 200) reject(new StaffGroupsMetaFailed())
@@ -105,7 +105,7 @@ export class StaffGroups extends ThBaseHandler {
     })
   }
 
-  get(staffGroupId: string): Promise<StaffGroupResponse> {
+  get (staffGroupId: string): Promise<StaffGroupResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri(`/${staffGroupId}`)
       try {
@@ -124,7 +124,7 @@ export class StaffGroups extends ThBaseHandler {
     })
   }
 
-  put(staffGroupId: string, staffGroup: StaffGroup): Promise<StaffGroupResponse> {
+  put (staffGroupId: string, staffGroup: StaffGroup): Promise<StaffGroupResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri(`/${staffGroupId}`)
       try {
@@ -140,7 +140,7 @@ export class StaffGroups extends ThBaseHandler {
     })
   }
 
-  create(staffGroup: StaffGroup): Promise<StaffGroupResponse> {
+  create (staffGroup: StaffGroup): Promise<StaffGroupResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri()
       try {
@@ -156,7 +156,7 @@ export class StaffGroups extends ThBaseHandler {
     })
   }
 
-  delete(staffGroupId: string): Promise<StaffGroupResponse> {
+  delete (staffGroupId: string): Promise<StaffGroupResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri(`/${staffGroupId}`)
       try {
@@ -175,7 +175,7 @@ export class StaffGroups extends ThBaseHandler {
 
 class StaffGroupsFetchAllFailed extends BaseError {
   public name = 'StaffGroupsFetchAllFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch all staff groups',
     properties?: Record<string, unknown>
   ) {
@@ -185,7 +185,7 @@ class StaffGroupsFetchAllFailed extends BaseError {
 
 class StaffGroupsMetaFailed extends BaseError {
   public name = 'StaffGroupsMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch staff groups meta call',
     properties?: Record<string, unknown>
   ) {
@@ -195,7 +195,7 @@ class StaffGroupsMetaFailed extends BaseError {
 
 export class StaffGroupFetchFailed extends BaseError {
   public name = 'StaffGroupFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the staff group',
     properties?: Record<string, unknown>
   ) {
@@ -205,7 +205,7 @@ export class StaffGroupFetchFailed extends BaseError {
 
 export class StaffGroupPutFailed extends BaseError {
   public name = 'StaffGroupPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter the staff group',
     properties?: Record<string, unknown>
   ) {
@@ -215,7 +215,7 @@ export class StaffGroupPutFailed extends BaseError {
 
 export class StaffGroupCreationFailed extends BaseError {
   public name = 'StaffGroupCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create the staff group',
     properties?: Record<string, unknown>
   ) {
@@ -225,7 +225,7 @@ export class StaffGroupCreationFailed extends BaseError {
 
 export class StaffGroupDeleteFailed extends BaseError {
   public name = 'StaffGroupDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete the staff group',
     properties?: Record<string, unknown>
   ) {

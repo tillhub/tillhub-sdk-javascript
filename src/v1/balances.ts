@@ -9,7 +9,7 @@ export interface BalancesOptions {
 }
 
 export interface BalancesResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
 }
 
@@ -36,26 +36,26 @@ export class Balances extends ThBaseHandler {
   http: Client
   public options: BalancesOptions
 
-  constructor(options: BalancesOptions, http: Client) {
+  constructor (options: BalancesOptions, http: Client) {
     super(http, {
       endpoint: Balances.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Balances.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
   }
 
-  getAll(q?: BalancesQuery): Promise<BalancesResponse> {
+  getAll (q?: BalancesQuery): Promise<BalancesResponse> {
     return new Promise(async (resolve, reject) => {
       const query = q ? JSON.parse(JSON.stringify(q)) : {}
       let uri
       let next
 
       try {
-        if (query && query.uri) {
+        if (query?.uri) {
           uri = query.uri
         } else {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}`
@@ -83,14 +83,13 @@ export class Balances extends ThBaseHandler {
     })
   }
 
-  meta(): Promise<BalancesResponse> {
+  meta (): Promise<BalancesResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
 
       try {
         const response = await this.http.getClient().get(uri)
-        if (response.status !== 200)
-          return reject(new errors.BalancesMetaFailed(undefined, { status: response.status }))
+        if (response.status !== 200) { return reject(new errors.BalancesMetaFailed(undefined, { status: response.status })) }
 
         if (!response.data.results[0]) {
           return reject(
@@ -108,7 +107,7 @@ export class Balances extends ThBaseHandler {
     })
   }
 
-  async get(transactionId: string): Promise<BalancesResponse> {
+  async get (transactionId: string): Promise<BalancesResponse> {
     const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${transactionId}`
 
     try {

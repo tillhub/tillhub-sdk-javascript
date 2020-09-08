@@ -45,20 +45,20 @@ export class StockTakings extends ThBaseHandler {
   public options: StockTakingsOptions
   public uriHelper: UriHelper
 
-  constructor(options: StockTakingsOptions, http: Client) {
+  constructor (options: StockTakingsOptions, http: Client) {
     super(http, {
       endpoint: StockTakings.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = StockTakings.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  create(stockTaking: StockTaking): Promise<StockTakingResponse> {
+  create (stockTaking: StockTaking): Promise<StockTakingResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri()
@@ -77,7 +77,7 @@ export class StockTakings extends ThBaseHandler {
     })
   }
 
-  getAll(query?: StockTakingsQueryOptions): Promise<StockTakingsResponse> {
+  getAll (query?: StockTakingsQueryOptions): Promise<StockTakingsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
@@ -106,7 +106,7 @@ export class StockTakings extends ThBaseHandler {
     })
   }
 
-  get(stockTakingId: string, query?: StockTakingsQueryOptions): Promise<StockTakingResponse> {
+  get (stockTakingId: string, query?: StockTakingsQueryOptions): Promise<StockTakingResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const baseUri = this.uriHelper.generateBaseUri(`/${stockTakingId}`)
@@ -126,7 +126,7 @@ export class StockTakings extends ThBaseHandler {
     })
   }
 
-  update(stockTakingId: string, stockTaking: StockTaking): Promise<StockTakingResponse> {
+  update (stockTakingId: string, stockTaking: StockTaking): Promise<StockTakingResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri(`/${stockTakingId}`)
@@ -145,7 +145,7 @@ export class StockTakings extends ThBaseHandler {
     })
   }
 
-  delete(stockTakingId: string): Promise<StockTakingResponse> {
+  delete (stockTakingId: string): Promise<StockTakingResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri(`/${stockTakingId}`)
@@ -163,7 +163,7 @@ export class StockTakings extends ThBaseHandler {
     })
   }
 
-  meta(query?: StockTakingsQueryOptions): Promise<StockTakingsResponse> {
+  meta (query?: StockTakingsQueryOptions): Promise<StockTakingsResponse> {
     return new Promise(async (resolve, reject) => {
       const base = this.uriHelper.generateBaseUri('/meta')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -190,7 +190,7 @@ export class StockTakings extends ThBaseHandler {
 
 export class StockTakingsFetchFailed extends BaseError {
   public name = 'StockTakingsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch stock takings',
     properties?: Record<string, unknown>
   ) {
@@ -201,7 +201,7 @@ export class StockTakingsFetchFailed extends BaseError {
 
 export class StockTakingsFetchOneFailed extends BaseError {
   public name = 'StockTakingsFetchOneFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch one stock taking',
     properties?: Record<string, unknown>
   ) {
@@ -212,7 +212,7 @@ export class StockTakingsFetchOneFailed extends BaseError {
 
 export class StockTakingsUpdateFailed extends BaseError {
   public name = 'StockTakingsUpdateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update stock taking',
     properties?: Record<string, unknown>
   ) {
@@ -223,7 +223,7 @@ export class StockTakingsUpdateFailed extends BaseError {
 
 export class StockTakingsCreationFailed extends BaseError {
   public name = 'StockTakingsCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create stock taking',
     properties?: Record<string, unknown>
   ) {
@@ -234,7 +234,7 @@ export class StockTakingsCreationFailed extends BaseError {
 
 export class StockTakingsDeleteFailed extends BaseError {
   public name = 'StockTakingsDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete stock taking',
     properties?: Record<string, unknown>
   ) {
@@ -245,7 +245,7 @@ export class StockTakingsDeleteFailed extends BaseError {
 
 export class StockTakingsMetaFailed extends BaseError {
   public name = 'StockTakingsMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get meta of stock takings',
     properties?: Record<string, unknown>
   ) {

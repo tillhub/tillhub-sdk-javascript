@@ -2,7 +2,7 @@ import { BaseError } from './baseError'
 
 export class ReportsBalancesFetchAllFailed extends BaseError {
   public name = 'ReportsBalancesFetchAllFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch all the balances',
     properties?: Record<string, unknown>
   ) {
@@ -13,7 +13,7 @@ export class ReportsBalancesFetchAllFailed extends BaseError {
 
 export class ReportsBalancesFetchOneFailed extends BaseError {
   public name = 'ReportsBalancesFetchOneFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch one balance',
     properties?: Record<string, unknown>
   ) {
@@ -24,7 +24,7 @@ export class ReportsBalancesFetchOneFailed extends BaseError {
 
 export class ReportsBalancesMetaFailed extends BaseError {
   public name = 'ReportsBalancesMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch meta data for balances',
     properties?: Record<string, unknown>
   ) {
@@ -35,7 +35,7 @@ export class ReportsBalancesMetaFailed extends BaseError {
 
 export class ReportsPaymentOptionsFetchAllFailed extends BaseError {
   public name = 'ReportsPaymentOptionsFetchAllFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch all the payment options',
     properties?: Record<string, unknown>
   ) {
@@ -46,7 +46,7 @@ export class ReportsPaymentOptionsFetchAllFailed extends BaseError {
 
 export class ReportsPaymentOptionsMetaFailed extends BaseError {
   public name = 'ReportsPaymentOptionsMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch meta the payment options',
     properties?: Record<string, unknown>
   ) {
@@ -57,7 +57,7 @@ export class ReportsPaymentOptionsMetaFailed extends BaseError {
 
 export class ReportsPaymentsFetchAllFailed extends BaseError {
   public name = 'ReportsPaymentsFetchAllFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch all the payments',
     properties?: Record<string, unknown>
   ) {
@@ -68,7 +68,7 @@ export class ReportsPaymentsFetchAllFailed extends BaseError {
 
 export class ReportsPaymentsMetaFailed extends BaseError {
   public name = 'ReportsPaymentsMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch meta data for payments',
     properties?: Record<string, unknown>
   ) {
@@ -79,7 +79,7 @@ export class ReportsPaymentsMetaFailed extends BaseError {
 
 export class VatReportFetchFailed extends BaseError {
   public name = 'VatReportFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the vat report',
     properties?: Record<string, unknown>
   ) {
@@ -90,7 +90,7 @@ export class VatReportFetchFailed extends BaseError {
 
 export class VatReportFetchMetaFailed extends BaseError {
   public name = 'VatReportFetchMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch meta data for vat report',
     properties?: Record<string, unknown>
   ) {
@@ -101,7 +101,7 @@ export class VatReportFetchMetaFailed extends BaseError {
 
 export class CustomerFetchFailed extends BaseError {
   public name = 'CustomerFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch customer report',
     properties?: Record<string, unknown>
   ) {
@@ -112,7 +112,7 @@ export class CustomerFetchFailed extends BaseError {
 
 export class CustomerFilterFetchFailed extends BaseError {
   public name = 'CustomerFilterFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch customer filters',
     properties?: Record<string, unknown>
   ) {
@@ -122,7 +122,7 @@ export class CustomerFilterFetchFailed extends BaseError {
 }
 export class CustomerTransactionFetchFailed extends BaseError {
   public name = 'CustomerTransactionFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch customer report transactions',
     properties?: Record<string, unknown>
   ) {
@@ -132,7 +132,7 @@ export class CustomerTransactionFetchFailed extends BaseError {
 }
 export class CustomerOverviewFetchFailed extends BaseError {
   public name = 'CustomerOverviewFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch customer report overview',
     properties?: Record<string, unknown>
   ) {
@@ -142,7 +142,7 @@ export class CustomerOverviewFetchFailed extends BaseError {
 }
 export class CustomersMetaFailed extends BaseError {
   public name = 'CustomersMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch customer report metadata',
     properties?: Record<string, unknown>
   ) {

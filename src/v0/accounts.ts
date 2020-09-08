@@ -57,25 +57,25 @@ export class Accounts extends ThBaseHandler {
   http: Client
   public options: AccountsOptions
 
-  constructor(options: AccountsOptions, http: Client) {
+  constructor (options: AccountsOptions, http: Client) {
     super(http, {
       endpoint: Accounts.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Accounts.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
   }
 
-  getAll(queryOrOptions?: AccountsQueryOrOptions | undefined): Promise<AccountsResponse> {
+  getAll (queryOrOptions?: AccountsQueryOrOptions | undefined): Promise<AccountsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
         let uri
-        if (queryOrOptions && queryOrOptions.uri) {
+        if (queryOrOptions?.uri) {
           uri = queryOrOptions.uri
         } else {
           let queryString = ''
@@ -104,7 +104,7 @@ export class Accounts extends ThBaseHandler {
     })
   }
 
-  get(accountId: string): Promise<AccountResponse> {
+  get (accountId: string): Promise<AccountResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${accountId}`
       try {
@@ -123,7 +123,7 @@ export class Accounts extends ThBaseHandler {
     })
   }
 
-  put(accountId: string, account: Account): Promise<AccountResponse> {
+  put (accountId: string, account: Account): Promise<AccountResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${accountId}`
       try {
@@ -139,7 +139,7 @@ export class Accounts extends ThBaseHandler {
     })
   }
 
-  create(account: Account): Promise<AccountResponse> {
+  create (account: Account): Promise<AccountResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
@@ -155,7 +155,7 @@ export class Accounts extends ThBaseHandler {
     })
   }
 
-  delete(accountId: string): Promise<AccountResponse> {
+  delete (accountId: string): Promise<AccountResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${accountId}`
       try {

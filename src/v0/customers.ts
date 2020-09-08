@@ -155,20 +155,20 @@ export class Customers extends ThBaseHandler {
   public options: CustomersOptions
   public uriHelper: UriHelper
 
-  constructor(options: CustomersOptions, http: Client) {
+  constructor (options: CustomersOptions, http: Client) {
     super(http, {
       endpoint: Customers.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Customers.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: CustomersQuery | undefined): Promise<CustomersResponse> {
+  getAll (query?: CustomersQuery | undefined): Promise<CustomersResponse> {
     return new Promise(async (resolve, reject) => {
       let next
       const base = this.uriHelper.generateBaseUri()
@@ -195,7 +195,7 @@ export class Customers extends ThBaseHandler {
     })
   }
 
-  get(customerId: string, query: CustomersQuery): Promise<CustomerResponse> {
+  get (customerId: string, query: CustomersQuery): Promise<CustomerResponse> {
     return new Promise(async (resolve, reject) => {
       const base = this.uriHelper.generateBaseUri(`/${customerId}`)
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -217,7 +217,7 @@ export class Customers extends ThBaseHandler {
     })
   }
 
-  createNote(customerId: string, note: CustomerNoteItem): Promise<CustomerResponse> {
+  createNote (customerId: string, note: CustomerNoteItem): Promise<CustomerResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${customerId}/notes`
       try {
@@ -237,7 +237,7 @@ export class Customers extends ThBaseHandler {
     })
   }
 
-  put(customerId: string, customer: Customer): Promise<CustomerResponse> {
+  put (customerId: string, customer: Customer): Promise<CustomerResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${customerId}`
       try {
@@ -256,7 +256,7 @@ export class Customers extends ThBaseHandler {
     })
   }
 
-  create(customer: Customer, query?: HandlerCustomerQuery): Promise<CustomerResponse> {
+  create (customer: Customer, query?: HandlerCustomerQuery): Promise<CustomerResponse> {
     return new Promise(async (resolve, reject) => {
       const base = this.uriHelper.generateBaseUri()
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -277,7 +277,7 @@ export class Customers extends ThBaseHandler {
     })
   }
 
-  meta(q?: CustomersMetaQuery | undefined): Promise<CustomersResponse> {
+  meta (q?: CustomersMetaQuery | undefined): Promise<CustomersResponse> {
     return new Promise(async (resolve, reject) => {
       let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
 
@@ -305,7 +305,7 @@ export class Customers extends ThBaseHandler {
     })
   }
 
-  delete(customerId: string): Promise<CustomerResponse> {
+  delete (customerId: string): Promise<CustomerResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${customerId}`
       try {
@@ -322,7 +322,7 @@ export class Customers extends ThBaseHandler {
     })
   }
 
-  count(): Promise<CustomersResponse> {
+  count (): Promise<CustomersResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
 
@@ -341,7 +341,7 @@ export class Customers extends ThBaseHandler {
     })
   }
 
-  search(searchTerm: string): Promise<CustomersResponse> {
+  search (searchTerm: string): Promise<CustomersResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}/api/v2/customers/${this.options.user}/search?q=${searchTerm}`
       try {
@@ -361,7 +361,7 @@ export class Customers extends ThBaseHandler {
 
 export class CustomersFetchFailed extends BaseError {
   public name = 'CustomersFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch customers',
     properties?: Record<string, unknown>
   ) {
@@ -372,7 +372,7 @@ export class CustomersFetchFailed extends BaseError {
 
 export class CustomerFetchFailed extends BaseError {
   public name = 'CustomerFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch customer',
     properties?: Record<string, unknown>
   ) {
@@ -383,7 +383,7 @@ export class CustomerFetchFailed extends BaseError {
 
 export class CustomerPutFailed extends BaseError {
   public name = 'CustomerPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter customer',
     properties?: Record<string, unknown>
   ) {
@@ -394,7 +394,7 @@ export class CustomerPutFailed extends BaseError {
 
 export class CustomerNoteCreationFailed extends BaseError {
   public name = 'CustomerNoteCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create customer note',
     properties?: Record<string, unknown>
   ) {
@@ -405,7 +405,7 @@ export class CustomerNoteCreationFailed extends BaseError {
 
 export class CustomerCreationFailed extends BaseError {
   public name = 'CustomerCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create customer',
     properties?: Record<string, unknown>
   ) {
@@ -416,7 +416,7 @@ export class CustomerCreationFailed extends BaseError {
 
 export class CustomersMetaFailed extends BaseError {
   public name = 'CustomersMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get customers metadata',
     properties?: Record<string, unknown>
   ) {
@@ -427,7 +427,7 @@ export class CustomersMetaFailed extends BaseError {
 
 export class CustomersCountFailed extends BaseError {
   public name = 'CustomersCountFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not count customers',
     properties?: Record<string, unknown>
   ) {
@@ -438,7 +438,7 @@ export class CustomersCountFailed extends BaseError {
 
 export class CustomersSearchFailed extends BaseError {
   public name = 'CustomersSearchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not search for customer',
     properties?: Record<string, unknown>
   ) {
@@ -449,7 +449,7 @@ export class CustomersSearchFailed extends BaseError {
 
 export class CustomerDeleteFailed extends BaseError {
   public name = 'CustomerDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete the customer',
     properties?: Record<string, unknown>
   ) {

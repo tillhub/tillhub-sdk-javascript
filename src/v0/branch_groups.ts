@@ -22,7 +22,7 @@ export interface BranchGroupsQuery {
 }
 
 export interface BranchGroupsResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   next?: () => Promise<BranchGroupsResponse>
 }
@@ -57,26 +57,26 @@ export class BranchGroups extends ThBaseHandler {
   public options: BranchGroupsOptions
   public uriHelper: UriHelper
 
-  constructor(options: BranchGroupsOptions, http: Client) {
+  constructor (options: BranchGroupsOptions, http: Client) {
     super(http, {
       endpoint: BranchGroups.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = BranchGroups.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(queryOrOptions?: BranchGroupsQuery | undefined): Promise<BranchGroupsResponse> {
+  getAll (queryOrOptions?: BranchGroupsQuery | undefined): Promise<BranchGroupsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
         let uri
-        if (queryOrOptions && queryOrOptions.uri) {
+        if (queryOrOptions?.uri) {
           uri = queryOrOptions.uri
         } else {
           let queryString = ''
@@ -110,7 +110,7 @@ export class BranchGroups extends ThBaseHandler {
     })
   }
 
-  get(branchId: string): Promise<BranchGroupResponse> {
+  get (branchId: string): Promise<BranchGroupResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${branchId}`
       try {
@@ -129,7 +129,7 @@ export class BranchGroups extends ThBaseHandler {
     })
   }
 
-  put(branchId: string, branchGroup: BranchGroup): Promise<BranchGroupResponse> {
+  put (branchId: string, branchGroup: BranchGroup): Promise<BranchGroupResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${branchId}`
       try {
@@ -145,7 +145,7 @@ export class BranchGroups extends ThBaseHandler {
     })
   }
 
-  create(branchGroup: BranchGroup): Promise<BranchGroupResponse> {
+  create (branchGroup: BranchGroup): Promise<BranchGroupResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
@@ -161,7 +161,7 @@ export class BranchGroups extends ThBaseHandler {
     })
   }
 
-  delete(branchId: string): Promise<BranchGroupResponse> {
+  delete (branchId: string): Promise<BranchGroupResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${branchId}`
       try {
@@ -180,7 +180,7 @@ export class BranchGroups extends ThBaseHandler {
 
 export class BranchGroupsFetchFailed extends BaseError {
   public name = 'BranchGroupsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch branch groups',
     properties?: Record<string, unknown>
   ) {
@@ -191,7 +191,7 @@ export class BranchGroupsFetchFailed extends BaseError {
 
 export class BranchGroupFetchFailed extends BaseError {
   public name = 'BranchGroupFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch branch group',
     properties?: Record<string, unknown>
   ) {
@@ -202,7 +202,7 @@ export class BranchGroupFetchFailed extends BaseError {
 
 export class BranchGroupPutFailed extends BaseError {
   public name = 'BranchPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter branch group',
     properties?: Record<string, unknown>
   ) {
@@ -213,7 +213,7 @@ export class BranchGroupPutFailed extends BaseError {
 
 export class BranchGroupCreationFailed extends BaseError {
   public name = 'BranchGroupCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create branch group',
     properties?: Record<string, unknown>
   ) {
@@ -224,7 +224,7 @@ export class BranchGroupCreationFailed extends BaseError {
 
 export class BranchGroupDeleteFailed extends BaseError {
   public name = 'BranchGroupDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete branch group',
     properties?: Record<string, unknown>
   ) {

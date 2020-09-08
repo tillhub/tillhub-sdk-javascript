@@ -17,24 +17,24 @@ export class Print {
   public options: PrintOptions
   public uriHelper: UriHelper
 
-  constructor(options: PrintOptions, http: Client) {
+  constructor (options: PrintOptions, http: Client) {
     this.options = options
     this.http = http
 
     this.endpoint = '/api/v0/print'
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  jobs(): Jobs {
+  jobs (): Jobs {
     return new Jobs(this.options, this.http, this.uriHelper)
   }
 
-  messages(): Messages {
+  messages (): Messages {
     return new Messages(this.options, this.http, this.uriHelper)
   }
 
-  printers(): Printers {
+  printers (): Printers {
     return new Printers(this.options, this.http, this.uriHelper)
   }
 
@@ -45,7 +45,7 @@ export class Print {
    * @param {Object} [query] - query Record<string, unknown>
    * @returns {EventSource} - event source notifying of server-sent events
    */
-  subscribeTo(eventName: string, query?: Record<string, unknown>): EventSource {
+  subscribeTo (eventName: string, query?: Record<string, unknown>): EventSource {
     const base = this.uriHelper.generateBaseUri(`/events/${eventName}`)
     const uri = this.uriHelper.generateUriWithQuery(base, query)
 

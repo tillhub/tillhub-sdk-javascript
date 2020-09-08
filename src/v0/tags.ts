@@ -26,7 +26,7 @@ export interface TagResponse {
 }
 
 export interface TagsResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
 }
 
@@ -44,17 +44,17 @@ export class Tags extends ThBaseHandler {
   public options: TagsOptions
   public uriHelper: UriHelper
 
-  constructor(options: TagsOptions, http: Client) {
-    super(http, { endpoint: Tags.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+  constructor (options: TagsOptions, http: Client) {
+    super(http, { endpoint: Tags.baseEndpoint, base: options.base ?? 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
     this.endpoint = Tags.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: TagsQuery | undefined): Promise<TagsResponse> {
+  getAll (query?: TagsQuery | undefined): Promise<TagsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
@@ -79,7 +79,7 @@ export class Tags extends ThBaseHandler {
     })
   }
 
-  get(tagId: string): Promise<TagResponse> {
+  get (tagId: string): Promise<TagResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri(`/${tagId}`)
@@ -98,10 +98,10 @@ export class Tags extends ThBaseHandler {
     })
   }
 
-  meta(): Promise<TagsResponse> {
+  meta (): Promise<TagsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const uri = this.uriHelper.generateBaseUri(`/meta`)
+        const uri = this.uriHelper.generateBaseUri('/meta')
         const response = await this.http.getClient().get(uri)
 
         if (response.status !== 200) reject(new errors.TagsGetMetaFailed())
@@ -116,7 +116,7 @@ export class Tags extends ThBaseHandler {
     })
   }
 
-  create(tag: Tag): Promise<TagResponse> {
+  create (tag: Tag): Promise<TagResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri()
@@ -132,7 +132,7 @@ export class Tags extends ThBaseHandler {
     })
   }
 
-  put(tagId: string, tag: Tag): Promise<TagResponse> {
+  put (tagId: string, tag: Tag): Promise<TagResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri(`/${tagId}`)

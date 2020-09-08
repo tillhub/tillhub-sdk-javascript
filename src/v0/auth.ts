@@ -62,19 +62,19 @@ export interface TokenAuth {
   token: string
 }
 
-export function isUsernameAuth(obj: any): obj is UsernameAuth {
+export function isUsernameAuth (obj: any): obj is UsernameAuth {
   return 'password' in obj
 }
 
-export function isKeyAuth(obj: any): obj is KeyAuth {
+export function isKeyAuth (obj: any): obj is KeyAuth {
   return 'apiKey' in obj
 }
 
-export function isTokenAuth(obj: any): obj is KeyAuth {
+export function isTokenAuth (obj: any): obj is KeyAuth {
   return 'token' in obj
 }
 
-export function isOrgAuth(obj: any): obj is KeyAuth {
+export function isOrgAuth (obj: any): obj is KeyAuth {
   return 'organisation' in obj
 }
 
@@ -100,10 +100,10 @@ export class Auth {
   public token?: string
   public user?: string
 
-  constructor(options: AuthOptions) {
+  constructor (options: AuthOptions) {
     this.options = options
 
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
 
     if (!this.options.credentials) return
 
@@ -118,7 +118,7 @@ export class Auth {
    * Initialise the SDK instance by authenticating the client
    *
    */
-  public clearInstance(): void {
+  public clearInstance (): void {
     this.authenticated = false
     this.options.credentials = undefined
     this.options.token = undefined
@@ -126,22 +126,22 @@ export class Auth {
     this.options.type = undefined
   }
 
-  protected determineAuthType(): void {
+  protected determineAuthType (): void {
     if (isUsernameAuth(this.options.credentials)) this.options.type = AuthTypes.username
     if (isKeyAuth(this.options.credentials)) this.options.type = AuthTypes.key
     if (isTokenAuth(this.options.credentials)) this.options.type = AuthTypes.token
     if (isOrgAuth(this.options.credentials)) this.options.type = AuthTypes.org
   }
 
-  async authenticate(): Promise<AuthResponse> {
+  async authenticate (): Promise<AuthResponse> {
     if (this.options.type === AuthTypes.username) {
-      return this.loginUsername(this.options.credentials as UsernameAuth)
+      return await this.loginUsername(this.options.credentials as UsernameAuth)
     }
 
     throw new errors.AuthenticationFailed('No auth data was provided')
   }
 
-  async loginUsername(authData: UsernameAuth = {} as UsernameAuth): Promise<AuthResponse> {
+  async loginUsername (authData: UsernameAuth = {} as UsernameAuth): Promise<AuthResponse> {
     let username: string
     let password: string
     if (
@@ -151,7 +151,7 @@ export class Auth {
     ) {
       username = (this.options.credentials as UsernameAuth).username
       password = (this.options.credentials as UsernameAuth).password
-    } else if (authData && authData.username && authData.password) {
+    } else if (authData?.username && authData.password) {
       username = authData.username
       password = authData.password
     } else {
@@ -190,7 +190,7 @@ export class Auth {
     }
   }
 
-  async requestPasswordReset(target: PasswordResetRequest): Promise<PasswordResetRequestResponse> {
+  async requestPasswordReset (target: PasswordResetRequest): Promise<PasswordResetRequestResponse> {
     try {
       const { data } = await axios.post(`${this.options.base}/api/v0/users/login/reset`, {
         email: target.email
@@ -204,7 +204,7 @@ export class Auth {
     }
   }
 
-  async setNewPassword(nonce: PasswordResetNonce): Promise<PasswordResetRequestResponse> {
+  async setNewPassword (nonce: PasswordResetNonce): Promise<PasswordResetRequestResponse> {
     try {
       const { data } = await axios.post(`${this.options.base}/api/v0/users/login/reset`, {
         password: nonce.password,
@@ -219,7 +219,7 @@ export class Auth {
     }
   }
 
-  protected setDefaultHeader(user: string, token: string): void {
+  protected setDefaultHeader (user: string, token: string): void {
     const clientOptions: ClientOptions = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -234,7 +234,7 @@ export class Auth {
     Client.getInstance(clientOptions).setDefaults(clientOptions)
   }
 
-  public async logout(token?: string): Promise<LogoutResponse> {
+  public async logout (token?: string): Promise<LogoutResponse> {
     if (!token && !this.token) {
       throw new LogoutMissingToken()
     }
@@ -242,7 +242,7 @@ export class Auth {
     try {
       const { data } = await axios.get(`${this.options.base}/api/v0/users/logout`, {
         headers: {
-          Authorization: `Bearer ${token || this.token}`
+          Authorization: `Bearer ${token ?? this.token}`
         }
       })
 
@@ -257,7 +257,7 @@ export class Auth {
 
 export class LogoutMissingToken extends errors.BaseError {
   public name = 'LogoutMissingToken'
-  constructor(
+  constructor (
     public message: string = 'Could not log out due to missing token.',
     properties?: Record<string, unknown>
   ) {
@@ -268,7 +268,7 @@ export class LogoutMissingToken extends errors.BaseError {
 
 export class LogoutFailed extends errors.BaseError {
   public name = 'LogoutFailed'
-  constructor(public message: string = 'Could not log out.', properties?: Record<string, unknown>) {
+  constructor (public message: string = 'Could not log out.', properties?: Record<string, unknown>) {
     super(message, properties)
     Object.setPrototypeOf(this, LogoutFailed.prototype)
   }

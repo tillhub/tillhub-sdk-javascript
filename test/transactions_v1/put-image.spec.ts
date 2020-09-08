@@ -1,9 +1,9 @@
 import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
-dotenv.config()
 import { v1 } from '../../src/tillhub-js'
 import { initThInstance } from '../util'
+dotenv.config()
 
 const legacyId = '4564'
 const mockTransactionId = '516976d6-4912-4021-af8a-d7e6e4ebfa08'

@@ -1,10 +1,10 @@
 import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
-dotenv.config()
 import qs from 'qs'
 import { v0 } from '../../src/tillhub-js'
 import { initThInstance } from '../util'
+dotenv.config()
 
 const legacyId = '4564'
 const searchTerm = 'asdf'

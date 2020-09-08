@@ -1,3 +1,4 @@
+
 import { Client } from '../client'
 import { BaseError } from '../errors/baseError'
 import { UriHelper, HandlerQuery } from '../uri-helper'
@@ -71,15 +72,15 @@ export interface User {
 }
 
 export class Users extends ThBaseHandler {
-  public static baseEndpoint = `/api/v0/configurations`
+  public static baseEndpoint = '/api/v0/configurations'
   endpoint: string
   http: Client
   public options: UsersOptions
   public configurationId?: string
   public uriHelper: UriHelper
 
-  constructor(options: UsersOptions, http: Client) {
-    super(http, { endpoint: Users.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+  constructor (options: UsersOptions, http: Client) {
+    super(http, { endpoint: Users.baseEndpoint, base: options.base ?? 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
@@ -89,13 +90,12 @@ export class Users extends ThBaseHandler {
 
     this.endpoint = Users.baseEndpoint
 
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: HandleUsersQuery): Promise<UsersResponse> {
-    if (!this.configurationId)
-      throw new TypeError('fetching users requires configuration ID to be set.')
+  getAll (query?: HandleUsersQuery): Promise<UsersResponse> {
+    if (!this.configurationId) { throw new TypeError('fetching users requires configuration ID to be set.') }
     return new Promise(async (resolve, reject) => {
       let next
 
@@ -119,9 +119,8 @@ export class Users extends ThBaseHandler {
     })
   }
 
-  get(userId: string): Promise<UserResponse> {
-    if (!this.configurationId)
-      throw new TypeError('fetching users requires configuration ID to be set.')
+  get (userId: string): Promise<UserResponse> {
+    if (!this.configurationId) { throw new TypeError('fetching users requires configuration ID to be set.') }
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${this.configurationId}/users/${userId}`
       try {
@@ -140,9 +139,8 @@ export class Users extends ThBaseHandler {
     })
   }
 
-  put(userId: string, user: User): Promise<UserResponse> {
-    if (!this.configurationId)
-      throw new TypeError('fetching users requires configuration ID to be set.')
+  put (userId: string, user: User): Promise<UserResponse> {
+    if (!this.configurationId) { throw new TypeError('fetching users requires configuration ID to be set.') }
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${this.configurationId}/users/${userId}`
       try {
@@ -158,9 +156,8 @@ export class Users extends ThBaseHandler {
     })
   }
 
-  create(user: User): Promise<UserResponse> {
-    if (!this.configurationId)
-      throw new TypeError('fetching users requires configuration ID to be set.')
+  create (user: User): Promise<UserResponse> {
+    if (!this.configurationId) { throw new TypeError('fetching users requires configuration ID to be set.') }
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${this.configurationId}/users`
       try {
@@ -176,7 +173,7 @@ export class Users extends ThBaseHandler {
     })
   }
 
-  delete(userId: string): Promise<UserResponse> {
+  delete (userId: string): Promise<UserResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${this.configurationId}/users/${userId}`
       try {
@@ -194,9 +191,8 @@ export class Users extends ThBaseHandler {
     })
   }
 
-  createToken(userId: string): Promise<UserResponse> {
-    if (!this.configurationId)
-      throw new TypeError('fetching users requires configuration ID to be set.')
+  createToken (userId: string): Promise<UserResponse> {
+    if (!this.configurationId) { throw new TypeError('fetching users requires configuration ID to be set.') }
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${this.configurationId}/users/${userId}/api/key`
 
@@ -216,7 +212,7 @@ export class Users extends ThBaseHandler {
 
 export class UsersFetchFailed extends BaseError {
   public name = 'UsersFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch user',
     properties?: Record<string, unknown>
   ) {
@@ -227,7 +223,7 @@ export class UsersFetchFailed extends BaseError {
 
 export class UserFetchFailed extends BaseError {
   public name = 'UserFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch user',
     properties?: Record<string, unknown>
   ) {
@@ -238,7 +234,7 @@ export class UserFetchFailed extends BaseError {
 
 export class UserPutFailed extends BaseError {
   public name = 'UserPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter user',
     properties?: Record<string, unknown>
   ) {
@@ -249,7 +245,7 @@ export class UserPutFailed extends BaseError {
 
 export class UserCreationFailed extends BaseError {
   public name = 'UserCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create user',
     properties?: Record<string, unknown>
   ) {
@@ -260,7 +256,7 @@ export class UserCreationFailed extends BaseError {
 
 export class UserDeleteFailed extends BaseError {
   public name = 'UserDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete user',
     properties?: Record<string, unknown>
   ) {
@@ -271,7 +267,7 @@ export class UserDeleteFailed extends BaseError {
 
 export class UserTokenCreationFailed extends BaseError {
   public name = 'UserTokenCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create token',
     properties?: Record<string, unknown>
   ) {

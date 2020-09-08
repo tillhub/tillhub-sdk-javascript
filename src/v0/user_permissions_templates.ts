@@ -33,20 +33,20 @@ export class UserPermissionsTemplates extends ThBaseHandler {
   public options: UserPermissionsTemplatesOptions
   public uriHelper: UriHelper
 
-  constructor(options: UserPermissionsTemplatesOptions, http: Client) {
+  constructor (options: UserPermissionsTemplatesOptions, http: Client) {
     super(http, {
       endpoint: UserPermissionsTemplates.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = UserPermissionsTemplates.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  create(template: UserPermissionsTemplate): Promise<UserPermissionsTemplateResponse> {
+  create (template: UserPermissionsTemplate): Promise<UserPermissionsTemplateResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri()
@@ -69,7 +69,7 @@ export class UserPermissionsTemplates extends ThBaseHandler {
     })
   }
 
-  getAll(query?: Record<string, unknown>): Promise<UserPermissionsTemplatesResponse> {
+  getAll (query?: Record<string, unknown>): Promise<UserPermissionsTemplatesResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const baseUri = this.uriHelper.generateBaseUri()
@@ -93,7 +93,7 @@ export class UserPermissionsTemplates extends ThBaseHandler {
     })
   }
 
-  get(
+  get (
     templateId: string,
     query?: Record<string, unknown>
   ): Promise<UserPermissionsTemplateResponse> {
@@ -120,7 +120,7 @@ export class UserPermissionsTemplates extends ThBaseHandler {
     })
   }
 
-  update(
+  update (
     templateId: string,
     template: UserPermissionsTemplate
   ): Promise<UserPermissionsTemplateResponse> {
@@ -146,7 +146,7 @@ export class UserPermissionsTemplates extends ThBaseHandler {
     })
   }
 
-  delete(templateId: string): Promise<UserPermissionsTemplateResponse> {
+  delete (templateId: string): Promise<UserPermissionsTemplateResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri(`/${templateId}`)
 
@@ -171,7 +171,7 @@ export class UserPermissionsTemplates extends ThBaseHandler {
 
 export class UserPermissionsTemplatesFetchFailed extends BaseError {
   public name = 'UserPermissionsTemplatesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch all user permissions templates',
     properties?: Record<string, unknown>
   ) {
@@ -181,7 +181,7 @@ export class UserPermissionsTemplatesFetchFailed extends BaseError {
 
 export class UserPermissionsTemplatesFetchOneFailed extends BaseError {
   public name = 'UserPermissionsTemplatesFetchOneFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch one user permissions template',
     properties?: Record<string, unknown>
   ) {
@@ -191,7 +191,7 @@ export class UserPermissionsTemplatesFetchOneFailed extends BaseError {
 
 export class UserPermissionsTemplatesUpdateFailed extends BaseError {
   public name = 'UserPermissionsTemplatesUpdateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update user permissions template',
     properties?: Record<string, unknown>
   ) {
@@ -201,7 +201,7 @@ export class UserPermissionsTemplatesUpdateFailed extends BaseError {
 
 export class UserPermissionsTemplatesCreationFailed extends BaseError {
   public name = 'UserPermissionsTemplatesCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create user permissions template',
     properties?: Record<string, unknown>
   ) {
@@ -211,7 +211,7 @@ export class UserPermissionsTemplatesCreationFailed extends BaseError {
 
 export class UserPermissionsTemplatesDeleteFailed extends BaseError {
   public name = 'UserPermissionsTemplatesDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete user permissions template',
     properties?: Record<string, unknown>
   ) {

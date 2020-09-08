@@ -23,7 +23,7 @@ export interface OrdersQuery {
 }
 
 export interface OrdersResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   msg?: string
 }
@@ -91,20 +91,20 @@ export class Orders extends ThBaseHandler {
   http: Client
   public options: OrdersOptions
 
-  constructor(options: OrdersOptions, http: Client) {
-    super(http, { endpoint: Orders.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+  constructor (options: OrdersOptions, http: Client) {
+    super(http, { endpoint: Orders.baseEndpoint, base: options.base ?? 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
     this.endpoint = Orders.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
   }
 
-  getAll(query?: OrdersQuery | undefined): Promise<OrdersResponse> {
+  getAll (query?: OrdersQuery | undefined): Promise<OrdersResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         let uri
-        if (query && query.uri) {
+        if (query?.uri) {
           uri = query.uri
         } else {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}`
@@ -123,7 +123,7 @@ export class Orders extends ThBaseHandler {
     })
   }
 
-  create(options: OrdersRequest): Promise<OrdersResponse> {
+  create (options: OrdersRequest): Promise<OrdersResponse> {
     return new Promise(async (resolve, reject) => {
       const { orderId, values } = options
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${orderId}`
@@ -141,7 +141,7 @@ export class Orders extends ThBaseHandler {
     })
   }
 
-  update(options: OrdersRequest): Promise<OrdersResponse> {
+  update (options: OrdersRequest): Promise<OrdersResponse> {
     return new Promise(async (resolve, reject) => {
       const { orderId, values } = options
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${orderId}`
@@ -159,7 +159,7 @@ export class Orders extends ThBaseHandler {
     })
   }
 
-  getOrderItems(orderId: string | undefined): Promise<OrdersResponse> {
+  getOrderItems (orderId: string | undefined): Promise<OrdersResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${orderId}/order_items`
       try {
@@ -176,7 +176,7 @@ export class Orders extends ThBaseHandler {
     })
   }
 
-  deleteOrderItems(query: OrdersQuery): Promise<OrdersResponse> {
+  deleteOrderItems (query: OrdersQuery): Promise<OrdersResponse> {
     let route: string
     if (query.itemId) {
       route = `/${query.itemId}`
@@ -187,7 +187,7 @@ export class Orders extends ThBaseHandler {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/order_items${route}`
       try {
         const response = await this.http.getClient().delete(uri)
-        allowedStatuses.includes(response.status) === false &&
+        !allowedStatuses.includes(response.status) &&
           reject(new errors.OrderItemsDeleteFailed())
 
         return resolve({ msg: response.data.msg } as OrdersResponse)
@@ -197,7 +197,7 @@ export class Orders extends ThBaseHandler {
     })
   }
 
-  createOrderItems(body: OrderItemsCreateRequest): Promise<OrdersResponse> {
+  createOrderItems (body: OrderItemsCreateRequest): Promise<OrdersResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/order_items`
       try {
@@ -214,7 +214,7 @@ export class Orders extends ThBaseHandler {
     })
   }
 
-  updateOrderItems(body: OrderItemsUpdateRequest): Promise<OrdersResponse> {
+  updateOrderItems (body: OrderItemsUpdateRequest): Promise<OrdersResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/order_items`
       try {
@@ -231,7 +231,7 @@ export class Orders extends ThBaseHandler {
     })
   }
 
-  updateOrderItem(query: OrderItemUpdateRequest): Promise<OrdersResponse> {
+  updateOrderItem (query: OrderItemUpdateRequest): Promise<OrdersResponse> {
     return new Promise(async (resolve, reject) => {
       const { item, itemId } = query
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/order_items/${itemId}`
@@ -249,11 +249,11 @@ export class Orders extends ThBaseHandler {
     })
   }
 
-  getIncomingOrders(query?: OrdersQuery | undefined): Promise<OrdersResponse> {
+  getIncomingOrders (query?: OrdersQuery | undefined): Promise<OrdersResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         let uri
-        if (query && query.uri) {
+        if (query?.uri) {
           uri = query.uri
         } else {
           uri = `${this.options.base}${this.endpoint}/${
@@ -274,11 +274,11 @@ export class Orders extends ThBaseHandler {
     })
   }
 
-  getOutgoingOrders(query?: OrdersQuery | undefined): Promise<OrdersResponse> {
+  getOutgoingOrders (query?: OrdersQuery | undefined): Promise<OrdersResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         let uri
-        if (query && query.uri) {
+        if (query?.uri) {
           uri = query.uri
         } else {
           uri = `${this.options.base}${this.endpoint}/${
@@ -299,11 +299,11 @@ export class Orders extends ThBaseHandler {
     })
   }
 
-  getOrderSuggestions(query?: OrdersQuery | undefined): Promise<OrdersResponse> {
+  getOrderSuggestions (query?: OrdersQuery | undefined): Promise<OrdersResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         let uri
-        if (query && query.uri) {
+        if (query?.uri) {
           uri = query.uri
         } else {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}/suggestions`
@@ -322,7 +322,7 @@ export class Orders extends ThBaseHandler {
     })
   }
 
-  getHistoricOrderItems(orderId?: string | undefined): Promise<OrdersResponse> {
+  getHistoricOrderItems (orderId?: string | undefined): Promise<OrdersResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${orderId}/order_items`
@@ -340,12 +340,12 @@ export class Orders extends ThBaseHandler {
     })
   }
 
-  bookStock(query: BookStockRequest): Promise<OrdersResponse> {
+  bookStock (query: BookStockRequest): Promise<OrdersResponse> {
     return new Promise(async (resolve, reject) => {
       const { orderId, body } = query
       try {
         let uri
-        if (query && query.uri) {
+        if (query?.uri) {
           uri = query.uri
         } else {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}/order_items/${orderId}/book_stock`
@@ -364,11 +364,11 @@ export class Orders extends ThBaseHandler {
     })
   }
 
-  getOpenOrder(query?: OrdersQuery | undefined): Promise<OrdersResponse> {
+  getOpenOrder (query?: OrdersQuery | undefined): Promise<OrdersResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         let uri
-        if (query && query.uri) {
+        if (query?.uri) {
           uri = query.uri
         } else {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}/open`

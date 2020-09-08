@@ -37,20 +37,20 @@ export class StaffPermissionsTemplates extends ThBaseHandler {
   public options: StaffPermissionsTemplatesOptions
   public uriHelper: UriHelper
 
-  constructor(options: StaffPermissionsTemplatesOptions, http: Client) {
+  constructor (options: StaffPermissionsTemplatesOptions, http: Client) {
     super(http, {
       endpoint: StaffPermissionsTemplates.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = StaffPermissionsTemplates.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  create(template: StaffPermissionsTemplate): Promise<StaffPermissionsTemplateResponse> {
+  create (template: StaffPermissionsTemplate): Promise<StaffPermissionsTemplateResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri()
@@ -73,7 +73,7 @@ export class StaffPermissionsTemplates extends ThBaseHandler {
     })
   }
 
-  getAll(
+  getAll (
     query?: StaffPermissionsTemplatesQueryOptions
   ): Promise<StaffPermissionsTemplatesResponse> {
     return new Promise(async (resolve, reject) => {
@@ -99,7 +99,7 @@ export class StaffPermissionsTemplates extends ThBaseHandler {
     })
   }
 
-  get(
+  get (
     templateId: string,
     query?: StaffPermissionsTemplatesQueryOptions
   ): Promise<StaffPermissionsTemplateResponse> {
@@ -126,7 +126,7 @@ export class StaffPermissionsTemplates extends ThBaseHandler {
     })
   }
 
-  update(
+  update (
     templateId: string,
     template: StaffPermissionsTemplate
   ): Promise<StaffPermissionsTemplateResponse> {
@@ -152,7 +152,7 @@ export class StaffPermissionsTemplates extends ThBaseHandler {
     })
   }
 
-  delete(templateId: string): Promise<StaffPermissionsTemplateResponse> {
+  delete (templateId: string): Promise<StaffPermissionsTemplateResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri(`/${templateId}`)
 
@@ -177,7 +177,7 @@ export class StaffPermissionsTemplates extends ThBaseHandler {
 
 export class StaffPermissionsTemplatesFetchFailed extends BaseError {
   public name = 'StaffPermissionsTemplatesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch all staff permissions templates',
     properties?: Record<string, unknown>
   ) {
@@ -187,7 +187,7 @@ export class StaffPermissionsTemplatesFetchFailed extends BaseError {
 
 export class StaffPermissionsTemplatesFetchOneFailed extends BaseError {
   public name = 'StaffPermissionsTemplatesFetchOneFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch one staff permissions template',
     properties?: Record<string, unknown>
   ) {
@@ -197,7 +197,7 @@ export class StaffPermissionsTemplatesFetchOneFailed extends BaseError {
 
 export class StaffPermissionsTemplatesUpdateFailed extends BaseError {
   public name = 'StaffPermissionsTemplatesUpdateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update staff permissions template',
     properties?: Record<string, unknown>
   ) {
@@ -207,7 +207,7 @@ export class StaffPermissionsTemplatesUpdateFailed extends BaseError {
 
 export class StaffPermissionsTemplatesCreationFailed extends BaseError {
   public name = 'StaffPermissionsTemplatesCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create staff permissions template',
     properties?: Record<string, unknown>
   ) {
@@ -217,7 +217,7 @@ export class StaffPermissionsTemplatesCreationFailed extends BaseError {
 
 export class StaffPermissionsTemplatesDeleteFailed extends BaseError {
   public name = 'StaffPermissionsTemplatesDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete staff permissions template',
     properties?: Record<string, unknown>
   ) {

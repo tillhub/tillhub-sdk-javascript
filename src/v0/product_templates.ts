@@ -45,21 +45,21 @@ export class ProductTemplates {
   http: Client
   public options: ProductTemplatesOptions
 
-  constructor(options: ProductTemplatesOptions, http: Client) {
+  constructor (options: ProductTemplatesOptions, http: Client) {
     this.options = options
     this.http = http
 
     this.endpoint = '/api/v0/product_templates'
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
   }
 
-  getAll(queryOrOptions?: ProductTemplatesQuery | undefined): Promise<ProductTemplatesResponse> {
+  getAll (queryOrOptions?: ProductTemplatesQuery | undefined): Promise<ProductTemplatesResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
         let uri
-        if (queryOrOptions && queryOrOptions.uri) {
+        if (queryOrOptions?.uri) {
           uri = queryOrOptions.uri
         } else {
           let queryString = ''
@@ -88,13 +88,13 @@ export class ProductTemplates {
     })
   }
 
-  get(
+  get (
     productTemplateId: string,
     queryOrOptions?: ProductTemplatesQuery | undefined
   ): Promise<ProductTemplateResponse> {
     return new Promise(async (resolve, reject) => {
       let uri
-      if (queryOrOptions && queryOrOptions.uri) {
+      if (queryOrOptions?.uri) {
         uri = queryOrOptions.uri
       } else {
         let queryString = ''
@@ -123,7 +123,7 @@ export class ProductTemplates {
     })
   }
 
-  search(searchTerm: string): Promise<ProductTemplatesResponse> {
+  search (searchTerm: string): Promise<ProductTemplatesResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}?q=${searchTerm}`
       try {
@@ -142,7 +142,7 @@ export class ProductTemplates {
     })
   }
 
-  put(
+  put (
     productTemplateId: string,
     productTemplate: ProductTemplate
   ): Promise<ProductTemplateResponse> {
@@ -161,7 +161,7 @@ export class ProductTemplates {
     })
   }
 
-  create(productTemplate: ProductTemplate): Promise<ProductTemplateResponse> {
+  create (productTemplate: ProductTemplate): Promise<ProductTemplateResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
@@ -177,7 +177,7 @@ export class ProductTemplates {
     })
   }
 
-  delete(taxId: string): Promise<ProductTemplateResponse> {
+  delete (taxId: string): Promise<ProductTemplateResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${taxId}`
       try {
@@ -196,7 +196,7 @@ export class ProductTemplates {
 
 export class ProductTemplatesFetchFailed extends BaseError {
   public name = 'ProductTemplatesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch product templates',
     properties?: Record<string, unknown>
   ) {
@@ -207,7 +207,7 @@ export class ProductTemplatesFetchFailed extends BaseError {
 
 export class ProductTemplateFetchFailed extends BaseError {
   public name = 'ProductTemplateFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch product template',
     properties?: Record<string, unknown>
   ) {
@@ -218,7 +218,7 @@ export class ProductTemplateFetchFailed extends BaseError {
 
 export class ProductTemplatePutFailed extends BaseError {
   public name = 'ProductTemplatePutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter product template',
     properties?: Record<string, unknown>
   ) {
@@ -229,7 +229,7 @@ export class ProductTemplatePutFailed extends BaseError {
 
 export class ProductTemplateCreationFailed extends BaseError {
   public name = 'ProductTemplateCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could create product template',
     properties?: Record<string, unknown>
   ) {
@@ -240,7 +240,7 @@ export class ProductTemplateCreationFailed extends BaseError {
 
 export class ProuctTemplatesCountFailed extends BaseError {
   public name = 'ProuctTemplatesCountFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get count of product templates',
     properties?: Record<string, unknown>
   ) {
@@ -251,7 +251,7 @@ export class ProuctTemplatesCountFailed extends BaseError {
 
 export class ProductTemplateDeleteFailed extends BaseError {
   public name = 'ProductTemplateDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete product template',
     properties?: Record<string, unknown>
   ) {
@@ -262,7 +262,7 @@ export class ProductTemplateDeleteFailed extends BaseError {
 
 export class ProductTemplatesSearchFailed extends BaseError {
   public name = 'ProductTemplatesSearchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not search for product template',
     properties?: Record<string, unknown>
   ) {

@@ -80,20 +80,20 @@ export class Timetracking extends ThBaseHandler {
   public options: TimetrackingOptions
   public uriHelper: UriHelper
 
-  constructor(options: TimetrackingOptions, http: Client) {
+  constructor (options: TimetrackingOptions, http: Client) {
     super(http, {
       endpoint: Timetracking.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Timetracking.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  get(staffId: string, query?: TimetrackingQuery): Promise<TimetrackingResponse> {
+  get (staffId: string, query?: TimetrackingQuery): Promise<TimetrackingResponse> {
     return new Promise(async (resolve, reject) => {
       const base = this.uriHelper.generateBaseUri(`/reports/staff/${staffId}`)
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -113,7 +113,7 @@ export class Timetracking extends ThBaseHandler {
     })
   }
 
-  getEntries(staffId: string, query?: TimetrackingEntryQuery): Promise<TimetrackingResponse> {
+  getEntries (staffId: string, query?: TimetrackingEntryQuery): Promise<TimetrackingResponse> {
     return new Promise(async (resolve, reject) => {
       const base = this.uriHelper.generateBaseUri(`/entries/staff/${staffId}`)
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -133,9 +133,9 @@ export class Timetracking extends ThBaseHandler {
     })
   }
 
-  createEntry(entry: TimetrackingEntry): Promise<TimetrackingEntryResponse> {
+  createEntry (entry: TimetrackingEntry): Promise<TimetrackingEntryResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/entries`)
+      const uri = this.uriHelper.generateBaseUri('/entries')
       try {
         const response = await this.http.getClient().post(uri, entry)
         response.status !== 200 &&
@@ -152,7 +152,7 @@ export class Timetracking extends ThBaseHandler {
     })
   }
 
-  updateEntry(entryId: string, data?: TimetrackingEntry): Promise<TimetrackingEntryResponse> {
+  updateEntry (entryId: string, data?: TimetrackingEntry): Promise<TimetrackingEntryResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri(`/entries/${entryId}`)
       try {
@@ -171,7 +171,7 @@ export class Timetracking extends ThBaseHandler {
     })
   }
 
-  deleteEntry(entryId: string): Promise<TimetrackingEntryResponse> {
+  deleteEntry (entryId: string): Promise<TimetrackingEntryResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri(`/entries/${entryId}`)
       try {
@@ -186,9 +186,9 @@ export class Timetracking extends ThBaseHandler {
     })
   }
 
-  getStaffList(): Promise<TimetrackingResponse> {
+  getStaffList (): Promise<TimetrackingResponse> {
     return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/staff`)
+      const uri = this.uriHelper.generateBaseUri('/staff')
       try {
         const response = await this.http.getClient().get(uri)
         response.status !== 200 &&
@@ -208,7 +208,7 @@ export class Timetracking extends ThBaseHandler {
 
 export class TimetrackingReportFetchFailed extends BaseError {
   public name = 'TimetrackingReportFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the timetracking report for the staff member',
     properties?: Record<string, unknown>
   ) {
@@ -219,7 +219,7 @@ export class TimetrackingReportFetchFailed extends BaseError {
 
 export class TimetrackingStaffListFetchFailed extends BaseError {
   public name = 'TimetrackingStaffListFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the list of staff with timetracking entries',
     properties?: Record<string, unknown>
   ) {
@@ -230,7 +230,7 @@ export class TimetrackingStaffListFetchFailed extends BaseError {
 
 export class TimetrackingEntriesFetchFailed extends BaseError {
   public name = 'TimetrackingEntriesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the timetracking entries for the staff member',
     properties?: Record<string, unknown>
   ) {
@@ -241,7 +241,7 @@ export class TimetrackingEntriesFetchFailed extends BaseError {
 
 export class TimetrackingEntryCreateFailed extends BaseError {
   public name = 'TimetrackingEntryCreateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could have not create the timetracking entry',
     properties?: Record<string, unknown>
   ) {
@@ -252,7 +252,7 @@ export class TimetrackingEntryCreateFailed extends BaseError {
 
 export class TimetrackingEntryPutFailed extends BaseError {
   public name = 'TimetrackingEntryPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could have not update the timetracking entry',
     properties?: Record<string, unknown>
   ) {
@@ -263,7 +263,7 @@ export class TimetrackingEntryPutFailed extends BaseError {
 
 export class TimetrackingEntryDeleteFailed extends BaseError {
   public name = 'TimetrackingEntryDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could have not delete the timetracking entry',
     properties?: Record<string, unknown>
   ) {

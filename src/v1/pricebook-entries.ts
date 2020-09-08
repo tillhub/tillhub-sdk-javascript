@@ -59,13 +59,13 @@ export class PricebookEntries {
   public options: PricebookEntriesOptions
   public uriHelper: UriHelper
 
-  constructor(options: PricebookEntriesOptions, http: Client, uriHelper: UriHelper) {
+  constructor (options: PricebookEntriesOptions, http: Client, uriHelper: UriHelper) {
     this.options = options
     this.http = http
     this.uriHelper = uriHelper
   }
 
-  getAll(query?: PricebookEntriesQuery | undefined): Promise<PricebookEntriesResponse> {
+  getAll (query?: PricebookEntriesQuery | undefined): Promise<PricebookEntriesResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
@@ -91,7 +91,7 @@ export class PricebookEntries {
     })
   }
 
-  meta(): Promise<PricebookEntriesResponse> {
+  meta (): Promise<PricebookEntriesResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri('/prices/book/entry/meta')
@@ -109,7 +109,7 @@ export class PricebookEntries {
     })
   }
 
-  get(pricebookEntryId: string): Promise<PricebookEntryResponse> {
+  get (pricebookEntryId: string): Promise<PricebookEntryResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri(`/prices/book/entry/${pricebookEntryId}`)
       try {
@@ -128,7 +128,7 @@ export class PricebookEntries {
     })
   }
 
-  put(pricebookEntryId: string, pricebookEntry: PricebookEntry): Promise<PricebookEntryResponse> {
+  put (pricebookEntryId: string, pricebookEntry: PricebookEntry): Promise<PricebookEntryResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri(`/prices/book/entry/${pricebookEntryId}`)
       try {
@@ -144,7 +144,7 @@ export class PricebookEntries {
     })
   }
 
-  create(pricebookEntry: PricebookEntry): Promise<PricebookEntryResponse> {
+  create (pricebookEntry: PricebookEntry): Promise<PricebookEntryResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri('/prices/book/entry')
       try {
@@ -160,7 +160,7 @@ export class PricebookEntries {
     })
   }
 
-  delete(pricebookEntryId: string): Promise<PricebookEntryResponse> {
+  delete (pricebookEntryId: string): Promise<PricebookEntryResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri(`/prices/book/entry/${pricebookEntryId}`)
       try {
@@ -179,7 +179,7 @@ export class PricebookEntries {
 
 export class PricebookEntriesFetchFailed extends BaseError {
   public name = 'PricebookEntriesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch pricebook entries',
     properties?: Record<string, unknown>
   ) {
@@ -190,7 +190,7 @@ export class PricebookEntriesFetchFailed extends BaseError {
 
 class PricebookEntriesMetaFailed extends BaseError {
   public name = 'PricebookEntriesMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch pricebook entries meta call',
     properties?: Record<string, unknown>
   ) {
@@ -201,7 +201,7 @@ class PricebookEntriesMetaFailed extends BaseError {
 
 export class PricebookEntryFetchFailed extends BaseError {
   public name = 'PricebookEntryFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch pricebook entry',
     properties?: Record<string, unknown>
   ) {
@@ -212,7 +212,7 @@ export class PricebookEntryFetchFailed extends BaseError {
 
 export class PricebookEntryPutFailed extends BaseError {
   public name = 'PricebookEntryPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter pricebook entry',
     properties?: Record<string, unknown>
   ) {
@@ -223,7 +223,7 @@ export class PricebookEntryPutFailed extends BaseError {
 
 export class PricebookEntryCreationFailed extends BaseError {
   public name = 'PricebookEntryCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create pricebook entry',
     properties?: Record<string, unknown>
   ) {
@@ -234,7 +234,7 @@ export class PricebookEntryCreationFailed extends BaseError {
 
 export class PricebookEntryDeleteFailed extends BaseError {
   public name = 'PricebookEntryDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete pricebook entry',
     properties?: Record<string, unknown>
   ) {

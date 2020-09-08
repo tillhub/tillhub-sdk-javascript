@@ -28,7 +28,7 @@ export interface ProductServiceQuestionReponse {
 }
 
 export interface ProductServiceQuestionsResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
 }
 
@@ -36,7 +36,7 @@ export interface ProductServiceQuestion {
   name?: string
   content?: string
   description?: string
-  service_questions?: Array<string>
+  service_questions?: string[]
   answer_validation?: Record<string, unknown>
   required?: boolean
   deleted?: boolean
@@ -50,20 +50,20 @@ export class ProductServiceQuestions extends ThBaseHandler {
   public options: ProductServiceQuestionsOptions
   public uriHelper: UriHelper
 
-  constructor(options: ProductServiceQuestionsOptions, http: Client) {
+  constructor (options: ProductServiceQuestionsOptions, http: Client) {
     super(http, {
       endpoint: ProductServiceQuestions.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = ProductServiceQuestions.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(
+  getAll (
     query?: ProductServiceQuestionsQuery | undefined
   ): Promise<ProductServiceQuestionsResponse> {
     return new Promise(async (resolve, reject) => {
@@ -91,7 +91,7 @@ export class ProductServiceQuestions extends ThBaseHandler {
     })
   }
 
-  get(questionId: string): Promise<ProductServiceQuestionReponse> {
+  get (questionId: string): Promise<ProductServiceQuestionReponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri(`/${questionId}`)
@@ -112,10 +112,10 @@ export class ProductServiceQuestions extends ThBaseHandler {
     })
   }
 
-  meta(): Promise<ProductServiceQuestionsResponse> {
+  meta (): Promise<ProductServiceQuestionsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const uri = this.uriHelper.generateBaseUri(`/meta`)
+        const uri = this.uriHelper.generateBaseUri('/meta')
         const response = await this.http.getClient().get(uri)
 
         if (response.status !== 200) reject(new errors.ProductServiceQuestionsGetMetaFailed())
@@ -130,7 +130,7 @@ export class ProductServiceQuestions extends ThBaseHandler {
     })
   }
 
-  create(productServiceQuestion: ProductServiceQuestion): Promise<ProductServiceQuestionReponse> {
+  create (productServiceQuestion: ProductServiceQuestion): Promise<ProductServiceQuestionReponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri()
@@ -146,7 +146,7 @@ export class ProductServiceQuestions extends ThBaseHandler {
     })
   }
 
-  put(
+  put (
     questionId: string,
     productServiceQuestion: ProductServiceQuestion
   ): Promise<ProductServiceQuestionReponse> {
@@ -169,7 +169,7 @@ export class ProductServiceQuestions extends ThBaseHandler {
     })
   }
 
-  delete(taxId: string): Promise<ProductServiceQuestionReponse> {
+  delete (taxId: string): Promise<ProductServiceQuestionReponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${taxId}`
       try {

@@ -28,7 +28,7 @@ export interface TransactionsOptions {
 }
 
 export interface TransactionResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   next?: () => Promise<TransactionResponse>
 }
 
@@ -56,119 +56,106 @@ export class Transactions extends ThBaseHandler {
   public options: TransactionsOptions
   public uriHelper: UriHelper
 
-  constructor(options: TransactionsOptions, http: Client) {
+  constructor (options: TransactionsOptions, http: Client) {
     super(http, {
       endpoint: Transactions.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
     // this.signing = new Signing(options, http)
 
     this.endpoint = Transactions.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: TransactionsQuery | undefined): Promise<TransactionResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (query?: TransactionsQuery | undefined): Promise<TransactionResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      try {
-        const base = this.uriHelper.generateBaseUri()
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+      const response = await this.http.getClient().get(uri)
 
-        const response = await this.http.getClient().get(uri)
-
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<TransactionResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count, cursor: response.data.cursor },
-          next
-        } as TransactionResponse)
-      } catch (error) {
-        return reject(new TransactionFetchFailed(undefined, { error }))
+      if (response.data.cursor && response.data.cursor.next) {
+        next = (): Promise<TransactionResponse> => this.getAll({ uri: response.data.cursor.next })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count, cursor: response.data.cursor },
+        next
+      }
+    } catch (error) {
+      throw new TransactionFetchFailed(undefined, { error })
+    }
   }
 
-  meta(q?: TransactionsMetaQuery | undefined): Promise<TransactionResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri('/meta')
-        const uri = this.uriHelper.generateUriWithQuery(base, q)
+  async meta (q?: TransactionsMetaQuery | undefined): Promise<TransactionResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/meta')
+      const uri = this.uriHelper.generateUriWithQuery(base, q)
 
-        const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri)
 
-        if (response.status !== 200) reject(new TransactionsGetMetaFailed())
+      if (response.status !== 200) reject(new TransactionsGetMetaFailed())
 
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.count }
-        } as TransactionResponse)
-      } catch (error) {
-        return reject(new TransactionsGetMetaFailed(undefined, { error }))
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new TransactionsGetMetaFailed(undefined, { error })
+    }
   }
 
-  getImages(transactionId: string): Promise<TransactionResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri(`/${transactionId}/images`)
-        const response = await this.http.getClient().get(uri)
+  async getImages (transactionId: string): Promise<TransactionResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri(`/${transactionId}/images`)
+      const response = await this.http.getClient().get(uri)
 
-        if (response.status !== 200)
-          reject(new TransactionsGetImageFailed(undefined, { status: response.status }))
+      if (response.status !== 200) { throw new TransactionsGetImageFailed(undefined, { status: response.status }) }
 
-        if (!response.data.results[0]) reject(new TransactionsGetImageFailed())
+      if (!response.data.results[0]) throw new TransactionsGetImageFailed()
 
-        return resolve({
-          data: response.data.results
-        } as TransactionResponse)
-      } catch (error) {
-        return reject(new TransactionsGetImageFailed(undefined, { error }))
+      return {
+        data: response.data.results
       }
-    })
+    } catch (error) {
+      throw new TransactionsGetImageFailed(undefined, { error })
+    }
   }
 
-  putImage(transactionId: string, image: TransactionImage): Promise<TransactionImageResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri(`/${transactionId}/images`)
-        const response = await this.http.getClient().put(uri, image)
+  async putImage (transactionId: string, image: TransactionImage): Promise<TransactionImageResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri(`/${transactionId}/images`)
+      const response = await this.http.getClient().put(uri, image)
 
-        if (response.status !== 200)
-          reject(new TransactionsImagePutFailed(undefined, { status: response.status }))
-
-        return resolve({
-          data: response.data.results
-        } as TransactionImageResponse)
-      } catch (error) {
-        return reject(new TransactionsImagePutFailed(undefined, { error }))
+      if (response.status !== 200) {
+        throw new TransactionsImagePutFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results
+      }
+    } catch (error) {
+      throw new TransactionsImagePutFailed(undefined, { error })
+    }
   }
 
-  createImage(transactionId: string, image: TransactionImage): Promise<TransactionImageResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri(`/${transactionId}/images`)
-        const response = await this.http.getClient().post(uri, image)
+  async createImage (transactionId: string, image: TransactionImage): Promise<TransactionImageResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri(`/${transactionId}/images`)
+      const response = await this.http.getClient().post(uri, image)
 
-        if (response.status !== 200)
-          reject(new TransactionsImageCreateFailed(undefined, { status: response.status }))
+      if (response.status !== 200) { throw new TransactionsImageCreateFailed(undefined, { status: response.status }) }
 
-        return resolve({
-          data: response.data.results
-        } as TransactionImageResponse)
-      } catch (error) {
-        return reject(new TransactionsImageCreateFailed(undefined, { error }))
+      return {
+        data: response.data.results
       }
-    })
+    } catch (error) {
+      throw new TransactionsImageCreateFailed(undefined, { error })
+    }
   }
 }
 
@@ -179,94 +166,86 @@ export class TransactionsLegacy {
   public options: TransactionsOptions
   public uriHelper: UriHelper
 
-  constructor(options: TransactionsOptions, http: Client) {
+  constructor (options: TransactionsOptions, http: Client) {
     this.options = options
     this.http = http
     this.signing = new Signing(options, http)
 
     this.endpoint = '/api/v1/transactions'
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: TransactionsQuery | undefined): Promise<TransactionResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (query?: TransactionsQuery | undefined): Promise<TransactionResponse> {
+    let next
 
-      try {
-        let uri
-        if (query && query.uri) {
-          uri = query.uri
-        } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}/legacy`
-        }
-
-        const response = await this.http.getClient().get(uri)
-
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<TransactionResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count, cursor: response.data.cursor },
-          next
-        } as TransactionResponse)
-      } catch (error) {
-        return reject(new TransactionFetchFailed(undefined, { error }))
+    try {
+      let uri
+      if (query?.uri) {
+        uri = query.uri
+      } else {
+        uri = `${this.options.base}${this.endpoint}/${this.options.user}/legacy`
       }
-    })
+
+      const response = await this.http.getClient().get(uri)
+
+      if (response.data.cursor && response.data.cursor.next) {
+        next = (): Promise<TransactionResponse> => this.getAll({ uri: response.data.cursor.next })
+      }
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count, cursor: response.data.cursor },
+        next
+      }
+    } catch (error) {
+      throw new TransactionFetchFailed(undefined, { error })
+    }
   }
 
-  pdfUri(requestObject: PdfRequestObject): Promise<TransactionResponse> {
-    return new Promise(async (resolve, reject) => {
-      const { query, transactionId, template } = requestObject
-
-      try {
-        let uri
-        if (query && query.uri) {
-          uri = query.uri
-        } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}/${transactionId}/legacy/${template}/pdf`
-        }
-
-        if (query && query.format) {
-          uri = `${uri}?format=${query.format}`
-        }
-
-        const response = await this.http.getClient().post(uri, null, {
-          headers: {
-            Accept: 'application/json' // not needed for tillhub-api, but axios sets default headers { 'accept': 'application/json, text/plain, */*' } if not specified
-          }
-        })
-
-        return resolve({
-          data: response.data.results
-        } as TransactionResponse)
-      } catch (err) {
-        return reject(new TransactionPdfFailed(err.message))
+  async pdfUri (requestObject: PdfRequestObject): Promise<TransactionResponse> {
+    try {
+      let uri
+      if (query?.uri) {
+        uri = query.uri
+      } else {
+        uri = `${this.options.base}${this.endpoint}/${this.options.user}/${transactionId}/legacy/${template}/pdf`
       }
-    })
+
+      if (query?.format) {
+        uri = `${uri}?format=${query.format}`
+      }
+
+      const response = await this.http.getClient().post(uri, null, {
+        headers: {
+          Accept: 'application/json' // not needed for tillhub-api, but axios sets default headers { 'accept': 'application/json, text/plain, */*' } if not specified
+        }
+      })
+
+      return {
+        data: response.data.results
+      }
+    } catch (err) {
+      throw new TransactionPdfFailed(err.message)
+    }
   }
 
-  meta(q?: TransactionsMetaQuery | undefined): Promise<TransactionResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri('/meta/legacy')
-        const uri = this.uriHelper.generateUriWithQuery(base, q)
+  async meta (q?: TransactionsMetaQuery | undefined): Promise<TransactionResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/meta/legacy')
+      const uri = this.uriHelper.generateUriWithQuery(base, q)
 
-        const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri)
 
-        if (response.status !== 200) reject(new TransactionsGetMetaFailed())
+      if (response.status !== 200) reject(new TransactionsGetMetaFailed())
 
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.count }
-        } as TransactionResponse)
-      } catch (error) {
-        return reject(new TransactionsGetMetaFailed(undefined, { error }))
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new TransactionsGetMetaFailed(undefined, { error })
+    }
   }
 }
 
@@ -275,115 +254,107 @@ export class Signing {
   http: Client
   public options: TransactionsOptions
 
-  constructor(options: TransactionsOptions, http: Client) {
+  constructor (options: TransactionsOptions, http: Client) {
     this.options = options
     this.http = http
 
     this.endpoint = '/api/v1/transactions'
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
   }
 
-  initialise(
+  async initialise (
     singingResourceType: string,
     singingResource: string,
     signingSystem: string,
     signingConfiguration: FiskaltrustAuth
   ): Promise<TransactionResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = `${this.options.base}${this.endpoint}/${this.options.user}/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/initialise`
+    try {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/initialise`
 
-        const response = await this.http.getClient().post(uri, signingConfiguration, {
-          headers: {
-            Accept: 'application/json'
-          }
-        })
+      const response = await this.http.getClient().post(uri, signingConfiguration, {
+        headers: {
+          Accept: 'application/json'
+        }
+      })
 
-        return resolve({
-          data: response.data.results
-        } as any)
-      } catch (err) {
-        return reject(new TransactionSigningInitialisationFailed(err.message))
+      return {
+        data: response.data.results
       }
-    })
+    } catch (err) {
+      throw new TransactionSigningInitialisationFailed(err.message)
+    }
   }
 
-  yearly(
+  async yearly (
     singingResourceType: string,
     singingResource: string,
     signingSystem: string
   ): Promise<TransactionResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = `${this.options.base}${this.endpoint}/${this.options.user}/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/yearly`
+    try {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/yearly`
 
-        const response = await this.http.getClient().post(uri, undefined, {
-          headers: {
-            Accept: 'application/json'
-          }
-        })
+      const response = await this.http.getClient().post(uri, undefined, {
+        headers: {
+          Accept: 'application/json'
+        }
+      })
 
-        return resolve({
-          data: response.data.results
-        } as any)
-      } catch (err) {
-        return reject(new TransactionSigningYearlyReceiptFailed(err.message))
+      return {
+        data: response.data.results
       }
-    })
+    } catch (err) {
+      throw new TransactionSigningYearlyReceiptFailed(err.message)
+    }
   }
 
-  monthly(
+  async monthly (
     singingResourceType: string,
     singingResource: string,
     signingSystem: string
   ): Promise<TransactionResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = `${this.options.base}${this.endpoint}/${this.options.user}/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/monthly`
+    try {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/monthly`
 
-        const response = await this.http.getClient().post(uri, undefined, {
-          headers: {
-            Accept: 'application/json'
-          }
-        })
+      const response = await this.http.getClient().post(uri, undefined, {
+        headers: {
+          Accept: 'application/json'
+        }
+      })
 
-        return resolve({
-          data: response.data.results
-        } as any)
-      } catch (err) {
-        return reject(new TransactionSigningMonthlyReceiptFailed(err.message))
+      return {
+        data: response.data.results
       }
-    })
+    } catch (err) {
+      throw new TransactionSigningMonthlyReceiptFailed(err.message)
+    }
   }
 
-  zero(
+  async zero (
     singingResourceType: string,
     singingResource: string,
     signingSystem: string
   ): Promise<TransactionResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = `${this.options.base}${this.endpoint}/${this.options.user}/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/zero`
+    try {
+      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/zero`
 
-        const response = await this.http.getClient().post(uri, undefined, {
-          headers: {
-            Accept: 'application/json'
-          }
-        })
+      const response = await this.http.getClient().post(uri, undefined, {
+        headers: {
+          Accept: 'application/json'
+        }
+      })
 
-        return resolve({
-          data: response.data.results
-        } as any)
-      } catch (err) {
-        return reject(new TransactionSigningZeroReceiptFailed(err.message))
+      return {
+        data: response.data.results
       }
-    })
+    } catch (err) {
+      throw new TransactionSigningZeroReceiptFailed(err.message)
+    }
   }
 }
 
 class TransactionFetchFailed extends BaseError {
   public name = 'TransactionFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch transaction',
     properties?: Record<string, unknown>
   ) {
@@ -394,7 +365,7 @@ class TransactionFetchFailed extends BaseError {
 
 class TransactionPdfFailed extends BaseError {
   public name = 'TransactionPdfFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create pdf',
     properties?: Record<string, unknown>
   ) {
@@ -405,7 +376,7 @@ class TransactionPdfFailed extends BaseError {
 
 class TransactionSigningInitialisationFailed extends BaseError {
   public name = 'TransactionSigningInitialisationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not initialise signing system',
     properties?: Record<string, unknown>
   ) {
@@ -416,7 +387,7 @@ class TransactionSigningInitialisationFailed extends BaseError {
 
 class TransactionSigningYearlyReceiptFailed extends BaseError {
   public name = 'TransactionSigningYearlyReceiptFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not generate yearly receipt',
     properties?: Record<string, unknown>
   ) {
@@ -427,7 +398,7 @@ class TransactionSigningYearlyReceiptFailed extends BaseError {
 
 class TransactionSigningMonthlyReceiptFailed extends BaseError {
   public name = 'TransactionSigningMonthlyReceiptFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not generate monthly receipt',
     properties?: Record<string, unknown>
   ) {
@@ -438,7 +409,7 @@ class TransactionSigningMonthlyReceiptFailed extends BaseError {
 
 class TransactionSigningZeroReceiptFailed extends BaseError {
   public name = 'TransactionSigningZeroReceiptFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not generate zero receipt',
     properties?: Record<string, unknown>
   ) {
@@ -449,7 +420,7 @@ class TransactionSigningZeroReceiptFailed extends BaseError {
 
 class TransactionsGetMetaFailed extends BaseError {
   public name = 'TransactionsGetMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get transactions meta',
     properties?: Record<string, unknown>
   ) {
@@ -460,7 +431,7 @@ class TransactionsGetMetaFailed extends BaseError {
 
 class TransactionsGetImageFailed extends BaseError {
   public name = 'TransactionsGetImageFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get transactions image',
     properties?: Record<string, unknown>
   ) {
@@ -471,7 +442,7 @@ class TransactionsGetImageFailed extends BaseError {
 
 class TransactionsImagePutFailed extends BaseError {
   public name = 'TransactionsImagePutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update transactions image',
     properties?: Record<string, unknown>
   ) {
@@ -482,7 +453,7 @@ class TransactionsImagePutFailed extends BaseError {
 
 class TransactionsImageCreateFailed extends BaseError {
   public name = 'TransactionsImageCreateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create transactions image',
     properties?: Record<string, unknown>
   ) {

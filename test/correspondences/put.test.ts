@@ -1,9 +1,9 @@
 import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
-dotenv.config()
 import { Correspondences } from './../../src/v0/correspondences'
 import { initThInstance } from '../util'
+dotenv.config()
 
 const legacyId = '4564'
 

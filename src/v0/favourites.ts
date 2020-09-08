@@ -50,20 +50,20 @@ export class Favourites extends ThBaseHandler {
   public options: FavouritesOptions
   public uriHelper: UriHelper
 
-  constructor(options: FavouritesOptions, http: Client) {
+  constructor (options: FavouritesOptions, http: Client) {
     super(http, {
       endpoint: Favourites.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Favourites.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async getAll(query?: Record<string, unknown>): Promise<FavouritesResponse> {
+  async getAll (query?: Record<string, unknown>): Promise<FavouritesResponse> {
     try {
       const base = this.uriHelper.generateBaseUri()
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -80,7 +80,7 @@ export class Favourites extends ThBaseHandler {
     }
   }
 
-  async get(favouriteId: string): Promise<FavouriteResponse> {
+  async get (favouriteId: string): Promise<FavouriteResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/${favouriteId}`)
       const uri = this.uriHelper.generateUriWithQuery(base)
@@ -98,7 +98,7 @@ export class Favourites extends ThBaseHandler {
     }
   }
 
-  async create(favourite: Favourite): Promise<FavouriteResponse> {
+  async create (favourite: Favourite): Promise<FavouriteResponse> {
     try {
       const base = this.uriHelper.generateBaseUri()
       const uri = this.uriHelper.generateUriWithQuery(base)
@@ -115,7 +115,7 @@ export class Favourites extends ThBaseHandler {
     }
   }
 
-  async update(favouriteId: string, favourite: Favourite): Promise<FavouriteResponse> {
+  async update (favouriteId: string, favourite: Favourite): Promise<FavouriteResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/${favouriteId}`)
       const uri = this.uriHelper.generateUriWithQuery(base)
@@ -132,7 +132,7 @@ export class Favourites extends ThBaseHandler {
     }
   }
 
-  async delete(favouriteId: string): Promise<FavouriteResponse> {
+  async delete (favouriteId: string): Promise<FavouriteResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/${favouriteId}`)
       const uri = this.uriHelper.generateUriWithQuery(base)

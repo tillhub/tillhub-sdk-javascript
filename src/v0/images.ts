@@ -20,15 +20,15 @@ export class Images {
   http: Client
   public options: ImagesOptions
 
-  constructor(options: ImagesOptions, http: Client) {
+  constructor (options: ImagesOptions, http: Client) {
     this.options = options
     this.http = http
 
     this.endpoint = '/api/v0/images'
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
   }
 
-  put(query: ImagesQuery, payload: FormData): Promise<ImagesResponse> {
+  put (query: ImagesQuery, payload: FormData): Promise<ImagesResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${query.subsystem}/${query.prefix}`
       try {
@@ -44,7 +44,7 @@ export class Images {
     })
   }
 
-  create(query: ImagesQuery, payload: FormData): Promise<ImagesResponse> {
+  create (query: ImagesQuery, payload: FormData): Promise<ImagesResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${query.subsystem}/${query.prefix}`
       try {

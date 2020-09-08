@@ -19,7 +19,7 @@ export interface ContentsQuery {
 }
 
 export interface ContentsResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   next?: () => Promise<ContentsResponse>
 }
@@ -63,26 +63,26 @@ export class Contents extends ThBaseHandler {
   public options: ContentOptions
   public uriHelper: UriHelper
 
-  constructor(options: ContentOptions, http: Client) {
+  constructor (options: ContentOptions, http: Client) {
     super(http, {
       endpoint: Contents.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Contents.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(queryOrOptions?: ContentsQuery | undefined): Promise<ContentsResponse> {
+  getAll (queryOrOptions?: ContentsQuery | undefined): Promise<ContentsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
         let uri
-        if (queryOrOptions && queryOrOptions.uri) {
+        if (queryOrOptions?.uri) {
           uri = queryOrOptions.uri
         } else {
           let queryString = ''
@@ -115,7 +115,7 @@ export class Contents extends ThBaseHandler {
     })
   }
 
-  get(contentId: string): Promise<ContentResponse> {
+  get (contentId: string): Promise<ContentResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${contentId}`
       try {
@@ -134,7 +134,7 @@ export class Contents extends ThBaseHandler {
     })
   }
 
-  search(searchTerm: string): Promise<ContentsResponse> {
+  search (searchTerm: string): Promise<ContentsResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}?q=${searchTerm}`
       try {
@@ -153,7 +153,7 @@ export class Contents extends ThBaseHandler {
     })
   }
 
-  patch(contentId: string, content: Content): Promise<ContentResponse> {
+  patch (contentId: string, content: Content): Promise<ContentResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${contentId}`
       try {
@@ -169,7 +169,7 @@ export class Contents extends ThBaseHandler {
     })
   }
 
-  create(content: Content): Promise<ContentResponse> {
+  create (content: Content): Promise<ContentResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
@@ -185,7 +185,7 @@ export class Contents extends ThBaseHandler {
     })
   }
 
-  delete(contentId: string): Promise<ContentResponse> {
+  delete (contentId: string): Promise<ContentResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${contentId}`
       try {
@@ -204,7 +204,7 @@ export class Contents extends ThBaseHandler {
 
 export class ContentsFetchFailed extends BaseError {
   public name = 'ContentsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch contents',
     properties?: Record<string, unknown>
   ) {
@@ -215,7 +215,7 @@ export class ContentsFetchFailed extends BaseError {
 
 export class ContentFetchFailed extends BaseError {
   public name = 'ContentFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch content',
     properties?: Record<string, unknown>
   ) {
@@ -226,7 +226,7 @@ export class ContentFetchFailed extends BaseError {
 
 export class ContentPatchFailed extends BaseError {
   public name = 'ContentPatchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter content',
     properties?: Record<string, unknown>
   ) {
@@ -237,7 +237,7 @@ export class ContentPatchFailed extends BaseError {
 
 export class ContentCreationFailed extends BaseError {
   public name = 'ContentCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create content',
     properties?: Record<string, unknown>
   ) {
@@ -248,7 +248,7 @@ export class ContentCreationFailed extends BaseError {
 
 export class ContentDeleteFailed extends BaseError {
   public name = 'ContentDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete content',
     properties?: Record<string, unknown>
   ) {
@@ -259,7 +259,7 @@ export class ContentDeleteFailed extends BaseError {
 
 export class ContentsSearchFailed extends BaseError {
   public name = 'ContentDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not search contents',
     properties?: Record<string, unknown>
   ) {

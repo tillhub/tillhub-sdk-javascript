@@ -19,11 +19,11 @@ export class Auth extends v0.Auth {
   authenticated = false
   public options: AuthOptions
 
-  constructor(options: AuthOptions) {
+  constructor (options: AuthOptions) {
     super(options)
     this.options = options
 
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
 
     if (!this.options.credentials) return
 
@@ -34,27 +34,27 @@ export class Auth extends v0.Auth {
     }
   }
 
-  async authenticate(): Promise<AuthResponse> {
+  async authenticate (): Promise<AuthResponse> {
     if (this.options.type === AuthTypes.username) {
-      return this.loginUsername(this.options.credentials as UsernameAuth)
+      return await this.loginUsername(this.options.credentials as UsernameAuth)
     }
 
     if (this.options.type === AuthTypes.token) {
-      return this.loginServiceAccount(this.options.credentials as KeyAuth)
+      return await this.loginServiceAccount(this.options.credentials as KeyAuth)
     }
 
     if (this.options.type === AuthTypes.org) {
-      return this.loginWithOrganisation(this.options.credentials as OrgAuth)
+      return await this.loginWithOrganisation(this.options.credentials as OrgAuth)
     }
 
     if (this.options.type === AuthTypes.support) {
-      return this.loginAsSupport(this.options.credentials as SupportAuth)
+      return await this.loginAsSupport(this.options.credentials as SupportAuth)
     }
 
     throw new errors.AuthenticationFailed('No auth data was provided')
   }
 
-  async loginServiceAccount(authData: KeyAuth): Promise<AuthResponse> {
+  async loginServiceAccount (authData: KeyAuth): Promise<AuthResponse> {
     try {
       const response = await axios.post(`${this.options.base}/api/v1/users/auth/key`, {
         id: authData.id,
@@ -80,7 +80,7 @@ export class Auth extends v0.Auth {
     }
   }
 
-  async loginWithOrganisation(authData: OrgAuth): Promise<AuthResponse> {
+  async loginWithOrganisation (authData: OrgAuth): Promise<AuthResponse> {
     try {
       const response = await axios.post(
         `${this.options.base}/api/v1/users/auth/organisation/login`,
@@ -119,7 +119,7 @@ export class Auth extends v0.Auth {
     }
   }
 
-  async loginAsSupport(authData: SupportAuth): Promise<AuthResponse> {
+  async loginAsSupport (authData: SupportAuth): Promise<AuthResponse> {
     try {
       const response = await axios.post(`${this.options.base}/api/v1/users/auth/support/login`, {
         token: authData.token,

@@ -94,7 +94,7 @@ export interface InvoicesSimpleUpdateRequestBody {
 }
 
 export interface InvoicesResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   next?: () => Promise<InvoicesResponse>
   msg?: string
@@ -106,26 +106,26 @@ export class Invoices extends ThBaseHandler {
   http: Client
   public options: InvoicesOptions
 
-  constructor(options: InvoicesOptions, http: Client) {
+  constructor (options: InvoicesOptions, http: Client) {
     super(http, {
       endpoint: Invoices.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Invoices.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
   }
 
-  getAll(q?: InvoicesQuery | undefined): Promise<InvoicesResponse> {
+  getAll (q?: InvoicesQuery | undefined): Promise<InvoicesResponse> {
     return new Promise(async (resolve, reject) => {
       const query = JSON.parse(JSON.stringify(q))
       let uri
       let next
 
       try {
-        if (query && query.uri) {
+        if (query?.uri) {
           uri = query.uri
         } else {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}`
@@ -153,7 +153,7 @@ export class Invoices extends ThBaseHandler {
     })
   }
 
-  getMeta(): Promise<InvoicesResponse> {
+  getMeta (): Promise<InvoicesResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
 
@@ -171,13 +171,13 @@ export class Invoices extends ThBaseHandler {
     })
   }
 
-  getOne(requestObject: InvoicesGetOneRequestObject): Promise<InvoicesResponse> {
+  getOne (requestObject: InvoicesGetOneRequestObject): Promise<InvoicesResponse> {
     return new Promise(async (resolve, reject) => {
       const { invoiceId, query } = requestObject
       let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${invoiceId}`
 
       try {
-        if (query && query.embed) {
+        if (query?.embed) {
           const queryString = query.embed
             .map((item) => {
               return `embed[]=${item}`
@@ -199,14 +199,14 @@ export class Invoices extends ThBaseHandler {
     })
   }
 
-  create(requestObject: InvoicesCreateRequestObject): Promise<InvoicesResponse> {
+  create (requestObject: InvoicesCreateRequestObject): Promise<InvoicesResponse> {
     return new Promise(async (resolve, reject) => {
       const { body, query } = requestObject
 
       let uri = `${this.options.base}${this.endpoint}/${this.options.user}`
 
       try {
-        if (query && query.embed) {
+        if (query?.embed) {
           const queryString = query.embed
             .map((item) => {
               return `embed[]=${item}`
@@ -228,13 +228,13 @@ export class Invoices extends ThBaseHandler {
     })
   }
 
-  update(requestObject: InvoicesUpdateRequestObject): Promise<InvoicesResponse> {
+  update (requestObject: InvoicesUpdateRequestObject): Promise<InvoicesResponse> {
     return new Promise(async (resolve, reject) => {
       const { body, query, invoiceId } = requestObject
 
       let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${invoiceId}`
 
-      if (query && query.embed) {
+      if (query?.embed) {
         const queryString = query.embed
           .map((item) => {
             return `embed[]=${item}`
@@ -257,7 +257,7 @@ export class Invoices extends ThBaseHandler {
     })
   }
 
-  deleteOne(invoiceId: string): Promise<InvoicesResponse> {
+  deleteOne (invoiceId: string): Promise<InvoicesResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${invoiceId}`
       try {

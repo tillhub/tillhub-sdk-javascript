@@ -19,7 +19,7 @@ export interface ContentTemplatesQuery {
 }
 
 export interface ContentTemplatesResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   next?: () => Promise<ContentTemplatesResponse>
 }
@@ -47,15 +47,15 @@ export interface ContentTemplate {
 }
 
 export interface Contents {
-  idle?: Array<string>
-  welcome?: Array<string>
-  cart?: Array<string>
-  payment?: Array<string>
-  payment_terminal?: Array<string>
-  payment_approved?: Array<string>
-  goodbye?: Array<string>
-  logo?: Array<string>
-  runtime?: Array<string>
+  idle?: string[]
+  welcome?: string[]
+  cart?: string[]
+  payment?: string[]
+  payment_terminal?: string[]
+  payment_approved?: string[]
+  goodbye?: string[]
+  logo?: string[]
+  runtime?: string[]
 }
 
 export class ContentTemplates extends ThBaseHandler {
@@ -65,26 +65,26 @@ export class ContentTemplates extends ThBaseHandler {
   public options: ContentTemplatesOptions
   public uriHelper: UriHelper
 
-  constructor(options: ContentTemplatesOptions, http: Client) {
+  constructor (options: ContentTemplatesOptions, http: Client) {
     super(http, {
       endpoint: ContentTemplates.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = ContentTemplates.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(queryOrOptions?: ContentTemplatesQuery | undefined): Promise<ContentTemplatesResponse> {
+  getAll (queryOrOptions?: ContentTemplatesQuery | undefined): Promise<ContentTemplatesResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
         let uri
-        if (queryOrOptions && queryOrOptions.uri) {
+        if (queryOrOptions?.uri) {
           uri = queryOrOptions.uri
         } else {
           let queryString = ''
@@ -118,7 +118,7 @@ export class ContentTemplates extends ThBaseHandler {
     })
   }
 
-  get(templateId: string): Promise<ContentTemplateResponse> {
+  get (templateId: string): Promise<ContentTemplateResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${templateId}`
       try {
@@ -137,7 +137,7 @@ export class ContentTemplates extends ThBaseHandler {
     })
   }
 
-  search(searchTerm: string): Promise<ContentTemplatesResponse> {
+  search (searchTerm: string): Promise<ContentTemplatesResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}?q=${searchTerm}`
       try {
@@ -156,7 +156,7 @@ export class ContentTemplates extends ThBaseHandler {
     })
   }
 
-  patch(templateId: string, content: ContentTemplate): Promise<ContentTemplateResponse> {
+  patch (templateId: string, content: ContentTemplate): Promise<ContentTemplateResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${templateId}`
       try {
@@ -172,7 +172,7 @@ export class ContentTemplates extends ThBaseHandler {
     })
   }
 
-  create(content: ContentTemplate): Promise<ContentTemplateResponse> {
+  create (content: ContentTemplate): Promise<ContentTemplateResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
@@ -188,7 +188,7 @@ export class ContentTemplates extends ThBaseHandler {
     })
   }
 
-  delete(templateId: string): Promise<ContentTemplateResponse> {
+  delete (templateId: string): Promise<ContentTemplateResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${templateId}`
       try {
@@ -208,7 +208,7 @@ export class ContentTemplates extends ThBaseHandler {
 
 export class ContentTemplatesFetchFailed extends BaseError {
   public name = 'ContentTemplatesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch content templates',
     properties?: Record<string, unknown>
   ) {
@@ -219,7 +219,7 @@ export class ContentTemplatesFetchFailed extends BaseError {
 
 export class ContentTemplateFetchFailed extends BaseError {
   public name = 'ContentTemplateFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch content template',
     properties?: Record<string, unknown>
   ) {
@@ -230,7 +230,7 @@ export class ContentTemplateFetchFailed extends BaseError {
 
 export class ContentTemplatePatchFailed extends BaseError {
   public name = 'ContentTemplatePatchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter content template',
     properties?: Record<string, unknown>
   ) {
@@ -241,7 +241,7 @@ export class ContentTemplatePatchFailed extends BaseError {
 
 export class ContentTemplateCreationFailed extends BaseError {
   public name = 'ContentTemplateCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create content template',
     properties?: Record<string, unknown>
   ) {
@@ -252,7 +252,7 @@ export class ContentTemplateCreationFailed extends BaseError {
 
 export class ContentTemplateDeleteFailed extends BaseError {
   public name = 'ContentTemplateDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete content template',
     properties?: Record<string, unknown>
   ) {
@@ -263,7 +263,7 @@ export class ContentTemplateDeleteFailed extends BaseError {
 
 export class ContentTemplatesSearchFailed extends BaseError {
   public name = 'ContentTemplatesSearchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not search content templates',
     properties?: Record<string, unknown>
   ) {

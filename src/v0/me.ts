@@ -37,20 +37,20 @@ export class Me extends ThBaseHandler {
   public options: MeOptions
   public uriHelper: UriHelper
 
-  constructor(options: MeOptions, http: Client) {
+  constructor (options: MeOptions, http: Client) {
     super(http, {
       endpoint: Me.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Me.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  get(): Promise<MeResponse> {
+  get (): Promise<MeResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}`
       try {
@@ -72,7 +72,7 @@ export class Me extends ThBaseHandler {
 
 export class MeFetchFailed extends BaseError {
   public name = 'MeFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch me data',
     properties?: Record<string, unknown>
   ) {

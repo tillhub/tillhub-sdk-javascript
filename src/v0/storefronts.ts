@@ -59,25 +59,25 @@ export class Storefronts extends ThBaseHandler {
   http: Client
   public options: StorefrontsOptions
 
-  constructor(options: StorefrontsOptions, http: Client) {
+  constructor (options: StorefrontsOptions, http: Client) {
     super(http, {
       endpoint: Storefronts.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Storefronts.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
   }
 
-  getAll(queryOrOptions?: StorefrontsQuery | undefined): Promise<StorefrontsResponse> {
+  getAll (queryOrOptions?: StorefrontsQuery | undefined): Promise<StorefrontsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
         let uri
-        if (queryOrOptions && queryOrOptions.uri) {
+        if (queryOrOptions?.uri) {
           uri = queryOrOptions.uri
         } else {
           let queryString = ''
@@ -105,7 +105,7 @@ export class Storefronts extends ThBaseHandler {
     })
   }
 
-  get(storefrontId: string): Promise<StorefrontResponse> {
+  get (storefrontId: string): Promise<StorefrontResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${storefrontId}`
       try {
@@ -124,7 +124,7 @@ export class Storefronts extends ThBaseHandler {
     })
   }
 
-  put(storefrontId: string, storefront: Storefront): Promise<StorefrontResponse> {
+  put (storefrontId: string, storefront: Storefront): Promise<StorefrontResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${storefrontId}`
       try {
@@ -140,7 +140,7 @@ export class Storefronts extends ThBaseHandler {
     })
   }
 
-  create(storefront: Storefront): Promise<StorefrontResponse> {
+  create (storefront: Storefront): Promise<StorefrontResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
@@ -156,7 +156,7 @@ export class Storefronts extends ThBaseHandler {
     })
   }
 
-  delete(storefrontId: string): Promise<StorefrontResponse> {
+  delete (storefrontId: string): Promise<StorefrontResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${storefrontId}`
       try {
@@ -175,7 +175,7 @@ export class Storefronts extends ThBaseHandler {
 
 export class StorefrontsFetchFailed extends BaseError {
   public name = 'StorefrontsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch storefronts',
     properties?: Record<string, unknown>
   ) {
@@ -186,7 +186,7 @@ export class StorefrontsFetchFailed extends BaseError {
 
 export class StorefrontsFetchOneFailed extends BaseError {
   public name = 'StorefrontsFetchOneFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch one storefront',
     properties?: Record<string, unknown>
   ) {
@@ -197,7 +197,7 @@ export class StorefrontsFetchOneFailed extends BaseError {
 
 export class StorefrontsPutFailed extends BaseError {
   public name = 'StorefrontsPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update storefront',
     properties?: Record<string, unknown>
   ) {
@@ -208,7 +208,7 @@ export class StorefrontsPutFailed extends BaseError {
 
 export class StorefrontsCreationFailed extends BaseError {
   public name = 'StorefrontsCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create storefronts',
     properties?: Record<string, unknown>
   ) {
@@ -219,7 +219,7 @@ export class StorefrontsCreationFailed extends BaseError {
 
 export class StorefrontsDeleteFailed extends BaseError {
   public name = 'StorefrontsDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete storefronts',
     properties?: Record<string, unknown>
   ) {

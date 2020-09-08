@@ -17,7 +17,7 @@ export interface CategoriesQuery {
 }
 
 export interface CategoriesResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   next?: () => Promise<CategoriesResponse>
 }
@@ -50,20 +50,20 @@ export class Categories extends ThBaseHandler {
   public options: CategoriesOptions
   public uriHelper: UriHelper
 
-  constructor(options: CategoriesOptions, http: Client) {
+  constructor (options: CategoriesOptions, http: Client) {
     super(http, {
       endpoint: Categories.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Categories.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: CategoriesQuery | undefined): Promise<CategoriesResponse> {
+  getAll (query?: CategoriesQuery | undefined): Promise<CategoriesResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
@@ -91,7 +91,7 @@ export class Categories extends ThBaseHandler {
     })
   }
 
-  get(categoryId: string): Promise<CategoryResponse> {
+  get (categoryId: string): Promise<CategoryResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri(`/${categoryId}`)
       try {
@@ -110,7 +110,7 @@ export class Categories extends ThBaseHandler {
     })
   }
 
-  put(categoryId: string, category: Category): Promise<CategoryResponse> {
+  put (categoryId: string, category: Category): Promise<CategoryResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri(`/${categoryId}`)
       try {
@@ -126,7 +126,7 @@ export class Categories extends ThBaseHandler {
     })
   }
 
-  create(category: Category): Promise<CategoryResponse> {
+  create (category: Category): Promise<CategoryResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri()
       try {
@@ -142,7 +142,7 @@ export class Categories extends ThBaseHandler {
     })
   }
 
-  delete(storefrontId: string): Promise<CategoryResponse> {
+  delete (storefrontId: string): Promise<CategoryResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${storefrontId}`
       try {
@@ -161,7 +161,7 @@ export class Categories extends ThBaseHandler {
 
 export class CategoriesFetchFailed extends BaseError {
   public name = 'CategoriesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch categories',
     properties?: Record<string, unknown>
   ) {
@@ -172,7 +172,7 @@ export class CategoriesFetchFailed extends BaseError {
 
 export class CategoryFetchFailed extends BaseError {
   public name = 'CategoryFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch category',
     properties?: Record<string, unknown>
   ) {
@@ -183,7 +183,7 @@ export class CategoryFetchFailed extends BaseError {
 
 export class CategoryPutFailed extends BaseError {
   public name = 'CategoryPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter category',
     properties?: Record<string, unknown>
   ) {
@@ -194,7 +194,7 @@ export class CategoryPutFailed extends BaseError {
 
 export class CategoryCreationFailed extends BaseError {
   public name = 'CategoryCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create category',
     properties?: Record<string, unknown>
   ) {
@@ -205,7 +205,7 @@ export class CategoryCreationFailed extends BaseError {
 
 export class CategoriesDeleteFailed extends BaseError {
   public name = 'CategoriesDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete category',
     properties?: Record<string, unknown>
   ) {

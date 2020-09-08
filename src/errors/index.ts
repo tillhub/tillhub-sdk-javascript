@@ -4,7 +4,7 @@ export { BaseError }
 
 export class AuthenticationFailed extends BaseError {
   public name = 'AuthenticationFailed'
-  constructor(
+  constructor (
     public message: string = 'Authentication was not successful',
     properties?: Record<string, unknown>
   ) {
@@ -15,7 +15,7 @@ export class AuthenticationFailed extends BaseError {
 
 export class PasswordResetRequestFailed extends BaseError {
   public name = 'PasswordResetRequestFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not reset password',
     properties?: Record<string, unknown>
   ) {
@@ -26,7 +26,7 @@ export class PasswordResetRequestFailed extends BaseError {
 
 export class PasswordSetRequestFailed extends BaseError {
   public name = 'PasswordSetRequestFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not set password',
     properties?: Record<string, unknown>
   ) {
@@ -37,7 +37,7 @@ export class PasswordSetRequestFailed extends BaseError {
 
 export class UninstantiatedClient extends BaseError {
   public name = 'UninstantiatedClient'
-  constructor(
+  constructor (
     public message: string = 'Cannot instantiate API without instantiated HTTP client',
     properties?: Record<string, unknown>
   ) {
@@ -48,7 +48,7 @@ export class UninstantiatedClient extends BaseError {
 
 export class TransactionFetchFailed extends BaseError {
   public name = 'TransactionFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch transaction',
     properties?: Record<string, unknown>
   ) {
@@ -59,7 +59,7 @@ export class TransactionFetchFailed extends BaseError {
 
 export class TransactionPdfFailed extends BaseError {
   public name = 'TransactionPdfFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create pdf',
     properties?: Record<string, unknown>
   ) {
@@ -70,7 +70,7 @@ export class TransactionPdfFailed extends BaseError {
 
 export class TransactionSigningInitialisationFailed extends BaseError {
   public name = 'TransactionSigningInitialisationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not initialise signing system',
     properties?: Record<string, unknown>
   ) {
@@ -81,7 +81,7 @@ export class TransactionSigningInitialisationFailed extends BaseError {
 
 export class TransactionSigningYearlyReceiptFailed extends BaseError {
   public name = 'TransactionSigningYearlyReceiptFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not generate yearly receipt',
     properties?: Record<string, unknown>
   ) {
@@ -92,7 +92,7 @@ export class TransactionSigningYearlyReceiptFailed extends BaseError {
 
 export class TransactionSigningMonthlyReceiptFailed extends BaseError {
   public name = 'TransactionSigningMonthlyReceiptFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not generate monthly receipt',
     properties?: Record<string, unknown>
   ) {
@@ -103,7 +103,7 @@ export class TransactionSigningMonthlyReceiptFailed extends BaseError {
 
 export class TransactionSigningZeroReceiptFailed extends BaseError {
   public name = 'TransactionSigningZeroReceiptFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not generate zero receipt',
     properties?: Record<string, unknown>
   ) {
@@ -114,7 +114,7 @@ export class TransactionSigningZeroReceiptFailed extends BaseError {
 
 export class TransactionsGetMetaFailed extends BaseError {
   public name = 'TransactionsGetMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get transactions meta',
     properties?: Record<string, unknown>
   ) {
@@ -125,7 +125,7 @@ export class TransactionsGetMetaFailed extends BaseError {
 
 export class TaxesFetchFailed extends BaseError {
   public name = 'TaxesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch taxes',
     properties?: Record<string, unknown>
   ) {
@@ -136,7 +136,7 @@ export class TaxesFetchFailed extends BaseError {
 
 export class TaxesPutFailed extends BaseError {
   public name = 'TaxesPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter tax',
     properties?: Record<string, unknown>
   ) {
@@ -147,7 +147,7 @@ export class TaxesPutFailed extends BaseError {
 
 export class TaxesCreationFailed extends BaseError {
   public name = 'TaxesCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create tax',
     properties?: Record<string, unknown>
   ) {
@@ -158,7 +158,7 @@ export class TaxesCreationFailed extends BaseError {
 
 export class TaxDeleteFailed extends BaseError {
   public name = 'TaxDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete tax',
     properties?: Record<string, unknown>
   ) {
@@ -169,7 +169,7 @@ export class TaxDeleteFailed extends BaseError {
 
 export class DeliveriesFetchAllFailed extends BaseError {
   public name = 'DeliveriesFetchAllFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch deliveries',
     properties?: Record<string, unknown>
   ) {
@@ -180,7 +180,7 @@ export class DeliveriesFetchAllFailed extends BaseError {
 
 export class DeliveriesFetchOneFailed extends BaseError {
   public name = 'DeliveriesFetchOneFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch delivery',
     properties?: Record<string, unknown>
   ) {
@@ -191,7 +191,7 @@ export class DeliveriesFetchOneFailed extends BaseError {
 
 export class DeliveriesCreateFailed extends BaseError {
   public name = 'DeliveriesCreateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create delivery',
     properties?: Record<string, unknown>
   ) {
@@ -202,7 +202,7 @@ export class DeliveriesCreateFailed extends BaseError {
 
 export class DeliveriesPDFFailed extends BaseError {
   public name = 'DeliveriesPDFFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create PDF for delivery',
     properties?: Record<string, unknown>
   ) {
@@ -213,7 +213,7 @@ export class DeliveriesPDFFailed extends BaseError {
 
 export class DeliveriesUpdateFailed extends BaseError {
   public name = 'DeliveriesUpdateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update delivery',
     properties?: Record<string, unknown>
   ) {
@@ -224,7 +224,7 @@ export class DeliveriesUpdateFailed extends BaseError {
 
 export class DeliveriesInProgressFailed extends BaseError {
   public name = 'DeliveriesInProgressFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not change delivery status to "in_progress',
     properties?: Record<string, unknown>
   ) {
@@ -235,7 +235,7 @@ export class DeliveriesInProgressFailed extends BaseError {
 
 export class DeliveriesDispatchFailed extends BaseError {
   public name = 'DeliveriesDispatchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not change delivery status to "in_progress',
     properties?: Record<string, unknown>
   ) {
@@ -246,7 +246,7 @@ export class DeliveriesDispatchFailed extends BaseError {
 
 export class DeliveriesDeleteFailed extends BaseError {
   public name = 'DeliveriesDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete delivery',
     properties?: Record<string, unknown>
   ) {
@@ -257,7 +257,7 @@ export class DeliveriesDeleteFailed extends BaseError {
 
 export class DeliveryItemsCreateFailed extends BaseError {
   public name = 'DeliveryItemsCreateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create delivery items',
     properties?: Record<string, unknown>
   ) {
@@ -268,7 +268,7 @@ export class DeliveryItemsCreateFailed extends BaseError {
 
 export class DeliveryItemsFetchAllFailed extends BaseError {
   public name = 'DeliveryItemsFetchAllFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch delivery items',
     properties?: Record<string, unknown>
   ) {
@@ -279,7 +279,7 @@ export class DeliveryItemsFetchAllFailed extends BaseError {
 
 export class DeliveryItemUpdateFailed extends BaseError {
   public name = 'DeliveryItemUpdateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update delivery',
     properties?: Record<string, unknown>
   ) {
@@ -290,7 +290,7 @@ export class DeliveryItemUpdateFailed extends BaseError {
 
 export class ProductGroupsFetchFailed extends BaseError {
   public name = 'ProductGroupsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch product groups',
     properties?: Record<string, unknown>
   ) {
@@ -301,7 +301,7 @@ export class ProductGroupsFetchFailed extends BaseError {
 
 export class ProductGroupFetchFailed extends BaseError {
   public name = 'ProductGroupFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch product group',
     properties?: Record<string, unknown>
   ) {
@@ -312,7 +312,7 @@ export class ProductGroupFetchFailed extends BaseError {
 
 export class ProductGroupPutFailed extends BaseError {
   public name = 'ProductGroupPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter product group',
     properties?: Record<string, unknown>
   ) {
@@ -323,7 +323,7 @@ export class ProductGroupPutFailed extends BaseError {
 
 export class ProductGroupCreationFailed extends BaseError {
   public name = 'ProductGroupCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create product group',
     properties?: Record<string, unknown>
   ) {
@@ -334,7 +334,7 @@ export class ProductGroupCreationFailed extends BaseError {
 
 export class ProductGroupsSearchFailed extends BaseError {
   public name = 'ProductGroupsSearchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not search product group',
     properties?: Record<string, unknown>
   ) {
@@ -345,7 +345,7 @@ export class ProductGroupsSearchFailed extends BaseError {
 
 export class ProuctGroupsCountFailed extends BaseError {
   public name = 'ProuctGroupsCountFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get count of product groups',
     properties?: Record<string, unknown>
   ) {
@@ -356,7 +356,7 @@ export class ProuctGroupsCountFailed extends BaseError {
 
 export class ProductGroupDeleteFailed extends BaseError {
   public name = 'ProductGroupDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete product group',
     properties?: Record<string, unknown>
   ) {
@@ -367,7 +367,7 @@ export class ProductGroupDeleteFailed extends BaseError {
 
 export class AccountsFetchFailed extends BaseError {
   public name = 'AccountsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch accounts',
     properties?: Record<string, unknown>
   ) {
@@ -378,7 +378,7 @@ export class AccountsFetchFailed extends BaseError {
 
 export class AccountFetchFailed extends BaseError {
   public name = 'AccountFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch account',
     properties?: Record<string, unknown>
   ) {
@@ -389,7 +389,7 @@ export class AccountFetchFailed extends BaseError {
 
 export class AccountPutFailed extends BaseError {
   public name = 'AccountPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter account',
     properties?: Record<string, unknown>
   ) {
@@ -400,7 +400,7 @@ export class AccountPutFailed extends BaseError {
 
 export class AccountCreationFailed extends BaseError {
   public name = 'AccountCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create account',
     properties?: Record<string, unknown>
   ) {
@@ -411,7 +411,7 @@ export class AccountCreationFailed extends BaseError {
 
 export class AccountDeleteFailed extends BaseError {
   public name = 'AccountDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete account',
     properties?: Record<string, unknown>
   ) {
@@ -422,7 +422,7 @@ export class AccountDeleteFailed extends BaseError {
 
 export class ExpenseAccountsFetchFailed extends BaseError {
   public name = 'ExpenseAccountsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch expense accounts',
     properties?: Record<string, unknown>
   ) {
@@ -433,7 +433,7 @@ export class ExpenseAccountsFetchFailed extends BaseError {
 
 export class ExpenseAccountFetchFailed extends BaseError {
   public name = 'ExpenseAccountFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch expense account',
     properties?: Record<string, unknown>
   ) {
@@ -444,7 +444,7 @@ export class ExpenseAccountFetchFailed extends BaseError {
 
 export class ExpenseAccountPutFailed extends BaseError {
   public name = 'ExpenseAccountPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter expense account',
     properties?: Record<string, unknown>
   ) {
@@ -455,7 +455,7 @@ export class ExpenseAccountPutFailed extends BaseError {
 
 export class ExpenseAccountCreationFailed extends BaseError {
   public name = 'ExpenseAccountCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create expense account',
     properties?: Record<string, unknown>
   ) {
@@ -466,7 +466,7 @@ export class ExpenseAccountCreationFailed extends BaseError {
 
 export class PaymentOptionsFetchFailed extends BaseError {
   public name = 'PaymentOptionsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch payment option',
     properties?: Record<string, unknown>
   ) {
@@ -477,7 +477,7 @@ export class PaymentOptionsFetchFailed extends BaseError {
 
 export class ExpenseAccountDeleteFailed extends BaseError {
   public name = 'ExpenseAccountDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete expense account',
     properties?: Record<string, unknown>
   ) {
@@ -488,7 +488,7 @@ export class ExpenseAccountDeleteFailed extends BaseError {
 
 export class PaymentOptionFetchFailed extends BaseError {
   public name = 'PaymentOptionFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch payment option',
     properties?: Record<string, unknown>
   ) {
@@ -499,7 +499,7 @@ export class PaymentOptionFetchFailed extends BaseError {
 
 export class PaymentOptionPutFailed extends BaseError {
   public name = 'PaymentOptionPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter payment option',
     properties?: Record<string, unknown>
   ) {
@@ -510,7 +510,7 @@ export class PaymentOptionPutFailed extends BaseError {
 
 export class PaymentOptionCreationFailed extends BaseError {
   public name = 'PaymentOptionCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create payment option',
     properties?: Record<string, unknown>
   ) {
@@ -521,7 +521,7 @@ export class PaymentOptionCreationFailed extends BaseError {
 
 export class PaymentOptionDeleteFailed extends BaseError {
   public name = 'PaymentOptionDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete payment option',
     properties?: Record<string, unknown>
   ) {
@@ -532,7 +532,7 @@ export class PaymentOptionDeleteFailed extends BaseError {
 
 export class TemplatesCreationFailed extends BaseError {
   public name = 'TemplatesCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create template',
     properties?: Record<string, unknown>
   ) {
@@ -543,7 +543,7 @@ export class TemplatesCreationFailed extends BaseError {
 
 export class TemplatesPutFailed extends BaseError {
   public name = 'TemplatesPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not replace template',
     properties?: Record<string, unknown>
   ) {
@@ -554,7 +554,7 @@ export class TemplatesPutFailed extends BaseError {
 
 export class TemplatesFetchFailed extends BaseError {
   public name = 'TemplatesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch templates',
     properties?: Record<string, unknown>
   ) {
@@ -565,7 +565,7 @@ export class TemplatesFetchFailed extends BaseError {
 
 export class TemplatesPreviewFailed extends BaseError {
   public name = 'TemplatesPreviewFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not preview template',
     properties?: Record<string, unknown>
   ) {
@@ -576,7 +576,7 @@ export class TemplatesPreviewFailed extends BaseError {
 
 export class ConfigurationsFetchFailed extends BaseError {
   public name = 'ConfigurationsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch configurations',
     properties?: Record<string, unknown>
   ) {
@@ -587,7 +587,7 @@ export class ConfigurationsFetchFailed extends BaseError {
 
 export class ConfigurationFetchFailed extends BaseError {
   public name = 'ConfigurationFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch configuration',
     properties?: Record<string, unknown>
   ) {
@@ -598,7 +598,7 @@ export class ConfigurationFetchFailed extends BaseError {
 
 export class ConfigurationPutFailed extends BaseError {
   public name = 'ConfigurationPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter configuration',
     properties?: Record<string, unknown>
   ) {
@@ -609,7 +609,7 @@ export class ConfigurationPutFailed extends BaseError {
 
 export class ConfigurationPatchFailed extends BaseError {
   public name = 'ConfigurationPatchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not patch configuration',
     properties?: Record<string, unknown>
   ) {
@@ -620,7 +620,7 @@ export class ConfigurationPatchFailed extends BaseError {
 
 export class ConfigurationCreationFailed extends BaseError {
   public name = 'ConfigurationCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create configuration',
     properties?: Record<string, unknown>
   ) {
@@ -631,7 +631,7 @@ export class ConfigurationCreationFailed extends BaseError {
 
 export class ConfigurationDeleteFailed extends BaseError {
   public name = 'ConfigurationDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete configuration',
     properties?: Record<string, unknown>
   ) {
@@ -642,7 +642,7 @@ export class ConfigurationDeleteFailed extends BaseError {
 
 export class DiscountsFetchFailed extends BaseError {
   public name = 'DiscountsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch discounts',
     properties?: Record<string, unknown>
   ) {
@@ -653,7 +653,7 @@ export class DiscountsFetchFailed extends BaseError {
 
 export class DiscountFetchFailed extends BaseError {
   public name = 'DiscountFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch discount',
     properties?: Record<string, unknown>
   ) {
@@ -664,7 +664,7 @@ export class DiscountFetchFailed extends BaseError {
 
 export class DiscountPutFailed extends BaseError {
   public name = 'DiscountPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter discount',
     properties?: Record<string, unknown>
   ) {
@@ -675,7 +675,7 @@ export class DiscountPutFailed extends BaseError {
 
 export class DiscountCreationFailed extends BaseError {
   public name = 'DiscountCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create discount',
     properties?: Record<string, unknown>
   ) {
@@ -686,7 +686,7 @@ export class DiscountCreationFailed extends BaseError {
 
 export class DiscountsCountFailed extends BaseError {
   public name = 'DiscountsCountFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not count discounts',
     properties?: Record<string, unknown>
   ) {
@@ -697,7 +697,7 @@ export class DiscountsCountFailed extends BaseError {
 
 export class DiscountDeleteFailed extends BaseError {
   public name = 'DiscountDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete discount',
     properties?: Record<string, unknown>
   ) {
@@ -708,7 +708,7 @@ export class DiscountDeleteFailed extends BaseError {
 
 export class InvoicesFetchAllFailed extends BaseError {
   public name = 'InvoicesFetchAllFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch invoices',
     properties?: Record<string, unknown>
   ) {
@@ -719,7 +719,7 @@ export class InvoicesFetchAllFailed extends BaseError {
 
 export class InvoicesFetchOneFailed extends BaseError {
   public name = 'InvoicesFetchOneFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the invoice',
     properties?: Record<string, unknown>
   ) {
@@ -730,7 +730,7 @@ export class InvoicesFetchOneFailed extends BaseError {
 
 export class InvoicesCreateFailed extends BaseError {
   public name = 'InvoicesCreateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create invoice',
     properties?: Record<string, unknown>
   ) {
@@ -741,7 +741,7 @@ export class InvoicesCreateFailed extends BaseError {
 
 export class InvoicesUpdateFailed extends BaseError {
   public name = 'InvoicesUpdateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update invoice',
     properties?: Record<string, unknown>
   ) {
@@ -752,7 +752,7 @@ export class InvoicesUpdateFailed extends BaseError {
 
 export class InvoicesDeleteFailed extends BaseError {
   public name = 'InvoicesDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete invoice',
     properties?: Record<string, unknown>
   ) {
@@ -763,7 +763,7 @@ export class InvoicesDeleteFailed extends BaseError {
 
 export class InvoicesGetMetaFailed extends BaseError {
   public name = 'InvoicesGetMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get invoice meta',
     properties?: Record<string, unknown>
   ) {
@@ -774,7 +774,7 @@ export class InvoicesGetMetaFailed extends BaseError {
 
 export class OrdersFetchFailed extends BaseError {
   public name = 'OrdersFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the orders',
     properties?: Record<string, unknown>
   ) {
@@ -785,7 +785,7 @@ export class OrdersFetchFailed extends BaseError {
 
 export class OrdersCreateFailed extends BaseError {
   public name = 'OrdersCreateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create the orders',
     properties?: Record<string, unknown>
   ) {
@@ -796,7 +796,7 @@ export class OrdersCreateFailed extends BaseError {
 
 export class OrdersUpdateFailed extends BaseError {
   public name = 'OrdersUpdateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update the orders',
     properties?: Record<string, unknown>
   ) {
@@ -807,7 +807,7 @@ export class OrdersUpdateFailed extends BaseError {
 
 export class IncomingOrdersFetchFailed extends BaseError {
   public name = 'IncomingOrdersFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch incoming orders',
     properties?: Record<string, unknown>
   ) {
@@ -818,7 +818,7 @@ export class IncomingOrdersFetchFailed extends BaseError {
 
 export class OutgoingOrdersFetchFailed extends BaseError {
   public name = 'OutgoingOrdersFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch outgoing orders',
     properties?: Record<string, unknown>
   ) {
@@ -829,7 +829,7 @@ export class OutgoingOrdersFetchFailed extends BaseError {
 
 export class OrderItemsFetchFailed extends BaseError {
   public name = 'OrderItemsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the order items',
     properties?: Record<string, unknown>
   ) {
@@ -840,7 +840,7 @@ export class OrderItemsFetchFailed extends BaseError {
 
 export class OrderItemsCreateFailed extends BaseError {
   public name = 'OrderItemsCreateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create the order items',
     properties?: Record<string, unknown>
   ) {
@@ -851,7 +851,7 @@ export class OrderItemsCreateFailed extends BaseError {
 
 export class OrderItemUpdateFailed extends BaseError {
   public name = 'OrderItemUpdateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update the order item',
     properties?: Record<string, unknown>
   ) {
@@ -862,7 +862,7 @@ export class OrderItemUpdateFailed extends BaseError {
 
 export class OrderItemsUpdateFailed extends BaseError {
   public name = 'OrderItemsUpdateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update the order items',
     properties?: Record<string, unknown>
   ) {
@@ -873,7 +873,7 @@ export class OrderItemsUpdateFailed extends BaseError {
 
 export class OrderItemsDeleteFailed extends BaseError {
   public name = 'OrderItemsDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete the order items',
     properties?: Record<string, unknown>
   ) {
@@ -884,7 +884,7 @@ export class OrderItemsDeleteFailed extends BaseError {
 
 export class OrderSuggestionsFetchFailed extends BaseError {
   public name = 'OrderSuggestionsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the orders suggestions',
     properties?: Record<string, unknown>
   ) {
@@ -895,7 +895,7 @@ export class OrderSuggestionsFetchFailed extends BaseError {
 
 export class HistoricOrderItemsFetchFailed extends BaseError {
   public name = 'HistoricOrderItemsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the historic order items',
     properties?: Record<string, unknown>
   ) {
@@ -906,7 +906,7 @@ export class HistoricOrderItemsFetchFailed extends BaseError {
 
 export class BookStockFailed extends BaseError {
   public name = 'BookStockFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not book the stocks',
     properties?: Record<string, unknown>
   ) {
@@ -917,7 +917,7 @@ export class BookStockFailed extends BaseError {
 
 export class OpenOrderFetchFailed extends BaseError {
   public name = 'OpenOrderFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch open order',
     properties?: Record<string, unknown>
   ) {
@@ -928,7 +928,7 @@ export class OpenOrderFetchFailed extends BaseError {
 
 export class RegistersFetchFailed extends BaseError {
   public name = 'RegistersFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the Registers',
     properties?: Record<string, unknown>
   ) {
@@ -939,7 +939,7 @@ export class RegistersFetchFailed extends BaseError {
 
 export class RegisterFetchFailed extends BaseError {
   public name = 'RegisterFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the Register',
     properties?: Record<string, unknown>
   ) {
@@ -950,7 +950,7 @@ export class RegisterFetchFailed extends BaseError {
 
 export class RegisterPutFailed extends BaseError {
   public name = 'RegisterPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter register',
     properties?: Record<string, unknown>
   ) {
@@ -961,7 +961,7 @@ export class RegisterPutFailed extends BaseError {
 
 export class RegisterNotificationCreateFailed extends BaseError {
   public name = 'RegisterNotificationCreateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create the Notification',
     properties?: Record<string, unknown>
   ) {
@@ -972,7 +972,7 @@ export class RegisterNotificationCreateFailed extends BaseError {
 
 export class RegisterDeviceConfigurationPutFailed extends BaseError {
   public name = 'RegisterDeviceConfigurationPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update the Device Configuration',
     properties?: Record<string, unknown>
   ) {
@@ -983,7 +983,7 @@ export class RegisterDeviceConfigurationPutFailed extends BaseError {
 
 export class AuditActionsFetchAllFailed extends BaseError {
   public name = 'AuditActionsFetchAllFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch audit actions',
     properties?: Record<string, unknown>
   ) {
@@ -994,7 +994,7 @@ export class AuditActionsFetchAllFailed extends BaseError {
 
 export class AuditActionsFetchOneFailed extends BaseError {
   public name = 'AuditActionsFetchOneFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch audit action',
     properties?: Record<string, unknown>
   ) {
@@ -1005,7 +1005,7 @@ export class AuditActionsFetchOneFailed extends BaseError {
 
 export class AuditActionsGetMetaFailed extends BaseError {
   public name = 'AuditActionsGetMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch audit actions meta',
     properties?: Record<string, unknown>
   ) {
@@ -1016,7 +1016,7 @@ export class AuditActionsGetMetaFailed extends BaseError {
 
 export class AuditActionsCreateFailed extends BaseError {
   public name = 'AuditActionsCreateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create audit action',
     properties?: Record<string, unknown>
   ) {
@@ -1026,7 +1026,7 @@ export class AuditActionsCreateFailed extends BaseError {
 }
 export class AuditActionsTypesFetchFailed extends BaseError {
   public name = 'AuditActionsTypesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch audit action types',
     properties?: Record<string, unknown>
   ) {
@@ -1037,7 +1037,7 @@ export class AuditActionsTypesFetchFailed extends BaseError {
 
 export class AuditLogsFetchAllFailed extends BaseError {
   public name = 'AuditLogsFetchAllFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch audit logs',
     properties?: Record<string, unknown>
   ) {
@@ -1048,7 +1048,7 @@ export class AuditLogsFetchAllFailed extends BaseError {
 
 export class AuditLogsFetchOneFailed extends BaseError {
   public name = 'AuditLogsFetchOneFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch audit log',
     properties?: Record<string, unknown>
   ) {
@@ -1059,7 +1059,7 @@ export class AuditLogsFetchOneFailed extends BaseError {
 
 export class AuditLogsGetMetaFailed extends BaseError {
   public name = 'AuditLogsGetMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch audit logs meta',
     properties?: Record<string, unknown>
   ) {
@@ -1070,21 +1070,21 @@ export class AuditLogsGetMetaFailed extends BaseError {
 
 export class ImageCreationFailed extends BaseError {
   public name = 'ImageCreationFailed'
-  constructor(public message: string = 'Could not create new image') {
+  constructor (public message: string = 'Could not create new image') {
     super(message)
   }
 }
 
 export class ImagePutFailed extends BaseError {
   public name = 'ImagePutFailed'
-  constructor(public message: string = 'Could not update new image') {
+  constructor (public message: string = 'Could not update new image') {
     super(message)
   }
 }
 
 export class StaffCountFailed extends BaseError {
   public name = 'StaffCountFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not count the staff',
     properties?: Record<string, unknown>
   ) {
@@ -1095,7 +1095,7 @@ export class StaffCountFailed extends BaseError {
 
 export class NotificationsEmailError extends BaseError {
   public name = 'NotificationsEmailError'
-  constructor(
+  constructor (
     public message: string = 'Could not send email',
     properties?: Record<string, unknown>
   ) {
@@ -1106,7 +1106,7 @@ export class NotificationsEmailError extends BaseError {
 
 export class ProductGroupsFiltersFetchFailed extends BaseError {
   public name = 'ProductGroupsFiltersFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get products group filters',
     properties?: Record<string, unknown>
   ) {
@@ -1122,7 +1122,7 @@ export class ProductGroupsFiltersFetchFailed extends BaseError {
 /* Jobs */
 export class PrintJobsFetchFailed extends BaseError {
   public name = 'PrintJobsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch print jobs',
     properties?: Record<string, unknown>
   ) {
@@ -1133,7 +1133,7 @@ export class PrintJobsFetchFailed extends BaseError {
 
 export class PrintJobFetchFailed extends BaseError {
   public name = 'PrintJobFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch print job',
     properties?: Record<string, unknown>
   ) {
@@ -1144,7 +1144,7 @@ export class PrintJobFetchFailed extends BaseError {
 
 export class PrintJobCreateFailed extends BaseError {
   public name = 'PrintJobCreateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create print job',
     properties?: Record<string, unknown>
   ) {
@@ -1155,7 +1155,7 @@ export class PrintJobCreateFailed extends BaseError {
 
 export class PrintJobDeleteFailed extends BaseError {
   public name = 'PrintJobDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete print job',
     properties?: Record<string, unknown>
   ) {
@@ -1166,7 +1166,7 @@ export class PrintJobDeleteFailed extends BaseError {
 
 export class PrintJobUpdateFailed extends BaseError {
   public name = 'PrintJobUpdateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update print job',
     properties?: Record<string, unknown>
   ) {
@@ -1177,7 +1177,7 @@ export class PrintJobUpdateFailed extends BaseError {
 
 export class PrintJobDataFetchFailed extends BaseError {
   public name = 'PrintJobDataFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch print job data',
     properties?: Record<string, unknown>
   ) {
@@ -1189,7 +1189,7 @@ export class PrintJobDataFetchFailed extends BaseError {
 /* Messages */
 export class PrintMessagesFetchFailed extends BaseError {
   public name = 'PrintMessagesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch print messages',
     properties?: Record<string, unknown>
   ) {
@@ -1200,7 +1200,7 @@ export class PrintMessagesFetchFailed extends BaseError {
 
 export class PrintMessageFetchFailed extends BaseError {
   public name = 'PrintMessageFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch print message',
     properties?: Record<string, unknown>
   ) {
@@ -1211,7 +1211,7 @@ export class PrintMessageFetchFailed extends BaseError {
 
 export class PrintMessageCreateFailed extends BaseError {
   public name = 'PrintMessageCreateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create print message',
     properties?: Record<string, unknown>
   ) {
@@ -1222,7 +1222,7 @@ export class PrintMessageCreateFailed extends BaseError {
 
 export class PrintMessageDeleteFailed extends BaseError {
   public name = 'PrintMessageDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete print message',
     properties?: Record<string, unknown>
   ) {
@@ -1233,7 +1233,7 @@ export class PrintMessageDeleteFailed extends BaseError {
 
 export class PrintMessageUpdateFailed extends BaseError {
   public name = 'PrintMessageUpdateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update print message',
     properties?: Record<string, unknown>
   ) {
@@ -1245,7 +1245,7 @@ export class PrintMessageUpdateFailed extends BaseError {
 /* Printers */
 export class PrintersFetchFailed extends BaseError {
   public name = 'PrintersFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch printers',
     properties?: Record<string, unknown>
   ) {
@@ -1256,7 +1256,7 @@ export class PrintersFetchFailed extends BaseError {
 
 export class PrinterFetchFailed extends BaseError {
   public name = 'PrinterFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch printer',
     properties?: Record<string, unknown>
   ) {
@@ -1267,7 +1267,7 @@ export class PrinterFetchFailed extends BaseError {
 
 export class PrinterCreateFailed extends BaseError {
   public name = 'PrinterCreateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create printer',
     properties?: Record<string, unknown>
   ) {
@@ -1278,7 +1278,7 @@ export class PrinterCreateFailed extends BaseError {
 
 export class PrinterDeleteFailed extends BaseError {
   public name = 'PrinterDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete printer',
     properties?: Record<string, unknown>
   ) {
@@ -1289,7 +1289,7 @@ export class PrinterDeleteFailed extends BaseError {
 
 export class PrinterUpdateFailed extends BaseError {
   public name = 'PrinterUpdateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update printer',
     properties?: Record<string, unknown>
   ) {
@@ -1300,7 +1300,7 @@ export class PrinterUpdateFailed extends BaseError {
 
 export class MessagesFetchFailed extends BaseError {
   public name = 'MessagesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the messages',
     properties?: Record<string, unknown>
   ) {
@@ -1315,7 +1315,7 @@ export class MessagesFetchFailed extends BaseError {
 
 export class FavouritesFetchFailed extends BaseError {
   public name = 'FavouritesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch favourites set',
     properties?: Record<string, unknown>
   ) {
@@ -1326,7 +1326,7 @@ export class FavouritesFetchFailed extends BaseError {
 
 export class FavouriteFetchFailed extends BaseError {
   public name = 'FavouriteFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch favourite',
     properties?: Record<string, unknown>
   ) {
@@ -1337,7 +1337,7 @@ export class FavouriteFetchFailed extends BaseError {
 
 export class FavouriteCreateFailed extends BaseError {
   public name = 'FavouriteCreateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create favourite',
     properties?: Record<string, unknown>
   ) {
@@ -1348,7 +1348,7 @@ export class FavouriteCreateFailed extends BaseError {
 
 export class FavouriteDeleteFailed extends BaseError {
   public name = 'FavouriteDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete favourite',
     properties?: Record<string, unknown>
   ) {
@@ -1359,7 +1359,7 @@ export class FavouriteDeleteFailed extends BaseError {
 
 export class FavouriteUpdateFailed extends BaseError {
   public name = 'FavouriteUpdateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update favourite',
     properties?: Record<string, unknown>
   ) {
@@ -1370,7 +1370,7 @@ export class FavouriteUpdateFailed extends BaseError {
 
 export class MessagesUpdateFailed extends BaseError {
   public name = 'MessagesUpdateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update the message',
     properties?: Record<string, unknown>
   ) {
@@ -1381,7 +1381,7 @@ export class MessagesUpdateFailed extends BaseError {
 
 export class BalancesFetchFailed extends BaseError {
   public name = 'BalancesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the balances',
     properties?: Record<string, unknown>
   ) {
@@ -1392,7 +1392,7 @@ export class BalancesFetchFailed extends BaseError {
 
 export class BalancesFetchOneFailed extends BaseError {
   public name = 'BalancesFetchOneFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the balance',
     properties?: Record<string, unknown>
   ) {
@@ -1403,7 +1403,7 @@ export class BalancesFetchOneFailed extends BaseError {
 
 export class BalancesMetaFailed extends BaseError {
   public name = 'BalancesMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch meta data for balances',
     properties?: Record<string, unknown>
   ) {
@@ -1414,7 +1414,7 @@ export class BalancesMetaFailed extends BaseError {
 
 export class LegacySettingsFetchFailed extends BaseError {
   public name = 'LegacySettingsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch legacy settings',
     properties?: Record<string, unknown>
   ) {
@@ -1424,7 +1424,7 @@ export class LegacySettingsFetchFailed extends BaseError {
 }
 export class LegacySettingFetchFailed extends BaseError {
   public name = 'LegacySettingFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch one legacy settings object',
     properties?: Record<string, unknown>
   ) {
@@ -1434,7 +1434,7 @@ export class LegacySettingFetchFailed extends BaseError {
 }
 export class LegacySettingUpdateFailed extends BaseError {
   public name = 'LegacySettingUpdateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update one legacy settings object',
     properties?: Record<string, unknown>
   ) {

@@ -80,17 +80,17 @@ export class Trash extends ThBaseHandler {
   public options: TrashOptions
   public uriHelper: UriHelper
 
-  constructor(options: TrashOptions, http: Client) {
-    super(http, { endpoint: Trash.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+  constructor (options: TrashOptions, http: Client) {
+    super(http, { endpoint: Trash.baseEndpoint, base: options.base ?? 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
     this.endpoint = Trash.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query: TrashQuery): Promise<TrashResponse> {
+  getAll (query: TrashQuery): Promise<TrashResponse> {
     return new Promise(async (resolve, reject) => {
       let next
       const base = this.uriHelper.generateBaseUri('/')
@@ -117,7 +117,7 @@ export class Trash extends ThBaseHandler {
     })
   }
 
-  recover(query: RecoverQuery): Promise<TrashResponse> {
+  recover (query: RecoverQuery): Promise<TrashResponse> {
     return new Promise(async (resolve, reject) => {
       const base = this.uriHelper.generateBaseUri('/untrash')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -140,7 +140,7 @@ export class Trash extends ThBaseHandler {
 
 export class TrashFetchFailed extends BaseError {
   public name = 'TrashFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the trashed Record<string, unknown>s',
     properties?: Record<string, unknown>
   ) {
@@ -151,7 +151,7 @@ export class TrashFetchFailed extends BaseError {
 
 export class RecoverFailed extends BaseError {
   public name = 'RecoverFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not recover the Record<string, unknown>',
     properties?: Record<string, unknown>
   ) {

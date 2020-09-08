@@ -3,9 +3,7 @@ import qs from 'qs'
 import safeGet from 'just-safe-get'
 import { Client } from '../client'
 import { BaseError } from '../errors'
-import { UriHelper } from '../uri-helper'
 import { ThBaseHandler } from '../base'
-import { Customer } from './customers'
 
 export interface VouchersOptions {
   user?: string
@@ -27,14 +25,14 @@ export interface VouchersMetaQuery {
 }
 
 export interface VouchersResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   msg?: string
   next?: () => Promise<VouchersResponse>
 }
 
 export interface VoucherLogsResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   msg?: string
   next?: () => Promise<VoucherLogsResponse>
@@ -49,33 +47,14 @@ export interface VoucherResponse {
   msg?: string
 }
 
-export interface BoundedCustomersGetResponse {
-  data?: Customer[]
-  metadata?: {
-    count?: number
-    patch?: any
-  }
-  msg?: string
-}
-
-export interface BoundedCustomersPostResponse {
-  data: {
-    id: string
-    voucher_id: string
-    customer_id: string
-  }
-  metadata?: {
-    count?: number
-    patch?: any
-  }
-  msg?: string
-}
-
 type VoucherFormatTypes = 'numeric' | 'alphanumeric' | 'alphabetic'
 type VoucherTypes = 'amount' | 'discount' | 'product'
 
 export interface Voucher {
   id?: string
+}
+
+export interface Voucher {
   type?: VoucherTypes | null
   format: string | null
   format_type: VoucherFormatTypes | null
@@ -100,7 +79,7 @@ export interface Voucher {
 }
 
 export interface UsersResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
 }
 
 export class Vouchers extends ThBaseHandler {
@@ -109,29 +88,27 @@ export class Vouchers extends ThBaseHandler {
   http: Client
   logs: VoucherLogs
   public options: VouchersOptions
-  public uriHelper: UriHelper
 
-  constructor(options: VouchersOptions, http: Client) {
+  constructor (options: VouchersOptions, http: Client) {
     super(http, {
       endpoint: Vouchers.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
     this.logs = new VoucherLogs(options, http)
 
     this.endpoint = Vouchers.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
-    this.uriHelper = new UriHelper(this.endpoint, this.options)
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
   }
 
-  getAll(optionsOrQuery?: VouchersQueryOptions | undefined): Promise<VouchersResponse> {
+  getAll (optionsOrQuery?: VouchersQueryOptions | undefined): Promise<VouchersResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
         let uri
-        if (optionsOrQuery && optionsOrQuery.uri) {
+        if (optionsOrQuery?.uri) {
           uri = optionsOrQuery.uri
         } else {
           let queryString = ''
@@ -164,7 +141,7 @@ export class Vouchers extends ThBaseHandler {
     })
   }
 
-  meta(q?: VouchersMetaQuery | undefined): Promise<VouchersResponse> {
+  meta (q?: VouchersMetaQuery | undefined): Promise<VouchersResponse> {
     return new Promise(async (resolve, reject) => {
       let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
 
@@ -194,7 +171,7 @@ export class Vouchers extends ThBaseHandler {
     })
   }
 
-  delete(voucherId: string): Promise<VouchersResponse> {
+  delete (voucherId: string): Promise<VouchersResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${voucherId}`
       try {
@@ -212,7 +189,7 @@ export class Vouchers extends ThBaseHandler {
     })
   }
 
-  count(): Promise<VouchersResponse> {
+  count (): Promise<VouchersResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
 
@@ -232,7 +209,7 @@ export class Vouchers extends ThBaseHandler {
     })
   }
 
-  get(voucherId: string): Promise<VoucherResponse> {
+  get (voucherId: string): Promise<VoucherResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${voucherId}`
       try {
@@ -250,7 +227,7 @@ export class Vouchers extends ThBaseHandler {
     })
   }
 
-  getLogs(
+  getLogs (
     voucherId: string,
     optionsOrQuery?: VouchersQueryOptions | undefined
   ): Promise<VoucherLogsResponse> {
@@ -259,7 +236,7 @@ export class Vouchers extends ThBaseHandler {
 
       try {
         let uri
-        if (optionsOrQuery && optionsOrQuery.uri) {
+        if (optionsOrQuery?.uri) {
           uri = optionsOrQuery.uri
         } else {
           uri = `${this.options.base}${this.endpoint}/${this.options.user}/${voucherId}/logs`
@@ -285,7 +262,7 @@ export class Vouchers extends ThBaseHandler {
     })
   }
 
-  put(voucherId: string, voucher: Voucher): Promise<VoucherResponse> {
+  put (voucherId: string, voucher: Voucher): Promise<VoucherResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${voucherId}`
       try {
@@ -301,7 +278,7 @@ export class Vouchers extends ThBaseHandler {
     })
   }
 
-  patch(source: Voucher, target: Voucher): Promise<VoucherResponse> {
+  patch (source: Voucher, target: Voucher): Promise<VoucherResponse> {
     return new Promise(async (resolve, reject) => {
       if (!source.id || !target.id || source.id !== target.id) {
         return reject(
@@ -334,7 +311,7 @@ export class Vouchers extends ThBaseHandler {
     })
   }
 
-  create(voucher: Voucher): Promise<VoucherResponse> {
+  create (voucher: Voucher): Promise<VoucherResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
 
@@ -364,7 +341,7 @@ export class Vouchers extends ThBaseHandler {
     })
   }
 
-  getAllUsers(): Promise<UsersResponse> {
+  getAllUsers (): Promise<UsersResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = `${this.options.base}${this.endpoint}/${this.options.user}/users`
@@ -382,62 +359,6 @@ export class Vouchers extends ThBaseHandler {
       }
     })
   }
-
-  async getBoundedCustomers(voucherId: string): Promise<BoundedCustomersGetResponse> {
-    try {
-      const uri = this.uriHelper.generateBaseUri(`/${voucherId}/customers`)
-
-      const response = await this.http.getClient().get(uri)
-      if (response.status !== 200) {
-        throw new VouchersBoundedCustomerGetFailed(undefined, { status: response.status })
-      }
-      return {
-        data: response.data.results
-      }
-    } catch (error) {
-      throw new VouchersBoundedCustomerGetFailed(undefined, { error })
-    }
-  }
-
-  async createBoundedCustomers(
-    voucherId: string,
-    customers: string[]
-  ): Promise<BoundedCustomersPostResponse> {
-    try {
-      const uri = this.uriHelper.generateBaseUri(`/${voucherId}/customers`)
-
-      const response = await this.http.getClient().post(uri, customers)
-      if (response.status !== 200) {
-        throw new VouchersBoundedCustomerCreateFailed(undefined, { status: response.status })
-      }
-
-      return {
-        data: response.data.results
-      }
-    } catch (error) {
-      throw new VouchersBoundedCustomerCreateFailed(undefined, { error })
-    }
-  }
-
-  async updateBoundedCustomers(
-    voucherId: string,
-    customers: string[]
-  ): Promise<BoundedCustomersPostResponse> {
-    try {
-      const uri = this.uriHelper.generateBaseUri(`/${voucherId}/customers`)
-
-      const response = await this.http.getClient().put(uri, customers)
-      if (response.status !== 200) {
-        throw new VouchersBoundedCustomerPutFailed(undefined, { status: response.status })
-      }
-
-      return {
-        data: response.data.results
-      }
-    } catch (error) {
-      throw new VouchersBoundedCustomerPutFailed(undefined, { error })
-    }
-  }
 }
 
 export class VoucherLogs extends ThBaseHandler {
@@ -446,25 +367,25 @@ export class VoucherLogs extends ThBaseHandler {
   http: Client
   public options: VouchersOptions
 
-  constructor(options: VouchersOptions, http: Client) {
+  constructor (options: VouchersOptions, http: Client) {
     super(http, {
       endpoint: VoucherLogs.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = VoucherLogs.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
   }
 
-  getAll(optionsOrQuery?: VouchersQueryOptions | undefined): Promise<VoucherLogsResponse> {
+  getAll (optionsOrQuery?: VouchersQueryOptions | undefined): Promise<VoucherLogsResponse> {
     return new Promise(async (resolve, reject) => {
       let next
 
       try {
         let uri
-        if (optionsOrQuery && optionsOrQuery.uri) {
+        if (optionsOrQuery?.uri) {
           uri = optionsOrQuery.uri
         } else {
           let queryString = ''
@@ -497,7 +418,7 @@ export class VoucherLogs extends ThBaseHandler {
     })
   }
 
-  meta(): Promise<VoucherLogsResponse> {
+  meta (): Promise<VoucherLogsResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/logs/meta`
 
@@ -524,7 +445,7 @@ export class VoucherLogs extends ThBaseHandler {
 
 export class VoucherTypeError extends BaseError {
   public name = 'VouchersFetchFailed'
-  constructor(public message: string, properties?: Record<string, unknown>) {
+  constructor (public message: string, properties?: Record<string, unknown>) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherTypeError.prototype)
   }
@@ -532,7 +453,7 @@ export class VoucherTypeError extends BaseError {
 
 export class VouchersFetchFailed extends BaseError {
   public name = 'VouchersFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the vouchers',
     properties?: Record<string, unknown>
   ) {
@@ -543,7 +464,7 @@ export class VouchersFetchFailed extends BaseError {
 
 export class VoucherLogsFetchFailed extends BaseError {
   public name = 'VoucherLogsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the voucher logs',
     properties?: Record<string, unknown>
   ) {
@@ -554,7 +475,7 @@ export class VoucherLogsFetchFailed extends BaseError {
 
 export class VoucherFetchFailed extends BaseError {
   public name = 'VoucherFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch voucher',
     properties?: Record<string, unknown>
   ) {
@@ -565,7 +486,7 @@ export class VoucherFetchFailed extends BaseError {
 
 export class VoucherPutFailed extends BaseError {
   public name = 'VoucherPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter voucher',
     properties?: Record<string, unknown>
   ) {
@@ -576,7 +497,7 @@ export class VoucherPutFailed extends BaseError {
 
 export class VoucherPatchFailed extends BaseError {
   public name = 'VoucherPatchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter voucher',
     properties?: Record<string, unknown>
   ) {
@@ -587,7 +508,7 @@ export class VoucherPatchFailed extends BaseError {
 
 export class VoucherCreationFailed extends BaseError {
   public name = 'VoucherPostFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create voucher',
     properties?: Record<string, unknown>
   ) {
@@ -598,7 +519,7 @@ export class VoucherCreationFailed extends BaseError {
 
 export class VoucherCodeConflict extends BaseError {
   public name = 'VoucherCodeConflict'
-  constructor(
+  constructor (
     public message: string = 'This voucher code is already in use. Please use another code.',
     properties?: Record<string, unknown>
   ) {
@@ -609,7 +530,7 @@ export class VoucherCodeConflict extends BaseError {
 
 export class VouchersCountFailed extends BaseError {
   public name = 'VouchersCountFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not count the vouchers',
     properties?: Record<string, unknown>
   ) {
@@ -620,7 +541,7 @@ export class VouchersCountFailed extends BaseError {
 
 export class VouchersMetaFailed extends BaseError {
   public name = 'VouchersMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get voucher metadata',
     properties?: Record<string, unknown>
   ) {
@@ -631,7 +552,7 @@ export class VouchersMetaFailed extends BaseError {
 
 export class VoucherLogsMetaFailed extends BaseError {
   public name = 'VoucherLogsMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get voucher logs metadata',
     properties?: Record<string, unknown>
   ) {
@@ -642,7 +563,7 @@ export class VoucherLogsMetaFailed extends BaseError {
 
 export class VoucherDeleteFailed extends BaseError {
   public name = 'VoucherDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete the voucher',
     properties?: Record<string, unknown>
   ) {
@@ -653,7 +574,7 @@ export class VoucherDeleteFailed extends BaseError {
 
 export class VouchersLogsFetchFailed extends BaseError {
   public name = 'VouchersLogsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the vouchers logs',
     properties?: Record<string, unknown>
   ) {
@@ -664,7 +585,7 @@ export class VouchersLogsFetchFailed extends BaseError {
 
 export class VouchersLogsCountFailed extends BaseError {
   public name = 'VouchersLogsCountFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not count the vouchers logs',
     properties?: Record<string, unknown>
   ) {
@@ -675,44 +596,11 @@ export class VouchersLogsCountFailed extends BaseError {
 
 export class VouchersUsersFailed extends BaseError {
   public name = 'VouchersUsersFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get authorized voucher users',
     properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, VouchersUsersFailed.prototype)
-  }
-}
-
-export class VouchersBoundedCustomerGetFailed extends BaseError {
-  public name = 'VouchersBoundedCustomerGetFailed'
-  constructor(
-    public message: string = 'Could not get the voucher bounded customers',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, VouchersBoundedCustomerGetFailed.prototype)
-  }
-}
-
-export class VouchersBoundedCustomerCreateFailed extends BaseError {
-  public name = 'VouchersBoundedCustomerCreateFailed'
-  constructor(
-    public message: string = 'Could not create the voucher bounded customers',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, VouchersBoundedCustomerCreateFailed.prototype)
-  }
-}
-
-export class VouchersBoundedCustomerPutFailed extends BaseError {
-  public name = 'VouchersBoundedCustomerPutFailed'
-  constructor(
-    public message: string = 'Could not update the voucher bounded customers',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, VouchersBoundedCustomerPutFailed.prototype)
   }
 }

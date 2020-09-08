@@ -76,20 +76,20 @@ export class Warehouses extends ThBaseHandler {
   public options: WarehousesOptions
   public uriHelper: UriHelper
 
-  constructor(options: WarehousesOptions, http: Client) {
+  constructor (options: WarehousesOptions, http: Client) {
     super(http, {
       endpoint: Warehouses.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Warehouses.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: WarehousesQuery | undefined): Promise<WarehousesResponse> {
+  getAll (query?: WarehousesQuery | undefined): Promise<WarehousesResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const base = this.uriHelper.generateBaseUri()
@@ -110,7 +110,7 @@ export class Warehouses extends ThBaseHandler {
     })
   }
 
-  getOne(warehouseId: string): Promise<WarehousesResponse> {
+  getOne (warehouseId: string): Promise<WarehousesResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${warehouseId}`
       try {
@@ -130,7 +130,7 @@ export class Warehouses extends ThBaseHandler {
     })
   }
 
-  create(warehouse: Warehouse): Promise<WarehousesResponse> {
+  create (warehouse: Warehouse): Promise<WarehousesResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri()
 
@@ -151,7 +151,7 @@ export class Warehouses extends ThBaseHandler {
     })
   }
 
-  put(warehouseId: string, warehouse: Warehouse): Promise<WarehousesResponse> {
+  put (warehouseId: string, warehouse: Warehouse): Promise<WarehousesResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = this.uriHelper.generateBaseUri(`/${warehouseId}`)
 
@@ -172,7 +172,7 @@ export class Warehouses extends ThBaseHandler {
     })
   }
 
-  delete(warehouseId: string): Promise<WarehousesResponse> {
+  delete (warehouseId: string): Promise<WarehousesResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${warehouseId}`
       try {
@@ -192,7 +192,7 @@ export class Warehouses extends ThBaseHandler {
 
 class WarehousesFetchFailed extends BaseError {
   public name = 'WarehousesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch warehouses',
     properties?: Record<string, unknown>
   ) {
@@ -203,7 +203,7 @@ class WarehousesFetchFailed extends BaseError {
 
 class WarehouseFetchOneFailed extends BaseError {
   public name = 'WarehouseFetchOneFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch one warehouse',
     properties?: Record<string, unknown>
   ) {
@@ -214,7 +214,7 @@ class WarehouseFetchOneFailed extends BaseError {
 
 class WarehouseCreateFailed extends BaseError {
   public name = 'WarehouseCreateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create the warehouse',
     properties?: Record<string, unknown>
   ) {
@@ -225,7 +225,7 @@ class WarehouseCreateFailed extends BaseError {
 
 class WarehousePutFailed extends BaseError {
   public name = 'WarehousePutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter the warehouse',
     properties?: Record<string, unknown>
   ) {
@@ -236,7 +236,7 @@ class WarehousePutFailed extends BaseError {
 
 class WarehouseDeleteFailed extends BaseError {
   public name = 'WarehouseDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete the warehouse',
     properties?: Record<string, unknown>
   ) {

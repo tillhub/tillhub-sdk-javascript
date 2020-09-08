@@ -36,10 +36,10 @@ export interface Configuration {
 
 export interface Configuration {
   vouchers?: Record<string, unknown>
-  scan_prefixes?: Record<string, unknown>[]
-  voucher_actions?: Record<string, unknown>[]
+  scan_prefixes?: Array<Record<string, unknown>>
+  voucher_actions?: Array<Record<string, unknown>>
   settings?: Record<string, unknown>
-  hooks?: Record<string, unknown>[]
+  hooks?: Array<Record<string, unknown>>
   themes?: Record<string, unknown>
   name?: string
   client_id?: string
@@ -78,11 +78,12 @@ class ConfigurationReference {
     count?: number
     patch?: any
   }
-  response: ConfigurationResponse
-  private options: ConfigurationsOptions
-  private http: Client
 
-  constructor(response: ConfigurationResponse, http: Client, options: ConfigurationsOptions) {
+  response: ConfigurationResponse
+  private readonly options: ConfigurationsOptions
+  private readonly http: Client
+
+  constructor (response: ConfigurationResponse, http: Client, options: ConfigurationsOptions) {
     this.data = response.data
     this.id = response.data.id
     this.metadata = response.metadata
@@ -91,7 +92,7 @@ class ConfigurationReference {
     this.http = http
   }
 
-  users(): Users {
+  users (): Users {
     return new Users(this.options as UsersOptions, this.http)
   }
 }
@@ -103,24 +104,24 @@ export class Configurations extends ThBaseHandler {
   public options: ConfigurationsOptions
   public uriHelper: UriHelper
 
-  constructor(options: ConfigurationsOptions, http: Client) {
+  constructor (options: ConfigurationsOptions, http: Client) {
     super(http, {
       endpoint: Configurations.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Configurations.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(optionsOrQuery?: ConfigurationsQueryOptions | undefined): Promise<ConfigurationsResponse> {
+  getAll (optionsOrQuery?: ConfigurationsQueryOptions | undefined): Promise<ConfigurationsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         let uri
-        if (optionsOrQuery && optionsOrQuery.uri) {
+        if (optionsOrQuery?.uri) {
           uri = optionsOrQuery.uri
         } else {
           let queryString = ''
@@ -146,7 +147,7 @@ export class Configurations extends ThBaseHandler {
     })
   }
 
-  get(configurationId: string): Promise<ConfigurationReference> {
+  get (configurationId: string): Promise<ConfigurationReference> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${configurationId}`
       try {
@@ -172,7 +173,7 @@ export class Configurations extends ThBaseHandler {
     })
   }
 
-  put(configurationId: string, configuration: Configuration): Promise<ConfigurationResponse> {
+  put (configurationId: string, configuration: Configuration): Promise<ConfigurationResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${configurationId}`
       try {
@@ -188,7 +189,7 @@ export class Configurations extends ThBaseHandler {
     })
   }
 
-  patch(configurationId: string, configuration: Configuration): Promise<ConfigurationResponse> {
+  patch (configurationId: string, configuration: Configuration): Promise<ConfigurationResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${configurationId}`
       try {
@@ -204,7 +205,7 @@ export class Configurations extends ThBaseHandler {
     })
   }
 
-  create(configuration: Configuration): Promise<ConfigurationResponse> {
+  create (configuration: Configuration): Promise<ConfigurationResponse> {
     return new Promise(async (resolve, reject) => {
       const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
       try {
@@ -220,7 +221,7 @@ export class Configurations extends ThBaseHandler {
     })
   }
 
-  delete(configurationId: string): Promise<ConfigurationResponse> {
+  delete (configurationId: string): Promise<ConfigurationResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const uri = this.uriHelper.generateBaseUri(`/${configurationId}`)

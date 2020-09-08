@@ -17,7 +17,7 @@ export interface AnalyticsOptions {
 }
 
 export interface AnalyticsResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   msg?: string
 }
@@ -148,16 +148,16 @@ export class Analytics {
   public options: AnalyticsOptions
   public uriHelper: UriHelper
 
-  constructor(options: AnalyticsOptions, http: Client) {
+  constructor (options: AnalyticsOptions, http: Client) {
     this.options = options
     this.http = http
 
     this.endpoint = '/api/v0/analytics'
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getRevenuesForDayOfWeek(query: RevenuBasicOptions): Promise<AnalyticsResponse> {
+  getRevenuesForDayOfWeek (query: RevenuBasicOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const base = this.uriHelper.generateBaseUri('/aggregates/revenues/day_of_week')
@@ -176,7 +176,7 @@ export class Analytics {
     })
   }
 
-  getRevenuesSumForTimeRange(query: RevenuBasicOptions): Promise<AnalyticsResponse> {
+  getRevenuesSumForTimeRange (query: RevenuBasicOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const base = this.uriHelper.generateBaseUri('/aggregates/revenues/sum')
@@ -195,7 +195,7 @@ export class Analytics {
     })
   }
 
-  getRevenues(query: RevenuesOptions): Promise<AnalyticsResponse> {
+  getRevenues (query: RevenuesOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const base = this.uriHelper.generateBaseUri('/aggregates/revenues')
@@ -215,7 +215,7 @@ export class Analytics {
     })
   }
 
-  getRevenuesForHourOfDay(query: RevenuBasicOptions): Promise<AnalyticsResponse> {
+  getRevenuesForHourOfDay (query: RevenuBasicOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const base = this.uriHelper.generateBaseUri('/aggregates/revenues/hour_of_day')
@@ -234,7 +234,7 @@ export class Analytics {
     })
   }
 
-  getReportsProducts(query?: ProductsOptions | undefined): Promise<AnalyticsResponse> {
+  getReportsProducts (query?: ProductsOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const queryString = qs.stringify(query, { addQueryPrefix: true })
@@ -255,7 +255,7 @@ export class Analytics {
     })
   }
 
-  getProductsChildren(
+  getProductsChildren (
     productNumber: string,
     query?: ProductsOptions | undefined
   ): Promise<AnalyticsResponse> {
@@ -278,7 +278,7 @@ export class Analytics {
     })
   }
 
-  getStaffOverviewReport(query?: StaffQuery | undefined): Promise<AnalyticsResponse> {
+  getStaffOverviewReport (query?: StaffQuery | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const base = this.uriHelper.generateBaseUri('/reports/staff/overview')
@@ -297,10 +297,10 @@ export class Analytics {
     })
   }
 
-  getProductGroupsStaffReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
+  getProductGroupsStaffReport (options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const base = this.uriHelper.generateBaseUri(`/reports/staff/product_groups`)
+        const base = this.uriHelper.generateBaseUri('/reports/staff/product_groups')
         const uri = this.uriHelper.generateUriWithQuery(base, options)
 
         const response = await this.http.getClient().get(uri)
@@ -316,7 +316,7 @@ export class Analytics {
     })
   }
 
-  getProductGroupsReport(query?: RevenuBasicOptions | undefined): Promise<AnalyticsResponse> {
+  getProductGroupsReport (query?: RevenuBasicOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const base = this.uriHelper.generateBaseUri('/aggregates/product_groups')
@@ -335,10 +335,10 @@ export class Analytics {
     })
   }
 
-  getRefundsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
+  getRefundsReport (options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const base = this.uriHelper.generateBaseUri(`/reports/staff/refunds`)
+        const base = this.uriHelper.generateBaseUri('/reports/staff/refunds')
         const uri = this.uriHelper.generateUriWithQuery(base, options)
 
         const response = await this.http.getClient().get(uri)
@@ -354,7 +354,7 @@ export class Analytics {
     })
   }
 
-  getVouchersReports(query?: VoucherOptions | undefined): Promise<AnalyticsResponse> {
+  getVouchersReports (query?: VoucherOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         let uri = `${this.options.base}${this.endpoint}/${this.options.user}/reports/vouchers`
@@ -378,10 +378,10 @@ export class Analytics {
     })
   }
 
-  getProductsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
+  getProductsReport (options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
-        const base = this.uriHelper.generateBaseUri(`/reports/staff/products`)
+        const base = this.uriHelper.generateBaseUri('/reports/staff/products')
         const uri = this.uriHelper.generateUriWithQuery(base, options)
 
         const response = await this.http.getClient().get(uri)
@@ -397,7 +397,7 @@ export class Analytics {
     })
   }
 
-  getPaymentsReport(query?: PaymentsReportOptions): Promise<AnalyticsResponse> {
+  getPaymentsReport (query?: PaymentsReportOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const base = `${this.options.base}${this.endpoint}/${this.options.user}/reports/staff/payments`
@@ -417,7 +417,7 @@ export class Analytics {
     })
   }
 
-  getTopPaymentsReport(query?: TopPaymentsReportOptions): Promise<AnalyticsResponse> {
+  getTopPaymentsReport (query?: TopPaymentsReportOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const base = `${this.options.base}${this.endpoint}/${this.options.user}/reports/payments/top`
@@ -437,7 +437,7 @@ export class Analytics {
     })
   }
 
-  getSimpleSalesCartItems(
+  getSimpleSalesCartItems (
     query?: SimpleSalesCartItemsOptions | undefined
   ): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
@@ -465,8 +465,9 @@ export class Analytics {
       }
     })
   }
+
   // TODO: Remove when customers() is implemented
-  getCustomersReport(query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse> {
+  getCustomersReport (query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const base = this.uriHelper.generateBaseUri('/reports/customers')
@@ -484,8 +485,9 @@ export class Analytics {
       }
     })
   }
+
   // TODO: Remove when customers() is implemented
-  getCustomersTransaction(query: CustomersTransactionOptions): Promise<AnalyticsResponse> {
+  getCustomersTransaction (query: CustomersTransactionOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const base = this.uriHelper.generateBaseUri('/reports/customers/transactions')
@@ -503,8 +505,9 @@ export class Analytics {
       }
     })
   }
+
   // TODO: Remove when customers() is implemented
-  getCustomersOverview(query: CustomersTransactionOptions): Promise<AnalyticsResponse> {
+  getCustomersOverview (query: CustomersTransactionOptions): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const base = this.uriHelper.generateBaseUri('/reports/customers/overview')
@@ -523,7 +526,7 @@ export class Analytics {
     })
   }
 
-  getStocksReport(query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse> {
+  getStocksReport (query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const queryString = qs.stringify(query, { addQueryPrefix: true })
@@ -543,7 +546,7 @@ export class Analytics {
     })
   }
 
-  getProductGroups(query?: ProductGoupsOptions | undefined): Promise<AnalyticsResponse> {
+  getProductGroups (query?: ProductGoupsOptions | undefined): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const base = this.uriHelper.generateBaseUri('/reports/product_groups')
@@ -562,7 +565,7 @@ export class Analytics {
     })
   }
 
-  getProductGroupsFilters(query: ProductGoupsFilters): Promise<AnalyticsResponse> {
+  getProductGroupsFilters (query: ProductGoupsFilters): Promise<AnalyticsResponse> {
     return new Promise(async (resolve, reject) => {
       try {
         const base = this.uriHelper.generateBaseUri('/reports/product_groups/filters')
@@ -581,34 +584,34 @@ export class Analytics {
     })
   }
 
-  balances(): Balances {
+  balances (): Balances {
     return new Balances(this.options, this.http, this.uriHelper)
   }
 
-  paymentOptions(): PaymentOptions {
+  paymentOptions (): PaymentOptions {
     return new PaymentOptions(this.options, this.http, this.uriHelper)
   }
 
-  payments(): Payments {
+  payments (): Payments {
     return new Payments(this.options, this.http, this.uriHelper)
   }
 
-  vat(): Vat {
+  vat (): Vat {
     return new Vat(this.options, this.http, this.uriHelper)
   }
 
-  cashBook(): CashBook {
+  cashBook (): CashBook {
     return new CashBook(this.options, this.http, this.uriHelper)
   }
 
-  customers(): Customers {
+  customers (): Customers {
     return new Customers(this.options, this.http, this.uriHelper)
   }
 }
 
 export class ReportsStocksFetchFailed extends BaseError {
   public name = 'ReportsStocksFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the stocks report',
     properties?: Record<string, unknown>
   ) {
@@ -619,7 +622,7 @@ export class ReportsStocksFetchFailed extends BaseError {
 
 export class RefundsReportFetchFailed extends BaseError {
   public name = 'RefundsReportFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the refunds report',
     properties?: Record<string, unknown>
   ) {
@@ -630,7 +633,7 @@ export class RefundsReportFetchFailed extends BaseError {
 
 export class VouchersReportFetchFailed extends BaseError {
   public name = 'VouchersReportFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the vouchers report',
     properties?: Record<string, unknown>
   ) {
@@ -641,7 +644,7 @@ export class VouchersReportFetchFailed extends BaseError {
 
 export class ProductsReportFetchFailed extends BaseError {
   public name = 'ProductsReportFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the products report',
     properties?: Record<string, unknown>
   ) {
@@ -652,7 +655,7 @@ export class ProductsReportFetchFailed extends BaseError {
 
 export class PaymentsReportFetchFailed extends BaseError {
   public name = 'PaymentsReportFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch payments report',
     properties?: Record<string, unknown>
   ) {
@@ -663,7 +666,7 @@ export class PaymentsReportFetchFailed extends BaseError {
 
 export class TopPaymentsReportFetchFailed extends BaseError {
   public name = 'TopPaymentsReportFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch top payments report',
     properties?: Record<string, unknown>
   ) {
@@ -674,7 +677,7 @@ export class TopPaymentsReportFetchFailed extends BaseError {
 
 export class RevenuesFetchFailed extends BaseError {
   public name = 'RevenuesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the Revenues',
     properties?: Record<string, unknown>
   ) {
@@ -685,7 +688,7 @@ export class RevenuesFetchFailed extends BaseError {
 
 export class ReportsProductGroupsFiltersFetchFailed extends BaseError {
   public name = 'ReportsProductGroupsFiltersFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get products group filters',
     properties?: Record<string, unknown>
   ) {
@@ -696,7 +699,7 @@ export class ReportsProductGroupsFiltersFetchFailed extends BaseError {
 
 export class ReportsProductGroupsFetchFailed extends BaseError {
   public name = 'ReportsProductGroupsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch product groups',
     properties?: Record<string, unknown>
   ) {
@@ -707,7 +710,7 @@ export class ReportsProductGroupsFetchFailed extends BaseError {
 
 export class ReportsCustomerOverviewFailed extends BaseError {
   public name = 'ReportsProductGroupsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch customer overview',
     properties?: Record<string, unknown>
   ) {
@@ -718,7 +721,7 @@ export class ReportsCustomerOverviewFailed extends BaseError {
 
 export class ReportsCustomerTransactionsFailed extends BaseError {
   public name = 'ReportsCustomerTransactionsFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch customer transactions',
     properties?: Record<string, unknown>
   ) {
@@ -729,7 +732,7 @@ export class ReportsCustomerTransactionsFailed extends BaseError {
 
 export class ReportsCustomerCustomersFailed extends BaseError {
   public name = 'ReportsCustomerCustomersFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch customer reports',
     properties?: Record<string, unknown>
   ) {
@@ -740,7 +743,7 @@ export class ReportsCustomerCustomersFailed extends BaseError {
 
 export class SimpleSalesCartItemsReportFetchFailed extends BaseError {
   public name = 'SimpleSalesCartItemsReportFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the sales cart items report',
     properties?: Record<string, unknown>
   ) {
@@ -751,7 +754,7 @@ export class SimpleSalesCartItemsReportFetchFailed extends BaseError {
 
 export class ProductGroupsStaffReportFetchFailed extends BaseError {
   public name = 'ProductGroupsStaffReportFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the product groups staff report',
     properties?: Record<string, unknown>
   ) {
@@ -762,7 +765,7 @@ export class ProductGroupsStaffReportFetchFailed extends BaseError {
 
 export class ProductGroupsReportFetchFailed extends BaseError {
   public name = 'ProductGroupsReportFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the product groups report',
     properties?: Record<string, unknown>
   ) {
@@ -773,7 +776,7 @@ export class ProductGroupsReportFetchFailed extends BaseError {
 
 export class StatisticsProductChildrenFetchFailed extends BaseError {
   public name = 'StatisticsProductChildrenFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the Statistics Products Children',
     properties?: Record<string, unknown>
   ) {
@@ -784,7 +787,7 @@ export class StatisticsProductChildrenFetchFailed extends BaseError {
 
 export class StaffOverviewFetchFailed extends BaseError {
   public name = 'StaffOverviewFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the staff overview report',
     properties?: Record<string, unknown>
   ) {
@@ -795,7 +798,7 @@ export class StaffOverviewFetchFailed extends BaseError {
 
 export class StatisticsProductFetchFailed extends BaseError {
   public name = 'StatisticsProductFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the Statistics Products',
     properties?: Record<string, unknown>
   ) {

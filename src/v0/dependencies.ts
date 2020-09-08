@@ -33,20 +33,20 @@ export class Dependencies extends ThBaseHandler {
   public options: DependenciesOptions
   public uriHelper: UriHelper
 
-  constructor(options: DependenciesOptions, http: Client) {
+  constructor (options: DependenciesOptions, http: Client) {
     super(http, {
       endpoint: Dependencies.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Dependencies.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  get(query: DependenciesQuery): Promise<DependenciesResponse> {
+  get (query: DependenciesQuery): Promise<DependenciesResponse> {
     return new Promise(async (resolve, reject) => {
       const base = this.uriHelper.generateBaseUri('/')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -70,7 +70,7 @@ export class Dependencies extends ThBaseHandler {
 
 export class DependenciesFetchFailed extends BaseError {
   public name = 'DependenciesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the dependencies',
     properties?: Record<string, unknown>
   ) {
