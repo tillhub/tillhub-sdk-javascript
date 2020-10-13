@@ -1,6 +1,8 @@
 import { Client } from '../client';
 import { BaseError } from '../errors';
+import { UriHelper } from '../uri-helper';
 import { ThBaseHandler } from '../base';
+import { Customer } from './customers';
 export interface VouchersOptions {
     user?: string;
     base?: string;
@@ -37,12 +39,30 @@ export interface VoucherResponse {
     };
     msg?: string;
 }
+export interface BoundedCustomersGetResponse {
+    data?: Customer[];
+    metadata?: {
+        count?: number;
+        patch?: any;
+    };
+    msg?: string;
+}
+export interface BoundedCustomersPostResponse {
+    data: {
+        id: string;
+        voucher_id: string;
+        customer_id: string;
+    };
+    metadata?: {
+        count?: number;
+        patch?: any;
+    };
+    msg?: string;
+}
 declare type VoucherFormatTypes = 'numeric' | 'alphanumeric' | 'alphabetic';
 declare type VoucherTypes = 'amount' | 'discount' | 'product';
 export interface Voucher {
     id?: string;
-}
-export interface Voucher {
     type?: VoucherTypes | null;
     format: string | null;
     format_type: VoucherFormatTypes | null;
@@ -74,6 +94,7 @@ export declare class Vouchers extends ThBaseHandler {
     http: Client;
     logs: VoucherLogs;
     options: VouchersOptions;
+    uriHelper: UriHelper;
     constructor(options: VouchersOptions, http: Client);
     getAll(optionsOrQuery?: VouchersQueryOptions | undefined): Promise<VouchersResponse>;
     meta(q?: VouchersMetaQuery | undefined): Promise<VouchersResponse>;
@@ -85,6 +106,9 @@ export declare class Vouchers extends ThBaseHandler {
     patch(source: Voucher, target: Voucher): Promise<VoucherResponse>;
     create(voucher: Voucher): Promise<VoucherResponse>;
     getAllUsers(): Promise<UsersResponse>;
+    getBoundedCustomers(voucherId: string): Promise<BoundedCustomersGetResponse>;
+    createBoundedCustomers(voucherId: string, customers: string[]): Promise<BoundedCustomersPostResponse>;
+    updateBoundedCustomers(voucherId: string, customers: string[]): Promise<BoundedCustomersPostResponse>;
 }
 export declare class VoucherLogs extends ThBaseHandler {
     static baseEndpoint: string;
@@ -166,6 +190,21 @@ export declare class VouchersLogsCountFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class VouchersUsersFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class VouchersBoundedCustomerGetFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class VouchersBoundedCustomerCreateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class VouchersBoundedCustomerPutFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

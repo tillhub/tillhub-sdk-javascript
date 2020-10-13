@@ -1,11 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.VouchersUsersFailed = exports.VouchersLogsCountFailed = exports.VouchersLogsFetchFailed = exports.VoucherDeleteFailed = exports.VoucherLogsMetaFailed = exports.VouchersMetaFailed = exports.VouchersCountFailed = exports.VoucherCodeConflict = exports.VoucherCreationFailed = exports.VoucherPatchFailed = exports.VoucherPutFailed = exports.VoucherFetchFailed = exports.VoucherLogsFetchFailed = exports.VouchersFetchFailed = exports.VoucherTypeError = exports.VoucherLogs = exports.Vouchers = void 0;
+exports.VouchersBoundedCustomerPutFailed = exports.VouchersBoundedCustomerCreateFailed = exports.VouchersBoundedCustomerGetFailed = exports.VouchersUsersFailed = exports.VouchersLogsCountFailed = exports.VouchersLogsFetchFailed = exports.VoucherDeleteFailed = exports.VoucherLogsMetaFailed = exports.VouchersMetaFailed = exports.VouchersCountFailed = exports.VoucherCodeConflict = exports.VoucherCreationFailed = exports.VoucherPatchFailed = exports.VoucherPutFailed = exports.VoucherFetchFailed = exports.VoucherLogsFetchFailed = exports.VouchersFetchFailed = exports.VoucherTypeError = exports.VoucherLogs = exports.Vouchers = void 0;
 var tslib_1 = require("tslib");
 var just_diff_1 = require("just-diff");
 var qs_1 = tslib_1.__importDefault(require("qs"));
 var just_safe_get_1 = tslib_1.__importDefault(require("just-safe-get"));
 var errors_1 = require("../errors");
+var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
 var Vouchers = (function (_super) {
     tslib_1.__extends(Vouchers, _super);
@@ -19,6 +20,7 @@ var Vouchers = (function (_super) {
         _this.logs = new VoucherLogs(options, http);
         _this.endpoint = Vouchers.baseEndpoint;
         _this.options.base = _this.options.base || 'https://api.tillhub.com';
+        _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
         return _this;
     }
     Vouchers.prototype.getAll = function (optionsOrQuery) {
@@ -348,6 +350,81 @@ var Vouchers = (function (_super) {
             });
         }); });
     };
+    Vouchers.prototype.getBoundedCustomers = function (voucherId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_11;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = this.uriHelper.generateBaseUri("/" + voucherId + "/customers");
+                        return [4, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new VouchersBoundedCustomerGetFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results
+                            }];
+                    case 2:
+                        error_11 = _a.sent();
+                        throw new VouchersBoundedCustomerGetFailed(undefined, { error: error_11 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    Vouchers.prototype.createBoundedCustomers = function (voucherId, customers) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_12;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = this.uriHelper.generateBaseUri("/" + voucherId + "/customers");
+                        return [4, this.http.getClient().post(uri, customers)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new VouchersBoundedCustomerCreateFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results
+                            }];
+                    case 2:
+                        error_12 = _a.sent();
+                        throw new VouchersBoundedCustomerCreateFailed(undefined, { error: error_12 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    Vouchers.prototype.updateBoundedCustomers = function (voucherId, customers) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_13;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = this.uriHelper.generateBaseUri("/" + voucherId + "/customers");
+                        return [4, this.http.getClient().put(uri, customers)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new VouchersBoundedCustomerPutFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results
+                            }];
+                    case 2:
+                        error_13 = _a.sent();
+                        throw new VouchersBoundedCustomerPutFailed(undefined, { error: error_13 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
     Vouchers.baseEndpoint = '/api/v0/vouchers';
     return Vouchers;
 }(base_1.ThBaseHandler));
@@ -368,7 +445,7 @@ var VoucherLogs = (function (_super) {
     VoucherLogs.prototype.getAll = function (optionsOrQuery) {
         var _this = this;
         return new Promise(function (resolve, reject) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
-            var next, uri, queryString, response_3, error_11;
+            var next, uri, queryString, response_3, error_14;
             var _this = this;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
@@ -400,8 +477,8 @@ var VoucherLogs = (function (_super) {
                                 next: next
                             })];
                     case 2:
-                        error_11 = _a.sent();
-                        return [2, reject(new VouchersLogsFetchFailed(undefined, { error: error_11 }))];
+                        error_14 = _a.sent();
+                        return [2, reject(new VouchersLogsFetchFailed(undefined, { error: error_14 }))];
                     case 3: return [2];
                 }
             });
@@ -410,7 +487,7 @@ var VoucherLogs = (function (_super) {
     VoucherLogs.prototype.meta = function () {
         var _this = this;
         return new Promise(function (resolve, reject) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
-            var uri, response, error_12;
+            var uri, response, error_15;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -432,8 +509,8 @@ var VoucherLogs = (function (_super) {
                                 metadata: { count: response.data.count }
                             })];
                     case 3:
-                        error_12 = _a.sent();
-                        return [2, reject(new VoucherLogsMetaFailed(undefined, { error: error_12 }))];
+                        error_15 = _a.sent();
+                        return [2, reject(new VoucherLogsMetaFailed(undefined, { error: error_15 }))];
                     case 4: return [2];
                 }
             });
@@ -637,4 +714,43 @@ var VouchersUsersFailed = (function (_super) {
     return VouchersUsersFailed;
 }(errors_1.BaseError));
 exports.VouchersUsersFailed = VouchersUsersFailed;
+var VouchersBoundedCustomerGetFailed = (function (_super) {
+    tslib_1.__extends(VouchersBoundedCustomerGetFailed, _super);
+    function VouchersBoundedCustomerGetFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get the voucher bounded customers'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'VouchersBoundedCustomerGetFailed';
+        Object.setPrototypeOf(_this, VouchersBoundedCustomerGetFailed.prototype);
+        return _this;
+    }
+    return VouchersBoundedCustomerGetFailed;
+}(errors_1.BaseError));
+exports.VouchersBoundedCustomerGetFailed = VouchersBoundedCustomerGetFailed;
+var VouchersBoundedCustomerCreateFailed = (function (_super) {
+    tslib_1.__extends(VouchersBoundedCustomerCreateFailed, _super);
+    function VouchersBoundedCustomerCreateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create the voucher bounded customers'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'VouchersBoundedCustomerCreateFailed';
+        Object.setPrototypeOf(_this, VouchersBoundedCustomerCreateFailed.prototype);
+        return _this;
+    }
+    return VouchersBoundedCustomerCreateFailed;
+}(errors_1.BaseError));
+exports.VouchersBoundedCustomerCreateFailed = VouchersBoundedCustomerCreateFailed;
+var VouchersBoundedCustomerPutFailed = (function (_super) {
+    tslib_1.__extends(VouchersBoundedCustomerPutFailed, _super);
+    function VouchersBoundedCustomerPutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not update the voucher bounded customers'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'VouchersBoundedCustomerPutFailed';
+        Object.setPrototypeOf(_this, VouchersBoundedCustomerPutFailed.prototype);
+        return _this;
+    }
+    return VouchersBoundedCustomerPutFailed;
+}(errors_1.BaseError));
+exports.VouchersBoundedCustomerPutFailed = VouchersBoundedCustomerPutFailed;
 //# sourceMappingURL=vouchers.js.map

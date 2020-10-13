@@ -1,3 +1,10 @@
+# [3.210.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.209.0...v3.210.0) (2020-10-13)
+
+
+### Features
+
+* **vouchers:** add handlers for bounded customers ([ce2d2dc](https://github.com/tillhub/tillhub-sdk-javascript/commit/ce2d2dc537cf44055ffdd3cfc26db8630d6082be))
+
 # [3.209.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.208.1...v3.209.0) (2020-09-07)
 
 
