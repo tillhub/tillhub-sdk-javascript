@@ -3,7 +3,9 @@ import qs from 'qs'
 import safeGet from 'just-safe-get'
 import { Client } from '../client'
 import { BaseError } from '../errors'
+import { UriHelper } from '../uri-helper'
 import { ThBaseHandler } from '../base'
+import { Customer } from './customers'
 
 export interface VouchersOptions {
   user?: string
@@ -47,14 +49,33 @@ export interface VoucherResponse {
   msg?: string
 }
 
+export interface BoundedCustomersGetResponse {
+  data?: Customer[]
+  metadata?: {
+    count?: number
+    patch?: any
+  }
+  msg?: string
+}
+
+export interface BoundedCustomersPostResponse {
+  data: {
+    id: string
+    voucher_id: string
+    customer_id: string
+  }
+  metadata?: {
+    count?: number
+    patch?: any
+  }
+  msg?: string
+}
+
 type VoucherFormatTypes = 'numeric' | 'alphanumeric' | 'alphabetic'
 type VoucherTypes = 'amount' | 'discount' | 'product'
 
 export interface Voucher {
   id?: string
-}
-
-export interface Voucher {
   type?: VoucherTypes | null
   format: string | null
   format_type: VoucherFormatTypes | null
@@ -88,6 +109,7 @@ export class Vouchers extends ThBaseHandler {
   http: Client
   logs: VoucherLogs
   public options: VouchersOptions
+  public uriHelper: UriHelper
 
   constructor (options: VouchersOptions, http: Client) {
     super(http, {
@@ -99,7 +121,8 @@ export class Vouchers extends ThBaseHandler {
     this.logs = new VoucherLogs(options, http)
 
     this.endpoint = Vouchers.baseEndpoint
-    this.options.base = this.options.base ?? 'https://api.tillhub.com'
+    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
   getAll (optionsOrQuery?: VouchersQueryOptions | undefined): Promise<VouchersResponse> {
@@ -359,6 +382,62 @@ export class Vouchers extends ThBaseHandler {
       }
     })
   }
+
+  async getBoundedCustomers(voucherId: string): Promise<BoundedCustomersGetResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri(`/${voucherId}/customers`)
+
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new VouchersBoundedCustomerGetFailed(undefined, { status: response.status })
+      }
+      return {
+        data: response.data.results
+      }
+    } catch (error) {
+      throw new VouchersBoundedCustomerGetFailed(undefined, { error })
+    }
+  }
+
+  async createBoundedCustomers(
+    voucherId: string,
+    customers: string[]
+  ): Promise<BoundedCustomersPostResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri(`/${voucherId}/customers`)
+
+      const response = await this.http.getClient().post(uri, customers)
+      if (response.status !== 200) {
+        throw new VouchersBoundedCustomerCreateFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results
+      }
+    } catch (error) {
+      throw new VouchersBoundedCustomerCreateFailed(undefined, { error })
+    }
+  }
+
+  async updateBoundedCustomers(
+    voucherId: string,
+    customers: string[]
+  ): Promise<BoundedCustomersPostResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri(`/${voucherId}/customers`)
+
+      const response = await this.http.getClient().put(uri, customers)
+      if (response.status !== 200) {
+        throw new VouchersBoundedCustomerPutFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results
+      }
+    } catch (error) {
+      throw new VouchersBoundedCustomerPutFailed(undefined, { error })
+    }
+  }
 }
 
 export class VoucherLogs extends ThBaseHandler {
@@ -602,5 +681,38 @@ export class VouchersUsersFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, VouchersUsersFailed.prototype)
+  }
+}
+
+export class VouchersBoundedCustomerGetFailed extends BaseError {
+  public name = 'VouchersBoundedCustomerGetFailed'
+  constructor(
+    public message: string = 'Could not get the voucher bounded customers',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, VouchersBoundedCustomerGetFailed.prototype)
+  }
+}
+
+export class VouchersBoundedCustomerCreateFailed extends BaseError {
+  public name = 'VouchersBoundedCustomerCreateFailed'
+  constructor(
+    public message: string = 'Could not create the voucher bounded customers',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, VouchersBoundedCustomerCreateFailed.prototype)
+  }
+}
+
+export class VouchersBoundedCustomerPutFailed extends BaseError {
+  public name = 'VouchersBoundedCustomerPutFailed'
+  constructor(
+    public message: string = 'Could not update the voucher bounded customers',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, VouchersBoundedCustomerPutFailed.prototype)
   }
 }
