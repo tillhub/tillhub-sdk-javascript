@@ -178,6 +178,7 @@ export class Auth {
         scopes: response.data.user.scopes,
         role: response.data.user.role,
         orgName: response.data.user.display_name,
+        whitelabel: response.data.user.whitelabel,
         expiresAt: response.data.expires_at
       } as AuthResponse
     } catch (err) {
