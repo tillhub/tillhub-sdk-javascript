@@ -1,3 +1,10 @@
+# [3.211.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.210.0...v3.211.0) (2020-10-15)
+
+
+### Features
+
+* **auth:** add whitelabel property ([8137abe](https://github.com/tillhub/tillhub-sdk-javascript/commit/8137abecd4718f35ad38dd363ae289928ce12a29))
+
 # [3.210.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.209.0...v3.210.0) (2020-10-13)
 
 
