@@ -59,101 +59,91 @@ export class AuditActions {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll (q?: AuditsQuery | undefined): Promise<AuditsResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (q?: AuditsQuery | undefined): Promise<AuditsResponse> {
+    let next
 
-      try {
-        const base = this.uriHelper.generateBaseUri('/actions')
-        const uri = this.uriHelper.generateUriWithQuery(base, q)
+    try {
+      const base = this.uriHelper.generateBaseUri('/actions')
+      const uri = this.uriHelper.generateUriWithQuery(base, q)
 
-        const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri)
 
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<AuditsResponse> =>
-            this.getAll({ ...q, uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { cursor: response.data.cursor },
-          next
-        } as AuditsResponse)
-      } catch (err) {
-        return reject(new errors.AuditActionsFetchAllFailed())
+      if (response.data.cursor?.next) {
+        next = (): Promise<AuditsResponse> =>
+          this.getAll({ ...q, uri: response.data.cursor.next })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { cursor: response.data.cursor },
+        next
+      }
+    } catch (err) {
+      throw new errors.AuditActionsFetchAllFailed()
+    }
   }
 
-  meta (q?: AuditsMetaQuery | undefined): Promise<AuditsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri('/actions/meta')
-        const uri = this.uriHelper.generateUriWithQuery(base, q)
+  async meta (q?: AuditsMetaQuery | undefined): Promise<AuditsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/actions/meta')
+      const uri = this.uriHelper.generateUriWithQuery(base, q)
 
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) reject(new errors.AuditActionsGetMetaFailed())
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new errors.AuditActionsGetMetaFailed()
 
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.count }
-        } as AuditsResponse)
-      } catch (err) {
-        return reject(new errors.AuditActionsGetMetaFailed())
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new errors.AuditActionsGetMetaFailed()
+    }
   }
 
-  get (requestObject: AuditActionsGetOneRequestObject): Promise<AuditsResponse> {
-    return new Promise(async (resolve, reject) => {
-      const { auditActionId, query } = requestObject
+  async get (requestObject: AuditActionsGetOneRequestObject): Promise<AuditsResponse> {
+    const { auditActionId, query } = requestObject
 
-      try {
-        const base = this.uriHelper.generateBaseUri(`/actions/${auditActionId}`)
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+    try {
+      const base = this.uriHelper.generateBaseUri(`/actions/${auditActionId}`)
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri)
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as AuditsResponse)
-      } catch (err) {
-        return reject(new errors.AuditActionsFetchOneFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new errors.AuditActionsFetchOneFailed()
+    }
   }
 
-  create (body: AuditActionsCreateBody): Promise<AuditsResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/actions`
+  async create (body: AuditActionsCreateBody): Promise<AuditsResponse> {
+    const uri = this.uriHelper.generateBaseUri('/actions')
 
-      try {
-        const response = await this.http.getClient().post(uri, body)
+    try {
+      const response = await this.http.getClient().post(uri, body)
 
-        return resolve({
-          msg: response.data.msg
-        } as AuditsResponse)
-      } catch (err) {
-        return reject(new errors.AuditActionsCreateFailed())
+      return {
+        msg: response.data.msg
       }
-    })
+    } catch (err) {
+      throw new errors.AuditActionsCreateFailed()
+    }
   }
 
-  getTypes (query: AuditsTypesQuery): Promise<AuditsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri('/actions/types')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+  async getTypes (query: AuditsTypesQuery): Promise<AuditsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/actions/types')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri)
 
-        return resolve({
-          data: response.data.results
-        } as AuditsResponse)
-      } catch (err) {
-        return reject(new errors.AuditActionsTypesFetchFailed())
+      return {
+        data: response.data.results
       }
-    })
+    } catch (err) {
+      throw new errors.AuditActionsTypesFetchFailed()
+    }
   }
 }

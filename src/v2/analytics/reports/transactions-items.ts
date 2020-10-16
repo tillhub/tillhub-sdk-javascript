@@ -8,7 +8,7 @@ export interface TransactionsItemsHandlerOptions {
 }
 
 export interface AnalyticsReportsTransactionsItemsResponse {
-  data: Record<string, unknown>[]
+    data: Array<Record<string, unknown>>
   summary: Record<string, unknown>[]
   metaData: {
     count: number

@@ -47,68 +47,62 @@ export class AuditLogs {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll (q?: AuditsQuery | undefined): Promise<AuditsResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (q?: AuditsQuery | undefined): Promise<AuditsResponse> {
+    let next
 
-      try {
-        const base = this.uriHelper.generateBaseUri('/logs')
-        const uri = this.uriHelper.generateUriWithQuery(base, q)
+    try {
+      const base = this.uriHelper.generateBaseUri('/logs')
+      const uri = this.uriHelper.generateUriWithQuery(base, q)
 
-        const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri)
 
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<AuditsResponse> =>
-            this.getAll({ ...q, uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { cursor: response.data.cursor },
-          next
-        } as AuditsResponse)
-      } catch (err) {
-        return reject(new errors.AuditLogsFetchAllFailed())
+      if (response.data.cursor?.next) {
+        next = (): Promise<AuditsResponse> =>
+          this.getAll({ ...q, uri: response.data.cursor.next })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { cursor: response.data.cursor },
+        next
+      }
+    } catch (err) {
+      throw new errors.AuditLogsFetchAllFailed()
+    }
   }
 
-  meta (q?: AuditsMetaQuery | undefined): Promise<AuditsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri('/logs/meta')
-        const uri = this.uriHelper.generateUriWithQuery(base, q)
+  async meta (q?: AuditsMetaQuery | undefined): Promise<AuditsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/logs/meta')
+      const uri = this.uriHelper.generateUriWithQuery(base, q)
 
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) reject(new errors.AuditLogsGetMetaFailed())
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new errors.AuditLogsGetMetaFailed()
 
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.count }
-        } as AuditsResponse)
-      } catch (err) {
-        return reject(new errors.AuditLogsGetMetaFailed())
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new errors.AuditLogsGetMetaFailed()
+    }
   }
 
-  get (requestObject: AuditLogsGetOneRequestObject): Promise<AuditsResponse> {
-    return new Promise(async (resolve, reject) => {
-      const { auditLogId, query } = requestObject
+  async get (requestObject: AuditLogsGetOneRequestObject): Promise<AuditsResponse> {
+    const { auditLogId, query } = requestObject
 
-      try {
-        const base = this.uriHelper.generateBaseUri(`/logs/${auditLogId}`)
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+    try {
+      const base = this.uriHelper.generateBaseUri(`/logs/${auditLogId}`)
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri)
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as AuditsResponse)
-      } catch (err) {
-        return reject(new errors.AuditLogsFetchOneFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new errors.AuditLogsFetchOneFailed()
+    }
   }
 }

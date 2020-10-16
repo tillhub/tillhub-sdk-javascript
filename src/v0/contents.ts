@@ -33,13 +33,10 @@ export interface ContentResponse {
   msg?: string
 }
 
-export interface Content {
-  id?: string
-}
-
 export type ContentTypeType = 'video' | 'image' | 'text' | 'transition'
 
 export interface Content {
+  id?: string
   name?: string
   type: ContentTypeType
   payload: string | null

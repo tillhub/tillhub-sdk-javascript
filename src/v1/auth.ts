@@ -56,7 +56,7 @@ export class Auth extends v0.Auth {
 
   async loginServiceAccount (authData: KeyAuth): Promise<AuthResponse> {
     try {
-      const response = await axios.post(`${this.options.base}/api/v1/users/auth/key`, {
+      const response = await axios.post(this.getEndpoint('/api/v1/users/auth/key'), {
         id: authData.id,
         api_key: authData.apiKey
       })
@@ -70,11 +70,11 @@ export class Auth extends v0.Auth {
         token: response.data.token,
         user: response.data.user.legacy_id || response.data.user.id,
         name: response.data.user.name
-      } as AuthResponse
+      }
     } catch (err) {
       const error = new errors.AuthenticationFailed()
       err.error = err
-      err.body = err.response && err.response.data ? err.response.data : null
+      err.body = err.response?.data ?? null
 
       throw error
     }
@@ -83,7 +83,7 @@ export class Auth extends v0.Auth {
   async loginWithOrganisation (authData: OrgAuth): Promise<AuthResponse> {
     try {
       const response = await axios.post(
-        `${this.options.base}/api/v1/users/auth/organisation/login`,
+        this.getEndpoint('/api/v1/users/auth/organisation/login'),
         {
           organisation: authData.organisation,
           username: authData.username,
@@ -109,11 +109,11 @@ export class Auth extends v0.Auth {
         role,
         scopes,
         subUser: subUser || null
-      } as AuthResponse
+      }
     } catch (err) {
       const error = new errors.AuthenticationFailed()
       err.error = err
-      err.body = err.response && err.response.data ? err.response.data : null
+      err.body = err.response?.data ?? null
 
       throw error
     }
@@ -121,7 +121,7 @@ export class Auth extends v0.Auth {
 
   async loginAsSupport (authData: SupportAuth): Promise<AuthResponse> {
     try {
-      const response = await axios.post(`${this.options.base}/api/v1/users/auth/support/login`, {
+      const response = await axios.post(this.getEndpoint('/api/v1/users/auth/support/login'), {
         token: authData.token,
         client_account: authData.client_account,
         recaptcha_token: authData.recaptcha_token
@@ -139,11 +139,11 @@ export class Auth extends v0.Auth {
         scopes: response.data.user.scopes,
         role: response.data.user.role,
         is_support: true
-      } as AuthResponse
+      }
     } catch (err) {
       const error = new errors.AuthenticationFailed()
       err.error = err
-      err.body = err.response && err.response.data ? err.response.data : null
+      err.body = err.response?.data ?? null
 
       throw error
     }

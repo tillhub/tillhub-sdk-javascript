@@ -22,6 +22,7 @@ module.exports = {
     '@typescript-eslint/promise-function-async': 'off',
     'eslint-disable-next-line @typescript-eslint/no-extraneous-class': 'off',
     '@typescript-eslint/no-unused-vars': [1, { args: 'none' }],
+    '@typescript-eslint/no-redeclare': 'off'
     // 'space-before-function-paren': [
     //   2,
     //   {

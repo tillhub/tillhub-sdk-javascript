@@ -29,6 +29,7 @@ export interface TransactionsOptions {
 
 export interface TransactionResponse {
   data: Array<Record<string, unknown>>
+  metadata?: Record<string, unknown>
   next?: () => Promise<TransactionResponse>
 }
 
@@ -71,13 +72,14 @@ export class Transactions extends ThBaseHandler {
   }
 
   async getAll (query?: TransactionsQuery | undefined): Promise<TransactionResponse> {
+    let next
     try {
       const base = this.uriHelper.generateBaseUri()
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri)
 
-      if (response.data.cursor && response.data.cursor.next) {
+      if (response.data.cursor?.next) {
         next = (): Promise<TransactionResponse> => this.getAll({ uri: response.data.cursor.next })
       }
 
@@ -98,7 +100,7 @@ export class Transactions extends ThBaseHandler {
 
       const response = await this.http.getClient().get(uri)
 
-      if (response.status !== 200) reject(new TransactionsGetMetaFailed())
+      if (response.status !== 200) throw new TransactionsGetMetaFailed()
 
       return {
         data: response.data.results[0],
@@ -180,16 +182,12 @@ export class TransactionsLegacy {
     let next
 
     try {
-      let uri
-      if (query?.uri) {
-        uri = query.uri
-      } else {
-        uri = `${this.options.base}${this.endpoint}/${this.options.user}/legacy`
-      }
+      const base = this.uriHelper.generateBaseUri('/legacy')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri)
 
-      if (response.data.cursor && response.data.cursor.next) {
+      if (response.data.cursor?.next) {
         next = (): Promise<TransactionResponse> => this.getAll({ uri: response.data.cursor.next })
       }
 
@@ -204,17 +202,10 @@ export class TransactionsLegacy {
   }
 
   async pdfUri (requestObject: PdfRequestObject): Promise<TransactionResponse> {
+    const { query, transactionId, template } = requestObject
     try {
-      let uri
-      if (query?.uri) {
-        uri = query.uri
-      } else {
-        uri = `${this.options.base}${this.endpoint}/${this.options.user}/${transactionId}/legacy/${template}/pdf`
-      }
-
-      if (query?.format) {
-        uri = `${uri}?format=${query.format}`
-      }
+      const base = this.uriHelper.generateBaseUri(`/${transactionId}/legacy/${template}/pdf`)
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().post(uri, null, {
         headers: {
@@ -237,7 +228,7 @@ export class TransactionsLegacy {
 
       const response = await this.http.getClient().get(uri)
 
-      if (response.status !== 200) reject(new TransactionsGetMetaFailed())
+      if (response.status !== 200) throw new TransactionsGetMetaFailed()
 
       return {
         data: response.data.results[0],
@@ -253,6 +244,7 @@ export class Signing {
   endpoint: string
   http: Client
   public options: TransactionsOptions
+  public uriHelper: UriHelper
 
   constructor (options: TransactionsOptions, http: Client) {
     this.options = options
@@ -260,6 +252,7 @@ export class Signing {
 
     this.endpoint = '/api/v1/transactions'
     this.options.base = this.options.base ?? 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
   async initialise (
@@ -269,7 +262,8 @@ export class Signing {
     signingConfiguration: FiskaltrustAuth
   ): Promise<TransactionResponse> {
     try {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/initialise`
+      const uri = this.uriHelper.generateBaseUri(`/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/initialise`)
+      // const uri = `${this.options.base}${this.endpoint}/${this.options.user}/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/initialise`
 
       const response = await this.http.getClient().post(uri, signingConfiguration, {
         headers: {
@@ -291,8 +285,7 @@ export class Signing {
     signingSystem: string
   ): Promise<TransactionResponse> {
     try {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/yearly`
-
+      const uri = this.uriHelper.generateBaseUri(`/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/yearly`)
       const response = await this.http.getClient().post(uri, undefined, {
         headers: {
           Accept: 'application/json'
@@ -313,8 +306,7 @@ export class Signing {
     signingSystem: string
   ): Promise<TransactionResponse> {
     try {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/monthly`
-
+      const uri = this.uriHelper.generateBaseUri(`/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/monthly`)
       const response = await this.http.getClient().post(uri, undefined, {
         headers: {
           Accept: 'application/json'
@@ -335,7 +327,7 @@ export class Signing {
     signingSystem: string
   ): Promise<TransactionResponse> {
     try {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/zero`
+      const uri = this.uriHelper.generateBaseUri(`/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/zero`)
 
       const response = await this.http.getClient().post(uri, undefined, {
         headers: {

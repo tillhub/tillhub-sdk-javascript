@@ -136,7 +136,6 @@ export class Categories extends ThBaseHandler {
   }
 
   async delete (storefrontId: string): Promise<CategoryResponse> {
-    // const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${storefrontId}`
     const uri = this.uriHelper.generateBaseUri(`/${storefrontId}`)
 
     try {

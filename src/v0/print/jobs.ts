@@ -15,14 +15,14 @@ export interface PrintJob {
 }
 
 export interface PrintJobsResponse {
-  data: PrintJob[]
-  metadata: Record<string, unknown>
+  data?: PrintJob[]
+  metadata?: Record<string, unknown>
   msg?: string
 }
 
 export interface PrintJobResponse {
-  data: PrintJob
-  metadata: Record<string, unknown>
+  data?: PrintJob
+  metadata?: Record<string, unknown>
   msg?: string
 }
 
@@ -36,13 +36,13 @@ export class Jobs {
   public options: PrintOptions
   public uriHelper: UriHelper
 
-  constructor(options: PrintOptions, http: Client, uriHelper: UriHelper) {
+  constructor (options: PrintOptions, http: Client, uriHelper: UriHelper) {
     this.options = options
     this.http = http
     this.uriHelper = uriHelper
   }
 
-  async getAll(query?: Record<string, unknown>): Promise<PrintJobsResponse> {
+  async getAll (query?: Record<string, unknown>): Promise<PrintJobsResponse> {
     try {
       const base = this.uriHelper.generateBaseUri('/jobs')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -53,13 +53,13 @@ export class Jobs {
       return {
         data: response.data.results,
         metadata: { count: response.data.count }
-      } as PrintJobsResponse
+      }
     } catch (e) {
       throw new errors.PrintJobsFetchFailed()
     }
   }
 
-  async get(jobId: string): Promise<PrintJobResponse> {
+  async get (jobId: string): Promise<PrintJobResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/jobs/${jobId}`)
       const uri = this.uriHelper.generateUriWithQuery(base)
@@ -71,18 +71,18 @@ export class Jobs {
         data: response.data.results[0] as PrintJob,
         metadata: { count: response.data.count },
         msg: response.data.msg
-      } as PrintJobResponse
+      }
     } catch (e) {
       throw new errors.PrintJobFetchFailed()
     }
   }
 
-  async create(
+  async create (
     job: Record<string, unknown>,
     query?: Record<string, unknown>
   ): Promise<PrintJobResponse> {
     try {
-      const base = this.uriHelper.generateBaseUri(`/jobs`)
+      const base = this.uriHelper.generateBaseUri('/jobs')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
       const response = await this.http.getClient().post(uri, job)
       if (response.status !== 200) throw new errors.PrintJobCreateFailed()
@@ -90,13 +90,13 @@ export class Jobs {
       return {
         data: response.data.results[0] as PrintJob,
         metadata: { count: response.data.count }
-      } as PrintJobResponse
+      }
     } catch (e) {
       throw new errors.PrintJobCreateFailed()
     }
   }
 
-  async update(jobId: string, job: Record<string, unknown>): Promise<PrintJobResponse> {
+  async update (jobId: string, job: Record<string, unknown>): Promise<PrintJobResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/jobs/${jobId}`)
       const uri = this.uriHelper.generateUriWithQuery(base)
@@ -107,13 +107,13 @@ export class Jobs {
       return {
         data: response.data.results[0] as PrintJob,
         metadata: { count: response.data.count }
-      } as PrintJobResponse
+      }
     } catch (e) {
       throw new errors.PrintJobUpdateFailed()
     }
   }
 
-  async delete(jobId: string): Promise<PrintJobResponse> {
+  async delete (jobId: string): Promise<PrintJobResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/jobs/${jobId}`)
       const uri = this.uriHelper.generateUriWithQuery(base)
@@ -123,13 +123,13 @@ export class Jobs {
 
       return {
         msg: response.data.msg
-      } as PrintJobResponse
+      }
     } catch (e) {
       throw new errors.PrintJobDeleteFailed()
     }
   }
 
-  async getData(jobId: string): Promise<PrintJobDataResponse> {
+  async getData (jobId: string): Promise<PrintJobDataResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/jobs/${jobId}/data`)
       const uri = this.uriHelper.generateUriWithQuery(base)
@@ -139,7 +139,7 @@ export class Jobs {
       return {
         data: response.data.results[0],
         msg: response.data.msg
-      } as PrintJobDataResponse
+      }
     } catch (e) {
       throw new errors.PrintJobDataFetchFailed()
     }

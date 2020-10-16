@@ -1,7 +1,7 @@
-import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 import { ThBaseHandler } from '../base'
+import { UriHelper } from '../uri-helper'
 
 export interface DeviceConfigurationObject {
   device_token: string
@@ -27,8 +27,8 @@ export interface Notification {
 }
 
 export interface RegistersOptions {
-  user: string
-  base: string
+  user?: string
+  base?: string
 }
 
 export interface RegistersQuery {
@@ -42,6 +42,7 @@ export interface RegistersQuery {
 
 export interface RegisterResponse {
   data: Register
+  metadata?: Record<string, unknown>
 }
 
 export interface RegistersResponse {
@@ -68,6 +69,7 @@ export class Registers extends ThBaseHandler {
   endpoint: string
   http: Client
   public options: RegistersOptions
+  public uriHelper: UriHelper
 
   constructor (options: RegistersOptions, http: Client) {
     super(http, {
@@ -79,28 +81,19 @@ export class Registers extends ThBaseHandler {
 
     this.endpoint = Registers.baseEndpoint
     this.options.base = this.options.base ?? 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
   async getAll (q?: RegistersQuery): Promise<RegistersResponse> {
-    const query = q ? JSON.parse(JSON.stringify(q)) : {}
-    let uri
     let next
 
     try {
-      if (query?.uri) {
-        uri = query.uri
-      } else {
-        uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-      }
-
-      const queryString = qs.stringify(query)
-      if (queryString) {
-        uri = `${uri}?${queryString}`
-      }
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, q)
 
       const response = await this.http.getClient().get(uri)
 
-      if (response.data.cursor && response.data.cursor.next) {
+      if (response.data.cursor?.next) {
         next = (): Promise<RegistersResponse> => this.getAll({ uri: response.data.cursor.next })
       }
 
@@ -115,7 +108,7 @@ export class Registers extends ThBaseHandler {
   }
 
   async get (registerId: string): Promise<RegisterResponse> {
-    const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${registerId}`
+    const uri = this.uriHelper.generateBaseUri(`/${registerId}`)
 
     try {
       const response = await this.http.getClient().get(uri)
@@ -129,7 +122,8 @@ export class Registers extends ThBaseHandler {
 
   async notify (registerId: string, notification: Notification): Promise<NotificationResponse> {
     try {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${registerId}/notification`
+      const uri = this.uriHelper.generateBaseUri(`/${registerId}/notification`)
+
       const response = await this.http.getClient().post(uri, notification)
       return {
         data: response.data.msg
@@ -144,7 +138,7 @@ export class Registers extends ThBaseHandler {
     deviceConfiguration: DeviceConfigurationObject
   ): Promise<RegisterResponse> {
     try {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${registerId}/device_configuration`
+      const uri = this.uriHelper.generateBaseUri(`/${registerId}/device_configuration`)
 
       const response = await this.http.getClient().put(uri, deviceConfiguration)
       return {
@@ -157,7 +151,7 @@ export class Registers extends ThBaseHandler {
   }
 
   async put (registerId: string, register: Register): Promise<RegisterResponse> {
-    const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${registerId}`
+    const uri = this.uriHelper.generateBaseUri(`/${registerId}`)
     try {
       const response = await this.http.getClient().put(uri, register)
 

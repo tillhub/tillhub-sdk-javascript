@@ -8,8 +8,9 @@ export interface PaymentsOptions {
 }
 
 export interface PaymentsResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
+  next?: () => Promise<PaymentsResponse>
 }
 
 export interface PaymentsQuery {
@@ -46,61 +47,53 @@ export class Payments {
   public options: PaymentsOptions
   public uriHelper: UriHelper
 
-  constructor(options: PaymentsOptions, http: Client, uriHelper: UriHelper) {
+  constructor (options: PaymentsOptions, http: Client, uriHelper: UriHelper) {
     this.options = options
     this.http = http
     this.uriHelper = uriHelper
   }
 
-  getAll(query?: PaymentsQuery): Promise<PaymentsResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
-      try {
-        const base = this.uriHelper.generateBaseUri('/reports/payments')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
-        const response = await this.http.getClient().get(uri)
+  async getAll (query?: PaymentsQuery): Promise<PaymentsResponse> {
+    let next
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/payments')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+      const response = await this.http.getClient().get(uri)
 
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<PaymentsResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count },
-          next
-        } as PaymentsResponse)
-      } catch (err) {
-        return reject(new errors.ReportsPaymentsFetchAllFailed())
+      if (response.data.cursor?.next) {
+        next = (): Promise<PaymentsResponse> => this.getAll({ uri: response.data.cursor.next })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count },
+        next
+      }
+    } catch (err) {
+      throw new errors.ReportsPaymentsFetchAllFailed()
+    }
   }
 
-  meta(query?: MetaQuery): Promise<PaymentsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri('/reports/payments/meta')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
-        const response = await this.http.getClient().get(uri)
+  async meta (query?: MetaQuery): Promise<PaymentsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/payments/meta')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+      const response = await this.http.getClient().get(uri)
 
-        if (response.status !== 200) {
-          return reject(
-            new errors.ReportsPaymentsMetaFailed(undefined, { status: response.status })
-          )
-        }
-
-        if (!response.data.results[0]) {
-          return reject(
-            new errors.ReportsPaymentsMetaFailed('Could not get payments metadata unexpectedly')
-          )
-        }
-
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.count }
-        } as PaymentsResponse)
-      } catch (err) {
-        return reject(new errors.ReportsPaymentsMetaFailed())
+      if (response.status !== 200) {
+        throw new errors.ReportsPaymentsMetaFailed(undefined, { status: response.status })
       }
-    })
+
+      if (!response.data.results[0]) {
+        throw new errors.ReportsPaymentsMetaFailed('Could not get payments metadata unexpectedly')
+      }
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new errors.ReportsPaymentsMetaFailed()
+    }
   }
 }

@@ -12,7 +12,7 @@ export interface TransactionsHandlerOptions {
 }
 
 export interface AnalyticsReportsTransactionsOverviewResponseItem {
-  data: Record<string, unknown>[]
+    data: Array<Record<string, unknown>>
   summary: Record<string, unknown>[]
   metaData: {
     count: number

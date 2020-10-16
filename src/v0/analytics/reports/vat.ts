@@ -8,8 +8,9 @@ export interface VatOptions {
 }
 
 export interface VatResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
+  next?: () => Promise<VatResponse>
 }
 
 export interface VatQuery {
@@ -28,59 +29,53 @@ export class Vat {
   public options: VatOptions
   public uriHelper: UriHelper
 
-  constructor(options: VatOptions, http: Client, uriHelper: UriHelper) {
+  constructor (options: VatOptions, http: Client, uriHelper: UriHelper) {
     this.options = options
     this.http = http
     this.uriHelper = uriHelper
   }
 
-  getAll(query?: VatQuery): Promise<VatResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
-      try {
-        const base = this.uriHelper.generateBaseUri('/reports/vat')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
-        const response = await this.http.getClient().get(uri)
+  async getAll (query?: VatQuery): Promise<VatResponse> {
+    let next
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/vat')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+      const response = await this.http.getClient().get(uri)
 
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<VatResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count },
-          next
-        } as VatResponse)
-      } catch (err) {
-        return reject(new errors.VatReportFetchFailed())
+      if (response.data.cursor?.next) {
+        next = (): Promise<VatResponse> => this.getAll({ uri: response.data.cursor.next })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count },
+        next
+      }
+    } catch (err) {
+      throw new errors.VatReportFetchFailed()
+    }
   }
 
-  meta(query?: MetaQuery): Promise<VatResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri('/reports/vat/meta')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
-        const response = await this.http.getClient().get(uri)
+  async meta (query?: MetaQuery): Promise<VatResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/vat/meta')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+      const response = await this.http.getClient().get(uri)
 
-        if (response.status !== 200) {
-          return reject(new errors.VatReportFetchMetaFailed(undefined, { status: response.status }))
-        }
-
-        if (!response.data.results[0]) {
-          return reject(
-            new errors.VatReportFetchMetaFailed('Could not get vat metadata unexpectedly')
-          )
-        }
-
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.count }
-        } as VatResponse)
-      } catch (err) {
-        return reject(new errors.VatReportFetchMetaFailed())
+      if (response.status !== 200) {
+        throw new errors.VatReportFetchMetaFailed(undefined, { status: response.status })
       }
-    })
+
+      if (!response.data.results[0]) {
+        throw new errors.VatReportFetchMetaFailed('Could not get vat metadata unexpectedly')
+      }
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new errors.VatReportFetchMetaFailed()
+    }
   }
 }

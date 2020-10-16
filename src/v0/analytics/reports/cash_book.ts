@@ -8,7 +8,8 @@ export interface CashBookOptions {
 }
 
 export interface CashBookResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
+  metadata: Record<string, unknown>
 }
 
 export interface CashBookQuery {
@@ -30,33 +31,31 @@ export class CashBook {
   public options: CashBookOptions
   public uriHelper: UriHelper
 
-  constructor(options: CashBookOptions, http: Client, uriHelper: UriHelper) {
+  constructor (options: CashBookOptions, http: Client, uriHelper: UriHelper) {
     this.options = options
     this.http = http
     this.uriHelper = uriHelper
   }
 
-  getAll(query?: CashBookQuery): Promise<CashBookResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri('/reports/cash_book')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
-        const response = await this.http.getClient().get(uri)
+  async getAll (query?: CashBookQuery): Promise<CashBookResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/cash_book')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+      const response = await this.http.getClient().get(uri)
 
-        return resolve({
-          data: response.data.results[0].values,
-          metadata: { count: response.data.results[0].count }
-        } as CashBookResponse)
-      } catch (err) {
-        return reject(new CashBookReportFetchFailed())
+      return {
+        data: response.data.results[0].values,
+        metadata: { count: response.data.results[0].count }
       }
-    })
+    } catch (err) {
+      throw new CashBookReportFetchFailed()
+    }
   }
 }
 
 export class CashBookReportFetchFailed extends BaseError {
   public name = 'CashBookReportFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the cash book report',
     properties?: Record<string, unknown>
   ) {

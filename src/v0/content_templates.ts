@@ -33,13 +33,10 @@ export interface ContentTemplateResponse {
   msg?: string
 }
 
-export interface ContentTemplate {
-  id?: string
-}
-
 export type ContentTypeType = 'video' | 'image' | 'text' | 'transition'
 
 export interface ContentTemplate {
+  id?: string
   name?: string
   active?: boolean
   deleted?: boolean
@@ -78,131 +75,108 @@ export class ContentTemplates extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll (queryOrOptions?: ContentTemplatesQuery | undefined): Promise<ContentTemplatesResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (queryOrOptions?: ContentTemplatesQuery | undefined): Promise<ContentTemplatesResponse> {
+    let next
 
-      try {
-        let uri
-        if (queryOrOptions?.uri) {
-          uri = queryOrOptions.uri
-        } else {
-          let queryString = ''
-          if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
-            queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
-          }
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
-            queryString ? `?${queryString}` : ''
-          }`
-        }
-
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new ContentTemplatesFetchFailed(undefined, { status: response.status }))
-        }
-
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<ContentTemplatesResponse> =>
-            this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { cursor: response.data.cursor },
-          next
-        } as ContentTemplatesResponse)
-      } catch (error) {
-        return reject(new ContentTemplatesFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new ContentTemplatesFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      if (response.data.cursor?.next) {
+        next = (): Promise<ContentTemplatesResponse> =>
+          this.getAll({ uri: response.data.cursor.next })
+      }
+
+      return {
+        data: response.data.results,
+        metadata: { cursor: response.data.cursor },
+        next
+      }
+    } catch (error) {
+      throw new ContentTemplatesFetchFailed(undefined, { error })
+    }
   }
 
-  get (templateId: string): Promise<ContentTemplateResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${templateId}`
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new ContentTemplateFetchFailed(undefined, { status: response.status }))
+  async get (templateId: string): Promise<ContentTemplateResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${templateId}`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) { throw new ContentTemplateFetchFailed(undefined, { status: response.status }) }
 
-        return resolve({
-          data: response.data.results[0] as ContentTemplate,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as ContentTemplateResponse)
-      } catch (error) {
-        return reject(new ContentTemplateFetchFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as ContentTemplate,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new ContentTemplateFetchFailed(undefined, { error })
+    }
   }
 
-  search (searchTerm: string): Promise<ContentTemplatesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}?q=${searchTerm}`
-      try {
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new ContentTemplatesSearchFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as ContentTemplatesResponse)
-      } catch (error) {
-        return reject(new ContentTemplatesSearchFailed(undefined, { error }))
+  async search (searchTerm: string): Promise<ContentTemplatesResponse> {
+    const base = this.uriHelper.generateBaseUri()
+    const uri = this.uriHelper.generateUriWithQuery(base, { q: searchTerm })
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new ContentTemplatesSearchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new ContentTemplatesSearchFailed(undefined, { error })
+    }
   }
 
-  patch (templateId: string, content: ContentTemplate): Promise<ContentTemplateResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${templateId}`
-      try {
-        const response = await this.http.getClient().patch(uri, content)
+  async patch (templateId: string, content: ContentTemplate): Promise<ContentTemplateResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${templateId}`)
+    try {
+      const response = await this.http.getClient().patch(uri, content)
 
-        return resolve({
-          data: response.data.results[0] as ContentTemplate,
-          metadata: { count: response.data.count }
-        } as ContentTemplateResponse)
-      } catch (error) {
-        return reject(new ContentTemplatePatchFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as ContentTemplate,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new ContentTemplatePatchFailed(undefined, { error })
+    }
   }
 
-  create (content: ContentTemplate): Promise<ContentTemplateResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-      try {
-        const response = await this.http.getClient().post(uri, content)
+  async create (content: ContentTemplate): Promise<ContentTemplateResponse> {
+    const uri = this.uriHelper.generateBaseUri()
+    try {
+      const response = await this.http.getClient().post(uri, content)
 
-        return resolve({
-          data: response.data.results[0] as ContentTemplate,
-          metadata: { count: response.data.count }
-        } as ContentTemplateResponse)
-      } catch (error) {
-        return reject(new ContentTemplateCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as ContentTemplate,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new ContentTemplateCreationFailed(undefined, { error })
+    }
   }
 
-  delete (templateId: string): Promise<ContentTemplateResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${templateId}`
-      try {
-        const response = await this.http.getClient().patch(uri, { deleted: true, active: false })
-        response.status !== 200 && reject(new ContentTemplateDeleteFailed())
+  async delete (templateId: string): Promise<ContentTemplateResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${templateId}`)
+    try {
+      const response = await this.http.getClient().patch(uri, { deleted: true, active: false })
+      if (response.status !== 200) throw new ContentTemplateDeleteFailed()
 
-        return resolve({
-          data: response.data.results[0] as ContentTemplate,
-          msg: response.data.msg
-        } as ContentTemplateResponse)
-      } catch (err) {
-        return reject(new ContentTemplateDeleteFailed())
+      return {
+        data: response.data.results[0] as ContentTemplate,
+        msg: response.data.msg
       }
-    })
+    } catch (err) {
+      throw new ContentTemplateDeleteFailed()
+    }
   }
 }
 

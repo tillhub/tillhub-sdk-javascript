@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
@@ -25,7 +24,7 @@ export interface VoucherSystemsResponse {
 }
 
 export interface VoucherSystemResponse {
-  data: VoucherSystem
+  data?: VoucherSystem
   metadata?: {
     count?: number
     patch?: any
@@ -35,9 +34,6 @@ export interface VoucherSystemResponse {
 
 export interface VoucherSystem {
   id?: string
-}
-
-export interface VoucherSystem {
   name: string
   country?: string
   region?: string
@@ -68,111 +64,92 @@ export class VoucherSystems extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll (queryOrOptions?: VoucherSystemsQuery | undefined): Promise<VoucherSystemsResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (queryOrOptions?: VoucherSystemsQuery | undefined): Promise<VoucherSystemsResponse> {
+    let next
 
-      try {
-        let uri
-        if (queryOrOptions?.uri) {
-          uri = queryOrOptions.uri
-        } else {
-          let queryString = ''
-          if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
-            queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
-          }
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
-            queryString ? `?${queryString}` : ''
-          }`
-        }
-
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new VoucherSystemsFetchFailed(undefined, { status: response.status }))
-        }
-
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<VoucherSystemsResponse> =>
-            this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { cursor: response.data.cursor },
-          next
-        } as VoucherSystemsResponse)
-      } catch (error) {
-        return reject(new VoucherSystemsFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw (new VoucherSystemsFetchFailed(undefined, { status: response.status }))
       }
-    })
+
+      if (response?.data?.cursor?.next) {
+        next = (): Promise<VoucherSystemsResponse> =>
+          this.getAll({ uri: response.data.cursor.next })
+      }
+
+      return {
+        data: response.data.results,
+        metadata: { cursor: response.data.cursor },
+        next
+      }
+    } catch (error) {
+      throw (new VoucherSystemsFetchFailed(undefined, { error }))
+    }
   }
 
-  get (voucherSystemId: string): Promise<VoucherSystemResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${voucherSystemId}`
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new VoucherSystemFetchFailed(undefined, { status: response.status }))
+  async get (voucherSystemId: string): Promise<VoucherSystemResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${voucherSystemId}`)
 
-        return resolve({
-          data: response.data.results[0] as VoucherSystem,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as VoucherSystemResponse)
-      } catch (error) {
-        return reject(new VoucherSystemFetchFailed(undefined, { error }))
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw (new VoucherSystemFetchFailed(undefined, { status: response.status }))
       }
-    })
+
+      return {
+        data: response.data.results[0] as VoucherSystem,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw (new VoucherSystemFetchFailed(undefined, { error }))
+    }
   }
 
-  put (voucherSystemId: string, voucherSystemGroup: VoucherSystem): Promise<VoucherSystemResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${voucherSystemId}`
-      try {
-        const response = await this.http.getClient().put(uri, voucherSystemGroup)
+  async put (voucherSystemId: string, voucherSystemGroup: VoucherSystem): Promise<VoucherSystemResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${voucherSystemId}`)
+    try {
+      const response = await this.http.getClient().put(uri, voucherSystemGroup)
 
-        return resolve({
-          data: response.data.results[0] as VoucherSystem,
-          metadata: { count: response.data.count }
-        } as VoucherSystemResponse)
-      } catch (error) {
-        return reject(new VoucherSystemPutFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as VoucherSystem,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw (new VoucherSystemPutFailed(undefined, { error }))
+    }
   }
 
-  create (voucherSystemGroup: VoucherSystem): Promise<VoucherSystemResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-      try {
-        const response = await this.http.getClient().post(uri, voucherSystemGroup)
+  async create (voucherSystemGroup: VoucherSystem): Promise<VoucherSystemResponse> {
+    const uri = this.uriHelper.generateBaseUri()
+    try {
+      const response = await this.http.getClient().post(uri, voucherSystemGroup)
 
-        return resolve({
-          data: response.data.results[0] as VoucherSystem,
-          metadata: { count: response.data.count }
-        } as VoucherSystemResponse)
-      } catch (error) {
-        return reject(new VoucherSystemCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as VoucherSystem,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw (new VoucherSystemCreationFailed(undefined, { error }))
+    }
   }
 
-  delete (voucherSystemId: string): Promise<VoucherSystemResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${voucherSystemId}`
-      try {
-        const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new VoucherSystemDeleteFailed())
+  async delete (voucherSystemId: string): Promise<VoucherSystemResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${voucherSystemId}`)
+    try {
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) throw (new VoucherSystemDeleteFailed())
 
-        return resolve({
-          msg: response.data.msg
-        } as VoucherSystemResponse)
-      } catch (err) {
-        return reject(new VoucherSystemDeleteFailed())
+      return {
+        msg: response.data.msg
       }
-    })
+    } catch (err) {
+      throw (new VoucherSystemDeleteFailed())
+    }
   }
 }
 

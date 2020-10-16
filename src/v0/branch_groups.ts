@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
@@ -28,7 +27,7 @@ export interface BranchGroupsResponse {
 }
 
 export interface BranchGroupResponse {
-  data: BranchGroup
+  data?: BranchGroup
   metadata?: {
     count?: number
     patch?: any
@@ -38,9 +37,6 @@ export interface BranchGroupResponse {
 
 export interface BranchGroup {
   id?: string
-}
-
-export interface BranchGroup {
   name: string
   color?: string
   branches?: string[]
@@ -70,111 +66,92 @@ export class BranchGroups extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll (queryOrOptions?: BranchGroupsQuery | undefined): Promise<BranchGroupsResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (queryOrOptions?: BranchGroupsQuery | undefined): Promise<BranchGroupsResponse> {
+    let next
 
-      try {
-        let uri
-        if (queryOrOptions?.uri) {
-          uri = queryOrOptions.uri
-        } else {
-          let queryString = ''
-          if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
-            queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
-          }
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
-            queryString ? `?${queryString}` : ''
-          }`
-        }
-
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new BranchGroupsFetchFailed(undefined, { status: response.status }))
-        }
-
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<BranchGroupsResponse> =>
-            this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { cursor: response.data.cursor },
-          next
-        } as BranchGroupsResponse)
-      } catch (error) {
-        return reject(new BranchGroupsFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new BranchGroupsFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      if (response.data.cursor?.next) {
+        next = (): Promise<BranchGroupsResponse> =>
+          this.getAll({ uri: response.data.cursor.next })
+      }
+
+      return {
+        data: response.data.results,
+        metadata: { cursor: response.data.cursor },
+        next
+      }
+    } catch (error) {
+      throw new BranchGroupsFetchFailed(undefined, { error })
+    }
   }
 
-  get (branchId: string): Promise<BranchGroupResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${branchId}`
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new BranchGroupFetchFailed(undefined, { status: response.status }))
+  async get (branchId: string): Promise<BranchGroupResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${branchId}`)
 
-        return resolve({
-          data: response.data.results[0] as BranchGroup,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as BranchGroupResponse)
-      } catch (error) {
-        return reject(new BranchGroupFetchFailed(undefined, { error }))
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new BranchGroupFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0] as BranchGroup,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new BranchGroupFetchFailed(undefined, { error })
+    }
   }
 
-  put (branchId: string, branchGroup: BranchGroup): Promise<BranchGroupResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${branchId}`
-      try {
-        const response = await this.http.getClient().put(uri, branchGroup)
+  async put (branchId: string, branchGroup: BranchGroup): Promise<BranchGroupResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${branchId}`)
+    try {
+      const response = await this.http.getClient().put(uri, branchGroup)
 
-        return resolve({
-          data: response.data.results[0] as BranchGroup,
-          metadata: { count: response.data.count }
-        } as BranchGroupResponse)
-      } catch (error) {
-        return reject(new BranchGroupPutFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as BranchGroup,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new BranchGroupPutFailed(undefined, { error })
+    }
   }
 
-  create (branchGroup: BranchGroup): Promise<BranchGroupResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-      try {
-        const response = await this.http.getClient().post(uri, branchGroup)
+  async create (branchGroup: BranchGroup): Promise<BranchGroupResponse> {
+    const uri = this.uriHelper.generateBaseUri()
+    try {
+      const response = await this.http.getClient().post(uri, branchGroup)
 
-        return resolve({
-          data: response.data.results[0] as BranchGroup,
-          metadata: { count: response.data.count }
-        } as BranchGroupResponse)
-      } catch (error) {
-        return reject(new BranchGroupCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as BranchGroup,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new BranchGroupCreationFailed(undefined, { error })
+    }
   }
 
-  delete (branchId: string): Promise<BranchGroupResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${branchId}`
-      try {
-        const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new BranchGroupDeleteFailed())
+  async delete (branchId: string): Promise<BranchGroupResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${branchId}`)
+    try {
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) throw new BranchGroupDeleteFailed()
 
-        return resolve({
-          msg: response.data.msg
-        } as BranchGroupResponse)
-      } catch (err) {
-        return reject(new BranchGroupDeleteFailed())
+      return {
+        msg: response.data.msg
       }
-    })
+    } catch (err) {
+      throw new BranchGroupDeleteFailed()
+    }
   }
 }
 

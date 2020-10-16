@@ -78,6 +78,12 @@ export function isOrgAuth (obj: any): obj is KeyAuth {
   return 'organisation' in obj
 }
 
+export interface ErrorObject {
+  id: string
+  label: string
+  errorDetails: Record<string, unknown>
+}
+
 export interface AuthResponse {
   token: string
   user: string
@@ -89,6 +95,7 @@ export interface AuthResponse {
   subUser?: Record<string, unknown>
   orgName?: string
   expiresAt?: string
+  errors?: ErrorObject[]
 }
 
 /**
@@ -112,6 +119,12 @@ export class Auth {
     if (this.options.user && this.options.type === AuthTypes.token) {
       this.setDefaultHeader(this.options.user, (this.options.credentials as TokenAuth).token)
     }
+  }
+
+  getEndpoint (path?: string): string {
+    const base = this.options.base ?? 'https://api.tillhub.com'
+    const _path = path ?? ''
+    return `${base}${_path}`
   }
 
   /**
@@ -141,7 +154,7 @@ export class Auth {
     throw new errors.AuthenticationFailed('No auth data was provided')
   }
 
-  async loginUsername (authData: UsernameAuth = {} as UsernameAuth): Promise<AuthResponse> {
+  async loginUsername (authData: UsernameAuth): Promise<AuthResponse> {
     let username: string
     let password: string
     if (
@@ -159,7 +172,7 @@ export class Auth {
     }
 
     try {
-      const response = await axios.post(`${this.options.base}/api/v0/users/login`, {
+      const response = await axios.post(this.getEndpoint('/api/v0/users/login'), {
         email: username,
         password: password,
         recaptcha_token: authData.recaptcha_token
@@ -180,11 +193,11 @@ export class Auth {
         orgName: response.data.user.display_name,
         whitelabel: response.data.user.whitelabel,
         expiresAt: response.data.expires_at
-      } as AuthResponse
+      }
     } catch (err) {
       const error = new errors.AuthenticationFailed()
       err.error = err
-      err.body = err.response && err.response.data ? err.response.data : null
+      err.body = err.response?.data ?? null
 
       throw error
     }
@@ -192,13 +205,13 @@ export class Auth {
 
   async requestPasswordReset (target: PasswordResetRequest): Promise<PasswordResetRequestResponse> {
     try {
-      const { data } = await axios.post(`${this.options.base}/api/v0/users/login/reset`, {
+      const { data } = await axios.post(this.getEndpoint('/api/v0/users/login/reset'), {
         email: target.email
       })
 
       return {
         msg: data.msg
-      } as PasswordResetRequestResponse
+      }
     } catch (err) {
       throw new errors.PasswordResetRequestFailed(undefined, { error: err })
     }
@@ -206,14 +219,14 @@ export class Auth {
 
   async setNewPassword (nonce: PasswordResetNonce): Promise<PasswordResetRequestResponse> {
     try {
-      const { data } = await axios.post(`${this.options.base}/api/v0/users/login/reset`, {
+      const { data } = await axios.post(this.getEndpoint('/api/v0/users/login/reset'), {
         password: nonce.password,
         password_reset_id: nonce.password_reset_id
       })
 
       return {
         msg: data.msg
-      } as PasswordResetRequestResponse
+      }
     } catch (err) {
       throw new errors.PasswordSetRequestFailed(undefined, { error: err })
     }
@@ -235,20 +248,21 @@ export class Auth {
   }
 
   public async logout (token?: string): Promise<LogoutResponse> {
-    if (!token && !this.token) {
+    const _token = token ?? this.token ?? ''
+    if (!_token) {
       throw new LogoutMissingToken()
     }
 
     try {
-      const { data } = await axios.get(`${this.options.base}/api/v0/users/logout`, {
+      const { data } = await axios.get(this.getEndpoint('/api/v0/users/logout'), {
         headers: {
-          Authorization: `Bearer ${token ?? this.token}`
+          Authorization: `Bearer ${_token}`
         }
       })
 
       return {
         msg: data.msg
-      } as LogoutResponse
+      }
     } catch (err) {
       throw new LogoutFailed(undefined, { error: err })
     }

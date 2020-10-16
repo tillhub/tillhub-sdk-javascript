@@ -90,51 +90,46 @@ export class Trash extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll (query: TrashQuery): Promise<TrashResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
-      const base = this.uriHelper.generateBaseUri('/')
-      const uri = this.uriHelper.generateUriWithQuery(base, query)
+  async getAll (query: TrashQuery): Promise<TrashResponse> {
+    let next
+    const base = this.uriHelper.generateBaseUri('/')
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      try {
-        const response = await this.http.getClient().get(uri)
+    try {
+      const response = await this.http.getClient().get(uri)
 
-        response.status !== 200 &&
-          reject(new TrashFetchFailed(undefined, { status: response.status }))
+      if (response.status !== 200) { throw (new TrashFetchFailed(undefined, { status: response.status })) }
 
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<TrashResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count },
-          next
-        } as TrashResponse)
-      } catch (error) {
-        return reject(new TrashFetchFailed(undefined, { error }))
+      if (response.data.cursor?.next) {
+        next = (): Promise<TrashResponse> => this.getAll({ uri: response.data.cursor.next })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count },
+        next
+      }
+    } catch (error) {
+      throw (new TrashFetchFailed(undefined, { error }))
+    }
   }
 
-  recover (query: RecoverQuery): Promise<TrashResponse> {
-    return new Promise(async (resolve, reject) => {
-      const base = this.uriHelper.generateBaseUri('/untrash')
-      const uri = this.uriHelper.generateUriWithQuery(base, query)
+  async recover (query: RecoverQuery): Promise<TrashResponse> {
+    const base = this.uriHelper.generateBaseUri('/untrash')
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      try {
-        const response = await this.http.getClient().put(uri)
+    try {
+      const response = await this.http.getClient().put(uri)
 
-        response.status !== 200 && reject(new RecoverFailed(undefined, { status: response.status }))
+      if (response.status !== 200) throw (new RecoverFailed(undefined, { status: response.status }))
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as TrashResponse)
-      } catch (error) {
-        return reject(new RecoverFailed(undefined, { error }))
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw (new RecoverFailed(undefined, { error }))
+    }
   }
 }
 
