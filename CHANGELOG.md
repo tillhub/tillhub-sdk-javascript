@@ -1,3 +1,19 @@
+# [3.212.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.211.0...v3.212.0) (2020-10-20)
+
+
+### Bug Fixes
+
+* **auth:** add whitelabel to auth reponse type interface ([21b0fb0](https://github.com/tillhub/tillhub-sdk-javascript/commit/21b0fb0820141462549a899b660a04801f351051))
+* apply lint fixes ([84fcc45](https://github.com/tillhub/tillhub-sdk-javascript/commit/84fcc451e392b63be52641652f95fa240539738c))
+* **categories:** apply lint fixes ([19df466](https://github.com/tillhub/tillhub-sdk-javascript/commit/19df466a93f488a391a4449326ff3696ac34370c))
+* add missing dep ([f246bff](https://github.com/tillhub/tillhub-sdk-javascript/commit/f246bff0bef263f203ebea1ce42c01451d78b8a6))
+
+
+### Features
+
+* apply lint errors fixes ([f8960e5](https://github.com/tillhub/tillhub-sdk-javascript/commit/f8960e5ddece0cac5913c1db99a34bbf25de283e))
+* **vouchers:** add handlers for bounded customers ([8b99e8a](https://github.com/tillhub/tillhub-sdk-javascript/commit/8b99e8aa3b28c2e85c2d3b9f9797e2cf6972bbb0))
+
 # [3.211.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.210.0...v3.211.0) (2020-10-15)
 
 
