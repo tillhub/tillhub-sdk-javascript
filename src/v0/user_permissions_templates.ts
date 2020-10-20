@@ -14,8 +14,8 @@ export interface UserPermissionsTemplatesResponse {
 }
 
 export interface UserPermissionsTemplateResponse {
-  data: UserPermissionsTemplate
-  metadata: Record<string, unknown>
+  data?: UserPermissionsTemplate
+  metadata?: Record<string, unknown>
   msg?: string
 }
 
@@ -46,126 +46,111 @@ export class UserPermissionsTemplates extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  create (template: UserPermissionsTemplate): Promise<UserPermissionsTemplateResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri()
+  async create (template: UserPermissionsTemplate): Promise<UserPermissionsTemplateResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri()
 
-        const response = await this.http.getClient().post(uri, template)
-        response.status !== 200 &&
-          reject(
-            new UserPermissionsTemplatesCreationFailed(undefined, {
-              status: response.status
-            })
-          )
-
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.count }
-        } as UserPermissionsTemplateResponse)
-      } catch (error) {
-        return reject(new UserPermissionsTemplatesCreationFailed(undefined, { error }))
+      const response = await this.http.getClient().post(uri, template)
+      if (response.status !== 200) {
+        throw new UserPermissionsTemplatesCreationFailed(undefined, {
+          status: response.status
+        })
       }
-    })
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new UserPermissionsTemplatesCreationFailed(undefined, { error })
+    }
   }
 
-  getAll (query?: Record<string, unknown>): Promise<UserPermissionsTemplatesResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const baseUri = this.uriHelper.generateBaseUri()
-        const uri = this.uriHelper.generateUriWithQuery(baseUri, query)
+  async getAll (query?: Record<string, unknown>): Promise<UserPermissionsTemplatesResponse> {
+    try {
+      const baseUri = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(baseUri, query)
 
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(
-            new UserPermissionsTemplatesFetchFailed(undefined, {
-              status: response.status
-            })
-          )
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as UserPermissionsTemplatesResponse)
-      } catch (error) {
-        return reject(new UserPermissionsTemplatesFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new UserPermissionsTemplatesFetchFailed(undefined, {
+          status: response.status
+        })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new UserPermissionsTemplatesFetchFailed(undefined, { error })
+    }
   }
 
-  get (
+  async get (
     templateId: string,
     query?: Record<string, unknown>
   ): Promise<UserPermissionsTemplateResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const baseUri = this.uriHelper.generateBaseUri(`/${templateId}`)
-        const uri = this.uriHelper.generateUriWithQuery(baseUri, query)
+    try {
+      const baseUri = this.uriHelper.generateBaseUri(`/${templateId}`)
+      const uri = this.uriHelper.generateUriWithQuery(baseUri, query)
 
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(
-            new UserPermissionsTemplatesFetchOneFailed(undefined, {
-              status: response.status
-            })
-          )
-
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: 1 }
-        } as UserPermissionsTemplateResponse)
-      } catch (error) {
-        return reject(new UserPermissionsTemplatesFetchOneFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new UserPermissionsTemplatesFetchOneFailed(undefined, {
+          status: response.status
+        })
       }
-    })
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: 1 }
+      }
+    } catch (error) {
+      throw new UserPermissionsTemplatesFetchOneFailed(undefined, { error })
+    }
   }
 
-  update (
+  async update (
     templateId: string,
     template: UserPermissionsTemplate
   ): Promise<UserPermissionsTemplateResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri(`/${templateId}`)
-
-        const response = await this.http.getClient().put(uri, template)
-        response.status !== 200 &&
-          reject(
-            new UserPermissionsTemplatesUpdateFailed(undefined, {
-              status: response.status
-            })
-          )
-
-        return resolve({
-          data: response.data.results[0] as UserPermissionsTemplate,
-          metadata: { count: response.data.count }
-        } as UserPermissionsTemplateResponse)
-      } catch (error) {
-        return reject(new UserPermissionsTemplatesUpdateFailed(undefined, { error }))
-      }
-    })
-  }
-
-  delete (templateId: string): Promise<UserPermissionsTemplateResponse> {
-    return new Promise(async (resolve, reject) => {
+    try {
       const uri = this.uriHelper.generateBaseUri(`/${templateId}`)
 
-      try {
-        const response = await this.http.getClient().delete(uri)
-        response.status !== 200 &&
-          reject(
-            new UserPermissionsTemplatesDeleteFailed(undefined, {
-              status: response.status
-            })
-          )
-
-        return resolve({
-          msg: response.data.msg
-        } as UserPermissionsTemplateResponse)
-      } catch (err) {
-        return reject(new UserPermissionsTemplatesDeleteFailed())
+      const response = await this.http.getClient().put(uri, template)
+      if (response.status !== 200) {
+        throw new UserPermissionsTemplatesUpdateFailed(undefined, {
+          status: response.status
+        })
       }
-    })
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new UserPermissionsTemplatesUpdateFailed(undefined, { error })
+    }
+  }
+
+  async delete (templateId: string): Promise<UserPermissionsTemplateResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${templateId}`)
+
+    try {
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) {
+        throw new UserPermissionsTemplatesDeleteFailed(undefined, {
+          status: response.status
+        })
+      }
+
+      return {
+        msg: response.data.msg
+      }
+    } catch (err) {
+      throw new UserPermissionsTemplatesDeleteFailed()
+    }
   }
 }
 

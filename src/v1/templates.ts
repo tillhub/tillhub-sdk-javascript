@@ -1,9 +1,9 @@
-import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 import { ThBaseHandler } from '../base'
+import { UriHelper } from '../uri-helper'
 
-export interface TemplatesOptions {
+export interface TemplatesQueryOptions {
   limit?: number
   uri?: string
   query?: any
@@ -75,6 +75,7 @@ export class Templates extends ThBaseHandler {
   endpoint: string
   http: Client
   public options: TemplatesOptions
+  public uriHelper: UriHelper
 
   constructor (options: TemplatesOptions, http: Client) {
     super(http, {
@@ -86,10 +87,12 @@ export class Templates extends ThBaseHandler {
 
     this.endpoint = Templates.baseEndpoint
     this.options.base = this.options.base ?? 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
   async create (template: Template): Promise<TemplatesResponse> {
-    const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+    const uri = this.uriHelper.generateBaseUri()
+
     try {
       const response = await this.http.getClient().post(uri, template)
 
@@ -103,7 +106,7 @@ export class Templates extends ThBaseHandler {
   }
 
   async put (templateId: string, template: Template): Promise<TemplatesResponse> {
-    const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${templateId}`
+    const uri = this.uriHelper.generateBaseUri(`/${templateId}`)
     try {
       const response = await this.http.getClient().put(uri, template)
 
@@ -116,16 +119,10 @@ export class Templates extends ThBaseHandler {
     }
   }
 
-  async getAll (options?: TemplatesOptions | undefined): Promise<TemplatesResponse> {
+  async getAll (options?: TemplatesQueryOptions | undefined): Promise<TemplatesResponse> {
     try {
-      let uri
-      if (options?.uri) {
-        uri = options.uri
-      } else {
-        uri = `${this.options.base}${this.endpoint}/${this.options.user}${
-          options?.query ? `?${qs.stringify(options.query)}` : ''
-          }`
-      }
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, options)
 
       const response = await this.http.getClient().get(uri)
 
@@ -140,13 +137,9 @@ export class Templates extends ThBaseHandler {
 
   async preview (requestObject: TemplatesPreviewRequestObject): Promise<TemplatesResponse> {
     const { body, query, templateId } = requestObject
-
-    let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${templateId}/preview`
-
     try {
-      if (query?.format) {
-        uri = `${uri}?format=${query.format}`
-      }
+      const base = this.uriHelper.generateBaseUri(`/${templateId}/preview`)
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().post(uri, body, {
         headers: {

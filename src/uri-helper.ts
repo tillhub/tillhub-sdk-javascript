@@ -28,18 +28,18 @@ export class UriHelper {
   }
 
   public generateUriWithQuery (basePath: string, query?: HandlerQuery): string {
-    let uri
-    if (!query) {
-      uri = `${basePath}`
-    } else if (query.uri ?? (query?.query?.uri)) {
-      uri = query.uri ?? query.query.uri
-    } else if (query.query) {
+    if (!query) return `${basePath}`
+
+    if (query.uri ?? (query?.query?.uri)) {
+      return query.uri ?? query.query.uri
+    }
+
+    if (query.query) {
       const flattenQuery = { ...query, ...query.query }
       delete flattenQuery.query
-      uri = `${basePath}?${qs.stringify(flattenQuery)}`
-    } else {
-      uri = `${basePath}?${qs.stringify(query)}`
+      return `${basePath}${qs.stringify(flattenQuery, { addQueryPrefix: true })}`
     }
-    return uri
+
+    return `${basePath}${qs.stringify(query, { addQueryPrefix: true })}`
   }
 }

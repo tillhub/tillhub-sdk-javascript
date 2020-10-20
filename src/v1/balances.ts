@@ -1,7 +1,7 @@
-import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 import { ThBaseHandler } from '../base'
+import { UriHelper } from '../uri-helper'
 
 export interface BalancesOptions {
   user?: string
@@ -10,7 +10,8 @@ export interface BalancesOptions {
 
 export interface BalancesResponse {
   data: Array<Record<string, unknown>>
-  metadata: Record<string, unknown>
+  metadata?: Record<string, unknown>
+  next?: () => Promise<BalancesResponse>
 }
 
 export interface BalancesQuery {
@@ -35,6 +36,7 @@ export class Balances extends ThBaseHandler {
   endpoint: string
   http: Client
   public options: BalancesOptions
+  public uriHelper: UriHelper
 
   constructor (options: BalancesOptions, http: Client) {
     super(http, {
@@ -46,75 +48,62 @@ export class Balances extends ThBaseHandler {
 
     this.endpoint = Balances.baseEndpoint
     this.options.base = this.options.base ?? 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll (q?: BalancesQuery): Promise<BalancesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const query = q ? JSON.parse(JSON.stringify(q)) : {}
-      let uri
-      let next
+  async getAll (query?: BalancesQuery): Promise<BalancesResponse> {
+    let next
 
-      try {
-        if (query?.uri) {
-          uri = query.uri
-        } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-        }
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const queryString = qs.stringify(query)
-        if (queryString) {
-          uri = `${uri}?${queryString}`
-        }
+      const response = await this.http.getClient().get(uri)
 
-        const response = await this.http.getClient().get(uri)
-
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<BalancesResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count },
-          next
-        } as BalancesResponse)
-      } catch (err) {
-        return reject(new errors.BalancesFetchFailed())
+      if (response.data.cursor?.next) {
+        next = (): Promise<BalancesResponse> => this.getAll({ uri: response.data.cursor.next })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count },
+        next
+      }
+    } catch (err) {
+      throw new errors.BalancesFetchFailed()
+    }
   }
 
-  meta (): Promise<BalancesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+  async meta (): Promise<BalancesResponse> {
+    const uri = this.uriHelper.generateBaseUri('/meta')
 
-      try {
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) { return reject(new errors.BalancesMetaFailed(undefined, { status: response.status })) }
-
-        if (!response.data.results[0]) {
-          return reject(
-            new errors.BalancesMetaFailed('could not get balances metadata unexpectedly')
-          )
-        }
-
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.count }
-        } as BalancesResponse)
-      } catch (err) {
-        return reject(new errors.BalancesMetaFailed())
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new errors.BalancesMetaFailed(undefined, { status: response.status })
       }
-    })
+
+      if (!response.data.results[0]) {
+        throw new errors.BalancesMetaFailed('could not get balances metadata unexpectedly')
+      }
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new errors.BalancesMetaFailed()
+    }
   }
 
   async get (transactionId: string): Promise<BalancesResponse> {
-    const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${transactionId}`
+    const uri = this.uriHelper.generateBaseUri(`/${transactionId}`)
 
     try {
       const response = await this.http.getClient().get(uri)
       return {
         data: response.data.results[0]
-      } as BalancesResponse
+      }
     } catch (error) {
       throw new errors.BalancesFetchOneFailed(undefined, { error })
     }

@@ -51,13 +51,8 @@ export interface RegistersResponse {
   next?: () => Promise<RegistersResponse>
 }
 
-// eslint-disable-next-line import/export
 export interface Register {
   id: string
-}
-
-// eslint-disable-next-line import/export
-export interface Register {
   name?: string | null
   description?: string | null
   register_number: number

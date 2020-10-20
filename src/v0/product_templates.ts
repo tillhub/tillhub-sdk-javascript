@@ -1,6 +1,6 @@
-import qs from 'qs'
 import { Client } from '../client'
 import { BaseError } from '../errors'
+import { UriHelper } from '../uri-helper'
 
 export interface ProductTemplatesOptions {
   user?: string
@@ -22,7 +22,7 @@ export interface ProductTemplatesResponse {
 }
 
 export interface ProductTemplateResponse {
-  data: ProductTemplate
+  data?: ProductTemplate
   metadata?: {
     count?: number
     patch?: any
@@ -31,9 +31,6 @@ export interface ProductTemplateResponse {
 }
 export interface ProductTemplate {
   id?: string
-}
-
-export interface ProductTemplate {
   name: string
   option_template?: {
     [key: string]: any
@@ -44,6 +41,7 @@ export class ProductTemplates {
   endpoint: string
   http: Client
   public options: ProductTemplatesOptions
+  public uriHelper: UriHelper
 
   constructor (options: ProductTemplatesOptions, http: Client) {
     this.options = options
@@ -51,146 +49,110 @@ export class ProductTemplates {
 
     this.endpoint = '/api/v0/product_templates'
     this.options.base = this.options.base ?? 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll (queryOrOptions?: ProductTemplatesQuery | undefined): Promise<ProductTemplatesResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (queryOrOptions?: ProductTemplatesQuery | undefined): Promise<ProductTemplatesResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
 
-      try {
-        let uri
-        if (queryOrOptions?.uri) {
-          uri = queryOrOptions.uri
-        } else {
-          let queryString = ''
-          if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
-            queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
-          }
-
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
-            queryString ? `?${queryString}` : ''
-          }`
-        }
-
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new ProductTemplatesFetchFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count },
-          next
-        } as ProductTemplatesResponse)
-      } catch (error) {
-        return reject(new ProductTemplatesFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new ProductTemplatesFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new ProductTemplatesFetchFailed(undefined, { error })
+    }
   }
 
-  get (
+  async get (
     productTemplateId: string,
     queryOrOptions?: ProductTemplatesQuery | undefined
   ): Promise<ProductTemplateResponse> {
-    return new Promise(async (resolve, reject) => {
-      let uri
-      if (queryOrOptions?.uri) {
-        uri = queryOrOptions.uri
-      } else {
-        let queryString = ''
-        if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
-          queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
-        }
+    const base = this.uriHelper.generateBaseUri(`/${productTemplateId}`)
+    const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
 
-        uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productTemplateId}${
-          queryString ? `?${queryString}` : ''
-        }`
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) { throw new ProductTemplateFetchFailed(undefined, { status: response.status }) }
+
+      return {
+        data: response.data.results[0],
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
       }
-
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new ProductTemplateFetchFailed(undefined, { status: response.status }))
-
-        return resolve({
-          data: response.data.results[0] as ProductTemplate,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as ProductTemplateResponse)
-      } catch (error) {
-        return reject(new ProductTemplateFetchFailed(undefined, { error }))
-      }
-    })
+    } catch (error) {
+      throw new ProductTemplateFetchFailed(undefined, { error })
+    }
   }
 
-  search (searchTerm: string): Promise<ProductTemplatesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}?q=${searchTerm}`
-      try {
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new ProductTemplatesSearchFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as ProductTemplatesResponse)
-      } catch (error) {
-        return reject(new ProductTemplatesSearchFailed(undefined, { error }))
+  async search (searchTerm: string): Promise<ProductTemplatesResponse> {
+    const base = this.uriHelper.generateBaseUri()
+    const uri = this.uriHelper.generateUriWithQuery(base, { q: searchTerm })
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new ProductTemplatesSearchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new ProductTemplatesSearchFailed(undefined, { error })
+    }
   }
 
-  put (
+  async put (
     productTemplateId: string,
     productTemplate: ProductTemplate
   ): Promise<ProductTemplateResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productTemplateId}`
-      try {
-        const response = await this.http.getClient().put(uri, productTemplate)
+    const uri = this.uriHelper.generateBaseUri(`/${productTemplateId}`)
+    try {
+      const response = await this.http.getClient().put(uri, productTemplate)
 
-        return resolve({
-          data: response.data.results[0] as ProductTemplate,
-          metadata: { count: response.data.count }
-        } as ProductTemplateResponse)
-      } catch (error) {
-        return reject(new ProductTemplatePutFailed(undefined, { error }))
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new ProductTemplatePutFailed(undefined, { error })
+    }
   }
 
-  create (productTemplate: ProductTemplate): Promise<ProductTemplateResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-      try {
-        const response = await this.http.getClient().post(uri, productTemplate)
+  async create (productTemplate: ProductTemplate): Promise<ProductTemplateResponse> {
+    const uri = this.uriHelper.generateBaseUri()
+    try {
+      const response = await this.http.getClient().post(uri, productTemplate)
 
-        return resolve({
-          data: response.data.results[0] as ProductTemplate,
-          metadata: { count: response.data.count }
-        } as ProductTemplateResponse)
-      } catch (error) {
-        return reject(new ProductTemplateCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new ProductTemplateCreationFailed(undefined, { error })
+    }
   }
 
-  delete (taxId: string): Promise<ProductTemplateResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${taxId}`
-      try {
-        const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new ProductTemplateDeleteFailed())
+  async delete (taxId: string): Promise<ProductTemplateResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${taxId}`)
+    try {
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) throw new ProductTemplateDeleteFailed()
 
-        return resolve({
-          msg: response.data.msg
-        } as ProductTemplateResponse)
-      } catch (err) {
-        return reject(new ProductTemplateDeleteFailed())
+      return {
+        msg: response.data.msg
       }
-    })
+    } catch (err) {
+      throw new ProductTemplateDeleteFailed()
+    }
   }
 }
 

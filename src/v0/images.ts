@@ -1,5 +1,6 @@
 import { Client } from '../client'
 import * as errors from '../errors'
+import { UriHelper } from '../uri-helper'
 
 export interface ImagesOptions {
   user?: string
@@ -19,6 +20,7 @@ export class Images {
   endpoint: string
   http: Client
   public options: ImagesOptions
+  public uriHelper: UriHelper
 
   constructor (options: ImagesOptions, http: Client) {
     this.options = options
@@ -26,37 +28,34 @@ export class Images {
 
     this.endpoint = '/api/v0/images'
     this.options.base = this.options.base ?? 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  put (query: ImagesQuery, payload: FormData): Promise<ImagesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${query.subsystem}/${query.prefix}`
-      try {
-        const response = await this.http
-          .getClient()
-          .put(uri, payload, { headers: { 'Content-Type': 'image/jpeg' } })
-        return resolve({
-          data: response.data.results
-        } as ImagesResponse)
-      } catch (err) {
-        return reject(new errors.ImagePutFailed())
+  async put (query: ImagesQuery, payload: FormData): Promise<ImagesResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${query.subsystem}/${query.prefix}`)
+    try {
+      const response = await this.http
+        .getClient()
+        .put(uri, payload, { headers: { 'Content-Type': 'image/jpeg' } })
+      return {
+        data: response.data.results
       }
-    })
+    } catch (err) {
+      throw new errors.ImagePutFailed()
+    }
   }
 
-  create (query: ImagesQuery, payload: FormData): Promise<ImagesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${query.subsystem}/${query.prefix}`
-      try {
-        const response = await this.http
-          .getClient()
-          .post(uri, payload, { headers: { 'Content-Type': 'image/jpeg' } })
-        return resolve({
-          data: response.data.results
-        } as ImagesResponse)
-      } catch (err) {
-        return reject(new errors.ImageCreationFailed())
+  async create (query: ImagesQuery, payload: FormData): Promise<ImagesResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${query.subsystem}/${query.prefix}`)
+    try {
+      const response = await this.http
+        .getClient()
+        .post(uri, payload, { headers: { 'Content-Type': 'image/jpeg' } })
+      return {
+        data: response.data.results
       }
-    })
+    } catch (err) {
+      throw new errors.ImageCreationFailed()
+    }
   }
 }

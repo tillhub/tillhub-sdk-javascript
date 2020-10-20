@@ -1,7 +1,7 @@
-import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 import { ThBaseHandler } from '../base'
+import { UriHelper } from '../uri-helper'
 
 export interface TaxesOptions {
   user?: string
@@ -23,18 +23,16 @@ export interface TaxesResponse {
 }
 
 export interface TaxResponse {
-  data: Tax
+  data?: Tax
   metadata?: {
     count?: number
     patch?: any
   }
   msg?: string
 }
-export interface Tax {
-  id?: string
-}
 
 export interface Tax {
+  id?: string
   name: string
   fa_account_number?: string
   type: TaxType
@@ -67,6 +65,7 @@ export class Taxes extends ThBaseHandler {
   endpoint: string
   http: Client
   public options: TaxesOptions
+  public uriHelper: UriHelper
 
   constructor (options: TaxesOptions, http: Client) {
     super(http, { endpoint: Taxes.baseEndpoint, base: options.base ?? 'https://api.tillhub.com' })
@@ -75,106 +74,83 @@ export class Taxes extends ThBaseHandler {
 
     this.endpoint = Taxes.baseEndpoint
     this.options.base = this.options.base ?? 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll (queryOrOptions?: TaxesQuery | undefined): Promise<TaxesResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (queryOrOptions?: TaxesQuery | undefined): Promise<TaxesResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
 
-      try {
-        let uri
-        if (queryOrOptions?.uri) {
-          uri = queryOrOptions.uri
-        } else {
-          let queryString = ''
-          if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
-            queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
-          }
-
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
-            queryString ? `?${queryString}` : ''
-          }`
-        }
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new errors.TaxesFetchFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count },
-          next
-        } as TaxesResponse)
-      } catch (error) {
-        return reject(new errors.TaxesFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new errors.TaxesFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new errors.TaxesFetchFailed(undefined, { error })
+    }
   }
 
-  get (taxId: string): Promise<TaxResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${taxId}`
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new errors.TaxesFetchFailed(undefined, { status: response.status }))
+  async get (taxId: string): Promise<TaxResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${taxId}`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) { throw new errors.TaxesFetchFailed(undefined, { status: response.status }) }
 
-        return resolve({
-          data: response.data.results[0] as Tax,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as TaxResponse)
-      } catch (error) {
-        return reject(new errors.TaxesFetchFailed(undefined, { error }))
+      return {
+        data: response.data.results[0],
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new errors.TaxesFetchFailed(undefined, { error })
+    }
   }
 
-  put (taxId: string, tax: Tax): Promise<TaxResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${taxId}`
-      try {
-        const response = await this.http.getClient().put(uri, tax)
+  async put (taxId: string, tax: Tax): Promise<TaxResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${taxId}`)
+    try {
+      const response = await this.http.getClient().put(uri, tax)
 
-        return resolve({
-          data: response.data.results[0] as Tax,
-          metadata: { count: response.data.count }
-        } as TaxResponse)
-      } catch (error) {
-        return reject(new errors.TaxesPutFailed(undefined, { error }))
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new errors.TaxesPutFailed(undefined, { error })
+    }
   }
 
-  create (tax: Tax): Promise<TaxResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-      try {
-        const response = await this.http.getClient().post(uri, tax)
+  async create (tax: Tax): Promise<TaxResponse> {
+    const uri = this.uriHelper.generateBaseUri()
+    try {
+      const response = await this.http.getClient().post(uri, tax)
 
-        return resolve({
-          data: response.data.results[0] as Tax,
-          metadata: { count: response.data.count }
-        } as TaxResponse)
-      } catch (error) {
-        return reject(new errors.TaxesCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new errors.TaxesCreationFailed(undefined, { error })
+    }
   }
 
-  delete (taxId: string): Promise<TaxResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${taxId}`
-      try {
-        const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new errors.TaxDeleteFailed())
+  async delete (taxId: string): Promise<TaxResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${taxId}`)
+    try {
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) throw new errors.TaxDeleteFailed()
 
-        return resolve({
-          msg: response.data.msg
-        } as TaxResponse)
-      } catch (err) {
-        return reject(new errors.TaxDeleteFailed())
+      return {
+        msg: response.data.msg
       }
-    })
+    } catch (err) {
+      throw new errors.TaxDeleteFailed()
+    }
   }
 }

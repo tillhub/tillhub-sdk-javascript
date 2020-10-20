@@ -1,7 +1,7 @@
-import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 import { ThBaseHandler } from '../base'
+import { UriHelper } from '../uri-helper'
 
 export interface InvoicesOptions {
   user?: string
@@ -94,8 +94,8 @@ export interface InvoicesSimpleUpdateRequestBody {
 }
 
 export interface InvoicesResponse {
-  data: Array<Record<string, unknown>>
-  metadata: Record<string, unknown>
+  data?: Array<Record<string, unknown>>
+  metadata?: Record<string, unknown>
   next?: () => Promise<InvoicesResponse>
   msg?: string
 }
@@ -105,6 +105,7 @@ export class Invoices extends ThBaseHandler {
   endpoint: string
   http: Client
   public options: InvoicesOptions
+  public uriHelper: UriHelper
 
   constructor (options: InvoicesOptions, http: Client) {
     super(http, {
@@ -116,159 +117,129 @@ export class Invoices extends ThBaseHandler {
 
     this.endpoint = Invoices.baseEndpoint
     this.options.base = this.options.base ?? 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll (q?: InvoicesQuery | undefined): Promise<InvoicesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const query = JSON.parse(JSON.stringify(q))
-      let uri
-      let next
+  generateUriQueryEmbed (base: string, query?: InvoicesQuery): string {
+    const { embed, ...restQuery } = query ?? {} // eslint-disable-line @typescript-eslint/no-unused-vars
+    let uri = this.uriHelper.generateUriWithQuery(base, restQuery)
 
-      try {
-        if (query?.uri) {
-          uri = query.uri
-        } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-        }
+    if (query?.embed) {
+      const queryString = query.embed
+        .map((item) => {
+          return `embed[]=${item}`
+        })
+        .join('&')
 
-        const queryString = qs.stringify(query)
-        if (queryString) {
-          uri = `${uri}?${queryString}`
-        }
-
-        const response = await this.http.getClient().get(uri)
-
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<InvoicesResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count },
-          next
-        } as InvoicesResponse)
-      } catch (err) {
-        return reject(new errors.InvoicesFetchAllFailed())
-      }
-    })
+      const connector = uri.includes('?') ? '&' : '?'
+      uri = `${uri}${connector}${queryString}`
+    }
+    return uri
   }
 
-  getMeta (): Promise<InvoicesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+  async getAll (query?: InvoicesQuery | undefined): Promise<InvoicesResponse> {
+    let next
 
-      try {
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) reject(new errors.InvoicesGetMetaFailed())
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as InvoicesResponse)
-      } catch (err) {
-        return reject(new errors.InvoicesGetMetaFailed())
+      const response = await this.http.getClient().get(uri)
+
+      if (response.data.cursor?.next) {
+        next = (): Promise<InvoicesResponse> => this.getAll({ uri: response.data.cursor.next })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count },
+        next
+      }
+    } catch (err) {
+      throw new errors.InvoicesFetchAllFailed()
+    }
   }
 
-  getOne (requestObject: InvoicesGetOneRequestObject): Promise<InvoicesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const { invoiceId, query } = requestObject
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${invoiceId}`
+  async getMeta (): Promise<InvoicesResponse> {
+    const uri = this.uriHelper.generateBaseUri('/meta')
 
-      try {
-        if (query?.embed) {
-          const queryString = query.embed
-            .map((item) => {
-              return `embed[]=${item}`
-            })
-            .join('&')
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new errors.InvoicesGetMetaFailed()
 
-          uri = `${uri}?${queryString}`
-        }
-
-        const response = await this.http.getClient().get(uri)
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as InvoicesResponse)
-      } catch (err) {
-        return reject(new errors.InvoicesFetchOneFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new errors.InvoicesGetMetaFailed()
+    }
   }
 
-  create (requestObject: InvoicesCreateRequestObject): Promise<InvoicesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const { body, query } = requestObject
+  async getOne (requestObject: InvoicesGetOneRequestObject): Promise<InvoicesResponse> {
+    const { invoiceId, query } = requestObject
 
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+    try {
+      const base = this.uriHelper.generateBaseUri(`/${invoiceId}`)
+      const uri = this.generateUriQueryEmbed(base, query)
 
-      try {
-        if (query?.embed) {
-          const queryString = query.embed
-            .map((item) => {
-              return `embed[]=${item}`
-            })
-            .join('&')
+      const response = await this.http.getClient().get(uri)
 
-          uri = `${uri}?${queryString}`
-        }
-
-        const response = await this.http.getClient().post(uri, body)
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as InvoicesResponse)
-      } catch (err) {
-        return reject(new errors.InvoicesCreateFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new errors.InvoicesFetchOneFailed()
+    }
   }
 
-  update (requestObject: InvoicesUpdateRequestObject): Promise<InvoicesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const { body, query, invoiceId } = requestObject
+  async create (requestObject: InvoicesCreateRequestObject): Promise<InvoicesResponse> {
+    const { body, query } = requestObject
 
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${invoiceId}`
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.generateUriQueryEmbed(base, query)
 
-      if (query?.embed) {
-        const queryString = query.embed
-          .map((item) => {
-            return `embed[]=${item}`
-          })
-          .join('&')
+      const response = await this.http.getClient().post(uri, body)
 
-        uri = `${uri}?${queryString}`
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-
-      try {
-        const response = await this.http.getClient().put(uri, body)
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as InvoicesResponse)
-      } catch (err) {
-        return reject(new errors.InvoicesUpdateFailed(err.message))
-      }
-    })
+    } catch (err) {
+      throw new errors.InvoicesCreateFailed()
+    }
   }
 
-  deleteOne (invoiceId: string): Promise<InvoicesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${invoiceId}`
-      try {
-        const response = await this.http.getClient().delete(uri)
+  async update (requestObject: InvoicesUpdateRequestObject): Promise<InvoicesResponse> {
+    const { body, query, invoiceId } = requestObject
 
-        return resolve({
-          msg: response.data.msg
-        } as InvoicesResponse)
-      } catch (err) {
-        return reject(new errors.InvoicesDeleteFailed())
+    try {
+      const base = this.uriHelper.generateBaseUri(`/${invoiceId}`)
+      const uri = this.generateUriQueryEmbed(base, query)
+
+      const response = await this.http.getClient().put(uri, body)
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new errors.InvoicesUpdateFailed(err.message)
+    }
+  }
+
+  async deleteOne (invoiceId: string): Promise<InvoicesResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri(`/${invoiceId}`)
+      const response = await this.http.getClient().delete(uri)
+
+      return {
+        msg: response.data.msg
+      }
+    } catch (err) {
+      throw new errors.InvoicesDeleteFailed()
+    }
   }
 }

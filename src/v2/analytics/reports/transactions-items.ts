@@ -1,6 +1,7 @@
 import { ThAnalyticsBaseHandler, ThAnalyticsBaseResultItem } from '../../../base'
 import { Client } from '../../../client'
 import { BaseError } from '../../../errors'
+import { UriHelper } from '../../../uri-helper'
 
 export interface TransactionsItemsHandlerOptions {
   user?: string
@@ -8,8 +9,8 @@ export interface TransactionsItemsHandlerOptions {
 }
 
 export interface AnalyticsReportsTransactionsItemsResponse {
-    data: Array<Record<string, unknown>>
-  summary: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
+  summary: Array<Record<string, unknown>>
   metaData: {
     count: number
     total_count: number
@@ -21,13 +22,13 @@ export class AnalyticsReportsTransactionsItems extends ThAnalyticsBaseHandler {
   http: Client
   public options: TransactionsItemsHandlerOptions
 
-  constructor(options: TransactionsItemsHandlerOptions, http: Client) {
+  constructor (options: TransactionsItemsHandlerOptions, http: Client) {
     super(http, options)
     this.options = options
     this.http = http
   }
 
-  static create(options: Record<string, unknown>, http: Client): AnalyticsReportsTransactionsItems {
+  static create (options: Record<string, unknown>, http: Client): AnalyticsReportsTransactionsItems {
     return ThAnalyticsBaseHandler.generateAuthenticatedInstance(
       AnalyticsReportsTransactionsItems,
       options,
@@ -35,18 +36,16 @@ export class AnalyticsReportsTransactionsItems extends ThAnalyticsBaseHandler {
     )
   }
 
-  public async getAll(
+  public async getAll (
     query?: Record<string, unknown>
   ): Promise<AnalyticsReportsTransactionsItemsResponse> {
     try {
       let nextFn
-      const { results: d, next, status } = await this.handleGet(
-        `${this.options.base}/api/v2/analytics/${this.options.user}/reports/transactions/items`,
-        query
-      )
+      const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
+      const uri = localUriHelper.generateBaseUri('/reports/transactions/items')
+      const { results: d, next, status } = await this.handleGet(uri, query)
 
-      if (status !== 200)
-        throw new AnalyticsReportsTransactionsItemsFetchError(undefined, { status: status })
+      if (status !== 200) { throw new AnalyticsReportsTransactionsItemsFetchError(undefined, { status: status }) }
       // eslint-disable-next-line
       // @ts-ignore
       const data = d.find(
@@ -98,7 +97,7 @@ export class AnalyticsReportsTransactionsItems extends ThAnalyticsBaseHandler {
 
 export class AnalyticsReportsTransactionsItemsFetchError extends BaseError {
   public name = 'AnalyticsReportsTransactionsItemsFetchError'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch transactions items. ',
     properties?: Record<string, unknown>
   ) {

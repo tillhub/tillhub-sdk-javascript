@@ -5,6 +5,7 @@ import {
 } from '../../../base'
 import { Client } from '../../../client'
 import { BaseError } from '../../../errors'
+import { UriHelper } from '../../../uri-helper'
 
 export interface CountingProtocolsHandlerOptions {
   user?: string
@@ -33,7 +34,7 @@ export interface CountingProtocolsQuery {
 
 export interface AnalyticsReportsCountingProtocolsResponse {
   data: CountingProtocol[]
-  summary: Record<string, unknown>[]
+  summary: Array<Record<string, unknown>>
   metaData: {
     count: number
     total_count: number
@@ -57,7 +58,7 @@ export interface CountingProtocol {
   context?: string
   comments?: string
   location?: string
-  cash_units?: Record<string, unknown>[]
+  cash_units?: Array<Record<string, unknown>>
   timezone?: string
   discrepancy?: boolean
   discrepancy_total?: string
@@ -81,13 +82,13 @@ export class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
   http: Client
   public options: CountingProtocolsHandlerOptions
 
-  constructor(options: CountingProtocolsHandlerOptions, http: Client) {
+  constructor (options: CountingProtocolsHandlerOptions, http: Client) {
     super(http, options)
     this.options = options
     this.http = http
   }
 
-  static create(options: Record<string, unknown>, http: Client): AnalyticsReportsCountingProtocols {
+  static create (options: Record<string, unknown>, http: Client): AnalyticsReportsCountingProtocols {
     return ThAnalyticsBaseHandler.generateAuthenticatedInstance(
       AnalyticsReportsCountingProtocols,
       options,
@@ -95,18 +96,16 @@ export class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
     )
   }
 
-  public async getAll(
+  public async getAll (
     query?: CountingProtocolsQuery
   ): Promise<AnalyticsReportsCountingProtocolsResponse> {
     try {
       let nextFn
-      const { results: d, next, status } = await this.handleGet(
-        `${this.options.base}/api/v2/analytics/${this.options.user}/reports/cashier_counting_protocols/overview`,
-        query
-      )
+      const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
+      const uri = localUriHelper.generateBaseUri('/reports/cashier_counting_protocols/overview')
+      const { results: d, next, status } = await this.handleGet(uri, query)
 
-      if (status !== 200)
-        throw new AnalyticsReportsCountingProtocolsFetchFailed(undefined, { status: status })
+      if (status !== 200) { throw new AnalyticsReportsCountingProtocolsFetchFailed(undefined, { status: status }) }
 
       // eslint-disable-next-line
       // @ts-ignore
@@ -138,8 +137,6 @@ export class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
           this.getAll({ uri: next })
       }
 
-      // eslint-disable-next-line
-      // @ts-ignore
       return {
         data,
         summary,
@@ -148,20 +145,19 @@ export class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
           total_count: totalCount.count
         },
         next: nextFn
-      } as AnalyticsReportsCountingProtocolsResponse
+      }
     } catch (err) {
       throw new AnalyticsReportsCountingProtocolsFetchFailed(undefined, { error: err })
     }
   }
 
-  public async export(
+  public async export (
     query?: Record<string, unknown>
   ): Promise<AnalyticsReportsCountingProtocolsExportResponseItem> {
     try {
-      const result = await this.handleExport(
-        `${this.options.base}/api/v2/analytics/${this.options.user}/reports/cashier_counting_protocols/overview`,
-        query
-      )
+      const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
+      const uri = localUriHelper.generateBaseUri('/reports/cashier_counting_protocols/overview')
+      const result = await this.handleExport(uri, query)
       return result
     } catch (err) {
       throw new AnalyticsReportsCountingProtocolsExportFetchError(undefined, { error: err })
@@ -171,7 +167,7 @@ export class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
 
 export class AnalyticsReportsCountingProtocolsFetchFailed extends BaseError {
   public name = 'AnalyticsReportsCountingProtocolsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the counting protocols report',
     properties?: Record<string, unknown>
   ) {
@@ -182,7 +178,7 @@ export class AnalyticsReportsCountingProtocolsFetchFailed extends BaseError {
 
 export class AnalyticsReportsCountingProtocolsExportFetchError extends BaseError {
   public name = 'AnalyticsReportsCountingProtocolsExportFetchError'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch counting protocols export. ',
     properties?: Record<string, unknown>
   ) {

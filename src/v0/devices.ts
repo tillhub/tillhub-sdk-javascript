@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
@@ -31,7 +30,7 @@ export interface DevicesResponse {
 }
 
 export interface DeviceResponse {
-  data: Device
+  data?: Device
   metadata?: {
     count?: number
     patch?: any
@@ -48,14 +47,11 @@ export interface DeviceContent {
   welcome?: Record<string, unknown>
 }
 
-export interface Device {
-  id?: string
-}
-
 export type DeviceStatusType = 'bound' | 'pending'
 export type DeviceTypeType = 'cfd' | 'printer'
 
 export interface Device {
+  id?: string
   status?: DeviceStatusType
   register?: string
   type: DeviceTypeType
@@ -82,144 +78,132 @@ export class Devices extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll (queryOrOptions?: DevicesQuery | undefined): Promise<DevicesResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (queryOrOptions?: DevicesQuery | undefined): Promise<DevicesResponse> {
+    let next
+    const base = this.uriHelper.generateBaseUri()
+    const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
 
-      try {
-        let uri
-        if (queryOrOptions?.uri) {
-          uri = queryOrOptions.uri
-        } else {
-          let queryString = ''
-          if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
-            queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
-          }
+    try {
+      // let uri
+      // if (queryOrOptions?.uri) {
+      //   uri = queryOrOptions.uri
+      // } else {
+      //   let queryString = ''
+      //   if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
+      //     queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
+      //   }
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
-            queryString ? `?${queryString}` : ''
-          }`
-        }
+      //   uri = `${this.options.base}${this.endpoint}/${this.options.user}${
+      //       queryString ? `?${queryString}` : ''
+      //     }`
+      // }
 
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new DevicesFetchFailed(undefined, { status: response.status }))
-        }
-
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<DevicesResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { cursor: response.data.cursor },
-          next
-        } as DevicesResponse)
-      } catch (error) {
-        return reject(new DevicesFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new DevicesFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      if (response.data.cursor?.next) {
+        next = (): Promise<DevicesResponse> => this.getAll({ uri: response.data.cursor.next })
+      }
+
+      return {
+        data: response.data.results,
+        metadata: { cursor: response.data.cursor },
+        next
+      }
+    } catch (error) {
+      throw new DevicesFetchFailed(undefined, { error })
+    }
   }
 
-  get (deviceId: string): Promise<DeviceResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deviceId}`
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new DeviceFetchFailed(undefined, { status: response.status }))
-
-        return resolve({
-          data: response.data.results[0] as Device,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as DeviceResponse)
-      } catch (error) {
-        return reject(new DeviceFetchFailed(undefined, { error }))
+  async get (deviceId: string): Promise<DeviceResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${deviceId}`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new DeviceFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0] as Device,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new DeviceFetchFailed(undefined, { error })
+    }
   }
 
-  contents (deviceId: string): Promise<DeviceContentResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deviceId}/contents`
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new DeviceContentFetchFailed(undefined, { status: response.status }))
+  async contents (deviceId: string): Promise<DeviceContentResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${deviceId}/contents`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) { throw new DeviceContentFetchFailed(undefined, { status: response.status }) }
 
-        return resolve({
-          data: response.data.results[0] as DeviceContent,
-          msg: response.data.msg
-        } as DeviceContentResponse)
-      } catch (error) {
-        return reject(new DeviceContentFetchFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as DeviceContent,
+        msg: response.data.msg
       }
-    })
+    } catch (error) {
+      throw new DeviceContentFetchFailed(undefined, { error })
+    }
   }
 
-  patch (deviceId: string, device: Device): Promise<DeviceResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deviceId}`
-      try {
-        const response = await this.http.getClient().patch(uri, device)
+  async patch (deviceId: string, device: Device): Promise<DeviceResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${deviceId}`)
+    try {
+      const response = await this.http.getClient().patch(uri, device)
 
-        return resolve({
-          data: response.data.results[0] as Device,
-          metadata: { count: response.data.count }
-        } as DeviceResponse)
-      } catch (error) {
-        return reject(new DevicePatchFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Device,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new DevicePatchFailed(undefined, { error })
+    }
   }
 
-  create (device: Device): Promise<DeviceResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-      try {
-        const response = await this.http.getClient().post(uri, device)
+  async create (device: Device): Promise<DeviceResponse> {
+    const uri = this.uriHelper.generateBaseUri()
+    try {
+      const response = await this.http.getClient().post(uri, device)
 
-        return resolve({
-          data: response.data.results[0] as Device,
-          metadata: { count: response.data.count }
-        } as DeviceResponse)
-      } catch (error) {
-        return reject(new DeviceCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Device,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new DeviceCreationFailed(undefined, { error })
+    }
   }
 
-  bind (deviceOrShortId: string, bindRequest: DeviceBindRequest): Promise<DeviceResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deviceOrShortId}/bind`
-      try {
-        const response = await this.http.getClient().post(uri, bindRequest)
+  async bind (deviceOrShortId: string, bindRequest: DeviceBindRequest): Promise<DeviceResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${deviceOrShortId}/bind`)
+    try {
+      const response = await this.http.getClient().post(uri, bindRequest)
 
-        return resolve({
-          data: response.data.results[0] as Device,
-          metadata: { count: response.data.count }
-        } as DeviceResponse)
-      } catch (error) {
-        return reject(new DeviceBindingFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Device,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new DeviceBindingFailed(undefined, { error })
+    }
   }
 
-  delete (deviceId: string): Promise<DeviceResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deviceId}`
-      try {
-        const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new DeviceDeleteFailed())
+  async delete (deviceId: string): Promise<DeviceResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${deviceId}`)
+    try {
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) throw new DeviceDeleteFailed()
 
-        return resolve({
-          msg: response.data.msg
-        } as DeviceResponse)
-      } catch (err) {
-        return reject(new DeviceDeleteFailed())
+      return {
+        msg: response.data.msg
       }
-    })
+    } catch (err) {
+      throw new DeviceDeleteFailed()
+    }
   }
 }
 

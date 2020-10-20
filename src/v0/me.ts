@@ -50,23 +50,22 @@ export class Me extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  get (): Promise<MeResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}`
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new MeFetchFailed(undefined, { status: response.status }))
+  async get (): Promise<MeResponse> {
+    const base = this.options.base ?? 'https://api.tillhub.com'
+    const uri = `${base}${this.endpoint}`
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new MeFetchFailed(undefined, { status: response.status })
 
-        return resolve({
-          data: response.data.results[0] as Me,
-          msg: response.data.msg,
-          metadata: { count: response.data.count },
-          errors: response.data.errors || []
-        } as MeResponse)
-      } catch (error) {
-        return reject(new MeFetchFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Me,
+        msg: response.data.msg,
+        metadata: { count: response.data.count },
+        errors: response.data.errors || []
       }
-    })
+    } catch (error) {
+      throw new MeFetchFailed(undefined, { error })
+    }
   }
 }
 

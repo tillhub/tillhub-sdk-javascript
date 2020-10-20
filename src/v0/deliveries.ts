@@ -1,5 +1,6 @@
 import { Client } from '../client'
 import * as errors from '../errors'
+import { UriHelper } from '../uri-helper'
 import { ThBaseHandler } from '../base'
 
 export interface DeliveriesOptions {
@@ -130,8 +131,8 @@ export interface DeliveryItemsUpdateBody {
 }
 
 export interface DeliveriesResponse {
-  data: Array<Record<string, unknown>>
-  metadata: Record<string, unknown>
+  data?: Array<Record<string, unknown>>
+  metadata?: Record<string, unknown>
   next?: () => Promise<DeliveriesResponse>
   msg?: string
 }
@@ -141,6 +142,7 @@ export class Deliveries extends ThBaseHandler {
   endpoint: string
   http: Client
   public options: DeliveriesOptions
+  public uriHelper: UriHelper
 
   constructor (options: DeliveriesOptions, http: Client) {
     super(http, {
@@ -152,330 +154,229 @@ export class Deliveries extends ThBaseHandler {
 
     this.endpoint = Deliveries.baseEndpoint
     this.options.base = this.options.base ?? 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll (query?: DeliveriesQuery | undefined): Promise<DeliveriesResponse> {
-    return new Promise(async (resolve, reject) => {
-      let uri
-      let next
+  generateUriQueryEmbed (base: string, query?: DeliveriesQuery): string {
+    const { embed, ...restQuery } = query ?? {} // eslint-disable-line @typescript-eslint/no-unused-vars
+    let uri = this.uriHelper.generateUriWithQuery(base, restQuery)
 
-      try {
-        if (query?.uri) {
-          uri = query.uri
-        } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-        }
-
-        if (query?.embed) {
-          const queryString = query.embed
-            .map((item) => {
-              return `embed[]=${item}`
-            })
-            .join('&')
-
-          uri = `${uri}?${queryString}`
-        }
-
-        const response = await this.http.getClient().get(uri)
-
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<DeliveriesResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count },
-          next
-        } as DeliveriesResponse)
-      } catch (err) {
-        return reject(new errors.DeliveriesFetchAllFailed())
-      }
-    })
-  }
-
-  getOne (requestObject: DeliveriesGetOneRequestObject): Promise<DeliveriesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const { deliveryId, query } = requestObject
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deliveryId}`
-
-      try {
-        if (query?.embed) {
-          const queryString = query.embed
-            .map((item) => {
-              return `embed[]=${item}`
-            })
-            .join('&')
-
-          uri = `${uri}?${queryString}`
-        }
-
-        const response = await this.http.getClient().get(uri)
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as DeliveriesResponse)
-      } catch (err) {
-        return reject(new errors.DeliveriesFetchOneFailed())
-      }
-    })
-  }
-
-  createDelivery (requestObject: DeliveriesCreateRequestObject): Promise<DeliveriesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const { body, query } = requestObject
-
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-
-      try {
-        if (query?.embed) {
-          const queryString = query.embed
-            .map((item) => {
-              return `embed[]=${item}`
-            })
-            .join('&')
-
-          uri = `${uri}?${queryString}`
-        }
-
-        const response = await this.http.getClient().post(uri, body)
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as DeliveriesResponse)
-      } catch (err) {
-        return reject(new errors.DeliveriesCreateFailed())
-      }
-    })
-  }
-
-  createDeliveryPDF (deliveryId: string): Promise<DeliveriesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deliveryId}/pdf?format=uri`
-
-      try {
-        const response = await this.http.getClient().post(uri, null, {
-          headers: {
-            Accept: 'application/json' // not needed for tillhub-api, but axios sets default headers { 'accept': 'application/json, text/plain, */*' } if not specified
-          }
+    if (query?.embed) {
+      const queryString = query.embed
+        .map((item) => {
+          return `embed[]=${item}`
         })
+        .join('&')
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as DeliveriesResponse)
-      } catch (err) {
-        return reject(new errors.DeliveriesPDFFailed())
-      }
-    })
+      const connector = uri.includes('?') ? '&' : '?'
+      uri = `${uri}${connector}${queryString}`
+    }
+    return uri
   }
 
-  updateDelivery (requestObject: DeliveriesUpdateRequestObject): Promise<DeliveriesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const { body, query, deliveryId } = requestObject
+  async getAll (query?: DeliveriesQuery | undefined): Promise<DeliveriesResponse> {
+    let next
+    const base = this.uriHelper.generateBaseUri()
+    const uri = this.generateUriQueryEmbed(base, query)
 
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deliveryId}`
+    try {
+      const response = await this.http.getClient().get(uri)
 
-      if (query?.embed) {
-        const queryString = query.embed
-          .map((item) => {
-            return `embed[]=${item}`
-          })
-          .join('&')
-
-        uri = `${uri}?${queryString}`
+      if (response.data.cursor?.next) {
+        next = (): Promise<DeliveriesResponse> => this.getAll({ uri: response.data.cursor.next })
       }
 
-      try {
-        const response = await this.http.getClient().put(uri, body)
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as DeliveriesResponse)
-      } catch (err) {
-        return reject(new errors.DeliveriesUpdateFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count },
+        next
       }
-    })
+    } catch (err) {
+      throw new errors.DeliveriesFetchAllFailed()
+    }
   }
 
-  setInProgress (requestObject: DeliveriesSimpleUpdateRequestBody): Promise<DeliveriesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const { deliveryId, query } = requestObject
+  async getOne (requestObject: DeliveriesGetOneRequestObject): Promise<DeliveriesResponse> {
+    const { deliveryId, query } = requestObject
+    const base = this.uriHelper.generateBaseUri(`/${deliveryId}`)
+    const uri = this.generateUriQueryEmbed(base, query)
 
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deliveryId}/in_progress`
+    try {
+      const response = await this.http.getClient().get(uri)
 
-      if (query?.embed) {
-        const queryString = query.embed
-          .map((item) => {
-            return `embed[]=${item}`
-          })
-          .join('&')
-
-        uri = `${uri}?${queryString}`
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-
-      try {
-        const response = await this.http.getClient().post(uri)
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as DeliveriesResponse)
-      } catch (err) {
-        return reject(new errors.DeliveriesInProgressFailed())
-      }
-    })
+    } catch (err) {
+      throw new errors.DeliveriesFetchOneFailed()
+    }
   }
 
-  dispatchDelivery (requestObject: DeliveriesSimpleUpdateRequestBody): Promise<DeliveriesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const { deliveryId, query } = requestObject
+  async createDelivery (requestObject: DeliveriesCreateRequestObject): Promise<DeliveriesResponse> {
+    const { body, query } = requestObject
+    const base = this.uriHelper.generateBaseUri()
+    const uri = this.generateUriQueryEmbed(base, query)
 
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deliveryId}/dispatch`
+    try {
+      const response = await this.http.getClient().post(uri, body)
 
-      if (query?.embed) {
-        const queryString = query.embed
-          .map((item) => {
-            return `embed[]=${item}`
-          })
-          .join('&')
-
-        uri = `${uri}?${queryString}`
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-
-      try {
-        const response = await this.http.getClient().post(uri)
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as DeliveriesResponse)
-      } catch (err) {
-        return reject(new errors.DeliveriesDispatchFailed())
-      }
-    })
+    } catch (err) {
+      throw new errors.DeliveriesCreateFailed()
+    }
   }
 
-  deleteDelivery (deliveryId: string): Promise<DeliveriesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deliveryId}`
-      try {
-        const response = await this.http.getClient().delete(uri)
+  async createDeliveryPDF (deliveryId: string): Promise<DeliveriesResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${deliveryId}/pdf?format=uri`)
+    try {
+      const response = await this.http.getClient().post(uri, null, {
+        headers: {
+          Accept: 'application/json' // not needed for tillhub-api, but axios sets default headers { 'accept': 'application/json, text/plain, */*' } if not specified
+        }
+      })
 
-        return resolve({
-          msg: response.data.msg
-        } as DeliveriesResponse)
-      } catch (err) {
-        return reject(new errors.DeliveriesDeleteFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new errors.DeliveriesPDFFailed()
+    }
   }
 
-  createDeliveryItems (
+  async updateDelivery (requestObject: DeliveriesUpdateRequestObject): Promise<DeliveriesResponse> {
+    const { body, query, deliveryId } = requestObject
+    const base = this.uriHelper.generateBaseUri(`/${deliveryId}`)
+    const uri = this.generateUriQueryEmbed(base, query)
+
+    try {
+      const response = await this.http.getClient().put(uri, body)
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new errors.DeliveriesUpdateFailed()
+    }
+  }
+
+  async setInProgress (requestObject: DeliveriesSimpleUpdateRequestBody): Promise<DeliveriesResponse> {
+    const { deliveryId, query } = requestObject
+    const base = this.uriHelper.generateBaseUri(`/${deliveryId}/in_progress`)
+    const uri = this.generateUriQueryEmbed(base, query)
+
+    try {
+      const response = await this.http.getClient().post(uri)
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new errors.DeliveriesInProgressFailed()
+    }
+  }
+
+  async dispatchDelivery (requestObject: DeliveriesSimpleUpdateRequestBody): Promise<DeliveriesResponse> {
+    const { deliveryId, query } = requestObject
+    const base = this.uriHelper.generateBaseUri(`/${deliveryId}/dispatch`)
+    const uri = this.generateUriQueryEmbed(base, query)
+
+    try {
+      const response = await this.http.getClient().post(uri)
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new errors.DeliveriesDispatchFailed()
+    }
+  }
+
+  async deleteDelivery (deliveryId: string): Promise<DeliveriesResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${deliveryId}`)
+    try {
+      const response = await this.http.getClient().delete(uri)
+
+      return {
+        msg: response.data.msg
+      }
+    } catch (err) {
+      throw new errors.DeliveriesDeleteFailed()
+    }
+  }
+
+  async createDeliveryItems (
     requestObject: DeliveryItemsCreateRequestObject
   ): Promise<DeliveriesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const { body, query } = requestObject
+    const { body, query } = requestObject
+    const base = this.uriHelper.generateBaseUri('/items')
+    const uri = this.generateUriQueryEmbed(base, query)
 
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/items`
+    try {
+      const response = await this.http.getClient().post(uri, body)
 
-      try {
-        if (query?.embed) {
-          const queryString = query.embed
-            .map((item) => {
-              return `embed[]=${item}`
-            })
-            .join('&')
-
-          uri = `${uri}?${queryString}`
-        }
-
-        const response = await this.http.getClient().post(uri, body)
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as DeliveriesResponse)
-      } catch (err) {
-        return reject(new errors.DeliveryItemsCreateFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new errors.DeliveryItemsCreateFailed()
+    }
   }
 
-  getAllDeliveryItems (
+  async getAllDeliveryItems (
     requestObject: DeliveryItemsGetAllRequestObject
   ): Promise<DeliveriesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const { deliveryId, query } = requestObject
+    const { deliveryId, query } = requestObject
+    const base = this.uriHelper.generateBaseUri(`/${deliveryId}/items`)
+    const uri = this.generateUriQueryEmbed(base, query)
 
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/${deliveryId}/items`
+    try {
+      const response = await this.http.getClient().get(uri)
 
-      try {
-        if (query?.embed) {
-          const queryString = query.embed
-            .map((item) => {
-              return `embed[]=${item}`
-            })
-            .join('&')
-
-          uri = `${uri}?${queryString}`
-        }
-
-        const response = await this.http.getClient().get(uri)
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as DeliveriesResponse)
-      } catch (err) {
-        return reject(new errors.DeliveryItemsFetchAllFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new errors.DeliveryItemsFetchAllFailed()
+    }
   }
 
-  updateDeliveryItem (requestObject: DeliveryItemUpdateRequestObject): Promise<DeliveriesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const { body, query, itemId } = requestObject
+  async updateDeliveryItem (requestObject: DeliveryItemUpdateRequestObject): Promise<DeliveriesResponse> {
+    const { body, query, itemId } = requestObject
+    const base = this.uriHelper.generateBaseUri(`/items/${itemId}`)
+    const uri = this.generateUriQueryEmbed(base, query)
 
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/items/${itemId}`
+    try {
+      const response = await this.http.getClient().put(uri, body)
 
-      if (query?.embed) {
-        const queryString = query.embed
-          .map((item) => {
-            return `embed[]=${item}`
-          })
-          .join('&')
-
-        uri = `${uri}?${queryString}`
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-
-      try {
-        const response = await this.http.getClient().put(uri, body)
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as DeliveriesResponse)
-      } catch (err) {
-        return reject(new errors.DeliveryItemUpdateFailed())
-      }
-    })
+    } catch (err) {
+      throw new errors.DeliveryItemUpdateFailed()
+    }
   }
 
-  deleteDeliveryItem (itemId: string): Promise<DeliveriesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/items/${itemId}`
-      try {
-        const response = await this.http.getClient().delete(uri)
+  async deleteDeliveryItem (itemId: string): Promise<DeliveriesResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/items/${itemId}`)
+    try {
+      const response = await this.http.getClient().delete(uri)
 
-        return resolve({
-          msg: response.data.msg
-        } as DeliveriesResponse)
-      } catch (err) {
-        return reject(new errors.DeliveriesDeleteFailed())
+      return {
+        msg: response.data.msg
       }
-    })
+    } catch (err) {
+      throw new errors.DeliveriesDeleteFailed()
+    }
   }
 }

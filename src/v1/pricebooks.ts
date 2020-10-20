@@ -24,7 +24,7 @@ export interface PricebooksResponse {
 }
 
 export interface PricebookResponse {
-  data: Pricebook
+  data?: Pricebook
   metadata?: {
     count?: number
     patch?: any
@@ -60,7 +60,7 @@ export class Pricebooks {
 
       const response = await this.http.getClient().get(uri)
 
-      if (response.data.cursor && response.data.cursor.next) {
+      if (response.data.cursor?.next) {
         next = (): Promise<PricebooksResponse> => this.getAll({ uri: response.data.cursor.next })
       }
 

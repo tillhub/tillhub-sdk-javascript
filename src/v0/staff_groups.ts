@@ -20,10 +20,11 @@ export interface StaffGroupsQuery {
 export interface StaffGroupsResponse {
   data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
+  next?: () => Promise<StaffGroupsResponse>
 }
 
 export interface StaffGroupResponse {
-  data: StaffGroup
+  data?: StaffGroup
   metadata?: {
     count?: number
     patch?: any
@@ -62,114 +63,103 @@ export class StaffGroups extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll (query?: StaffGroupsQuery | undefined): Promise<StaffGroupsResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (query?: StaffGroupsQuery | undefined): Promise<StaffGroupsResponse> {
+    let next
 
-      try {
-        const base = this.uriHelper.generateBaseUri()
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri)
 
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<StaffGroupsResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count, cursor: response.data.cursor },
-          next
-        } as StaffGroupsResponse)
-      } catch (error) {
-        return reject(new StaffGroupsFetchAllFailed(undefined, { error }))
+      if (response.data.cursor?.next) {
+        next = (): Promise<StaffGroupsResponse> => this.getAll({ uri: response.data.cursor.next })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count, cursor: response.data.cursor },
+        next
+      }
+    } catch (error) {
+      throw new StaffGroupsFetchAllFailed(undefined, { error })
+    }
   }
 
-  meta (): Promise<StaffGroupsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri('/meta')
-        const response = await this.http.getClient().get(uri)
+  async meta (): Promise<StaffGroupsResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri('/meta')
+      const response = await this.http.getClient().get(uri)
 
-        if (response.status !== 200) reject(new StaffGroupsMetaFailed())
+      if (response.status !== 200) throw new StaffGroupsMetaFailed()
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as StaffGroupsResponse)
-      } catch (error) {
-        return reject(new StaffGroupsMetaFailed(undefined, { error }))
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new StaffGroupsMetaFailed(undefined, { error })
+    }
   }
 
-  get (staffGroupId: string): Promise<StaffGroupResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/${staffGroupId}`)
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new StaffGroupFetchFailed(undefined, { status: response.status }))
-
-        return resolve({
-          data: response.data.results[0] as StaffGroup,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as StaffGroupResponse)
-      } catch (error) {
-        return reject(new StaffGroupFetchFailed(undefined, { error }))
+  async get (staffGroupId: string): Promise<StaffGroupResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${staffGroupId}`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new StaffGroupFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0] as StaffGroup,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new StaffGroupFetchFailed(undefined, { error })
+    }
   }
 
-  put (staffGroupId: string, staffGroup: StaffGroup): Promise<StaffGroupResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/${staffGroupId}`)
-      try {
-        const response = await this.http.getClient().put(uri, staffGroup)
+  async put (staffGroupId: string, staffGroup: StaffGroup): Promise<StaffGroupResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${staffGroupId}`)
+    try {
+      const response = await this.http.getClient().put(uri, staffGroup)
 
-        return resolve({
-          data: response.data.results[0] as StaffGroup,
-          metadata: { count: response.data.count }
-        } as StaffGroupResponse)
-      } catch (error) {
-        return reject(new StaffGroupPutFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as StaffGroup,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new StaffGroupPutFailed(undefined, { error })
+    }
   }
 
-  create (staffGroup: StaffGroup): Promise<StaffGroupResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri()
-      try {
-        const response = await this.http.getClient().post(uri, staffGroup)
+  async create (staffGroup: StaffGroup): Promise<StaffGroupResponse> {
+    const uri = this.uriHelper.generateBaseUri()
+    try {
+      const response = await this.http.getClient().post(uri, staffGroup)
 
-        return resolve({
-          data: response.data.results[0] as StaffGroup,
-          metadata: { count: response.data.count }
-        } as StaffGroupResponse)
-      } catch (error) {
-        return reject(new StaffGroupCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as StaffGroup,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new StaffGroupCreationFailed(undefined, { error })
+    }
   }
 
-  delete (staffGroupId: string): Promise<StaffGroupResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/${staffGroupId}`)
-      try {
-        const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new StaffGroupDeleteFailed())
+  async delete (staffGroupId: string): Promise<StaffGroupResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${staffGroupId}`)
+    try {
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) throw new StaffGroupDeleteFailed()
 
-        return resolve({
-          msg: response.data.msg
-        } as StaffGroupResponse)
-      } catch (err) {
-        return reject(new StaffGroupDeleteFailed())
+      return {
+        msg: response.data.msg
       }
-    })
+    } catch (err) {
+      throw new StaffGroupDeleteFailed()
+    }
   }
 }
 
@@ -180,6 +170,7 @@ class StaffGroupsFetchAllFailed extends BaseError {
     properties?: Record<string, unknown>
   ) {
     super(message, properties)
+    Object.setPrototypeOf(this, StaffGroupsFetchAllFailed.prototype)
   }
 }
 
@@ -190,6 +181,7 @@ class StaffGroupsMetaFailed extends BaseError {
     properties?: Record<string, unknown>
   ) {
     super(message, properties)
+    Object.setPrototypeOf(this, StaffGroupsMetaFailed.prototype)
   }
 }
 
@@ -200,6 +192,7 @@ export class StaffGroupFetchFailed extends BaseError {
     properties?: Record<string, unknown>
   ) {
     super(message, properties)
+    Object.setPrototypeOf(this, StaffGroupFetchFailed.prototype)
   }
 }
 
@@ -210,6 +203,7 @@ export class StaffGroupPutFailed extends BaseError {
     properties?: Record<string, unknown>
   ) {
     super(message, properties)
+    Object.setPrototypeOf(this, StaffGroupPutFailed.prototype)
   }
 }
 
@@ -220,6 +214,7 @@ export class StaffGroupCreationFailed extends BaseError {
     properties?: Record<string, unknown>
   ) {
     super(message, properties)
+    Object.setPrototypeOf(this, StaffGroupCreationFailed.prototype)
   }
 }
 
@@ -230,5 +225,6 @@ export class StaffGroupDeleteFailed extends BaseError {
     properties?: Record<string, unknown>
   ) {
     super(message, properties)
+    Object.setPrototypeOf(this, StaffGroupDeleteFailed.prototype)
   }
 }

@@ -1,7 +1,7 @@
-import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 import { ThBaseHandler } from '../base'
+import { UriHelper } from '../uri-helper'
 
 export interface ProductGroupsOptions {
   user?: string
@@ -26,18 +26,16 @@ export interface ProductGroupsResponse {
 }
 
 export interface ProductGroupResponse {
-  data: ProductGroup
+  data?: ProductGroup
   metadata?: {
     count?: number
     patch?: any
   }
   msg?: string
 }
-export interface ProductGroup {
-  id?: string
-}
 
 export interface ProductGroup {
+  id?: string
   name: string
   product_group_id: string
   tax: string
@@ -52,6 +50,7 @@ export class ProductGroups extends ThBaseHandler {
   endpoint: string
   http: Client
   public options: ProductGroupsOptions
+  public uriHelper: UriHelper
 
   constructor (options: ProductGroupsOptions, http: Client) {
     super(http, {
@@ -63,144 +62,107 @@ export class ProductGroups extends ThBaseHandler {
 
     this.endpoint = ProductGroups.baseEndpoint
     this.options.base = this.options.base ?? 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll (queryOrOptions?: ProductGroupsQuery | undefined): Promise<ProductGroupsResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (queryOrOptions?: ProductGroupsQuery | undefined): Promise<ProductGroupsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
 
-      try {
-        let uri
-        if (queryOrOptions?.uri) {
-          uri = queryOrOptions.uri
-        } else {
-          let queryString = ''
-          if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
-            queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
-          }
-
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
-            queryString ? `?${queryString}` : ''
-          }`
-        }
-
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new errors.ProductGroupsFetchFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count },
-          next
-        } as ProductGroupsResponse)
-      } catch (error) {
-        return reject(new errors.ProductGroupsFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new errors.ProductGroupsFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new errors.ProductGroupsFetchFailed(undefined, { error })
+    }
   }
 
-  get (
+  async get (
     productGroupId: string,
     queryOrOptions?: ProductGroupsQuery | undefined
   ): Promise<ProductGroupResponse> {
-    return new Promise(async (resolve, reject) => {
-      let uri
-      if (queryOrOptions?.uri) {
-        uri = queryOrOptions.uri
-      } else {
-        let queryString = ''
-        if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
-          queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
-        }
+    const base = this.uriHelper.generateBaseUri(`/${productGroupId}`)
+    const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
 
-        uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productGroupId}${
-          queryString ? `?${queryString}` : ''
-        }`
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) { throw new errors.ProductGroupFetchFailed(undefined, { status: response.status }) }
+
+      return {
+        data: response.data.results[0] as ProductGroup,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
       }
-
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new errors.ProductGroupFetchFailed(undefined, { status: response.status }))
-
-        return resolve({
-          data: response.data.results[0] as ProductGroup,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as ProductGroupResponse)
-      } catch (error) {
-        return reject(new errors.ProductGroupFetchFailed(undefined, { error }))
-      }
-    })
+    } catch (error) {
+      throw new errors.ProductGroupFetchFailed(undefined, { error })
+    }
   }
 
-  put (productGroupId: string, productGroup: ProductGroup): Promise<ProductGroupResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productGroupId}`
-      try {
-        const response = await this.http.getClient().put(uri, productGroup)
+  async put (productGroupId: string, productGroup: ProductGroup): Promise<ProductGroupResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${productGroupId}`)
 
-        return resolve({
-          data: response.data.results[0] as ProductGroup,
-          metadata: { count: response.data.count }
-        } as ProductGroupResponse)
-      } catch (error) {
-        return reject(new errors.ProductGroupPutFailed(undefined, { error }))
+    try {
+      const response = await this.http.getClient().put(uri, productGroup)
+
+      return {
+        data: response.data.results[0] as ProductGroup,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new errors.ProductGroupPutFailed(undefined, { error })
+    }
   }
 
-  create (productGroup: ProductGroup): Promise<ProductGroupResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-      try {
-        const response = await this.http.getClient().post(uri, productGroup)
+  async create (productGroup: ProductGroup): Promise<ProductGroupResponse> {
+    const uri = this.uriHelper.generateBaseUri()
+    try {
+      const response = await this.http.getClient().post(uri, productGroup)
 
-        return resolve({
-          data: response.data.results[0] as ProductGroup,
-          metadata: { count: response.data.count }
-        } as ProductGroupResponse)
-      } catch (error) {
-        return reject(new errors.ProductGroupCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as ProductGroup,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new errors.ProductGroupCreationFailed(undefined, { error })
+    }
   }
 
-  delete (taxId: string): Promise<ProductGroupResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${taxId}`
-      try {
-        const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new errors.ProductGroupDeleteFailed())
+  async delete (taxId: string): Promise<ProductGroupResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${taxId}`)
+    try {
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) throw new errors.ProductGroupDeleteFailed()
 
-        return resolve({
-          msg: response.data.msg
-        } as ProductGroupResponse)
-      } catch (err) {
-        return reject(new errors.ProductGroupDeleteFailed())
+      return {
+        msg: response.data.msg
       }
-    })
+    } catch (err) {
+      throw new errors.ProductGroupDeleteFailed()
+    }
   }
 
-  search (searchTerm: string): Promise<ProductGroupsResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/search?q=${searchTerm}`
-      try {
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(
-            new errors.ProductGroupsSearchFailed(undefined, { status: response.status })
-          )
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as ProductGroupsResponse)
-      } catch (error) {
-        return reject(new errors.ProductGroupsSearchFailed(undefined, { error }))
+  async search (searchTerm: string): Promise<ProductGroupsResponse> {
+    const base = this.uriHelper.generateBaseUri('/search')
+    const uri = this.uriHelper.generateUriWithQuery(base, { q: searchTerm })
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new errors.ProductGroupsSearchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new errors.ProductGroupsSearchFailed(undefined, { error })
+    }
   }
 }

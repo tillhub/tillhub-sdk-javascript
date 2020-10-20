@@ -1,7 +1,7 @@
-import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 import { ThBaseHandler } from '../base'
+import { UriHelper } from '../uri-helper'
 
 const allowedStatuses = [200, 204]
 
@@ -23,8 +23,8 @@ export interface OrdersQuery {
 }
 
 export interface OrdersResponse {
-  data: Array<Record<string, unknown>>
-  metadata: Record<string, unknown>
+  data?: Array<Record<string, unknown>>
+  metadata?: Record<string, unknown>
   msg?: string
 }
 
@@ -90,6 +90,7 @@ export class Orders extends ThBaseHandler {
   endpoint: string
   http: Client
   public options: OrdersOptions
+  public uriHelper: UriHelper
 
   constructor (options: OrdersOptions, http: Client) {
     super(http, { endpoint: Orders.baseEndpoint, base: options.base ?? 'https://api.tillhub.com' })
@@ -97,293 +98,251 @@ export class Orders extends ThBaseHandler {
     this.http = http
 
     this.endpoint = Orders.baseEndpoint
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
     this.options.base = this.options.base ?? 'https://api.tillhub.com'
   }
 
-  getAll (query?: OrdersQuery | undefined): Promise<OrdersResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        let uri
-        if (query?.uri) {
-          uri = query.uri
-        } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-        }
+  async getAll (query?: OrdersQuery | undefined): Promise<OrdersResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.OrdersFetchFailed())
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new errors.OrdersFetchFailed()
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as OrdersResponse)
-      } catch (err) {
-        return reject(new errors.OrdersFetchFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
-  }
-
-  create (options: OrdersRequest): Promise<OrdersResponse> {
-    return new Promise(async (resolve, reject) => {
-      const { orderId, values } = options
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${orderId}`
-      try {
-        const response = await this.http.getClient().post(uri, values)
-        response.status !== 200 && reject(new errors.OrdersCreateFailed())
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as OrdersResponse)
-      } catch (err) {
-        return reject(new errors.OrdersCreateFailed())
-      }
-    })
-  }
-
-  update (options: OrdersRequest): Promise<OrdersResponse> {
-    return new Promise(async (resolve, reject) => {
-      const { orderId, values } = options
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${orderId}`
-      try {
-        const response = await this.http.getClient().put(uri, values)
-        response.status !== 200 && reject(new errors.OrdersUpdateFailed())
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as OrdersResponse)
-      } catch (err) {
-        return reject(new errors.OrdersUpdateFailed())
-      }
-    })
-  }
-
-  getOrderItems (orderId: string | undefined): Promise<OrdersResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${orderId}/order_items`
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.OrderItemsFetchFailed())
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as OrdersResponse)
-      } catch (err) {
-        return reject(new errors.OrderItemsFetchFailed())
-      }
-    })
-  }
-
-  deleteOrderItems (query: OrdersQuery): Promise<OrdersResponse> {
-    let route: string
-    if (query.itemId) {
-      route = `/${query.itemId}`
-    } else {
-      route = `?${qs.stringify(query)}`
+    } catch (err) {
+      throw new errors.OrdersFetchFailed()
     }
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/order_items${route}`
-      try {
-        const response = await this.http.getClient().delete(uri)
-        !allowedStatuses.includes(response.status) &&
-          reject(new errors.OrderItemsDeleteFailed())
-
-        return resolve({ msg: response.data.msg } as OrdersResponse)
-      } catch (err) {
-        return reject(new errors.OrderItemsDeleteFailed())
-      }
-    })
   }
 
-  createOrderItems (body: OrderItemsCreateRequest): Promise<OrdersResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/order_items`
-      try {
-        const response = await this.http.getClient().post(uri, body)
-        response.status !== 200 && reject(new errors.OrderItemsCreateFailed())
+  async create (options: OrdersRequest): Promise<OrdersResponse> {
+    const { orderId, values } = options
+    const uri = this.uriHelper.generateBaseUri(`/${orderId}`)
+    try {
+      const response = await this.http.getClient().post(uri, values)
+      if (response.status !== 200) throw new errors.OrdersCreateFailed()
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as OrdersResponse)
-      } catch (err) {
-        return reject(new errors.OrderItemsCreateFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new errors.OrdersCreateFailed()
+    }
   }
 
-  updateOrderItems (body: OrderItemsUpdateRequest): Promise<OrdersResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/order_items`
-      try {
-        const response = await this.http.getClient().put(uri, body)
-        response.status !== 200 && reject(new errors.OrderItemsUpdateFailed())
+  async update (options: OrdersRequest): Promise<OrdersResponse> {
+    const { orderId, values } = options
+    const uri = this.uriHelper.generateBaseUri(`/${orderId}`)
+    try {
+      const response = await this.http.getClient().put(uri, values)
+      if (response.status !== 200) throw new errors.OrdersUpdateFailed()
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as OrdersResponse)
-      } catch (err) {
-        return reject(new errors.OrderItemsUpdateFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new errors.OrdersUpdateFailed()
+    }
   }
 
-  updateOrderItem (query: OrderItemUpdateRequest): Promise<OrdersResponse> {
-    return new Promise(async (resolve, reject) => {
-      const { item, itemId } = query
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/order_items/${itemId}`
-      try {
-        const response = await this.http.getClient().put(uri, item)
-        response.status !== 200 && reject(new errors.OrderItemUpdateFailed())
+  async getOrderItems (orderId: string): Promise<OrdersResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${orderId}/order_items`)
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as OrdersResponse)
-      } catch (err) {
-        return reject(new errors.OrderItemUpdateFailed())
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new errors.OrderItemsFetchFailed()
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new errors.OrderItemsFetchFailed()
+    }
   }
 
-  getIncomingOrders (query?: OrdersQuery | undefined): Promise<OrdersResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        let uri
-        if (query?.uri) {
-          uri = query.uri
-        } else {
-          uri = `${this.options.base}${this.endpoint}/${
-            this.options.user
-          }?embed=location&direction=incoming${query ? `${qs.stringify(query)}` : ''}`
-        }
+  async deleteOrderItems (query: OrdersQuery): Promise<OrdersResponse> {
+    let uri
+    if (query.itemId) {
+      uri = this.uriHelper.generateBaseUri(`/order_items/${query.itemId}`)
+    } else {
+      const base = this.uriHelper.generateBaseUri('/order_items')
+      uri = this.uriHelper.generateUriWithQuery(base, query)
+    }
 
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.IncomingOrdersFetchFailed())
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as OrdersResponse)
-      } catch (err) {
-        return reject(new errors.IncomingOrdersFetchFailed())
+    try {
+      const response = await this.http.getClient().delete(uri)
+      if (!allowedStatuses.includes(response.status)) {
+        throw new errors.OrderItemsDeleteFailed()
       }
-    })
+
+      return { msg: response.data.msg }
+    } catch (err) {
+      throw new errors.OrderItemsDeleteFailed()
+    }
   }
 
-  getOutgoingOrders (query?: OrdersQuery | undefined): Promise<OrdersResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        let uri
-        if (query?.uri) {
-          uri = query.uri
-        } else {
-          uri = `${this.options.base}${this.endpoint}/${
-            this.options.user
-          }?embed=location&direction=outgoing${query ? `${qs.stringify(query)}` : ''}`
-        }
+  async createOrderItems (body: OrderItemsCreateRequest): Promise<OrdersResponse> {
+    const uri = this.uriHelper.generateBaseUri('/order_items')
+    try {
+      const response = await this.http.getClient().post(uri, body)
+      if (response.status !== 200) throw new errors.OrderItemsCreateFailed()
 
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.OutgoingOrdersFetchFailed())
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as OrdersResponse)
-      } catch (err) {
-        return reject(new errors.OutgoingOrdersFetchFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new errors.OrderItemsCreateFailed()
+    }
   }
 
-  getOrderSuggestions (query?: OrdersQuery | undefined): Promise<OrdersResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        let uri
-        if (query?.uri) {
-          uri = query.uri
-        } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}/suggestions`
-        }
+  async updateOrderItems (body: OrderItemsUpdateRequest): Promise<OrdersResponse> {
+    const uri = this.uriHelper.generateBaseUri('/order_items')
+    try {
+      const response = await this.http.getClient().put(uri, body)
+      if (response.status !== 200) throw new errors.OrderItemsUpdateFailed()
 
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.OrderSuggestionsFetchFailed())
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as OrdersResponse)
-      } catch (err) {
-        return reject(new errors.OrderSuggestionsFetchFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new errors.OrderItemsUpdateFailed()
+    }
   }
 
-  getHistoricOrderItems (orderId?: string | undefined): Promise<OrdersResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${orderId}/order_items`
+  async updateOrderItem (query: OrderItemUpdateRequest): Promise<OrdersResponse> {
+    const { item, itemId } = query
+    const uri = this.uriHelper.generateBaseUri(`/order_items/${itemId}`)
+    try {
+      const response = await this.http.getClient().put(uri, item)
+      if (response.status !== 200) throw new errors.OrderItemUpdateFailed()
 
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.HistoricOrderItemsFetchFailed())
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as OrdersResponse)
-      } catch (err) {
-        return reject(new errors.HistoricOrderItemsFetchFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new errors.OrderItemUpdateFailed()
+    }
   }
 
-  bookStock (query: BookStockRequest): Promise<OrdersResponse> {
-    return new Promise(async (resolve, reject) => {
-      const { orderId, body } = query
-      try {
-        let uri
-        if (query?.uri) {
-          uri = query.uri
-        } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}/order_items/${orderId}/book_stock`
-        }
-
-        const response = await this.http.getClient().post(uri, body)
-        response.status !== 200 && reject(new errors.BookStockFailed())
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as OrdersResponse)
-      } catch (err) {
-        return reject(new errors.BookStockFailed())
+  async getIncomingOrders (query?: OrdersQuery | undefined): Promise<OrdersResponse> {
+    try {
+      const extendedQuery = {
+        ...query,
+        embed: 'location',
+        direction: 'incoming'
       }
-    })
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, extendedQuery)
+
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new errors.IncomingOrdersFetchFailed()
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new errors.IncomingOrdersFetchFailed()
+    }
   }
 
-  getOpenOrder (query?: OrdersQuery | undefined): Promise<OrdersResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        let uri
-        if (query?.uri) {
-          uri = query.uri
-        } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}/open`
-        }
-
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.OpenOrderFetchFailed())
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as OrdersResponse)
-      } catch (err) {
-        return reject(new errors.OpenOrderFetchFailed())
+  async getOutgoingOrders (query?: OrdersQuery | undefined): Promise<OrdersResponse> {
+    try {
+      const extendedQuery = {
+        ...query,
+        embed: 'location',
+        direction: 'outgoing'
       }
-    })
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, extendedQuery)
+
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new errors.OutgoingOrdersFetchFailed()
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new errors.OutgoingOrdersFetchFailed()
+    }
+  }
+
+  async getOrderSuggestions (query?: OrdersQuery | undefined): Promise<OrdersResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/suggestions')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new errors.OrderSuggestionsFetchFailed()
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new errors.OrderSuggestionsFetchFailed()
+    }
+  }
+
+  async getHistoricOrderItems (orderId: string): Promise<OrdersResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri(`/${orderId}/order_items`)
+
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new errors.HistoricOrderItemsFetchFailed()
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new errors.HistoricOrderItemsFetchFailed()
+    }
+  }
+
+  async bookStock (query: BookStockRequest): Promise<OrdersResponse> {
+    const { orderId, body } = query
+    try {
+      const base = this.uriHelper.generateBaseUri(`/order_items/${orderId}/book_stock`)
+      const uri = this.uriHelper.generateUriWithQuery(base, { uri: query?.uri })
+
+      const response = await this.http.getClient().post(uri, body)
+      if (response.status !== 200) throw new errors.BookStockFailed()
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new errors.BookStockFailed()
+    }
+  }
+
+  async getOpenOrder (query?: OrdersQuery | undefined): Promise<OrdersResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/open')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new errors.OpenOrderFetchFailed()
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new errors.OpenOrderFetchFailed()
+    }
   }
 }

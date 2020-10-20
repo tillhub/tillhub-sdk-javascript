@@ -46,25 +46,24 @@ export class Dependencies extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  get (query: DependenciesQuery): Promise<DependenciesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const base = this.uriHelper.generateBaseUri('/')
-      const uri = this.uriHelper.generateUriWithQuery(base, query)
+  async get (query: DependenciesQuery): Promise<DependenciesResponse> {
+    const base = this.uriHelper.generateBaseUri('/')
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      try {
-        const response = await this.http.getClient().get(uri)
+    try {
+      const response = await this.http.getClient().get(uri)
 
-        response.status !== 200 &&
-          reject(new DependenciesFetchFailed(undefined, { status: response.status }))
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as DependenciesResponse)
-      } catch (error) {
-        return reject(new DependenciesFetchFailed(undefined, { error }))
+      if (response.status !== 200) {
+        throw new DependenciesFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new DependenciesFetchFailed(undefined, { error })
+    }
   }
 }
 

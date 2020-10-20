@@ -60,7 +60,7 @@ export class Vouchers extends VoucherV0 {
         throw new VouchersFetchFailed(undefined, { status: response.status })
       }
 
-      if (response.data.cursor && response.data.cursor.next) {
+      if (response.data.cursor?.next) {
         next = (): Promise<VouchersResponse> => this.getAll({ uri: response.data.cursor.next })
       }
 

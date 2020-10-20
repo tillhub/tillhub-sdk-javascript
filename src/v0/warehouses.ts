@@ -19,9 +19,10 @@ export interface WarehousesQuery {
 }
 
 export interface WarehousesResponse {
-  data: Warehouse
-  metadata: Record<string, unknown>
+  data?: Warehouse
+  metadata?: Record<string, unknown>
   msg?: string | null
+  errors?: ErrorObject[]
 }
 
 export interface WarehouseResponse {
@@ -69,6 +70,12 @@ export interface Warehouse {
   barcode?: string | null
 }
 
+export interface ErrorObject {
+  id: string
+  label: string
+  errorDetails?: Record<string, unknown>
+}
+
 export class Warehouses extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/warehouses'
   endpoint: string
@@ -89,104 +96,94 @@ export class Warehouses extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll (query?: WarehousesQuery | undefined): Promise<WarehousesResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri()
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+  async getAll (query?: WarehousesQuery | undefined): Promise<WarehousesResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new WarehousesFetchFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { cursor: response.data.cursor }
-        } as WarehousesResponse)
-      } catch (error) {
-        return reject(new WarehousesFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new WarehousesFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { cursor: response.data.cursor }
+      }
+    } catch (error) {
+      throw new WarehousesFetchFailed(undefined, { error })
+    }
   }
 
-  getOne (warehouseId: string): Promise<WarehousesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${warehouseId}`
-      try {
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new WarehouseFetchOneFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results[0] as Warehouse,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as WarehousesResponse)
-      } catch (error) {
-        return reject(new WarehouseFetchOneFailed(undefined, { error }))
+  async getOne (warehouseId: string): Promise<WarehousesResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${warehouseId}`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new WarehouseFetchOneFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0],
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new WarehouseFetchOneFailed(undefined, { error })
+    }
   }
 
-  create (warehouse: Warehouse): Promise<WarehousesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri()
+  async create (warehouse: Warehouse): Promise<WarehousesResponse> {
+    const uri = this.uriHelper.generateBaseUri()
 
-      try {
-        const response = await this.http.getClient().post(uri, warehouse)
-        if (response.status !== 200) {
-          return reject(new WarehouseCreateFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results[0] as Warehouse,
-          metadata: { count: response.data.count },
-          errors: response.data.errors || []
-        } as WarehousesResponse)
-      } catch (error) {
-        return reject(new WarehouseCreateFailed(undefined, { error }))
+    try {
+      const response = await this.http.getClient().post(uri, warehouse)
+      if (response.status !== 200) {
+        throw new WarehouseCreateFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count },
+        errors: response.data.errors || []
+      }
+    } catch (error) {
+      throw new WarehouseCreateFailed(undefined, { error })
+    }
   }
 
-  put (warehouseId: string, warehouse: Warehouse): Promise<WarehousesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/${warehouseId}`)
+  async put (warehouseId: string, warehouse: Warehouse): Promise<WarehousesResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${warehouseId}`)
 
-      try {
-        const response = await this.http.getClient().put(uri, warehouse)
+    try {
+      const response = await this.http.getClient().put(uri, warehouse)
 
-        if (response.status !== 200) {
-          return reject(new WarehousePutFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results[0] as Warehouse,
-          metadata: { count: response.data.count }
-        } as WarehousesResponse)
-      } catch (error) {
-        return reject(new WarehousePutFailed(undefined, { error }))
+      if (response.status !== 200) {
+        throw new WarehousePutFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new WarehousePutFailed(undefined, { error })
+    }
   }
 
-  delete (warehouseId: string): Promise<WarehousesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${warehouseId}`
-      try {
-        const response = await this.http.getClient().delete(uri)
+  async delete (warehouseId: string): Promise<WarehousesResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${warehouseId}`)
+    try {
+      const response = await this.http.getClient().delete(uri)
 
-        if (response.status !== 200) {
-          return reject(new WarehouseDeleteFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({ msg: response.data.msg } as WarehousesResponse)
-      } catch (error) {
-        return reject(new WarehouseDeleteFailed(undefined, { error }))
+      if (response.status !== 200) {
+        throw new WarehouseDeleteFailed(undefined, { status: response.status })
       }
-    })
+
+      return { msg: response.data.msg }
+    } catch (error) {
+      throw new WarehouseDeleteFailed(undefined, { error })
+    }
   }
 }
 

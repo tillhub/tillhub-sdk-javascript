@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 import { Users, UsersOptions } from './users'

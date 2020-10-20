@@ -85,42 +85,39 @@ export class CountingProtocols extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll (query?: CountingProtocolsQuery): Promise<CountingProtocolsResponse> {
-    return new Promise(async (resolve, reject) => {
-      const base = this.uriHelper.generateBaseUri()
-      const uri = this.uriHelper.generateUriWithQuery(base, query)
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new CountingProtocolsFetchFailed(undefined, { status: response.status }))
-
-        return resolve({
-          data: response.data.results,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as CountingProtocolsResponse)
-      } catch (error) {
-        return reject(new CountingProtocolsFetchFailed(undefined, { error }))
+  async getAll (query?: CountingProtocolsQuery): Promise<CountingProtocolsResponse> {
+    const base = this.uriHelper.generateBaseUri()
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new CountingProtocolsFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new CountingProtocolsFetchFailed(undefined, { error })
+    }
   }
 
-  meta (): Promise<CountingProtocolsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri('/meta')
-        const response = await this.http.getClient().get(uri)
+  async meta (): Promise<CountingProtocolsResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri('/meta')
+      const response = await this.http.getClient().get(uri)
 
-        if (response.status !== 200) reject(new CountingProtocolsMetaFailed())
+      if (response.status !== 200) throw new CountingProtocolsMetaFailed()
 
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.count }
-        } as CountingProtocolsResponse)
-      } catch (error) {
-        return reject(new CountingProtocolsMetaFailed(undefined, { error }))
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new CountingProtocolsMetaFailed(undefined, { error })
+    }
   }
 }
 

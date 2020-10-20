@@ -5,6 +5,7 @@ import {
 } from '../../../base'
 import { Client } from '../../../client'
 import { BaseError } from '../../../errors'
+import { UriHelper } from '../../../uri-helper'
 
 export interface RevenueHandlerOptions {
   user?: string
@@ -12,11 +13,11 @@ export interface RevenueHandlerOptions {
 }
 
 export interface AnalyticsReportsRevenuesGroupedResponseItem {
-    data: Array<Record<string, unknown>>
-  summary: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
+  summary: Array<Record<string, unknown>>
   metaData: {
-    count: number
-    total_count: number
+    count?: number
+    total_count?: number
   }
   next?: () => Promise<AnalyticsReportsRevenuesGroupedResponseItem>
 }
@@ -27,13 +28,13 @@ export class AnalyticsReportsRevenuesGrouped extends ThAnalyticsBaseHandler {
   http: Client
   public options: RevenueHandlerOptions
 
-  constructor(options: RevenueHandlerOptions, http: Client) {
+  constructor (options: RevenueHandlerOptions, http: Client) {
     super(http, options)
     this.options = options
     this.http = http
   }
 
-  static create(options: Record<string, unknown>, http: Client): AnalyticsReportsRevenuesGrouped {
+  static create (options: Record<string, unknown>, http: Client): AnalyticsReportsRevenuesGrouped {
     return ThAnalyticsBaseHandler.generateAuthenticatedInstance(
       AnalyticsReportsRevenuesGrouped,
       options,
@@ -41,25 +42,23 @@ export class AnalyticsReportsRevenuesGrouped extends ThAnalyticsBaseHandler {
     )
   }
 
-  public async getAll(
+  public async getAll (
     query?: Record<string, unknown>
   ): Promise<AnalyticsReportsRevenuesGroupedResponseItem> {
     try {
       let nextFn
-      const { results: d, next } = await this.handleGet(
-        `${this.options.base}/api/v2/analytics/${this.options.user}/reports/revenues/grouped`,
-        query
-      )
+      const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
+      const uri = localUriHelper.generateBaseUri('/reports/revenues/grouped')
+      const { results: d, next } = await this.handleGet(uri, query)
+
       if (!d) {
         throw new TypeError('Unexpectedly did not return data.')
       }
 
       // eslint-disable-next-line
       // @ts-ignore
-      const data = (
-        d.find(
-          (item: ThAnalyticsBaseResultItem) => item.metric.job === 'reports_revenues_items_v2_data'
-        ) || {}
+      const data = d.find(
+        (item: ThAnalyticsBaseResultItem) => item.metric.job === 'reports_revenues_items_v2_data'
       ).values
       // eslint-disable-next-line
       // @ts-ignore
@@ -77,20 +76,20 @@ export class AnalyticsReportsRevenuesGrouped extends ThAnalyticsBaseHandler {
         summary: summary,
         metaData: {},
         next: nextFn
-      } as AnalyticsReportsRevenuesGroupedResponseItem
+      }
     } catch (err) {
       throw new AnalyticsReportsRevenuesGroupedFetchError(undefined, { error: err })
     }
   }
 
-  public async export(
+  public async export (
     query?: Record<string, unknown>
   ): Promise<AnalyticsReportsRevenuesGroupedExportResponseItem> {
     try {
-      const result = await this.handleExport(
-        `${this.options.base}/api/v2/analytics/${this.options.user}/reports/revenues/grouped`,
-        query
-      )
+      const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
+      const uri = localUriHelper.generateBaseUri('/reports/revenues/grouped')
+      const result = await this.handleExport(uri, query)
+
       return result
     } catch (err) {
       throw new AnalyticsReportsRevenuesGroupedExportFetchError(undefined, { error: err })
@@ -100,7 +99,7 @@ export class AnalyticsReportsRevenuesGrouped extends ThAnalyticsBaseHandler {
 
 export class AnalyticsReportsRevenuesGroupedFetchError extends BaseError {
   public name = 'AnalyticsReportsRevenuesGroupedFetchError'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch revenue items. ',
     properties?: Record<string, unknown>
   ) {
@@ -111,7 +110,7 @@ export class AnalyticsReportsRevenuesGroupedFetchError extends BaseError {
 
 export class AnalyticsReportsRevenuesGroupedExportFetchError extends BaseError {
   public name = 'AnalyticsReportsRevenuesGroupedExportFetchError'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch revenue grouped export. ',
     properties?: Record<string, unknown>
   ) {

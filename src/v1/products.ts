@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { Client } from '../client'
 import { BaseError } from '../errors/baseError'
 import { UriHelper, HandlerQuery } from '../uri-helper'
@@ -19,13 +18,8 @@ type ProductTypes =
   | 'variant'
   | 'variant_product'
 
-// eslint-disable-next-line import/export
 export interface Product {
   id?: string
-}
-
-// eslint-disable-next-line import/export
-export interface Product {
   name?: string
   description?: string | null
   attributes?: Record<string, unknown> | null
@@ -107,8 +101,8 @@ export interface ProductDeleteOptions {
 }
 
 export interface ProductsResponse {
-  data: Product[]
-  metadata: Record<string, unknown>
+  data?: Product[]
+  metadata?: Record<string, unknown>
   msg?: string
   next?: () => Promise<ProductsResponse>
 }
@@ -213,10 +207,10 @@ export class Products extends ThBaseHandler {
 
       const response = await this.http.getClient().get(uri)
       if (response.status !== 200) {
-        return reject(new ProductsFetchFailed(undefined, { status: response.status }))
+        throw new ProductsFetchFailed(undefined, { status: response.status })
       }
 
-      if (response.data.cursor && response.data.cursor.next) {
+      if (response.data.cursor?.next) {
         next = (): Promise<ProductsResponse> => this.getAll({ uri: response.data.cursor.next })
       }
 
@@ -234,21 +228,15 @@ export class Products extends ThBaseHandler {
     let next
 
     try {
-      let uri
-      if (options?.uri) {
-        uri = options.uri
-      } else {
-        uri = `${this.options.base}${this.endpoint}/${this.options.user}/import${
-          options?.query ? `?${qs.stringify(options.query)}` : ''
-          }`
-      }
+      const base = this.uriHelper.generateBaseUri('/import')
+      const uri = this.uriHelper.generateUriWithQuery(base, options)
 
       const response = await this.http.getClient().get(uri)
       if (response.status !== 200) {
         throw new ProductsImportFailed(undefined, { status: response.status })
       }
 
-      if (response.data.cursor && response.data.cursor.next) {
+      if (response.data.cursor?.next) {
         next = (): Promise<ProductsResponse> => this.import({ uri: response.data.cursor.next })
       }
 
@@ -363,7 +351,7 @@ export class Products extends ThBaseHandler {
     try {
       const response = await this.http.getClient().put(uri, products)
       if (![200, 202].includes(response.status)) {
-        return reject(new ProductsBulkEditFailed(undefined, { status: response.status }))
+        throw new ProductsBulkEditFailed(undefined, { status: response.status })
       }
 
       return {
@@ -395,14 +383,8 @@ export class Products extends ThBaseHandler {
 
   async delete (productId: string, deleteOptions?: ProductDeleteOptions): Promise<ProductsResponse> {
     try {
-      let uri
-      if (deleteOptions) {
-        uri = `${this.options.base}${this.endpoint}/${
-          this.options.user
-          }/${productId}?${qs.stringify(deleteOptions)}`
-      } else {
-        uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productId}`
-      }
+      const base = this.uriHelper.generateBaseUri(`/${productId}`)
+      const uri = this.uriHelper.generateUriWithQuery(base, deleteOptions)
 
       const response = await this.http.getClient().delete(uri)
       if (response.status !== 200) {

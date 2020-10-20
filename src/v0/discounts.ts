@@ -1,6 +1,6 @@
-import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
+import { UriHelper } from '../uri-helper'
 import { ThBaseHandler } from '../base'
 
 export interface DiscountsOptions {
@@ -24,7 +24,7 @@ export interface DiscountsResponse {
 }
 
 export interface DiscountResponse {
-  data: Discount
+  data?: Discount
   metadata?: {
     count?: number
     patch?: any
@@ -37,9 +37,6 @@ export type DiscountGroupType = 'cart' | 'customer'
 
 export interface Discount {
   id?: string
-}
-
-export interface Discount {
   amount?: number
   type: DiscountType
   account?: string
@@ -55,6 +52,7 @@ export class Discounts extends ThBaseHandler {
   endpoint: string
   http: Client
   public options: DiscountsOptions
+  public uriHelper: UriHelper
 
   constructor (options: DiscountsOptions, http: Client) {
     super(http, {
@@ -66,131 +64,110 @@ export class Discounts extends ThBaseHandler {
 
     this.endpoint = Discounts.baseEndpoint
     this.options.base = this.options.base ?? 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll (queryOrOptions?: DiscountsQuery | undefined): Promise<DiscountsResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (queryOrOptions?: DiscountsQuery | undefined): Promise<DiscountsResponse> {
+    let next
 
-      try {
-        let uri
-        if (queryOrOptions?.uri) {
-          uri = queryOrOptions.uri
-        } else {
-          let queryString = ''
-          if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
-            queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
-          }
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
-            queryString ? `?${queryString}` : ''
-          }`
-        }
-
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new errors.DiscountsFetchFailed(undefined, { status: response.status }))
-        }
-
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<DiscountsResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { cursor: response.data.cursor },
-          next
-        } as DiscountsResponse)
-      } catch (error) {
-        return reject(new errors.DiscountsFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new errors.DiscountsFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      if (response.data.cursor?.next) {
+        next = (): Promise<DiscountsResponse> => this.getAll({ uri: response.data.cursor.next })
+      }
+
+      return {
+        data: response.data.results,
+        metadata: { cursor: response.data.cursor },
+        next
+      }
+    } catch (error) {
+      throw new errors.DiscountsFetchFailed(undefined, { error })
+    }
   }
 
-  get (discountId: string): Promise<DiscountResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${discountId}`
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new errors.DiscountFetchFailed(undefined, { status: response.status }))
-
-        return resolve({
-          data: response.data.results[0] as Discount,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as DiscountResponse)
-      } catch (error) {
-        return reject(new errors.DiscountFetchFailed(undefined, { error }))
+  async get (discountId: string): Promise<DiscountResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${discountId}`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new errors.DiscountFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0] as Discount,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new errors.DiscountFetchFailed(undefined, { error })
+    }
   }
 
-  put (discountId: string, discount: Discount): Promise<DiscountResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${discountId}`
-      try {
-        const response = await this.http.getClient().put(uri, discount)
+  async put (discountId: string, discount: Discount): Promise<DiscountResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${discountId}`)
+    try {
+      const response = await this.http.getClient().put(uri, discount)
 
-        return resolve({
-          data: response.data.results[0] as Discount,
-          metadata: { count: response.data.count }
-        } as DiscountResponse)
-      } catch (error) {
-        return reject(new errors.DiscountPutFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Discount,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new errors.DiscountPutFailed(undefined, { error })
+    }
   }
 
-  create (discount: Discount): Promise<DiscountResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-      try {
-        const response = await this.http.getClient().post(uri, discount)
+  async create (discount: Discount): Promise<DiscountResponse> {
+    const uri = this.uriHelper.generateBaseUri()
+    try {
+      const response = await this.http.getClient().post(uri, discount)
 
-        return resolve({
-          data: response.data.results[0] as Discount,
-          metadata: { count: response.data.count }
-        } as DiscountResponse)
-      } catch (error) {
-        return reject(new errors.DiscountCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Discount,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new errors.DiscountCreationFailed(undefined, { error })
+    }
   }
 
-  count (): Promise<DiscountsResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+  async count (): Promise<DiscountsResponse> {
+    const uri = this.uriHelper.generateBaseUri('/meta')
 
-      try {
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new errors.DiscountsCountFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as DiscountsResponse)
-      } catch (error) {
-        return reject(new errors.DiscountsCountFailed(undefined, { error }))
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new errors.DiscountsCountFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new errors.DiscountsCountFailed(undefined, { error })
+    }
   }
 
-  delete (discountId: string): Promise<DiscountResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${discountId}`
-      try {
-        const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new errors.DiscountDeleteFailed())
+  async delete (discountId: string): Promise<DiscountResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${discountId}`)
+    try {
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) throw new errors.DiscountDeleteFailed()
 
-        return resolve({
-          msg: response.data.msg
-        } as DiscountResponse)
-      } catch (err) {
-        return reject(new errors.DiscountDeleteFailed())
+      return {
+        msg: response.data.msg
       }
-    })
+    } catch (err) {
+      throw new errors.DiscountDeleteFailed()
+    }
   }
 }

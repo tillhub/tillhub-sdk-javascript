@@ -31,22 +31,20 @@ export class Notifications {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  email (requestObject: EmailOptions): Promise<NotificationsResponse> {
-    return new Promise(async (resolve, reject) => {
-      const { body = {}, type } = requestObject
+  async email (requestObject: EmailOptions): Promise<NotificationsResponse> {
+    const { body = {}, type } = requestObject
 
-      try {
-        const base = this.uriHelper.generateBaseUri(`/emails/${type}`)
-        const uri = this.uriHelper.generateUriWithQuery(base)
+    try {
+      const base = this.uriHelper.generateBaseUri(`/emails/${type}`)
+      const uri = this.uriHelper.generateUriWithQuery(base)
 
-        const response = await this.http.getClient().post(uri, body)
+      const response = await this.http.getClient().post(uri, body)
 
-        return resolve({
-          msg: response.data.msg
-        } as NotificationsResponse)
-      } catch (err) {
-        return reject(new errors.NotificationsEmailError())
+      return {
+        msg: response.data.msg
       }
-    })
+    } catch (err) {
+      throw new errors.NotificationsEmailError()
+    }
   }
 }

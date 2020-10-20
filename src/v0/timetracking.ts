@@ -39,7 +39,7 @@ export interface TimetrackingEntryQuery {
 }
 
 export interface TimetrackingEntryResponse {
-  data: TimetrackingEntry
+  data?: TimetrackingEntry
   metadata?: {
     count?: number
     patch?: any
@@ -93,116 +93,100 @@ export class Timetracking extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  get (staffId: string, query?: TimetrackingQuery): Promise<TimetrackingResponse> {
-    return new Promise(async (resolve, reject) => {
-      const base = this.uriHelper.generateBaseUri(`/reports/staff/${staffId}`)
-      const uri = this.uriHelper.generateUriWithQuery(base, query)
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new TimetrackingReportFetchFailed(undefined, { status: response.status }))
+  async get (staffId: string, query?: TimetrackingQuery): Promise<TimetrackingResponse> {
+    const base = this.uriHelper.generateBaseUri(`/reports/staff/${staffId}`)
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) { throw new TimetrackingReportFetchFailed(undefined, { status: response.status }) }
 
-        return resolve({
-          data: response.data.results,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as TimetrackingResponse)
-      } catch (error) {
-        return reject(new TimetrackingReportFetchFailed(undefined, { error }))
+      return {
+        data: response.data.results,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new TimetrackingReportFetchFailed(undefined, { error })
+    }
   }
 
-  getEntries (staffId: string, query?: TimetrackingEntryQuery): Promise<TimetrackingResponse> {
-    return new Promise(async (resolve, reject) => {
-      const base = this.uriHelper.generateBaseUri(`/entries/staff/${staffId}`)
-      const uri = this.uriHelper.generateUriWithQuery(base, query)
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new TimetrackingEntriesFetchFailed(undefined, { status: response.status }))
+  async getEntries (staffId: string, query?: TimetrackingEntryQuery): Promise<TimetrackingResponse> {
+    const base = this.uriHelper.generateBaseUri(`/entries/staff/${staffId}`)
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) { throw new TimetrackingEntriesFetchFailed(undefined, { status: response.status }) }
 
-        return resolve({
-          data: response.data.results,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as TimetrackingResponse)
-      } catch (error) {
-        return reject(new TimetrackingEntriesFetchFailed(undefined, { error }))
+      return {
+        data: response.data.results,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new TimetrackingEntriesFetchFailed(undefined, { error })
+    }
   }
 
-  createEntry (entry: TimetrackingEntry): Promise<TimetrackingEntryResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri('/entries')
-      try {
-        const response = await this.http.getClient().post(uri, entry)
-        response.status !== 200 &&
-          reject(new TimetrackingEntryCreateFailed(undefined, { status: response.status }))
+  async createEntry (entry: TimetrackingEntry): Promise<TimetrackingEntryResponse> {
+    const uri = this.uriHelper.generateBaseUri('/entries')
+    try {
+      const response = await this.http.getClient().post(uri, entry)
+      if (response.status !== 200) { throw new TimetrackingEntryCreateFailed(undefined, { status: response.status }) }
 
-        return resolve({
-          data: response.data.results[0] as TimetrackingEntry,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as TimetrackingEntryResponse)
-      } catch (error) {
-        return reject(new TimetrackingEntryCreateFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as TimetrackingEntry,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new TimetrackingEntryCreateFailed(undefined, { error })
+    }
   }
 
-  updateEntry (entryId: string, data?: TimetrackingEntry): Promise<TimetrackingEntryResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/entries/${entryId}`)
-      try {
-        const response = await this.http.getClient().put(uri, data)
-        response.status !== 200 &&
-          reject(new TimetrackingEntryPutFailed(undefined, { status: response.status }))
-
-        return resolve({
-          data: response.data.results[0] as TimetrackingEntry,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as TimetrackingEntryResponse)
-      } catch (error) {
-        return reject(new TimetrackingEntryPutFailed(undefined, { error }))
+  async updateEntry (entryId: string, data?: TimetrackingEntry): Promise<TimetrackingEntryResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/entries/${entryId}`)
+    try {
+      const response = await this.http.getClient().put(uri, data)
+      if (response.status !== 200) {
+        throw new TimetrackingEntryPutFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0] as TimetrackingEntry,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new TimetrackingEntryPutFailed(undefined, { error })
+    }
   }
 
-  deleteEntry (entryId: string): Promise<TimetrackingEntryResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/entries/${entryId}`)
-      try {
-        const response = await this.http.getClient().delete(uri)
-        response.status !== 200 &&
-          reject(new TimetrackingEntryDeleteFailed(undefined, { status: response.status }))
+  async deleteEntry (entryId: string): Promise<TimetrackingEntryResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/entries/${entryId}`)
+    try {
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) { throw new TimetrackingEntryDeleteFailed(undefined, { status: response.status }) }
 
-        return resolve({ msg: response.data.msg } as TimetrackingEntryResponse)
-      } catch (error) {
-        return reject(new TimetrackingEntryDeleteFailed(undefined, { error }))
-      }
-    })
+      return { msg: response.data.msg }
+    } catch (error) {
+      throw new TimetrackingEntryDeleteFailed(undefined, { error })
+    }
   }
 
-  getStaffList (): Promise<TimetrackingResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri('/staff')
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new TimetrackingStaffListFetchFailed(undefined, { status: response.status }))
+  async getStaffList (): Promise<TimetrackingResponse> {
+    const uri = this.uriHelper.generateBaseUri('/staff')
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) { throw new TimetrackingStaffListFetchFailed(undefined, { status: response.status }) }
 
-        return resolve({
-          data: response.data.results,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as TimetrackingResponse)
-      } catch (error) {
-        return reject(new TimetrackingStaffListFetchFailed(undefined, { error }))
+      return {
+        data: response.data.results,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new TimetrackingStaffListFetchFailed(undefined, { error })
+    }
   }
 }
 

@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 import { UriHelper } from '../uri-helper'
@@ -62,40 +61,36 @@ export class Messages extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll (query?: MessagesQueryOptions | undefined): Promise<MessagesResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const queryString = qs.stringify(query, { addQueryPrefix: true })
-        const uri = `${this.options.base}${this.endpoint}/${this.options.user}${queryString}`
+  async getAll (query?: MessagesQueryOptions | undefined): Promise<MessagesResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.MessagesFetchFailed())
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new errors.MessagesFetchFailed()
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as MessagesResponse)
-      } catch (err) {
-        return reject(new errors.MessagesFetchFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new errors.MessagesFetchFailed()
+    }
   }
 
-  update (messageId: string, messageRequest: Message): Promise<MessageResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri(`/${messageId}`)
+  async update (messageId: string, messageRequest: Message): Promise<MessageResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri(`/${messageId}`)
 
-        const response = await this.http.getClient().put(uri, messageRequest)
-        response.status !== 200 && reject(new errors.MessagesUpdateFailed())
+      const response = await this.http.getClient().put(uri, messageRequest)
+      if (response.status !== 200) throw new errors.MessagesUpdateFailed()
 
-        return resolve({
-          data: response.data.results[0] as Message,
-          metadata: { count: response.data.count }
-        } as MessageResponse)
-      } catch (err) {
-        return reject(new errors.MessagesUpdateFailed())
+      return {
+        data: response.data.results[0] as Message,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new errors.MessagesUpdateFailed()
+    }
   }
 }

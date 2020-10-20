@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
@@ -25,7 +24,7 @@ export interface ContentsResponse {
 }
 
 export interface ContentResponse {
-  data: Content
+  data?: Content
   metadata?: {
     count?: number
     patch?: any
@@ -73,129 +72,109 @@ export class Contents extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll (queryOrOptions?: ContentsQuery | undefined): Promise<ContentsResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (queryOrOptions?: ContentsQuery | undefined): Promise<ContentsResponse> {
+    let next
 
-      try {
-        let uri
-        if (queryOrOptions?.uri) {
-          uri = queryOrOptions.uri
-        } else {
-          let queryString = ''
-          if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
-            queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
-          }
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
-            queryString ? `?${queryString}` : ''
-          }`
-        }
-
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new ContentsFetchFailed(undefined, { status: response.status }))
-        }
-
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<ContentsResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { cursor: response.data.cursor },
-          next
-        } as ContentsResponse)
-      } catch (error) {
-        return reject(new ContentsFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new ContentsFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      if (response.data.cursor?.next) {
+        next = (): Promise<ContentsResponse> => this.getAll({ uri: response.data.cursor.next })
+      }
+
+      return {
+        data: response.data.results,
+        metadata: { cursor: response.data.cursor },
+        next
+      }
+    } catch (error) {
+      throw new ContentsFetchFailed(undefined, { error })
+    }
   }
 
-  get (contentId: string): Promise<ContentResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${contentId}`
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new ContentFetchFailed(undefined, { status: response.status }))
-
-        return resolve({
-          data: response.data.results[0] as Content,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as ContentResponse)
-      } catch (error) {
-        return reject(new ContentFetchFailed(undefined, { error }))
+  async get (contentId: string): Promise<ContentResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${contentId}`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new ContentFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0] as Content,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new ContentFetchFailed(undefined, { error })
+    }
   }
 
-  search (searchTerm: string): Promise<ContentsResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}?q=${searchTerm}`
-      try {
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new ContentsSearchFailed(undefined, { status: response.status }))
-        }
+  async search (searchTerm: string): Promise<ContentsResponse> {
+    const base = this.uriHelper.generateBaseUri()
+    const uri = this.uriHelper.generateUriWithQuery(base, { q: searchTerm })
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as ContentsResponse)
-      } catch (error) {
-        return reject(new ContentsSearchFailed(undefined, { error }))
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new ContentsSearchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new ContentsSearchFailed(undefined, { error })
+    }
   }
 
-  patch (contentId: string, content: Content): Promise<ContentResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${contentId}`
-      try {
-        const response = await this.http.getClient().patch(uri, content)
+  async patch (contentId: string, content: Content): Promise<ContentResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${contentId}`)
+    try {
+      const response = await this.http.getClient().patch(uri, content)
 
-        return resolve({
-          data: response.data.results[0] as Content,
-          metadata: { count: response.data.count }
-        } as ContentResponse)
-      } catch (error) {
-        return reject(new ContentPatchFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Content,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new ContentPatchFailed(undefined, { error })
+    }
   }
 
-  create (content: Content): Promise<ContentResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-      try {
-        const response = await this.http.getClient().post(uri, content)
+  async create (content: Content): Promise<ContentResponse> {
+    const uri = this.uriHelper.generateBaseUri()
+    try {
+      const response = await this.http.getClient().post(uri, content)
 
-        return resolve({
-          data: response.data.results[0] as Content,
-          metadata: { count: response.data.count }
-        } as ContentResponse)
-      } catch (error) {
-        return reject(new ContentCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Content,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new ContentCreationFailed(undefined, { error })
+    }
   }
 
-  delete (contentId: string): Promise<ContentResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${contentId}`
-      try {
-        const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new ContentDeleteFailed())
+  async delete (contentId: string): Promise<ContentResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${contentId}`)
+    try {
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) throw new ContentDeleteFailed()
 
-        return resolve({
-          msg: response.data.msg
-        } as ContentResponse)
-      } catch (err) {
-        return reject(new ContentDeleteFailed())
+      return {
+        msg: response.data.msg
       }
-    })
+    } catch (err) {
+      throw new ContentDeleteFailed()
+    }
   }
 }
 

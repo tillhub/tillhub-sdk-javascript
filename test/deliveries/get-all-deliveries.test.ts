@@ -19,7 +19,8 @@ if (process.env.SYSTEM_TEST) {
 }
 
 const query = {
-  embed: ['location']
+  embed: ['location', 'product'],
+  limit: 500
 }
 
 const legacyId = '4564'
@@ -46,7 +47,7 @@ describe('v0: Deliveries: can get all', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/deliveries/${legacyId}?embed[]=location`)
+        .onGet(`https://api.tillhub.com/api/v0/deliveries/${legacyId}?limit=500&embed[]=location&embed[]=product`)
         .reply(() => {
           return [
             200,
@@ -98,7 +99,7 @@ describe('v0: Deliveries: can get all', () => {
         ]
       })
       mock
-        .onGet(`https://api.tillhub.com/api/v0/deliveries/${legacyId}?embed[]=location`)
+        .onGet(`https://api.tillhub.com/api/v0/deliveries/${legacyId}?limit=500&embed[]=location&embed[]=product`)
         .reply(() => {
           return [400]
         })

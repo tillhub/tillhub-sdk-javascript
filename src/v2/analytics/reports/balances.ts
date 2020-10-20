@@ -5,6 +5,7 @@ import {
 } from '../../../base'
 import { Client } from '../../../client'
 import { BaseError } from '../../../errors'
+import { UriHelper } from '../../../uri-helper'
 
 export interface BalancesHandlerOptions {
   user?: string
@@ -12,8 +13,8 @@ export interface BalancesHandlerOptions {
 }
 
 export interface AnalyticsReportsBalancesOverviewResponseItem {
-    data: Array<Record<string, unknown>>
-  summary: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
+  summary: Array<Record<string, unknown>>
   metaData: {
     count: number
     total_count: number
@@ -35,13 +36,13 @@ export class AnalyticsReportsBalancesOverview extends ThAnalyticsBaseHandler {
   http: Client
   public options: BalancesHandlerOptions
 
-  constructor(options: BalancesHandlerOptions, http: Client) {
+  constructor (options: BalancesHandlerOptions, http: Client) {
     super(http, options)
     this.options = options
     this.http = http
   }
 
-  static create(options: Record<string, unknown>, http: Client): AnalyticsReportsBalancesOverview {
+  static create (options: Record<string, unknown>, http: Client): AnalyticsReportsBalancesOverview {
     return ThAnalyticsBaseHandler.generateAuthenticatedInstance(
       AnalyticsReportsBalancesOverview,
       options,
@@ -49,15 +50,14 @@ export class AnalyticsReportsBalancesOverview extends ThAnalyticsBaseHandler {
     )
   }
 
-  public async getAll(
+  public async getAll (
     query?: Record<string, unknown>
   ): Promise<AnalyticsReportsBalancesOverviewResponseItem> {
     try {
       let nextFn
-      const { results: d, next } = await this.handleGet(
-        `${this.options.base}/api/v2/analytics/${this.options.user}/reports/balances/overview`,
-        query
-      )
+      const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
+      const uri = localUriHelper.generateBaseUri('/reports/balances/overview')
+      const { results: d, next } = await this.handleGet(uri, query)
 
       // eslint-disable-next-line
       // @ts-ignore
@@ -91,11 +91,7 @@ export class AnalyticsReportsBalancesOverview extends ThAnalyticsBaseHandler {
         data: data,
         summary: summary,
         metaData: {
-          // eslint-disable-next-line
-          // @ts-ignore
           count: count.count,
-          // eslint-disable-next-line
-          // @ts-ignore
           total_count: totalCount.count
         },
         next: nextFn
@@ -105,14 +101,13 @@ export class AnalyticsReportsBalancesOverview extends ThAnalyticsBaseHandler {
     }
   }
 
-  public async export(
+  public async export (
     query?: Record<string, unknown>
   ): Promise<AnalyticsReportsBalancesOverviewExportResponseItem> {
     try {
-      const result = await this.handleExport(
-        `${this.options.base}/api/v2/analytics/${this.options.user}/reports/balances/overview`,
-        query
-      )
+      const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
+      const uri = localUriHelper.generateBaseUri('/reports/balances/overview')
+      const result = await this.handleExport(uri, query)
       return result
     } catch (err) {
       throw new AnalyticsReportsBalancesOverviewExportFetchError(undefined, { error: err })
@@ -124,13 +119,13 @@ export class AnalyticsReportsBalancesDetail extends ThAnalyticsBaseHandler {
   http: Client
   public options: BalancesHandlerOptions
 
-  constructor(options: BalancesHandlerOptions, http: Client) {
+  constructor (options: BalancesHandlerOptions, http: Client) {
     super(http, options)
     this.options = options
     this.http = http
   }
 
-  static create(options: Record<string, unknown>, http: Client): AnalyticsReportsBalancesDetail {
+  static create (options: Record<string, unknown>, http: Client): AnalyticsReportsBalancesDetail {
     return ThAnalyticsBaseHandler.generateAuthenticatedInstance(
       AnalyticsReportsBalancesDetail,
       options,
@@ -138,11 +133,11 @@ export class AnalyticsReportsBalancesDetail extends ThAnalyticsBaseHandler {
     )
   }
 
-  public async get(id?: string): Promise<AnalyticsReportsBalancesDetailResponseItem> {
+  public async get (id: string): Promise<AnalyticsReportsBalancesDetailResponseItem> {
     try {
-      const { results: d } = await this.handleGet(
-        `${this.options.base}/api/v2/analytics/${this.options.user}/reports/balances/${id}/detail`
-      )
+      const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
+      const uri = localUriHelper.generateBaseUri(`/reports/balances/${id}/detail`)
+      const { results: d } = await this.handleGet(uri)
 
       // eslint-disable-next-line
       // @ts-ignore
@@ -157,7 +152,7 @@ export class AnalyticsReportsBalancesDetail extends ThAnalyticsBaseHandler {
           count: 1,
           total_count: 1
         }
-      } as AnalyticsReportsBalancesDetailResponseItem
+      }
     } catch (err) {
       throw new AnalyticsReportsTransactionDetailFetcshError(undefined, { error: err })
     }
@@ -166,7 +161,7 @@ export class AnalyticsReportsBalancesDetail extends ThAnalyticsBaseHandler {
 
 export class AnalyticsReportsBalancesOverviewFetchError extends BaseError {
   public name = 'AnalyticsReportsBalancesOverviewFetchError'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch balance overview. ',
     properties?: Record<string, unknown>
   ) {
@@ -177,7 +172,7 @@ export class AnalyticsReportsBalancesOverviewFetchError extends BaseError {
 
 export class AnalyticsReportsTransactionDetailFetcshError extends BaseError {
   public name = 'AnalyticsReportsTransactionDetailFetcshError'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch balance detail. ',
     properties?: Record<string, unknown>
   ) {
@@ -188,7 +183,7 @@ export class AnalyticsReportsTransactionDetailFetcshError extends BaseError {
 
 export class AnalyticsReportsBalancesOverviewExportFetchError extends BaseError {
   public name = 'AnalyticsReportsBalancesOverviewExportFetchError'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch balance overview export. ',
     properties?: Record<string, unknown>
   ) {

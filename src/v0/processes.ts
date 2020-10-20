@@ -23,11 +23,12 @@ export interface ProcessItemsQueryOptions {
 export interface ProcessesResponse {
   data: Process[]
   metadata: Record<string, unknown>
+  next?: () => Promise<ProcessesResponse>
 }
 
 export interface ProcessResponse {
-  data: Process
-  metadata: Record<string, unknown>
+  data?: Process
+  metadata?: Record<string, unknown>
   msg?: string
 }
 
@@ -75,152 +76,135 @@ export class Processes extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  create (process: Process): Promise<ProcessResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri()
+  async create (process: Process): Promise<ProcessResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri()
 
-        const response = await this.http.getClient().post(uri, process)
-        response.status !== 200 &&
-          reject(new ProcessesCreationFailed(undefined, { status: response.status }))
-
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.count }
-        } as ProcessResponse)
-      } catch (error) {
-        return reject(new ProcessesCreationFailed(undefined, { error }))
+      const response = await this.http.getClient().post(uri, process)
+      if (response.status !== 200) {
+        throw new ProcessesCreationFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new ProcessesCreationFailed(undefined, { error })
+    }
   }
 
-  getAll (query?: ProcessesQueryOptions): Promise<ProcessesResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (query?: ProcessesQueryOptions): Promise<ProcessesResponse> {
+    let next
 
-      try {
-        const baseUri = this.uriHelper.generateBaseUri()
-        const uri = this.uriHelper.generateUriWithQuery(baseUri, query)
+    try {
+      const baseUri = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(baseUri, query)
 
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new ProcessesFetchFailed(undefined, { status: response.status }))
-        }
-
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<ProcessesResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count },
-          next
-        } as ProcessesResponse)
-      } catch (error) {
-        return reject(new ProcessesFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new ProcessesFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      if (response.data.cursor?.next) {
+        next = (): Promise<ProcessesResponse> => this.getAll({ uri: response.data.cursor.next })
+      }
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count },
+        next
+      }
+    } catch (error) {
+      throw new ProcessesFetchFailed(undefined, { error })
+    }
   }
 
-  get (processId: string, query?: ProcessesQueryOptions): Promise<ProcessResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const baseUri = this.uriHelper.generateBaseUri(`/${processId}`)
-        const uri = this.uriHelper.generateUriWithQuery(baseUri, query)
+  async get (processId: string, query?: ProcessesQueryOptions): Promise<ProcessResponse> {
+    try {
+      const baseUri = this.uriHelper.generateBaseUri(`/${processId}`)
+      const uri = this.uriHelper.generateUriWithQuery(baseUri, query)
 
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new ProcessesFetchOneFailed(undefined, { status: response.status }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) { throw new ProcessesFetchOneFailed(undefined, { status: response.status }) }
 
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: 1 }
-        } as ProcessResponse)
-      } catch (error) {
-        return reject(new ProcessesFetchOneFailed(undefined, { error }))
+      return {
+        data: response.data.results[0],
+        metadata: { count: 1 }
       }
-    })
+    } catch (error) {
+      throw new ProcessesFetchOneFailed(undefined, { error })
+    }
   }
 
-  update (processId: string, process: Process): Promise<ProcessResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri(`/${processId}`)
+  async update (processId: string, process: Process): Promise<ProcessResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri(`/${processId}`)
 
-        const response = await this.http.getClient().patch(uri, process)
-        response.status !== 200 &&
-          reject(new ProcessesUpdateFailed(undefined, { status: response.status }))
+      const response = await this.http.getClient().patch(uri, process)
+      if (response.status !== 200) { throw new ProcessesUpdateFailed(undefined, { status: response.status }) }
 
-        return resolve({
-          data: response.data.results[0] as Process,
-          metadata: { count: response.data.count }
-        } as ProcessResponse)
-      } catch (error) {
-        return reject(new ProcessesUpdateFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Process,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new ProcessesUpdateFailed(undefined, { error })
+    }
   }
 
-  delete (processId: string): Promise<ProcessResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri(`/${processId}`)
+  async delete (processId: string): Promise<ProcessResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri(`/${processId}`)
 
-        const response = await this.http.getClient().delete(uri)
-        response.status !== 200 &&
-          reject(new ProcessesDeleteFailed(undefined, { status: response.status }))
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) { throw new ProcessesDeleteFailed(undefined, { status: response.status }) }
 
-        return resolve({
-          msg: response.data.msg
-        } as ProcessResponse)
-      } catch (error) {
-        return reject(new ProcessesDeleteFailed(undefined, { error }))
+      return {
+        msg: response.data.msg
       }
-    })
+    } catch (error) {
+      throw new ProcessesDeleteFailed(undefined, { error })
+    }
   }
 
-  getItems (processId: string, query?: ProcessItemsQueryOptions): Promise<ProcessesItemsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const baseUri = this.uriHelper.generateBaseUri(`/${processId}/items`)
-        const uri = this.uriHelper.generateUriWithQuery(baseUri, query)
+  async getItems (processId: string, query?: ProcessItemsQueryOptions): Promise<ProcessesItemsResponse> {
+    try {
+      const baseUri = this.uriHelper.generateBaseUri(`/${processId}/items`)
+      const uri = this.uriHelper.generateUriWithQuery(baseUri, query)
 
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new ProcessItemsFetchFailed(undefined, { state: response.status }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) { throw new ProcessItemsFetchFailed(undefined, { state: response.status }) }
 
-        return resolve({
-          data: response.data.results as ProcessItems,
-          metadata: { count: response.data.count }
-        } as ProcessesItemsResponse)
-      } catch (error) {
-        return reject(new ProcessItemsFetchFailed(undefined, { error }))
+      return {
+        data: response.data.results as ProcessItems,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new ProcessItemsFetchFailed(undefined, { error })
+    }
   }
 
-  meta (query?: ProcessesQueryOptions): Promise<ProcessesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const base = this.uriHelper.generateBaseUri('/meta')
-      const uri = this.uriHelper.generateUriWithQuery(base, query)
+  async meta (query?: ProcessesQueryOptions): Promise<ProcessesResponse> {
+    const base = this.uriHelper.generateBaseUri('/meta')
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      try {
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new ProcessesMetaFailed(undefined, { status: response.status }))
-        }
-        if (!response.data.results[0]) {
-          return reject(new ProcessesMetaFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.count }
-        } as ProcessesResponse)
-      } catch (err) {
-        return reject(new ProcessesMetaFailed(undefined, { error: err }))
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new ProcessesMetaFailed(undefined, { status: response.status })
       }
-    })
+      if (!response.data.results[0]) {
+        throw new ProcessesMetaFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new ProcessesMetaFailed(undefined, { error: err })
+    }
   }
 }
 

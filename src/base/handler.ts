@@ -62,7 +62,7 @@ export interface ThAnalyticsBaseResultItem {
     type?: string
   }
   count: number
-  values: Array<Record<string, unknown>>
+  values: any[]
 }
 
 export interface ThAnalyticsBaseResponse {
@@ -87,18 +87,18 @@ export class ThAnalyticsBaseHandler {
   }
 
   protected static generateAuthenticatedInstance<T>(
-    type: new (options: ThAnalyticsBaseHandlerOptions, http: Client) => T,
+    Type: new (options: ThAnalyticsBaseHandlerOptions, http: Client) => T,
     options: ThAnalyticsBaseHandlerOptions,
     http: Client
   ): T {
-    return new type(options, http)
+    return new Type(options, http)
   }
 
   private static generateUriWithQuery (basePath: string, query?: HandlerQuery): string {
     let uri
     if (!query) {
       uri = `${basePath}`
-    } else if (query.uri || (query.query && query.query.uri)) {
+    } else if (query.uri ?? (query.query?.uri)) {
       uri = query.uri ?? query.query.uri
     } else if (query.query) {
       const flattenedQuery = Object.assign({}, query, query.query)
@@ -127,9 +127,9 @@ export class ThAnalyticsBaseHandler {
     return {
       status: response.status,
       next:
-        response.data.cursor && response.data.cursor.next ? response.data.cursor.next : undefined,
+        response.data.cursor?.next ? response.data.cursor.next : undefined,
       results: response.data.results
-    } as ThAnalyticsBaseResponse
+    }
   }
 
   protected async handleExport (
@@ -146,6 +146,6 @@ export class ThAnalyticsBaseHandler {
 
     return {
       ...response.data.results[0]
-    } as ThAnalyticsExportsBaseResponse
+    }
   }
 }

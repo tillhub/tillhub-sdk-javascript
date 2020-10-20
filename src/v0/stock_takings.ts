@@ -23,11 +23,12 @@ export interface StockTakingsQueryOptions {
 export interface StockTakingsResponse {
   data: StockTaking[]
   metadata: Record<string, unknown>
+  next?: () => Promise<StockTakingsResponse>
 }
 
 export interface StockTakingResponse {
-  data: StockTaking
-  metadata: Record<string, unknown>
+  data?: StockTaking
+  metadata?: Record<string, unknown>
   msg?: string
 }
 
@@ -58,133 +59,125 @@ export class StockTakings extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  create (stockTaking: StockTaking): Promise<StockTakingResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri()
+  async create (stockTaking: StockTaking): Promise<StockTakingResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri()
 
-        const response = await this.http.getClient().post(uri, stockTaking)
-        response.status !== 200 &&
-          reject(new StockTakingsCreationFailed(undefined, { status: response.status }))
-
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.count }
-        } as StockTakingResponse)
-      } catch (error) {
-        return reject(new StockTakingsCreationFailed(undefined, { error }))
+      const response = await this.http.getClient().post(uri, stockTaking)
+      if (response.status !== 200) {
+        throw new StockTakingsCreationFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new StockTakingsCreationFailed(undefined, { error })
+    }
   }
 
-  getAll (query?: StockTakingsQueryOptions): Promise<StockTakingsResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (query?: StockTakingsQueryOptions): Promise<StockTakingsResponse> {
+    let next
 
-      try {
-        const baseUri = this.uriHelper.generateBaseUri()
-        const uri = this.uriHelper.generateUriWithQuery(baseUri, query)
+    try {
+      const baseUri = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(baseUri, query)
 
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new StockTakingsFetchFailed(undefined, { status: response.status }))
-        }
-
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<StockTakingsResponse> =>
-            this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count },
-          next
-        } as StockTakingsResponse)
-      } catch (error) {
-        return reject(new StockTakingsFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new StockTakingsFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      if (response.data.cursor?.next) {
+        next = (): Promise<StockTakingsResponse> =>
+          this.getAll({ uri: response.data.cursor.next })
+      }
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count },
+        next
+      }
+    } catch (error) {
+      throw new StockTakingsFetchFailed(undefined, { error })
+    }
   }
 
-  get (stockTakingId: string, query?: StockTakingsQueryOptions): Promise<StockTakingResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const baseUri = this.uriHelper.generateBaseUri(`/${stockTakingId}`)
-        const uri = this.uriHelper.generateUriWithQuery(baseUri, query)
+  async get (stockTakingId: string, query?: StockTakingsQueryOptions): Promise<StockTakingResponse> {
+    try {
+      const baseUri = this.uriHelper.generateBaseUri(`/${stockTakingId}`)
+      const uri = this.uriHelper.generateUriWithQuery(baseUri, query)
 
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new StockTakingsFetchOneFailed(undefined, { status: response.status }))
-
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: 1 }
-        } as StockTakingResponse)
-      } catch (error) {
-        return reject(new StockTakingsFetchOneFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new StockTakingsFetchOneFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: 1 }
+      }
+    } catch (error) {
+      throw new StockTakingsFetchOneFailed(undefined, { error })
+    }
   }
 
-  update (stockTakingId: string, stockTaking: StockTaking): Promise<StockTakingResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri(`/${stockTakingId}`)
+  async update (stockTakingId: string, stockTaking: StockTaking): Promise<StockTakingResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri(`/${stockTakingId}`)
 
-        const response = await this.http.getClient().patch(uri, stockTaking)
-        response.status !== 200 &&
-          reject(new StockTakingsUpdateFailed(undefined, { status: response.status }))
-
-        return resolve({
-          data: response.data.results[0] as StockTaking,
-          metadata: { count: response.data.count }
-        } as StockTakingResponse)
-      } catch (error) {
-        return reject(new StockTakingsUpdateFailed(undefined, { error }))
+      const response = await this.http.getClient().patch(uri, stockTaking)
+      if (response.status !== 200) {
+        throw new StockTakingsUpdateFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0] as StockTaking,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new StockTakingsUpdateFailed(undefined, { error })
+    }
   }
 
-  delete (stockTakingId: string): Promise<StockTakingResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri(`/${stockTakingId}`)
+  async delete (stockTakingId: string): Promise<StockTakingResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri(`/${stockTakingId}`)
 
-        const response = await this.http.getClient().delete(uri)
-        response.status !== 200 &&
-          reject(new StockTakingsDeleteFailed(undefined, { status: response.status }))
-
-        return resolve({
-          msg: response.data.msg
-        } as StockTakingResponse)
-      } catch (error) {
-        return reject(new StockTakingsDeleteFailed(undefined, { error }))
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) {
+        throw new StockTakingsDeleteFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        msg: response.data.msg
+      }
+    } catch (error) {
+      throw new StockTakingsDeleteFailed(undefined, { error })
+    }
   }
 
-  meta (query?: StockTakingsQueryOptions): Promise<StockTakingsResponse> {
-    return new Promise(async (resolve, reject) => {
-      const base = this.uriHelper.generateBaseUri('/meta')
-      const uri = this.uriHelper.generateUriWithQuery(base, query)
+  async meta (query?: StockTakingsQueryOptions): Promise<StockTakingsResponse> {
+    const base = this.uriHelper.generateBaseUri('/meta')
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      try {
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new StockTakingsMetaFailed(undefined, { status: response.status }))
-        }
-        if (!response.data.results[0]) {
-          return reject(new StockTakingsMetaFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.count }
-        } as StockTakingsResponse)
-      } catch (err) {
-        return reject(new StockTakingsMetaFailed(undefined, { error: err }))
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new StockTakingsMetaFailed(undefined, { status: response.status })
       }
-    })
+      if (!response.data.results[0]) {
+        throw new StockTakingsMetaFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new StockTakingsMetaFailed(undefined, { error: err })
+    }
   }
 }
 

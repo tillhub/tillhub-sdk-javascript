@@ -1,7 +1,7 @@
-import qs from 'qs'
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { ThBaseHandler } from '../base'
+import { UriHelper } from '../uri-helper'
 
 export interface StorefrontsOptions {
   user?: string
@@ -23,7 +23,7 @@ export interface StorefrontsResponse {
 }
 
 export interface StorefrontResponse {
-  data: Storefront
+  data?: Storefront
   metadata?: {
     count?: number
     patch?: any
@@ -58,6 +58,7 @@ export class Storefronts extends ThBaseHandler {
   endpoint: string
   http: Client
   public options: StorefrontsOptions
+  public uriHelper: UriHelper
 
   constructor (options: StorefrontsOptions, http: Client) {
     super(http, {
@@ -69,107 +70,84 @@ export class Storefronts extends ThBaseHandler {
 
     this.endpoint = Storefronts.baseEndpoint
     this.options.base = this.options.base ?? 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll (queryOrOptions?: StorefrontsQuery | undefined): Promise<StorefrontsResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (queryOrOptions?: StorefrontsQuery | undefined): Promise<StorefrontsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
 
-      try {
-        let uri
-        if (queryOrOptions?.uri) {
-          uri = queryOrOptions.uri
-        } else {
-          let queryString = ''
-          if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
-            queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
-          }
-
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
-            queryString ? `?${queryString}` : ''
-          }`
-        }
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new StorefrontsFetchFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count },
-          next
-        } as StorefrontsResponse)
-      } catch (error) {
-        return reject(new StorefrontsFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new StorefrontsFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new StorefrontsFetchFailed(undefined, { error })
+    }
   }
 
-  get (storefrontId: string): Promise<StorefrontResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${storefrontId}`
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new StorefrontsFetchOneFailed(undefined, { status: response.status }))
+  async get (storefrontId: string): Promise<StorefrontResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${storefrontId}`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) { throw new StorefrontsFetchOneFailed(undefined, { status: response.status }) }
 
-        return resolve({
-          data: response.data.results[0] as Storefront,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as StorefrontResponse)
-      } catch (error) {
-        return reject(new StorefrontsFetchOneFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Storefront,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new StorefrontsFetchOneFailed(undefined, { error })
+    }
   }
 
-  put (storefrontId: string, storefront: Storefront): Promise<StorefrontResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${storefrontId}`
-      try {
-        const response = await this.http.getClient().put(uri, storefront)
+  async put (storefrontId: string, storefront: Storefront): Promise<StorefrontResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${storefrontId}`)
+    try {
+      const response = await this.http.getClient().put(uri, storefront)
 
-        return resolve({
-          data: response.data.results[0] as Storefront,
-          metadata: { count: response.data.count }
-        } as StorefrontResponse)
-      } catch (error) {
-        return reject(new StorefrontsPutFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Storefront,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new StorefrontsPutFailed(undefined, { error })
+    }
   }
 
-  create (storefront: Storefront): Promise<StorefrontResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-      try {
-        const response = await this.http.getClient().post(uri, storefront)
+  async create (storefront: Storefront): Promise<StorefrontResponse> {
+    const uri = this.uriHelper.generateBaseUri()
+    try {
+      const response = await this.http.getClient().post(uri, storefront)
 
-        return resolve({
-          data: response.data.results[0] as Storefront,
-          metadata: { count: response.data.count }
-        } as StorefrontResponse)
-      } catch (error) {
-        return reject(new StorefrontsCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Storefront,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new StorefrontsCreationFailed(undefined, { error })
+    }
   }
 
-  delete (storefrontId: string): Promise<StorefrontResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${storefrontId}`
-      try {
-        const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new StorefrontsDeleteFailed())
+  async delete (storefrontId: string): Promise<StorefrontResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${storefrontId}`)
+    try {
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) throw new StorefrontsDeleteFailed()
 
-        return resolve({
-          msg: response.data.msg
-        } as StorefrontResponse)
-      } catch (err) {
-        return reject(new StorefrontsDeleteFailed())
+      return {
+        msg: response.data.msg
       }
-    })
+    } catch (err) {
+      throw new StorefrontsDeleteFailed()
+    }
   }
 }
 

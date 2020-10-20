@@ -33,8 +33,8 @@ export interface FavouritesResponse {
 }
 
 export interface FavouriteResponse {
-  data: Favourite
-  metadata: Record<string, unknown>
+  data?: Favourite
+  metadata?: Record<string, unknown>
   msg?: string
 }
 
@@ -74,7 +74,7 @@ export class Favourites extends ThBaseHandler {
       return {
         data: response.data.results,
         metadata: { count: response.data.count }
-      } as FavouritesResponse
+      }
     } catch (e) {
       throw new errors.FavouritesFetchFailed()
     }
@@ -89,10 +89,10 @@ export class Favourites extends ThBaseHandler {
       if (response.status !== 200) throw new errors.FavouriteFetchFailed()
 
       return {
-        data: response.data.results[0] as Favourites,
+        data: response.data.results[0],
         metadata: { count: response.data.count },
         msg: response.data.msg
-      } as FavouriteResponse
+      }
     } catch (e) {
       throw new errors.FavouriteFetchFailed()
     }
@@ -107,9 +107,9 @@ export class Favourites extends ThBaseHandler {
       if (response.status !== 200) throw new errors.FavouriteCreateFailed()
 
       return {
-        data: response.data.results[0] as Favourites,
+        data: response.data.results[0],
         metadata: { count: response.data.count }
-      } as FavouriteResponse
+      }
     } catch (e) {
       throw new errors.FavouriteCreateFailed()
     }
@@ -124,9 +124,9 @@ export class Favourites extends ThBaseHandler {
       if (response.status !== 200) throw new errors.FavouriteUpdateFailed()
 
       return {
-        data: response.data.results[0] as Favourites,
+        data: response.data.results[0],
         metadata: { count: response.data.count }
-      } as FavouriteResponse
+      }
     } catch (e) {
       throw new errors.FavouriteUpdateFailed()
     }
@@ -142,7 +142,7 @@ export class Favourites extends ThBaseHandler {
 
       return {
         msg: response.data.msg
-      } as FavouriteResponse
+      }
     } catch (e) {
       throw new errors.FavouriteDeleteFailed()
     }

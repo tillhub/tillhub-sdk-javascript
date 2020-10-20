@@ -25,26 +25,24 @@ export interface UsersResponse {
 }
 
 export interface UserResponse {
-  data: User
+  data?: User
   metadata?: {
     count?: number
     patch?: any
   }
   msg?: string
 }
-export interface User {
-  id?: string
-}
 
 export type UserRoles =
-  | 'admin'
-  | 'manager'
-  | 'serviceaccount'
-  | 'franchisee'
-  | 'franchise'
-  | 'staff'
+| 'admin'
+| 'manager'
+| 'serviceaccount'
+| 'franchisee'
+| 'franchise'
+| 'staff'
 
 export interface User {
+  id?: string
   user: {
     id?: string
     email?: string
@@ -94,119 +92,105 @@ export class Users extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll (query?: HandleUsersQuery): Promise<UsersResponse> {
+  async getAll (query?: HandleUsersQuery): Promise<UsersResponse> {
     if (!this.configurationId) { throw new TypeError('fetching users requires configuration ID to be set.') }
-    return new Promise(async (resolve, reject) => {
-      let next
+    try {
+      const base = this.uriHelper.generateBaseUri(`/${this.configurationId}/users`)
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      try {
-        const base = this.uriHelper.generateBaseUri(`/${this.configurationId}/users`)
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
-
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new UsersFetchFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count },
-          next
-        } as UsersResponse)
-      } catch (error) {
-        return reject(new UsersFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new UsersFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new UsersFetchFailed(undefined, { error })
+    }
   }
 
-  get (userId: string): Promise<UserResponse> {
+  async get (userId: string): Promise<UserResponse> {
     if (!this.configurationId) { throw new TypeError('fetching users requires configuration ID to be set.') }
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${this.configurationId}/users/${userId}`
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new UsersFetchFailed(undefined, { status: response.status }))
-
-        return resolve({
-          data: response.data.results[0] as User,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as UserResponse)
-      } catch (error) {
-        return reject(new UserFetchFailed(undefined, { error }))
+    const uri = this.uriHelper.generateBaseUri(`/${this.configurationId}/users/${userId}`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new UsersFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0],
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new UserFetchFailed(undefined, { error })
+    }
   }
 
-  put (userId: string, user: User): Promise<UserResponse> {
+  async put (userId: string, user: User): Promise<UserResponse> {
     if (!this.configurationId) { throw new TypeError('fetching users requires configuration ID to be set.') }
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${this.configurationId}/users/${userId}`
-      try {
-        const response = await this.http.getClient().put(uri, user)
+    const uri = this.uriHelper.generateBaseUri(`/${this.configurationId}/users/${userId}`)
+    try {
+      const response = await this.http.getClient().put(uri, user)
 
-        return resolve({
-          data: response.data.results[0] as User,
-          metadata: { count: response.data.count }
-        } as UserResponse)
-      } catch (error) {
-        return reject(new UserPutFailed(undefined, { error }))
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new UserPutFailed(undefined, { error })
+    }
   }
 
-  create (user: User): Promise<UserResponse> {
+  async create (user: User): Promise<UserResponse> {
     if (!this.configurationId) { throw new TypeError('fetching users requires configuration ID to be set.') }
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${this.configurationId}/users`
-      try {
-        const response = await this.http.getClient().post(uri, user)
+    const uri = this.uriHelper.generateBaseUri(`/${this.configurationId}/users`)
+    try {
+      const response = await this.http.getClient().post(uri, user)
 
-        return resolve({
-          data: response.data.results[0] as User,
-          metadata: { count: response.data.count }
-        } as UserResponse)
-      } catch (error) {
-        return reject(new UserCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new UserCreationFailed(undefined, { error })
+    }
   }
 
-  delete (userId: string): Promise<UserResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${this.configurationId}/users/${userId}`
-      try {
-        const response = await this.http.getClient().delete(uri)
-        if (response.status !== 200) {
-          return reject(new UserDeleteFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          msg: response.data.msg
-        } as UserResponse)
-      } catch (error) {
-        return reject(new UserDeleteFailed(undefined, { error }))
+  async delete (userId: string): Promise<UserResponse> {
+    if (!this.configurationId) { throw new TypeError('deleting user requires configuration ID to be set.') }
+    const uri = this.uriHelper.generateBaseUri(`/${this.configurationId}/users/${userId}`)
+    try {
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) {
+        throw new UserDeleteFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        msg: response.data.msg
+      }
+    } catch (error) {
+      throw new UserDeleteFailed(undefined, { error })
+    }
   }
 
-  createToken (userId: string): Promise<UserResponse> {
+  async createToken (userId: string): Promise<UserResponse> {
     if (!this.configurationId) { throw new TypeError('fetching users requires configuration ID to be set.') }
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${this.configurationId}/users/${userId}/api/key`
+    const uri = this.uriHelper.generateBaseUri(`/${this.configurationId}/users/${userId}/api/key`)
+    try {
+      const response = await this.http.getClient().post(uri)
 
-      try {
-        const response = await this.http.getClient().post(uri)
-
-        return resolve({
-          data: response.data.results[0] as User,
-          metadata: { count: response.data.count }
-        } as UserResponse)
-      } catch (error) {
-        return reject(new UserTokenCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new UserTokenCreationFailed(undefined, { error })
+    }
   }
 }
 

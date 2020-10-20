@@ -25,7 +25,7 @@ export interface DeviceGroupsResponse {
 }
 
 export interface DeviceGroupResponse {
-  data: DeviceGroup
+  data?: DeviceGroup
   metadata?: {
     count?: number
     patch?: any
@@ -61,97 +61,88 @@ export class DeviceGroups extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll (query?: DeviceGroupsQuery | undefined): Promise<DeviceGroupsResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (query?: DeviceGroupsQuery | undefined): Promise<DeviceGroupsResponse> {
+    let next
 
-      try {
-        const base = this.uriHelper.generateBaseUri()
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri)
 
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<DeviceGroupsResponse> =>
-            this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count, cursor: response.data.cursor },
-          next
-        } as DeviceGroupsResponse)
-      } catch (error) {
-        return reject(new DeviceGroupsFetchFailed(undefined, { error }))
+      if (response.data.cursor?.next) {
+        next = (): Promise<DeviceGroupsResponse> =>
+          this.getAll({ uri: response.data.cursor.next })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count, cursor: response.data.cursor },
+        next
+      }
+    } catch (error) {
+      throw new DeviceGroupsFetchFailed(undefined, { error })
+    }
   }
 
-  get (deviceGroupId: string): Promise<DeviceGroupResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/${deviceGroupId}`)
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new DeviceGroupFetchFailed(undefined, { status: response.status }))
-
-        return resolve({
-          data: response.data.results[0] as DeviceGroup,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as DeviceGroupResponse)
-      } catch (error) {
-        return reject(new DeviceGroupFetchFailed(undefined, { error }))
+  async get (deviceGroupId: string): Promise<DeviceGroupResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${deviceGroupId}`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new DeviceGroupFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0] as DeviceGroup,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new DeviceGroupFetchFailed(undefined, { error })
+    }
   }
 
-  put (deviceGroupId: string, deviceGroup: DeviceGroup): Promise<DeviceGroupResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/${deviceGroupId}`)
-      try {
-        const response = await this.http.getClient().put(uri, deviceGroup)
+  async put (deviceGroupId: string, deviceGroup: DeviceGroup): Promise<DeviceGroupResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${deviceGroupId}`)
+    try {
+      const response = await this.http.getClient().put(uri, deviceGroup)
 
-        return resolve({
-          data: response.data.results[0] as DeviceGroup,
-          metadata: { count: response.data.count }
-        } as DeviceGroupResponse)
-      } catch (error) {
-        return reject(new DeviceGroupPutFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as DeviceGroup,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new DeviceGroupPutFailed(undefined, { error })
+    }
   }
 
-  create (deviceGroup: DeviceGroup): Promise<DeviceGroupResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri()
-      try {
-        const response = await this.http.getClient().post(uri, deviceGroup)
+  async create (deviceGroup: DeviceGroup): Promise<DeviceGroupResponse> {
+    const uri = this.uriHelper.generateBaseUri()
+    try {
+      const response = await this.http.getClient().post(uri, deviceGroup)
 
-        return resolve({
-          data: response.data.results[0] as DeviceGroup,
-          metadata: { count: response.data.count }
-        } as DeviceGroupResponse)
-      } catch (error) {
-        return reject(new DeviceGroupCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as DeviceGroup,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new DeviceGroupCreationFailed(undefined, { error })
+    }
   }
 
-  delete (deviceGroupId: string): Promise<DeviceGroupResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/${deviceGroupId}`)
-      try {
-        const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new DeviceGroupDeleteFailed())
+  async delete (deviceGroupId: string): Promise<DeviceGroupResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${deviceGroupId}`)
+    try {
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) throw new DeviceGroupDeleteFailed()
 
-        return resolve({
-          msg: response.data.msg
-        } as DeviceGroupResponse)
-      } catch (err) {
-        return reject(new DeviceGroupDeleteFailed())
+      return {
+        msg: response.data.msg
       }
-    })
+    } catch (err) {
+      throw new DeviceGroupDeleteFailed()
+    }
   }
 }
 
