@@ -1,3 +1,11 @@
+## [3.212.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.212.0...v3.212.1) (2020-10-20)
+
+
+### Bug Fixes
+
+* **dist:** properly build bundle ([9320857](https://github.com/tillhub/tillhub-sdk-javascript/commit/9320857de428e283fb8867e6497676105f1ea1e8))
+* build bundle with release config ([ceb0aa5](https://github.com/tillhub/tillhub-sdk-javascript/commit/ceb0aa5c6fc463d799a482d4cdf65324c903b07c))
+
 # [3.212.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.211.0...v3.212.0) (2020-10-20)
 
 
