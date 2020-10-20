@@ -95,6 +95,7 @@ export interface AuthResponse {
   subUser?: Record<string, unknown>
   orgName?: string
   expiresAt?: string
+  whitelabel?: string
   errors?: ErrorObject[]
 }
 
