@@ -2,7 +2,7 @@ import { BaseError } from './baseError'
 
 export class TagsFetchAllFailed extends BaseError {
   public name = 'TagsFetchAllFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch all tags',
     properties?: Record<string, unknown>
   ) {
@@ -13,7 +13,7 @@ export class TagsFetchAllFailed extends BaseError {
 
 export class TagsFetchOneFailed extends BaseError {
   public name = 'TagsFetchOneFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch single tag',
     properties?: Record<string, unknown>
   ) {
@@ -24,7 +24,7 @@ export class TagsFetchOneFailed extends BaseError {
 
 export class TagsGetMetaFailed extends BaseError {
   public name = 'TagsGetMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch meta data for tags',
     properties?: Record<string, unknown>
   ) {
@@ -35,7 +35,7 @@ export class TagsGetMetaFailed extends BaseError {
 
 export class TagsCreationFailed extends BaseError {
   public name = 'TagsCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create tags',
     properties?: Record<string, unknown>
   ) {
@@ -46,7 +46,7 @@ export class TagsCreationFailed extends BaseError {
 
 export class TagsPutFailed extends BaseError {
   public name = 'TagsPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update tags',
     properties?: Record<string, unknown>
   ) {

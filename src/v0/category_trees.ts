@@ -17,13 +17,13 @@ export interface CategoryTreesQuery {
 }
 
 export interface CategoryTreesResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   next?: () => Promise<CategoryTreesResponse>
 }
 
 export interface CategoryTreeResponse {
-  data: CategoryTree
+  data?: CategoryTree
   metadata?: {
     count?: number
     patch?: any
@@ -37,7 +37,7 @@ export interface CategoryTree {
   summary?: string
   description?: string
   comments?: string
-  children?: Record<string, unknown>[]
+  children?: Array<Record<string, unknown>>
   active?: boolean
   deleted?: boolean
 }
@@ -49,119 +49,108 @@ export class CategoryTrees extends ThBaseHandler {
   public options: CategoryTreesOptions
   public uriHelper: UriHelper
 
-  constructor(options: CategoryTreesOptions, http: Client) {
+  constructor (options: CategoryTreesOptions, http: Client) {
     super(http, {
       endpoint: CategoryTrees.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = CategoryTrees.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: CategoryTreesQuery | undefined): Promise<CategoryTreesResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (query?: CategoryTreesQuery | undefined): Promise<CategoryTreesResponse> {
+    let next
 
-      try {
-        const base = this.uriHelper.generateBaseUri()
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new CategoryTreesFetchFailed(undefined, { status: response.status }))
-        }
-
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<CategoryTreesResponse> =>
-            this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { cursor: response.data.cursor },
-          next
-        } as CategoryTreesResponse)
-      } catch (error) {
-        return reject(new CategoryTreesFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new CategoryTreesFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      if (response.data.cursor?.next) {
+        next = (): Promise<CategoryTreesResponse> =>
+          this.getAll({ uri: response.data.cursor.next })
+      }
+
+      return {
+        data: response.data.results,
+        metadata: { cursor: response.data.cursor },
+        next
+      }
+    } catch (error) {
+      throw new CategoryTreesFetchFailed(undefined, { error })
+    }
   }
 
-  get(categoryTreeId: string): Promise<CategoryTreeResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/${categoryTreeId}`)
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new CategoryTreeFetchFailed(undefined, { status: response.status }))
+  async get (categoryTreeId: string): Promise<CategoryTreeResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${categoryTreeId}`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) { throw new CategoryTreeFetchFailed(undefined, { status: response.status }) }
 
-        return resolve({
-          data: response.data.results[0] as CategoryTree,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as CategoryTreeResponse)
-      } catch (error) {
-        return reject(new CategoryTreeFetchFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as CategoryTree,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new CategoryTreeFetchFailed(undefined, { error })
+    }
   }
 
-  put(categoryTreeId: string, categoryTree: CategoryTree): Promise<CategoryTreeResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/${categoryTreeId}`)
-      try {
-        const response = await this.http.getClient().put(uri, categoryTree)
+  async put (categoryTreeId: string, categoryTree: CategoryTree): Promise<CategoryTreeResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${categoryTreeId}`)
+    try {
+      const response = await this.http.getClient().put(uri, categoryTree)
 
-        return resolve({
-          data: response.data.results[0] as CategoryTree,
-          metadata: { count: response.data.count }
-        } as CategoryTreeResponse)
-      } catch (error) {
-        return reject(new CategoryTreePutFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as CategoryTree,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new CategoryTreePutFailed(undefined, { error })
+    }
   }
 
-  create(categoryTree: CategoryTree): Promise<CategoryTreeResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri()
-      try {
-        const response = await this.http.getClient().post(uri, categoryTree)
+  async create (categoryTree: CategoryTree): Promise<CategoryTreeResponse> {
+    const uri = this.uriHelper.generateBaseUri()
+    try {
+      const response = await this.http.getClient().post(uri, categoryTree)
 
-        return resolve({
-          data: response.data.results[0] as CategoryTree,
-          metadata: { count: response.data.count }
-        } as CategoryTreeResponse)
-      } catch (error) {
-        return reject(new CategoryTreeCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as CategoryTree,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new CategoryTreeCreationFailed(undefined, { error })
+    }
   }
 
-  delete(storefrontId: string): Promise<CategoryTreeResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${storefrontId}`
-      try {
-        const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new CategortTreesDeleteFailed())
+  async delete (storefrontId: string): Promise<CategoryTreeResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${storefrontId}`)
+    try {
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) throw new CategoryTreesDeleteFailed()
 
-        return resolve({
-          msg: response.data.msg
-        } as CategoryTreeResponse)
-      } catch (err) {
-        return reject(new CategortTreesDeleteFailed())
+      return {
+        msg: response.data.msg
       }
-    })
+    } catch (err) {
+      throw new CategoryTreesDeleteFailed()
+    }
   }
 }
 
 export class CategoryTreesFetchFailed extends BaseError {
   public name = 'CategoryTreesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch category trees',
     properties?: Record<string, unknown>
   ) {
@@ -172,7 +161,7 @@ export class CategoryTreesFetchFailed extends BaseError {
 
 export class CategoryTreeFetchFailed extends BaseError {
   public name = 'CategoryTreeFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch category tree',
     properties?: Record<string, unknown>
   ) {
@@ -183,7 +172,7 @@ export class CategoryTreeFetchFailed extends BaseError {
 
 export class CategoryTreePutFailed extends BaseError {
   public name = 'CategoryTreePutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter category tree',
     properties?: Record<string, unknown>
   ) {
@@ -194,7 +183,7 @@ export class CategoryTreePutFailed extends BaseError {
 
 export class CategoryTreeCreationFailed extends BaseError {
   public name = 'CategoryTreeCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create category tree',
     properties?: Record<string, unknown>
   ) {
@@ -203,13 +192,13 @@ export class CategoryTreeCreationFailed extends BaseError {
   }
 }
 
-export class CategortTreesDeleteFailed extends BaseError {
-  public name = 'CategortTreesDeleteFailed'
-  constructor(
+export class CategoryTreesDeleteFailed extends BaseError {
+  public name = 'CategoryTreesDeleteFailed'
+  constructor (
     public message: string = 'Could not delete category tree',
     properties?: Record<string, unknown>
   ) {
     super(message, properties)
-    Object.setPrototypeOf(this, CategortTreesDeleteFailed.prototype)
+    Object.setPrototypeOf(this, CategoryTreesDeleteFailed.prototype)
   }
 }

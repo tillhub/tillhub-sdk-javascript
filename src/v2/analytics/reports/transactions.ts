@@ -5,6 +5,7 @@ import {
 } from '../../../base'
 import { Client } from '../../../client'
 import { BaseError } from '../../../errors'
+import { UriHelper } from '../../../uri-helper'
 
 export interface TransactionsHandlerOptions {
   user?: string
@@ -12,8 +13,8 @@ export interface TransactionsHandlerOptions {
 }
 
 export interface AnalyticsReportsTransactionsOverviewResponseItem {
-  data: Record<string, unknown>[]
-  summary: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
+  summary: Array<Record<string, unknown>>
   metaData: {
     count: number
     total_count: number
@@ -35,13 +36,13 @@ export class AnalyticsReportsTransactionsOverview extends ThAnalyticsBaseHandler
   http: Client
   public options: TransactionsHandlerOptions
 
-  constructor(options: TransactionsHandlerOptions, http: Client) {
+  constructor (options: TransactionsHandlerOptions, http: Client) {
     super(http, options)
     this.options = options
     this.http = http
   }
 
-  static create(
+  static create (
     options: Record<string, unknown>,
     http: Client
   ): AnalyticsReportsTransactionsOverview {
@@ -52,39 +53,39 @@ export class AnalyticsReportsTransactionsOverview extends ThAnalyticsBaseHandler
     )
   }
 
-  public async getAll(
+  public async getAll (
     query?: Record<string, unknown>
   ): Promise<AnalyticsReportsTransactionsOverviewResponseItem> {
     try {
       let nextFn
-      const { results: d, next } = await this.handleGet(
-        `${this.options.base}/api/v2/analytics/${this.options.user}/reports/transactions/overview`,
-        query
-      )
+      const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
+      const uri = localUriHelper.generateBaseUri('/reports/transactions/overview')
+      const { results: d, next } = await this.handleGet(uri, query)
+
       if (!d) {
         throw new TypeError('Unexpectedly did not return data.')
       }
 
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+      // @ts-expect-error
       const data = d.find(
         (item: ThAnalyticsBaseResultItem) =>
           item.metric.job === 'reports_transactions_v2_overview_data'
       ).values
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+      // @ts-expect-error
       const summary = d.find(
         (item: ThAnalyticsBaseResultItem) =>
           item.metric.job === 'reports_transactions_v2_overview_summary'
       ).values
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+      // @ts-expect-error
       const count = d.find(
         (item: ThAnalyticsBaseResultItem) =>
           item.metric.job === 'reports_transactions_v2_overview_filtered_meta'
       ).values[0]
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+      // @ts-expect-error
       const totalCount = d.find(
         (item: ThAnalyticsBaseResultItem) =>
           item.metric.job === 'reports_transactions_v2_overview_meta'
@@ -103,20 +104,20 @@ export class AnalyticsReportsTransactionsOverview extends ThAnalyticsBaseHandler
           total_count: totalCount.count
         },
         next: nextFn
-      } as AnalyticsReportsTransactionsOverviewResponseItem
+      }
     } catch (err) {
       throw new AnalyticsReportsTransactionsOverviewFetchError(undefined, { error: err })
     }
   }
 
-  public async export(
+  public async export (
     query?: Record<string, unknown>
   ): Promise<AnalyticsReportsTraansactionsOverviewExportResponseItem> {
     try {
-      const result = await this.handleExport(
-        `${this.options.base}/api/v2/analytics/${this.options.user}/reports/transactions/overview`,
-        query
-      )
+      const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
+      const uri = localUriHelper.generateBaseUri('/reports/transactions/overview')
+      const result = await this.handleExport(uri, query)
+
       return result
     } catch (err) {
       throw new AnalyticsReportsTransactionsOverviewExportFetchError(undefined, { error: err })
@@ -128,13 +129,13 @@ export class AnalyticsReportsTransactionsDetail extends ThAnalyticsBaseHandler {
   http: Client
   public options: TransactionsHandlerOptions
 
-  constructor(options: TransactionsHandlerOptions, http: Client) {
+  constructor (options: TransactionsHandlerOptions, http: Client) {
     super(http, options)
     this.options = options
     this.http = http
   }
 
-  static create(
+  static create (
     options: Record<string, unknown>,
     http: Client
   ): AnalyticsReportsTransactionsDetail {
@@ -145,11 +146,11 @@ export class AnalyticsReportsTransactionsDetail extends ThAnalyticsBaseHandler {
     )
   }
 
-  public async get(id?: string): Promise<AnalyticsReportsTransactionDetailResponseItem> {
+  public async get (id: string): Promise<AnalyticsReportsTransactionDetailResponseItem> {
     try {
-      const { results: d } = await this.handleGet(
-        `${this.options.base}/api/v2/analytics/${this.options.user}/reports/transactions/${id}/detail`
-      )
+      const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
+      const uri = localUriHelper.generateBaseUri(`/reports/transactions/${id}/detail`)
+      const { results: d } = await this.handleGet(uri)
       // eslint-disable-next-line
       // @ts-ignore
       const data = d.find(
@@ -163,7 +164,7 @@ export class AnalyticsReportsTransactionsDetail extends ThAnalyticsBaseHandler {
           count: 1,
           total_count: 1
         }
-      } as AnalyticsReportsTransactionDetailResponseItem
+      }
     } catch (err) {
       throw new AnalyticsReportsTransactionDetailFetcshError(undefined, { error: err })
     }
@@ -172,7 +173,7 @@ export class AnalyticsReportsTransactionsDetail extends ThAnalyticsBaseHandler {
 
 export class AnalyticsReportsTransactionsOverviewFetchError extends BaseError {
   public name = 'AnalyticsReportsTransactionsOverviewFetchError'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch transaction overview. ',
     properties?: Record<string, unknown>
   ) {
@@ -183,7 +184,7 @@ export class AnalyticsReportsTransactionsOverviewFetchError extends BaseError {
 
 export class AnalyticsReportsTransactionDetailFetcshError extends BaseError {
   public name = 'AnalyticsReportsTransactionDetailFetcshError'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch transaction detail. ',
     properties?: Record<string, unknown>
   ) {
@@ -194,7 +195,7 @@ export class AnalyticsReportsTransactionDetailFetcshError extends BaseError {
 
 export class AnalyticsReportsTransactionsOverviewExportFetchError extends BaseError {
   public name = 'AnalyticsReportsTransactionsOverviewExportFetchError'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch transaction overview export. ',
     properties?: Record<string, unknown>
   ) {

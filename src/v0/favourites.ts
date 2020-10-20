@@ -33,8 +33,8 @@ export interface FavouritesResponse {
 }
 
 export interface FavouriteResponse {
-  data: Favourite
-  metadata: Record<string, unknown>
+  data?: Favourite
+  metadata?: Record<string, unknown>
   msg?: string
 }
 
@@ -50,20 +50,20 @@ export class Favourites extends ThBaseHandler {
   public options: FavouritesOptions
   public uriHelper: UriHelper
 
-  constructor(options: FavouritesOptions, http: Client) {
+  constructor (options: FavouritesOptions, http: Client) {
     super(http, {
       endpoint: Favourites.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Favourites.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async getAll(query?: Record<string, unknown>): Promise<FavouritesResponse> {
+  async getAll (query?: Record<string, unknown>): Promise<FavouritesResponse> {
     try {
       const base = this.uriHelper.generateBaseUri()
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -74,13 +74,13 @@ export class Favourites extends ThBaseHandler {
       return {
         data: response.data.results,
         metadata: { count: response.data.count }
-      } as FavouritesResponse
+      }
     } catch (e) {
       throw new errors.FavouritesFetchFailed()
     }
   }
 
-  async get(favouriteId: string): Promise<FavouriteResponse> {
+  async get (favouriteId: string): Promise<FavouriteResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/${favouriteId}`)
       const uri = this.uriHelper.generateUriWithQuery(base)
@@ -89,16 +89,16 @@ export class Favourites extends ThBaseHandler {
       if (response.status !== 200) throw new errors.FavouriteFetchFailed()
 
       return {
-        data: response.data.results[0] as Favourites,
+        data: response.data.results[0],
         metadata: { count: response.data.count },
         msg: response.data.msg
-      } as FavouriteResponse
+      }
     } catch (e) {
       throw new errors.FavouriteFetchFailed()
     }
   }
 
-  async create(favourite: Favourite): Promise<FavouriteResponse> {
+  async create (favourite: Favourite): Promise<FavouriteResponse> {
     try {
       const base = this.uriHelper.generateBaseUri()
       const uri = this.uriHelper.generateUriWithQuery(base)
@@ -107,15 +107,15 @@ export class Favourites extends ThBaseHandler {
       if (response.status !== 200) throw new errors.FavouriteCreateFailed()
 
       return {
-        data: response.data.results[0] as Favourites,
+        data: response.data.results[0],
         metadata: { count: response.data.count }
-      } as FavouriteResponse
+      }
     } catch (e) {
       throw new errors.FavouriteCreateFailed()
     }
   }
 
-  async update(favouriteId: string, favourite: Favourite): Promise<FavouriteResponse> {
+  async update (favouriteId: string, favourite: Favourite): Promise<FavouriteResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/${favouriteId}`)
       const uri = this.uriHelper.generateUriWithQuery(base)
@@ -124,15 +124,15 @@ export class Favourites extends ThBaseHandler {
       if (response.status !== 200) throw new errors.FavouriteUpdateFailed()
 
       return {
-        data: response.data.results[0] as Favourites,
+        data: response.data.results[0],
         metadata: { count: response.data.count }
-      } as FavouriteResponse
+      }
     } catch (e) {
       throw new errors.FavouriteUpdateFailed()
     }
   }
 
-  async delete(favouriteId: string): Promise<FavouriteResponse> {
+  async delete (favouriteId: string): Promise<FavouriteResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/${favouriteId}`)
       const uri = this.uriHelper.generateUriWithQuery(base)
@@ -142,7 +142,7 @@ export class Favourites extends ThBaseHandler {
 
       return {
         msg: response.data.msg
-      } as FavouriteResponse
+      }
     } catch (e) {
       throw new errors.FavouriteDeleteFailed()
     }

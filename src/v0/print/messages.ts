@@ -17,14 +17,14 @@ export interface PrintMessage {
 }
 
 export interface PrintMessagesResponse {
-  data: PrintMessage[]
-  metadata: Record<string, unknown>
+  data?: PrintMessage[]
+  metadata?: Record<string, unknown>
   msg?: string
 }
 
 export interface PrintMessageResponse {
-  data: PrintMessage
-  metadata: Record<string, unknown>
+  data?: PrintMessage
+  metadata?: Record<string, unknown>
   msg?: string
 }
 
@@ -33,13 +33,13 @@ export class Messages {
   public options: PrintOptions
   public uriHelper: UriHelper
 
-  constructor(options: PrintOptions, http: Client, uriHelper: UriHelper) {
+  constructor (options: PrintOptions, http: Client, uriHelper: UriHelper) {
     this.options = options
     this.http = http
     this.uriHelper = uriHelper
   }
 
-  async getAll(query?: Record<string, unknown>): Promise<PrintMessagesResponse> {
+  async getAll (query?: Record<string, unknown>): Promise<PrintMessagesResponse> {
     try {
       const base = this.uriHelper.generateBaseUri('/messages')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -50,13 +50,13 @@ export class Messages {
       return {
         data: response.data.results,
         metadata: { count: response.data.count }
-      } as PrintMessagesResponse
+      }
     } catch (e) {
       throw new errors.PrintMessagesFetchFailed()
     }
   }
 
-  async get(messageId: string): Promise<PrintMessageResponse> {
+  async get (messageId: string): Promise<PrintMessageResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/messages/${messageId}`)
       const uri = this.uriHelper.generateUriWithQuery(base)
@@ -68,15 +68,15 @@ export class Messages {
         data: response.data.results[0] as PrintMessage,
         metadata: { count: response.data.count },
         msg: response.data.msg
-      } as PrintMessageResponse
+      }
     } catch (e) {
       throw new errors.PrintMessageFetchFailed()
     }
   }
 
-  async create(message: Record<string, unknown>): Promise<PrintMessageResponse> {
+  async create (message: Record<string, unknown>): Promise<PrintMessageResponse> {
     try {
-      const base = this.uriHelper.generateBaseUri(`/messages`)
+      const base = this.uriHelper.generateBaseUri('/messages')
       const uri = this.uriHelper.generateUriWithQuery(base)
 
       const response = await this.http.getClient().post(uri, message)
@@ -85,13 +85,13 @@ export class Messages {
       return {
         data: response.data.results[0] as PrintMessage,
         metadata: { count: response.data.count }
-      } as PrintMessageResponse
+      }
     } catch (e) {
       throw new errors.PrintMessageCreateFailed()
     }
   }
 
-  async update(messageId: string, message: Record<string, unknown>): Promise<PrintMessageResponse> {
+  async update (messageId: string, message: Record<string, unknown>): Promise<PrintMessageResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/messages/${messageId}`)
       const uri = this.uriHelper.generateUriWithQuery(base)
@@ -102,13 +102,13 @@ export class Messages {
       return {
         data: response.data.results[0] as PrintMessage,
         metadata: { count: response.data.count }
-      } as PrintMessageResponse
+      }
     } catch (e) {
       throw new errors.PrintMessageUpdateFailed()
     }
   }
 
-  async delete(messageId: string): Promise<PrintMessageResponse> {
+  async delete (messageId: string): Promise<PrintMessageResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/messages/${messageId}`)
       const uri = this.uriHelper.generateUriWithQuery(base)
@@ -118,7 +118,7 @@ export class Messages {
 
       return {
         msg: response.data.msg
-      } as PrintMessageResponse
+      }
     } catch (e) {
       throw new errors.PrintMessageDeleteFailed()
     }

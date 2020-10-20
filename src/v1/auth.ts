@@ -19,11 +19,11 @@ export class Auth extends v0.Auth {
   authenticated = false
   public options: AuthOptions
 
-  constructor(options: AuthOptions) {
+  constructor (options: AuthOptions) {
     super(options)
     this.options = options
 
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
 
     if (!this.options.credentials) return
 
@@ -34,29 +34,29 @@ export class Auth extends v0.Auth {
     }
   }
 
-  async authenticate(): Promise<AuthResponse> {
+  async authenticate (): Promise<AuthResponse> {
     if (this.options.type === AuthTypes.username) {
-      return this.loginUsername(this.options.credentials as UsernameAuth)
+      return await this.loginUsername(this.options.credentials as UsernameAuth)
     }
 
     if (this.options.type === AuthTypes.token) {
-      return this.loginServiceAccount(this.options.credentials as KeyAuth)
+      return await this.loginServiceAccount(this.options.credentials as KeyAuth)
     }
 
     if (this.options.type === AuthTypes.org) {
-      return this.loginWithOrganisation(this.options.credentials as OrgAuth)
+      return await this.loginWithOrganisation(this.options.credentials as OrgAuth)
     }
 
     if (this.options.type === AuthTypes.support) {
-      return this.loginAsSupport(this.options.credentials as SupportAuth)
+      return await this.loginAsSupport(this.options.credentials as SupportAuth)
     }
 
     throw new errors.AuthenticationFailed('No auth data was provided')
   }
 
-  async loginServiceAccount(authData: KeyAuth): Promise<AuthResponse> {
+  async loginServiceAccount (authData: KeyAuth): Promise<AuthResponse> {
     try {
-      const response = await axios.post(`${this.options.base}/api/v1/users/auth/key`, {
+      const response = await axios.post(this.getEndpoint('/api/v1/users/auth/key'), {
         id: authData.id,
         api_key: authData.apiKey
       })
@@ -70,20 +70,20 @@ export class Auth extends v0.Auth {
         token: response.data.token,
         user: response.data.user.legacy_id || response.data.user.id,
         name: response.data.user.name
-      } as AuthResponse
+      }
     } catch (err) {
       const error = new errors.AuthenticationFailed()
       err.error = err
-      err.body = err.response && err.response.data ? err.response.data : null
+      err.body = err.response?.data ?? null
 
       throw error
     }
   }
 
-  async loginWithOrganisation(authData: OrgAuth): Promise<AuthResponse> {
+  async loginWithOrganisation (authData: OrgAuth): Promise<AuthResponse> {
     try {
       const response = await axios.post(
-        `${this.options.base}/api/v1/users/auth/organisation/login`,
+        this.getEndpoint('/api/v1/users/auth/organisation/login'),
         {
           organisation: authData.organisation,
           username: authData.username,
@@ -109,19 +109,19 @@ export class Auth extends v0.Auth {
         role,
         scopes,
         subUser: subUser || null
-      } as AuthResponse
+      }
     } catch (err) {
       const error = new errors.AuthenticationFailed()
       err.error = err
-      err.body = err.response && err.response.data ? err.response.data : null
+      err.body = err.response?.data ?? null
 
       throw error
     }
   }
 
-  async loginAsSupport(authData: SupportAuth): Promise<AuthResponse> {
+  async loginAsSupport (authData: SupportAuth): Promise<AuthResponse> {
     try {
-      const response = await axios.post(`${this.options.base}/api/v1/users/auth/support/login`, {
+      const response = await axios.post(this.getEndpoint('/api/v1/users/auth/support/login'), {
         token: authData.token,
         client_account: authData.client_account,
         recaptcha_token: authData.recaptcha_token
@@ -139,11 +139,11 @@ export class Auth extends v0.Auth {
         scopes: response.data.user.scopes,
         role: response.data.user.role,
         is_support: true
-      } as AuthResponse
+      }
     } catch (err) {
       const error = new errors.AuthenticationFailed()
       err.error = err
-      err.body = err.response && err.response.data ? err.response.data : null
+      err.body = err.response?.data ?? null
 
       throw error
     }

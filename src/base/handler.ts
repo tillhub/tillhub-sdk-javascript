@@ -15,10 +15,10 @@ export interface HandlerQuery {
 }
 
 export class ThBaseHandler {
-  private handlerOptions: ThBaseHandlerOptions
-  private client: Client
+  private readonly handlerOptions: ThBaseHandlerOptions
+  private readonly client: Client
 
-  constructor(http: Client, handlerOptions: ThBaseHandlerOptions) {
+  constructor (http: Client, handlerOptions: ThBaseHandlerOptions) {
     this.client = http
     this.handlerOptions = handlerOptions
   }
@@ -62,7 +62,7 @@ export interface ThAnalyticsBaseResultItem {
     type?: string
   }
   count: number
-  values: Record<string, unknown>[]
+  values: any[]
 }
 
 export interface ThAnalyticsBaseResponse {
@@ -78,28 +78,28 @@ export interface ThAnalyticsExportsBaseResponse {
 }
 
 export class ThAnalyticsBaseHandler {
-  private handlerOptions: ThAnalyticsBaseHandlerOptions
-  private client: Client
+  private readonly handlerOptions: ThAnalyticsBaseHandlerOptions
+  private readonly client: Client
 
-  constructor(http: Client, handlerOptions: ThAnalyticsBaseHandlerOptions) {
+  constructor (http: Client, handlerOptions: ThAnalyticsBaseHandlerOptions) {
     this.client = http
     this.handlerOptions = handlerOptions
   }
 
   protected static generateAuthenticatedInstance<T>(
-    type: { new (options: ThAnalyticsBaseHandlerOptions, http: Client): T },
+    Type: new (options: ThAnalyticsBaseHandlerOptions, http: Client) => T,
     options: ThAnalyticsBaseHandlerOptions,
     http: Client
   ): T {
-    return new type(options, http)
+    return new Type(options, http)
   }
 
-  private static generateUriWithQuery(basePath: string, query?: HandlerQuery): string {
+  private static generateUriWithQuery (basePath: string, query?: HandlerQuery): string {
     let uri
     if (!query) {
       uri = `${basePath}`
-    } else if (query.uri || (query.query && query.query.uri)) {
-      uri = query.uri || query.query.uri
+    } else if (query.uri ?? (query.query?.uri)) {
+      uri = query.uri ?? query.query.uri
     } else if (query.query) {
       const flattenedQuery = Object.assign({}, query, query.query)
       flattenedQuery.query = undefined
@@ -112,7 +112,7 @@ export class ThAnalyticsBaseHandler {
     return uri
   }
 
-  protected async handleGet(
+  protected async handleGet (
     url: string,
     query?: HandlerQuery,
     requestOptions?: any
@@ -127,12 +127,12 @@ export class ThAnalyticsBaseHandler {
     return {
       status: response.status,
       next:
-        response.data.cursor && response.data.cursor.next ? response.data.cursor.next : undefined,
+        response.data.cursor?.next ? response.data.cursor.next : undefined,
       results: response.data.results
-    } as ThAnalyticsBaseResponse
+    }
   }
 
-  protected async handleExport(
+  protected async handleExport (
     url: string,
     query?: HandlerQuery,
     requestOptions?: any
@@ -146,6 +146,6 @@ export class ThAnalyticsBaseHandler {
 
     return {
       ...response.data.results[0]
-    } as ThAnalyticsExportsBaseResponse
+    }
   }
 }

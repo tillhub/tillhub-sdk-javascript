@@ -18,8 +18,9 @@ export interface BalancesGetOneRequestObject {
 }
 
 export interface BalancesResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
+  next?: () => Promise<BalancesResponse>
 }
 
 export interface BalancesQuery {
@@ -39,83 +40,74 @@ export class Balances {
   public options: BalancesOptions
   public uriHelper: UriHelper
 
-  constructor(options: BalancesOptions, http: Client, uriHelper: UriHelper) {
+  constructor (options: BalancesOptions, http: Client, uriHelper: UriHelper) {
     this.options = options
     this.http = http
     this.uriHelper = uriHelper
   }
 
-  getAll(query?: BalancesQuery): Promise<BalancesResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
-      try {
-        const base = this.uriHelper.generateBaseUri('/reports/balances')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
-        const response = await this.http.getClient().get(uri)
+  async getAll (query?: BalancesQuery): Promise<BalancesResponse> {
+    let next
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/balances')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+      const response = await this.http.getClient().get(uri)
 
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<BalancesResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count },
-          next
-        } as BalancesResponse)
-      } catch (err) {
-        return reject(new errors.ReportsBalancesFetchAllFailed())
+      if (response.data.cursor?.next) {
+        next = (): Promise<BalancesResponse> => this.getAll({ uri: response.data.cursor.next })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count },
+        next
+      }
+    } catch (err) {
+      throw new errors.ReportsBalancesFetchAllFailed()
+    }
   }
 
-  meta(query?: BalancesQuery): Promise<BalancesResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri('/reports/balances/meta')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
-        const response = await this.http.getClient().get(uri)
+  async meta (query?: BalancesQuery): Promise<BalancesResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/balances/meta')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+      const response = await this.http.getClient().get(uri)
 
-        if (response.status !== 200)
-          return reject(
-            new errors.ReportsBalancesMetaFailed(undefined, { status: response.status })
-          )
-
-        if (!response.data.results[0]) {
-          return reject(
-            new errors.ReportsBalancesMetaFailed('Could not get balances metadata unexpectedly')
-          )
-        }
-
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.count }
-        } as BalancesResponse)
-      } catch (err) {
-        return reject(new errors.ReportsBalancesMetaFailed())
+      if (response.status !== 200) {
+        throw new errors.ReportsBalancesMetaFailed(undefined, { status: response.status })
       }
-    })
+
+      if (!response.data.results[0]) {
+        throw new errors.ReportsBalancesMetaFailed('Could not get balances metadata unexpectedly')
+      }
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new errors.ReportsBalancesMetaFailed()
+    }
   }
 
-  get(requestObject: BalancesGetOneRequestObject): Promise<BalancesResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
-      try {
-        const base = this.uriHelper.generateBaseUri(`/reports/balances/${requestObject.balanceId}`)
-        const uri = this.uriHelper.generateUriWithQuery(base, requestObject.query)
-        const response = await this.http.getClient().get(uri)
+  async get (requestObject: BalancesGetOneRequestObject): Promise<BalancesResponse> {
+    let next
+    try {
+      const base = this.uriHelper.generateBaseUri(`/reports/balances/${requestObject.balanceId}`)
+      const uri = this.uriHelper.generateUriWithQuery(base, requestObject.query)
+      const response = await this.http.getClient().get(uri)
 
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<BalancesResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.count },
-          next
-        } as BalancesResponse)
-      } catch (err) {
-        return reject(new errors.ReportsBalancesFetchOneFailed())
+      if (response.data.cursor?.next) {
+        next = (): Promise<BalancesResponse> => this.getAll({ uri: response.data.cursor.next })
       }
-    })
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count },
+        next
+      }
+    } catch (err) {
+      throw new errors.ReportsBalancesFetchOneFailed()
+    }
   }
 }

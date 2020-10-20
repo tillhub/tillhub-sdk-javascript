@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
@@ -19,13 +18,13 @@ export interface PromotionsQuery {
 }
 
 export interface PromotionsResponse {
-  data: Record<string, unknown>[]
+  data: Promotion[]
   metadata: Record<string, unknown>
   next?: () => Promise<PromotionsResponse>
 }
 
 export interface PromotionResponse {
-  data: Promotion
+  data?: Promotion
   metadata?: {
     count?: number
     patch?: any
@@ -35,9 +34,6 @@ export interface PromotionResponse {
 
 export interface Promotion {
   id?: string
-}
-
-export interface Promotion {
   [key: string]: any
 }
 
@@ -48,129 +44,108 @@ export class Promotions extends ThBaseHandler {
   public options: PromotionsOptions
   public uriHelper: UriHelper
 
-  constructor(options: PromotionsOptions, http: Client) {
+  constructor (options: PromotionsOptions, http: Client) {
     super(http, {
       endpoint: Promotions.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Promotions.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(queryOrOptions?: PromotionsQuery | undefined): Promise<PromotionsResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (queryOrOptions?: PromotionsQuery | undefined): Promise<PromotionsResponse> {
+    let next
 
-      try {
-        let uri
-        if (queryOrOptions && queryOrOptions.uri) {
-          uri = queryOrOptions.uri
-        } else {
-          let queryString = ''
-          if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
-            queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
-          }
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
-            queryString ? `?${queryString}` : ''
-          }`
-        }
-
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new PromotionsFetchFailed(undefined, { status: response.status }))
-        }
-
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<PromotionsResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { cursor: response.data.cursor },
-          next
-        } as PromotionsResponse)
-      } catch (error) {
-        return reject(new PromotionsFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new PromotionsFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      if (response.data.cursor?.next) {
+        next = (): Promise<PromotionsResponse> => this.getAll({ uri: response.data.cursor.next })
+      }
+
+      return {
+        data: response.data.results,
+        metadata: { cursor: response.data.cursor },
+        next
+      }
+    } catch (error) {
+      throw new PromotionsFetchFailed(undefined, { error })
+    }
   }
 
-  get(promotionId: string): Promise<PromotionResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${promotionId}`
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new PromotionFetchFailed(undefined, { status: response.status }))
+  async get (promotionId: string): Promise<PromotionResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${promotionId}`)
 
-        return resolve({
-          data: response.data.results[0] as Promotion,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as PromotionResponse)
-      } catch (error) {
-        return reject(new PromotionFetchFailed(undefined, { error }))
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) { throw new PromotionFetchFailed(undefined, { status: response.status }) }
+
+      return {
+        data: response.data.results[0] as Promotion,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new PromotionFetchFailed(undefined, { error })
+    }
   }
 
-  put(promotionId: string, promotion: Promotion): Promise<PromotionResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${promotionId}`
-      try {
-        const response = await this.http.getClient().put(uri, promotion)
+  async put (promotionId: string, promotion: Promotion): Promise<PromotionResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${promotionId}`)
+    try {
+      const response = await this.http.getClient().put(uri, promotion)
 
-        return resolve({
-          data: response.data.results[0] as Promotion,
-          metadata: { count: response.data.count }
-        } as PromotionResponse)
-      } catch (error) {
-        return reject(new PromotionPutFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Promotion,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new PromotionPutFailed(undefined, { error })
+    }
   }
 
-  create(promotion: Promotion): Promise<PromotionResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-      try {
-        const response = await this.http.getClient().post(uri, promotion)
+  async create (promotion: Promotion): Promise<PromotionResponse> {
+    const uri = this.uriHelper.generateBaseUri()
+    try {
+      const response = await this.http.getClient().post(uri, promotion)
 
-        return resolve({
-          data: response.data.results[0] as Promotion,
-          metadata: { count: response.data.count }
-        } as PromotionResponse)
-      } catch (error) {
-        return reject(new PromotionCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Promotion,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new PromotionCreationFailed(undefined, { error })
+    }
   }
 
-  delete(promotionId: string): Promise<PromotionResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${promotionId}`
-      try {
-        const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new PromotionDeleteFailed())
+  async delete (promotionId: string): Promise<PromotionResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${promotionId}`)
+    try {
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) throw new PromotionDeleteFailed()
 
-        return resolve({
-          msg: response.data.msg
-        } as PromotionResponse)
-      } catch (err) {
-        return reject(new PromotionDeleteFailed())
+      return {
+        msg: response.data.msg
       }
-    })
+    } catch (err) {
+      throw new PromotionDeleteFailed()
+    }
   }
 }
 
 export class PromotionsFetchFailed extends BaseError {
   public name = 'PromotionsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch promotions',
     properties?: Record<string, unknown>
   ) {
@@ -181,7 +156,7 @@ export class PromotionsFetchFailed extends BaseError {
 
 export class PromotionFetchFailed extends BaseError {
   public name = 'PromotionFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch promotion',
     properties?: Record<string, unknown>
   ) {
@@ -192,7 +167,7 @@ export class PromotionFetchFailed extends BaseError {
 
 export class PromotionPutFailed extends BaseError {
   public name = 'PromotionPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter promotion',
     properties?: Record<string, unknown>
   ) {
@@ -203,7 +178,7 @@ export class PromotionPutFailed extends BaseError {
 
 export class PromotionCreationFailed extends BaseError {
   public name = 'PromotionCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create promotion',
     properties?: Record<string, unknown>
   ) {
@@ -214,7 +189,7 @@ export class PromotionCreationFailed extends BaseError {
 
 export class PromotionDeleteFailed extends BaseError {
   public name = 'PromotionDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete promotion',
     properties?: Record<string, unknown>
   ) {

@@ -80,67 +80,62 @@ export class Trash extends ThBaseHandler {
   public options: TrashOptions
   public uriHelper: UriHelper
 
-  constructor(options: TrashOptions, http: Client) {
-    super(http, { endpoint: Trash.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+  constructor (options: TrashOptions, http: Client) {
+    super(http, { endpoint: Trash.baseEndpoint, base: options.base ?? 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
     this.endpoint = Trash.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query: TrashQuery): Promise<TrashResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
-      const base = this.uriHelper.generateBaseUri('/')
-      const uri = this.uriHelper.generateUriWithQuery(base, query)
+  async getAll (query: TrashQuery): Promise<TrashResponse> {
+    let next
+    const base = this.uriHelper.generateBaseUri('/')
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      try {
-        const response = await this.http.getClient().get(uri)
+    try {
+      const response = await this.http.getClient().get(uri)
 
-        response.status !== 200 &&
-          reject(new TrashFetchFailed(undefined, { status: response.status }))
+      if (response.status !== 200) { throw (new TrashFetchFailed(undefined, { status: response.status })) }
 
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<TrashResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count },
-          next
-        } as TrashResponse)
-      } catch (error) {
-        return reject(new TrashFetchFailed(undefined, { error }))
+      if (response.data.cursor?.next) {
+        next = (): Promise<TrashResponse> => this.getAll({ uri: response.data.cursor.next })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count },
+        next
+      }
+    } catch (error) {
+      throw (new TrashFetchFailed(undefined, { error }))
+    }
   }
 
-  recover(query: RecoverQuery): Promise<TrashResponse> {
-    return new Promise(async (resolve, reject) => {
-      const base = this.uriHelper.generateBaseUri('/untrash')
-      const uri = this.uriHelper.generateUriWithQuery(base, query)
+  async recover (query: RecoverQuery): Promise<TrashResponse> {
+    const base = this.uriHelper.generateBaseUri('/untrash')
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      try {
-        const response = await this.http.getClient().put(uri)
+    try {
+      const response = await this.http.getClient().put(uri)
 
-        response.status !== 200 && reject(new RecoverFailed(undefined, { status: response.status }))
+      if (response.status !== 200) throw (new RecoverFailed(undefined, { status: response.status }))
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as TrashResponse)
-      } catch (error) {
-        return reject(new RecoverFailed(undefined, { error }))
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw (new RecoverFailed(undefined, { error }))
+    }
   }
 }
 
 export class TrashFetchFailed extends BaseError {
   public name = 'TrashFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the trashed Record<string, unknown>s',
     properties?: Record<string, unknown>
   ) {
@@ -151,7 +146,7 @@ export class TrashFetchFailed extends BaseError {
 
 export class RecoverFailed extends BaseError {
   public name = 'RecoverFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not recover the Record<string, unknown>',
     properties?: Record<string, unknown>
   ) {

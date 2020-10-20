@@ -1,5 +1,4 @@
 import typeOf from 'just-typeof'
-import qs from 'qs'
 import safeGet from 'just-safe-get'
 import { Client } from '../client'
 import { BaseError } from '../errors'
@@ -21,21 +20,18 @@ export interface BranchesQuery {
 }
 
 export interface BranchesResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   next?: () => Promise<BranchesResponse>
 }
 
 export interface BranchResponse {
-  data: Branch
+  data?: Branch
   metadata?: {
     count?: number
     patch?: any
   }
   msg?: string
-}
-export interface Branch {
-  id?: string
 }
 
 export interface ExternalCustomIdQuery {
@@ -53,6 +49,7 @@ export interface SearchQuery {
 }
 
 export interface Branch {
+  id?: string
   branch_number?: number
   name: string
   email?: string
@@ -74,210 +71,176 @@ export class Branches extends ThBaseHandler {
   public options: BranchesOptions
   public uriHelper: UriHelper
 
-  constructor(options: BranchesOptions, http: Client) {
+  constructor (options: BranchesOptions, http: Client) {
     super(http, {
       endpoint: Branches.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Branches.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(queryOrOptions?: BranchesQuery | undefined): Promise<BranchesResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (queryOrOptions?: BranchesQuery | undefined): Promise<BranchesResponse> {
+    let next
 
-      try {
-        let uri
-        if (queryOrOptions && queryOrOptions.uri) {
-          uri = queryOrOptions.uri
-        } else {
-          let queryString = ''
-          if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
-            queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
-          }
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
-            queryString ? `?${queryString}` : ''
-          }`
-        }
-
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new BranchesFetchFailed(undefined, { status: response.status }))
-        }
-
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<BranchesResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { cursor: response.data.cursor },
-          next
-        } as BranchesResponse)
-      } catch (error) {
-        return reject(new BranchesFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new BranchesFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      if (response.data.cursor?.next) {
+        next = (): Promise<BranchesResponse> => this.getAll({ uri: response.data.cursor.next })
+      }
+
+      return {
+        data: response.data.results,
+        metadata: { cursor: response.data.cursor },
+        next
+      }
+    } catch (error) {
+      throw new BranchesFetchFailed(undefined, { error })
+    }
   }
 
-  get(branchId: string): Promise<BranchResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${branchId}`
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new BranchFetchFailed(undefined, { status: response.status }))
+  async get (branchId: string): Promise<BranchResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${branchId}`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) { throw new BranchFetchFailed(undefined, { status: response.status }) }
 
-        return resolve({
-          data: response.data.results[0] as Branch,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as BranchResponse)
-      } catch (error) {
-        return reject(new BranchFetchFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Branch,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new BranchFetchFailed(undefined, { error })
+    }
   }
 
-  put(branchId: string, branch: Branch): Promise<BranchResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${branchId}`
-      try {
-        const response = await this.http.getClient().put(uri, branch)
+  async put (branchId: string, branch: Branch): Promise<BranchResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${branchId}`)
+    try {
+      const response = await this.http.getClient().put(uri, branch)
 
-        return resolve({
-          data: response.data.results[0] as Branch,
-          metadata: { count: response.data.count }
-        } as BranchResponse)
-      } catch (error) {
-        return reject(new BranchPutFailed(safeGet(error, 'response.data.msg'), { error }))
+      return {
+        data: response.data.results[0] as Branch,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new BranchPutFailed(safeGet(error, 'response.data.msg'), { error })
+    }
   }
 
-  create(branch: Branch): Promise<BranchResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-      try {
-        const response = await this.http.getClient().post(uri, branch)
+  async create (branch: Branch): Promise<BranchResponse> {
+    const uri = this.uriHelper.generateBaseUri()
+    try {
+      const response = await this.http.getClient().post(uri, branch)
 
-        return resolve({
-          data: response.data.results[0] as Branch,
-          metadata: { count: response.data.count }
-        } as BranchResponse)
-      } catch (error) {
-        return reject(new BranchCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Branch,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new BranchCreationFailed(undefined, { error })
+    }
   }
 
-  count(): Promise<BranchesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+  async count (): Promise<BranchesResponse> {
+    const uri = this.uriHelper.generateBaseUri('/meta')
 
-      try {
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new BranchesCountFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as BranchesResponse)
-      } catch (error) {
-        return reject(new BranchesCountFailed(undefined, { error }))
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new BranchesCountFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new BranchesCountFailed(undefined, { error })
+    }
   }
 
-  delete(branchId: string): Promise<BranchResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${branchId}`
-      try {
-        const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new BranchDeleteFailed(safeGet(response, 'data.msg')))
+  async delete (branchId: string): Promise<BranchResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${branchId}`)
+    try {
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) throw new BranchDeleteFailed(safeGet(response, 'data.msg'))
 
-        return resolve({
-          msg: response.data.msg
-        } as BranchResponse)
-      } catch (err) {
-        return reject(new BranchDeleteFailed(safeGet(err, 'response.data.msg')))
+      return {
+        msg: response.data.msg
       }
-    })
+    } catch (err) {
+      throw new BranchDeleteFailed(safeGet(err, 'response.data.msg'))
+    }
   }
 
-  getUniqueExternalId(query: ExternalCustomIdQuery): Promise<BranchResponse> {
-    return new Promise(async (resolve, reject) => {
-      const base = this.uriHelper.generateBaseUri(`/external_id`)
-      const uri = this.uriHelper.generateUriWithQuery(base, query)
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(
-            new ExternalCustomIdGetUniqueFailed(undefined, {
-              status: response.status
-            })
-          )
-
-        return resolve({
-          data: response.data.results as ExternalCustomIdResponse,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as BranchResponse)
-      } catch (error) {
-        if (error.response && error.response.status === 409) {
-          return reject(
-            new ExternalCustomIdGetUniqueFailed(undefined, {
-              status: error.response.status,
-              name: error.response.data.name
-            })
-          )
-        }
-        return reject(new ExternalCustomIdGetUniqueFailed(undefined, { error }))
+  async getUniqueExternalId (query: ExternalCustomIdQuery): Promise<BranchResponse> {
+    const base = this.uriHelper.generateBaseUri('/external_id')
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new ExternalCustomIdGetUniqueFailed(undefined, {
+          status: response.status
+        })
       }
-    })
+
+      return {
+        data: response.data.results,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 409) {
+        throw new ExternalCustomIdGetUniqueFailed(undefined, {
+          status: error.response.status,
+          name: error.response.data.name
+        })
+      }
+      throw new ExternalCustomIdGetUniqueFailed(undefined, { error })
+    }
   }
 
-  search(query: string | SearchQuery): Promise<BranchResponse> {
-    return new Promise(async (resolve, reject) => {
-      let uri
-      if (typeof query === 'string') {
-        uri = this.uriHelper.generateBaseUri(`/search?q=${query}`)
-      } else if (typeOf(query) === 'object') {
-        const base = this.uriHelper.generateBaseUri('/search')
-        uri = this.uriHelper.generateUriWithQuery(base, query)
-      } else {
-        return reject(
-          new BranchesSearchFailed('Could not search for branch - query type is invalid')
-        )
-      }
+  async search (query: string | SearchQuery): Promise<BranchResponse> {
+    let uri
+    if (typeof query === 'string') {
+      uri = this.uriHelper.generateBaseUri(`/search?q=${query}`)
+    } else if (typeOf(query) === 'object') {
+      const base = this.uriHelper.generateBaseUri('/search')
+      uri = this.uriHelper.generateUriWithQuery(base, query)
+    } else {
+      throw new BranchesSearchFailed('Could not search for branch - query type is invalid')
+    }
 
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new BranchesSearchFailed(undefined, { status: response.status }))
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) { throw new BranchesSearchFailed(undefined, { status: response.status }) }
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as BranchResponse)
-      } catch (error) {
-        return reject(new BranchesSearchFailed(undefined, { error }))
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new BranchesSearchFailed(undefined, { error })
+    }
   }
 }
 
 export class BranchesFetchFailed extends BaseError {
   public name = 'BranchesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch branches',
     properties?: Record<string, unknown>
   ) {
@@ -288,7 +251,7 @@ export class BranchesFetchFailed extends BaseError {
 
 export class BranchFetchFailed extends BaseError {
   public name = 'BrancheFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch branch',
     properties?: Record<string, unknown>
   ) {
@@ -299,7 +262,7 @@ export class BranchFetchFailed extends BaseError {
 
 export class BranchPutFailed extends BaseError {
   public name = 'BranchPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter branch',
     properties?: Record<string, unknown>
   ) {
@@ -310,7 +273,7 @@ export class BranchPutFailed extends BaseError {
 
 export class BranchCreationFailed extends BaseError {
   public name = 'BranchCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create branch',
     properties?: Record<string, unknown>
   ) {
@@ -321,7 +284,7 @@ export class BranchCreationFailed extends BaseError {
 
 export class BranchesCountFailed extends BaseError {
   public name = 'BranchesCountFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not count the branches',
     properties?: Record<string, unknown>
   ) {
@@ -332,7 +295,7 @@ export class BranchesCountFailed extends BaseError {
 
 export class BranchDeleteFailed extends BaseError {
   public name = 'BranchDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete branch',
     properties?: Record<string, unknown>
   ) {
@@ -343,7 +306,7 @@ export class BranchDeleteFailed extends BaseError {
 
 export class ExternalCustomIdGetUniqueFailed extends BaseError {
   public name = 'ExternalCustomIdGetUniqueFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get a unique external_custom_id',
     properties?: Record<string, unknown>
   ) {
@@ -354,7 +317,7 @@ export class ExternalCustomIdGetUniqueFailed extends BaseError {
 
 export class BranchesSearchFailed extends BaseError {
   public name = 'BranchesSearchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not search for branch',
     properties?: Record<string, unknown>
   ) {

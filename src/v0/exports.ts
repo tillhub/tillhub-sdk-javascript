@@ -45,9 +45,9 @@ export interface GobdQueryOrOptions {
 }
 
 export interface ExportsResponse {
-  data: {
+  data: Array<{
     uri: string
-  }[]
+  }>
   metadata: Record<string, unknown>
   msg?: string | null
 }
@@ -58,61 +58,57 @@ export class Exports {
   public options: ExportsOptions
   public uriHelper: UriHelper
 
-  constructor(options: ExportsOptions, http: Client) {
+  constructor (options: ExportsOptions, http: Client) {
     this.options = options
     this.http = http
 
     this.endpoint = '/api/v0/exports'
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  datev(datevQuery: DatevQuery, queryOrOptions: ExportsQueryOrOptions): Promise<ExportsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = `${this.options.base}${this.endpoint}/${this.options.user}/datev`
-        const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
+  async datev (datevQuery: DatevQuery, queryOrOptions: ExportsQueryOrOptions): Promise<ExportsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/datev')
+      const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
 
-        const response = await this.http.getClient().post(uri, datevQuery)
-        if (response.status !== 200) {
-          return reject(new ExportsDatevFetchFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: {}
-        } as ExportsResponse)
-      } catch (error) {
-        return reject(new ExportsDatevFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().post(uri, datevQuery)
+      if (response.status !== 200) {
+        throw new ExportsDatevFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: {}
+      }
+    } catch (error) {
+      throw new ExportsDatevFetchFailed(undefined, { error })
+    }
   }
 
-  gobd(gobdQuery: GobdQuery, queryOrOptions: GobdQueryOrOptions): Promise<ExportsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = `${this.options.base}${this.endpoint}/${this.options.user}/gobd`
-        const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
+  async gobd (gobdQuery: GobdQuery, queryOrOptions: GobdQueryOrOptions): Promise<ExportsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/gobd')
+      const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
 
-        const response = await this.http.getClient().post(uri, gobdQuery)
-        if (response.status !== 200) {
-          return reject(new ExportsGobdFetchFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: {}
-        } as ExportsResponse)
-      } catch (error) {
-        return reject(new ExportsGobdFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().post(uri, gobdQuery)
+      if (response.status !== 200) {
+        throw new ExportsGobdFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: {}
+      }
+    } catch (error) {
+      throw new ExportsGobdFetchFailed(undefined, { error })
+    }
   }
 }
 
 class ExportsDatevFetchFailed extends BaseError {
   public name = 'ExportsDatevFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch datev export',
     properties?: Record<string, unknown>
   ) {
@@ -123,7 +119,7 @@ class ExportsDatevFetchFailed extends BaseError {
 
 class ExportsGobdFetchFailed extends BaseError {
   public name = 'ExportsGobdFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch gobd export',
     properties?: Record<string, unknown>
   ) {

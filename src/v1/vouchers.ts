@@ -30,7 +30,7 @@ export interface VouchersQueryOptions {
 }
 
 export interface VouchersResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   msg?: string
   next?: () => Promise<VouchersResponse>
@@ -41,45 +41,43 @@ export class Vouchers extends VoucherV0 {
   public endpointV1: string
   public uriHelperV1: UriHelper
 
-  constructor(options: VouchersOptions, http: Client) {
+  constructor (options: VouchersOptions, http: Client) {
     super(options, http)
 
     this.endpointV1 = Vouchers.baseEndpointV1
     this.uriHelperV1 = new UriHelper(this.endpointV1, options)
   }
 
-  getAll(optionsOrQuery?: VouchersQueryOptions): Promise<VouchersResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (optionsOrQuery?: VouchersQueryOptions): Promise<VouchersResponse> {
+    let next
 
-      try {
-        const base = this.uriHelperV1.generateBaseUri()
-        const uri = this.uriHelperV1.generateUriWithQuery(base, optionsOrQuery)
+    try {
+      const base = this.uriHelperV1.generateBaseUri()
+      const uri = this.uriHelperV1.generateUriWithQuery(base, optionsOrQuery)
 
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new VouchersFetchFailed(undefined, { status: response.status }))
-        }
-
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<VouchersResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { cursor: response.data.cursor },
-          next
-        } as VouchersResponse)
-      } catch (error) {
-        return reject(new VouchersFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new VouchersFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      if (response.data.cursor?.next) {
+        next = (): Promise<VouchersResponse> => this.getAll({ uri: response.data.cursor.next })
+      }
+
+      return {
+        data: response.data.results,
+        metadata: { cursor: response.data.cursor },
+        next
+      }
+    } catch (error) {
+      throw new VouchersFetchFailed(undefined, { error })
+    }
   }
 }
 
 export class VouchersFetchFailed extends BaseError {
   public name = 'VouchersFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the vouchers',
     properties?: Record<string, unknown>
   ) {

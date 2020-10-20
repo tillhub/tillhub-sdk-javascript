@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv'
-dotenv.config()
 import ThRealtime from '../../src/realtime'
+dotenv.config()
 
 describe('SDK: client: can instantiate SDK client', () => {
   it('TillhubRealtime instantiable', () => {

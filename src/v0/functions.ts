@@ -18,13 +18,13 @@ export interface FunctionsQuery {
 }
 
 export interface FunctionsResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   next?: () => Promise<FunctionsResponse>
 }
 
 export interface FunctionResponse {
-  data: () => any
+  data?: () => any
   metadata?: {
     count?: number
     patch?: any
@@ -80,115 +80,106 @@ export class Functions extends ThBaseHandler {
   public options: FunctionsOptions
   public uriHelper: UriHelper
 
-  constructor(options: FunctionsOptions, http: Client) {
+  constructor (options: FunctionsOptions, http: Client) {
     super(http, {
       endpoint: Functions.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Functions.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: FunctionsQuery | undefined): Promise<FunctionsResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (query?: FunctionsQuery | undefined): Promise<FunctionsResponse> {
+    let next
 
-      try {
-        const base = this.uriHelper.generateBaseUri()
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri)
 
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<FunctionsResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count, cursor: response.data.cursor },
-          next
-        } as FunctionsResponse)
-      } catch (error) {
-        return reject(new FunctionsFetchFailed(undefined, { error }))
+      if (response.data.cursor?.next) {
+        next = (): Promise<FunctionsResponse> => this.getAll({ uri: response.data.cursor.next })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count, cursor: response.data.cursor },
+        next
+      }
+    } catch (error) {
+      throw new FunctionsFetchFailed(undefined, { error })
+    }
   }
 
-  get(functionId: string): Promise<FunctionResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/${functionId}`)
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new FunctionFetchFailed(undefined, { status: response.status }))
-
-        return resolve({
-          data: response.data.results[0] as FunctionInterface,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as FunctionResponse)
-      } catch (error) {
-        return reject(new FunctionFetchFailed(undefined, { error }))
+  async get (functionId: string): Promise<FunctionResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${functionId}`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new FunctionFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0],
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new FunctionFetchFailed(undefined, { error })
+    }
   }
 
-  put(functionId: string, fn: FunctionInterface): Promise<FunctionResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/${functionId}`)
-      try {
-        const response = await this.http.getClient().put(uri, fn)
+  async put (functionId: string, fn: FunctionInterface): Promise<FunctionResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${functionId}`)
+    try {
+      const response = await this.http.getClient().put(uri, fn)
 
-        return resolve({
-          data: response.data.results[0] as FunctionInterface,
-          metadata: { count: response.data.count }
-        } as FunctionResponse)
-      } catch (error) {
-        return reject(new FunctionPutFailed(undefined, { error }))
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new FunctionPutFailed(undefined, { error })
+    }
   }
 
-  create(fn: FunctionInterface): Promise<FunctionResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri()
-      try {
-        const response = await this.http.getClient().post(uri, fn)
+  async create (fn: FunctionInterface): Promise<FunctionResponse> {
+    const uri = this.uriHelper.generateBaseUri()
+    try {
+      const response = await this.http.getClient().post(uri, fn)
 
-        return resolve({
-          data: response.data.results[0] as FunctionInterface,
-          metadata: { count: response.data.count }
-        } as FunctionResponse)
-      } catch (error) {
-        return reject(new FunctionCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new FunctionCreationFailed(undefined, { error })
+    }
   }
 
-  delete(functionId: string): Promise<FunctionResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/${functionId}`)
-      try {
-        const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new FunctionDeleteFailed())
+  async delete (functionId: string): Promise<FunctionResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${functionId}`)
+    try {
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) throw new FunctionDeleteFailed()
 
-        return resolve({
-          msg: response.data.msg
-        } as FunctionResponse)
-      } catch (err) {
-        return reject(new FunctionDeleteFailed())
+      return {
+        msg: response.data.msg
       }
-    })
+    } catch (err) {
+      throw new FunctionDeleteFailed()
+    }
   }
 }
 
 export class FunctionsFetchFailed extends BaseError {
   public name = 'FunctionsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch functions',
     properties?: Record<string, unknown>
   ) {
@@ -199,7 +190,7 @@ export class FunctionsFetchFailed extends BaseError {
 
 export class FunctionFetchFailed extends BaseError {
   public name = 'FunctionFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch function',
     properties?: Record<string, unknown>
   ) {
@@ -210,7 +201,7 @@ export class FunctionFetchFailed extends BaseError {
 
 export class FunctionPutFailed extends BaseError {
   public name = 'FunctionPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter function',
     properties?: Record<string, unknown>
   ) {
@@ -221,7 +212,7 @@ export class FunctionPutFailed extends BaseError {
 
 export class FunctionCreationFailed extends BaseError {
   public name = 'FunctionCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create function',
     properties?: Record<string, unknown>
   ) {
@@ -232,7 +223,7 @@ export class FunctionCreationFailed extends BaseError {
 
 export class FunctionDeleteFailed extends BaseError {
   public name = 'FunctionDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete function',
     properties?: Record<string, unknown>
   ) {

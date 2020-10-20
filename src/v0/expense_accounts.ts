@@ -1,7 +1,7 @@
-import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 import { ThBaseHandler } from '../base'
+import { UriHelper } from '../uri-helper'
 
 export interface ExpenseAccountsOptions {
   user?: string
@@ -23,20 +23,18 @@ export interface ExpenseAccountsResponse {
 }
 
 export interface ExpenseAccountResponse {
-  data: ExpenseAccount
+  data?: ExpenseAccount
   metadata?: {
     count?: number
     patch?: any
   }
   msg?: string
 }
-export interface ExpenseAccount {
-  id?: string
-}
 
 export type ExpenseAccountType = 'expense' | 'deposit' | 'bank'
 
 export interface ExpenseAccount {
+  id?: string
   name: string
   active?: boolean
   fa_account_number: number
@@ -50,120 +48,97 @@ export class ExpenseAccounts extends ThBaseHandler {
   endpoint: string
   http: Client
   public options: ExpenseAccountsOptions
+  public uriHelper: UriHelper
 
-  constructor(options: ExpenseAccountsOptions, http: Client) {
+  constructor (options: ExpenseAccountsOptions, http: Client) {
     super(http, {
       endpoint: ExpenseAccounts.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = ExpenseAccounts.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(queryOrOptions?: ExpenseAccountsQuery | undefined): Promise<ExpenseAccountsResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (queryOrOptions?: ExpenseAccountsQuery | undefined): Promise<ExpenseAccountsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
 
-      try {
-        let uri
-        if (queryOrOptions && queryOrOptions.uri) {
-          uri = queryOrOptions.uri
-        } else {
-          let queryString = ''
-          if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
-            queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
-          }
-
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
-            queryString ? `?${queryString}` : ''
-          }`
-        }
-
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(
-            new errors.ExpenseAccountsFetchFailed(undefined, { status: response.status })
-          )
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count },
-          next
-        } as ExpenseAccountsResponse)
-      } catch (error) {
-        return reject(new errors.ExpenseAccountsFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new errors.ExpenseAccountsFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new errors.ExpenseAccountsFetchFailed(undefined, { error })
+    }
   }
 
-  get(expenseAccountId: string): Promise<ExpenseAccountResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${expenseAccountId}`
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new errors.ExpenseAccountFetchFailed(undefined, { status: response.status }))
-
-        return resolve({
-          data: response.data.results[0] as ExpenseAccount,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as ExpenseAccountResponse)
-      } catch (error) {
-        return reject(new errors.ExpenseAccountFetchFailed(undefined, { error }))
+  async get (expenseAccountId: string): Promise<ExpenseAccountResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${expenseAccountId}`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new errors.ExpenseAccountFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0] as ExpenseAccount,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new errors.ExpenseAccountFetchFailed(undefined, { error })
+    }
   }
 
-  put(expenseAccountId: string, expenseAccount: ExpenseAccount): Promise<ExpenseAccountResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${expenseAccountId}`
-      try {
-        const response = await this.http.getClient().put(uri, expenseAccount)
+  async put (expenseAccountId: string, expenseAccount: ExpenseAccount): Promise<ExpenseAccountResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${expenseAccountId}`)
+    try {
+      const response = await this.http.getClient().put(uri, expenseAccount)
 
-        return resolve({
-          data: response.data.results[0] as ExpenseAccount,
-          metadata: { count: response.data.count }
-        } as ExpenseAccountResponse)
-      } catch (error) {
-        return reject(new errors.ExpenseAccountPutFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as ExpenseAccount,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new errors.ExpenseAccountPutFailed(undefined, { error })
+    }
   }
 
-  create(expenseAccount: ExpenseAccount): Promise<ExpenseAccountResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-      try {
-        const response = await this.http.getClient().post(uri, expenseAccount)
+  async create (expenseAccount: ExpenseAccount): Promise<ExpenseAccountResponse> {
+    const uri = this.uriHelper.generateBaseUri()
+    try {
+      const response = await this.http.getClient().post(uri, expenseAccount)
 
-        return resolve({
-          data: response.data.results[0] as ExpenseAccount,
-          metadata: { count: response.data.count }
-        } as ExpenseAccountResponse)
-      } catch (error) {
-        return reject(new errors.ExpenseAccountCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as ExpenseAccount,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new errors.ExpenseAccountCreationFailed(undefined, { error })
+    }
   }
 
-  delete(expenseAccountId: string): Promise<ExpenseAccountResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${expenseAccountId}`
-      try {
-        const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new errors.ExpenseAccountDeleteFailed())
+  async delete (expenseAccountId: string): Promise<ExpenseAccountResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${expenseAccountId}`)
+    try {
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) throw new errors.ExpenseAccountDeleteFailed()
 
-        return resolve({
-          msg: response.data.msg
-        } as ExpenseAccountResponse)
-      } catch (err) {
-        return reject(new errors.ExpenseAccountDeleteFailed())
+      return {
+        msg: response.data.msg
       }
-    })
+    } catch (err) {
+      throw new errors.ExpenseAccountDeleteFailed()
+    }
   }
 }

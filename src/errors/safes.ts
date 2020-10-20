@@ -2,7 +2,7 @@ import { BaseError } from './baseError'
 
 export class SafesFetchAllFailed extends BaseError {
   public name = 'SafesFetchAllFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch all safes',
     properties?: Record<string, unknown>
   ) {
@@ -13,7 +13,7 @@ export class SafesFetchAllFailed extends BaseError {
 
 export class SafesFetchOneFailed extends BaseError {
   public name = 'SafesFetchOneFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch single safe',
     properties?: Record<string, unknown>
   ) {
@@ -24,7 +24,7 @@ export class SafesFetchOneFailed extends BaseError {
 
 export class SafesGetMetaFailed extends BaseError {
   public name = 'SafesGetMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch meta data for safes',
     properties?: Record<string, unknown>
   ) {
@@ -35,7 +35,7 @@ export class SafesGetMetaFailed extends BaseError {
 
 export class SafesCreationFailed extends BaseError {
   public name = 'SafesCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create safes',
     properties?: Record<string, unknown>
   ) {
@@ -46,7 +46,7 @@ export class SafesCreationFailed extends BaseError {
 
 export class SafesPutFailed extends BaseError {
   public name = 'SafesPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update safes',
     properties?: Record<string, unknown>
   ) {
@@ -57,7 +57,7 @@ export class SafesPutFailed extends BaseError {
 
 export class SafesBookFailed extends BaseError {
   public name = 'SafesBookFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not book transfer in safes',
     properties?: Record<string, unknown>
   ) {
@@ -67,7 +67,7 @@ export class SafesBookFailed extends BaseError {
 }
 export class SafesLogBookFetchAllFailed extends BaseError {
   public name = 'SafesLogBookFetchAllFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get safes logs',
     properties?: Record<string, unknown>
   ) {
@@ -77,7 +77,7 @@ export class SafesLogBookFetchAllFailed extends BaseError {
 }
 export class SafesLogBookGetMetaFailed extends BaseError {
   public name = 'SafesLogBookGetMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get meta of safes logs',
     properties?: Record<string, unknown>
   ) {

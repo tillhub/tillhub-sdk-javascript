@@ -24,7 +24,7 @@ export interface PricebooksResponse {
 }
 
 export interface PricebookResponse {
-  data: Pricebook
+  data?: Pricebook
   metadata?: {
     count?: number
     patch?: any
@@ -45,126 +45,117 @@ export class Pricebooks {
   public options: PricebooksOptions
   public uriHelper: UriHelper
 
-  constructor(options: PricebooksOptions, http: Client, uriHelper: UriHelper) {
+  constructor (options: PricebooksOptions, http: Client, uriHelper: UriHelper) {
     this.options = options
     this.http = http
     this.uriHelper = uriHelper
   }
 
-  getAll(query?: PricebooksQuery | undefined): Promise<PricebooksResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (query?: PricebooksQuery | undefined): Promise<PricebooksResponse> {
+    let next
 
-      try {
-        const base = this.uriHelper.generateBaseUri('/prices/book')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+    try {
+      const base = this.uriHelper.generateBaseUri('/prices/book')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri)
 
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<PricebooksResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count, cursor: response.data.cursor },
-          next
-        } as PricebooksResponse)
-      } catch (error) {
-        return reject(new PricebooksFetchFailed(undefined, { error }))
+      if (response.data.cursor?.next) {
+        next = (): Promise<PricebooksResponse> => this.getAll({ uri: response.data.cursor.next })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count, cursor: response.data.cursor },
+        next
+      }
+    } catch (error) {
+      throw new PricebooksFetchFailed(undefined, { error })
+    }
   }
 
-  meta(): Promise<PricebooksResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri(`/prices/book/meta`)
-        const response = await this.http.getClient().get(uri)
+  async meta (): Promise<PricebooksResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri('/prices/book/meta')
+      const response = await this.http.getClient().get(uri)
 
-        if (response.status !== 200) reject(new PricebooksMetaFailed())
+      if (response.status !== 200) throw new PricebooksMetaFailed()
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as PricebooksResponse)
-      } catch (error) {
-        return reject(new PricebooksMetaFailed(undefined, { error }))
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new PricebooksMetaFailed(undefined, { error })
+    }
   }
 
-  get(pricebookId: string): Promise<PricebookResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/prices/book/${pricebookId}`)
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new PricebookFetchFailed(undefined, { status: response.status }))
-
-        return resolve({
-          data: response.data.results[0] as Pricebook,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as PricebookResponse)
-      } catch (error) {
-        return reject(new PricebookFetchFailed(undefined, { error }))
+  async get (pricebookId: string): Promise<PricebookResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/prices/book/${pricebookId}`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new PricebookFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0] as Pricebook,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new PricebookFetchFailed(undefined, { error })
+    }
   }
 
-  put(pricebookId: string, pricebook: Pricebook): Promise<PricebookResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/prices/book/${pricebookId}`)
-      try {
-        const response = await this.http.getClient().put(uri, pricebook)
+  async put (pricebookId: string, pricebook: Pricebook): Promise<PricebookResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/prices/book/${pricebookId}`)
+    try {
+      const response = await this.http.getClient().put(uri, pricebook)
 
-        return resolve({
-          data: response.data.results[0] as Pricebook,
-          metadata: { count: response.data.count }
-        } as PricebookResponse)
-      } catch (error) {
-        return reject(new PricebookPutFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Pricebook,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new PricebookPutFailed(undefined, { error })
+    }
   }
 
-  create(pricebook: Pricebook): Promise<PricebookResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri('/prices/book')
-      try {
-        const response = await this.http.getClient().post(uri, pricebook)
+  async create (pricebook: Pricebook): Promise<PricebookResponse> {
+    const uri = this.uriHelper.generateBaseUri('/prices/book')
+    try {
+      const response = await this.http.getClient().post(uri, pricebook)
 
-        return resolve({
-          data: response.data.results[0] as Pricebook,
-          metadata: { count: response.data.count }
-        } as PricebookResponse)
-      } catch (error) {
-        return reject(new PricebookCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Pricebook,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new PricebookCreationFailed(undefined, { error })
+    }
   }
 
-  delete(pricebookId: string): Promise<PricebookResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/prices/book/${pricebookId}`)
-      try {
-        const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new PricebookDeleteFailed())
-
-        return resolve({
-          msg: response.data.msg
-        } as PricebookResponse)
-      } catch (err) {
-        return reject(new PricebookDeleteFailed())
+  async delete (pricebookId: string): Promise<PricebookResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/prices/book/${pricebookId}`)
+    try {
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) {
+        throw new PricebookDeleteFailed()
       }
-    })
+
+      return {
+        msg: response.data.msg
+      }
+    } catch (err) {
+      throw new PricebookDeleteFailed()
+    }
   }
 }
 
 export class PricebooksFetchFailed extends BaseError {
   public name = 'PricebooksFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch pricebooks',
     properties?: Record<string, unknown>
   ) {
@@ -175,7 +166,7 @@ export class PricebooksFetchFailed extends BaseError {
 
 class PricebooksMetaFailed extends BaseError {
   public name = 'PricebooksMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch pricebooks meta call',
     properties?: Record<string, unknown>
   ) {
@@ -186,7 +177,7 @@ class PricebooksMetaFailed extends BaseError {
 
 export class PricebookFetchFailed extends BaseError {
   public name = 'PricebookFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch pricebook',
     properties?: Record<string, unknown>
   ) {
@@ -197,7 +188,7 @@ export class PricebookFetchFailed extends BaseError {
 
 export class PricebookPutFailed extends BaseError {
   public name = 'PricebookPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter pricebook',
     properties?: Record<string, unknown>
   ) {
@@ -208,7 +199,7 @@ export class PricebookPutFailed extends BaseError {
 
 export class PricebookCreationFailed extends BaseError {
   public name = 'PricebookCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create pricebook',
     properties?: Record<string, unknown>
   ) {
@@ -219,7 +210,7 @@ export class PricebookCreationFailed extends BaseError {
 
 export class PricebookDeleteFailed extends BaseError {
   public name = 'PricebookDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete pricebook',
     properties?: Record<string, unknown>
   ) {

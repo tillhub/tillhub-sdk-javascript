@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
@@ -17,7 +16,7 @@ export interface AnalyticsOptions {
 }
 
 export interface AnalyticsResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   msg?: string
 }
@@ -127,7 +126,7 @@ export interface ProductGoupsOptions {
   branch_number?: number
 }
 
-export interface ProductGoupsFilters {
+export interface ProductGroupsFilters {
   column: string
   type?: string
 }
@@ -148,467 +147,418 @@ export class Analytics {
   public options: AnalyticsOptions
   public uriHelper: UriHelper
 
-  constructor(options: AnalyticsOptions, http: Client) {
+  constructor (options: AnalyticsOptions, http: Client) {
     this.options = options
     this.http = http
 
     this.endpoint = '/api/v0/analytics'
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getRevenuesForDayOfWeek(query: RevenuBasicOptions): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri('/aggregates/revenues/day_of_week')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+  async getRevenuesForDayOfWeek (query: RevenuBasicOptions): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/aggregates/revenues/day_of_week')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new RevenuesFetchFailed())
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new RevenuesFetchFailed()
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new RevenuesFetchFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new RevenuesFetchFailed()
+    }
   }
 
-  getRevenuesSumForTimeRange(query: RevenuBasicOptions): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri('/aggregates/revenues/sum')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+  async getRevenuesSumForTimeRange (query: RevenuBasicOptions): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/aggregates/revenues/sum')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new RevenuesFetchFailed())
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new RevenuesFetchFailed()
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new RevenuesFetchFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new RevenuesFetchFailed()
+    }
   }
 
-  getRevenues(query: RevenuesOptions): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri('/aggregates/revenues')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+  async getRevenues (query: RevenuesOptions): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/aggregates/revenues')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri)
 
-        response.status !== 200 && reject(new RevenuesFetchFailed())
+      if (response.status !== 200) throw new RevenuesFetchFailed()
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new RevenuesFetchFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new RevenuesFetchFailed()
+    }
   }
 
-  getRevenuesForHourOfDay(query: RevenuBasicOptions): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri('/aggregates/revenues/hour_of_day')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+  async getRevenuesForHourOfDay (query: RevenuBasicOptions): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/aggregates/revenues/hour_of_day')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new RevenuesFetchFailed())
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new RevenuesFetchFailed()
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new RevenuesFetchFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new RevenuesFetchFailed()
+    }
   }
 
-  getReportsProducts(query?: ProductsOptions | undefined): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const queryString = qs.stringify(query, { addQueryPrefix: true })
-        // TODO: move this to proper v1. We cut a corner here not to require consumers refactoring for the report
-        const uri = `${this.options.base}/api/v1/analytics/${this.options.user}/reports/products${queryString}`
+  async getReportsProducts (query?: ProductsOptions | undefined): Promise<AnalyticsResponse> {
+    try {
+      // TODO: move this to proper v1. We cut a corner here not to require consumers refactoring for the report
+      const localUriHelper = new UriHelper('/api/v1/analytics', this.options)
+      const base = localUriHelper.generateBaseUri('/reports/products')
+      const uri = localUriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new StatisticsProductFetchFailed())
-        return resolve({
-          data: response.data.results,
-          metadata: {
-            count: response.data.count
-          }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new StatisticsProductFetchFailed())
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new StatisticsProductFetchFailed()
+      return {
+        data: response.data.results,
+        metadata: {
+          count: response.data.count
+        }
       }
-    })
+    } catch (err) {
+      throw new StatisticsProductFetchFailed()
+    }
   }
 
-  getProductsChildren(
+  async getProductsChildren (
     productNumber: string,
     query?: ProductsOptions | undefined
   ): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri(`/reports/products/${productNumber}`)
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+    try {
+      const base = this.uriHelper.generateBaseUri(`/reports/products/${productNumber}`)
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new StatisticsProductChildrenFetchFailed())
-        return resolve({
-          data: response.data.results,
-          metadata: {
-            count: response.data.count
-          }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new StatisticsProductChildrenFetchFailed())
-      }
-    })
-  }
-
-  getStaffOverviewReport(query?: StaffQuery | undefined): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri('/reports/staff/overview')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
-
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new StaffOverviewFetchFailed())
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new StaffOverviewFetchFailed())
-      }
-    })
-  }
-
-  getProductGroupsStaffReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri(`/reports/staff/product_groups`)
-        const uri = this.uriHelper.generateUriWithQuery(base, options)
-
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new ProductGroupsStaffReportFetchFailed())
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new ProductGroupsStaffReportFetchFailed())
-      }
-    })
-  }
-
-  getProductGroupsReport(query?: RevenuBasicOptions | undefined): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri('/aggregates/product_groups')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
-
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new ProductGroupsReportFetchFailed())
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new ProductGroupsReportFetchFailed())
-      }
-    })
-  }
-
-  getRefundsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri(`/reports/staff/refunds`)
-        const uri = this.uriHelper.generateUriWithQuery(base, options)
-
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new RefundsReportFetchFailed())
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new RefundsReportFetchFailed())
-      }
-    })
-  }
-
-  getVouchersReports(query?: VoucherOptions | undefined): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        let uri = `${this.options.base}${this.endpoint}/${this.options.user}/reports/vouchers`
-
-        const queryString = qs.stringify(query)
-
-        if (queryString) {
-          uri = `${uri}?${queryString}`
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new StatisticsProductChildrenFetchFailed()
+      return {
+        data: response.data.results,
+        metadata: {
+          count: response.data.count
         }
-
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new VouchersReportFetchFailed())
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new VouchersReportFetchFailed())
       }
-    })
+    } catch (err) {
+      throw new StatisticsProductChildrenFetchFailed()
+    }
   }
 
-  getProductsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri(`/reports/staff/products`)
-        const uri = this.uriHelper.generateUriWithQuery(base, options)
+  async getStaffOverviewReport (query?: StaffQuery | undefined): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/staff/overview')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new ProductsReportFetchFailed())
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new StaffOverviewFetchFailed()
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new ProductsReportFetchFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new StaffOverviewFetchFailed()
+    }
   }
 
-  getPaymentsReport(query?: PaymentsReportOptions): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = `${this.options.base}${this.endpoint}/${this.options.user}/reports/staff/payments`
+  async getProductGroupsStaffReport (options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/staff/product_groups')
+      const uri = this.uriHelper.generateUriWithQuery(base, options)
 
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new ProductGroupsStaffReportFetchFailed()
 
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new PaymentsReportFetchFailed())
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new PaymentsReportFetchFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new ProductGroupsStaffReportFetchFailed()
+    }
   }
 
-  getTopPaymentsReport(query?: TopPaymentsReportOptions): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = `${this.options.base}${this.endpoint}/${this.options.user}/reports/payments/top`
+  async getProductGroupsReport (query?: RevenuBasicOptions | undefined): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/aggregates/product_groups')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new ProductGroupsReportFetchFailed()
 
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new TopPaymentsReportFetchFailed())
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new TopPaymentsReportFetchFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new ProductGroupsReportFetchFailed()
+    }
   }
 
-  getSimpleSalesCartItems(
+  async getRefundsReport (options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/staff/refunds')
+      const uri = this.uriHelper.generateUriWithQuery(base, options)
+
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new RefundsReportFetchFailed()
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new RefundsReportFetchFailed()
+    }
+  }
+
+  async getVouchersReports (query?: VoucherOptions | undefined): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/vouchers')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new VouchersReportFetchFailed()
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new VouchersReportFetchFailed()
+    }
+  }
+
+  async getProductsReport (options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/staff/products')
+      const uri = this.uriHelper.generateUriWithQuery(base, options)
+
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new ProductsReportFetchFailed()
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new ProductsReportFetchFailed()
+    }
+  }
+
+  async getPaymentsReport (query?: PaymentsReportOptions): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/staff/payments')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new PaymentsReportFetchFailed()
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new PaymentsReportFetchFailed()
+    }
+  }
+
+  async getTopPaymentsReport (query?: TopPaymentsReportOptions): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/payments/top')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new TopPaymentsReportFetchFailed()
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new TopPaymentsReportFetchFailed()
+    }
+  }
+
+  async getSimpleSalesCartItems (
     query?: SimpleSalesCartItemsOptions | undefined
   ): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        let uri = `${this.options.base}${this.endpoint}/${this.options.user}/reports/transactions/simple`
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/transactions/simple')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const queryString = qs.stringify(query)
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new SimpleSalesCartItemsReportFetchFailed()
 
-        if (queryString) {
-          uri = `${uri}?${queryString}`
+      return {
+        data: response.data.results[0].results,
+        metadata: {
+          count: response.data.results[0].count,
+          metric: response.data.results[0].metric
         }
-
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new SimpleSalesCartItemsReportFetchFailed())
-
-        return resolve({
-          data: response.data.results[0].results,
-          metadata: {
-            count: response.data.results[0].count,
-            metric: response.data.results[0].metric
-          }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new SimpleSalesCartItemsReportFetchFailed())
       }
-    })
+    } catch (err) {
+      throw new SimpleSalesCartItemsReportFetchFailed()
+    }
   }
+
   // TODO: Remove when customers() is implemented
-  getCustomersReport(query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri('/reports/customers')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+  async getCustomersReport (query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/customers')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new ReportsCustomerCustomersFailed())
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new ReportsCustomerCustomersFailed()
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new ReportsCustomerCustomersFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new ReportsCustomerCustomersFailed()
+    }
   }
+
   // TODO: Remove when customers() is implemented
-  getCustomersTransaction(query: CustomersTransactionOptions): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri('/reports/customers/transactions')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+  async getCustomersTransaction (query: CustomersTransactionOptions): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/customers/transactions')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new ReportsCustomerTransactionsFailed())
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new ReportsCustomerTransactionsFailed()
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new ReportsCustomerTransactionsFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new ReportsCustomerTransactionsFailed()
+    }
   }
+
   // TODO: Remove when customers() is implemented
-  getCustomersOverview(query: CustomersTransactionOptions): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri('/reports/customers/overview')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+  async getCustomersOverview (query: CustomersTransactionOptions): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/customers/overview')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new ReportsCustomerOverviewFailed())
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new ReportsCustomerOverviewFailed()
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new ReportsCustomerOverviewFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new ReportsCustomerOverviewFailed()
+    }
   }
 
-  getStocksReport(query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const queryString = qs.stringify(query, { addQueryPrefix: true })
-        // TODO: move this to proper v1. We cut a corner here not to require consumers refactoring for the report
-        const uri = `${this.options.base}/api/v1/analytics/${this.options.user}/reports/stocks${queryString}`
+  async getStocksReport (query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse> {
+    try {
+      // TODO: move this to proper v1. We cut a corner here not to require consumers refactoring for the report
+      const localUriHelper = new UriHelper('/api/v1/analytics', this.options)
+      const base = localUriHelper.generateBaseUri('/reports/stocks')
+      const uri = localUriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri)
 
-        response.status !== 200 && reject(new ReportsStocksFetchFailed())
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new ReportsStocksFetchFailed())
+      if (response.status !== 200) throw new ReportsStocksFetchFailed()
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new ReportsStocksFetchFailed()
+    }
   }
 
-  getProductGroups(query?: ProductGoupsOptions | undefined): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri('/reports/product_groups')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new ReportsProductGroupsFetchFailed())
-        return resolve({
-          data: response.data.results,
-          metadata: {
-            count: response.data.count
-          }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new ReportsProductGroupsFetchFailed())
+  async getProductGroups (query?: ProductGoupsOptions | undefined): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/product_groups')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new ReportsProductGroupsFetchFailed()
+      return {
+        data: response.data.results,
+        metadata: {
+          count: response.data.count
+        }
       }
-    })
+    } catch (err) {
+      throw new ReportsProductGroupsFetchFailed()
+    }
   }
 
-  getProductGroupsFilters(query: ProductGoupsFilters): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri('/reports/product_groups/filters')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new ReportsProductGroupsFiltersFetchFailed())
-        return resolve({
-          data: response.data.results,
-          metadata: {
-            count: response.data.count
-          }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new ReportsProductGroupsFiltersFetchFailed())
+  async getProductGroupsFilters (query: ProductGroupsFilters): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/product_groups/filters')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new ReportsProductGroupsFiltersFetchFailed()
+      return {
+        data: response.data.results,
+        metadata: {
+          count: response.data.count
+        }
       }
-    })
+    } catch (err) {
+      throw new ReportsProductGroupsFiltersFetchFailed()
+    }
   }
 
-  balances(): Balances {
+  balances (): Balances {
     return new Balances(this.options, this.http, this.uriHelper)
   }
 
-  paymentOptions(): PaymentOptions {
+  paymentOptions (): PaymentOptions {
     return new PaymentOptions(this.options, this.http, this.uriHelper)
   }
 
-  payments(): Payments {
+  payments (): Payments {
     return new Payments(this.options, this.http, this.uriHelper)
   }
 
-  vat(): Vat {
+  vat (): Vat {
     return new Vat(this.options, this.http, this.uriHelper)
   }
 
-  cashBook(): CashBook {
+  cashBook (): CashBook {
     return new CashBook(this.options, this.http, this.uriHelper)
   }
 
-  customers(): Customers {
+  customers (): Customers {
     return new Customers(this.options, this.http, this.uriHelper)
   }
 }
 
 export class ReportsStocksFetchFailed extends BaseError {
   public name = 'ReportsStocksFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the stocks report',
     properties?: Record<string, unknown>
   ) {
@@ -619,7 +569,7 @@ export class ReportsStocksFetchFailed extends BaseError {
 
 export class RefundsReportFetchFailed extends BaseError {
   public name = 'RefundsReportFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the refunds report',
     properties?: Record<string, unknown>
   ) {
@@ -630,7 +580,7 @@ export class RefundsReportFetchFailed extends BaseError {
 
 export class VouchersReportFetchFailed extends BaseError {
   public name = 'VouchersReportFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the vouchers report',
     properties?: Record<string, unknown>
   ) {
@@ -641,7 +591,7 @@ export class VouchersReportFetchFailed extends BaseError {
 
 export class ProductsReportFetchFailed extends BaseError {
   public name = 'ProductsReportFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the products report',
     properties?: Record<string, unknown>
   ) {
@@ -652,7 +602,7 @@ export class ProductsReportFetchFailed extends BaseError {
 
 export class PaymentsReportFetchFailed extends BaseError {
   public name = 'PaymentsReportFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch payments report',
     properties?: Record<string, unknown>
   ) {
@@ -663,7 +613,7 @@ export class PaymentsReportFetchFailed extends BaseError {
 
 export class TopPaymentsReportFetchFailed extends BaseError {
   public name = 'TopPaymentsReportFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch top payments report',
     properties?: Record<string, unknown>
   ) {
@@ -674,7 +624,7 @@ export class TopPaymentsReportFetchFailed extends BaseError {
 
 export class RevenuesFetchFailed extends BaseError {
   public name = 'RevenuesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the Revenues',
     properties?: Record<string, unknown>
   ) {
@@ -685,7 +635,7 @@ export class RevenuesFetchFailed extends BaseError {
 
 export class ReportsProductGroupsFiltersFetchFailed extends BaseError {
   public name = 'ReportsProductGroupsFiltersFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get products group filters',
     properties?: Record<string, unknown>
   ) {
@@ -696,7 +646,7 @@ export class ReportsProductGroupsFiltersFetchFailed extends BaseError {
 
 export class ReportsProductGroupsFetchFailed extends BaseError {
   public name = 'ReportsProductGroupsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch product groups',
     properties?: Record<string, unknown>
   ) {
@@ -707,7 +657,7 @@ export class ReportsProductGroupsFetchFailed extends BaseError {
 
 export class ReportsCustomerOverviewFailed extends BaseError {
   public name = 'ReportsProductGroupsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch customer overview',
     properties?: Record<string, unknown>
   ) {
@@ -718,7 +668,7 @@ export class ReportsCustomerOverviewFailed extends BaseError {
 
 export class ReportsCustomerTransactionsFailed extends BaseError {
   public name = 'ReportsCustomerTransactionsFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch customer transactions',
     properties?: Record<string, unknown>
   ) {
@@ -729,7 +679,7 @@ export class ReportsCustomerTransactionsFailed extends BaseError {
 
 export class ReportsCustomerCustomersFailed extends BaseError {
   public name = 'ReportsCustomerCustomersFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch customer reports',
     properties?: Record<string, unknown>
   ) {
@@ -740,7 +690,7 @@ export class ReportsCustomerCustomersFailed extends BaseError {
 
 export class SimpleSalesCartItemsReportFetchFailed extends BaseError {
   public name = 'SimpleSalesCartItemsReportFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the sales cart items report',
     properties?: Record<string, unknown>
   ) {
@@ -751,7 +701,7 @@ export class SimpleSalesCartItemsReportFetchFailed extends BaseError {
 
 export class ProductGroupsStaffReportFetchFailed extends BaseError {
   public name = 'ProductGroupsStaffReportFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the product groups staff report',
     properties?: Record<string, unknown>
   ) {
@@ -762,7 +712,7 @@ export class ProductGroupsStaffReportFetchFailed extends BaseError {
 
 export class ProductGroupsReportFetchFailed extends BaseError {
   public name = 'ProductGroupsReportFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the product groups report',
     properties?: Record<string, unknown>
   ) {
@@ -773,7 +723,7 @@ export class ProductGroupsReportFetchFailed extends BaseError {
 
 export class StatisticsProductChildrenFetchFailed extends BaseError {
   public name = 'StatisticsProductChildrenFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the Statistics Products Children',
     properties?: Record<string, unknown>
   ) {
@@ -784,7 +734,7 @@ export class StatisticsProductChildrenFetchFailed extends BaseError {
 
 export class StaffOverviewFetchFailed extends BaseError {
   public name = 'StaffOverviewFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the staff overview report',
     properties?: Record<string, unknown>
   ) {
@@ -795,7 +745,7 @@ export class StaffOverviewFetchFailed extends BaseError {
 
 export class StatisticsProductFetchFailed extends BaseError {
   public name = 'StatisticsProductFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the Statistics Products',
     properties?: Record<string, unknown>
   ) {

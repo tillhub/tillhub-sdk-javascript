@@ -33,44 +33,43 @@ export class Dependencies extends ThBaseHandler {
   public options: DependenciesOptions
   public uriHelper: UriHelper
 
-  constructor(options: DependenciesOptions, http: Client) {
+  constructor (options: DependenciesOptions, http: Client) {
     super(http, {
       endpoint: Dependencies.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Dependencies.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  get(query: DependenciesQuery): Promise<DependenciesResponse> {
-    return new Promise(async (resolve, reject) => {
-      const base = this.uriHelper.generateBaseUri('/')
-      const uri = this.uriHelper.generateUriWithQuery(base, query)
+  async get (query: DependenciesQuery): Promise<DependenciesResponse> {
+    const base = this.uriHelper.generateBaseUri('/')
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      try {
-        const response = await this.http.getClient().get(uri)
+    try {
+      const response = await this.http.getClient().get(uri)
 
-        response.status !== 200 &&
-          reject(new DependenciesFetchFailed(undefined, { status: response.status }))
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as DependenciesResponse)
-      } catch (error) {
-        return reject(new DependenciesFetchFailed(undefined, { error }))
+      if (response.status !== 200) {
+        throw new DependenciesFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new DependenciesFetchFailed(undefined, { error })
+    }
   }
 }
 
 export class DependenciesFetchFailed extends BaseError {
   public name = 'DependenciesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the dependencies',
     properties?: Record<string, unknown>
   ) {

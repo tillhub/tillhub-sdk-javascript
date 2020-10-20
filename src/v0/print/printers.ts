@@ -13,14 +13,14 @@ export interface Printer {
 }
 
 export interface PrintersResponse {
-  data: Printer[]
-  metadata: Record<string, unknown>
+  data?: Printer[]
+  metadata?: Record<string, unknown>
   msg?: string
 }
 
 export interface PrinterResponse {
-  data: Printer
-  metadata: Record<string, unknown>
+  data?: Printer
+  metadata?: Record<string, unknown>
   msg?: string
 }
 
@@ -29,13 +29,13 @@ export class Printers {
   public options: PrintOptions
   public uriHelper: UriHelper
 
-  constructor(options: PrintOptions, http: Client, uriHelper: UriHelper) {
+  constructor (options: PrintOptions, http: Client, uriHelper: UriHelper) {
     this.options = options
     this.http = http
     this.uriHelper = uriHelper
   }
 
-  async getAll(query?: Record<string, unknown>): Promise<PrintersResponse> {
+  async getAll (query?: Record<string, unknown>): Promise<PrintersResponse> {
     try {
       const base = this.uriHelper.generateBaseUri('/printers')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -46,13 +46,13 @@ export class Printers {
       return {
         data: response.data.results,
         metadata: { count: response.data.count }
-      } as PrintersResponse
+      }
     } catch (e) {
       throw new errors.PrintersFetchFailed()
     }
   }
 
-  async get(printerId: string): Promise<PrinterResponse> {
+  async get (printerId: string): Promise<PrinterResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/printers/${printerId}`)
       const uri = this.uriHelper.generateUriWithQuery(base)
@@ -64,15 +64,15 @@ export class Printers {
         data: response.data.results[0] as Printer,
         metadata: { count: response.data.count },
         msg: response.data.msg
-      } as PrinterResponse
+      }
     } catch (e) {
       throw new errors.PrinterFetchFailed()
     }
   }
 
-  async create(printer: Record<string, unknown>): Promise<PrinterResponse> {
+  async create (printer: Record<string, unknown>): Promise<PrinterResponse> {
     try {
-      const base = this.uriHelper.generateBaseUri(`/printers`)
+      const base = this.uriHelper.generateBaseUri('/printers')
       const uri = this.uriHelper.generateUriWithQuery(base)
 
       const response = await this.http.getClient().post(uri, printer)
@@ -81,13 +81,13 @@ export class Printers {
       return {
         data: response.data.results[0] as Printer,
         metadata: { count: response.data.count }
-      } as PrinterResponse
+      }
     } catch (e) {
       throw new errors.PrinterCreateFailed()
     }
   }
 
-  async update(printerId: string, printer: Record<string, unknown>): Promise<PrinterResponse> {
+  async update (printerId: string, printer: Record<string, unknown>): Promise<PrinterResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/printers/${printerId}`)
       const uri = this.uriHelper.generateUriWithQuery(base)
@@ -98,13 +98,13 @@ export class Printers {
       return {
         data: response.data.results[0] as Printer,
         metadata: { count: response.data.count }
-      } as PrinterResponse
+      }
     } catch (e) {
       throw new errors.PrinterUpdateFailed()
     }
   }
 
-  async delete(printerId: string): Promise<PrinterResponse> {
+  async delete (printerId: string): Promise<PrinterResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/printers/${printerId}`)
       const uri = this.uriHelper.generateUriWithQuery(base)
@@ -114,7 +114,7 @@ export class Printers {
 
       return {
         msg: response.data.msg
-      } as PrinterResponse
+      }
     } catch (e) {
       throw new errors.PrinterDeleteFailed()
     }

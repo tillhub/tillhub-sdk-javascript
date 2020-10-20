@@ -1,7 +1,7 @@
-import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 import { ThBaseHandler } from '../base'
+import { UriHelper } from '../uri-helper'
 
 export interface AccountsOptions {
   user?: string
@@ -23,21 +23,20 @@ export interface AccountsQueryOrOptions {
 export interface AccountsResponse {
   data: Account[]
   metadata: Record<string, unknown>
+  next?: () => Promise<AccountsResponse>
 }
 
 export interface AccountResponse {
-  data: Account
+  data?: Account
   metadata?: {
     count?: number
     patch?: any
   }
   msg?: string
 }
-export interface Account {
-  id?: string
-}
 
 interface AccountsRefType {
+  id?: string
   branch: string
   branch_number: number
   name: string
@@ -56,118 +55,99 @@ export class Accounts extends ThBaseHandler {
   endpoint: string
   http: Client
   public options: AccountsOptions
+  public uriHelper: UriHelper
 
-  constructor(options: AccountsOptions, http: Client) {
+  constructor (options: AccountsOptions, http: Client) {
     super(http, {
       endpoint: Accounts.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Accounts.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(queryOrOptions?: AccountsQueryOrOptions | undefined): Promise<AccountsResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (queryOrOptions?: AccountsQueryOrOptions | undefined): Promise<AccountsResponse> {
+    let next
 
-      try {
-        let uri
-        if (queryOrOptions && queryOrOptions.uri) {
-          uri = queryOrOptions.uri
-        } else {
-          let queryString = ''
-          if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
-            queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
-          }
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
-            queryString ? `?${queryString}` : ''
-          }`
-        }
-
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new errors.AccountsFetchFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count },
-          next
-        } as AccountsResponse)
-      } catch (error) {
-        return reject(new errors.AccountsFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new errors.AccountsFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count },
+        next
+      }
+    } catch (error) {
+      throw new errors.AccountsFetchFailed(undefined, { error })
+    }
   }
 
-  get(accountId: string): Promise<AccountResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${accountId}`
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new errors.AccountFetchFailed(undefined, { status: response.status }))
+  async get (accountId: string): Promise<AccountResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${accountId}`)
 
-        return resolve({
-          data: response.data.results[0] as Account,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as AccountResponse)
-      } catch (error) {
-        return reject(new errors.AccountFetchFailed(undefined, { error }))
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) { throw new errors.AccountFetchFailed(undefined, { status: response.status }) }
+
+      return {
+        data: response.data.results[0] as Account,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new errors.AccountFetchFailed(undefined, { error })
+    }
   }
 
-  put(accountId: string, account: Account): Promise<AccountResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${accountId}`
-      try {
-        const response = await this.http.getClient().put(uri, account)
+  async put (accountId: string, account: Account): Promise<AccountResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${accountId}`)
+    try {
+      const response = await this.http.getClient().put(uri, account)
 
-        return resolve({
-          data: response.data.results[0] as Account,
-          metadata: { count: response.data.count }
-        } as AccountResponse)
-      } catch (error) {
-        return reject(new errors.AccountPutFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Account,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new errors.AccountPutFailed(undefined, { error })
+    }
   }
 
-  create(account: Account): Promise<AccountResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-      try {
-        const response = await this.http.getClient().post(uri, account)
+  async create (account: Account): Promise<AccountResponse> {
+    const uri = this.uriHelper.generateBaseUri()
+    try {
+      const response = await this.http.getClient().post(uri, account)
 
-        return resolve({
-          data: response.data.results[0] as Account,
-          metadata: { count: response.data.count }
-        } as AccountResponse)
-      } catch (error) {
-        return reject(new errors.AccountCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Account,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new errors.AccountCreationFailed(undefined, { error })
+    }
   }
 
-  delete(accountId: string): Promise<AccountResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${accountId}`
-      try {
-        const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new errors.AccountDeleteFailed())
+  async delete (accountId: string): Promise<AccountResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${accountId}`)
+    try {
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) throw new errors.AccountDeleteFailed()
 
-        return resolve({
-          msg: response.data.msg
-        } as AccountResponse)
-      } catch (err) {
-        return reject(new errors.AccountDeleteFailed())
+      return {
+        msg: response.data.msg
       }
-    })
+    } catch (err) {
+      throw new errors.AccountDeleteFailed()
+    }
   }
 }

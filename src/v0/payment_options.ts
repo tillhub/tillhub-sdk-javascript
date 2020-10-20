@@ -1,7 +1,7 @@
-import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 import { ThBaseHandler } from '../base'
+import { UriHelper } from '../uri-helper'
 
 export interface PaymentOptionsOptions {
   user?: string
@@ -23,20 +23,18 @@ export interface PaymentOptionsResponse {
 }
 
 export interface PaymentOptionResponse {
-  data: PaymentOption
+  data?: PaymentOption
   metadata?: {
     count?: number
     patch?: any
   }
   msg?: string
 }
-export interface PaymentOption {
-  id?: string
-}
 
 export type PaymentOptionType = 'expense' | 'deposit' | 'bank'
 
 export interface PaymentOption {
+  id?: string
   active?: boolean
   type: PaymentOptionType
   name: string
@@ -53,120 +51,109 @@ export class PaymentOptions extends ThBaseHandler {
   endpoint: string
   http: Client
   public options: PaymentOptionsOptions
+  public uriHelper: UriHelper
 
-  constructor(options: PaymentOptionsOptions, http: Client) {
+  constructor (options: PaymentOptionsOptions, http: Client) {
     super(http, {
       endpoint: PaymentOptions.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = PaymentOptions.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(queryOrOptions?: PaymentOptionsQuery | undefined): Promise<PaymentOptionsResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (queryOrOptions?: PaymentOptionsQuery | undefined): Promise<PaymentOptionsResponse> {
+    try {
+      // let uri
+      // if (queryOrOptions?.uri) {
+      //   uri = queryOrOptions.uri
+      // } else {
+      //   let queryString = ''
+      //   if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
+      //     queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
+      //   }
 
-      try {
-        let uri
-        if (queryOrOptions && queryOrOptions.uri) {
-          uri = queryOrOptions.uri
-        } else {
-          let queryString = ''
-          if (queryOrOptions && (queryOrOptions.query || queryOrOptions.limit)) {
-            queryString = qs.stringify({ limit: queryOrOptions.limit, ...queryOrOptions.query })
-          }
+      //   uri = `${this.options.base}${this.endpoint}/${this.options.user}${
+      //       queryString ? `?${queryString}` : ''
+      //     }`
+      // }
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
-            queryString ? `?${queryString}` : ''
-          }`
-        }
-
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(
-            new errors.PaymentOptionsFetchFailed(undefined, { status: response.status })
-          )
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count },
-          next
-        } as PaymentOptionsResponse)
-      } catch (error) {
-        return reject(new errors.PaymentOptionsFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new errors.PaymentOptionsFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new errors.PaymentOptionsFetchFailed(undefined, { error })
+    }
   }
 
-  get(paymentOptionId: string): Promise<PaymentOptionResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${paymentOptionId}`
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new errors.PaymentOptionFetchFailed(undefined, { status: response.status }))
+  async get (paymentOptionId: string): Promise<PaymentOptionResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${paymentOptionId}`)
 
-        return resolve({
-          data: response.data.results[0] as PaymentOption,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as PaymentOptionResponse)
-      } catch (error) {
-        return reject(new errors.PaymentOptionFetchFailed(undefined, { error }))
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) { throw new errors.PaymentOptionFetchFailed(undefined, { status: response.status }) }
+
+      return {
+        data: response.data.results[0] as PaymentOption,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new errors.PaymentOptionFetchFailed(undefined, { error })
+    }
   }
 
-  put(paymentOptionId: string, paymentOption: PaymentOption): Promise<PaymentOptionResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${paymentOptionId}`
-      try {
-        const response = await this.http.getClient().put(uri, paymentOption)
+  async put (paymentOptionId: string, paymentOption: PaymentOption): Promise<PaymentOptionResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${paymentOptionId}`)
+    try {
+      const response = await this.http.getClient().put(uri, paymentOption)
 
-        return resolve({
-          data: response.data.results[0] as PaymentOption,
-          metadata: { count: response.data.count }
-        } as PaymentOptionResponse)
-      } catch (error) {
-        return reject(new errors.PaymentOptionPutFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as PaymentOption,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new errors.PaymentOptionPutFailed(undefined, { error })
+    }
   }
 
-  create(paymentOption: PaymentOption): Promise<PaymentOptionResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-      try {
-        const response = await this.http.getClient().post(uri, paymentOption)
+  async create (paymentOption: PaymentOption): Promise<PaymentOptionResponse> {
+    const uri = this.uriHelper.generateBaseUri()
+    try {
+      const response = await this.http.getClient().post(uri, paymentOption)
 
-        return resolve({
-          data: response.data.results[0] as PaymentOption,
-          metadata: { count: response.data.count }
-        } as PaymentOptionResponse)
-      } catch (error) {
-        return reject(new errors.PaymentOptionCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as PaymentOption,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new errors.PaymentOptionCreationFailed(undefined, { error })
+    }
   }
 
-  delete(paymentOptionId: string): Promise<PaymentOptionResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${paymentOptionId}`
-      try {
-        const response = await this.http.getClient().delete(uri)
-        response.status !== 200 && reject(new errors.PaymentOptionDeleteFailed())
+  async delete (paymentOptionId: string): Promise<PaymentOptionResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${paymentOptionId}`)
+    try {
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) throw new errors.PaymentOptionDeleteFailed()
 
-        return resolve({
-          msg: response.data.msg
-        } as PaymentOptionResponse)
-      } catch (err) {
-        return reject(new errors.PaymentOptionDeleteFailed())
+      return {
+        msg: response.data.msg
       }
-    })
+    } catch (err) {
+      throw new errors.PaymentOptionDeleteFailed()
+    }
   }
 }

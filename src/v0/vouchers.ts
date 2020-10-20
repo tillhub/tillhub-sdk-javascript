@@ -1,5 +1,4 @@
 import { diff, jsonPatchPathConverter } from 'just-diff'
-import qs from 'qs'
 import safeGet from 'just-safe-get'
 import { Client } from '../client'
 import { BaseError } from '../errors'
@@ -27,14 +26,14 @@ export interface VouchersMetaQuery {
 }
 
 export interface VouchersResponse {
-  data: Record<string, unknown>[]
-  metadata: Record<string, unknown>
+  data?: Array<Record<string, unknown>>
+  metadata?: Record<string, unknown>
   msg?: string
   next?: () => Promise<VouchersResponse>
 }
 
 export interface VoucherLogsResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   msg?: string
   next?: () => Promise<VoucherLogsResponse>
@@ -100,7 +99,7 @@ export interface Voucher {
 }
 
 export interface UsersResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
 }
 
 export class Vouchers extends ThBaseHandler {
@@ -111,279 +110,234 @@ export class Vouchers extends ThBaseHandler {
   public options: VouchersOptions
   public uriHelper: UriHelper
 
-  constructor(options: VouchersOptions, http: Client) {
+  constructor (options: VouchersOptions, http: Client) {
     super(http, {
       endpoint: Vouchers.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
     this.logs = new VoucherLogs(options, http)
 
     this.endpoint = Vouchers.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(optionsOrQuery?: VouchersQueryOptions | undefined): Promise<VouchersResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (optionsOrQuery?: VouchersQueryOptions | undefined): Promise<VouchersResponse> {
+    let next
 
-      try {
-        let uri
-        if (optionsOrQuery && optionsOrQuery.uri) {
-          uri = optionsOrQuery.uri
-        } else {
-          let queryString = ''
-          if (optionsOrQuery && (optionsOrQuery.query || optionsOrQuery.limit)) {
-            queryString = qs.stringify({ limit: optionsOrQuery.limit, ...optionsOrQuery.query })
-          }
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, optionsOrQuery)
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
-            queryString ? `?${queryString}` : ''
-          }`
-        }
-
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new VouchersFetchFailed(undefined, { status: response.status }))
-        }
-
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<VouchersResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { cursor: response.data.cursor },
-          next
-        } as VouchersResponse)
-      } catch (error) {
-        return reject(new VouchersFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new VouchersFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      if (response.data.cursor?.next) {
+        next = (): Promise<VouchersResponse> => this.getAll({ uri: response.data.cursor.next })
+      }
+
+      return {
+        data: response.data.results,
+        metadata: { cursor: response.data.cursor },
+        next
+      }
+    } catch (error) {
+      throw new VouchersFetchFailed(undefined, { error })
+    }
   }
 
-  meta(q?: VouchersMetaQuery | undefined): Promise<VouchersResponse> {
-    return new Promise(async (resolve, reject) => {
-      let uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+  async meta (q?: VouchersMetaQuery | undefined): Promise<VouchersResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/meta')
+      const uri = this.uriHelper.generateUriWithQuery(base, q)
 
-      try {
-        const queryString = qs.stringify(q)
-
-        if (queryString) {
-          uri = `${uri}?${queryString}`
-        }
-
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new VouchersMetaFailed(undefined, { status: response.status }))
-        }
-
-        if (!response.data.results[0]) {
-          return reject(new VouchersMetaFailed('could not get voucher metadata unexpectedly'))
-        }
-
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.count }
-        } as VouchersResponse)
-      } catch (error) {
-        return reject(new VouchersMetaFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new VouchersMetaFailed(undefined, { status: response.status })
       }
-    })
+
+      if (!response.data.results[0]) {
+        throw new VouchersMetaFailed('could not get voucher metadata unexpectedly')
+      }
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new VouchersMetaFailed(undefined, { error })
+    }
   }
 
-  delete(voucherId: string): Promise<VouchersResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${voucherId}`
-      try {
-        const response = await this.http.getClient().delete(uri)
-        if (response.status !== 200) {
-          return reject(new VoucherDeleteFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          msg: response.data.msg
-        } as VouchersResponse)
-      } catch (error) {
-        return reject(new VoucherDeleteFailed(undefined, { error }))
+  async delete (voucherId: string): Promise<VouchersResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${voucherId}`)
+    try {
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) {
+        throw new VoucherDeleteFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        msg: response.data.msg
+      }
+    } catch (error) {
+      throw new VoucherDeleteFailed(undefined, { error })
+    }
   }
 
-  count(): Promise<VouchersResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+  async count (): Promise<VouchersResponse> {
+    const uri = this.uriHelper.generateBaseUri('/meta')
 
-      try {
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new VouchersCountFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as VouchersResponse)
-      } catch (error) {
-        return reject(new VouchersCountFailed(undefined, { error }))
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new VouchersCountFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new VouchersCountFailed(undefined, { error })
+    }
   }
 
-  get(voucherId: string): Promise<VoucherResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${voucherId}`
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new VoucherFetchFailed())
+  async get (voucherId: string): Promise<VoucherResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${voucherId}`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new VoucherFetchFailed()
 
-        return resolve({
-          data: response.data.results[0] as Voucher,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as VoucherResponse)
-      } catch (error) {
-        return reject(new VoucherFetchFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Voucher,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new VoucherFetchFailed(undefined, { error })
+    }
   }
 
-  getLogs(
+  async getLogs (
     voucherId: string,
     optionsOrQuery?: VouchersQueryOptions | undefined
   ): Promise<VoucherLogsResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+    let next
 
-      try {
-        let uri
-        if (optionsOrQuery && optionsOrQuery.uri) {
-          uri = optionsOrQuery.uri
-        } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}/${voucherId}/logs`
-        }
+    try {
+      const base = this.uriHelper.generateBaseUri(`/${voucherId}/logs`)
+      const uri = this.uriHelper.generateUriWithQuery(base, optionsOrQuery)
 
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new VoucherLogsFetchFailed(undefined, { status: response.status }))
-        }
-
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<VoucherLogsResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count },
-          next
-        } as VouchersResponse)
-      } catch (error) {
-        return reject(new VoucherLogsFetchFailed(undefined, { error }))
-      }
-    })
-  }
-
-  put(voucherId: string, voucher: Voucher): Promise<VoucherResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${voucherId}`
-      try {
-        const response = await this.http.getClient().put(uri, voucher)
-
-        return resolve({
-          data: response.data.results[0] as Voucher,
-          metadata: { count: response.data.count }
-        } as VoucherResponse)
-      } catch (error) {
-        return reject(new VoucherPutFailed(undefined, { error }))
-      }
-    })
-  }
-
-  patch(source: Voucher, target: Voucher): Promise<VoucherResponse> {
-    return new Promise(async (resolve, reject) => {
-      if (!source.id || !target.id || source.id !== target.id) {
-        return reject(
-          new VoucherTypeError(
-            'source and target Record<string, unknown> require ID to be set and be equal to each other'
-          )
-        )
-      }
-
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${source.id}`
-      try {
-        const patch = diff(source, target, jsonPatchPathConverter)
-
-        const response = await this.http.getClient()({
-          method: 'PATCH',
-          url: uri,
-          headers: {
-            'content-type': 'application/json-patch+json'
-          },
-          data: patch
-        })
-
-        return resolve({
-          data: response.data.results[0] as Voucher,
-          metadata: { count: response.data.count, patch }
-        } as VoucherResponse)
-      } catch (error) {
-        return reject(new VoucherPatchFailed(undefined, { error }))
-      }
-    })
-  }
-
-  create(voucher: Voucher): Promise<VoucherResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-
-      let response
-      try {
-        response = await this.http.getClient().post(uri, voucher)
-      } catch (error) {
-        const responseStatus = safeGet(error, 'response.status')
-
-        if (responseStatus === 409) {
-          return reject(new VoucherCodeConflict(undefined, { error }))
-        } else {
-          return reject(new VoucherCreationFailed(undefined, { error }))
-        }
-      }
-
+      const response = await this.http.getClient().get(uri)
       if (response.status !== 200) {
-        return reject(
-          new VoucherCreationFailed(safeGet(response, 'error.message'), { status: response.status })
-        )
+        throw new VoucherLogsFetchFailed(undefined, { status: response.status })
       }
 
-      return resolve({
+      if (response.data.cursor?.next) {
+        next = (): Promise<VoucherLogsResponse> => this.getLogs(voucherId, { uri: response.data.cursor.next })
+      }
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count },
+        next
+      }
+    } catch (error) {
+      throw new VoucherLogsFetchFailed(undefined, { error })
+    }
+  }
+
+  async put (voucherId: string, voucher: Voucher): Promise<VoucherResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${voucherId}`)
+    try {
+      const response = await this.http.getClient().put(uri, voucher)
+
+      return {
         data: response.data.results[0] as Voucher,
         metadata: { count: response.data.count }
-      } as VoucherResponse)
-    })
-  }
-
-  getAllUsers(): Promise<UsersResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = `${this.options.base}${this.endpoint}/${this.options.user}/users`
-
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new VouchersUsersFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results
-        } as UsersResponse)
-      } catch (error) {
-        return reject(new VouchersUsersFailed(undefined, { error }))
       }
-    })
+    } catch (error) {
+      throw new VoucherPutFailed(undefined, { error })
+    }
   }
 
-  async getBoundedCustomers(voucherId: string): Promise<BoundedCustomersGetResponse> {
+  async patch (source: Voucher, target: Voucher): Promise<VoucherResponse> {
+    if (!source.id || !target.id || source.id !== target.id) {
+      throw new VoucherTypeError(
+        'source and target Record<string, unknown> require ID to be set and be equal to each other'
+      )
+    }
+    const uri = this.uriHelper.generateBaseUri(`/${source.id}`)
+
+    try {
+      const patch = diff(source, target, jsonPatchPathConverter)
+
+      const response = await this.http.getClient()({
+        method: 'PATCH',
+        url: uri,
+        headers: {
+          'content-type': 'application/json-patch+json'
+        },
+        data: patch
+      })
+
+      return {
+        data: response.data.results[0] as Voucher,
+        metadata: { count: response.data.count, patch }
+      }
+    } catch (error) {
+      throw new VoucherPatchFailed(undefined, { error })
+    }
+  }
+
+  async create (voucher: Voucher): Promise<VoucherResponse> {
+    const uri = this.uriHelper.generateBaseUri()
+
+    let response
+    try {
+      response = await this.http.getClient().post(uri, voucher)
+    } catch (error) {
+      const responseStatus = safeGet(error, 'response.status')
+
+      if (responseStatus === 409) {
+        throw new VoucherCodeConflict(undefined, { error })
+      } else {
+        throw new VoucherCreationFailed(undefined, { error })
+      }
+    }
+
+    if (response.status !== 200) {
+      throw new VoucherCreationFailed(safeGet(response, 'error.message'), { status: response.status })
+    }
+    return {
+      data: response.data.results[0] as Voucher,
+      metadata: { count: response.data.count }
+    }
+  }
+
+  async getAllUsers (): Promise<UsersResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri('/users')
+
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new VouchersUsersFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results
+      }
+    } catch (error) {
+      throw new VouchersUsersFailed(undefined, { error })
+    }
+  }
+
+  async getBoundedCustomers (voucherId: string): Promise<BoundedCustomersGetResponse> {
     try {
       const uri = this.uriHelper.generateBaseUri(`/${voucherId}/customers`)
 
@@ -399,7 +353,7 @@ export class Vouchers extends ThBaseHandler {
     }
   }
 
-  async createBoundedCustomers(
+  async createBoundedCustomers (
     voucherId: string,
     customers: string[]
   ): Promise<BoundedCustomersPostResponse> {
@@ -419,7 +373,7 @@ export class Vouchers extends ThBaseHandler {
     }
   }
 
-  async updateBoundedCustomers(
+  async updateBoundedCustomers (
     voucherId: string,
     customers: string[]
   ): Promise<BoundedCustomersPostResponse> {
@@ -445,86 +399,73 @@ export class VoucherLogs extends ThBaseHandler {
   endpoint: string
   http: Client
   public options: VouchersOptions
+  public uriHelper: UriHelper
 
-  constructor(options: VouchersOptions, http: Client) {
+  constructor (options: VouchersOptions, http: Client) {
     super(http, {
       endpoint: VoucherLogs.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = VoucherLogs.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(optionsOrQuery?: VouchersQueryOptions | undefined): Promise<VoucherLogsResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (optionsOrQuery?: VouchersQueryOptions | undefined): Promise<VoucherLogsResponse> {
+    let next
 
-      try {
-        let uri
-        if (optionsOrQuery && optionsOrQuery.uri) {
-          uri = optionsOrQuery.uri
-        } else {
-          let queryString = ''
-          if (optionsOrQuery && (optionsOrQuery.query || optionsOrQuery.limit)) {
-            queryString = qs.stringify({ limit: optionsOrQuery.limit, ...optionsOrQuery.query })
-          }
+    try {
+      const base = this.uriHelper.generateBaseUri('/logs')
+      const uri = this.uriHelper.generateUriWithQuery(base, optionsOrQuery)
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}/logs${
-            queryString ? `?${queryString}` : ''
-          }`
-        }
-
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new VouchersLogsFetchFailed(undefined, { status: response.status }))
-        }
-
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<VoucherLogsResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { cursor: response.data.cursor },
-          next
-        } as VouchersResponse)
-      } catch (error) {
-        return reject(new VouchersLogsFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new VouchersLogsFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      if (response.data.cursor?.next) {
+        next = (): Promise<VoucherLogsResponse> => this.getAll({ uri: response.data.cursor.next })
+      }
+
+      return {
+        data: response.data.results,
+        metadata: { cursor: response.data.cursor },
+        next
+      }
+    } catch (error) {
+      throw new VouchersLogsFetchFailed(undefined, { error })
+    }
   }
 
-  meta(): Promise<VoucherLogsResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/logs/meta`
+  async meta (): Promise<VoucherLogsResponse> {
+    const uri = this.uriHelper.generateBaseUri('/logs/meta')
 
-      try {
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new VoucherLogsMetaFailed(undefined, { status: response.status }))
-        }
-
-        if (!response.data.results[0]) {
-          return reject(new VouchersMetaFailed('could not get voucher metadata unexpectedly'))
-        }
-
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.count }
-        } as VouchersResponse)
-      } catch (error) {
-        return reject(new VoucherLogsMetaFailed(undefined, { error }))
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new VoucherLogsMetaFailed(undefined, { status: response.status })
       }
-    })
+
+      if (!response.data.results[0]) {
+        throw new VouchersMetaFailed('could not get voucher metadata unexpectedly')
+      }
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new VoucherLogsMetaFailed(undefined, { error })
+    }
   }
 }
 
 export class VoucherTypeError extends BaseError {
   public name = 'VouchersFetchFailed'
-  constructor(public message: string, properties?: Record<string, unknown>) {
+  constructor (public message: string, properties?: Record<string, unknown>) {
     super(message, properties)
     Object.setPrototypeOf(this, VoucherTypeError.prototype)
   }
@@ -532,7 +473,7 @@ export class VoucherTypeError extends BaseError {
 
 export class VouchersFetchFailed extends BaseError {
   public name = 'VouchersFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the vouchers',
     properties?: Record<string, unknown>
   ) {
@@ -543,7 +484,7 @@ export class VouchersFetchFailed extends BaseError {
 
 export class VoucherLogsFetchFailed extends BaseError {
   public name = 'VoucherLogsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the voucher logs',
     properties?: Record<string, unknown>
   ) {
@@ -554,7 +495,7 @@ export class VoucherLogsFetchFailed extends BaseError {
 
 export class VoucherFetchFailed extends BaseError {
   public name = 'VoucherFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch voucher',
     properties?: Record<string, unknown>
   ) {
@@ -565,7 +506,7 @@ export class VoucherFetchFailed extends BaseError {
 
 export class VoucherPutFailed extends BaseError {
   public name = 'VoucherPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter voucher',
     properties?: Record<string, unknown>
   ) {
@@ -576,7 +517,7 @@ export class VoucherPutFailed extends BaseError {
 
 export class VoucherPatchFailed extends BaseError {
   public name = 'VoucherPatchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter voucher',
     properties?: Record<string, unknown>
   ) {
@@ -587,7 +528,7 @@ export class VoucherPatchFailed extends BaseError {
 
 export class VoucherCreationFailed extends BaseError {
   public name = 'VoucherPostFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create voucher',
     properties?: Record<string, unknown>
   ) {
@@ -598,7 +539,7 @@ export class VoucherCreationFailed extends BaseError {
 
 export class VoucherCodeConflict extends BaseError {
   public name = 'VoucherCodeConflict'
-  constructor(
+  constructor (
     public message: string = 'This voucher code is already in use. Please use another code.',
     properties?: Record<string, unknown>
   ) {
@@ -609,7 +550,7 @@ export class VoucherCodeConflict extends BaseError {
 
 export class VouchersCountFailed extends BaseError {
   public name = 'VouchersCountFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not count the vouchers',
     properties?: Record<string, unknown>
   ) {
@@ -620,7 +561,7 @@ export class VouchersCountFailed extends BaseError {
 
 export class VouchersMetaFailed extends BaseError {
   public name = 'VouchersMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get voucher metadata',
     properties?: Record<string, unknown>
   ) {
@@ -631,7 +572,7 @@ export class VouchersMetaFailed extends BaseError {
 
 export class VoucherLogsMetaFailed extends BaseError {
   public name = 'VoucherLogsMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get voucher logs metadata',
     properties?: Record<string, unknown>
   ) {
@@ -642,7 +583,7 @@ export class VoucherLogsMetaFailed extends BaseError {
 
 export class VoucherDeleteFailed extends BaseError {
   public name = 'VoucherDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete the voucher',
     properties?: Record<string, unknown>
   ) {
@@ -653,7 +594,7 @@ export class VoucherDeleteFailed extends BaseError {
 
 export class VouchersLogsFetchFailed extends BaseError {
   public name = 'VouchersLogsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the vouchers logs',
     properties?: Record<string, unknown>
   ) {
@@ -664,7 +605,7 @@ export class VouchersLogsFetchFailed extends BaseError {
 
 export class VouchersLogsCountFailed extends BaseError {
   public name = 'VouchersLogsCountFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not count the vouchers logs',
     properties?: Record<string, unknown>
   ) {
@@ -675,7 +616,7 @@ export class VouchersLogsCountFailed extends BaseError {
 
 export class VouchersUsersFailed extends BaseError {
   public name = 'VouchersUsersFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get authorized voucher users',
     properties?: Record<string, unknown>
   ) {
@@ -686,7 +627,7 @@ export class VouchersUsersFailed extends BaseError {
 
 export class VouchersBoundedCustomerGetFailed extends BaseError {
   public name = 'VouchersBoundedCustomerGetFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get the voucher bounded customers',
     properties?: Record<string, unknown>
   ) {
@@ -697,7 +638,7 @@ export class VouchersBoundedCustomerGetFailed extends BaseError {
 
 export class VouchersBoundedCustomerCreateFailed extends BaseError {
   public name = 'VouchersBoundedCustomerCreateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create the voucher bounded customers',
     properties?: Record<string, unknown>
   ) {
@@ -708,7 +649,7 @@ export class VouchersBoundedCustomerCreateFailed extends BaseError {
 
 export class VouchersBoundedCustomerPutFailed extends BaseError {
   public name = 'VouchersBoundedCustomerPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update the voucher bounded customers',
     properties?: Record<string, unknown>
   ) {

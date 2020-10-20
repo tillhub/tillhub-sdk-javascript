@@ -1,10 +1,10 @@
 import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
-dotenv.config()
 import { v0 } from '../../src/tillhub-js'
 import { initThInstance } from '../util'
 import { WarehouseAddressType } from '../../src/v0/warehouses'
+dotenv.config()
 
 const legacyId = '4564'
 

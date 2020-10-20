@@ -2,7 +2,7 @@ import { BaseError } from './baseError'
 
 export class ProductServiceQuestionsFetchAllFailed extends BaseError {
   public name = 'ProductServiceQuestionsFetchAllFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch all product service question',
     properties?: Record<string, unknown>
   ) {
@@ -13,7 +13,7 @@ export class ProductServiceQuestionsFetchAllFailed extends BaseError {
 
 export class ProductServiceQuestionsFetchOneFailed extends BaseError {
   public name = 'ProductServiceQuestionsFetchOneFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch single product service question',
     properties?: Record<string, unknown>
   ) {
@@ -24,7 +24,7 @@ export class ProductServiceQuestionsFetchOneFailed extends BaseError {
 
 export class ProductServiceQuestionsGetMetaFailed extends BaseError {
   public name = 'ProductServiceQuestionsGetMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch meta data for product service question',
     properties?: Record<string, unknown>
   ) {
@@ -35,7 +35,7 @@ export class ProductServiceQuestionsGetMetaFailed extends BaseError {
 
 export class ProductServiceQuestionsCreationFailed extends BaseError {
   public name = 'ProductServiceQuestionsCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create product service question',
     properties?: Record<string, unknown>
   ) {
@@ -46,7 +46,7 @@ export class ProductServiceQuestionsCreationFailed extends BaseError {
 
 export class ProductServiceQuestionsPutFailed extends BaseError {
   public name = 'ProductServiceQuestionsPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update product service question',
     properties?: Record<string, unknown>
   ) {
@@ -57,7 +57,7 @@ export class ProductServiceQuestionsPutFailed extends BaseError {
 
 export class ProductServiceQuestionDeleteFailed extends BaseError {
   public name = 'ProductServiceQuestionDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete product service question',
     properties?: Record<string, unknown>
   ) {
@@ -68,7 +68,7 @@ export class ProductServiceQuestionDeleteFailed extends BaseError {
 
 export class ProductServiceQuestionsBookFailed extends BaseError {
   public name = 'ProductServiceQuestionsBookFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not book transfer in product service questions',
     properties?: Record<string, unknown>
   ) {

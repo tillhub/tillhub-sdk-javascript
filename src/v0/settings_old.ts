@@ -1,4 +1,5 @@
 import { Client } from '../client'
+import { UriHelper } from '../uri-helper'
 import {
   LegacySettingFetchFailed,
   LegacySettingsFetchFailed,
@@ -54,74 +55,71 @@ export interface LegacySettingResponse {
   metadata: {
     count: number
   }
+  msg?: string
 }
 
 export class LegacySettings {
   endpoint: string
   http: Client
   public options: LegacySettingsOptions
+  public uriHelper: UriHelper
 
-  constructor(options: LegacySettingsOptions, http: Client) {
+  constructor (options: LegacySettingsOptions, http: Client) {
     this.options = options
     this.http = http
 
     this.endpoint = '/api/v0/settings_old'
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
+    this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(): Promise<LegacySettingsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
+  async getAll (): Promise<LegacySettingsResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri()
 
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new LegacySettingsFetchFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as LegacySettingsResponse)
-      } catch (error) {
-        return reject(new LegacySettingsFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new LegacySettingsFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new LegacySettingsFetchFailed(undefined, { error })
+    }
   }
 
-  get(LegacySettingId: string): Promise<LegacySettingResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${LegacySettingId}`
-
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new LegacySettingFetchFailed(undefined, { status: response.status }))
-
-        return resolve({
-          data: response.data.results[0] as LegacySetting,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as LegacySettingResponse)
-      } catch (error) {
-        return reject(new LegacySettingFetchFailed(undefined, { error }))
+  async get (legacySettingId: string): Promise<LegacySettingResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${legacySettingId}`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new LegacySettingFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0] as LegacySetting,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new LegacySettingFetchFailed(undefined, { error })
+    }
   }
 
-  update(LegacySettingId: string, LegacySetting: LegacySetting): Promise<LegacySettingResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${LegacySettingId}`
-      try {
-        const response = await this.http.getClient().patch(uri, LegacySetting)
+  async update (legacySettingId: string, LegacySetting: LegacySetting): Promise<LegacySettingResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${legacySettingId}`)
+    try {
+      const response = await this.http.getClient().patch(uri, LegacySetting)
 
-        return resolve({
-          data: response.data.results[0] as LegacySetting,
-          metadata: { count: response.data.count }
-        } as LegacySettingResponse)
-      } catch (error) {
-        return reject(new LegacySettingUpdateFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as LegacySetting,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new LegacySettingUpdateFailed(undefined, { error })
+    }
   }
 }

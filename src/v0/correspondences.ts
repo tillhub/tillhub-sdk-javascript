@@ -17,7 +17,7 @@ export interface CorrespondencesQuery {
 }
 
 export interface CorrespondencesResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   next?: () => Promise<CorrespondencesResponse>
 }
@@ -56,103 +56,96 @@ export class Correspondences extends ThBaseHandler {
   public options: CorrespondencesOptions
   public uriHelper: UriHelper
 
-  constructor(options: CorrespondencesOptions, http: Client) {
+  constructor (options: CorrespondencesOptions, http: Client) {
     super(http, {
       endpoint: Correspondences.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Correspondences.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: CorrespondencesQuery | undefined): Promise<CorrespondencesResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (query?: CorrespondencesQuery | undefined): Promise<CorrespondencesResponse> {
+    let next
 
-      try {
-        const base = this.uriHelper.generateBaseUri()
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new CorrespondencesFetchFailed(undefined, { status: response.status }))
-        }
-
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<CorrespondencesResponse> =>
-            this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { cursor: response.data.cursor },
-          next
-        } as CorrespondencesResponse)
-      } catch (error) {
-        return reject(new CorrespondencesFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new CorrespondencesFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      if (response.data.cursor?.next) {
+        next = (): Promise<CorrespondencesResponse> =>
+          this.getAll({ uri: response.data.cursor.next })
+      }
+
+      return {
+        data: response.data.results,
+        metadata: { cursor: response.data.cursor },
+        next
+      }
+    } catch (error) {
+      throw new CorrespondencesFetchFailed(undefined, { error })
+    }
   }
 
-  get(correspondenceId: string): Promise<CorrespondenceResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/${correspondenceId}`)
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new CorrespondenceFetchFailed(undefined, { status: response.status }))
-
-        return resolve({
-          data: response.data.results[0] as Correspondence,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as CorrespondenceResponse)
-      } catch (error) {
-        return reject(new CorrespondenceFetchFailed(undefined, { error }))
+  async get (correspondenceId: string): Promise<CorrespondenceResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${correspondenceId}`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new CorrespondenceFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0] as Correspondence,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new CorrespondenceFetchFailed(undefined, { error })
+    }
   }
 
-  put(correspondenceId: string, correspondence: Correspondence): Promise<CorrespondenceResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/${correspondenceId}`)
-      try {
-        const response = await this.http.getClient().put(uri, correspondence)
+  async put (correspondenceId: string, correspondence: Correspondence): Promise<CorrespondenceResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${correspondenceId}`)
+    try {
+      const response = await this.http.getClient().put(uri, correspondence)
 
-        return resolve({
-          data: response.data.results[0] as Correspondence,
-          metadata: { count: response.data.count }
-        } as CorrespondenceResponse)
-      } catch (error) {
-        return reject(new CorrespondencePutFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Correspondence,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new CorrespondencePutFailed(undefined, { error })
+    }
   }
 
-  create(correspondence: Correspondence): Promise<CorrespondenceResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri()
-      try {
-        const response = await this.http.getClient().post(uri, correspondence)
+  async create (correspondence: Correspondence): Promise<CorrespondenceResponse> {
+    const uri = this.uriHelper.generateBaseUri()
+    try {
+      const response = await this.http.getClient().post(uri, correspondence)
 
-        return resolve({
-          data: response.data.results[0] as Correspondence,
-          metadata: { count: response.data.count }
-        } as CorrespondenceResponse)
-      } catch (error) {
-        return reject(new CorrespondenceCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Correspondence,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new CorrespondenceCreationFailed(undefined, { error })
+    }
   }
 }
 
 export class CorrespondencesFetchFailed extends BaseError {
   public name = 'CorrespondencesFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch Correspondences',
     properties?: Record<string, unknown>
   ) {
@@ -163,7 +156,7 @@ export class CorrespondencesFetchFailed extends BaseError {
 
 export class CorrespondenceFetchFailed extends BaseError {
   public name = 'CorrespondenceFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch correspondence',
     properties?: Record<string, unknown>
   ) {
@@ -174,7 +167,7 @@ export class CorrespondenceFetchFailed extends BaseError {
 
 export class CorrespondencePutFailed extends BaseError {
   public name = 'CorrespondencePutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter correspondence',
     properties?: Record<string, unknown>
   ) {
@@ -185,7 +178,7 @@ export class CorrespondencePutFailed extends BaseError {
 
 export class CorrespondenceCreationFailed extends BaseError {
   public name = 'CorrespondenceCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create correspondence',
     properties?: Record<string, unknown>
   ) {

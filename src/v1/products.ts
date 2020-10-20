@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { Client } from '../client'
 import { BaseError } from '../errors/baseError'
 import { UriHelper, HandlerQuery } from '../uri-helper'
@@ -21,9 +20,6 @@ type ProductTypes =
 
 export interface Product {
   id?: string
-}
-
-export interface Product {
   name?: string
   description?: string | null
   attributes?: Record<string, unknown> | null
@@ -75,7 +71,7 @@ export interface Product {
   i18n?: Record<string, unknown> | null
   is_service?: boolean
   delegateable?: boolean
-  delegateable_to?: Record<string, unknown>[]
+  delegateable_to?: Array<Record<string, unknown>>
   delegated_from?: Record<string, unknown>
 }
 
@@ -105,8 +101,8 @@ export interface ProductDeleteOptions {
 }
 
 export interface ProductsResponse {
-  data: Product[]
-  metadata: Record<string, unknown>
+  data?: Product[]
+  metadata?: Record<string, unknown>
   msg?: string
   next?: () => Promise<ProductsResponse>
 }
@@ -159,7 +155,7 @@ export interface BarcodeResponse {
   barcode?: string
   id?: string
   name?: string
-  codes?: Record<string, unknown>[]
+  codes?: Array<Record<string, unknown>>
 }
 
 export class Products extends ThBaseHandler {
@@ -169,363 +165,318 @@ export class Products extends ThBaseHandler {
   public options: ProductsOptions
   public uriHelper: UriHelper
 
-  constructor(options: ProductsOptions, http: Client) {
+  constructor (options: ProductsOptions, http: Client) {
     super(http, {
       endpoint: Products.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Products.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  create(product: Product, query?: HandlerProductsQuery): Promise<ProductResponse> {
-    return new Promise(async (resolve, reject) => {
+  async create (product: Product, query?: HandlerProductsQuery): Promise<ProductResponse> {
+    const base = this.uriHelper.generateBaseUri()
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+    try {
+      const response = await this.http.getClient().post(uri, product)
+      if (response.status !== 200) {
+        throw new ProductsCreateFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count },
+        errors: response.data.errors || []
+      }
+    } catch (error) {
+      throw new ProductsCreateFailed(undefined, { error })
+    }
+  }
+
+  async getAll (options?: ProductsOptions | undefined): Promise<ProductsResponse> {
+    let next
+
+    try {
       const base = this.uriHelper.generateBaseUri()
-      const uri = this.uriHelper.generateUriWithQuery(base, query)
+      const uri = this.uriHelper.generateUriWithQuery(base, options)
 
-      try {
-        const response = await this.http.getClient().post(uri, product)
-        if (response.status !== 200) {
-          return reject(new ProductsCreateFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.count },
-          errors: response.data.errors || []
-        } as ProductResponse)
-      } catch (error) {
-        return reject(new ProductsCreateFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new ProductsFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      if (response.data.cursor?.next) {
+        next = (): Promise<ProductsResponse> => this.getAll({ uri: response.data.cursor.next })
+      }
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count, cursor: response.data.cursor },
+        next
+      }
+    } catch (error) {
+      throw new ProductsFetchFailed(undefined, { error })
+    }
   }
 
-  getAll(options?: ProductsOptions | undefined): Promise<ProductsResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async import (options?: ProductsOptions | undefined): Promise<ProductsResponse> {
+    let next
 
-      try {
-        const base = this.uriHelper.generateBaseUri()
-        const uri = this.uriHelper.generateUriWithQuery(base, options)
+    try {
+      const base = this.uriHelper.generateBaseUri('/import')
+      const uri = this.uriHelper.generateUriWithQuery(base, options)
 
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new ProductsFetchFailed(undefined, { status: response.status }))
-        }
-
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<ProductsResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count, cursor: response.data.cursor },
-          next
-        } as ProductsResponse)
-      } catch (error) {
-        return reject(new ProductsFetchFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new ProductsImportFailed(undefined, { status: response.status })
       }
-    })
+
+      if (response.data.cursor?.next) {
+        next = (): Promise<ProductsResponse> => this.import({ uri: response.data.cursor.next })
+      }
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count, cursor: response.data.cursor },
+        next
+      }
+    } catch (error) {
+      throw new ProductsImportFailed(undefined, { error })
+    }
   }
 
-  import(options?: ProductsOptions | undefined): Promise<ProductsResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
-
-      try {
-        let uri
-        if (options && options.uri) {
-          uri = options.uri
-        } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}/import${
-            options && options.query ? `?${qs.stringify(options.query)}` : ''
-          }`
-        }
-
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new ProductsImportFailed(undefined, { status: response.status }))
-        }
-
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<ProductsResponse> => this.import({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count, cursor: response.data.cursor },
-          next
-        } as ProductsResponse)
-      } catch (error) {
-        return reject(new ProductsImportFailed(undefined, { error }))
+  async get (productId: string): Promise<ProductResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${productId}`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new ProductFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0] as Product,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new ProductFetchFailed(undefined, { error })
+    }
   }
 
-  get(productId: string): Promise<ProductResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/${productId}`)
-      try {
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new ProductFetchFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results[0] as Product,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as ProductResponse)
-      } catch (error) {
-        return reject(new ProductFetchFailed(undefined, { error }))
+  async getDetails (productId: string): Promise<ProductResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${productId}/details`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new ProductDetailsFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0] as Product,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new ProductDetailsFetchFailed(undefined, { error })
+    }
   }
 
-  getDetails(productId: string): Promise<ProductResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/${productId}/details`)
-      try {
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new ProductDetailsFetchFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results[0] as Product,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as ProductResponse)
-      } catch (error) {
-        return reject(new ProductDetailsFetchFailed(undefined, { error }))
+  async getChildrenDetails (productId: string): Promise<ProductResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${productId}/children/details`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new ProductChildrenDetailsFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new ProductChildrenDetailsFetchFailed(undefined, { error })
+    }
   }
 
-  getChildrenDetails(productId: string): Promise<ProductResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/${productId}/children/details`)
-      try {
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(
-            new ProductChildrenDetailsFetchFailed(undefined, { status: response.status })
-          )
-        }
+  async meta (): Promise<ProductsResponse> {
+    const uri = this.uriHelper.generateBaseUri('/meta')
 
-        return resolve({
-          data: response.data.results,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as ProductResponse)
-      } catch (error) {
-        return reject(new ProductChildrenDetailsFetchFailed(undefined, { error }))
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new ProductsMetaFailed(undefined, { status: response.status })
       }
-    })
+      if (!response.data.results[0]) {
+        throw new ProductsMetaFailed('could not get product metadata unexpectedly', {
+          status: response.status
+        })
+      }
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new ProductsMetaFailed(undefined, { error })
+    }
   }
 
-  meta(): Promise<ProductsResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri('/meta')
+  async put (productId: string, product: Product): Promise<ProductResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${productId}`)
 
-      try {
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new ProductsMetaFailed(undefined, { status: response.status }))
-        }
-        if (!response.data.results[0]) {
-          return reject(
-            new ProductsMetaFailed('could not get product metadata unexpectedly', {
-              status: response.status
-            })
-          )
-        }
-
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.count }
-        } as ProductsResponse)
-      } catch (error) {
-        return reject(new ProductsMetaFailed(undefined, { error }))
+    try {
+      const response = await this.http.getClient().put(uri, product)
+      if (response.status !== 200) {
+        throw new ProductsUpdateFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new ProductsUpdateFailed(undefined, { error })
+    }
   }
 
-  put(productId: string, product: Product): Promise<ProductResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/${productId}`)
+  async bulkEdit (products: Product[]): Promise<ProductsResponse> {
+    const uri = this.uriHelper.generateBaseUri('/bulk')
 
-      try {
-        const response = await this.http.getClient().put(uri, product)
-        if (response.status !== 200) {
-          return reject(new ProductsUpdateFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.count }
-        } as ProductResponse)
-      } catch (error) {
-        return reject(new ProductsUpdateFailed(undefined, { error }))
+    try {
+      const response = await this.http.getClient().put(uri, products)
+      if (![200, 202].includes(response.status)) {
+        throw new ProductsBulkEditFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new ProductsBulkEditFailed(undefined, { error })
+    }
   }
 
-  bulkEdit(products: Product[]): Promise<ProductsResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri('/bulk')
+  async count (): Promise<ProductsResponse> {
+    const uri = this.uriHelper.generateBaseUri('/meta')
 
-      try {
-        const response = await this.http.getClient().put(uri, products)
-        if ([200, 202].includes(response.status) === false) {
-          return reject(new ProductsBulkEditFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as ProductsResponse)
-      } catch (error) {
-        return reject(new ProductsBulkEditFailed(undefined, { error }))
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new ProductsCountFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new ProductsCountFailed(undefined, { error })
+    }
   }
 
-  count(): Promise<ProductsResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri('/meta')
+  async delete (productId: string, deleteOptions?: ProductDeleteOptions): Promise<ProductsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri(`/${productId}`)
+      const uri = this.uriHelper.generateUriWithQuery(base, deleteOptions)
 
-      try {
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new ProductsCountFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as ProductsResponse)
-      } catch (error) {
-        return reject(new ProductsCountFailed(undefined, { error }))
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) {
+        throw new ProductsDeleteFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        msg: response.data.msg
+      }
+    } catch (error) {
+      throw new ProductsDeleteFailed(undefined, { error })
+    }
   }
 
-  delete(productId: string, deleteOptions?: ProductDeleteOptions): Promise<ProductsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        let uri
-        if (deleteOptions) {
-          uri = `${this.options.base}${this.endpoint}/${
-            this.options.user
-          }/${productId}?${qs.stringify(deleteOptions)}`
-        } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}/${productId}`
-        }
-
-        const response = await this.http.getClient().delete(uri)
-        if (response.status !== 200) {
-          return reject(new ProductsDeleteFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          msg: response.data.msg
-        } as ProductsResponse)
-      } catch (error) {
-        return reject(new ProductsDeleteFailed(undefined, { error }))
-      }
-    })
-  }
-
-  search(query: SearchQuery | string): Promise<ProductsResponse> {
+  async search (query: SearchQuery | string): Promise<ProductsResponse> {
     const _query: SearchQuery = typeof query === 'string' ? { q: query } : query
 
-    return new Promise(async (resolve, reject) => {
-      const base = this.uriHelper.generateBaseUri('/search')
-      const uri = this.uriHelper.generateUriWithQuery(base, _query)
-      try {
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new ProductsSearchFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as ProductsResponse)
-      } catch (error) {
-        return reject(new ProductsSearchFailed(undefined, { error }))
+    const base = this.uriHelper.generateBaseUri('/search')
+    const uri = this.uriHelper.generateUriWithQuery(base, _query)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new ProductsSearchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new ProductsSearchFailed(undefined, { error })
+    }
   }
 
-  bookStock(requestOptions: BookStockQuery): Promise<ProductResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = this.uriHelper.generateBaseUri(`/${requestOptions.productId}/stock/book`)
-      try {
-        const response = await this.http.getClient().post(uri, requestOptions.body)
-        response.status !== 200 && reject(new ProductsBookStockFailed())
-
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.count }
-        } as ProductResponse)
-      } catch (err) {
-        return reject(new ProductsBookStockFailed())
+  async bookStock (requestOptions: BookStockQuery): Promise<ProductResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${requestOptions.productId}/stock/book`)
+    try {
+      const response = await this.http.getClient().post(uri, requestOptions.body)
+      if (response.status !== 200) {
+        throw new ProductsBookStockFailed()
       }
-    })
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new ProductsBookStockFailed()
+    }
   }
 
-  checkBarcode(code: string): Promise<ProductResponse> {
-    return new Promise(async (resolve, reject) => {
-      const base = this.uriHelper.generateBaseUri('/barcode')
-      const uri = this.uriHelper.generateUriWithQuery(base, { code })
+  async checkBarcode (code: string): Promise<ProductResponse> {
+    const base = this.uriHelper.generateBaseUri('/barcode')
+    const uri = this.uriHelper.generateUriWithQuery(base, { code })
 
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(
-            new BarcodeGetFailed(undefined, {
-              status: response.status
-            })
-          )
-
-        return resolve({
-          data: response.data.results as BarcodeResponse,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as ProductResponse)
-      } catch (error) {
-        if (error.response && error.response.status === 409) {
-          return reject(
-            new BarcodeGetFailed(undefined, {
-              status: error.response.status,
-              name: error.response.data.name,
-              data: error.response.data.results
-            })
-          )
-        }
-        return reject(new BarcodeGetFailed(undefined, { error }))
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new BarcodeGetFailed(undefined, {
+          status: response.status
+        })
       }
-    })
+
+      return {
+        data: response.data.results as BarcodeResponse,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 409) {
+        throw new BarcodeGetFailed(undefined, {
+          status: error.response.status,
+          name: error.response.data.name,
+          data: error.response.data.results
+        })
+      }
+      throw new BarcodeGetFailed(undefined, { error })
+    }
   }
 
-  pricebooks(): Pricebooks {
+  pricebooks (): Pricebooks {
     return new Pricebooks(this.options, this.http, this.uriHelper)
   }
 
-  pricebookEntries(): PricebookEntries {
+  pricebookEntries (): PricebookEntries {
     return new PricebookEntries(this.options, this.http, this.uriHelper)
   }
 }
 
 export class ProductsCreateFailed extends BaseError {
   public name = 'ProductsCreateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create the product',
     properties?: Record<string, unknown>
   ) {
@@ -536,7 +487,7 @@ export class ProductsCreateFailed extends BaseError {
 
 export class ProductFetchFailed extends BaseError {
   public name = 'ProductFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the product',
     properties?: Record<string, unknown>
   ) {
@@ -546,7 +497,7 @@ export class ProductFetchFailed extends BaseError {
 }
 export class ProductsFetchFailed extends BaseError {
   public name = 'ProductsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the products',
     properties?: Record<string, unknown>
   ) {
@@ -556,7 +507,7 @@ export class ProductsFetchFailed extends BaseError {
 }
 export class ProductsImportFailed extends BaseError {
   public name = 'ProductsImportFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not import the products',
     properties?: Record<string, unknown>
   ) {
@@ -567,7 +518,7 @@ export class ProductsImportFailed extends BaseError {
 
 export class ProductDetailsFetchFailed extends BaseError {
   public name = 'ProductDetailsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the details of the product',
     properties?: Record<string, unknown>
   ) {
@@ -577,7 +528,7 @@ export class ProductDetailsFetchFailed extends BaseError {
 }
 export class ProductChildrenDetailsFetchFailed extends BaseError {
   public name = 'ProductChildrenDetailsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the details of the children products',
     properties?: Record<string, unknown>
   ) {
@@ -588,7 +539,7 @@ export class ProductChildrenDetailsFetchFailed extends BaseError {
 
 export class ProductsCountFailed extends BaseError {
   public name = 'ProductsCountFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not count the products',
     properties?: Record<string, unknown>
   ) {
@@ -599,7 +550,7 @@ export class ProductsCountFailed extends BaseError {
 
 export class ProductsMetaFailed extends BaseError {
   public name = 'ProductsMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get products metadata',
     properties?: Record<string, unknown>
   ) {
@@ -610,7 +561,7 @@ export class ProductsMetaFailed extends BaseError {
 
 export class ProductsUpdateFailed extends BaseError {
   public name = 'ProductsUpdateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update the product',
     properties?: Record<string, unknown>
   ) {
@@ -621,7 +572,7 @@ export class ProductsUpdateFailed extends BaseError {
 
 export class ProductsBulkEditFailed extends BaseError {
   public name = 'ProductsBulkEditFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not bulk edit the products',
     properties?: Record<string, unknown>
   ) {
@@ -632,7 +583,7 @@ export class ProductsBulkEditFailed extends BaseError {
 
 export class ProductsDeleteFailed extends BaseError {
   public name = 'ProductsDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete the product',
     properties?: Record<string, unknown>
   ) {
@@ -643,7 +594,7 @@ export class ProductsDeleteFailed extends BaseError {
 
 export class ProductsSearchFailed extends BaseError {
   public name = 'ProductsSearchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not search for the product',
     properties?: Record<string, unknown>
   ) {
@@ -654,7 +605,7 @@ export class ProductsSearchFailed extends BaseError {
 
 export class ProductsBookStockFailed extends BaseError {
   public name = 'ProductsBookStockFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not book stock for the product',
     properties?: Record<string, unknown>
   ) {
@@ -665,7 +616,7 @@ export class ProductsBookStockFailed extends BaseError {
 
 export class BarcodeGetFailed extends BaseError {
   public name = 'BarcodeGetFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not check for barcode collision',
     properties?: Record<string, unknown>
   ) {

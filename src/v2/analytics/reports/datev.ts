@@ -1,6 +1,7 @@
 import { ThAnalyticsBaseHandler, ThAnalyticsExportsBaseResponse } from '../../../base'
 import { Client } from '../../../client'
 import { BaseError } from '../../../errors'
+import { UriHelper } from '../../../uri-helper'
 
 export interface DatevHandlerOptions {
   user?: string
@@ -13,13 +14,13 @@ export class AnalyticsReportsDatev extends ThAnalyticsBaseHandler {
   http: Client
   public options: DatevHandlerOptions
 
-  constructor(options: DatevHandlerOptions, http: Client) {
+  constructor (options: DatevHandlerOptions, http: Client) {
     super(http, options)
     this.options = options
     this.http = http
   }
 
-  static create(options: Record<string, unknown>, http: Client): AnalyticsReportsDatev {
+  static create (options: Record<string, unknown>, http: Client): AnalyticsReportsDatev {
     return ThAnalyticsBaseHandler.generateAuthenticatedInstance(
       AnalyticsReportsDatev,
       options,
@@ -27,14 +28,14 @@ export class AnalyticsReportsDatev extends ThAnalyticsBaseHandler {
     )
   }
 
-  public async export(
+  public async export (
     query?: Record<string, unknown>
   ): Promise<AnalyticsReportsDatevExportResponseItem> {
     try {
-      const result = await this.handleExport(
-        `${this.options.base}/api/v2/analytics/${this.options.user}/reports/datev`,
-        query
-      )
+      const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
+      const uri = localUriHelper.generateBaseUri('/reports/datev')
+      const result = await this.handleExport(uri, query)
+
       return result
     } catch (err) {
       throw new AnalyticsReportsDatevExportFetchError(undefined, { error: err })
@@ -44,7 +45,7 @@ export class AnalyticsReportsDatev extends ThAnalyticsBaseHandler {
 
 export class AnalyticsReportsDatevExportFetchError extends BaseError {
   public name = 'AnalyticsReportsDatevExportFetchError'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch datev report. ',
     properties?: Record<string, unknown>
   ) {

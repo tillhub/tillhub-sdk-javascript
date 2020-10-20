@@ -15,10 +15,10 @@ const user = {
 }
 
 if (process.env.SYSTEM_TEST) {
-  user.username = process.env.SYSTEM_TEST_USERNAME || user.username
-  user.password = process.env.SYSTEM_TEST_PASSWORD || user.password
-  user.clientAccount = process.env.SYSTEM_TEST_CLIENT_ACCOUNT_ID || user.clientAccount
-  user.apiKey = process.env.SYSTEM_TEST_API_KEY || user.apiKey
+  user.username = process.env.SYSTEM_TEST_USERNAME ?? user.username
+  user.password = process.env.SYSTEM_TEST_PASSWORD ?? user.password
+  user.clientAccount = process.env.SYSTEM_TEST_CLIENT_ACCOUNT_ID ?? user.clientAccount
+  user.apiKey = process.env.SYSTEM_TEST_API_KEY ?? user.apiKey
 }
 
 describe('SDK: can destroy SDK', () => {
@@ -44,6 +44,7 @@ describe('SDK: can destroy SDK', () => {
   })
 
   it('Can do login from instance', async () => {
+    th.destroy()
     const options = {
       username: user.username,
       password: user.password
@@ -88,7 +89,7 @@ describe('SDK: can destroy SDK', () => {
 
     const clientInstance = Client.getInstance({})
 
-    expect(clientInstance.getClient().defaults.headers.common['Authorization']).toBeUndefined()
+    expect(clientInstance.getClient().defaults.headers.common.Authorization).toBeUndefined()
 
     expect(th.auth).toBeDefined()
     expect(th.options).toBeUndefined()
@@ -104,7 +105,7 @@ describe('SDK: can destroy SDK', () => {
     })
 
     expect(th.auth.token).toBe('mockToken')
-    expect(clientInstance.getClient().defaults.headers.common['Authorization']).toBe(
+    expect(clientInstance.getClient().defaults.headers.common.Authorization).toBe(
       'Bearer mockToken'
     )
     expect(th.auth.authenticated).toBe(true)
@@ -119,7 +120,7 @@ describe('SDK: can destroy SDK', () => {
 
     const clientInstance = Client.getInstance({})
 
-    expect(clientInstance.getClient().defaults.headers.common['Authorization']).toBeUndefined()
+    expect(clientInstance.getClient().defaults.headers.common.Authorization).toBeUndefined()
 
     expect(th.auth).toBeDefined()
     expect(th.options).toBeUndefined()
@@ -157,7 +158,7 @@ describe('SDK: can destroy SDK', () => {
       expect(user).toBe('4564')
       expect(th.auth.token).toBe('sometoken')
       expect(th.auth.authenticated).toBe(true)
-      expect(clientInstance.getClient().defaults.headers.common['Authorization']).toBe(
+      expect(clientInstance.getClient().defaults.headers.common.Authorization).toBe(
         'Bearer sometoken'
       )
     } catch (err) {

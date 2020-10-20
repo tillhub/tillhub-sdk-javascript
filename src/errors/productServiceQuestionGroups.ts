@@ -2,7 +2,7 @@ import { BaseError } from './baseError'
 
 export class ProductServiceQuestionGroupsFetchAllFailed extends BaseError {
   public name = 'ProductServiceQuestionGroupsFetchAllFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch all product service question groups',
     properties?: Record<string, unknown>
   ) {
@@ -13,7 +13,7 @@ export class ProductServiceQuestionGroupsFetchAllFailed extends BaseError {
 
 export class ProductServiceQuestionGroupsFetchOneFailed extends BaseError {
   public name = 'ProductServiceQuestionGroupsFetchOneFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch single product service question group',
     properties?: Record<string, unknown>
   ) {
@@ -24,7 +24,7 @@ export class ProductServiceQuestionGroupsFetchOneFailed extends BaseError {
 
 export class ProductServiceQuestionGroupsGetMetaFailed extends BaseError {
   public name = 'ProductServiceQuestionGroupsGetMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch meta data for product service question groups',
     properties?: Record<string, unknown>
   ) {
@@ -35,7 +35,7 @@ export class ProductServiceQuestionGroupsGetMetaFailed extends BaseError {
 
 export class ProductServiceQuestionGroupsCreationFailed extends BaseError {
   public name = 'ProductServiceQuestionGroupsCreationFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create product service question groups',
     properties?: Record<string, unknown>
   ) {
@@ -46,7 +46,7 @@ export class ProductServiceQuestionGroupsCreationFailed extends BaseError {
 
 export class ProductServiceQuestionGroupsPutFailed extends BaseError {
   public name = 'ProductServiceQuestionGroupsPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update product service question groups',
     properties?: Record<string, unknown>
   ) {
@@ -57,7 +57,7 @@ export class ProductServiceQuestionGroupsPutFailed extends BaseError {
 
 export class ProductServiceQuestionGroupsBookFailed extends BaseError {
   public name = 'ProductServiceQuestionGroupsBookFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not book transfer in product service question groups',
     properties?: Record<string, unknown>
   ) {

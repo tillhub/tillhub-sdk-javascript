@@ -1,9 +1,9 @@
 import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
-dotenv.config()
 import { v0 } from '../../src/tillhub-js'
 import { initThInstance } from '../util'
+dotenv.config()
 
 const legacyId = '4564'
 
@@ -33,7 +33,7 @@ describe('v0: Me: can get me data', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/me`).reply(() => {
+      mock.onGet('https://api.tillhub.com/api/v0/me').reply(() => {
         return [
           200,
           {
@@ -70,7 +70,7 @@ describe('v0: Me: can get me data', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/me`).reply(() => {
+      mock.onGet('https://api.tillhub.com/api/v0/me').reply(() => {
         return [205]
       })
     }
@@ -106,7 +106,7 @@ describe('v0: Me: can get me data', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/me`).reply(() => {
+      mock.onGet('https://api.tillhub.com/api/v0/me').reply(() => {
         return [
           200,
           {

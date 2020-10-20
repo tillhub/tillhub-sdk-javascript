@@ -1,8 +1,8 @@
 import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
-dotenv.config()
 import { TillhubClient, v0 } from '../../src/tillhub-js'
+dotenv.config()
 
 const user = {
   username: 'test@example.com',
@@ -12,14 +12,15 @@ const user = {
 }
 
 if (process.env.SYSTEM_TEST) {
-  user.username = process.env.SYSTEM_TEST_USERNAME || user.username
-  user.password = process.env.SYSTEM_TEST_PASSWORD || user.password
-  user.clientAccount = process.env.SYSTEM_TEST_CLIENT_ACCOUNT_ID || user.clientAccount
-  user.apiKey = process.env.SYSTEM_TEST_API_KEY || user.apiKey
+  user.username = process.env.SYSTEM_TEST_USERNAME ?? user.username
+  user.password = process.env.SYSTEM_TEST_PASSWORD ?? user.password
+  user.clientAccount = process.env.SYSTEM_TEST_CLIENT_ACCOUNT_ID ?? user.clientAccount
+  user.apiKey = process.env.SYSTEM_TEST_API_KEY ?? user.apiKey
 }
 
 const query = {
-  embed: ['location']
+  embed: ['location', 'product'],
+  limit: 500
 }
 
 const legacyId = '4564'
@@ -46,7 +47,7 @@ describe('v0: Deliveries: can get all', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/deliveries/${legacyId}?embed[]=location`)
+        .onGet(`https://api.tillhub.com/api/v0/deliveries/${legacyId}?limit=500&embed[]=location&embed[]=product`)
         .reply(() => {
           return [
             200,
@@ -98,7 +99,7 @@ describe('v0: Deliveries: can get all', () => {
         ]
       })
       mock
-        .onGet(`https://api.tillhub.com/api/v0/deliveries/${legacyId}?embed[]=location`)
+        .onGet(`https://api.tillhub.com/api/v0/deliveries/${legacyId}?limit=500&embed[]=location&embed[]=product`)
         .reply(() => {
           return [400]
         })

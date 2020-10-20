@@ -19,8 +19,8 @@ export interface ProductServiceQuestionGroupsQuery {
   }
 }
 
-export interface ProductServiceQuestionGroupReponse {
-  data: ProductServiceQuestionGroupsResponse
+export interface ProductServiceQuestionGroupResponse {
+  data: ProductServiceQuestionGroup
   metadata?: {
     count?: number
   }
@@ -28,15 +28,16 @@ export interface ProductServiceQuestionGroupReponse {
 }
 
 export interface ProductServiceQuestionGroupsResponse {
-  data: Record<string, unknown>[]
+  data: ProductServiceQuestionGroup[]
   metadata: Record<string, unknown>
+  next?: () => Promise<ProductServiceQuestionGroupsResponse>
 }
 
 export interface ProductServiceQuestionGroup {
   name?: string
   custom_id?: string
   description?: string
-  service_questions?: Array<string>
+  service_questions?: string[]
   deleted?: boolean
   active?: boolean
 }
@@ -48,126 +49,112 @@ export class ProductServiceQuestionGroups extends ThBaseHandler {
   public options: ProductServiceQuestionGroupsOptions
   public uriHelper: UriHelper
 
-  constructor(options: ProductServiceQuestionGroupsOptions, http: Client) {
+  constructor (options: ProductServiceQuestionGroupsOptions, http: Client) {
     super(http, {
       endpoint: ProductServiceQuestionGroups.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = ProductServiceQuestionGroups.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(
+  async getAll (
     query?: ProductServiceQuestionGroupsQuery | undefined
   ): Promise<ProductServiceQuestionGroupsResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+    let next
 
-      try {
-        const base = this.uriHelper.generateBaseUri()
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri)
 
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<ProductServiceQuestionGroupsResponse> =>
-            this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count, cursor: response.data.cursor },
-          next
-        } as ProductServiceQuestionGroupsResponse)
-      } catch (error) {
-        return reject(new errors.ProductServiceQuestionGroupsFetchAllFailed(undefined, { error }))
+      if (response.data.cursor?.next) {
+        next = (): Promise<ProductServiceQuestionGroupsResponse> =>
+          this.getAll({ uri: response.data.cursor.next })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count, cursor: response.data.cursor },
+        next
+      }
+    } catch (error) {
+      throw new errors.ProductServiceQuestionGroupsFetchAllFailed(undefined, { error })
+    }
   }
 
-  get(groupId: string): Promise<ProductServiceQuestionGroupReponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri(`/${groupId}`)
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(
-            new errors.ProductServiceQuestionGroupsFetchOneFailed(undefined, {
-              status: response.status
-            })
-          )
-
-        return resolve({
-          data: response.data.results[0] as ProductServiceQuestionGroup,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as ProductServiceQuestionGroupReponse)
-      } catch (error) {
-        return reject(new errors.ProductServiceQuestionGroupsFetchOneFailed(undefined, { error }))
+  async get (groupId: string): Promise<ProductServiceQuestionGroupResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri(`/${groupId}`)
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new errors.ProductServiceQuestionGroupsFetchOneFailed(undefined, {
+          status: response.status
+        })
       }
-    })
+
+      return {
+        data: response.data.results[0],
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new errors.ProductServiceQuestionGroupsFetchOneFailed(undefined, { error })
+    }
   }
 
-  meta(): Promise<ProductServiceQuestionGroupsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri(`/meta`)
-        const response = await this.http.getClient().get(uri)
+  async meta (): Promise<ProductServiceQuestionGroupsResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri('/meta')
+      const response = await this.http.getClient().get(uri)
 
-        if (response.status !== 200) reject(new errors.ProductServiceQuestionGroupsGetMetaFailed())
+      if (response.status !== 200) throw new errors.ProductServiceQuestionGroupsGetMetaFailed()
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as ProductServiceQuestionGroupsResponse)
-      } catch (error) {
-        return reject(new errors.ProductServiceQuestionGroupsGetMetaFailed(undefined, { error }))
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new errors.ProductServiceQuestionGroupsGetMetaFailed(undefined, { error })
+    }
   }
 
-  create(
+  async create (
     productServiceQuestionGroup: ProductServiceQuestionGroup
-  ): Promise<ProductServiceQuestionGroupReponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri()
-        const response = await this.http.getClient().post(uri, productServiceQuestionGroup)
+  ): Promise<ProductServiceQuestionGroupResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri()
+      const response = await this.http.getClient().post(uri, productServiceQuestionGroup)
 
-        return resolve({
-          data: response.data.results[0] as ProductServiceQuestionGroup,
-          metadata: { count: response.data.count }
-        } as ProductServiceQuestionGroupReponse)
-      } catch (error) {
-        return reject(new errors.ProductServiceQuestionGroupsCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new errors.ProductServiceQuestionGroupsCreationFailed(undefined, { error })
+    }
   }
 
-  put(
+  async put (
     groupId: string,
     productServiceQuestionGroup: ProductServiceQuestionGroup
-  ): Promise<ProductServiceQuestionGroupReponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri(`/${groupId}`)
-        const response = await this.http.getClient().put(uri, productServiceQuestionGroup)
-        response.status !== 200 &&
-          reject(
-            new errors.ProductServiceQuestionGroupsPutFailed(undefined, { status: response.status })
-          )
+  ): Promise<ProductServiceQuestionGroupResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri(`/${groupId}`)
+      const response = await this.http.getClient().put(uri, productServiceQuestionGroup)
+      if (response.status !== 200) { throw new errors.ProductServiceQuestionGroupsPutFailed(undefined, { status: response.status }) }
 
-        return resolve({
-          data: response.data.results[0] as ProductServiceQuestionGroup,
-          metadata: { count: response.data.count }
-        } as ProductServiceQuestionGroupReponse)
-      } catch (error) {
-        return reject(new errors.ProductServiceQuestionGroupsPutFailed(undefined, { error }))
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new errors.ProductServiceQuestionGroupsPutFailed(undefined, { error })
+    }
   }
 }

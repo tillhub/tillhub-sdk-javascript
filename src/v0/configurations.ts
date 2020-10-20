@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { Client } from '../client'
 import * as errors from '../errors'
 import { Users, UsersOptions } from './users'
@@ -30,16 +29,14 @@ export interface ConfigurationResponse {
   }
   msg?: string
 }
-export interface Configuration {
-  id?: string
-}
 
 export interface Configuration {
+  id?: string
   vouchers?: Record<string, unknown>
-  scan_prefixes?: Record<string, unknown>[]
-  voucher_actions?: Record<string, unknown>[]
+  scan_prefixes?: Array<Record<string, unknown>>
+  voucher_actions?: Array<Record<string, unknown>>
   settings?: Record<string, unknown>
-  hooks?: Record<string, unknown>[]
+  hooks?: Array<Record<string, unknown>>
   themes?: Record<string, unknown>
   name?: string
   client_id?: string
@@ -78,11 +75,12 @@ class ConfigurationReference {
     count?: number
     patch?: any
   }
-  response: ConfigurationResponse
-  private options: ConfigurationsOptions
-  private http: Client
 
-  constructor(response: ConfigurationResponse, http: Client, options: ConfigurationsOptions) {
+  response: ConfigurationResponse
+  private readonly options: ConfigurationsOptions
+  private readonly http: Client
+
+  constructor (response: ConfigurationResponse, http: Client, options: ConfigurationsOptions) {
     this.data = response.data
     this.id = response.data.id
     this.metadata = response.metadata
@@ -91,7 +89,7 @@ class ConfigurationReference {
     this.http = http
   }
 
-  users(): Users {
+  users (): Users {
     return new Users(this.options as UsersOptions, this.http)
   }
 }
@@ -103,135 +101,111 @@ export class Configurations extends ThBaseHandler {
   public options: ConfigurationsOptions
   public uriHelper: UriHelper
 
-  constructor(options: ConfigurationsOptions, http: Client) {
+  constructor (options: ConfigurationsOptions, http: Client) {
     super(http, {
       endpoint: Configurations.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = Configurations.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(optionsOrQuery?: ConfigurationsQueryOptions | undefined): Promise<ConfigurationsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        let uri
-        if (optionsOrQuery && optionsOrQuery.uri) {
-          uri = optionsOrQuery.uri
-        } else {
-          let queryString = ''
-          if (optionsOrQuery && (optionsOrQuery.query || optionsOrQuery.owner)) {
-            queryString = qs.stringify({ owner: optionsOrQuery.owner, ...optionsOrQuery.query })
-          }
+  async getAll (optionsOrQuery?: ConfigurationsQueryOptions | undefined): Promise<ConfigurationsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, optionsOrQuery)
 
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
-            queryString ? `?${queryString}` : ''
-          }`
-        }
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new errors.ConfigurationsFetchFailed()
 
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.ConfigurationsFetchFailed())
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as ConfigurationsResponse)
-      } catch (err) {
-        return reject(new errors.ConfigurationsFetchFailed())
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new errors.ConfigurationsFetchFailed()
+    }
   }
 
-  get(configurationId: string): Promise<ConfigurationReference> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${configurationId}`
-      try {
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new errors.ConfigurationFetchFailed(undefined, { status: response.status }))
+  async get (configurationId: string): Promise<ConfigurationReference> {
+    const uri = this.uriHelper.generateBaseUri(`/${configurationId}`)
 
-        // we are wrapping the response into a class to reference sub APIs more easily
-        return resolve(
-          new ConfigurationReference(
-            {
-              data: response.data.results[0] as Configuration,
-              msg: response.data.msg,
-              metadata: { count: response.data.count }
-            },
-            this.http,
-            this.options
-          )
-        )
-      } catch (error) {
-        return reject(new errors.ConfigurationFetchFailed(undefined, { error }))
-      }
-    })
-  }
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) { throw new errors.ConfigurationFetchFailed(undefined, { status: response.status }) }
 
-  put(configurationId: string, configuration: Configuration): Promise<ConfigurationResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${configurationId}`
-      try {
-        const response = await this.http.getClient().put(uri, configuration)
-
-        return resolve({
+      // we are wrapping the response into a class to reference sub APIs more easily
+      return new ConfigurationReference(
+        {
           data: response.data.results[0] as Configuration,
+          msg: response.data.msg,
           metadata: { count: response.data.count }
-        } as ConfigurationResponse)
-      } catch (error) {
-        return reject(new errors.ConfigurationPutFailed(undefined, { error }))
-      }
-    })
+        },
+        this.http,
+        this.options
+      )
+    } catch (error) {
+      throw new errors.ConfigurationFetchFailed(undefined, { error })
+    }
   }
 
-  patch(configurationId: string, configuration: Configuration): Promise<ConfigurationResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${configurationId}`
-      try {
-        const response = await this.http.getClient().patch(uri, configuration)
+  async put (configurationId: string, configuration: Configuration): Promise<ConfigurationResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${configurationId}`)
+    try {
+      const response = await this.http.getClient().put(uri, configuration)
 
-        return resolve({
-          data: response.data.results[0] as Configuration,
-          metadata: { count: response.data.count }
-        } as ConfigurationResponse)
-      } catch (error) {
-        return reject(new errors.ConfigurationPatchFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Configuration,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new errors.ConfigurationPutFailed(undefined, { error })
+    }
   }
 
-  create(configuration: Configuration): Promise<ConfigurationResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}`
-      try {
-        const response = await this.http.getClient().post(uri, configuration)
+  async patch (configurationId: string, configuration: Configuration): Promise<ConfigurationResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${configurationId}`)
+    try {
+      const response = await this.http.getClient().patch(uri, configuration)
 
-        return resolve({
-          data: response.data.results[0] as Configuration,
-          metadata: { count: response.data.count }
-        } as ConfigurationResponse)
-      } catch (error) {
-        return reject(new errors.ConfigurationCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Configuration,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new errors.ConfigurationPatchFailed(undefined, { error })
+    }
   }
 
-  delete(configurationId: string): Promise<ConfigurationResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri(`/${configurationId}`)
-        const response = await this.http.getClient().delete(uri)
+  async create (configuration: Configuration): Promise<ConfigurationResponse> {
+    const uri = this.uriHelper.generateBaseUri()
+    try {
+      const response = await this.http.getClient().post(uri, configuration)
 
-        return resolve({
-          msg: response.data.msg
-        } as ConfigurationResponse)
-      } catch (error) {
-        return reject(new errors.ConfigurationDeleteFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Configuration,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new errors.ConfigurationCreationFailed(undefined, { error })
+    }
+  }
+
+  async delete (configurationId: string): Promise<ConfigurationResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri(`/${configurationId}`)
+      const response = await this.http.getClient().delete(uri)
+
+      return {
+        data: {},
+        msg: response.data.msg
+      }
+    } catch (error) {
+      throw new errors.ConfigurationDeleteFailed(undefined, { error })
+    }
   }
 }

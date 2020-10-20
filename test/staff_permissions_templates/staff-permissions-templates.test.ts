@@ -1,7 +1,6 @@
 import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
-dotenv.config()
 import {
   StaffPermissionsTemplate,
   StaffPermissionsTemplates,
@@ -12,6 +11,7 @@ import {
   StaffPermissionsTemplatesDeleteFailed
 } from '../../src/v0/staff_permissions_templates'
 import { initThInstance } from '../util'
+dotenv.config()
 
 const legacyId = '4564'
 const templateId = '1337'

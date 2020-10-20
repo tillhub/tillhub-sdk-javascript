@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { UriHelper, HandlerQuery } from '../uri-helper'
@@ -11,9 +10,6 @@ export interface Images {
 
 export interface Cart {
   id?: string
-}
-
-export interface Cart {
   name?: string
 }
 
@@ -34,8 +30,8 @@ export interface CartDeleteOptions {
 }
 
 export interface CartsResponse {
-  data: Cart[]
-  metadata: Record<string, unknown>
+  data?: Cart[]
+  metadata?: Record<string, unknown>
   msg?: string
   next?: () => Promise<CartsResponse>
 }
@@ -76,188 +72,161 @@ export class Carts extends ThBaseHandler {
   public options: CartsOptions
   public uriHelper: UriHelper
 
-  constructor(options: CartsOptions, http: Client) {
-    super(http, { endpoint: Carts.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+  constructor (options: CartsOptions, http: Client) {
+    super(http, { endpoint: Carts.baseEndpoint, base: options.base ?? 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
     this.endpoint = Carts.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  create(cart: Cart, query?: Record<string, unknown>): Promise<CartResponse> {
-    return new Promise(async (resolve, reject) => {
+  async create (cart: Cart, query?: Record<string, unknown>): Promise<CartResponse> {
+    const base = this.uriHelper.generateBaseUri()
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+    try {
+      const response = await this.http.getClient().post(uri, cart)
+      if (response.status !== 200) {
+        throw new CartsCreateFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count },
+        errors: response.data.errors || []
+      }
+    } catch (error) {
+      throw new CartsCreateFailed(undefined, { error })
+    }
+  }
+
+  async getAll (options?: CartsOptions | undefined): Promise<CartsResponse> {
+    let next
+
+    try {
       const base = this.uriHelper.generateBaseUri()
-      const uri = this.uriHelper.generateUriWithQuery(base, query)
+      const uri = this.uriHelper.generateUriWithQuery(base, options)
 
-      try {
-        const response = await this.http.getClient().post(uri, cart)
-        if (response.status !== 200) {
-          return reject(new CartsCreateFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.count },
-          errors: response.data.errors || []
-        } as CartResponse)
-      } catch (error) {
-        return reject(new CartsCreateFailed(undefined, { error }))
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new CartsFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      if (response.data.cursor?.next) {
+        next = (): Promise<CartsResponse> => this.getAll({ uri: response.data.cursor.next })
+      }
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count, cursor: response.data.cursor },
+        next
+      }
+    } catch (error) {
+      throw new CartsFetchFailed(undefined, { error })
+    }
   }
 
-  getAll(options?: CartsOptions | undefined): Promise<CartsResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
-
-      try {
-        let uri
-        if (options && options.uri) {
-          uri = options.uri
-        } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}${
-            options && options.query ? `?${qs.stringify(options.query)}` : ''
-          }`
-        }
-
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new CartsFetchFailed(undefined, { status: response.status }))
-        }
-
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<CartsResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count, cursor: response.data.cursor },
-          next
-        } as CartsResponse)
-      } catch (error) {
-        return reject(new CartsFetchFailed(undefined, { error }))
+  async get (cartId: string): Promise<CartResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${cartId}`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new CartFetchFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0] as Cart,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new CartFetchFailed(undefined, { error })
+    }
   }
 
-  get(cartId: string): Promise<CartResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${cartId}`
-      try {
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new CartFetchFailed(undefined, { status: response.status }))
-        }
+  async meta (): Promise<CartsResponse> {
+    const uri = this.uriHelper.generateBaseUri('/meta')
 
-        return resolve({
-          data: response.data.results[0] as Cart,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as CartResponse)
-      } catch (error) {
-        return reject(new CartFetchFailed(undefined, { error }))
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new CartsMetaFailed(undefined, { status: response.status })
       }
-    })
+      if (!response.data.results[0]) {
+        throw new CartsMetaFailed('could not get cart metadata unexpectedly', {
+          status: response.status
+        })
+      }
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new CartsMetaFailed(undefined, { error })
+    }
   }
 
-  meta(): Promise<CartsResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/meta`
+  async put (cartId: string, cart: Cart): Promise<CartResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${cartId}`)
 
-      try {
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new CartsMetaFailed(undefined, { status: response.status }))
-        }
-        if (!response.data.results[0]) {
-          return reject(
-            new CartsMetaFailed('could not get cart metadata unexpectedly', {
-              status: response.status
-            })
-          )
-        }
-
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.count }
-        } as CartsResponse)
-      } catch (error) {
-        return reject(new CartsMetaFailed(undefined, { error }))
+    try {
+      const response = await this.http.getClient().put(uri, cart)
+      if (response.status !== 200) {
+        throw new CartsUpdateFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new CartsUpdateFailed(undefined, { error })
+    }
   }
 
-  put(cartId: string, cart: Cart): Promise<CartResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/${cartId}`
+  async delete (cartId: string, deleteOptions?: CartDeleteOptions): Promise<CartsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri(`/${cartId}`)
+      const uri = this.uriHelper.generateUriWithQuery(base, deleteOptions)
 
-      try {
-        const response = await this.http.getClient().put(uri, cart)
-        if (response.status !== 200) {
-          return reject(new CartsUpdateFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.count }
-        } as CartResponse)
-      } catch (error) {
-        return reject(new CartsUpdateFailed(undefined, { error }))
+      const response = await this.http.getClient().delete(uri)
+      if (response.status !== 200) {
+        throw new CartsDeleteFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        msg: response.data.msg
+      }
+    } catch (error) {
+      throw new CartsDeleteFailed(undefined, { error })
+    }
   }
 
-  delete(cartId: string, deleteOptions?: CartDeleteOptions): Promise<CartsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        let uri
-        if (deleteOptions) {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}/${cartId}?${qs.stringify(
-            deleteOptions
-          )}`
-        } else {
-          uri = `${this.options.base}${this.endpoint}/${this.options.user}/${cartId}`
-        }
-
-        const response = await this.http.getClient().delete(uri)
-        if (response.status !== 200) {
-          return reject(new CartsDeleteFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          msg: response.data.msg
-        } as CartsResponse)
-      } catch (error) {
-        return reject(new CartsDeleteFailed(undefined, { error }))
+  async search (searchTerm: string): Promise<CartsResponse> {
+    const base = this.uriHelper.generateBaseUri('/search')
+    const uri = this.uriHelper.generateUriWithQuery(base, { q: searchTerm })
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new CartsSearchFailed(undefined, { status: response.status })
       }
-    })
-  }
 
-  search(searchTerm: string): Promise<CartsResponse> {
-    return new Promise(async (resolve, reject) => {
-      const uri = `${this.options.base}${this.endpoint}/${this.options.user}/search?q=${searchTerm}`
-      try {
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new CartsSearchFailed(undefined, { status: response.status }))
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as CartsResponse)
-      } catch (error) {
-        return reject(new CartsSearchFailed(undefined, { error }))
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new CartsSearchFailed(undefined, { error })
+    }
   }
 }
 
 export class CartFetchFailed extends BaseError {
   public name = 'CartFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch cart',
     properties?: Record<string, unknown>
   ) {
@@ -268,7 +237,7 @@ export class CartFetchFailed extends BaseError {
 
 export class CartsSearchFailed extends BaseError {
   public name = 'CartsSearchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could complete carts search',
     properties?: Record<string, unknown>
   ) {
@@ -279,7 +248,7 @@ export class CartsSearchFailed extends BaseError {
 
 export class CartsDeleteFailed extends BaseError {
   public name = 'CartsDeleteFailed'
-  constructor(public message: string = 'Could delete cart', properties?: Record<string, unknown>) {
+  constructor (public message: string = 'Could delete cart', properties?: Record<string, unknown>) {
     super(message, properties)
     Object.setPrototypeOf(this, CartsDeleteFailed.prototype)
   }
@@ -287,7 +256,7 @@ export class CartsDeleteFailed extends BaseError {
 
 export class CartsUpdateFailed extends BaseError {
   public name = 'CartsUpdateFailed'
-  constructor(public message: string = 'Could update cart', properties?: Record<string, unknown>) {
+  constructor (public message: string = 'Could update cart', properties?: Record<string, unknown>) {
     super(message, properties)
     Object.setPrototypeOf(this, CartsUpdateFailed.prototype)
   }
@@ -295,7 +264,7 @@ export class CartsUpdateFailed extends BaseError {
 
 export class CartsMetaFailed extends BaseError {
   public name = 'CartsMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could fetch carts metadata',
     properties?: Record<string, unknown>
   ) {
@@ -306,7 +275,7 @@ export class CartsMetaFailed extends BaseError {
 
 export class CartsFetchFailed extends BaseError {
   public name = 'CartsFetchFailed'
-  constructor(public message: string = 'Could fetch carts', properties?: Record<string, unknown>) {
+  constructor (public message: string = 'Could fetch carts', properties?: Record<string, unknown>) {
     super(message, properties)
     Object.setPrototypeOf(this, CartsFetchFailed.prototype)
   }
@@ -314,7 +283,7 @@ export class CartsFetchFailed extends BaseError {
 
 export class CartsCreateFailed extends BaseError {
   public name = 'CartsCreateFailed'
-  constructor(public message: string = 'Could create cart', properties?: Record<string, unknown>) {
+  constructor (public message: string = 'Could create cart', properties?: Record<string, unknown>) {
     super(message, properties)
     Object.setPrototypeOf(this, CartsCreateFailed.prototype)
   }

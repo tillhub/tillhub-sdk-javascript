@@ -8,7 +8,7 @@ export interface AnalyticsOptions {
 }
 
 export interface AnalyticsResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   msg?: string
 }
@@ -47,115 +47,106 @@ export class Customers {
   public options: AnalyticsOptions
   public uriHelper: UriHelper
 
-  constructor(options: AnalyticsOptions, http: Client, uriHelper: UriHelper) {
+  constructor (options: AnalyticsOptions, http: Client, uriHelper: UriHelper) {
     this.options = options
     this.http = http
     this.uriHelper = uriHelper
   }
-  getAll(query?: CustomersQuery | undefined): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri('/reports/customers')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.CustomerFetchFailed())
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new errors.CustomerFetchFailed())
-      }
-    })
-  }
-
-  getFilters(query?: FiltersQuery | undefined): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri('/reports/customers')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
-
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.CustomerFilterFetchFailed())
-        const { values } = response.data.results[0]
-        const data = {
-          customer_number: values.map((item: CustomersItem) => item.customer_number),
-          firstname: values.map((item: CustomersItem) => item.firstname),
-          lastname: values.map((item: CustomersItem) => item.lastname),
-          company: values.map((item: CustomersItem) => item.company)
-        }
-
-        return resolve({
-          data: [data],
-          metadata: { count: response.data.count }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new errors.CustomerFilterFetchFailed())
-      }
-    })
-  }
-
-  getTransaction(query: CustomersOneQuery): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri('/reports/customers/transactions')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
-
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.CustomerTransactionFetchFailed())
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new errors.CustomerTransactionFetchFailed())
-      }
-    })
-  }
-
-  getOverview(query: CustomersOneQuery): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri('/reports/customers/overview')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
-
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 && reject(new errors.CustomerOverviewFetchFailed())
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new errors.CustomerOverviewFetchFailed())
-      }
-    })
-  }
-
-  meta(query?: CustomersQuery | undefined): Promise<AnalyticsResponse> {
-    return new Promise(async (resolve, reject) => {
-      const base = this.uriHelper.generateBaseUri('/reports/customers/meta')
+  async getAll (query?: CustomersQuery | undefined): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/customers')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      try {
-        const response = await this.http.getClient().get(uri)
-        if (response.status !== 200) {
-          return reject(new errors.CustomersMetaFailed(undefined, { status: response.status }))
-        }
-        if (!response.data.results[0]) {
-          return reject(new errors.CustomersMetaFailed(undefined, { status: response.status }))
-        }
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new errors.CustomerFetchFailed()
 
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.count }
-        } as AnalyticsResponse)
-      } catch (err) {
-        return reject(new errors.CustomersMetaFailed(undefined, { error: err }))
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (err) {
+      throw new errors.CustomerFetchFailed()
+    }
+  }
+
+  async getFilters (query?: FiltersQuery | undefined): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/customers')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new errors.CustomerFilterFetchFailed()
+      const { values } = response.data.results[0]
+      const data = {
+        customer_number: values.map((item: CustomersItem) => item.customer_number),
+        firstname: values.map((item: CustomersItem) => item.firstname),
+        lastname: values.map((item: CustomersItem) => item.lastname),
+        company: values.map((item: CustomersItem) => item.company)
+      }
+
+      return {
+        data: [data],
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new errors.CustomerFilterFetchFailed()
+    }
+  }
+
+  async getTransaction (query: CustomersOneQuery): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/customers/transactions')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new errors.CustomerTransactionFetchFailed()
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new errors.CustomerTransactionFetchFailed()
+    }
+  }
+
+  async getOverview (query: CustomersOneQuery): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/customers/overview')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) throw new errors.CustomerOverviewFetchFailed()
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new errors.CustomerOverviewFetchFailed()
+    }
+  }
+
+  async meta (query?: CustomersQuery | undefined): Promise<AnalyticsResponse> {
+    const base = this.uriHelper.generateBaseUri('/reports/customers/meta')
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new errors.CustomersMetaFailed(undefined, { status: response.status })
+      }
+      if (!response.data.results[0]) {
+        throw new errors.CustomersMetaFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (err) {
+      throw new errors.CustomersMetaFailed(undefined, { error: err })
+    }
   }
 }

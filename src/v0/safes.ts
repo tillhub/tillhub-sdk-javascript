@@ -15,7 +15,7 @@ export interface SafesQuery {
 }
 
 export interface SafeResponse {
-  data: SafesResponse
+  data: Safe
   metadata?: {
     count?: number
   }
@@ -23,8 +23,9 @@ export interface SafeResponse {
 }
 
 export interface SafesResponse {
-  data: Record<string, unknown>[]
+  data: Safe[]
   metadata: Record<string, unknown>
+  next?: () => Promise<SafesResponse>
 }
 
 export interface AmountItem {
@@ -42,7 +43,7 @@ export interface Safe {
   state?: string
   limit_upper?: number
   limit_lower?: number
-  items?: Array<AmountItem> | null
+  items?: AmountItem[] | null
   metadata?: Record<string, unknown>
   deleted?: boolean
   active?: boolean
@@ -52,7 +53,7 @@ export interface BookRequestBody {
   to: string
   from: string
   issuer: string
-  items: Record<string, unknown>[]
+  items: Array<Record<string, unknown>>
   initiated_at?: string
 }
 
@@ -83,7 +84,11 @@ export interface SafesLogBookQuery {
 }
 
 export interface SafesLogBookResponse {
-  data: Record<string, unknown>[]
+  data: Array<Record<string, unknown>>
+  metadata?: {
+    count?: number
+    cursor?: number
+  }
   next?: () => Promise<SafesLogBookResponse>
 }
 
@@ -94,126 +99,114 @@ export class Safes extends ThBaseHandler {
   public options: SafesOptions
   public uriHelper: UriHelper
 
-  constructor(options: SafesOptions, http: Client) {
-    super(http, { endpoint: Safes.baseEndpoint, base: options.base || 'https://api.tillhub.com' })
+  constructor (options: SafesOptions, http: Client) {
+    super(http, { endpoint: Safes.baseEndpoint, base: options.base ?? 'https://api.tillhub.com' })
     this.options = options
     this.http = http
 
     this.endpoint = Safes.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: SafesQuery | undefined): Promise<SafesResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (query?: SafesQuery | undefined): Promise<SafesResponse> {
+    let next
 
-      try {
-        const base = this.uriHelper.generateBaseUri()
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri)
 
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<SafesResponse> => this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count, cursor: response.data.cursor },
-          next
-        } as SafesResponse)
-      } catch (error) {
-        return reject(new errors.SafesFetchAllFailed(undefined, { error }))
+      if (response.data.cursor?.next) {
+        next = (): Promise<SafesResponse> => this.getAll({ uri: response.data.cursor.next })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count, cursor: response.data.cursor },
+        next
+      }
+    } catch (error) {
+      throw new errors.SafesFetchAllFailed(undefined, { error })
+    }
   }
 
-  get(safeId: string): Promise<SafeResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri(`/${safeId}`)
-        const response = await this.http.getClient().get(uri)
-        response.status !== 200 &&
-          reject(new errors.SafesFetchOneFailed(undefined, { status: response.status }))
-
-        return resolve({
-          data: response.data.results[0] as Safe,
-          msg: response.data.msg,
-          metadata: { count: response.data.count }
-        } as SafeResponse)
-      } catch (error) {
-        return reject(new errors.SafesFetchOneFailed(undefined, { error }))
+  async get (safeId: string): Promise<SafeResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri(`/${safeId}`)
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new errors.SafesFetchOneFailed(undefined, { status: response.status })
       }
-    })
+
+      return {
+        data: response.data.results[0] as Safe,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new errors.SafesFetchOneFailed(undefined, { error })
+    }
   }
 
-  meta(): Promise<SafesResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri(`/meta`)
-        const response = await this.http.getClient().get(uri)
+  async meta (): Promise<SafesResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri('/meta')
+      const response = await this.http.getClient().get(uri)
 
-        if (response.status !== 200) reject(new errors.SafesGetMetaFailed())
+      if (response.status !== 200) throw new errors.SafesGetMetaFailed()
 
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count }
-        } as SafesResponse)
-      } catch (error) {
-        return reject(new errors.SafesGetMetaFailed(undefined, { error }))
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new errors.SafesGetMetaFailed(undefined, { error })
+    }
   }
 
-  create(safe: Safe): Promise<SafeResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri()
-        const response = await this.http.getClient().post(uri, safe)
+  async create (safe: Safe): Promise<SafeResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri()
+      const response = await this.http.getClient().post(uri, safe)
 
-        return resolve({
-          data: response.data.results[0] as Safe,
-          metadata: { count: response.data.count }
-        } as SafeResponse)
-      } catch (error) {
-        return reject(new errors.SafesCreationFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Safe,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new errors.SafesCreationFailed(undefined, { error })
+    }
   }
 
-  put(safeId: string, safe: Safe): Promise<SafeResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri(`/${safeId}`)
-        const response = await this.http.getClient().put(uri, safe)
-        response.status !== 200 &&
-          reject(new errors.SafesPutFailed(undefined, { status: response.status }))
+  async put (safeId: string, safe: Safe): Promise<SafeResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri(`/${safeId}`)
+      const response = await this.http.getClient().put(uri, safe)
+      if (response.status !== 200) { throw new errors.SafesPutFailed(undefined, { status: response.status }) }
 
-        return resolve({
-          data: response.data.results[0] as Safe,
-          metadata: { count: response.data.count }
-        } as SafeResponse)
-      } catch (error) {
-        return reject(new errors.SafesPutFailed(undefined, { error }))
+      return {
+        data: response.data.results[0] as Safe,
+        metadata: { count: response.data.count }
       }
-    })
+    } catch (error) {
+      throw new errors.SafesPutFailed(undefined, { error })
+    }
   }
 
-  book(body: BookRequestBody): Promise<SafeResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const uri = this.uriHelper.generateBaseUri(`/book`)
-        const response = await this.http.getClient().post(uri, body)
+  async book (body: BookRequestBody): Promise<SafeResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri('/book')
+      const response = await this.http.getClient().post(uri, body)
 
-        return resolve({
-          data: response.data,
-          msg: response.data.msg
-        } as SafeResponse)
-      } catch (error) {
-        return reject(new errors.SafesBookFailed(error.msg, { error }))
+      return {
+        data: response.data,
+        msg: response.data.msg
       }
-    })
+    } catch (error) {
+      throw new errors.SafesBookFailed(error.msg, { error })
+    }
   }
 }
 
@@ -224,62 +217,58 @@ export class SafesLogBook extends ThBaseHandler {
   public options: SafesLogBookOptions
   public uriHelper: UriHelper
 
-  constructor(options: SafesLogBookOptions, http: Client) {
+  constructor (options: SafesLogBookOptions, http: Client) {
     super(http, {
       endpoint: SafesLogBook.baseEndpoint,
-      base: options.base || 'https://api.tillhub.com'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = SafesLogBook.baseEndpoint
-    this.options.base = this.options.base || 'https://api.tillhub.com'
+    this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  getAll(query?: SafesLogBookQuery | undefined): Promise<SafesLogBookResponse> {
-    return new Promise(async (resolve, reject) => {
-      let next
+  async getAll (query?: SafesLogBookQuery | undefined): Promise<SafesLogBookResponse> {
+    let next
 
-      try {
-        const base = this.uriHelper.generateBaseUri('/logs')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+    try {
+      const base = this.uriHelper.generateBaseUri('/logs')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri)
 
-        if (response.data.cursor && response.data.cursor.next) {
-          next = (): Promise<SafesLogBookResponse> =>
-            this.getAll({ uri: response.data.cursor.next })
-        }
-
-        return resolve({
-          data: response.data.results,
-          metadata: { count: response.data.count, cursor: response.data.cursor },
-          next
-        } as SafesLogBookResponse)
-      } catch (error) {
-        return reject(new errors.SafesLogBookFetchAllFailed(undefined, { error }))
+      if (response.data.cursor?.next) {
+        next = (): Promise<SafesLogBookResponse> =>
+          this.getAll({ uri: response.data.cursor.next })
       }
-    })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count, cursor: response.data.cursor },
+        next
+      }
+    } catch (error) {
+      throw new errors.SafesLogBookFetchAllFailed(undefined, { error })
+    }
   }
 
-  meta(query?: SafesLogBookQuery | undefined): Promise<SafesLogBookResponse> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const base = this.uriHelper.generateBaseUri('/logs/meta')
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+  async meta (query?: SafesLogBookQuery | undefined): Promise<SafesLogBookResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/logs/meta')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-        const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri)
 
-        if (response.status !== 200) reject(new errors.SafesLogBookGetMetaFailed())
+      if (response.status !== 200) throw new errors.SafesLogBookGetMetaFailed()
 
-        return resolve({
-          data: response.data.results[0],
-          metadata: { count: response.data.results[0].count }
-        } as SafesLogBookResponse)
-      } catch (error) {
-        return reject(new errors.SafesLogBookGetMetaFailed(undefined, { error }))
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.results[0].count }
       }
-    })
+    } catch (error) {
+      throw new errors.SafesLogBookGetMetaFailed(undefined, { error })
+    }
   }
 }
