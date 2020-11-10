@@ -40,6 +40,7 @@ export interface Storefront {
     resource_syncs_outbound?: string[];
     resource_syncs_inbound?: string[];
     link?: string;
+    default_location?: string;
     external_reference_id?: string;
     external_api_base?: string;
     auth?: Record<string, unknown>;

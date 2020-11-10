@@ -1,3 +1,10 @@
+# [3.213.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.212.1...v3.213.0) (2020-11-10)
+
+
+### Features
+
+* **storefronts:** add default location property to store interface ([38b20ef](https://github.com/tillhub/tillhub-sdk-javascript/commit/38b20ef195e9c539c3d8a2aef8b89f1632498802))
+
 ## [3.212.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.212.0...v3.212.1) (2020-10-20)
 
 
