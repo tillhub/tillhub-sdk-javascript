@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StorefrontsDeleteFailed = exports.StorefrontsCreationFailed = exports.StorefrontsPutFailed = exports.StorefrontsFetchOneFailed = exports.StorefrontsFetchFailed = exports.Storefronts = void 0;
+exports.StorefrontsProfileFetchFailed = exports.StorefrontsDeleteFailed = exports.StorefrontsCreationFailed = exports.StorefrontsPutFailed = exports.StorefrontsFetchOneFailed = exports.StorefrontsFetchFailed = exports.Storefronts = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var base_1 = require("../base");
@@ -152,6 +152,35 @@ var Storefronts = (function (_super) {
             });
         });
     };
+    Storefronts.prototype.profile = function (storefrontId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_5;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri("/" + storefrontId + "/profile");
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new StorefrontsProfileFetchFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results[0],
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            }];
+                    case 3:
+                        error_5 = _a.sent();
+                        throw new StorefrontsProfileFetchFailed(undefined, { error: error_5 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     Storefronts.baseEndpoint = '/api/v0/storefronts';
     return Storefronts;
 }(base_1.ThBaseHandler));
@@ -221,4 +250,17 @@ var StorefrontsDeleteFailed = (function (_super) {
     return StorefrontsDeleteFailed;
 }(errors_1.BaseError));
 exports.StorefrontsDeleteFailed = StorefrontsDeleteFailed;
+var StorefrontsProfileFetchFailed = (function (_super) {
+    tslib_1.__extends(StorefrontsProfileFetchFailed, _super);
+    function StorefrontsProfileFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the storefront profile data'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StorefrontsProfileFetchFailed';
+        Object.setPrototypeOf(_this, StorefrontsProfileFetchFailed.prototype);
+        return _this;
+    }
+    return StorefrontsProfileFetchFailed;
+}(errors_1.BaseError));
+exports.StorefrontsProfileFetchFailed = StorefrontsProfileFetchFailed;
 //# sourceMappingURL=storefronts.js.map

@@ -1,3 +1,10 @@
+# [3.214.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.213.0...v3.214.0) (2020-11-11)
+
+
+### Features
+
+* **storefronts:** add profile handler ([4fc6ccf](https://github.com/tillhub/tillhub-sdk-javascript/commit/4fc6ccfefc33fc18365cbfe45bb29720156c6026))
+
 # [3.213.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.212.1...v3.213.0) (2020-11-10)
 
 

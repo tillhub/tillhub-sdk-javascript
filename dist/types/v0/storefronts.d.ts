@@ -26,10 +26,13 @@ export interface StorefrontResponse {
     };
     msg?: string;
 }
-export interface StorefrontProfile {
-    currency?: string;
-    language?: string;
-    tax?: number;
+export interface StorefrontProfileResponse {
+    data?: StorefrontProfile;
+    metadata?: {
+        count?: number;
+        patch?: any;
+    };
+    msg?: string;
 }
 export interface Storefront {
     id?: string;
@@ -47,6 +50,57 @@ export interface Storefront {
     metadata?: Record<string, unknown>;
     profile?: StorefrontProfile;
 }
+export interface StorefrontProfile {
+    company: {
+        companyName?: string;
+        email?: string;
+        street?: string;
+        city?: string;
+        countryCode?: string;
+        postalCode?: string;
+        stateOrProvinceCode?: string;
+        phone?: string;
+    };
+    formatsAndUnits: {
+        currency?: string;
+        currencyPrefix?: string;
+        currencySuffix?: string;
+        currencyPrecision?: number;
+        currencyGroupSeparator?: string;
+        currencyDecimalSeparator?: string;
+        currencyTruncateZeroFractional?: boolean;
+        currencyRate?: number;
+        weightUnit?: string;
+        weightPrecision?: number;
+        weightGroupSeparator?: string;
+        weightDecimalSeparator?: string;
+        weightTruncateZeroFractional?: boolean;
+        dateFormat?: string;
+        timeFormat?: string;
+        timezone?: string;
+        dimensionsUnit?: string;
+        orderNumberPrefix?: string;
+        orderNumberSuffix?: string;
+    };
+    languages: {
+        enabledLanguages?: string[];
+        facebookPreferredLocale?: string;
+    };
+    taxSettings: {
+        automaticTaxEnabled?: boolean;
+        taxes?: [{
+            id?: number;
+            name?: string;
+            enabled?: boolean;
+            includeInPrice?: boolean;
+            useShippingAddress?: boolean;
+            taxShipping?: boolean;
+            appliedByDefault?: boolean;
+            defaultTax?: number;
+            rules?: any[];
+        }];
+    };
+}
 export declare class Storefronts extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
@@ -59,6 +113,7 @@ export declare class Storefronts extends ThBaseHandler {
     put(storefrontId: string, storefront: Storefront): Promise<StorefrontResponse>;
     create(storefront: Storefront): Promise<StorefrontResponse>;
     delete(storefrontId: string): Promise<StorefrontResponse>;
+    profile(storefrontId: string): Promise<StorefrontProfileResponse>;
 }
 export declare class StorefrontsFetchFailed extends BaseError {
     message: string;
@@ -81,6 +136,11 @@ export declare class StorefrontsCreationFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StorefrontsDeleteFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class StorefrontsProfileFetchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
