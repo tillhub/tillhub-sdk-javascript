@@ -31,10 +31,13 @@ export interface StorefrontResponse {
   msg?: string
 }
 
-export interface StorefrontProfile {
-  currency?: string
-  language?: string
-  tax?: number
+export interface StorefrontProfileResponse {
+  data?: StorefrontProfile
+  metadata?: {
+    count?: number
+    patch?: any
+  }
+  msg?: string
 }
 
 export interface Storefront {
@@ -46,11 +49,66 @@ export interface Storefront {
   resource_syncs_outbound?: string[]
   resource_syncs_inbound?: string[]
   link?: string
+  default_location?: string
   external_reference_id?: string
   external_api_base?: string
   auth?: Record<string, unknown>
   metadata?: Record<string, unknown>
   profile?: StorefrontProfile
+}
+
+export interface StorefrontProfile {
+  company: {
+    companyName?: string
+    email?: string
+    street?: string
+    city?: string
+    countryCode?: string
+    postalCode?: string
+    stateOrProvinceCode?: string
+    phone?: string
+  }
+  formatsAndUnits: {
+    currency?: string
+    currencyPrefix?: string
+    currencySuffix?: string
+    currencyPrecision?: number
+    currencyGroupSeparator?: string
+    currencyDecimalSeparator?: string
+    currencyTruncateZeroFractional?: boolean
+    currencyRate?: number
+    weightUnit?: string
+    weightPrecision?: number
+    weightGroupSeparator?: string
+    weightDecimalSeparator?: string
+    weightTruncateZeroFractional?: boolean
+    dateFormat?: string
+    timeFormat?: string
+    timezone?: string
+    dimensionsUnit?: string
+    orderNumberPrefix?: string
+    orderNumberSuffix?: string
+  }
+  languages: {
+    enabledLanguages?: string[]
+    facebookPreferredLocale?: string
+  }
+  taxSettings: {
+    automaticTaxEnabled?: boolean
+    taxes?: [
+      {
+        id?: number
+        name?: string
+        enabled?: boolean
+        includeInPrice?: boolean
+        useShippingAddress?: boolean
+        taxShipping?: boolean
+        appliedByDefault?: boolean
+        defaultTax?: number
+        rules?: any[]
+      }
+    ]
+  }
 }
 
 export class Storefronts extends ThBaseHandler {
@@ -149,6 +207,24 @@ export class Storefronts extends ThBaseHandler {
       throw new StorefrontsDeleteFailed()
     }
   }
+
+  async profile (storefrontId: string): Promise<StorefrontProfileResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${storefrontId}/profile`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new StorefrontsProfileFetchFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results[0] as StorefrontProfile,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new StorefrontsProfileFetchFailed(undefined, { error })
+    }
+  }
 }
 
 export class StorefrontsFetchFailed extends BaseError {
@@ -203,5 +279,16 @@ export class StorefrontsDeleteFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, StorefrontsDeleteFailed.prototype)
+  }
+}
+
+export class StorefrontsProfileFetchFailed extends BaseError {
+  public name = 'StorefrontsProfileFetchFailed'
+  constructor (
+    public message: string = 'Could not fetch the storefront profile data',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, StorefrontsProfileFetchFailed.prototype)
   }
 }
