@@ -34,6 +34,16 @@ export interface StorefrontProfileResponse {
     };
     msg?: string;
 }
+export interface StorefrontSyncAllResponse {
+    msg: string;
+}
+export interface StorefrontSyncStatusResponse {
+    data?: StorefrontSyncStatus;
+    metadata?: {
+        count?: number;
+    };
+    msg?: string;
+}
 export interface Storefront {
     id?: string;
     name?: string;
@@ -101,6 +111,15 @@ export interface StorefrontProfile {
         }];
     };
 }
+export interface StorefrontSyncStatus {
+    id?: string;
+    synced?: number;
+    not_synced?: number;
+    started_at?: string;
+    ended_at?: string;
+    total?: string;
+    status?: string;
+}
 export declare class Storefronts extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
@@ -114,6 +133,8 @@ export declare class Storefronts extends ThBaseHandler {
     create(storefront: Storefront): Promise<StorefrontResponse>;
     delete(storefrontId: string): Promise<StorefrontResponse>;
     profile(storefrontId: string): Promise<StorefrontProfileResponse>;
+    syncAll(storefrontId: string): Promise<StorefrontSyncAllResponse>;
+    syncStatus(storefrontId: string): Promise<StorefrontSyncStatusResponse>;
 }
 export declare class StorefrontsFetchFailed extends BaseError {
     message: string;
@@ -141,6 +162,16 @@ export declare class StorefrontsDeleteFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StorefrontsProfileFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class StorefrontsSyncAllFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class StorefrontsSyncStatusFetchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StorefrontsProfileFetchFailed = exports.StorefrontsDeleteFailed = exports.StorefrontsCreationFailed = exports.StorefrontsPutFailed = exports.StorefrontsFetchOneFailed = exports.StorefrontsFetchFailed = exports.Storefronts = void 0;
+exports.StorefrontsSyncStatusFetchFailed = exports.StorefrontsSyncAllFailed = exports.StorefrontsProfileFetchFailed = exports.StorefrontsDeleteFailed = exports.StorefrontsCreationFailed = exports.StorefrontsPutFailed = exports.StorefrontsFetchOneFailed = exports.StorefrontsFetchFailed = exports.Storefronts = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var base_1 = require("../base");
@@ -181,6 +181,62 @@ var Storefronts = (function (_super) {
             });
         });
     };
+    Storefronts.prototype.syncAll = function (storefrontId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_6;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri("/" + storefrontId + "/sync");
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().post(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new StorefrontsSyncAllFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                msg: response.data.msg
+                            }];
+                    case 3:
+                        error_6 = _a.sent();
+                        throw new StorefrontsSyncAllFailed(undefined, { error: error_6 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
+    Storefronts.prototype.syncStatus = function (storefrontId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_7;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri("/" + storefrontId + "/sync/status");
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new StorefrontsSyncStatusFetchFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results[0],
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            }];
+                    case 3:
+                        error_7 = _a.sent();
+                        throw new StorefrontsSyncStatusFetchFailed(undefined, { error: error_7 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     Storefronts.baseEndpoint = '/api/v0/storefronts';
     return Storefronts;
 }(base_1.ThBaseHandler));
@@ -263,4 +319,30 @@ var StorefrontsProfileFetchFailed = (function (_super) {
     return StorefrontsProfileFetchFailed;
 }(errors_1.BaseError));
 exports.StorefrontsProfileFetchFailed = StorefrontsProfileFetchFailed;
+var StorefrontsSyncAllFailed = (function (_super) {
+    tslib_1.__extends(StorefrontsSyncAllFailed, _super);
+    function StorefrontsSyncAllFailed(message, properties) {
+        if (message === void 0) { message = 'Could not sync all the products'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StorefrontsSyncAllFailed';
+        Object.setPrototypeOf(_this, StorefrontsSyncAllFailed.prototype);
+        return _this;
+    }
+    return StorefrontsSyncAllFailed;
+}(errors_1.BaseError));
+exports.StorefrontsSyncAllFailed = StorefrontsSyncAllFailed;
+var StorefrontsSyncStatusFetchFailed = (function (_super) {
+    tslib_1.__extends(StorefrontsSyncStatusFetchFailed, _super);
+    function StorefrontsSyncStatusFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the status of the sync process'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StorefrontsSyncStatusFetchFailed';
+        Object.setPrototypeOf(_this, StorefrontsSyncStatusFetchFailed.prototype);
+        return _this;
+    }
+    return StorefrontsSyncStatusFetchFailed;
+}(errors_1.BaseError));
+exports.StorefrontsSyncStatusFetchFailed = StorefrontsSyncStatusFetchFailed;
 //# sourceMappingURL=storefronts.js.map

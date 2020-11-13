@@ -1,3 +1,10 @@
+# [3.215.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.214.0...v3.215.0) (2020-11-13)
+
+
+### Features
+
+* **storefronts:** add sync all and sync status handlers ([2c44120](https://github.com/tillhub/tillhub-sdk-javascript/commit/2c441200e5dcc0d9cafb9f696479b9d13f73362c))
+
 # [3.214.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.213.0...v3.214.0) (2020-11-11)
 
 
