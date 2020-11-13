@@ -40,6 +40,18 @@ export interface StorefrontProfileResponse {
   msg?: string
 }
 
+export interface StorefrontSyncAllResponse {
+  msg: string
+}
+
+export interface StorefrontSyncStatusResponse {
+  data?: StorefrontSyncStatus
+  metadata?: {
+    count?: number
+  }
+  msg?: string
+}
+
 export interface Storefront {
   id?: string
   name?: string
@@ -109,6 +121,16 @@ export interface StorefrontProfile {
       }
     ]
   }
+}
+
+export interface StorefrontSyncStatus {
+  id?: string
+  synced?: number
+  not_synced?: number
+  started_at?: string
+  ended_at?: string
+  total?: string
+  status?: string
 }
 
 export class Storefronts extends ThBaseHandler {
@@ -225,6 +247,40 @@ export class Storefronts extends ThBaseHandler {
       throw new StorefrontsProfileFetchFailed(undefined, { error })
     }
   }
+
+  async syncAll (storefrontId: string): Promise<StorefrontSyncAllResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${storefrontId}/sync`)
+    try {
+      const response = await this.http.getClient().post(uri)
+      if (response.status !== 200) {
+        throw new StorefrontsSyncAllFailed(undefined, { status: response.status })
+      }
+
+      return {
+        msg: response.data.msg
+      }
+    } catch (error) {
+      throw new StorefrontsSyncAllFailed(undefined, { error })
+    }
+  }
+
+  async syncStatus (storefrontId: string): Promise<StorefrontSyncStatusResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${storefrontId}/sync/status`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new StorefrontsSyncStatusFetchFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results[0] as StorefrontSyncStatus,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new StorefrontsSyncStatusFetchFailed(undefined, { error })
+    }
+  }
 }
 
 export class StorefrontsFetchFailed extends BaseError {
@@ -290,5 +346,27 @@ export class StorefrontsProfileFetchFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, StorefrontsProfileFetchFailed.prototype)
+  }
+}
+
+export class StorefrontsSyncAllFailed extends BaseError {
+  public name = 'StorefrontsSyncAllFailed'
+  constructor (
+    public message: string = 'Could not sync all the products',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, StorefrontsSyncAllFailed.prototype)
+  }
+}
+
+export class StorefrontsSyncStatusFetchFailed extends BaseError {
+  public name = 'StorefrontsSyncStatusFetchFailed'
+  constructor (
+    public message: string = 'Could not fetch the status of the sync process',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, StorefrontsSyncStatusFetchFailed.prototype)
   }
 }
