@@ -35,7 +35,7 @@ describe('v0: Storefronts: can start the sync all products process', () => {
 
       mock
         .onPost(
-          `https://api.tillhub.com/api/v0/storefronts/${legacyId}/${storeId}/sync`
+          `https://api.tillhub.com/api/v0/storefronts/${legacyId}/${storeId}/products/sync`
         )
         .reply(() => {
           return [
@@ -73,7 +73,7 @@ describe('v0: Storefronts: can start the sync all products process', () => {
 
       mock
         .onPost(
-          `https://api.tillhub.com/api/v0/storefronts/${legacyId}/${storeId}/sync`
+          `https://api.tillhub.com/api/v0/storefronts/${legacyId}/${storeId}/products/sync`
         )
         .reply(() => {
           return [205]
