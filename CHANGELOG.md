@@ -1,3 +1,10 @@
+## [3.215.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.215.0...v3.215.1) (2020-11-16)
+
+
+### Bug Fixes
+
+* **storefronts:** fix sync all products handler endpoint ([35cc9bd](https://github.com/tillhub/tillhub-sdk-javascript/commit/35cc9bda97af7ed71678d293f5f468201e427b57))
+
 # [3.215.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.214.0...v3.215.0) (2020-11-13)
 
 
