@@ -52,6 +52,14 @@ export interface StorefrontSyncStatusResponse {
   msg?: string
 }
 
+export interface StorefrontWhitelistResponse {
+  data?: Array<Record<string, unknown>>
+  metadata?: {
+    count?: number
+  }
+  msg?: string
+}
+
 export interface Storefront {
   id?: string
   name?: string
@@ -281,6 +289,24 @@ export class Storefronts extends ThBaseHandler {
       throw new StorefrontsSyncStatusFetchFailed(undefined, { error })
     }
   }
+
+  async whitelist (storefrontId: string, products: string[]): Promise<StorefrontWhitelistResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${storefrontId}/products/whitelist`)
+    try {
+      const response = await this.http.getClient().post(uri, { products })
+      if (response.status !== 200) {
+        throw new StorefrontsWhitelistFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new StorefrontsWhitelistFailed(undefined, { error })
+    }
+  }
 }
 
 export class StorefrontsFetchFailed extends BaseError {
@@ -368,5 +394,16 @@ export class StorefrontsSyncStatusFetchFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, StorefrontsSyncStatusFetchFailed.prototype)
+  }
+}
+
+export class StorefrontsWhitelistFailed extends BaseError {
+  public name = 'StorefrontsWhitelistFailed'
+  constructor (
+    public message: string = 'Could not whitelist the provided products',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, StorefrontsWhitelistFailed.prototype)
   }
 }
