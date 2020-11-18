@@ -44,6 +44,13 @@ export interface StorefrontSyncStatusResponse {
     };
     msg?: string;
 }
+export interface StorefrontWhitelistResponse {
+    data?: Array<Record<string, unknown>>;
+    metadata?: {
+        count?: number;
+    };
+    msg?: string;
+}
 export interface Storefront {
     id?: string;
     name?: string;
@@ -135,6 +142,7 @@ export declare class Storefronts extends ThBaseHandler {
     profile(storefrontId: string): Promise<StorefrontProfileResponse>;
     syncAll(storefrontId: string): Promise<StorefrontSyncAllResponse>;
     syncStatus(storefrontId: string): Promise<StorefrontSyncStatusResponse>;
+    whitelist(storefrontId: string, products: string[]): Promise<StorefrontWhitelistResponse>;
 }
 export declare class StorefrontsFetchFailed extends BaseError {
     message: string;
@@ -172,6 +180,11 @@ export declare class StorefrontsSyncAllFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StorefrontsSyncStatusFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class StorefrontsWhitelistFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

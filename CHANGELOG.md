@@ -1,3 +1,10 @@
+# [3.216.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.215.1...v3.216.0) (2020-11-18)
+
+
+### Features
+
+* **storefronts:** add handler to whitelist products ([9a9dcd5](https://github.com/tillhub/tillhub-sdk-javascript/commit/9a9dcd50597d4bd92c03bd9af914dc11df1a19b4))
+
 ## [3.215.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.215.0...v3.215.1) (2020-11-16)
 
 

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StorefrontsSyncStatusFetchFailed = exports.StorefrontsSyncAllFailed = exports.StorefrontsProfileFetchFailed = exports.StorefrontsDeleteFailed = exports.StorefrontsCreationFailed = exports.StorefrontsPutFailed = exports.StorefrontsFetchOneFailed = exports.StorefrontsFetchFailed = exports.Storefronts = void 0;
+exports.StorefrontsWhitelistFailed = exports.StorefrontsSyncStatusFetchFailed = exports.StorefrontsSyncAllFailed = exports.StorefrontsProfileFetchFailed = exports.StorefrontsDeleteFailed = exports.StorefrontsCreationFailed = exports.StorefrontsPutFailed = exports.StorefrontsFetchOneFailed = exports.StorefrontsFetchFailed = exports.Storefronts = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var base_1 = require("../base");
@@ -237,6 +237,35 @@ var Storefronts = (function (_super) {
             });
         });
     };
+    Storefronts.prototype.whitelist = function (storefrontId, products) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_8;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri("/" + storefrontId + "/products/whitelist");
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().post(uri, { products: products })];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new StorefrontsWhitelistFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results,
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            }];
+                    case 3:
+                        error_8 = _a.sent();
+                        throw new StorefrontsWhitelistFailed(undefined, { error: error_8 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     Storefronts.baseEndpoint = '/api/v0/storefronts';
     return Storefronts;
 }(base_1.ThBaseHandler));
@@ -345,4 +374,17 @@ var StorefrontsSyncStatusFetchFailed = (function (_super) {
     return StorefrontsSyncStatusFetchFailed;
 }(errors_1.BaseError));
 exports.StorefrontsSyncStatusFetchFailed = StorefrontsSyncStatusFetchFailed;
+var StorefrontsWhitelistFailed = (function (_super) {
+    tslib_1.__extends(StorefrontsWhitelistFailed, _super);
+    function StorefrontsWhitelistFailed(message, properties) {
+        if (message === void 0) { message = 'Could not whitelist the provided products'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StorefrontsWhitelistFailed';
+        Object.setPrototypeOf(_this, StorefrontsWhitelistFailed.prototype);
+        return _this;
+    }
+    return StorefrontsWhitelistFailed;
+}(errors_1.BaseError));
+exports.StorefrontsWhitelistFailed = StorefrontsWhitelistFailed;
 //# sourceMappingURL=storefronts.js.map
