@@ -256,7 +256,7 @@ export class Storefronts extends ThBaseHandler {
     }
   }
 
-  async syncAll (storefrontId: string): Promise<StorefrontSyncAllResponse> {
+  async sync (storefrontId: string): Promise<StorefrontSyncAllResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${storefrontId}/products/sync`)
     try {
       const response = await this.http.getClient().post(uri)

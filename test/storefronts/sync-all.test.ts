@@ -17,7 +17,7 @@ const storefrontsSyncResponse = {
   msg: 'nice!'
 }
 
-describe('v0: Storefronts: can start the sync all products process', () => {
+describe('v0: Storefronts: can start the sync products process', () => {
   it("Tillhub's products are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
@@ -51,7 +51,7 @@ describe('v0: Storefronts: can start the sync all products process', () => {
 
     expect(storefronts).toBeInstanceOf(v0.Storefronts)
 
-    const { msg } = await storefronts.syncAll(storeId)
+    const { msg } = await storefronts.sync(storeId)
 
     expect(msg).toBe(storefrontsSyncResponse.msg)
   })
@@ -82,7 +82,7 @@ describe('v0: Storefronts: can start the sync all products process', () => {
 
     try {
       const th = await initThInstance()
-      await th.storefronts().syncAll(storeId)
+      await th.storefronts().sync(storeId)
     } catch (err) {
       expect(err.name).toBe('StorefrontsSyncAllFailed')
     }
