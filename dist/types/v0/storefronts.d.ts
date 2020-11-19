@@ -140,7 +140,7 @@ export declare class Storefronts extends ThBaseHandler {
     create(storefront: Storefront): Promise<StorefrontResponse>;
     delete(storefrontId: string): Promise<StorefrontResponse>;
     profile(storefrontId: string): Promise<StorefrontProfileResponse>;
-    syncAll(storefrontId: string): Promise<StorefrontSyncAllResponse>;
+    sync(storefrontId: string): Promise<StorefrontSyncAllResponse>;
     syncStatus(storefrontId: string): Promise<StorefrontSyncStatusResponse>;
     whitelist(storefrontId: string, products: string[]): Promise<StorefrontWhitelistResponse>;
 }

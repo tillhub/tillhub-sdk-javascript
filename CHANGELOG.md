@@ -1,3 +1,10 @@
+## [3.216.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.216.0...v3.216.1) (2020-11-19)
+
+
+### Bug Fixes
+
+* **storefronts:** rename handler to be more general ([a78e89f](https://github.com/tillhub/tillhub-sdk-javascript/commit/a78e89f3393b77adea72415a5c1e377c3e41d708))
+
 # [3.216.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.215.1...v3.216.0) (2020-11-18)
 
 

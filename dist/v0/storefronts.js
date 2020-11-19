@@ -181,7 +181,7 @@ var Storefronts = (function (_super) {
             });
         });
     };
-    Storefronts.prototype.syncAll = function (storefrontId) {
+    Storefronts.prototype.sync = function (storefrontId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var uri, response, error_6;
             return tslib_1.__generator(this, function (_a) {
