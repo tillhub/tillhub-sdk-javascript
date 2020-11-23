@@ -143,6 +143,7 @@ export declare class Storefronts extends ThBaseHandler {
     sync(storefrontId: string): Promise<StorefrontSyncAllResponse>;
     syncStatus(storefrontId: string): Promise<StorefrontSyncStatusResponse>;
     whitelist(storefrontId: string, products: string[]): Promise<StorefrontWhitelistResponse>;
+    getWhitelisted(storefrontId: string): Promise<StorefrontWhitelistResponse>;
 }
 export declare class StorefrontsFetchFailed extends BaseError {
     message: string;
@@ -185,6 +186,11 @@ export declare class StorefrontsSyncStatusFetchFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StorefrontsWhitelistFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class StorefrontsFetchWhitelistedFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
