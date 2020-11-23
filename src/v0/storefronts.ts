@@ -307,6 +307,24 @@ export class Storefronts extends ThBaseHandler {
       throw new StorefrontsWhitelistFailed(undefined, { error })
     }
   }
+
+  async getWhitelisted (storefrontId: string): Promise<StorefrontWhitelistResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${storefrontId}/products/whitelist`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new StorefrontsFetchWhitelistedFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new StorefrontsFetchWhitelistedFailed(undefined, { error })
+    }
+  }
 }
 
 export class StorefrontsFetchFailed extends BaseError {
@@ -405,5 +423,16 @@ export class StorefrontsWhitelistFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, StorefrontsWhitelistFailed.prototype)
+  }
+}
+
+export class StorefrontsFetchWhitelistedFailed extends BaseError {
+  public name = 'StorefrontsFetchWhitelistedFailed'
+  constructor (
+    public message: string = 'Could not fetch whitelisted products',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, StorefrontsFetchWhitelistedFailed.prototype)
   }
 }
