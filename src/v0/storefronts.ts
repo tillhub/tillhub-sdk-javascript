@@ -52,12 +52,51 @@ export interface StorefrontSyncStatusResponse {
   msg?: string
 }
 
+interface WhitelistProductExternalId {
+  last_synced: string
+  store_front: string
+  combination_id: string
+}
+
+export interface WhitelistProduct {
+  id: string
+  name: string
+  type: string
+  prices: {
+    base_prices: any[]
+    branch_prices: any[]
+    scaled_prices: any[]
+    default_prices: any[]
+    purchase_prices: any[]
+    time_based_prices: any[]
+  }
+  category: null
+  external_ids: WhitelistProductExternalId[]
+  updated_at: {
+    iso: string
+    unix: number
+  }
+  created_at: null
+}
+
 export interface StorefrontWhitelistResponse {
   data?: Array<Record<string, unknown>>
   metadata?: {
     count?: number
   }
   msg?: string
+}
+
+export interface StorefrontDelta {
+  total_not_synced: number
+}
+
+export interface StorefrontDeltaResponse {
+  data: StorefrontDelta
+  metadata: {
+    count: number
+  }
+  msg: string
 }
 
 export interface Storefront {
@@ -290,6 +329,24 @@ export class Storefronts extends ThBaseHandler {
     }
   }
 
+  async delta (storefrontId: string): Promise<StorefrontDeltaResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${storefrontId}/sync/delta`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new StorefrontsDeltaFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results[0],
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new StorefrontsDeltaFailed(undefined, { error })
+    }
+  }
+
   async whitelist (storefrontId: string, products: string[]): Promise<StorefrontWhitelistResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${storefrontId}/products/whitelist`)
     try {
@@ -412,6 +469,17 @@ export class StorefrontsSyncStatusFetchFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, StorefrontsSyncStatusFetchFailed.prototype)
+  }
+}
+
+export class StorefrontsDeltaFailed extends BaseError {
+  public name = 'StorefrontsDeltaFailed'
+  constructor (
+    public message: string = 'Could not fetch the delta for the whitelisted products of the store',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, StorefrontsDeltaFailed.prototype)
   }
 }
 
