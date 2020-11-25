@@ -44,12 +44,47 @@ export interface StorefrontSyncStatusResponse {
     };
     msg?: string;
 }
+interface WhitelistProductExternalId {
+    last_synced: string;
+    store_front: string;
+    combination_id: string;
+}
+export interface WhitelistProduct {
+    id: string;
+    name: string;
+    type: string;
+    prices: {
+        base_prices: any[];
+        branch_prices: any[];
+        scaled_prices: any[];
+        default_prices: any[];
+        purchase_prices: any[];
+        time_based_prices: any[];
+    };
+    category: null;
+    external_ids: WhitelistProductExternalId[];
+    updated_at: {
+        iso: string;
+        unix: number;
+    };
+    created_at: null;
+}
 export interface StorefrontWhitelistResponse {
     data?: Array<Record<string, unknown>>;
     metadata?: {
         count?: number;
     };
     msg?: string;
+}
+export interface StorefrontDelta {
+    total_not_synced: number;
+}
+export interface StorefrontDeltaResponse {
+    data: StorefrontDelta;
+    metadata: {
+        count: number;
+    };
+    msg: string;
 }
 export interface Storefront {
     id?: string;
@@ -142,6 +177,7 @@ export declare class Storefronts extends ThBaseHandler {
     profile(storefrontId: string): Promise<StorefrontProfileResponse>;
     sync(storefrontId: string): Promise<StorefrontSyncAllResponse>;
     syncStatus(storefrontId: string): Promise<StorefrontSyncStatusResponse>;
+    delta(storefrontId: string): Promise<StorefrontDeltaResponse>;
     whitelist(storefrontId: string, products: string[]): Promise<StorefrontWhitelistResponse>;
     getWhitelisted(storefrontId: string): Promise<StorefrontWhitelistResponse>;
 }
@@ -185,6 +221,11 @@ export declare class StorefrontsSyncStatusFetchFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
 }
+export declare class StorefrontsDeltaFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
 export declare class StorefrontsWhitelistFailed extends BaseError {
     message: string;
     name: string;
@@ -195,3 +236,4 @@ export declare class StorefrontsFetchWhitelistedFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
 }
+export {};

@@ -1,3 +1,10 @@
+# [3.218.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.217.0...v3.218.0) (2020-11-25)
+
+
+### Features
+
+* **storefronts:** add delta handler ([48e1dda](https://github.com/tillhub/tillhub-sdk-javascript/commit/48e1dda90354fcd5c564e6eea08a3bb3a739d954))
+
 # [3.217.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.216.1...v3.217.0) (2020-11-23)
 
 
