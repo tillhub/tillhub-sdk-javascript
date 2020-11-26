@@ -341,8 +341,8 @@ var Storefronts = (function (_super) {
                             throw new StorefrontsFetchWhitelistedMetaFailed(undefined, { status: response.status });
                         }
                         return [2, {
-                                data: response.data.results,
-                                metadata: { count: response.data.count }
+                                data: response.data.results[0],
+                                msg: response.data.msg
                             }];
                     case 3:
                         error_11 = _a.sent();

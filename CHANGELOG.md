@@ -1,3 +1,10 @@
+## [3.219.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.219.0...v3.219.1) (2020-11-26)
+
+
+### Bug Fixes
+
+* **storefronts:** fix whitelist meta response ([fa4cc65](https://github.com/tillhub/tillhub-sdk-javascript/commit/fa4cc65107b27ef66a6b783e740d87a0ea8d2df9))
+
 # [3.219.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.218.0...v3.219.0) (2020-11-26)
 
 

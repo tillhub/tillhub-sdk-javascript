@@ -86,6 +86,15 @@ export interface StorefrontDeltaResponse {
     };
     msg: string;
 }
+export interface StorefrontWhitelistMetaResponse {
+    data: [{
+        count: number;
+    }];
+    metadata?: {
+        count: number;
+    };
+    msg?: string;
+}
 export interface Storefront {
     id?: string;
     name?: string;
@@ -180,7 +189,7 @@ export declare class Storefronts extends ThBaseHandler {
     delta(storefrontId: string): Promise<StorefrontDeltaResponse>;
     whitelist(storefrontId: string, products: string[]): Promise<StorefrontWhitelistResponse>;
     getWhitelisted(storefrontId: string): Promise<StorefrontWhitelistResponse>;
-    getWhitelistedMeta(storefrontId: string): Promise<StorefrontWhitelistResponse>;
+    getWhitelistedMeta(storefrontId: string): Promise<StorefrontWhitelistMetaResponse>;
 }
 export declare class StorefrontsFetchFailed extends BaseError {
     message: string;
