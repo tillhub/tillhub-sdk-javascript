@@ -80,7 +80,7 @@ export interface WhitelistProduct {
 }
 
 export interface StorefrontWhitelistResponse {
-  data?: Array<Record<string, unknown>>
+  data?: WhitelistProduct[]
   metadata?: {
     count?: number
   }
@@ -382,6 +382,23 @@ export class Storefronts extends ThBaseHandler {
       throw new StorefrontsFetchWhitelistedFailed(undefined, { error })
     }
   }
+
+  async getWhitelistedMeta (storefrontId: string): Promise<StorefrontWhitelistResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${storefrontId}/products/whitelist/meta`)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new StorefrontsFetchWhitelistedMetaFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new StorefrontsFetchWhitelistedMetaFailed(undefined, { error })
+    }
+  }
 }
 
 export class StorefrontsFetchFailed extends BaseError {
@@ -502,5 +519,16 @@ export class StorefrontsFetchWhitelistedFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, StorefrontsFetchWhitelistedFailed.prototype)
+  }
+}
+
+export class StorefrontsFetchWhitelistedMetaFailed extends BaseError {
+  public name = 'StorefrontsFetchWhitelistedMetaFailed'
+  constructor (
+    public message: string = 'Could not fetch meta data for the whitelisted products',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, StorefrontsFetchWhitelistedMetaFailed.prototype)
   }
 }
