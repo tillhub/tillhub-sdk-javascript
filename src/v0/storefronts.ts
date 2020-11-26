@@ -99,6 +99,18 @@ export interface StorefrontDeltaResponse {
   msg: string
 }
 
+export interface StorefrontWhitelistMetaResponse {
+  data: [
+    {
+      count: number
+    }
+  ]
+  metadata?: {
+    count: number
+  }
+  msg?: string
+}
+
 export interface Storefront {
   id?: string
   name?: string
@@ -383,7 +395,7 @@ export class Storefronts extends ThBaseHandler {
     }
   }
 
-  async getWhitelistedMeta (storefrontId: string): Promise<StorefrontWhitelistResponse> {
+  async getWhitelistedMeta (storefrontId: string): Promise<StorefrontWhitelistMetaResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${storefrontId}/products/whitelist/meta`)
     try {
       const response = await this.http.getClient().get(uri)
@@ -392,8 +404,8 @@ export class Storefronts extends ThBaseHandler {
       }
 
       return {
-        data: response.data.results,
-        metadata: { count: response.data.count }
+        data: response.data.results[0],
+        msg: response.data.msg
       }
     } catch (error) {
       throw new StorefrontsFetchWhitelistedMetaFailed(undefined, { error })

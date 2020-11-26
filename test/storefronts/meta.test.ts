@@ -15,7 +15,7 @@ afterEach(() => {
 
 const storeId = '1234'
 const storefrontsWhitelistResponse = {
-  count: 5
+  results: [{ count: 5 }]
 }
 
 describe('v0: Storefronts: can fetch metadata for the whitelisted products', () => {
@@ -52,9 +52,9 @@ describe('v0: Storefronts: can fetch metadata for the whitelisted products', () 
 
     expect(storefronts).toBeInstanceOf(v0.Storefronts)
 
-    const { metadata } = await storefronts.getWhitelistedMeta(storeId)
+    const { data } = await storefronts.getWhitelistedMeta(storeId)
 
-    expect(metadata?.count).toBe(storefrontsWhitelistResponse.count)
+    expect(data).toMatchObject(storefrontsWhitelistResponse.results[0])
   })
 
   it('rejects on status codes that are not 200', async () => {
