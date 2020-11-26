@@ -1,3 +1,10 @@
+# [3.219.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.218.0...v3.219.0) (2020-11-26)
+
+
+### Features
+
+* **storefronts:** add meta handler ([b6f5c30](https://github.com/tillhub/tillhub-sdk-javascript/commit/b6f5c305a61d32ad4a2873ed53f72fed1f4910aa))
+
 # [3.218.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.217.0...v3.218.0) (2020-11-25)
 
 

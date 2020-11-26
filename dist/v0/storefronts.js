@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StorefrontsFetchWhitelistedFailed = exports.StorefrontsWhitelistFailed = exports.StorefrontsDeltaFailed = exports.StorefrontsSyncStatusFetchFailed = exports.StorefrontsSyncAllFailed = exports.StorefrontsProfileFetchFailed = exports.StorefrontsDeleteFailed = exports.StorefrontsCreationFailed = exports.StorefrontsPutFailed = exports.StorefrontsFetchOneFailed = exports.StorefrontsFetchFailed = exports.Storefronts = void 0;
+exports.StorefrontsFetchWhitelistedMetaFailed = exports.StorefrontsFetchWhitelistedFailed = exports.StorefrontsWhitelistFailed = exports.StorefrontsDeltaFailed = exports.StorefrontsSyncStatusFetchFailed = exports.StorefrontsSyncAllFailed = exports.StorefrontsProfileFetchFailed = exports.StorefrontsDeleteFailed = exports.StorefrontsCreationFailed = exports.StorefrontsPutFailed = exports.StorefrontsFetchOneFailed = exports.StorefrontsFetchFailed = exports.Storefronts = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var base_1 = require("../base");
@@ -324,6 +324,34 @@ var Storefronts = (function (_super) {
             });
         });
     };
+    Storefronts.prototype.getWhitelistedMeta = function (storefrontId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_11;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri("/" + storefrontId + "/products/whitelist/meta");
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new StorefrontsFetchWhitelistedMetaFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            }];
+                    case 3:
+                        error_11 = _a.sent();
+                        throw new StorefrontsFetchWhitelistedMetaFailed(undefined, { error: error_11 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     Storefronts.baseEndpoint = '/api/v0/storefronts';
     return Storefronts;
 }(base_1.ThBaseHandler));
@@ -471,4 +499,17 @@ var StorefrontsFetchWhitelistedFailed = (function (_super) {
     return StorefrontsFetchWhitelistedFailed;
 }(errors_1.BaseError));
 exports.StorefrontsFetchWhitelistedFailed = StorefrontsFetchWhitelistedFailed;
+var StorefrontsFetchWhitelistedMetaFailed = (function (_super) {
+    tslib_1.__extends(StorefrontsFetchWhitelistedMetaFailed, _super);
+    function StorefrontsFetchWhitelistedMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch meta data for the whitelisted products'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StorefrontsFetchWhitelistedMetaFailed';
+        Object.setPrototypeOf(_this, StorefrontsFetchWhitelistedMetaFailed.prototype);
+        return _this;
+    }
+    return StorefrontsFetchWhitelistedMetaFailed;
+}(errors_1.BaseError));
+exports.StorefrontsFetchWhitelistedMetaFailed = StorefrontsFetchWhitelistedMetaFailed;
 //# sourceMappingURL=storefronts.js.map
