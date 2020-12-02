@@ -68,7 +68,7 @@ describe('v0: Timetracking: can get the timetracking configurations', () => {
 
     const { data } = await Timetracking.getConfiguration()
 
-    expect(data[0]).toStrictEqual(configuration)
+    expect(data).toStrictEqual([configuration])
   })
 
   it('rejects on status codes that are not 200', async () => {
