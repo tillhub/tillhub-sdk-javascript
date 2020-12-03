@@ -6,7 +6,7 @@ import { initThInstance } from '../util'
 dotenv.config()
 
 const legacyId = '4564'
-const configuration = [{
+const configuration = {
   id: '8bebcfe1-448f-4ac8-a27e-9c815c0a8d3a',
   auto_clock_out: true,
   auto_clock_out_after: {
@@ -14,7 +14,7 @@ const configuration = [{
     period: 'hours'
   },
   auto_clock_out_at: null
-}]
+}
 
 const mock = new MockAdapter(axios)
 afterEach(() => {
@@ -42,7 +42,7 @@ describe('v0: Timetracking: can get the timetracking configurations', () => {
           200,
           {
             count: 1,
-            results: configuration
+            results: [configuration]
           }
         ]
       })

@@ -74,7 +74,7 @@ export interface TimetrackingEntry {
 export type TimetrackingEntryTypes = 'day' | 'break'
 
 export interface TimetrackingConfigurationResponse {
-  data?: TimetrackingConfiguration[]
+  data: TimetrackingConfiguration
   metadata?: {
     count?: number
     patch?: any
@@ -206,7 +206,7 @@ export class Timetracking extends ThBaseHandler {
         throw new TimetrackingConfigurationFetchFailed(undefined, { status: response.status })
       }
       return {
-        data: response.data.results as TimetrackingConfiguration[],
+        data: response.data.results[0] as TimetrackingConfiguration,
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
@@ -224,7 +224,7 @@ export class Timetracking extends ThBaseHandler {
       }
 
       return {
-        data: response.data.results as TimetrackingConfiguration[],
+        data: response.data.results[0] as TimetrackingConfiguration,
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
@@ -242,7 +242,7 @@ export class Timetracking extends ThBaseHandler {
       }
 
       return {
-        data: response.data.results as TimetrackingConfiguration[],
+        data: response.data.results[0] as TimetrackingConfiguration,
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }

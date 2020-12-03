@@ -46,7 +46,7 @@ describe('v0: Timetracking: can alter the timetracking configurations', () => {
             200,
             {
               count: 1,
-              results: updateObject
+              results: [updateObject]
             }
           ]
         })
