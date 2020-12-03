@@ -215,6 +215,24 @@ export class Timetracking extends ThBaseHandler {
     }
   }
 
+  async createConfiguration (data?: TimetrackingConfiguration): Promise<TimetrackingConfigurationResponse> {
+    const uri = this.uriHelper.generateBaseUri('/configurations')
+    try {
+      const response = await this.http.getClient().post(uri, data)
+      if (response.status !== 200) {
+        throw new TimetrackingConfigurationPostFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results as TimetrackingConfiguration[],
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new TimetrackingConfigurationPostFailed(undefined, { error })
+    }
+  }
+
   async updateConfiguration (configId: string, data?: TimetrackingConfiguration): Promise<TimetrackingConfigurationResponse> {
     const uri = this.uriHelper.generateBaseUri(`/configurations/${configId}`)
     try {
@@ -324,6 +342,17 @@ export class TimetrackingConfigurationFetchFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, TimetrackingConfigurationFetchFailed.prototype)
+  }
+}
+
+export class TimetrackingConfigurationPostFailed extends BaseError {
+  public name = 'TimetrackingConfigurationPostFailed'
+  constructor (
+    public message: string = 'Could not create the timetracking configurations',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, TimetrackingConfigurationPostFailed.prototype)
   }
 }
 
