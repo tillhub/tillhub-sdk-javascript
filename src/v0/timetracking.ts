@@ -73,6 +73,31 @@ export interface TimetrackingEntry {
 
 export type TimetrackingEntryTypes = 'day' | 'break'
 
+export interface TimetrackingConfigurationResponse {
+  data: TimetrackingConfiguration
+  metadata?: {
+    count?: number
+    patch?: any
+  }
+  msg?: string
+}
+
+export interface TimetrackingConfiguration {
+  id?: string | null
+  client_id?: string | null
+  owner?: string | null
+  active?: boolean
+  deleted?: boolean
+  auto_clock_out?: boolean
+  auto_clock_out_after?: {
+    value: number
+    period: TimetrackingPeriodTypes
+  } | null
+  auto_clock_out_at: string | null
+}
+
+export type TimetrackingPeriodTypes = 'hours' | 'days'
+
 export class Timetracking extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/time_tracking'
   endpoint: string
@@ -173,6 +198,59 @@ export class Timetracking extends ThBaseHandler {
     }
   }
 
+  async getConfiguration (): Promise<TimetrackingConfigurationResponse> {
+    const uri = this.uriHelper.generateBaseUri('/configurations')
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new TimetrackingConfigurationFetchFailed(undefined, { status: response.status })
+      }
+      return {
+        data: response.data.results[0] as TimetrackingConfiguration,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new TimetrackingConfigurationFetchFailed(undefined, { error })
+    }
+  }
+
+  async createConfiguration (data?: TimetrackingConfiguration): Promise<TimetrackingConfigurationResponse> {
+    const uri = this.uriHelper.generateBaseUri('/configurations')
+    try {
+      const response = await this.http.getClient().post(uri, data)
+      if (response.status !== 200) {
+        throw new TimetrackingConfigurationPostFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results[0] as TimetrackingConfiguration,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new TimetrackingConfigurationPostFailed(undefined, { error })
+    }
+  }
+
+  async updateConfiguration (configId: string, data?: TimetrackingConfiguration): Promise<TimetrackingConfigurationResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/configurations/${configId}`)
+    try {
+      const response = await this.http.getClient().put(uri, data)
+      if (response.status !== 200) {
+        throw new TimetrackingConfigurationPutFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results[0] as TimetrackingConfiguration,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new TimetrackingConfigurationPutFailed(undefined, { error })
+    }
+  }
+
   async getStaffList (): Promise<TimetrackingResponse> {
     const uri = this.uriHelper.generateBaseUri('/staff')
     try {
@@ -253,5 +331,38 @@ export class TimetrackingEntryDeleteFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, TimetrackingEntryDeleteFailed.prototype)
+  }
+}
+
+export class TimetrackingConfigurationFetchFailed extends BaseError {
+  public name = 'TimetrackingConfigurationFetchFailed'
+  constructor (
+    public message: string = 'Could not fetch the timetracking configurations',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, TimetrackingConfigurationFetchFailed.prototype)
+  }
+}
+
+export class TimetrackingConfigurationPostFailed extends BaseError {
+  public name = 'TimetrackingConfigurationPostFailed'
+  constructor (
+    public message: string = 'Could not create the timetracking configurations',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, TimetrackingConfigurationPostFailed.prototype)
+  }
+}
+
+export class TimetrackingConfigurationPutFailed extends BaseError {
+  public name = 'TimetrackingConfigurationPutFailed'
+  constructor (
+    public message: string = 'Could not update the timetracking configurations',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, TimetrackingConfigurationPutFailed.prototype)
   }
 }
