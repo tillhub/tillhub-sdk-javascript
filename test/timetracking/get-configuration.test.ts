@@ -8,18 +8,6 @@ dotenv.config()
 const legacyId = '4564'
 const configuration = {
   id: '8bebcfe1-448f-4ac8-a27e-9c815c0a8d3a',
-  owner: '47f6dbca-ad55-41c0-8603-4e874736a238',
-  client_id: null,
-  deleted: false,
-  active: true,
-  created_at: {
-    iso: '2020-07-30T06:52:59.097Z',
-    unix: 1596091979097
-  },
-  updated_at: {
-    iso: '2020-07-30T06:52:59.097Z',
-    unix: 1596091979097
-  },
   auto_clock_out: true,
   auto_clock_out_after: {
     value: 15,
@@ -66,7 +54,7 @@ describe('v0: Timetracking: can get the timetracking configurations', () => {
 
     expect(Timetracking).toBeInstanceOf(v0.Timetracking)
 
-    const { data } = await Timetracking.getConfiguration()
+    const { data } = await Timetracking.getAllConfigurations()
 
     expect(data).toStrictEqual([configuration])
   })
@@ -93,7 +81,7 @@ describe('v0: Timetracking: can get the timetracking configurations', () => {
 
     try {
       const th = await initThInstance()
-      await th.timetracking().getConfiguration()
+      await th.timetracking().getAllConfigurations()
     } catch (err) {
       expect(err.name).toBe('TimetrackingConfigurationFetchFailed')
     }

@@ -7,23 +7,21 @@ import { TimetrackingPeriodTypes } from '../../src/v0/timetracking'
 dotenv.config()
 
 const legacyId = '4564'
+const configId = '8bebcfe1-448f-4ac8-a27e-9c815c0a8d3a'
 
 const mock = new MockAdapter(axios)
 afterEach(() => {
   mock.reset()
 })
 
-const updateObject = [{
-  client_id: 'null',
-  deleted: false,
-  active: true,
+const updateObject = {
   auto_clock_out: true,
   auto_clock_out_after: {
     value: 15,
     period: 'hours' as TimetrackingPeriodTypes
   },
-  auto_clock_out_at: 'null'
-}]
+  auto_clock_out_at: null
+}
 
 describe('v0: Timetracking: can alter the timetracking configurations', () => {
   it("Tillhub's timetracking are instantiable", async () => {
@@ -42,7 +40,7 @@ describe('v0: Timetracking: can alter the timetracking configurations', () => {
       })
 
       mock
-        .onPut(`https://api.tillhub.com/api/v0/time_tracking/${legacyId}/configurations`)
+        .onPut(`https://api.tillhub.com/api/v0/time_tracking/${legacyId}/configurations/${configId}`)
         .reply(() => {
           return [
             200,
@@ -60,7 +58,7 @@ describe('v0: Timetracking: can alter the timetracking configurations', () => {
 
     expect(timetracking).toBeInstanceOf(v0.Timetracking)
 
-    const { data } = await timetracking.updateConfiguration(updateObject)
+    const { data } = await timetracking.updateConfiguration(configId, updateObject)
 
     expect(data).toMatchObject(updateObject)
   })
@@ -80,7 +78,7 @@ describe('v0: Timetracking: can alter the timetracking configurations', () => {
         ]
       })
       mock
-        .onPut(`https://api.tillhub.com/api/v0/time_tracking/${legacyId}/configurations`)
+        .onPut(`https://api.tillhub.com/api/v0/time_tracking/${legacyId}/configurations/${configId}`)
         .reply(() => {
           return [205]
         })
@@ -89,7 +87,7 @@ describe('v0: Timetracking: can alter the timetracking configurations', () => {
     const th = await initThInstance()
 
     try {
-      await th.timetracking().updateConfiguration(updateObject)
+      await th.timetracking().updateConfiguration(configId, updateObject)
     } catch (err) {
       expect(err.name).toBe('TimetrackingConfigurationPutFailed')
     }

@@ -83,16 +83,17 @@ export interface TimetrackingConfigurationResponse {
 }
 
 export interface TimetrackingConfiguration {
-  client_id?: string
+  id?: string | null
+  client_id?: string | null
+  owner?: string | null
   active?: boolean
   deleted?: boolean
   auto_clock_out?: boolean
   auto_clock_out_after?: {
     value: number
     period: TimetrackingPeriodTypes
-  }
-  auto_clock_out_at_midnight?: boolean
-  auto_clock_out_at: string
+  } | null
+  auto_clock_out_at: string | null
 }
 
 export type TimetrackingPeriodTypes = 'hours' | 'days'
@@ -197,14 +198,15 @@ export class Timetracking extends ThBaseHandler {
     }
   }
 
-  async getConfiguration (): Promise<TimetrackingConfigurationResponse> {
+  async getAllConfigurations (): Promise<TimetrackingConfigurationResponse> {
     const uri = this.uriHelper.generateBaseUri('/configurations')
     try {
       const response = await this.http.getClient().get(uri)
-      if (response.status !== 200) { throw new TimetrackingConfigurationFetchFailed(undefined, { status: response.status }) }
-
+      if (response.status !== 200) {
+        throw new TimetrackingConfigurationFetchFailed(undefined, { status: response.status })
+      }
       return {
-        data: response.data.results,
+        data: response.data.results as TimetrackingConfiguration[],
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
@@ -213,8 +215,8 @@ export class Timetracking extends ThBaseHandler {
     }
   }
 
-  async updateConfiguration (data?: TimetrackingConfiguration[]): Promise<TimetrackingConfigurationResponse> {
-    const uri = this.uriHelper.generateBaseUri('/configurations')
+  async updateConfiguration (configId: string, data?: TimetrackingConfiguration): Promise<TimetrackingConfigurationResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/configurations/${configId}`)
     try {
       const response = await this.http.getClient().put(uri, data)
       if (response.status !== 200) {
