@@ -198,7 +198,7 @@ export class Timetracking extends ThBaseHandler {
     }
   }
 
-  async getAllConfigurations (): Promise<TimetrackingConfigurationResponse> {
+  async getConfiguration (): Promise<TimetrackingConfigurationResponse> {
     const uri = this.uriHelper.generateBaseUri('/configurations')
     try {
       const response = await this.http.getClient().get(uri)

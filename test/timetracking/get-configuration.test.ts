@@ -54,7 +54,7 @@ describe('v0: Timetracking: can get the timetracking configurations', () => {
 
     expect(Timetracking).toBeInstanceOf(v0.Timetracking)
 
-    const { data } = await Timetracking.getAllConfigurations()
+    const { data } = await Timetracking.getConfiguration()
 
     expect(data).toMatchObject(configuration)
   })
@@ -81,7 +81,7 @@ describe('v0: Timetracking: can get the timetracking configurations', () => {
 
     try {
       const th = await initThInstance()
-      await th.timetracking().getAllConfigurations()
+      await th.timetracking().getConfiguration()
     } catch (err) {
       expect(err.name).toBe('TimetrackingConfigurationFetchFailed')
     }
