@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TimetrackingEntryDeleteFailed = exports.TimetrackingEntryPutFailed = exports.TimetrackingEntryCreateFailed = exports.TimetrackingEntriesFetchFailed = exports.TimetrackingStaffListFetchFailed = exports.TimetrackingReportFetchFailed = exports.Timetracking = void 0;
+exports.TimetrackingConfigurationPutFailed = exports.TimetrackingConfigurationPostFailed = exports.TimetrackingConfigurationFetchFailed = exports.TimetrackingEntryDeleteFailed = exports.TimetrackingEntryPutFailed = exports.TimetrackingEntryCreateFailed = exports.TimetrackingEntriesFetchFailed = exports.TimetrackingStaffListFetchFailed = exports.TimetrackingReportFetchFailed = exports.Timetracking = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -163,9 +163,96 @@ var Timetracking = (function (_super) {
             });
         });
     };
-    Timetracking.prototype.getStaffList = function () {
+    Timetracking.prototype.getConfiguration = function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var uri, response, error_6;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri('/configurations');
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new TimetrackingConfigurationFetchFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results[0],
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            }];
+                    case 3:
+                        error_6 = _a.sent();
+                        throw new TimetrackingConfigurationFetchFailed(undefined, { error: error_6 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
+    Timetracking.prototype.createConfiguration = function (data) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_7;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri('/configurations');
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().post(uri, data)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new TimetrackingConfigurationPostFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results[0],
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            }];
+                    case 3:
+                        error_7 = _a.sent();
+                        throw new TimetrackingConfigurationPostFailed(undefined, { error: error_7 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
+    Timetracking.prototype.updateConfiguration = function (configId, data) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_8;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri("/configurations/" + configId);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().put(uri, data)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new TimetrackingConfigurationPutFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results[0],
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            }];
+                    case 3:
+                        error_8 = _a.sent();
+                        throw new TimetrackingConfigurationPutFailed(undefined, { error: error_8 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
+    Timetracking.prototype.getStaffList = function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_9;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -185,8 +272,8 @@ var Timetracking = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_6 = _a.sent();
-                        throw new TimetrackingStaffListFetchFailed(undefined, { error: error_6 });
+                        error_9 = _a.sent();
+                        throw new TimetrackingStaffListFetchFailed(undefined, { error: error_9 });
                     case 4: return [2];
                 }
             });
@@ -274,4 +361,43 @@ var TimetrackingEntryDeleteFailed = (function (_super) {
     return TimetrackingEntryDeleteFailed;
 }(errors_1.BaseError));
 exports.TimetrackingEntryDeleteFailed = TimetrackingEntryDeleteFailed;
+var TimetrackingConfigurationFetchFailed = (function (_super) {
+    tslib_1.__extends(TimetrackingConfigurationFetchFailed, _super);
+    function TimetrackingConfigurationFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the timetracking configurations'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TimetrackingConfigurationFetchFailed';
+        Object.setPrototypeOf(_this, TimetrackingConfigurationFetchFailed.prototype);
+        return _this;
+    }
+    return TimetrackingConfigurationFetchFailed;
+}(errors_1.BaseError));
+exports.TimetrackingConfigurationFetchFailed = TimetrackingConfigurationFetchFailed;
+var TimetrackingConfigurationPostFailed = (function (_super) {
+    tslib_1.__extends(TimetrackingConfigurationPostFailed, _super);
+    function TimetrackingConfigurationPostFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create the timetracking configurations'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TimetrackingConfigurationPostFailed';
+        Object.setPrototypeOf(_this, TimetrackingConfigurationPostFailed.prototype);
+        return _this;
+    }
+    return TimetrackingConfigurationPostFailed;
+}(errors_1.BaseError));
+exports.TimetrackingConfigurationPostFailed = TimetrackingConfigurationPostFailed;
+var TimetrackingConfigurationPutFailed = (function (_super) {
+    tslib_1.__extends(TimetrackingConfigurationPutFailed, _super);
+    function TimetrackingConfigurationPutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not update the timetracking configurations'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TimetrackingConfigurationPutFailed';
+        Object.setPrototypeOf(_this, TimetrackingConfigurationPutFailed.prototype);
+        return _this;
+    }
+    return TimetrackingConfigurationPutFailed;
+}(errors_1.BaseError));
+exports.TimetrackingConfigurationPutFailed = TimetrackingConfigurationPutFailed;
 //# sourceMappingURL=timetracking.js.map

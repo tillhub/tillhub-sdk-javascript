@@ -63,6 +63,28 @@ export interface TimetrackingEntry {
     client_id?: string;
 }
 export declare type TimetrackingEntryTypes = 'day' | 'break';
+export interface TimetrackingConfigurationResponse {
+    data: TimetrackingConfiguration;
+    metadata?: {
+        count?: number;
+        patch?: any;
+    };
+    msg?: string;
+}
+export interface TimetrackingConfiguration {
+    id?: string | null;
+    client_id?: string | null;
+    owner?: string | null;
+    active?: boolean;
+    deleted?: boolean;
+    auto_clock_out?: boolean;
+    auto_clock_out_after?: {
+        value: number;
+        period: TimetrackingPeriodTypes;
+    } | null;
+    auto_clock_out_at: string | null;
+}
+export declare type TimetrackingPeriodTypes = 'hours' | 'days';
 export declare class Timetracking extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
@@ -75,6 +97,9 @@ export declare class Timetracking extends ThBaseHandler {
     createEntry(entry: TimetrackingEntry): Promise<TimetrackingEntryResponse>;
     updateEntry(entryId: string, data?: TimetrackingEntry): Promise<TimetrackingEntryResponse>;
     deleteEntry(entryId: string): Promise<TimetrackingEntryResponse>;
+    getConfiguration(): Promise<TimetrackingConfigurationResponse>;
+    createConfiguration(data?: TimetrackingConfiguration): Promise<TimetrackingConfigurationResponse>;
+    updateConfiguration(configId: string, data?: TimetrackingConfiguration): Promise<TimetrackingConfigurationResponse>;
     getStaffList(): Promise<TimetrackingResponse>;
 }
 export declare class TimetrackingReportFetchFailed extends BaseError {
@@ -103,6 +128,21 @@ export declare class TimetrackingEntryPutFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class TimetrackingEntryDeleteFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class TimetrackingConfigurationFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class TimetrackingConfigurationPostFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class TimetrackingConfigurationPutFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

@@ -1,3 +1,11 @@
+# [3.220.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.219.1...v3.220.0) (2020-12-03)
+
+
+### Features
+
+* **timetracking:** add configurations to timetracking ([120be21](https://github.com/tillhub/tillhub-sdk-javascript/commit/120be21fd6551dd5c53f774a050cd228f1445ac0))
+* **timetracking:** timetracking configuration ([09b90f7](https://github.com/tillhub/tillhub-sdk-javascript/commit/09b90f7d2a038937876c8fce611ed208a64e30d2))
+
 ## [3.219.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.219.0...v3.219.1) (2020-11-26)
 
 
