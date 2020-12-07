@@ -1,148 +1,25 @@
 import { Client } from '../client'
-import { BaseError } from '../errors'
-import { UriHelper, HandlerQuery } from '../uri-helper'
+import { UriHelper } from '../uri-helper'
 import { ThBaseHandler } from '../base'
-
-export interface CustomersOptions {
-  user?: string
-  base?: string
-}
-
-export interface CustomersQuery {
-  limit?: number
-  uri?: string
-  query?: {
-    deleted?: boolean
-    active?: boolean
-    extended?: boolean
-    location?: string
-  }
-}
-
-export interface CustomersMetaQuery {
-  deleted?: boolean
-  location?: string
-}
-
-export interface CustomersResponse {
-  data: Customer[]
-  metadata: Record<string, unknown>
-  next?: () => Promise<CustomersResponse>
-}
-
-export interface CustomerResponse {
-  data?: Customer
-  metadata?: {
-    count?: number
-    patch?: any
-  }
-  msg?: string
-  errors?: ErrorObject[]
-}
-
-export interface CustomerQuery {
-  customer_number_template?: string
-  generate_customer_number?: boolean
-}
-
-export interface HandlerCustomerQuery extends HandlerQuery {
-  query?: CustomerQuery
-}
-
-export interface CustomerPhonenumbers {
-  main?: string
-  home?: string
-  mobile?: string
-  work?: string
-}
-
-export interface CustomerNoteItem {
-  type: 'text'
-  payload: any
-}
-
-export interface CustomerContacts {
-  email?: {
-    enabled: boolean
-  }
-  newsletter?: {
-    enabled: boolean
-  }
-  phone?: {
-    enabled: boolean
-  }
-  post?: {
-    enabled: boolean
-  }
-}
-
-export interface ErrorObject {
-  id: string
-  label: string
-  errorDetails: Record<string, unknown>
-}
-
-export type CustomerAddressType = 'delivery' | 'billing'
-
-export interface CustomerAddress {
-  lines: string[] | null
-  street: string | null
-  street_number: string | null
-  locality: string | null
-  region: string | null
-  postal_code: string | null
-  country: string | null
-  type: CustomerAddressType | null
-}
-
-export interface CustomerCompany {
-  name: string
-}
-
-export interface CustomerImage {
-  '1x': string
-  avatar: string
-}
-
-export interface CustomerInternalDiscount {
-  id: string
-  amount: number
-  type: 'percentage' | 'value'
-  account: string
-  name: string
-  group: 'cart' | 'customer'
-}
-
-export interface CustomerDiscount {
-  amount: number
-  type: 'percent' | 'value'
-  group: 'cart' | 'customer'
-}
-
-export interface Customer {
-  id?: string
-  gender?: string | null
-  firstname?: string
-  lastname?: string
-  middlename?: string | null
-  displayname?: string | null
-  phonenumbers?: string | null
-  email?: string | null
-  customer_number?: string | null
-  company?: CustomerCompany | null
-  description?: string | null
-  is_b2b?: boolean
-  date_of_birth?: string | null
-  image?: CustomerImage | null
-  active?: boolean
-  contacts?: CustomerContacts | null
-  metadata?: Record<string, unknown> | null
-  addresses?: CustomerAddress[] | null
-  comment?: string | null
-  discounts?: Array<CustomerInternalDiscount | CustomerDiscount> | null
-  client_id?: string | null
-  external_reference?: string | null
-}
+import {
+  CustomersOptions,
+  CustomersQuery,
+  CustomersMetaQuery,
+  CustomersResponse,
+  CustomerResponse,
+  HandlerCustomerQuery,
+  CustomerNoteItem,
+  Customer,
+  CustomersFetchFailed,
+  CustomerFetchFailed,
+  CustomerPutFailed,
+  CustomerNoteCreationFailed,
+  CustomerCreationFailed,
+  CustomersMetaFailed,
+  CustomersCountFailed,
+  CustomersSearchFailed,
+  CustomerDeleteFailed
+} from '../v0/customers'
 
 export class Customers extends ThBaseHandler {
   public static baseEndpoint = '/api/v1/customers'
@@ -333,104 +210,5 @@ export class Customers extends ThBaseHandler {
     } catch (error) {
       throw new CustomersSearchFailed(undefined, { error })
     }
-  }
-}
-
-export class CustomersFetchFailed extends BaseError {
-  public name = 'CustomersFetchFailed'
-  constructor (
-    public message: string = 'Could not fetch customers',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, CustomersFetchFailed.prototype)
-  }
-}
-
-export class CustomerFetchFailed extends BaseError {
-  public name = 'CustomerFetchFailed'
-  constructor (
-    public message: string = 'Could not fetch customer',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, CustomerFetchFailed.prototype)
-  }
-}
-
-export class CustomerPutFailed extends BaseError {
-  public name = 'CustomerPutFailed'
-  constructor (
-    public message: string = 'Could not alter customer',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, CustomerPutFailed.prototype)
-  }
-}
-
-export class CustomerNoteCreationFailed extends BaseError {
-  public name = 'CustomerNoteCreationFailed'
-  constructor (
-    public message: string = 'Could not create customer note',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, CustomerNoteCreationFailed.prototype)
-  }
-}
-
-export class CustomerCreationFailed extends BaseError {
-  public name = 'CustomerCreationFailed'
-  constructor (
-    public message: string = 'Could not create customer',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, CustomerCreationFailed.prototype)
-  }
-}
-
-export class CustomersMetaFailed extends BaseError {
-  public name = 'CustomersMetaFailed'
-  constructor (
-    public message: string = 'Could not get customers metadata',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, CustomersMetaFailed.prototype)
-  }
-}
-
-export class CustomersCountFailed extends BaseError {
-  public name = 'CustomersCountFailed'
-  constructor (
-    public message: string = 'Could not count customers',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, CustomersCountFailed.prototype)
-  }
-}
-
-export class CustomersSearchFailed extends BaseError {
-  public name = 'CustomersSearchFailed'
-  constructor (
-    public message: string = 'Could not search for customer',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, CustomersSearchFailed.prototype)
-  }
-}
-
-export class CustomerDeleteFailed extends BaseError {
-  public name = 'CustomerDeleteFailed'
-  constructor (
-    public message: string = 'Could not delete the customer',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, CustomerDeleteFailed.prototype)
   }
 }
