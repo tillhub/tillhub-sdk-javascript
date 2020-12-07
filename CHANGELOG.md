@@ -1,3 +1,15 @@
+# [3.221.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.220.0...v3.221.0) (2020-12-07)
+
+
+### Bug Fixes
+
+* **customers-v1:** reuse types, interfaces and errors ([594731c](https://github.com/tillhub/tillhub-sdk-javascript/commit/594731cbd718e1736b135ccdccc8e133f17ab276))
+
+
+### Features
+
+* **customer-v1:** add customers v1 handlers ([f8bc7bc](https://github.com/tillhub/tillhub-sdk-javascript/commit/f8bc7bc16ecfccf976cebb1047a28875f2c960ee))
+
 # [3.220.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.219.1...v3.220.0) (2020-12-03)
 
 
