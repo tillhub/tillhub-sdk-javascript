@@ -1,7 +1,8 @@
 import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
-import { v0 } from '../../src/tillhub-js'
+import qs from 'qs'
+import { v1 } from '../../src/tillhub-js'
 import { initThInstance } from '../util'
 dotenv.config()
 
@@ -12,13 +13,24 @@ afterEach(() => {
   mock.reset()
 })
 
-const storeId = '1234'
-const storefrontsWhitelistResponse = {
-  results: [{ count: 5 }]
+const customer = {
+  firstname: 'Carol',
+  lastname: 'Danvers',
+  gender: 'female',
+  company: {
+    name: 'US Air Force'
+  },
+  active: false,
+  displayname: 'Vers'
 }
 
-describe('v0: Storefronts: can fetch metadata for the whitelisted products', () => {
-  it("Tillhub's products are instantiable", async () => {
+describe('v0: Customers: can create a customer', () => {
+  const query = {
+    customer_number_template: '{country}{-}{branch}',
+    generate_customer_number: true
+  }
+
+  it("Tillhub's customers are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
@@ -34,26 +46,29 @@ describe('v0: Storefronts: can fetch metadata for the whitelisted products', () 
       })
 
       mock
-        .onGet(
-          `https://api.tillhub.com/api/v0/storefronts/${legacyId}/${storeId}/products/whitelist/meta`
-        )
+        .onPost(`https://api.tillhub.com/api/v1/customers/${legacyId}?${qs.stringify(query)}`)
         .reply(() => {
           return [
             200,
-            storefrontsWhitelistResponse
+            {
+              count: 1,
+              results: [customer],
+              errors: []
+            }
           ]
         })
     }
 
     const th = await initThInstance()
 
-    const storefronts = th.storefronts()
+    const CustomersV1 = th.customersV1()
 
-    expect(storefronts).toBeInstanceOf(v0.Storefronts)
+    expect(CustomersV1).toBeInstanceOf(v1.Customers)
 
-    const { data } = await storefronts.getWhitelistedMeta(storeId)
+    const { data, errors } = await CustomersV1.create(customer, { query })
 
-    expect(data).toMatchObject(storefrontsWhitelistResponse.results[0])
+    expect(data).toMatchObject(customer)
+    expect(errors).toEqual([])
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -71,20 +86,16 @@ describe('v0: Storefronts: can fetch metadata for the whitelisted products', () 
         ]
       })
 
-      mock
-        .onGet(
-          `https://api.tillhub.com/api/v0/storefronts/${legacyId}/${storeId}/products/whitelist/meta`
-        )
-        .reply(() => {
-          return [205]
-        })
+      mock.onPost(`https://api.tillhub.com/api/v1/customers/${legacyId}`).reply(() => {
+        return [205]
+      })
     }
 
     try {
       const th = await initThInstance()
-      await th.storefronts().getWhitelistedMeta(storeId)
+      await th.customersV1().create(customer)
     } catch (err) {
-      expect(err.name).toBe('StorefrontsFetchWhitelistedMetaFailed')
+      expect(err.name).toBe('CustomerCreationFailed')
     }
   })
 })
