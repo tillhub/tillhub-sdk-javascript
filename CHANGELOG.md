@@ -1,3 +1,10 @@
+## [3.221.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.221.0...v3.221.1) (2020-12-09)
+
+
+### Bug Fixes
+
+* **customers-v1:** expose only getAll method for export, remove the rest ([06e511c](https://github.com/tillhub/tillhub-sdk-javascript/commit/06e511cc8768f55c04fee08e0c67b3a860af7e98))
+
 # [3.221.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.220.0...v3.221.0) (2020-12-07)
 
 
