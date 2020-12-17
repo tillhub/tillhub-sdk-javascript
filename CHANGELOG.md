@@ -1,3 +1,17 @@
+# [4.0.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.221.1...v4.0.0) (2020-12-17)
+
+
+### Features
+
+* **branches:** add cost_center to branches ([7b0750f](https://github.com/tillhub/tillhub-sdk-javascript/commit/7b0750f9fe03b507f9e00db0e8c6ce8fe6028fb8))
+
+
+### BREAKING CHANGES
+
+* **branches:** A new field is defined
+
+DAS-693
+
 ## [3.221.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.221.0...v3.221.1) (2020-12-09)
 
 
