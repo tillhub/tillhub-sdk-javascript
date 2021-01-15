@@ -56,6 +56,7 @@ import { Timetracking } from './timetracking'
 import { CountingProtocols } from './counting-protocols'
 import { StockTakings } from './stock_takings'
 import { UserPermissionsTemplates } from './user_permissions_templates'
+import { DbBackups } from './db_backups'
 
 export {
   Auth,
@@ -118,5 +119,6 @@ export {
   Timetracking,
   CountingProtocols,
   StockTakings,
-  UserPermissionsTemplates
+  UserPermissionsTemplates,
+  DbBackups
 }

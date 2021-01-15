@@ -893,6 +893,14 @@ export class TillhubClient extends events.EventEmitter {
   userPermissionsTemplates (): v0.UserPermissionsTemplates {
     return this.generateAuthenticatedInstance(v0.UserPermissionsTemplates)
   }
+
+  /**
+   * Create an authenticated DbBackups instance
+   *
+   */
+  dbBackups (): v0.DbBackups {
+    return this.generateAuthenticatedInstance(v0.DbBackups)
+  }
 }
 
 export class Tillhub extends TillhubClient {
