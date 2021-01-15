@@ -414,6 +414,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.userPermissionsTemplates = function () {
         return this.generateAuthenticatedInstance(v0.UserPermissionsTemplates);
     };
+    TillhubClient.prototype.dbBackups = function () {
+        return this.generateAuthenticatedInstance(v0.DbBackups);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));

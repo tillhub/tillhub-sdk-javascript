@@ -1,3 +1,10 @@
+# [4.1.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.0.0...v4.1.0) (2021-01-15)
+
+
+### Features
+
+* **v0:** add db_backups ([21b6452](https://github.com/tillhub/tillhub-sdk-javascript/commit/21b6452cab23d0b50210a87344c57dbf4ad7a153))
+
 # [4.0.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v3.221.1...v4.0.0) (2020-12-17)
 
 
