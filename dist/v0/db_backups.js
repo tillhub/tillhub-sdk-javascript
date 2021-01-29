@@ -59,7 +59,7 @@ var DbBackups = (function (_super) {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: 0 })];
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {

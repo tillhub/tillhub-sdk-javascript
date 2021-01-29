@@ -1,3 +1,10 @@
+## [4.1.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.1.1...v4.1.2) (2021-01-29)
+
+
+### Bug Fixes
+
+* **db-backups:** remove axios timeout also for get signned url ([5ebb202](https://github.com/tillhub/tillhub-sdk-javascript/commit/5ebb202223cffb58f62b352fb4916a2e3bbadff2))
+
 ## [4.1.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.1.0...v4.1.1) (2021-01-29)
 
 
