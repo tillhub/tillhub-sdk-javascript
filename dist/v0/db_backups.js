@@ -28,7 +28,7 @@ var DbBackups = (function (_super) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri();
-                        return [4, this.http.getClient().get(base)];
+                        return [4, this.http.getClient().get(base, { timeout: 0 })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200) {

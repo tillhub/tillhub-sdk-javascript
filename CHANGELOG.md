@@ -1,3 +1,10 @@
+## [4.1.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.1.0...v4.1.1) (2021-01-29)
+
+
+### Bug Fixes
+
+* **db-backups:** add axios timeout for get all handler to prevent abort after 10 sec ([7512e5b](https://github.com/tillhub/tillhub-sdk-javascript/commit/7512e5bf3ee89929ca72cc28f42ea6ae06c6cb1c))
+
 # [4.1.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.0.0...v4.1.0) (2021-01-15)
 
 
