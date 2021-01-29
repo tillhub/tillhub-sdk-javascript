@@ -81,7 +81,9 @@ export class DbBackups extends ThBaseHandler {
   async signedUrl (dbBackupDate: string): Promise<DbBackupSignedUrlResponse> {
     const uri = this.uriHelper.generateBaseUri(`/signed_url/${dbBackupDate}`)
     try {
-      const response = await this.http.getClient().get(uri)
+      // Since DB backup response might take almost up to 1 min
+      // therefore we are overriding the Axios instance default timeout (10 secs) for this specific handler to have NO timeout.
+      const response = await this.http.getClient().get(uri, { timeout: 0 })
       if (response.status !== 200) {
         throw new DbBackupsSignedUrlFetchFailed(undefined, { status: response.status })
       }
