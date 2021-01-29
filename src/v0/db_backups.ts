@@ -59,7 +59,9 @@ export class DbBackups extends ThBaseHandler {
     try {
       const base = this.uriHelper.generateBaseUri()
 
-      const response = await this.http.getClient().get(base)
+      // Since DB backup response might take almost up to 1 min
+      // therefore we are overriding the Axios instance default timeout (10 secs) for this specific handler to have NO timeout.
+      const response = await this.http.getClient().get(base, { timeout: 0 })
       if (response.status !== 200) {
         throw new DbBackupsFetchFailed(undefined, { status: response.status })
       }
