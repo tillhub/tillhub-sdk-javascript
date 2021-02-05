@@ -8,6 +8,7 @@ declare const _default: {
         AnalyticsReportsTransactionsItems: typeof import("./reports/transactions-items").AnalyticsReportsTransactionsItems;
         AnalyticsReportsCountingProtocols: typeof import("./reports/counting-protocols").AnalyticsReportsCountingProtocols;
         AnalyticsReportsDatev: typeof import("./reports/datev").AnalyticsReportsDatev;
+        AnalyticsReportsProducts: typeof import("./reports/products").AnalyticsReportsProducts;
     };
 };
 export default _default;

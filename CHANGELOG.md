@@ -1,3 +1,10 @@
+# [4.2.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.1.2...v4.2.0) (2021-02-05)
+
+
+### Features
+
+* **analytics/v2/products:** add handler for products reports v2 ([159bf5b](https://github.com/tillhub/tillhub-sdk-javascript/commit/159bf5bdc33d521953becb7927e548e06d19f67c))
+
 ## [4.1.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.1.1...v4.1.2) (2021-01-29)
 
 

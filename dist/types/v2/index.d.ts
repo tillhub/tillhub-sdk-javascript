@@ -9,6 +9,7 @@ export interface AnalyticsHandlerTypes {
             AnalyticsReportsBalancesDetail: any;
             AnalyticsReportsCountingProtocols: any;
             AnalyticsReportsDatev: any;
+            AnalyticsReportsProducts: any;
         };
     };
 }
@@ -23,6 +24,7 @@ declare const _default: {
             AnalyticsReportsTransactionsItems: typeof import("./analytics/reports/transactions-items").AnalyticsReportsTransactionsItems;
             AnalyticsReportsCountingProtocols: typeof import("./analytics/reports/counting-protocols").AnalyticsReportsCountingProtocols;
             AnalyticsReportsDatev: typeof import("./analytics/reports/datev").AnalyticsReportsDatev;
+            AnalyticsReportsProducts: typeof import("./analytics/reports/products").AnalyticsReportsProducts;
         };
     };
 };
