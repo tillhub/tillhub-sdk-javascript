@@ -87,9 +87,11 @@ export interface StorefrontDeltaResponse {
     msg: string;
 }
 export interface StorefrontWhitelistMetaResponse {
-    data: [{
-        count: number;
-    }];
+    data: [
+        {
+            count: number;
+        }
+    ];
     metadata?: {
         count: number;
     };
@@ -149,17 +151,19 @@ export interface StorefrontProfile {
     };
     taxSettings: {
         automaticTaxEnabled?: boolean;
-        taxes?: [{
-            id?: number;
-            name?: string;
-            enabled?: boolean;
-            includeInPrice?: boolean;
-            useShippingAddress?: boolean;
-            taxShipping?: boolean;
-            appliedByDefault?: boolean;
-            defaultTax?: number;
-            rules?: any[];
-        }];
+        taxes?: [
+            {
+                id?: number;
+                name?: string;
+                enabled?: boolean;
+                includeInPrice?: boolean;
+                useShippingAddress?: boolean;
+                taxShipping?: boolean;
+                appliedByDefault?: boolean;
+                defaultTax?: number;
+                rules?: any[];
+            }
+        ];
     };
 }
 export interface StorefrontSyncStatus {

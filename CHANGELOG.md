@@ -1,3 +1,15 @@
+# [4.3.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.2.0...v4.3.0) (2021-02-08)
+
+
+### Bug Fixes
+
+* revent typedoc upgrade ([b499f99](https://github.com/tillhub/tillhub-sdk-javascript/commit/b499f99eef63184960fe0f4f618b20102160f119))
+
+
+### Features
+
+* upgrade deps, remove unused files+deps, audit fix ([41fc39a](https://github.com/tillhub/tillhub-sdk-javascript/commit/41fc39acd3ca058a9f927774d8c985c5cbb16a39))
+
 # [4.2.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.1.2...v4.2.0) (2021-02-05)
 
 
