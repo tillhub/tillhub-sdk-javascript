@@ -63,7 +63,7 @@ export interface StaffPhoneNumbers {
 export interface PinRequest {
   provided_pin?: string
   staff_id?: string
-  user_id?: string
+  pin_length?: number
 }
 
 export interface PinResponse {

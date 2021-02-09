@@ -15,7 +15,7 @@ afterEach(() => {
 
 const pin = {
   provided_pin: '1234',
-  user_id: '745ad010-b5b8-4034-9fc2-7c1145317bdd'
+  pin_length: 4
 }
 const queryString = qs.stringify(pin, { addQueryPrefix: true })
 
