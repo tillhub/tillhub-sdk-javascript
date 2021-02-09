@@ -1,3 +1,10 @@
+# [4.4.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.3.0...v4.4.0) (2021-02-09)
+
+
+### Features
+
+* **staff:** add user_id for pin generation ([af79ea0](https://github.com/tillhub/tillhub-sdk-javascript/commit/af79ea07eab081aacabfa7372b49e53c763bbdd4))
+
 # [4.3.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.2.0...v4.3.0) (2021-02-08)
 
 
