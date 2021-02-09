@@ -1,3 +1,10 @@
+# [4.5.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.4.0...v4.5.0) (2021-02-09)
+
+
+### Features
+
+* **staff:** add pin length to pin generation ([44b8345](https://github.com/tillhub/tillhub-sdk-javascript/commit/44b8345aedcdb83ec6e1d21e59c1b9348ea072de))
+
 # [4.4.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.3.0...v4.4.0) (2021-02-09)
 
 
