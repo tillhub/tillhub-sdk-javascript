@@ -346,6 +346,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.safesLogBook = function () {
         return this.generateAuthenticatedInstance(v0.SafesLogBook);
     };
+    TillhubClient.prototype.safesLogBookV1 = function () {
+        return this.generateAuthenticatedInstance(v1.SafesLogBook);
+    };
     TillhubClient.prototype.warehouses = function () {
         return this.generateAuthenticatedInstance(v0.Warehouses);
     };

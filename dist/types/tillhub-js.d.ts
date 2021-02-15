@@ -79,6 +79,7 @@ export declare class TillhubClient extends events.EventEmitter {
     tags(): v0.Tags;
     safes(): v0.Safes;
     safesLogBook(): v0.SafesLogBook;
+    safesLogBookV1(): v1.SafesLogBook;
     warehouses(): v0.Warehouses;
     staffGroups(): v0.StaffGroups;
     exports(): v0.Exports;

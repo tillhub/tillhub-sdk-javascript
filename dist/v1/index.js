@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Carts = exports.Customers = exports.Vouchers = exports.Balances = exports.Registers = exports.TransactionsLegacy = exports.Transactions = exports.Templates = exports.Products = exports.Pricebooks = exports.Auth = void 0;
+exports.SafesLogBook = exports.Carts = exports.Customers = exports.Vouchers = exports.Balances = exports.Registers = exports.TransactionsLegacy = exports.Transactions = exports.Templates = exports.Products = exports.Pricebooks = exports.Auth = void 0;
 var auth_1 = require("./auth");
 Object.defineProperty(exports, "Auth", { enumerable: true, get: function () { return auth_1.Auth; } });
 var pricebooks_1 = require("./pricebooks");
@@ -22,4 +22,6 @@ var customers_1 = require("./customers");
 Object.defineProperty(exports, "Customers", { enumerable: true, get: function () { return customers_1.Customers; } });
 var carts_1 = require("./carts");
 Object.defineProperty(exports, "Carts", { enumerable: true, get: function () { return carts_1.Carts; } });
+var safes_1 = require("./safes");
+Object.defineProperty(exports, "SafesLogBook", { enumerable: true, get: function () { return safes_1.SafesLogBook; } });
 //# sourceMappingURL=index.js.map

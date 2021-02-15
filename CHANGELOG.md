@@ -1,3 +1,10 @@
+# [4.6.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.5.0...v4.6.0) (2021-02-15)
+
+
+### Features
+
+* **safes:** add safes-log-book v1 handler for sockets based exports ([6b1335d](https://github.com/tillhub/tillhub-sdk-javascript/commit/6b1335de2c00a701e39fa378a039010abb6ae89d))
+
 # [4.5.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.4.0...v4.5.0) (2021-02-09)
 
 
