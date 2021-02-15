@@ -712,6 +712,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated SafesLogBookV1 instance
+   *
+   */
+  safesLogBookV1 (): v1.SafesLogBook {
+    return this.generateAuthenticatedInstance(v1.SafesLogBook)
+  }
+
+  /**
    * Create an authenticated Warehouses instance
    *
    */
