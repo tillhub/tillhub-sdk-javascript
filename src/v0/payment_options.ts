@@ -119,6 +119,7 @@ export class PaymentOptions extends ThBaseHandler {
     const uri = this.uriHelper.generateBaseUri(`/${paymentOptionId}`)
     try {
       const response = await this.http.getClient().put(uri, paymentOption)
+      if (response.status !== 200) throw new errors.PaymentOptionPutFailed(undefined, { status: response.status })
 
       return {
         data: response.data.results[0] as PaymentOption,
@@ -133,6 +134,7 @@ export class PaymentOptions extends ThBaseHandler {
     const uri = this.uriHelper.generateBaseUri()
     try {
       const response = await this.http.getClient().post(uri, paymentOption)
+      if (response.status !== 200) throw new errors.PaymentOptionCreationFailed(undefined, { status: response.status })
 
       return {
         data: response.data.results[0] as PaymentOption,
