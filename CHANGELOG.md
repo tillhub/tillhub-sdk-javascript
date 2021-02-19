@@ -1,3 +1,10 @@
+# [4.7.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.6.0...v4.7.0) (2021-02-19)
+
+
+### Features
+
+* **payment-options:** add status error ([1ee1084](https://github.com/tillhub/tillhub-sdk-javascript/commit/1ee10841893be5aadca845bb4c343d6139830713))
+
 # [4.6.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.5.0...v4.6.0) (2021-02-15)
 
 
