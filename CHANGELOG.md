@@ -1,3 +1,10 @@
+# [4.8.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.7.0...v4.8.0) (2021-03-02)
+
+
+### Features
+
+* **users:** add user_permission_template_id ([554fb2c](https://github.com/tillhub/tillhub-sdk-javascript/commit/554fb2c8335aec5a20a9ff37ff5f8367dbb3f0a9))
+
 # [4.7.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.6.0...v4.7.0) (2021-02-19)
 
 
