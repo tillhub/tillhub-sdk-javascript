@@ -57,6 +57,7 @@ export interface User {
   configuration_id: string
   groups?: Record<string, unknown> | null
   scopes?: string[] | null
+  user_permission_template_id?: string | null
   attributes?: Record<string, unknown> | null
   parents?: string[] | null
   children?: string[] | null
