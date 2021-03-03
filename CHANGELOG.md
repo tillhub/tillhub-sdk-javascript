@@ -1,3 +1,10 @@
+# [4.9.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.8.0...v4.9.0) (2021-03-03)
+
+
+### Features
+
+* **analytics-v3:** add handler for datev websocket export ([e31bd1a](https://github.com/tillhub/tillhub-sdk-javascript/commit/e31bd1a7fa7da2b1aa7c6a8b9a8a7d75d4b83a74))
+
 # [4.8.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.7.0...v4.8.0) (2021-03-02)
 
 

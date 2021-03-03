@@ -5,8 +5,9 @@ import { Auth } from './v1/auth';
 import * as v0 from './v0';
 import * as v1 from './v1';
 import v2, { AnalyticsHandlerTypes } from './v2';
+import v3, { AnalyticsHandlerTypesV3 } from './v3';
 import { Client } from './client';
-export { v0, v1, v2 };
+export { v0, v1, v2, v3 };
 export declare const defaultOptions: TillhubSDKOptions;
 declare type Fn = () => any;
 export interface TillhubSDKOptions {
@@ -62,6 +63,7 @@ export declare class TillhubClient extends events.EventEmitter {
     orders(): v0.Orders;
     analytics(): v0.Analytics;
     analyticsHandlers(): AnalyticsHandlerTypes;
+    analyticsHandlersV3(): AnalyticsHandlerTypesV3;
     transactionsLegacy(): v1.TransactionsLegacy;
     transactions(): v1.Transactions;
     staff(): v0.Staff;

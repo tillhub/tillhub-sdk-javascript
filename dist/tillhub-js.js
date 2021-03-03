@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Tillhub = exports.TillhubClient = exports.defaultOptions = exports.v2 = exports.v1 = exports.v0 = void 0;
+exports.Tillhub = exports.TillhubClient = exports.defaultOptions = exports.v3 = exports.v2 = exports.v1 = exports.v0 = void 0;
 var tslib_1 = require("tslib");
 var events_1 = tslib_1.__importDefault(require("events"));
 var v0 = tslib_1.__importStar(require("./v0"));
@@ -9,6 +9,8 @@ var v1 = tslib_1.__importStar(require("./v1"));
 exports.v1 = v1;
 var v2_1 = tslib_1.__importDefault(require("./v2"));
 exports.v2 = v2_1.default;
+var v3_1 = tslib_1.__importDefault(require("./v3"));
+exports.v3 = v3_1.default;
 var client_1 = require("./client");
 var errors = tslib_1.__importStar(require("./errors"));
 var environment_1 = require("./environment");
@@ -242,6 +244,22 @@ var TillhubClient = (function (_super) {
                     AnalyticsReportsCountingProtocols: v2_1.default.analytics.reports.AnalyticsReportsCountingProtocols.create({ user: this.auth.user, base: this.options.base }, this.http),
                     AnalyticsReportsDatev: v2_1.default.analytics.reports.AnalyticsReportsDatev.create({ user: this.auth.user, base: this.options.base }, this.http),
                     AnalyticsReportsProducts: new v2_1.default.analytics.reports.AnalyticsReportsProducts({ user: this.auth.user, base: this.options.base }, this.http)
+                }
+            }
+        };
+    };
+    TillhubClient.prototype.analyticsHandlersV3 = function () {
+        if (!this.options ||
+            !this.options.base ||
+            !this.http ||
+            !this.auth ||
+            !this.auth.authenticated) {
+            throw new errors.UninstantiatedClient();
+        }
+        return {
+            analytics: {
+                reports: {
+                    AnalyticsReportsDatev: v3_1.default.analytics.reports.AnalyticsReportsDatev.create({ user: this.auth.user, base: this.options.base }, this.http)
                 }
             }
         };
