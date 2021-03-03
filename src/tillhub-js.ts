@@ -8,11 +8,12 @@ import { Auth } from './v1/auth'
 import * as v0 from './v0'
 import * as v1 from './v1'
 import v2, { AnalyticsHandlerTypes } from './v2'
+import v3, { AnalyticsHandlerTypesV3 } from './v3'
 import { Client, ClientOptions } from './client'
 import * as errors from './errors'
 import { environment } from './environment'
 
-export { v0, v1, v2 }
+export { v0, v1, v2, v3 }
 
 export const defaultOptions: TillhubSDKOptions = {
   base: 'https://api.tillhub.com'
@@ -500,6 +501,33 @@ export class TillhubClient extends events.EventEmitter {
             this.http
           ),
           AnalyticsReportsProducts: new v2.analytics.reports.AnalyticsReportsProducts({ user: this.auth.user, base: this.options.base }, this.http)
+        }
+      }
+    }
+  }
+
+  /**
+   * Create an authenticated Analytics v3 instance
+   *
+   */
+  analyticsHandlersV3 (): AnalyticsHandlerTypesV3 {
+    if (
+      !this.options ||
+      !this.options.base ||
+      !this.http ||
+      !this.auth ||
+      !this.auth.authenticated
+    ) {
+      throw new errors.UninstantiatedClient()
+    }
+
+    return {
+      analytics: {
+        reports: {
+          AnalyticsReportsDatev: v3.analytics.reports.AnalyticsReportsDatev.create(
+            { user: this.auth.user, base: this.options.base },
+            this.http
+          )
         }
       }
     }
