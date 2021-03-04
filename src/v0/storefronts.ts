@@ -111,6 +111,15 @@ export interface StorefrontWhitelistMetaResponse {
   msg?: string
 }
 
+interface StorefrontAvailableProductsResponse {
+  data: WhitelistProduct[]
+  metadata?: {
+    count: number
+  }
+  msg?: string
+  next?: () => Promise<StorefrontAvailableProductsResponse>
+}
+
 export interface Storefront {
   id?: string
   name?: string
@@ -411,6 +420,32 @@ export class Storefronts extends ThBaseHandler {
       throw new StorefrontsFetchWhitelistedMetaFailed(undefined, { error })
     }
   }
+
+  async availableProducts (storefrontId: string, query?: { uri?: string }): Promise<StorefrontAvailableProductsResponse> {
+    let next
+
+    const base = this.uriHelper.generateBaseUri(`/${storefrontId}/products/available`)
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new StorefrontsAvailableProductsFailed(undefined, { status: response.status })
+      }
+
+      if (response.data.cursor?.next) {
+        next = (): Promise<StorefrontAvailableProductsResponse> => this.availableProducts(storefrontId, { uri: response.data.cursor.next })
+      }
+
+      return {
+        data: response.data.results,
+        msg: response.data.msg,
+        metadata: { count: response.data.count },
+        next
+      }
+    } catch (error) {
+      throw new StorefrontsAvailableProductsFailed(undefined, { error })
+    }
+  }
 }
 
 export class StorefrontsFetchFailed extends BaseError {
@@ -542,5 +577,16 @@ export class StorefrontsFetchWhitelistedMetaFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, StorefrontsFetchWhitelistedMetaFailed.prototype)
+  }
+}
+
+export class StorefrontsAvailableProductsFailed extends BaseError {
+  public name = 'StorefrontsAvailableProductsFailed'
+  constructor (
+    public message: string = 'Could not fetch available products',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, StorefrontsAvailableProductsFailed.prototype)
   }
 }
