@@ -1,3 +1,10 @@
+# [4.10.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.9.0...v4.10.0) (2021-03-04)
+
+
+### Features
+
+* **storefronts:** add handler to get available products - store specific ([e19aa37](https://github.com/tillhub/tillhub-sdk-javascript/commit/e19aa374c114ecf427a9a99d862b507e69a8e711))
+
 # [4.9.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.8.0...v4.9.0) (2021-03-03)
 
 

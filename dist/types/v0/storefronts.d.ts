@@ -97,6 +97,14 @@ export interface StorefrontWhitelistMetaResponse {
     };
     msg?: string;
 }
+interface StorefrontAvailableProductsResponse {
+    data: WhitelistProduct[];
+    metadata?: {
+        count: number;
+    };
+    msg?: string;
+    next?: () => Promise<StorefrontAvailableProductsResponse>;
+}
 export interface Storefront {
     id?: string;
     name?: string;
@@ -194,6 +202,9 @@ export declare class Storefronts extends ThBaseHandler {
     whitelist(storefrontId: string, products: string[]): Promise<StorefrontWhitelistResponse>;
     getWhitelisted(storefrontId: string): Promise<StorefrontWhitelistResponse>;
     getWhitelistedMeta(storefrontId: string): Promise<StorefrontWhitelistMetaResponse>;
+    availableProducts(storefrontId: string, query?: {
+        uri?: string;
+    }): Promise<StorefrontAvailableProductsResponse>;
 }
 export declare class StorefrontsFetchFailed extends BaseError {
     message: string;
@@ -251,6 +262,11 @@ export declare class StorefrontsFetchWhitelistedFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StorefrontsFetchWhitelistedMetaFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class StorefrontsAvailableProductsFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

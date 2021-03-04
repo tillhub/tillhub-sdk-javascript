@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StorefrontsFetchWhitelistedMetaFailed = exports.StorefrontsFetchWhitelistedFailed = exports.StorefrontsWhitelistFailed = exports.StorefrontsDeltaFailed = exports.StorefrontsSyncStatusFetchFailed = exports.StorefrontsSyncAllFailed = exports.StorefrontsProfileFetchFailed = exports.StorefrontsDeleteFailed = exports.StorefrontsCreationFailed = exports.StorefrontsPutFailed = exports.StorefrontsFetchOneFailed = exports.StorefrontsFetchFailed = exports.Storefronts = void 0;
+exports.StorefrontsAvailableProductsFailed = exports.StorefrontsFetchWhitelistedMetaFailed = exports.StorefrontsFetchWhitelistedFailed = exports.StorefrontsWhitelistFailed = exports.StorefrontsDeltaFailed = exports.StorefrontsSyncStatusFetchFailed = exports.StorefrontsSyncAllFailed = exports.StorefrontsProfileFetchFailed = exports.StorefrontsDeleteFailed = exports.StorefrontsCreationFailed = exports.StorefrontsPutFailed = exports.StorefrontsFetchOneFailed = exports.StorefrontsFetchFailed = exports.Storefronts = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var base_1 = require("../base");
@@ -352,6 +352,42 @@ var Storefronts = (function (_super) {
             });
         });
     };
+    Storefronts.prototype.availableProducts = function (storefrontId, query) {
+        var _a;
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var next, base, uri, response_1, error_12;
+            var _this = this;
+            return tslib_1.__generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        base = this.uriHelper.generateBaseUri("/" + storefrontId + "/products/available");
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        _b.label = 1;
+                    case 1:
+                        _b.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().get(uri)];
+                    case 2:
+                        response_1 = _b.sent();
+                        if (response_1.status !== 200) {
+                            throw new StorefrontsAvailableProductsFailed(undefined, { status: response_1.status });
+                        }
+                        if ((_a = response_1.data.cursor) === null || _a === void 0 ? void 0 : _a.next) {
+                            next = function () { return _this.availableProducts(storefrontId, { uri: response_1.data.cursor.next }); };
+                        }
+                        return [2, {
+                                data: response_1.data.results,
+                                msg: response_1.data.msg,
+                                metadata: { count: response_1.data.count },
+                                next: next
+                            }];
+                    case 3:
+                        error_12 = _b.sent();
+                        throw new StorefrontsAvailableProductsFailed(undefined, { error: error_12 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     Storefronts.baseEndpoint = '/api/v0/storefronts';
     return Storefronts;
 }(base_1.ThBaseHandler));
@@ -512,4 +548,17 @@ var StorefrontsFetchWhitelistedMetaFailed = (function (_super) {
     return StorefrontsFetchWhitelistedMetaFailed;
 }(errors_1.BaseError));
 exports.StorefrontsFetchWhitelistedMetaFailed = StorefrontsFetchWhitelistedMetaFailed;
+var StorefrontsAvailableProductsFailed = (function (_super) {
+    tslib_1.__extends(StorefrontsAvailableProductsFailed, _super);
+    function StorefrontsAvailableProductsFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch available products'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StorefrontsAvailableProductsFailed';
+        Object.setPrototypeOf(_this, StorefrontsAvailableProductsFailed.prototype);
+        return _this;
+    }
+    return StorefrontsAvailableProductsFailed;
+}(errors_1.BaseError));
+exports.StorefrontsAvailableProductsFailed = StorefrontsAvailableProductsFailed;
 //# sourceMappingURL=storefronts.js.map
