@@ -2,6 +2,7 @@ import { Client } from '../client'
 import { BaseError } from '../errors'
 import { ThBaseHandler } from '../base'
 import { UriHelper } from '../uri-helper'
+import { ProductsOptions } from '../v1/products'
 
 export interface StorefrontsOptions {
   user?: string
@@ -421,7 +422,7 @@ export class Storefronts extends ThBaseHandler {
     }
   }
 
-  async availableProducts (storefrontId: string, query?: { uri?: string }): Promise<StorefrontAvailableProductsResponse> {
+  async availableProducts (storefrontId: string, query?: ProductsOptions): Promise<StorefrontAvailableProductsResponse> {
     let next
 
     const base = this.uriHelper.generateBaseUri(`/${storefrontId}/products/available`)
@@ -444,6 +445,27 @@ export class Storefronts extends ThBaseHandler {
       }
     } catch (error) {
       throw new StorefrontsAvailableProductsFailed(undefined, { error })
+    }
+  }
+
+  async availableProductsMeta (storefrontId: string, query?: ProductsOptions): Promise<StorefrontAvailableProductsResponse> {
+    const base = this.uriHelper.generateBaseUri(`/${storefrontId}/products/available/meta`)
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new StorefrontsAvailableProductsMetaFailed(undefined, { status: response.status })
+      }
+      if (!response.data.results[0]) {
+        throw new StorefrontsAvailableProductsMetaFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new StorefrontsAvailableProductsMetaFailed(undefined, { error })
     }
   }
 }
@@ -588,5 +610,16 @@ export class StorefrontsAvailableProductsFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, StorefrontsAvailableProductsFailed.prototype)
+  }
+}
+
+export class StorefrontsAvailableProductsMetaFailed extends BaseError {
+  public name = 'StorefrontsAvailableProductsMetaFailed'
+  constructor (
+    public message: string = 'Could not fetch meta data for available products',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, StorefrontsAvailableProductsMetaFailed.prototype)
   }
 }

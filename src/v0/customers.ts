@@ -278,7 +278,7 @@ export class Customers extends ThBaseHandler {
 
       return {
         data: response.data.results[0],
-        metadata: { count: response.data.count }
+        metadata: { count: response.data.results[0].count }
       }
     } catch (err) {
       throw new CustomersMetaFailed(undefined, { error: err })
