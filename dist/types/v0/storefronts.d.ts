@@ -2,6 +2,7 @@ import { Client } from '../client';
 import { BaseError } from '../errors';
 import { ThBaseHandler } from '../base';
 import { UriHelper } from '../uri-helper';
+import { ProductsOptions } from '../v1/products';
 export interface StorefrontsOptions {
     user?: string;
     base?: string;
@@ -202,9 +203,8 @@ export declare class Storefronts extends ThBaseHandler {
     whitelist(storefrontId: string, products: string[]): Promise<StorefrontWhitelistResponse>;
     getWhitelisted(storefrontId: string): Promise<StorefrontWhitelistResponse>;
     getWhitelistedMeta(storefrontId: string): Promise<StorefrontWhitelistMetaResponse>;
-    availableProducts(storefrontId: string, query?: {
-        uri?: string;
-    }): Promise<StorefrontAvailableProductsResponse>;
+    availableProducts(storefrontId: string, query?: ProductsOptions): Promise<StorefrontAvailableProductsResponse>;
+    availableProductsMeta(storefrontId: string, query?: ProductsOptions): Promise<StorefrontAvailableProductsResponse>;
 }
 export declare class StorefrontsFetchFailed extends BaseError {
     message: string;
@@ -267,6 +267,11 @@ export declare class StorefrontsFetchWhitelistedMetaFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class StorefrontsAvailableProductsFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class StorefrontsAvailableProductsMetaFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

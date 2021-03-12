@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StorefrontsAvailableProductsFailed = exports.StorefrontsFetchWhitelistedMetaFailed = exports.StorefrontsFetchWhitelistedFailed = exports.StorefrontsWhitelistFailed = exports.StorefrontsDeltaFailed = exports.StorefrontsSyncStatusFetchFailed = exports.StorefrontsSyncAllFailed = exports.StorefrontsProfileFetchFailed = exports.StorefrontsDeleteFailed = exports.StorefrontsCreationFailed = exports.StorefrontsPutFailed = exports.StorefrontsFetchOneFailed = exports.StorefrontsFetchFailed = exports.Storefronts = void 0;
+exports.StorefrontsAvailableProductsMetaFailed = exports.StorefrontsAvailableProductsFailed = exports.StorefrontsFetchWhitelistedMetaFailed = exports.StorefrontsFetchWhitelistedFailed = exports.StorefrontsWhitelistFailed = exports.StorefrontsDeltaFailed = exports.StorefrontsSyncStatusFetchFailed = exports.StorefrontsSyncAllFailed = exports.StorefrontsProfileFetchFailed = exports.StorefrontsDeleteFailed = exports.StorefrontsCreationFailed = exports.StorefrontsPutFailed = exports.StorefrontsFetchOneFailed = exports.StorefrontsFetchFailed = exports.Storefronts = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var base_1 = require("../base");
@@ -388,6 +388,38 @@ var Storefronts = (function (_super) {
             });
         });
     };
+    Storefronts.prototype.availableProductsMeta = function (storefrontId, query) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_13;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        base = this.uriHelper.generateBaseUri("/" + storefrontId + "/products/available/meta");
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new StorefrontsAvailableProductsMetaFailed(undefined, { status: response.status });
+                        }
+                        if (!response.data.results[0]) {
+                            throw new StorefrontsAvailableProductsMetaFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            }];
+                    case 3:
+                        error_13 = _a.sent();
+                        throw new StorefrontsAvailableProductsMetaFailed(undefined, { error: error_13 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     Storefronts.baseEndpoint = '/api/v0/storefronts';
     return Storefronts;
 }(base_1.ThBaseHandler));
@@ -561,4 +593,17 @@ var StorefrontsAvailableProductsFailed = (function (_super) {
     return StorefrontsAvailableProductsFailed;
 }(errors_1.BaseError));
 exports.StorefrontsAvailableProductsFailed = StorefrontsAvailableProductsFailed;
+var StorefrontsAvailableProductsMetaFailed = (function (_super) {
+    tslib_1.__extends(StorefrontsAvailableProductsMetaFailed, _super);
+    function StorefrontsAvailableProductsMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch meta data for available products'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'StorefrontsAvailableProductsMetaFailed';
+        Object.setPrototypeOf(_this, StorefrontsAvailableProductsMetaFailed.prototype);
+        return _this;
+    }
+    return StorefrontsAvailableProductsMetaFailed;
+}(errors_1.BaseError));
+exports.StorefrontsAvailableProductsMetaFailed = StorefrontsAvailableProductsMetaFailed;
 //# sourceMappingURL=storefronts.js.map

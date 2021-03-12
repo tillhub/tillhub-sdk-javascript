@@ -1,3 +1,15 @@
+# [4.11.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.10.0...v4.11.0) (2021-03-12)
+
+
+### Bug Fixes
+
+* **customers:** revert unintended change ([f155ed6](https://github.com/tillhub/tillhub-sdk-javascript/commit/f155ed62f885d7c96b7d46c67958c67090f103a4))
+
+
+### Features
+
+* **storefronts:** add meta handler for available products ([c26c24a](https://github.com/tillhub/tillhub-sdk-javascript/commit/c26c24a194550d6bf94fea770d7b1adfe45bc58d))
+
 # [4.10.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.9.0...v4.10.0) (2021-03-04)
 
 
