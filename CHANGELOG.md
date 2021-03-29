@@ -1,3 +1,10 @@
+# [4.13.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.12.0...v4.13.0) (2021-03-29)
+
+
+### Features
+
+* **timetracking:** rollback changes on entries ([22ec332](https://github.com/tillhub/tillhub-sdk-javascript/commit/22ec3329fdd6419fa37f1bd013a4d9bf69567351))
+
 # [4.12.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.11.0...v4.12.0) (2021-03-29)
 
 

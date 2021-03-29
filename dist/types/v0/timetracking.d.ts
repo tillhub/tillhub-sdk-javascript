@@ -93,7 +93,7 @@ export declare class Timetracking extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: TimetrackingOptions, http: Client);
     get(staffId: string, query?: TimetrackingQuery): Promise<TimetrackingResponse>;
-    getEntries(staffId: string, entryId: string, query?: TimetrackingEntryQuery): Promise<TimetrackingResponse>;
+    getEntries(staffId: string, query?: TimetrackingEntryQuery): Promise<TimetrackingResponse>;
     createEntry(entry: TimetrackingEntry): Promise<TimetrackingEntryResponse>;
     updateEntry(entryId: string, data?: TimetrackingEntry): Promise<TimetrackingEntryResponse>;
     deleteEntry(entryId: string): Promise<TimetrackingEntryResponse>;
