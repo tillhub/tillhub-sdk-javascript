@@ -50,13 +50,13 @@ var Timetracking = (function (_super) {
             });
         });
     };
-    Timetracking.prototype.getEntries = function (staffId, query) {
+    Timetracking.prototype.getEntries = function (staffId, entryId, query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        base = this.uriHelper.generateBaseUri("/entries/staff/" + staffId);
+                        base = this.uriHelper.generateBaseUri("/entries/staff/" + staffId + "/" + entryId);
                         uri = this.uriHelper.generateUriWithQuery(base, query);
                         _a.label = 1;
                     case 1:

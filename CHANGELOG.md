@@ -1,3 +1,10 @@
+# [4.12.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.11.0...v4.12.0) (2021-03-29)
+
+
+### Features
+
+* **timetracking:** add timetracking entries id ([ea13be8](https://github.com/tillhub/tillhub-sdk-javascript/commit/ea13be832a4e73263a2d69f162b3af9633533a08))
+
 # [4.11.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.10.0...v4.11.0) (2021-03-12)
 
 
