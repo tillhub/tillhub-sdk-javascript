@@ -135,8 +135,8 @@ export class Timetracking extends ThBaseHandler {
     }
   }
 
-  async getEntries (staffId: string, entryId: string, query?: TimetrackingEntryQuery): Promise<TimetrackingResponse> {
-    const base = this.uriHelper.generateBaseUri(`/entries/staff/${staffId}/${entryId}`)
+  async getEntries (staffId: string, query?: TimetrackingEntryQuery): Promise<TimetrackingResponse> {
+    const base = this.uriHelper.generateBaseUri(`/entries/staff/${staffId}`)
     const uri = this.uriHelper.generateUriWithQuery(base, query)
     try {
       const response = await this.http.getClient().get(uri)

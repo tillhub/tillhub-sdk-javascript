@@ -14,7 +14,6 @@ afterEach(() => {
 })
 
 const staffId = '1234'
-const entryId = '1234'
 const date = '2000-01-01'
 const query = { date }
 const queryString = qs.stringify(query, { addQueryPrefix: true })
@@ -57,7 +56,7 @@ describe('v0: Timetracking: can get the timetracking entries for a specific staf
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v0/time_tracking/${legacyId}/entries/staff/${staffId}/${entryId}${queryString}`
+          `https://api.tillhub.com/api/v0/time_tracking/${legacyId}/entries/staff/${staffId}${queryString}`
         )
         .reply(() => {
           return [
@@ -76,7 +75,7 @@ describe('v0: Timetracking: can get the timetracking entries for a specific staf
 
     expect(Timetracking).toBeInstanceOf(v0.Timetracking)
 
-    const { data } = await Timetracking.getEntries(staffId, entryId, { query })
+    const { data } = await Timetracking.getEntries(staffId, { query })
 
     expect(data).toMatchObject(timetrackingResponse)
   })
@@ -98,7 +97,7 @@ describe('v0: Timetracking: can get the timetracking entries for a specific staf
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v0/time_tracking/${legacyId}/entries/staff/${staffId}/${entryId}${queryString}`
+          `https://api.tillhub.com/api/v0/time_tracking/${legacyId}/entries/staff/${staffId}${queryString}`
         )
         .reply(() => {
           return [205]
@@ -107,7 +106,7 @@ describe('v0: Timetracking: can get the timetracking entries for a specific staf
 
     try {
       const th = await initThInstance()
-      await th.timetracking().getEntries(staffId, entryId, { query })
+      await th.timetracking().getEntries(staffId, { query })
     } catch (err) {
       expect(err.name).toBe('TimetrackingEntriesFetchFailed')
     }
