@@ -33,7 +33,7 @@ const transactionsData = {
 }
 
 describe('v3: AnalyticsReportsTransactions', () => {
-  it('can get transactions analytics reports', async () => {
+  it('can get transactions analytics reports export', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
         .onGet(`https://api.tillhub.com/api/v3/analytics/${legacyId}/reports/transactions/overview?${qs.stringify(query)}`)

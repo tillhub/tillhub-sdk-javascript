@@ -61,7 +61,7 @@ export class AnalyticsReportsTransactions extends ThAnalyticsBaseHandler {
 export class AnalyticsReportsV3TransactionsExportFetchError extends BaseError {
   public name = 'AnalyticsReportsV3TransactionsExportFetchError'
   constructor (
-    public message: string = 'Could not fetch transactions report. ',
+    public message: string = 'Could not fetch transactions report export.',
     properties?: Record<string, unknown>
   ) {
     super(message, properties)

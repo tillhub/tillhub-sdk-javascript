@@ -33,7 +33,7 @@ const customersData = {
 }
 
 describe('v1: AnalyticsReportsCustomers', () => {
-  it('can get customers analytics reports', async () => {
+  it('can get customers analytics reports export', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
         .onGet(`https://api.tillhub.com/api/v1/analytics/${legacyId}/reports/customers?${qs.stringify(query)}`)
