@@ -224,6 +224,22 @@ var TillhubClient = (function (_super) {
         }
         return new v0.Analytics({ user: this.auth.user, base: this.options.base }, this.http);
     };
+    TillhubClient.prototype.analyticsHandlersV1 = function () {
+        if (!this.options ||
+            !this.options.base ||
+            !this.http ||
+            !this.auth ||
+            !this.auth.authenticated) {
+            throw new errors.UninstantiatedClient();
+        }
+        return {
+            analytics: {
+                reports: {
+                    AnalyticsReportsCustomers: new v1.analytics.reports.AnalyticsReportsCustomers({ user: this.auth.user, base: this.options.base }, this.http)
+                }
+            }
+        };
+    };
     TillhubClient.prototype.analyticsHandlers = function () {
         if (!this.options ||
             !this.options.base ||
@@ -259,7 +275,8 @@ var TillhubClient = (function (_super) {
         return {
             analytics: {
                 reports: {
-                    AnalyticsReportsDatev: v3_1.default.analytics.reports.AnalyticsReportsDatev.create({ user: this.auth.user, base: this.options.base }, this.http)
+                    AnalyticsReportsDatev: v3_1.default.analytics.reports.AnalyticsReportsDatev.create({ user: this.auth.user, base: this.options.base }, this.http),
+                    AnalyticsReportsTransactions: v3_1.default.analytics.reports.AnalyticsReportsTransactions.create({ user: this.auth.user, base: this.options.base }, this.http)
                 }
             }
         };

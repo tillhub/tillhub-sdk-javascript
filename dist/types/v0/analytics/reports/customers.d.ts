@@ -19,6 +19,10 @@ export interface CustomersQuery {
     legacy?: boolean;
     cursor_field?: string;
     branch_number?: number;
+    start?: string;
+    end?: string;
+    q?: string;
+    locations?: string[] | string;
 }
 export interface FiltersQuery {
     branch_number?: number;

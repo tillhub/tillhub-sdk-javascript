@@ -1,3 +1,10 @@
+# [4.14.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.13.0...v4.14.0) (2021-04-05)
+
+
+### Features
+
+* **analytics:** add export handlers for customers v1, transactions v3 ([bbfad8c](https://github.com/tillhub/tillhub-sdk-javascript/commit/bbfad8c55ace53721ed88604458d69d0754ea1cb))
+
 # [4.13.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.12.0...v4.13.0) (2021-03-29)
 
 
