@@ -9,6 +9,7 @@ import { Vouchers } from './vouchers'
 import { Customers } from './customers'
 import { Carts } from './carts'
 import { SafesLogBook } from './safes'
+import analytics from './analytics'
 
 export {
   Auth,
@@ -22,5 +23,14 @@ export {
   Vouchers,
   Customers,
   Carts,
-  SafesLogBook
+  SafesLogBook,
+  analytics
+}
+
+export interface AnalyticsHandlersV1Types {
+  analytics: {
+    reports: {
+      AnalyticsReportsCustomers: any
+    }
+  }
 }
