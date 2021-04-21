@@ -178,7 +178,9 @@ export class Registers extends ThBaseHandler {
 
     try {
       const response = await this.http.getClient().get(uri)
-      if (response.status !== 200) { throw new errors.RegistersSearchFailed(undefined, { status: response.status }) }
+      if (response.status !== 200) {
+        throw new errors.RegistersSearchFailed(undefined, { status: response.status })
+      }
 
       return {
         data: response.data.results,
