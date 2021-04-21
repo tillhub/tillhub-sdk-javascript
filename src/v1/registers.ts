@@ -1,3 +1,4 @@
+import typeOf from 'just-typeof'
 import { Client } from '../client'
 import * as errors from '../errors'
 import { ThBaseHandler } from '../base'
@@ -49,6 +50,11 @@ export interface RegistersResponse {
   data: Register[]
   metadata: Record<string, unknown>
   next?: () => Promise<RegistersResponse>
+}
+
+export interface SearchQuery {
+  q: string
+  fields?: string[]
 }
 
 export interface Register {
@@ -156,6 +162,30 @@ export class Registers extends ThBaseHandler {
       }
     } catch (error) {
       throw new errors.RegisterPutFailed(undefined, { error })
+    }
+  }
+
+  async search (query: string | SearchQuery): Promise<RegisterResponse> {
+    let uri
+    if (typeof query === 'string') {
+      uri = this.uriHelper.generateBaseUri(`/search?q=${query}`)
+    } else if (typeOf(query) === 'object') {
+      const base = this.uriHelper.generateBaseUri('/search')
+      uri = this.uriHelper.generateUriWithQuery(base, query)
+    } else {
+      throw new errors.RegistersSearchFailed('Could not search for register - query type is invalid')
+    }
+
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) { throw new errors.RegistersSearchFailed(undefined, { status: response.status }) }
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new errors.RegistersSearchFailed(undefined, { error })
     }
   }
 }
