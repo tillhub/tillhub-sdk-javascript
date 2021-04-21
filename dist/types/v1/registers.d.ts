@@ -44,6 +44,10 @@ export interface RegistersResponse {
     metadata: Record<string, unknown>;
     next?: () => Promise<RegistersResponse>;
 }
+export interface SearchQuery {
+    q: string;
+    fields?: string[];
+}
 export interface Register {
     id: string;
     name?: string | null;
@@ -63,4 +67,5 @@ export declare class Registers extends ThBaseHandler {
     notify(registerId: string, notification: Notification): Promise<NotificationResponse>;
     updateDeviceConfiguration(registerId: string, deviceConfiguration: DeviceConfigurationObject): Promise<RegisterResponse>;
     put(registerId: string, register: Register): Promise<RegisterResponse>;
+    search(query: string | SearchQuery): Promise<RegisterResponse>;
 }

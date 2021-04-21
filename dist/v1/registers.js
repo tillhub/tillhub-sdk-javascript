@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Registers = void 0;
 var tslib_1 = require("tslib");
+var just_typeof_1 = tslib_1.__importDefault(require("just-typeof"));
 var errors = tslib_1.__importStar(require("../errors"));
 var base_1 = require("../base");
 var uri_helper_1 = require("../uri-helper");
@@ -139,6 +140,43 @@ var Registers = (function (_super) {
                     case 3:
                         error_4 = _a.sent();
                         throw new errors.RegisterPutFailed(undefined, { error: error_4 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
+    Registers.prototype.search = function (query) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, base, response, error_5;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (typeof query === 'string') {
+                            uri = this.uriHelper.generateBaseUri("/search?q=" + query);
+                        }
+                        else if (just_typeof_1.default(query) === 'object') {
+                            base = this.uriHelper.generateBaseUri('/search');
+                            uri = this.uriHelper.generateUriWithQuery(base, query);
+                        }
+                        else {
+                            throw new errors.RegistersSearchFailed('Could not search for register - query type is invalid');
+                        }
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new errors.RegistersSearchFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            }];
+                    case 3:
+                        error_5 = _a.sent();
+                        throw new errors.RegistersSearchFailed(undefined, { error: error_5 });
                     case 4: return [2];
                 }
             });

@@ -1,3 +1,10 @@
+## [4.14.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.14.0...v4.14.1) (2021-04-21)
+
+
+### Bug Fixes
+
+* **registers:** force push deployment ([d8b6f1d](https://github.com/tillhub/tillhub-sdk-javascript/commit/d8b6f1d1ba2ee20e280bb757d2fa35ddfe9331c1))
+
 # [4.14.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.13.0...v4.14.0) (2021-04-05)
 
 
