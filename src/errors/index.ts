@@ -981,6 +981,17 @@ export class RegisterDeviceConfigurationPutFailed extends BaseError {
   }
 }
 
+export class RegistersSearchFailed extends BaseError {
+  public name = 'RegistersSearchFailed'
+  constructor (
+    public message: string = 'Could not search for register',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, RegistersSearchFailed.prototype)
+  }
+}
+
 export class AuditActionsFetchAllFailed extends BaseError {
   public name = 'AuditActionsFetchAllFailed'
   constructor (
