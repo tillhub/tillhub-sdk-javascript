@@ -600,31 +600,6 @@ export declare class MessagesFetchFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
 }
-export declare class FavouritesFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: Record<string, unknown>);
-}
-export declare class FavouriteFetchFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: Record<string, unknown>);
-}
-export declare class FavouriteCreateFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: Record<string, unknown>);
-}
-export declare class FavouriteDeleteFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: Record<string, unknown>);
-}
-export declare class FavouriteUpdateFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: Record<string, unknown>);
-}
 export declare class MessagesUpdateFailed extends BaseError {
     message: string;
     name: string;

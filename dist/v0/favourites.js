@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Favourites = void 0;
+exports.FavouriteUpdateFailed = exports.FavouriteDeleteFailed = exports.FavouriteCreateFailed = exports.FavouriteFetchFailed = exports.FavouritesFetchFailed = exports.Favourites = void 0;
 var tslib_1 = require("tslib");
+var baseError_1 = require("../errors/baseError");
 var uri_helper_1 = require("../uri-helper");
-var errors = tslib_1.__importStar(require("../errors"));
 var base_1 = require("../base");
 var Favourites = (function (_super) {
     tslib_1.__extends(Favourites, _super);
@@ -21,26 +21,32 @@ var Favourites = (function (_super) {
         return _this;
     }
     Favourites.prototype.getAll = function (query) {
+        var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, e_1;
-            return tslib_1.__generator(this, function (_a) {
-                switch (_a.label) {
+            var next, base, uri, response_1, e_1;
+            var _this = this;
+            return tslib_1.__generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _b.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri();
                         uri = this.uriHelper.generateUriWithQuery(base, query);
                         return [4, this.http.getClient().get(uri)];
                     case 1:
-                        response = _a.sent();
-                        if (response.status !== 200)
-                            throw new errors.FavouritesFetchFailed();
+                        response_1 = _b.sent();
+                        if (response_1.status !== 200)
+                            throw new FavouritesFetchFailed();
+                        if ((_a = response_1.data.cursor) === null || _a === void 0 ? void 0 : _a.next) {
+                            next = function () { return _this.getAll({ uri: response_1.data.cursor.next }); };
+                        }
                         return [2, {
-                                data: response.data.results,
-                                metadata: { count: response.data.count }
+                                data: response_1.data.results,
+                                metadata: { count: response_1.data.count },
+                                next: next
                             }];
                     case 2:
-                        e_1 = _a.sent();
-                        throw new errors.FavouritesFetchFailed();
+                        e_1 = _b.sent();
+                        throw new FavouritesFetchFailed();
                     case 3: return [2];
                 }
             });
@@ -59,7 +65,7 @@ var Favourites = (function (_super) {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new errors.FavouriteFetchFailed();
+                            throw new FavouriteFetchFailed();
                         return [2, {
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count },
@@ -67,7 +73,7 @@ var Favourites = (function (_super) {
                             }];
                     case 2:
                         e_2 = _a.sent();
-                        throw new errors.FavouriteFetchFailed();
+                        throw new FavouriteFetchFailed();
                     case 3: return [2];
                 }
             });
@@ -86,14 +92,14 @@ var Favourites = (function (_super) {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new errors.FavouriteCreateFailed();
+                            throw new FavouriteCreateFailed();
                         return [2, {
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
                         e_3 = _a.sent();
-                        throw new errors.FavouriteCreateFailed();
+                        throw new FavouriteCreateFailed();
                     case 3: return [2];
                 }
             });
@@ -112,14 +118,14 @@ var Favourites = (function (_super) {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new errors.FavouriteUpdateFailed();
+                            throw new FavouriteUpdateFailed();
                         return [2, {
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
                         e_4 = _a.sent();
-                        throw new errors.FavouriteUpdateFailed();
+                        throw new FavouriteUpdateFailed();
                     case 3: return [2];
                 }
             });
@@ -138,13 +144,13 @@ var Favourites = (function (_super) {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new errors.FavouriteDeleteFailed();
+                            throw new FavouriteDeleteFailed();
                         return [2, {
                                 msg: response.data.msg
                             }];
                     case 2:
                         e_5 = _a.sent();
-                        throw new errors.FavouriteDeleteFailed();
+                        throw new FavouriteDeleteFailed();
                     case 3: return [2];
                 }
             });
@@ -154,4 +160,69 @@ var Favourites = (function (_super) {
     return Favourites;
 }(base_1.ThBaseHandler));
 exports.Favourites = Favourites;
+var FavouritesFetchFailed = (function (_super) {
+    tslib_1.__extends(FavouritesFetchFailed, _super);
+    function FavouritesFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch favourites set'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'FavouritesFetchFailed';
+        Object.setPrototypeOf(_this, FavouritesFetchFailed.prototype);
+        return _this;
+    }
+    return FavouritesFetchFailed;
+}(baseError_1.BaseError));
+exports.FavouritesFetchFailed = FavouritesFetchFailed;
+var FavouriteFetchFailed = (function (_super) {
+    tslib_1.__extends(FavouriteFetchFailed, _super);
+    function FavouriteFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch favourite'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'FavouriteFetchFailed';
+        Object.setPrototypeOf(_this, FavouriteFetchFailed.prototype);
+        return _this;
+    }
+    return FavouriteFetchFailed;
+}(baseError_1.BaseError));
+exports.FavouriteFetchFailed = FavouriteFetchFailed;
+var FavouriteCreateFailed = (function (_super) {
+    tslib_1.__extends(FavouriteCreateFailed, _super);
+    function FavouriteCreateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create favourite'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'FavouriteCreateFailed';
+        Object.setPrototypeOf(_this, FavouriteCreateFailed.prototype);
+        return _this;
+    }
+    return FavouriteCreateFailed;
+}(baseError_1.BaseError));
+exports.FavouriteCreateFailed = FavouriteCreateFailed;
+var FavouriteDeleteFailed = (function (_super) {
+    tslib_1.__extends(FavouriteDeleteFailed, _super);
+    function FavouriteDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete favourite'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'FavouriteDeleteFailed';
+        Object.setPrototypeOf(_this, FavouriteDeleteFailed.prototype);
+        return _this;
+    }
+    return FavouriteDeleteFailed;
+}(baseError_1.BaseError));
+exports.FavouriteDeleteFailed = FavouriteDeleteFailed;
+var FavouriteUpdateFailed = (function (_super) {
+    tslib_1.__extends(FavouriteUpdateFailed, _super);
+    function FavouriteUpdateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not update favourite'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'FavouriteUpdateFailed';
+        Object.setPrototypeOf(_this, FavouriteUpdateFailed.prototype);
+        return _this;
+    }
+    return FavouriteUpdateFailed;
+}(baseError_1.BaseError));
+exports.FavouriteUpdateFailed = FavouriteUpdateFailed;
 //# sourceMappingURL=favourites.js.map

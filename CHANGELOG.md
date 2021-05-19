@@ -1,3 +1,10 @@
+# [4.15.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.14.1...v4.15.0) (2021-05-19)
+
+
+### Features
+
+* **favourites:** make getAll paginable, refactor ([d5251a8](https://github.com/tillhub/tillhub-sdk-javascript/commit/d5251a85cd40567e5c0c7e5718719de70c484a7c))
+
 ## [4.14.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.14.0...v4.14.1) (2021-04-21)
 
 

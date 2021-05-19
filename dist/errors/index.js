@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TemplatesCreationFailed = exports.PaymentOptionDeleteFailed = exports.PaymentOptionCreationFailed = exports.PaymentOptionPutFailed = exports.PaymentOptionFetchFailed = exports.ExpenseAccountDeleteFailed = exports.PaymentOptionsFetchFailed = exports.ExpenseAccountCreationFailed = exports.ExpenseAccountPutFailed = exports.ExpenseAccountFetchFailed = exports.ExpenseAccountsFetchFailed = exports.AccountDeleteFailed = exports.AccountCreationFailed = exports.AccountPutFailed = exports.AccountFetchFailed = exports.AccountsFetchFailed = exports.ProductGroupDeleteFailed = exports.ProuctGroupsCountFailed = exports.ProductGroupsSearchFailed = exports.ProductGroupCreationFailed = exports.ProductGroupPutFailed = exports.ProductGroupFetchFailed = exports.ProductGroupsFetchFailed = exports.DeliveryItemUpdateFailed = exports.DeliveryItemsFetchAllFailed = exports.DeliveryItemsCreateFailed = exports.DeliveriesDeleteFailed = exports.DeliveriesDispatchFailed = exports.DeliveriesInProgressFailed = exports.DeliveriesUpdateFailed = exports.DeliveriesPDFFailed = exports.DeliveriesCreateFailed = exports.DeliveriesFetchOneFailed = exports.DeliveriesFetchAllFailed = exports.TaxDeleteFailed = exports.TaxesCreationFailed = exports.TaxesPutFailed = exports.TaxesFetchFailed = exports.TransactionsGetMetaFailed = exports.TransactionSigningZeroReceiptFailed = exports.TransactionSigningMonthlyReceiptFailed = exports.TransactionSigningYearlyReceiptFailed = exports.TransactionSigningInitialisationFailed = exports.TransactionPdfFailed = exports.TransactionFetchFailed = exports.UninstantiatedClient = exports.PasswordSetRequestFailed = exports.PasswordResetRequestFailed = exports.AuthenticationFailed = exports.BaseError = void 0;
 exports.ImageCreationFailed = exports.AuditLogsGetMetaFailed = exports.AuditLogsFetchOneFailed = exports.AuditLogsFetchAllFailed = exports.AuditActionsTypesFetchFailed = exports.AuditActionsCreateFailed = exports.AuditActionsGetMetaFailed = exports.AuditActionsFetchOneFailed = exports.AuditActionsFetchAllFailed = exports.RegistersSearchFailed = exports.RegisterDeviceConfigurationPutFailed = exports.RegisterNotificationCreateFailed = exports.RegisterPutFailed = exports.RegisterFetchFailed = exports.RegistersFetchFailed = exports.OpenOrderFetchFailed = exports.BookStockFailed = exports.HistoricOrderItemsFetchFailed = exports.OrderSuggestionsFetchFailed = exports.OrderItemsDeleteFailed = exports.OrderItemsUpdateFailed = exports.OrderItemUpdateFailed = exports.OrderItemsCreateFailed = exports.OrderItemsFetchFailed = exports.OutgoingOrdersFetchFailed = exports.IncomingOrdersFetchFailed = exports.OrdersUpdateFailed = exports.OrdersCreateFailed = exports.OrdersFetchFailed = exports.InvoicesGetMetaFailed = exports.InvoicesDeleteFailed = exports.InvoicesUpdateFailed = exports.InvoicesCreateFailed = exports.InvoicesFetchOneFailed = exports.InvoicesFetchAllFailed = exports.DiscountDeleteFailed = exports.DiscountsCountFailed = exports.DiscountCreationFailed = exports.DiscountPutFailed = exports.DiscountFetchFailed = exports.DiscountsFetchFailed = exports.ConfigurationDeleteFailed = exports.ConfigurationCreationFailed = exports.ConfigurationPatchFailed = exports.ConfigurationPutFailed = exports.ConfigurationFetchFailed = exports.ConfigurationsFetchFailed = exports.TemplatesPreviewFailed = exports.TemplatesFetchFailed = exports.TemplatesPutFailed = void 0;
-exports.LegacySettingUpdateFailed = exports.LegacySettingFetchFailed = exports.LegacySettingsFetchFailed = exports.BalancesMetaFailed = exports.BalancesFetchOneFailed = exports.BalancesFetchFailed = exports.MessagesUpdateFailed = exports.FavouriteUpdateFailed = exports.FavouriteDeleteFailed = exports.FavouriteCreateFailed = exports.FavouriteFetchFailed = exports.FavouritesFetchFailed = exports.MessagesFetchFailed = exports.PrinterUpdateFailed = exports.PrinterDeleteFailed = exports.PrinterCreateFailed = exports.PrinterFetchFailed = exports.PrintersFetchFailed = exports.PrintMessageUpdateFailed = exports.PrintMessageDeleteFailed = exports.PrintMessageCreateFailed = exports.PrintMessageFetchFailed = exports.PrintMessagesFetchFailed = exports.PrintJobDataFetchFailed = exports.PrintJobUpdateFailed = exports.PrintJobDeleteFailed = exports.PrintJobCreateFailed = exports.PrintJobFetchFailed = exports.PrintJobsFetchFailed = exports.ProductGroupsFiltersFetchFailed = exports.NotificationsEmailError = exports.StaffCountFailed = exports.ImagePutFailed = void 0;
+exports.LegacySettingUpdateFailed = exports.LegacySettingFetchFailed = exports.LegacySettingsFetchFailed = exports.BalancesMetaFailed = exports.BalancesFetchOneFailed = exports.BalancesFetchFailed = exports.MessagesUpdateFailed = exports.MessagesFetchFailed = exports.PrinterUpdateFailed = exports.PrinterDeleteFailed = exports.PrinterCreateFailed = exports.PrinterFetchFailed = exports.PrintersFetchFailed = exports.PrintMessageUpdateFailed = exports.PrintMessageDeleteFailed = exports.PrintMessageCreateFailed = exports.PrintMessageFetchFailed = exports.PrintMessagesFetchFailed = exports.PrintJobDataFetchFailed = exports.PrintJobUpdateFailed = exports.PrintJobDeleteFailed = exports.PrintJobCreateFailed = exports.PrintJobFetchFailed = exports.PrintJobsFetchFailed = exports.ProductGroupsFiltersFetchFailed = exports.NotificationsEmailError = exports.StaffCountFailed = exports.ImagePutFailed = void 0;
 var tslib_1 = require("tslib");
 var baseError_1 = require("./baseError");
 Object.defineProperty(exports, "BaseError", { enumerable: true, get: function () { return baseError_1.BaseError; } });
@@ -1564,71 +1564,6 @@ var MessagesFetchFailed = (function (_super) {
     return MessagesFetchFailed;
 }(baseError_1.BaseError));
 exports.MessagesFetchFailed = MessagesFetchFailed;
-var FavouritesFetchFailed = (function (_super) {
-    tslib_1.__extends(FavouritesFetchFailed, _super);
-    function FavouritesFetchFailed(message, properties) {
-        if (message === void 0) { message = 'Could not fetch favourites set'; }
-        var _this = _super.call(this, message, properties) || this;
-        _this.message = message;
-        _this.name = 'FavouritesFetchFailed';
-        Object.setPrototypeOf(_this, FavouritesFetchFailed.prototype);
-        return _this;
-    }
-    return FavouritesFetchFailed;
-}(baseError_1.BaseError));
-exports.FavouritesFetchFailed = FavouritesFetchFailed;
-var FavouriteFetchFailed = (function (_super) {
-    tslib_1.__extends(FavouriteFetchFailed, _super);
-    function FavouriteFetchFailed(message, properties) {
-        if (message === void 0) { message = 'Could not fetch favourite'; }
-        var _this = _super.call(this, message, properties) || this;
-        _this.message = message;
-        _this.name = 'FavouriteFetchFailed';
-        Object.setPrototypeOf(_this, FavouriteFetchFailed.prototype);
-        return _this;
-    }
-    return FavouriteFetchFailed;
-}(baseError_1.BaseError));
-exports.FavouriteFetchFailed = FavouriteFetchFailed;
-var FavouriteCreateFailed = (function (_super) {
-    tslib_1.__extends(FavouriteCreateFailed, _super);
-    function FavouriteCreateFailed(message, properties) {
-        if (message === void 0) { message = 'Could not create favourite'; }
-        var _this = _super.call(this, message, properties) || this;
-        _this.message = message;
-        _this.name = 'FavouriteCreateFailed';
-        Object.setPrototypeOf(_this, FavouriteCreateFailed.prototype);
-        return _this;
-    }
-    return FavouriteCreateFailed;
-}(baseError_1.BaseError));
-exports.FavouriteCreateFailed = FavouriteCreateFailed;
-var FavouriteDeleteFailed = (function (_super) {
-    tslib_1.__extends(FavouriteDeleteFailed, _super);
-    function FavouriteDeleteFailed(message, properties) {
-        if (message === void 0) { message = 'Could not delete favourite'; }
-        var _this = _super.call(this, message, properties) || this;
-        _this.message = message;
-        _this.name = 'FavouriteDeleteFailed';
-        Object.setPrototypeOf(_this, FavouriteDeleteFailed.prototype);
-        return _this;
-    }
-    return FavouriteDeleteFailed;
-}(baseError_1.BaseError));
-exports.FavouriteDeleteFailed = FavouriteDeleteFailed;
-var FavouriteUpdateFailed = (function (_super) {
-    tslib_1.__extends(FavouriteUpdateFailed, _super);
-    function FavouriteUpdateFailed(message, properties) {
-        if (message === void 0) { message = 'Could not update favourite'; }
-        var _this = _super.call(this, message, properties) || this;
-        _this.message = message;
-        _this.name = 'FavouriteUpdateFailed';
-        Object.setPrototypeOf(_this, FavouriteUpdateFailed.prototype);
-        return _this;
-    }
-    return FavouriteUpdateFailed;
-}(baseError_1.BaseError));
-exports.FavouriteUpdateFailed = FavouriteUpdateFailed;
 var MessagesUpdateFailed = (function (_super) {
     tslib_1.__extends(MessagesUpdateFailed, _super);
     function MessagesUpdateFailed(message, properties) {

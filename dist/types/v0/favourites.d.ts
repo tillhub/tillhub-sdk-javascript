@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { BaseError } from '../errors/baseError';
 import { UriHelper } from '../uri-helper';
 import { ThBaseHandler } from '../base';
 export interface Item {
@@ -25,6 +26,7 @@ export interface FavouritesResponse {
     data: Favourite[];
     metadata: Record<string, unknown>;
     msg?: string;
+    next?: () => Promise<FavouritesResponse>;
 }
 export interface FavouriteResponse {
     data?: Favourite;
@@ -47,4 +49,29 @@ export declare class Favourites extends ThBaseHandler {
     create(favourite: Favourite): Promise<FavouriteResponse>;
     update(favouriteId: string, favourite: Favourite): Promise<FavouriteResponse>;
     delete(favouriteId: string): Promise<FavouriteResponse>;
+}
+export declare class FavouritesFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class FavouriteFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class FavouriteCreateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class FavouriteDeleteFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class FavouriteUpdateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
