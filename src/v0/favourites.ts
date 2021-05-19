@@ -1,6 +1,6 @@
 import { Client } from '../client'
+import { BaseError } from '../errors/baseError'
 import { UriHelper } from '../uri-helper'
-import * as errors from '../errors'
 import { ThBaseHandler } from '../base'
 
 export interface Item {
@@ -30,6 +30,7 @@ export interface FavouritesResponse {
   data: Favourite[]
   metadata: Record<string, unknown>
   msg?: string
+  next?: () => Promise<FavouritesResponse>
 }
 
 export interface FavouriteResponse {
@@ -64,19 +65,26 @@ export class Favourites extends ThBaseHandler {
   }
 
   async getAll (query?: Record<string, unknown>): Promise<FavouritesResponse> {
+    let next
+
     try {
       const base = this.uriHelper.generateBaseUri()
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri)
-      if (response.status !== 200) throw new errors.FavouritesFetchFailed()
+      if (response.status !== 200) throw new FavouritesFetchFailed()
+
+      if (response.data.cursor?.next) {
+        next = (): Promise<FavouritesResponse> => this.getAll({ uri: response.data.cursor.next })
+      }
 
       return {
         data: response.data.results,
-        metadata: { count: response.data.count }
+        metadata: { count: response.data.count },
+        next
       }
     } catch (e) {
-      throw new errors.FavouritesFetchFailed()
+      throw new FavouritesFetchFailed()
     }
   }
 
@@ -86,7 +94,7 @@ export class Favourites extends ThBaseHandler {
       const uri = this.uriHelper.generateUriWithQuery(base)
 
       const response = await this.http.getClient().get(uri)
-      if (response.status !== 200) throw new errors.FavouriteFetchFailed()
+      if (response.status !== 200) throw new FavouriteFetchFailed()
 
       return {
         data: response.data.results[0],
@@ -94,7 +102,7 @@ export class Favourites extends ThBaseHandler {
         msg: response.data.msg
       }
     } catch (e) {
-      throw new errors.FavouriteFetchFailed()
+      throw new FavouriteFetchFailed()
     }
   }
 
@@ -104,14 +112,14 @@ export class Favourites extends ThBaseHandler {
       const uri = this.uriHelper.generateUriWithQuery(base)
 
       const response = await this.http.getClient().post(uri, favourite)
-      if (response.status !== 200) throw new errors.FavouriteCreateFailed()
+      if (response.status !== 200) throw new FavouriteCreateFailed()
 
       return {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
     } catch (e) {
-      throw new errors.FavouriteCreateFailed()
+      throw new FavouriteCreateFailed()
     }
   }
 
@@ -121,14 +129,14 @@ export class Favourites extends ThBaseHandler {
       const uri = this.uriHelper.generateUriWithQuery(base)
 
       const response = await this.http.getClient().put(uri, favourite)
-      if (response.status !== 200) throw new errors.FavouriteUpdateFailed()
+      if (response.status !== 200) throw new FavouriteUpdateFailed()
 
       return {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
     } catch (e) {
-      throw new errors.FavouriteUpdateFailed()
+      throw new FavouriteUpdateFailed()
     }
   }
 
@@ -138,13 +146,68 @@ export class Favourites extends ThBaseHandler {
       const uri = this.uriHelper.generateUriWithQuery(base)
 
       const response = await this.http.getClient().delete(uri)
-      if (response.status !== 200) throw new errors.FavouriteDeleteFailed()
+      if (response.status !== 200) throw new FavouriteDeleteFailed()
 
       return {
         msg: response.data.msg
       }
     } catch (e) {
-      throw new errors.FavouriteDeleteFailed()
+      throw new FavouriteDeleteFailed()
     }
+  }
+}
+
+export class FavouritesFetchFailed extends BaseError {
+  public name = 'FavouritesFetchFailed'
+  constructor (
+    public message: string = 'Could not fetch favourites set',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, FavouritesFetchFailed.prototype)
+  }
+}
+
+export class FavouriteFetchFailed extends BaseError {
+  public name = 'FavouriteFetchFailed'
+  constructor (
+    public message: string = 'Could not fetch favourite',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, FavouriteFetchFailed.prototype)
+  }
+}
+
+export class FavouriteCreateFailed extends BaseError {
+  public name = 'FavouriteCreateFailed'
+  constructor (
+    public message: string = 'Could not create favourite',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, FavouriteCreateFailed.prototype)
+  }
+}
+
+export class FavouriteDeleteFailed extends BaseError {
+  public name = 'FavouriteDeleteFailed'
+  constructor (
+    public message: string = 'Could not delete favourite',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, FavouriteDeleteFailed.prototype)
+  }
+}
+
+export class FavouriteUpdateFailed extends BaseError {
+  public name = 'FavouriteUpdateFailed'
+  constructor (
+    public message: string = 'Could not update favourite',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, FavouriteUpdateFailed.prototype)
   }
 }
