@@ -1320,65 +1320,6 @@ export class MessagesFetchFailed extends BaseError {
   }
 }
 
-/**
- * FAVOURITES
- */
-
-export class FavouritesFetchFailed extends BaseError {
-  public name = 'FavouritesFetchFailed'
-  constructor (
-    public message: string = 'Could not fetch favourites set',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, FavouritesFetchFailed.prototype)
-  }
-}
-
-export class FavouriteFetchFailed extends BaseError {
-  public name = 'FavouriteFetchFailed'
-  constructor (
-    public message: string = 'Could not fetch favourite',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, FavouriteFetchFailed.prototype)
-  }
-}
-
-export class FavouriteCreateFailed extends BaseError {
-  public name = 'FavouriteCreateFailed'
-  constructor (
-    public message: string = 'Could not create favourite',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, FavouriteCreateFailed.prototype)
-  }
-}
-
-export class FavouriteDeleteFailed extends BaseError {
-  public name = 'FavouriteDeleteFailed'
-  constructor (
-    public message: string = 'Could not delete favourite',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, FavouriteDeleteFailed.prototype)
-  }
-}
-
-export class FavouriteUpdateFailed extends BaseError {
-  public name = 'FavouriteUpdateFailed'
-  constructor (
-    public message: string = 'Could not update favourite',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, FavouriteUpdateFailed.prototype)
-  }
-}
-
 export class MessagesUpdateFailed extends BaseError {
   public name = 'MessagesUpdateFailed'
   constructor (
