@@ -25,7 +25,7 @@ const taxesResponse = [
     account: faker.finance.account(),
     rate: faker.datatype.number().toString(),
     percentage: '25%',
-    is_fixed: faker.random.boolean(),
+    is_fixed: faker.datatype.boolean(),
     jurisdiction: 'germany' as Jurisdictions,
     rate_class: 'normal' as RateClasses
   } as Tax
