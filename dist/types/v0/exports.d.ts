@@ -1,5 +1,6 @@
 import { Client } from '../client';
 import { UriHelper } from '../uri-helper';
+import { BaseError } from '../errors/baseError';
 export interface ExportsOptions {
     user?: string;
     base?: string;
@@ -27,7 +28,7 @@ export interface GobdQuery {
     tz?: string;
     password?: string;
     emails?: string[];
-    client_name: string;
+    client_name?: string;
 }
 export interface GobdQueryOrOptions {
     limit?: number;
@@ -52,4 +53,9 @@ export declare class Exports {
     constructor(options: ExportsOptions, http: Client);
     datev(datevQuery: DatevQuery, queryOrOptions: ExportsQueryOrOptions): Promise<ExportsResponse>;
     gobd(gobdQuery: GobdQuery, queryOrOptions: GobdQueryOrOptions): Promise<ExportsResponse>;
+}
+export declare class ExportsGobdFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

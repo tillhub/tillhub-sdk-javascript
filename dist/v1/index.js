@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.analytics = exports.SafesLogBook = exports.Carts = exports.Customers = exports.Vouchers = exports.Balances = exports.Registers = exports.TransactionsLegacy = exports.Transactions = exports.Templates = exports.Products = exports.Pricebooks = exports.Auth = void 0;
+exports.analytics = exports.ExportsV1 = exports.SafesLogBook = exports.Carts = exports.Customers = exports.Vouchers = exports.Balances = exports.Registers = exports.TransactionsLegacy = exports.Transactions = exports.Templates = exports.Products = exports.Pricebooks = exports.Auth = void 0;
 var tslib_1 = require("tslib");
 var auth_1 = require("./auth");
 Object.defineProperty(exports, "Auth", { enumerable: true, get: function () { return auth_1.Auth; } });
@@ -25,6 +25,8 @@ var carts_1 = require("./carts");
 Object.defineProperty(exports, "Carts", { enumerable: true, get: function () { return carts_1.Carts; } });
 var safes_1 = require("./safes");
 Object.defineProperty(exports, "SafesLogBook", { enumerable: true, get: function () { return safes_1.SafesLogBook; } });
+var exports_1 = require("./exports");
+Object.defineProperty(exports, "ExportsV1", { enumerable: true, get: function () { return exports_1.ExportsV1; } });
 var analytics_1 = tslib_1.__importDefault(require("./analytics"));
 exports.analytics = analytics_1.default;
 //# sourceMappingURL=index.js.map

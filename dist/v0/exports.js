@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Exports = void 0;
+exports.ExportsGobdFetchFailed = exports.Exports = void 0;
 var tslib_1 = require("tslib");
 var uri_helper_1 = require("../uri-helper");
 var baseError_1 = require("../errors/baseError");
@@ -94,4 +94,5 @@ var ExportsGobdFetchFailed = (function (_super) {
     }
     return ExportsGobdFetchFailed;
 }(baseError_1.BaseError));
+exports.ExportsGobdFetchFailed = ExportsGobdFetchFailed;
 //# sourceMappingURL=exports.js.map

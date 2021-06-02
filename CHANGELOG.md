@@ -1,3 +1,12 @@
+# [4.16.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.15.0...v4.16.0) (2021-06-02)
+
+
+### Features
+
+* upgrade deps to resolve security issues (npm audit) ([3005d00](https://github.com/tillhub/tillhub-sdk-javascript/commit/3005d001dcba8be7d03ab7fcb6fab5c5a1df8079))
+* **exports/v1:** add gobd export next gen ([a5159eb](https://github.com/tillhub/tillhub-sdk-javascript/commit/a5159eba659fdbdb0ab470e7948c887252694f26))
+* **tests:** update faker dep, resolve depracations ([0f3802f](https://github.com/tillhub/tillhub-sdk-javascript/commit/0f3802fb0b3f04a94f0f94323b6b3cb4cddbd92b))
+
 # [4.15.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.14.1...v4.15.0) (2021-05-19)
 
 

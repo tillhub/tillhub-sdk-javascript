@@ -68,6 +68,7 @@ export declare class TillhubClient extends events.EventEmitter {
     analyticsHandlersV3(): AnalyticsHandlerTypesV3;
     transactionsLegacy(): v1.TransactionsLegacy;
     transactions(): v1.Transactions;
+    exportsV1(): v1.ExportsV1;
     staff(): v0.Staff;
     auditActions(): v0.AuditActions;
     auditLogs(): v0.AuditLogs;

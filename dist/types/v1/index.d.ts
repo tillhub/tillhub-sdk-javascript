@@ -9,8 +9,9 @@ import { Vouchers } from './vouchers';
 import { Customers } from './customers';
 import { Carts } from './carts';
 import { SafesLogBook } from './safes';
+import { ExportsV1 } from './exports';
 import analytics from './analytics';
-export { Auth, Pricebooks, Products, Templates, Transactions, TransactionsLegacy, Registers, Balances, Vouchers, Customers, Carts, SafesLogBook, analytics };
+export { Auth, Pricebooks, Products, Templates, Transactions, TransactionsLegacy, Registers, Balances, Vouchers, Customers, Carts, SafesLogBook, ExportsV1, analytics };
 export interface AnalyticsHandlersV1Types {
     analytics: {
         reports: {

@@ -301,6 +301,9 @@ var TillhubClient = (function (_super) {
         }
         return new v1.Transactions({ user: this.auth.user, base: this.options.base }, this.http);
     };
+    TillhubClient.prototype.exportsV1 = function () {
+        return this.generateAuthenticatedInstance(v1.ExportsV1);
+    };
     TillhubClient.prototype.staff = function () {
         return this.generateAuthenticatedInstance(v0.Staff);
     };
