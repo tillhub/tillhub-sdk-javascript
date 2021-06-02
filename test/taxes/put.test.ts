@@ -14,7 +14,7 @@ afterEach(() => {
   mock.reset()
 })
 
-const taxId = faker.random.uuid()
+const taxId = faker.datatype.uuid()
 
 const updateObject = {
   name: faker.random.word(),

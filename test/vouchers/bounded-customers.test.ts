@@ -17,13 +17,13 @@ afterEach(() => {
   mock.reset()
 })
 
-const legacyId = faker.random.uuid()
-const voucherId = faker.random.uuid()
-const customers = [faker.random.uuid()]
+const legacyId = faker.datatype.uuid()
+const voucherId = faker.datatype.uuid()
+const customers = [faker.datatype.uuid()]
 
 const mockCreatePutResponse = [
   {
-    id: faker.random.uuid(),
+    id: faker.datatype.uuid(),
     voucher_id: voucherId,
     customer_id: customers[0]
   }

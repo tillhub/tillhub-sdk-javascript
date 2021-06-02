@@ -16,10 +16,10 @@ afterEach(() => {
 
 const taxObj = {
   name: faker.random.word(),
-  fa_account_number: faker.random.number().toString(),
+  fa_account_number: faker.datatype.number().toString(),
   type: 'vat' as TaxType,
   account: faker.finance.account(),
-  rate: faker.random.number().toString(),
+  rate: faker.datatype.number().toString(),
   percentage: '25%',
   is_fixed: faker.random.boolean(),
   jurisdiction: 'germany' as Jurisdictions,
