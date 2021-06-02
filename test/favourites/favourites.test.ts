@@ -59,7 +59,7 @@ describe('v0: Favourites', () => {
   })
 
   it('handle pagination', async () => {
-    const favouritesItems = Array.from({ length: 5 }, () => faker.random.uuid())
+    const favouritesItems = Array.from({ length: 5 }, () => faker.datatype.uuid())
     const favouritesResponse = {
       results: favouritesItems.map(item => ({ product_id: item })),
       cursor: {

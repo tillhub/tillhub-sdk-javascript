@@ -32,7 +32,7 @@ export interface GobdQuery {
   tz?: string
   password?: string
   emails?: string[]
-  client_name: string
+  client_name?: string
 }
 
 export interface GobdQueryOrOptions {
@@ -117,7 +117,7 @@ class ExportsDatevFetchFailed extends BaseError {
   }
 }
 
-class ExportsGobdFetchFailed extends BaseError {
+export class ExportsGobdFetchFailed extends BaseError {
   public name = 'ExportsGobdFetchFailed'
   constructor (
     public message: string = 'Could not fetch gobd export',

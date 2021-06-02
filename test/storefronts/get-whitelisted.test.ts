@@ -14,7 +14,7 @@ afterEach(() => {
 })
 
 const storeId = '1234'
-const products = Array.from({ length: 5 }, () => faker.random.uuid())
+const products = Array.from({ length: 5 }, () => faker.datatype.uuid())
 const storefrontsWhitelistResponse = {
   results: products.map(item => ({ product_id: item })),
   count: products.length

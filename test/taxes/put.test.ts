@@ -14,13 +14,13 @@ afterEach(() => {
   mock.reset()
 })
 
-const taxId = faker.random.uuid()
+const taxId = faker.datatype.uuid()
 
 const updateObject = {
   name: faker.random.word(),
   type: 'vat' as TaxType,
   account: faker.finance.account(),
-  is_fixed: faker.random.boolean(),
+  is_fixed: faker.datatype.boolean(),
   jurisdiction: 'austria' as Jurisdictions,
   rate_class: 'super_reduced' as RateClasses
 }

@@ -13,7 +13,7 @@ afterEach(() => {
   mock.reset()
 })
 
-const taxId = faker.random.uuid()
+const taxId = faker.datatype.uuid()
 const respMsg = `Deleted tax ${taxId}`
 
 describe('v0: Taxes: can delete the tax', () => {
