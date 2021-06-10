@@ -4,8 +4,9 @@ import { UsernameAuth, KeyAuth, TokenAuth } from './v0/auth';
 import { Auth } from './v1/auth';
 import * as v0 from './v0';
 import * as v1 from './v1';
+import * as v2 from './v2';
 import { AnalyticsHandlersV1Types } from './v1';
-import v2, { AnalyticsHandlerTypes } from './v2';
+import { AnalyticsHandlerTypes } from './v2';
 import v3, { AnalyticsHandlerTypesV3 } from './v3';
 import { Client } from './client';
 export { v0, v1, v2, v3 };
@@ -68,6 +69,7 @@ export declare class TillhubClient extends events.EventEmitter {
     analyticsHandlersV3(): AnalyticsHandlerTypesV3;
     transactionsLegacy(): v1.TransactionsLegacy;
     transactions(): v1.Transactions;
+    transactionsV2(): v2.Transactions;
     exportsV1(): v1.ExportsV1;
     staff(): v0.Staff;
     auditActions(): v0.AuditActions;

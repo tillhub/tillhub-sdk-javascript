@@ -7,8 +7,8 @@ var v0 = tslib_1.__importStar(require("./v0"));
 exports.v0 = v0;
 var v1 = tslib_1.__importStar(require("./v1"));
 exports.v1 = v1;
-var v2_1 = tslib_1.__importDefault(require("./v2"));
-exports.v2 = v2_1.default;
+var v2 = tslib_1.__importStar(require("./v2"));
+exports.v2 = v2;
 var v3_1 = tslib_1.__importDefault(require("./v3"));
 exports.v3 = v3_1.default;
 var client_1 = require("./client");
@@ -251,15 +251,15 @@ var TillhubClient = (function (_super) {
         return {
             analytics: {
                 reports: {
-                    AnalyticsReportsRevenuesGrouped: v2_1.default.analytics.reports.AnalyticsReportsRevenuesGrouped.create({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsTransactionsOverview: v2_1.default.analytics.reports.AnalyticsReportsTransactionsOverview.create({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsTransactionsDetail: v2_1.default.analytics.reports.AnalyticsReportsTransactionsDetail.create({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsTransactionsItems: v2_1.default.analytics.reports.AnalyticsReportsTransactionsItems.create({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsBalancesOverview: v2_1.default.analytics.reports.AnalyticsReportsBalancesOverview.create({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsBalancesDetail: v2_1.default.analytics.reports.AnalyticsReportsBalancesDetail.create({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsCountingProtocols: v2_1.default.analytics.reports.AnalyticsReportsCountingProtocols.create({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsDatev: v2_1.default.analytics.reports.AnalyticsReportsDatev.create({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsProducts: new v2_1.default.analytics.reports.AnalyticsReportsProducts({ user: this.auth.user, base: this.options.base }, this.http)
+                    AnalyticsReportsRevenuesGrouped: v2.analytics.reports.AnalyticsReportsRevenuesGrouped.create({ user: this.auth.user, base: this.options.base }, this.http),
+                    AnalyticsReportsTransactionsOverview: v2.analytics.reports.AnalyticsReportsTransactionsOverview.create({ user: this.auth.user, base: this.options.base }, this.http),
+                    AnalyticsReportsTransactionsDetail: v2.analytics.reports.AnalyticsReportsTransactionsDetail.create({ user: this.auth.user, base: this.options.base }, this.http),
+                    AnalyticsReportsTransactionsItems: v2.analytics.reports.AnalyticsReportsTransactionsItems.create({ user: this.auth.user, base: this.options.base }, this.http),
+                    AnalyticsReportsBalancesOverview: v2.analytics.reports.AnalyticsReportsBalancesOverview.create({ user: this.auth.user, base: this.options.base }, this.http),
+                    AnalyticsReportsBalancesDetail: v2.analytics.reports.AnalyticsReportsBalancesDetail.create({ user: this.auth.user, base: this.options.base }, this.http),
+                    AnalyticsReportsCountingProtocols: v2.analytics.reports.AnalyticsReportsCountingProtocols.create({ user: this.auth.user, base: this.options.base }, this.http),
+                    AnalyticsReportsDatev: v2.analytics.reports.AnalyticsReportsDatev.create({ user: this.auth.user, base: this.options.base }, this.http),
+                    AnalyticsReportsProducts: new v2.analytics.reports.AnalyticsReportsProducts({ user: this.auth.user, base: this.options.base }, this.http)
                 }
             }
         };
@@ -300,6 +300,9 @@ var TillhubClient = (function (_super) {
             throw new errors.UninstantiatedClient();
         }
         return new v1.Transactions({ user: this.auth.user, base: this.options.base }, this.http);
+    };
+    TillhubClient.prototype.transactionsV2 = function () {
+        return this.generateAuthenticatedInstance(v2.Transactions);
     };
     TillhubClient.prototype.exportsV1 = function () {
         return this.generateAuthenticatedInstance(v1.ExportsV1);

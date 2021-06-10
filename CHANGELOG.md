@@ -1,3 +1,10 @@
+# [4.17.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.16.0...v4.17.0) (2021-06-10)
+
+
+### Features
+
+* **v2/transactions:** add handlers for getting and creating (ws) images ([0f89b31](https://github.com/tillhub/tillhub-sdk-javascript/commit/0f89b31e013afe90ee8d4a8252111473a3c13551))
+
 # [4.16.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.15.0...v4.16.0) (2021-06-02)
 
 
