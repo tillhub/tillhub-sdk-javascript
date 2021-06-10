@@ -1,4 +1,5 @@
 import analytics from './analytics'
+import { Transactions } from './transactions'
 
 export interface AnalyticsHandlerTypes {
   analytics: {
@@ -16,6 +17,7 @@ export interface AnalyticsHandlerTypes {
   }
 }
 
-export default {
-  analytics
+export {
+  analytics,
+  Transactions
 }

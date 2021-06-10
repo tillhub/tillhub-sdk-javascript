@@ -7,8 +7,9 @@ import { AuthOptions, UsernameAuth, KeyAuth, TokenAuth } from './v0/auth'
 import { Auth } from './v1/auth'
 import * as v0 from './v0'
 import * as v1 from './v1'
+import * as v2 from './v2'
 import { AnalyticsHandlersV1Types } from './v1'
-import v2, { AnalyticsHandlerTypes } from './v2'
+import { AnalyticsHandlerTypes } from './v2'
 import v3, { AnalyticsHandlerTypesV3 } from './v3'
 import { Client, ClientOptions } from './client'
 import * as errors from './errors'
@@ -596,6 +597,14 @@ export class TillhubClient extends events.EventEmitter {
     }
 
     return new v1.Transactions({ user: this.auth.user, base: this.options.base }, this.http)
+  }
+
+  /**
+   * Create an authenticated Transactions V2 instance
+   *
+   */
+  transactionsV2 (): v2.Transactions {
+    return this.generateAuthenticatedInstance(v2.Transactions)
   }
 
   /**
