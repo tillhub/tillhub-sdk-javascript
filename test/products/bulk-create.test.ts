@@ -51,8 +51,8 @@ describe('Create a bulk of new Product', () => {
           200,
           {
             count: 2,
-            invalidProducts: [],
-            updatedProducts: productsObjArray
+            invalid_products: [],
+            updated_products: productsObjArray
           }
         ]
       })
@@ -86,7 +86,7 @@ describe('Create a bulk of new Product', () => {
   })
 })
 
-it('rejects on status codes that are not 200/422', async () => {
+it('rejects on status codes that are not 200/409', async () => {
   if (process.env.SYSTEM_TEST !== 'true') {
     mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
       return [

@@ -360,15 +360,15 @@ export class Products extends ThBaseHandler {
 
     try {
       const response = await this.http.getClient().post(uri, products)
-      if (![200, 422].includes(response.status)) {
+      if (![200, 409].includes(response.status)) {
         throw new ProductsBulkCreateFailed(undefined, { status: response.status })
       }
 
       return {
         msg: response.data.msg,
         results: {
-          invalid_products: response.data.invalidProducts,
-          updated_products: response.data.updatedProducts,
+          invalid_products: response.data.invalid_products,
+          updated_products: response.data.updated_products,
           count: response.data.count
         }
       }
