@@ -1,8 +1,7 @@
 import * as dotenv from 'dotenv'
 import axios from 'axios'
-import qs from 'qs'
 import MockAdapter from 'axios-mock-adapter'
-import th, { TillhubClient, v1 } from '../../src/tillhub-js'
+import th, { v1 } from '../../src/tillhub-js'
 dotenv.config()
 
 const user = {
@@ -80,10 +79,10 @@ describe('Create a bulk of new Product', () => {
     const { results } = await products.bulkCreate(productsObjArray)
 
     expect(typeof results).toEqual('object')
-    expect(results?.updatedProducts?.length).toEqual(2)
+    expect(results?.updated_products?.length).toEqual(2)
     expect(results?.count).toEqual(2)
-    expect(results?.updatedProducts).toEqual(productsObjArray)
-    expect(results?.invalidProducts).toEqual([])
+    expect(results?.updated_products).toEqual(productsObjArray)
+    expect(results?.invalid_products).toEqual([])
   })
 })
 

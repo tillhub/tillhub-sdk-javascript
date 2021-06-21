@@ -109,8 +109,8 @@ export interface ProductsResponse {
 
 export interface ProductsBulkResponse {
   results?: {
-    updatedProducts?: Product[]
-    invalidProducts?: Product[]
+    updated_products?: Product[]
+    invalid_products?: Product[]
     count?: number
   }
   msg?: string
@@ -367,8 +367,8 @@ export class Products extends ThBaseHandler {
       return {
         msg: response.data.msg,
         results: {
-          invalidProducts: response.data.invalidProducts,
-          updatedProducts: response.data.updatedProducts,
+          invalid_products: response.data.invalidProducts,
+          updated_products: response.data.updatedProducts,
           count: response.data.count
         }
       }
