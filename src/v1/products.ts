@@ -107,6 +107,15 @@ export interface ProductsResponse {
   next?: () => Promise<ProductsResponse>
 }
 
+export interface ProductsBulkResponse {
+  results?: {
+    updated_products?: Product[]
+    invalid_products?: Product[]
+    count?: number
+  }
+  msg?: string
+}
+
 export interface ProductResponse {
   data: Product
   metadata?: {
@@ -345,6 +354,29 @@ export class Products extends ThBaseHandler {
     }
   }
 
+  async bulkCreate (products: Product[], query?: HandlerProductsQuery): Promise<ProductsBulkResponse> {
+    const base = this.uriHelper.generateBaseUri('/bulk_create')
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+    try {
+      const response = await this.http.getClient().post(uri, products)
+      if (![200, 409].includes(response.status)) {
+        throw new ProductsBulkCreateFailed(undefined, { status: response.status })
+      }
+
+      return {
+        msg: response.data.msg,
+        results: {
+          invalid_products: response.data.invalid_products,
+          updated_products: response.data.updated_products,
+          count: response.data.count
+        }
+      }
+    } catch (error) {
+      throw new ProductsBulkCreateFailed(undefined, { error })
+    }
+  }
+
   async bulkEdit (products: Product[]): Promise<ProductsResponse> {
     const uri = this.uriHelper.generateBaseUri('/bulk')
 
@@ -567,6 +599,17 @@ export class ProductsUpdateFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsUpdateFailed.prototype)
+  }
+}
+
+export class ProductsBulkCreateFailed extends BaseError {
+  public name = 'ProductsBulkCreateFailed'
+  constructor (
+    public message: string = 'Could not bulk create the products',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, ProductsBulkCreateFailed.prototype)
   }
 }
 
