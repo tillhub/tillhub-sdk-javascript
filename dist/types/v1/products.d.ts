@@ -93,6 +93,14 @@ export interface ProductsResponse {
     msg?: string;
     next?: () => Promise<ProductsResponse>;
 }
+export interface ProductsBulkResponse {
+    results?: {
+        updated_products?: Product[];
+        invalid_products?: Product[];
+        count?: number;
+    };
+    msg?: string;
+}
 export interface ProductResponse {
     data: Product;
     metadata?: {
@@ -151,6 +159,7 @@ export declare class Products extends ThBaseHandler {
     getChildrenDetails(productId: string): Promise<ProductResponse>;
     meta(): Promise<ProductsResponse>;
     put(productId: string, product: Product): Promise<ProductResponse>;
+    bulkCreate(products: Product[], query?: HandlerProductsQuery): Promise<ProductsBulkResponse>;
     bulkEdit(products: Product[]): Promise<ProductsResponse>;
     count(): Promise<ProductsResponse>;
     delete(productId: string, deleteOptions?: ProductDeleteOptions): Promise<ProductsResponse>;
@@ -201,6 +210,11 @@ export declare class ProductsMetaFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ProductsUpdateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class ProductsBulkCreateFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

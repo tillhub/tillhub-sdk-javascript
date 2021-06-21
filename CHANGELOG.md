@@ -1,3 +1,13 @@
+# [4.18.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.17.0...v4.18.0) (2021-06-21)
+
+
+### Features
+
+* **bulk_create:** add bulk create products ([c9d5383](https://github.com/tillhub/tillhub-sdk-javascript/commit/c9d5383e537e0004176f1f8df68dc9f54ba5dccf))
+* **product:** clean unused test ([c5127e4](https://github.com/tillhub/tillhub-sdk-javascript/commit/c5127e4b1884cd488f34c8c17cdb957fbc5ee9d4))
+* **product:** new snake case & error number ([5b1b416](https://github.com/tillhub/tillhub-sdk-javascript/commit/5b1b4160f219a7e52728676c024950e51bd4fbb7))
+* **products:** bulk create with snake case ([39a2a1c](https://github.com/tillhub/tillhub-sdk-javascript/commit/39a2a1ce5363632808a9d3f4c969a41c52395c5c))
+
 # [4.17.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.16.0...v4.17.0) (2021-06-10)
 
 
