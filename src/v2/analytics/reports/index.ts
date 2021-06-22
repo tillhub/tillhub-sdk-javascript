@@ -8,6 +8,7 @@ import { AnalyticsReportsBalancesOverview, AnalyticsReportsBalancesDetail } from
 import { AnalyticsReportsCountingProtocols } from './counting-protocols'
 import { AnalyticsReportsDatev } from './datev'
 import { AnalyticsReportsProducts } from './products'
+import { AnalyticsReportsStocks } from './stocks'
 
 export default {
   AnalyticsReportsTransactionsOverview,
@@ -18,5 +19,6 @@ export default {
   AnalyticsReportsTransactionsItems,
   AnalyticsReportsCountingProtocols,
   AnalyticsReportsDatev,
-  AnalyticsReportsProducts
+  AnalyticsReportsProducts,
+  AnalyticsReportsStocks
 }
