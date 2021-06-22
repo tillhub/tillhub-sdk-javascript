@@ -2,8 +2,11 @@ import { Client } from '../../../client'
 import { BaseError } from '../../../errors'
 import { UriHelper } from '../../../uri-helper'
 
+export interface AnalyticsReportsStocksV3ExportResponseItem {
+  correlationId?: string
+}
 export interface AnalyticsResponse {
-  data: Array<Record<string, unknown>>
+  data: AnalyticsReportsStocksV3ExportResponseItem[]
   metadata: Record<string, unknown>
   msg?: string
 }
