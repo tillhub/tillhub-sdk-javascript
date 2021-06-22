@@ -526,7 +526,8 @@ export class TillhubClient extends events.EventEmitter {
             { user: this.auth.user, base: this.options.base },
             this.http
           ),
-          AnalyticsReportsProducts: new v2.analytics.reports.AnalyticsReportsProducts({ user: this.auth.user, base: this.options.base }, this.http)
+          AnalyticsReportsProducts: new v2.analytics.reports.AnalyticsReportsProducts({ user: this.auth.user, base: this.options.base }, this.http),
+          AnalyticsReportsStocks: new v2.analytics.reports.AnalyticsReportsStocks({ user: this.auth.user, base: this.options.base }, this.http)
         }
       }
     }
@@ -555,6 +556,10 @@ export class TillhubClient extends events.EventEmitter {
             this.http
           ),
           AnalyticsReportsTransactions: v3.analytics.reports.AnalyticsReportsTransactions.create(
+            { user: this.auth.user, base: this.options.base },
+            this.http
+          ),
+          AnalyticsReportsBalances: v3.analytics.reports.AnalyticsReportsBalances.create(
             { user: this.auth.user, base: this.options.base },
             this.http
           )
