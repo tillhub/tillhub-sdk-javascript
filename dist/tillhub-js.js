@@ -259,7 +259,8 @@ var TillhubClient = (function (_super) {
                     AnalyticsReportsBalancesDetail: v2.analytics.reports.AnalyticsReportsBalancesDetail.create({ user: this.auth.user, base: this.options.base }, this.http),
                     AnalyticsReportsCountingProtocols: v2.analytics.reports.AnalyticsReportsCountingProtocols.create({ user: this.auth.user, base: this.options.base }, this.http),
                     AnalyticsReportsDatev: v2.analytics.reports.AnalyticsReportsDatev.create({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsProducts: new v2.analytics.reports.AnalyticsReportsProducts({ user: this.auth.user, base: this.options.base }, this.http)
+                    AnalyticsReportsProducts: new v2.analytics.reports.AnalyticsReportsProducts({ user: this.auth.user, base: this.options.base }, this.http),
+                    AnalyticsReportsStocks: new v2.analytics.reports.AnalyticsReportsStocks({ user: this.auth.user, base: this.options.base }, this.http)
                 }
             }
         };
@@ -276,7 +277,8 @@ var TillhubClient = (function (_super) {
             analytics: {
                 reports: {
                     AnalyticsReportsDatev: v3_1.default.analytics.reports.AnalyticsReportsDatev.create({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsTransactions: v3_1.default.analytics.reports.AnalyticsReportsTransactions.create({ user: this.auth.user, base: this.options.base }, this.http)
+                    AnalyticsReportsTransactions: v3_1.default.analytics.reports.AnalyticsReportsTransactions.create({ user: this.auth.user, base: this.options.base }, this.http),
+                    AnalyticsReportsBalances: v3_1.default.analytics.reports.AnalyticsReportsBalances.create({ user: this.auth.user, base: this.options.base }, this.http)
                 }
             }
         };

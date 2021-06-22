@@ -5,6 +5,7 @@ import { AnalyticsReportsBalancesOverview, AnalyticsReportsBalancesDetail } from
 import { AnalyticsReportsCountingProtocols } from './counting-protocols';
 import { AnalyticsReportsDatev } from './datev';
 import { AnalyticsReportsProducts } from './products';
+import { AnalyticsReportsStocks } from './stocks';
 declare const _default: {
     AnalyticsReportsTransactionsOverview: typeof AnalyticsReportsTransactionsOverview;
     AnalyticsReportsRevenuesGrouped: typeof AnalyticsReportsRevenuesGrouped;
@@ -15,5 +16,6 @@ declare const _default: {
     AnalyticsReportsCountingProtocols: typeof AnalyticsReportsCountingProtocols;
     AnalyticsReportsDatev: typeof AnalyticsReportsDatev;
     AnalyticsReportsProducts: typeof AnalyticsReportsProducts;
+    AnalyticsReportsStocks: typeof AnalyticsReportsStocks;
 };
 export default _default;

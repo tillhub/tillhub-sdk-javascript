@@ -1,3 +1,12 @@
+# [4.19.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.18.0...v4.19.0) (2021-06-22)
+
+
+### Features
+
+* **analytics/v2/stocks:** add data type def for response ([7fd18c8](https://github.com/tillhub/tillhub-sdk-javascript/commit/7fd18c840ee47bf9474952d4c0ad8ef580604df3))
+* **analytics/v2/stocks:** add websockets export handler ([ed5eb28](https://github.com/tillhub/tillhub-sdk-javascript/commit/ed5eb287b70d5b07817233fee0cc8b4de223b854))
+* **analytics/v3/balances:** add websockets export handler ([d6ba902](https://github.com/tillhub/tillhub-sdk-javascript/commit/d6ba902055b235deea1b2b5b73fa9474efa9687d))
+
 # [4.18.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.17.0...v4.18.0) (2021-06-21)
 
 

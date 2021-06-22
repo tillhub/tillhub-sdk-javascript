@@ -12,6 +12,7 @@ export interface AnalyticsHandlerTypes {
             AnalyticsReportsCountingProtocols: any;
             AnalyticsReportsDatev: any;
             AnalyticsReportsProducts: any;
+            AnalyticsReportsStocks: any;
         };
     };
 }
