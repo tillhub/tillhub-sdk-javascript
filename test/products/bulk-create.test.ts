@@ -52,6 +52,7 @@ describe('Create a bulk of new Product', () => {
           {
             count: 2,
             invalid_products: [],
+            invalid_stock: [],
             updated_products: productsObjArray
           }
         ]
@@ -83,6 +84,7 @@ describe('Create a bulk of new Product', () => {
     expect(results?.count).toEqual(2)
     expect(results?.updated_products).toEqual(productsObjArray)
     expect(results?.invalid_products).toEqual([])
+    expect(results?.invalid_stock).toEqual([])
   })
 })
 
