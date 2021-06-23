@@ -97,6 +97,7 @@ export interface ProductsBulkResponse {
     results?: {
         updated_products?: Product[];
         invalid_products?: Product[];
+        invalid_stock?: Product[];
         count?: number;
     };
     msg?: string;

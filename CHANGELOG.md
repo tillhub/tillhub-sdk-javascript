@@ -1,3 +1,10 @@
+# [4.20.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.19.0...v4.20.0) (2021-06-23)
+
+
+### Features
+
+* **products:** add stock response to bulk create ([994f8df](https://github.com/tillhub/tillhub-sdk-javascript/commit/994f8df3b25d78a8c53571101d70ca97303ecfc7))
+
 # [4.19.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.18.0...v4.19.0) (2021-06-22)
 
 

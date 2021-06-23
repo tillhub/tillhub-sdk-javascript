@@ -286,6 +286,7 @@ var Products = (function (_super) {
                         return [2, {
                                 msg: response.data.msg,
                                 results: {
+                                    invalid_stock: response.data.invalid_stock,
                                     invalid_products: response.data.invalid_products,
                                     updated_products: response.data.updated_products,
                                     count: response.data.count
