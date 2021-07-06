@@ -19,9 +19,9 @@ export declare class AnalyticsReportsCustomers extends ThAnalyticsBaseHandler {
     options: CustomersHandlerOptions;
     constructor(options: CustomersHandlerOptions, http: Client);
     static create(options: Record<string, unknown>, http: Client): AnalyticsReportsCustomers;
-    export(query?: CustomersQuery): Promise<AnalyticsResponse>;
+    getAll(query?: CustomersQuery): Promise<AnalyticsResponse>;
 }
-export declare class AnalyticsReportsV1CustomersExportFetchError extends BaseError {
+export declare class AnalyticsReportsV1CustomersFetchError extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

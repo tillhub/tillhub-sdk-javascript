@@ -1,3 +1,10 @@
+## [4.21.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.21.0...v4.21.1) (2021-07-06)
+
+
+### Bug Fixes
+
+* **v1/reports:** rename method names to getAll ([b84a3da](https://github.com/tillhub/tillhub-sdk-javascript/commit/b84a3dab9800d5fd05dab293e25e334718a82cf5))
+
 # [4.21.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.20.0...v4.21.0) (2021-07-06)
 
 

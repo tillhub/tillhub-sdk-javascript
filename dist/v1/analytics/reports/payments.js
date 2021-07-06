@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AnalyticsReportsV1PaymentsExportFetchError = exports.AnalyticsReportsPayments = void 0;
+exports.AnalyticsReportsV1PaymentsFetchError = exports.AnalyticsReportsPayments = void 0;
 var tslib_1 = require("tslib");
 var base_1 = require("../../../base");
 var errors_1 = require("../../../errors");
@@ -16,7 +16,7 @@ var AnalyticsReportsPayments = (function (_super) {
     AnalyticsReportsPayments.create = function (options, http) {
         return base_1.ThAnalyticsBaseHandler.generateAuthenticatedInstance(AnalyticsReportsPayments, options, http);
     };
-    AnalyticsReportsPayments.prototype.export = function (query) {
+    AnalyticsReportsPayments.prototype.getAll = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var localUriHelper, base, uri, response, err_1;
             return tslib_1.__generator(this, function (_a) {
@@ -30,7 +30,7 @@ var AnalyticsReportsPayments = (function (_super) {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new AnalyticsReportsV1PaymentsExportFetchError();
+                            throw new AnalyticsReportsV1PaymentsFetchError();
                         return [2, {
                                 data: response.data.results,
                                 metadata: {
@@ -39,7 +39,7 @@ var AnalyticsReportsPayments = (function (_super) {
                             }];
                     case 2:
                         err_1 = _a.sent();
-                        throw new AnalyticsReportsV1PaymentsExportFetchError(undefined, { error: err_1 });
+                        throw new AnalyticsReportsV1PaymentsFetchError(undefined, { error: err_1 });
                     case 3: return [2];
                 }
             });
@@ -48,17 +48,17 @@ var AnalyticsReportsPayments = (function (_super) {
     return AnalyticsReportsPayments;
 }(base_1.ThAnalyticsBaseHandler));
 exports.AnalyticsReportsPayments = AnalyticsReportsPayments;
-var AnalyticsReportsV1PaymentsExportFetchError = (function (_super) {
-    tslib_1.__extends(AnalyticsReportsV1PaymentsExportFetchError, _super);
-    function AnalyticsReportsV1PaymentsExportFetchError(message, properties) {
+var AnalyticsReportsV1PaymentsFetchError = (function (_super) {
+    tslib_1.__extends(AnalyticsReportsV1PaymentsFetchError, _super);
+    function AnalyticsReportsV1PaymentsFetchError(message, properties) {
         if (message === void 0) { message = 'Could not fetch payments report export'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
-        _this.name = 'AnalyticsReportsV1PaymentsExportFetchError';
-        Object.setPrototypeOf(_this, AnalyticsReportsV1PaymentsExportFetchError.prototype);
+        _this.name = 'AnalyticsReportsV1PaymentsFetchError';
+        Object.setPrototypeOf(_this, AnalyticsReportsV1PaymentsFetchError.prototype);
         return _this;
     }
-    return AnalyticsReportsV1PaymentsExportFetchError;
+    return AnalyticsReportsV1PaymentsFetchError;
 }(errors_1.BaseError));
-exports.AnalyticsReportsV1PaymentsExportFetchError = AnalyticsReportsV1PaymentsExportFetchError;
+exports.AnalyticsReportsV1PaymentsFetchError = AnalyticsReportsV1PaymentsFetchError;
 //# sourceMappingURL=payments.js.map

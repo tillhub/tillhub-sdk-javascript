@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AnalyticsReportsV1CustomersExportFetchError = exports.AnalyticsReportsCustomers = void 0;
+exports.AnalyticsReportsV1CustomersFetchError = exports.AnalyticsReportsCustomers = void 0;
 var tslib_1 = require("tslib");
 var base_1 = require("../../../base");
 var errors_1 = require("../../../errors");
@@ -16,7 +16,7 @@ var AnalyticsReportsCustomers = (function (_super) {
     AnalyticsReportsCustomers.create = function (options, http) {
         return base_1.ThAnalyticsBaseHandler.generateAuthenticatedInstance(AnalyticsReportsCustomers, options, http);
     };
-    AnalyticsReportsCustomers.prototype.export = function (query) {
+    AnalyticsReportsCustomers.prototype.getAll = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var localUriHelper, base, uri, response, err_1;
             return tslib_1.__generator(this, function (_a) {
@@ -30,7 +30,7 @@ var AnalyticsReportsCustomers = (function (_super) {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new AnalyticsReportsV1CustomersExportFetchError();
+                            throw new AnalyticsReportsV1CustomersFetchError();
                         return [2, {
                                 data: response.data.results,
                                 metadata: {
@@ -39,7 +39,7 @@ var AnalyticsReportsCustomers = (function (_super) {
                             }];
                     case 2:
                         err_1 = _a.sent();
-                        throw new AnalyticsReportsV1CustomersExportFetchError(undefined, { error: err_1 });
+                        throw new AnalyticsReportsV1CustomersFetchError(undefined, { error: err_1 });
                     case 3: return [2];
                 }
             });
@@ -48,17 +48,17 @@ var AnalyticsReportsCustomers = (function (_super) {
     return AnalyticsReportsCustomers;
 }(base_1.ThAnalyticsBaseHandler));
 exports.AnalyticsReportsCustomers = AnalyticsReportsCustomers;
-var AnalyticsReportsV1CustomersExportFetchError = (function (_super) {
-    tslib_1.__extends(AnalyticsReportsV1CustomersExportFetchError, _super);
-    function AnalyticsReportsV1CustomersExportFetchError(message, properties) {
-        if (message === void 0) { message = 'Could not fetch customers report export'; }
+var AnalyticsReportsV1CustomersFetchError = (function (_super) {
+    tslib_1.__extends(AnalyticsReportsV1CustomersFetchError, _super);
+    function AnalyticsReportsV1CustomersFetchError(message, properties) {
+        if (message === void 0) { message = 'Could not fetch customers report'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
-        _this.name = 'AnalyticsReportsV1CustomersExportFetchError';
-        Object.setPrototypeOf(_this, AnalyticsReportsV1CustomersExportFetchError.prototype);
+        _this.name = 'AnalyticsReportsV1CustomersFetchError';
+        Object.setPrototypeOf(_this, AnalyticsReportsV1CustomersFetchError.prototype);
         return _this;
     }
-    return AnalyticsReportsV1CustomersExportFetchError;
+    return AnalyticsReportsV1CustomersFetchError;
 }(errors_1.BaseError));
-exports.AnalyticsReportsV1CustomersExportFetchError = AnalyticsReportsV1CustomersExportFetchError;
+exports.AnalyticsReportsV1CustomersFetchError = AnalyticsReportsV1CustomersFetchError;
 //# sourceMappingURL=customers.js.map
