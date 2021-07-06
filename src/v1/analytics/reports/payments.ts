@@ -37,7 +37,7 @@ export class AnalyticsReportsPayments extends ThAnalyticsBaseHandler {
     )
   }
 
-  public async export (
+  public async getAll (
     query?: PaymentsQuery
   ): Promise<AnalyticsResponse> {
     try {
@@ -46,7 +46,7 @@ export class AnalyticsReportsPayments extends ThAnalyticsBaseHandler {
       const uri = localUriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri)
-      if (response.status !== 200) throw new AnalyticsReportsV1PaymentsExportFetchError()
+      if (response.status !== 200) throw new AnalyticsReportsV1PaymentsFetchError()
       return {
         data: response.data.results,
         metadata: {
@@ -54,18 +54,18 @@ export class AnalyticsReportsPayments extends ThAnalyticsBaseHandler {
         }
       }
     } catch (err) {
-      throw new AnalyticsReportsV1PaymentsExportFetchError(undefined, { error: err })
+      throw new AnalyticsReportsV1PaymentsFetchError(undefined, { error: err })
     }
   }
 }
 
-export class AnalyticsReportsV1PaymentsExportFetchError extends BaseError {
-  public name = 'AnalyticsReportsV1PaymentsExportFetchError'
+export class AnalyticsReportsV1PaymentsFetchError extends BaseError {
+  public name = 'AnalyticsReportsV1PaymentsFetchError'
   constructor (
     public message: string = 'Could not fetch payments report export',
     properties?: Record<string, unknown>
   ) {
     super(message, properties)
-    Object.setPrototypeOf(this, AnalyticsReportsV1PaymentsExportFetchError.prototype)
+    Object.setPrototypeOf(this, AnalyticsReportsV1PaymentsFetchError.prototype)
   }
 }
