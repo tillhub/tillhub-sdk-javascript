@@ -37,7 +37,7 @@ export class AnalyticsReportsCustomers extends ThAnalyticsBaseHandler {
     )
   }
 
-  public async export (
+  public async getAll (
     query?: CustomersQuery
   ): Promise<AnalyticsResponse> {
     try {
@@ -46,7 +46,7 @@ export class AnalyticsReportsCustomers extends ThAnalyticsBaseHandler {
       const uri = localUriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri)
-      if (response.status !== 200) throw new AnalyticsReportsV1CustomersExportFetchError()
+      if (response.status !== 200) throw new AnalyticsReportsV1CustomersFetchError()
       return {
         data: response.data.results,
         metadata: {
@@ -54,18 +54,18 @@ export class AnalyticsReportsCustomers extends ThAnalyticsBaseHandler {
         }
       }
     } catch (err) {
-      throw new AnalyticsReportsV1CustomersExportFetchError(undefined, { error: err })
+      throw new AnalyticsReportsV1CustomersFetchError(undefined, { error: err })
     }
   }
 }
 
-export class AnalyticsReportsV1CustomersExportFetchError extends BaseError {
-  public name = 'AnalyticsReportsV1CustomersExportFetchError'
+export class AnalyticsReportsV1CustomersFetchError extends BaseError {
+  public name = 'AnalyticsReportsV1CustomersFetchError'
   constructor (
-    public message: string = 'Could not fetch customers report export',
+    public message: string = 'Could not fetch customers report',
     properties?: Record<string, unknown>
   ) {
     super(message, properties)
-    Object.setPrototypeOf(this, AnalyticsReportsV1CustomersExportFetchError.prototype)
+    Object.setPrototypeOf(this, AnalyticsReportsV1CustomersFetchError.prototype)
   }
 }

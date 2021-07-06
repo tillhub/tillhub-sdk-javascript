@@ -1,4 +1,4 @@
-import { AnalyticsReportsV1CustomersExportFetchError } from './../../../src/v1/analytics/reports/customers'
+import { AnalyticsReportsV1CustomersFetchError } from './../../../src/v1/analytics/reports/customers'
 import * as dotenv from 'dotenv'
 import qs from 'qs'
 import axios from 'axios'
@@ -24,6 +24,7 @@ afterEach(() => {
 })
 
 const query = {
+  format: 'csv',
   start: '2019-03-18T22:59:59.999Z',
   end: '2019-03-07T23:00:00.000Z'
 }
@@ -54,7 +55,7 @@ describe('v1: AnalyticsReportsCustomers', () => {
 
     expect(analyticsReportsCustomers).toBeInstanceOf(v1.analytics.reports.AnalyticsReportsCustomers)
 
-    const { data } = await analyticsReportsCustomers.export({ query })
+    const { data } = await analyticsReportsCustomers.getAll({ query })
 
     expect(Array.isArray(data)).toBe(true)
     expect(data[0]).toEqual(customersData)
@@ -75,9 +76,9 @@ describe('v1: AnalyticsReportsCustomers', () => {
     const analyticsReportsCustomers = th.analyticsHandlersV1().analytics.reports.AnalyticsReportsCustomers
 
     try {
-      await analyticsReportsCustomers.export({ query })
+      await analyticsReportsCustomers.getAll({ query })
     } catch (err) {
-      expect(err.name).toBe(AnalyticsReportsV1CustomersExportFetchError.name)
+      expect(err.name).toBe(AnalyticsReportsV1CustomersFetchError.name)
     }
   })
 })
