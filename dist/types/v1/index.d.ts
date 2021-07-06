@@ -16,6 +16,7 @@ export interface AnalyticsHandlersV1Types {
     analytics: {
         reports: {
             AnalyticsReportsCustomers: any;
+            AnalyticsReportsPayments: any;
         };
     };
 }

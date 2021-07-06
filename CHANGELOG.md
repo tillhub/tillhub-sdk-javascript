@@ -1,3 +1,10 @@
+# [4.21.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.20.0...v4.21.0) (2021-07-06)
+
+
+### Features
+
+* **v1/reports:** add handler for payments next gen exprort ([5da6d5f](https://github.com/tillhub/tillhub-sdk-javascript/commit/5da6d5f986ac498d954300a73f6b2395db50b417))
+
 # [4.20.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.19.0...v4.20.0) (2021-06-23)
 
 
