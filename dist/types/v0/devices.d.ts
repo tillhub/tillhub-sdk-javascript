@@ -60,6 +60,7 @@ export declare class Devices extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: DevicesOptions, http: Client);
     getAll(queryOrOptions?: DevicesQuery | undefined): Promise<DevicesResponse>;
+    search(searchTerm: string): Promise<DevicesResponse>;
     get(deviceId: string): Promise<DeviceResponse>;
     contents(deviceId: string): Promise<DeviceContentResponse>;
     patch(deviceId: string, device: Device): Promise<DeviceResponse>;

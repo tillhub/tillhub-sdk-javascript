@@ -1,3 +1,11 @@
+# [4.22.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.21.1...v4.22.0) (2021-08-05)
+
+
+### Features
+
+* **devices:** add search for devices ([5b634f2](https://github.com/tillhub/tillhub-sdk-javascript/commit/5b634f2beb5d941de6c609b5c32469f158786b08))
+* **devices:** fix test ([99ee657](https://github.com/tillhub/tillhub-sdk-javascript/commit/99ee65745c99f2aff52a1650f43c023174b62d43))
+
 ## [4.21.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.21.0...v4.21.1) (2021-07-06)
 
 
