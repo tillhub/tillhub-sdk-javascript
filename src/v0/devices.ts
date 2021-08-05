@@ -117,6 +117,24 @@ export class Devices extends ThBaseHandler {
     }
   }
 
+  async search (searchTerm: string): Promise<DevicesResponse> {
+    const base = this.uriHelper.generateBaseUri('/search')
+    const uri = this.uriHelper.generateUriWithQuery(base, { q: searchTerm })
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new DeviceFetchFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error) {
+      throw new DeviceFetchFailed(undefined, { error })
+    }
+  }
+
   async get (deviceId: string): Promise<DeviceResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${deviceId}`)
     try {
