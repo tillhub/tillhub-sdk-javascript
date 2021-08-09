@@ -4,7 +4,7 @@ import { UriHelper } from '../uri-helper'
 import { StocksOptions, StocksBookFetchFailed, StocksBookQuery, StocksResponse } from '../v0/stocks'
 
 export class StocksBook extends ThBaseHandler {
-  public static baseEndpoint = '/api/v1/stocks'
+  public static baseEndpoint = '/api/v1/stock'
   endpoint: string
   http: Client
   public options: StocksOptions

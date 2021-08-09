@@ -37,7 +37,7 @@ describe('v1: StocksBookV1', () => {
   it('can get stocks book export', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
-        .onGet(`https://api.tillhub.com/api/v1/stocks/${legacyId}/book?${qs.stringify(query)}`)
+        .onGet(`https://api.tillhub.com/api/v1/stock/${legacyId}/book?${qs.stringify(query)}`)
         .reply(() => {
           return [
             200,
@@ -51,7 +51,7 @@ describe('v1: StocksBookV1', () => {
 
     const th = await initThInstance()
 
-    const stocks = th.StocksBookV1()
+    const stocks = th.stocksBookV1()
 
     expect(stocks).toBeInstanceOf(v1.StocksBook)
 
@@ -65,7 +65,7 @@ describe('v1: StocksBookV1', () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
         .onGet(
-          `https://api.tillhub.com/api/v1/stocks/${legacyId}/book?${qs.stringify(query)}`
+          `https://api.tillhub.com/api/v1/stock/${legacyId}/book?${qs.stringify(query)}`
         )
         .reply(() => {
           return [205]
@@ -73,7 +73,7 @@ describe('v1: StocksBookV1', () => {
     }
 
     const th = await initThInstance()
-    const stocksBook = th.StocksBookV1()
+    const stocksBook = th.stocksBookV1()
 
     try {
       await stocksBook.getAll(query)
