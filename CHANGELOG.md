@@ -1,3 +1,11 @@
+# [4.23.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.22.0...v4.23.0) (2021-08-09)
+
+
+### Features
+
+* **counting-protocols:** add v1 handler for exports next gen ([d95c398](https://github.com/tillhub/tillhub-sdk-javascript/commit/d95c3982aad3c33826c092771c61fed046612ec6))
+* **stocks_book:** add v1 handler for exports next gen ([38af6bf](https://github.com/tillhub/tillhub-sdk-javascript/commit/38af6bfc087ffe5f34ba185c3097c622202b3170))
+
 # [4.22.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.21.1...v4.22.0) (2021-08-05)
 
 

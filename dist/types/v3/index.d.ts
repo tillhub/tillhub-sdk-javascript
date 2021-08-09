@@ -4,6 +4,7 @@ export interface AnalyticsHandlerTypesV3 {
             AnalyticsReportsDatev: any;
             AnalyticsReportsTransactions: any;
             AnalyticsReportsBalances: any;
+            AnalyticsReportsCountingProtocols: any;
         };
     };
 }
@@ -12,6 +13,7 @@ declare const _default: {
         reports: {
             AnalyticsReportsDatev: typeof import("./analytics/reports/datev").AnalyticsReportsDatev;
             AnalyticsReportsTransactions: typeof import("./analytics/reports/transactions").AnalyticsReportsTransactions;
+            AnalyticsReportsCountingProtocols: typeof import("./analytics/reports/counting-protocols").AnalyticsReportsCountingProtocols;
             AnalyticsReportsBalances: typeof import("./analytics/reports/balances").AnalyticsReportsBalances;
         };
     };

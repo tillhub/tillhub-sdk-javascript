@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { BaseError } from '../errors/baseError';
 import { UriHelper } from '../uri-helper';
 import { ThBaseHandler } from '../base';
 export interface StocksOptions {
@@ -82,4 +83,9 @@ export declare class StocksBook {
     constructor(options: StocksOptions, http: Client);
     getAll(query?: StocksBookQuery | undefined): Promise<StocksResponse>;
     meta(): Promise<StocksResponse>;
+}
+export declare class StocksBookFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

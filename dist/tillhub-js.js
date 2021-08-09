@@ -194,6 +194,9 @@ var TillhubClient = (function (_super) {
         }
         return new v0.Stocks({ user: this.auth.user, base: this.options.base }, this.http);
     };
+    TillhubClient.prototype.StocksBookV1 = function () {
+        return this.generateAuthenticatedInstance(v1.StocksBook);
+    };
     TillhubClient.prototype.stocksBook = function () {
         if (!this.options ||
             !this.options.base ||
@@ -279,7 +282,8 @@ var TillhubClient = (function (_super) {
                 reports: {
                     AnalyticsReportsDatev: v3_1.default.analytics.reports.AnalyticsReportsDatev.create({ user: this.auth.user, base: this.options.base }, this.http),
                     AnalyticsReportsTransactions: v3_1.default.analytics.reports.AnalyticsReportsTransactions.create({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsBalances: v3_1.default.analytics.reports.AnalyticsReportsBalances.create({ user: this.auth.user, base: this.options.base }, this.http)
+                    AnalyticsReportsBalances: v3_1.default.analytics.reports.AnalyticsReportsBalances.create({ user: this.auth.user, base: this.options.base }, this.http),
+                    AnalyticsReportsCountingProtocols: v3_1.default.analytics.reports.AnalyticsReportsCountingProtocols.create({ user: this.auth.user, base: this.options.base }, this.http)
                 }
             }
         };
