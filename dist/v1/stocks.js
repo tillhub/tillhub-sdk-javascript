@@ -53,7 +53,7 @@ var StocksBook = (function (_super) {
             });
         });
     };
-    StocksBook.baseEndpoint = '/api/v1/stocks';
+    StocksBook.baseEndpoint = '/api/v1/stock';
     return StocksBook;
 }(base_1.ThBaseHandler));
 exports.StocksBook = StocksBook;

@@ -194,7 +194,7 @@ var TillhubClient = (function (_super) {
         }
         return new v0.Stocks({ user: this.auth.user, base: this.options.base }, this.http);
     };
-    TillhubClient.prototype.StocksBookV1 = function () {
+    TillhubClient.prototype.stocksBookV1 = function () {
         return this.generateAuthenticatedInstance(v1.StocksBook);
     };
     TillhubClient.prototype.stocksBook = function () {

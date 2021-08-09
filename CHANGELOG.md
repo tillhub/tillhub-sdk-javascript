@@ -1,3 +1,10 @@
+## [4.23.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.23.0...v4.23.1) (2021-08-09)
+
+
+### Bug Fixes
+
+* **stocks:** fix route and handler name for stocks book ([36d0f13](https://github.com/tillhub/tillhub-sdk-javascript/commit/36d0f13b0bcb7557544ffb00ba78ab063afbcea5))
+
 # [4.23.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.22.0...v4.23.0) (2021-08-09)
 
 
