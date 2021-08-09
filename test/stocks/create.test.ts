@@ -97,7 +97,7 @@ describe('Create a new stock', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v1/stock/${userId}`).reply(() => {
+      mock.onPost(`https://api.tillhub.com/api/v0/stock/${userId}`).reply(() => {
         return [205]
       })
     }

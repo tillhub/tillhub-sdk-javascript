@@ -399,6 +399,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated Stocks Book V1 instance
+   *
+   */
+  StocksBookV1 (): v1.StocksBook {
+    return this.generateAuthenticatedInstance(v1.StocksBook)
+  }
+
+  /**
    * Create an authenticated StocksBook instance
    *
    */
@@ -561,6 +569,10 @@ export class TillhubClient extends events.EventEmitter {
             this.http
           ),
           AnalyticsReportsBalances: v3.analytics.reports.AnalyticsReportsBalances.create(
+            { user: this.auth.user, base: this.options.base },
+            this.http
+          ),
+          AnalyticsReportsCountingProtocols: v3.analytics.reports.AnalyticsReportsCountingProtocols.create(
             { user: this.auth.user, base: this.options.base },
             this.http
           )

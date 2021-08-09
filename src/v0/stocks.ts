@@ -301,7 +301,7 @@ class StocksLocationFetchOneFailed extends BaseError {
   }
 }
 
-class StocksBookFetchFailed extends BaseError {
+export class StocksBookFetchFailed extends BaseError {
   public name = 'StocksBookFetchFailed'
   constructor (
     public message: string = 'Could not fetch the stocks book',
