@@ -10,6 +10,7 @@ import { Customers } from './customers'
 import { Carts } from './carts'
 import { SafesLogBook } from './safes'
 import { ExportsV1 } from './exports'
+import { StocksBook } from './stocks'
 import analytics from './analytics'
 
 export {
@@ -26,6 +27,7 @@ export {
   Carts,
   SafesLogBook,
   ExportsV1,
+  StocksBook,
   analytics
 }
 

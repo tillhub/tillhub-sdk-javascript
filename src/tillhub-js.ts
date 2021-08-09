@@ -399,6 +399,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated Stocks Book V1 instance
+   *
+   */
+  StocksBookV1 (): v1.StocksBook {
+    return this.generateAuthenticatedInstance(v1.StocksBook)
+  }
+
+  /**
    * Create an authenticated StocksBook instance
    *
    */
