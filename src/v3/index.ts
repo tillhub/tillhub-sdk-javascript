@@ -7,6 +7,7 @@ export interface AnalyticsHandlerTypesV3 {
       AnalyticsReportsTransactions: any
       AnalyticsReportsBalances: any
       AnalyticsReportsCountingProtocols: any
+      AnalyticsReportsRevenues: any
     }
   }
 }
