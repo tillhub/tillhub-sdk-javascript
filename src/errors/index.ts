@@ -1046,39 +1046,6 @@ export class AuditActionsTypesFetchFailed extends BaseError {
   }
 }
 
-export class AuditLogsFetchAllFailed extends BaseError {
-  public name = 'AuditLogsFetchAllFailed'
-  constructor (
-    public message: string = 'Could not fetch audit logs',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, AuditLogsFetchAllFailed.prototype)
-  }
-}
-
-export class AuditLogsFetchOneFailed extends BaseError {
-  public name = 'AuditLogsFetchOneFailed'
-  constructor (
-    public message: string = 'Could not fetch audit log',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, AuditLogsFetchOneFailed.prototype)
-  }
-}
-
-export class AuditLogsGetMetaFailed extends BaseError {
-  public name = 'AuditLogsGetMetaFailed'
-  constructor (
-    public message: string = 'Could not fetch audit logs meta',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, AuditLogsGetMetaFailed.prototype)
-  }
-}
-
 export class ImageCreationFailed extends BaseError {
   public name = 'ImageCreationFailed'
   constructor (public message: string = 'Could not create new image') {

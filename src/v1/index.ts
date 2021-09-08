@@ -12,6 +12,7 @@ import { SafesLogBook } from './safes'
 import { ExportsV1 } from './exports'
 import { StocksBook } from './stocks'
 import analytics from './analytics'
+import { AuditLogs } from './audit_logs'
 
 export {
   Auth,
@@ -28,7 +29,8 @@ export {
   SafesLogBook,
   ExportsV1,
   StocksBook,
-  analytics
+  analytics,
+  AuditLogs
 }
 
 export interface AnalyticsHandlersV1Types {
