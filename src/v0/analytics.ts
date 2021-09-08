@@ -100,7 +100,7 @@ export interface TopPaymentsReportOptions {
   branch_number?: number
 }
 
-export interface ProductGoupsOptions {
+export interface ProductGroupsOptions {
   description?: string
   product_group_id?: string
   qty?: {
@@ -497,7 +497,7 @@ export class Analytics {
     }
   }
 
-  async getProductGroups (query?: ProductGoupsOptions | undefined): Promise<AnalyticsResponse> {
+  async getProductGroups (query?: ProductGroupsOptions | undefined): Promise<AnalyticsResponse> {
     try {
       const base = this.uriHelper.generateBaseUri('/reports/product_groups')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
