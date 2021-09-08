@@ -88,7 +88,7 @@ export class Transactions extends ThBaseHandler {
         metadata: { count: response.data.count, cursor: response.data.cursor },
         next
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new TransactionFetchFailed(undefined, { error })
     }
   }
@@ -106,7 +106,7 @@ export class Transactions extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new TransactionsGetMetaFailed(undefined, { error })
     }
   }
@@ -123,7 +123,7 @@ export class Transactions extends ThBaseHandler {
       return {
         data: response.data.results
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new TransactionsGetImageFailed(undefined, { error })
     }
   }
@@ -140,7 +140,7 @@ export class Transactions extends ThBaseHandler {
       return {
         data: response.data.results
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new TransactionsImagePutFailed(undefined, { error })
     }
   }
@@ -155,7 +155,7 @@ export class Transactions extends ThBaseHandler {
       return {
         data: response.data.results
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new TransactionsImageCreateFailed(undefined, { error })
     }
   }
@@ -196,7 +196,7 @@ export class TransactionsLegacy {
         metadata: { count: response.data.count, cursor: response.data.cursor },
         next
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new TransactionFetchFailed(undefined, { error })
     }
   }
@@ -234,7 +234,7 @@ export class TransactionsLegacy {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new TransactionsGetMetaFailed(undefined, { error })
     }
   }

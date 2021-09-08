@@ -80,7 +80,7 @@ export class DeviceGroups extends ThBaseHandler {
         metadata: { count: response.data.count, cursor: response.data.cursor },
         next
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new DeviceGroupsFetchFailed(undefined, { error })
     }
   }
@@ -98,7 +98,7 @@ export class DeviceGroups extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new DeviceGroupFetchFailed(undefined, { error })
     }
   }
@@ -112,7 +112,7 @@ export class DeviceGroups extends ThBaseHandler {
         data: response.data.results[0] as DeviceGroup,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new DeviceGroupPutFailed(undefined, { error })
     }
   }
@@ -126,7 +126,7 @@ export class DeviceGroups extends ThBaseHandler {
         data: response.data.results[0] as DeviceGroup,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new DeviceGroupCreationFailed(undefined, { error })
     }
   }

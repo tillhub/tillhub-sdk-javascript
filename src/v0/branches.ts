@@ -106,7 +106,7 @@ export class Branches extends ThBaseHandler {
         metadata: { cursor: response.data.cursor },
         next
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new BranchesFetchFailed(undefined, { error })
     }
   }
@@ -122,7 +122,7 @@ export class Branches extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new BranchFetchFailed(undefined, { error })
     }
   }
@@ -136,7 +136,7 @@ export class Branches extends ThBaseHandler {
         data: response.data.results[0] as Branch,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new BranchPutFailed(safeGet(error, 'response.data.msg'), { error })
     }
   }
@@ -150,7 +150,7 @@ export class Branches extends ThBaseHandler {
         data: response.data.results[0] as Branch,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new BranchCreationFailed(undefined, { error })
     }
   }
@@ -168,7 +168,7 @@ export class Branches extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new BranchesCountFailed(undefined, { error })
     }
   }
@@ -203,7 +203,7 @@ export class Branches extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       if (error.response && error.response.status === 409) {
         throw new ExternalCustomIdGetUniqueFailed(undefined, {
           status: error.response.status,
@@ -233,7 +233,7 @@ export class Branches extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new BranchesSearchFailed(undefined, { error })
     }
   }

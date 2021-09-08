@@ -166,7 +166,7 @@ export class Stocks extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StocksLocationFetchOneFailed(undefined, { error })
     }
   }
@@ -183,7 +183,7 @@ export class Stocks extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StocksTransferFailed(undefined, { error })
     }
   }
@@ -222,7 +222,7 @@ export class StocksBook {
         metadata: { count: response.data.count, cursor: response.data.cursor },
         next
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StocksBookFetchFailed(undefined, { error })
     }
   }
@@ -240,7 +240,7 @@ export class StocksBook {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StocksBookGetMetaFailed(undefined, { error })
     }
   }

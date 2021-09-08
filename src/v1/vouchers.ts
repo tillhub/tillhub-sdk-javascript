@@ -69,7 +69,7 @@ export class Vouchers extends VoucherV0 {
         metadata: { cursor: response.data.cursor },
         next
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new VouchersFetchFailed(undefined, { error })
     }
   }

@@ -167,7 +167,7 @@ export class Staff extends ThBaseHandler {
         metadata: { count: response.data.count },
         next
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StaffFetchFailed(undefined, { error })
     }
   }
@@ -185,7 +185,7 @@ export class Staff extends ThBaseHandler {
         metadata: { count: response.data.count },
         errors: response.data.errors || []
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StaffMemberCreateFailed(undefined, { error })
     }
   }
@@ -201,7 +201,7 @@ export class Staff extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StaffFetchOneFailed(undefined, { error })
     }
   }
@@ -219,7 +219,7 @@ export class Staff extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StaffFetchOneFailed(undefined, { error })
     }
   }
@@ -234,7 +234,7 @@ export class Staff extends ThBaseHandler {
         data: response.data.results[0] as StaffMember,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StaffPutFailed(undefined, { error })
     }
   }
@@ -246,7 +246,7 @@ export class Staff extends ThBaseHandler {
       if (response.status !== 200) { throw new StaffDeleteFailed(undefined, { status: response.status }) }
 
       return { msg: response.data.msg }
-    } catch (error) {
+    } catch (error: any) {
       throw new StaffDeleteFailed(undefined, { error })
     }
   }
@@ -267,7 +267,7 @@ export class Staff extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       if (error.response && error.response.status === 409) {
         throw new StaffPinGetFailed(undefined, {
           status: error.response.status,
@@ -294,7 +294,7 @@ export class Staff extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       if (error.response && error.response.status === 409) {
         throw new StaffNumberGetFailed(undefined, {
           status: error.response.status,
@@ -344,7 +344,7 @@ export class Staff extends ThBaseHandler {
         data: list,
         metadata: { resources: resources }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StaffFetchFailed(undefined, { error })
     }
   }
@@ -360,7 +360,7 @@ export class Staff extends ThBaseHandler {
         data: response.data.results[0] as StaffMember,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new MakeUserStaffFailed(undefined, { error })
     }
   }
@@ -406,7 +406,7 @@ export class Staff extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StaffSearchFailed(undefined, { error })
     }
   }

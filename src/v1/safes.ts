@@ -43,7 +43,7 @@ export class SafesLogBook extends ThBaseHandler {
         metadata: { count: response.data.count, cursor: response.data.cursor },
         next
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.SafesLogBookFetchAllFailed(undefined, { error })
     }
   }

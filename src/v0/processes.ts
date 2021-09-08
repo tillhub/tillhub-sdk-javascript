@@ -89,7 +89,7 @@ export class Processes extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new ProcessesCreationFailed(undefined, { error })
     }
   }
@@ -115,7 +115,7 @@ export class Processes extends ThBaseHandler {
         metadata: { count: response.data.count },
         next
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new ProcessesFetchFailed(undefined, { error })
     }
   }
@@ -132,7 +132,7 @@ export class Processes extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: 1 }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new ProcessesFetchOneFailed(undefined, { error })
     }
   }
@@ -148,7 +148,7 @@ export class Processes extends ThBaseHandler {
         data: response.data.results[0] as Process,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new ProcessesUpdateFailed(undefined, { error })
     }
   }
@@ -163,7 +163,7 @@ export class Processes extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new ProcessesDeleteFailed(undefined, { error })
     }
   }
@@ -180,7 +180,7 @@ export class Processes extends ThBaseHandler {
         data: response.data.results as ProcessItems,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new ProcessItemsFetchFailed(undefined, { error })
     }
   }

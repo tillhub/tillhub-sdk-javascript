@@ -78,7 +78,7 @@ export class Promotions extends ThBaseHandler {
         metadata: { cursor: response.data.cursor },
         next
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new PromotionsFetchFailed(undefined, { error })
     }
   }
@@ -95,7 +95,7 @@ export class Promotions extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new PromotionFetchFailed(undefined, { error })
     }
   }
@@ -109,7 +109,7 @@ export class Promotions extends ThBaseHandler {
         data: response.data.results[0] as Promotion,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new PromotionPutFailed(undefined, { error })
     }
   }
@@ -123,7 +123,7 @@ export class Promotions extends ThBaseHandler {
         data: response.data.results[0] as Promotion,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new PromotionCreationFailed(undefined, { error })
     }
   }

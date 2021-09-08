@@ -73,7 +73,7 @@ export class Tags extends ThBaseHandler {
         metadata: { count: response.data.count, cursor: response.data.cursor },
         next
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.TagsFetchAllFailed(undefined, { error })
     }
   }
@@ -89,7 +89,7 @@ export class Tags extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.TagsFetchOneFailed(undefined, { error })
     }
   }
@@ -105,7 +105,7 @@ export class Tags extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.TagsGetMetaFailed(undefined, { error })
     }
   }
@@ -119,7 +119,7 @@ export class Tags extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.TagsCreationFailed(undefined, { error })
     }
   }
@@ -134,7 +134,7 @@ export class Tags extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.TagsPutFailed(undefined, { error })
     }
   }

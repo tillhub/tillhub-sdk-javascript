@@ -148,7 +148,7 @@ export class Configurations extends ThBaseHandler {
         this.http,
         this.options
       )
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.ConfigurationFetchFailed(undefined, { error })
     }
   }
@@ -162,7 +162,7 @@ export class Configurations extends ThBaseHandler {
         data: response.data.results[0] as Configuration,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.ConfigurationPutFailed(undefined, { error })
     }
   }
@@ -176,7 +176,7 @@ export class Configurations extends ThBaseHandler {
         data: response.data.results[0] as Configuration,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.ConfigurationPatchFailed(undefined, { error })
     }
   }
@@ -190,7 +190,7 @@ export class Configurations extends ThBaseHandler {
         data: response.data.results[0] as Configuration,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.ConfigurationCreationFailed(undefined, { error })
     }
   }
@@ -204,7 +204,7 @@ export class Configurations extends ThBaseHandler {
         data: {},
         msg: response.data.msg
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.ConfigurationDeleteFailed(undefined, { error })
     }
   }

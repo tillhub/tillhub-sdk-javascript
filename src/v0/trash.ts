@@ -109,7 +109,7 @@ export class Trash extends ThBaseHandler {
         metadata: { count: response.data.count },
         next
       }
-    } catch (error) {
+    } catch (error: any) {
       throw (new TrashFetchFailed(undefined, { error }))
     }
   }
@@ -127,7 +127,7 @@ export class Trash extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw (new RecoverFailed(undefined, { error }))
     }
   }

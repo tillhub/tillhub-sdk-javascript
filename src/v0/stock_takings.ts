@@ -72,7 +72,7 @@ export class StockTakings extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StockTakingsCreationFailed(undefined, { error })
     }
   }
@@ -99,7 +99,7 @@ export class StockTakings extends ThBaseHandler {
         metadata: { count: response.data.count },
         next
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StockTakingsFetchFailed(undefined, { error })
     }
   }
@@ -118,7 +118,7 @@ export class StockTakings extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: 1 }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StockTakingsFetchOneFailed(undefined, { error })
     }
   }
@@ -136,7 +136,7 @@ export class StockTakings extends ThBaseHandler {
         data: response.data.results[0] as StockTaking,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StockTakingsUpdateFailed(undefined, { error })
     }
   }
@@ -153,7 +153,7 @@ export class StockTakings extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StockTakingsDeleteFailed(undefined, { error })
     }
   }

@@ -66,7 +66,7 @@ export class ProductTemplates {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new ProductTemplatesFetchFailed(undefined, { error })
     }
   }
@@ -87,7 +87,7 @@ export class ProductTemplates {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new ProductTemplateFetchFailed(undefined, { error })
     }
   }
@@ -105,7 +105,7 @@ export class ProductTemplates {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new ProductTemplatesSearchFailed(undefined, { error })
     }
   }
@@ -122,7 +122,7 @@ export class ProductTemplates {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new ProductTemplatePutFailed(undefined, { error })
     }
   }
@@ -136,7 +136,7 @@ export class ProductTemplates {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new ProductTemplateCreationFailed(undefined, { error })
     }
   }

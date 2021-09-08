@@ -236,7 +236,7 @@ export class Storefronts extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StorefrontsFetchFailed(undefined, { error })
     }
   }
@@ -252,7 +252,7 @@ export class Storefronts extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StorefrontsFetchOneFailed(undefined, { error })
     }
   }
@@ -266,7 +266,7 @@ export class Storefronts extends ThBaseHandler {
         data: response.data.results[0] as Storefront,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StorefrontsPutFailed(undefined, { error })
     }
   }
@@ -280,7 +280,7 @@ export class Storefronts extends ThBaseHandler {
         data: response.data.results[0] as Storefront,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StorefrontsCreationFailed(undefined, { error })
     }
   }
@@ -312,7 +312,7 @@ export class Storefronts extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StorefrontsProfileFetchFailed(undefined, { error })
     }
   }
@@ -328,7 +328,7 @@ export class Storefronts extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StorefrontsSyncAllFailed(undefined, { error })
     }
   }
@@ -346,7 +346,7 @@ export class Storefronts extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StorefrontsSyncStatusFetchFailed(undefined, { error })
     }
   }
@@ -364,7 +364,7 @@ export class Storefronts extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StorefrontsDeltaFailed(undefined, { error })
     }
   }
@@ -382,7 +382,7 @@ export class Storefronts extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StorefrontsWhitelistFailed(undefined, { error })
     }
   }
@@ -400,7 +400,7 @@ export class Storefronts extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StorefrontsFetchWhitelistedFailed(undefined, { error })
     }
   }
@@ -417,7 +417,7 @@ export class Storefronts extends ThBaseHandler {
         data: response.data.results[0],
         msg: response.data.msg
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StorefrontsFetchWhitelistedMetaFailed(undefined, { error })
     }
   }
@@ -443,7 +443,7 @@ export class Storefronts extends ThBaseHandler {
         metadata: { count: response.data.count },
         next
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StorefrontsAvailableProductsFailed(undefined, { error })
     }
   }
@@ -464,7 +464,7 @@ export class Storefronts extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StorefrontsAvailableProductsMetaFailed(undefined, { error })
     }
   }

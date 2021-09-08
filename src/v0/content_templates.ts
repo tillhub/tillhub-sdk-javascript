@@ -96,7 +96,7 @@ export class ContentTemplates extends ThBaseHandler {
         metadata: { cursor: response.data.cursor },
         next
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new ContentTemplatesFetchFailed(undefined, { error })
     }
   }
@@ -112,7 +112,7 @@ export class ContentTemplates extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new ContentTemplateFetchFailed(undefined, { error })
     }
   }
@@ -130,7 +130,7 @@ export class ContentTemplates extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new ContentTemplatesSearchFailed(undefined, { error })
     }
   }
@@ -144,7 +144,7 @@ export class ContentTemplates extends ThBaseHandler {
         data: response.data.results[0] as ContentTemplate,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new ContentTemplatePatchFailed(undefined, { error })
     }
   }
@@ -158,7 +158,7 @@ export class ContentTemplates extends ThBaseHandler {
         data: response.data.results[0] as ContentTemplate,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new ContentTemplateCreationFailed(undefined, { error })
     }
   }

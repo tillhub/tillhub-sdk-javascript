@@ -204,7 +204,7 @@ export class Customers extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new CustomerFetchFailed(undefined, { error })
     }
   }
@@ -223,7 +223,7 @@ export class Customers extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new CustomerNoteCreationFailed(undefined, { error })
     }
   }
@@ -240,7 +240,7 @@ export class Customers extends ThBaseHandler {
         data: response.data.results[0] as Customer,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new CustomerPutFailed(undefined, { error })
     }
   }
@@ -259,7 +259,7 @@ export class Customers extends ThBaseHandler {
         metadata: { count: response.data.count },
         errors: response.data.errors || []
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new CustomerCreationFailed(undefined, { error })
     }
   }
@@ -329,7 +329,7 @@ export class Customers extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new CustomersSearchFailed(undefined, { error })
     }
   }

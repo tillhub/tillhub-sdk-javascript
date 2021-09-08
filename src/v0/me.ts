@@ -63,7 +63,7 @@ export class Me extends ThBaseHandler {
         metadata: { count: response.data.count },
         errors: response.data.errors || []
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new MeFetchFailed(undefined, { error })
     }
   }

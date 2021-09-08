@@ -77,7 +77,7 @@ export class ExpenseAccounts extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.ExpenseAccountsFetchFailed(undefined, { error })
     }
   }
@@ -95,7 +95,7 @@ export class ExpenseAccounts extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.ExpenseAccountFetchFailed(undefined, { error })
     }
   }
@@ -109,7 +109,7 @@ export class ExpenseAccounts extends ThBaseHandler {
         data: response.data.results[0] as ExpenseAccount,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.ExpenseAccountPutFailed(undefined, { error })
     }
   }
@@ -123,7 +123,7 @@ export class ExpenseAccounts extends ThBaseHandler {
         data: response.data.results[0] as ExpenseAccount,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.ExpenseAccountCreationFailed(undefined, { error })
     }
   }

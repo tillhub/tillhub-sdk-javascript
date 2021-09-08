@@ -43,7 +43,7 @@ export class StocksBook extends ThBaseHandler {
         metadata: { count: response.data.count, cursor: response.data.cursor },
         next
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new StocksBookFetchFailed(undefined, { error })
     }
   }

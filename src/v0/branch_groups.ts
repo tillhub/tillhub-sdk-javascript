@@ -88,7 +88,7 @@ export class BranchGroups extends ThBaseHandler {
         metadata: { cursor: response.data.cursor },
         next
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new BranchGroupsFetchFailed(undefined, { error })
     }
   }
@@ -107,7 +107,7 @@ export class BranchGroups extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new BranchGroupFetchFailed(undefined, { error })
     }
   }
@@ -121,7 +121,7 @@ export class BranchGroups extends ThBaseHandler {
         data: response.data.results[0] as BranchGroup,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new BranchGroupPutFailed(undefined, { error })
     }
   }
@@ -135,7 +135,7 @@ export class BranchGroups extends ThBaseHandler {
         data: response.data.results[0] as BranchGroup,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new BranchGroupCreationFailed(undefined, { error })
     }
   }

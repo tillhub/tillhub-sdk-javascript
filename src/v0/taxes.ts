@@ -91,7 +91,7 @@ export class Taxes extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.TaxesFetchFailed(undefined, { error })
     }
   }
@@ -107,7 +107,7 @@ export class Taxes extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.TaxesFetchFailed(undefined, { error })
     }
   }
@@ -121,7 +121,7 @@ export class Taxes extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.TaxesPutFailed(undefined, { error })
     }
   }
@@ -135,7 +135,7 @@ export class Taxes extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.TaxesCreationFailed(undefined, { error })
     }
   }

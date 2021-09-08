@@ -127,7 +127,7 @@ export class Safes extends ThBaseHandler {
         metadata: { count: response.data.count, cursor: response.data.cursor },
         next
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.SafesFetchAllFailed(undefined, { error })
     }
   }
@@ -145,7 +145,7 @@ export class Safes extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.SafesFetchOneFailed(undefined, { error })
     }
   }
@@ -161,7 +161,7 @@ export class Safes extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.SafesGetMetaFailed(undefined, { error })
     }
   }
@@ -175,7 +175,7 @@ export class Safes extends ThBaseHandler {
         data: response.data.results[0] as Safe,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.SafesCreationFailed(undefined, { error })
     }
   }
@@ -190,7 +190,7 @@ export class Safes extends ThBaseHandler {
         data: response.data.results[0] as Safe,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.SafesPutFailed(undefined, { error })
     }
   }
@@ -204,7 +204,7 @@ export class Safes extends ThBaseHandler {
         data: response.data,
         msg: response.data.msg
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.SafesBookFailed(error.msg, { error })
     }
   }
@@ -249,7 +249,7 @@ export class SafesLogBook extends ThBaseHandler {
         metadata: { count: response.data.count, cursor: response.data.cursor },
         next
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.SafesLogBookFetchAllFailed(undefined, { error })
     }
   }
@@ -267,7 +267,7 @@ export class SafesLogBook extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: response.data.results[0].count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.SafesLogBookGetMetaFailed(undefined, { error })
     }
   }

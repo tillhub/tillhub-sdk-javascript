@@ -112,7 +112,7 @@ export class Devices extends ThBaseHandler {
         metadata: { cursor: response.data.cursor },
         next
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new DevicesFetchFailed(undefined, { error })
     }
   }
@@ -130,7 +130,7 @@ export class Devices extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new DeviceFetchFailed(undefined, { error })
     }
   }
@@ -148,7 +148,7 @@ export class Devices extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new DeviceFetchFailed(undefined, { error })
     }
   }
@@ -163,7 +163,7 @@ export class Devices extends ThBaseHandler {
         data: response.data.results[0] as DeviceContent,
         msg: response.data.msg
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new DeviceContentFetchFailed(undefined, { error })
     }
   }
@@ -177,7 +177,7 @@ export class Devices extends ThBaseHandler {
         data: response.data.results[0] as Device,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new DevicePatchFailed(undefined, { error })
     }
   }
@@ -191,7 +191,7 @@ export class Devices extends ThBaseHandler {
         data: response.data.results[0] as Device,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new DeviceCreationFailed(undefined, { error })
     }
   }
@@ -205,7 +205,7 @@ export class Devices extends ThBaseHandler {
         data: response.data.results[0] as Device,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new DeviceBindingFailed(undefined, { error })
     }
   }

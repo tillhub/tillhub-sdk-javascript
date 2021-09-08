@@ -145,7 +145,7 @@ export class Vouchers extends ThBaseHandler {
         metadata: { cursor: response.data.cursor },
         next
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new VouchersFetchFailed(undefined, { error })
     }
   }
@@ -168,7 +168,7 @@ export class Vouchers extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new VouchersMetaFailed(undefined, { error })
     }
   }
@@ -184,7 +184,7 @@ export class Vouchers extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new VoucherDeleteFailed(undefined, { error })
     }
   }
@@ -202,7 +202,7 @@ export class Vouchers extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new VouchersCountFailed(undefined, { error })
     }
   }
@@ -218,7 +218,7 @@ export class Vouchers extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new VoucherFetchFailed(undefined, { error })
     }
   }
@@ -247,7 +247,7 @@ export class Vouchers extends ThBaseHandler {
         metadata: { count: response.data.count },
         next
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new VoucherLogsFetchFailed(undefined, { error })
     }
   }
@@ -261,7 +261,7 @@ export class Vouchers extends ThBaseHandler {
         data: response.data.results[0] as Voucher,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new VoucherPutFailed(undefined, { error })
     }
   }
@@ -290,7 +290,7 @@ export class Vouchers extends ThBaseHandler {
         data: response.data.results[0] as Voucher,
         metadata: { count: response.data.count, patch }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new VoucherPatchFailed(undefined, { error })
     }
   }
@@ -301,7 +301,7 @@ export class Vouchers extends ThBaseHandler {
     let response
     try {
       response = await this.http.getClient().post(uri, voucher)
-    } catch (error) {
+    } catch (error: any) {
       const responseStatus = safeGet(error, 'response.status')
 
       if (responseStatus === 409) {
@@ -332,7 +332,7 @@ export class Vouchers extends ThBaseHandler {
       return {
         data: response.data.results
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new VouchersUsersFailed(undefined, { error })
     }
   }
@@ -348,7 +348,7 @@ export class Vouchers extends ThBaseHandler {
       return {
         data: response.data.results
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new VouchersBoundedCustomerGetFailed(undefined, { error })
     }
   }
@@ -368,7 +368,7 @@ export class Vouchers extends ThBaseHandler {
       return {
         data: response.data.results
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new VouchersBoundedCustomerCreateFailed(undefined, { error })
     }
   }
@@ -388,7 +388,7 @@ export class Vouchers extends ThBaseHandler {
       return {
         data: response.data.results
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new VouchersBoundedCustomerPutFailed(undefined, { error })
     }
   }
@@ -435,7 +435,7 @@ export class VoucherLogs extends ThBaseHandler {
         metadata: { cursor: response.data.cursor },
         next
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new VouchersLogsFetchFailed(undefined, { error })
     }
   }
@@ -457,7 +457,7 @@ export class VoucherLogs extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new VoucherLogsMetaFailed(undefined, { error })
     }
   }

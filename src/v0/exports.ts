@@ -81,7 +81,7 @@ export class Exports {
         data: response.data.results,
         metadata: {}
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new ExportsDatevFetchFailed(undefined, { error })
     }
   }
@@ -100,7 +100,7 @@ export class Exports {
         data: response.data.results,
         metadata: {}
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new ExportsGobdFetchFailed(undefined, { error })
     }
   }

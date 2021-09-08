@@ -41,7 +41,7 @@ export class ExportsV1 {
         data: response.data.results,
         metadata: {}
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new ExportsGobdFetchFailed(undefined, { error })
     }
   }

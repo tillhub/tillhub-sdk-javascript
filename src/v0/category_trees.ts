@@ -84,7 +84,7 @@ export class CategoryTrees extends ThBaseHandler {
         metadata: { cursor: response.data.cursor },
         next
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new CategoryTreesFetchFailed(undefined, { error })
     }
   }
@@ -100,7 +100,7 @@ export class CategoryTrees extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new CategoryTreeFetchFailed(undefined, { error })
     }
   }
@@ -114,7 +114,7 @@ export class CategoryTrees extends ThBaseHandler {
         data: response.data.results[0] as CategoryTree,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new CategoryTreePutFailed(undefined, { error })
     }
   }
@@ -128,7 +128,7 @@ export class CategoryTrees extends ThBaseHandler {
         data: response.data.results[0] as CategoryTree,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new CategoryTreeCreationFailed(undefined, { error })
     }
   }

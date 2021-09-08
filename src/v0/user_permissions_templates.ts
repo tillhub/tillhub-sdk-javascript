@@ -61,7 +61,7 @@ export class UserPermissionsTemplates extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new UserPermissionsTemplatesCreationFailed(undefined, { error })
     }
   }
@@ -82,7 +82,7 @@ export class UserPermissionsTemplates extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new UserPermissionsTemplatesFetchFailed(undefined, { error })
     }
   }
@@ -106,7 +106,7 @@ export class UserPermissionsTemplates extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: 1 }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new UserPermissionsTemplatesFetchOneFailed(undefined, { error })
     }
   }
@@ -129,7 +129,7 @@ export class UserPermissionsTemplates extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new UserPermissionsTemplatesUpdateFailed(undefined, { error })
     }
   }

@@ -61,7 +61,7 @@ export class Dependencies extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new DependenciesFetchFailed(undefined, { error })
     }
   }

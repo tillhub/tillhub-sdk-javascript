@@ -104,7 +104,7 @@ export class Balances extends ThBaseHandler {
       return {
         data: response.data.results[0]
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new errors.BalancesFetchOneFailed(undefined, { error })
     }
   }

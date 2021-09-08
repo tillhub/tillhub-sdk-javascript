@@ -76,7 +76,7 @@ export class Reasons extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new ReasonsFetchFailed(undefined, { error })
     }
   }
@@ -94,7 +94,7 @@ export class Reasons extends ThBaseHandler {
         msg: response.data.msg,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new ReasonsFetchOneFailed(undefined, { error })
     }
   }
@@ -108,7 +108,7 @@ export class Reasons extends ThBaseHandler {
         data: response.data.results[0] as Reason,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new ReasonsPutFailed(undefined, { error })
     }
   }
@@ -122,7 +122,7 @@ export class Reasons extends ThBaseHandler {
         data: response.data.results[0] as Reason,
         metadata: { count: response.data.count }
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new ReasonsCreationFailed(undefined, { error })
     }
   }
