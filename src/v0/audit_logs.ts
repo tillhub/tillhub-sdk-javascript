@@ -1,5 +1,5 @@
 import { Client } from '../client'
-import * as errors from '../errors'
+import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
 
 export interface AuditsOptions {
@@ -67,7 +67,7 @@ export class AuditLogs {
         next
       }
     } catch (err: any) {
-      throw new errors.AuditLogsFetchAllFailed()
+      throw new AuditLogsFetchAllFailed()
     }
   }
 
@@ -77,14 +77,14 @@ export class AuditLogs {
       const uri = this.uriHelper.generateUriWithQuery(base, q)
 
       const response = await this.http.getClient().get(uri)
-      if (response.status !== 200) throw new errors.AuditLogsGetMetaFailed()
+      if (response.status !== 200) throw new AuditLogsGetMetaFailed()
 
       return {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
     } catch (err: any) {
-      throw new errors.AuditLogsGetMetaFailed()
+      throw new AuditLogsGetMetaFailed()
     }
   }
 
@@ -102,7 +102,40 @@ export class AuditLogs {
         metadata: { count: response.data.count }
       }
     } catch (err: any) {
-      throw new errors.AuditLogsFetchOneFailed()
+      throw new AuditLogsFetchOneFailed()
     }
+  }
+}
+
+export class AuditLogsFetchAllFailed extends BaseError {
+  public name = 'AuditLogsFetchAllFailed'
+  constructor (
+    public message: string = 'Could not fetch audit logs',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, AuditLogsFetchAllFailed.prototype)
+  }
+}
+
+export class AuditLogsFetchOneFailed extends BaseError {
+  public name = 'AuditLogsFetchOneFailed'
+  constructor (
+    public message: string = 'Could not fetch audit log',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, AuditLogsFetchOneFailed.prototype)
+  }
+}
+
+export class AuditLogsGetMetaFailed extends BaseError {
+  public name = 'AuditLogsGetMetaFailed'
+  constructor (
+    public message: string = 'Could not fetch audit logs meta',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, AuditLogsGetMetaFailed.prototype)
   }
 }
