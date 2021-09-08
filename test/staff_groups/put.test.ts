@@ -82,7 +82,7 @@ describe('v0: Staff Groups: can alter the staff groups', () => {
 
     try {
       await th.staffGroups().put(staffGroupId, staffGroup)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StaffGroupPutFailed')
     }
   })

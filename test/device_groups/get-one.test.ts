@@ -120,7 +120,7 @@ describe('v0: DeviceGroups: Actions: can get one', () => {
 
     try {
       await th.deviceGroups().get(deviceGroupId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('DeviceGroupFetchFailed')
     }
   })

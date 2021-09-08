@@ -78,7 +78,7 @@ describe('v0: Me: can get me data', () => {
     try {
       const th = await initThInstance()
       await th.me().get()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('MeFetchFailed')
     }
   })

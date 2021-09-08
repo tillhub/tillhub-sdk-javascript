@@ -70,7 +70,7 @@ describe('v2: AnalyticsReportsProducts', () => {
 
     try {
       await analyticsReportsProducts.getAll({ query })
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe(AnalyticsReportsProductsFetchFailed.name)
     }
   })

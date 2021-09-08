@@ -73,7 +73,7 @@ describe('v0: Correspondences: can get all', () => {
 
     try {
       await th.correspondences().getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('CorrespondencesFetchFailed')
     }
   })

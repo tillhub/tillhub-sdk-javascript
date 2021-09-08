@@ -125,7 +125,7 @@ describe('v0: Stocks: can get all locations', () => {
 
     try {
       await th.stocks().getLocations(query)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StocksLocationsFetchFailed')
     }
   })

@@ -53,7 +53,7 @@ export class AnalyticsReportsPayments extends ThAnalyticsBaseHandler {
           count: response.data.count
         }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new AnalyticsReportsV1PaymentsFetchError(undefined, { error: err })
     }
   }

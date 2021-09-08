@@ -87,7 +87,7 @@ describe('v0: PricebookEntries: can alter the pricebookEntries', () => {
 
     try {
       await th.products().pricebookEntries().put(pricebookEntryId, pricebookEntry)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('PricebookEntryPutFailed')
     }
   })

@@ -130,7 +130,7 @@ describe('v0: Orders: can delete Order Items', () => {
 
     try {
       await th.orders().deleteOrderItems(orderItemsDelete)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('OrderItemsDeleteFailed')
     }
   })

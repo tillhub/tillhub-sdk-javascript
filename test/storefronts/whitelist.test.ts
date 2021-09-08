@@ -86,7 +86,7 @@ describe('v0: Storefronts: can whitelist products', () => {
     try {
       const th = await initThInstance()
       await th.storefronts().whitelist(storeId, products)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StorefrontsWhitelistFailed')
     }
   })

@@ -98,7 +98,7 @@ describe('v0: Correspondences: can get one correspondence', () => {
     try {
       const th = await initThInstance()
       await th.correspondences().get(correspondenceId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('CorrespondenceFetchFailed')
     }
   })

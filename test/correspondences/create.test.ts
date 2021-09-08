@@ -93,7 +93,7 @@ describe('v0: Correspondence: can create one correspondence', () => {
     try {
       const th = await initThInstance()
       await th.correspondences().create(correspondence)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('CorrespondenceCreationFailed')
     }
   })

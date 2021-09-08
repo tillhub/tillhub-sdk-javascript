@@ -129,7 +129,7 @@ describe('v0: Analytics: gets revenue sum for time range', () => {
 
     try {
       await th.analytics().getRevenuesSumForTimeRange(queryObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('RevenuesFetchFailed')
     }
   })

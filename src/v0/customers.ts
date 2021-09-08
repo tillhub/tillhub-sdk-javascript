@@ -184,7 +184,7 @@ export class Customers extends ThBaseHandler {
         metadata: { cursor: response.data.cursor },
         next
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new CustomersFetchFailed(undefined, { error: err })
     }
   }
@@ -280,7 +280,7 @@ export class Customers extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new CustomersMetaFailed(undefined, { error: err })
     }
   }
@@ -295,7 +295,7 @@ export class Customers extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new CustomerDeleteFailed(undefined, { error: err })
     }
   }
@@ -312,7 +312,7 @@ export class Customers extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new CustomersCountFailed(undefined, { error: err })
     }
   }

@@ -83,7 +83,7 @@ describe('v0: Branches: can alter a branch', () => {
 
     try {
       await th.branches().put(branchId, updateObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('BranchPutFailed')
       expect(err.message).toBe('Branch could not be deleted because it has 2 active registers.')
     }

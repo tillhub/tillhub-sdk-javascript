@@ -89,7 +89,7 @@ export class AnalyticsReportsTransactionsItems extends ThAnalyticsBaseHandler {
         },
         next: nextFn
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new AnalyticsReportsTransactionsItemsFetchError(undefined, { error: err })
     }
   }

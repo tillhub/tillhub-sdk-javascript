@@ -91,7 +91,7 @@ describe('v0: Storefronts: fetching available products', () => {
     try {
       const th = await initThInstance()
       await th.storefronts().availableProducts(storeId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StorefrontsAvailableProductsFailed')
     }
   })

@@ -121,7 +121,7 @@ describe('v0: Transactions: can get images', () => {
 
     try {
       await th.transactions().getImages(mockTransactionId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('TransactionsGetImageFailed')
     }
   })

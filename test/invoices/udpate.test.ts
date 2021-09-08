@@ -161,7 +161,7 @@ describe('v0: Invoices', () => {
 
     try {
       await th.invoices().update(requestObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('InvoicesUpdateFailed')
     }
   })

@@ -77,7 +77,7 @@ describe('v0: CountingProtocols: can get all the counting protocols', () => {
     try {
       const th = await initThInstance()
       await th.countingProtocols().getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('CountingProtocolsFetchFailed')
     }
   })

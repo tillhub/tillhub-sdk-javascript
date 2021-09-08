@@ -98,7 +98,7 @@ describe('v0: Warehouses: can create a warehouse', () => {
     try {
       const th = await initThInstance()
       await th.warehouses().create(warehouse)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('WarehouseCreateFailed')
     }
   })

@@ -83,7 +83,7 @@ describe('v0: Contents Templates: can alter the templates', () => {
 
     try {
       await th.contentTemplates().delete(templateId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ContentTemplateDeleteFailed')
     }
   })

@@ -120,7 +120,7 @@ describe('v1: Balances: Actions: can get one', () => {
 
     try {
       await th.balances().get(transactionId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('BalancesFetchOneFailed')
     }
   })

@@ -73,7 +73,7 @@ export class Messages extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.MessagesFetchFailed()
     }
   }
@@ -89,7 +89,7 @@ export class Messages extends ThBaseHandler {
         data: response.data.results[0] as Message,
         metadata: { count: response.data.count }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.MessagesUpdateFailed()
     }
   }

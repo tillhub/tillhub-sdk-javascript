@@ -156,7 +156,7 @@ describe('v0: Analytics: gets product s transactions report', () => {
 
     try {
       await th.analytics().getProductsReport(reportOptions)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ProductsReportFetchFailed')
     }
   })

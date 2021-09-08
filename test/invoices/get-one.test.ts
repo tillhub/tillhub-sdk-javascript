@@ -136,7 +136,7 @@ describe('v0: Invoices: can get one', () => {
 
     try {
       await th.invoices().getOne(requestObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('InvoicesFetchOneFailed')
     }
   })

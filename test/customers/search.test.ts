@@ -92,7 +92,7 @@ describe('v0: Customers: can search for customers', () => {
 
     try {
       await th.customers().search(query)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('CustomersSearchFailed')
     }
   })

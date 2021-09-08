@@ -86,7 +86,7 @@ describe('v0: Taxes: can alter the tax class', () => {
 
     try {
       await th.taxes().put(taxId, updateObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('TaxesPutFailed')
     }
   })

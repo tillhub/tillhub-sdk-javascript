@@ -80,7 +80,7 @@ describe('v0: Reasons: can create a reasons', () => {
     try {
       const th = await initThInstance()
       await th.reasons().create(reasons)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ReasonsCreationFailed')
     }
   })

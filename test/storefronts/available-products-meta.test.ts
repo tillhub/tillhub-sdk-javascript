@@ -64,7 +64,7 @@ describe('v0: Storefronts: fetching meta data for available products', () => {
     try {
       const th = await initThInstance()
       await th.storefronts().availableProductsMeta(storeId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StorefrontsAvailableProductsMetaFailed')
     }
   })

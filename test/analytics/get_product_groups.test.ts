@@ -147,7 +147,7 @@ describe('v0: Analytics Report Groups - getReportGroups', () => {
 
     try {
       await th.analytics().getProductGroups(queryObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ReportsProductGroupsFetchFailed')
     }
   })

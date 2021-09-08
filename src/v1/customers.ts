@@ -48,7 +48,7 @@ export class Customers extends ThBaseHandler {
         metadata: { cursor: response.data.cursor },
         next
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new CustomersFetchFailed(undefined, { error: err })
     }
   }

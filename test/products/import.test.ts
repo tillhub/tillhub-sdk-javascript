@@ -178,7 +178,7 @@ describe('v0: Products: can import', () => {
 
     try {
       await th.products().import()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ProductsImportFailed')
     }
   })

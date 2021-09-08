@@ -119,7 +119,7 @@ describe('v0: Product Groups: can search for product groups', () => {
 
     try {
       await th.productGroups().search(searchTerm)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ProductGroupsSearchFailed')
     }
   })

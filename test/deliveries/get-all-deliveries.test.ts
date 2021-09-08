@@ -123,7 +123,7 @@ describe('v0: Deliveries: can get all', () => {
 
     try {
       await th.deliveries().getAll(query)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('DeliveriesFetchAllFailed')
     }
   })

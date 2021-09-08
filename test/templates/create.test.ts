@@ -117,7 +117,7 @@ describe('v1: Templates: can craete template', () => {
 
     try {
       await th.templates().create(templateObj)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('TemplatesCreationFailed')
     }
   })

@@ -83,7 +83,7 @@ describe('v0: Storefronts: can start the sync products process', () => {
     try {
       const th = await initThInstance()
       await th.storefronts().sync(storeId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StorefrontsSyncAllFailed')
     }
   })

@@ -114,7 +114,7 @@ describe('v0: Safes: can get count number of all safes', () => {
 
     try {
       await th.safes().meta()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('SafesGetMetaFailed')
     }
   })

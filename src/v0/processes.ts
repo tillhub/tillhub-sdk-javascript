@@ -202,7 +202,7 @@ export class Processes extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new ProcessesMetaFailed(undefined, { error: err })
     }
   }

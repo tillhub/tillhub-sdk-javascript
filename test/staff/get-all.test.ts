@@ -73,7 +73,7 @@ describe('v0: Staff: can get all staff members', () => {
     try {
       const th = await initThInstance()
       await th.staff().getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StaffFetchFailed')
     }
   })

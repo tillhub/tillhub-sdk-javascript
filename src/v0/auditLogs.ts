@@ -66,7 +66,7 @@ export class AuditLogs {
         metadata: { cursor: response.data.cursor },
         next
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.AuditLogsFetchAllFailed()
     }
   }
@@ -83,7 +83,7 @@ export class AuditLogs {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.AuditLogsGetMetaFailed()
     }
   }
@@ -101,7 +101,7 @@ export class AuditLogs {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.AuditLogsFetchOneFailed()
     }
   }

@@ -122,7 +122,7 @@ describe('v0: Orders: can get all outgoing orders', () => {
 
     try {
       await th.orders().getOutgoingOrders()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('OutgoingOrdersFetchFailed')
     }
   })

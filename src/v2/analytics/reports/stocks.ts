@@ -49,7 +49,7 @@ export class AnalyticsReportsStocks {
           count: response.data.count
         }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new AnalyticsReportsStocksFetchFailed(undefined, { error: err })
     }
   }

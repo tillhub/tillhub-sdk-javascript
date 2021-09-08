@@ -110,7 +110,7 @@ describe('v0: Analytics: gets vat report', () => {
 
     try {
       await th.analytics().vat().getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('VatReportFetchFailed')
     }
   })

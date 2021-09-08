@@ -87,7 +87,7 @@ describe('v0: Taxes: can create one tax class', () => {
     try {
       const th = await initThInstance()
       await th.taxes().create(taxObj)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('TaxesCreationFailed')
     }
   })

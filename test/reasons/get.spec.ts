@@ -80,7 +80,7 @@ describe('v0: Reasons: can get one reason', () => {
     try {
       const th = await initThInstance()
       await th.reasons().get(reasonsId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ReasonsFetchOneFailed')
     }
   })

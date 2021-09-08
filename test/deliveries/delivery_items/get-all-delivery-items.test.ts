@@ -129,7 +129,7 @@ describe('v0: Deliveries: Items', () => {
 
     try {
       await th.deliveries().getAllDeliveryItems(requestObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('DeliveryItemsFetchAllFailed')
     }
   })

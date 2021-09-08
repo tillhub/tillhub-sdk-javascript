@@ -88,7 +88,7 @@ describe('v0: SafesLogBook', () => {
     try {
       const th = await initThInstance()
       await th.safesLogBook().getAll(query)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('SafesLogBookFetchAllFailed')
     }
   })

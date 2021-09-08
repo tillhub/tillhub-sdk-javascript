@@ -79,7 +79,7 @@ describe('v2: Transactions - images', () => {
 
     try {
       await transactionsV2.createImage(transactionId, image)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe(TransactionsImageCreateFailed.name)
     }
   })
@@ -125,7 +125,7 @@ describe('v2: Transactions - images', () => {
 
     try {
       await transactionsV2.getImages(transactionId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe(TransactionsGetImagesFailed.name)
     }
   })

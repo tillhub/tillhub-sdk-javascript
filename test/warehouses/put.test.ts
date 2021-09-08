@@ -84,7 +84,7 @@ describe('v0: Warehouses: can alter the warehouse', () => {
 
     try {
       await th.warehouses().put(warehouseId, updateObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('WarehousePutFailed')
     }
   })

@@ -130,7 +130,7 @@ describe('v0: Analytics: gets revenue for  day of week', () => {
 
     try {
       await th.analytics().getRevenuesForDayOfWeek(queryObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('RevenuesFetchFailed')
     }
   })

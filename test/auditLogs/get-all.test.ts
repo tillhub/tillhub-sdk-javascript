@@ -127,7 +127,7 @@ describe('v0: Audits: Logs: can get all', () => {
 
     try {
       await th.auditLogs().getAll(query)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('AuditLogsFetchAllFailed')
     }
   })

@@ -382,7 +382,7 @@ export class Staff extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new StaffMetaFailed(undefined, { error: err })
     }
   }

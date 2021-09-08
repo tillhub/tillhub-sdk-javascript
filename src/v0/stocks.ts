@@ -100,7 +100,7 @@ export class Stocks extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new StocksFetchFailed()
     }
   }
@@ -116,7 +116,7 @@ export class Stocks extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new StocksCreateFailed()
     }
   }
@@ -133,7 +133,7 @@ export class Stocks extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new StocksUpdateFailed()
     }
   }
@@ -150,7 +150,7 @@ export class Stocks extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new StocksLocationsFetchFailed()
     }
   }

@@ -86,7 +86,7 @@ describe('v0: Contents Templates: can get one template', () => {
     try {
       const th = await initThInstance()
       await th.contentTemplates().get(templateId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ContentTemplateFetchFailed')
     }
   })

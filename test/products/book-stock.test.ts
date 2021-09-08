@@ -135,7 +135,7 @@ describe('Book stock for a product', () => {
 
     try {
       await th.products().bookStock(requestOptions)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ProductsBookStockFailed')
     }
   })

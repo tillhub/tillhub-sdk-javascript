@@ -120,7 +120,7 @@ describe('Create a new stock', () => {
 
     try {
       await th.stocks().create(stockObj)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StocksCreateFailed')
     }
   })

@@ -79,7 +79,7 @@ describe('v0: Pricebooks: can delete a pricebook', () => {
 
     try {
       await th.products().pricebooks().delete(pricebookId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('PricebookDeleteFailed')
     }
   })

@@ -98,7 +98,7 @@ describe('v0: Correspondences: can alter the correspondences', () => {
 
     try {
       await th.correspondences().put(correspondenceId, correspondence)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('CorrespondencePutFailed')
     }
   })

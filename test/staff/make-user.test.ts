@@ -86,7 +86,7 @@ describe('v0: Staff: can make a staff member a user', () => {
     try {
       const th = await initThInstance()
       await th.staff().makeUser(staffID, makeUserObj)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('MakeUserStaffFailed')
     }
   })

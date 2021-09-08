@@ -91,7 +91,7 @@ describe('v0: Storefronts: can get the status of the sync process', () => {
     try {
       const th = await initThInstance()
       await th.storefronts().syncStatus(storeId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StorefrontsSyncStatusFetchFailed')
     }
   })

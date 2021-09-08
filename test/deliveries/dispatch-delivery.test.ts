@@ -142,7 +142,7 @@ describe('v0: Deliveries', () => {
 
     try {
       await th.deliveries().dispatchDelivery(requestObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('DeliveriesDispatchFailed')
     }
   })

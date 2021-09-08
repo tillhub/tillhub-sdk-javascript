@@ -114,7 +114,7 @@ describe('v1: Balances: can get all', () => {
 
     try {
       await th.balances().getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('BalancesFetchFailed')
     }
   })

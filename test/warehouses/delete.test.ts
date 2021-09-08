@@ -79,7 +79,7 @@ describe('v0: Warehouses: can delete a warehouse', () => {
 
     try {
       await th.warehouses().delete(warehouseId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('WarehouseDeleteFailed')
     }
   })

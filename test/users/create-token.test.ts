@@ -84,7 +84,7 @@ describe('v0: Users: can create token for user', () => {
     try {
       const th = await initThInstance()
       await th.users(configID).createToken(userID)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('UserTokenCreationFailed')
     }
   })

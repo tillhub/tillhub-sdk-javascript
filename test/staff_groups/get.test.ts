@@ -82,7 +82,7 @@ describe('v0: StaffGroups: can get one staff group', () => {
     try {
       const th = await initThInstance()
       await th.staffGroups().get(staffGroupId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StaffGroupFetchFailed')
     }
   })

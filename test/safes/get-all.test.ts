@@ -122,7 +122,7 @@ describe('v0: Safes: can get all', () => {
 
     try {
       await th.safes().getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('SafesFetchAllFailed')
     }
   })

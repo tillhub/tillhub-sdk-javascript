@@ -43,7 +43,7 @@ describe('Auth: logout', () => {
 
     try {
       await auth.logout()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('LogoutMissingToken')
     }
   })
@@ -93,7 +93,7 @@ describe('Auth: logout', () => {
       const data = await auth.logout()
       expect(data).toBeTruthy()
       expect(data.msg === 'Logout successful.').toBe(true)
-    } catch (err) {
+    } catch (err: any) {
       throw err
     }
   })
@@ -136,7 +136,7 @@ describe('Auth: logout', () => {
     try {
       await auth.authenticate()
       await auth.logout()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('LogoutFailed')
     }
   })

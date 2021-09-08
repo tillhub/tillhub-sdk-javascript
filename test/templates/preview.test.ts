@@ -140,7 +140,7 @@ describe('v0: Templates', () => {
 
     try {
       await th.templates().preview(requestObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('TemplatesPreviewFailed')
     }
   })

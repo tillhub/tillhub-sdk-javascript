@@ -103,7 +103,7 @@ describe('v0: Storefronts: can get the storefront profile', () => {
     try {
       const th = await initThInstance()
       await th.storefronts().profile(storeId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StorefrontsProfileFetchFailed')
     }
   })

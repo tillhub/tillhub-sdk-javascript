@@ -71,7 +71,7 @@ describe('v0: StocksBook: can get meta', () => {
     try {
       const th = await initThInstance()
       await th.stocksBook().meta()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StocksBookGetMetaFailed')
     }
   })

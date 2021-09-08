@@ -84,7 +84,7 @@ describe('v0: Warehouses: can get one warehouse', () => {
     try {
       const th = await initThInstance()
       await th.warehouses().getOne(warehouseId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('WarehouseFetchOneFailed')
     }
   })

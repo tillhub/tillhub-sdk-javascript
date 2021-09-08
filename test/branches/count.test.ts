@@ -114,7 +114,7 @@ describe('v0: Branches: can get count number of all branches', () => {
 
     try {
       await th.branches().count()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('BranchesCountFailed')
     }
   })

@@ -135,7 +135,7 @@ describe('v0: Deliveries', () => {
 
     try {
       await th.deliveries().createDelivery(requestObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('DeliveriesCreateFailed')
     }
   })

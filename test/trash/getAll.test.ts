@@ -82,7 +82,7 @@ describe('v0: Trash: can get the trashed object', () => {
     try {
       const th = await initThInstance()
       await th.trash().getAll(trashQuery)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('TrashFetchFailed')
     }
   })

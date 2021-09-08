@@ -81,7 +81,7 @@ describe('v1: Products: can check if a barcode is unique', () => {
     try {
       const th = await initThInstance()
       await th.products().checkBarcode(code)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('BarcodeGetFailed')
     }
   })
@@ -118,7 +118,7 @@ describe('v1: Products: can check if a barcode is unique', () => {
     try {
       const th = await initThInstance()
       await th.products().checkBarcode(code)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('BarcodeGetFailed')
       expect(err.properties.status).toBe(409)
       expect(err.properties.name).toBe(errorName)

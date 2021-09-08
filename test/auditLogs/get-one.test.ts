@@ -123,7 +123,7 @@ describe('v0: Audits: Logs: can get one', () => {
 
     try {
       await th.auditLogs().get(requestObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('AuditLogsFetchOneFailed')
     }
   })

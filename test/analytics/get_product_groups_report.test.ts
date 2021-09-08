@@ -156,7 +156,7 @@ describe('v0: Analytics: gets product groups transactions report', () => {
 
     try {
       await th.analytics().getProductGroupsReport(reportOptions)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ProductGroupsReportFetchFailed')
     }
   })

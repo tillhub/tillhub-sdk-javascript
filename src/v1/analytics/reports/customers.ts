@@ -53,7 +53,7 @@ export class AnalyticsReportsCustomers extends ThAnalyticsBaseHandler {
           count: response.data.count
         }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new AnalyticsReportsV1CustomersFetchError(undefined, { error: err })
     }
   }

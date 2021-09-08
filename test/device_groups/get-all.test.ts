@@ -114,7 +114,7 @@ describe('v0: DeviceGroups: can get all', () => {
 
     try {
       await th.deviceGroups().getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('DeviceGroupsFetchFailed')
     }
   })

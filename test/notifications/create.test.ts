@@ -110,7 +110,7 @@ describe('v0: Notifications: can email receipt', () => {
     try {
       const th = await initThInstance()
       await th.notifications().email(options)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('NotificationsEmailError')
     }
   })

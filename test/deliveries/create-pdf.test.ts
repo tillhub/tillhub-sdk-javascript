@@ -124,7 +124,7 @@ describe('v0: Deliveries', () => {
 
     try {
       await th.deliveries().createDeliveryPDF(deliveryId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('DeliveriesPDFFailed')
     }
   })

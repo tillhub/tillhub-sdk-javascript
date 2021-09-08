@@ -72,7 +72,7 @@ describe('v0: Staff: can get all staff filter lists', () => {
     try {
       const th = await initThInstance()
       await th.staff().getFilters()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StaffFetchFailed')
     }
   })

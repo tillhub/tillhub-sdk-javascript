@@ -119,7 +119,7 @@ describe('v0: Audit Actions', () => {
 
     try {
       await th.auditActions().create(body)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('AuditActionsCreateFailed')
     }
   })

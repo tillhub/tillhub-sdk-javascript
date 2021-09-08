@@ -79,7 +79,7 @@ describe('v0: Users: can get all users members', () => {
     try {
       const th = await initThInstance()
       await th.users(configID).getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('UsersFetchFailed')
     }
   })

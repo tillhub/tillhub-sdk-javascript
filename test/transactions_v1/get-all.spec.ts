@@ -128,7 +128,7 @@ describe('v0: Transactions: can get all', () => {
 
     try {
       await th.transactions().getAll(query)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('TransactionFetchFailed')
     }
   })

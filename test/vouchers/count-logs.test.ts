@@ -115,7 +115,7 @@ describe('v0: Branches: can get count number of all vouchers logs', () => {
 
     try {
       await th.vouchers().logs.meta()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('VoucherLogsMetaFailed')
     }
   })

@@ -82,7 +82,7 @@ describe('v0: Product Service Question: can get one productServiceQuestion', () 
     try {
       const th = await initThInstance()
       await th.productServiceQuestions().get(questionId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ProductServiceQuestionsFetchOneFailed')
     }
   })

@@ -77,7 +77,7 @@ describe('v1: AnalyticsReportsCustomers', () => {
 
     try {
       await analyticsReportsCustomers.getAll({ query })
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe(AnalyticsReportsV1CustomersFetchError.name)
     }
   })

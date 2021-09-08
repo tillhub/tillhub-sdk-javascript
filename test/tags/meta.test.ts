@@ -114,7 +114,7 @@ describe('v0: Tags: can get count number of all tags', () => {
 
     try {
       await th.tags().meta()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('TagsGetMetaFailed')
     }
   })

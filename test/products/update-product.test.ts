@@ -127,7 +127,7 @@ describe('v1: Products', () => {
 
     try {
       await th.products().put(productId, requestObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ProductsUpdateFailed')
     }
   })

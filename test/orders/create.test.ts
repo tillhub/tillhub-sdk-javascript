@@ -75,7 +75,7 @@ describe('v0: Orders: can create Orders', () => {
     try {
       const th = await initThInstance()
       await th.orders().create(createObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('OrdersCreateFailed')
     }
   })

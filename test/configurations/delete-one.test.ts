@@ -117,7 +117,7 @@ describe('v0: configurations', () => {
 
     try {
       await th.configurations().delete(configurationId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ConfigurationDeleteFailed')
     }
   })

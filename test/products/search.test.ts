@@ -178,7 +178,7 @@ describe('v1: Products: can search for products', () => {
 
     try {
       await th.products().search(searchQuery)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ProductsSearchFailed')
     }
   })

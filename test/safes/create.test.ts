@@ -94,7 +94,7 @@ describe('v0: Safes: can create one safe', () => {
     try {
       const th = await initThInstance()
       await th.safes().create(safe)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('SafesCreationFailed')
     }
   })

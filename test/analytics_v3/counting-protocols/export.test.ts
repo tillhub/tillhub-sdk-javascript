@@ -76,7 +76,7 @@ describe('v3: AnalyticsReportsCountingProtocols', () => {
 
     try {
       await AnalyticsReportsCountingProtocols.export({ query })
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe(AnalyticsReportsCountingProtocolsExportFetchError.name)
     }
   })

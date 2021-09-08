@@ -86,7 +86,7 @@ describe('v1: PricebookEntries: can get all', () => {
 
     try {
       await th.products().pricebookEntries().getAll({ query })
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('PricebookEntriesFetchFailed')
     }
   })

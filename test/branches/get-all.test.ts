@@ -114,7 +114,7 @@ describe('v0: Branches: can get all', () => {
 
     try {
       await th.branches().getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('BranchesFetchFailed')
     }
   })

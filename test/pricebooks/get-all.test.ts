@@ -73,7 +73,7 @@ describe('v1: Pricebooks: can get all', () => {
 
     try {
       await th.products().pricebooks().getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('PricebooksFetchFailed')
     }
   })

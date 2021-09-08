@@ -118,7 +118,7 @@ describe('v0: Product Service Question: can get count number of all product Serv
 
     try {
       await th.productServiceQuestions().meta()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ProductServiceQuestionsGetMetaFailed')
     }
   })

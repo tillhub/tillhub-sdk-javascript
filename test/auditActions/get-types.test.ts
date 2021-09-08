@@ -127,7 +127,7 @@ describe('v0: Audits: Actions: can get types', () => {
 
     try {
       await th.auditActions().getTypes(query)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('AuditActionsTypesFetchFailed')
     }
   })

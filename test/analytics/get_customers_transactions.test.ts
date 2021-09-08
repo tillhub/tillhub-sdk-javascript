@@ -128,7 +128,7 @@ describe('v0: Analytics: gets customers transactionsreport', () => {
 
     try {
       await th.analytics().getCustomersReport()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ReportsCustomerCustomersFailed')
     }
   })

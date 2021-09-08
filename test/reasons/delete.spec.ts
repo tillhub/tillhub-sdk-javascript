@@ -75,7 +75,7 @@ describe('v0: Reason: can delete a reasons', () => {
 
     try {
       await th.reasons().delete(reasonsId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ReasonsDeleteFailed')
     }
   })

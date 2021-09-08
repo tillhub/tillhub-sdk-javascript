@@ -108,7 +108,7 @@ describe('v2: AnalyticsReportsTransactionsItems: can get all the transactions it
     try {
       const th = await initThInstance()
       await th.analyticsHandlers().analytics.reports.AnalyticsReportsTransactionsItems.getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('AnalyticsReportsTransactionsItemsFetchError')
     }
   })

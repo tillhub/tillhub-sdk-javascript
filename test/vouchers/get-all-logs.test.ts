@@ -115,7 +115,7 @@ describe('v0: vouchers: can get all logs', () => {
 
     try {
       await th.vouchers().logs.getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('VouchersLogsFetchFailed')
     }
   })

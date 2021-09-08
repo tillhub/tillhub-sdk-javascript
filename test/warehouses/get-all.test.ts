@@ -73,7 +73,7 @@ describe('v0: Warehouses: can get all the warehouses', () => {
     try {
       const th = await initThInstance()
       await th.warehouses().getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('WarehousesFetchFailed')
     }
   })

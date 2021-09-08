@@ -127,7 +127,7 @@ describe('v0: Analytics: gets staff overview report grouped by staff member', ()
 
     try {
       await th.analytics().getStaffOverviewReport(query)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StaffOverviewFetchFailed')
     }
   })

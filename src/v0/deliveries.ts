@@ -191,7 +191,7 @@ export class Deliveries extends ThBaseHandler {
         metadata: { count: response.data.count },
         next
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.DeliveriesFetchAllFailed()
     }
   }
@@ -208,7 +208,7 @@ export class Deliveries extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.DeliveriesFetchOneFailed()
     }
   }
@@ -225,7 +225,7 @@ export class Deliveries extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.DeliveriesCreateFailed()
     }
   }
@@ -243,7 +243,7 @@ export class Deliveries extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.DeliveriesPDFFailed()
     }
   }
@@ -260,7 +260,7 @@ export class Deliveries extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.DeliveriesUpdateFailed()
     }
   }
@@ -277,7 +277,7 @@ export class Deliveries extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.DeliveriesInProgressFailed()
     }
   }
@@ -294,7 +294,7 @@ export class Deliveries extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.DeliveriesDispatchFailed()
     }
   }
@@ -307,7 +307,7 @@ export class Deliveries extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.DeliveriesDeleteFailed()
     }
   }
@@ -326,7 +326,7 @@ export class Deliveries extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.DeliveryItemsCreateFailed()
     }
   }
@@ -345,7 +345,7 @@ export class Deliveries extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.DeliveryItemsFetchAllFailed()
     }
   }
@@ -362,7 +362,7 @@ export class Deliveries extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.DeliveryItemUpdateFailed()
     }
   }
@@ -375,7 +375,7 @@ export class Deliveries extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.DeliveriesDeleteFailed()
     }
   }

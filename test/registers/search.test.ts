@@ -116,7 +116,7 @@ describe('v1: Registers: can search for register', () => {
 
     try {
       await th.registers().search(searchTerm)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('RegistersSearchFailed')
     }
   })

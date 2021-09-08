@@ -114,7 +114,7 @@ describe('v1: Balances: can get count number of all balances', () => {
 
     try {
       await th.balances().meta()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('BalancesMetaFailed')
     }
   })

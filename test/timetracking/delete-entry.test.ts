@@ -83,7 +83,7 @@ describe('v0: Timetracking: can alter the timetracking entry', () => {
 
     try {
       await th.timetracking().deleteEntry(timetrackingEntryId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('TimetrackingEntryDeleteFailed')
     }
   })

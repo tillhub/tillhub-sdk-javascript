@@ -35,7 +35,7 @@ export class Data {
       return {
         data: response.data.results
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new DataReplaceFailed()
     }
   }
@@ -50,7 +50,7 @@ export class Data {
       return {
         data: response.data.results
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new DataCreateFailed()
     }
   }

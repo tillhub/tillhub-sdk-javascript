@@ -114,7 +114,7 @@ describe('v0: Accounts: can get all', () => {
 
     try {
       await th.taxes().getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('TaxesFetchFailed')
     }
   })

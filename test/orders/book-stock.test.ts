@@ -130,7 +130,7 @@ describe('v0: Orders: can book stock', () => {
 
     try {
       await th.orders().bookStock(bookStockRequest)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('BookStockFailed')
     }
   })

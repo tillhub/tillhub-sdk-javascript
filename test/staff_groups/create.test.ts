@@ -77,7 +77,7 @@ describe('v0: Staff Group: can create one staff group', () => {
     try {
       const th = await initThInstance()
       await th.staffGroups().create(staffGroup)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StaffGroupCreationFailed')
     }
   })

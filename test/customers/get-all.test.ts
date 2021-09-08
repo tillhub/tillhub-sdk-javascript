@@ -114,7 +114,7 @@ describe('v0: customers: can get all', () => {
 
     try {
       await th.customers().getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('CustomersFetchFailed')
     }
   })

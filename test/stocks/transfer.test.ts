@@ -89,7 +89,7 @@ describe('v0: Stocks: can transfer stocks from one location to another', () => {
     try {
       const th = await initThInstance()
       await th.stocks().transfer(transferRequest)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StocksTransferFailed')
     }
   })

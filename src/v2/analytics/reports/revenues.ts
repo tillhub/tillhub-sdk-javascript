@@ -77,7 +77,7 @@ export class AnalyticsReportsRevenuesGrouped extends ThAnalyticsBaseHandler {
         metaData: {},
         next: nextFn
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new AnalyticsReportsRevenuesGroupedFetchError(undefined, { error: err })
     }
   }
@@ -91,7 +91,7 @@ export class AnalyticsReportsRevenuesGrouped extends ThAnalyticsBaseHandler {
       const result = await this.handleExport(uri, query)
 
       return result
-    } catch (err) {
+    } catch (err: any) {
       throw new AnalyticsReportsRevenuesGroupedExportFetchError(undefined, { error: err })
     }
   }

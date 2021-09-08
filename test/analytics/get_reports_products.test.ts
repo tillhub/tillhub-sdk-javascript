@@ -139,7 +139,7 @@ describe('v0: Analytics Reports Products - getReportsProducts', () => {
 
     try {
       await th.analytics().getReportsProducts(queryObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StatisticsProductFetchFailed')
     }
   })

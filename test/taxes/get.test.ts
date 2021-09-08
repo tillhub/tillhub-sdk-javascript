@@ -92,7 +92,7 @@ describe('v0: Taxes: can get a tax', () => {
     try {
       const th = await initThInstance()
       await th.taxes().get(taxId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('TaxesFetchFailed')
     }
   })

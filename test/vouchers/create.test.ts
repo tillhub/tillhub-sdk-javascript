@@ -88,7 +88,7 @@ describe('v0: Vouchers: can create a voucher', () => {
     try {
       const th = await initThInstance()
       await th.vouchers().create(voucher)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('VoucherPostFailed')
       expect(err.message).toBe('Could not create voucher')
     }
@@ -129,7 +129,7 @@ describe('v0: Vouchers: can create a voucher', () => {
     try {
       const th = await initThInstance()
       await th.vouchers().create(voucher)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('VoucherCodeConflict')
       expect(err.message).toBe('This voucher code is already in use. Please use another code.')
     }

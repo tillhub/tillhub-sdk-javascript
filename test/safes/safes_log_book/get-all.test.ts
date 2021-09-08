@@ -147,7 +147,7 @@ describe('v0: SafesLogBook: can get all', () => {
 
     try {
       await th.safesLogBook().getAll(query)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('SafesLogBookFetchAllFailed')
     }
   })

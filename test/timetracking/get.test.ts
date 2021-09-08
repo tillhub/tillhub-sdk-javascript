@@ -107,7 +107,7 @@ describe('v0: Timetracking: can get the timetracking report for a specific staff
     try {
       const th = await initThInstance()
       await th.timetracking().get(staffId, timetrackingQuery)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('TimetrackingReportFetchFailed')
     }
   })

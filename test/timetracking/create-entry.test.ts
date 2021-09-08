@@ -82,7 +82,7 @@ describe('v0: Timetracking: can create one timetracking entry', () => {
     try {
       const th = await initThInstance()
       await th.timetracking().createEntry(timetrackingEntry)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('TimetrackingEntryCreateFailed')
     }
   })

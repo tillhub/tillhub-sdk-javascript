@@ -40,7 +40,7 @@ export class Images {
       return {
         data: response.data.results
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.ImagePutFailed()
     }
   }
@@ -54,7 +54,7 @@ export class Images {
       return {
         data: response.data.results
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.ImageCreationFailed()
     }
   }

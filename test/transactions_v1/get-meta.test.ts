@@ -127,7 +127,7 @@ describe('v1: Transactions: can get meta', () => {
 
     try {
       await th.transactions().meta(query)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('TransactionsGetMetaFailed')
     }
   })

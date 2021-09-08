@@ -79,7 +79,7 @@ describe('SDK: can destroy SDK', () => {
       expect(user).toBe('4564')
       expect(th.auth.token).toBe('sometoken')
       expect(th.auth.authenticated).toBe(true)
-    } catch (err) {
+    } catch (err: any) {
       throw err
     }
   })
@@ -161,7 +161,7 @@ describe('SDK: can destroy SDK', () => {
       expect(clientInstance.getClient().defaults.headers.common.Authorization).toBe(
         'Bearer sometoken'
       )
-    } catch (err) {
+    } catch (err: any) {
       throw err
     }
   })

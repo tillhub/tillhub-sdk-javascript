@@ -83,7 +83,7 @@ describe('v0: Storefronts: can fetch metadata for the whitelisted products', () 
     try {
       const th = await initThInstance()
       await th.storefronts().getWhitelistedMeta(storeId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StorefrontsFetchWhitelistedMetaFailed')
     }
   })

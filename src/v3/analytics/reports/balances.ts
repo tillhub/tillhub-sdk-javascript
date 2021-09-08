@@ -52,7 +52,7 @@ export class AnalyticsReportsBalances extends ThAnalyticsBaseHandler {
           count: response.data.count
         }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new AnalyticsReportsV3BalancesExportFetchError(undefined, { error: err })
     }
   }

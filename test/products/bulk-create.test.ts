@@ -112,7 +112,7 @@ it('rejects on status codes that are not 200/409', async () => {
     const products = th.products()
     expect(products).toBeInstanceOf(v1.Products)
     await products.bulkCreate(productsObjArray)
-  } catch (err) {
+  } catch (err: any) {
     expect(err.name).toBe('ProductsBulkCreateFailed')
   }
 })

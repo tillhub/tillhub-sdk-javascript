@@ -78,7 +78,7 @@ describe('v0: Tags: can get one tag', () => {
     try {
       const th = await initThInstance()
       await th.tags().get(tagId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('TagsFetchOneFailed')
     }
   })

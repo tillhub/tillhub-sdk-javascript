@@ -108,7 +108,7 @@ describe('v0: Staff: can get a unique pin number', () => {
     try {
       const th = await initThInstance()
       await th.staff().getPin()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StaffPinGetFailed')
     }
   })
@@ -142,7 +142,7 @@ describe('v0: Staff: can get a unique pin number', () => {
     try {
       const th = await initThInstance()
       await th.staff().getPin(pin)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StaffPinGetFailed')
       expect(err.properties.status).toBe(409)
       expect(err.properties.name).toBe(errorName)

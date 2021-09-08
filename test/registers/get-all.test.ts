@@ -166,7 +166,7 @@ describe('v1: Registers: can get all', () => {
 
     try {
       await th.registers().getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('RegistersFetchFailed')
     }
   })

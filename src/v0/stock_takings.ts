@@ -175,7 +175,7 @@ export class StockTakings extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new StockTakingsMetaFailed(undefined, { error: err })
     }
   }

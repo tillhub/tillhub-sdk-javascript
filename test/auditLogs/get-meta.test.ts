@@ -127,7 +127,7 @@ describe('v0: Audits: Logs: can get meta', () => {
 
     try {
       await th.auditLogs().meta(query)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('AuditLogsGetMetaFailed')
     }
   })

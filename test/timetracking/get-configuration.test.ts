@@ -82,7 +82,7 @@ describe('v0: Timetracking: can get the timetracking configurations', () => {
     try {
       const th = await initThInstance()
       await th.timetracking().getConfiguration()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('TimetrackingConfigurationFetchFailed')
     }
   })

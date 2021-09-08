@@ -63,7 +63,7 @@ describe('Auth: make auth flow', () => {
       expect(typeof data.role === 'string').toBe(true)
       expect(typeof data.orgName === 'string').toBe(true)
       expect(data.features).toEqual({ inventory: true })
-    } catch (err) {
+    } catch (err: any) {
       throw err
     }
   })
@@ -106,7 +106,7 @@ describe('Auth: make auth flow', () => {
       expect(typeof data.user === 'string').toBe(true)
       expect(typeof data.features === 'object').toBe(true)
       expect(data.features).toEqual({ inventory: true })
-    } catch (err) {
+    } catch (err: any) {
       throw err
     }
   })

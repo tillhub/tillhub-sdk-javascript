@@ -117,7 +117,7 @@ describe('v0: customers', () => {
 
     try {
       await th.customers().delete(customerId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('CustomerDeleteFailed')
     }
   })

@@ -43,7 +43,7 @@ export class Videos {
       return {
         data: response.data.results
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new VideoPutFailed()
     }
   }
@@ -60,7 +60,7 @@ export class Videos {
       return {
         data: response.data.results
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new VideoCreationFailed()
     }
   }

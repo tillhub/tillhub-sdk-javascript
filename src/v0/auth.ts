@@ -195,7 +195,7 @@ export class Auth {
         whitelabel: response.data.user.whitelabel,
         expiresAt: response.data.expires_at
       }
-    } catch (err) {
+    } catch (err: any) {
       const error = new errors.AuthenticationFailed()
       err.error = err
       err.body = err.response?.data ?? null
@@ -213,7 +213,7 @@ export class Auth {
       return {
         msg: data.msg
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.PasswordResetRequestFailed(undefined, { error: err })
     }
   }
@@ -228,7 +228,7 @@ export class Auth {
       return {
         msg: data.msg
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.PasswordSetRequestFailed(undefined, { error: err })
     }
   }
@@ -264,7 +264,7 @@ export class Auth {
       return {
         msg: data.msg
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new LogoutFailed(undefined, { error: err })
     }
   }

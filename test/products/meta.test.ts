@@ -114,7 +114,7 @@ describe('v1: Products: can get count number of all products', () => {
 
     try {
       await th.products().meta()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ProductsMetaFailed')
     }
   })

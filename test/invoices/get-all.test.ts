@@ -135,7 +135,7 @@ describe('v0: Invoices: can get all', () => {
 
     try {
       await th.invoices().getAll(query)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('InvoicesFetchAllFailed')
     }
   })

@@ -73,7 +73,7 @@ describe('v0: Contents Templates: can get all the contents templates', () => {
     try {
       const th = await initThInstance()
       await th.contentTemplates().getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ContentTemplatesFetchFailed')
     }
   })

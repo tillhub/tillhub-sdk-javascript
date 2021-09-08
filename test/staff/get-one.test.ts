@@ -80,7 +80,7 @@ describe('v0: Staff: can get one staff member', () => {
     try {
       const th = await initThInstance()
       await th.staff().getOne(staffId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StaffFetchOneFailed')
     }
   })
@@ -147,7 +147,7 @@ describe('v0: Staff: can get one staff member', () => {
     try {
       const th = await initThInstance()
       await th.staff().get(staffId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StaffFetchOneFailed')
     }
   })

@@ -97,7 +97,7 @@ describe('v0: Transactions: can alter the image', () => {
 
     try {
       await th.transactions().putImage(mockTransactionId, mockImage)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('TransactionsImagePutFailed')
     }
   })

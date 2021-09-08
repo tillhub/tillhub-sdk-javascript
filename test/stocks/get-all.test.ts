@@ -114,7 +114,7 @@ describe('v0: Stocks: can get all', () => {
 
     try {
       await th.stocks().getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StocksFetchFailed')
     }
   })

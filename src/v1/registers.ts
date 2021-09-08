@@ -103,7 +103,7 @@ export class Registers extends ThBaseHandler {
         metadata: { count: response.data.count },
         next
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.RegistersFetchFailed()
     }
   }

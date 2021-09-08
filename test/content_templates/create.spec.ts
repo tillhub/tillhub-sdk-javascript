@@ -82,7 +82,7 @@ describe('v0: ContentTemplates: can create a contents_template', () => {
     try {
       const th = await initThInstance()
       await th.contentTemplates().create(template)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ContentTemplateCreationFailed')
     }
   })

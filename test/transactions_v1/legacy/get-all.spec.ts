@@ -12,10 +12,10 @@ const user = {
 }
 
 if (process.env.SYSTEM_TEST) {
-  user.username = process.env.SYSTEM_TEST_USERNAME || user.username
-  user.password = process.env.SYSTEM_TEST_PASSWORD || user.password
-  user.clientAccount = process.env.SYSTEM_TEST_CLIENT_ACCOUNT_ID || user.clientAccount
-  user.apiKey = process.env.SYSTEM_TEST_API_KEY || user.apiKey
+  user.username = process.env.SYSTEM_TEST_USERNAME ?? user.username
+  user.password = process.env.SYSTEM_TEST_PASSWORD ?? user.password
+  user.clientAccount = process.env.SYSTEM_TEST_CLIENT_ACCOUNT_ID ?? user.clientAccount
+  user.apiKey = process.env.SYSTEM_TEST_API_KEY ?? user.apiKey
 }
 
 const legacyId = '4564'
@@ -114,7 +114,7 @@ describe('v0: TransactionsLegacy: can get all', () => {
 
     try {
       await th.transactionsLegacy().getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('TransactionFetchFailed')
     }
   })

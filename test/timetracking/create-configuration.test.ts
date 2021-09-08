@@ -87,7 +87,7 @@ describe('v0: Timetracking: can create a timetracking configurations', () => {
 
     try {
       await th.timetracking().createConfiguration(updateObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('TimetrackingConfigurationPostFailed')
     }
   })

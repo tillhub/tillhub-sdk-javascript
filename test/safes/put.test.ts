@@ -78,7 +78,7 @@ describe('v0: Safes: can alter the Safes', () => {
 
     try {
       await th.safes().put(safeId, safe)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('SafesPutFailed')
     }
   })

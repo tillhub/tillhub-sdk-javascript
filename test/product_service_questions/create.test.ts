@@ -97,7 +97,7 @@ describe('v0: Product Service Question: can create one product service question'
     try {
       const th = await initThInstance()
       await th.productServiceQuestions().create(productServiceQuestion)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ProductServiceQuestionsCreationFailed')
     }
   })

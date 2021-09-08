@@ -114,7 +114,7 @@ describe('v0: Orders: can get open order', () => {
 
     try {
       await th.orders().getOpenOrder()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('OpenOrderFetchFailed')
     }
   })

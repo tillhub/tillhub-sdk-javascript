@@ -94,7 +94,7 @@ describe('v0: Customers: can create a customer', () => {
     try {
       const th = await initThInstance()
       await th.customers().create(customer)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('CustomerCreationFailed')
     }
   })

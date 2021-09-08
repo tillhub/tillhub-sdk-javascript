@@ -156,7 +156,7 @@ describe('v0: Invoices', () => {
 
     try {
       await th.invoices().create(requestObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('InvoicesCreateFailed')
     }
   })

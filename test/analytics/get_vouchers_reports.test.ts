@@ -138,7 +138,7 @@ describe('v0: Analytics: reports gets all vouchers', () => {
 
     try {
       await th.analytics().getVouchersReports()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('VouchersReportFetchFailed')
     }
   })

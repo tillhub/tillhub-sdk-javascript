@@ -85,7 +85,7 @@ describe('v0: Trash: can recover an object', () => {
     try {
       const th = await initThInstance()
       await th.trash().recover(recoverQuery)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('RecoverFailed')
     }
   })

@@ -119,7 +119,7 @@ describe('v0: Devices: can search for devices', () => {
 
     try {
       await th.devices().search(searchTerm)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('DeviceFetchFailed')
     }
   })

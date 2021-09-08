@@ -129,7 +129,7 @@ describe('v0: Orders: can create Order Items', () => {
 
     try {
       await th.orders().createOrderItems(orderItemsCreate)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('OrderItemsCreateFailed')
     }
   })

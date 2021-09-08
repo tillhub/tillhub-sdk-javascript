@@ -150,7 +150,7 @@ export class ProductTemplates {
       return {
         msg: response.data.msg
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new ProductTemplateDeleteFailed()
     }
   }

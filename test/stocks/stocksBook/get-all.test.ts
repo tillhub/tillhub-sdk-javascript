@@ -90,7 +90,7 @@ describe('v0: StocksBook: can get all', () => {
     try {
       const th = await initThInstance()
       await th.stocksBook().getAll(query)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StocksBookFetchFailed')
     }
   })

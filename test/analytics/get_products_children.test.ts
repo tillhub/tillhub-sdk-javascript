@@ -140,7 +140,7 @@ describe('v0: Analytics Products Children- getProductsChildren', () => {
 
     try {
       await th.analytics().getProductsChildren(productNumber, queryObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StatisticsProductChildrenFetchFailed')
     }
   })

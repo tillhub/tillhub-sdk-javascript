@@ -69,7 +69,7 @@ export class Balances extends ThBaseHandler {
         metadata: { count: response.data.count },
         next
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.BalancesFetchFailed()
     }
   }
@@ -91,7 +91,7 @@ export class Balances extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.BalancesMetaFailed()
     }
   }

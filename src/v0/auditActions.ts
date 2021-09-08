@@ -78,7 +78,7 @@ export class AuditActions {
         metadata: { cursor: response.data.cursor },
         next
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.AuditActionsFetchAllFailed()
     }
   }
@@ -95,7 +95,7 @@ export class AuditActions {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.AuditActionsGetMetaFailed()
     }
   }
@@ -113,7 +113,7 @@ export class AuditActions {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.AuditActionsFetchOneFailed()
     }
   }
@@ -127,7 +127,7 @@ export class AuditActions {
       return {
         msg: response.data.msg
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.AuditActionsCreateFailed()
     }
   }
@@ -142,7 +142,7 @@ export class AuditActions {
       return {
         data: response.data.results
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new errors.AuditActionsTypesFetchFailed()
     }
   }

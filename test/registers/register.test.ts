@@ -266,7 +266,7 @@ describe('v1: Register', () => {
 
     try {
       await th.registers().get(mockRegister.id)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('RegisterFetchFailed')
     }
   })

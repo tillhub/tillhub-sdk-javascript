@@ -216,7 +216,7 @@ export class TransactionsLegacy {
       return {
         data: response.data.results
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new TransactionPdfFailed(err.message)
     }
   }
@@ -274,7 +274,7 @@ export class Signing {
       return {
         data: response.data.results
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new TransactionSigningInitialisationFailed(err.message)
     }
   }
@@ -295,7 +295,7 @@ export class Signing {
       return {
         data: response.data.results
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new TransactionSigningYearlyReceiptFailed(err.message)
     }
   }
@@ -316,7 +316,7 @@ export class Signing {
       return {
         data: response.data.results
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new TransactionSigningMonthlyReceiptFailed(err.message)
     }
   }
@@ -338,7 +338,7 @@ export class Signing {
       return {
         data: response.data.results
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new TransactionSigningZeroReceiptFailed(err.message)
     }
   }

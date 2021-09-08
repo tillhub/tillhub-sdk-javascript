@@ -115,7 +115,7 @@ describe('v0: vouchers: can get all users', () => {
 
     try {
       await th.vouchers().getAllUsers()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('VouchersUsersFailed')
     }
   })

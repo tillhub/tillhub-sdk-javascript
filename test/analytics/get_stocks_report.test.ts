@@ -114,7 +114,7 @@ describe('v0: Analytics: gets Stocks report', () => {
     try {
       const th = await initThInstance()
       await th.analytics().getStocksReport()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ReportsStocksFetchFailed')
     }
   })

@@ -77,7 +77,7 @@ describe('v1: StocksBookV1', () => {
 
     try {
       await stocksBook.getAll(query)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe(StocksBookFetchFailed.name)
     }
   })

@@ -86,7 +86,7 @@ describe('v0: Storefronts: can fetch delta of the whitelisted products', () => {
     try {
       const th = await initThInstance()
       await th.storefronts().delta(storeId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StorefrontsDeltaFailed')
     }
   })

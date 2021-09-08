@@ -130,7 +130,7 @@ describe('v0: Analytics: gets Payments report', () => {
     try {
       const th = await initThInstance()
       await th.analytics().getPaymentsReport()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('PaymentsReportFetchFailed')
     }
   })

@@ -99,7 +99,7 @@ describe('v0: Orders: can update an Order Item', () => {
   it('rejects on status codes that are not 200', async () => {
     try {
       await th.orders().updateOrderItem(requestObj)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('OrderItemUpdateFailed')
     }
   })

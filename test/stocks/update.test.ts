@@ -129,7 +129,7 @@ describe('v0: Stocks', () => {
 
     try {
       await th.stocks().update(requestObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StocksUpdateFailed')
     }
   })

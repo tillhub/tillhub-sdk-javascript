@@ -76,7 +76,7 @@ describe('v0: Counting Protocols: can get meta of counting protocols', () => {
     try {
       const th = await initThInstance()
       await th.countingProtocols().meta()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('CountingProtocolsMetaFailed')
     }
   })

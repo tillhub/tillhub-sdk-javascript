@@ -173,7 +173,7 @@ export class ContentTemplates extends ThBaseHandler {
         data: response.data.results[0] as ContentTemplate,
         msg: response.data.msg
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new ContentTemplateDeleteFailed()
     }
   }

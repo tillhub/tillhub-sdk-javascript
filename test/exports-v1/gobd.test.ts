@@ -76,7 +76,7 @@ describe('v1: Exports - gobd', () => {
 
     try {
       await exportsV1.gobd(query)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe(ExportsGobdFetchFailed.name)
     }
   })

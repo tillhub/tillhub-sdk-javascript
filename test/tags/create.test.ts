@@ -77,7 +77,7 @@ describe('v0: Tags: can create one tag', () => {
     try {
       const th = await initThInstance()
       await th.tags().create(tag)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('TagsCreationFailed')
     }
   })

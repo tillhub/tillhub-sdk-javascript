@@ -79,7 +79,7 @@ describe('v0: Staff Groups: can delete a staff group', () => {
 
     try {
       await th.staffGroups().delete(staffGroupId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StaffGroupDeleteFailed')
     }
   })

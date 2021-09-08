@@ -136,7 +136,7 @@ describe('v0: vouchers: can patch one', () => {
 
     try {
       await th.vouchers().patch(voucherSource as any, voucherTarget as any)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('VoucherPatchFailed')
     }
   })

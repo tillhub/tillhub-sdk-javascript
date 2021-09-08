@@ -71,7 +71,7 @@ export class Auth extends v0.Auth {
         user: response.data.user.legacy_id || response.data.user.id,
         name: response.data.user.name
       }
-    } catch (err) {
+    } catch (err: any) {
       const error = new errors.AuthenticationFailed()
       err.error = err
       err.body = err.response?.data ?? null
@@ -110,7 +110,7 @@ export class Auth extends v0.Auth {
         scopes,
         subUser: subUser || null
       }
-    } catch (err) {
+    } catch (err: any) {
       const error = new errors.AuthenticationFailed()
       err.error = err
       err.body = err.response?.data ?? null
@@ -140,7 +140,7 @@ export class Auth extends v0.Auth {
         role: response.data.user.role,
         is_support: true
       }
-    } catch (err) {
+    } catch (err: any) {
       const error = new errors.AuthenticationFailed()
       err.error = err
       err.body = err.response?.data ?? null

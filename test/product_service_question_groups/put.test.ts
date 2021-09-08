@@ -94,7 +94,7 @@ describe('v0: Product Service Question Groups: can alter the group', () => {
 
     try {
       await th.productServiceQuestionGroups().put(groupdId, productServiceQuestionGroup)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ProductServiceQuestionGroupsPutFailed')
     }
   })

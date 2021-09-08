@@ -109,7 +109,7 @@ describe('v0: Staff: can get a unique staff number', () => {
     try {
       const th = await initThInstance()
       await th.staff().getStaffNumber()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StaffNumberGetFailed')
     }
   })
@@ -145,7 +145,7 @@ describe('v0: Staff: can get a unique staff number', () => {
     try {
       const th = await initThInstance()
       await th.staff().getStaffNumber(staffNumber)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StaffNumberGetFailed')
       expect(err.properties.status).toBe(409)
       expect(err.properties.name).toBe(errorName)

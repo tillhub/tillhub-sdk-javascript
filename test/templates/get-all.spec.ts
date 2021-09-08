@@ -114,7 +114,7 @@ describe('v1: Templates: can get all', () => {
 
     try {
       await th.templates().getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('TemplatesFetchFailed')
     }
   })

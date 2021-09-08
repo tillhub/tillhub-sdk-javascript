@@ -89,7 +89,7 @@ describe('v0: Product Service Question Groups: can create one product service qu
     try {
       const th = await initThInstance()
       await th.productServiceQuestionGroups().create(productServiceQuestionGroup)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ProductServiceQuestionGroupsCreationFailed')
     }
   })

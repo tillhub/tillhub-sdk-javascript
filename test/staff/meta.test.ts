@@ -80,7 +80,7 @@ describe('v0: Staff: can get meta of staff', () => {
     try {
       const th = await initThInstance()
       await th.staff().meta(query)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StaffMetaFailed')
     }
   })

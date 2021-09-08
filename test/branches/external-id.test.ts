@@ -81,7 +81,7 @@ describe('v0: Branches: can get a unique external_custom_id', () => {
     try {
       const th = await initThInstance()
       await th.branches().getUniqueExternalId(externalCustomId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ExternalCustomIdGetUniqueFailed')
     }
   })
@@ -117,7 +117,7 @@ describe('v0: Branches: can get a unique external_custom_id', () => {
     try {
       const th = await initThInstance()
       await th.branches().getUniqueExternalId(externalCustomId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ExternalCustomIdGetUniqueFailed')
       expect(err.properties.status).toBe(409)
       expect(err.properties.name).toBe(errorName)

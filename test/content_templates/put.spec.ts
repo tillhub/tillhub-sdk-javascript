@@ -85,7 +85,7 @@ describe('v0: Contents Templates: can alter the templates', () => {
 
     try {
       await th.contentTemplates().patch(templateId, updateObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ContentTemplatePatchFailed')
     }
   })

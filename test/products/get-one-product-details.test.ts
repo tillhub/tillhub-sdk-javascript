@@ -121,7 +121,7 @@ describe('v1: Products: can get details of one', () => {
 
     try {
       await th.products().getDetails(productId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ProductDetailsFetchFailed')
     }
   })

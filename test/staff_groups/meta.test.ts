@@ -114,7 +114,7 @@ describe('v0: Staff Groups: can get count number of all staff goups', () => {
 
     try {
       await th.staffGroups().meta()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StaffGroupsMetaFailed')
     }
   })

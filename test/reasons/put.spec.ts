@@ -80,7 +80,7 @@ describe('v0: Reasons: can alter the reasons', () => {
 
     try {
       await th.reasons().put(reasonsId, updateObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ReasonsPutFailed')
     }
   })

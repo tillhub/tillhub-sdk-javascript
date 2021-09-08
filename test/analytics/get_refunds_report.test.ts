@@ -186,7 +186,7 @@ describe('v0: Analytics: gets refunds report', () => {
 
     try {
       await th.analytics().getRefundsReport(reportOptions)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('RefundsReportFetchFailed')
     }
   })

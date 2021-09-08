@@ -231,7 +231,7 @@ describe('Create a new Product', () => {
 
     try {
       await th.products().create(productObj)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ProductsCreateFailed')
     }
   })

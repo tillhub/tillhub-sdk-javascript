@@ -86,7 +86,7 @@ describe('v0: Safes: book a transfer', () => {
     try {
       const th = await initThInstance()
       await th.safes().book(body)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('SafesBookFailed')
     }
   })

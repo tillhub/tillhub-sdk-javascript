@@ -86,7 +86,7 @@ describe('v0: Product Service Question Groups: can get one productServiceQuestio
     try {
       const th = await initThInstance()
       await th.productServiceQuestionGroups().get(groupId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ProductServiceQuestionGroupsFetchOneFailed')
     }
   })

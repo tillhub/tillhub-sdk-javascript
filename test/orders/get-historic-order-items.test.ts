@@ -119,7 +119,7 @@ describe('v0: Orders: can get all historic order items', () => {
 
     try {
       await th.orders().getHistoricOrderItems(orderId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('HistoricOrderItemsFetchFailed')
     }
   })

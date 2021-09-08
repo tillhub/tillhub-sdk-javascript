@@ -80,7 +80,7 @@ describe('v0: Dependencies: can get the number of dependencies for a specific re
     try {
       const th = await initThInstance()
       await th.dependencies().get(dependenciesQuery)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('DependenciesFetchFailed')
     }
   })

@@ -78,7 +78,7 @@ describe('v0: Safes: can get one safe', () => {
     try {
       const th = await initThInstance()
       await th.safes().get(safeId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('SafesFetchOneFailed')
     }
   })

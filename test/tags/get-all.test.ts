@@ -114,7 +114,7 @@ describe('v0: Tags: can get all', () => {
 
     try {
       await th.tags().getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('TagsFetchAllFailed')
     }
   })

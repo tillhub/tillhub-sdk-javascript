@@ -114,7 +114,7 @@ describe('v0: Orders: can get order suggestions', () => {
 
     try {
       await th.orders().getOrderSuggestions()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('OrderSuggestionsFetchFailed')
     }
   })

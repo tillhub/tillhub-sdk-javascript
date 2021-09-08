@@ -114,7 +114,7 @@ describe('v0: Invoices: can get meta', () => {
 
     try {
       await th.invoices().getMeta()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('InvoicesGetMetaFailed')
     }
   })

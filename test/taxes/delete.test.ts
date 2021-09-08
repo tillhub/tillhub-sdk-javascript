@@ -76,7 +76,7 @@ describe('v0: Taxes: can delete the tax', () => {
 
     try {
       await th.taxes().delete(taxId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('TaxDeleteFailed')
     }
   })

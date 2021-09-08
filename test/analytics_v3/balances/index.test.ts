@@ -76,7 +76,7 @@ describe('v3: AnalyticsReportsBalances', () => {
 
     try {
       await analyticsReportsBalances.export({ query })
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe(AnalyticsReportsV3BalancesExportFetchError.name)
     }
   })

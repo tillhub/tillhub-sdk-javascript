@@ -14,10 +14,10 @@ const user = {
 }
 
 if (process.env.SYSTEM_TEST) {
-  user.username = process.env.SYSTEM_TEST_USERNAME || user.username
-  user.password = process.env.SYSTEM_TEST_PASSWORD || user.password
-  user.clientAccount = process.env.SYSTEM_TEST_CLIENT_ACCOUNT_ID || user.clientAccount
-  user.apiKey = process.env.SYSTEM_TEST_API_KEY || user.apiKey
+  user.username = process.env.SYSTEM_TEST_USERNAME ?? user.username
+  user.password = process.env.SYSTEM_TEST_PASSWORD ?? user.password
+  user.clientAccount = process.env.SYSTEM_TEST_CLIENT_ACCOUNT_ID ?? user.clientAccount
+  user.apiKey = process.env.SYSTEM_TEST_API_KEY ?? user.apiKey
 }
 
 describe('SDK: can instantiate SDK', () => {
@@ -78,7 +78,7 @@ describe('SDK: can instantiate SDK', () => {
       expect(user).toBe('4564')
       expect(th.auth.token).toBe('sometoken')
       expect(th.auth.authenticated).toBe(true)
-    } catch (err) {
+    } catch (err: any) {
       throw err
     }
   })

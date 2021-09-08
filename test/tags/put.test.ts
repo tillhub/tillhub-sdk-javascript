@@ -78,7 +78,7 @@ describe('v0: Tags: can alter the Tags', () => {
 
     try {
       await th.tags().put(tagId, tag)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('TagsPutFailed')
     }
   })

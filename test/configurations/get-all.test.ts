@@ -114,7 +114,7 @@ describe('v0: Configurations: can get all', () => {
 
     try {
       await th.configurations().getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ConfigurationsFetchFailed')
     }
   })

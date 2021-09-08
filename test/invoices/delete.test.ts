@@ -116,7 +116,7 @@ describe('v0: Invoices', () => {
 
     try {
       await th.invoices().deleteOne(invoiceId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('InvoicesDeleteFailed')
     }
   })

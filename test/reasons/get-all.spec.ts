@@ -73,7 +73,7 @@ describe('v0: Reasons: can get all the reasons', () => {
     try {
       const th = await initThInstance()
       await th.reasons().getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ReasonsFetchFailed')
     }
   })

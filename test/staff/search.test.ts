@@ -138,7 +138,7 @@ describe('v0: Staff: can search for staff', () => {
 
     try {
       await th.staff().search(query)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StaffSearchFailed')
     }
   })

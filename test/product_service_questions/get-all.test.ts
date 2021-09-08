@@ -118,7 +118,7 @@ describe('v0: Product Service Question: can get all', () => {
 
     try {
       await th.productServiceQuestions().getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ProductServiceQuestionsFetchAllFailed')
     }
   })

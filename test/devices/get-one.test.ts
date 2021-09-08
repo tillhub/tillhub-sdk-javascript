@@ -116,7 +116,7 @@ describe('v0: Devices: Actions: can get one', () => {
 
     try {
       await th.devices().get(deviceId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('DeviceFetchFailed')
     }
   })

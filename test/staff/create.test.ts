@@ -107,7 +107,7 @@ describe('v0: Staff: can create one staff member', () => {
     try {
       const th = await initThInstance()
       await th.staff().create(staffMember)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StaffMemberCreateFailed')
     }
   })

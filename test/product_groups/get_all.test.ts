@@ -115,7 +115,7 @@ describe('v0: ProductGroups: can get all', () => {
 
     try {
       await th.productGroups().getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ProductGroupsFetchFailed')
     }
   })

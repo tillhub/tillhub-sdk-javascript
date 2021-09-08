@@ -117,7 +117,7 @@ describe('v1: Products', () => {
 
     try {
       await th.products().delete(productId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ProductsDeleteFailed')
     }
   })

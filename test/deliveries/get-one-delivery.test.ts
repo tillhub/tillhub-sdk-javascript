@@ -129,7 +129,7 @@ describe('v0: Deliveries: can get one', () => {
 
     try {
       await th.deliveries().getOne(requestObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('DeliveriesFetchOneFailed')
     }
   })

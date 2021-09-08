@@ -109,7 +109,7 @@ describe('v2: AnalyticsReportsCountingProtocols: can get all the counting protoc
     try {
       const th = await initThInstance()
       await th.analyticsHandlers().analytics.reports.AnalyticsReportsCountingProtocols.getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('AnalyticsReportsCountingProtocolsFetchFailed')
     }
   })

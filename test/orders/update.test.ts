@@ -124,7 +124,7 @@ describe('v0: Orders: can update Orders', () => {
 
     try {
       await th.orders().update(updateObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('OrdersUpdateFailed')
     }
   })

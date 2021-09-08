@@ -84,7 +84,7 @@ describe('v0: Discounts: can create one discount', () => {
     try {
       const th = await initThInstance()
       await th.discounts().create(discount)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('DiscountCreationFailed')
     }
   })

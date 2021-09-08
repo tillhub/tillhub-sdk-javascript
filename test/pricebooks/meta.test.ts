@@ -77,7 +77,7 @@ describe('v0: Pricebooks: can get count number of all pricebooks', () => {
 
     try {
       await th.products().pricebooks().meta()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('PricebooksMetaFailed')
     }
   })

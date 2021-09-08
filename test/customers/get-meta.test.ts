@@ -127,7 +127,7 @@ describe('v0: Branches: can get count number of all customers logs', () => {
 
     try {
       await th.customers().meta(query)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('CustomersMetaFailed')
     }
   })

@@ -132,7 +132,7 @@ describe('v0: Audits: Actions: can get all', () => {
 
     try {
       await th.auditActions().getAll(query)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('AuditActionsFetchAllFailed')
     }
   })

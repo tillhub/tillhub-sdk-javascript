@@ -145,7 +145,7 @@ export class Categories extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new CategoriesDeleteFailed()
     }
   }

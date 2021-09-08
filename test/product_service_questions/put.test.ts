@@ -90,7 +90,7 @@ describe('v0: Product Service Question: can alter the', () => {
 
     try {
       await th.productServiceQuestions().put(questionId, productServiceQuestion)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ProductServiceQuestionsPutFailed')
     }
   })

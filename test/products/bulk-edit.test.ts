@@ -78,7 +78,7 @@ describe('v1: Products: can bulk edit multiple products', () => {
     try {
       const th = await initThInstance()
       await th.products().bulkEdit(products)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('ProductsBulkEditFailed')
     }
   })

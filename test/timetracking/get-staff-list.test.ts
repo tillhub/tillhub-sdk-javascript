@@ -73,7 +73,7 @@ describe('v0: Timetracking: can get list of all staff members with at least one 
     try {
       const th = await initThInstance()
       await th.timetracking().getStaffList()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('TimetrackingStaffListFetchFailed')
     }
   })

@@ -114,7 +114,7 @@ describe('v0: Functions: can get all', () => {
 
     try {
       await th.functions().getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('FunctionsFetchFailed')
     }
   })

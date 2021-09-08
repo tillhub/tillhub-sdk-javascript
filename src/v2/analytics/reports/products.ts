@@ -54,7 +54,7 @@ export class AnalyticsReportsProducts {
           count: response.data.count
         }
       }
-    } catch (err) {
+    } catch (err: any) {
       throw new AnalyticsReportsProductsFetchFailed(undefined, { error: err })
     }
   }

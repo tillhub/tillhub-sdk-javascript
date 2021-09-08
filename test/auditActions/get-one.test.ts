@@ -139,7 +139,7 @@ describe('v0: Audits: Actions: can get one', () => {
 
     try {
       await th.auditActions().get(requestObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('AuditActionsFetchOneFailed')
     }
   })

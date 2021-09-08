@@ -80,7 +80,7 @@ describe('v0: Staff: can alter the Staff member', () => {
 
     try {
       await th.staff().put(staffId, updateObject)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StaffPutFailed')
     }
   })

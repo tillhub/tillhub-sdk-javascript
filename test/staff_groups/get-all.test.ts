@@ -114,7 +114,7 @@ describe('v0: StaffGroups: can get all', () => {
 
     try {
       await th.staffGroups().getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StaffGroupsFetchAllFailed')
     }
   })

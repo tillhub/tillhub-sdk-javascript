@@ -119,7 +119,7 @@ describe('v0: Messages: can get all messages', () => {
     try {
       const th = await initThInstance()
       await th.messages().getAll()
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('MessagesFetchFailed')
     }
   })

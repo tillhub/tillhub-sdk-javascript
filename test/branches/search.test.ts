@@ -116,7 +116,7 @@ describe('v0: Branches: can search for branches', () => {
 
     try {
       await th.branches().search(searchTerm)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('BranchesSearchFailed')
     }
   })

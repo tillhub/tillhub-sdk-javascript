@@ -91,7 +91,7 @@ describe('v0: Stock: Locations: can get one', () => {
     try {
       const th = await initThInstance()
       await th.stocks().getOneLocation(locationId)
-    } catch (err) {
+    } catch (err: any) {
       expect(err.name).toBe('StocksLocationFetchOneFailed')
     }
   })
