@@ -39,6 +39,7 @@ export interface AnalyticsHandlersV1Types {
       AnalyticsReportsVouchers: any
       AnalyticsReportsVat: any
       AnalyticsReportsProductGroups: any
+      AnalyticsReportsPaymentOptions: any
     }
   }
 }
