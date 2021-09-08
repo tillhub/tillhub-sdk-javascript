@@ -4,6 +4,7 @@ import { AnalyticsReportsVouchers } from './vouchers'
 import { AnalyticsReportsVat } from './vat'
 import { AnalyticsReportsProductGroups } from './product_groups'
 import { AnalyticsReportsPaymentOptions } from './payment_options'
+import { AnalyticsReportsStockTakings } from './stock_takings'
 
 export default {
   AnalyticsReportsCustomers,
@@ -11,5 +12,6 @@ export default {
   AnalyticsReportsVouchers,
   AnalyticsReportsVat,
   AnalyticsReportsProductGroups,
-  AnalyticsReportsPaymentOptions
+  AnalyticsReportsPaymentOptions,
+  AnalyticsReportsStockTakings
 }
