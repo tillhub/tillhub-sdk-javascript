@@ -43,6 +43,7 @@ export interface AnalyticsHandlersV1Types {
       AnalyticsReportsProductGroups: any
       AnalyticsReportsPaymentOptions: any
       AnalyticsReportsStockTakings: any
+      AnalyticsReportsProcesses: any
     }
   }
 }
