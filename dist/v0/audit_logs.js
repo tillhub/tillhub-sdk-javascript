@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AuditLogs = void 0;
+exports.AuditLogsGetMetaFailed = exports.AuditLogsFetchOneFailed = exports.AuditLogsFetchAllFailed = exports.AuditLogs = void 0;
 var tslib_1 = require("tslib");
-var errors = tslib_1.__importStar(require("../errors"));
+var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
 var AuditLogs = (function () {
     function AuditLogs(options, http) {
@@ -39,7 +39,7 @@ var AuditLogs = (function () {
                             }];
                     case 2:
                         err_1 = _b.sent();
-                        throw new errors.AuditLogsFetchAllFailed();
+                        throw new AuditLogsFetchAllFailed();
                     case 3: return [2];
                 }
             });
@@ -58,14 +58,14 @@ var AuditLogs = (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new errors.AuditLogsGetMetaFailed();
+                            throw new AuditLogsGetMetaFailed();
                         return [2, {
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
                         err_2 = _a.sent();
-                        throw new errors.AuditLogsGetMetaFailed();
+                        throw new AuditLogsGetMetaFailed();
                     case 3: return [2];
                 }
             });
@@ -92,7 +92,7 @@ var AuditLogs = (function () {
                             }];
                     case 3:
                         err_3 = _a.sent();
-                        throw new errors.AuditLogsFetchOneFailed();
+                        throw new AuditLogsFetchOneFailed();
                     case 4: return [2];
                 }
             });
@@ -101,4 +101,43 @@ var AuditLogs = (function () {
     return AuditLogs;
 }());
 exports.AuditLogs = AuditLogs;
-//# sourceMappingURL=auditLogs.js.map
+var AuditLogsFetchAllFailed = (function (_super) {
+    tslib_1.__extends(AuditLogsFetchAllFailed, _super);
+    function AuditLogsFetchAllFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch audit logs'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'AuditLogsFetchAllFailed';
+        Object.setPrototypeOf(_this, AuditLogsFetchAllFailed.prototype);
+        return _this;
+    }
+    return AuditLogsFetchAllFailed;
+}(errors_1.BaseError));
+exports.AuditLogsFetchAllFailed = AuditLogsFetchAllFailed;
+var AuditLogsFetchOneFailed = (function (_super) {
+    tslib_1.__extends(AuditLogsFetchOneFailed, _super);
+    function AuditLogsFetchOneFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch audit log'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'AuditLogsFetchOneFailed';
+        Object.setPrototypeOf(_this, AuditLogsFetchOneFailed.prototype);
+        return _this;
+    }
+    return AuditLogsFetchOneFailed;
+}(errors_1.BaseError));
+exports.AuditLogsFetchOneFailed = AuditLogsFetchOneFailed;
+var AuditLogsGetMetaFailed = (function (_super) {
+    tslib_1.__extends(AuditLogsGetMetaFailed, _super);
+    function AuditLogsGetMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch audit logs meta'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'AuditLogsGetMetaFailed';
+        Object.setPrototypeOf(_this, AuditLogsGetMetaFailed.prototype);
+        return _this;
+    }
+    return AuditLogsGetMetaFailed;
+}(errors_1.BaseError));
+exports.AuditLogsGetMetaFailed = AuditLogsGetMetaFailed;
+//# sourceMappingURL=audit_logs.js.map

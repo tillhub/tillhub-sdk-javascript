@@ -475,21 +475,6 @@ export declare class AuditActionsTypesFetchFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
 }
-export declare class AuditLogsFetchAllFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: Record<string, unknown>);
-}
-export declare class AuditLogsFetchOneFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: Record<string, unknown>);
-}
-export declare class AuditLogsGetMetaFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: Record<string, unknown>);
-}
 export declare class ImageCreationFailed extends BaseError {
     message: string;
     name: string;

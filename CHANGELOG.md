@@ -1,3 +1,17 @@
+# [4.24.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.23.1...v4.24.0) (2021-09-08)
+
+
+### Features
+
+* **audit-logs:** v1 export ([99625d9](https://github.com/tillhub/tillhub-sdk-javascript/commit/99625d9e5248955ac5684eecc958291cb823a9b1))
+* **payment-options:** v1 export next gen ([cd0efaa](https://github.com/tillhub/tillhub-sdk-javascript/commit/cd0efaaab35fbb59d2ac88e8d29edef6d0d00640))
+* **processes:** v1 analytics report export ([032fc3e](https://github.com/tillhub/tillhub-sdk-javascript/commit/032fc3ee87e3a45a0af806a74ef93b30e194a79f))
+* **product-groups:** v1 export next gen ([370be09](https://github.com/tillhub/tillhub-sdk-javascript/commit/370be094f2088038c7a1ffb9d0822e2decb08bcc))
+* **revenues:** v3 exports next gen ([95add7e](https://github.com/tillhub/tillhub-sdk-javascript/commit/95add7e4c41f7784bae0e72370152f1ba575b824))
+* **stock-takings:** v1 analytics report export ([cdbe13b](https://github.com/tillhub/tillhub-sdk-javascript/commit/cdbe13bda1dbf2f266ad01375bcd2f9eabcaa2b2))
+* **vat:** v1 export next gen ([064d4bb](https://github.com/tillhub/tillhub-sdk-javascript/commit/064d4bb73e0b60da7c2264e500d4200aff98a928))
+* **vouchers:** v1 export next gen ([0a5cb7e](https://github.com/tillhub/tillhub-sdk-javascript/commit/0a5cb7e00b13d4210adb9d915bd954c006889807))
+
 ## [4.23.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.23.0...v4.23.1) (2021-08-09)
 
 

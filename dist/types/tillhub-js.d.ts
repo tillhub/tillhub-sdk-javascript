@@ -75,6 +75,7 @@ export declare class TillhubClient extends events.EventEmitter {
     staff(): v0.Staff;
     auditActions(): v0.AuditActions;
     auditLogs(): v0.AuditLogs;
+    auditLogsV1(): v1.AuditLogs;
     registers(): v1.Registers;
     images(): v0.Images;
     videos(): v0.Videos;

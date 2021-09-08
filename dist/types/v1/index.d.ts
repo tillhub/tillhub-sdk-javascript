@@ -12,12 +12,19 @@ import { SafesLogBook } from './safes';
 import { ExportsV1 } from './exports';
 import { StocksBook } from './stocks';
 import analytics from './analytics';
-export { Auth, Pricebooks, Products, Templates, Transactions, TransactionsLegacy, Registers, Balances, Vouchers, Customers, Carts, SafesLogBook, ExportsV1, StocksBook, analytics };
+import { AuditLogs } from './audit_logs';
+export { Auth, Pricebooks, Products, Templates, Transactions, TransactionsLegacy, Registers, Balances, Vouchers, Customers, Carts, SafesLogBook, ExportsV1, StocksBook, analytics, AuditLogs };
 export interface AnalyticsHandlersV1Types {
     analytics: {
         reports: {
             AnalyticsReportsCustomers: any;
             AnalyticsReportsPayments: any;
+            AnalyticsReportsVouchers: any;
+            AnalyticsReportsVat: any;
+            AnalyticsReportsProductGroups: any;
+            AnalyticsReportsPaymentOptions: any;
+            AnalyticsReportsStockTakings: any;
+            AnalyticsReportsProcesses: any;
         };
     };
 }

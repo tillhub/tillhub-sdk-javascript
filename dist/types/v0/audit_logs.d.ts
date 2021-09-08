@@ -1,4 +1,5 @@
 import { Client } from '../client';
+import { BaseError } from '../errors';
 import { UriHelper } from '../uri-helper';
 export interface AuditsOptions {
     user?: string;
@@ -34,4 +35,19 @@ export declare class AuditLogs {
     getAll(q?: AuditsQuery | undefined): Promise<AuditsResponse>;
     meta(q?: AuditsMetaQuery | undefined): Promise<AuditsResponse>;
     get(requestObject: AuditLogsGetOneRequestObject): Promise<AuditsResponse>;
+}
+export declare class AuditLogsFetchAllFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class AuditLogsFetchOneFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class AuditLogsGetMetaFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

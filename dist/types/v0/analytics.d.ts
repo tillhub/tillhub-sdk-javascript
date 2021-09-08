@@ -86,7 +86,7 @@ export interface TopPaymentsReportOptions {
     end?: string;
     branch_number?: number;
 }
-export interface ProductGoupsOptions {
+export interface ProductGroupsOptions {
     description?: string;
     product_group_id?: string;
     qty?: {
@@ -148,7 +148,7 @@ export declare class Analytics {
     getCustomersTransaction(query: CustomersTransactionOptions): Promise<AnalyticsResponse>;
     getCustomersOverview(query: CustomersTransactionOptions): Promise<AnalyticsResponse>;
     getStocksReport(query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse>;
-    getProductGroups(query?: ProductGoupsOptions | undefined): Promise<AnalyticsResponse>;
+    getProductGroups(query?: ProductGroupsOptions | undefined): Promise<AnalyticsResponse>;
     getProductGroupsFilters(query: ProductGroupsFilters): Promise<AnalyticsResponse>;
     balances(): Balances;
     paymentOptions(): PaymentOptions;
