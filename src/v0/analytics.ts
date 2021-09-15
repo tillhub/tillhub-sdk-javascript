@@ -1,4 +1,4 @@
-import { Client } from '../client'
+import { Client, Timeout } from '../client'
 import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
 import { Balances } from './analytics/reports/balances'
@@ -13,6 +13,7 @@ export type StaffID = string | null
 export interface AnalyticsOptions {
   user?: string
   base?: string
+  timeout?: Timeout
 }
 
 export interface AnalyticsResponse {
@@ -146,6 +147,7 @@ export class Analytics {
   http: Client
   public options: AnalyticsOptions
   public uriHelper: UriHelper
+  public timeout: Timeout
 
   constructor (options: AnalyticsOptions, http: Client) {
     this.options = options
@@ -154,6 +156,7 @@ export class Analytics {
     this.endpoint = '/api/v0/analytics'
     this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
+    this.timeout = options.timeout ?? this.http.getClient().defaults.timeout
   }
 
   async getRevenuesForDayOfWeek (query: RevenuBasicOptions): Promise<AnalyticsResponse> {
@@ -161,7 +164,7 @@ export class Analytics {
       const base = this.uriHelper.generateBaseUri('/aggregates/revenues/day_of_week')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
       if (response.status !== 200) throw new RevenuesFetchFailed()
 
       return {
@@ -178,7 +181,7 @@ export class Analytics {
       const base = this.uriHelper.generateBaseUri('/aggregates/revenues/sum')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
       if (response.status !== 200) throw new RevenuesFetchFailed()
 
       return {
@@ -195,7 +198,7 @@ export class Analytics {
       const base = this.uriHelper.generateBaseUri('/aggregates/revenues')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
 
       if (response.status !== 200) throw new RevenuesFetchFailed()
 
@@ -213,7 +216,7 @@ export class Analytics {
       const base = this.uriHelper.generateBaseUri('/aggregates/revenues/hour_of_day')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
       if (response.status !== 200) throw new RevenuesFetchFailed()
 
       return {
@@ -232,7 +235,7 @@ export class Analytics {
       const base = localUriHelper.generateBaseUri('/reports/products')
       const uri = localUriHelper.generateUriWithQuery(base, query)
 
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
       if (response.status !== 200) throw new StatisticsProductFetchFailed()
       return {
         data: response.data.results,
@@ -253,7 +256,7 @@ export class Analytics {
       const base = this.uriHelper.generateBaseUri(`/reports/products/${productNumber}`)
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
       if (response.status !== 200) throw new StatisticsProductChildrenFetchFailed()
       return {
         data: response.data.results,
@@ -271,7 +274,7 @@ export class Analytics {
       const base = this.uriHelper.generateBaseUri('/reports/staff/overview')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
       if (response.status !== 200) throw new StaffOverviewFetchFailed()
 
       return {
@@ -288,7 +291,7 @@ export class Analytics {
       const base = this.uriHelper.generateBaseUri('/reports/staff/product_groups')
       const uri = this.uriHelper.generateUriWithQuery(base, options)
 
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
       if (response.status !== 200) throw new ProductGroupsStaffReportFetchFailed()
 
       return {
@@ -305,7 +308,7 @@ export class Analytics {
       const base = this.uriHelper.generateBaseUri('/aggregates/product_groups')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
       if (response.status !== 200) throw new ProductGroupsReportFetchFailed()
 
       return {
@@ -322,7 +325,7 @@ export class Analytics {
       const base = this.uriHelper.generateBaseUri('/reports/staff/refunds')
       const uri = this.uriHelper.generateUriWithQuery(base, options)
 
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
       if (response.status !== 200) throw new RefundsReportFetchFailed()
 
       return {
@@ -339,7 +342,7 @@ export class Analytics {
       const base = this.uriHelper.generateBaseUri('/reports/vouchers')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
       if (response.status !== 200) throw new VouchersReportFetchFailed()
 
       return {
@@ -356,7 +359,7 @@ export class Analytics {
       const base = this.uriHelper.generateBaseUri('/reports/staff/products')
       const uri = this.uriHelper.generateUriWithQuery(base, options)
 
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
       if (response.status !== 200) throw new ProductsReportFetchFailed()
 
       return {
@@ -373,7 +376,7 @@ export class Analytics {
       const base = this.uriHelper.generateBaseUri('/reports/staff/payments')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
       if (response.status !== 200) throw new PaymentsReportFetchFailed()
 
       return {
@@ -390,7 +393,7 @@ export class Analytics {
       const base = this.uriHelper.generateBaseUri('/reports/payments/top')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
       if (response.status !== 200) throw new TopPaymentsReportFetchFailed()
 
       return {
@@ -409,7 +412,7 @@ export class Analytics {
       const base = this.uriHelper.generateBaseUri('/reports/transactions/simple')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
       if (response.status !== 200) throw new SimpleSalesCartItemsReportFetchFailed()
 
       return {
@@ -430,7 +433,7 @@ export class Analytics {
       const base = this.uriHelper.generateBaseUri('/reports/customers')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
       if (response.status !== 200) throw new ReportsCustomerCustomersFailed()
 
       return {
@@ -448,7 +451,7 @@ export class Analytics {
       const base = this.uriHelper.generateBaseUri('/reports/customers/transactions')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
       if (response.status !== 200) throw new ReportsCustomerTransactionsFailed()
 
       return {
@@ -466,7 +469,7 @@ export class Analytics {
       const base = this.uriHelper.generateBaseUri('/reports/customers/overview')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
       if (response.status !== 200) throw new ReportsCustomerOverviewFailed()
 
       return {
@@ -485,7 +488,7 @@ export class Analytics {
       const base = localUriHelper.generateBaseUri('/reports/stocks')
       const uri = localUriHelper.generateUriWithQuery(base, query)
 
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
 
       if (response.status !== 200) throw new ReportsStocksFetchFailed()
       return {
@@ -501,7 +504,7 @@ export class Analytics {
     try {
       const base = this.uriHelper.generateBaseUri('/reports/product_groups')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
       if (response.status !== 200) throw new ReportsProductGroupsFetchFailed()
       return {
         data: response.data.results,
@@ -518,7 +521,7 @@ export class Analytics {
     try {
       const base = this.uriHelper.generateBaseUri('/reports/product_groups/filters')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
       if (response.status !== 200) throw new ReportsProductGroupsFiltersFetchFailed()
       return {
         data: response.data.results,
