@@ -1,4 +1,4 @@
-import { Client } from '../client';
+import { Client, Timeout } from '../client';
 import { BaseError } from '../errors';
 import { UriHelper } from '../uri-helper';
 import { Balances } from './analytics/reports/balances';
@@ -11,6 +11,7 @@ export declare type StaffID = string | null;
 export interface AnalyticsOptions {
     user?: string;
     base?: string;
+    timeout?: Timeout;
 }
 export interface AnalyticsResponse {
     data: Array<Record<string, unknown>>;
@@ -128,6 +129,7 @@ export declare class Analytics {
     http: Client;
     options: AnalyticsOptions;
     uriHelper: UriHelper;
+    timeout: Timeout;
     constructor(options: AnalyticsOptions, http: Client);
     getRevenuesForDayOfWeek(query: RevenuBasicOptions): Promise<AnalyticsResponse>;
     getRevenuesSumForTimeRange(query: RevenuBasicOptions): Promise<AnalyticsResponse>;

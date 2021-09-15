@@ -1,8 +1,9 @@
 import { AxiosInstance } from 'axios';
 declare type Fn = () => any;
+export declare type Timeout = number | undefined;
 export interface ClientOptions {
     base?: string;
-    timeout?: number;
+    timeout?: Timeout;
     headers?: {
         [key: string]: any;
     };

@@ -217,7 +217,7 @@ var TillhubClient = (function (_super) {
         }
         return new v0.Orders({ user: this.auth.user, base: this.options.base }, this.http);
     };
-    TillhubClient.prototype.analytics = function () {
+    TillhubClient.prototype.analytics = function (axiosOptions) {
         if (!this.options ||
             !this.options.base ||
             !this.http ||
@@ -225,7 +225,7 @@ var TillhubClient = (function (_super) {
             !this.auth.authenticated) {
             throw new errors.UninstantiatedClient();
         }
-        return new v0.Analytics({ user: this.auth.user, base: this.options.base }, this.http);
+        return new v0.Analytics({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http);
     };
     TillhubClient.prototype.analyticsHandlersV1 = function () {
         if (!this.options ||

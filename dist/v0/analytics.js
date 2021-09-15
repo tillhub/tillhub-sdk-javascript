@@ -12,12 +12,13 @@ var cash_book_1 = require("./analytics/reports/cash_book");
 var customers_1 = require("./analytics/reports/customers");
 var Analytics = (function () {
     function Analytics(options, http) {
-        var _a;
+        var _a, _b;
         this.options = options;
         this.http = http;
         this.endpoint = '/api/v0/analytics';
         this.options.base = (_a = this.options.base) !== null && _a !== void 0 ? _a : 'https://api.tillhub.com';
         this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
+        this.timeout = (_b = options.timeout) !== null && _b !== void 0 ? _b : this.http.getClient().defaults.timeout;
     }
     Analytics.prototype.getRevenuesForDayOfWeek = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
@@ -28,7 +29,7 @@ var Analytics = (function () {
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/aggregates/revenues/day_of_week');
                         uri = this.uriHelper.generateUriWithQuery(base, query);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
@@ -54,7 +55,7 @@ var Analytics = (function () {
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/aggregates/revenues/sum');
                         uri = this.uriHelper.generateUriWithQuery(base, query);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
@@ -80,7 +81,7 @@ var Analytics = (function () {
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/aggregates/revenues');
                         uri = this.uriHelper.generateUriWithQuery(base, query);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
@@ -106,7 +107,7 @@ var Analytics = (function () {
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/aggregates/revenues/hour_of_day');
                         uri = this.uriHelper.generateUriWithQuery(base, query);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
@@ -133,7 +134,7 @@ var Analytics = (function () {
                         localUriHelper = new uri_helper_1.UriHelper('/api/v1/analytics', this.options);
                         base = localUriHelper.generateBaseUri('/reports/products');
                         uri = localUriHelper.generateUriWithQuery(base, query);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
@@ -161,7 +162,7 @@ var Analytics = (function () {
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri("/reports/products/" + productNumber);
                         uri = this.uriHelper.generateUriWithQuery(base, query);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
@@ -189,7 +190,7 @@ var Analytics = (function () {
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/reports/staff/overview');
                         uri = this.uriHelper.generateUriWithQuery(base, query);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
@@ -215,7 +216,7 @@ var Analytics = (function () {
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/reports/staff/product_groups');
                         uri = this.uriHelper.generateUriWithQuery(base, options);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
@@ -241,7 +242,7 @@ var Analytics = (function () {
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/aggregates/product_groups');
                         uri = this.uriHelper.generateUriWithQuery(base, query);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
@@ -267,7 +268,7 @@ var Analytics = (function () {
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/reports/staff/refunds');
                         uri = this.uriHelper.generateUriWithQuery(base, options);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
@@ -293,7 +294,7 @@ var Analytics = (function () {
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/reports/vouchers');
                         uri = this.uriHelper.generateUriWithQuery(base, query);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
@@ -319,7 +320,7 @@ var Analytics = (function () {
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/reports/staff/products');
                         uri = this.uriHelper.generateUriWithQuery(base, options);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
@@ -345,7 +346,7 @@ var Analytics = (function () {
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/reports/staff/payments');
                         uri = this.uriHelper.generateUriWithQuery(base, query);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
@@ -371,7 +372,7 @@ var Analytics = (function () {
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/reports/payments/top');
                         uri = this.uriHelper.generateUriWithQuery(base, query);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
@@ -397,7 +398,7 @@ var Analytics = (function () {
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/reports/transactions/simple');
                         uri = this.uriHelper.generateUriWithQuery(base, query);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
@@ -426,7 +427,7 @@ var Analytics = (function () {
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/reports/customers');
                         uri = this.uriHelper.generateUriWithQuery(base, query);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
@@ -452,7 +453,7 @@ var Analytics = (function () {
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/reports/customers/transactions');
                         uri = this.uriHelper.generateUriWithQuery(base, query);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
@@ -478,7 +479,7 @@ var Analytics = (function () {
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/reports/customers/overview');
                         uri = this.uriHelper.generateUriWithQuery(base, query);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
@@ -505,7 +506,7 @@ var Analytics = (function () {
                         localUriHelper = new uri_helper_1.UriHelper('/api/v1/analytics', this.options);
                         base = localUriHelper.generateBaseUri('/reports/stocks');
                         uri = localUriHelper.generateUriWithQuery(base, query);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
@@ -531,7 +532,7 @@ var Analytics = (function () {
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/reports/product_groups');
                         uri = this.uriHelper.generateUriWithQuery(base, query);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
@@ -559,7 +560,7 @@ var Analytics = (function () {
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/reports/product_groups/filters');
                         uri = this.uriHelper.generateUriWithQuery(base, query);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)

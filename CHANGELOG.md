@@ -1,3 +1,10 @@
+# [4.25.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.24.0...v4.25.0) (2021-09-15)
+
+
+### Features
+
+* **analytics:** add timeout prop to adjust axios ([1366454](https://github.com/tillhub/tillhub-sdk-javascript/commit/13664542350193ec5a3d1a8c4f5cd884ac82da0d))
+
 # [4.24.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.23.1...v4.24.0) (2021-09-08)
 
 

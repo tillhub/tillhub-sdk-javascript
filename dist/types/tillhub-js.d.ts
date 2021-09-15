@@ -8,7 +8,7 @@ import * as v2 from './v2';
 import { AnalyticsHandlersV1Types } from './v1';
 import { AnalyticsHandlerTypes } from './v2';
 import v3, { AnalyticsHandlerTypesV3 } from './v3';
-import { Client } from './client';
+import { Client, Timeout } from './client';
 export { v0, v1, v2, v3 };
 export declare const defaultOptions: TillhubSDKOptions;
 declare type Fn = () => any;
@@ -18,6 +18,9 @@ export interface TillhubSDKOptions {
     user?: string;
     responseInterceptors?: Fn[];
     requestInterceptors?: Fn[];
+}
+interface AxiosOptions {
+    timeout?: Timeout;
 }
 export declare interface TillhubClient {
     on: ((event: 'raw-error' | 'error', listener: (error: Error) => void) => this) & ((event: string, listener: Fn) => this);
@@ -64,7 +67,7 @@ export declare class TillhubClient extends events.EventEmitter {
     stocksBookV1(): v1.StocksBook;
     stocksBook(): v0.StocksBook;
     orders(): v0.Orders;
-    analytics(): v0.Analytics;
+    analytics(axiosOptions?: AxiosOptions): v0.Analytics;
     analyticsHandlersV1(): AnalyticsHandlersV1Types;
     analyticsHandlers(): AnalyticsHandlerTypes;
     analyticsHandlersV3(): AnalyticsHandlerTypesV3;
