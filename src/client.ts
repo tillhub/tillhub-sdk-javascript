@@ -4,9 +4,11 @@ import { environment } from './environment'
 
 type Fn = () => any
 
+export type Timeout = number | undefined
+
 export interface ClientOptions {
   base?: string
-  timeout?: number
+  timeout?: Timeout
   headers?: {
     [key: string]: any
   }

@@ -11,7 +11,7 @@ import * as v2 from './v2'
 import { AnalyticsHandlersV1Types } from './v1'
 import { AnalyticsHandlerTypes } from './v2'
 import v3, { AnalyticsHandlerTypesV3 } from './v3'
-import { Client, ClientOptions } from './client'
+import { Client, ClientOptions, Timeout } from './client'
 import * as errors from './errors'
 import { environment } from './environment'
 
@@ -29,6 +29,10 @@ export interface TillhubSDKOptions {
   user?: string
   responseInterceptors?: Fn[]
   requestInterceptors?: Fn[]
+}
+
+interface AxiosOptions {
+  timeout?: Timeout
 }
 
 type MaybeOptions = Record<string, unknown>
@@ -446,7 +450,7 @@ export class TillhubClient extends events.EventEmitter {
    * Create an authenticated Analytics instance
    *
    */
-  analytics (): v0.Analytics {
+  analytics (axiosOptions?: AxiosOptions): v0.Analytics {
     if (
       !this.options ||
       !this.options.base ||
@@ -457,7 +461,7 @@ export class TillhubClient extends events.EventEmitter {
       throw new errors.UninstantiatedClient()
     }
 
-    return new v0.Analytics({ user: this.auth.user, base: this.options.base }, this.http)
+    return new v0.Analytics({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http)
   }
 
   /**
