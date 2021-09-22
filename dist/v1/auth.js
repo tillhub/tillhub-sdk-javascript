@@ -103,6 +103,7 @@ var Auth = (function (_super) {
                                 name: response.data.user.name,
                                 errors: response.data.errors,
                                 features: response.data.features,
+                                expiresAt: response.data.expires_at,
                                 role: role,
                                 scopes: scopes,
                                 subUser: subUser || null
@@ -139,6 +140,7 @@ var Auth = (function (_super) {
                                 user: response.data.user.legacy_id || response.data.user.id,
                                 name: response.data.user.name,
                                 scopes: response.data.user.scopes,
+                                expiresAt: response.data.expires_at,
                                 role: response.data.user.role,
                                 is_support: true
                             }];

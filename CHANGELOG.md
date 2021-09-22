@@ -1,3 +1,10 @@
+## [4.25.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.25.0...v4.25.1) (2021-09-22)
+
+
+### Bug Fixes
+
+* **auth:** expose expires_at to org and support login ([8dd4d93](https://github.com/tillhub/tillhub-sdk-javascript/commit/8dd4d9364409a964555fdba0d50d55e1269274da))
+
 # [4.25.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.24.0...v4.25.0) (2021-09-15)
 
 
