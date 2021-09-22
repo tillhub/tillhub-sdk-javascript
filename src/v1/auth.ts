@@ -106,6 +106,7 @@ export class Auth extends v0.Auth {
         name: response.data.user.name,
         errors: response.data.errors,
         features: response.data.features,
+        expiresAt: response.data.expires_at,
         role,
         scopes,
         subUser: subUser || null
@@ -137,6 +138,7 @@ export class Auth extends v0.Auth {
         user: response.data.user.legacy_id || response.data.user.id,
         name: response.data.user.name,
         scopes: response.data.user.scopes,
+        expiresAt: response.data.expires_at,
         role: response.data.user.role,
         is_support: true
       }
