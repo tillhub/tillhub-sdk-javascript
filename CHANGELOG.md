@@ -1,3 +1,10 @@
+# [4.26.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.25.1...v4.26.0) (2021-09-23)
+
+
+### Features
+
+* **vouchers:** add abocard endopints ([b5b4056](https://github.com/tillhub/tillhub-sdk-javascript/commit/b5b4056b0d483f43d6fc141a7643869137f8412b))
+
 ## [4.25.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.25.0...v4.25.1) (2021-09-22)
 
 

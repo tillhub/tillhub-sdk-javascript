@@ -171,6 +171,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.voucherSystems = function () {
         return this.generateAuthenticatedInstance(v0.VoucherSystems);
     };
+    TillhubClient.prototype.abocardSystems = function () {
+        return this.generateAuthenticatedInstance(v0.AbocardSystems);
+    };
     TillhubClient.prototype.me = function () {
         return this.generateAuthenticatedInstance(v0.Me);
     };
