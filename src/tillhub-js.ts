@@ -360,6 +360,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated abocard systems instance
+   *
+   */
+  abocardSystems (): v0.AbocardSystems {
+    return this.generateAuthenticatedInstance(v0.AbocardSystems)
+  }
+
+  /**
    * Create an authenticated me instance
    */
   me (): v0.Me {
