@@ -44,6 +44,7 @@ import { Processes } from './processes'
 import { Promotions } from './promotions'
 import { StaffPermissionsTemplates } from './staff_permissions_templates'
 import { VoucherSystems } from './voucher_systems'
+import { AbocardSystems } from './abocard_systems'
 import { Functions } from './functions'
 import { DeviceGroups } from './device_groups'
 import { Correspondences } from './correspondences'
@@ -108,6 +109,7 @@ export {
   Promotions,
   StaffPermissionsTemplates,
   VoucherSystems,
+  AbocardSystems,
   Functions,
   DeviceGroups,
   Correspondences,
