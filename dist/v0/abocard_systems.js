@@ -29,7 +29,7 @@ var AbocardSystems = (function (_super) {
                 switch (_b.label) {
                     case 0:
                         _b.trys.push([0, 2, , 3]);
-                        base = this.uriHelper.generateBaseUri();
+                        base = this.uriHelper.generateBaseUri('/abocard/systems');
                         uri = this.uriHelper.generateUriWithQuery(base, query);
                         return [4, this.http.getClient().get(uri)];
                     case 1:
@@ -59,7 +59,7 @@ var AbocardSystems = (function (_super) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        base = this.uriHelper.generateBaseUri("/" + abocardId);
+                        base = this.uriHelper.generateBaseUri("/abocard/systems/" + abocardId);
                         uri = this.uriHelper.generateUriWithQuery(base);
                         return [4, this.http.getClient().get(uri)];
                     case 1:
@@ -86,7 +86,7 @@ var AbocardSystems = (function (_super) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        base = this.uriHelper.generateBaseUri();
+                        base = this.uriHelper.generateBaseUri('/abocard/systems');
                         uri = this.uriHelper.generateUriWithQuery(base);
                         return [4, this.http.getClient().post(uri, abocard)];
                     case 1:
@@ -112,7 +112,7 @@ var AbocardSystems = (function (_super) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        base = this.uriHelper.generateBaseUri("/" + abocardId);
+                        base = this.uriHelper.generateBaseUri("/abocard/systems/" + abocardId);
                         uri = this.uriHelper.generateUriWithQuery(base);
                         return [4, this.http.getClient().put(uri, abocard)];
                     case 1:
@@ -138,7 +138,7 @@ var AbocardSystems = (function (_super) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        base = this.uriHelper.generateBaseUri("/" + abocardId);
+                        base = this.uriHelper.generateBaseUri("/abocard/systems/" + abocardId);
                         uri = this.uriHelper.generateUriWithQuery(base);
                         return [4, this.http.getClient().delete(uri)];
                     case 1:
@@ -156,7 +156,7 @@ var AbocardSystems = (function (_super) {
             });
         });
     };
-    AbocardSystems.baseEndpoint = '/api/v0/abocard/systems';
+    AbocardSystems.baseEndpoint = '/api/v0/loyalties';
     return AbocardSystems;
 }(base_1.ThBaseHandler));
 exports.AbocardSystems = AbocardSystems;

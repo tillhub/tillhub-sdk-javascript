@@ -1,3 +1,10 @@
+## [4.26.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.26.0...v4.26.1) (2021-09-23)
+
+
+### Bug Fixes
+
+* **vouchers:** adjust abocard API path ([4e75ce3](https://github.com/tillhub/tillhub-sdk-javascript/commit/4e75ce3e4c066b9b13202d0bc1a8c6eef876a82c))
+
 # [4.26.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.25.1...v4.26.0) (2021-09-23)
 
 
