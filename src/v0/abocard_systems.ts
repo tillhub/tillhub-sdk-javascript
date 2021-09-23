@@ -3,19 +3,6 @@ import { BaseError } from '../errors/baseError'
 import { UriHelper } from '../uri-helper'
 import { ThBaseHandler } from '../base'
 
-export interface Item {
-  type?: string
-  object_id: string
-  client_id: string
-  order_index: number
-}
-
-export interface Tab {
-  name?: string
-  order_index: number
-  items: Item[]
-}
-
 export interface Abocard {
   id?: string
   name?: string
