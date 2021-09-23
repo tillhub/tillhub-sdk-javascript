@@ -55,7 +55,7 @@ export interface AbocardsOptions {
 }
 
 export class AbocardSystems extends ThBaseHandler {
-  public static baseEndpoint = '/api/v0/abocard/systems'
+  public static baseEndpoint = '/api/v0/loyalties'
   endpoint: string
   http: Client
   public options: AbocardsOptions
@@ -78,7 +78,7 @@ export class AbocardSystems extends ThBaseHandler {
     let next
 
     try {
-      const base = this.uriHelper.generateBaseUri()
+      const base = this.uriHelper.generateBaseUri('/abocard/systems')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri)
@@ -100,7 +100,7 @@ export class AbocardSystems extends ThBaseHandler {
 
   async get (abocardId: string): Promise<AbocardResponse> {
     try {
-      const base = this.uriHelper.generateBaseUri(`/${abocardId}`)
+      const base = this.uriHelper.generateBaseUri(`/abocard/systems/${abocardId}`)
       const uri = this.uriHelper.generateUriWithQuery(base)
 
       const response = await this.http.getClient().get(uri)
@@ -118,7 +118,7 @@ export class AbocardSystems extends ThBaseHandler {
 
   async create (abocard: Abocard): Promise<AbocardResponse> {
     try {
-      const base = this.uriHelper.generateBaseUri()
+      const base = this.uriHelper.generateBaseUri('/abocard/systems')
       const uri = this.uriHelper.generateUriWithQuery(base)
 
       const response = await this.http.getClient().post(uri, abocard)
@@ -135,7 +135,7 @@ export class AbocardSystems extends ThBaseHandler {
 
   async update (abocardId: string, abocard: Abocard): Promise<AbocardResponse> {
     try {
-      const base = this.uriHelper.generateBaseUri(`/${abocardId}`)
+      const base = this.uriHelper.generateBaseUri(`/abocard/systems/${abocardId}`)
       const uri = this.uriHelper.generateUriWithQuery(base)
 
       const response = await this.http.getClient().put(uri, abocard)
@@ -152,7 +152,7 @@ export class AbocardSystems extends ThBaseHandler {
 
   async delete (abocardId: string): Promise<AbocardResponse> {
     try {
-      const base = this.uriHelper.generateBaseUri(`/${abocardId}`)
+      const base = this.uriHelper.generateBaseUri(`/abocard/systems/${abocardId}`)
       const uri = this.uriHelper.generateUriWithQuery(base)
 
       const response = await this.http.getClient().delete(uri)

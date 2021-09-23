@@ -37,7 +37,7 @@ afterEach(() => {
 describe('v0: Abocards', () => {
   it('retrieves all abocards', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onGet(`https://api.tillhub.com/api/v0/abocard/systems/${legacyId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/loyalties/${legacyId}/abocard/systems`).reply(() => {
         return [
           200,
           {
@@ -63,13 +63,13 @@ describe('v0: Abocards', () => {
     const abocardsResponse = {
       results: abocardsItems.map(item => ({ product_id: item })),
       cursor: {
-        next: `https://api.tillhub.com/api/v0/abocard/systems/${legacyId}?page=2`
+        next: `https://api.tillhub.com/api/v0/loyalties/${legacyId}/abocard/systems?page=2`
       },
       count: abocardsItems.length
     }
 
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onGet(`https://api.tillhub.com/api/v0/abocard/systems/${legacyId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/loyalties/${legacyId}/abocard/systems`).reply(() => {
         return [
           200,
           abocardsResponse
@@ -87,7 +87,7 @@ describe('v0: Abocards', () => {
   it('retrieves one abocard', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
-        .onGet(`https://api.tillhub.com/api/v0/abocard/systems/${legacyId}/${abocardId}`)
+        .onGet(`https://api.tillhub.com/api/v0/loyalties/${legacyId}/abocard/systems/${abocardId}`)
         .reply(() => {
           return [
             200,
@@ -111,7 +111,7 @@ describe('v0: Abocards', () => {
 
   it('creates one abocard', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost(`https://api.tillhub.com/api/v0/abocard/systems/${legacyId}`).reply(() => {
+      mock.onPost(`https://api.tillhub.com/api/v0/loyalties/${legacyId}/abocard/systems`).reply(() => {
         return [
           200,
           {
@@ -133,7 +133,7 @@ describe('v0: Abocards', () => {
   it('updates one abocard', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
-        .onPut(`https://api.tillhub.com/api/v0/abocard/systems/${legacyId}/${abocardId}`)
+        .onPut(`https://api.tillhub.com/api/v0/loyalties/${legacyId}/abocard/systems/${abocardId}`)
         .reply(() => {
           return [
             200,
@@ -156,7 +156,7 @@ describe('v0: Abocards', () => {
   it('deletes one abocard', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
-        .onDelete(`https://api.tillhub.com/api/v0/abocard/systems/${legacyId}/${abocardId}`)
+        .onDelete(`https://api.tillhub.com/api/v0/loyalties/${legacyId}/abocard/systems/${abocardId}`)
         .reply(() => {
           return [
             200,
@@ -177,7 +177,7 @@ describe('v0: Abocards', () => {
 
   it('rejects getAll() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onGet(`https://api.tillhub.com/api/v0/abocard/systems/${legacyId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/loyalties/${legacyId}/abocard/systems`).reply(() => {
         return [205]
       })
     }
@@ -195,7 +195,7 @@ describe('v0: Abocards', () => {
   it('rejects get() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
-        .onGet(`https://api.tillhub.com/api/v0/abocard/systems/${legacyId}/${abocardId}`)
+        .onGet(`https://api.tillhub.com/api/v0/loyalties/${legacyId}/abocard/systems/${abocardId}`)
         .reply(() => {
           return [205]
         })
@@ -214,7 +214,7 @@ describe('v0: Abocards', () => {
   it('rejects create() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
-        .onPost(`https://api.tillhub.com/api/v0/abocard/systems/${legacyId}/${abocardId}`)
+        .onPost(`https://api.tillhub.com/api/v0/loyalties/${legacyId}/abocard/systems/${abocardId}`)
         .reply(() => {
           return [205]
         })
@@ -233,7 +233,7 @@ describe('v0: Abocards', () => {
   it('rejects update() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
-        .onPut(`https://api.tillhub.com/api/v0/abocard/systems/${legacyId}/${abocardId}`)
+        .onPut(`https://api.tillhub.com/api/v0/loyalties/${legacyId}/abocard/systems/${abocardId}`)
         .reply(() => {
           return [205]
         })
@@ -251,7 +251,7 @@ describe('v0: Abocards', () => {
   it('rejects delete() if status code is not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
-        .onDelete(`https://api.tillhub.com/api/v0/abocard/systems/${legacyId}/${abocardId}`)
+        .onDelete(`https://api.tillhub.com/api/v0/loyalties/${legacyId}/abocard/systems/${abocardId}`)
         .reply(() => {
           return [205]
         })
