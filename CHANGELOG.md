@@ -1,3 +1,15 @@
+# [4.27.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.26.1...v4.27.0) (2021-09-27)
+
+
+### Bug Fixes
+
+* **analytics/v2:** remove ts-ignores and resolve errors ([5aceac9](https://github.com/tillhub/tillhub-sdk-javascript/commit/5aceac95b1e5da9e992ba7bded711f3a7685ee10))
+
+
+### Features
+
+* **ci:** add dependabot ([6149b02](https://github.com/tillhub/tillhub-sdk-javascript/commit/6149b025c6d5b1e98079ad863c64569a44a70460))
+
 ## [4.26.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.26.0...v4.26.1) (2021-09-23)
 
 

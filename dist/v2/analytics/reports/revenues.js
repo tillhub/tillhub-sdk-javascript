@@ -17,24 +17,25 @@ var AnalyticsReportsRevenuesGrouped = (function (_super) {
         return base_1.ThAnalyticsBaseHandler.generateAuthenticatedInstance(AnalyticsReportsRevenuesGrouped, options, http);
     };
     AnalyticsReportsRevenuesGrouped.prototype.getAll = function (query) {
+        var _a, _b, _c, _d;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var nextFn, localUriHelper, uri, _a, d, next_1, data, summary, err_1;
+            var nextFn, localUriHelper, uri, _e, d, next_1, data, summary, err_1;
             var _this = this;
-            return tslib_1.__generator(this, function (_b) {
-                switch (_b.label) {
+            return tslib_1.__generator(this, function (_f) {
+                switch (_f.label) {
                     case 0:
-                        _b.trys.push([0, 2, , 3]);
+                        _f.trys.push([0, 2, , 3]);
                         nextFn = void 0;
                         localUriHelper = new uri_helper_1.UriHelper('/api/v2/analytics', this.options);
                         uri = localUriHelper.generateBaseUri('/reports/revenues/grouped');
                         return [4, this.handleGet(uri, query)];
                     case 1:
-                        _a = _b.sent(), d = _a.results, next_1 = _a.next;
+                        _e = _f.sent(), d = _e.results, next_1 = _e.next;
                         if (!d) {
                             throw new TypeError('Unexpectedly did not return data.');
                         }
-                        data = d.find(function (item) { return item.metric.job === 'reports_revenues_items_v2_data'; }).values;
-                        summary = d.find(function (item) { return item.metric.job === 'reports_revenues_items_v2_summary'; }).values;
+                        data = (_b = (_a = d === null || d === void 0 ? void 0 : d.find(function (item) { return item.metric.job === 'reports_revenues_items_v2_data'; })) === null || _a === void 0 ? void 0 : _a.values) !== null && _b !== void 0 ? _b : [];
+                        summary = (_d = (_c = d === null || d === void 0 ? void 0 : d.find(function (item) { return item.metric.job === 'reports_revenues_items_v2_summary'; })) === null || _c === void 0 ? void 0 : _c.values) !== null && _d !== void 0 ? _d : [];
                         if (next_1) {
                             nextFn = function () {
                                 return _this.getAll({ uri: next_1 });
@@ -47,7 +48,7 @@ var AnalyticsReportsRevenuesGrouped = (function (_super) {
                                 next: nextFn
                             }];
                     case 2:
-                        err_1 = _b.sent();
+                        err_1 = _f.sent();
                         throw new AnalyticsReportsRevenuesGroupedFetchError(undefined, { error: err_1 });
                     case 3: return [2];
                 }

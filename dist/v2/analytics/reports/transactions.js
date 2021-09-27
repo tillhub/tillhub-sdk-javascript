@@ -17,34 +17,35 @@ var AnalyticsReportsTransactionsOverview = (function (_super) {
         return base_1.ThAnalyticsBaseHandler.generateAuthenticatedInstance(AnalyticsReportsTransactionsOverview, options, http);
     };
     AnalyticsReportsTransactionsOverview.prototype.getAll = function (query) {
+        var _a, _b, _c, _d, _e, _f, _g, _h;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var nextFn, localUriHelper, uri, _a, d, next_1, data, summary, count, totalCount, err_1;
+            var nextFn, localUriHelper, uri, _j, d, next_1, data, summary, count, totalCount, err_1;
             var _this = this;
-            return tslib_1.__generator(this, function (_b) {
-                switch (_b.label) {
+            return tslib_1.__generator(this, function (_k) {
+                switch (_k.label) {
                     case 0:
-                        _b.trys.push([0, 2, , 3]);
+                        _k.trys.push([0, 2, , 3]);
                         nextFn = void 0;
                         localUriHelper = new uri_helper_1.UriHelper('/api/v2/analytics', this.options);
                         uri = localUriHelper.generateBaseUri('/reports/transactions/overview');
                         return [4, this.handleGet(uri, query)];
                     case 1:
-                        _a = _b.sent(), d = _a.results, next_1 = _a.next;
+                        _j = _k.sent(), d = _j.results, next_1 = _j.next;
                         if (!d) {
                             throw new TypeError('Unexpectedly did not return data.');
                         }
-                        data = d.find(function (item) {
+                        data = (_b = (_a = d === null || d === void 0 ? void 0 : d.find(function (item) {
                             return item.metric.job === 'reports_transactions_v2_overview_data';
-                        }).values;
-                        summary = d.find(function (item) {
+                        })) === null || _a === void 0 ? void 0 : _a.values) !== null && _b !== void 0 ? _b : [];
+                        summary = (_d = (_c = d === null || d === void 0 ? void 0 : d.find(function (item) {
                             return item.metric.job === 'reports_transactions_v2_overview_summary';
-                        }).values;
-                        count = d.find(function (item) {
+                        })) === null || _c === void 0 ? void 0 : _c.values) !== null && _d !== void 0 ? _d : [];
+                        count = (_f = (_e = d === null || d === void 0 ? void 0 : d.find(function (item) {
                             return item.metric.job === 'reports_transactions_v2_overview_filtered_meta';
-                        }).values[0];
-                        totalCount = d.find(function (item) {
+                        })) === null || _e === void 0 ? void 0 : _e.values[0]) !== null && _f !== void 0 ? _f : {};
+                        totalCount = (_h = (_g = d === null || d === void 0 ? void 0 : d.find(function (item) {
                             return item.metric.job === 'reports_transactions_v2_overview_meta';
-                        }).values[0];
+                        })) === null || _g === void 0 ? void 0 : _g.values[0]) !== null && _h !== void 0 ? _h : {};
                         if (next_1) {
                             nextFn = function () {
                                 return _this.getAll({ uri: next_1 });
@@ -60,7 +61,7 @@ var AnalyticsReportsTransactionsOverview = (function (_super) {
                                 next: nextFn
                             }];
                     case 2:
-                        err_1 = _b.sent();
+                        err_1 = _k.sent();
                         throw new AnalyticsReportsTransactionsOverviewFetchError(undefined, { error: err_1 });
                     case 3: return [2];
                 }
@@ -103,20 +104,21 @@ var AnalyticsReportsTransactionsDetail = (function (_super) {
         return base_1.ThAnalyticsBaseHandler.generateAuthenticatedInstance(AnalyticsReportsTransactionsDetail, options, http);
     };
     AnalyticsReportsTransactionsDetail.prototype.get = function (id) {
+        var _a, _b;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var localUriHelper, uri, d, data, err_3;
-            return tslib_1.__generator(this, function (_a) {
-                switch (_a.label) {
+            return tslib_1.__generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         localUriHelper = new uri_helper_1.UriHelper('/api/v2/analytics', this.options);
                         uri = localUriHelper.generateBaseUri("/reports/transactions/" + id + "/detail");
                         return [4, this.handleGet(uri)];
                     case 1:
-                        d = (_a.sent()).results;
-                        data = d.find(function (item) {
+                        d = (_c.sent()).results;
+                        data = (_b = (_a = d === null || d === void 0 ? void 0 : d.find(function (item) {
                             return item.metric.job === 'reports_transactions_v2_transaction_detail_data';
-                        }).values;
+                        })) === null || _a === void 0 ? void 0 : _a.values) !== null && _b !== void 0 ? _b : [];
                         return [2, {
                                 data: data[0],
                                 metaData: {
@@ -125,7 +127,7 @@ var AnalyticsReportsTransactionsDetail = (function (_super) {
                                 }
                             }];
                     case 2:
-                        err_3 = _a.sent();
+                        err_3 = _c.sent();
                         throw new AnalyticsReportsTransactionDetailFetcshError(undefined, { error: err_3 });
                     case 3: return [2];
                 }
