@@ -59,28 +59,23 @@ export class AnalyticsReportsBalancesOverview extends ThAnalyticsBaseHandler {
       const uri = localUriHelper.generateBaseUri('/reports/balances/overview')
       const { results: d, next } = await this.handleGet(uri, query)
 
-      // eslint-disable-next-line
-      // @ts-ignore
-      const data = d.find(
+      const data = d?.find(
         (item: ThAnalyticsBaseResultItem) => item.metric.job === 'reports_balances_v2_overview_data'
-      ).values
-      // eslint-disable-next-line
-      // @ts-ignore
-      const summary = d.find(
+      )?.values ?? []
+
+      const summary = d?.find(
         (item: ThAnalyticsBaseResultItem) =>
           item.metric.job === 'reports_balances_v2_overview_summary'
-      ).values
-      // eslint-disable-next-line
-      // @ts-ignore
-      const count = d.find(
+      )?.values ?? []
+
+      const count = d?.find(
         (item: ThAnalyticsBaseResultItem) =>
           item.metric.job === 'reports_balances_v2_overview_filtered_meta'
-      ).values[0]
-      // eslint-disable-next-line
-      // @ts-ignore
-      const totalCount = d.find(
+      )?.values[0] ?? {}
+
+      const totalCount = d?.find(
         (item: ThAnalyticsBaseResultItem) => item.metric.job === 'reports_balances_v2_overview_meta'
-      ).values[0]
+      )?.values[0] ?? {}
 
       if (next) {
         nextFn = (): Promise<AnalyticsReportsBalancesOverviewResponseItem> =>
@@ -139,12 +134,10 @@ export class AnalyticsReportsBalancesDetail extends ThAnalyticsBaseHandler {
       const uri = localUriHelper.generateBaseUri(`/reports/balances/${id}/detail`)
       const { results: d } = await this.handleGet(uri)
 
-      // eslint-disable-next-line
-      // @ts-ignore
-      const data = d.find(
+      const data = d?.find(
         (item: ThAnalyticsBaseResultItem) =>
           item.metric.job === 'reports_balances_v2_balance_detail_data'
-      ).values
+      )?.values ?? []
 
       return {
         data: data[0],

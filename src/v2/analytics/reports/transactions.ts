@@ -66,30 +66,25 @@ export class AnalyticsReportsTransactionsOverview extends ThAnalyticsBaseHandler
         throw new TypeError('Unexpectedly did not return data.')
       }
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      const data = d.find(
+      const data = d?.find(
         (item: ThAnalyticsBaseResultItem) =>
           item.metric.job === 'reports_transactions_v2_overview_data'
-      ).values
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      const summary = d.find(
+      )?.values ?? []
+
+      const summary = d?.find(
         (item: ThAnalyticsBaseResultItem) =>
           item.metric.job === 'reports_transactions_v2_overview_summary'
-      ).values
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      const count = d.find(
+      )?.values ?? []
+
+      const count = d?.find(
         (item: ThAnalyticsBaseResultItem) =>
           item.metric.job === 'reports_transactions_v2_overview_filtered_meta'
-      ).values[0]
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      const totalCount = d.find(
+      )?.values[0] ?? {}
+
+      const totalCount = d?.find(
         (item: ThAnalyticsBaseResultItem) =>
           item.metric.job === 'reports_transactions_v2_overview_meta'
-      ).values[0]
+      )?.values[0] ?? {}
 
       if (next) {
         nextFn = (): Promise<AnalyticsReportsTransactionsOverviewResponseItem> =>
@@ -151,12 +146,11 @@ export class AnalyticsReportsTransactionsDetail extends ThAnalyticsBaseHandler {
       const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
       const uri = localUriHelper.generateBaseUri(`/reports/transactions/${id}/detail`)
       const { results: d } = await this.handleGet(uri)
-      // eslint-disable-next-line
-      // @ts-ignore
-      const data = d.find(
+
+      const data = d?.find(
         (item: ThAnalyticsBaseResultItem) =>
           item.metric.job === 'reports_transactions_v2_transaction_detail_data'
-      ).values
+      )?.values ?? []
 
       return {
         data: data[0],
