@@ -107,30 +107,25 @@ export class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
 
       if (status !== 200) { throw new AnalyticsReportsCountingProtocolsFetchFailed(undefined, { status: status }) }
 
-      // eslint-disable-next-line
-      // @ts-ignore
-      const data = d.find(
+      const data = d?.find(
         (item: ThAnalyticsBaseResultItem) =>
           item.metric.job === 'reports_counting_protocols_v2_overview_data'
-      ).values
-      // eslint-disable-next-line
-      // @ts-ignore
-      const summary = d.find(
+      )?.values ?? []
+
+      const summary = d?.find(
         (item: ThAnalyticsBaseResultItem) =>
           item.metric.job === 'reports_counting_protocols_v2_overview_summary'
-      ).values
-      // eslint-disable-next-line
-      // @ts-ignore
+      )?.values ?? []
+
       const count = d.find(
         (item: ThAnalyticsBaseResultItem) =>
           item.metric.job === 'reports_counting_protocols_v2_overview_filtered_meta'
-      ).values[0]
-      // eslint-disable-next-line
-      // @ts-ignore
+      )?.values[0] ?? {}
+
       const totalCount = d.find(
         (item: ThAnalyticsBaseResultItem) =>
           item.metric.job === 'reports_counting_protocols_v2_overview_meta'
-      ).values[0]
+      )?.values[0] ?? {}
 
       if (next) {
         nextFn = (): Promise<AnalyticsReportsCountingProtocolsResponse> =>
