@@ -165,14 +165,14 @@ export class Analytics {
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri, { timeout: this.timeout })
-      if (response.status !== 200) throw new RevenuesFetchFailed()
+      if (response.status !== 200) throw new RevenuesFetchFailed(undefined, { status: response.status })
 
       return {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new RevenuesFetchFailed()
+    } catch (error: any) {
+      throw new RevenuesFetchFailed(undefined, { error })
     }
   }
 
@@ -182,14 +182,14 @@ export class Analytics {
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri, { timeout: this.timeout })
-      if (response.status !== 200) throw new RevenuesFetchFailed()
+      if (response.status !== 200) throw new RevenuesFetchFailed(undefined, { status: response.status })
 
       return {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new RevenuesFetchFailed()
+    } catch (error: any) {
+      throw new RevenuesFetchFailed(undefined, { error })
     }
   }
 
@@ -200,14 +200,14 @@ export class Analytics {
 
       const response = await this.http.getClient().get(uri, { timeout: this.timeout })
 
-      if (response.status !== 200) throw new RevenuesFetchFailed()
+      if (response.status !== 200) throw new RevenuesFetchFailed(undefined, { status: response.status })
 
       return {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new RevenuesFetchFailed()
+    } catch (error: any) {
+      throw new RevenuesFetchFailed(undefined, { error })
     }
   }
 
@@ -217,14 +217,14 @@ export class Analytics {
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri, { timeout: this.timeout })
-      if (response.status !== 200) throw new RevenuesFetchFailed()
+      if (response.status !== 200) throw new RevenuesFetchFailed(undefined, { status: response.status })
 
       return {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new RevenuesFetchFailed()
+    } catch (error: any) {
+      throw new RevenuesFetchFailed(undefined, { error })
     }
   }
 
@@ -236,15 +236,15 @@ export class Analytics {
       const uri = localUriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri, { timeout: this.timeout })
-      if (response.status !== 200) throw new StatisticsProductFetchFailed()
+      if (response.status !== 200) throw new StatisticsProductFetchFailed(undefined, { status: response.status })
       return {
         data: response.data.results,
         metadata: {
           count: response.data.count
         }
       }
-    } catch (err: any) {
-      throw new StatisticsProductFetchFailed()
+    } catch (error: any) {
+      throw new StatisticsProductFetchFailed(undefined, { error })
     }
   }
 
@@ -257,15 +257,15 @@ export class Analytics {
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri, { timeout: this.timeout })
-      if (response.status !== 200) throw new StatisticsProductChildrenFetchFailed()
+      if (response.status !== 200) throw new StatisticsProductChildrenFetchFailed(undefined, { status: response.status })
       return {
         data: response.data.results,
         metadata: {
           count: response.data.count
         }
       }
-    } catch (err: any) {
-      throw new StatisticsProductChildrenFetchFailed()
+    } catch (error: any) {
+      throw new StatisticsProductChildrenFetchFailed(undefined, { error })
     }
   }
 
@@ -275,14 +275,14 @@ export class Analytics {
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri, { timeout: this.timeout })
-      if (response.status !== 200) throw new StaffOverviewFetchFailed()
+      if (response.status !== 200) throw new StaffOverviewFetchFailed(undefined, { status: response.status })
 
       return {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new StaffOverviewFetchFailed()
+    } catch (error: any) {
+      throw new StaffOverviewFetchFailed(undefined, { error })
     }
   }
 
@@ -292,14 +292,14 @@ export class Analytics {
       const uri = this.uriHelper.generateUriWithQuery(base, options)
 
       const response = await this.http.getClient().get(uri, { timeout: this.timeout })
-      if (response.status !== 200) throw new ProductGroupsStaffReportFetchFailed()
+      if (response.status !== 200) throw new ProductGroupsStaffReportFetchFailed(undefined, { status: response.status })
 
       return {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new ProductGroupsStaffReportFetchFailed()
+    } catch (error: any) {
+      throw new ProductGroupsStaffReportFetchFailed(undefined, { error })
     }
   }
 
@@ -309,14 +309,14 @@ export class Analytics {
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri, { timeout: this.timeout })
-      if (response.status !== 200) throw new ProductGroupsReportFetchFailed()
+      if (response.status !== 200) throw new ProductGroupsReportFetchFailed(undefined, { status: response.status })
 
       return {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new ProductGroupsReportFetchFailed()
+    } catch (error: any) {
+      throw new ProductGroupsReportFetchFailed(undefined, { error })
     }
   }
 
@@ -326,14 +326,14 @@ export class Analytics {
       const uri = this.uriHelper.generateUriWithQuery(base, options)
 
       const response = await this.http.getClient().get(uri, { timeout: this.timeout })
-      if (response.status !== 200) throw new RefundsReportFetchFailed()
+      if (response.status !== 200) throw new RefundsReportFetchFailed(undefined, { status: response.status })
 
       return {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new RefundsReportFetchFailed()
+    } catch (error: any) {
+      throw new RefundsReportFetchFailed(undefined, { error })
     }
   }
 
@@ -343,14 +343,14 @@ export class Analytics {
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri, { timeout: this.timeout })
-      if (response.status !== 200) throw new VouchersReportFetchFailed()
+      if (response.status !== 200) throw new VouchersReportFetchFailed(undefined, { status: response.status })
 
       return {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new VouchersReportFetchFailed()
+    } catch (error: any) {
+      throw new VouchersReportFetchFailed(undefined, { error })
     }
   }
 
@@ -360,14 +360,14 @@ export class Analytics {
       const uri = this.uriHelper.generateUriWithQuery(base, options)
 
       const response = await this.http.getClient().get(uri, { timeout: this.timeout })
-      if (response.status !== 200) throw new ProductsReportFetchFailed()
+      if (response.status !== 200) throw new ProductsReportFetchFailed(undefined, { status: response.status })
 
       return {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new ProductsReportFetchFailed()
+    } catch (error: any) {
+      throw new ProductsReportFetchFailed(undefined, { error })
     }
   }
 
@@ -377,14 +377,14 @@ export class Analytics {
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri, { timeout: this.timeout })
-      if (response.status !== 200) throw new PaymentsReportFetchFailed()
+      if (response.status !== 200) throw new PaymentsReportFetchFailed(undefined, { status: response.status })
 
       return {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new PaymentsReportFetchFailed()
+    } catch (error: any) {
+      throw new PaymentsReportFetchFailed(undefined, { error })
     }
   }
 
@@ -394,14 +394,14 @@ export class Analytics {
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri, { timeout: this.timeout })
-      if (response.status !== 200) throw new TopPaymentsReportFetchFailed()
+      if (response.status !== 200) throw new TopPaymentsReportFetchFailed(undefined, { status: response.status })
 
       return {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new TopPaymentsReportFetchFailed()
+    } catch (error: any) {
+      throw new TopPaymentsReportFetchFailed(undefined, { error })
     }
   }
 
@@ -413,7 +413,7 @@ export class Analytics {
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri, { timeout: this.timeout })
-      if (response.status !== 200) throw new SimpleSalesCartItemsReportFetchFailed()
+      if (response.status !== 200) throw new SimpleSalesCartItemsReportFetchFailed(undefined, { status: response.status })
 
       return {
         data: response.data.results[0].results,
@@ -422,8 +422,8 @@ export class Analytics {
           metric: response.data.results[0].metric
         }
       }
-    } catch (err: any) {
-      throw new SimpleSalesCartItemsReportFetchFailed()
+    } catch (error: any) {
+      throw new SimpleSalesCartItemsReportFetchFailed(undefined, { error })
     }
   }
 
@@ -434,14 +434,14 @@ export class Analytics {
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri, { timeout: this.timeout })
-      if (response.status !== 200) throw new ReportsCustomerCustomersFailed()
+      if (response.status !== 200) throw new ReportsCustomerCustomersFailed(undefined, { status: response.status })
 
       return {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new ReportsCustomerCustomersFailed()
+    } catch (error: any) {
+      throw new ReportsCustomerCustomersFailed(undefined, { error })
     }
   }
 
@@ -452,14 +452,14 @@ export class Analytics {
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri, { timeout: this.timeout })
-      if (response.status !== 200) throw new ReportsCustomerTransactionsFailed()
+      if (response.status !== 200) throw new ReportsCustomerTransactionsFailed(undefined, { status: response.status })
 
       return {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new ReportsCustomerTransactionsFailed()
+    } catch (error: any) {
+      throw new ReportsCustomerTransactionsFailed(undefined, { error })
     }
   }
 
@@ -470,14 +470,14 @@ export class Analytics {
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri, { timeout: this.timeout })
-      if (response.status !== 200) throw new ReportsCustomerOverviewFailed()
+      if (response.status !== 200) throw new ReportsCustomerOverviewFailed(undefined, { status: response.status })
 
       return {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new ReportsCustomerOverviewFailed()
+    } catch (error: any) {
+      throw new ReportsCustomerOverviewFailed(undefined, { error })
     }
   }
 
@@ -490,13 +490,13 @@ export class Analytics {
 
       const response = await this.http.getClient().get(uri, { timeout: this.timeout })
 
-      if (response.status !== 200) throw new ReportsStocksFetchFailed()
+      if (response.status !== 200) throw new ReportsStocksFetchFailed(undefined, { status: response.status })
       return {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new ReportsStocksFetchFailed()
+    } catch (error: any) {
+      throw new ReportsStocksFetchFailed(undefined, { error })
     }
   }
 
@@ -505,15 +505,15 @@ export class Analytics {
       const base = this.uriHelper.generateBaseUri('/reports/product_groups')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
       const response = await this.http.getClient().get(uri, { timeout: this.timeout })
-      if (response.status !== 200) throw new ReportsProductGroupsFetchFailed()
+      if (response.status !== 200) throw new ReportsProductGroupsFetchFailed(undefined, { status: response.status })
       return {
         data: response.data.results,
         metadata: {
           count: response.data.count
         }
       }
-    } catch (err: any) {
-      throw new ReportsProductGroupsFetchFailed()
+    } catch (error: any) {
+      throw new ReportsProductGroupsFetchFailed(undefined, { error })
     }
   }
 
@@ -522,15 +522,15 @@ export class Analytics {
       const base = this.uriHelper.generateBaseUri('/reports/product_groups/filters')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
       const response = await this.http.getClient().get(uri, { timeout: this.timeout })
-      if (response.status !== 200) throw new ReportsProductGroupsFiltersFetchFailed()
+      if (response.status !== 200) throw new ReportsProductGroupsFiltersFetchFailed(undefined, { status: response.status })
       return {
         data: response.data.results,
         metadata: {
           count: response.data.count
         }
       }
-    } catch (err: any) {
-      throw new ReportsProductGroupsFiltersFetchFailed()
+    } catch (error: any) {
+      throw new ReportsProductGroupsFiltersFetchFailed(undefined, { error })
     }
   }
 
