@@ -22,7 +22,7 @@ var Analytics = (function () {
     }
     Analytics.prototype.getRevenuesForDayOfWeek = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_1;
+            var base, uri, response, error_1;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -33,14 +33,14 @@ var Analytics = (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new RevenuesFetchFailed();
+                            throw new RevenuesFetchFailed(undefined, { status: response.status });
                         return [2, {
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_1 = _a.sent();
-                        throw new RevenuesFetchFailed();
+                        error_1 = _a.sent();
+                        throw new RevenuesFetchFailed(undefined, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -48,7 +48,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getRevenuesSumForTimeRange = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_2;
+            var base, uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -59,14 +59,14 @@ var Analytics = (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new RevenuesFetchFailed();
+                            throw new RevenuesFetchFailed(undefined, { status: response.status });
                         return [2, {
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_2 = _a.sent();
-                        throw new RevenuesFetchFailed();
+                        error_2 = _a.sent();
+                        throw new RevenuesFetchFailed(undefined, { error: error_2 });
                     case 3: return [2];
                 }
             });
@@ -74,7 +74,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getRevenues = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_3;
+            var base, uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -85,14 +85,14 @@ var Analytics = (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new RevenuesFetchFailed();
+                            throw new RevenuesFetchFailed(undefined, { status: response.status });
                         return [2, {
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_3 = _a.sent();
-                        throw new RevenuesFetchFailed();
+                        error_3 = _a.sent();
+                        throw new RevenuesFetchFailed(undefined, { error: error_3 });
                     case 3: return [2];
                 }
             });
@@ -100,7 +100,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getRevenuesForHourOfDay = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_4;
+            var base, uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -111,14 +111,14 @@ var Analytics = (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new RevenuesFetchFailed();
+                            throw new RevenuesFetchFailed(undefined, { status: response.status });
                         return [2, {
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_4 = _a.sent();
-                        throw new RevenuesFetchFailed();
+                        error_4 = _a.sent();
+                        throw new RevenuesFetchFailed(undefined, { error: error_4 });
                     case 3: return [2];
                 }
             });
@@ -126,7 +126,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getReportsProducts = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var localUriHelper, base, uri, response, err_5;
+            var localUriHelper, base, uri, response, error_5;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -138,7 +138,7 @@ var Analytics = (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new StatisticsProductFetchFailed();
+                            throw new StatisticsProductFetchFailed(undefined, { status: response.status });
                         return [2, {
                                 data: response.data.results,
                                 metadata: {
@@ -146,8 +146,8 @@ var Analytics = (function () {
                                 }
                             }];
                     case 2:
-                        err_5 = _a.sent();
-                        throw new StatisticsProductFetchFailed();
+                        error_5 = _a.sent();
+                        throw new StatisticsProductFetchFailed(undefined, { error: error_5 });
                     case 3: return [2];
                 }
             });
@@ -155,7 +155,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getProductsChildren = function (productNumber, query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_6;
+            var base, uri, response, error_6;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -166,7 +166,7 @@ var Analytics = (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new StatisticsProductChildrenFetchFailed();
+                            throw new StatisticsProductChildrenFetchFailed(undefined, { status: response.status });
                         return [2, {
                                 data: response.data.results,
                                 metadata: {
@@ -174,8 +174,8 @@ var Analytics = (function () {
                                 }
                             }];
                     case 2:
-                        err_6 = _a.sent();
-                        throw new StatisticsProductChildrenFetchFailed();
+                        error_6 = _a.sent();
+                        throw new StatisticsProductChildrenFetchFailed(undefined, { error: error_6 });
                     case 3: return [2];
                 }
             });
@@ -183,7 +183,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getStaffOverviewReport = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_7;
+            var base, uri, response, error_7;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -194,14 +194,14 @@ var Analytics = (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new StaffOverviewFetchFailed();
+                            throw new StaffOverviewFetchFailed(undefined, { status: response.status });
                         return [2, {
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_7 = _a.sent();
-                        throw new StaffOverviewFetchFailed();
+                        error_7 = _a.sent();
+                        throw new StaffOverviewFetchFailed(undefined, { error: error_7 });
                     case 3: return [2];
                 }
             });
@@ -209,7 +209,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getProductGroupsStaffReport = function (options) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_8;
+            var base, uri, response, error_8;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -220,14 +220,14 @@ var Analytics = (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new ProductGroupsStaffReportFetchFailed();
+                            throw new ProductGroupsStaffReportFetchFailed(undefined, { status: response.status });
                         return [2, {
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_8 = _a.sent();
-                        throw new ProductGroupsStaffReportFetchFailed();
+                        error_8 = _a.sent();
+                        throw new ProductGroupsStaffReportFetchFailed(undefined, { error: error_8 });
                     case 3: return [2];
                 }
             });
@@ -235,7 +235,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getProductGroupsReport = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_9;
+            var base, uri, response, error_9;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -246,14 +246,14 @@ var Analytics = (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new ProductGroupsReportFetchFailed();
+                            throw new ProductGroupsReportFetchFailed(undefined, { status: response.status });
                         return [2, {
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_9 = _a.sent();
-                        throw new ProductGroupsReportFetchFailed();
+                        error_9 = _a.sent();
+                        throw new ProductGroupsReportFetchFailed(undefined, { error: error_9 });
                     case 3: return [2];
                 }
             });
@@ -261,7 +261,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getRefundsReport = function (options) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_10;
+            var base, uri, response, error_10;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -272,14 +272,14 @@ var Analytics = (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new RefundsReportFetchFailed();
+                            throw new RefundsReportFetchFailed(undefined, { status: response.status });
                         return [2, {
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_10 = _a.sent();
-                        throw new RefundsReportFetchFailed();
+                        error_10 = _a.sent();
+                        throw new RefundsReportFetchFailed(undefined, { error: error_10 });
                     case 3: return [2];
                 }
             });
@@ -287,7 +287,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getVouchersReports = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_11;
+            var base, uri, response, error_11;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -298,14 +298,14 @@ var Analytics = (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new VouchersReportFetchFailed();
+                            throw new VouchersReportFetchFailed(undefined, { status: response.status });
                         return [2, {
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_11 = _a.sent();
-                        throw new VouchersReportFetchFailed();
+                        error_11 = _a.sent();
+                        throw new VouchersReportFetchFailed(undefined, { error: error_11 });
                     case 3: return [2];
                 }
             });
@@ -313,7 +313,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getProductsReport = function (options) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_12;
+            var base, uri, response, error_12;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -324,14 +324,14 @@ var Analytics = (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new ProductsReportFetchFailed();
+                            throw new ProductsReportFetchFailed(undefined, { status: response.status });
                         return [2, {
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_12 = _a.sent();
-                        throw new ProductsReportFetchFailed();
+                        error_12 = _a.sent();
+                        throw new ProductsReportFetchFailed(undefined, { error: error_12 });
                     case 3: return [2];
                 }
             });
@@ -339,7 +339,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getPaymentsReport = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_13;
+            var base, uri, response, error_13;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -350,14 +350,14 @@ var Analytics = (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new PaymentsReportFetchFailed();
+                            throw new PaymentsReportFetchFailed(undefined, { status: response.status });
                         return [2, {
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_13 = _a.sent();
-                        throw new PaymentsReportFetchFailed();
+                        error_13 = _a.sent();
+                        throw new PaymentsReportFetchFailed(undefined, { error: error_13 });
                     case 3: return [2];
                 }
             });
@@ -365,7 +365,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getTopPaymentsReport = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_14;
+            var base, uri, response, error_14;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -376,14 +376,14 @@ var Analytics = (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new TopPaymentsReportFetchFailed();
+                            throw new TopPaymentsReportFetchFailed(undefined, { status: response.status });
                         return [2, {
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_14 = _a.sent();
-                        throw new TopPaymentsReportFetchFailed();
+                        error_14 = _a.sent();
+                        throw new TopPaymentsReportFetchFailed(undefined, { error: error_14 });
                     case 3: return [2];
                 }
             });
@@ -391,7 +391,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getSimpleSalesCartItems = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_15;
+            var base, uri, response, error_15;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -402,7 +402,7 @@ var Analytics = (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new SimpleSalesCartItemsReportFetchFailed();
+                            throw new SimpleSalesCartItemsReportFetchFailed(undefined, { status: response.status });
                         return [2, {
                                 data: response.data.results[0].results,
                                 metadata: {
@@ -411,8 +411,8 @@ var Analytics = (function () {
                                 }
                             }];
                     case 2:
-                        err_15 = _a.sent();
-                        throw new SimpleSalesCartItemsReportFetchFailed();
+                        error_15 = _a.sent();
+                        throw new SimpleSalesCartItemsReportFetchFailed(undefined, { error: error_15 });
                     case 3: return [2];
                 }
             });
@@ -420,7 +420,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getCustomersReport = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_16;
+            var base, uri, response, error_16;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -431,14 +431,14 @@ var Analytics = (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new ReportsCustomerCustomersFailed();
+                            throw new ReportsCustomerCustomersFailed(undefined, { status: response.status });
                         return [2, {
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_16 = _a.sent();
-                        throw new ReportsCustomerCustomersFailed();
+                        error_16 = _a.sent();
+                        throw new ReportsCustomerCustomersFailed(undefined, { error: error_16 });
                     case 3: return [2];
                 }
             });
@@ -446,7 +446,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getCustomersTransaction = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_17;
+            var base, uri, response, error_17;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -457,14 +457,14 @@ var Analytics = (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new ReportsCustomerTransactionsFailed();
+                            throw new ReportsCustomerTransactionsFailed(undefined, { status: response.status });
                         return [2, {
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_17 = _a.sent();
-                        throw new ReportsCustomerTransactionsFailed();
+                        error_17 = _a.sent();
+                        throw new ReportsCustomerTransactionsFailed(undefined, { error: error_17 });
                     case 3: return [2];
                 }
             });
@@ -472,7 +472,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getCustomersOverview = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_18;
+            var base, uri, response, error_18;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -483,14 +483,14 @@ var Analytics = (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new ReportsCustomerOverviewFailed();
+                            throw new ReportsCustomerOverviewFailed(undefined, { status: response.status });
                         return [2, {
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_18 = _a.sent();
-                        throw new ReportsCustomerOverviewFailed();
+                        error_18 = _a.sent();
+                        throw new ReportsCustomerOverviewFailed(undefined, { error: error_18 });
                     case 3: return [2];
                 }
             });
@@ -498,7 +498,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getStocksReport = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var localUriHelper, base, uri, response, err_19;
+            var localUriHelper, base, uri, response, error_19;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -510,14 +510,14 @@ var Analytics = (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new ReportsStocksFetchFailed();
+                            throw new ReportsStocksFetchFailed(undefined, { status: response.status });
                         return [2, {
                                 data: response.data.results,
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_19 = _a.sent();
-                        throw new ReportsStocksFetchFailed();
+                        error_19 = _a.sent();
+                        throw new ReportsStocksFetchFailed(undefined, { error: error_19 });
                     case 3: return [2];
                 }
             });
@@ -525,7 +525,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getProductGroups = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_20;
+            var base, uri, response, error_20;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -536,7 +536,7 @@ var Analytics = (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new ReportsProductGroupsFetchFailed();
+                            throw new ReportsProductGroupsFetchFailed(undefined, { status: response.status });
                         return [2, {
                                 data: response.data.results,
                                 metadata: {
@@ -544,8 +544,8 @@ var Analytics = (function () {
                                 }
                             }];
                     case 2:
-                        err_20 = _a.sent();
-                        throw new ReportsProductGroupsFetchFailed();
+                        error_20 = _a.sent();
+                        throw new ReportsProductGroupsFetchFailed(undefined, { error: error_20 });
                     case 3: return [2];
                 }
             });
@@ -553,7 +553,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getProductGroupsFilters = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_21;
+            var base, uri, response, error_21;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -564,7 +564,7 @@ var Analytics = (function () {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)
-                            throw new ReportsProductGroupsFiltersFetchFailed();
+                            throw new ReportsProductGroupsFiltersFetchFailed(undefined, { status: response.status });
                         return [2, {
                                 data: response.data.results,
                                 metadata: {
@@ -572,8 +572,8 @@ var Analytics = (function () {
                                 }
                             }];
                     case 2:
-                        err_21 = _a.sent();
-                        throw new ReportsProductGroupsFiltersFetchFailed();
+                        error_21 = _a.sent();
+                        throw new ReportsProductGroupsFiltersFetchFailed(undefined, { error: error_21 });
                     case 3: return [2];
                 }
             });

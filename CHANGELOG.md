@@ -1,3 +1,10 @@
+## [4.27.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.27.0...v4.27.1) (2021-09-28)
+
+
+### Bug Fixes
+
+* **analytics/v0:** attach error object and status code to error ([12086f2](https://github.com/tillhub/tillhub-sdk-javascript/commit/12086f2796395e7db6c9f938ad6e84881aaf9122))
+
 # [4.27.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.26.1...v4.27.0) (2021-09-27)
 
 
