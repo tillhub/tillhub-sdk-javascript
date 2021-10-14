@@ -1,3 +1,10 @@
+## [4.28.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.28.1...v4.28.2) (2021-10-14)
+
+
+### Bug Fixes
+
+* **transactions-items:** add missing export pro ([5849e7c](https://github.com/tillhub/tillhub-sdk-javascript/commit/5849e7c5e9761d74072ebcc694018302a12f4184))
+
 ## [4.28.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.28.0...v4.28.1) (2021-10-14)
 
 

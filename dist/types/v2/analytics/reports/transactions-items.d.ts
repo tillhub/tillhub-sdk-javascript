@@ -10,8 +10,13 @@ export interface TransactionsItemsExportOptions {
     uri?: string;
     register_custom_id?: string;
     register?: string;
+    product?: string;
     branch?: string;
     limit?: number;
+    dates?: {
+        start?: string;
+        end?: string;
+    };
 }
 interface AnalyticsReportsTransactionsItemsExportItem {
     correlationId?: string;
