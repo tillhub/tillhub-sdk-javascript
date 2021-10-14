@@ -1,3 +1,10 @@
+## [4.28.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.28.0...v4.28.1) (2021-10-14)
+
+
+### Bug Fixes
+
+* **transactions-items:** add missing export properties ([dbbb028](https://github.com/tillhub/tillhub-sdk-javascript/commit/dbbb02852fab5c3d5095ec623e9b52bb2c981ad3))
+
 # [4.28.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.27.1...v4.28.0) (2021-10-14)
 
 
