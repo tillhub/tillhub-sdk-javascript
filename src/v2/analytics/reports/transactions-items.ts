@@ -11,7 +11,10 @@ export interface TransactionsItemsHandlerOptions {
 export interface TransactionsItemsExportOptions {
   format?: string
   uri?: string
-  branch_number?: number
+  register_custom_id?: string
+  register?: string
+  branch?: string
+  limit?: number
 }
 
 interface AnalyticsReportsTransactionsItemsExportItem {
