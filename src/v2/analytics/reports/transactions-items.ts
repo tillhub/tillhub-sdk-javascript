@@ -8,6 +8,23 @@ export interface TransactionsItemsHandlerOptions {
   base?: string
 }
 
+export interface TransactionsItemsExportOptions {
+  format?: string
+  uri?: string
+  branch_number?: number
+}
+
+interface AnalyticsReportsTransactionsItemsExportItem {
+  correlationId?: string
+}
+
+interface AnalyticsReportsTransactionsItemsExportResponse {
+  data: AnalyticsReportsTransactionsItemsExportItem[]
+  metadata: Record<string, unknown>
+  msg?: string
+
+}
+
 export interface AnalyticsReportsTransactionsItemsResponse {
   data: Array<Record<string, unknown>>
   summary: Array<Record<string, unknown>>
@@ -87,6 +104,27 @@ export class AnalyticsReportsTransactionsItems extends ThAnalyticsBaseHandler {
       throw new AnalyticsReportsTransactionsItemsFetchError(undefined, { error: err })
     }
   }
+
+  public async export (
+    query?: TransactionsItemsExportOptions
+  ): Promise<AnalyticsReportsTransactionsItemsExportResponse> {
+    try {
+      const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
+      const base = localUriHelper.generateBaseUri('/reports/transactions/items')
+      const uri = localUriHelper.generateUriWithQuery(base, { format: 'csv', ...query })
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new AnalyticsReportsTransactionsItemsExportError(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results,
+        metadata: {}
+      }
+    } catch (err: any) {
+      throw new AnalyticsReportsTransactionsItemsExportError(undefined, { error: err })
+    }
+  }
 }
 
 export class AnalyticsReportsTransactionsItemsFetchError extends BaseError {
@@ -97,5 +135,16 @@ export class AnalyticsReportsTransactionsItemsFetchError extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsReportsTransactionsItemsFetchError.prototype)
+  }
+}
+
+export class AnalyticsReportsTransactionsItemsExportError extends BaseError {
+  public name = 'AnalyticsReportsTransactionsItemsExportError'
+  constructor (
+    public message: string = 'Could not export transactions items. ',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, AnalyticsReportsTransactionsItemsExportError.prototype)
   }
 }
