@@ -1,3 +1,10 @@
+# [4.28.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.27.1...v4.28.0) (2021-10-14)
+
+
+### Features
+
+* **transactions-items:** add export handler ([bfff3cb](https://github.com/tillhub/tillhub-sdk-javascript/commit/bfff3cb5e796bbbae76a8abdb334954a68df4f75))
+
 ## [4.27.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.27.0...v4.27.1) (2021-09-28)
 
 

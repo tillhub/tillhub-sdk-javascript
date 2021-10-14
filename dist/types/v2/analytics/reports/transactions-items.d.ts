@@ -5,6 +5,19 @@ export interface TransactionsItemsHandlerOptions {
     user?: string;
     base?: string;
 }
+export interface TransactionsItemsExportOptions {
+    format?: string;
+    uri?: string;
+    branch_number?: number;
+}
+interface AnalyticsReportsTransactionsItemsExportItem {
+    correlationId?: string;
+}
+interface AnalyticsReportsTransactionsItemsExportResponse {
+    data: AnalyticsReportsTransactionsItemsExportItem[];
+    metadata: Record<string, unknown>;
+    msg?: string;
+}
 export interface AnalyticsReportsTransactionsItemsResponse {
     data: Array<Record<string, unknown>>;
     summary: Array<Record<string, unknown>>;
@@ -20,9 +33,16 @@ export declare class AnalyticsReportsTransactionsItems extends ThAnalyticsBaseHa
     constructor(options: TransactionsItemsHandlerOptions, http: Client);
     static create(options: Record<string, unknown>, http: Client): AnalyticsReportsTransactionsItems;
     getAll(query?: Record<string, unknown>): Promise<AnalyticsReportsTransactionsItemsResponse>;
+    export(query?: TransactionsItemsExportOptions): Promise<AnalyticsReportsTransactionsItemsExportResponse>;
 }
 export declare class AnalyticsReportsTransactionsItemsFetchError extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
 }
+export declare class AnalyticsReportsTransactionsItemsExportError extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export {};

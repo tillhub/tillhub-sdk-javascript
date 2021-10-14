@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AnalyticsReportsTransactionsItemsFetchError = exports.AnalyticsReportsTransactionsItems = void 0;
+exports.AnalyticsReportsTransactionsItemsExportError = exports.AnalyticsReportsTransactionsItemsFetchError = exports.AnalyticsReportsTransactionsItems = void 0;
 var tslib_1 = require("tslib");
 var base_1 = require("../../../base");
 var errors_1 = require("../../../errors");
@@ -68,6 +68,34 @@ var AnalyticsReportsTransactionsItems = (function (_super) {
             });
         });
     };
+    AnalyticsReportsTransactionsItems.prototype.export = function (query) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var localUriHelper, base, uri, response, err_2;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        localUriHelper = new uri_helper_1.UriHelper('/api/v2/analytics', this.options);
+                        base = localUriHelper.generateBaseUri('/reports/transactions/items');
+                        uri = localUriHelper.generateUriWithQuery(base, tslib_1.__assign({ format: 'csv' }, query));
+                        return [4, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new AnalyticsReportsTransactionsItemsExportError(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results,
+                                metadata: {}
+                            }];
+                    case 2:
+                        err_2 = _a.sent();
+                        throw new AnalyticsReportsTransactionsItemsExportError(undefined, { error: err_2 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
     return AnalyticsReportsTransactionsItems;
 }(base_1.ThAnalyticsBaseHandler));
 exports.AnalyticsReportsTransactionsItems = AnalyticsReportsTransactionsItems;
@@ -84,4 +112,17 @@ var AnalyticsReportsTransactionsItemsFetchError = (function (_super) {
     return AnalyticsReportsTransactionsItemsFetchError;
 }(errors_1.BaseError));
 exports.AnalyticsReportsTransactionsItemsFetchError = AnalyticsReportsTransactionsItemsFetchError;
+var AnalyticsReportsTransactionsItemsExportError = (function (_super) {
+    tslib_1.__extends(AnalyticsReportsTransactionsItemsExportError, _super);
+    function AnalyticsReportsTransactionsItemsExportError(message, properties) {
+        if (message === void 0) { message = 'Could not export transactions items. '; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'AnalyticsReportsTransactionsItemsExportError';
+        Object.setPrototypeOf(_this, AnalyticsReportsTransactionsItemsExportError.prototype);
+        return _this;
+    }
+    return AnalyticsReportsTransactionsItemsExportError;
+}(errors_1.BaseError));
+exports.AnalyticsReportsTransactionsItemsExportError = AnalyticsReportsTransactionsItemsExportError;
 //# sourceMappingURL=transactions-items.js.map
