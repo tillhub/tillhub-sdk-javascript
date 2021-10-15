@@ -30,6 +30,18 @@ export interface CustomersResponse {
   next?: () => Promise<CustomersResponse>
 }
 
+export interface CustomersBulkResponse {
+  data: {
+    updated_customers?: Customer[]
+    invalid_customers?: Customer[]
+    created_customers?: Customer[]
+  }
+  metadata?: {
+    count?: number
+  }
+  msg?: string
+}
+
 export interface CustomerResponse {
   data?: Customer
   metadata?: {
@@ -264,6 +276,32 @@ export class Customers extends ThBaseHandler {
     }
   }
 
+  async bulkCreate (customers: Customer[], query?: HandlerCustomerQuery): Promise<CustomersBulkResponse> {
+    const base = this.uriHelper.generateBaseUri('/bulk_create')
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+    try {
+      const response = await this.http.getClient().post(uri, customers)
+      if (![200, 409].includes(response.status)) {
+        throw new CustomersBulkCreateFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: {
+          created_customers: response.data.created_customers,
+          invalid_customers: response.data.invalid_customers,
+          updated_customers: response.data.updated_customers
+        },
+        metadata: {
+          count: response.data.count
+        },
+        msg: response.data.msg
+      }
+    } catch (error: any) {
+      throw new CustomersBulkCreateFailed(undefined, { error })
+    }
+  }
+
   async meta (q?: CustomersMetaQuery | undefined): Promise<CustomersResponse> {
     const base = this.uriHelper.generateBaseUri('/meta')
     const uri = this.uriHelper.generateUriWithQuery(base, q)
@@ -387,6 +425,17 @@ export class CustomerCreationFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, CustomerCreationFailed.prototype)
+  }
+}
+
+export class CustomersBulkCreateFailed extends BaseError {
+  public name = 'CustomersBulkCreateFailed'
+  constructor (
+    public message: string = 'Could not bulk create the customers',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, CustomersBulkCreateFailed.prototype)
   }
 }
 
