@@ -1,3 +1,11 @@
+# [4.29.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.28.2...v4.29.0) (2021-10-15)
+
+
+### Features
+
+* **customers:** bulk add DAS-1287 ([5edd6e4](https://github.com/tillhub/tillhub-sdk-javascript/commit/5edd6e43c984d57c483c8fceb35b9c5ace6fb27d))
+* **customers:** refactor tests DAS-1287 ([039601c](https://github.com/tillhub/tillhub-sdk-javascript/commit/039601c684ec0045a975a1988769622ad592f3ec))
+
 ## [4.28.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.28.1...v4.28.2) (2021-10-14)
 
 

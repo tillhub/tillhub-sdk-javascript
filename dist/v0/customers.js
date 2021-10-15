@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CustomerDeleteFailed = exports.CustomersSearchFailed = exports.CustomersCountFailed = exports.CustomersMetaFailed = exports.CustomerCreationFailed = exports.CustomerNoteCreationFailed = exports.CustomerPutFailed = exports.CustomerFetchFailed = exports.CustomersFetchFailed = exports.Customers = void 0;
+exports.CustomerDeleteFailed = exports.CustomersSearchFailed = exports.CustomersCountFailed = exports.CustomersMetaFailed = exports.CustomersBulkCreateFailed = exports.CustomerCreationFailed = exports.CustomerNoteCreationFailed = exports.CustomerPutFailed = exports.CustomerFetchFailed = exports.CustomersFetchFailed = exports.Customers = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -172,6 +172,42 @@ var Customers = (function (_super) {
             });
         });
     };
+    Customers.prototype.bulkCreate = function (customers, query) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_5;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        base = this.uriHelper.generateBaseUri('/bulk_create');
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().post(uri, customers)];
+                    case 2:
+                        response = _a.sent();
+                        if (![200, 409].includes(response.status)) {
+                            throw new CustomersBulkCreateFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: {
+                                    created_customers: response.data.created_customers,
+                                    invalid_customers: response.data.invalid_customers,
+                                    updated_customers: response.data.updated_customers
+                                },
+                                metadata: {
+                                    count: response.data.count
+                                },
+                                msg: response.data.msg
+                            }];
+                    case 3:
+                        error_5 = _a.sent();
+                        throw new CustomersBulkCreateFailed(undefined, { error: error_5 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     Customers.prototype.meta = function (q) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, err_2;
@@ -262,7 +298,7 @@ var Customers = (function (_super) {
     Customers.prototype.search = function (searchTerm) {
         var _a, _b;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, user, uri, response, error_5;
+            var base, user, uri, response, error_6;
             return tslib_1.__generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -282,8 +318,8 @@ var Customers = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_5 = _c.sent();
-                        throw new CustomersSearchFailed(undefined, { error: error_5 });
+                        error_6 = _c.sent();
+                        throw new CustomersSearchFailed(undefined, { error: error_6 });
                     case 4: return [2];
                 }
             });
@@ -358,6 +394,19 @@ var CustomerCreationFailed = (function (_super) {
     return CustomerCreationFailed;
 }(errors_1.BaseError));
 exports.CustomerCreationFailed = CustomerCreationFailed;
+var CustomersBulkCreateFailed = (function (_super) {
+    tslib_1.__extends(CustomersBulkCreateFailed, _super);
+    function CustomersBulkCreateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not bulk create the customers'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'CustomersBulkCreateFailed';
+        Object.setPrototypeOf(_this, CustomersBulkCreateFailed.prototype);
+        return _this;
+    }
+    return CustomersBulkCreateFailed;
+}(errors_1.BaseError));
+exports.CustomersBulkCreateFailed = CustomersBulkCreateFailed;
 var CustomersMetaFailed = (function (_super) {
     tslib_1.__extends(CustomersMetaFailed, _super);
     function CustomersMetaFailed(message, properties) {

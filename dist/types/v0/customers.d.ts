@@ -25,6 +25,17 @@ export interface CustomersResponse {
     metadata: Record<string, unknown>;
     next?: () => Promise<CustomersResponse>;
 }
+export interface CustomersBulkResponse {
+    data: {
+        updated_customers?: Customer[];
+        invalid_customers?: Customer[];
+        created_customers?: Customer[];
+    };
+    metadata?: {
+        count?: number;
+    };
+    msg?: string;
+}
 export interface CustomerResponse {
     data?: Customer;
     metadata?: {
@@ -137,6 +148,7 @@ export declare class Customers extends ThBaseHandler {
     createNote(customerId: string, note: CustomerNoteItem): Promise<CustomerResponse>;
     put(customerId: string, customer: Customer): Promise<CustomerResponse>;
     create(customer: Customer, query?: HandlerCustomerQuery): Promise<CustomerResponse>;
+    bulkCreate(customers: Customer[], query?: HandlerCustomerQuery): Promise<CustomersBulkResponse>;
     meta(q?: CustomersMetaQuery | undefined): Promise<CustomersResponse>;
     delete(customerId: string): Promise<CustomerResponse>;
     count(): Promise<CustomersResponse>;
@@ -163,6 +175,11 @@ export declare class CustomerNoteCreationFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class CustomerCreationFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class CustomersBulkCreateFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
