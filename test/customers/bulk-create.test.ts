@@ -1,22 +1,9 @@
 import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
-import th, { v0 } from '../../src/tillhub-js'
+import { v0 } from '../../src/tillhub-js'
 dotenv.config()
-
-const user = {
-  username: 'test@example.com',
-  password: '12345678',
-  clientAccount: 'someuuid',
-  apiKey: '12345678'
-}
-
-if (process.env.SYSTEM_TEST) {
-  user.username = process.env.SYSTEM_TEST_USERNAME ?? user.username
-  user.password = process.env.SYSTEM_TEST_PASSWORD ?? user.password
-  user.clientAccount = process.env.SYSTEM_TEST_CLIENT_ACCOUNT_ID ?? user.clientAccount
-  user.apiKey = process.env.SYSTEM_TEST_API_KEY ?? user.apiKey
-}
+import { initThInstance } from '../util'
 
 const customersObjArray = [{
   firstname: 'Carol',
@@ -37,7 +24,17 @@ const customersObjArray = [{
   active: false,
   displayname: 'Vers'
 }]
-const userId = '4564'
+
+const legacyId = '4564'
+
+beforeEach(() => {
+  if (process.env.SYSTEM_TEST !== 'true') {
+    mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+      return [200, { token: '', user: { id: '123', legacy_id: legacyId } }]
+    })
+  }
+})
+
 const mock = new MockAdapter(axios)
 
 afterEach(() => {
@@ -47,20 +44,7 @@ afterEach(() => {
 describe('Create a bulk of new Customers', () => {
   it('bulk create', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
-        return [
-          200,
-          {
-            token: '',
-            user: {
-              id: '123',
-              legacy_id: userId
-            }
-          }
-        ]
-      })
-
-      mock.onPost(`https://api.tillhub.com/api/v0/customers/${userId}/bulk_create`).reply(() => {
+      mock.onPost(`https://api.tillhub.com/api/v0/customers/${legacyId}/bulk_create`).reply(() => {
         return [
           200,
           {
@@ -73,56 +57,32 @@ describe('Create a bulk of new Customers', () => {
       })
     }
 
-    const options = {
-      credentials: {
-        username: user.username,
-        password: user.password
-      },
-      base: process.env.TILLHUB_BASE
-    }
-
-    th.init(options)
-    await th.auth.loginUsername({
-      username: user.username,
-      password: user.password
-    })
+    const th = await initThInstance()
 
     const customers = th.customers()
 
     expect(customers).toBeInstanceOf(v0.Customers)
 
-    const { results } = await customers.bulkCreate(customersObjArray)
+    const { data, metadata } = await customers.bulkCreate(customersObjArray)
 
-    expect(typeof results).toEqual('object')
-    expect(results?.updated_customers?.length).toEqual(2)
-    expect(results?.count).toEqual(2)
-    expect(results?.updated_customers).toEqual(customersObjArray)
-    expect(results?.invalid_customers).toEqual([])
-    expect(results?.created_customers).toEqual([])
+    expect(typeof data).toEqual('object')
+    expect(data?.updated_customers?.length).toEqual(2)
+    expect(metadata?.count).toEqual(2)
+    expect(data?.updated_customers).toEqual(customersObjArray)
+    expect(data?.invalid_customers).toEqual([])
+    expect(data?.created_customers).toEqual([])
   })
 })
 
 it('rejects on status codes that are not 200/409', async () => {
   if (process.env.SYSTEM_TEST !== 'true') {
-    mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
-      return [
-        200,
-        {
-          token: '',
-          user: {
-            id: '123',
-            legacy_id: userId
-          }
-        }
-      ]
-    })
-
-    mock.onPost(`https://api.tillhub.com/api/v0/customers/${userId}/bulk_create`).reply(() => {
+    mock.onPost(`https://api.tillhub.com/api/v0/customers/${legacyId}/bulk_create`).reply(() => {
       return [444]
     })
   }
 
   try {
+    const th = await initThInstance()
     const customers = th.customers()
     expect(customers).toBeInstanceOf(v0.Customers)
     await customers.bulkCreate(customersObjArray)

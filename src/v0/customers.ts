@@ -31,10 +31,12 @@ export interface CustomersResponse {
 }
 
 export interface CustomersBulkResponse {
-  results?: {
+  data: {
     updated_customers?: Customer[]
     invalid_customers?: Customer[]
     created_customers?: Customer[]
+  }
+  metadata?: {
     count?: number
   }
   msg?: string
@@ -285,13 +287,15 @@ export class Customers extends ThBaseHandler {
       }
 
       return {
-        msg: response.data.msg,
-        results: {
+        data: {
           created_customers: response.data.created_customers,
           invalid_customers: response.data.invalid_customers,
-          updated_customers: response.data.updated_customers,
+          updated_customers: response.data.updated_customers
+        },
+        metadata: {
           count: response.data.count
-        }
+        },
+        msg: response.data.msg
       }
     } catch (error: any) {
       throw new CustomersBulkCreateFailed(undefined, { error })
