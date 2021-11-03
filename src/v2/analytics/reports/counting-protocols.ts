@@ -6,11 +6,7 @@ import {
 import { Client } from '../../../client'
 import { BaseError } from '../../../errors'
 import { UriHelper } from '../../../uri-helper'
-
-export interface CountingProtocolsHandlerOptions {
-  user?: string
-  base?: string
-}
+import { AnalyticsOptions } from '../../../v0/analytics'
 
 export interface CountingProtocolsQuery {
   limit?: number
@@ -80,12 +76,14 @@ export type AnalyticsReportsCountingProtocolsExportResponseItem = ThAnalyticsExp
 
 export class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
   http: Client
-  public options: CountingProtocolsHandlerOptions
+  public options: AnalyticsOptions
+  public timeout: AnalyticsOptions['timeout']
 
-  constructor (options: CountingProtocolsHandlerOptions, http: Client) {
+  constructor (options: AnalyticsOptions, http: Client) {
     super(http, options)
     this.options = options
     this.http = http
+    this.timeout = options.timeout ?? this.http.getClient().defaults.timeout
   }
 
   static create (options: Record<string, unknown>, http: Client): AnalyticsReportsCountingProtocols {
@@ -103,7 +101,7 @@ export class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
       let nextFn
       const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
       const uri = localUriHelper.generateBaseUri('/reports/cashier_counting_protocols/overview')
-      const { results: d, next, status } = await this.handleGet(uri, query)
+      const { results: d, next, status } = await this.handleGet(uri, query, { timeout: this.timeout })
 
       if (status !== 200) { throw new AnalyticsReportsCountingProtocolsFetchFailed(undefined, { status: status }) }
 

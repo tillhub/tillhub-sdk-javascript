@@ -507,7 +507,7 @@ export class TillhubClient extends events.EventEmitter {
    * Create an authenticated Analytics instance
    *
    */
-  analyticsHandlers (): AnalyticsHandlerTypes {
+  analyticsHandlers (axiosOptions?: AxiosOptions): AnalyticsHandlerTypes {
     if (
       !this.options ||
       !this.options.base ||
@@ -522,39 +522,39 @@ export class TillhubClient extends events.EventEmitter {
       analytics: {
         reports: {
           AnalyticsReportsRevenuesGrouped: v2.analytics.reports.AnalyticsReportsRevenuesGrouped.create(
-            { user: this.auth.user, base: this.options.base },
+            { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
             this.http
           ),
           AnalyticsReportsTransactionsOverview: v2.analytics.reports.AnalyticsReportsTransactionsOverview.create(
-            { user: this.auth.user, base: this.options.base },
+            { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
             this.http
           ),
           AnalyticsReportsTransactionsDetail: v2.analytics.reports.AnalyticsReportsTransactionsDetail.create(
-            { user: this.auth.user, base: this.options.base },
+            { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
             this.http
           ),
           AnalyticsReportsTransactionsItems: v2.analytics.reports.AnalyticsReportsTransactionsItems.create(
-            { user: this.auth.user, base: this.options.base },
+            { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
             this.http
           ),
           AnalyticsReportsBalancesOverview: v2.analytics.reports.AnalyticsReportsBalancesOverview.create(
-            { user: this.auth.user, base: this.options.base },
+            { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
             this.http
           ),
           AnalyticsReportsBalancesDetail: v2.analytics.reports.AnalyticsReportsBalancesDetail.create(
-            { user: this.auth.user, base: this.options.base },
+            { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
             this.http
           ),
           AnalyticsReportsCountingProtocols: v2.analytics.reports.AnalyticsReportsCountingProtocols.create(
-            { user: this.auth.user, base: this.options.base },
+            { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
             this.http
           ),
           AnalyticsReportsDatev: v2.analytics.reports.AnalyticsReportsDatev.create(
             { user: this.auth.user, base: this.options.base },
             this.http
           ),
-          AnalyticsReportsProducts: new v2.analytics.reports.AnalyticsReportsProducts({ user: this.auth.user, base: this.options.base }, this.http),
-          AnalyticsReportsStocks: new v2.analytics.reports.AnalyticsReportsStocks({ user: this.auth.user, base: this.options.base }, this.http)
+          AnalyticsReportsProducts: new v2.analytics.reports.AnalyticsReportsProducts({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http),
+          AnalyticsReportsStocks: new v2.analytics.reports.AnalyticsReportsStocks({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http)
         }
       }
     }

@@ -1,10 +1,10 @@
 import { ThAnalyticsBaseHandler } from '../../../base'
 import { Client } from '../../../client'
 import {
-  CountingProtocolsHandlerOptions,
   AnalyticsReportsCountingProtocolsExportResponseItem,
   AnalyticsReportsCountingProtocolsExportFetchError
 } from '../../../v2/analytics/reports/counting-protocols'
+import { AnalyticsOptions } from '../../../v0/analytics'
 
 import { UriHelper } from '../../../uri-helper'
 
@@ -16,9 +16,9 @@ export interface AnalyticsResponse {
 
 export class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
   http: Client
-  public options: CountingProtocolsHandlerOptions
+  public options: AnalyticsOptions
 
-  constructor (options: CountingProtocolsHandlerOptions, http: Client) {
+  constructor (options: AnalyticsOptions, http: Client) {
     super(http, options)
     this.options = options
     this.http = http

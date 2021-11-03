@@ -1,6 +1,7 @@
 import { Client } from '../../../client'
 import { BaseError } from '../../../errors'
 import { UriHelper } from '../../../uri-helper'
+import { AnalyticsOptions } from '../../../v0/analytics'
 
 export interface AnalyticsReportsStocksV3ExportResponseItem {
   correlationId?: string
@@ -9,11 +10,6 @@ export interface AnalyticsResponse {
   data: AnalyticsReportsStocksV3ExportResponseItem[]
   metadata: Record<string, unknown>
   msg?: string
-}
-
-export interface AnalyticsOptions {
-  user?: string
-  base?: string
 }
 
 export interface StocksExportOptions {
@@ -26,6 +22,7 @@ export class AnalyticsReportsStocks {
   http: Client
   public options: AnalyticsOptions
   public uriHelper: UriHelper
+  public timeout: AnalyticsOptions['timeout']
 
   constructor (options: AnalyticsOptions, http: Client) {
     this.options = options
@@ -34,6 +31,7 @@ export class AnalyticsReportsStocks {
     this.endpoint = '/api/v2/analytics'
     this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
+    this.timeout = options.timeout ?? this.http.getClient().defaults.timeout
   }
 
   async getAll (query?: StocksExportOptions | undefined): Promise<AnalyticsResponse> {
@@ -41,7 +39,7 @@ export class AnalyticsReportsStocks {
       const base = this.uriHelper.generateBaseUri('/reports/stocks')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
       if (response.status !== 200) throw new AnalyticsReportsStocksFetchFailed()
       return {
         data: response.data.results,
