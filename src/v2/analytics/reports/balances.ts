@@ -6,11 +6,7 @@ import {
 import { Client } from '../../../client'
 import { BaseError } from '../../../errors'
 import { UriHelper } from '../../../uri-helper'
-
-export interface BalancesHandlerOptions {
-  user?: string
-  base?: string
-}
+import { AnalyticsOptions } from '../../../v0/analytics'
 
 export interface AnalyticsReportsBalancesOverviewResponseItem {
   data: Array<Record<string, unknown>>
@@ -34,12 +30,14 @@ export type AnalyticsReportsBalancesOverviewExportResponseItem = ThAnalyticsExpo
 
 export class AnalyticsReportsBalancesOverview extends ThAnalyticsBaseHandler {
   http: Client
-  public options: BalancesHandlerOptions
+  public options: AnalyticsOptions
+  public timeout: AnalyticsOptions['timeout']
 
-  constructor (options: BalancesHandlerOptions, http: Client) {
+  constructor (options: AnalyticsOptions, http: Client) {
     super(http, options)
     this.options = options
     this.http = http
+    this.timeout = options.timeout ?? this.http.getClient().defaults.timeout
   }
 
   static create (options: Record<string, unknown>, http: Client): AnalyticsReportsBalancesOverview {
@@ -57,7 +55,7 @@ export class AnalyticsReportsBalancesOverview extends ThAnalyticsBaseHandler {
       let nextFn
       const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
       const uri = localUriHelper.generateBaseUri('/reports/balances/overview')
-      const { results: d, next } = await this.handleGet(uri, query)
+      const { results: d, next } = await this.handleGet(uri, query, { timeout: this.timeout })
 
       const data = d?.find(
         (item: ThAnalyticsBaseResultItem) => item.metric.job === 'reports_balances_v2_overview_data'
@@ -112,12 +110,14 @@ export class AnalyticsReportsBalancesOverview extends ThAnalyticsBaseHandler {
 
 export class AnalyticsReportsBalancesDetail extends ThAnalyticsBaseHandler {
   http: Client
-  public options: BalancesHandlerOptions
+  public options: AnalyticsOptions
+  public timeout: AnalyticsOptions['timeout']
 
-  constructor (options: BalancesHandlerOptions, http: Client) {
+  constructor (options: AnalyticsOptions, http: Client) {
     super(http, options)
     this.options = options
     this.http = http
+    this.timeout = options.timeout ?? this.http.getClient().defaults.timeout
   }
 
   static create (options: Record<string, unknown>, http: Client): AnalyticsReportsBalancesDetail {
@@ -132,7 +132,7 @@ export class AnalyticsReportsBalancesDetail extends ThAnalyticsBaseHandler {
     try {
       const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
       const uri = localUriHelper.generateBaseUri(`/reports/balances/${id}/detail`)
-      const { results: d } = await this.handleGet(uri)
+      const { results: d } = await this.handleGet(uri, { timeout: this.timeout })
 
       const data = d?.find(
         (item: ThAnalyticsBaseResultItem) =>
