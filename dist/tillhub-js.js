@@ -253,7 +253,7 @@ var TillhubClient = (function (_super) {
             }
         };
     };
-    TillhubClient.prototype.analyticsHandlers = function () {
+    TillhubClient.prototype.analyticsHandlers = function (axiosOptions) {
         if (!this.options ||
             !this.options.base ||
             !this.http ||
@@ -264,16 +264,16 @@ var TillhubClient = (function (_super) {
         return {
             analytics: {
                 reports: {
-                    AnalyticsReportsRevenuesGrouped: v2.analytics.reports.AnalyticsReportsRevenuesGrouped.create({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsTransactionsOverview: v2.analytics.reports.AnalyticsReportsTransactionsOverview.create({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsTransactionsDetail: v2.analytics.reports.AnalyticsReportsTransactionsDetail.create({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsTransactionsItems: v2.analytics.reports.AnalyticsReportsTransactionsItems.create({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsBalancesOverview: v2.analytics.reports.AnalyticsReportsBalancesOverview.create({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsBalancesDetail: v2.analytics.reports.AnalyticsReportsBalancesDetail.create({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsCountingProtocols: v2.analytics.reports.AnalyticsReportsCountingProtocols.create({ user: this.auth.user, base: this.options.base }, this.http),
+                    AnalyticsReportsRevenuesGrouped: v2.analytics.reports.AnalyticsReportsRevenuesGrouped.create({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
+                    AnalyticsReportsTransactionsOverview: v2.analytics.reports.AnalyticsReportsTransactionsOverview.create({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
+                    AnalyticsReportsTransactionsDetail: v2.analytics.reports.AnalyticsReportsTransactionsDetail.create({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
+                    AnalyticsReportsTransactionsItems: v2.analytics.reports.AnalyticsReportsTransactionsItems.create({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
+                    AnalyticsReportsBalancesOverview: v2.analytics.reports.AnalyticsReportsBalancesOverview.create({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
+                    AnalyticsReportsBalancesDetail: v2.analytics.reports.AnalyticsReportsBalancesDetail.create({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
+                    AnalyticsReportsCountingProtocols: v2.analytics.reports.AnalyticsReportsCountingProtocols.create({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
                     AnalyticsReportsDatev: v2.analytics.reports.AnalyticsReportsDatev.create({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsProducts: new v2.analytics.reports.AnalyticsReportsProducts({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsStocks: new v2.analytics.reports.AnalyticsReportsStocks({ user: this.auth.user, base: this.options.base }, this.http)
+                    AnalyticsReportsProducts: new v2.analytics.reports.AnalyticsReportsProducts({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
+                    AnalyticsReportsStocks: new v2.analytics.reports.AnalyticsReportsStocks({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http)
                 }
             }
         };

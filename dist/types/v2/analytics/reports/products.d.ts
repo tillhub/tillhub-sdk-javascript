@@ -1,14 +1,11 @@
 import { Client } from '../../../client';
 import { BaseError } from '../../../errors';
 import { UriHelper } from '../../../uri-helper';
+import { AnalyticsOptions } from '../../../v0/analytics';
 export interface AnalyticsResponse {
     data: Array<Record<string, unknown>>;
     metadata: Record<string, unknown>;
     msg?: string;
-}
-export interface AnalyticsOptions {
-    user?: string;
-    base?: string;
 }
 export interface ProductsOptions {
     [key: string]: any;
@@ -27,6 +24,7 @@ export declare class AnalyticsReportsProducts {
     http: Client;
     options: AnalyticsOptions;
     uriHelper: UriHelper;
+    timeout: AnalyticsOptions['timeout'];
     constructor(options: AnalyticsOptions, http: Client);
     getAll(query?: ProductsOptions | undefined): Promise<AnalyticsResponse>;
 }

@@ -70,7 +70,7 @@ export declare class TillhubClient extends events.EventEmitter {
     orders(): v0.Orders;
     analytics(axiosOptions?: AxiosOptions): v0.Analytics;
     analyticsHandlersV1(): AnalyticsHandlersV1Types;
-    analyticsHandlers(): AnalyticsHandlerTypes;
+    analyticsHandlers(axiosOptions?: AxiosOptions): AnalyticsHandlerTypes;
     analyticsHandlersV3(): AnalyticsHandlerTypesV3;
     transactionsLegacy(): v1.TransactionsLegacy;
     transactions(): v1.Transactions;

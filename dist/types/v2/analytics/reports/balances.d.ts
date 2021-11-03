@@ -1,10 +1,7 @@
 import { ThAnalyticsBaseHandler, ThAnalyticsExportsBaseResponse } from '../../../base';
 import { Client } from '../../../client';
 import { BaseError } from '../../../errors';
-export interface BalancesHandlerOptions {
-    user?: string;
-    base?: string;
-}
+import { AnalyticsOptions } from '../../../v0/analytics';
 export interface AnalyticsReportsBalancesOverviewResponseItem {
     data: Array<Record<string, unknown>>;
     summary: Array<Record<string, unknown>>;
@@ -24,16 +21,18 @@ export interface AnalyticsReportsBalancesDetailResponseItem {
 export declare type AnalyticsReportsBalancesOverviewExportResponseItem = ThAnalyticsExportsBaseResponse;
 export declare class AnalyticsReportsBalancesOverview extends ThAnalyticsBaseHandler {
     http: Client;
-    options: BalancesHandlerOptions;
-    constructor(options: BalancesHandlerOptions, http: Client);
+    options: AnalyticsOptions;
+    timeout: AnalyticsOptions['timeout'];
+    constructor(options: AnalyticsOptions, http: Client);
     static create(options: Record<string, unknown>, http: Client): AnalyticsReportsBalancesOverview;
     getAll(query?: Record<string, unknown>): Promise<AnalyticsReportsBalancesOverviewResponseItem>;
     export(query?: Record<string, unknown>): Promise<AnalyticsReportsBalancesOverviewExportResponseItem>;
 }
 export declare class AnalyticsReportsBalancesDetail extends ThAnalyticsBaseHandler {
     http: Client;
-    options: BalancesHandlerOptions;
-    constructor(options: BalancesHandlerOptions, http: Client);
+    options: AnalyticsOptions;
+    timeout: AnalyticsOptions['timeout'];
+    constructor(options: AnalyticsOptions, http: Client);
     static create(options: Record<string, unknown>, http: Client): AnalyticsReportsBalancesDetail;
     get(id: string): Promise<AnalyticsReportsBalancesDetailResponseItem>;
 }

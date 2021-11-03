@@ -1,6 +1,7 @@
 import { ThAnalyticsBaseHandler } from '../../../base';
 import { Client } from '../../../client';
-import { CountingProtocolsHandlerOptions, AnalyticsReportsCountingProtocolsExportResponseItem } from '../../../v2/analytics/reports/counting-protocols';
+import { AnalyticsReportsCountingProtocolsExportResponseItem } from '../../../v2/analytics/reports/counting-protocols';
+import { AnalyticsOptions } from '../../../v0/analytics';
 export interface AnalyticsResponse {
     data: AnalyticsReportsCountingProtocolsExportResponseItem[];
     metadata: Record<string, unknown>;
@@ -8,8 +9,8 @@ export interface AnalyticsResponse {
 }
 export declare class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
     http: Client;
-    options: CountingProtocolsHandlerOptions;
-    constructor(options: CountingProtocolsHandlerOptions, http: Client);
+    options: AnalyticsOptions;
+    constructor(options: AnalyticsOptions, http: Client);
     static create(options: Record<string, unknown>, http: Client): AnalyticsReportsCountingProtocols;
     export(query?: Record<string, unknown>): Promise<AnalyticsResponse>;
 }

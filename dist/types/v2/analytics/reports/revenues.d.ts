@@ -1,10 +1,7 @@
 import { ThAnalyticsBaseHandler, ThAnalyticsExportsBaseResponse } from '../../../base';
 import { Client } from '../../../client';
 import { BaseError } from '../../../errors';
-export interface RevenueHandlerOptions {
-    user?: string;
-    base?: string;
-}
+import { AnalyticsOptions } from '../../../v0/analytics';
 export interface AnalyticsReportsRevenuesGroupedResponseItem {
     data: Array<Record<string, unknown>>;
     summary: Array<Record<string, unknown>>;
@@ -17,8 +14,9 @@ export interface AnalyticsReportsRevenuesGroupedResponseItem {
 export declare type AnalyticsReportsRevenuesGroupedExportResponseItem = ThAnalyticsExportsBaseResponse;
 export declare class AnalyticsReportsRevenuesGrouped extends ThAnalyticsBaseHandler {
     http: Client;
-    options: RevenueHandlerOptions;
-    constructor(options: RevenueHandlerOptions, http: Client);
+    options: AnalyticsOptions;
+    timeout: AnalyticsOptions['timeout'];
+    constructor(options: AnalyticsOptions, http: Client);
     static create(options: Record<string, unknown>, http: Client): AnalyticsReportsRevenuesGrouped;
     getAll(query?: Record<string, unknown>): Promise<AnalyticsReportsRevenuesGroupedResponseItem>;
     export(query?: Record<string, unknown>): Promise<AnalyticsReportsRevenuesGroupedExportResponseItem>;

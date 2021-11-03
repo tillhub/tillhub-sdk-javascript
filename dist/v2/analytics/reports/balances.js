@@ -8,9 +8,11 @@ var uri_helper_1 = require("../../../uri-helper");
 var AnalyticsReportsBalancesOverview = (function (_super) {
     tslib_1.__extends(AnalyticsReportsBalancesOverview, _super);
     function AnalyticsReportsBalancesOverview(options, http) {
+        var _a;
         var _this = _super.call(this, http, options) || this;
         _this.options = options;
         _this.http = http;
+        _this.timeout = (_a = options.timeout) !== null && _a !== void 0 ? _a : _this.http.getClient().defaults.timeout;
         return _this;
     }
     AnalyticsReportsBalancesOverview.create = function (options, http) {
@@ -28,7 +30,7 @@ var AnalyticsReportsBalancesOverview = (function (_super) {
                         nextFn = void 0;
                         localUriHelper = new uri_helper_1.UriHelper('/api/v2/analytics', this.options);
                         uri = localUriHelper.generateBaseUri('/reports/balances/overview');
-                        return [4, this.handleGet(uri, query)];
+                        return [4, this.handleGet(uri, query, { timeout: this.timeout })];
                     case 1:
                         _j = _k.sent(), d = _j.results, next_1 = _j.next;
                         data = (_b = (_a = d === null || d === void 0 ? void 0 : d.find(function (item) { return item.metric.job === 'reports_balances_v2_overview_data'; })) === null || _a === void 0 ? void 0 : _a.values) !== null && _b !== void 0 ? _b : [];
@@ -88,9 +90,11 @@ exports.AnalyticsReportsBalancesOverview = AnalyticsReportsBalancesOverview;
 var AnalyticsReportsBalancesDetail = (function (_super) {
     tslib_1.__extends(AnalyticsReportsBalancesDetail, _super);
     function AnalyticsReportsBalancesDetail(options, http) {
+        var _a;
         var _this = _super.call(this, http, options) || this;
         _this.options = options;
         _this.http = http;
+        _this.timeout = (_a = options.timeout) !== null && _a !== void 0 ? _a : _this.http.getClient().defaults.timeout;
         return _this;
     }
     AnalyticsReportsBalancesDetail.create = function (options, http) {
@@ -106,7 +110,7 @@ var AnalyticsReportsBalancesDetail = (function (_super) {
                         _c.trys.push([0, 2, , 3]);
                         localUriHelper = new uri_helper_1.UriHelper('/api/v2/analytics', this.options);
                         uri = localUriHelper.generateBaseUri("/reports/balances/" + id + "/detail");
-                        return [4, this.handleGet(uri)];
+                        return [4, this.handleGet(uri, { timeout: this.timeout })];
                     case 1:
                         d = (_c.sent()).results;
                         data = (_b = (_a = d === null || d === void 0 ? void 0 : d.find(function (item) {

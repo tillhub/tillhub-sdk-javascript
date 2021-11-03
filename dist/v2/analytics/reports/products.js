@@ -6,12 +6,13 @@ var errors_1 = require("../../../errors");
 var uri_helper_1 = require("../../../uri-helper");
 var AnalyticsReportsProducts = (function () {
     function AnalyticsReportsProducts(options, http) {
-        var _a;
+        var _a, _b;
         this.options = options;
         this.http = http;
         this.endpoint = '/api/v2/analytics';
         this.options.base = (_a = this.options.base) !== null && _a !== void 0 ? _a : 'https://api.tillhub.com';
         this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
+        this.timeout = (_b = options.timeout) !== null && _b !== void 0 ? _b : this.http.getClient().defaults.timeout;
     }
     AnalyticsReportsProducts.prototype.getAll = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
@@ -22,7 +23,7 @@ var AnalyticsReportsProducts = (function () {
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/reports/products');
                         uri = this.uriHelper.generateUriWithQuery(base, query);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)

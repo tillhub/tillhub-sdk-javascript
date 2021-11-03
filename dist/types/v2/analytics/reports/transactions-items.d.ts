@@ -1,10 +1,7 @@
 import { ThAnalyticsBaseHandler } from '../../../base';
 import { Client } from '../../../client';
 import { BaseError } from '../../../errors';
-export interface TransactionsItemsHandlerOptions {
-    user?: string;
-    base?: string;
-}
+import { AnalyticsOptions } from '../../../v0/analytics';
 export interface TransactionsItemsExportOptions {
     format?: string;
     uri?: string;
@@ -37,8 +34,9 @@ export interface AnalyticsReportsTransactionsItemsResponse {
 }
 export declare class AnalyticsReportsTransactionsItems extends ThAnalyticsBaseHandler {
     http: Client;
-    options: TransactionsItemsHandlerOptions;
-    constructor(options: TransactionsItemsHandlerOptions, http: Client);
+    options: AnalyticsOptions;
+    timeout: AnalyticsOptions['timeout'];
+    constructor(options: AnalyticsOptions, http: Client);
     static create(options: Record<string, unknown>, http: Client): AnalyticsReportsTransactionsItems;
     getAll(query?: Record<string, unknown>): Promise<AnalyticsReportsTransactionsItemsResponse>;
     export(query?: TransactionsItemsExportOptions): Promise<AnalyticsReportsTransactionsItemsExportResponse>;

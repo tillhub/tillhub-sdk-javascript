@@ -1,6 +1,7 @@
 import { Client } from '../../../client';
 import { BaseError } from '../../../errors';
 import { UriHelper } from '../../../uri-helper';
+import { AnalyticsOptions } from '../../../v0/analytics';
 export interface AnalyticsReportsStocksV3ExportResponseItem {
     correlationId?: string;
 }
@@ -8,10 +9,6 @@ export interface AnalyticsResponse {
     data: AnalyticsReportsStocksV3ExportResponseItem[];
     metadata: Record<string, unknown>;
     msg?: string;
-}
-export interface AnalyticsOptions {
-    user?: string;
-    base?: string;
 }
 export interface StocksExportOptions {
     format?: string;
@@ -22,6 +19,7 @@ export declare class AnalyticsReportsStocks {
     http: Client;
     options: AnalyticsOptions;
     uriHelper: UriHelper;
+    timeout: AnalyticsOptions['timeout'];
     constructor(options: AnalyticsOptions, http: Client);
     getAll(query?: StocksExportOptions | undefined): Promise<AnalyticsResponse>;
 }

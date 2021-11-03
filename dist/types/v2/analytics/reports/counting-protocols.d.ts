@@ -1,10 +1,7 @@
 import { ThAnalyticsBaseHandler, ThAnalyticsExportsBaseResponse } from '../../../base';
 import { Client } from '../../../client';
 import { BaseError } from '../../../errors';
-export interface CountingProtocolsHandlerOptions {
-    user?: string;
-    base?: string;
-}
+import { AnalyticsOptions } from '../../../v0/analytics';
 export interface CountingProtocolsQuery {
     limit?: number;
     uri?: string;
@@ -69,8 +66,9 @@ export interface CountingProtocol {
 export declare type AnalyticsReportsCountingProtocolsExportResponseItem = ThAnalyticsExportsBaseResponse;
 export declare class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
     http: Client;
-    options: CountingProtocolsHandlerOptions;
-    constructor(options: CountingProtocolsHandlerOptions, http: Client);
+    options: AnalyticsOptions;
+    timeout: AnalyticsOptions['timeout'];
+    constructor(options: AnalyticsOptions, http: Client);
     static create(options: Record<string, unknown>, http: Client): AnalyticsReportsCountingProtocols;
     getAll(query?: CountingProtocolsQuery): Promise<AnalyticsReportsCountingProtocolsResponse>;
     export(query?: Record<string, unknown>): Promise<AnalyticsReportsCountingProtocolsExportResponseItem>;

@@ -8,9 +8,11 @@ var uri_helper_1 = require("../../../uri-helper");
 var AnalyticsReportsTransactionsItems = (function (_super) {
     tslib_1.__extends(AnalyticsReportsTransactionsItems, _super);
     function AnalyticsReportsTransactionsItems(options, http) {
+        var _a;
         var _this = _super.call(this, http, options) || this;
         _this.options = options;
         _this.http = http;
+        _this.timeout = (_a = options.timeout) !== null && _a !== void 0 ? _a : _this.http.getClient().defaults.timeout;
         return _this;
     }
     AnalyticsReportsTransactionsItems.create = function (options, http) {
@@ -28,7 +30,7 @@ var AnalyticsReportsTransactionsItems = (function (_super) {
                         nextFn = void 0;
                         localUriHelper = new uri_helper_1.UriHelper('/api/v2/analytics', this.options);
                         uri = localUriHelper.generateBaseUri('/reports/transactions/items');
-                        return [4, this.handleGet(uri, query)];
+                        return [4, this.handleGet(uri, query, { timeout: this.timeout })];
                     case 1:
                         _j = _k.sent(), d = _j.results, next_1 = _j.next, status_1 = _j.status;
                         if (status_1 !== 200) {

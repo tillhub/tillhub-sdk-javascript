@@ -1,3 +1,10 @@
+# [4.30.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.29.0...v4.30.0) (2021-11-03)
+
+
+### Features
+
+* **v2/analytics:** add axios timeout option ([db92977](https://github.com/tillhub/tillhub-sdk-javascript/commit/db9297790f00701225a5f695979aaee69db74c04))
+
 # [4.29.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.28.2...v4.29.0) (2021-10-15)
 
 
