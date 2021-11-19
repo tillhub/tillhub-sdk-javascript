@@ -1,7 +1,8 @@
-import { Client } from '../client'
+import { Client, Timeout } from '../client'
 import { UriHelper } from '../uri-helper'
 import { ThBaseHandler } from '../base'
 import { BaseError } from '../errors/baseError'
+import { AnalyticsOptions } from '../v0/analytics'
 
 export interface PdfRequestObject {
   transactionId: string
@@ -20,11 +21,6 @@ export interface TransactionsMetaQuery {
   type?: string | string[]
   legacy?: boolean
   query?: Record<string, unknown>
-}
-
-export interface TransactionsOptions {
-  user?: string
-  base?: string
 }
 
 export interface TransactionResponse {
@@ -53,18 +49,18 @@ export class Transactions extends ThBaseHandler {
   public static baseEndpoint = '/api/v1/transactions'
   endpoint: string
   http: Client
-  // signing: Signing
-  public options: TransactionsOptions
+  public options: AnalyticsOptions
   public uriHelper: UriHelper
+  public timeout: Timeout
 
-  constructor (options: TransactionsOptions, http: Client) {
+  constructor (options: AnalyticsOptions, http: Client) {
     super(http, {
       endpoint: Transactions.baseEndpoint,
       base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
-    // this.signing = new Signing(options, http)
+    this.timeout = options.timeout ?? this.http.getClient().defaults.timeout
 
     this.endpoint = Transactions.baseEndpoint
     this.options.base = this.options.base ?? 'https://api.tillhub.com'
@@ -77,7 +73,7 @@ export class Transactions extends ThBaseHandler {
       const base = this.uriHelper.generateBaseUri()
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
 
       if (response.data.cursor?.next) {
         next = (): Promise<TransactionResponse> => this.getAll({ uri: response.data.cursor.next })
@@ -98,7 +94,7 @@ export class Transactions extends ThBaseHandler {
       const base = this.uriHelper.generateBaseUri('/meta')
       const uri = this.uriHelper.generateUriWithQuery(base, q)
 
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
 
       if (response.status !== 200) throw new TransactionsGetMetaFailed()
 
@@ -165,10 +161,10 @@ export class TransactionsLegacy {
   endpoint: string
   http: Client
   signing: Signing
-  public options: TransactionsOptions
+  public options: AnalyticsOptions
   public uriHelper: UriHelper
 
-  constructor (options: TransactionsOptions, http: Client) {
+  constructor (options: AnalyticsOptions, http: Client) {
     this.options = options
     this.http = http
     this.signing = new Signing(options, http)
@@ -243,10 +239,10 @@ export class TransactionsLegacy {
 export class Signing {
   endpoint: string
   http: Client
-  public options: TransactionsOptions
+  public options: AnalyticsOptions
   public uriHelper: UriHelper
 
-  constructor (options: TransactionsOptions, http: Client) {
+  constructor (options: AnalyticsOptions, http: Client) {
     this.options = options
     this.http = http
 
@@ -263,7 +259,6 @@ export class Signing {
   ): Promise<TransactionResponse> {
     try {
       const uri = this.uriHelper.generateBaseUri(`/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/initialise`)
-      // const uri = `${this.options.base}${this.endpoint}/${this.options.user}/legacy/signing/${singingResourceType}/${singingResource}/${signingSystem}/initialise`
 
       const response = await this.http.getClient().post(uri, signingConfiguration, {
         headers: {
