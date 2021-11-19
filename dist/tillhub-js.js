@@ -308,7 +308,7 @@ var TillhubClient = (function (_super) {
         }
         return new v1.TransactionsLegacy({ user: this.auth.user, base: this.options.base }, this.http);
     };
-    TillhubClient.prototype.transactions = function () {
+    TillhubClient.prototype.transactions = function (axiosOptions) {
         if (!this.options ||
             !this.options.base ||
             !this.http ||
@@ -316,7 +316,7 @@ var TillhubClient = (function (_super) {
             !this.auth.authenticated) {
             throw new errors.UninstantiatedClient();
         }
-        return new v1.Transactions({ user: this.auth.user, base: this.options.base }, this.http);
+        return new v1.Transactions({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http);
     };
     TillhubClient.prototype.transactionsV2 = function () {
         return this.generateAuthenticatedInstance(v2.Transactions);

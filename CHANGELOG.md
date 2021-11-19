@@ -1,3 +1,10 @@
+## [4.31.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.31.0...v4.31.1) (2021-11-19)
+
+
+### Bug Fixes
+
+* **reports:** apply timeout to tx handler, payments meta ([e1b0b21](https://github.com/tillhub/tillhub-sdk-javascript/commit/e1b0b21529e0a3c411a45874a0cbdd5c1887c09f))
+
 # [4.31.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.30.0...v4.31.0) (2021-11-19)
 
 

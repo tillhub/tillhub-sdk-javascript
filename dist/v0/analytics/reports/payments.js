@@ -50,7 +50,7 @@ var Payments = (function () {
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/reports/payments/meta');
                         uri = this.uriHelper.generateUriWithQuery(base, query);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200) {
