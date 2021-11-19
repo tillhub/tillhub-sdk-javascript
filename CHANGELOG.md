@@ -1,3 +1,10 @@
+# [4.31.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.30.0...v4.31.0) (2021-11-19)
+
+
+### Features
+
+* **reports:** add timeout to payments, transactions ([e07eb50](https://github.com/tillhub/tillhub-sdk-javascript/commit/e07eb50dd57612d9afd3367e989f4ba880abdda7))
+
 # [4.30.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.29.0...v4.30.0) (2021-11-03)
 
 

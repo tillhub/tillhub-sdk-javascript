@@ -5,9 +5,11 @@ var tslib_1 = require("tslib");
 var errors = tslib_1.__importStar(require("../../../errors/analytics"));
 var Payments = (function () {
     function Payments(options, http, uriHelper) {
+        var _a;
         this.options = options;
         this.http = http;
         this.uriHelper = uriHelper;
+        this.timeout = (_a = options.timeout) !== null && _a !== void 0 ? _a : this.http.getClient().defaults.timeout;
     }
     Payments.prototype.getAll = function (query) {
         var _a;
@@ -20,7 +22,7 @@ var Payments = (function () {
                         _b.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/reports/payments');
                         uri = this.uriHelper.generateUriWithQuery(base, query);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response_1 = _b.sent();
                         if ((_a = response_1.data.cursor) === null || _a === void 0 ? void 0 : _a.next) {

@@ -8,15 +8,16 @@ var baseError_1 = require("../errors/baseError");
 var Transactions = (function (_super) {
     tslib_1.__extends(Transactions, _super);
     function Transactions(options, http) {
-        var _a, _b;
+        var _a, _b, _c;
         var _this = _super.call(this, http, {
             endpoint: Transactions.baseEndpoint,
             base: (_a = options.base) !== null && _a !== void 0 ? _a : 'https://api.tillhub.com'
         }) || this;
         _this.options = options;
         _this.http = http;
+        _this.timeout = (_b = options.timeout) !== null && _b !== void 0 ? _b : _this.http.getClient().defaults.timeout;
         _this.endpoint = Transactions.baseEndpoint;
-        _this.options.base = (_b = _this.options.base) !== null && _b !== void 0 ? _b : 'https://api.tillhub.com';
+        _this.options.base = (_c = _this.options.base) !== null && _c !== void 0 ? _c : 'https://api.tillhub.com';
         _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
         return _this;
     }
@@ -31,7 +32,7 @@ var Transactions = (function (_super) {
                         _b.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri();
                         uri = this.uriHelper.generateUriWithQuery(base, query);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response_1 = _b.sent();
                         if ((_a = response_1.data.cursor) === null || _a === void 0 ? void 0 : _a.next) {
@@ -59,7 +60,7 @@ var Transactions = (function (_super) {
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/meta');
                         uri = this.uriHelper.generateUriWithQuery(base, q);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200)

@@ -1,9 +1,6 @@
-import { Client } from '../../../client';
+import { Client, Timeout } from '../../../client';
 import { UriHelper } from '../../../uri-helper';
-export interface PaymentsOptions {
-    user?: string;
-    base?: string;
-}
+import { AnalyticsOptions } from '../../analytics';
 export interface PaymentsResponse {
     data: Array<Record<string, unknown>>;
     metadata: Record<string, unknown>;
@@ -38,9 +35,10 @@ export interface MetaQuery {
 }
 export declare class Payments {
     http: Client;
-    options: PaymentsOptions;
+    options: AnalyticsOptions;
     uriHelper: UriHelper;
-    constructor(options: PaymentsOptions, http: Client, uriHelper: UriHelper);
+    timeout: Timeout;
+    constructor(options: AnalyticsOptions, http: Client, uriHelper: UriHelper);
     getAll(query?: PaymentsQuery): Promise<PaymentsResponse>;
     meta(query?: MetaQuery): Promise<PaymentsResponse>;
 }
