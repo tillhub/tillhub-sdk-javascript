@@ -1,11 +1,7 @@
-import { Client } from '../../../client'
+import { Client, Timeout } from '../../../client'
 import { UriHelper } from '../../../uri-helper'
 import * as errors from '../../../errors/analytics'
-
-export interface PaymentsOptions {
-  user?: string
-  base?: string
-}
+import { AnalyticsOptions } from '../../analytics'
 
 export interface PaymentsResponse {
   data: Array<Record<string, unknown>>
@@ -44,13 +40,15 @@ export interface MetaQuery {
 
 export class Payments {
   http: Client
-  public options: PaymentsOptions
+  public options: AnalyticsOptions
   public uriHelper: UriHelper
+  public timeout: Timeout
 
-  constructor (options: PaymentsOptions, http: Client, uriHelper: UriHelper) {
+  constructor (options: AnalyticsOptions, http: Client, uriHelper: UriHelper) {
     this.options = options
     this.http = http
     this.uriHelper = uriHelper
+    this.timeout = options.timeout ?? this.http.getClient().defaults.timeout
   }
 
   async getAll (query?: PaymentsQuery): Promise<PaymentsResponse> {
@@ -58,7 +56,7 @@ export class Payments {
     try {
       const base = this.uriHelper.generateBaseUri('/reports/payments')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
 
       if (response.data.cursor?.next) {
         next = (): Promise<PaymentsResponse> => this.getAll({ uri: response.data.cursor.next })
