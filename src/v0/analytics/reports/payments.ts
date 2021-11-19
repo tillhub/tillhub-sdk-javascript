@@ -76,7 +76,7 @@ export class Payments {
     try {
       const base = this.uriHelper.generateBaseUri('/reports/payments/meta')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
 
       if (response.status !== 200) {
         throw new errors.ReportsPaymentsMetaFailed(undefined, { status: response.status })

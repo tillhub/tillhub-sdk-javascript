@@ -625,7 +625,7 @@ export class TillhubClient extends events.EventEmitter {
    * Create an authenticated Transactions instance
    *
    */
-  transactions (): v1.Transactions {
+  transactions (axiosOptions?: AxiosOptions): v1.Transactions {
     if (
       !this.options ||
       !this.options.base ||
@@ -636,7 +636,7 @@ export class TillhubClient extends events.EventEmitter {
       throw new errors.UninstantiatedClient()
     }
 
-    return new v1.Transactions({ user: this.auth.user, base: this.options.base }, this.http)
+    return new v1.Transactions({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http)
   }
 
   /**
