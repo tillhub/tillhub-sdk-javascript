@@ -4,6 +4,7 @@ import { Deliveries } from './deliveries'
 import { ProductGroups } from './product_groups'
 import { ProductTemplates } from './product_templates'
 import { ProductAddonGroups } from './product_addon_groups'
+import { ProductAddons } from './product_addons'
 import { Accounts } from './accounts'
 import { ExpenseAccounts } from './expense_accounts'
 import { PaymentOptions } from './payment_options'
@@ -67,6 +68,7 @@ export {
   ProductGroups,
   ProductTemplates,
   ProductAddonGroups,
+  ProductAddons,
   Accounts,
   ExpenseAccounts,
   PaymentOptions,
