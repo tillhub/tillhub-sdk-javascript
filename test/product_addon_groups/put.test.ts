@@ -48,13 +48,11 @@ describe('v0: Product addon groups: can alter', () => {
     }
 
     const th = await initThInstance()
-
     const ProductAddonsGroups = th.productAddonGroups()
 
     expect(ProductAddonsGroups).toBeInstanceOf(v0.ProductAddonGroups)
 
     const { data } = await ProductAddonsGroups.put(productAddonGroupId, productAddonGroup)
-
     expect(data).toMatchObject(productAddonGroup)
   })
 

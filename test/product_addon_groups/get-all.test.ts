@@ -69,11 +69,9 @@ describe('v0: Product addon groups: can get all', () => {
     })
 
     const ProductAddonsGroups = th.productAddonGroups()
-
     expect(ProductAddonsGroups).toBeInstanceOf(v0.ProductAddonGroups)
 
     const { data } = await ProductAddonsGroups.getAll()
-
     expect(Array.isArray(data)).toBe(true)
   })
 

@@ -68,11 +68,9 @@ describe('v0: Product addon groups: can get count number of all addon groups', (
     })
 
     const ProductAddonsGroups = th.productAddonGroups()
-
     expect(ProductAddonsGroups).toBeInstanceOf(v0.ProductAddonGroups)
 
     const { data } = await ProductAddonsGroups.meta()
-
     expect(data).toEqual([{ count: 50 }])
   })
 

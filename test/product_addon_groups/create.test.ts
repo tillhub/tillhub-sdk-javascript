@@ -47,13 +47,11 @@ describe('v0: Product addon groups: can create', () => {
     }
 
     const th = await initThInstance()
-
     const ProductAddonsGroups = th.productAddonGroups()
 
     expect(ProductAddonsGroups).toBeInstanceOf(v0.ProductAddonGroups)
 
     const { data } = await ProductAddonsGroups.create(productAddonGroup)
-
     expect(data).toMatchObject(productAddonGroup)
   })
 
