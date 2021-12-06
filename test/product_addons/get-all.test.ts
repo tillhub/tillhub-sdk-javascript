@@ -61,7 +61,6 @@ describe('v0: Product addons: can get all', () => {
     }
 
     const th = new TillhubClient()
-
     th.init(options)
     await th.auth.loginUsername({
       username: user.username,
@@ -69,6 +68,7 @@ describe('v0: Product addons: can get all', () => {
     })
 
     const ProductAddons = th.productAddons()
+
     expect(ProductAddons).toBeInstanceOf(v0.ProductAddons)
 
     const { data } = await ProductAddons.getAll()
