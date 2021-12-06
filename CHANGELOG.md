@@ -1,3 +1,11 @@
+# [4.32.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.31.1...v4.32.0) (2021-12-06)
+
+
+### Features
+
+* **product-addon-groups:** added product addon groups ([93c8c96](https://github.com/tillhub/tillhub-sdk-javascript/commit/93c8c969767bc2b81ba0e70b00e1af6c2e6a74cb))
+* **product-addons:** added product addons ([14d5d3f](https://github.com/tillhub/tillhub-sdk-javascript/commit/14d5d3f79b2c4e254fe174dda928a660953a5ffe))
+
 ## [4.31.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.31.0...v4.31.1) (2021-11-19)
 
 
