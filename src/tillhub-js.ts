@@ -492,6 +492,24 @@ export class TillhubClient extends events.EventEmitter {
    * Create an authenticated Analytics instance
    *
    */
+  analyticsV1 (axiosOptions?: AxiosOptions): v1.Analytics {
+    if (
+      !this.options ||
+      !this.options.base ||
+      !this.http ||
+      !this.auth ||
+      !this.auth.authenticated
+    ) {
+      throw new errors.UninstantiatedClient()
+    }
+
+    return new v1.Analytics({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http)
+  }
+
+  /**
+   * Create an authenticated Analytics instance
+   *
+   */
   analyticsHandlersV1 (): AnalyticsHandlersV1Types {
     if (
       !this.options ||

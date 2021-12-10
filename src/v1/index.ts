@@ -11,6 +11,7 @@ import { Carts } from './carts'
 import { SafesLogBook } from './safes'
 import { ExportsV1 } from './exports'
 import { StocksBook } from './stocks'
+import { Analytics } from './analytic'
 import analytics from './analytics'
 import { AuditLogs } from './audit_logs'
 
@@ -30,6 +31,7 @@ export {
   ExportsV1,
   StocksBook,
   analytics,
+  Analytics,
   AuditLogs
 }
 
