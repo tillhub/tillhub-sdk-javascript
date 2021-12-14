@@ -147,6 +147,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.branches = function () {
         return this.generateAuthenticatedInstance(v0.Branches);
     };
+    TillhubClient.prototype.branchesV1 = function () {
+        return this.generateAuthenticatedInstance(v1.Branches);
+    };
     TillhubClient.prototype.branchGroups = function () {
         return this.generateAuthenticatedInstance(v0.BranchGroups);
     };

@@ -53,6 +53,7 @@ export declare class TillhubClient extends events.EventEmitter {
     configurations(): v0.Configurations;
     users(configurationId: string): v0.Users;
     branches(): v0.Branches;
+    branchesV1(): v1.Branches;
     branchGroups(): v0.BranchGroups;
     devices(): v0.Devices;
     contents(): v0.Contents;

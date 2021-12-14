@@ -11,9 +11,10 @@ import { Carts } from './carts';
 import { SafesLogBook } from './safes';
 import { ExportsV1 } from './exports';
 import { StocksBook } from './stocks';
+import { Branches } from './branches';
 import analytics from './analytics';
 import { AuditLogs } from './audit_logs';
-export { Auth, Pricebooks, Products, Templates, Transactions, TransactionsLegacy, Registers, Balances, Vouchers, Customers, Carts, SafesLogBook, ExportsV1, StocksBook, analytics, AuditLogs };
+export { Auth, Pricebooks, Products, Templates, Transactions, TransactionsLegacy, Registers, Balances, Vouchers, Customers, Carts, SafesLogBook, ExportsV1, StocksBook, analytics, AuditLogs, Branches };
 export interface AnalyticsHandlersV1Types {
     analytics: {
         reports: {

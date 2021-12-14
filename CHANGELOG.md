@@ -1,3 +1,10 @@
+# [4.33.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.32.0...v4.33.0) (2021-12-14)
+
+
+### Features
+
+* **branches:** added branches v1 ([ff9cc7c](https://github.com/tillhub/tillhub-sdk-javascript/commit/ff9cc7c5b4e7649012582c1241ef6a651d6d0f50))
+
 # [4.32.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.31.1...v4.32.0) (2021-12-06)
 
 
