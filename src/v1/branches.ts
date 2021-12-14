@@ -121,6 +121,22 @@ export class Branches extends ThBaseHandler {
     }
   }
 
+  async meta (): Promise<BranchesResponse> {
+    const uri = this.uriHelper.generateBaseUri('/meta')
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) { throw new BranchesMetaFailed(undefined, { status: response.status }) }
+      if (!response.data.results[0]) { throw new BranchesMetaFailed('could not get branches metadata unexpectedly') }
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (err: any) {
+      throw new BranchesMetaFailed()
+    }
+  }
+
   async get (branchId: string): Promise<BranchResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${branchId}`)
     try {
@@ -157,5 +173,16 @@ export class BranchesFetchFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, BranchesFetchFailed.prototype)
+  }
+}
+
+export class BranchesMetaFailed extends BaseError {
+  public name = 'BranchesMetaFailed'
+  constructor (
+    public message: string = 'Could not fetch meta data for branches',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, BranchesMetaFailed.prototype)
   }
 }
