@@ -23,7 +23,10 @@ afterEach(() => {
   mock.reset()
 })
 
-const correlationId = faker.datatype.uuid()
+const metaResponse = {
+  count: 50,
+  results: [{ count: 50 }]
+}
 
 describe('v1: Branches', () => {
   it('meta', async () => {
@@ -33,20 +36,18 @@ describe('v1: Branches', () => {
         .reply(() => {
           return [
             200,
-            {
-              count: 1,
-              results: [{ correlationId }]
-            }
+            metaResponse
           ]
         })
     }
 
     const th = await initThInstance()
+
     const branches = th.branchesV1()
     expect(branches).toBeInstanceOf(v1.Branches)
 
-    const { data } = await branches.meta()
-    expect(data).toEqual({ correlationId })
+    const { metadata } = await branches.meta()
+    expect(metadata).toMatchObject(metaResponse.results[0])
   })
 
   it('rejects on status codes that are not 200', async () => {
