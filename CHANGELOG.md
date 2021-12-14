@@ -1,3 +1,10 @@
+## [4.33.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.33.0...v4.33.1) (2021-12-14)
+
+
+### Bug Fixes
+
+* **branches:** beranches v1 meta ([4d66ea9](https://github.com/tillhub/tillhub-sdk-javascript/commit/4d66ea9ad7216d2fbe2fc848ca90f978aa8ac914))
+
 # [4.33.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.32.0...v4.33.0) (2021-12-14)
 
 

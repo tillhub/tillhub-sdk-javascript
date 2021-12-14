@@ -77,6 +77,7 @@ export declare class Branches extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: BranchesOptions, http: Client);
     getAll(queryOrOptions?: BranchesQuery | undefined): Promise<BranchesResponse>;
+    meta(): Promise<BranchesResponse>;
     get(branchId: string): Promise<BranchResponse>;
 }
 export declare class BranchFetchFailed extends BaseError {
@@ -85,6 +86,11 @@ export declare class BranchFetchFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class BranchesFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class BranchesMetaFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

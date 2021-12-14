@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BranchesFetchFailed = exports.BranchFetchFailed = exports.Branches = void 0;
+exports.BranchesMetaFailed = exports.BranchesFetchFailed = exports.BranchFetchFailed = exports.Branches = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -49,6 +49,37 @@ var Branches = (function (_super) {
                         error_1 = _b.sent();
                         throw new BranchesFetchFailed(undefined, { error: error_1 });
                     case 3: return [2];
+                }
+            });
+        });
+    };
+    Branches.prototype.meta = function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, err_1;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri('/meta');
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new BranchesMetaFailed(undefined, { status: response.status });
+                        }
+                        if (!response.data.results[0]) {
+                            throw new BranchesMetaFailed('could not get branches metadata unexpectedly');
+                        }
+                        return [2, {
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            }];
+                    case 3:
+                        err_1 = _a.sent();
+                        throw new BranchesMetaFailed();
+                    case 4: return [2];
                 }
             });
         });
@@ -112,4 +143,17 @@ var BranchesFetchFailed = (function (_super) {
     return BranchesFetchFailed;
 }(errors_1.BaseError));
 exports.BranchesFetchFailed = BranchesFetchFailed;
+var BranchesMetaFailed = (function (_super) {
+    tslib_1.__extends(BranchesMetaFailed, _super);
+    function BranchesMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch meta data for branches'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'BranchesMetaFailed';
+        Object.setPrototypeOf(_this, BranchesMetaFailed.prototype);
+        return _this;
+    }
+    return BranchesMetaFailed;
+}(errors_1.BaseError));
+exports.BranchesMetaFailed = BranchesMetaFailed;
 //# sourceMappingURL=branches.js.map
