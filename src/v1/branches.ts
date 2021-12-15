@@ -121,9 +121,10 @@ export class Branches extends ThBaseHandler {
     }
   }
 
-  async meta (): Promise<BranchesResponse> {
-    const uri = this.uriHelper.generateBaseUri('/meta')
+  async meta (queryOrOptions?: BranchesQuery | undefined): Promise<BranchesResponse> {
     try {
+      const base = this.uriHelper.generateBaseUri('/meta')
+      const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
       const response = await this.http.getClient().get(uri)
       if (response.status !== 200) { throw new BranchesMetaFailed(undefined, { status: response.status }) }
       if (!response.data.results[0]) { throw new BranchesMetaFailed('could not get branches metadata unexpectedly') }
