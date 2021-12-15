@@ -3,7 +3,6 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import { v1 } from '../../src/tillhub-js'
 import { initThInstance } from '../util'
-import faker from 'faker'
 import { BranchesMetaFailed } from '../../src/v1/branches'
 dotenv.config()
 
