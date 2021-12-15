@@ -53,18 +53,17 @@ var Branches = (function (_super) {
             });
         });
     };
-    Branches.prototype.meta = function () {
+    Branches.prototype.meta = function (queryOrOptions) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_1;
+            var base, uri, response, err_1;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = this.uriHelper.generateBaseUri('/meta');
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri('/meta');
+                        uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions);
                         return [4, this.http.getClient().get(uri)];
-                    case 2:
+                    case 1:
                         response = _a.sent();
                         if (response.status !== 200) {
                             throw new BranchesMetaFailed(undefined, { status: response.status });
@@ -76,10 +75,10 @@ var Branches = (function (_super) {
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count }
                             }];
-                    case 3:
+                    case 2:
                         err_1 = _a.sent();
                         throw new BranchesMetaFailed();
-                    case 4: return [2];
+                    case 3: return [2];
                 }
             });
         });
