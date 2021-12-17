@@ -1,3 +1,10 @@
+# [4.34.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.33.2...v4.34.0) (2021-12-17)
+
+
+### Features
+
+* **paymentV1:** adapt the response ([f554c47](https://github.com/tillhub/tillhub-sdk-javascript/commit/f554c476f1a551cad972ef8abcfd4078b5930f4e))
+
 ## [4.33.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.33.1...v4.33.2) (2021-12-15)
 
 

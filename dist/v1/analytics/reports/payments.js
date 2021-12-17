@@ -17,28 +17,29 @@ var AnalyticsReportsPayments = (function (_super) {
         return base_1.ThAnalyticsBaseHandler.generateAuthenticatedInstance(AnalyticsReportsPayments, options, http);
     };
     AnalyticsReportsPayments.prototype.getAll = function (query) {
+        var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var localUriHelper, base, uri, response, err_1;
-            return tslib_1.__generator(this, function (_a) {
-                switch (_a.label) {
+            return tslib_1.__generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _b.trys.push([0, 2, , 3]);
                         localUriHelper = new uri_helper_1.UriHelper('/api/v1/analytics', this.options);
                         base = localUriHelper.generateBaseUri('/reports/payments');
                         uri = localUriHelper.generateUriWithQuery(base, query);
                         return [4, this.http.getClient().get(uri)];
                     case 1:
-                        response = _a.sent();
-                        if (response.status !== 200)
+                        response = _b.sent();
+                        if (response.status !== 200 || !((_a = response === null || response === void 0 ? void 0 : response.data) === null || _a === void 0 ? void 0 : _a.results.length))
                             throw new AnalyticsReportsV1PaymentsFetchError();
                         return [2, {
-                                data: response.data.results,
+                                data: response.data.results[0].values,
                                 metadata: {
-                                    count: response.data.count
+                                    count: response.data.results[0].count
                                 }
                             }];
                     case 2:
-                        err_1 = _a.sent();
+                        err_1 = _b.sent();
                         throw new AnalyticsReportsV1PaymentsFetchError(undefined, { error: err_1 });
                     case 3: return [2];
                 }
