@@ -42,8 +42,10 @@ describe('v1: AnalyticsReportsPayments', () => {
           return [
             200,
             {
-              count: 1,
-              results: [paymentsData]
+              results: [{
+                values: [paymentsData],
+                count: 1
+              }]
             }
           ]
         })
@@ -55,10 +57,10 @@ describe('v1: AnalyticsReportsPayments', () => {
 
     expect(analyticsReportsPayments).toBeInstanceOf(v1.analytics.reports.AnalyticsReportsPayments)
 
-    const { data } = await analyticsReportsPayments.getAll({ query })
+    const response = await analyticsReportsPayments.getAll({ query })
 
-    expect(Array.isArray(data)).toBe(true)
-    expect(data[0]).toEqual(paymentsData)
+    expect(response.metadata.count).toBe(1)
+    expect(response.data[0]).toEqual(paymentsData)
   })
 
   it('rejects on status codes that are not 200', async () => {
