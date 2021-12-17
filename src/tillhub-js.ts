@@ -500,7 +500,7 @@ export class TillhubClient extends events.EventEmitter {
    * Create an authenticated Analytics instance
    *
    */
-  analyticsHandlersV1 (): AnalyticsHandlersV1Types {
+  analyticsHandlersV1 (axiosOptions?: AxiosOptions): AnalyticsHandlersV1Types {
     if (
       !this.options ||
       !this.options.base ||
@@ -514,14 +514,14 @@ export class TillhubClient extends events.EventEmitter {
     return {
       analytics: {
         reports: {
-          AnalyticsReportsCustomers: new v1.analytics.reports.AnalyticsReportsCustomers({ user: this.auth.user, base: this.options.base }, this.http),
-          AnalyticsReportsPayments: new v1.analytics.reports.AnalyticsReportsPayments({ user: this.auth.user, base: this.options.base }, this.http),
-          AnalyticsReportsVouchers: new v1.analytics.reports.AnalyticsReportsVouchers({ user: this.auth.user, base: this.options.base }, this.http),
-          AnalyticsReportsVat: new v1.analytics.reports.AnalyticsReportsVat({ user: this.auth.user, base: this.options.base }, this.http),
-          AnalyticsReportsProductGroups: new v1.analytics.reports.AnalyticsReportsProductGroups({ user: this.auth.user, base: this.options.base }, this.http),
-          AnalyticsReportsPaymentOptions: new v1.analytics.reports.AnalyticsReportsPaymentOptions({ user: this.auth.user, base: this.options.base }, this.http),
-          AnalyticsReportsStockTakings: new v1.analytics.reports.AnalyticsReportsStockTakings({ user: this.auth.user, base: this.options.base }, this.http),
-          AnalyticsReportsProcesses: new v1.analytics.reports.AnalyticsReportsProcesses({ user: this.auth.user, base: this.options.base }, this.http)
+          AnalyticsReportsCustomers: new v1.analytics.reports.AnalyticsReportsCustomers({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http),
+          AnalyticsReportsPayments: new v1.analytics.reports.AnalyticsReportsPayments({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http),
+          AnalyticsReportsVouchers: new v1.analytics.reports.AnalyticsReportsVouchers({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http),
+          AnalyticsReportsVat: new v1.analytics.reports.AnalyticsReportsVat({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http),
+          AnalyticsReportsProductGroups: new v1.analytics.reports.AnalyticsReportsProductGroups({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http),
+          AnalyticsReportsPaymentOptions: new v1.analytics.reports.AnalyticsReportsPaymentOptions({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http),
+          AnalyticsReportsStockTakings: new v1.analytics.reports.AnalyticsReportsStockTakings({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http),
+          AnalyticsReportsProcesses: new v1.analytics.reports.AnalyticsReportsProcesses({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http)
         }
       }
     }
