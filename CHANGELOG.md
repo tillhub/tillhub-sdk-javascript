@@ -1,3 +1,10 @@
+# [4.35.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.34.0...v4.35.0) (2021-12-17)
+
+
+### Features
+
+* **analyticsV1:** add timeout ([8648065](https://github.com/tillhub/tillhub-sdk-javascript/commit/86480656fd060a8760bdd69e7ccae0af422845f7))
+
 # [4.34.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.33.2...v4.34.0) (2021-12-17)
 
 

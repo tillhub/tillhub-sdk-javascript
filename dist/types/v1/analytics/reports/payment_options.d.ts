@@ -1,10 +1,11 @@
 import { ThAnalyticsBaseHandler } from '../../../base';
 import { PaymentOptionsQuery } from '../../../v0/analytics/reports/payment_options';
-import { Client } from '../../../client';
+import { Client, Timeout } from '../../../client';
 import { BaseError } from '../../../errors';
 export interface PaymentOptionsHandlerOptions {
     user?: string;
     base?: string;
+    timeout?: Timeout;
 }
 export interface AnalyticsReportsPaymentOptionsV1ExportResponseItem {
     correlationId?: string;
@@ -17,6 +18,7 @@ export interface AnalyticsResponse {
 export declare class AnalyticsReportsPaymentOptions extends ThAnalyticsBaseHandler {
     http: Client;
     options: PaymentOptionsHandlerOptions;
+    timeout: Timeout;
     constructor(options: PaymentOptionsHandlerOptions, http: Client);
     static create(options: Record<string, unknown>, http: Client): AnalyticsReportsPaymentOptions;
     getAll(query?: PaymentOptionsQuery): Promise<AnalyticsResponse>;

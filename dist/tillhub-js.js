@@ -239,7 +239,7 @@ var TillhubClient = (function (_super) {
         }
         return new v0.Analytics({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http);
     };
-    TillhubClient.prototype.analyticsHandlersV1 = function () {
+    TillhubClient.prototype.analyticsHandlersV1 = function (axiosOptions) {
         if (!this.options ||
             !this.options.base ||
             !this.http ||
@@ -250,14 +250,14 @@ var TillhubClient = (function (_super) {
         return {
             analytics: {
                 reports: {
-                    AnalyticsReportsCustomers: new v1.analytics.reports.AnalyticsReportsCustomers({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsPayments: new v1.analytics.reports.AnalyticsReportsPayments({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsVouchers: new v1.analytics.reports.AnalyticsReportsVouchers({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsVat: new v1.analytics.reports.AnalyticsReportsVat({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsProductGroups: new v1.analytics.reports.AnalyticsReportsProductGroups({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsPaymentOptions: new v1.analytics.reports.AnalyticsReportsPaymentOptions({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsStockTakings: new v1.analytics.reports.AnalyticsReportsStockTakings({ user: this.auth.user, base: this.options.base }, this.http),
-                    AnalyticsReportsProcesses: new v1.analytics.reports.AnalyticsReportsProcesses({ user: this.auth.user, base: this.options.base }, this.http)
+                    AnalyticsReportsCustomers: new v1.analytics.reports.AnalyticsReportsCustomers({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
+                    AnalyticsReportsPayments: new v1.analytics.reports.AnalyticsReportsPayments({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
+                    AnalyticsReportsVouchers: new v1.analytics.reports.AnalyticsReportsVouchers({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
+                    AnalyticsReportsVat: new v1.analytics.reports.AnalyticsReportsVat({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
+                    AnalyticsReportsProductGroups: new v1.analytics.reports.AnalyticsReportsProductGroups({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
+                    AnalyticsReportsPaymentOptions: new v1.analytics.reports.AnalyticsReportsPaymentOptions({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
+                    AnalyticsReportsStockTakings: new v1.analytics.reports.AnalyticsReportsStockTakings({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
+                    AnalyticsReportsProcesses: new v1.analytics.reports.AnalyticsReportsProcesses({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http)
                 }
             }
         };

@@ -1,10 +1,11 @@
 import { ThAnalyticsBaseHandler } from '../../../base';
 import { CustomersQuery } from '../../../v0/analytics/reports/customers';
-import { Client } from '../../../client';
+import { Client, Timeout } from '../../../client';
 import { BaseError } from '../../../errors';
 export interface CustomersHandlerOptions {
     user?: string;
     base?: string;
+    timeout?: Timeout;
 }
 export interface AnalyticsReportsCustomersV1ExportResponseItem {
     correlationId?: string;
@@ -17,6 +18,7 @@ export interface AnalyticsResponse {
 export declare class AnalyticsReportsCustomers extends ThAnalyticsBaseHandler {
     http: Client;
     options: CustomersHandlerOptions;
+    timeout: Timeout;
     constructor(options: CustomersHandlerOptions, http: Client);
     static create(options: Record<string, unknown>, http: Client): AnalyticsReportsCustomers;
     getAll(query?: CustomersQuery): Promise<AnalyticsResponse>;

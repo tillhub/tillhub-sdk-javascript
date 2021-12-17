@@ -1,10 +1,11 @@
 import { ThAnalyticsBaseHandler } from '../../../base';
 import { VoucherOptions } from '../../../v0/analytics';
-import { Client } from '../../../client';
+import { Client, Timeout } from '../../../client';
 import { BaseError } from '../../../errors';
 export interface VouchersHandlerOptions {
     user?: string;
     base?: string;
+    timeout?: Timeout;
 }
 export interface AnalyticsReportsVouchersV1ExportResponseItem {
     correlationId?: string;
@@ -17,6 +18,7 @@ export interface AnalyticsResponse {
 export declare class AnalyticsReportsVouchers extends ThAnalyticsBaseHandler {
     http: Client;
     options: VouchersHandlerOptions;
+    timeout: Timeout;
     constructor(options: VouchersHandlerOptions, http: Client);
     static create(options: Record<string, unknown>, http: Client): AnalyticsReportsVouchers;
     getAll(query?: VoucherOptions): Promise<AnalyticsResponse>;

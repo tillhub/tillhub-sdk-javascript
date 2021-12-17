@@ -1,10 +1,11 @@
 import { ThAnalyticsBaseHandler } from '../../../base';
 import { ProductGroupsOptions } from '../../../v0/analytics';
-import { Client } from '../../../client';
+import { Client, Timeout } from '../../../client';
 import { BaseError } from '../../../errors';
 export interface ProductGroupsHandlerOptions {
     user?: string;
     base?: string;
+    timeout?: Timeout;
 }
 export interface AnalyticsReportsProductGroupsV1ExportResponseItem {
     correlationId?: string;
@@ -17,6 +18,7 @@ export interface AnalyticsResponse {
 export declare class AnalyticsReportsProductGroups extends ThAnalyticsBaseHandler {
     http: Client;
     options: ProductGroupsHandlerOptions;
+    timeout: Timeout;
     constructor(options: ProductGroupsHandlerOptions, http: Client);
     static create(options: Record<string, unknown>, http: Client): AnalyticsReportsProductGroups;
     getAll(query?: ProductGroupsOptions): Promise<AnalyticsResponse>;
