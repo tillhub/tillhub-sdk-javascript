@@ -1,12 +1,13 @@
 import { ThAnalyticsBaseHandler } from '../../../base'
 import { CustomersQuery } from '../../../v0/analytics/reports/customers'
-import { Client } from '../../../client'
+import { Client, Timeout } from '../../../client'
 import { BaseError } from '../../../errors'
 import { UriHelper } from '../../../uri-helper'
 
 export interface CustomersHandlerOptions {
   user?: string
   base?: string
+  timeout?: Timeout
 }
 
 export interface AnalyticsReportsCustomersV1ExportResponseItem {
@@ -22,11 +23,13 @@ export interface AnalyticsResponse {
 export class AnalyticsReportsCustomers extends ThAnalyticsBaseHandler {
   http: Client
   public options: CustomersHandlerOptions
+  public timeout: Timeout
 
   constructor (options: CustomersHandlerOptions, http: Client) {
     super(http, options)
     this.options = options
     this.http = http
+    this.timeout = options.timeout ?? this.http.getClient().defaults.timeout
   }
 
   static create (options: Record<string, unknown>, http: Client): AnalyticsReportsCustomers {
@@ -45,7 +48,7 @@ export class AnalyticsReportsCustomers extends ThAnalyticsBaseHandler {
       const base = localUriHelper.generateBaseUri('/reports/customers')
       const uri = localUriHelper.generateUriWithQuery(base, query)
 
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
       if (response.status !== 200) throw new AnalyticsReportsV1CustomersFetchError()
       return {
         data: response.data.results,

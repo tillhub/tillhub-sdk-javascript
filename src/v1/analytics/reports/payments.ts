@@ -1,12 +1,13 @@
 import { ThAnalyticsBaseHandler } from '../../../base'
 import { PaymentsQuery } from '../../../v0/analytics/reports/payments'
-import { Client } from '../../../client'
+import { Client, Timeout } from '../../../client'
 import { BaseError } from '../../../errors'
 import { UriHelper } from '../../../uri-helper'
 
 export interface PaymentsHandlerOptions {
   user?: string
   base?: string
+  timeout?: Timeout
 }
 
 export interface AnalyticsReportsPaymentsV1ExportResponseItem {
@@ -22,11 +23,13 @@ export interface AnalyticsResponse {
 export class AnalyticsReportsPayments extends ThAnalyticsBaseHandler {
   http: Client
   public options: PaymentsHandlerOptions
+  public timeout: Timeout
 
   constructor (options: PaymentsHandlerOptions, http: Client) {
     super(http, options)
     this.options = options
     this.http = http
+    this.timeout = options.timeout ?? this.http.getClient().defaults.timeout
   }
 
   static create (options: Record<string, unknown>, http: Client): AnalyticsReportsPayments {
@@ -45,7 +48,7 @@ export class AnalyticsReportsPayments extends ThAnalyticsBaseHandler {
       const base = localUriHelper.generateBaseUri('/reports/payments')
       const uri = localUriHelper.generateUriWithQuery(base, query)
 
-      const response = await this.http.getClient().get(uri)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
       if (response.status !== 200 || !response?.data?.results.length) throw new AnalyticsReportsV1PaymentsFetchError()
       return {
         data: response.data.results[0].values,
