@@ -46,11 +46,11 @@ export class AnalyticsReportsPayments extends ThAnalyticsBaseHandler {
       const uri = localUriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri)
-      if (response.status !== 200) throw new AnalyticsReportsV1PaymentsFetchError()
+      if (response.status !== 200 || !response?.data?.results.length) throw new AnalyticsReportsV1PaymentsFetchError()
       return {
-        data: response.data.results,
+        data: response.data.results[0].values,
         metadata: {
-          count: response.data.count
+          count: response.data.results[0].count
         }
       }
     } catch (err: any) {
