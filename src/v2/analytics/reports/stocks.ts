@@ -10,11 +10,13 @@ export interface AnalyticsResponse {
   data: AnalyticsReportsStocksV3ExportResponseItem[]
   metadata: Record<string, unknown>
   msg?: string
+  next?: () => Promise<AnalyticsResponse>
 }
 
 export interface StocksExportOptions {
   format?: string
   branch_number?: number
+  uri?: string
 }
 
 export class AnalyticsReportsStocks {
@@ -35,17 +37,26 @@ export class AnalyticsReportsStocks {
   }
 
   async getAll (query?: StocksExportOptions | undefined): Promise<AnalyticsResponse> {
+    let nextFn
     try {
       const base = this.uriHelper.generateBaseUri('/reports/stocks')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri, { timeout: this.timeout })
       if (response.status !== 200) throw new AnalyticsReportsStocksFetchFailed()
+
+      const next = response.data.cursor?.next
+      if (next) {
+        nextFn = (): Promise<AnalyticsResponse> =>
+          this.getAll({ uri: next })
+      }
+
       return {
         data: response.data.results,
         metadata: {
           count: response.data.count
-        }
+        },
+        next: nextFn
       }
     } catch (err: any) {
       throw new AnalyticsReportsStocksFetchFailed(undefined, { error: err })

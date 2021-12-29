@@ -57,6 +57,37 @@ describe('v2: AnalyticsReportsStocks', () => {
     expect(data[0].correlationId).toBe(correlationId)
   })
 
+  it('handle pagination', async () => {
+    const stocks = Array.from({ length: 5 }, () => faker.datatype.uuid())
+    const stocksResponse = {
+      results: stocks.map(item => ({ id: item })),
+      cursor: {
+        next: `https://api.tillhub.com/api/v2/analytics/${legacyId}/reports/stocks?page=2`
+      },
+      count: stocks.length
+    }
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock
+        .onGet(`https://api.tillhub.com/api/v2/analytics/${legacyId}/reports/stocks`)
+
+        .reply(() => {
+          return [
+            200,
+            stocksResponse
+          ]
+        })
+    }
+
+    const th = await initThInstance()
+
+    const analyticsReportsStocks = th.analyticsHandlers().analytics.reports.AnalyticsReportsStocks
+
+    expect(analyticsReportsStocks).toBeInstanceOf(v2.analytics.reports.AnalyticsReportsStocks)
+
+    const { next } = await analyticsReportsStocks.getAll()
+    expect(typeof next === 'function').toBeTruthy()
+  })
+
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
