@@ -9,10 +9,12 @@ export interface AnalyticsResponse {
     data: AnalyticsReportsStocksV3ExportResponseItem[];
     metadata: Record<string, unknown>;
     msg?: string;
+    next?: () => Promise<AnalyticsResponse>;
 }
 export interface StocksExportOptions {
     format?: string;
     branch_number?: number;
+    uri?: string;
 }
 export declare class AnalyticsReportsStocks {
     endpoint: string;

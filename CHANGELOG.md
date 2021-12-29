@@ -1,3 +1,10 @@
+# [4.36.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.35.0...v4.36.0) (2021-12-29)
+
+
+### Features
+
+* **v2/analytics/stocks:** add pagination ([02efda0](https://github.com/tillhub/tillhub-sdk-javascript/commit/02efda079d081e24df7752dee607f84992e575a4))
+
 # [4.35.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.34.0...v4.35.0) (2021-12-17)
 
 
