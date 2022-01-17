@@ -1,32 +1,37 @@
+import { ThAnalyticsBaseHandler, AnalyticsSocketsExportResponseItem } from '../../../base';
 import { Client } from '../../../client';
 import { BaseError } from '../../../errors';
-import { UriHelper } from '../../../uri-helper';
 import { AnalyticsOptions } from '../../../v0/analytics';
-export interface AnalyticsReportsStocksV3ExportResponseItem {
-    correlationId?: string;
-}
-export interface AnalyticsResponse {
-    data: AnalyticsReportsStocksV3ExportResponseItem[];
-    metadata: Record<string, unknown>;
-    msg?: string;
-    next?: () => Promise<AnalyticsResponse>;
+interface AnalyticsReportsStocksResponseItem {
+    data: Array<Record<string, unknown>>;
+    metaData: {
+        count?: number;
+        total_count?: number;
+    };
+    next?: () => Promise<AnalyticsReportsStocksResponseItem>;
 }
 export interface StocksExportOptions {
     format?: string;
     branch_number?: number;
     uri?: string;
 }
-export declare class AnalyticsReportsStocks {
-    endpoint: string;
+export declare class AnalyticsReportsStocks extends ThAnalyticsBaseHandler {
     http: Client;
     options: AnalyticsOptions;
-    uriHelper: UriHelper;
     timeout: AnalyticsOptions['timeout'];
     constructor(options: AnalyticsOptions, http: Client);
-    getAll(query?: StocksExportOptions | undefined): Promise<AnalyticsResponse>;
+    static create(options: Record<string, unknown>, http: Client): AnalyticsReportsStocks;
+    getAll(query?: StocksExportOptions | undefined): Promise<AnalyticsReportsStocksResponseItem>;
+    export(query?: StocksExportOptions): Promise<AnalyticsSocketsExportResponseItem>;
 }
 export declare class AnalyticsReportsStocksFetchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
 }
+export declare class AnalyticsReportsStocksExportFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export {};

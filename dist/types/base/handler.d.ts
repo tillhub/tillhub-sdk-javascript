@@ -42,6 +42,13 @@ export interface ThAnalyticsExportsBaseResponse {
     filename?: string;
     expires_at?: string;
 }
+export interface ThAnalyticsSocketsExportsBaseResponse {
+    correlationId?: string;
+}
+export interface AnalyticsSocketsExportResponseItem {
+    data: ThAnalyticsSocketsExportsBaseResponse[];
+    metadata: Record<string, unknown>;
+}
 export declare class ThAnalyticsBaseHandler {
     private readonly handlerOptions;
     private readonly client;
@@ -50,4 +57,5 @@ export declare class ThAnalyticsBaseHandler {
     private static generateUriWithQuery;
     protected handleGet(url: string, query?: HandlerQuery, requestOptions?: any): Promise<ThAnalyticsBaseResponse>;
     protected handleExport(url: string, query?: HandlerQuery, requestOptions?: any): Promise<ThAnalyticsExportsBaseResponse>;
+    protected handleSocketsExport(url: string, query?: HandlerQuery, requestOptions?: any): Promise<AnalyticsSocketsExportResponseItem>;
 }

@@ -73,6 +73,24 @@ var ThAnalyticsBaseHandler = (function () {
             });
         });
     };
+    ThAnalyticsBaseHandler.prototype.handleSocketsExport = function (url, query, requestOptions) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var opts, response;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        opts = tslib_1.__assign({ method: 'GET', url: ThAnalyticsBaseHandler.generateUriWithQuery(url, tslib_1.__assign({ format: 'csv' }, query)) }, requestOptions);
+                        return [4, this.client.getClient()(opts)];
+                    case 1:
+                        response = _a.sent();
+                        return [2, {
+                                data: response.data.results,
+                                metadata: response.data.metadata
+                            }];
+                }
+            });
+        });
+    };
     return ThAnalyticsBaseHandler;
 }());
 exports.ThAnalyticsBaseHandler = ThAnalyticsBaseHandler;

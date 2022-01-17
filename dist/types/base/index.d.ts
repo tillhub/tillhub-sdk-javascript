@@ -1,3 +1,3 @@
-import { ThBaseHandler, ThAnalyticsBaseHandler, ThAnalyticsBaseResponse, ThAnalyticsExportsBaseResponse, ThAnalyticsBaseResultItem } from './handler';
+import { ThBaseHandler, ThAnalyticsBaseHandler, ThAnalyticsBaseResponse, ThAnalyticsExportsBaseResponse, ThAnalyticsBaseResultItem, AnalyticsSocketsExportResponseItem } from './handler';
 import { ThBaseRequest } from './request';
-export { ThBaseHandler, ThBaseRequest, ThAnalyticsBaseHandler, ThAnalyticsBaseResponse, ThAnalyticsExportsBaseResponse, ThAnalyticsBaseResultItem };
+export { ThBaseHandler, ThBaseRequest, ThAnalyticsBaseHandler, ThAnalyticsBaseResponse, ThAnalyticsExportsBaseResponse, ThAnalyticsBaseResultItem, AnalyticsSocketsExportResponseItem };

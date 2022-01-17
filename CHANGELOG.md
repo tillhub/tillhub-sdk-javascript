@@ -1,3 +1,10 @@
+# [4.37.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.36.0...v4.37.0) (2022-01-17)
+
+
+### Features
+
+* **reports/v2/stocks:** adjust response to v2 format, handle pagination, export ([e81a537](https://github.com/tillhub/tillhub-sdk-javascript/commit/e81a537dac67463eb62a33f8a2d74626087a3bb1))
+
 # [4.36.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.35.0...v4.36.0) (2021-12-29)
 
 
