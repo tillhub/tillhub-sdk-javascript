@@ -43,7 +43,7 @@ export class Notifications {
       return {
         msg: response.data.msg
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.NotificationsEmailError()
     }
   }

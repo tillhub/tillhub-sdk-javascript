@@ -35,8 +35,8 @@ export class Data {
       return {
         data: response.data.results
       }
-    } catch (err: any) {
-      throw new DataReplaceFailed()
+    } catch (error: any) {
+      throw new DataReplaceFailed(error.message, { error })
     }
   }
 
@@ -50,24 +50,28 @@ export class Data {
       return {
         data: response.data.results
       }
-    } catch (err: any) {
-      throw new DataCreateFailed()
+    } catch (error: any) {
+      throw new DataCreateFailed(error.message, { error })
     }
   }
 }
 
 export class DataCreateFailed extends BaseError {
   public name = 'DataCreateFailed'
-  constructor (public message: string = 'Could not create data') {
-    super(message)
+  constructor (public message: string = 'Could not create data',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
     Object.setPrototypeOf(this, DataCreateFailed.prototype)
   }
 }
 
 export class DataReplaceFailed extends BaseError {
   public name = 'DataReplaceFailed'
-  constructor (public message: string = 'Could not replace data') {
-    super(message)
+  constructor (public message: string = 'Could not replace data',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
     Object.setPrototypeOf(this, DataReplaceFailed.prototype)
   }
 }

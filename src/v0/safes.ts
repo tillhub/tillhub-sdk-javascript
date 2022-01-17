@@ -128,7 +128,7 @@ export class Safes extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new errors.SafesFetchAllFailed(undefined, { error })
+      throw new errors.SafesFetchAllFailed(error.message, { error })
     }
   }
 
@@ -146,7 +146,7 @@ export class Safes extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.SafesFetchOneFailed(undefined, { error })
+      throw new errors.SafesFetchOneFailed(error.message, { error })
     }
   }
 
@@ -162,7 +162,7 @@ export class Safes extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.SafesGetMetaFailed(undefined, { error })
+      throw new errors.SafesGetMetaFailed(error.message, { error })
     }
   }
 
@@ -176,7 +176,7 @@ export class Safes extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.SafesCreationFailed(undefined, { error })
+      throw new errors.SafesCreationFailed(error.message, { error })
     }
   }
 
@@ -191,7 +191,7 @@ export class Safes extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.SafesPutFailed(undefined, { error })
+      throw new errors.SafesPutFailed(error.message, { error })
     }
   }
 
@@ -250,7 +250,7 @@ export class SafesLogBook extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new errors.SafesLogBookFetchAllFailed(undefined, { error })
+      throw new errors.SafesLogBookFetchAllFailed(error.message, { error })
     }
   }
 
@@ -268,7 +268,7 @@ export class SafesLogBook extends ThBaseHandler {
         metadata: { count: response.data.results[0].count }
       }
     } catch (error: any) {
-      throw new errors.SafesLogBookGetMetaFailed(undefined, { error })
+      throw new errors.SafesLogBookGetMetaFailed(error.message, { error })
     }
   }
 }

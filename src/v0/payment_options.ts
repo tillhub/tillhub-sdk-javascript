@@ -94,7 +94,7 @@ export class PaymentOptions extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.PaymentOptionsFetchFailed(undefined, { error })
+      throw new errors.PaymentOptionsFetchFailed(error.message, { error })
     }
   }
 
@@ -111,7 +111,7 @@ export class PaymentOptions extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.PaymentOptionFetchFailed(undefined, { error })
+      throw new errors.PaymentOptionFetchFailed(error.message, { error })
     }
   }
 
@@ -126,7 +126,7 @@ export class PaymentOptions extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.PaymentOptionPutFailed(undefined, { error })
+      throw new errors.PaymentOptionPutFailed(error.message, { error })
     }
   }
 
@@ -141,7 +141,7 @@ export class PaymentOptions extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.PaymentOptionCreationFailed(undefined, { error })
+      throw new errors.PaymentOptionCreationFailed(error.message, { error })
     }
   }
 
@@ -154,7 +154,7 @@ export class PaymentOptions extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.PaymentOptionDeleteFailed()
     }
   }

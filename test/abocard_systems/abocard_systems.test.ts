@@ -187,7 +187,7 @@ describe('v0: Abocards', () => {
     try {
       await th.abocardSystems().getAll()
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(AbocardsFetchFailed.name)
     }
   })
@@ -206,7 +206,7 @@ describe('v0: Abocards', () => {
     try {
       await th.abocardSystems().get(abocardId)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(AbocardFetchFailed.name)
     }
   })
@@ -225,7 +225,7 @@ describe('v0: Abocards', () => {
     try {
       await th.abocardSystems().create(mockAbocard)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(AbocardCreateFailed.name)
     }
   })
@@ -243,7 +243,7 @@ describe('v0: Abocards', () => {
     try {
       await th.abocardSystems().update(abocardId, mockAbocard)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(AbocardUpdateFailed.name)
     }
   })
@@ -262,7 +262,7 @@ describe('v0: Abocards', () => {
     try {
       await th.abocardSystems().delete(abocardId)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(AbocardDeleteFailed.name)
     }
   })

@@ -44,7 +44,7 @@ export class SafesLogBook extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new errors.SafesLogBookFetchAllFailed(undefined, { error })
+      throw new errors.SafesLogBookFetchAllFailed(error.message, { error })
     }
   }
 }

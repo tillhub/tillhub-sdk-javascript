@@ -155,8 +155,8 @@ export class Invoices extends ThBaseHandler {
         metadata: { count: response.data.count },
         next
       }
-    } catch (err: any) {
-      throw new errors.InvoicesFetchAllFailed()
+    } catch (error: any) {
+      throw new errors.InvoicesFetchAllFailed(error.message, { error })
     }
   }
 
@@ -171,8 +171,8 @@ export class Invoices extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new errors.InvoicesGetMetaFailed()
+    } catch (error: any) {
+      throw new errors.InvoicesGetMetaFailed(error.message, { error })
     }
   }
 
@@ -189,7 +189,7 @@ export class Invoices extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.InvoicesFetchOneFailed()
     }
   }
@@ -207,8 +207,8 @@ export class Invoices extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new errors.InvoicesCreateFailed()
+    } catch (error: any) {
+      throw new errors.InvoicesCreateFailed(error.message, { error })
     }
   }
 
@@ -225,8 +225,8 @@ export class Invoices extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new errors.InvoicesUpdateFailed(err.message)
+    } catch (error: any) {
+      throw new errors.InvoicesUpdateFailed(error.message, { error })
     }
   }
 
@@ -238,8 +238,8 @@ export class Invoices extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (err: any) {
-      throw new errors.InvoicesDeleteFailed()
+    } catch (error: any) {
+      throw new errors.InvoicesDeleteFailed(error.message, { error })
     }
   }
 }

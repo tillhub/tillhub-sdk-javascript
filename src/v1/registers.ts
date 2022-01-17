@@ -103,7 +103,7 @@ export class Registers extends ThBaseHandler {
         metadata: { count: response.data.count },
         next
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.RegistersFetchFailed()
     }
   }
@@ -117,7 +117,7 @@ export class Registers extends ThBaseHandler {
         data: response.data.results[0]
       }
     } catch (error: any) {
-      throw new errors.RegisterFetchFailed(undefined, { error })
+      throw new errors.RegisterFetchFailed(error.message, { error })
     }
   }
 
@@ -130,7 +130,7 @@ export class Registers extends ThBaseHandler {
         data: response.data.msg
       }
     } catch (error: any) {
-      throw new errors.RegisterNotificationCreateFailed(undefined, { error })
+      throw new errors.RegisterNotificationCreateFailed(error.message, { error })
     }
   }
 
@@ -147,7 +147,7 @@ export class Registers extends ThBaseHandler {
       }
     } catch (error: any) {
       console.warn(error)
-      throw new errors.RegisterDeviceConfigurationPutFailed(undefined, { error })
+      throw new errors.RegisterDeviceConfigurationPutFailed(error.message, { error })
     }
   }
 
@@ -161,7 +161,7 @@ export class Registers extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.RegisterPutFailed(undefined, { error })
+      throw new errors.RegisterPutFailed(error.message, { error })
     }
   }
 
@@ -187,7 +187,7 @@ export class Registers extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.RegistersSearchFailed(undefined, { error })
+      throw new errors.RegistersSearchFailed(error.message, { error })
     }
   }
 }

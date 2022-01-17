@@ -80,7 +80,7 @@ export class ProductGroups extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.ProductGroupsFetchFailed(undefined, { error })
+      throw new errors.ProductGroupsFetchFailed(error.message, { error })
     }
   }
 
@@ -101,7 +101,7 @@ export class ProductGroups extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.ProductGroupFetchFailed(undefined, { error })
+      throw new errors.ProductGroupFetchFailed(error.message, { error })
     }
   }
 
@@ -116,7 +116,7 @@ export class ProductGroups extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.ProductGroupPutFailed(undefined, { error })
+      throw new errors.ProductGroupPutFailed(error.message, { error })
     }
   }
 
@@ -130,7 +130,7 @@ export class ProductGroups extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.ProductGroupCreationFailed(undefined, { error })
+      throw new errors.ProductGroupCreationFailed(error.message, { error })
     }
   }
 
@@ -143,7 +143,7 @@ export class ProductGroups extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.ProductGroupDeleteFailed()
     }
   }
@@ -162,7 +162,7 @@ export class ProductGroups extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.ProductGroupsSearchFailed(undefined, { error })
+      throw new errors.ProductGroupsSearchFailed(error.message, { error })
     }
   }
 }

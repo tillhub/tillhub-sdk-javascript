@@ -213,8 +213,8 @@ export class Auth {
       return {
         msg: data.msg
       }
-    } catch (err: any) {
-      throw new errors.PasswordResetRequestFailed(undefined, { error: err })
+    } catch (error: any) {
+      throw new errors.PasswordResetRequestFailed(error.message, { error })
     }
   }
 
@@ -228,8 +228,8 @@ export class Auth {
       return {
         msg: data.msg
       }
-    } catch (err: any) {
-      throw new errors.PasswordSetRequestFailed(undefined, { error: err })
+    } catch (error: any) {
+      throw new errors.PasswordSetRequestFailed(error.message, { error })
     }
   }
 
@@ -264,8 +264,8 @@ export class Auth {
       return {
         msg: data.msg
       }
-    } catch (err: any) {
-      throw new LogoutFailed(undefined, { error: err })
+    } catch (error: any) {
+      throw new LogoutFailed(error.message, { error })
     }
   }
 }

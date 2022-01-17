@@ -56,8 +56,8 @@ export class AnalyticsReportsStockTakings extends ThAnalyticsBaseHandler {
           count: response.data.count
         }
       }
-    } catch (err: any) {
-      throw new AnalyticsReportsV1StockTakingsFetchError(undefined, { error: err })
+    } catch (error: any) {
+      throw new AnalyticsReportsV1StockTakingsFetchError(error.message, { error })
     }
   }
 }

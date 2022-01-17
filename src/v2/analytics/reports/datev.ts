@@ -37,8 +37,8 @@ export class AnalyticsReportsDatev extends ThAnalyticsBaseHandler {
       const result = await this.handleExport(uri, query)
 
       return result
-    } catch (err: any) {
-      throw new AnalyticsReportsDatevExportFetchError(undefined, { error: err })
+    } catch (error: any) {
+      throw new AnalyticsReportsDatevExportFetchError(error.message, { error })
     }
   }
 }

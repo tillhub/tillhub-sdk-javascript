@@ -94,7 +94,7 @@ export class Contents extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new ContentsFetchFailed(undefined, { error })
+      throw new ContentsFetchFailed(error.message, { error })
     }
   }
 
@@ -112,7 +112,7 @@ export class Contents extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ContentFetchFailed(undefined, { error })
+      throw new ContentFetchFailed(error.message, { error })
     }
   }
 
@@ -131,7 +131,7 @@ export class Contents extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ContentsSearchFailed(undefined, { error })
+      throw new ContentsSearchFailed(error.message, { error })
     }
   }
 
@@ -145,7 +145,7 @@ export class Contents extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ContentPatchFailed(undefined, { error })
+      throw new ContentPatchFailed(error.message, { error })
     }
   }
 
@@ -159,7 +159,7 @@ export class Contents extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ContentCreationFailed(undefined, { error })
+      throw new ContentCreationFailed(error.message, { error })
     }
   }
 
@@ -172,8 +172,8 @@ export class Contents extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (err: any) {
-      throw new ContentDeleteFailed()
+    } catch (error: any) {
+      throw new ContentDeleteFailed(error.message, { error })
     }
   }
 }

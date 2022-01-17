@@ -27,7 +27,7 @@ const requestObject = {
   }
 }
 
-function queryString() {
+function queryString () {
   return qs.stringify(requestObject.query)
 }
 

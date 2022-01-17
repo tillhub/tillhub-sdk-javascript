@@ -80,8 +80,8 @@ export class AbocardSystems extends ThBaseHandler {
         metadata: { count: response.data.count },
         next
       }
-    } catch (e) {
-      throw new AbocardsFetchFailed()
+    } catch (error: any) {
+      throw new AbocardsFetchFailed(error.message, { error })
     }
   }
 
@@ -98,8 +98,8 @@ export class AbocardSystems extends ThBaseHandler {
         metadata: { count: response.data.count },
         msg: response.data.msg
       }
-    } catch (e) {
-      throw new AbocardFetchFailed()
+    } catch (error: any) {
+      throw new AbocardFetchFailed(error.message, { error })
     }
   }
 
@@ -115,8 +115,8 @@ export class AbocardSystems extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (e) {
-      throw new AbocardCreateFailed()
+    } catch (error: any) {
+      throw new AbocardCreateFailed(error.message, { error })
     }
   }
 
@@ -132,8 +132,8 @@ export class AbocardSystems extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (e) {
-      throw new AbocardUpdateFailed()
+    } catch (error: any) {
+      throw new AbocardUpdateFailed(error.message, { error })
     }
   }
 
@@ -148,8 +148,8 @@ export class AbocardSystems extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (e) {
-      throw new AbocardDeleteFailed()
+    } catch (error: any) {
+      throw new AbocardDeleteFailed(error.message, { error })
     }
   }
 }

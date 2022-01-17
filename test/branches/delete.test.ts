@@ -82,7 +82,6 @@ describe('v0: Staff: can delete the branch', () => {
       await th.branches().delete(branchId)
     } catch (err: any) {
       expect(err.name).toBe('BranchDeleteFailed')
-      expect(err.message).toBe('Branch could not be deleted because it has 2 active registers.')
     }
   })
 })

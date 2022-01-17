@@ -85,7 +85,7 @@ export class Transactions extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new TransactionFetchFailed(undefined, { error })
+      throw new TransactionFetchFailed(error.message, { error })
     }
   }
 
@@ -103,7 +103,7 @@ export class Transactions extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new TransactionsGetMetaFailed(undefined, { error })
+      throw new TransactionsGetMetaFailed(error.message, { error })
     }
   }
 
@@ -120,7 +120,7 @@ export class Transactions extends ThBaseHandler {
         data: response.data.results
       }
     } catch (error: any) {
-      throw new TransactionsGetImageFailed(undefined, { error })
+      throw new TransactionsGetImageFailed(error.message, { error })
     }
   }
 
@@ -137,7 +137,7 @@ export class Transactions extends ThBaseHandler {
         data: response.data.results
       }
     } catch (error: any) {
-      throw new TransactionsImagePutFailed(undefined, { error })
+      throw new TransactionsImagePutFailed(error.message, { error })
     }
   }
 
@@ -152,7 +152,7 @@ export class Transactions extends ThBaseHandler {
         data: response.data.results
       }
     } catch (error: any) {
-      throw new TransactionsImageCreateFailed(undefined, { error })
+      throw new TransactionsImageCreateFailed(error.message, { error })
     }
   }
 }
@@ -193,7 +193,7 @@ export class TransactionsLegacy {
         next
       }
     } catch (error: any) {
-      throw new TransactionFetchFailed(undefined, { error })
+      throw new TransactionFetchFailed(error.message, { error })
     }
   }
 
@@ -212,8 +212,8 @@ export class TransactionsLegacy {
       return {
         data: response.data.results
       }
-    } catch (err: any) {
-      throw new TransactionPdfFailed(err.message)
+    } catch (error: any) {
+      throw new TransactionPdfFailed(error.message)
     }
   }
 
@@ -231,7 +231,7 @@ export class TransactionsLegacy {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new TransactionsGetMetaFailed(undefined, { error })
+      throw new TransactionsGetMetaFailed(error.message, { error })
     }
   }
 }
@@ -269,8 +269,8 @@ export class Signing {
       return {
         data: response.data.results
       }
-    } catch (err: any) {
-      throw new TransactionSigningInitialisationFailed(err.message)
+    } catch (error: any) {
+      throw new TransactionSigningInitialisationFailed(error.message, { error })
     }
   }
 
@@ -290,8 +290,8 @@ export class Signing {
       return {
         data: response.data.results
       }
-    } catch (err: any) {
-      throw new TransactionSigningYearlyReceiptFailed(err.message)
+    } catch (error: any) {
+      throw new TransactionSigningYearlyReceiptFailed(error.message, { error })
     }
   }
 
@@ -311,8 +311,8 @@ export class Signing {
       return {
         data: response.data.results
       }
-    } catch (err: any) {
-      throw new TransactionSigningMonthlyReceiptFailed(err.message)
+    } catch (error: any) {
+      throw new TransactionSigningMonthlyReceiptFailed(error.message, { error })
     }
   }
 
@@ -333,8 +333,8 @@ export class Signing {
       return {
         data: response.data.results
       }
-    } catch (err: any) {
-      throw new TransactionSigningZeroReceiptFailed(err.message)
+    } catch (error: any) {
+      throw new TransactionSigningZeroReceiptFailed(error.message, { error })
     }
   }
 }

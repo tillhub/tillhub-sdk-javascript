@@ -204,7 +204,7 @@ export class Products extends ThBaseHandler {
         errors: response.data.errors || []
       }
     } catch (error: any) {
-      throw new ProductsCreateFailed(undefined, { error })
+      throw new ProductsCreateFailed(error.message, { error })
     }
   }
 
@@ -230,7 +230,7 @@ export class Products extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new ProductsFetchFailed(undefined, { error })
+      throw new ProductsFetchFailed(error.message, { error })
     }
   }
 
@@ -256,7 +256,7 @@ export class Products extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new ProductsImportFailed(undefined, { error })
+      throw new ProductsImportFailed(error.message, { error })
     }
   }
 
@@ -274,7 +274,7 @@ export class Products extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ProductFetchFailed(undefined, { error })
+      throw new ProductFetchFailed(error.message, { error })
     }
   }
 
@@ -292,7 +292,7 @@ export class Products extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ProductDetailsFetchFailed(undefined, { error })
+      throw new ProductDetailsFetchFailed(error.message, { error })
     }
   }
 
@@ -310,7 +310,7 @@ export class Products extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ProductChildrenDetailsFetchFailed(undefined, { error })
+      throw new ProductChildrenDetailsFetchFailed(error.message, { error })
     }
   }
 
@@ -333,7 +333,7 @@ export class Products extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ProductsMetaFailed(undefined, { error })
+      throw new ProductsMetaFailed(error.message, { error })
     }
   }
 
@@ -351,7 +351,7 @@ export class Products extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ProductsUpdateFailed(undefined, { error })
+      throw new ProductsUpdateFailed(error.message, { error })
     }
   }
 
@@ -375,7 +375,7 @@ export class Products extends ThBaseHandler {
         }
       }
     } catch (error: any) {
-      throw new ProductsBulkCreateFailed(undefined, { error })
+      throw new ProductsBulkCreateFailed(error.message, { error })
     }
   }
 
@@ -393,7 +393,7 @@ export class Products extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ProductsBulkEditFailed(undefined, { error })
+      throw new ProductsBulkEditFailed(error.message, { error })
     }
   }
 
@@ -411,7 +411,7 @@ export class Products extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ProductsCountFailed(undefined, { error })
+      throw new ProductsCountFailed(error.message, { error })
     }
   }
 
@@ -429,7 +429,7 @@ export class Products extends ThBaseHandler {
         msg: response.data.msg
       }
     } catch (error: any) {
-      throw new ProductsDeleteFailed(undefined, { error })
+      throw new ProductsDeleteFailed(error.message, { error })
     }
   }
 
@@ -449,7 +449,7 @@ export class Products extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ProductsSearchFailed(undefined, { error })
+      throw new ProductsSearchFailed(error.message, { error })
     }
   }
 
@@ -457,16 +457,14 @@ export class Products extends ThBaseHandler {
     const uri = this.uriHelper.generateBaseUri(`/${requestOptions.productId}/stock/book`)
     try {
       const response = await this.http.getClient().post(uri, requestOptions.body)
-      if (response.status !== 200) {
-        throw new ProductsBookStockFailed()
-      }
+      if (response.status !== 200) throw new ProductsBookStockFailed()
 
       return {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new ProductsBookStockFailed()
+    } catch (error: any) {
+      throw new ProductsBookStockFailed(error.message, { error })
     }
   }
 
@@ -495,7 +493,7 @@ export class Products extends ThBaseHandler {
           data: error.response.data.results
         })
       }
-      throw new BarcodeGetFailed(undefined, { error })
+      throw new BarcodeGetFailed(error.message, { error })
     }
   }
 

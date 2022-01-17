@@ -100,7 +100,7 @@ export class Templates extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.TemplatesCreationFailed()
     }
   }
@@ -114,7 +114,7 @@ export class Templates extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.TemplatesPutFailed()
     }
   }
@@ -130,7 +130,7 @@ export class Templates extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count, cursor: response.data.cursor }
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.TemplatesFetchFailed()
     }
   }
@@ -151,7 +151,7 @@ export class Templates extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.TemplatesPreviewFailed()
     }
   }

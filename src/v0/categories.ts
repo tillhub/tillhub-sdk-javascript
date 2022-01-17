@@ -85,7 +85,7 @@ export class Categories extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new CategoriesFetchFailed(undefined, { error })
+      throw new CategoriesFetchFailed(error.message, { error })
     }
   }
 
@@ -103,7 +103,7 @@ export class Categories extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new CategoryFetchFailed(undefined, { error })
+      throw new CategoryFetchFailed(error.message, { error })
     }
   }
 
@@ -117,7 +117,7 @@ export class Categories extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new CategoryPutFailed(undefined, { error })
+      throw new CategoryPutFailed(error.message, { error })
     }
   }
 
@@ -131,7 +131,7 @@ export class Categories extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new CategoryCreationFailed(undefined, { error })
+      throw new CategoryCreationFailed(error.message, { error })
     }
   }
 
@@ -145,8 +145,8 @@ export class Categories extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (err: any) {
-      throw new CategoriesDeleteFailed()
+    } catch (error: any) {
+      throw new CategoriesDeleteFailed(error.message, { error })
     }
   }
 }

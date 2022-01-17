@@ -86,7 +86,7 @@ export class ProductServiceQuestions extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new errors.ProductServiceQuestionsFetchAllFailed(undefined, { error })
+      throw new errors.ProductServiceQuestionsFetchAllFailed(error.message, { error })
     }
   }
 
@@ -104,7 +104,7 @@ export class ProductServiceQuestions extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.ProductServiceQuestionsFetchOneFailed(undefined, { error })
+      throw new errors.ProductServiceQuestionsFetchOneFailed(error.message, { error })
     }
   }
 
@@ -120,7 +120,7 @@ export class ProductServiceQuestions extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.ProductServiceQuestionsGetMetaFailed(undefined, { error })
+      throw new errors.ProductServiceQuestionsGetMetaFailed(error.message, { error })
     }
   }
 
@@ -134,7 +134,7 @@ export class ProductServiceQuestions extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.ProductServiceQuestionsCreationFailed(undefined, { error })
+      throw new errors.ProductServiceQuestionsCreationFailed(error.message, { error })
     }
   }
 
@@ -152,7 +152,7 @@ export class ProductServiceQuestions extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.ProductServiceQuestionsPutFailed(undefined, { error })
+      throw new errors.ProductServiceQuestionsPutFailed(error.message, { error })
     }
   }
 
@@ -165,7 +165,7 @@ export class ProductServiceQuestions extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.ProductServiceQuestionDeleteFailed()
     }
   }

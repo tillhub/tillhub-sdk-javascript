@@ -131,7 +131,7 @@ export class Timetracking extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new TimetrackingReportFetchFailed(undefined, { error })
+      throw new TimetrackingReportFetchFailed(error.message, { error })
     }
   }
 
@@ -148,7 +148,7 @@ export class Timetracking extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new TimetrackingEntriesFetchFailed(undefined, { error })
+      throw new TimetrackingEntriesFetchFailed(error.message, { error })
     }
   }
 
@@ -164,7 +164,7 @@ export class Timetracking extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new TimetrackingEntryCreateFailed(undefined, { error })
+      throw new TimetrackingEntryCreateFailed(error.message, { error })
     }
   }
 
@@ -182,7 +182,7 @@ export class Timetracking extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new TimetrackingEntryPutFailed(undefined, { error })
+      throw new TimetrackingEntryPutFailed(error.message, { error })
     }
   }
 
@@ -194,7 +194,7 @@ export class Timetracking extends ThBaseHandler {
 
       return { msg: response.data.msg }
     } catch (error: any) {
-      throw new TimetrackingEntryDeleteFailed(undefined, { error })
+      throw new TimetrackingEntryDeleteFailed(error.message, { error })
     }
   }
 
@@ -211,7 +211,7 @@ export class Timetracking extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new TimetrackingConfigurationFetchFailed(undefined, { error })
+      throw new TimetrackingConfigurationFetchFailed(error.message, { error })
     }
   }
 
@@ -229,7 +229,7 @@ export class Timetracking extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new TimetrackingConfigurationPostFailed(undefined, { error })
+      throw new TimetrackingConfigurationPostFailed(error.message, { error })
     }
   }
 
@@ -247,7 +247,7 @@ export class Timetracking extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new TimetrackingConfigurationPutFailed(undefined, { error })
+      throw new TimetrackingConfigurationPutFailed(error.message, { error })
     }
   }
 
@@ -263,7 +263,7 @@ export class Timetracking extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new TimetrackingStaffListFetchFailed(undefined, { error })
+      throw new TimetrackingStaffListFetchFailed(error.message, { error })
     }
   }
 }

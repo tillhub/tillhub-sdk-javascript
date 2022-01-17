@@ -97,7 +97,7 @@ export class ContentTemplates extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new ContentTemplatesFetchFailed(undefined, { error })
+      throw new ContentTemplatesFetchFailed(error.message, { error })
     }
   }
 
@@ -113,7 +113,7 @@ export class ContentTemplates extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ContentTemplateFetchFailed(undefined, { error })
+      throw new ContentTemplateFetchFailed(error.message, { error })
     }
   }
 
@@ -131,7 +131,7 @@ export class ContentTemplates extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ContentTemplatesSearchFailed(undefined, { error })
+      throw new ContentTemplatesSearchFailed(error.message, { error })
     }
   }
 
@@ -145,7 +145,7 @@ export class ContentTemplates extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ContentTemplatePatchFailed(undefined, { error })
+      throw new ContentTemplatePatchFailed(error.message, { error })
     }
   }
 
@@ -159,7 +159,7 @@ export class ContentTemplates extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ContentTemplateCreationFailed(undefined, { error })
+      throw new ContentTemplateCreationFailed(error.message, { error })
     }
   }
 
@@ -173,8 +173,8 @@ export class ContentTemplates extends ThBaseHandler {
         data: response.data.results[0] as ContentTemplate,
         msg: response.data.msg
       }
-    } catch (err: any) {
-      throw new ContentTemplateDeleteFailed()
+    } catch (error: any) {
+      throw new ContentTemplateDeleteFailed(error.message, { error })
     }
   }
 }

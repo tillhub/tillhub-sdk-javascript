@@ -100,8 +100,8 @@ export class Stocks extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new StocksFetchFailed()
+    } catch (error: any) {
+      throw new StocksFetchFailed(error.message, { error })
     }
   }
 
@@ -116,8 +116,8 @@ export class Stocks extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new StocksCreateFailed()
+    } catch (error: any) {
+      throw new StocksCreateFailed(error.message, { error })
     }
   }
 
@@ -133,8 +133,8 @@ export class Stocks extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new StocksUpdateFailed()
+    } catch (error: any) {
+      throw new StocksUpdateFailed(error.message, { error })
     }
   }
 
@@ -150,8 +150,8 @@ export class Stocks extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new StocksLocationsFetchFailed()
+    } catch (error: any) {
+      throw new StocksLocationsFetchFailed(error.message, { error })
     }
   }
 
@@ -167,7 +167,7 @@ export class Stocks extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new StocksLocationFetchOneFailed(undefined, { error })
+      throw new StocksLocationFetchOneFailed(error.message, { error })
     }
   }
 
@@ -184,7 +184,7 @@ export class Stocks extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new StocksTransferFailed(undefined, { error })
+      throw new StocksTransferFailed(error.message, { error })
     }
   }
 }
@@ -223,7 +223,7 @@ export class StocksBook {
         next
       }
     } catch (error: any) {
-      throw new StocksBookFetchFailed(undefined, { error })
+      throw new StocksBookFetchFailed(error.message, { error })
     }
   }
 
@@ -241,7 +241,7 @@ export class StocksBook {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new StocksBookGetMetaFailed(undefined, { error })
+      throw new StocksBookGetMetaFailed(error.message, { error })
     }
   }
 }

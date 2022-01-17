@@ -43,7 +43,7 @@ export class AuditLogs extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new AuditLogsFetchAllFailed(undefined, { error })
+      throw new AuditLogsFetchAllFailed(error.message, { error })
     }
   }
 }

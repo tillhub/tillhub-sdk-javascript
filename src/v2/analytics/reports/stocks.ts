@@ -80,8 +80,8 @@ export class AnalyticsReportsStocks extends ThAnalyticsBaseHandler {
         },
         next: nextFn
       }
-    } catch (err: any) {
-      throw new AnalyticsReportsStocksFetchFailed(err.message, { error: err })
+    } catch (error: any) {
+      throw new AnalyticsReportsStocksFetchFailed(error.message, { error })
     }
   }
 
@@ -94,8 +94,8 @@ export class AnalyticsReportsStocks extends ThAnalyticsBaseHandler {
       const result = await this.handleSocketsExport(uri, query)
 
       return result
-    } catch (err: any) {
-      throw new AnalyticsReportsStocksExportFetchFailed(err.message, { error: err })
+    } catch (error: any) {
+      throw new AnalyticsReportsStocksExportFetchFailed(error.message, { error })
     }
   }
 }

@@ -146,7 +146,7 @@ export class Vouchers extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new VouchersFetchFailed(undefined, { error })
+      throw new VouchersFetchFailed(error.message, { error })
     }
   }
 
@@ -169,7 +169,7 @@ export class Vouchers extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new VouchersMetaFailed(undefined, { error })
+      throw new VouchersMetaFailed(error.message, { error })
     }
   }
 
@@ -185,7 +185,7 @@ export class Vouchers extends ThBaseHandler {
         msg: response.data.msg
       }
     } catch (error: any) {
-      throw new VoucherDeleteFailed(undefined, { error })
+      throw new VoucherDeleteFailed(error.message, { error })
     }
   }
 
@@ -203,7 +203,7 @@ export class Vouchers extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new VouchersCountFailed(undefined, { error })
+      throw new VouchersCountFailed(error.message, { error })
     }
   }
 
@@ -219,7 +219,7 @@ export class Vouchers extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new VoucherFetchFailed(undefined, { error })
+      throw new VoucherFetchFailed(error.message, { error })
     }
   }
 
@@ -248,7 +248,7 @@ export class Vouchers extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new VoucherLogsFetchFailed(undefined, { error })
+      throw new VoucherLogsFetchFailed(error.message, { error })
     }
   }
 
@@ -262,7 +262,7 @@ export class Vouchers extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new VoucherPutFailed(undefined, { error })
+      throw new VoucherPutFailed(error.message, { error })
     }
   }
 
@@ -291,7 +291,7 @@ export class Vouchers extends ThBaseHandler {
         metadata: { count: response.data.count, patch }
       }
     } catch (error: any) {
-      throw new VoucherPatchFailed(undefined, { error })
+      throw new VoucherPatchFailed(error.message, { error })
     }
   }
 
@@ -305,9 +305,9 @@ export class Vouchers extends ThBaseHandler {
       const responseStatus = safeGet(error, 'response.status')
 
       if (responseStatus === 409) {
-        throw new VoucherCodeConflict(undefined, { error })
+        throw new VoucherCodeConflict(error.message, { error })
       } else {
-        throw new VoucherCreationFailed(undefined, { error })
+        throw new VoucherCreationFailed(error.message, { error })
       }
     }
 
@@ -333,7 +333,7 @@ export class Vouchers extends ThBaseHandler {
         data: response.data.results
       }
     } catch (error: any) {
-      throw new VouchersUsersFailed(undefined, { error })
+      throw new VouchersUsersFailed(error.message, { error })
     }
   }
 
@@ -349,7 +349,7 @@ export class Vouchers extends ThBaseHandler {
         data: response.data.results
       }
     } catch (error: any) {
-      throw new VouchersBoundedCustomerGetFailed(undefined, { error })
+      throw new VouchersBoundedCustomerGetFailed(error.message, { error })
     }
   }
 
@@ -369,7 +369,7 @@ export class Vouchers extends ThBaseHandler {
         data: response.data.results
       }
     } catch (error: any) {
-      throw new VouchersBoundedCustomerCreateFailed(undefined, { error })
+      throw new VouchersBoundedCustomerCreateFailed(error.message, { error })
     }
   }
 
@@ -389,7 +389,7 @@ export class Vouchers extends ThBaseHandler {
         data: response.data.results
       }
     } catch (error: any) {
-      throw new VouchersBoundedCustomerPutFailed(undefined, { error })
+      throw new VouchersBoundedCustomerPutFailed(error.message, { error })
     }
   }
 }
@@ -436,7 +436,7 @@ export class VoucherLogs extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new VouchersLogsFetchFailed(undefined, { error })
+      throw new VouchersLogsFetchFailed(error.message, { error })
     }
   }
 
@@ -458,7 +458,7 @@ export class VoucherLogs extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new VoucherLogsMetaFailed(undefined, { error })
+      throw new VoucherLogsMetaFailed(error.message, { error })
     }
   }
 }

@@ -44,7 +44,7 @@ export class StocksBook extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new StocksBookFetchFailed(undefined, { error })
+      throw new StocksBookFetchFailed(error.message, { error })
     }
   }
 }

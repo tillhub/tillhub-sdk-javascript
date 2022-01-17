@@ -83,8 +83,8 @@ export class Favourites extends ThBaseHandler {
         metadata: { count: response.data.count },
         next
       }
-    } catch (e) {
-      throw new FavouritesFetchFailed()
+    } catch (error: any) {
+      throw new FavouritesFetchFailed(error.message, { error })
     }
   }
 
@@ -101,8 +101,8 @@ export class Favourites extends ThBaseHandler {
         metadata: { count: response.data.count },
         msg: response.data.msg
       }
-    } catch (e) {
-      throw new FavouriteFetchFailed()
+    } catch (error: any) {
+      throw new FavouriteFetchFailed(error.message, { error })
     }
   }
 
@@ -118,8 +118,8 @@ export class Favourites extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (e) {
-      throw new FavouriteCreateFailed()
+    } catch (error: any) {
+      throw new FavouriteCreateFailed(error.message, { error })
     }
   }
 
@@ -135,8 +135,8 @@ export class Favourites extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (e) {
-      throw new FavouriteUpdateFailed()
+    } catch (error: any) {
+      throw new FavouriteUpdateFailed(error.message, { error })
     }
   }
 
@@ -151,8 +151,8 @@ export class Favourites extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (e) {
-      throw new FavouriteDeleteFailed()
+    } catch (error: any) {
+      throw new FavouriteDeleteFailed(error.message, { error })
     }
   }
 }

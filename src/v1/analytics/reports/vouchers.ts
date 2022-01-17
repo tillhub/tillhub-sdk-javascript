@@ -56,8 +56,8 @@ export class AnalyticsReportsVouchers extends ThAnalyticsBaseHandler {
           count: response.data.count
         }
       }
-    } catch (err: any) {
-      throw new AnalyticsReportsV1VouchersFetchError(undefined, { error: err })
+    } catch (error: any) {
+      throw new AnalyticsReportsV1VouchersFetchError(error.message, { error })
     }
   }
 }

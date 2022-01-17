@@ -90,7 +90,7 @@ export class Processes extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ProcessesCreationFailed(undefined, { error })
+      throw new ProcessesCreationFailed(error.message, { error })
     }
   }
 
@@ -116,7 +116,7 @@ export class Processes extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new ProcessesFetchFailed(undefined, { error })
+      throw new ProcessesFetchFailed(error.message, { error })
     }
   }
 
@@ -133,7 +133,7 @@ export class Processes extends ThBaseHandler {
         metadata: { count: 1 }
       }
     } catch (error: any) {
-      throw new ProcessesFetchOneFailed(undefined, { error })
+      throw new ProcessesFetchOneFailed(error.message, { error })
     }
   }
 
@@ -149,7 +149,7 @@ export class Processes extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ProcessesUpdateFailed(undefined, { error })
+      throw new ProcessesUpdateFailed(error.message, { error })
     }
   }
 
@@ -164,7 +164,7 @@ export class Processes extends ThBaseHandler {
         msg: response.data.msg
       }
     } catch (error: any) {
-      throw new ProcessesDeleteFailed(undefined, { error })
+      throw new ProcessesDeleteFailed(error.message, { error })
     }
   }
 
@@ -181,7 +181,7 @@ export class Processes extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ProcessItemsFetchFailed(undefined, { error })
+      throw new ProcessItemsFetchFailed(error.message, { error })
     }
   }
 
@@ -202,8 +202,8 @@ export class Processes extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new ProcessesMetaFailed(undefined, { error: err })
+    } catch (error: any) {
+      throw new ProcessesMetaFailed(error.message, { error })
     }
   }
 }

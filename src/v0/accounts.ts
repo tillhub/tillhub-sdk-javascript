@@ -88,7 +88,7 @@ export class Accounts extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new errors.AccountsFetchFailed(undefined, { error })
+      throw new errors.AccountsFetchFailed(error.message, { error })
     }
   }
 
@@ -105,7 +105,7 @@ export class Accounts extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.AccountFetchFailed(undefined, { error })
+      throw new errors.AccountFetchFailed(error.message, { error })
     }
   }
 
@@ -119,7 +119,7 @@ export class Accounts extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.AccountPutFailed(undefined, { error })
+      throw new errors.AccountPutFailed(error.message, { error })
     }
   }
 
@@ -133,7 +133,7 @@ export class Accounts extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.AccountCreationFailed(undefined, { error })
+      throw new errors.AccountCreationFailed(error.message, { error })
     }
   }
 
@@ -146,8 +146,8 @@ export class Accounts extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (err: any) {
-      throw new errors.AccountDeleteFailed()
+    } catch (error: any) {
+      throw new errors.AccountDeleteFailed(error.message, { error })
     }
   }
 }

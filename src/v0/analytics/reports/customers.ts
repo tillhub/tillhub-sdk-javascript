@@ -69,7 +69,7 @@ export class Customers {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.CustomerFetchFailed()
     }
   }
@@ -93,7 +93,7 @@ export class Customers {
         data: [data],
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.CustomerFilterFetchFailed()
     }
   }
@@ -110,7 +110,7 @@ export class Customers {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.CustomerTransactionFetchFailed()
     }
   }
@@ -127,7 +127,7 @@ export class Customers {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.CustomerOverviewFetchFailed()
     }
   }
@@ -149,8 +149,8 @@ export class Customers {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new errors.CustomersMetaFailed(undefined, { error: err })
+    } catch (error: any) {
+      throw new errors.CustomersMetaFailed(error.message, { error })
     }
   }
 }

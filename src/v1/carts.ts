@@ -98,7 +98,7 @@ export class Carts extends ThBaseHandler {
         errors: response.data.errors || []
       }
     } catch (error: any) {
-      throw new CartsCreateFailed(undefined, { error })
+      throw new CartsCreateFailed(error.message, { error })
     }
   }
 
@@ -124,7 +124,7 @@ export class Carts extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new CartsFetchFailed(undefined, { error })
+      throw new CartsFetchFailed(error.message, { error })
     }
   }
 
@@ -142,7 +142,7 @@ export class Carts extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new CartFetchFailed(undefined, { error })
+      throw new CartFetchFailed(error.message, { error })
     }
   }
 
@@ -165,7 +165,7 @@ export class Carts extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new CartsMetaFailed(undefined, { error })
+      throw new CartsMetaFailed(error.message, { error })
     }
   }
 
@@ -183,7 +183,7 @@ export class Carts extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new CartsUpdateFailed(undefined, { error })
+      throw new CartsUpdateFailed(error.message, { error })
     }
   }
 
@@ -201,7 +201,7 @@ export class Carts extends ThBaseHandler {
         msg: response.data.msg
       }
     } catch (error: any) {
-      throw new CartsDeleteFailed(undefined, { error })
+      throw new CartsDeleteFailed(error.message, { error })
     }
   }
 
@@ -219,7 +219,7 @@ export class Carts extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new CartsSearchFailed(undefined, { error })
+      throw new CartsSearchFailed(error.message, { error })
     }
   }
 }

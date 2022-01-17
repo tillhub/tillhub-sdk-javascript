@@ -51,7 +51,7 @@ export class Messages {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (e) {
+    } catch (error: any) {
       throw new errors.PrintMessagesFetchFailed()
     }
   }
@@ -69,7 +69,7 @@ export class Messages {
         metadata: { count: response.data.count },
         msg: response.data.msg
       }
-    } catch (e) {
+    } catch (error: any) {
       throw new errors.PrintMessageFetchFailed()
     }
   }
@@ -86,7 +86,7 @@ export class Messages {
         data: response.data.results[0] as PrintMessage,
         metadata: { count: response.data.count }
       }
-    } catch (e) {
+    } catch (error: any) {
       throw new errors.PrintMessageCreateFailed()
     }
   }
@@ -103,7 +103,7 @@ export class Messages {
         data: response.data.results[0] as PrintMessage,
         metadata: { count: response.data.count }
       }
-    } catch (e) {
+    } catch (error: any) {
       throw new errors.PrintMessageUpdateFailed()
     }
   }
@@ -119,7 +119,7 @@ export class Messages {
       return {
         msg: response.data.msg
       }
-    } catch (e) {
+    } catch (error: any) {
       throw new errors.PrintMessageDeleteFailed()
     }
   }

@@ -330,7 +330,7 @@ describe('v0: Print.Messages', () => {
     try {
       await th.print().messages().getAll()
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(PrintMessagesFetchFailed.name)
     }
   })
@@ -376,7 +376,7 @@ describe('v0: Print.Messages', () => {
     try {
       await th.print().messages().get(messageId)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(PrintMessageFetchFailed.name)
     }
   })
@@ -422,7 +422,7 @@ describe('v0: Print.Messages', () => {
     try {
       await th.print().messages().create(mockMessage)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(PrintMessageCreateFailed.name)
     }
   })
@@ -468,7 +468,7 @@ describe('v0: Print.Messages', () => {
     try {
       await th.print().messages().update(messageId, mockMessage)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(PrintMessageUpdateFailed.name)
     }
   })
@@ -514,7 +514,7 @@ describe('v0: Print.Messages', () => {
     try {
       await th.print().messages().delete(messageId)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(PrintMessageDeleteFailed.name)
     }
   })

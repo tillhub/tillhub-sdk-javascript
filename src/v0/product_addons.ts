@@ -90,7 +90,7 @@ export class ProductAddons extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new errors.ProductAddonsFetchAllFailed(undefined, { error })
+      throw new errors.ProductAddonsFetchAllFailed(error.message, { error })
     }
   }
 
@@ -106,7 +106,7 @@ export class ProductAddons extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.ProductAddonFetchOneFailed(undefined, { error })
+      throw new errors.ProductAddonFetchOneFailed(error.message, { error })
     }
   }
 
@@ -122,7 +122,7 @@ export class ProductAddons extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.ProductAddonsGetMetaFailed(undefined, { error })
+      throw new errors.ProductAddonsGetMetaFailed(error.message, { error })
     }
   }
 
@@ -136,7 +136,7 @@ export class ProductAddons extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.ProductAddonCreationFailed(undefined, { error })
+      throw new errors.ProductAddonCreationFailed(error.message, { error })
     }
   }
 
@@ -151,7 +151,7 @@ export class ProductAddons extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.ProductAddonPutFailed(undefined, { error })
+      throw new errors.ProductAddonPutFailed(error.message, { error })
     }
   }
 
@@ -164,7 +164,7 @@ export class ProductAddons extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.ProductAddonDeleteFailed()
     }
   }

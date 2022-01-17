@@ -48,8 +48,8 @@ export class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
           count: response.data.count
         }
       }
-    } catch (err: any) {
-      throw new AnalyticsReportsCountingProtocolsExportFetchError(undefined, { error: err })
+    } catch (error: any) {
+      throw new AnalyticsReportsCountingProtocolsExportFetchError(error.message, { error })
     }
   }
 }

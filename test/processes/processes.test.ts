@@ -386,7 +386,7 @@ describe('v0: Processes', () => {
     try {
       await th.processes().getAll()
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(ProcessesFetchFailed.name)
     }
   })
@@ -430,7 +430,7 @@ describe('v0: Processes', () => {
     try {
       await th.processes().get(processId)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(ProcessesFetchOneFailed.name)
     }
   })
@@ -474,7 +474,7 @@ describe('v0: Processes', () => {
     try {
       await th.processes().create(mockProcess)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(ProcessesCreationFailed.name)
     }
   })
@@ -520,7 +520,7 @@ describe('v0: Processes', () => {
     try {
       await th.processes().update(processId, mockProcess)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(ProcessesUpdateFailed.name)
     }
   })
@@ -566,7 +566,7 @@ describe('v0: Processes', () => {
     try {
       await th.processes().getItems(processId)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(ProcessItemsFetchFailed.name)
     }
   })
@@ -612,7 +612,7 @@ describe('v0: Processes', () => {
     try {
       await th.processes().delete(processId)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(ProcessesDeleteFailed.name)
     }
   })

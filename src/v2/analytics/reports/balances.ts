@@ -89,8 +89,8 @@ export class AnalyticsReportsBalancesOverview extends ThAnalyticsBaseHandler {
         },
         next: nextFn
       }
-    } catch (err: any) {
-      throw new AnalyticsReportsBalancesOverviewFetchError(undefined, { error: err })
+    } catch (error: any) {
+      throw new AnalyticsReportsBalancesOverviewFetchError(error.message, { error })
     }
   }
 
@@ -102,8 +102,8 @@ export class AnalyticsReportsBalancesOverview extends ThAnalyticsBaseHandler {
       const uri = localUriHelper.generateBaseUri('/reports/balances/overview')
       const result = await this.handleExport(uri, query)
       return result
-    } catch (err: any) {
-      throw new AnalyticsReportsBalancesOverviewExportFetchError(undefined, { error: err })
+    } catch (error: any) {
+      throw new AnalyticsReportsBalancesOverviewExportFetchError(error.message, { error })
     }
   }
 }
@@ -146,8 +146,8 @@ export class AnalyticsReportsBalancesDetail extends ThAnalyticsBaseHandler {
           total_count: 1
         }
       }
-    } catch (err: any) {
-      throw new AnalyticsReportsTransactionDetailFetcshError(undefined, { error: err })
+    } catch (error: any) {
+      throw new AnalyticsReportsTransactionDetailFetcshError(error.message, { error })
     }
   }
 }
