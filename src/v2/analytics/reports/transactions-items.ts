@@ -1,4 +1,4 @@
-import { ThAnalyticsBaseHandler, ThAnalyticsBaseResultItem } from '../../../base'
+import { ThAnalyticsBaseHandler, ThAnalyticsBaseResultItem, AnalyticsSocketsExportResponseItem } from '../../../base'
 import { Client } from '../../../client'
 import { BaseError } from '../../../errors'
 import { UriHelper } from '../../../uri-helper'
@@ -16,17 +16,6 @@ export interface TransactionsItemsExportOptions {
     start?: string
     end?: string
   }
-}
-
-interface AnalyticsReportsTransactionsItemsExportItem {
-  correlationId?: string
-}
-
-interface AnalyticsReportsTransactionsItemsExportResponse {
-  data: AnalyticsReportsTransactionsItemsExportItem[]
-  metadata: Record<string, unknown>
-  msg?: string
-
 }
 
 export interface AnalyticsReportsTransactionsItemsResponse {
@@ -113,7 +102,7 @@ export class AnalyticsReportsTransactionsItems extends ThAnalyticsBaseHandler {
 
   public async export (
     query?: TransactionsItemsExportOptions
-  ): Promise<AnalyticsReportsTransactionsItemsExportResponse> {
+  ): Promise<AnalyticsSocketsExportResponseItem> {
     try {
       const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
       const base = localUriHelper.generateBaseUri('/reports/transactions/items')

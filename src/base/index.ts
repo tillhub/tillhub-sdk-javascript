@@ -3,7 +3,8 @@ import {
   ThAnalyticsBaseHandler,
   ThAnalyticsBaseResponse,
   ThAnalyticsExportsBaseResponse,
-  ThAnalyticsBaseResultItem
+  ThAnalyticsBaseResultItem,
+  AnalyticsSocketsExportResponseItem
 } from './handler'
 import { ThBaseRequest } from './request'
 
@@ -13,5 +14,6 @@ export {
   ThAnalyticsBaseHandler,
   ThAnalyticsBaseResponse,
   ThAnalyticsExportsBaseResponse,
-  ThAnalyticsBaseResultItem
+  ThAnalyticsBaseResultItem,
+  AnalyticsSocketsExportResponseItem
 }

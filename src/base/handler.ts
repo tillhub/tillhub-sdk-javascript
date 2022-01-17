@@ -29,28 +29,6 @@ export interface ThAnalyticsBaseHandlerOptions {
   base?: string
 }
 
-// export interface ThAnalyticsBaseHandlerJsonReponseItem {
-//   created_at: {
-//     iso: string
-//     unix: number
-//   },
-//   metric: {
-//     job: string,
-//     user: string
-//   }
-//   count: number
-//   results: any[]
-// }
-
-// export interface ThAnalyticsBaseResponse {
-//   data: object[]
-//   metadata: {
-//     count: number
-//     total_count: number
-//   }
-//   msg?: string
-// }
-
 export interface ThAnalyticsBaseResultItem {
   created_at: {
     iso: string
@@ -75,6 +53,15 @@ export interface ThAnalyticsExportsBaseResponse {
   url: string
   filename?: string
   expires_at?: string
+}
+
+export interface ThAnalyticsSocketsExportsBaseResponse {
+  correlationId?: string
+}
+
+export interface AnalyticsSocketsExportResponseItem {
+  data: ThAnalyticsSocketsExportsBaseResponse[]
+  metadata: Record<string, unknown>
 }
 
 export class ThAnalyticsBaseHandler {
@@ -146,6 +133,24 @@ export class ThAnalyticsBaseHandler {
 
     return {
       ...response.data.results[0]
+    }
+  }
+
+  protected async handleSocketsExport (
+    url: string,
+    query?: HandlerQuery,
+    requestOptions?: any
+  ): Promise<AnalyticsSocketsExportResponseItem> {
+    const opts = {
+      method: 'GET',
+      url: ThAnalyticsBaseHandler.generateUriWithQuery(url, { format: 'csv', ...query }),
+      ...requestOptions
+    }
+    const response = await this.client.getClient()(opts)
+
+    return {
+      data: response.data.results,
+      metadata: response.data.metadata
     }
   }
 }

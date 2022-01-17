@@ -1,16 +1,20 @@
+import {
+  ThAnalyticsBaseHandler,
+  ThAnalyticsBaseResultItem,
+  AnalyticsSocketsExportResponseItem
+} from '../../../base'
 import { Client } from '../../../client'
 import { BaseError } from '../../../errors'
 import { UriHelper } from '../../../uri-helper'
 import { AnalyticsOptions } from '../../../v0/analytics'
 
-export interface AnalyticsReportsStocksV3ExportResponseItem {
-  correlationId?: string
-}
-export interface AnalyticsResponse {
-  data: AnalyticsReportsStocksV3ExportResponseItem[]
-  metadata: Record<string, unknown>
-  msg?: string
-  next?: () => Promise<AnalyticsResponse>
+interface AnalyticsReportsStocksResponseItem {
+  data: Array<Record<string, unknown>>
+  metaData: {
+    count?: number
+    total_count?: number
+  }
+  next?: () => Promise<AnalyticsReportsStocksResponseItem>
 }
 
 export interface StocksExportOptions {
@@ -19,47 +23,79 @@ export interface StocksExportOptions {
   uri?: string
 }
 
-export class AnalyticsReportsStocks {
-  endpoint: string
+export class AnalyticsReportsStocks extends ThAnalyticsBaseHandler {
   http: Client
   public options: AnalyticsOptions
-  public uriHelper: UriHelper
   public timeout: AnalyticsOptions['timeout']
 
   constructor (options: AnalyticsOptions, http: Client) {
+    super(http, options)
     this.options = options
     this.http = http
-
-    this.endpoint = '/api/v2/analytics'
-    this.options.base = this.options.base ?? 'https://api.tillhub.com'
-    this.uriHelper = new UriHelper(this.endpoint, this.options)
     this.timeout = options.timeout ?? this.http.getClient().defaults.timeout
   }
 
-  async getAll (query?: StocksExportOptions | undefined): Promise<AnalyticsResponse> {
-    let nextFn
+  static create (options: Record<string, unknown>, http: Client): AnalyticsReportsStocks {
+    return ThAnalyticsBaseHandler.generateAuthenticatedInstance(
+      AnalyticsReportsStocks,
+      options,
+      http
+    )
+  }
+
+  async getAll (query?: StocksExportOptions | undefined): Promise<AnalyticsReportsStocksResponseItem> {
     try {
-      const base = this.uriHelper.generateBaseUri('/reports/stocks')
-      const uri = this.uriHelper.generateUriWithQuery(base, query)
+      let nextFn
+      const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
+      const uri = localUriHelper.generateBaseUri('/reports/stocks')
+      const { results: d, next } = await this.handleGet(uri, query, { timeout: this.timeout })
 
-      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
-      if (response.status !== 200) throw new AnalyticsReportsStocksFetchFailed()
+      if (!d) {
+        throw new TypeError('Unexpectedly did not return data.')
+      }
 
-      const next = response.data.cursor?.next
+      const data = d?.find(
+        (item: ThAnalyticsBaseResultItem) => item.metric.job === 'reports_stocks'
+      )?.values ?? []
+
+      const count = d?.find(
+        (item: ThAnalyticsBaseResultItem) =>
+          item.metric.job === 'reports_stocks_v2_overview_filtered_meta'
+      )?.values[0] ?? {}
+
+      const totalCount = d?.find(
+        (item: ThAnalyticsBaseResultItem) => item.metric.job === 'reports_stocks_v2_overview_meta'
+      )?.values[0] ?? {}
+
       if (next) {
-        nextFn = (): Promise<AnalyticsResponse> =>
+        nextFn = (): Promise<AnalyticsReportsStocksResponseItem> =>
           this.getAll({ uri: next })
       }
 
       return {
-        data: response.data.results,
-        metadata: {
-          count: response.data.count
+        data,
+        metaData: {
+          count: count.count,
+          total_count: totalCount.count
         },
         next: nextFn
       }
     } catch (err: any) {
-      throw new AnalyticsReportsStocksFetchFailed(undefined, { error: err })
+      throw new AnalyticsReportsStocksFetchFailed(err.message, { error: err })
+    }
+  }
+
+  public async export (
+    query?: StocksExportOptions
+  ): Promise<AnalyticsSocketsExportResponseItem> {
+    try {
+      const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
+      const uri = localUriHelper.generateBaseUri('/reports/stocks')
+      const result = await this.handleSocketsExport(uri, query)
+
+      return result
+    } catch (err: any) {
+      throw new AnalyticsReportsStocksExportFetchFailed(err.message, { error: err })
     }
   }
 }
@@ -72,5 +108,16 @@ export class AnalyticsReportsStocksFetchFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsReportsStocksFetchFailed.prototype)
+  }
+}
+
+export class AnalyticsReportsStocksExportFetchFailed extends BaseError {
+  public name = 'AnalyticsReportsStocksExportFetchFailed'
+  constructor (
+    public message: string = 'Could not fetch stocks export. ',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, AnalyticsReportsStocksExportFetchFailed.prototype)
   }
 }
