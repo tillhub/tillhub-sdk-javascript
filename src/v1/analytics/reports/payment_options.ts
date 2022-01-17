@@ -56,8 +56,8 @@ export class AnalyticsReportsPaymentOptions extends ThAnalyticsBaseHandler {
           count: response.data.count
         }
       }
-    } catch (err: any) {
-      throw new AnalyticsReportsV1PaymentOptionsFetchError(undefined, { error: err })
+    } catch (error: any) {
+      throw new AnalyticsReportsV1PaymentOptionsFetchError(error.message, { error })
     }
   }
 }

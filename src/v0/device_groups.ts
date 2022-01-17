@@ -81,7 +81,7 @@ export class DeviceGroups extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new DeviceGroupsFetchFailed(undefined, { error })
+      throw new DeviceGroupsFetchFailed(error.message, { error })
     }
   }
 
@@ -99,7 +99,7 @@ export class DeviceGroups extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new DeviceGroupFetchFailed(undefined, { error })
+      throw new DeviceGroupFetchFailed(error.message, { error })
     }
   }
 
@@ -113,7 +113,7 @@ export class DeviceGroups extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new DeviceGroupPutFailed(undefined, { error })
+      throw new DeviceGroupPutFailed(error.message, { error })
     }
   }
 
@@ -127,7 +127,7 @@ export class DeviceGroups extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new DeviceGroupCreationFailed(undefined, { error })
+      throw new DeviceGroupCreationFailed(error.message, { error })
     }
   }
 
@@ -140,8 +140,8 @@ export class DeviceGroups extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (err: any) {
-      throw new DeviceGroupDeleteFailed()
+    } catch (error: any) {
+      throw new DeviceGroupDeleteFailed(error.message, { error })
     }
   }
 }

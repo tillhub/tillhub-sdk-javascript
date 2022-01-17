@@ -89,7 +89,7 @@ export class Discounts extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new errors.DiscountsFetchFailed(undefined, { error })
+      throw new errors.DiscountsFetchFailed(error.message, { error })
     }
   }
 
@@ -107,7 +107,7 @@ export class Discounts extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.DiscountFetchFailed(undefined, { error })
+      throw new errors.DiscountFetchFailed(error.message, { error })
     }
   }
 
@@ -121,7 +121,7 @@ export class Discounts extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.DiscountPutFailed(undefined, { error })
+      throw new errors.DiscountPutFailed(error.message, { error })
     }
   }
 
@@ -135,7 +135,7 @@ export class Discounts extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.DiscountCreationFailed(undefined, { error })
+      throw new errors.DiscountCreationFailed(error.message, { error })
     }
   }
 
@@ -153,7 +153,7 @@ export class Discounts extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.DiscountsCountFailed(undefined, { error })
+      throw new errors.DiscountsCountFailed(error.message, { error })
     }
   }
 
@@ -166,7 +166,7 @@ export class Discounts extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.DiscountDeleteFailed()
     }
   }

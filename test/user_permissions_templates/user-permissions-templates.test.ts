@@ -244,7 +244,7 @@ describe('v0: UserPermissionsTemplates', () => {
     try {
       await th.userPermissionsTemplates().getAll()
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(UserPermissionsTemplatesFetchFailed.name)
     }
   })
@@ -276,7 +276,7 @@ describe('v0: UserPermissionsTemplates', () => {
     try {
       await th.userPermissionsTemplates().get(templateId)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(UserPermissionsTemplatesFetchOneFailed.name)
     }
   })
@@ -310,7 +310,7 @@ describe('v0: UserPermissionsTemplates', () => {
     try {
       await th.userPermissionsTemplates().create(mockUserPermissionsTemplate)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(UserPermissionsTemplatesCreationFailed.name)
     }
   })
@@ -344,7 +344,7 @@ describe('v0: UserPermissionsTemplates', () => {
     try {
       await th.userPermissionsTemplates().update(templateId, mockUserPermissionsTemplate)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(UserPermissionsTemplatesUpdateFailed.name)
     }
   })
@@ -378,7 +378,7 @@ describe('v0: UserPermissionsTemplates', () => {
     try {
       await th.userPermissionsTemplates().delete(templateId)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(UserPermissionsTemplatesDeleteFailed.name)
     }
   })

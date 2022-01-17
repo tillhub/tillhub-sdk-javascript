@@ -82,7 +82,7 @@ export class StaffGroups extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new StaffGroupsFetchAllFailed(undefined, { error })
+      throw new StaffGroupsFetchAllFailed(error.message, { error })
     }
   }
 
@@ -98,7 +98,7 @@ export class StaffGroups extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new StaffGroupsMetaFailed(undefined, { error })
+      throw new StaffGroupsMetaFailed(error.message, { error })
     }
   }
 
@@ -116,7 +116,7 @@ export class StaffGroups extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new StaffGroupFetchFailed(undefined, { error })
+      throw new StaffGroupFetchFailed(error.message, { error })
     }
   }
 
@@ -130,7 +130,7 @@ export class StaffGroups extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new StaffGroupPutFailed(undefined, { error })
+      throw new StaffGroupPutFailed(error.message, { error })
     }
   }
 
@@ -144,7 +144,7 @@ export class StaffGroups extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new StaffGroupCreationFailed(undefined, { error })
+      throw new StaffGroupCreationFailed(error.message, { error })
     }
   }
 
@@ -157,8 +157,8 @@ export class StaffGroups extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (err: any) {
-      throw new StaffGroupDeleteFailed()
+    } catch (error: any) {
+      throw new StaffGroupDeleteFailed(error.message, { error })
     }
   }
 }

@@ -67,7 +67,7 @@ export class Payments {
         metadata: { count: response.data.count },
         next
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.ReportsPaymentsFetchAllFailed()
     }
   }
@@ -90,7 +90,7 @@ export class Payments {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.ReportsPaymentsMetaFailed()
     }
   }

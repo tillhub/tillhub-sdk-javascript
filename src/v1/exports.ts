@@ -42,7 +42,7 @@ export class ExportsV1 {
         metadata: {}
       }
     } catch (error: any) {
-      throw new ExportsGobdFetchFailed(undefined, { error })
+      throw new ExportsGobdFetchFailed(error.message, { error })
     }
   }
 }

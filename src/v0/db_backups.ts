@@ -74,7 +74,7 @@ export class DbBackups extends ThBaseHandler {
         }
       }
     } catch (error: any) {
-      throw new DbBackupsFetchFailed(undefined, { error })
+      throw new DbBackupsFetchFailed(error.message, { error })
     }
   }
 
@@ -93,7 +93,7 @@ export class DbBackups extends ThBaseHandler {
         msg: response.data.msg
       }
     } catch (error: any) {
-      throw new DbBackupsSignedUrlFetchFailed(undefined, { error })
+      throw new DbBackupsSignedUrlFetchFailed(error.message, { error })
     }
   }
 }

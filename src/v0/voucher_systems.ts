@@ -87,7 +87,7 @@ export class VoucherSystems extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw (new VoucherSystemsFetchFailed(undefined, { error }))
+      throw (new VoucherSystemsFetchFailed(error.message, { error }))
     }
   }
 
@@ -106,7 +106,7 @@ export class VoucherSystems extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw (new VoucherSystemFetchFailed(undefined, { error }))
+      throw (new VoucherSystemFetchFailed(error.message, { error }))
     }
   }
 
@@ -120,7 +120,7 @@ export class VoucherSystems extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw (new VoucherSystemPutFailed(undefined, { error }))
+      throw (new VoucherSystemPutFailed(error.message, { error }))
     }
   }
 
@@ -134,7 +134,7 @@ export class VoucherSystems extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw (new VoucherSystemCreationFailed(undefined, { error }))
+      throw (new VoucherSystemCreationFailed(error.message, { error }))
     }
   }
 
@@ -147,7 +147,7 @@ export class VoucherSystems extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw (new VoucherSystemDeleteFailed())
     }
   }

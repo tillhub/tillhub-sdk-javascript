@@ -70,7 +70,7 @@ export class Pricebooks {
         next
       }
     } catch (error: any) {
-      throw new PricebooksFetchFailed(undefined, { error })
+      throw new PricebooksFetchFailed(error.message, { error })
     }
   }
 
@@ -86,7 +86,7 @@ export class Pricebooks {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new PricebooksMetaFailed(undefined, { error })
+      throw new PricebooksMetaFailed(error.message, { error })
     }
   }
 
@@ -104,7 +104,7 @@ export class Pricebooks {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new PricebookFetchFailed(undefined, { error })
+      throw new PricebookFetchFailed(error.message, { error })
     }
   }
 
@@ -118,7 +118,7 @@ export class Pricebooks {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new PricebookPutFailed(undefined, { error })
+      throw new PricebookPutFailed(error.message, { error })
     }
   }
 
@@ -132,7 +132,7 @@ export class Pricebooks {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new PricebookCreationFailed(undefined, { error })
+      throw new PricebookCreationFailed(error.message, { error })
     }
   }
 
@@ -140,15 +140,13 @@ export class Pricebooks {
     const uri = this.uriHelper.generateBaseUri(`/prices/book/${pricebookId}`)
     try {
       const response = await this.http.getClient().delete(uri)
-      if (response.status !== 200) {
-        throw new PricebookDeleteFailed()
-      }
+      if (response.status !== 200) throw new PricebookDeleteFailed()
 
       return {
         msg: response.data.msg
       }
-    } catch (err: any) {
-      throw new PricebookDeleteFailed()
+    } catch (error: any) {
+      throw new PricebookDeleteFailed(error.message, { error })
     }
   }
 }

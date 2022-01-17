@@ -100,7 +100,7 @@ export class CountingProtocols extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new CountingProtocolsFetchFailed(undefined, { error })
+      throw new CountingProtocolsFetchFailed(error.message, { error })
     }
   }
 
@@ -116,7 +116,7 @@ export class CountingProtocols extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new CountingProtocolsMetaFailed(undefined, { error })
+      throw new CountingProtocolsMetaFailed(error.message, { error })
     }
   }
 }

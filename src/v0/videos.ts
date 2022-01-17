@@ -43,8 +43,8 @@ export class Videos {
       return {
         data: response.data.results
       }
-    } catch (err: any) {
-      throw new VideoPutFailed()
+    } catch (error: any) {
+      throw new VideoPutFailed(error.message, { error })
     }
   }
 
@@ -60,24 +60,30 @@ export class Videos {
       return {
         data: response.data.results
       }
-    } catch (err: any) {
-      throw new VideoCreationFailed()
+    } catch (error: any) {
+      throw new VideoCreationFailed(error.message, { error })
     }
   }
 }
 
 export class VideoCreationFailed extends BaseError {
   public name = 'VideoCreationFailed'
-  constructor (public message: string = 'Could not create new video') {
-    super(message)
+  constructor (
+    public message: string = 'Could not create new video',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
     Object.setPrototypeOf(this, VideoCreationFailed.prototype)
   }
 }
 
 export class VideoPutFailed extends BaseError {
   public name = 'VideoPutFailed'
-  constructor (public message: string = 'Could not update new video') {
-    super(message)
+  constructor (
+    public message: string = 'Could not update new video',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
     Object.setPrototypeOf(this, VideoPutFailed.prototype)
   }
 }

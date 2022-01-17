@@ -113,7 +113,7 @@ export class Devices extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new DevicesFetchFailed(undefined, { error })
+      throw new DevicesFetchFailed(error.message, { error })
     }
   }
 
@@ -131,7 +131,7 @@ export class Devices extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new DeviceFetchFailed(undefined, { error })
+      throw new DeviceFetchFailed(error.message, { error })
     }
   }
 
@@ -149,7 +149,7 @@ export class Devices extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new DeviceFetchFailed(undefined, { error })
+      throw new DeviceFetchFailed(error.message, { error })
     }
   }
 
@@ -164,7 +164,7 @@ export class Devices extends ThBaseHandler {
         msg: response.data.msg
       }
     } catch (error: any) {
-      throw new DeviceContentFetchFailed(undefined, { error })
+      throw new DeviceContentFetchFailed(error.message, { error })
     }
   }
 
@@ -178,7 +178,7 @@ export class Devices extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new DevicePatchFailed(undefined, { error })
+      throw new DevicePatchFailed(error.message, { error })
     }
   }
 
@@ -192,7 +192,7 @@ export class Devices extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new DeviceCreationFailed(undefined, { error })
+      throw new DeviceCreationFailed(error.message, { error })
     }
   }
 
@@ -206,7 +206,7 @@ export class Devices extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new DeviceBindingFailed(undefined, { error })
+      throw new DeviceBindingFailed(error.message, { error })
     }
   }
 
@@ -219,8 +219,8 @@ export class Devices extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (err: any) {
-      throw new DeviceDeleteFailed()
+    } catch (error: any) {
+      throw new DeviceDeleteFailed(error.message, { error })
     }
   }
 }

@@ -109,7 +109,7 @@ export class Users extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new UsersFetchFailed(undefined, { error })
+      throw new UsersFetchFailed(error.message, { error })
     }
   }
 
@@ -128,7 +128,7 @@ export class Users extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new UserFetchFailed(undefined, { error })
+      throw new UserFetchFailed(error.message, { error })
     }
   }
 
@@ -143,7 +143,7 @@ export class Users extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new UserPutFailed(undefined, { error })
+      throw new UserPutFailed(error.message, { error })
     }
   }
 
@@ -158,7 +158,7 @@ export class Users extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new UserCreationFailed(undefined, { error })
+      throw new UserCreationFailed(error.message, { error })
     }
   }
 
@@ -175,7 +175,7 @@ export class Users extends ThBaseHandler {
         msg: response.data.msg
       }
     } catch (error: any) {
-      throw new UserDeleteFailed(undefined, { error })
+      throw new UserDeleteFailed(error.message, { error })
     }
   }
 
@@ -190,7 +190,7 @@ export class Users extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new UserTokenCreationFailed(undefined, { error })
+      throw new UserTokenCreationFailed(error.message, { error })
     }
   }
 }

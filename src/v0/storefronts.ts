@@ -237,7 +237,7 @@ export class Storefronts extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new StorefrontsFetchFailed(undefined, { error })
+      throw new StorefrontsFetchFailed(error.message, { error })
     }
   }
 
@@ -253,7 +253,7 @@ export class Storefronts extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new StorefrontsFetchOneFailed(undefined, { error })
+      throw new StorefrontsFetchOneFailed(error.message, { error })
     }
   }
 
@@ -267,7 +267,7 @@ export class Storefronts extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new StorefrontsPutFailed(undefined, { error })
+      throw new StorefrontsPutFailed(error.message, { error })
     }
   }
 
@@ -281,7 +281,7 @@ export class Storefronts extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new StorefrontsCreationFailed(undefined, { error })
+      throw new StorefrontsCreationFailed(error.message, { error })
     }
   }
 
@@ -294,8 +294,8 @@ export class Storefronts extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (err: any) {
-      throw new StorefrontsDeleteFailed()
+    } catch (error: any) {
+      throw new StorefrontsDeleteFailed(error.message, { error })
     }
   }
 
@@ -313,7 +313,7 @@ export class Storefronts extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new StorefrontsProfileFetchFailed(undefined, { error })
+      throw new StorefrontsProfileFetchFailed(error.message, { error })
     }
   }
 
@@ -329,7 +329,7 @@ export class Storefronts extends ThBaseHandler {
         msg: response.data.msg
       }
     } catch (error: any) {
-      throw new StorefrontsSyncAllFailed(undefined, { error })
+      throw new StorefrontsSyncAllFailed(error.message, { error })
     }
   }
 
@@ -347,7 +347,7 @@ export class Storefronts extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new StorefrontsSyncStatusFetchFailed(undefined, { error })
+      throw new StorefrontsSyncStatusFetchFailed(error.message, { error })
     }
   }
 
@@ -365,7 +365,7 @@ export class Storefronts extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new StorefrontsDeltaFailed(undefined, { error })
+      throw new StorefrontsDeltaFailed(error.message, { error })
     }
   }
 
@@ -383,7 +383,7 @@ export class Storefronts extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new StorefrontsWhitelistFailed(undefined, { error })
+      throw new StorefrontsWhitelistFailed(error.message, { error })
     }
   }
 
@@ -401,7 +401,7 @@ export class Storefronts extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new StorefrontsFetchWhitelistedFailed(undefined, { error })
+      throw new StorefrontsFetchWhitelistedFailed(error.message, { error })
     }
   }
 
@@ -418,7 +418,7 @@ export class Storefronts extends ThBaseHandler {
         msg: response.data.msg
       }
     } catch (error: any) {
-      throw new StorefrontsFetchWhitelistedMetaFailed(undefined, { error })
+      throw new StorefrontsFetchWhitelistedMetaFailed(error.message, { error })
     }
   }
 
@@ -444,7 +444,7 @@ export class Storefronts extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new StorefrontsAvailableProductsFailed(undefined, { error })
+      throw new StorefrontsAvailableProductsFailed(error.message, { error })
     }
   }
 
@@ -465,7 +465,7 @@ export class Storefronts extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new StorefrontsAvailableProductsMetaFailed(undefined, { error })
+      throw new StorefrontsAvailableProductsMetaFailed(error.message, { error })
     }
   }
 }

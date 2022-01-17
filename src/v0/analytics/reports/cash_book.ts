@@ -47,8 +47,8 @@ export class CashBook {
         data: response.data.results[0].values,
         metadata: { count: response.data.results[0].count }
       }
-    } catch (err: any) {
-      throw new CashBookReportFetchFailed()
+    } catch (error: any) {
+      throw new CashBookReportFetchFailed(error.message, { error })
     }
   }
 }

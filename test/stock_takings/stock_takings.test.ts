@@ -334,7 +334,7 @@ describe('v0: StockTakings', () => {
     try {
       await th.stockTakings().getAll()
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(StockTakingsFetchFailed.name)
     }
   })
@@ -380,7 +380,7 @@ describe('v0: StockTakings', () => {
     try {
       await th.stockTakings().get(stockTakingId)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(StockTakingsFetchOneFailed.name)
     }
   })
@@ -426,7 +426,7 @@ describe('v0: StockTakings', () => {
     try {
       await th.stockTakings().create(mockStockTaking)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(StockTakingsCreationFailed.name)
     }
   })
@@ -472,7 +472,7 @@ describe('v0: StockTakings', () => {
     try {
       await th.stockTakings().update(stockTakingId, mockStockTaking)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(StockTakingsUpdateFailed.name)
     }
   })
@@ -518,7 +518,7 @@ describe('v0: StockTakings', () => {
     try {
       await th.stockTakings().delete(stockTakingId)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(StockTakingsDeleteFailed.name)
     }
   })

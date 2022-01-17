@@ -117,7 +117,7 @@ export class Branches extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new BranchesFetchFailed(undefined, { error })
+      throw new BranchesFetchFailed(error.message, { error })
     }
   }
 
@@ -133,8 +133,8 @@ export class Branches extends ThBaseHandler {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new BranchesMetaFailed()
+    } catch (error: any) {
+      throw new BranchesMetaFailed(error.message, { error })
     }
   }
 
@@ -150,7 +150,7 @@ export class Branches extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new BranchFetchFailed(undefined, { error })
+      throw new BranchFetchFailed(error.message, { error })
     }
   }
 }

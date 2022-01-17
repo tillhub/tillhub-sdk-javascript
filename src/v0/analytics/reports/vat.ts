@@ -51,7 +51,7 @@ export class Vat {
         metadata: { count: response.data.count },
         next
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.VatReportFetchFailed()
     }
   }
@@ -74,7 +74,7 @@ export class Vat {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.VatReportFetchMetaFailed()
     }
   }

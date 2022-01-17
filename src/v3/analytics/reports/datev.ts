@@ -52,8 +52,8 @@ export class AnalyticsReportsDatev extends ThAnalyticsBaseHandler {
           count: response.data.count
         }
       }
-    } catch (err: any) {
-      throw new AnalyticsReportsV3DatevExportFetchError(undefined, { error: err })
+    } catch (error: any) {
+      throw new AnalyticsReportsV3DatevExportFetchError(error.message, { error })
     }
   }
 }

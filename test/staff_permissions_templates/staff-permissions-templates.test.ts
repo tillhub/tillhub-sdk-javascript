@@ -251,7 +251,7 @@ describe('v0: StaffPermissionsTemplates', () => {
     try {
       await th.staffPermissionsTemplates().getAll()
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(StaffPermissionsTemplatesFetchFailed.name)
     }
   })
@@ -285,7 +285,7 @@ describe('v0: StaffPermissionsTemplates', () => {
     try {
       await th.staffPermissionsTemplates().get(templateId)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(StaffPermissionsTemplatesFetchOneFailed.name)
     }
   })
@@ -319,7 +319,7 @@ describe('v0: StaffPermissionsTemplates', () => {
     try {
       await th.staffPermissionsTemplates().create(mockStaffPermissionsTemplate)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(StaffPermissionsTemplatesCreationFailed.name)
     }
   })
@@ -353,7 +353,7 @@ describe('v0: StaffPermissionsTemplates', () => {
     try {
       await th.staffPermissionsTemplates().update(templateId, mockStaffPermissionsTemplate)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(StaffPermissionsTemplatesUpdateFailed.name)
     }
   })
@@ -387,7 +387,7 @@ describe('v0: StaffPermissionsTemplates', () => {
     try {
       await th.staffPermissionsTemplates().delete(templateId)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(StaffPermissionsTemplatesDeleteFailed.name)
     }
   })

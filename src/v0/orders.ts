@@ -114,7 +114,7 @@ export class Orders extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.OrdersFetchFailed()
     }
   }
@@ -130,7 +130,7 @@ export class Orders extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.OrdersCreateFailed()
     }
   }
@@ -146,7 +146,7 @@ export class Orders extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.OrdersUpdateFailed()
     }
   }
@@ -162,7 +162,7 @@ export class Orders extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.OrderItemsFetchFailed()
     }
   }
@@ -183,7 +183,7 @@ export class Orders extends ThBaseHandler {
       }
 
       return { msg: response.data.msg }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.OrderItemsDeleteFailed()
     }
   }
@@ -198,7 +198,7 @@ export class Orders extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.OrderItemsCreateFailed()
     }
   }
@@ -213,7 +213,7 @@ export class Orders extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.OrderItemsUpdateFailed()
     }
   }
@@ -229,7 +229,7 @@ export class Orders extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.OrderItemUpdateFailed()
     }
   }
@@ -251,7 +251,7 @@ export class Orders extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.IncomingOrdersFetchFailed()
     }
   }
@@ -273,7 +273,7 @@ export class Orders extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.OutgoingOrdersFetchFailed()
     }
   }
@@ -290,7 +290,7 @@ export class Orders extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.OrderSuggestionsFetchFailed()
     }
   }
@@ -306,7 +306,7 @@ export class Orders extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.HistoricOrderItemsFetchFailed()
     }
   }
@@ -324,7 +324,7 @@ export class Orders extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.BookStockFailed()
     }
   }
@@ -341,7 +341,7 @@ export class Orders extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.OpenOrderFetchFailed()
     }
   }

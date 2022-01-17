@@ -78,8 +78,8 @@ export class AuditActions {
         metadata: { cursor: response.data.cursor },
         next
       }
-    } catch (err: any) {
-      throw new errors.AuditActionsFetchAllFailed()
+    } catch (error: any) {
+      throw new errors.AuditActionsFetchAllFailed(error.message, { error })
     }
   }
 
@@ -95,8 +95,8 @@ export class AuditActions {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new errors.AuditActionsGetMetaFailed()
+    } catch (error: any) {
+      throw new errors.AuditActionsGetMetaFailed(error.message, { error })
     }
   }
 
@@ -113,8 +113,8 @@ export class AuditActions {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new errors.AuditActionsFetchOneFailed()
+    } catch (error: any) {
+      throw new errors.AuditActionsFetchOneFailed(error.message, { error })
     }
   }
 
@@ -127,8 +127,8 @@ export class AuditActions {
       return {
         msg: response.data.msg
       }
-    } catch (err: any) {
-      throw new errors.AuditActionsCreateFailed()
+    } catch (error: any) {
+      throw new errors.AuditActionsCreateFailed(error.message, { error })
     }
   }
 
@@ -142,8 +142,8 @@ export class AuditActions {
       return {
         data: response.data.results
       }
-    } catch (err: any) {
-      throw new errors.AuditActionsTypesFetchFailed()
+    } catch (error: any) {
+      throw new errors.AuditActionsTypesFetchFailed(error.message, { error })
     }
   }
 }

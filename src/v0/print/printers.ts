@@ -47,7 +47,7 @@ export class Printers {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (e) {
+    } catch (error: any) {
       throw new errors.PrintersFetchFailed()
     }
   }
@@ -65,7 +65,7 @@ export class Printers {
         metadata: { count: response.data.count },
         msg: response.data.msg
       }
-    } catch (e) {
+    } catch (error: any) {
       throw new errors.PrinterFetchFailed()
     }
   }
@@ -82,7 +82,7 @@ export class Printers {
         data: response.data.results[0] as Printer,
         metadata: { count: response.data.count }
       }
-    } catch (e) {
+    } catch (error: any) {
       throw new errors.PrinterCreateFailed()
     }
   }
@@ -99,7 +99,7 @@ export class Printers {
         data: response.data.results[0] as Printer,
         metadata: { count: response.data.count }
       }
-    } catch (e) {
+    } catch (error: any) {
       throw new errors.PrinterUpdateFailed()
     }
   }
@@ -115,7 +115,7 @@ export class Printers {
       return {
         msg: response.data.msg
       }
-    } catch (e) {
+    } catch (error: any) {
       throw new errors.PrinterDeleteFailed()
     }
   }

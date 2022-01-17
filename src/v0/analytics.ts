@@ -172,7 +172,7 @@ export class Analytics {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new RevenuesFetchFailed(undefined, { error })
+      throw new RevenuesFetchFailed(error.message, { error })
     }
   }
 
@@ -189,7 +189,7 @@ export class Analytics {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new RevenuesFetchFailed(undefined, { error })
+      throw new RevenuesFetchFailed(error.message, { error })
     }
   }
 
@@ -207,7 +207,7 @@ export class Analytics {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new RevenuesFetchFailed(undefined, { error })
+      throw new RevenuesFetchFailed(error.message, { error })
     }
   }
 
@@ -224,7 +224,7 @@ export class Analytics {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new RevenuesFetchFailed(undefined, { error })
+      throw new RevenuesFetchFailed(error.message, { error })
     }
   }
 
@@ -244,7 +244,7 @@ export class Analytics {
         }
       }
     } catch (error: any) {
-      throw new StatisticsProductFetchFailed(undefined, { error })
+      throw new StatisticsProductFetchFailed(error.message, { error })
     }
   }
 
@@ -265,7 +265,7 @@ export class Analytics {
         }
       }
     } catch (error: any) {
-      throw new StatisticsProductChildrenFetchFailed(undefined, { error })
+      throw new StatisticsProductChildrenFetchFailed(error.message, { error })
     }
   }
 
@@ -282,7 +282,7 @@ export class Analytics {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new StaffOverviewFetchFailed(undefined, { error })
+      throw new StaffOverviewFetchFailed(error.message, { error })
     }
   }
 
@@ -299,7 +299,7 @@ export class Analytics {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ProductGroupsStaffReportFetchFailed(undefined, { error })
+      throw new ProductGroupsStaffReportFetchFailed(error.message, { error })
     }
   }
 
@@ -316,7 +316,7 @@ export class Analytics {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ProductGroupsReportFetchFailed(undefined, { error })
+      throw new ProductGroupsReportFetchFailed(error.message, { error })
     }
   }
 
@@ -333,7 +333,7 @@ export class Analytics {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new RefundsReportFetchFailed(undefined, { error })
+      throw new RefundsReportFetchFailed(error.message, { error })
     }
   }
 
@@ -350,7 +350,7 @@ export class Analytics {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new VouchersReportFetchFailed(undefined, { error })
+      throw new VouchersReportFetchFailed(error.message, { error })
     }
   }
 
@@ -367,7 +367,7 @@ export class Analytics {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ProductsReportFetchFailed(undefined, { error })
+      throw new ProductsReportFetchFailed(error.message, { error })
     }
   }
 
@@ -384,7 +384,7 @@ export class Analytics {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new PaymentsReportFetchFailed(undefined, { error })
+      throw new PaymentsReportFetchFailed(error.message, { error })
     }
   }
 
@@ -401,7 +401,7 @@ export class Analytics {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new TopPaymentsReportFetchFailed(undefined, { error })
+      throw new TopPaymentsReportFetchFailed(error.message, { error })
     }
   }
 
@@ -423,7 +423,7 @@ export class Analytics {
         }
       }
     } catch (error: any) {
-      throw new SimpleSalesCartItemsReportFetchFailed(undefined, { error })
+      throw new SimpleSalesCartItemsReportFetchFailed(error.message, { error })
     }
   }
 
@@ -441,7 +441,7 @@ export class Analytics {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ReportsCustomerCustomersFailed(undefined, { error })
+      throw new ReportsCustomerCustomersFailed(error.message, { error })
     }
   }
 
@@ -459,7 +459,7 @@ export class Analytics {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ReportsCustomerTransactionsFailed(undefined, { error })
+      throw new ReportsCustomerTransactionsFailed(error.message, { error })
     }
   }
 
@@ -477,7 +477,7 @@ export class Analytics {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ReportsCustomerOverviewFailed(undefined, { error })
+      throw new ReportsCustomerOverviewFailed(error.message, { error })
     }
   }
 
@@ -496,7 +496,7 @@ export class Analytics {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new ReportsStocksFetchFailed(undefined, { error })
+      throw new ReportsStocksFetchFailed(error.message, { error })
     }
   }
 
@@ -513,7 +513,7 @@ export class Analytics {
         }
       }
     } catch (error: any) {
-      throw new ReportsProductGroupsFetchFailed(undefined, { error })
+      throw new ReportsProductGroupsFetchFailed(error.message, { error })
     }
   }
 
@@ -530,7 +530,7 @@ export class Analytics {
         }
       }
     } catch (error: any) {
-      throw new ReportsProductGroupsFiltersFetchFailed(undefined, { error })
+      throw new ReportsProductGroupsFiltersFetchFailed(error.message, { error })
     }
   }
 

@@ -107,7 +107,7 @@ export class Branches extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new BranchesFetchFailed(undefined, { error })
+      throw new BranchesFetchFailed(error.message, { error })
     }
   }
 
@@ -123,7 +123,7 @@ export class Branches extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new BranchFetchFailed(undefined, { error })
+      throw new BranchFetchFailed(error.message, { error })
     }
   }
 
@@ -151,7 +151,7 @@ export class Branches extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new BranchCreationFailed(undefined, { error })
+      throw new BranchCreationFailed(error.message, { error })
     }
   }
 
@@ -169,7 +169,7 @@ export class Branches extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new BranchesCountFailed(undefined, { error })
+      throw new BranchesCountFailed(error.message, { error })
     }
   }
 
@@ -182,8 +182,8 @@ export class Branches extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (err: any) {
-      throw new BranchDeleteFailed(safeGet(err, 'response.data.msg'))
+    } catch (error: any) {
+      throw new BranchDeleteFailed(error.message, { error })
     }
   }
 
@@ -210,7 +210,7 @@ export class Branches extends ThBaseHandler {
           name: error.response.data.name
         })
       }
-      throw new ExternalCustomIdGetUniqueFailed(undefined, { error })
+      throw new ExternalCustomIdGetUniqueFailed(error.message, { error })
     }
   }
 
@@ -234,7 +234,7 @@ export class Branches extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new BranchesSearchFailed(undefined, { error })
+      throw new BranchesSearchFailed(error.message, { error })
     }
   }
 }

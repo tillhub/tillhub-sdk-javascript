@@ -58,7 +58,7 @@ export class Transactions {
         data: response.data.results
       }
     } catch (error: any) {
-      throw new TransactionsGetImagesFailed(undefined, { error })
+      throw new TransactionsGetImagesFailed(error.message, { error })
     }
   }
 
@@ -75,7 +75,7 @@ export class Transactions {
         data: response.data.results
       }
     } catch (error: any) {
-      throw new TransactionsImageCreateFailed(undefined, { error })
+      throw new TransactionsImageCreateFailed(error.message, { error })
     }
   }
 }

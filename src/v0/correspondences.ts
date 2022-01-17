@@ -92,7 +92,7 @@ export class Correspondences extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new CorrespondencesFetchFailed(undefined, { error })
+      throw new CorrespondencesFetchFailed(error.message, { error })
     }
   }
 
@@ -110,7 +110,7 @@ export class Correspondences extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new CorrespondenceFetchFailed(undefined, { error })
+      throw new CorrespondenceFetchFailed(error.message, { error })
     }
   }
 
@@ -124,7 +124,7 @@ export class Correspondences extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new CorrespondencePutFailed(undefined, { error })
+      throw new CorrespondencePutFailed(error.message, { error })
     }
   }
 
@@ -138,7 +138,7 @@ export class Correspondences extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new CorrespondenceCreationFailed(undefined, { error })
+      throw new CorrespondenceCreationFailed(error.message, { error })
     }
   }
 }

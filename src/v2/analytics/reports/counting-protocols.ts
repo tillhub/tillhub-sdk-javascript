@@ -139,8 +139,8 @@ export class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
         },
         next: nextFn
       }
-    } catch (err: any) {
-      throw new AnalyticsReportsCountingProtocolsFetchFailed(undefined, { error: err })
+    } catch (error: any) {
+      throw new AnalyticsReportsCountingProtocolsFetchFailed(error.message, { error })
     }
   }
 
@@ -152,8 +152,8 @@ export class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
       const uri = localUriHelper.generateBaseUri('/reports/cashier_counting_protocols/overview')
       const result = await this.handleExport(uri, query)
       return result
-    } catch (err: any) {
-      throw new AnalyticsReportsCountingProtocolsExportFetchError(undefined, { error: err })
+    } catch (error: any) {
+      throw new AnalyticsReportsCountingProtocolsExportFetchError(error.message, { error })
     }
   }
 }

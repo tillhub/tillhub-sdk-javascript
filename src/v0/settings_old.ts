@@ -87,7 +87,7 @@ export class LegacySettings {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new LegacySettingsFetchFailed(undefined, { error })
+      throw new LegacySettingsFetchFailed(error.message, { error })
     }
   }
 
@@ -105,7 +105,7 @@ export class LegacySettings {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new LegacySettingFetchFailed(undefined, { error })
+      throw new LegacySettingFetchFailed(error.message, { error })
     }
   }
 
@@ -119,7 +119,7 @@ export class LegacySettings {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new LegacySettingUpdateFailed(undefined, { error })
+      throw new LegacySettingUpdateFailed(error.message, { error })
     }
   }
 }

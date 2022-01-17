@@ -111,7 +111,7 @@ export class Warehouses extends ThBaseHandler {
         metadata: { cursor: response.data.cursor }
       }
     } catch (error: any) {
-      throw new WarehousesFetchFailed(undefined, { error })
+      throw new WarehousesFetchFailed(error.message, { error })
     }
   }
 
@@ -129,7 +129,7 @@ export class Warehouses extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new WarehouseFetchOneFailed(undefined, { error })
+      throw new WarehouseFetchOneFailed(error.message, { error })
     }
   }
 
@@ -148,7 +148,7 @@ export class Warehouses extends ThBaseHandler {
         errors: response.data.errors || []
       }
     } catch (error: any) {
-      throw new WarehouseCreateFailed(undefined, { error })
+      throw new WarehouseCreateFailed(error.message, { error })
     }
   }
 
@@ -167,7 +167,7 @@ export class Warehouses extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new WarehousePutFailed(undefined, { error })
+      throw new WarehousePutFailed(error.message, { error })
     }
   }
 
@@ -182,7 +182,7 @@ export class Warehouses extends ThBaseHandler {
 
       return { msg: response.data.msg }
     } catch (error: any) {
-      throw new WarehouseDeleteFailed(undefined, { error })
+      throw new WarehouseDeleteFailed(error.message, { error })
     }
   }
 }

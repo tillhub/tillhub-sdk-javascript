@@ -95,8 +95,8 @@ export class AnalyticsReportsTransactionsItems extends ThAnalyticsBaseHandler {
         },
         next: nextFn
       }
-    } catch (err: any) {
-      throw new AnalyticsReportsTransactionsItemsFetchError(undefined, { error: err })
+    } catch (error: any) {
+      throw new AnalyticsReportsTransactionsItemsFetchError(error.message, { error })
     }
   }
 
@@ -116,8 +116,8 @@ export class AnalyticsReportsTransactionsItems extends ThAnalyticsBaseHandler {
         data: response.data.results,
         metadata: {}
       }
-    } catch (err: any) {
-      throw new AnalyticsReportsTransactionsItemsExportError(undefined, { error: err })
+    } catch (error: any) {
+      throw new AnalyticsReportsTransactionsItemsExportError(error.message, { error })
     }
   }
 }

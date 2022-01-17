@@ -66,8 +66,8 @@ export class AuditLogs {
         metadata: { cursor: response.data.cursor },
         next
       }
-    } catch (err: any) {
-      throw new AuditLogsFetchAllFailed()
+    } catch (error: any) {
+      throw new AuditLogsFetchAllFailed(error.message, { error })
     }
   }
 
@@ -83,8 +83,8 @@ export class AuditLogs {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new AuditLogsGetMetaFailed()
+    } catch (error: any) {
+      throw new AuditLogsGetMetaFailed(error.message, { error })
     }
   }
 
@@ -101,8 +101,8 @@ export class AuditLogs {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
-      throw new AuditLogsFetchOneFailed()
+    } catch (error: any) {
+      throw new AuditLogsFetchOneFailed(error.message, { error })
     }
   }
 }

@@ -66,7 +66,7 @@ export class StaffPermissionsTemplates extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new StaffPermissionsTemplatesCreationFailed(undefined, { error })
+      throw new StaffPermissionsTemplatesCreationFailed(error.message, { error })
     }
   }
 
@@ -89,7 +89,7 @@ export class StaffPermissionsTemplates extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new StaffPermissionsTemplatesFetchFailed(undefined, { error })
+      throw new StaffPermissionsTemplatesFetchFailed(error.message, { error })
     }
   }
 
@@ -113,7 +113,7 @@ export class StaffPermissionsTemplates extends ThBaseHandler {
         metadata: { count: 1 }
       }
     } catch (error: any) {
-      throw new StaffPermissionsTemplatesFetchOneFailed(undefined, { error })
+      throw new StaffPermissionsTemplatesFetchOneFailed(error.message, { error })
     }
   }
 
@@ -136,7 +136,7 @@ export class StaffPermissionsTemplates extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new StaffPermissionsTemplatesUpdateFailed(undefined, { error })
+      throw new StaffPermissionsTemplatesUpdateFailed(error.message, { error })
     }
   }
 
@@ -154,8 +154,8 @@ export class StaffPermissionsTemplates extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (err: any) {
-      throw new StaffPermissionsTemplatesDeleteFailed()
+    } catch (error: any) {
+      throw new StaffPermissionsTemplatesDeleteFailed(error.message, { error })
     }
   }
 }

@@ -62,7 +62,7 @@ export class Balances {
         metadata: { count: response.data.count },
         next
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.ReportsBalancesFetchAllFailed()
     }
   }
@@ -85,7 +85,7 @@ export class Balances {
         data: response.data.results[0],
         metadata: { count: response.data.count }
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.ReportsBalancesMetaFailed()
     }
   }
@@ -106,7 +106,7 @@ export class Balances {
         metadata: { count: response.data.count },
         next
       }
-    } catch (err: any) {
+    } catch (error: any) {
       throw new errors.ReportsBalancesFetchOneFailed()
     }
   }

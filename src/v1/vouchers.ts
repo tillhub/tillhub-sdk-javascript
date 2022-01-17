@@ -70,7 +70,7 @@ export class Vouchers extends VoucherV0 {
         next
       }
     } catch (error: any) {
-      throw new VouchersFetchFailed(undefined, { error })
+      throw new VouchersFetchFailed(error.message, { error })
     }
   }
 }

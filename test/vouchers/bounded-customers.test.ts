@@ -168,7 +168,7 @@ describe('v0: Vouchers: Voucher Bounded Customer', () => {
     try {
       await th.vouchers().getBoundedCustomers(voucherId)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(VouchersBoundedCustomerGetFailed.name)
     }
   })
@@ -200,7 +200,7 @@ describe('v0: Vouchers: Voucher Bounded Customer', () => {
     try {
       await th.vouchers().createBoundedCustomers(voucherId, customers)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(VouchersBoundedCustomerCreateFailed.name)
     }
   })
@@ -232,7 +232,7 @@ describe('v0: Vouchers: Voucher Bounded Customer', () => {
     try {
       await th.vouchers().updateBoundedCustomers(voucherId, customers)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(VouchersBoundedCustomerPutFailed.name)
     }
   })

@@ -54,7 +54,7 @@ export class Jobs {
         data: response.data.results,
         metadata: { count: response.data.count }
       }
-    } catch (e) {
+    } catch (error: any) {
       throw new errors.PrintJobsFetchFailed()
     }
   }
@@ -72,7 +72,7 @@ export class Jobs {
         metadata: { count: response.data.count },
         msg: response.data.msg
       }
-    } catch (e) {
+    } catch (error: any) {
       throw new errors.PrintJobFetchFailed()
     }
   }
@@ -91,7 +91,7 @@ export class Jobs {
         data: response.data.results[0] as PrintJob,
         metadata: { count: response.data.count }
       }
-    } catch (e) {
+    } catch (error: any) {
       throw new errors.PrintJobCreateFailed()
     }
   }
@@ -108,7 +108,7 @@ export class Jobs {
         data: response.data.results[0] as PrintJob,
         metadata: { count: response.data.count }
       }
-    } catch (e) {
+    } catch (error: any) {
       throw new errors.PrintJobUpdateFailed()
     }
   }
@@ -124,7 +124,7 @@ export class Jobs {
       return {
         msg: response.data.msg
       }
-    } catch (e) {
+    } catch (error: any) {
       throw new errors.PrintJobDeleteFailed()
     }
   }
@@ -140,7 +140,7 @@ export class Jobs {
         data: response.data.results[0],
         msg: response.data.msg
       }
-    } catch (e) {
+    } catch (error: any) {
       throw new errors.PrintJobDataFetchFailed()
     }
   }

@@ -48,8 +48,8 @@ export class Customers extends ThBaseHandler {
         metadata: { cursor: response.data.cursor },
         next
       }
-    } catch (err: any) {
-      throw new CustomersFetchFailed(undefined, { error: err })
+    } catch (error: any) {
+      throw new CustomersFetchFailed(error.message, { error })
     }
   }
 }

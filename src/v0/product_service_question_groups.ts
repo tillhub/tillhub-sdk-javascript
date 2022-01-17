@@ -84,7 +84,7 @@ export class ProductServiceQuestionGroups extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new errors.ProductServiceQuestionGroupsFetchAllFailed(undefined, { error })
+      throw new errors.ProductServiceQuestionGroupsFetchAllFailed(error.message, { error })
     }
   }
 
@@ -104,7 +104,7 @@ export class ProductServiceQuestionGroups extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.ProductServiceQuestionGroupsFetchOneFailed(undefined, { error })
+      throw new errors.ProductServiceQuestionGroupsFetchOneFailed(error.message, { error })
     }
   }
 
@@ -120,7 +120,7 @@ export class ProductServiceQuestionGroups extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.ProductServiceQuestionGroupsGetMetaFailed(undefined, { error })
+      throw new errors.ProductServiceQuestionGroupsGetMetaFailed(error.message, { error })
     }
   }
 
@@ -136,7 +136,7 @@ export class ProductServiceQuestionGroups extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.ProductServiceQuestionGroupsCreationFailed(undefined, { error })
+      throw new errors.ProductServiceQuestionGroupsCreationFailed(error.message, { error })
     }
   }
 
@@ -154,7 +154,7 @@ export class ProductServiceQuestionGroups extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.ProductServiceQuestionGroupsPutFailed(undefined, { error })
+      throw new errors.ProductServiceQuestionGroupsPutFailed(error.message, { error })
     }
   }
 }

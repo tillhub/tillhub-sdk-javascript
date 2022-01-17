@@ -85,7 +85,7 @@ export class PricebookEntries {
         next
       }
     } catch (error: any) {
-      throw new PricebookEntriesFetchFailed(undefined, { error })
+      throw new PricebookEntriesFetchFailed(error.message, { error })
     }
   }
 
@@ -101,7 +101,7 @@ export class PricebookEntries {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new PricebookEntriesMetaFailed(undefined, { error })
+      throw new PricebookEntriesMetaFailed(error.message, { error })
     }
   }
 
@@ -119,7 +119,7 @@ export class PricebookEntries {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new PricebookEntryFetchFailed(undefined, { error })
+      throw new PricebookEntryFetchFailed(error.message, { error })
     }
   }
 
@@ -133,7 +133,7 @@ export class PricebookEntries {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new PricebookEntryPutFailed(undefined, { error })
+      throw new PricebookEntryPutFailed(error.message, { error })
     }
   }
 
@@ -147,7 +147,7 @@ export class PricebookEntries {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new PricebookEntryCreationFailed(undefined, { error })
+      throw new PricebookEntryCreationFailed(error.message, { error })
     }
   }
 
@@ -160,8 +160,8 @@ export class PricebookEntries {
       return {
         msg: response.data.msg
       }
-    } catch (err: any) {
-      throw new PricebookEntryDeleteFailed()
+    } catch (error: any) {
+      throw new PricebookEntryDeleteFailed(error.message, { error })
     }
   }
 }

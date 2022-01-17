@@ -112,7 +112,7 @@ export class Functions extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new FunctionsFetchFailed(undefined, { error })
+      throw new FunctionsFetchFailed(error.message, { error })
     }
   }
 
@@ -130,7 +130,7 @@ export class Functions extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new FunctionFetchFailed(undefined, { error })
+      throw new FunctionFetchFailed(error.message, { error })
     }
   }
 
@@ -144,7 +144,7 @@ export class Functions extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new FunctionPutFailed(undefined, { error })
+      throw new FunctionPutFailed(error.message, { error })
     }
   }
 
@@ -158,7 +158,7 @@ export class Functions extends ThBaseHandler {
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new FunctionCreationFailed(undefined, { error })
+      throw new FunctionCreationFailed(error.message, { error })
     }
   }
 
@@ -171,8 +171,8 @@ export class Functions extends ThBaseHandler {
       return {
         msg: response.data.msg
       }
-    } catch (err: any) {
-      throw new FunctionDeleteFailed()
+    } catch (error: any) {
+      throw new FunctionDeleteFailed(error.message, { error })
     }
   }
 }

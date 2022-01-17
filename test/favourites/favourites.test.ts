@@ -187,7 +187,7 @@ describe('v0: Favourites', () => {
     try {
       await th.favourites().getAll()
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(FavouritesFetchFailed.name)
     }
   })
@@ -206,7 +206,7 @@ describe('v0: Favourites', () => {
     try {
       await th.favourites().get(favouriteId)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(FavouriteFetchFailed.name)
     }
   })
@@ -225,7 +225,7 @@ describe('v0: Favourites', () => {
     try {
       await th.favourites().create(mockFavourite)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(FavouriteCreateFailed.name)
     }
   })
@@ -243,7 +243,7 @@ describe('v0: Favourites', () => {
     try {
       await th.favourites().update(favouriteId, mockFavourite)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(FavouriteUpdateFailed.name)
     }
   })
@@ -262,7 +262,7 @@ describe('v0: Favourites', () => {
     try {
       await th.favourites().delete(favouriteId)
       fail('should throw an error')
-    } catch (e) {
+    } catch (e: any) {
       expect(e.name).toEqual(FavouriteDeleteFailed.name)
     }
   })
