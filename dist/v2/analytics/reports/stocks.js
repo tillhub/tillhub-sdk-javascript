@@ -38,9 +38,9 @@ var AnalyticsReportsStocks = (function (_super) {
                         }
                         data = (_b = (_a = d === null || d === void 0 ? void 0 : d.find(function (item) { return item.metric.job === 'reports_stocks'; })) === null || _a === void 0 ? void 0 : _a.values) !== null && _b !== void 0 ? _b : [];
                         count = (_d = (_c = d === null || d === void 0 ? void 0 : d.find(function (item) {
-                            return item.metric.job === 'reports_stocks_v2_overview_filtered_meta';
+                            return item.metric.job === 'reports_stocks_filtered_meta';
                         })) === null || _c === void 0 ? void 0 : _c.values[0]) !== null && _d !== void 0 ? _d : {};
-                        totalCount = (_f = (_e = d === null || d === void 0 ? void 0 : d.find(function (item) { return item.metric.job === 'reports_stocks_v2_overview_meta'; })) === null || _e === void 0 ? void 0 : _e.values[0]) !== null && _f !== void 0 ? _f : {};
+                        totalCount = (_f = (_e = d === null || d === void 0 ? void 0 : d.find(function (item) { return item.metric.job === 'reports_stocks_meta'; })) === null || _e === void 0 ? void 0 : _e.values[0]) !== null && _f !== void 0 ? _f : {};
                         if (next_1) {
                             nextFn = function () {
                                 return _this.getAll({ uri: next_1 });

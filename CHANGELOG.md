@@ -1,3 +1,10 @@
+## [4.37.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.37.1...v4.37.2) (2022-01-18)
+
+
+### Bug Fixes
+
+* **reports/v2/stocks:** fix job names ([701205c](https://github.com/tillhub/tillhub-sdk-javascript/commit/701205cd923d7fa2c23be0abc70f86eceb69ec9d))
+
 ## [4.37.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.37.0...v4.37.1) (2022-01-18)
 
 
