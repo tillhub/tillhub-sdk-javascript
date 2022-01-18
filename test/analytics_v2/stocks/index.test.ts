@@ -54,7 +54,7 @@ describe('v2: AnalyticsReportsStocks', () => {
                 },
                 {
                   metric: {
-                    job: 'reports_stocks_v2_overview_meta',
+                    job: 'reports_stocks_meta',
                     user: uuid
                   },
                   count: 1,
@@ -62,7 +62,7 @@ describe('v2: AnalyticsReportsStocks', () => {
                 },
                 {
                   metric: {
-                    job: 'reports_stocks_v2_overview_filtered_meta',
+                    job: 'reports_stocks_filtered_meta',
                     user: uuid
                   },
                   count: 1,

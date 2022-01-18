@@ -60,11 +60,11 @@ export class AnalyticsReportsStocks extends ThAnalyticsBaseHandler {
 
       const count = d?.find(
         (item: ThAnalyticsBaseResultItem) =>
-          item.metric.job === 'reports_stocks_v2_overview_filtered_meta'
+          item.metric.job === 'reports_stocks_filtered_meta'
       )?.values[0] ?? {}
 
       const totalCount = d?.find(
-        (item: ThAnalyticsBaseResultItem) => item.metric.job === 'reports_stocks_v2_overview_meta'
+        (item: ThAnalyticsBaseResultItem) => item.metric.job === 'reports_stocks_meta'
       )?.values[0] ?? {}
 
       if (next) {
