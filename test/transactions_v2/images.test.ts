@@ -1,7 +1,7 @@
 import { TransactionsImageCreateFailed, TransactionsGetImagesFailed } from '../../src/v2/transactions'
 import * as dotenv from 'dotenv'
 import axios from 'axios'
-import faker from 'faker'
+import faker from '@faker-js/faker'
 import MockAdapter from 'axios-mock-adapter'
 import { v2 } from '../../src/tillhub-js'
 import { initThInstance } from '../util'

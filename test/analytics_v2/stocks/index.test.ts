@@ -4,7 +4,7 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import { v2 } from '../../../src/tillhub-js'
 import { initThInstance } from '../../util'
-import faker from 'faker'
+import faker from '@faker-js/faker'
 dotenv.config()
 
 const legacyId = '4564'

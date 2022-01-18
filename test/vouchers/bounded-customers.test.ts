@@ -10,7 +10,7 @@ import {
 
 import { v0 } from '../../src/tillhub-js'
 import { initThInstance } from '../util'
-import faker from 'faker'
+import faker from '@faker-js/faker'
 
 const mock = new MockAdapter(axios)
 afterEach(() => {

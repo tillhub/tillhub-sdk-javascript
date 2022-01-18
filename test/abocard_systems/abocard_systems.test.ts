@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
-import faker from 'faker'
+import faker from '@faker-js/faker'
 import { initThInstance } from '../util'
 import {
   AbocardSystems,

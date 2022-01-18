@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv'
-import faker from 'faker'
+import faker from '@faker-js/faker'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import { v0 } from '../../src/tillhub-js'
