@@ -11,7 +11,7 @@ var CashBook = (function () {
     }
     CashBook.prototype.getAll = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_1;
+            var base, uri, response, error_1;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -26,8 +26,8 @@ var CashBook = (function () {
                                 metadata: { count: response.data.results[0].count }
                             }];
                     case 2:
-                        err_1 = _a.sent();
-                        throw new CashBookReportFetchFailed();
+                        error_1 = _a.sent();
+                        throw new CashBookReportFetchFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });

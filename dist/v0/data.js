@@ -15,7 +15,7 @@ var Data = (function () {
     }
     Data.prototype.replace = function (dataId, payload) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_1;
+            var uri, response, error_1;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -32,8 +32,8 @@ var Data = (function () {
                                 data: response.data.results
                             }];
                     case 3:
-                        err_1 = _a.sent();
-                        throw new DataReplaceFailed();
+                        error_1 = _a.sent();
+                        throw new DataReplaceFailed(error_1.message, { error: error_1 });
                     case 4: return [2];
                 }
             });
@@ -41,7 +41,7 @@ var Data = (function () {
     };
     Data.prototype.create = function (payload) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_2;
+            var uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -59,8 +59,8 @@ var Data = (function () {
                                 data: response.data.results
                             }];
                     case 3:
-                        err_2 = _a.sent();
-                        throw new DataCreateFailed();
+                        error_2 = _a.sent();
+                        throw new DataCreateFailed(error_2.message, { error: error_2 });
                     case 4: return [2];
                 }
             });
@@ -71,9 +71,9 @@ var Data = (function () {
 exports.Data = Data;
 var DataCreateFailed = (function (_super) {
     tslib_1.__extends(DataCreateFailed, _super);
-    function DataCreateFailed(message) {
+    function DataCreateFailed(message, properties) {
         if (message === void 0) { message = 'Could not create data'; }
-        var _this = _super.call(this, message) || this;
+        var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'DataCreateFailed';
         Object.setPrototypeOf(_this, DataCreateFailed.prototype);
@@ -84,9 +84,9 @@ var DataCreateFailed = (function (_super) {
 exports.DataCreateFailed = DataCreateFailed;
 var DataReplaceFailed = (function (_super) {
     tslib_1.__extends(DataReplaceFailed, _super);
-    function DataReplaceFailed(message) {
+    function DataReplaceFailed(message, properties) {
         if (message === void 0) { message = 'Could not replace data'; }
-        var _this = _super.call(this, message) || this;
+        var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'DataReplaceFailed';
         Object.setPrototypeOf(_this, DataReplaceFailed.prototype);

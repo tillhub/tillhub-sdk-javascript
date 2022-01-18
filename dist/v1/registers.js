@@ -24,7 +24,7 @@ var Registers = (function (_super) {
     Registers.prototype.getAll = function (q) {
         var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var next, base, uri, response_1, err_1;
+            var next, base, uri, response_1, error_1;
             var _this = this;
             return tslib_1.__generator(this, function (_b) {
                 switch (_b.label) {
@@ -44,7 +44,7 @@ var Registers = (function (_super) {
                                 next: next
                             }];
                     case 2:
-                        err_1 = _b.sent();
+                        error_1 = _b.sent();
                         throw new errors.RegistersFetchFailed();
                     case 3: return [2];
                 }
@@ -53,7 +53,7 @@ var Registers = (function (_super) {
     };
     Registers.prototype.get = function (registerId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_1;
+            var uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -68,8 +68,8 @@ var Registers = (function (_super) {
                                 data: response.data.results[0]
                             }];
                     case 3:
-                        error_1 = _a.sent();
-                        throw new errors.RegisterFetchFailed(undefined, { error: error_1 });
+                        error_2 = _a.sent();
+                        throw new errors.RegisterFetchFailed(error_2.message, { error: error_2 });
                     case 4: return [2];
                 }
             });
@@ -77,7 +77,7 @@ var Registers = (function (_super) {
     };
     Registers.prototype.notify = function (registerId, notification) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_2;
+            var uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -90,8 +90,8 @@ var Registers = (function (_super) {
                                 data: response.data.msg
                             }];
                     case 2:
-                        error_2 = _a.sent();
-                        throw new errors.RegisterNotificationCreateFailed(undefined, { error: error_2 });
+                        error_3 = _a.sent();
+                        throw new errors.RegisterNotificationCreateFailed(error_3.message, { error: error_3 });
                     case 3: return [2];
                 }
             });
@@ -99,7 +99,7 @@ var Registers = (function (_super) {
     };
     Registers.prototype.updateDeviceConfiguration = function (registerId, deviceConfiguration) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_3;
+            var uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -112,9 +112,9 @@ var Registers = (function (_super) {
                                 data: response.data.results[0]
                             }];
                     case 2:
-                        error_3 = _a.sent();
-                        console.warn(error_3);
-                        throw new errors.RegisterDeviceConfigurationPutFailed(undefined, { error: error_3 });
+                        error_4 = _a.sent();
+                        console.warn(error_4);
+                        throw new errors.RegisterDeviceConfigurationPutFailed(error_4.message, { error: error_4 });
                     case 3: return [2];
                 }
             });
@@ -122,7 +122,7 @@ var Registers = (function (_super) {
     };
     Registers.prototype.put = function (registerId, register) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_4;
+            var uri, response, error_5;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -138,8 +138,8 @@ var Registers = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_4 = _a.sent();
-                        throw new errors.RegisterPutFailed(undefined, { error: error_4 });
+                        error_5 = _a.sent();
+                        throw new errors.RegisterPutFailed(error_5.message, { error: error_5 });
                     case 4: return [2];
                 }
             });
@@ -147,7 +147,7 @@ var Registers = (function (_super) {
     };
     Registers.prototype.search = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, base, response, error_5;
+            var uri, base, response, error_6;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -175,8 +175,8 @@ var Registers = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_5 = _a.sent();
-                        throw new errors.RegistersSearchFailed(undefined, { error: error_5 });
+                        error_6 = _a.sent();
+                        throw new errors.RegistersSearchFailed(error_6.message, { error: error_6 });
                     case 4: return [2];
                 }
             });

@@ -46,7 +46,7 @@ var ProductServiceQuestionGroups = (function (_super) {
                             }];
                     case 2:
                         error_1 = _b.sent();
-                        throw new errors.ProductServiceQuestionGroupsFetchAllFailed(undefined, { error: error_1 });
+                        throw new errors.ProductServiceQuestionGroupsFetchAllFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -75,7 +75,7 @@ var ProductServiceQuestionGroups = (function (_super) {
                             }];
                     case 2:
                         error_2 = _a.sent();
-                        throw new errors.ProductServiceQuestionGroupsFetchOneFailed(undefined, { error: error_2 });
+                        throw new errors.ProductServiceQuestionGroupsFetchOneFailed(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }
             });
@@ -100,7 +100,7 @@ var ProductServiceQuestionGroups = (function (_super) {
                             }];
                     case 2:
                         error_3 = _a.sent();
-                        throw new errors.ProductServiceQuestionGroupsGetMetaFailed(undefined, { error: error_3 });
+                        throw new errors.ProductServiceQuestionGroupsGetMetaFailed(error_3.message, { error: error_3 });
                     case 3: return [2];
                 }
             });
@@ -123,7 +123,7 @@ var ProductServiceQuestionGroups = (function (_super) {
                             }];
                     case 2:
                         error_4 = _a.sent();
-                        throw new errors.ProductServiceQuestionGroupsCreationFailed(undefined, { error: error_4 });
+                        throw new errors.ProductServiceQuestionGroupsCreationFailed(error_4.message, { error: error_4 });
                     case 3: return [2];
                 }
             });
@@ -149,7 +149,7 @@ var ProductServiceQuestionGroups = (function (_super) {
                             }];
                     case 2:
                         error_5 = _a.sent();
-                        throw new errors.ProductServiceQuestionGroupsPutFailed(undefined, { error: error_5 });
+                        throw new errors.ProductServiceQuestionGroupsPutFailed(error_5.message, { error: error_5 });
                     case 3: return [2];
                 }
             });

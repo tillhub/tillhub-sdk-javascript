@@ -46,7 +46,7 @@ var Products = (function (_super) {
                             }];
                     case 3:
                         error_1 = _a.sent();
-                        throw new ProductsCreateFailed(undefined, { error: error_1 });
+                        throw new ProductsCreateFailed(error_1.message, { error: error_1 });
                     case 4: return [2];
                 }
             });
@@ -79,7 +79,7 @@ var Products = (function (_super) {
                             }];
                     case 2:
                         error_2 = _b.sent();
-                        throw new ProductsFetchFailed(undefined, { error: error_2 });
+                        throw new ProductsFetchFailed(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }
             });
@@ -112,7 +112,7 @@ var Products = (function (_super) {
                             }];
                     case 2:
                         error_3 = _b.sent();
-                        throw new ProductsImportFailed(undefined, { error: error_3 });
+                        throw new ProductsImportFailed(error_3.message, { error: error_3 });
                     case 3: return [2];
                 }
             });
@@ -141,7 +141,7 @@ var Products = (function (_super) {
                             }];
                     case 3:
                         error_4 = _a.sent();
-                        throw new ProductFetchFailed(undefined, { error: error_4 });
+                        throw new ProductFetchFailed(error_4.message, { error: error_4 });
                     case 4: return [2];
                 }
             });
@@ -170,7 +170,7 @@ var Products = (function (_super) {
                             }];
                     case 3:
                         error_5 = _a.sent();
-                        throw new ProductDetailsFetchFailed(undefined, { error: error_5 });
+                        throw new ProductDetailsFetchFailed(error_5.message, { error: error_5 });
                     case 4: return [2];
                 }
             });
@@ -199,7 +199,7 @@ var Products = (function (_super) {
                             }];
                     case 3:
                         error_6 = _a.sent();
-                        throw new ProductChildrenDetailsFetchFailed(undefined, { error: error_6 });
+                        throw new ProductChildrenDetailsFetchFailed(error_6.message, { error: error_6 });
                     case 4: return [2];
                 }
             });
@@ -232,7 +232,7 @@ var Products = (function (_super) {
                             }];
                     case 3:
                         error_7 = _a.sent();
-                        throw new ProductsMetaFailed(undefined, { error: error_7 });
+                        throw new ProductsMetaFailed(error_7.message, { error: error_7 });
                     case 4: return [2];
                 }
             });
@@ -260,7 +260,7 @@ var Products = (function (_super) {
                             }];
                     case 3:
                         error_8 = _a.sent();
-                        throw new ProductsUpdateFailed(undefined, { error: error_8 });
+                        throw new ProductsUpdateFailed(error_8.message, { error: error_8 });
                     case 4: return [2];
                 }
             });
@@ -294,7 +294,7 @@ var Products = (function (_super) {
                             }];
                     case 3:
                         error_9 = _a.sent();
-                        throw new ProductsBulkCreateFailed(undefined, { error: error_9 });
+                        throw new ProductsBulkCreateFailed(error_9.message, { error: error_9 });
                     case 4: return [2];
                 }
             });
@@ -322,7 +322,7 @@ var Products = (function (_super) {
                             }];
                     case 3:
                         error_10 = _a.sent();
-                        throw new ProductsBulkEditFailed(undefined, { error: error_10 });
+                        throw new ProductsBulkEditFailed(error_10.message, { error: error_10 });
                     case 4: return [2];
                 }
             });
@@ -350,7 +350,7 @@ var Products = (function (_super) {
                             }];
                     case 3:
                         error_11 = _a.sent();
-                        throw new ProductsCountFailed(undefined, { error: error_11 });
+                        throw new ProductsCountFailed(error_11.message, { error: error_11 });
                     case 4: return [2];
                 }
             });
@@ -376,7 +376,7 @@ var Products = (function (_super) {
                             }];
                     case 2:
                         error_12 = _a.sent();
-                        throw new ProductsDeleteFailed(undefined, { error: error_12 });
+                        throw new ProductsDeleteFailed(error_12.message, { error: error_12 });
                     case 3: return [2];
                 }
             });
@@ -406,7 +406,7 @@ var Products = (function (_super) {
                             }];
                     case 3:
                         error_13 = _a.sent();
-                        throw new ProductsSearchFailed(undefined, { error: error_13 });
+                        throw new ProductsSearchFailed(error_13.message, { error: error_13 });
                     case 4: return [2];
                 }
             });
@@ -414,7 +414,7 @@ var Products = (function (_super) {
     };
     Products.prototype.bookStock = function (requestOptions) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_1;
+            var uri, response, error_14;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -425,16 +425,15 @@ var Products = (function (_super) {
                         return [4, this.http.getClient().post(uri, requestOptions.body)];
                     case 2:
                         response = _a.sent();
-                        if (response.status !== 200) {
+                        if (response.status !== 200)
                             throw new ProductsBookStockFailed();
-                        }
                         return [2, {
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_1 = _a.sent();
-                        throw new ProductsBookStockFailed();
+                        error_14 = _a.sent();
+                        throw new ProductsBookStockFailed(error_14.message, { error: error_14 });
                     case 4: return [2];
                 }
             });
@@ -442,7 +441,7 @@ var Products = (function (_super) {
     };
     Products.prototype.checkBarcode = function (code) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_14;
+            var base, uri, response, error_15;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -465,15 +464,15 @@ var Products = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_14 = _a.sent();
-                        if (error_14.response && error_14.response.status === 409) {
+                        error_15 = _a.sent();
+                        if (error_15.response && error_15.response.status === 409) {
                             throw new BarcodeGetFailed(undefined, {
-                                status: error_14.response.status,
-                                name: error_14.response.data.name,
-                                data: error_14.response.data.results
+                                status: error_15.response.status,
+                                name: error_15.response.data.name,
+                                data: error_15.response.data.results
                             });
                         }
-                        throw new BarcodeGetFailed(undefined, { error: error_14 });
+                        throw new BarcodeGetFailed(error_15.message, { error: error_15 });
                     case 4: return [2];
                 }
             });

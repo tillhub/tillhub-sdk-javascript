@@ -41,7 +41,7 @@ var ProductAddons = (function (_super) {
                             }];
                     case 2:
                         error_1 = _b.sent();
-                        throw new errors.ProductAddonsFetchAllFailed(undefined, { error: error_1 });
+                        throw new errors.ProductAddonsFetchAllFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -68,7 +68,7 @@ var ProductAddons = (function (_super) {
                             }];
                     case 2:
                         error_2 = _a.sent();
-                        throw new errors.ProductAddonFetchOneFailed(undefined, { error: error_2 });
+                        throw new errors.ProductAddonFetchOneFailed(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }
             });
@@ -93,7 +93,7 @@ var ProductAddons = (function (_super) {
                             }];
                     case 2:
                         error_3 = _a.sent();
-                        throw new errors.ProductAddonsGetMetaFailed(undefined, { error: error_3 });
+                        throw new errors.ProductAddonsGetMetaFailed(error_3.message, { error: error_3 });
                     case 3: return [2];
                 }
             });
@@ -116,7 +116,7 @@ var ProductAddons = (function (_super) {
                             }];
                     case 2:
                         error_4 = _a.sent();
-                        throw new errors.ProductAddonCreationFailed(undefined, { error: error_4 });
+                        throw new errors.ProductAddonCreationFailed(error_4.message, { error: error_4 });
                     case 3: return [2];
                 }
             });
@@ -142,7 +142,7 @@ var ProductAddons = (function (_super) {
                             }];
                     case 2:
                         error_5 = _a.sent();
-                        throw new errors.ProductAddonPutFailed(undefined, { error: error_5 });
+                        throw new errors.ProductAddonPutFailed(error_5.message, { error: error_5 });
                     case 3: return [2];
                 }
             });
@@ -150,7 +150,7 @@ var ProductAddons = (function (_super) {
     };
     ProductAddons.prototype.delete = function (productAddonId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_1;
+            var uri, response, error_6;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -167,7 +167,7 @@ var ProductAddons = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        err_1 = _a.sent();
+                        error_6 = _a.sent();
                         throw new errors.ProductAddonDeleteFailed();
                     case 4: return [2];
                 }

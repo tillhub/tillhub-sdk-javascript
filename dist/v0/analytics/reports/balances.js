@@ -12,7 +12,7 @@ var Balances = (function () {
     Balances.prototype.getAll = function (query) {
         var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var next, base, uri, response_1, err_1;
+            var next, base, uri, response_1, error_1;
             var _this = this;
             return tslib_1.__generator(this, function (_b) {
                 switch (_b.label) {
@@ -32,7 +32,7 @@ var Balances = (function () {
                                 next: next
                             }];
                     case 2:
-                        err_1 = _b.sent();
+                        error_1 = _b.sent();
                         throw new errors.ReportsBalancesFetchAllFailed();
                     case 3: return [2];
                 }
@@ -41,7 +41,7 @@ var Balances = (function () {
     };
     Balances.prototype.meta = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_2;
+            var base, uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -62,7 +62,7 @@ var Balances = (function () {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_2 = _a.sent();
+                        error_2 = _a.sent();
                         throw new errors.ReportsBalancesMetaFailed();
                     case 3: return [2];
                 }
@@ -72,7 +72,7 @@ var Balances = (function () {
     Balances.prototype.get = function (requestObject) {
         var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var next, base, uri, response_2, err_3;
+            var next, base, uri, response_2, error_3;
             var _this = this;
             return tslib_1.__generator(this, function (_b) {
                 switch (_b.label) {
@@ -92,7 +92,7 @@ var Balances = (function () {
                                 next: next
                             }];
                     case 2:
-                        err_3 = _b.sent();
+                        error_3 = _b.sent();
                         throw new errors.ReportsBalancesFetchOneFailed();
                     case 3: return [2];
                 }

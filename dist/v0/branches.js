@@ -49,7 +49,7 @@ var Branches = (function (_super) {
                             }];
                     case 2:
                         error_1 = _b.sent();
-                        throw new BranchesFetchFailed(undefined, { error: error_1 });
+                        throw new BranchesFetchFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -78,7 +78,7 @@ var Branches = (function (_super) {
                             }];
                     case 3:
                         error_2 = _a.sent();
-                        throw new BranchFetchFailed(undefined, { error: error_2 });
+                        throw new BranchFetchFailed(error_2.message, { error: error_2 });
                     case 4: return [2];
                 }
             });
@@ -128,7 +128,7 @@ var Branches = (function (_super) {
                             }];
                     case 3:
                         error_4 = _a.sent();
-                        throw new BranchCreationFailed(undefined, { error: error_4 });
+                        throw new BranchCreationFailed(error_4.message, { error: error_4 });
                     case 4: return [2];
                 }
             });
@@ -156,7 +156,7 @@ var Branches = (function (_super) {
                             }];
                     case 3:
                         error_5 = _a.sent();
-                        throw new BranchesCountFailed(undefined, { error: error_5 });
+                        throw new BranchesCountFailed(error_5.message, { error: error_5 });
                     case 4: return [2];
                 }
             });
@@ -164,7 +164,7 @@ var Branches = (function (_super) {
     };
     Branches.prototype.delete = function (branchId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_1;
+            var uri, response, error_6;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -181,8 +181,8 @@ var Branches = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        err_1 = _a.sent();
-                        throw new BranchDeleteFailed(just_safe_get_1.default(err_1, 'response.data.msg'));
+                        error_6 = _a.sent();
+                        throw new BranchDeleteFailed(error_6.message, { error: error_6 });
                     case 4: return [2];
                 }
             });
@@ -190,7 +190,7 @@ var Branches = (function (_super) {
     };
     Branches.prototype.getUniqueExternalId = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_6;
+            var base, uri, response, error_7;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -213,14 +213,14 @@ var Branches = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_6 = _a.sent();
-                        if (error_6.response && error_6.response.status === 409) {
+                        error_7 = _a.sent();
+                        if (error_7.response && error_7.response.status === 409) {
                             throw new ExternalCustomIdGetUniqueFailed(undefined, {
-                                status: error_6.response.status,
-                                name: error_6.response.data.name
+                                status: error_7.response.status,
+                                name: error_7.response.data.name
                             });
                         }
-                        throw new ExternalCustomIdGetUniqueFailed(undefined, { error: error_6 });
+                        throw new ExternalCustomIdGetUniqueFailed(error_7.message, { error: error_7 });
                     case 4: return [2];
                 }
             });
@@ -228,7 +228,7 @@ var Branches = (function (_super) {
     };
     Branches.prototype.search = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, base, response, error_7;
+            var uri, base, response, error_8;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -256,8 +256,8 @@ var Branches = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_7 = _a.sent();
-                        throw new BranchesSearchFailed(undefined, { error: error_7 });
+                        error_8 = _a.sent();
+                        throw new BranchesSearchFailed(error_8.message, { error: error_8 });
                     case 4: return [2];
                 }
             });

@@ -47,7 +47,7 @@ var Branches = (function (_super) {
                             }];
                     case 2:
                         error_1 = _b.sent();
-                        throw new BranchesFetchFailed(undefined, { error: error_1 });
+                        throw new BranchesFetchFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -55,7 +55,7 @@ var Branches = (function (_super) {
     };
     Branches.prototype.meta = function (queryOrOptions) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_1;
+            var base, uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -76,8 +76,8 @@ var Branches = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_1 = _a.sent();
-                        throw new BranchesMetaFailed();
+                        error_2 = _a.sent();
+                        throw new BranchesMetaFailed(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }
             });
@@ -85,7 +85,7 @@ var Branches = (function (_super) {
     };
     Branches.prototype.get = function (branchId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_2;
+            var uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -105,8 +105,8 @@ var Branches = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_2 = _a.sent();
-                        throw new BranchFetchFailed(undefined, { error: error_2 });
+                        error_3 = _a.sent();
+                        throw new BranchFetchFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });

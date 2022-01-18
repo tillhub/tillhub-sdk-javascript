@@ -42,7 +42,7 @@ var Accounts = (function (_super) {
                             }];
                     case 2:
                         error_1 = _a.sent();
-                        throw new errors.AccountsFetchFailed(undefined, { error: error_1 });
+                        throw new errors.AccountsFetchFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -71,7 +71,7 @@ var Accounts = (function (_super) {
                             }];
                     case 3:
                         error_2 = _a.sent();
-                        throw new errors.AccountFetchFailed(undefined, { error: error_2 });
+                        throw new errors.AccountFetchFailed(error_2.message, { error: error_2 });
                     case 4: return [2];
                 }
             });
@@ -96,7 +96,7 @@ var Accounts = (function (_super) {
                             }];
                     case 3:
                         error_3 = _a.sent();
-                        throw new errors.AccountPutFailed(undefined, { error: error_3 });
+                        throw new errors.AccountPutFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });
@@ -121,7 +121,7 @@ var Accounts = (function (_super) {
                             }];
                     case 3:
                         error_4 = _a.sent();
-                        throw new errors.AccountCreationFailed(undefined, { error: error_4 });
+                        throw new errors.AccountCreationFailed(error_4.message, { error: error_4 });
                     case 4: return [2];
                 }
             });
@@ -129,7 +129,7 @@ var Accounts = (function (_super) {
     };
     Accounts.prototype.delete = function (accountId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_1;
+            var uri, response, error_5;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -146,8 +146,8 @@ var Accounts = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        err_1 = _a.sent();
-                        throw new errors.AccountDeleteFailed();
+                        error_5 = _a.sent();
+                        throw new errors.AccountDeleteFailed(error_5.message, { error: error_5 });
                     case 4: return [2];
                 }
             });

@@ -46,7 +46,7 @@ var Devices = (function (_super) {
                             }];
                     case 3:
                         error_1 = _b.sent();
-                        throw new DevicesFetchFailed(undefined, { error: error_1 });
+                        throw new DevicesFetchFailed(error_1.message, { error: error_1 });
                     case 4: return [2];
                 }
             });
@@ -75,7 +75,7 @@ var Devices = (function (_super) {
                             }];
                     case 3:
                         error_2 = _a.sent();
-                        throw new DeviceFetchFailed(undefined, { error: error_2 });
+                        throw new DeviceFetchFailed(error_2.message, { error: error_2 });
                     case 4: return [2];
                 }
             });
@@ -104,7 +104,7 @@ var Devices = (function (_super) {
                             }];
                     case 3:
                         error_3 = _a.sent();
-                        throw new DeviceFetchFailed(undefined, { error: error_3 });
+                        throw new DeviceFetchFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });
@@ -132,7 +132,7 @@ var Devices = (function (_super) {
                             }];
                     case 3:
                         error_4 = _a.sent();
-                        throw new DeviceContentFetchFailed(undefined, { error: error_4 });
+                        throw new DeviceContentFetchFailed(error_4.message, { error: error_4 });
                     case 4: return [2];
                 }
             });
@@ -157,7 +157,7 @@ var Devices = (function (_super) {
                             }];
                     case 3:
                         error_5 = _a.sent();
-                        throw new DevicePatchFailed(undefined, { error: error_5 });
+                        throw new DevicePatchFailed(error_5.message, { error: error_5 });
                     case 4: return [2];
                 }
             });
@@ -182,7 +182,7 @@ var Devices = (function (_super) {
                             }];
                     case 3:
                         error_6 = _a.sent();
-                        throw new DeviceCreationFailed(undefined, { error: error_6 });
+                        throw new DeviceCreationFailed(error_6.message, { error: error_6 });
                     case 4: return [2];
                 }
             });
@@ -207,7 +207,7 @@ var Devices = (function (_super) {
                             }];
                     case 3:
                         error_7 = _a.sent();
-                        throw new DeviceBindingFailed(undefined, { error: error_7 });
+                        throw new DeviceBindingFailed(error_7.message, { error: error_7 });
                     case 4: return [2];
                 }
             });
@@ -215,7 +215,7 @@ var Devices = (function (_super) {
     };
     Devices.prototype.delete = function (deviceId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_1;
+            var uri, response, error_8;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -232,8 +232,8 @@ var Devices = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        err_1 = _a.sent();
-                        throw new DeviceDeleteFailed();
+                        error_8 = _a.sent();
+                        throw new DeviceDeleteFailed(error_8.message, { error: error_8 });
                     case 4: return [2];
                 }
             });

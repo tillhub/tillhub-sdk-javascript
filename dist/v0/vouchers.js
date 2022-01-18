@@ -50,7 +50,7 @@ var Vouchers = (function (_super) {
                             }];
                     case 2:
                         error_1 = _b.sent();
-                        throw new VouchersFetchFailed(undefined, { error: error_1 });
+                        throw new VouchersFetchFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -80,7 +80,7 @@ var Vouchers = (function (_super) {
                             }];
                     case 2:
                         error_2 = _a.sent();
-                        throw new VouchersMetaFailed(undefined, { error: error_2 });
+                        throw new VouchersMetaFailed(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }
             });
@@ -107,7 +107,7 @@ var Vouchers = (function (_super) {
                             }];
                     case 3:
                         error_3 = _a.sent();
-                        throw new VoucherDeleteFailed(undefined, { error: error_3 });
+                        throw new VoucherDeleteFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });
@@ -135,7 +135,7 @@ var Vouchers = (function (_super) {
                             }];
                     case 3:
                         error_4 = _a.sent();
-                        throw new VouchersCountFailed(undefined, { error: error_4 });
+                        throw new VouchersCountFailed(error_4.message, { error: error_4 });
                     case 4: return [2];
                 }
             });
@@ -163,7 +163,7 @@ var Vouchers = (function (_super) {
                             }];
                     case 3:
                         error_5 = _a.sent();
-                        throw new VoucherFetchFailed(undefined, { error: error_5 });
+                        throw new VoucherFetchFailed(error_5.message, { error: error_5 });
                     case 4: return [2];
                 }
             });
@@ -196,7 +196,7 @@ var Vouchers = (function (_super) {
                             }];
                     case 2:
                         error_6 = _b.sent();
-                        throw new VoucherLogsFetchFailed(undefined, { error: error_6 });
+                        throw new VoucherLogsFetchFailed(error_6.message, { error: error_6 });
                     case 3: return [2];
                 }
             });
@@ -221,7 +221,7 @@ var Vouchers = (function (_super) {
                             }];
                     case 3:
                         error_7 = _a.sent();
-                        throw new VoucherPutFailed(undefined, { error: error_7 });
+                        throw new VoucherPutFailed(error_7.message, { error: error_7 });
                     case 4: return [2];
                 }
             });
@@ -257,7 +257,7 @@ var Vouchers = (function (_super) {
                             }];
                     case 3:
                         error_8 = _a.sent();
-                        throw new VoucherPatchFailed(undefined, { error: error_8 });
+                        throw new VoucherPatchFailed(error_8.message, { error: error_8 });
                     case 4: return [2];
                 }
             });
@@ -281,10 +281,10 @@ var Vouchers = (function (_super) {
                         error_9 = _a.sent();
                         responseStatus = just_safe_get_1.default(error_9, 'response.status');
                         if (responseStatus === 409) {
-                            throw new VoucherCodeConflict(undefined, { error: error_9 });
+                            throw new VoucherCodeConflict(error_9.message, { error: error_9 });
                         }
                         else {
-                            throw new VoucherCreationFailed(undefined, { error: error_9 });
+                            throw new VoucherCreationFailed(error_9.message, { error: error_9 });
                         }
                         return [3, 4];
                     case 4:
@@ -318,7 +318,7 @@ var Vouchers = (function (_super) {
                             }];
                     case 2:
                         error_10 = _a.sent();
-                        throw new VouchersUsersFailed(undefined, { error: error_10 });
+                        throw new VouchersUsersFailed(error_10.message, { error: error_10 });
                     case 3: return [2];
                 }
             });
@@ -343,7 +343,7 @@ var Vouchers = (function (_super) {
                             }];
                     case 2:
                         error_11 = _a.sent();
-                        throw new VouchersBoundedCustomerGetFailed(undefined, { error: error_11 });
+                        throw new VouchersBoundedCustomerGetFailed(error_11.message, { error: error_11 });
                     case 3: return [2];
                 }
             });
@@ -368,7 +368,7 @@ var Vouchers = (function (_super) {
                             }];
                     case 2:
                         error_12 = _a.sent();
-                        throw new VouchersBoundedCustomerCreateFailed(undefined, { error: error_12 });
+                        throw new VouchersBoundedCustomerCreateFailed(error_12.message, { error: error_12 });
                     case 3: return [2];
                 }
             });
@@ -393,7 +393,7 @@ var Vouchers = (function (_super) {
                             }];
                     case 2:
                         error_13 = _a.sent();
-                        throw new VouchersBoundedCustomerPutFailed(undefined, { error: error_13 });
+                        throw new VouchersBoundedCustomerPutFailed(error_13.message, { error: error_13 });
                     case 3: return [2];
                 }
             });
@@ -445,7 +445,7 @@ var VoucherLogs = (function (_super) {
                             }];
                     case 2:
                         error_14 = _b.sent();
-                        throw new VouchersLogsFetchFailed(undefined, { error: error_14 });
+                        throw new VouchersLogsFetchFailed(error_14.message, { error: error_14 });
                     case 3: return [2];
                 }
             });
@@ -476,7 +476,7 @@ var VoucherLogs = (function (_super) {
                             }];
                     case 3:
                         error_15 = _a.sent();
-                        throw new VoucherLogsMetaFailed(undefined, { error: error_15 });
+                        throw new VoucherLogsMetaFailed(error_15.message, { error: error_15 });
                     case 4: return [2];
                 }
             });

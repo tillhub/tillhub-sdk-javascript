@@ -43,7 +43,7 @@ var DbBackups = (function (_super) {
                             }];
                     case 2:
                         error_1 = _a.sent();
-                        throw new DbBackupsFetchFailed(undefined, { error: error_1 });
+                        throw new DbBackupsFetchFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -71,7 +71,7 @@ var DbBackups = (function (_super) {
                             }];
                     case 3:
                         error_2 = _a.sent();
-                        throw new DbBackupsSignedUrlFetchFailed(undefined, { error: error_2 });
+                        throw new DbBackupsSignedUrlFetchFailed(error_2.message, { error: error_2 });
                     case 4: return [2];
                 }
             });

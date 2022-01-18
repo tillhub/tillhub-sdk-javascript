@@ -20,7 +20,7 @@ var AnalyticsReportsCustomers = (function (_super) {
     };
     AnalyticsReportsCustomers.prototype.getAll = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var localUriHelper, base, uri, response, err_1;
+            var localUriHelper, base, uri, response, error_1;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -40,8 +40,8 @@ var AnalyticsReportsCustomers = (function (_super) {
                                 }
                             }];
                     case 2:
-                        err_1 = _a.sent();
-                        throw new AnalyticsReportsV1CustomersFetchError(undefined, { error: err_1 });
+                        error_1 = _a.sent();
+                        throw new AnalyticsReportsV1CustomersFetchError(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });

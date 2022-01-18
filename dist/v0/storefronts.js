@@ -41,7 +41,7 @@ var Storefronts = (function (_super) {
                             }];
                     case 2:
                         error_1 = _a.sent();
-                        throw new StorefrontsFetchFailed(undefined, { error: error_1 });
+                        throw new StorefrontsFetchFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -70,7 +70,7 @@ var Storefronts = (function (_super) {
                             }];
                     case 3:
                         error_2 = _a.sent();
-                        throw new StorefrontsFetchOneFailed(undefined, { error: error_2 });
+                        throw new StorefrontsFetchOneFailed(error_2.message, { error: error_2 });
                     case 4: return [2];
                 }
             });
@@ -95,7 +95,7 @@ var Storefronts = (function (_super) {
                             }];
                     case 3:
                         error_3 = _a.sent();
-                        throw new StorefrontsPutFailed(undefined, { error: error_3 });
+                        throw new StorefrontsPutFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });
@@ -120,7 +120,7 @@ var Storefronts = (function (_super) {
                             }];
                     case 3:
                         error_4 = _a.sent();
-                        throw new StorefrontsCreationFailed(undefined, { error: error_4 });
+                        throw new StorefrontsCreationFailed(error_4.message, { error: error_4 });
                     case 4: return [2];
                 }
             });
@@ -128,7 +128,7 @@ var Storefronts = (function (_super) {
     };
     Storefronts.prototype.delete = function (storefrontId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_1;
+            var uri, response, error_5;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -145,8 +145,8 @@ var Storefronts = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        err_1 = _a.sent();
-                        throw new StorefrontsDeleteFailed();
+                        error_5 = _a.sent();
+                        throw new StorefrontsDeleteFailed(error_5.message, { error: error_5 });
                     case 4: return [2];
                 }
             });
@@ -154,7 +154,7 @@ var Storefronts = (function (_super) {
     };
     Storefronts.prototype.profile = function (storefrontId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_5;
+            var uri, response, error_6;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -174,8 +174,8 @@ var Storefronts = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_5 = _a.sent();
-                        throw new StorefrontsProfileFetchFailed(undefined, { error: error_5 });
+                        error_6 = _a.sent();
+                        throw new StorefrontsProfileFetchFailed(error_6.message, { error: error_6 });
                     case 4: return [2];
                 }
             });
@@ -183,7 +183,7 @@ var Storefronts = (function (_super) {
     };
     Storefronts.prototype.sync = function (storefrontId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_6;
+            var uri, response, error_7;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -201,8 +201,8 @@ var Storefronts = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        error_6 = _a.sent();
-                        throw new StorefrontsSyncAllFailed(undefined, { error: error_6 });
+                        error_7 = _a.sent();
+                        throw new StorefrontsSyncAllFailed(error_7.message, { error: error_7 });
                     case 4: return [2];
                 }
             });
@@ -210,7 +210,7 @@ var Storefronts = (function (_super) {
     };
     Storefronts.prototype.syncStatus = function (storefrontId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_7;
+            var uri, response, error_8;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -230,8 +230,8 @@ var Storefronts = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_7 = _a.sent();
-                        throw new StorefrontsSyncStatusFetchFailed(undefined, { error: error_7 });
+                        error_8 = _a.sent();
+                        throw new StorefrontsSyncStatusFetchFailed(error_8.message, { error: error_8 });
                     case 4: return [2];
                 }
             });
@@ -239,7 +239,7 @@ var Storefronts = (function (_super) {
     };
     Storefronts.prototype.delta = function (storefrontId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_8;
+            var uri, response, error_9;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -259,8 +259,8 @@ var Storefronts = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_8 = _a.sent();
-                        throw new StorefrontsDeltaFailed(undefined, { error: error_8 });
+                        error_9 = _a.sent();
+                        throw new StorefrontsDeltaFailed(error_9.message, { error: error_9 });
                     case 4: return [2];
                 }
             });
@@ -268,7 +268,7 @@ var Storefronts = (function (_super) {
     };
     Storefronts.prototype.whitelist = function (storefrontId, products) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_9;
+            var uri, response, error_10;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -288,8 +288,8 @@ var Storefronts = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_9 = _a.sent();
-                        throw new StorefrontsWhitelistFailed(undefined, { error: error_9 });
+                        error_10 = _a.sent();
+                        throw new StorefrontsWhitelistFailed(error_10.message, { error: error_10 });
                     case 4: return [2];
                 }
             });
@@ -297,7 +297,7 @@ var Storefronts = (function (_super) {
     };
     Storefronts.prototype.getWhitelisted = function (storefrontId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_10;
+            var uri, response, error_11;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -317,8 +317,8 @@ var Storefronts = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_10 = _a.sent();
-                        throw new StorefrontsFetchWhitelistedFailed(undefined, { error: error_10 });
+                        error_11 = _a.sent();
+                        throw new StorefrontsFetchWhitelistedFailed(error_11.message, { error: error_11 });
                     case 4: return [2];
                 }
             });
@@ -326,7 +326,7 @@ var Storefronts = (function (_super) {
     };
     Storefronts.prototype.getWhitelistedMeta = function (storefrontId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_11;
+            var uri, response, error_12;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -345,8 +345,8 @@ var Storefronts = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        error_11 = _a.sent();
-                        throw new StorefrontsFetchWhitelistedMetaFailed(undefined, { error: error_11 });
+                        error_12 = _a.sent();
+                        throw new StorefrontsFetchWhitelistedMetaFailed(error_12.message, { error: error_12 });
                     case 4: return [2];
                 }
             });
@@ -355,7 +355,7 @@ var Storefronts = (function (_super) {
     Storefronts.prototype.availableProducts = function (storefrontId, query) {
         var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var next, base, uri, response_1, error_12;
+            var next, base, uri, response_1, error_13;
             var _this = this;
             return tslib_1.__generator(this, function (_b) {
                 switch (_b.label) {
@@ -381,8 +381,8 @@ var Storefronts = (function (_super) {
                                 next: next
                             }];
                     case 3:
-                        error_12 = _b.sent();
-                        throw new StorefrontsAvailableProductsFailed(undefined, { error: error_12 });
+                        error_13 = _b.sent();
+                        throw new StorefrontsAvailableProductsFailed(error_13.message, { error: error_13 });
                     case 4: return [2];
                 }
             });
@@ -390,7 +390,7 @@ var Storefronts = (function (_super) {
     };
     Storefronts.prototype.availableProductsMeta = function (storefrontId, query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_13;
+            var base, uri, response, error_14;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -413,8 +413,8 @@ var Storefronts = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_13 = _a.sent();
-                        throw new StorefrontsAvailableProductsMetaFailed(undefined, { error: error_13 });
+                        error_14 = _a.sent();
+                        throw new StorefrontsAvailableProductsMetaFailed(error_14.message, { error: error_14 });
                     case 4: return [2];
                 }
             });

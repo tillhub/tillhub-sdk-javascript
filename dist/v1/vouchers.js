@@ -40,7 +40,7 @@ var Vouchers = (function (_super) {
                             }];
                     case 2:
                         error_1 = _b.sent();
-                        throw new VouchersFetchFailed(undefined, { error: error_1 });
+                        throw new VouchersFetchFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });

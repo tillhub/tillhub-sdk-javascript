@@ -40,7 +40,7 @@ var Analytics = (function () {
                             }];
                     case 2:
                         error_1 = _a.sent();
-                        throw new RevenuesFetchFailed(undefined, { error: error_1 });
+                        throw new RevenuesFetchFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -66,7 +66,7 @@ var Analytics = (function () {
                             }];
                     case 2:
                         error_2 = _a.sent();
-                        throw new RevenuesFetchFailed(undefined, { error: error_2 });
+                        throw new RevenuesFetchFailed(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }
             });
@@ -92,7 +92,7 @@ var Analytics = (function () {
                             }];
                     case 2:
                         error_3 = _a.sent();
-                        throw new RevenuesFetchFailed(undefined, { error: error_3 });
+                        throw new RevenuesFetchFailed(error_3.message, { error: error_3 });
                     case 3: return [2];
                 }
             });
@@ -118,7 +118,7 @@ var Analytics = (function () {
                             }];
                     case 2:
                         error_4 = _a.sent();
-                        throw new RevenuesFetchFailed(undefined, { error: error_4 });
+                        throw new RevenuesFetchFailed(error_4.message, { error: error_4 });
                     case 3: return [2];
                 }
             });
@@ -147,7 +147,7 @@ var Analytics = (function () {
                             }];
                     case 2:
                         error_5 = _a.sent();
-                        throw new StatisticsProductFetchFailed(undefined, { error: error_5 });
+                        throw new StatisticsProductFetchFailed(error_5.message, { error: error_5 });
                     case 3: return [2];
                 }
             });
@@ -175,7 +175,7 @@ var Analytics = (function () {
                             }];
                     case 2:
                         error_6 = _a.sent();
-                        throw new StatisticsProductChildrenFetchFailed(undefined, { error: error_6 });
+                        throw new StatisticsProductChildrenFetchFailed(error_6.message, { error: error_6 });
                     case 3: return [2];
                 }
             });
@@ -201,7 +201,7 @@ var Analytics = (function () {
                             }];
                     case 2:
                         error_7 = _a.sent();
-                        throw new StaffOverviewFetchFailed(undefined, { error: error_7 });
+                        throw new StaffOverviewFetchFailed(error_7.message, { error: error_7 });
                     case 3: return [2];
                 }
             });
@@ -227,7 +227,7 @@ var Analytics = (function () {
                             }];
                     case 2:
                         error_8 = _a.sent();
-                        throw new ProductGroupsStaffReportFetchFailed(undefined, { error: error_8 });
+                        throw new ProductGroupsStaffReportFetchFailed(error_8.message, { error: error_8 });
                     case 3: return [2];
                 }
             });
@@ -253,7 +253,7 @@ var Analytics = (function () {
                             }];
                     case 2:
                         error_9 = _a.sent();
-                        throw new ProductGroupsReportFetchFailed(undefined, { error: error_9 });
+                        throw new ProductGroupsReportFetchFailed(error_9.message, { error: error_9 });
                     case 3: return [2];
                 }
             });
@@ -279,7 +279,7 @@ var Analytics = (function () {
                             }];
                     case 2:
                         error_10 = _a.sent();
-                        throw new RefundsReportFetchFailed(undefined, { error: error_10 });
+                        throw new RefundsReportFetchFailed(error_10.message, { error: error_10 });
                     case 3: return [2];
                 }
             });
@@ -305,7 +305,7 @@ var Analytics = (function () {
                             }];
                     case 2:
                         error_11 = _a.sent();
-                        throw new VouchersReportFetchFailed(undefined, { error: error_11 });
+                        throw new VouchersReportFetchFailed(error_11.message, { error: error_11 });
                     case 3: return [2];
                 }
             });
@@ -331,7 +331,7 @@ var Analytics = (function () {
                             }];
                     case 2:
                         error_12 = _a.sent();
-                        throw new ProductsReportFetchFailed(undefined, { error: error_12 });
+                        throw new ProductsReportFetchFailed(error_12.message, { error: error_12 });
                     case 3: return [2];
                 }
             });
@@ -357,7 +357,7 @@ var Analytics = (function () {
                             }];
                     case 2:
                         error_13 = _a.sent();
-                        throw new PaymentsReportFetchFailed(undefined, { error: error_13 });
+                        throw new PaymentsReportFetchFailed(error_13.message, { error: error_13 });
                     case 3: return [2];
                 }
             });
@@ -383,7 +383,7 @@ var Analytics = (function () {
                             }];
                     case 2:
                         error_14 = _a.sent();
-                        throw new TopPaymentsReportFetchFailed(undefined, { error: error_14 });
+                        throw new TopPaymentsReportFetchFailed(error_14.message, { error: error_14 });
                     case 3: return [2];
                 }
             });
@@ -412,7 +412,7 @@ var Analytics = (function () {
                             }];
                     case 2:
                         error_15 = _a.sent();
-                        throw new SimpleSalesCartItemsReportFetchFailed(undefined, { error: error_15 });
+                        throw new SimpleSalesCartItemsReportFetchFailed(error_15.message, { error: error_15 });
                     case 3: return [2];
                 }
             });
@@ -438,7 +438,7 @@ var Analytics = (function () {
                             }];
                     case 2:
                         error_16 = _a.sent();
-                        throw new ReportsCustomerCustomersFailed(undefined, { error: error_16 });
+                        throw new ReportsCustomerCustomersFailed(error_16.message, { error: error_16 });
                     case 3: return [2];
                 }
             });
@@ -464,7 +464,7 @@ var Analytics = (function () {
                             }];
                     case 2:
                         error_17 = _a.sent();
-                        throw new ReportsCustomerTransactionsFailed(undefined, { error: error_17 });
+                        throw new ReportsCustomerTransactionsFailed(error_17.message, { error: error_17 });
                     case 3: return [2];
                 }
             });
@@ -490,7 +490,7 @@ var Analytics = (function () {
                             }];
                     case 2:
                         error_18 = _a.sent();
-                        throw new ReportsCustomerOverviewFailed(undefined, { error: error_18 });
+                        throw new ReportsCustomerOverviewFailed(error_18.message, { error: error_18 });
                     case 3: return [2];
                 }
             });
@@ -517,7 +517,7 @@ var Analytics = (function () {
                             }];
                     case 2:
                         error_19 = _a.sent();
-                        throw new ReportsStocksFetchFailed(undefined, { error: error_19 });
+                        throw new ReportsStocksFetchFailed(error_19.message, { error: error_19 });
                     case 3: return [2];
                 }
             });
@@ -545,7 +545,7 @@ var Analytics = (function () {
                             }];
                     case 2:
                         error_20 = _a.sent();
-                        throw new ReportsProductGroupsFetchFailed(undefined, { error: error_20 });
+                        throw new ReportsProductGroupsFetchFailed(error_20.message, { error: error_20 });
                     case 3: return [2];
                 }
             });
@@ -573,7 +573,7 @@ var Analytics = (function () {
                             }];
                     case 2:
                         error_21 = _a.sent();
-                        throw new ReportsProductGroupsFiltersFetchFailed(undefined, { error: error_21 });
+                        throw new ReportsProductGroupsFiltersFetchFailed(error_21.message, { error: error_21 });
                     case 3: return [2];
                 }
             });

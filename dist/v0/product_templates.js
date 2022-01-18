@@ -34,7 +34,7 @@ var ProductTemplates = (function () {
                             }];
                     case 2:
                         error_1 = _a.sent();
-                        throw new ProductTemplatesFetchFailed(undefined, { error: error_1 });
+                        throw new ProductTemplatesFetchFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -64,7 +64,7 @@ var ProductTemplates = (function () {
                             }];
                     case 3:
                         error_2 = _a.sent();
-                        throw new ProductTemplateFetchFailed(undefined, { error: error_2 });
+                        throw new ProductTemplateFetchFailed(error_2.message, { error: error_2 });
                     case 4: return [2];
                 }
             });
@@ -93,7 +93,7 @@ var ProductTemplates = (function () {
                             }];
                     case 3:
                         error_3 = _a.sent();
-                        throw new ProductTemplatesSearchFailed(undefined, { error: error_3 });
+                        throw new ProductTemplatesSearchFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });
@@ -118,7 +118,7 @@ var ProductTemplates = (function () {
                             }];
                     case 3:
                         error_4 = _a.sent();
-                        throw new ProductTemplatePutFailed(undefined, { error: error_4 });
+                        throw new ProductTemplatePutFailed(error_4.message, { error: error_4 });
                     case 4: return [2];
                 }
             });
@@ -143,7 +143,7 @@ var ProductTemplates = (function () {
                             }];
                     case 3:
                         error_5 = _a.sent();
-                        throw new ProductTemplateCreationFailed(undefined, { error: error_5 });
+                        throw new ProductTemplateCreationFailed(error_5.message, { error: error_5 });
                     case 4: return [2];
                 }
             });
@@ -151,7 +151,7 @@ var ProductTemplates = (function () {
     };
     ProductTemplates.prototype.delete = function (taxId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_1;
+            var uri, response, error_6;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -168,8 +168,8 @@ var ProductTemplates = (function () {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        err_1 = _a.sent();
-                        throw new ProductTemplateDeleteFailed();
+                        error_6 = _a.sent();
+                        throw new ProductTemplateDeleteFailed(error_6.message, { error: error_6 });
                     case 4: return [2];
                 }
             });

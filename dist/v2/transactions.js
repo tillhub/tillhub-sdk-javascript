@@ -34,7 +34,7 @@ var Transactions = (function () {
                             }];
                     case 2:
                         error_1 = _a.sent();
-                        throw new TransactionsGetImagesFailed(undefined, { error: error_1 });
+                        throw new TransactionsGetImagesFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -59,7 +59,7 @@ var Transactions = (function () {
                             }];
                     case 2:
                         error_2 = _a.sent();
-                        throw new TransactionsImageCreateFailed(undefined, { error: error_2 });
+                        throw new TransactionsImageCreateFailed(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }
             });

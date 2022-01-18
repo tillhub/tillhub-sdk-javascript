@@ -21,7 +21,7 @@ var AnalyticsReportsTransactionsItems = (function (_super) {
     AnalyticsReportsTransactionsItems.prototype.getAll = function (query) {
         var _a, _b, _c, _d, _e, _f, _g, _h;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var nextFn, localUriHelper, uri, _j, d, next_1, status_1, data, summary, count, totalCount, err_1;
+            var nextFn, localUriHelper, uri, _j, d, next_1, status_1, data, summary, count, totalCount, error_1;
             var _this = this;
             return tslib_1.__generator(this, function (_k) {
                 switch (_k.label) {
@@ -63,8 +63,8 @@ var AnalyticsReportsTransactionsItems = (function (_super) {
                                 next: nextFn
                             }];
                     case 2:
-                        err_1 = _k.sent();
-                        throw new AnalyticsReportsTransactionsItemsFetchError(undefined, { error: err_1 });
+                        error_1 = _k.sent();
+                        throw new AnalyticsReportsTransactionsItemsFetchError(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -72,7 +72,7 @@ var AnalyticsReportsTransactionsItems = (function (_super) {
     };
     AnalyticsReportsTransactionsItems.prototype.export = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var localUriHelper, base, uri, response, err_2;
+            var localUriHelper, base, uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -91,8 +91,8 @@ var AnalyticsReportsTransactionsItems = (function (_super) {
                                 metadata: {}
                             }];
                     case 2:
-                        err_2 = _a.sent();
-                        throw new AnalyticsReportsTransactionsItemsExportError(undefined, { error: err_2 });
+                        error_2 = _a.sent();
+                        throw new AnalyticsReportsTransactionsItemsExportError(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }
             });

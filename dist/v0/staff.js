@@ -45,7 +45,7 @@ var Staff = (function (_super) {
                             }];
                     case 2:
                         error_1 = _b.sent();
-                        throw new StaffFetchFailed(undefined, { error: error_1 });
+                        throw new StaffFetchFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -74,7 +74,7 @@ var Staff = (function (_super) {
                             }];
                     case 3:
                         error_2 = _a.sent();
-                        throw new StaffMemberCreateFailed(undefined, { error: error_2 });
+                        throw new StaffMemberCreateFailed(error_2.message, { error: error_2 });
                     case 4: return [2];
                 }
             });
@@ -103,7 +103,7 @@ var Staff = (function (_super) {
                             }];
                     case 3:
                         error_3 = _a.sent();
-                        throw new StaffFetchOneFailed(undefined, { error: error_3 });
+                        throw new StaffFetchOneFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });
@@ -132,7 +132,7 @@ var Staff = (function (_super) {
                             }];
                     case 3:
                         error_4 = _a.sent();
-                        throw new StaffFetchOneFailed(undefined, { error: error_4 });
+                        throw new StaffFetchOneFailed(error_4.message, { error: error_4 });
                     case 4: return [2];
                 }
             });
@@ -160,7 +160,7 @@ var Staff = (function (_super) {
                             }];
                     case 3:
                         error_5 = _a.sent();
-                        throw new StaffPutFailed(undefined, { error: error_5 });
+                        throw new StaffPutFailed(error_5.message, { error: error_5 });
                     case 4: return [2];
                 }
             });
@@ -185,7 +185,7 @@ var Staff = (function (_super) {
                         return [2, { msg: response.data.msg }];
                     case 3:
                         error_6 = _a.sent();
-                        throw new StaffDeleteFailed(undefined, { error: error_6 });
+                        throw new StaffDeleteFailed(error_6.message, { error: error_6 });
                     case 4: return [2];
                 }
             });
@@ -223,7 +223,7 @@ var Staff = (function (_super) {
                                 name: error_7.response.data.name
                             });
                         }
-                        throw new StaffPinGetFailed(undefined, { error: error_7 });
+                        throw new StaffPinGetFailed(error_7.message, { error: error_7 });
                     case 4: return [2];
                 }
             });
@@ -261,7 +261,7 @@ var Staff = (function (_super) {
                                 name: error_8.response.data.name
                             });
                         }
-                        throw new StaffNumberGetFailed(undefined, { error: error_8 });
+                        throw new StaffNumberGetFailed(error_8.message, { error: error_8 });
                     case 4: return [2];
                 }
             });
@@ -310,7 +310,7 @@ var Staff = (function (_super) {
                             }];
                     case 2:
                         error_9 = _a.sent();
-                        throw new StaffFetchFailed(undefined, { error: error_9 });
+                        throw new StaffFetchFailed(error_9.message, { error: error_9 });
                     case 3: return [2];
                 }
             });
@@ -337,7 +337,7 @@ var Staff = (function (_super) {
                             }];
                     case 3:
                         error_10 = _a.sent();
-                        throw new MakeUserStaffFailed(undefined, { error: error_10 });
+                        throw new MakeUserStaffFailed(error_10.message, { error: error_10 });
                     case 4: return [2];
                 }
             });
@@ -345,7 +345,7 @@ var Staff = (function (_super) {
     };
     Staff.prototype.meta = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_1;
+            var base, uri, response, error_11;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -368,8 +368,8 @@ var Staff = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_1 = _a.sent();
-                        throw new StaffMetaFailed(undefined, { error: err_1 });
+                        error_11 = _a.sent();
+                        throw new StaffMetaFailed(error_11.message, { error: error_11 });
                     case 4: return [2];
                 }
             });
@@ -377,7 +377,7 @@ var Staff = (function (_super) {
     };
     Staff.prototype.search = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, base, response, error_11;
+            var uri, base, response, error_12;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -405,8 +405,8 @@ var Staff = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_11 = _a.sent();
-                        throw new StaffSearchFailed(undefined, { error: error_11 });
+                        error_12 = _a.sent();
+                        throw new StaffSearchFailed(error_12.message, { error: error_12 });
                     case 4: return [2];
                 }
             });

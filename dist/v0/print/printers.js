@@ -11,7 +11,7 @@ var Printers = (function () {
     }
     Printers.prototype.getAll = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, e_1;
+            var base, uri, response, error_1;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -28,7 +28,7 @@ var Printers = (function () {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        e_1 = _a.sent();
+                        error_1 = _a.sent();
                         throw new errors.PrintersFetchFailed();
                     case 3: return [2];
                 }
@@ -37,7 +37,7 @@ var Printers = (function () {
     };
     Printers.prototype.get = function (printerId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, e_2;
+            var base, uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -55,7 +55,7 @@ var Printers = (function () {
                                 msg: response.data.msg
                             }];
                     case 2:
-                        e_2 = _a.sent();
+                        error_2 = _a.sent();
                         throw new errors.PrinterFetchFailed();
                     case 3: return [2];
                 }
@@ -64,7 +64,7 @@ var Printers = (function () {
     };
     Printers.prototype.create = function (printer) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, e_3;
+            var base, uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -81,7 +81,7 @@ var Printers = (function () {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        e_3 = _a.sent();
+                        error_3 = _a.sent();
                         throw new errors.PrinterCreateFailed();
                     case 3: return [2];
                 }
@@ -90,7 +90,7 @@ var Printers = (function () {
     };
     Printers.prototype.update = function (printerId, printer) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, e_4;
+            var base, uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -107,7 +107,7 @@ var Printers = (function () {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        e_4 = _a.sent();
+                        error_4 = _a.sent();
                         throw new errors.PrinterUpdateFailed();
                     case 3: return [2];
                 }
@@ -116,7 +116,7 @@ var Printers = (function () {
     };
     Printers.prototype.delete = function (printerId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, e_5;
+            var base, uri, response, error_5;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -132,7 +132,7 @@ var Printers = (function () {
                                 msg: response.data.msg
                             }];
                     case 2:
-                        e_5 = _a.sent();
+                        error_5 = _a.sent();
                         throw new errors.PrinterDeleteFailed();
                     case 3: return [2];
                 }

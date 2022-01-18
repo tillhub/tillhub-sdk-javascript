@@ -43,7 +43,7 @@ var Dependencies = (function (_super) {
                             }];
                     case 3:
                         error_1 = _a.sent();
-                        throw new DependenciesFetchFailed(undefined, { error: error_1 });
+                        throw new DependenciesFetchFailed(error_1.message, { error: error_1 });
                     case 4: return [2];
                 }
             });

@@ -41,7 +41,7 @@ var Carts = (function (_super) {
                             }];
                     case 3:
                         error_1 = _a.sent();
-                        throw new CartsCreateFailed(undefined, { error: error_1 });
+                        throw new CartsCreateFailed(error_1.message, { error: error_1 });
                     case 4: return [2];
                 }
             });
@@ -74,7 +74,7 @@ var Carts = (function (_super) {
                             }];
                     case 2:
                         error_2 = _b.sent();
-                        throw new CartsFetchFailed(undefined, { error: error_2 });
+                        throw new CartsFetchFailed(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }
             });
@@ -103,7 +103,7 @@ var Carts = (function (_super) {
                             }];
                     case 3:
                         error_3 = _a.sent();
-                        throw new CartFetchFailed(undefined, { error: error_3 });
+                        throw new CartFetchFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });
@@ -136,7 +136,7 @@ var Carts = (function (_super) {
                             }];
                     case 3:
                         error_4 = _a.sent();
-                        throw new CartsMetaFailed(undefined, { error: error_4 });
+                        throw new CartsMetaFailed(error_4.message, { error: error_4 });
                     case 4: return [2];
                 }
             });
@@ -164,7 +164,7 @@ var Carts = (function (_super) {
                             }];
                     case 3:
                         error_5 = _a.sent();
-                        throw new CartsUpdateFailed(undefined, { error: error_5 });
+                        throw new CartsUpdateFailed(error_5.message, { error: error_5 });
                     case 4: return [2];
                 }
             });
@@ -190,7 +190,7 @@ var Carts = (function (_super) {
                             }];
                     case 2:
                         error_6 = _a.sent();
-                        throw new CartsDeleteFailed(undefined, { error: error_6 });
+                        throw new CartsDeleteFailed(error_6.message, { error: error_6 });
                     case 3: return [2];
                 }
             });
@@ -219,7 +219,7 @@ var Carts = (function (_super) {
                             }];
                     case 3:
                         error_7 = _a.sent();
-                        throw new CartsSearchFailed(undefined, { error: error_7 });
+                        throw new CartsSearchFailed(error_7.message, { error: error_7 });
                     case 4: return [2];
                 }
             });

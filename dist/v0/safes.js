@@ -41,7 +41,7 @@ var Safes = (function (_super) {
                             }];
                     case 2:
                         error_1 = _b.sent();
-                        throw new errors.SafesFetchAllFailed(undefined, { error: error_1 });
+                        throw new errors.SafesFetchAllFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -68,7 +68,7 @@ var Safes = (function (_super) {
                             }];
                     case 2:
                         error_2 = _a.sent();
-                        throw new errors.SafesFetchOneFailed(undefined, { error: error_2 });
+                        throw new errors.SafesFetchOneFailed(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }
             });
@@ -93,7 +93,7 @@ var Safes = (function (_super) {
                             }];
                     case 2:
                         error_3 = _a.sent();
-                        throw new errors.SafesGetMetaFailed(undefined, { error: error_3 });
+                        throw new errors.SafesGetMetaFailed(error_3.message, { error: error_3 });
                     case 3: return [2];
                 }
             });
@@ -116,7 +116,7 @@ var Safes = (function (_super) {
                             }];
                     case 2:
                         error_4 = _a.sent();
-                        throw new errors.SafesCreationFailed(undefined, { error: error_4 });
+                        throw new errors.SafesCreationFailed(error_4.message, { error: error_4 });
                     case 3: return [2];
                 }
             });
@@ -142,7 +142,7 @@ var Safes = (function (_super) {
                             }];
                     case 2:
                         error_5 = _a.sent();
-                        throw new errors.SafesPutFailed(undefined, { error: error_5 });
+                        throw new errors.SafesPutFailed(error_5.message, { error: error_5 });
                     case 3: return [2];
                 }
             });
@@ -216,7 +216,7 @@ var SafesLogBook = (function (_super) {
                             }];
                     case 2:
                         error_7 = _b.sent();
-                        throw new errors.SafesLogBookFetchAllFailed(undefined, { error: error_7 });
+                        throw new errors.SafesLogBookFetchAllFailed(error_7.message, { error: error_7 });
                     case 3: return [2];
                 }
             });
@@ -242,7 +242,7 @@ var SafesLogBook = (function (_super) {
                             }];
                     case 2:
                         error_8 = _a.sent();
-                        throw new errors.SafesLogBookGetMetaFailed(undefined, { error: error_8 });
+                        throw new errors.SafesLogBookGetMetaFailed(error_8.message, { error: error_8 });
                     case 3: return [2];
                 }
             });

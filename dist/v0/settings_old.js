@@ -33,7 +33,7 @@ var LegacySettings = (function () {
                             }];
                     case 2:
                         error_1 = _a.sent();
-                        throw new errors_1.LegacySettingsFetchFailed(undefined, { error: error_1 });
+                        throw new errors_1.LegacySettingsFetchFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -62,7 +62,7 @@ var LegacySettings = (function () {
                             }];
                     case 3:
                         error_2 = _a.sent();
-                        throw new errors_1.LegacySettingFetchFailed(undefined, { error: error_2 });
+                        throw new errors_1.LegacySettingFetchFailed(error_2.message, { error: error_2 });
                     case 4: return [2];
                 }
             });
@@ -87,7 +87,7 @@ var LegacySettings = (function () {
                             }];
                     case 3:
                         error_3 = _a.sent();
-                        throw new errors_1.LegacySettingUpdateFailed(undefined, { error: error_3 });
+                        throw new errors_1.LegacySettingUpdateFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });

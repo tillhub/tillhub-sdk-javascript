@@ -20,10 +20,10 @@ export declare class Data {
 export declare class DataCreateFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class DataReplaceFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

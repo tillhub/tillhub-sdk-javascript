@@ -23,7 +23,7 @@ var Balances = (function (_super) {
     Balances.prototype.getAll = function (query) {
         var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var next, base, uri, response_1, err_1;
+            var next, base, uri, response_1, error_1;
             var _this = this;
             return tslib_1.__generator(this, function (_b) {
                 switch (_b.label) {
@@ -43,7 +43,7 @@ var Balances = (function (_super) {
                                 next: next
                             }];
                     case 2:
-                        err_1 = _b.sent();
+                        error_1 = _b.sent();
                         throw new errors.BalancesFetchFailed();
                     case 3: return [2];
                 }
@@ -52,7 +52,7 @@ var Balances = (function (_super) {
     };
     Balances.prototype.meta = function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_2;
+            var uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -74,7 +74,7 @@ var Balances = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_2 = _a.sent();
+                        error_2 = _a.sent();
                         throw new errors.BalancesMetaFailed();
                     case 4: return [2];
                 }
@@ -83,7 +83,7 @@ var Balances = (function (_super) {
     };
     Balances.prototype.get = function (transactionId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_1;
+            var uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -98,8 +98,8 @@ var Balances = (function (_super) {
                                 data: response.data.results[0]
                             }];
                     case 3:
-                        error_1 = _a.sent();
-                        throw new errors.BalancesFetchOneFailed(undefined, { error: error_1 });
+                        error_3 = _a.sent();
+                        throw new errors.BalancesFetchOneFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });

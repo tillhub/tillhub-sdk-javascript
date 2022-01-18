@@ -47,7 +47,7 @@ var StocksBook = (function (_super) {
                             }];
                     case 2:
                         error_1 = _b.sent();
-                        throw new stocks_1.StocksBookFetchFailed(undefined, { error: error_1 });
+                        throw new stocks_1.StocksBookFetchFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });

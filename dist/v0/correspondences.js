@@ -49,7 +49,7 @@ var Correspondences = (function (_super) {
                             }];
                     case 2:
                         error_1 = _b.sent();
-                        throw new CorrespondencesFetchFailed(undefined, { error: error_1 });
+                        throw new CorrespondencesFetchFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -78,7 +78,7 @@ var Correspondences = (function (_super) {
                             }];
                     case 3:
                         error_2 = _a.sent();
-                        throw new CorrespondenceFetchFailed(undefined, { error: error_2 });
+                        throw new CorrespondenceFetchFailed(error_2.message, { error: error_2 });
                     case 4: return [2];
                 }
             });
@@ -103,7 +103,7 @@ var Correspondences = (function (_super) {
                             }];
                     case 3:
                         error_3 = _a.sent();
-                        throw new CorrespondencePutFailed(undefined, { error: error_3 });
+                        throw new CorrespondencePutFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });
@@ -128,7 +128,7 @@ var Correspondences = (function (_super) {
                             }];
                     case 3:
                         error_4 = _a.sent();
-                        throw new CorrespondenceCreationFailed(undefined, { error: error_4 });
+                        throw new CorrespondenceCreationFailed(error_4.message, { error: error_4 });
                     case 4: return [2];
                 }
             });

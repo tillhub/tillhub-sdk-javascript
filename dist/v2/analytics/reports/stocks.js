@@ -21,7 +21,7 @@ var AnalyticsReportsStocks = (function (_super) {
     AnalyticsReportsStocks.prototype.getAll = function (query) {
         var _a, _b, _c, _d, _e, _f;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var nextFn, localUriHelper, uri, _g, d, next_1, data, count, totalCount, err_1;
+            var nextFn, localUriHelper, uri, _g, d, next_1, data, count, totalCount, error_1;
             var _this = this;
             return tslib_1.__generator(this, function (_h) {
                 switch (_h.label) {
@@ -55,8 +55,8 @@ var AnalyticsReportsStocks = (function (_super) {
                                 next: nextFn
                             }];
                     case 2:
-                        err_1 = _h.sent();
-                        throw new AnalyticsReportsStocksFetchFailed(err_1.message, { error: err_1 });
+                        error_1 = _h.sent();
+                        throw new AnalyticsReportsStocksFetchFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -64,7 +64,7 @@ var AnalyticsReportsStocks = (function (_super) {
     };
     AnalyticsReportsStocks.prototype.export = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var localUriHelper, uri, result, err_2;
+            var localUriHelper, uri, result, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -76,8 +76,8 @@ var AnalyticsReportsStocks = (function (_super) {
                         result = _a.sent();
                         return [2, result];
                     case 2:
-                        err_2 = _a.sent();
-                        throw new AnalyticsReportsStocksExportFetchFailed(err_2.message, { error: err_2 });
+                        error_2 = _a.sent();
+                        throw new AnalyticsReportsStocksExportFetchFailed(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }
             });

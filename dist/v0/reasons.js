@@ -38,7 +38,7 @@ var Reasons = (function (_super) {
                             }];
                     case 2:
                         error_1 = _a.sent();
-                        throw new ReasonsFetchFailed(undefined, { error: error_1 });
+                        throw new ReasonsFetchFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -67,7 +67,7 @@ var Reasons = (function (_super) {
                             }];
                     case 3:
                         error_2 = _a.sent();
-                        throw new ReasonsFetchOneFailed(undefined, { error: error_2 });
+                        throw new ReasonsFetchOneFailed(error_2.message, { error: error_2 });
                     case 4: return [2];
                 }
             });
@@ -92,7 +92,7 @@ var Reasons = (function (_super) {
                             }];
                     case 3:
                         error_3 = _a.sent();
-                        throw new ReasonsPutFailed(undefined, { error: error_3 });
+                        throw new ReasonsPutFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });
@@ -117,7 +117,7 @@ var Reasons = (function (_super) {
                             }];
                     case 3:
                         error_4 = _a.sent();
-                        throw new ReasonsCreationFailed(undefined, { error: error_4 });
+                        throw new ReasonsCreationFailed(error_4.message, { error: error_4 });
                     case 4: return [2];
                 }
             });
@@ -125,7 +125,7 @@ var Reasons = (function (_super) {
     };
     Reasons.prototype.delete = function (reasonId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_1;
+            var uri, response, error_5;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -142,8 +142,8 @@ var Reasons = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        err_1 = _a.sent();
-                        throw new ReasonsDeleteFailed();
+                        error_5 = _a.sent();
+                        throw new ReasonsDeleteFailed(error_5.message, { error: error_5 });
                     case 4: return [2];
                 }
             });

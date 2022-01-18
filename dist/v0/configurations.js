@@ -37,7 +37,7 @@ var Configurations = (function (_super) {
     }
     Configurations.prototype.getAll = function (optionsOrQuery) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_1;
+            var base, uri, response, error_1;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -54,8 +54,8 @@ var Configurations = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_1 = _a.sent();
-                        throw new errors.ConfigurationsFetchFailed();
+                        error_1 = _a.sent();
+                        throw new errors.ConfigurationsFetchFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -63,7 +63,7 @@ var Configurations = (function (_super) {
     };
     Configurations.prototype.get = function (configurationId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_1;
+            var uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -83,8 +83,8 @@ var Configurations = (function (_super) {
                                 metadata: { count: response.data.count }
                             }, this.http, this.options)];
                     case 3:
-                        error_1 = _a.sent();
-                        throw new errors.ConfigurationFetchFailed(undefined, { error: error_1 });
+                        error_2 = _a.sent();
+                        throw new errors.ConfigurationFetchFailed(error_2.message, { error: error_2 });
                     case 4: return [2];
                 }
             });
@@ -92,7 +92,7 @@ var Configurations = (function (_super) {
     };
     Configurations.prototype.put = function (configurationId, configuration) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_2;
+            var uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -108,8 +108,8 @@ var Configurations = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_2 = _a.sent();
-                        throw new errors.ConfigurationPutFailed(undefined, { error: error_2 });
+                        error_3 = _a.sent();
+                        throw new errors.ConfigurationPutFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });
@@ -117,7 +117,7 @@ var Configurations = (function (_super) {
     };
     Configurations.prototype.patch = function (configurationId, configuration) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_3;
+            var uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -133,8 +133,8 @@ var Configurations = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_3 = _a.sent();
-                        throw new errors.ConfigurationPatchFailed(undefined, { error: error_3 });
+                        error_4 = _a.sent();
+                        throw new errors.ConfigurationPatchFailed(error_4.message, { error: error_4 });
                     case 4: return [2];
                 }
             });
@@ -142,7 +142,7 @@ var Configurations = (function (_super) {
     };
     Configurations.prototype.create = function (configuration) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_4;
+            var uri, response, error_5;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -158,8 +158,8 @@ var Configurations = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_4 = _a.sent();
-                        throw new errors.ConfigurationCreationFailed(undefined, { error: error_4 });
+                        error_5 = _a.sent();
+                        throw new errors.ConfigurationCreationFailed(error_5.message, { error: error_5 });
                     case 4: return [2];
                 }
             });
@@ -167,7 +167,7 @@ var Configurations = (function (_super) {
     };
     Configurations.prototype.delete = function (configurationId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_5;
+            var uri, response, error_6;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -181,8 +181,8 @@ var Configurations = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 2:
-                        error_5 = _a.sent();
-                        throw new errors.ConfigurationDeleteFailed(undefined, { error: error_5 });
+                        error_6 = _a.sent();
+                        throw new errors.ConfigurationDeleteFailed(error_6.message, { error: error_6 });
                     case 3: return [2];
                 }
             });

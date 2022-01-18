@@ -23,7 +23,7 @@ var Customers = (function (_super) {
     Customers.prototype.getAll = function (query) {
         var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var next, base, uri, response_1, err_1;
+            var next, base, uri, response_1, error_1;
             var _this = this;
             return tslib_1.__generator(this, function (_b) {
                 switch (_b.label) {
@@ -48,8 +48,8 @@ var Customers = (function (_super) {
                                 next: next
                             }];
                     case 3:
-                        err_1 = _b.sent();
-                        throw new CustomersFetchFailed(undefined, { error: err_1 });
+                        error_1 = _b.sent();
+                        throw new CustomersFetchFailed(error_1.message, { error: error_1 });
                     case 4: return [2];
                 }
             });
@@ -57,7 +57,7 @@ var Customers = (function (_super) {
     };
     Customers.prototype.get = function (customerId, query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_1;
+            var base, uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -78,8 +78,8 @@ var Customers = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_1 = _a.sent();
-                        throw new CustomerFetchFailed(undefined, { error: error_1 });
+                        error_2 = _a.sent();
+                        throw new CustomerFetchFailed(error_2.message, { error: error_2 });
                     case 4: return [2];
                 }
             });
@@ -87,7 +87,7 @@ var Customers = (function (_super) {
     };
     Customers.prototype.createNote = function (customerId, note) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_2;
+            var uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -107,8 +107,8 @@ var Customers = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_2 = _a.sent();
-                        throw new CustomerNoteCreationFailed(undefined, { error: error_2 });
+                        error_3 = _a.sent();
+                        throw new CustomerNoteCreationFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });
@@ -116,7 +116,7 @@ var Customers = (function (_super) {
     };
     Customers.prototype.put = function (customerId, customer) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_3;
+            var uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -135,8 +135,8 @@ var Customers = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_3 = _a.sent();
-                        throw new CustomerPutFailed(undefined, { error: error_3 });
+                        error_4 = _a.sent();
+                        throw new CustomerPutFailed(error_4.message, { error: error_4 });
                     case 4: return [2];
                 }
             });
@@ -144,7 +144,7 @@ var Customers = (function (_super) {
     };
     Customers.prototype.create = function (customer, query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_4;
+            var base, uri, response, error_5;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -165,8 +165,8 @@ var Customers = (function (_super) {
                                 errors: response.data.errors || []
                             }];
                     case 3:
-                        error_4 = _a.sent();
-                        throw new CustomerCreationFailed(undefined, { error: error_4 });
+                        error_5 = _a.sent();
+                        throw new CustomerCreationFailed(error_5.message, { error: error_5 });
                     case 4: return [2];
                 }
             });
@@ -174,7 +174,7 @@ var Customers = (function (_super) {
     };
     Customers.prototype.bulkCreate = function (customers, query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_5;
+            var base, uri, response, error_6;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -201,8 +201,8 @@ var Customers = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        error_5 = _a.sent();
-                        throw new CustomersBulkCreateFailed(undefined, { error: error_5 });
+                        error_6 = _a.sent();
+                        throw new CustomersBulkCreateFailed(error_6.message, { error: error_6 });
                     case 4: return [2];
                 }
             });
@@ -210,7 +210,7 @@ var Customers = (function (_super) {
     };
     Customers.prototype.meta = function (q) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_2;
+            var base, uri, response, error_7;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -233,8 +233,8 @@ var Customers = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_2 = _a.sent();
-                        throw new CustomersMetaFailed(undefined, { error: err_2 });
+                        error_7 = _a.sent();
+                        throw new CustomersMetaFailed(error_7.message, { error: error_7 });
                     case 4: return [2];
                 }
             });
@@ -242,7 +242,7 @@ var Customers = (function (_super) {
     };
     Customers.prototype.delete = function (customerId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_3;
+            var uri, response, error_8;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -260,8 +260,8 @@ var Customers = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        err_3 = _a.sent();
-                        throw new CustomerDeleteFailed(undefined, { error: err_3 });
+                        error_8 = _a.sent();
+                        throw new CustomerDeleteFailed(error_8.message, { error: error_8 });
                     case 4: return [2];
                 }
             });
@@ -269,7 +269,7 @@ var Customers = (function (_super) {
     };
     Customers.prototype.count = function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_4;
+            var uri, response, error_9;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -288,8 +288,8 @@ var Customers = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_4 = _a.sent();
-                        throw new CustomersCountFailed(undefined, { error: err_4 });
+                        error_9 = _a.sent();
+                        throw new CustomersCountFailed(error_9.message, { error: error_9 });
                     case 4: return [2];
                 }
             });
@@ -298,7 +298,7 @@ var Customers = (function (_super) {
     Customers.prototype.search = function (searchTerm) {
         var _a, _b;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, user, uri, response, error_6;
+            var base, user, uri, response, error_10;
             return tslib_1.__generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -318,8 +318,8 @@ var Customers = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_6 = _c.sent();
-                        throw new CustomersSearchFailed(undefined, { error: error_6 });
+                        error_10 = _c.sent();
+                        throw new CustomersSearchFailed(error_10.message, { error: error_10 });
                     case 4: return [2];
                 }
             });

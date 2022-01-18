@@ -21,7 +21,7 @@ var AnalyticsReportsTransactionsOverview = (function (_super) {
     AnalyticsReportsTransactionsOverview.prototype.getAll = function (query) {
         var _a, _b, _c, _d, _e, _f, _g, _h;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var nextFn, localUriHelper, uri, _j, d, next_1, data, summary, count, totalCount, err_1;
+            var nextFn, localUriHelper, uri, _j, d, next_1, data, summary, count, totalCount, error_1;
             var _this = this;
             return tslib_1.__generator(this, function (_k) {
                 switch (_k.label) {
@@ -63,8 +63,8 @@ var AnalyticsReportsTransactionsOverview = (function (_super) {
                                 next: nextFn
                             }];
                     case 2:
-                        err_1 = _k.sent();
-                        throw new AnalyticsReportsTransactionsOverviewFetchError(undefined, { error: err_1 });
+                        error_1 = _k.sent();
+                        throw new AnalyticsReportsTransactionsOverviewFetchError(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -72,7 +72,7 @@ var AnalyticsReportsTransactionsOverview = (function (_super) {
     };
     AnalyticsReportsTransactionsOverview.prototype.export = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var localUriHelper, uri, result, err_2;
+            var localUriHelper, uri, result, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -84,8 +84,8 @@ var AnalyticsReportsTransactionsOverview = (function (_super) {
                         result = _a.sent();
                         return [2, result];
                     case 2:
-                        err_2 = _a.sent();
-                        throw new AnalyticsReportsTransactionsOverviewExportFetchError(undefined, { error: err_2 });
+                        error_2 = _a.sent();
+                        throw new AnalyticsReportsTransactionsOverviewExportFetchError(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }
             });
@@ -110,7 +110,7 @@ var AnalyticsReportsTransactionsDetail = (function (_super) {
     AnalyticsReportsTransactionsDetail.prototype.get = function (id) {
         var _a, _b;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var localUriHelper, uri, d, data, err_3;
+            var localUriHelper, uri, d, data, error_3;
             return tslib_1.__generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -131,8 +131,8 @@ var AnalyticsReportsTransactionsDetail = (function (_super) {
                                 }
                             }];
                     case 2:
-                        err_3 = _c.sent();
-                        throw new AnalyticsReportsTransactionDetailFetcshError(undefined, { error: err_3 });
+                        error_3 = _c.sent();
+                        throw new AnalyticsReportsTransactionDetailFetcshError(error_3.message, { error: error_3 });
                     case 3: return [2];
                 }
             });

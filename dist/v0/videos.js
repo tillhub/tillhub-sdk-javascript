@@ -15,7 +15,7 @@ var Videos = (function () {
     }
     Videos.prototype.put = function (query, payload) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_1;
+            var base, uri, response, error_1;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -33,8 +33,8 @@ var Videos = (function () {
                                 data: response.data.results
                             }];
                     case 3:
-                        err_1 = _a.sent();
-                        throw new VideoPutFailed();
+                        error_1 = _a.sent();
+                        throw new VideoPutFailed(error_1.message, { error: error_1 });
                     case 4: return [2];
                 }
             });
@@ -42,7 +42,7 @@ var Videos = (function () {
     };
     Videos.prototype.create = function (query, payload) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_2;
+            var base, uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -61,8 +61,8 @@ var Videos = (function () {
                                 data: response.data.results
                             }];
                     case 3:
-                        err_2 = _a.sent();
-                        throw new VideoCreationFailed();
+                        error_2 = _a.sent();
+                        throw new VideoCreationFailed(error_2.message, { error: error_2 });
                     case 4: return [2];
                 }
             });
@@ -73,9 +73,9 @@ var Videos = (function () {
 exports.Videos = Videos;
 var VideoCreationFailed = (function (_super) {
     tslib_1.__extends(VideoCreationFailed, _super);
-    function VideoCreationFailed(message) {
+    function VideoCreationFailed(message, properties) {
         if (message === void 0) { message = 'Could not create new video'; }
-        var _this = _super.call(this, message) || this;
+        var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'VideoCreationFailed';
         Object.setPrototypeOf(_this, VideoCreationFailed.prototype);
@@ -86,9 +86,9 @@ var VideoCreationFailed = (function (_super) {
 exports.VideoCreationFailed = VideoCreationFailed;
 var VideoPutFailed = (function (_super) {
     tslib_1.__extends(VideoPutFailed, _super);
-    function VideoPutFailed(message) {
+    function VideoPutFailed(message, properties) {
         if (message === void 0) { message = 'Could not update new video'; }
-        var _this = _super.call(this, message) || this;
+        var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'VideoPutFailed';
         Object.setPrototypeOf(_this, VideoPutFailed.prototype);

@@ -45,7 +45,7 @@ var Me = (function (_super) {
                             }];
                     case 3:
                         error_1 = _b.sent();
-                        throw new MeFetchFailed(undefined, { error: error_1 });
+                        throw new MeFetchFailed(error_1.message, { error: error_1 });
                     case 4: return [2];
                 }
             });

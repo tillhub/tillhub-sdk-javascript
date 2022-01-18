@@ -15,7 +15,7 @@ var Notifications = (function () {
     }
     Notifications.prototype.email = function (requestObject) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var _a, body, type, base, uri, response, err_1;
+            var _a, body, type, base, uri, response, error_1;
             return tslib_1.__generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -32,7 +32,7 @@ var Notifications = (function () {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        err_1 = _b.sent();
+                        error_1 = _b.sent();
                         throw new errors.NotificationsEmailError();
                     case 4: return [2];
                 }

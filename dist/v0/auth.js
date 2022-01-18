@@ -133,7 +133,7 @@ var Auth = (function () {
     };
     Auth.prototype.requestPasswordReset = function (target) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var data, err_2;
+            var data, error_1;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -147,8 +147,8 @@ var Auth = (function () {
                                 msg: data.msg
                             }];
                     case 2:
-                        err_2 = _a.sent();
-                        throw new errors.PasswordResetRequestFailed(undefined, { error: err_2 });
+                        error_1 = _a.sent();
+                        throw new errors.PasswordResetRequestFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -156,7 +156,7 @@ var Auth = (function () {
     };
     Auth.prototype.setNewPassword = function (nonce) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var data, err_3;
+            var data, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -171,8 +171,8 @@ var Auth = (function () {
                                 msg: data.msg
                             }];
                     case 2:
-                        err_3 = _a.sent();
-                        throw new errors.PasswordSetRequestFailed(undefined, { error: err_3 });
+                        error_2 = _a.sent();
+                        throw new errors.PasswordSetRequestFailed(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }
             });
@@ -193,7 +193,7 @@ var Auth = (function () {
     Auth.prototype.logout = function (token) {
         var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var _token, data, err_4;
+            var _token, data, error_3;
             return tslib_1.__generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -215,8 +215,8 @@ var Auth = (function () {
                                 msg: data.msg
                             }];
                     case 3:
-                        err_4 = _b.sent();
-                        throw new LogoutFailed(undefined, { error: err_4 });
+                        error_3 = _b.sent();
+                        throw new LogoutFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });

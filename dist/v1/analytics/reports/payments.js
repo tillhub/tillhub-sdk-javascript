@@ -21,7 +21,7 @@ var AnalyticsReportsPayments = (function (_super) {
     AnalyticsReportsPayments.prototype.getAll = function (query) {
         var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var localUriHelper, base, uri, response, err_1;
+            var localUriHelper, base, uri, response, error_1;
             return tslib_1.__generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -41,8 +41,8 @@ var AnalyticsReportsPayments = (function (_super) {
                                 }
                             }];
                     case 2:
-                        err_1 = _b.sent();
-                        throw new AnalyticsReportsV1PaymentsFetchError(undefined, { error: err_1 });
+                        error_1 = _b.sent();
+                        throw new AnalyticsReportsV1PaymentsFetchError(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });

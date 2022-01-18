@@ -37,7 +37,7 @@ var Deliveries = (function (_super) {
     Deliveries.prototype.getAll = function (query) {
         var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var next, base, uri, response_1, err_1;
+            var next, base, uri, response_1, error_1;
             var _this = this;
             return tslib_1.__generator(this, function (_b) {
                 switch (_b.label) {
@@ -59,7 +59,7 @@ var Deliveries = (function (_super) {
                                 next: next
                             }];
                     case 3:
-                        err_1 = _b.sent();
+                        error_1 = _b.sent();
                         throw new errors.DeliveriesFetchAllFailed();
                     case 4: return [2];
                 }
@@ -68,7 +68,7 @@ var Deliveries = (function (_super) {
     };
     Deliveries.prototype.getOne = function (requestObject) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var deliveryId, query, base, uri, response, err_2;
+            var deliveryId, query, base, uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -86,7 +86,7 @@ var Deliveries = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_2 = _a.sent();
+                        error_2 = _a.sent();
                         throw new errors.DeliveriesFetchOneFailed();
                     case 4: return [2];
                 }
@@ -95,7 +95,7 @@ var Deliveries = (function (_super) {
     };
     Deliveries.prototype.createDelivery = function (requestObject) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var body, query, base, uri, response, err_3;
+            var body, query, base, uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -113,7 +113,7 @@ var Deliveries = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_3 = _a.sent();
+                        error_3 = _a.sent();
                         throw new errors.DeliveriesCreateFailed();
                     case 4: return [2];
                 }
@@ -122,7 +122,7 @@ var Deliveries = (function (_super) {
     };
     Deliveries.prototype.createDeliveryPDF = function (deliveryId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_4;
+            var uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -142,7 +142,7 @@ var Deliveries = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_4 = _a.sent();
+                        error_4 = _a.sent();
                         throw new errors.DeliveriesPDFFailed();
                     case 4: return [2];
                 }
@@ -151,7 +151,7 @@ var Deliveries = (function (_super) {
     };
     Deliveries.prototype.updateDelivery = function (requestObject) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var body, query, deliveryId, base, uri, response, err_5;
+            var body, query, deliveryId, base, uri, response, error_5;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -169,7 +169,7 @@ var Deliveries = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_5 = _a.sent();
+                        error_5 = _a.sent();
                         throw new errors.DeliveriesUpdateFailed();
                     case 4: return [2];
                 }
@@ -178,7 +178,7 @@ var Deliveries = (function (_super) {
     };
     Deliveries.prototype.setInProgress = function (requestObject) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var deliveryId, query, base, uri, response, err_6;
+            var deliveryId, query, base, uri, response, error_6;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -196,7 +196,7 @@ var Deliveries = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_6 = _a.sent();
+                        error_6 = _a.sent();
                         throw new errors.DeliveriesInProgressFailed();
                     case 4: return [2];
                 }
@@ -205,7 +205,7 @@ var Deliveries = (function (_super) {
     };
     Deliveries.prototype.dispatchDelivery = function (requestObject) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var deliveryId, query, base, uri, response, err_7;
+            var deliveryId, query, base, uri, response, error_7;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -223,7 +223,7 @@ var Deliveries = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_7 = _a.sent();
+                        error_7 = _a.sent();
                         throw new errors.DeliveriesDispatchFailed();
                     case 4: return [2];
                 }
@@ -232,7 +232,7 @@ var Deliveries = (function (_super) {
     };
     Deliveries.prototype.deleteDelivery = function (deliveryId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_8;
+            var uri, response, error_8;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -247,7 +247,7 @@ var Deliveries = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        err_8 = _a.sent();
+                        error_8 = _a.sent();
                         throw new errors.DeliveriesDeleteFailed();
                     case 4: return [2];
                 }
@@ -256,7 +256,7 @@ var Deliveries = (function (_super) {
     };
     Deliveries.prototype.createDeliveryItems = function (requestObject) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var body, query, base, uri, response, err_9;
+            var body, query, base, uri, response, error_9;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -274,7 +274,7 @@ var Deliveries = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_9 = _a.sent();
+                        error_9 = _a.sent();
                         throw new errors.DeliveryItemsCreateFailed();
                     case 4: return [2];
                 }
@@ -283,7 +283,7 @@ var Deliveries = (function (_super) {
     };
     Deliveries.prototype.getAllDeliveryItems = function (requestObject) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var deliveryId, query, base, uri, response, err_10;
+            var deliveryId, query, base, uri, response, error_10;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -301,7 +301,7 @@ var Deliveries = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_10 = _a.sent();
+                        error_10 = _a.sent();
                         throw new errors.DeliveryItemsFetchAllFailed();
                     case 4: return [2];
                 }
@@ -310,7 +310,7 @@ var Deliveries = (function (_super) {
     };
     Deliveries.prototype.updateDeliveryItem = function (requestObject) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var body, query, itemId, base, uri, response, err_11;
+            var body, query, itemId, base, uri, response, error_11;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -328,7 +328,7 @@ var Deliveries = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_11 = _a.sent();
+                        error_11 = _a.sent();
                         throw new errors.DeliveryItemUpdateFailed();
                     case 4: return [2];
                 }
@@ -337,7 +337,7 @@ var Deliveries = (function (_super) {
     };
     Deliveries.prototype.deleteDeliveryItem = function (itemId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_12;
+            var uri, response, error_12;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -352,7 +352,7 @@ var Deliveries = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        err_12 = _a.sent();
+                        error_12 = _a.sent();
                         throw new errors.DeliveriesDeleteFailed();
                     case 4: return [2];
                 }

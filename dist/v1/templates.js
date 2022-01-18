@@ -22,7 +22,7 @@ var Templates = (function (_super) {
     }
     Templates.prototype.create = function (template) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_1;
+            var uri, response, error_1;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -38,7 +38,7 @@ var Templates = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_1 = _a.sent();
+                        error_1 = _a.sent();
                         throw new errors.TemplatesCreationFailed();
                     case 4: return [2];
                 }
@@ -47,7 +47,7 @@ var Templates = (function (_super) {
     };
     Templates.prototype.put = function (templateId, template) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_2;
+            var uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -63,7 +63,7 @@ var Templates = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_2 = _a.sent();
+                        error_2 = _a.sent();
                         throw new errors.TemplatesPutFailed();
                     case 4: return [2];
                 }
@@ -72,7 +72,7 @@ var Templates = (function (_super) {
     };
     Templates.prototype.getAll = function (options) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_3;
+            var base, uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -87,7 +87,7 @@ var Templates = (function (_super) {
                                 metadata: { count: response.data.count, cursor: response.data.cursor }
                             }];
                     case 2:
-                        err_3 = _a.sent();
+                        error_3 = _a.sent();
                         throw new errors.TemplatesFetchFailed();
                     case 3: return [2];
                 }
@@ -96,7 +96,7 @@ var Templates = (function (_super) {
     };
     Templates.prototype.preview = function (requestObject) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var body, query, templateId, base, uri, response, err_4;
+            var body, query, templateId, base, uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -118,7 +118,7 @@ var Templates = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_4 = _a.sent();
+                        error_4 = _a.sent();
                         throw new errors.TemplatesPreviewFailed();
                     case 4: return [2];
                 }

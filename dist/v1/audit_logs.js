@@ -46,7 +46,7 @@ var AuditLogs = (function (_super) {
                             }];
                     case 2:
                         error_1 = _b.sent();
-                        throw new audit_logs_1.AuditLogsFetchAllFailed(undefined, { error: error_1 });
+                        throw new audit_logs_1.AuditLogsFetchAllFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });

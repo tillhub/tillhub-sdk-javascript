@@ -46,7 +46,7 @@ var Trash = (function (_super) {
                             }];
                     case 3:
                         error_1 = _b.sent();
-                        throw (new TrashFetchFailed(undefined, { error: error_1 }));
+                        throw (new TrashFetchFailed(error_1.message, { error: error_1 }));
                     case 4: return [2];
                 }
             });
@@ -74,7 +74,7 @@ var Trash = (function (_super) {
                             }];
                     case 3:
                         error_2 = _a.sent();
-                        throw (new RecoverFailed(undefined, { error: error_2 }));
+                        throw (new RecoverFailed(error_2.message, { error: error_2 }));
                     case 4: return [2];
                 }
             });

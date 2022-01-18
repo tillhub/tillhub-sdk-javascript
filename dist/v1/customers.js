@@ -23,7 +23,7 @@ var Customers = (function (_super) {
     Customers.prototype.getAll = function (query) {
         var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var next, base, uri, response_1, err_1;
+            var next, base, uri, response_1, error_1;
             var _this = this;
             return tslib_1.__generator(this, function (_b) {
                 switch (_b.label) {
@@ -48,8 +48,8 @@ var Customers = (function (_super) {
                                 next: next
                             }];
                     case 3:
-                        err_1 = _b.sent();
-                        throw new customers_1.CustomersFetchFailed(undefined, { error: err_1 });
+                        error_1 = _b.sent();
+                        throw new customers_1.CustomersFetchFailed(error_1.message, { error: error_1 });
                     case 4: return [2];
                 }
             });

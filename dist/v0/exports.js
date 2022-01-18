@@ -34,7 +34,7 @@ var Exports = (function () {
                             }];
                     case 2:
                         error_1 = _a.sent();
-                        throw new ExportsDatevFetchFailed(undefined, { error: error_1 });
+                        throw new ExportsDatevFetchFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -61,7 +61,7 @@ var Exports = (function () {
                             }];
                     case 2:
                         error_2 = _a.sent();
-                        throw new ExportsGobdFetchFailed(undefined, { error: error_2 });
+                        throw new ExportsGobdFetchFailed(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }
             });

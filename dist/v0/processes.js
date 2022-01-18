@@ -40,7 +40,7 @@ var Processes = (function (_super) {
                             }];
                     case 2:
                         error_1 = _a.sent();
-                        throw new ProcessesCreationFailed(undefined, { error: error_1 });
+                        throw new ProcessesCreationFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -73,7 +73,7 @@ var Processes = (function (_super) {
                             }];
                     case 2:
                         error_2 = _b.sent();
-                        throw new ProcessesFetchFailed(undefined, { error: error_2 });
+                        throw new ProcessesFetchFailed(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }
             });
@@ -100,7 +100,7 @@ var Processes = (function (_super) {
                             }];
                     case 2:
                         error_3 = _a.sent();
-                        throw new ProcessesFetchOneFailed(undefined, { error: error_3 });
+                        throw new ProcessesFetchOneFailed(error_3.message, { error: error_3 });
                     case 3: return [2];
                 }
             });
@@ -126,7 +126,7 @@ var Processes = (function (_super) {
                             }];
                     case 2:
                         error_4 = _a.sent();
-                        throw new ProcessesUpdateFailed(undefined, { error: error_4 });
+                        throw new ProcessesUpdateFailed(error_4.message, { error: error_4 });
                     case 3: return [2];
                 }
             });
@@ -151,7 +151,7 @@ var Processes = (function (_super) {
                             }];
                     case 2:
                         error_5 = _a.sent();
-                        throw new ProcessesDeleteFailed(undefined, { error: error_5 });
+                        throw new ProcessesDeleteFailed(error_5.message, { error: error_5 });
                     case 3: return [2];
                 }
             });
@@ -178,7 +178,7 @@ var Processes = (function (_super) {
                             }];
                     case 2:
                         error_6 = _a.sent();
-                        throw new ProcessItemsFetchFailed(undefined, { error: error_6 });
+                        throw new ProcessItemsFetchFailed(error_6.message, { error: error_6 });
                     case 3: return [2];
                 }
             });
@@ -186,7 +186,7 @@ var Processes = (function (_super) {
     };
     Processes.prototype.meta = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_1;
+            var base, uri, response, error_7;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -209,8 +209,8 @@ var Processes = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_1 = _a.sent();
-                        throw new ProcessesMetaFailed(undefined, { error: err_1 });
+                        error_7 = _a.sent();
+                        throw new ProcessesMetaFailed(error_7.message, { error: error_7 });
                     case 4: return [2];
                 }
             });

@@ -23,7 +23,7 @@ var AbocardSystems = (function (_super) {
     AbocardSystems.prototype.getAll = function (query) {
         var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var next, base, uri, response_1, e_1;
+            var next, base, uri, response_1, error_1;
             var _this = this;
             return tslib_1.__generator(this, function (_b) {
                 switch (_b.label) {
@@ -45,8 +45,8 @@ var AbocardSystems = (function (_super) {
                                 next: next
                             }];
                     case 2:
-                        e_1 = _b.sent();
-                        throw new AbocardsFetchFailed();
+                        error_1 = _b.sent();
+                        throw new AbocardsFetchFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -54,7 +54,7 @@ var AbocardSystems = (function (_super) {
     };
     AbocardSystems.prototype.get = function (abocardId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, e_2;
+            var base, uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -72,8 +72,8 @@ var AbocardSystems = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 2:
-                        e_2 = _a.sent();
-                        throw new AbocardFetchFailed();
+                        error_2 = _a.sent();
+                        throw new AbocardFetchFailed(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }
             });
@@ -81,7 +81,7 @@ var AbocardSystems = (function (_super) {
     };
     AbocardSystems.prototype.create = function (abocard) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, e_3;
+            var base, uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -98,8 +98,8 @@ var AbocardSystems = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        e_3 = _a.sent();
-                        throw new AbocardCreateFailed();
+                        error_3 = _a.sent();
+                        throw new AbocardCreateFailed(error_3.message, { error: error_3 });
                     case 3: return [2];
                 }
             });
@@ -107,7 +107,7 @@ var AbocardSystems = (function (_super) {
     };
     AbocardSystems.prototype.update = function (abocardId, abocard) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, e_4;
+            var base, uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -124,8 +124,8 @@ var AbocardSystems = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        e_4 = _a.sent();
-                        throw new AbocardUpdateFailed();
+                        error_4 = _a.sent();
+                        throw new AbocardUpdateFailed(error_4.message, { error: error_4 });
                     case 3: return [2];
                 }
             });
@@ -133,7 +133,7 @@ var AbocardSystems = (function (_super) {
     };
     AbocardSystems.prototype.delete = function (abocardId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, e_5;
+            var base, uri, response, error_5;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -149,8 +149,8 @@ var AbocardSystems = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 2:
-                        e_5 = _a.sent();
-                        throw new AbocardDeleteFailed();
+                        error_5 = _a.sent();
+                        throw new AbocardDeleteFailed(error_5.message, { error: error_5 });
                     case 3: return [2];
                 }
             });

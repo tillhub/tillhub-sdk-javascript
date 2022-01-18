@@ -20,7 +20,7 @@ var Orders = (function (_super) {
     }
     Orders.prototype.getAll = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_1;
+            var base, uri, response, error_1;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -37,7 +37,7 @@ var Orders = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_1 = _a.sent();
+                        error_1 = _a.sent();
                         throw new errors.OrdersFetchFailed();
                     case 3: return [2];
                 }
@@ -46,7 +46,7 @@ var Orders = (function (_super) {
     };
     Orders.prototype.create = function (options) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var orderId, values, uri, response, err_2;
+            var orderId, values, uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -65,7 +65,7 @@ var Orders = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_2 = _a.sent();
+                        error_2 = _a.sent();
                         throw new errors.OrdersCreateFailed();
                     case 4: return [2];
                 }
@@ -74,7 +74,7 @@ var Orders = (function (_super) {
     };
     Orders.prototype.update = function (options) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var orderId, values, uri, response, err_3;
+            var orderId, values, uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -93,7 +93,7 @@ var Orders = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_3 = _a.sent();
+                        error_3 = _a.sent();
                         throw new errors.OrdersUpdateFailed();
                     case 4: return [2];
                 }
@@ -102,7 +102,7 @@ var Orders = (function (_super) {
     };
     Orders.prototype.getOrderItems = function (orderId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_4;
+            var uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -120,7 +120,7 @@ var Orders = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_4 = _a.sent();
+                        error_4 = _a.sent();
                         throw new errors.OrderItemsFetchFailed();
                     case 4: return [2];
                 }
@@ -129,7 +129,7 @@ var Orders = (function (_super) {
     };
     Orders.prototype.deleteOrderItems = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, base, response, err_5;
+            var uri, base, response, error_5;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -151,7 +151,7 @@ var Orders = (function (_super) {
                         }
                         return [2, { msg: response.data.msg }];
                     case 3:
-                        err_5 = _a.sent();
+                        error_5 = _a.sent();
                         throw new errors.OrderItemsDeleteFailed();
                     case 4: return [2];
                 }
@@ -160,7 +160,7 @@ var Orders = (function (_super) {
     };
     Orders.prototype.createOrderItems = function (body) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_6;
+            var uri, response, error_6;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -178,7 +178,7 @@ var Orders = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_6 = _a.sent();
+                        error_6 = _a.sent();
                         throw new errors.OrderItemsCreateFailed();
                     case 4: return [2];
                 }
@@ -187,7 +187,7 @@ var Orders = (function (_super) {
     };
     Orders.prototype.updateOrderItems = function (body) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_7;
+            var uri, response, error_7;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -205,7 +205,7 @@ var Orders = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_7 = _a.sent();
+                        error_7 = _a.sent();
                         throw new errors.OrderItemsUpdateFailed();
                     case 4: return [2];
                 }
@@ -214,7 +214,7 @@ var Orders = (function (_super) {
     };
     Orders.prototype.updateOrderItem = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var item, itemId, uri, response, err_8;
+            var item, itemId, uri, response, error_8;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -233,7 +233,7 @@ var Orders = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_8 = _a.sent();
+                        error_8 = _a.sent();
                         throw new errors.OrderItemUpdateFailed();
                     case 4: return [2];
                 }
@@ -242,7 +242,7 @@ var Orders = (function (_super) {
     };
     Orders.prototype.getIncomingOrders = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var extendedQuery, base, uri, response, err_9;
+            var extendedQuery, base, uri, response, error_9;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -260,7 +260,7 @@ var Orders = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_9 = _a.sent();
+                        error_9 = _a.sent();
                         throw new errors.IncomingOrdersFetchFailed();
                     case 3: return [2];
                 }
@@ -269,7 +269,7 @@ var Orders = (function (_super) {
     };
     Orders.prototype.getOutgoingOrders = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var extendedQuery, base, uri, response, err_10;
+            var extendedQuery, base, uri, response, error_10;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -287,7 +287,7 @@ var Orders = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_10 = _a.sent();
+                        error_10 = _a.sent();
                         throw new errors.OutgoingOrdersFetchFailed();
                     case 3: return [2];
                 }
@@ -296,7 +296,7 @@ var Orders = (function (_super) {
     };
     Orders.prototype.getOrderSuggestions = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_11;
+            var base, uri, response, error_11;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -313,7 +313,7 @@ var Orders = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_11 = _a.sent();
+                        error_11 = _a.sent();
                         throw new errors.OrderSuggestionsFetchFailed();
                     case 3: return [2];
                 }
@@ -322,7 +322,7 @@ var Orders = (function (_super) {
     };
     Orders.prototype.getHistoricOrderItems = function (orderId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_12;
+            var uri, response, error_12;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -338,7 +338,7 @@ var Orders = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_12 = _a.sent();
+                        error_12 = _a.sent();
                         throw new errors.HistoricOrderItemsFetchFailed();
                     case 3: return [2];
                 }
@@ -347,7 +347,7 @@ var Orders = (function (_super) {
     };
     Orders.prototype.bookStock = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var orderId, body, base, uri, response, err_13;
+            var orderId, body, base, uri, response, error_13;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -367,7 +367,7 @@ var Orders = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_13 = _a.sent();
+                        error_13 = _a.sent();
                         throw new errors.BookStockFailed();
                     case 4: return [2];
                 }
@@ -376,7 +376,7 @@ var Orders = (function (_super) {
     };
     Orders.prototype.getOpenOrder = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_14;
+            var base, uri, response, error_14;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -393,7 +393,7 @@ var Orders = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_14 = _a.sent();
+                        error_14 = _a.sent();
                         throw new errors.OpenOrderFetchFailed();
                     case 3: return [2];
                 }

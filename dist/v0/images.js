@@ -15,7 +15,7 @@ var Images = (function () {
     }
     Images.prototype.put = function (query, payload) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_1;
+            var uri, response, error_1;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -32,7 +32,7 @@ var Images = (function () {
                                 data: response.data.results
                             }];
                     case 3:
-                        err_1 = _a.sent();
+                        error_1 = _a.sent();
                         throw new errors.ImagePutFailed();
                     case 4: return [2];
                 }
@@ -41,7 +41,7 @@ var Images = (function () {
     };
     Images.prototype.create = function (query, payload) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_2;
+            var uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -58,7 +58,7 @@ var Images = (function () {
                                 data: response.data.results
                             }];
                     case 3:
-                        err_2 = _a.sent();
+                        error_2 = _a.sent();
                         throw new errors.ImageCreationFailed();
                     case 4: return [2];
                 }

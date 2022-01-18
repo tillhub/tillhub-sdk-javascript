@@ -35,7 +35,7 @@ var PricebookEntries = (function () {
                             }];
                     case 2:
                         error_1 = _b.sent();
-                        throw new PricebookEntriesFetchFailed(undefined, { error: error_1 });
+                        throw new PricebookEntriesFetchFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -60,7 +60,7 @@ var PricebookEntries = (function () {
                             }];
                     case 2:
                         error_2 = _a.sent();
-                        throw new PricebookEntriesMetaFailed(undefined, { error: error_2 });
+                        throw new PricebookEntriesMetaFailed(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }
             });
@@ -89,7 +89,7 @@ var PricebookEntries = (function () {
                             }];
                     case 3:
                         error_3 = _a.sent();
-                        throw new PricebookEntryFetchFailed(undefined, { error: error_3 });
+                        throw new PricebookEntryFetchFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });
@@ -114,7 +114,7 @@ var PricebookEntries = (function () {
                             }];
                     case 3:
                         error_4 = _a.sent();
-                        throw new PricebookEntryPutFailed(undefined, { error: error_4 });
+                        throw new PricebookEntryPutFailed(error_4.message, { error: error_4 });
                     case 4: return [2];
                 }
             });
@@ -139,7 +139,7 @@ var PricebookEntries = (function () {
                             }];
                     case 3:
                         error_5 = _a.sent();
-                        throw new PricebookEntryCreationFailed(undefined, { error: error_5 });
+                        throw new PricebookEntryCreationFailed(error_5.message, { error: error_5 });
                     case 4: return [2];
                 }
             });
@@ -147,7 +147,7 @@ var PricebookEntries = (function () {
     };
     PricebookEntries.prototype.delete = function (pricebookEntryId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_1;
+            var uri, response, error_6;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -164,8 +164,8 @@ var PricebookEntries = (function () {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        err_1 = _a.sent();
-                        throw new PricebookEntryDeleteFailed();
+                        error_6 = _a.sent();
+                        throw new PricebookEntryDeleteFailed(error_6.message, { error: error_6 });
                     case 4: return [2];
                 }
             });

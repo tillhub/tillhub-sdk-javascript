@@ -1,3 +1,10 @@
+## [4.37.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.37.0...v4.37.1) (2022-01-18)
+
+
+### Bug Fixes
+
+* replace old faker with community faker ([bf2c043](https://github.com/tillhub/tillhub-sdk-javascript/commit/bf2c043d1d22a224415cd82c9eb7bae5b052e642))
+
 # [4.37.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.36.0...v4.37.0) (2022-01-17)
 
 

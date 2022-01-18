@@ -49,7 +49,7 @@ var VoucherSystems = (function (_super) {
                             }];
                     case 2:
                         error_1 = _c.sent();
-                        throw (new VoucherSystemsFetchFailed(undefined, { error: error_1 }));
+                        throw (new VoucherSystemsFetchFailed(error_1.message, { error: error_1 }));
                     case 3: return [2];
                 }
             });
@@ -78,7 +78,7 @@ var VoucherSystems = (function (_super) {
                             }];
                     case 3:
                         error_2 = _a.sent();
-                        throw (new VoucherSystemFetchFailed(undefined, { error: error_2 }));
+                        throw (new VoucherSystemFetchFailed(error_2.message, { error: error_2 }));
                     case 4: return [2];
                 }
             });
@@ -103,7 +103,7 @@ var VoucherSystems = (function (_super) {
                             }];
                     case 3:
                         error_3 = _a.sent();
-                        throw (new VoucherSystemPutFailed(undefined, { error: error_3 }));
+                        throw (new VoucherSystemPutFailed(error_3.message, { error: error_3 }));
                     case 4: return [2];
                 }
             });
@@ -128,7 +128,7 @@ var VoucherSystems = (function (_super) {
                             }];
                     case 3:
                         error_4 = _a.sent();
-                        throw (new VoucherSystemCreationFailed(undefined, { error: error_4 }));
+                        throw (new VoucherSystemCreationFailed(error_4.message, { error: error_4 }));
                     case 4: return [2];
                 }
             });
@@ -136,7 +136,7 @@ var VoucherSystems = (function (_super) {
     };
     VoucherSystems.prototype.delete = function (voucherSystemId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_1;
+            var uri, response, error_5;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -153,7 +153,7 @@ var VoucherSystems = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        err_1 = _a.sent();
+                        error_5 = _a.sent();
                         throw (new VoucherSystemDeleteFailed());
                     case 4: return [2];
                 }

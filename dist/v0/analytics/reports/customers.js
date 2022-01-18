@@ -11,7 +11,7 @@ var Customers = (function () {
     }
     Customers.prototype.getAll = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_1;
+            var base, uri, response, error_1;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -28,7 +28,7 @@ var Customers = (function () {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_1 = _a.sent();
+                        error_1 = _a.sent();
                         throw new errors.CustomerFetchFailed();
                     case 3: return [2];
                 }
@@ -37,7 +37,7 @@ var Customers = (function () {
     };
     Customers.prototype.getFilters = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, values, data, err_2;
+            var base, uri, response, values, data, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -61,7 +61,7 @@ var Customers = (function () {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_2 = _a.sent();
+                        error_2 = _a.sent();
                         throw new errors.CustomerFilterFetchFailed();
                     case 3: return [2];
                 }
@@ -70,7 +70,7 @@ var Customers = (function () {
     };
     Customers.prototype.getTransaction = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_3;
+            var base, uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -87,7 +87,7 @@ var Customers = (function () {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_3 = _a.sent();
+                        error_3 = _a.sent();
                         throw new errors.CustomerTransactionFetchFailed();
                     case 3: return [2];
                 }
@@ -96,7 +96,7 @@ var Customers = (function () {
     };
     Customers.prototype.getOverview = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_4;
+            var base, uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -113,7 +113,7 @@ var Customers = (function () {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_4 = _a.sent();
+                        error_4 = _a.sent();
                         throw new errors.CustomerOverviewFetchFailed();
                     case 3: return [2];
                 }
@@ -122,7 +122,7 @@ var Customers = (function () {
     };
     Customers.prototype.meta = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_5;
+            var base, uri, response, error_5;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -145,8 +145,8 @@ var Customers = (function () {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_5 = _a.sent();
-                        throw new errors.CustomersMetaFailed(undefined, { error: err_5 });
+                        error_5 = _a.sent();
+                        throw new errors.CustomersMetaFailed(error_5.message, { error: error_5 });
                     case 4: return [2];
                 }
             });

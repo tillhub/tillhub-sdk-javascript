@@ -44,7 +44,7 @@ var Timetracking = (function (_super) {
                             }];
                     case 3:
                         error_1 = _a.sent();
-                        throw new TimetrackingReportFetchFailed(undefined, { error: error_1 });
+                        throw new TimetrackingReportFetchFailed(error_1.message, { error: error_1 });
                     case 4: return [2];
                 }
             });
@@ -74,7 +74,7 @@ var Timetracking = (function (_super) {
                             }];
                     case 3:
                         error_2 = _a.sent();
-                        throw new TimetrackingEntriesFetchFailed(undefined, { error: error_2 });
+                        throw new TimetrackingEntriesFetchFailed(error_2.message, { error: error_2 });
                     case 4: return [2];
                 }
             });
@@ -103,7 +103,7 @@ var Timetracking = (function (_super) {
                             }];
                     case 3:
                         error_3 = _a.sent();
-                        throw new TimetrackingEntryCreateFailed(undefined, { error: error_3 });
+                        throw new TimetrackingEntryCreateFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });
@@ -132,7 +132,7 @@ var Timetracking = (function (_super) {
                             }];
                     case 3:
                         error_4 = _a.sent();
-                        throw new TimetrackingEntryPutFailed(undefined, { error: error_4 });
+                        throw new TimetrackingEntryPutFailed(error_4.message, { error: error_4 });
                     case 4: return [2];
                 }
             });
@@ -157,7 +157,7 @@ var Timetracking = (function (_super) {
                         return [2, { msg: response.data.msg }];
                     case 3:
                         error_5 = _a.sent();
-                        throw new TimetrackingEntryDeleteFailed(undefined, { error: error_5 });
+                        throw new TimetrackingEntryDeleteFailed(error_5.message, { error: error_5 });
                     case 4: return [2];
                 }
             });
@@ -186,7 +186,7 @@ var Timetracking = (function (_super) {
                             }];
                     case 3:
                         error_6 = _a.sent();
-                        throw new TimetrackingConfigurationFetchFailed(undefined, { error: error_6 });
+                        throw new TimetrackingConfigurationFetchFailed(error_6.message, { error: error_6 });
                     case 4: return [2];
                 }
             });
@@ -215,7 +215,7 @@ var Timetracking = (function (_super) {
                             }];
                     case 3:
                         error_7 = _a.sent();
-                        throw new TimetrackingConfigurationPostFailed(undefined, { error: error_7 });
+                        throw new TimetrackingConfigurationPostFailed(error_7.message, { error: error_7 });
                     case 4: return [2];
                 }
             });
@@ -244,7 +244,7 @@ var Timetracking = (function (_super) {
                             }];
                     case 3:
                         error_8 = _a.sent();
-                        throw new TimetrackingConfigurationPutFailed(undefined, { error: error_8 });
+                        throw new TimetrackingConfigurationPutFailed(error_8.message, { error: error_8 });
                     case 4: return [2];
                 }
             });
@@ -273,7 +273,7 @@ var Timetracking = (function (_super) {
                             }];
                     case 3:
                         error_9 = _a.sent();
-                        throw new TimetrackingStaffListFetchFailed(undefined, { error: error_9 });
+                        throw new TimetrackingStaffListFetchFailed(error_9.message, { error: error_9 });
                     case 4: return [2];
                 }
             });

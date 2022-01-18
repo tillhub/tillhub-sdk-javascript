@@ -46,7 +46,7 @@ var SafesLogBook = (function (_super) {
                             }];
                     case 2:
                         error_1 = _b.sent();
-                        throw new errors.SafesLogBookFetchAllFailed(undefined, { error: error_1 });
+                        throw new errors.SafesLogBookFetchAllFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });

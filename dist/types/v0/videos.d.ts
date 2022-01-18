@@ -25,10 +25,10 @@ export declare class Videos {
 export declare class VideoCreationFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class VideoPutFailed extends BaseError {
     message: string;
     name: string;
-    constructor(message?: string);
+    constructor(message?: string, properties?: Record<string, unknown>);
 }

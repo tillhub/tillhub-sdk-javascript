@@ -21,7 +21,7 @@ var AnalyticsReportsRevenuesGrouped = (function (_super) {
     AnalyticsReportsRevenuesGrouped.prototype.getAll = function (query) {
         var _a, _b, _c, _d;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var nextFn, localUriHelper, uri, _e, d, next_1, data, summary, err_1;
+            var nextFn, localUriHelper, uri, _e, d, next_1, data, summary, error_1;
             var _this = this;
             return tslib_1.__generator(this, function (_f) {
                 switch (_f.label) {
@@ -50,8 +50,8 @@ var AnalyticsReportsRevenuesGrouped = (function (_super) {
                                 next: nextFn
                             }];
                     case 2:
-                        err_1 = _f.sent();
-                        throw new AnalyticsReportsRevenuesGroupedFetchError(undefined, { error: err_1 });
+                        error_1 = _f.sent();
+                        throw new AnalyticsReportsRevenuesGroupedFetchError(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -59,7 +59,7 @@ var AnalyticsReportsRevenuesGrouped = (function (_super) {
     };
     AnalyticsReportsRevenuesGrouped.prototype.export = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var localUriHelper, uri, result, err_2;
+            var localUriHelper, uri, result, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -71,8 +71,8 @@ var AnalyticsReportsRevenuesGrouped = (function (_super) {
                         result = _a.sent();
                         return [2, result];
                     case 2:
-                        err_2 = _a.sent();
-                        throw new AnalyticsReportsRevenuesGroupedExportFetchError(undefined, { error: err_2 });
+                        error_2 = _a.sent();
+                        throw new AnalyticsReportsRevenuesGroupedExportFetchError(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }
             });

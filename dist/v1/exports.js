@@ -34,7 +34,7 @@ var ExportsV1 = (function () {
                             }];
                     case 2:
                         error_1 = _a.sent();
-                        throw new exports_1.ExportsGobdFetchFailed(undefined, { error: error_1 });
+                        throw new exports_1.ExportsGobdFetchFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });

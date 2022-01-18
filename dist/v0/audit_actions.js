@@ -16,7 +16,7 @@ var AuditActions = (function () {
     AuditActions.prototype.getAll = function (q) {
         var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var next, base, uri, response_1, err_1;
+            var next, base, uri, response_1, error_1;
             var _this = this;
             return tslib_1.__generator(this, function (_b) {
                 switch (_b.label) {
@@ -38,8 +38,8 @@ var AuditActions = (function () {
                                 next: next
                             }];
                     case 2:
-                        err_1 = _b.sent();
-                        throw new errors.AuditActionsFetchAllFailed();
+                        error_1 = _b.sent();
+                        throw new errors.AuditActionsFetchAllFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -47,7 +47,7 @@ var AuditActions = (function () {
     };
     AuditActions.prototype.meta = function (q) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_2;
+            var base, uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -64,8 +64,8 @@ var AuditActions = (function () {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        err_2 = _a.sent();
-                        throw new errors.AuditActionsGetMetaFailed();
+                        error_2 = _a.sent();
+                        throw new errors.AuditActionsGetMetaFailed(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }
             });
@@ -73,7 +73,7 @@ var AuditActions = (function () {
     };
     AuditActions.prototype.get = function (requestObject) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var auditActionId, query, base, uri, response, err_3;
+            var auditActionId, query, base, uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -91,8 +91,8 @@ var AuditActions = (function () {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        err_3 = _a.sent();
-                        throw new errors.AuditActionsFetchOneFailed();
+                        error_3 = _a.sent();
+                        throw new errors.AuditActionsFetchOneFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });
@@ -100,7 +100,7 @@ var AuditActions = (function () {
     };
     AuditActions.prototype.create = function (body) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_4;
+            var uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -115,8 +115,8 @@ var AuditActions = (function () {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        err_4 = _a.sent();
-                        throw new errors.AuditActionsCreateFailed();
+                        error_4 = _a.sent();
+                        throw new errors.AuditActionsCreateFailed(error_4.message, { error: error_4 });
                     case 4: return [2];
                 }
             });
@@ -124,7 +124,7 @@ var AuditActions = (function () {
     };
     AuditActions.prototype.getTypes = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, err_5;
+            var base, uri, response, error_5;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -138,8 +138,8 @@ var AuditActions = (function () {
                                 data: response.data.results
                             }];
                     case 2:
-                        err_5 = _a.sent();
-                        throw new errors.AuditActionsTypesFetchFailed();
+                        error_5 = _a.sent();
+                        throw new errors.AuditActionsTypesFetchFailed(error_5.message, { error: error_5 });
                     case 3: return [2];
                 }
             });

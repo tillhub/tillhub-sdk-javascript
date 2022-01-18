@@ -45,7 +45,7 @@ var Transactions = (function (_super) {
                             }];
                     case 2:
                         error_1 = _b.sent();
-                        throw new TransactionFetchFailed(undefined, { error: error_1 });
+                        throw new TransactionFetchFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
@@ -71,7 +71,7 @@ var Transactions = (function (_super) {
                             }];
                     case 2:
                         error_2 = _a.sent();
-                        throw new TransactionsGetMetaFailed(undefined, { error: error_2 });
+                        throw new TransactionsGetMetaFailed(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }
             });
@@ -98,7 +98,7 @@ var Transactions = (function (_super) {
                             }];
                     case 2:
                         error_3 = _a.sent();
-                        throw new TransactionsGetImageFailed(undefined, { error: error_3 });
+                        throw new TransactionsGetImageFailed(error_3.message, { error: error_3 });
                     case 3: return [2];
                 }
             });
@@ -123,7 +123,7 @@ var Transactions = (function (_super) {
                             }];
                     case 2:
                         error_4 = _a.sent();
-                        throw new TransactionsImagePutFailed(undefined, { error: error_4 });
+                        throw new TransactionsImagePutFailed(error_4.message, { error: error_4 });
                     case 3: return [2];
                 }
             });
@@ -148,7 +148,7 @@ var Transactions = (function (_super) {
                             }];
                     case 2:
                         error_5 = _a.sent();
-                        throw new TransactionsImageCreateFailed(undefined, { error: error_5 });
+                        throw new TransactionsImageCreateFailed(error_5.message, { error: error_5 });
                     case 3: return [2];
                 }
             });
@@ -192,7 +192,7 @@ var TransactionsLegacy = (function () {
                             }];
                     case 2:
                         error_6 = _b.sent();
-                        throw new TransactionFetchFailed(undefined, { error: error_6 });
+                        throw new TransactionFetchFailed(error_6.message, { error: error_6 });
                     case 3: return [2];
                 }
             });
@@ -200,7 +200,7 @@ var TransactionsLegacy = (function () {
     };
     TransactionsLegacy.prototype.pdfUri = function (requestObject) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var query, transactionId, template, base, uri, response, err_1;
+            var query, transactionId, template, base, uri, response, error_7;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -221,8 +221,8 @@ var TransactionsLegacy = (function () {
                                 data: response.data.results
                             }];
                     case 3:
-                        err_1 = _a.sent();
-                        throw new TransactionPdfFailed(err_1.message);
+                        error_7 = _a.sent();
+                        throw new TransactionPdfFailed(error_7.message);
                     case 4: return [2];
                 }
             });
@@ -230,7 +230,7 @@ var TransactionsLegacy = (function () {
     };
     TransactionsLegacy.prototype.meta = function (q) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_7;
+            var base, uri, response, error_8;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -247,8 +247,8 @@ var TransactionsLegacy = (function () {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        error_7 = _a.sent();
-                        throw new TransactionsGetMetaFailed(undefined, { error: error_7 });
+                        error_8 = _a.sent();
+                        throw new TransactionsGetMetaFailed(error_8.message, { error: error_8 });
                     case 3: return [2];
                 }
             });
@@ -268,7 +268,7 @@ var Signing = (function () {
     }
     Signing.prototype.initialise = function (singingResourceType, singingResource, signingSystem, signingConfiguration) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_2;
+            var uri, response, error_9;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -285,8 +285,8 @@ var Signing = (function () {
                                 data: response.data.results
                             }];
                     case 2:
-                        err_2 = _a.sent();
-                        throw new TransactionSigningInitialisationFailed(err_2.message);
+                        error_9 = _a.sent();
+                        throw new TransactionSigningInitialisationFailed(error_9.message, { error: error_9 });
                     case 3: return [2];
                 }
             });
@@ -294,7 +294,7 @@ var Signing = (function () {
     };
     Signing.prototype.yearly = function (singingResourceType, singingResource, signingSystem) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_3;
+            var uri, response, error_10;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -311,8 +311,8 @@ var Signing = (function () {
                                 data: response.data.results
                             }];
                     case 2:
-                        err_3 = _a.sent();
-                        throw new TransactionSigningYearlyReceiptFailed(err_3.message);
+                        error_10 = _a.sent();
+                        throw new TransactionSigningYearlyReceiptFailed(error_10.message, { error: error_10 });
                     case 3: return [2];
                 }
             });
@@ -320,7 +320,7 @@ var Signing = (function () {
     };
     Signing.prototype.monthly = function (singingResourceType, singingResource, signingSystem) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_4;
+            var uri, response, error_11;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -337,8 +337,8 @@ var Signing = (function () {
                                 data: response.data.results
                             }];
                     case 2:
-                        err_4 = _a.sent();
-                        throw new TransactionSigningMonthlyReceiptFailed(err_4.message);
+                        error_11 = _a.sent();
+                        throw new TransactionSigningMonthlyReceiptFailed(error_11.message, { error: error_11 });
                     case 3: return [2];
                 }
             });
@@ -346,7 +346,7 @@ var Signing = (function () {
     };
     Signing.prototype.zero = function (singingResourceType, singingResource, signingSystem) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, err_5;
+            var uri, response, error_12;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -363,8 +363,8 @@ var Signing = (function () {
                                 data: response.data.results
                             }];
                     case 2:
-                        err_5 = _a.sent();
-                        throw new TransactionSigningZeroReceiptFailed(err_5.message);
+                        error_12 = _a.sent();
+                        throw new TransactionSigningZeroReceiptFailed(error_12.message, { error: error_12 });
                     case 3: return [2];
                 }
             });

@@ -44,7 +44,7 @@ var CountingProtocols = (function (_super) {
                             }];
                     case 3:
                         error_1 = _a.sent();
-                        throw new CountingProtocolsFetchFailed(undefined, { error: error_1 });
+                        throw new CountingProtocolsFetchFailed(error_1.message, { error: error_1 });
                     case 4: return [2];
                 }
             });
@@ -69,7 +69,7 @@ var CountingProtocols = (function (_super) {
                             }];
                     case 2:
                         error_2 = _a.sent();
-                        throw new CountingProtocolsMetaFailed(undefined, { error: error_2 });
+                        throw new CountingProtocolsMetaFailed(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }
             });
