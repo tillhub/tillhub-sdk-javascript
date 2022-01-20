@@ -31,7 +31,7 @@ describe('v1: Branches', () => {
   it('can get one', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
-        .onGet(`https://api.tillhub.com/api/v1/branches/${legacyId}/${branchId}`)
+        .onGet(`https://api.tillhub.com/api/v0/branches/${legacyId}/${branchId}`)
         .reply(() => {
           return [
             200,
@@ -55,7 +55,7 @@ describe('v1: Branches', () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
         .onGet(
-          `https://api.tillhub.com/api/v1/branches/${legacyId}/${branchId}`
+          `https://api.tillhub.com/api/v0/branches/${legacyId}/${branchId}`
         )
         .reply(() => {
           return [205]

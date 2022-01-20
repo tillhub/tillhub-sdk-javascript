@@ -139,7 +139,9 @@ export class Branches extends ThBaseHandler {
   }
 
   async get (branchId: string): Promise<BranchResponse> {
-    const uri = this.uriHelper.generateBaseUri(`/${branchId}`)
+    // Branches V1 GET for single branch is not supported yet, so we'll use the V0 for the meantime
+    const localUriHelper = new UriHelper('/api/v0/branches', this.options)
+    const uri = localUriHelper.generateBaseUri(`/${branchId}`)
     try {
       const response = await this.http.getClient().get(uri)
       if (response.status !== 200) { throw new BranchFetchFailed(undefined, { status: response.status }) }
