@@ -85,11 +85,12 @@ var Branches = (function (_super) {
     };
     Branches.prototype.get = function (branchId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_3;
+            var localUriHelper, uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = this.uriHelper.generateBaseUri("/" + branchId);
+                        localUriHelper = new uri_helper_1.UriHelper('/api/v0/branches', this.options);
+                        uri = localUriHelper.generateBaseUri("/" + branchId);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);

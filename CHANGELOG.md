@@ -1,3 +1,10 @@
+## [4.37.3](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.37.2...v4.37.3) (2022-01-20)
+
+
+### Bug Fixes
+
+* **v1/branches:** get branch from v0 - as v1 not supported yet ([e4b92a4](https://github.com/tillhub/tillhub-sdk-javascript/commit/e4b92a4e58cdef011e3f9fa6fb9c71d31de6b174))
+
 ## [4.37.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.37.1...v4.37.2) (2022-01-18)
 
 
