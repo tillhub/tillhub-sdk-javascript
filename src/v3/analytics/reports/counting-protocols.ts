@@ -1,18 +1,11 @@
-import { ThAnalyticsBaseHandler } from '../../../base'
+import { ThAnalyticsBaseHandler, AnalyticsSocketsExportResponseItem } from '../../../base'
 import { Client } from '../../../client'
 import {
-  AnalyticsReportsCountingProtocolsExportResponseItem,
   AnalyticsReportsCountingProtocolsExportFetchError
 } from '../../../v2/analytics/reports/counting-protocols'
 import { AnalyticsOptions } from '../../../v0/analytics'
 
 import { UriHelper } from '../../../uri-helper'
-
-export interface AnalyticsResponse {
-  data: AnalyticsReportsCountingProtocolsExportResponseItem[]
-  metadata: Record<string, unknown>
-  msg?: string
-}
 
 export class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
   http: Client
@@ -34,20 +27,13 @@ export class AnalyticsReportsCountingProtocols extends ThAnalyticsBaseHandler {
 
   public async export (
     query?: Record<string, unknown>
-  ): Promise<AnalyticsResponse> {
+  ): Promise<AnalyticsSocketsExportResponseItem> {
     try {
       const localUriHelper = new UriHelper('/api/v3/analytics', this.options)
-      const base = localUriHelper.generateBaseUri('/reports/cashier_counting_protocols/overview')
-      const uri = localUriHelper.generateUriWithQuery(base, query)
+      const uri = localUriHelper.generateBaseUri('/reports/cashier_counting_protocols/overview')
+      const result = await this.handleSocketsExport(uri, query)
 
-      const response = await this.http.getClient().get(uri)
-      if (response.status !== 200) throw new AnalyticsReportsCountingProtocolsExportFetchError()
-      return {
-        data: response.data.results,
-        metadata: {
-          count: response.data.count
-        }
-      }
+      return result
     } catch (error: any) {
       throw new AnalyticsReportsCountingProtocolsExportFetchError(error.message, { error })
     }

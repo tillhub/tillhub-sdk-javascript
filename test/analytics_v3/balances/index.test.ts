@@ -27,6 +27,7 @@ const query = {
   date_start: '2019-03-18T22:59:59.999Z',
   date_end: '2019-03-07T23:00:00.000Z'
 }
+const FORMAT_CSV = qs.stringify({ format: 'csv' })
 
 const balancesData = {
   correlationId: 'asdf-1234-zxcv-4567'
@@ -36,7 +37,7 @@ describe('v3: AnalyticsReportsBalances', () => {
   it('can get balances analytics reports export', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
-        .onGet(`https://api.tillhub.com/api/v3/analytics/${legacyId}/reports/balances/overview?${qs.stringify(query)}`)
+        .onGet(`https://api.tillhub.com/api/v3/analytics/${legacyId}/reports/balances/overview?${FORMAT_CSV}&${qs.stringify(query)}`)
         .reply(() => {
           return [
             200,
@@ -64,7 +65,7 @@ describe('v3: AnalyticsReportsBalances', () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
         .onGet(
-          `https://api.tillhub.com/api/v3/analytics/${legacyId}/reports/balances/overview?${qs.stringify(query)}`
+          `https://api.tillhub.com/api/v3/analytics/${legacyId}/reports/balances/overview?${FORMAT_CSV}&${qs.stringify(query)}`
         )
         .reply(() => {
           return [205]
