@@ -31,12 +31,13 @@ const query = {
 const transactionsData = {
   correlationId: 'asdf-1234-zxcv-4567'
 }
+const FORMAT_CSV = qs.stringify({ format: 'csv' })
 
 describe('v3: AnalyticsReportsTransactions', () => {
   it('can get transactions analytics reports export', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
-        .onGet(`https://api.tillhub.com/api/v3/analytics/${legacyId}/reports/transactions/overview?${qs.stringify(query)}`)
+        .onGet(`https://api.tillhub.com/api/v3/analytics/${legacyId}/reports/transactions/overview?${FORMAT_CSV}&${qs.stringify(query)}`)
         .reply(() => {
           return [
             200,
@@ -64,7 +65,7 @@ describe('v3: AnalyticsReportsTransactions', () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
         .onGet(
-          `https://api.tillhub.com/api/v3/analytics/${legacyId}/reports/transactions/overview?${qs.stringify(query)}`
+          `https://api.tillhub.com/api/v3/analytics/${legacyId}/reports/transactions/overview?${FORMAT_CSV}&${qs.stringify(query)}`
         )
         .reply(() => {
           return [205]

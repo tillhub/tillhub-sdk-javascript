@@ -1,4 +1,7 @@
-import { ThAnalyticsBaseHandler } from '../../../base'
+import {
+  ThAnalyticsBaseHandler,
+  AnalyticsSocketsExportResponseItem
+} from '../../../base'
 import { Client } from '../../../client'
 import { BaseError } from '../../../errors'
 import { UriHelper } from '../../../uri-helper'
@@ -6,16 +9,6 @@ import { UriHelper } from '../../../uri-helper'
 export interface DatevHandlerOptions {
   user?: string
   base?: string
-}
-
-export interface AnalyticsReportsDatevV3ExportResponseItem {
-  correlationId?: string
-}
-
-export interface AnalyticsResponse {
-  data: AnalyticsReportsDatevV3ExportResponseItem[]
-  metadata: Record<string, unknown>
-  msg?: string
 }
 
 export class AnalyticsReportsDatev extends ThAnalyticsBaseHandler {
@@ -38,20 +31,13 @@ export class AnalyticsReportsDatev extends ThAnalyticsBaseHandler {
 
   public async export (
     query?: Record<string, unknown>
-  ): Promise<AnalyticsResponse> {
+  ): Promise<AnalyticsSocketsExportResponseItem> {
     try {
       const localUriHelper = new UriHelper('/api/v3/analytics', this.options)
-      const base = localUriHelper.generateBaseUri('/reports/datev')
-      const uri = localUriHelper.generateUriWithQuery(base, query)
+      const uri = localUriHelper.generateBaseUri('/reports/datev')
+      const result = await this.handleSocketsExport(uri, query)
 
-      const response = await this.http.getClient().get(uri)
-      if (response.status !== 200) throw new AnalyticsReportsV3DatevExportFetchError()
-      return {
-        data: response.data.results,
-        metadata: {
-          count: response.data.count
-        }
-      }
+      return result
     } catch (error: any) {
       throw new AnalyticsReportsV3DatevExportFetchError(error.message, { error })
     }
