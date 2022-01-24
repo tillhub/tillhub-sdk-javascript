@@ -18,25 +18,17 @@ var AnalyticsReportsBalances = (function (_super) {
     };
     AnalyticsReportsBalances.prototype.export = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var localUriHelper, base, uri, response, error_1;
+            var localUriHelper, uri, result, error_1;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         localUriHelper = new uri_helper_1.UriHelper('/api/v3/analytics', this.options);
-                        base = localUriHelper.generateBaseUri('/reports/balances/overview');
-                        uri = localUriHelper.generateUriWithQuery(base, query);
-                        return [4, this.http.getClient().get(uri)];
+                        uri = localUriHelper.generateBaseUri('/reports/balances/overview');
+                        return [4, this.handleSocketsExport(uri, query)];
                     case 1:
-                        response = _a.sent();
-                        if (response.status !== 200)
-                            throw new AnalyticsReportsV3BalancesExportFetchError();
-                        return [2, {
-                                data: response.data.results,
-                                metadata: {
-                                    count: response.data.count
-                                }
-                            }];
+                        result = _a.sent();
+                        return [2, result];
                     case 2:
                         error_1 = _a.sent();
                         throw new AnalyticsReportsV3BalancesExportFetchError(error_1.message, { error: error_1 });

@@ -1,24 +1,29 @@
-import { ThAnalyticsBaseHandler } from '../../../base';
+import { ThAnalyticsBaseHandler, AnalyticsSocketsExportResponseItem } from '../../../base';
 import { Client } from '../../../client';
 import { BaseError } from '../../../errors';
-export interface TransactionsHandlerOptions {
-    user?: string;
-    base?: string;
-}
-export interface AnalyticsReportsTransactionsV3ExportResponseItem {
-    correlationId?: string;
-}
-export interface AnalyticsResponse {
-    data: AnalyticsReportsTransactionsV3ExportResponseItem[];
-    metadata: Record<string, unknown>;
-    msg?: string;
+import { AnalyticsOptions } from '../../../v0/analytics';
+export interface AnalyticsReportsTransactionsOverviewResponseItem {
+    data: Array<Record<string, unknown>>;
+    summary: Array<Record<string, unknown>>;
+    metaData: {
+        count: number;
+        total_count: number;
+    };
+    next?: () => Promise<AnalyticsReportsTransactionsOverviewResponseItem>;
 }
 export declare class AnalyticsReportsTransactions extends ThAnalyticsBaseHandler {
     http: Client;
-    options: TransactionsHandlerOptions;
-    constructor(options: TransactionsHandlerOptions, http: Client);
+    options: AnalyticsOptions;
+    timeout: AnalyticsOptions['timeout'];
+    constructor(options: AnalyticsOptions, http: Client);
     static create(options: Record<string, unknown>, http: Client): AnalyticsReportsTransactions;
-    export(query?: Record<string, unknown>): Promise<AnalyticsResponse>;
+    getAll(query?: Record<string, unknown>): Promise<AnalyticsReportsTransactionsOverviewResponseItem>;
+    export(query?: Record<string, unknown>): Promise<AnalyticsSocketsExportResponseItem>;
+}
+export declare class AnalyticsReportsTransactionsOverviewFetchError extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class AnalyticsReportsV3TransactionsExportFetchError extends BaseError {
     message: string;

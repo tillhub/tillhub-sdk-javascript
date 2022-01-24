@@ -1,3 +1,11 @@
+# [4.38.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.37.3...v4.38.0) (2022-01-24)
+
+
+### Features
+
+* **v3/analytics:** use handleSocketsExport ([cddc7d1](https://github.com/tillhub/tillhub-sdk-javascript/commit/cddc7d1aebf9683ba86dc339c7b862f164af6576))
+* **v3/transactions:** add get all handler ([bb449b2](https://github.com/tillhub/tillhub-sdk-javascript/commit/bb449b27956f55cec697b19fe8963df7081db753))
+
 ## [4.37.3](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.37.2...v4.37.3) (2022-01-20)
 
 
