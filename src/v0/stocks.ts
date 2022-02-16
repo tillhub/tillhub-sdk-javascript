@@ -227,10 +227,10 @@ export class StocksBook {
     }
   }
 
-  async meta (): Promise<StocksResponse> {
+  async meta (query?: StocksBookQuery | undefined): Promise<StocksResponse> {
     try {
       const base = this.uriHelper.generateBaseUri('/book/meta')
-      const uri = this.uriHelper.generateUriWithQuery(base)
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri)
 
