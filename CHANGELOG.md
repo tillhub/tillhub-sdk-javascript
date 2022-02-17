@@ -1,3 +1,10 @@
+# [4.39.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.38.1...v4.39.0) (2022-02-17)
+
+
+### Features
+
+* **bot:** change bot ([#417](https://github.com/tillhub/tillhub-sdk-javascript/issues/417)) ([9fab7ef](https://github.com/tillhub/tillhub-sdk-javascript/commit/9fab7efff54962a1a9af988783942d9a7025a560))
+
 # [4.38.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.37.3...v4.38.0) (2022-01-24)
 
 

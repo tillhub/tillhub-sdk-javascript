@@ -82,7 +82,7 @@ export declare class StocksBook {
     uriHelper: UriHelper;
     constructor(options: StocksOptions, http: Client);
     getAll(query?: StocksBookQuery | undefined): Promise<StocksResponse>;
-    meta(): Promise<StocksResponse>;
+    meta(query?: StocksBookQuery | undefined): Promise<StocksResponse>;
 }
 export declare class StocksBookFetchFailed extends BaseError {
     message: string;

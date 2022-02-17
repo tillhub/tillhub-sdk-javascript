@@ -225,7 +225,7 @@ var StocksBook = (function () {
             });
         });
     };
-    StocksBook.prototype.meta = function () {
+    StocksBook.prototype.meta = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_8;
             return tslib_1.__generator(this, function (_a) {
@@ -233,7 +233,7 @@ var StocksBook = (function () {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/book/meta');
-                        uri = this.uriHelper.generateUriWithQuery(base);
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         return [4, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
