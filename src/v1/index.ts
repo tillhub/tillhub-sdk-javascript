@@ -12,6 +12,7 @@ import { SafesLogBook } from './safes'
 import { ExportsV1 } from './exports'
 import { StocksBook } from './stocks'
 import { Branches } from './branches'
+import { Tags } from './tags'
 import analytics from './analytics'
 import { AuditLogs } from './audit_logs'
 
@@ -27,6 +28,7 @@ export {
   Vouchers,
   Customers,
   Carts,
+  Tags,
   SafesLogBook,
   ExportsV1,
   StocksBook,
