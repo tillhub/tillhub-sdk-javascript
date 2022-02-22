@@ -9,7 +9,10 @@ var Tags = (function (_super) {
     tslib_1.__extends(Tags, _super);
     function Tags(options, http) {
         var _a, _b;
-        var _this = _super.call(this, http, { endpoint: Tags.baseEndpoint, base: (_a = options.base) !== null && _a !== void 0 ? _a : 'https://api.tillhub.com' }) || this;
+        var _this = _super.call(this, http, {
+            endpoint: Tags.baseEndpoint,
+            base: (_a = options.base) !== null && _a !== void 0 ? _a : 'https://api.tillhub.com'
+        }) || this;
         _this.options = options;
         _this.http = http;
         _this.endpoint = Tags.baseEndpoint;
@@ -31,6 +34,9 @@ var Tags = (function (_super) {
                         return [4, this.http.getClient().get(uri)];
                     case 1:
                         response_1 = _b.sent();
+                        if (response_1.status !== 200) {
+                            throw new errors.TagsFetchAllFailed(undefined, { status: response_1.status });
+                        }
                         if ((_a = response_1.data.cursor) === null || _a === void 0 ? void 0 : _a.next) {
                             next = function () { return _this.getAll({ uri: response_1.data.cursor.next }); };
                         }
@@ -42,31 +48,6 @@ var Tags = (function (_super) {
                     case 2:
                         error_1 = _b.sent();
                         throw new errors.TagsFetchAllFailed(error_1.message, { error: error_1 });
-                    case 3: return [2];
-                }
-            });
-        });
-    };
-    Tags.prototype.meta = function () {
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_2;
-            return tslib_1.__generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        uri = this.uriHelper.generateBaseUri('/meta');
-                        return [4, this.http.getClient().get(uri)];
-                    case 1:
-                        response = _a.sent();
-                        if (response.status !== 200)
-                            throw new errors.TagsGetMetaFailed();
-                        return [2, {
-                                data: response.data.results,
-                                metadata: { count: response.data.count }
-                            }];
-                    case 2:
-                        error_2 = _a.sent();
-                        throw new errors.TagsGetMetaFailed(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }
             });

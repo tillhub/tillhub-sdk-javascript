@@ -1,3 +1,10 @@
+# [4.41.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.40.0...v4.41.0) (2022-02-22)
+
+
+### Features
+
+* **tags:** refactor v1  code ([#419](https://github.com/tillhub/tillhub-sdk-javascript/issues/419)) ([df551bf](https://github.com/tillhub/tillhub-sdk-javascript/commit/df551bf0584f1ba805993463bf6e28f8e6a93b1f))
+
 # [4.40.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.39.0...v4.40.0) (2022-02-22)
 
 
