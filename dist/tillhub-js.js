@@ -417,6 +417,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.tags = function () {
         return this.generateAuthenticatedInstance(v0.Tags);
     };
+    TillhubClient.prototype.tagsV1 = function () {
+        return this.generateAuthenticatedInstance(v1.Tags);
+    };
     TillhubClient.prototype.safes = function () {
         return this.generateAuthenticatedInstance(v0.Safes);
     };

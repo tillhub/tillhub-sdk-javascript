@@ -1,3 +1,10 @@
+# [4.40.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.39.0...v4.40.0) (2022-02-22)
+
+
+### Features
+
+* **tags:** add v1 getAll ([#418](https://github.com/tillhub/tillhub-sdk-javascript/issues/418)) ([8833a46](https://github.com/tillhub/tillhub-sdk-javascript/commit/8833a46a175bce5acbe9eed2f1a08534606fa705))
+
 # [4.39.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.38.1...v4.39.0) (2022-02-17)
 
 
