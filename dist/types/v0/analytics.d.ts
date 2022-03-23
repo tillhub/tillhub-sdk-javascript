@@ -64,6 +64,19 @@ export interface VoucherOptions {
     delta?: string;
     type?: 'update:update' | 'update:decrement' | 'update:increment' | 'create';
 }
+export interface DiscountOptions {
+    [key: string]: any;
+    branch?: string;
+    product?: string;
+    discount?: string;
+    discount_rate?: string;
+    limit?: number;
+    offset?: number;
+    start?: string;
+    end?: string;
+    q?: string;
+    format?: string;
+}
 export interface ExportFormatOptions {
     format?: string;
     branch_number?: number;
@@ -142,6 +155,7 @@ export declare class Analytics {
     getProductGroupsReport(query?: RevenuBasicOptions | undefined): Promise<AnalyticsResponse>;
     getRefundsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse>;
     getVouchersReports(query?: VoucherOptions | undefined): Promise<AnalyticsResponse>;
+    getDiscountsReports(query?: DiscountOptions | undefined): Promise<AnalyticsResponse>;
     getProductsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse>;
     getPaymentsReport(query?: PaymentsReportOptions): Promise<AnalyticsResponse>;
     getTopPaymentsReport(query?: TopPaymentsReportOptions): Promise<AnalyticsResponse>;
@@ -170,6 +184,11 @@ export declare class RefundsReportFetchFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class VouchersReportFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class DiscountsReportFetchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

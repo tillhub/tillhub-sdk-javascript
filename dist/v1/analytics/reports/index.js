@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var customers_1 = require("./customers");
 var payments_1 = require("./payments");
 var vouchers_1 = require("./vouchers");
+var discounts_1 = require("./discounts");
 var vat_1 = require("./vat");
 var product_groups_1 = require("./product_groups");
 var payment_options_1 = require("./payment_options");
@@ -12,6 +13,7 @@ exports.default = {
     AnalyticsReportsCustomers: customers_1.AnalyticsReportsCustomers,
     AnalyticsReportsPayments: payments_1.AnalyticsReportsPayments,
     AnalyticsReportsVouchers: vouchers_1.AnalyticsReportsVouchers,
+    AnalyticsReportsDiscounts: discounts_1.AnalyticsReportsDiscounts,
     AnalyticsReportsVat: vat_1.AnalyticsReportsVat,
     AnalyticsReportsProductGroups: product_groups_1.AnalyticsReportsProductGroups,
     AnalyticsReportsPaymentOptions: payment_options_1.AnalyticsReportsPaymentOptions,

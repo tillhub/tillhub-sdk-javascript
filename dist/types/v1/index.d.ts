@@ -22,6 +22,7 @@ export interface AnalyticsHandlersV1Types {
             AnalyticsReportsCustomers: any;
             AnalyticsReportsPayments: any;
             AnalyticsReportsVouchers: any;
+            AnalyticsReportsDiscounts: any;
             AnalyticsReportsVat: any;
             AnalyticsReportsProductGroups: any;
             AnalyticsReportsPaymentOptions: any;

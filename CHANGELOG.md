@@ -1,3 +1,10 @@
+# [4.42.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.41.0...v4.42.0) (2022-03-23)
+
+
+### Features
+
+* **discounts:** add discounts report ([#425](https://github.com/tillhub/tillhub-sdk-javascript/issues/425)) ([ea3e109](https://github.com/tillhub/tillhub-sdk-javascript/commit/ea3e109c23fa21417ba6a374fc0ce4346758b565))
+
 # [4.41.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.40.0...v4.41.0) (2022-02-22)
 
 

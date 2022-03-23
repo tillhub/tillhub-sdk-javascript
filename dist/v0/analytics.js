@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StatisticsProductFetchFailed = exports.StaffOverviewFetchFailed = exports.StatisticsProductChildrenFetchFailed = exports.ProductGroupsReportFetchFailed = exports.ProductGroupsStaffReportFetchFailed = exports.SimpleSalesCartItemsReportFetchFailed = exports.ReportsCustomerCustomersFailed = exports.ReportsCustomerTransactionsFailed = exports.ReportsCustomerOverviewFailed = exports.ReportsProductGroupsFetchFailed = exports.ReportsProductGroupsFiltersFetchFailed = exports.RevenuesFetchFailed = exports.TopPaymentsReportFetchFailed = exports.PaymentsReportFetchFailed = exports.ProductsReportFetchFailed = exports.VouchersReportFetchFailed = exports.RefundsReportFetchFailed = exports.ReportsStocksFetchFailed = exports.Analytics = void 0;
+exports.StatisticsProductFetchFailed = exports.StaffOverviewFetchFailed = exports.StatisticsProductChildrenFetchFailed = exports.ProductGroupsReportFetchFailed = exports.ProductGroupsStaffReportFetchFailed = exports.SimpleSalesCartItemsReportFetchFailed = exports.ReportsCustomerCustomersFailed = exports.ReportsCustomerTransactionsFailed = exports.ReportsCustomerOverviewFailed = exports.ReportsProductGroupsFetchFailed = exports.ReportsProductGroupsFiltersFetchFailed = exports.RevenuesFetchFailed = exports.TopPaymentsReportFetchFailed = exports.PaymentsReportFetchFailed = exports.ProductsReportFetchFailed = exports.DiscountsReportFetchFailed = exports.VouchersReportFetchFailed = exports.RefundsReportFetchFailed = exports.ReportsStocksFetchFailed = exports.Analytics = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -311,9 +311,35 @@ var Analytics = (function () {
             });
         });
     };
-    Analytics.prototype.getProductsReport = function (options) {
+    Analytics.prototype.getDiscountsReports = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_12;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri('/reports/discounts');
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200)
+                            throw new DiscountsReportFetchFailed(undefined, { status: response.status });
+                        return [2, {
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            }];
+                    case 2:
+                        error_12 = _a.sent();
+                        throw new DiscountsReportFetchFailed(error_12.message, { error: error_12 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    Analytics.prototype.getProductsReport = function (options) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_13;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -330,8 +356,8 @@ var Analytics = (function () {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        error_12 = _a.sent();
-                        throw new ProductsReportFetchFailed(error_12.message, { error: error_12 });
+                        error_13 = _a.sent();
+                        throw new ProductsReportFetchFailed(error_13.message, { error: error_13 });
                     case 3: return [2];
                 }
             });
@@ -339,7 +365,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getPaymentsReport = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_13;
+            var base, uri, response, error_14;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -356,8 +382,8 @@ var Analytics = (function () {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        error_13 = _a.sent();
-                        throw new PaymentsReportFetchFailed(error_13.message, { error: error_13 });
+                        error_14 = _a.sent();
+                        throw new PaymentsReportFetchFailed(error_14.message, { error: error_14 });
                     case 3: return [2];
                 }
             });
@@ -365,7 +391,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getTopPaymentsReport = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_14;
+            var base, uri, response, error_15;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -382,8 +408,8 @@ var Analytics = (function () {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        error_14 = _a.sent();
-                        throw new TopPaymentsReportFetchFailed(error_14.message, { error: error_14 });
+                        error_15 = _a.sent();
+                        throw new TopPaymentsReportFetchFailed(error_15.message, { error: error_15 });
                     case 3: return [2];
                 }
             });
@@ -391,7 +417,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getSimpleSalesCartItems = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_15;
+            var base, uri, response, error_16;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -411,8 +437,8 @@ var Analytics = (function () {
                                 }
                             }];
                     case 2:
-                        error_15 = _a.sent();
-                        throw new SimpleSalesCartItemsReportFetchFailed(error_15.message, { error: error_15 });
+                        error_16 = _a.sent();
+                        throw new SimpleSalesCartItemsReportFetchFailed(error_16.message, { error: error_16 });
                     case 3: return [2];
                 }
             });
@@ -420,7 +446,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getCustomersReport = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_16;
+            var base, uri, response, error_17;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -437,8 +463,8 @@ var Analytics = (function () {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        error_16 = _a.sent();
-                        throw new ReportsCustomerCustomersFailed(error_16.message, { error: error_16 });
+                        error_17 = _a.sent();
+                        throw new ReportsCustomerCustomersFailed(error_17.message, { error: error_17 });
                     case 3: return [2];
                 }
             });
@@ -446,7 +472,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getCustomersTransaction = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_17;
+            var base, uri, response, error_18;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -463,8 +489,8 @@ var Analytics = (function () {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        error_17 = _a.sent();
-                        throw new ReportsCustomerTransactionsFailed(error_17.message, { error: error_17 });
+                        error_18 = _a.sent();
+                        throw new ReportsCustomerTransactionsFailed(error_18.message, { error: error_18 });
                     case 3: return [2];
                 }
             });
@@ -472,7 +498,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getCustomersOverview = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_18;
+            var base, uri, response, error_19;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -489,8 +515,8 @@ var Analytics = (function () {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        error_18 = _a.sent();
-                        throw new ReportsCustomerOverviewFailed(error_18.message, { error: error_18 });
+                        error_19 = _a.sent();
+                        throw new ReportsCustomerOverviewFailed(error_19.message, { error: error_19 });
                     case 3: return [2];
                 }
             });
@@ -498,7 +524,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getStocksReport = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var localUriHelper, base, uri, response, error_19;
+            var localUriHelper, base, uri, response, error_20;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -516,8 +542,8 @@ var Analytics = (function () {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        error_19 = _a.sent();
-                        throw new ReportsStocksFetchFailed(error_19.message, { error: error_19 });
+                        error_20 = _a.sent();
+                        throw new ReportsStocksFetchFailed(error_20.message, { error: error_20 });
                     case 3: return [2];
                 }
             });
@@ -525,7 +551,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getProductGroups = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_20;
+            var base, uri, response, error_21;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -544,8 +570,8 @@ var Analytics = (function () {
                                 }
                             }];
                     case 2:
-                        error_20 = _a.sent();
-                        throw new ReportsProductGroupsFetchFailed(error_20.message, { error: error_20 });
+                        error_21 = _a.sent();
+                        throw new ReportsProductGroupsFetchFailed(error_21.message, { error: error_21 });
                     case 3: return [2];
                 }
             });
@@ -553,7 +579,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getProductGroupsFilters = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_21;
+            var base, uri, response, error_22;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -572,8 +598,8 @@ var Analytics = (function () {
                                 }
                             }];
                     case 2:
-                        error_21 = _a.sent();
-                        throw new ReportsProductGroupsFiltersFetchFailed(error_21.message, { error: error_21 });
+                        error_22 = _a.sent();
+                        throw new ReportsProductGroupsFiltersFetchFailed(error_22.message, { error: error_22 });
                     case 3: return [2];
                 }
             });
@@ -639,6 +665,19 @@ var VouchersReportFetchFailed = (function (_super) {
     return VouchersReportFetchFailed;
 }(errors_1.BaseError));
 exports.VouchersReportFetchFailed = VouchersReportFetchFailed;
+var DiscountsReportFetchFailed = (function (_super) {
+    tslib_1.__extends(DiscountsReportFetchFailed, _super);
+    function DiscountsReportFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the discounts report'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'DiscountsReportFetchFailed';
+        Object.setPrototypeOf(_this, DiscountsReportFetchFailed.prototype);
+        return _this;
+    }
+    return DiscountsReportFetchFailed;
+}(errors_1.BaseError));
+exports.DiscountsReportFetchFailed = DiscountsReportFetchFailed;
 var ProductsReportFetchFailed = (function (_super) {
     tslib_1.__extends(ProductsReportFetchFailed, _super);
     function ProductsReportFetchFailed(message, properties) {

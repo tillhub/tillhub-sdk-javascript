@@ -3,6 +3,7 @@ declare const _default: {
         AnalyticsReportsCustomers: typeof import("./reports/customers").AnalyticsReportsCustomers;
         AnalyticsReportsPayments: typeof import("./reports/payments").AnalyticsReportsPayments;
         AnalyticsReportsVouchers: typeof import("./reports/vouchers").AnalyticsReportsVouchers;
+        AnalyticsReportsDiscounts: typeof import("./reports/discounts").AnalyticsReportsDiscounts;
         AnalyticsReportsVat: typeof import("./reports/vat").AnalyticsReportsVat;
         AnalyticsReportsProductGroups: typeof import("./reports/product_groups").AnalyticsReportsProductGroups;
         AnalyticsReportsPaymentOptions: typeof import("./reports/payment_options").AnalyticsReportsPaymentOptions;
