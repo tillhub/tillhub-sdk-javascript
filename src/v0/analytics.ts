@@ -73,6 +73,20 @@ export interface VoucherOptions {
   type?: 'update:update' | 'update:decrement' | 'update:increment' | 'create'
 }
 
+export interface DiscountOptions {
+  [key: string]: any
+  branch?: string
+  product?: string
+  discount?: string
+  discount_rate?: string
+  limit?: number
+  offset?: number
+  start?: string
+  end?: string
+  q?: string
+  format?: string
+}
+
 export interface ExportFormatOptions {
   format?: string
   branch_number?: number
@@ -354,6 +368,23 @@ export class Analytics {
     }
   }
 
+  async getDiscountsReports (query?: DiscountOptions | undefined): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/discounts')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
+      if (response.status !== 200) throw new DiscountsReportFetchFailed(undefined, { status: response.status })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new DiscountsReportFetchFailed(error.message, { error })
+    }
+  }
+
   async getProductsReport (options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
     try {
       const base = this.uriHelper.generateBaseUri('/reports/staff/products')
@@ -589,6 +620,17 @@ export class VouchersReportFetchFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, VouchersReportFetchFailed.prototype)
+  }
+}
+
+export class DiscountsReportFetchFailed extends BaseError {
+  public name = 'DiscountsReportFetchFailed'
+  constructor (
+    public message: string = 'Could not fetch the discounts report',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, DiscountsReportFetchFailed.prototype)
   }
 }
 

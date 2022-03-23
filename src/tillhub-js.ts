@@ -517,6 +517,7 @@ export class TillhubClient extends events.EventEmitter {
           AnalyticsReportsCustomers: new v1.analytics.reports.AnalyticsReportsCustomers({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http),
           AnalyticsReportsPayments: new v1.analytics.reports.AnalyticsReportsPayments({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http),
           AnalyticsReportsVouchers: new v1.analytics.reports.AnalyticsReportsVouchers({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http),
+          AnalyticsReportsDiscounts: new v1.analytics.reports.AnalyticsReportsDiscounts({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http),
           AnalyticsReportsVat: new v1.analytics.reports.AnalyticsReportsVat({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http),
           AnalyticsReportsProductGroups: new v1.analytics.reports.AnalyticsReportsProductGroups({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http),
           AnalyticsReportsPaymentOptions: new v1.analytics.reports.AnalyticsReportsPaymentOptions({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http),
