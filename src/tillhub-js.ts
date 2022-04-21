@@ -589,7 +589,7 @@ export class TillhubClient extends events.EventEmitter {
    * Create an authenticated Analytics v3 instance
    *
    */
-  analyticsHandlersV3 (): AnalyticsHandlerTypesV3 {
+  analyticsHandlersV3 (axiosOptions?: AxiosOptions): AnalyticsHandlerTypesV3 {
     if (
       !this.options ||
       !this.options.base ||
@@ -604,23 +604,23 @@ export class TillhubClient extends events.EventEmitter {
       analytics: {
         reports: {
           AnalyticsReportsDatev: v3.analytics.reports.AnalyticsReportsDatev.create(
-            { user: this.auth.user, base: this.options.base },
+            { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
             this.http
           ),
           AnalyticsReportsTransactions: v3.analytics.reports.AnalyticsReportsTransactions.create(
-            { user: this.auth.user, base: this.options.base },
+            { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
             this.http
           ),
           AnalyticsReportsBalances: v3.analytics.reports.AnalyticsReportsBalances.create(
-            { user: this.auth.user, base: this.options.base },
+            { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
             this.http
           ),
           AnalyticsReportsCountingProtocols: v3.analytics.reports.AnalyticsReportsCountingProtocols.create(
-            { user: this.auth.user, base: this.options.base },
+            { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
             this.http
           ),
           AnalyticsReportsRevenues: v3.analytics.reports.AnalyticsReportsRevenues.create(
-            { user: this.auth.user, base: this.options.base },
+            { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
             this.http
           )
         }
