@@ -296,8 +296,8 @@ export class Products extends ThBaseHandler {
     }
   }
 
-  async getChildrenDetails (productId: string): Promise<ProductResponse> {
-    const uri = this.uriHelper.generateBaseUri(`/${productId}/children/details`)
+  async getChildrenDetails (productId: string, hideStock?: boolean): Promise<ProductResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${productId}/children/details${hideStock ? '?stock=false' : ''}`)
     try {
       const response = await this.http.getClient().get(uri)
       if (response.status !== 200) {
