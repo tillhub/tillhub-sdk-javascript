@@ -157,7 +157,7 @@ export declare class Products extends ThBaseHandler {
     import(options?: ProductsOptions | undefined): Promise<ProductsResponse>;
     get(productId: string): Promise<ProductResponse>;
     getDetails(productId: string): Promise<ProductResponse>;
-    getChildrenDetails(productId: string): Promise<ProductResponse>;
+    getChildrenDetails(productId: string, hideStock?: boolean): Promise<ProductResponse>;
     meta(): Promise<ProductsResponse>;
     put(productId: string, product: Product): Promise<ProductResponse>;
     bulkCreate(products: Product[], query?: HandlerProductsQuery): Promise<ProductsBulkResponse>;

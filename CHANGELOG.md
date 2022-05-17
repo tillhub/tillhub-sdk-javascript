@@ -1,3 +1,11 @@
+# [4.44.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.43.0...v4.44.0) (2022-05-17)
+
+
+### Features
+
+* **detail:** add stock filter to product detail ([1ccf497](https://github.com/tillhub/tillhub-sdk-javascript/commit/1ccf49799b96278ffd44a613977c9de6d7b0896e))
+* **detail:** refactor ([89ef5fd](https://github.com/tillhub/tillhub-sdk-javascript/commit/89ef5fd3317a799345f51a941495af9950f55f81))
+
 # [4.43.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.42.0...v4.43.0) (2022-04-21)
 
 

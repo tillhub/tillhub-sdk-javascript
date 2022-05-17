@@ -176,13 +176,13 @@ var Products = (function (_super) {
             });
         });
     };
-    Products.prototype.getChildrenDetails = function (productId) {
+    Products.prototype.getChildrenDetails = function (productId, hideStock) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var uri, response, error_6;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = this.uriHelper.generateBaseUri("/" + productId + "/children/details");
+                        uri = this.uriHelper.generateBaseUri("/" + productId + "/children/details" + (hideStock ? '?stock=false' : ''));
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
