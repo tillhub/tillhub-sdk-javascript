@@ -1,3 +1,10 @@
+# [4.45.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.44.0...v4.45.0) (2022-05-31)
+
+
+### Features
+
+* **customers:** migrate customers API to V1 ([9dd7dc2](https://github.com/tillhub/tillhub-sdk-javascript/commit/9dd7dc271771160240ab75c671390b43ec509919))
+
 # [4.44.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.43.0...v4.44.0) (2022-05-17)
 
 
