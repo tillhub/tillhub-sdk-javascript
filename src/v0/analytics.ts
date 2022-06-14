@@ -115,6 +115,14 @@ export interface TopPaymentsReportOptions {
   branch_number?: number
 }
 
+export interface StaffSalesOptions {
+  column?: string
+  direction?: string
+  q?: string
+  format?: string
+  branch?: string
+}
+
 export interface ProductGroupsOptions {
   description?: string
   product_group_id?: string
@@ -531,6 +539,23 @@ export class Analytics {
     }
   }
 
+  async getStaffSales (query?: StaffSalesOptions | undefined): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/staff/sales')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
+      if (response.status !== 200) throw new ReportsStaffSalesFetchFailed(undefined, { status: response.status })
+      return {
+        data: response.data.results,
+        metadata: {
+          count: response.data.count
+        }
+      }
+    } catch (error: any) {
+      throw new ReportsStaffSalesFetchFailed(error.message, { error })
+    }
+  }
+
   async getProductGroups (query?: ProductGroupsOptions | undefined): Promise<AnalyticsResponse> {
     try {
       const base = this.uriHelper.generateBaseUri('/reports/product_groups')
@@ -697,6 +722,17 @@ export class ReportsProductGroupsFetchFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, ReportsProductGroupsFetchFailed.prototype)
+  }
+}
+
+export class ReportsStaffSalesFetchFailed extends BaseError {
+  public name = 'ReportsStaffSalesFetchFailed'
+  constructor (
+    public message: string = 'Could not fetch staff sales',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, ReportsStaffSalesFetchFailed.prototype)
   }
 }
 
