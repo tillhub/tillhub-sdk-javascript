@@ -100,6 +100,13 @@ export interface TopPaymentsReportOptions {
     end?: string;
     branch_number?: number;
 }
+export interface StaffSalesOptions {
+    column?: string;
+    direction?: string;
+    q?: string;
+    format?: string;
+    branch?: string;
+}
 export interface ProductGroupsOptions {
     description?: string;
     product_group_id?: string;
@@ -164,6 +171,7 @@ export declare class Analytics {
     getCustomersTransaction(query: CustomersTransactionOptions): Promise<AnalyticsResponse>;
     getCustomersOverview(query: CustomersTransactionOptions): Promise<AnalyticsResponse>;
     getStocksReport(query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse>;
+    getStaffSales(query?: StaffSalesOptions | undefined): Promise<AnalyticsResponse>;
     getProductGroups(query?: ProductGroupsOptions | undefined): Promise<AnalyticsResponse>;
     getProductGroupsFilters(query: ProductGroupsFilters): Promise<AnalyticsResponse>;
     balances(): Balances;
@@ -219,6 +227,11 @@ export declare class ReportsProductGroupsFiltersFetchFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ReportsProductGroupsFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class ReportsStaffSalesFetchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

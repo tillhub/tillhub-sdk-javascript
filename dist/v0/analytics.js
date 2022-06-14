@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StatisticsProductFetchFailed = exports.StaffOverviewFetchFailed = exports.StatisticsProductChildrenFetchFailed = exports.ProductGroupsReportFetchFailed = exports.ProductGroupsStaffReportFetchFailed = exports.SimpleSalesCartItemsReportFetchFailed = exports.ReportsCustomerCustomersFailed = exports.ReportsCustomerTransactionsFailed = exports.ReportsCustomerOverviewFailed = exports.ReportsProductGroupsFetchFailed = exports.ReportsProductGroupsFiltersFetchFailed = exports.RevenuesFetchFailed = exports.TopPaymentsReportFetchFailed = exports.PaymentsReportFetchFailed = exports.ProductsReportFetchFailed = exports.DiscountsReportFetchFailed = exports.VouchersReportFetchFailed = exports.RefundsReportFetchFailed = exports.ReportsStocksFetchFailed = exports.Analytics = void 0;
+exports.StatisticsProductFetchFailed = exports.StaffOverviewFetchFailed = exports.StatisticsProductChildrenFetchFailed = exports.ProductGroupsReportFetchFailed = exports.ProductGroupsStaffReportFetchFailed = exports.SimpleSalesCartItemsReportFetchFailed = exports.ReportsCustomerCustomersFailed = exports.ReportsCustomerTransactionsFailed = exports.ReportsCustomerOverviewFailed = exports.ReportsStaffSalesFetchFailed = exports.ReportsProductGroupsFetchFailed = exports.ReportsProductGroupsFiltersFetchFailed = exports.RevenuesFetchFailed = exports.TopPaymentsReportFetchFailed = exports.PaymentsReportFetchFailed = exports.ProductsReportFetchFailed = exports.DiscountsReportFetchFailed = exports.VouchersReportFetchFailed = exports.RefundsReportFetchFailed = exports.ReportsStocksFetchFailed = exports.Analytics = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -549,9 +549,37 @@ var Analytics = (function () {
             });
         });
     };
-    Analytics.prototype.getProductGroups = function (query) {
+    Analytics.prototype.getStaffSales = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_21;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri('/reports/staff/sales');
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200)
+                            throw new ReportsStaffSalesFetchFailed(undefined, { status: response.status });
+                        return [2, {
+                                data: response.data.results,
+                                metadata: {
+                                    count: response.data.count
+                                }
+                            }];
+                    case 2:
+                        error_21 = _a.sent();
+                        throw new ReportsStaffSalesFetchFailed(error_21.message, { error: error_21 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    Analytics.prototype.getProductGroups = function (query) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_22;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -570,8 +598,8 @@ var Analytics = (function () {
                                 }
                             }];
                     case 2:
-                        error_21 = _a.sent();
-                        throw new ReportsProductGroupsFetchFailed(error_21.message, { error: error_21 });
+                        error_22 = _a.sent();
+                        throw new ReportsProductGroupsFetchFailed(error_22.message, { error: error_22 });
                     case 3: return [2];
                 }
             });
@@ -579,7 +607,7 @@ var Analytics = (function () {
     };
     Analytics.prototype.getProductGroupsFilters = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_22;
+            var base, uri, response, error_23;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -598,8 +626,8 @@ var Analytics = (function () {
                                 }
                             }];
                     case 2:
-                        error_22 = _a.sent();
-                        throw new ReportsProductGroupsFiltersFetchFailed(error_22.message, { error: error_22 });
+                        error_23 = _a.sent();
+                        throw new ReportsProductGroupsFiltersFetchFailed(error_23.message, { error: error_23 });
                     case 3: return [2];
                 }
             });
@@ -756,6 +784,19 @@ var ReportsProductGroupsFetchFailed = (function (_super) {
     return ReportsProductGroupsFetchFailed;
 }(errors_1.BaseError));
 exports.ReportsProductGroupsFetchFailed = ReportsProductGroupsFetchFailed;
+var ReportsStaffSalesFetchFailed = (function (_super) {
+    tslib_1.__extends(ReportsStaffSalesFetchFailed, _super);
+    function ReportsStaffSalesFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch staff sales'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ReportsStaffSalesFetchFailed';
+        Object.setPrototypeOf(_this, ReportsStaffSalesFetchFailed.prototype);
+        return _this;
+    }
+    return ReportsStaffSalesFetchFailed;
+}(errors_1.BaseError));
+exports.ReportsStaffSalesFetchFailed = ReportsStaffSalesFetchFailed;
 var ReportsCustomerOverviewFailed = (function (_super) {
     tslib_1.__extends(ReportsCustomerOverviewFailed, _super);
     function ReportsCustomerOverviewFailed(message, properties) {

@@ -1,3 +1,10 @@
+# [4.46.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.45.0...v4.46.0) (2022-06-14)
+
+
+### Features
+
+* **report:** add staff sales report ([40ee5c2](https://github.com/tillhub/tillhub-sdk-javascript/commit/40ee5c27c63528874243353a3df99159afac6b68))
+
 # [4.45.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.44.0...v4.45.0) (2022-05-31)
 
 
