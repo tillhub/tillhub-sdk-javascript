@@ -1,7 +1,7 @@
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
-import { Vouchers as VoucherV0, VouchersOptions } from '../v0/vouchers'
+import { Vouchers as VoucherV0, VouchersOptions, VouchersMetaFailed, VouchersMetaQuery } from '../v0/vouchers'
 
 /**
  * @extends "VoucherV0"
@@ -71,6 +71,29 @@ export class Vouchers extends VoucherV0 {
       }
     } catch (error: any) {
       throw new VouchersFetchFailed(error.message, { error })
+    }
+  }
+
+  async meta (q?: VouchersMetaQuery | undefined): Promise<VouchersResponse> {
+    try {
+      const base = this.uriHelperV1.generateBaseUri('/meta')
+      const uri = this.uriHelperV1.generateUriWithQuery(base, q)
+
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new VouchersMetaFailed(undefined, { status: response.status })
+      }
+
+      if (!response.data.results[0]) {
+        throw new VouchersMetaFailed('could not get voucher metadata unexpectedly')
+      }
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new VouchersMetaFailed(error.message, { error })
     }
   }
 }
