@@ -41,7 +41,7 @@ describe('v0: Branches: can get count number of all vouchers logs', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/vouchers/${legacyId}/meta`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v1/vouchers/${legacyId}/meta`).reply(() => {
         return [
           200,
           {
@@ -92,7 +92,7 @@ describe('v0: Branches: can get count number of all vouchers logs', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/vouchers/${legacyId}/meta`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v1/vouchers/${legacyId}/meta`).reply(() => {
         return [302]
       })
     }
