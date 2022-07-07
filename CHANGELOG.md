@@ -1,3 +1,10 @@
+# [4.47.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.46.0...v4.47.0) (2022-07-07)
+
+
+### Features
+
+* **vouchers:** migrate vouchers meta to V1 ([#437](https://github.com/tillhub/tillhub-sdk-javascript/issues/437)) ([4294864](https://github.com/tillhub/tillhub-sdk-javascript/commit/42948642b786cb12606663b2ad2144050eaba7b8))
+
 # [4.46.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.45.0...v4.46.0) (2022-06-14)
 
 

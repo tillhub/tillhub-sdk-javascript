@@ -46,6 +46,36 @@ var Vouchers = (function (_super) {
             });
         });
     };
+    Vouchers.prototype.meta = function (q) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_2;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelperV1.generateBaseUri('/meta');
+                        uri = this.uriHelperV1.generateUriWithQuery(base, q);
+                        return [4, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new vouchers_1.VouchersMetaFailed(undefined, { status: response.status });
+                        }
+                        if (!response.data.results[0]) {
+                            throw new vouchers_1.VouchersMetaFailed('could not get voucher metadata unexpectedly');
+                        }
+                        return [2, {
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            }];
+                    case 2:
+                        error_2 = _a.sent();
+                        throw new vouchers_1.VouchersMetaFailed(error_2.message, { error: error_2 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
     Vouchers.baseEndpointV1 = '/api/v1/vouchers';
     return Vouchers;
 }(vouchers_1.Vouchers));

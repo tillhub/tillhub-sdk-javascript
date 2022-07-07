@@ -1,7 +1,7 @@
 import { Client } from '../client';
 import { BaseError } from '../errors';
 import { UriHelper } from '../uri-helper';
-import { Vouchers as VoucherV0, VouchersOptions } from '../v0/vouchers';
+import { Vouchers as VoucherV0, VouchersOptions, VouchersMetaQuery } from '../v0/vouchers';
 export interface VouchersQueryOptions {
     limit?: number;
     uri?: string;
@@ -35,6 +35,7 @@ export declare class Vouchers extends VoucherV0 {
     uriHelperV1: UriHelper;
     constructor(options: VouchersOptions, http: Client);
     getAll(optionsOrQuery?: VouchersQueryOptions): Promise<VouchersResponse>;
+    meta(q?: VouchersMetaQuery | undefined): Promise<VouchersResponse>;
 }
 export declare class VouchersFetchFailed extends BaseError {
     message: string;
