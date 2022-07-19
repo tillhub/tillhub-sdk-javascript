@@ -16,6 +16,21 @@ interface TransactionImageCreateResponse {
   metadata?: Record<string, unknown>
 }
 
+interface TransactionImageUpdateResponse {
+  data: TransactionImageResponseItem[]
+  metadata?: Record<string, unknown>
+}
+
+interface TransactionImageDeleteResponse {
+  data: TransactionImageResponseItem[]
+  metadata?: Record<string, unknown>
+}
+
+interface TransactionImagesDeleteResponse {
+  data: TransactionImageResponseItem[]
+  metadata?: Record<string, unknown>
+}
+
 interface TransactionImageGetResponse {
   data: TransactionImage[]
   metadata?: Record<string, unknown>
@@ -78,12 +93,63 @@ export class Transactions {
       throw new TransactionsImageCreateFailed(error.message, { error })
     }
   }
+
+  async updateImage (transactionId: string, imageIndex: number, image: string): Promise<TransactionImageUpdateResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri(`/${transactionId}/images/${imageIndex}`)
+      const response = await this.http.getClient().put(uri, image)
+
+      if (response.status !== 200) {
+        throw new TransactionsImageUpdateFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results
+      }
+    } catch (error: any) {
+      throw new TransactionsImageUpdateFailed(error.message, { error })
+    }
+  }
+
+  async deleteImage (transactionId: string, imageIndex: number): Promise<TransactionImageDeleteResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri(`/${transactionId}/images/${imageIndex}`)
+      const response = await this.http.getClient().delete(uri)
+
+      if (response.status !== 200) {
+        throw new TransactionsImageDeleteFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results
+      }
+    } catch (error: any) {
+      throw new TransactionsImageDeleteFailed(error.message, { error })
+    }
+  }
+
+  async deleteAllImages (transactionId: string): Promise<TransactionImagesDeleteResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri(`/${transactionId}/images`)
+      const response = await this.http.getClient().delete(uri)
+
+      if (response.status !== 200) {
+        throw new TransactionsImagesDeleteFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results
+      }
+    } catch (error: any) {
+      throw new TransactionsImagesDeleteFailed(error.message, { error })
+    }
+  }
 }
 
 export class TransactionsGetImagesFailed extends BaseError {
   public name = 'TransactionsGetImagesFailed'
   constructor (
-    public message: string = 'Could not get the transaction\'s images',
+    public message: string = 'Could not get the transaction images',
     properties?: Record<string, unknown>
   ) {
     super(message, properties)
@@ -94,10 +160,43 @@ export class TransactionsGetImagesFailed extends BaseError {
 export class TransactionsImageCreateFailed extends BaseError {
   public name = 'TransactionsImageCreateFailed'
   constructor (
-    public message: string = 'Could not create transactions image',
+    public message: string = 'Could not create transaction image',
     properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionsImageCreateFailed.prototype)
+  }
+}
+
+export class TransactionsImageUpdateFailed extends BaseError {
+  public name = 'TransactionsImageUpdateFailed'
+  constructor (
+    public message: string = 'Could not update transaction image',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, TransactionsImageUpdateFailed.prototype)
+  }
+}
+
+export class TransactionsImageDeleteFailed extends BaseError {
+  public name = 'TransactionsImageDeleteFailed'
+  constructor (
+    public message: string = 'Could not delete transaction image',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, TransactionsImageDeleteFailed.prototype)
+  }
+}
+
+export class TransactionsImagesDeleteFailed extends BaseError {
+  public name = 'TransactionsImagesDeleteFailed'
+  constructor (
+    public message: string = 'Could not delete all transaction images',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, TransactionsImageDeleteFailed.prototype)
   }
 }
