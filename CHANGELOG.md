@@ -1,3 +1,10 @@
+# [4.48.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.47.0...v4.48.0) (2022-07-19)
+
+
+### Features
+
+* **transactions:** added updateImage, deleteImage and deleteAllImages ([a6e20d0](https://github.com/tillhub/tillhub-sdk-javascript/commit/a6e20d0bc230683f665123b0f01409c1e8f1fb25)), closes [#441](https://github.com/tillhub/tillhub-sdk-javascript/issues/441)
+
 # [4.47.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.46.0...v4.47.0) (2022-07-07)
 
 
