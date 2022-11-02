@@ -34,6 +34,8 @@ import { LegacySettings } from './settings_old'
 import { Tags } from './tags'
 import { Safes, SafesLogBook } from './safes'
 import { Warehouses } from './warehouses'
+import { Webhooks } from './webhooks'
+import { WebhookEvents } from './webhook_events'
 import { Videos } from './videos'
 import { StaffGroups } from './staff_groups'
 import { Exports } from './exports'
@@ -101,6 +103,8 @@ export {
   Safes,
   SafesLogBook,
   Warehouses,
+  Webhooks,
+  WebhookEvents,
   Videos,
   StaffGroups,
   Exports,
