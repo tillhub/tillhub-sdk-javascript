@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StaffPermissionsTemplates = exports.Promotions = exports.Processes = exports.Me = exports.Reasons = exports.Data = exports.ProductServiceQuestions = exports.ProductServiceQuestionGroups = exports.Exports = exports.StaffGroups = exports.Videos = exports.Warehouses = exports.SafesLogBook = exports.Safes = exports.Tags = exports.LegacySettings = exports.Favourites = exports.Messages = exports.Print = exports.Notifications = exports.Images = exports.AuditLogs = exports.AuditActions = exports.Staff = exports.Analytics = exports.Orders = exports.StocksBook = exports.Stocks = exports.Invoices = exports.VoucherLogs = exports.Vouchers = exports.Discounts = exports.Customers = exports.ContentTemplates = exports.Contents = exports.Devices = exports.BranchGroups = exports.Branches = exports.Users = exports.Configurations = exports.PaymentOptions = exports.ExpenseAccounts = exports.Accounts = exports.ProductAddons = exports.ProductAddonGroups = exports.ProductTemplates = exports.ProductGroups = exports.Deliveries = exports.Taxes = exports.Auth = void 0;
-exports.DbBackups = exports.UserPermissionsTemplates = exports.StockTakings = exports.CountingProtocols = exports.Timetracking = exports.Trash = exports.Dependencies = exports.CategoryTrees = exports.Categories = exports.Storefronts = exports.Correspondences = exports.DeviceGroups = exports.Functions = exports.AbocardSystems = exports.VoucherSystems = void 0;
+exports.Processes = exports.Me = exports.Reasons = exports.Data = exports.ProductServiceQuestions = exports.ProductServiceQuestionGroups = exports.Exports = exports.StaffGroups = exports.Videos = exports.WebhookEvents = exports.Webhooks = exports.Warehouses = exports.SafesLogBook = exports.Safes = exports.Tags = exports.LegacySettings = exports.Favourites = exports.Messages = exports.Print = exports.Notifications = exports.Images = exports.AuditLogs = exports.AuditActions = exports.Staff = exports.Analytics = exports.Orders = exports.StocksBook = exports.Stocks = exports.Invoices = exports.VoucherLogs = exports.Vouchers = exports.Discounts = exports.Customers = exports.ContentTemplates = exports.Contents = exports.Devices = exports.BranchGroups = exports.Branches = exports.Users = exports.Configurations = exports.PaymentOptions = exports.ExpenseAccounts = exports.Accounts = exports.ProductAddons = exports.ProductAddonGroups = exports.ProductTemplates = exports.ProductGroups = exports.Deliveries = exports.Taxes = exports.Auth = void 0;
+exports.DbBackups = exports.UserPermissionsTemplates = exports.StockTakings = exports.CountingProtocols = exports.Timetracking = exports.Trash = exports.Dependencies = exports.CategoryTrees = exports.Categories = exports.Storefronts = exports.Correspondences = exports.DeviceGroups = exports.Functions = exports.AbocardSystems = exports.VoucherSystems = exports.StaffPermissionsTemplates = exports.Promotions = void 0;
 var auth_1 = require("./auth");
 Object.defineProperty(exports, "Auth", { enumerable: true, get: function () { return auth_1.Auth; } });
 var taxes_1 = require("./taxes");
@@ -77,6 +77,10 @@ Object.defineProperty(exports, "Safes", { enumerable: true, get: function () { r
 Object.defineProperty(exports, "SafesLogBook", { enumerable: true, get: function () { return safes_1.SafesLogBook; } });
 var warehouses_1 = require("./warehouses");
 Object.defineProperty(exports, "Warehouses", { enumerable: true, get: function () { return warehouses_1.Warehouses; } });
+var webhooks_1 = require("./webhooks");
+Object.defineProperty(exports, "Webhooks", { enumerable: true, get: function () { return webhooks_1.Webhooks; } });
+var webhook_events_1 = require("./webhook_events");
+Object.defineProperty(exports, "WebhookEvents", { enumerable: true, get: function () { return webhook_events_1.WebhookEvents; } });
 var videos_1 = require("./videos");
 Object.defineProperty(exports, "Videos", { enumerable: true, get: function () { return videos_1.Videos; } });
 var staff_groups_1 = require("./staff_groups");

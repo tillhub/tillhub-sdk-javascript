@@ -433,6 +433,12 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.warehouses = function () {
         return this.generateAuthenticatedInstance(v0.Warehouses);
     };
+    TillhubClient.prototype.webhooks = function () {
+        return this.generateAuthenticatedInstance(v0.Webhooks);
+    };
+    TillhubClient.prototype.webhookEvents = function () {
+        return this.generateAuthenticatedInstance(v0.WebhookEvents);
+    };
     TillhubClient.prototype.staffGroups = function () {
         return this.generateAuthenticatedInstance(v0.StaffGroups);
     };

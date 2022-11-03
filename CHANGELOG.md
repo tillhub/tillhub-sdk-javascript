@@ -1,3 +1,10 @@
+# [4.49.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.48.0...v4.49.0) (2022-11-03)
+
+
+### Features
+
+* **webhooks:** webhooks and events ([345bdbe](https://github.com/tillhub/tillhub-sdk-javascript/commit/345bdbeb491883783e305d0f276a085a32103eaa))
+
 # [4.48.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.47.0...v4.48.0) (2022-07-19)
 
 
