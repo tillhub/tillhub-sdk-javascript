@@ -893,6 +893,22 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated Webhooks instance
+   *
+   */
+  webhooks (): v0.Webhooks {
+    return this.generateAuthenticatedInstance(v0.Webhooks)
+  }
+
+  /**
+   * Create an authenticated Webhooks instance
+   *
+   */
+  webhookEvents (): v0.WebhookEvents {
+    return this.generateAuthenticatedInstance(v0.WebhookEvents)
+  }
+
+  /**
    * Create an authenticated StaffGroups instance
    *
    */
