@@ -1,3 +1,10 @@
+# [4.50.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.49.0...v4.50.0) (2022-11-07)
+
+
+### Features
+
+* **supported-events:** add getAll ([052171d](https://github.com/tillhub/tillhub-sdk-javascript/commit/052171de8961d9393d6b8fb28b0c7e359b2e7ffb))
+
 # [4.49.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.48.0...v4.49.0) (2022-11-03)
 
 

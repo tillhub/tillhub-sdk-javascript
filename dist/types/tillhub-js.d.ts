@@ -100,6 +100,7 @@ export declare class TillhubClient extends events.EventEmitter {
     warehouses(): v0.Warehouses;
     webhooks(): v0.Webhooks;
     webhookEvents(): v0.WebhookEvents;
+    supportedEvents(): v0.SupportedEvents;
     staffGroups(): v0.StaffGroups;
     exports(): v0.Exports;
     promotions(): v0.Promotions;

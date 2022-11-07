@@ -439,6 +439,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.webhookEvents = function () {
         return this.generateAuthenticatedInstance(v0.WebhookEvents);
     };
+    TillhubClient.prototype.supportedEvents = function () {
+        return this.generateAuthenticatedInstance(v0.SupportedEvents);
+    };
     TillhubClient.prototype.staffGroups = function () {
         return this.generateAuthenticatedInstance(v0.StaffGroups);
     };
