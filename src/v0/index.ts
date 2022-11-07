@@ -36,6 +36,7 @@ import { Safes, SafesLogBook } from './safes'
 import { Warehouses } from './warehouses'
 import { Webhooks } from './webhooks'
 import { WebhookEvents } from './webhook_events'
+import { SupportedEvents } from './supported_events'
 import { Videos } from './videos'
 import { StaffGroups } from './staff_groups'
 import { Exports } from './exports'
@@ -105,6 +106,7 @@ export {
   Warehouses,
   Webhooks,
   WebhookEvents,
+  SupportedEvents,
   Videos,
   StaffGroups,
   Exports,
