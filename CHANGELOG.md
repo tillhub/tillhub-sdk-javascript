@@ -1,3 +1,10 @@
+# [4.51.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.50.0...v4.51.0) (2022-11-08)
+
+
+### Features
+
+* **products:** add options to product getDetalis request ([#455](https://github.com/tillhub/tillhub-sdk-javascript/issues/455)) ([1913b3a](https://github.com/tillhub/tillhub-sdk-javascript/commit/1913b3a4bb04a817cb02ae1e82fad127ed5d5d24))
+
 # [4.50.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.49.0...v4.50.0) (2022-11-07)
 
 
