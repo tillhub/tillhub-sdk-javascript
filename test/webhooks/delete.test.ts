@@ -32,7 +32,7 @@ describe('v0: Webhooks: can delete a webhook', () => {
       })
 
       mock
-        .onDelete(`https://api.tillhub.com/v0/webhooks/${legacyId}/${webhookId}`)
+        .onDelete(`https://api.tillhub.com/api/v0/webhooks/${legacyId}/${webhookId}`)
         .reply(() => {
           return [
             200,
@@ -69,7 +69,7 @@ describe('v0: Webhooks: can delete a webhook', () => {
         ]
       })
       mock
-        .onDelete(`https://api.tillhub.com/v0/webhooks/${legacyId}/${webhookId}`)
+        .onDelete(`https://api.tillhub.com/api/v0/webhooks/${legacyId}/${webhookId}`)
         .reply(() => {
           return [205]
         })

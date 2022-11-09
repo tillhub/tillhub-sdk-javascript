@@ -60,7 +60,7 @@ export interface WebhookEventLog {
 }
 
 export class WebhookEvents extends ThBaseHandler {
-  public static baseEndpoint = '/v0/events'
+  public static baseEndpoint = '/api/v0/events'
   endpoint: string
   http: Client
   public options: WebhooksOptions
@@ -105,7 +105,7 @@ export class WebhookEvents extends ThBaseHandler {
     }
   }
 
-  async getOne (webhookId: string, eventId: string): Promise<WebhookEventResponse> {
+  async get (webhookId: string, eventId: string): Promise<WebhookEventResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${webhookId}/${eventId}`)
     try {
       const response = await this.http.getClient().get(uri)

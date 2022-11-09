@@ -35,7 +35,7 @@ describe('v0: Webhooks: can alter the webhook', () => {
       })
 
       mock
-        .onPut(`https://api.tillhub.com/v0/webhooks/${legacyId}/${webhookId}`)
+        .onPut(`https://api.tillhub.com/api/v0/webhooks/${legacyId}/${webhookId}`)
         .reply(() => {
           return [
             200,
@@ -73,7 +73,7 @@ describe('v0: Webhooks: can alter the webhook', () => {
         ]
       })
       mock
-        .onPut(`https://api.tillhub.com/v0/webhooks/${legacyId}/${webhookId}`)
+        .onPut(`https://api.tillhub.com/api/v0/webhooks/${legacyId}/${webhookId}`)
         .reply(() => {
           return [205]
         })

@@ -56,7 +56,7 @@ describe('v0: WebhookEvents: can replay a webhookEvent', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/v0/events/${legacyId}/${webhookId}/replay`).reply(() => {
+      mock.onPost(`https://api.tillhub.com/api/v0/events/${legacyId}/${webhookId}/replay`).reply(() => {
         return [
           200,
           {
@@ -94,7 +94,7 @@ describe('v0: WebhookEvents: can replay a webhookEvent', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/v0/events/${legacyId}/${webhookId}/replay`).reply(() => {
+      mock.onPost(`https://api.tillhub.com/api/v0/events/${legacyId}/${webhookId}/replay`).reply(() => {
         return [205]
       })
     }

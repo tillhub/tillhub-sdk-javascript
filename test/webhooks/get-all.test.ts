@@ -28,7 +28,7 @@ describe('v0: Webhooks: can get all the webhooks', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/v0/webhooks/${legacyId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/webhooks/${legacyId}`).reply(() => {
         return [
           200,
           {
@@ -65,7 +65,7 @@ describe('v0: Webhooks: can get all the webhooks', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/v0/webhooks/${legacyId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/webhooks/${legacyId}`).reply(() => {
         return [205]
       })
     }

@@ -34,7 +34,7 @@ export interface Webhook {
 }
 
 export class Webhooks extends ThBaseHandler {
-  public static baseEndpoint = '/v0/webhooks'
+  public static baseEndpoint = '/api/v0/webhooks'
   endpoint: string
   http: Client
   public options: WebhooksOptions
@@ -79,7 +79,7 @@ export class Webhooks extends ThBaseHandler {
     }
   }
 
-  async getOne (webhookId: string): Promise<WebhookResponse> {
+  async get (webhookId: string): Promise<WebhookResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${webhookId}`)
     try {
       const response = await this.http.getClient().get(uri)

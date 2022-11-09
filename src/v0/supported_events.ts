@@ -25,7 +25,7 @@ export interface SupportedEvent {
 }
 
 export class SupportedEvents extends ThBaseHandler {
-  public static baseEndpoint = '/v0/supported-events'
+  public static baseEndpoint = '/api/v0/supported-events'
   public static baseUrl = 'https://api.tillhub.com'
   endpoint: string
   http: Client

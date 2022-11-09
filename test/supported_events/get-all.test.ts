@@ -28,7 +28,7 @@ describe('v0: SupportedEvent: can get all the supported events', () => {
         ]
       })
 
-      mock.onGet('https://api.tillhub.com/v0/supported-events').reply(() => {
+      mock.onGet('https://api.tillhub.com/api/v0/supported-events').reply(() => {
         return [
           200,
           {
@@ -65,7 +65,7 @@ describe('v0: SupportedEvent: can get all the supported events', () => {
         ]
       })
 
-      mock.onGet('https://api.tillhub.com/v0/supported-events').reply(() => {
+      mock.onGet('https://api.tillhub.com/api/v0/supported-events').reply(() => {
         return [205]
       })
     }

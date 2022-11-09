@@ -3,7 +3,6 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import { v0 } from '../../src/tillhub-js'
 import { initThInstance } from '../util'
-import { EventType } from '../../src/v0/webhook_events'
 dotenv.config()
 
 const legacyId = '4564'
@@ -13,8 +12,7 @@ afterEach(() => {
   mock.reset()
 })
 
-const webhookId = '9999'
-
+const webhookId = 'asdf5566'
 const webhook = {
   id: webhookId,
   createdBy: 'creator_uuid',
@@ -22,27 +20,12 @@ const webhook = {
   eventList: ['products:create:v0', 'products:update:v0', 'products:delete:v0', 'transactions:create:v1'],
   secret: 'myL1ttl3D1rtyS3cr3t',
   updatedBy: 'update_uuid',
-  url: 'https://bestherethanthere.com'
+  url: 'https://bestherethanthere.com',
+  active: true
 }
 
-const webhookEventId = 'asdf5566'
-
-const webhookEvent = {
-  id: webhookEventId,
-  entityInstanceId: 'products:create:v0',
-  nextTryAt: new Date().toISOString(),
-  requestPayload: {},
-  triesCount: 0,
-  sentSuccessfully: null,
-  url: webhook.url,
-  entity: 'products',
-  eventType: 'create' as EventType,
-  version: 'v0',
-  webhook
-}
-
-describe('v0: WebhookEvents: can get one webhookEvent', () => {
-  it("Tillhub's webhookEvents are instantiable", async () => {
+describe('v0: Webhooks: can get one webhook', () => {
+  it("Tillhub's webhooks are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
@@ -58,13 +41,13 @@ describe('v0: WebhookEvents: can get one webhookEvent', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/v0/events/${legacyId}/${webhookId}/${webhookEventId}`)
+        .onGet(`https://api.tillhub.com/api/v0/webhooks/${legacyId}/${webhookId}`)
         .reply(() => {
           return [
             200,
             {
               count: 1,
-              results: [webhookEvent]
+              results: [webhook]
             }
           ]
         })
@@ -72,13 +55,13 @@ describe('v0: WebhookEvents: can get one webhookEvent', () => {
 
     const th = await initThInstance()
 
-    const WebhookEvents = th.webhookEvents()
+    const Webhooks = th.webhooks()
 
-    expect(WebhookEvents).toBeInstanceOf(v0.WebhookEvents)
+    expect(Webhooks).toBeInstanceOf(v0.Webhooks)
 
-    const { data } = await WebhookEvents.getOne(webhookId, webhookEventId)
+    const { data } = await Webhooks.get(webhookId)
 
-    expect(data).toMatchObject(webhookEvent)
+    expect(data).toMatchObject(webhook)
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -97,7 +80,7 @@ describe('v0: WebhookEvents: can get one webhookEvent', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/v0/events/${legacyId}/${webhookId}/${webhookEventId}`)
+        .onGet(`https://api.tillhub.com/api/v0/webhooks/${legacyId}/${webhookId}`)
         .reply(() => {
           return [205]
         })
@@ -105,9 +88,9 @@ describe('v0: WebhookEvents: can get one webhookEvent', () => {
 
     try {
       const th = await initThInstance()
-      await th.webhookEvents().getOne(webhookId, webhookEventId)
+      await th.webhooks().get(webhookId)
     } catch (err: any) {
-      expect(err.name).toBe('WebhookFetchOneEventFailed')
+      expect(err.name).toBe('WebhookFetchOneFailed')
     }
   })
 })

@@ -37,7 +37,7 @@ describe('v0: Webhooks: can create a webhook', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/v0/webhooks/${legacyId}`).reply(() => {
+      mock.onPost(`https://api.tillhub.com/api/v0/webhooks/${legacyId}`).reply(() => {
         return [
           200,
           {
@@ -74,7 +74,7 @@ describe('v0: Webhooks: can create a webhook', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/v0/webhooks/${legacyId}`).reply(() => {
+      mock.onPost(`https://api.tillhub.com/api/v0/webhooks/${legacyId}`).reply(() => {
         return [205]
       })
     }
