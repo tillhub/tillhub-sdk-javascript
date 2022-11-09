@@ -55,7 +55,7 @@ var Webhooks = (function (_super) {
             });
         });
     };
-    Webhooks.prototype.getOne = function (webhookId) {
+    Webhooks.prototype.get = function (webhookId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
@@ -167,7 +167,7 @@ var Webhooks = (function (_super) {
             });
         });
     };
-    Webhooks.baseEndpoint = '/v0/webhooks';
+    Webhooks.baseEndpoint = '/api/v0/webhooks';
     return Webhooks;
 }(base_1.ThBaseHandler));
 exports.Webhooks = Webhooks;

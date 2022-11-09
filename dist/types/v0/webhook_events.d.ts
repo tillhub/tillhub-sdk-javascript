@@ -59,6 +59,6 @@ export declare class WebhookEvents extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: WebhooksOptions, http: Client);
     getAll(webhookId: string, query?: WebhookEventQuery | undefined): Promise<WebhookEventResponse>;
-    getOne(webhookId: string, eventId: string): Promise<WebhookEventResponse>;
+    get(webhookId: string, eventId: string): Promise<WebhookEventResponse>;
     replay(webhookId: string, query?: WebhookEventQuery | undefined): Promise<WebhookEventResponse>;
 }

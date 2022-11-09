@@ -1,3 +1,10 @@
+# [4.52.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.51.0...v4.52.0) (2022-11-09)
+
+
+### Features
+
+* **webhooks:** update endpoints to add /api ([86e747c](https://github.com/tillhub/tillhub-sdk-javascript/commit/86e747c8174c69a562004d549b1e02c98454a827))
+
 # [4.51.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.50.0...v4.51.0) (2022-11-08)
 
 

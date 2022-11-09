@@ -55,7 +55,7 @@ var WebhookEvents = (function (_super) {
             });
         });
     };
-    WebhookEvents.prototype.getOne = function (webhookId, eventId) {
+    WebhookEvents.prototype.get = function (webhookId, eventId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
@@ -113,7 +113,7 @@ var WebhookEvents = (function (_super) {
             });
         });
     };
-    WebhookEvents.baseEndpoint = '/v0/events';
+    WebhookEvents.baseEndpoint = '/api/v0/events';
     return WebhookEvents;
 }(base_1.ThBaseHandler));
 exports.WebhookEvents = WebhookEvents;

@@ -48,7 +48,7 @@ var SupportedEvents = (function (_super) {
             });
         });
     };
-    SupportedEvents.baseEndpoint = '/v0/supported-events';
+    SupportedEvents.baseEndpoint = '/api/v0/supported-events';
     SupportedEvents.baseUrl = 'https://api.tillhub.com';
     return SupportedEvents;
 }(base_1.ThBaseHandler));

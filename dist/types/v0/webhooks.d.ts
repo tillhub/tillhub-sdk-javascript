@@ -35,7 +35,7 @@ export declare class Webhooks extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: WebhooksOptions, http: Client);
     getAll(query?: WebhookQuery | undefined): Promise<WebhookResponse>;
-    getOne(webhookId: string): Promise<WebhookResponse>;
+    get(webhookId: string): Promise<WebhookResponse>;
     create(webhook: Webhook): Promise<WebhookResponse>;
     put(webhookId: string, webhook: Webhook): Promise<WebhookResponse>;
     delete(webhookId: string): Promise<WebhookResponse>;
