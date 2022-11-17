@@ -1,3 +1,10 @@
+# [4.53.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.52.0...v4.53.0) (2022-11-17)
+
+
+### Features
+
+* **webhook:** fix next ([3753622](https://github.com/tillhub/tillhub-sdk-javascript/commit/37536220b1a15d212ed8f96334b6d44e05dd4a2a))
+
 # [4.52.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.51.0...v4.52.0) (2022-11-09)
 
 
