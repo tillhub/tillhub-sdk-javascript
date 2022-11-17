@@ -64,8 +64,8 @@ export class Webhooks extends ThBaseHandler {
         throw new WebhookFetchFailed(undefined, { status: response.status })
       }
 
-      if (response.data.cursor?.next) {
-        next = (): Promise<WebhookResponse> => this.getAll({ uri: response.data.cursor.next })
+      if (response.data.cursor?.after) {
+        next = (): Promise<WebhookResponse> => this.getAll({ uri: response.data.cursor.after })
       }
 
       return {
