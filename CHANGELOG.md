@@ -1,3 +1,10 @@
+# [4.54.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.53.0...v4.54.0) (2022-11-17)
+
+
+### Features
+
+* **webhook:** cursors ([f0cae09](https://github.com/tillhub/tillhub-sdk-javascript/commit/f0cae09cb8f6be940545bc78eccd8be570aa7a19))
+
 # [4.53.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.52.0...v4.53.0) (2022-11-17)
 
 
