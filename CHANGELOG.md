@@ -1,3 +1,10 @@
+# [4.55.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.54.0...v4.55.0) (2022-11-18)
+
+
+### Features
+
+* **events:** fix filters snake_case to camelCase ([eebf753](https://github.com/tillhub/tillhub-sdk-javascript/commit/eebf75372385e9fe5b79b6810d6010ef353b55de))
+
 # [4.54.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.53.0...v4.54.0) (2022-11-17)
 
 
