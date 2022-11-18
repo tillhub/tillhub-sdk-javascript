@@ -10,14 +10,14 @@ export interface WebhooksOptions {
 }
 
 export interface WebhookEventQuery {
-  sent_success?: boolean
-  return_retries?: boolean
+  sentSuccess?: boolean
+  returnRetries?: boolean
   start?: string
   end?: string
   event?: string[]
-  event_id?: string[]
+  eventId?: string[]
   entity?: string[]
-  event_type?: string[]
+  eventType?: string[]
   version?: string
   limit?: number
   offset?: number
