@@ -5,6 +5,7 @@ import { ProductGroups } from './product_groups'
 import { ProductTemplates } from './product_templates'
 import { ProductAddonGroups } from './product_addon_groups'
 import { ProductAddons } from './product_addons'
+import { ProductBranchCustomizations } from './product_branch_customizations'
 import { Accounts } from './accounts'
 import { ExpenseAccounts } from './expense_accounts'
 import { PaymentOptions } from './payment_options'
@@ -72,6 +73,7 @@ export {
   ProductTemplates,
   ProductAddonGroups,
   ProductAddons,
+  ProductBranchCustomizations,
   Accounts,
   ExpenseAccounts,
   PaymentOptions,

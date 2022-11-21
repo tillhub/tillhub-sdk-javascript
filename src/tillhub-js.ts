@@ -212,6 +212,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated product addons instance
+   *
+   */
+  productBranchCustomizations (): v0.ProductBranchCustomizations {
+    return this.generateAuthenticatedInstance(v0.ProductBranchCustomizations)
+  }
+
+  /**
    * Create an authenticated deliveries instance
    *
    */
