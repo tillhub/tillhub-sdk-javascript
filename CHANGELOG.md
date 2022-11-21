@@ -1,3 +1,10 @@
+# [4.56.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.55.0...v4.56.0) (2022-11-21)
+
+
+### Features
+
+* **productBranchCustomization:** add ([9206f38](https://github.com/tillhub/tillhub-sdk-javascript/commit/9206f38aa1287d77a89c7605f0f2d8d278ce67d4))
+
 # [4.55.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.54.0...v4.55.0) (2022-11-18)
 
 

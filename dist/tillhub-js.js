@@ -109,6 +109,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.productAddons = function () {
         return this.generateAuthenticatedInstance(v0.ProductAddons);
     };
+    TillhubClient.prototype.productBranchCustomizations = function () {
+        return this.generateAuthenticatedInstance(v0.ProductBranchCustomizations);
+    };
     TillhubClient.prototype.deliveries = function () {
         if (!this.options ||
             !this.options.base ||
