@@ -43,7 +43,6 @@ export declare class ProductBranchCustomizations extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: ProductBranchCustomizationOptions, http: Client);
     getAll(query?: ProductBranchCustomizationQuery | undefined): Promise<ProductBranchCustomizationsResponse>;
-    get(productBranchCustomizationId: string): Promise<ProductBranchCustomizationResponse>;
     create(productBranchCustomization: ProductBranchCustomization): Promise<ProductBranchCustomizationResponse>;
     put(productBranchCustomizationId: string, productBranchCustomization: ProductBranchCustomization): Promise<ProductBranchCustomizationResponse>;
     delete(productBranchCustomizationId: string): Promise<ProductBranchCustomizationResponse>;

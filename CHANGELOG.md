@@ -1,3 +1,10 @@
+# [4.57.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.56.0...v4.57.0) (2022-11-22)
+
+
+### Features
+
+* **customization:** fix endpoints ([8a2fe91](https://github.com/tillhub/tillhub-sdk-javascript/commit/8a2fe9185b6781a281449055b36eb36854c17a9f))
+
 # [4.56.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.55.0...v4.56.0) (2022-11-21)
 
 

@@ -26,7 +26,7 @@ var ProductBranchCustomizations = (function (_super) {
                 switch (_b.label) {
                     case 0:
                         _b.trys.push([0, 2, , 3]);
-                        base = this.uriHelper.generateBaseUri();
+                        base = this.uriHelper.generateBaseUri('/branch/customizations');
                         uri = this.uriHelper.generateUriWithQuery(base, query);
                         return [4, this.http.getClient().get(uri)];
                     case 1:
@@ -47,41 +47,14 @@ var ProductBranchCustomizations = (function (_super) {
             });
         });
     };
-    ProductBranchCustomizations.prototype.get = function (productBranchCustomizationId) {
+    ProductBranchCustomizations.prototype.create = function (productBranchCustomization) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        uri = this.uriHelper.generateBaseUri("/" + productBranchCustomizationId);
-                        return [4, this.http.getClient().get(uri)];
-                    case 1:
-                        response = _a.sent();
-                        if (response.status !== 200) {
-                            throw new errors.ProductBranchCustomizationFetchOneFailed(undefined, { status: response.status });
-                        }
-                        return [2, {
-                                data: response.data.results[0],
-                                msg: response.data.msg,
-                                metadata: { count: response.data.count }
-                            }];
-                    case 2:
-                        error_2 = _a.sent();
-                        throw new errors.ProductBranchCustomizationFetchOneFailed(error_2.message, { error: error_2 });
-                    case 3: return [2];
-                }
-            });
-        });
-    };
-    ProductBranchCustomizations.prototype.create = function (productBranchCustomization) {
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_3;
-            return tslib_1.__generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        uri = this.uriHelper.generateBaseUri();
+                        uri = this.uriHelper.generateBaseUri('/branch/customizations');
                         return [4, this.http.getClient().post(uri, productBranchCustomization)];
                     case 1:
                         response = _a.sent();
@@ -90,8 +63,8 @@ var ProductBranchCustomizations = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        error_3 = _a.sent();
-                        throw new errors.ProductBranchCustomizationCreationFailed(error_3.message, { error: error_3 });
+                        error_2 = _a.sent();
+                        throw new errors.ProductBranchCustomizationCreationFailed(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }
             });
@@ -99,12 +72,12 @@ var ProductBranchCustomizations = (function (_super) {
     };
     ProductBranchCustomizations.prototype.put = function (productBranchCustomizationId, productBranchCustomization) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_4;
+            var uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        uri = this.uriHelper.generateBaseUri("/" + productBranchCustomizationId);
+                        uri = this.uriHelper.generateBaseUri("/branch/customizations/" + productBranchCustomizationId);
                         return [4, this.http.getClient().put(uri, productBranchCustomization)];
                     case 1:
                         response = _a.sent();
@@ -116,8 +89,8 @@ var ProductBranchCustomizations = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        error_4 = _a.sent();
-                        throw new errors.ProductBranchCustomizationPutFailed(error_4.message, { error: error_4 });
+                        error_3 = _a.sent();
+                        throw new errors.ProductBranchCustomizationPutFailed(error_3.message, { error: error_3 });
                     case 3: return [2];
                 }
             });
@@ -125,11 +98,11 @@ var ProductBranchCustomizations = (function (_super) {
     };
     ProductBranchCustomizations.prototype.delete = function (productBranchCustomizationId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_5;
+            var uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = this.uriHelper.generateBaseUri("/" + productBranchCustomizationId);
+                        uri = this.uriHelper.generateBaseUri("/branch/customizations/" + productBranchCustomizationId);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -142,14 +115,14 @@ var ProductBranchCustomizations = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        error_5 = _a.sent();
+                        error_4 = _a.sent();
                         throw new errors.ProductBranchCustomizationDeleteFailed();
                     case 4: return [2];
                 }
             });
         });
     };
-    ProductBranchCustomizations.baseEndpoint = '/api/v0/product_branch_customizations';
+    ProductBranchCustomizations.baseEndpoint = '/api/v1/products';
     return ProductBranchCustomizations;
 }(base_1.ThBaseHandler));
 exports.ProductBranchCustomizations = ProductBranchCustomizations;
