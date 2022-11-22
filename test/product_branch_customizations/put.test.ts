@@ -41,7 +41,7 @@ describe('v0: Product branch customizations: can alter', () => {
         ]
       })
 
-      mock.onPut(`https://api.tillhub.com/api/v0/product_branch_customizations/${legacyId}/${productBranchCustomizationsId}`).reply(() => {
+      mock.onPut(`https://api.tillhub.com/api/v1/products/${legacyId}/branch/customizations/${productBranchCustomizationsId}`).reply(() => {
         return [
           200,
           {
@@ -75,7 +75,7 @@ describe('v0: Product branch customizations: can alter', () => {
           }
         ]
       })
-      mock.onPut(`https://api.tillhub.com/api/v0/product_branch_customizations/${legacyId}/${productBranchCustomizationsId}`).reply(() => {
+      mock.onPut(`https://api.tillhub.com/api/v1/products/${legacyId}/branch/customizations/${productBranchCustomizationsId}`).reply(() => {
         return [205]
       })
     }

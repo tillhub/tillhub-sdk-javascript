@@ -11,17 +11,6 @@ export class ProductBranchCustomizationsFetchAllFailed extends BaseError {
   }
 }
 
-export class ProductBranchCustomizationFetchOneFailed extends BaseError {
-  public name = 'ProductBranchCustomizationFetchOneFailed'
-  constructor (
-    public message: string = 'Could not fetch single product branch customization',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, ProductBranchCustomizationFetchOneFailed.prototype)
-  }
-}
-
 export class ProductBranchCustomizationCreationFailed extends BaseError {
   public name = 'ProductBranchCustomizationCreationFailed'
   constructor (

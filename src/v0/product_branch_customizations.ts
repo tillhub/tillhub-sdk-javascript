@@ -43,7 +43,7 @@ export interface ProductBranchCustomization {
 }
 
 export class ProductBranchCustomizations extends ThBaseHandler {
-  public static baseEndpoint = '/api/v0/product_branch_customizations'
+  public static baseEndpoint = '/api/v1/products'
   endpoint: string
   http: Client
   public options: ProductBranchCustomizationOptions
@@ -63,7 +63,7 @@ export class ProductBranchCustomizations extends ThBaseHandler {
     let next
 
     try {
-      const base = this.uriHelper.generateBaseUri()
+      const base = this.uriHelper.generateBaseUri('/branch/customizations')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri)
@@ -82,25 +82,9 @@ export class ProductBranchCustomizations extends ThBaseHandler {
     }
   }
 
-  async get (productBranchCustomizationId: string): Promise<ProductBranchCustomizationResponse> {
-    try {
-      const uri = this.uriHelper.generateBaseUri(`/${productBranchCustomizationId}`)
-      const response = await this.http.getClient().get(uri)
-      if (response.status !== 200) { throw new errors.ProductBranchCustomizationFetchOneFailed(undefined, { status: response.status }) }
-
-      return {
-        data: response.data.results[0],
-        msg: response.data.msg,
-        metadata: { count: response.data.count }
-      }
-    } catch (error: any) {
-      throw new errors.ProductBranchCustomizationFetchOneFailed(error.message, { error })
-    }
-  }
-
   async create (productBranchCustomization: ProductBranchCustomization): Promise<ProductBranchCustomizationResponse> {
     try {
-      const uri = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateBaseUri('/branch/customizations')
       const response = await this.http.getClient().post(uri, productBranchCustomization)
 
       return {
@@ -114,7 +98,7 @@ export class ProductBranchCustomizations extends ThBaseHandler {
 
   async put (productBranchCustomizationId: string, productBranchCustomization: ProductBranchCustomization): Promise<ProductBranchCustomizationResponse> {
     try {
-      const uri = this.uriHelper.generateBaseUri(`/${productBranchCustomizationId}`)
+      const uri = this.uriHelper.generateBaseUri(`/branch/customizations/${productBranchCustomizationId}`)
       const response = await this.http.getClient().put(uri, productBranchCustomization)
       if (response.status !== 200) { throw new errors.ProductBranchCustomizationPutFailed(undefined, { status: response.status }) }
 
@@ -128,7 +112,7 @@ export class ProductBranchCustomizations extends ThBaseHandler {
   }
 
   async delete (productBranchCustomizationId: string): Promise<ProductBranchCustomizationResponse> {
-    const uri = this.uriHelper.generateBaseUri(`/${productBranchCustomizationId}`)
+    const uri = this.uriHelper.generateBaseUri(`/branch/customizations/${productBranchCustomizationId}`)
     try {
       const response = await this.http.getClient().delete(uri)
       if (response.status !== 200) throw new errors.ProductBranchCustomizationDeleteFailed()

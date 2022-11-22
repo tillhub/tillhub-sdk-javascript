@@ -41,7 +41,7 @@ describe('v0: Product branch customizations: can get all', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/product_branch_customizations/${legacyId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/branch/customizations`).reply(() => {
         return [
           200,
           {
@@ -89,7 +89,7 @@ describe('v0: Product branch customizations: can get all', () => {
           }
         ]
       })
-      mock.onGet(`https://api.tillhub.com/api/v0/product_branch_customizations/${legacyId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/branch/customizations`).reply(() => {
         return [205]
       })
     }
