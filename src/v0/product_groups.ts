@@ -34,6 +34,18 @@ export interface ProductGroupResponse {
   msg?: string
 }
 
+export interface ProductGroupsBulkResponse {
+  data: {
+    updated_product_groups?: ProductGroup[]
+    invalid_product_groups?: ProductGroup[]
+    created_product_groups?: ProductGroup[]
+  }
+  metadata?: {
+    count?: number
+  }
+  msg?: string
+}
+
 export interface ProductGroup {
   id?: string
   name: string
@@ -134,6 +146,32 @@ export class ProductGroups extends ThBaseHandler {
     }
   }
 
+  async bulkCreate (ProductGroups: ProductGroup[]): Promise<ProductGroupsBulkResponse> {
+    const base = this.uriHelper.generateBaseUri('/bulk_create') // TODO: adjust this
+    const uri = this.uriHelper.generateUriWithQuery(base)
+
+    try {
+      const response = await this.http.getClient().post(uri, ProductGroups)
+      if (![200, 409].includes(response.status)) {
+        throw new ProductGroupBulkCreationFailed(undefined, { status: response.status })
+      }
+
+      return {
+        msg: response.data.msg,
+        data: {
+          updated_product_groups: response.data.updated_product_groups,
+          invalid_product_groups: response.data.invalid_product_groups,
+          created_product_groups: response.data.created_product_groups
+        },
+        metadata: {
+          count: response.data.count
+        }
+      }
+    } catch (error: any) {
+      throw new ProductGroupBulkCreationFailed(error.message, { error })
+    }
+  }
+
   async delete (taxId: string): Promise<ProductGroupResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${taxId}`)
     try {
@@ -164,5 +202,16 @@ export class ProductGroups extends ThBaseHandler {
     } catch (error: any) {
       throw new errors.ProductGroupsSearchFailed(error.message, { error })
     }
+  }
+}
+
+export class ProductGroupBulkCreationFailed extends errors.BaseError {
+  public name = 'ProductGroupBulkCreationFailed'
+  constructor (
+    public message: string = 'Could not bulk create the product groups',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, ProductGroupBulkCreationFailed.prototype)
   }
 }
