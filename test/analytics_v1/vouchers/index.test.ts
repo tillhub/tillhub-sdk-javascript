@@ -5,6 +5,8 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import { v1 } from '../../../src/tillhub-js'
 import { initThInstance } from '../../util'
+import faker from '@faker-js/faker'
+
 dotenv.config()
 
 const legacyId = '4564'
@@ -43,6 +45,9 @@ describe('v1: AnalyticsReportsVouchers', () => {
             200,
             {
               count: 1,
+              cursor: {
+                next: faker.internet.url()
+              },
               results: [vouchersData]
             }
           ]
