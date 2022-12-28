@@ -17,7 +17,8 @@ export interface AnalyticsReportsVouchersV1ExportResponseItem {
 export interface AnalyticsResponse {
   data: AnalyticsReportsVouchersV1ExportResponseItem[]
   metadata: Record<string, unknown>
-  msg?: string
+  msg?: string,
+  next?: () => Promise<AnalyticsResponse>
 }
 
 export class AnalyticsReportsVouchers extends ThAnalyticsBaseHandler {
@@ -47,14 +48,22 @@ export class AnalyticsReportsVouchers extends ThAnalyticsBaseHandler {
       const localUriHelper = new UriHelper('/api/v1/analytics', this.options)
       const base = localUriHelper.generateBaseUri('/reports/vouchers')
       const uri = localUriHelper.generateUriWithQuery(base, query)
-
       const response = await this.http.getClient().get(uri, { timeout: this.timeout })
+
+      let next
+      if (response.data.cursor?.next) {
+        next = (): Promise<AnalyticsResponse> => this.getAll({ uri: response.data.cursor.next })
+      }
+
       if (response.status !== 200) throw new AnalyticsReportsV1VouchersFetchError()
+
       return {
         data: response.data.results,
         metadata: {
-          count: response.data.count
-        }
+          count: response.data.count,
+          cursor: response.data.cursor
+        },
+        next
       }
     } catch (error: any) {
       throw new AnalyticsReportsV1VouchersFetchError(error.message, { error })
