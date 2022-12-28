@@ -14,6 +14,7 @@ export interface AnalyticsResponse {
     data: AnalyticsReportsVouchersV1ExportResponseItem[];
     metadata: Record<string, unknown>;
     msg?: string;
+    next?: () => Promise<AnalyticsResponse>;
 }
 export declare class AnalyticsReportsVouchers extends ThAnalyticsBaseHandler {
     http: Client;

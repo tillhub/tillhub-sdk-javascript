@@ -1,3 +1,10 @@
+# [4.58.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.57.0...v4.58.0) (2022-12-28)
+
+
+### Features
+
+* **vouchers:** add pagination support to voucher statistics ([#463](https://github.com/tillhub/tillhub-sdk-javascript/issues/463)) ([012aaa8](https://github.com/tillhub/tillhub-sdk-javascript/commit/012aaa89e5620c53e677992b591330851d36f5ed))
+
 # [4.57.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.56.0...v4.57.0) (2022-11-22)
 
 

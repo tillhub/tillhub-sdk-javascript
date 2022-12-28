@@ -19,28 +19,36 @@ var AnalyticsReportsVouchers = (function (_super) {
         return base_1.ThAnalyticsBaseHandler.generateAuthenticatedInstance(AnalyticsReportsVouchers, options, http);
     };
     AnalyticsReportsVouchers.prototype.getAll = function (query) {
+        var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var localUriHelper, base, uri, response, error_1;
-            return tslib_1.__generator(this, function (_a) {
-                switch (_a.label) {
+            var localUriHelper, base, uri, response_1, next, error_1;
+            var _this = this;
+            return tslib_1.__generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _b.trys.push([0, 2, , 3]);
                         localUriHelper = new uri_helper_1.UriHelper('/api/v1/analytics', this.options);
                         base = localUriHelper.generateBaseUri('/reports/vouchers');
                         uri = localUriHelper.generateUriWithQuery(base, query);
                         return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
                     case 1:
-                        response = _a.sent();
-                        if (response.status !== 200)
+                        response_1 = _b.sent();
+                        next = void 0;
+                        if ((_a = response_1.data.cursor) === null || _a === void 0 ? void 0 : _a.next) {
+                            next = function () { return _this.getAll({ uri: response_1.data.cursor.next }); };
+                        }
+                        if (response_1.status !== 200)
                             throw new AnalyticsReportsV1VouchersFetchError();
                         return [2, {
-                                data: response.data.results,
+                                data: response_1.data.results,
                                 metadata: {
-                                    count: response.data.count
-                                }
+                                    count: response_1.data.count,
+                                    cursor: response_1.data.cursor
+                                },
+                                next: next
                             }];
                     case 2:
-                        error_1 = _a.sent();
+                        error_1 = _b.sent();
                         throw new AnalyticsReportsV1VouchersFetchError(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
