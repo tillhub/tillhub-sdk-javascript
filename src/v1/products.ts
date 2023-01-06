@@ -83,17 +83,21 @@ export interface StockConfigurationLocation {
   reorder_point?: number | null
 }
 
+export interface ProductsQuery {
+  deleted?: boolean
+  active?: boolean
+  exclude_system_products?: boolean
+  location?: string
+  extended?: boolean
+  [key: string]: any
+}
+
 export interface ProductsOptions {
   user?: string
   base?: string
   limit?: number
   uri?: string
-  query?: {
-    deleted?: boolean
-    active?: boolean
-    extended?: boolean
-    [key: string]: any
-  }
+  query?: ProductsQuery
 }
 
 export interface ProductDeleteOptions {
@@ -316,9 +320,9 @@ export class Products extends ThBaseHandler {
     }
   }
 
-  async meta (): Promise<ProductsResponse> {
-    const uri = this.uriHelper.generateBaseUri('/meta')
-
+  async meta (q?: ProductsQuery | undefined): Promise<ProductsResponse> {
+    const base = this.uriHelper.generateBaseUri('/meta')
+    const uri = this.uriHelper.generateUriWithQuery(base, q)
     try {
       const response = await this.http.getClient().get(uri)
       if (response.status !== 200) {
