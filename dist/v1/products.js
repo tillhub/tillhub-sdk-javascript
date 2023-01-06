@@ -206,13 +206,14 @@ var Products = (function (_super) {
             });
         });
     };
-    Products.prototype.meta = function () {
+    Products.prototype.meta = function (q) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_7;
+            var base, uri, response, error_7;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = this.uriHelper.generateBaseUri('/meta');
+                        base = this.uriHelper.generateBaseUri('/meta');
+                        uri = this.uriHelper.generateUriWithQuery(base, q);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);

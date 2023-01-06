@@ -72,17 +72,20 @@ export interface StockConfigurationLocation {
     reorder_qty?: number | null;
     reorder_point?: number | null;
 }
+export interface ProductsQuery {
+    deleted?: boolean;
+    active?: boolean;
+    exclude_system_products?: boolean;
+    location?: string;
+    extended?: boolean;
+    [key: string]: any;
+}
 export interface ProductsOptions {
     user?: string;
     base?: string;
     limit?: number;
     uri?: string;
-    query?: {
-        deleted?: boolean;
-        active?: boolean;
-        extended?: boolean;
-        [key: string]: any;
-    };
+    query?: ProductsQuery;
 }
 export interface ProductDeleteOptions {
     delete_dependencies?: boolean;
@@ -158,7 +161,7 @@ export declare class Products extends ThBaseHandler {
     get(productId: string): Promise<ProductResponse>;
     getDetails(productId: string, options?: ProductsOptions | undefined): Promise<ProductResponse>;
     getChildrenDetails(productId: string, hideStock?: boolean): Promise<ProductResponse>;
-    meta(): Promise<ProductsResponse>;
+    meta(q?: ProductsQuery | undefined): Promise<ProductsResponse>;
     put(productId: string, product: Product): Promise<ProductResponse>;
     bulkCreate(products: Product[], query?: HandlerProductsQuery): Promise<ProductsBulkResponse>;
     bulkEdit(products: Product[]): Promise<ProductsResponse>;

@@ -1,3 +1,10 @@
+# [4.59.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.58.0...v4.59.0) (2023-01-06)
+
+
+### Features
+
+* **products:** add query params option to meta method ([c49fef8](https://github.com/tillhub/tillhub-sdk-javascript/commit/c49fef803bf708e1e6ffae2892d0d0006474c9a8))
+
 # [4.58.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.57.0...v4.58.0) (2022-12-28)
 
 
