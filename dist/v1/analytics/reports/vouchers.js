@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AnalyticsReportsV1VouchersFetchError = exports.AnalyticsReportsVouchers = void 0;
 var tslib_1 = require("tslib");
+var just_safe_get_1 = tslib_1.__importDefault(require("just-safe-get"));
 var base_1 = require("../../../base");
 var errors_1 = require("../../../errors");
 var uri_helper_1 = require("../../../uri-helper");
@@ -40,10 +41,9 @@ var AnalyticsReportsVouchers = (function (_super) {
                         if (response_1.status !== 200)
                             throw new AnalyticsReportsV1VouchersFetchError();
                         return [2, {
-                                data: response_1.data.results,
+                                data: just_safe_get_1.default(response_1.data, 'results.0.values') || [],
                                 metadata: {
-                                    count: response_1.data.count,
-                                    cursor: response_1.data.cursor
+                                    count: just_safe_get_1.default(response_1.data, 'results.2.values.0.count') || 0
                                 },
                                 next: next
                             }];

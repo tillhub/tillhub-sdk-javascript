@@ -1,3 +1,10 @@
+## [4.59.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.59.0...v4.59.1) (2023-01-11)
+
+
+### Bug Fixes
+
+* **vouchers:** change data structure in vouchers reports ([08ce355](https://github.com/tillhub/tillhub-sdk-javascript/commit/08ce35586903fdeee67d0fbf39e36edae2825d9a))
+
 # [4.59.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.58.0...v4.59.0) (2023-01-06)
 
 
