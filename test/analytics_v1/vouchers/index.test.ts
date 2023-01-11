@@ -31,9 +31,11 @@ const query = {
   end: '2019-03-07T23:00:00.000Z'
 }
 
-const vouchersData = {
-  correlationId: 'asdf-1234-zxcv-4567'
-}
+const vouchersData = [
+  { values: ['asdf-1234-zxcv-4567'] }, // items
+  { values: [{ count: 5 }] }, // metadata for all items
+  { values: [{ count: 2 }] } // metadata for filtered items
+]
 
 describe('v1: AnalyticsReportsVouchers', () => {
   it('can get vouchers analytics reports export', async () => {
@@ -48,7 +50,7 @@ describe('v1: AnalyticsReportsVouchers', () => {
               cursor: {
                 next: faker.internet.url()
               },
-              results: [vouchersData]
+              results: vouchersData
             }
           ]
         })
@@ -60,10 +62,11 @@ describe('v1: AnalyticsReportsVouchers', () => {
 
     expect(analyticsReportsVouchers).toBeInstanceOf(v1.analytics.reports.AnalyticsReportsVouchers)
 
-    const { data } = await analyticsReportsVouchers.getAll({ query })
+    const { data, metadata } = await analyticsReportsVouchers.getAll({ query })
 
     expect(Array.isArray(data)).toBe(true)
-    expect(data[0]).toEqual(vouchersData)
+    expect(data).toEqual(vouchersData[0].values) // items
+    expect(metadata).toEqual(vouchersData[2].values[0]) // metadata count is of filtered values
   })
 
   it('rejects on status codes that are not 200', async () => {
