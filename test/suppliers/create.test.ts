@@ -14,14 +14,26 @@ afterEach(() => {
 })
 
 const supplier = {
-  bankAccounts: [],
+  bankAccounts: [
+    { name: 'DKB', iban: '92347928347298347982374', swift: 'DE123-CE' }
+  ],
+  addresses: [
+    {
+      street: 'Berliner Str.',
+      street_number: '87',
+      region: 'Berlin',
+      postal_code: '10777',
+      country: 'DE',
+      type: 'returns'
+    }
+  ],
   companyName: 'ChatGTP',
   email: 'fack@email.com',
   firstname: 'Max',
   lastname: 'Mustermann',
   number: '1234',
   paymentTerms: '30 days',
-  phoneNumbers: [],
+  phoneNumbers: { main: '030-12324567' },
   taxNumber: ''
 }
 

@@ -7,18 +7,42 @@ import { initThInstance } from '../util'
 
 const suppliersObjArray = [
   {
-    bankAccounts: [],
+    addresses: [
+      {
+        street: 'Berliner Str.',
+        street_number: '87',
+        region: 'Berlin',
+        postal_code: '10777',
+        country: 'DE',
+        type: 'returns'
+      }
+    ],
+    bankAccounts: [
+      { name: 'DKB', iban: '92347928347298347982374', swift: 'DE123-CE' }
+    ],
     companyName: 'Steal infrastructure',
     email: 'max@fake.com',
     firstname: 'Max',
     lastname: 'Mustermann',
     number: '12345',
     paymentTerms: '30 days',
-    phoneNumbers: [],
+    phoneNumbers: { main: '030-12345678' },
     taxNumber: '1234156'
   },
   {
-    bankAccounts: [],
+    addresses: [
+      {
+        street: 'Kudamm',
+        street_number: '100',
+        region: 'Berlin',
+        postal_code: '10717',
+        country: 'DE',
+        type: 'billing'
+      }
+    ],
+    bankAccounts: [
+      { name: 'Sparkasse', iban: '18751629587612985762318', swift: 'DE123123SDFH' }
+    ],
     companyName: 'ChatGTP',
     email: 'Erika@fake.com',
     firstname: 'Erika',
@@ -26,7 +50,7 @@ const suppliersObjArray = [
     lastname: 'Mustermann',
     number: '54321',
     paymentTerms: '60 days',
-    phoneNumbers: [],
+    phoneNumbers: { mobile: '01575-12345678' },
     taxNumber: '123456'
   }
 ]
