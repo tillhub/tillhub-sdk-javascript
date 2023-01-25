@@ -97,20 +97,20 @@ export interface ErrorObject {
 export type SupplierAddressType = 'billing' | 'returns'
 
 export interface SupplierAddress {
-  lines: string[] | null
-  street: string | null
-  street_number: string | null
-  locality: string | null
-  region: string | null
-  postal_code: string | null
-  country: string | null
-  type: SupplierAddressType | null
+  lines?: string[] | null
+  street?: string | null
+  street_number?: string | null
+  locality?: string | null
+  region?: string | null
+  postal_code?: string | null
+  country?: string | null
+  type?: SupplierAddressType | null
 }
 
 export interface SupplierBankAccount {
-  name: string | null
-  iban: string | null
-  swift: string | null
+  name?: string | null
+  iban?: string | null
+  swift?: string | null
 }
 
 export interface Supplier {
