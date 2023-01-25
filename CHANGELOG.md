@@ -1,3 +1,10 @@
+# [4.60.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.59.1...v4.60.0) (2023-01-25)
+
+
+### Features
+
+* **suppliers:** add new CRUD endpoints for suppliers ([#472](https://github.com/tillhub/tillhub-sdk-javascript/issues/472)) ([58ad4f5](https://github.com/tillhub/tillhub-sdk-javascript/commit/58ad4f5a91d70e20ada571b039fd8a9ca1d84ed4))
+
 ## [4.59.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.59.0...v4.59.1) (2023-01-11)
 
 
