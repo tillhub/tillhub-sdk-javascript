@@ -1,3 +1,11 @@
+## [4.60.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.60.0...v4.60.1) (2023-01-25)
+
+
+### Bug Fixes
+
+* **suppliers:** adjust suppliers typeScript interfaces ([8784bfa](https://github.com/tillhub/tillhub-sdk-javascript/commit/8784bfa87d6aa34a66a6a46a86b9d94b046a53b8))
+* **suppliers:** cast object to suppliers item ([6d3127b](https://github.com/tillhub/tillhub-sdk-javascript/commit/6d3127b8df91cba89d25677bcdea57aeecfce92c))
+
 # [4.60.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.59.1...v4.60.0) (2023-01-25)
 
 
