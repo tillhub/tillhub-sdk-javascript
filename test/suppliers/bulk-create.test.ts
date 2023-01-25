@@ -4,6 +4,7 @@ import MockAdapter from 'axios-mock-adapter'
 import { v0 } from '../../src/tillhub-js'
 dotenv.config()
 import { initThInstance } from '../util'
+import { Supplier } from '../../src/v0/suppliers'
 
 const suppliersObjArray = [
   {
@@ -93,7 +94,7 @@ describe('Create a bulk of new Suppliers', () => {
 
     expect(suppliers).toBeInstanceOf(v0.Suppliers)
 
-    const { data, metadata } = await suppliers.bulkCreate(suppliersObjArray)
+    const { data, metadata } = await suppliers.bulkCreate(suppliersObjArray as Supplier[])
 
     expect(typeof data).toEqual('object')
     expect(data?.updated_suppliers?.length).toEqual(2)
@@ -115,7 +116,7 @@ it('rejects on status codes that are not 200/409', async () => {
     const th = await initThInstance()
     const suppliers = th.suppliers()
     expect(suppliers).toBeInstanceOf(v0.Suppliers)
-    await suppliers.bulkCreate(suppliersObjArray)
+    await suppliers.bulkCreate(suppliersObjArray as Supplier[])
   } catch (err: any) {
     expect(err.name).toBe('SuppliersBulkCreateFailed')
   }

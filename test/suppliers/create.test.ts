@@ -4,6 +4,8 @@ import MockAdapter from 'axios-mock-adapter'
 import qs from 'qs'
 import { v0 } from '../../src/tillhub-js'
 import { initThInstance } from '../util'
+import { Supplier } from '../../src/v0/suppliers'
+
 dotenv.config()
 
 const legacyId = '4564'
@@ -78,7 +80,7 @@ describe('v0: Suppliers: can create a supplier', () => {
 
     expect(Suppliers).toBeInstanceOf(v0.Suppliers)
 
-    const { data, errors } = await Suppliers.create(supplier, { query })
+    const { data, errors } = await Suppliers.create(supplier as Supplier, { query })
 
     expect(data).toMatchObject(supplier)
     expect(errors).toEqual([])
@@ -106,7 +108,7 @@ describe('v0: Suppliers: can create a supplier', () => {
 
     try {
       const th = await initThInstance()
-      await th.suppliers().create(supplier)
+      await th.suppliers().create(supplier as Supplier)
     } catch (err: any) {
       expect(err.name).toBe('SupplierCreationFailed')
     }
