@@ -34,8 +34,8 @@ const supplier = {
   firstname: 'Max',
   lastname: 'Mustermann',
   number: '1234',
-  paymentTerms: '30 days',
-  phoneNumbers: { main: '030-12324567' },
+  paymentTerms: 30,
+  phoneNumbers: [{ main: '030-12324567' }],
   taxNumber: ''
 }
 

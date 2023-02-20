@@ -61,11 +61,11 @@ export interface HandlerSupplierQuery extends HandlerQuery {
   query?: SupplierQuery
 }
 
+export declare type SupplierPhonenumberTypes = 'main' | 'home' | 'mobile' | 'work'
+
 export interface SupplierPhonenumbers {
-  main?: string
-  home?: string
-  mobile?: string
-  work?: string
+  type?: SupplierPhonenumberTypes | null
+  number?: String | null
 }
 
 export interface SupplierNoteItem {
@@ -119,8 +119,8 @@ export interface Supplier {
   description?: string | null
   number?: string | null
   email?: string | null
-  phonenumbers?: SupplierPhonenumbers | null
-  paymentTerms?: string | null
+  phonenumbers?: SupplierPhonenumbers[] | null
+  paymentTerms?: number | null
   taxNumber?: string | null
   glnNumber?: string | null
   taxSubject?: boolean
@@ -234,7 +234,7 @@ export class Suppliers extends ThBaseHandler {
   }
 
   async bulkCreate (suppliers: Supplier[], query?: HandlerSupplierQuery): Promise<SuppliersBulkResponse> {
-    const base = this.uriHelper.generateBaseUri('/bulk_create')
+    const base = this.uriHelper.generateBaseUri('/import')
     const uri = this.uriHelper.generateUriWithQuery(base, query)
 
     try {

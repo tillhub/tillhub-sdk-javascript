@@ -26,8 +26,8 @@ const suppliersObjArray = [
     firstname: 'Max',
     lastname: 'Mustermann',
     number: '12345',
-    paymentTerms: '30 days',
-    phoneNumbers: { main: '030-12345678' },
+    paymentTerms: 30,
+    phoneNumbers: [{ main: '030-12345678' }],
     taxNumber: '1234156'
   },
   {
@@ -50,8 +50,8 @@ const suppliersObjArray = [
     glnNumber: null,
     lastname: 'Mustermann',
     number: '54321',
-    paymentTerms: '60 days',
-    phoneNumbers: { mobile: '01575-12345678' },
+    paymentTerms: 60,
+    phoneNumbers: [{ mobile: '01575-12345678' }],
     taxNumber: '123456'
   }
 ]
@@ -75,7 +75,7 @@ afterEach(() => {
 describe('Create a bulk of new Suppliers', () => {
   it('bulk create', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost(`https://api.tillhub.com/api/v0/business-partners/${legacyId}/bulk_create`).reply(() => {
+      mock.onPost(`https://api.tillhub.com/api/v0/business-partners/${legacyId}/import`).reply(() => {
         return [
           200,
           {
@@ -107,7 +107,7 @@ describe('Create a bulk of new Suppliers', () => {
 
 it('rejects on status codes that are not 200/409', async () => {
   if (process.env.SYSTEM_TEST !== 'true') {
-    mock.onPost(`https://api.tillhub.com/api/v0/business-partners/${legacyId}/bulk_create`).reply(() => {
+    mock.onPost(`https://api.tillhub.com/api/v0/business-partners/${legacyId}/import`).reply(() => {
       return [444]
     })
   }
