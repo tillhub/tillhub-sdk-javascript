@@ -149,7 +149,7 @@ var Suppliers = (function (_super) {
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        base = this.uriHelper.generateBaseUri('/bulk_create');
+                        base = this.uriHelper.generateBaseUri('/import');
                         uri = this.uriHelper.generateUriWithQuery(base, query);
                         _a.label = 1;
                     case 1:

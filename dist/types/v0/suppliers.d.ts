@@ -52,11 +52,10 @@ export interface SupplierQuery {
 export interface HandlerSupplierQuery extends HandlerQuery {
     query?: SupplierQuery;
 }
+export declare type SupplierPhonenumberTypes = 'main' | 'home' | 'mobile' | 'work';
 export interface SupplierPhonenumbers {
-    main?: string;
-    home?: string;
-    mobile?: string;
-    work?: string;
+    type?: SupplierPhonenumberTypes | null;
+    number?: String | null;
 }
 export interface SupplierNoteItem {
     type: 'text';
@@ -103,8 +102,8 @@ export interface Supplier {
     description?: string | null;
     number?: string | null;
     email?: string | null;
-    phonenumbers?: SupplierPhonenumbers | null;
-    paymentTerms?: string | null;
+    phonenumbers?: SupplierPhonenumbers[] | null;
+    paymentTerms?: number | null;
     taxNumber?: string | null;
     glnNumber?: string | null;
     taxSubject?: boolean;

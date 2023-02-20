@@ -1,3 +1,10 @@
+## [4.60.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.60.1...v4.60.2) (2023-02-20)
+
+
+### Bug Fixes
+
+* **suppliers:** change API path and adjust phone numbers and tests ([#480](https://github.com/tillhub/tillhub-sdk-javascript/issues/480)) ([8fdafc8](https://github.com/tillhub/tillhub-sdk-javascript/commit/8fdafc8abc7587c6c672cc90958418254acb2276))
+
 ## [4.60.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.60.0...v4.60.1) (2023-01-25)
 
 
