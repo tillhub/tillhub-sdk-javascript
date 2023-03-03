@@ -10,6 +10,7 @@ import { Accounts } from './accounts'
 import { ExpenseAccounts } from './expense_accounts'
 import { PaymentOptions } from './payment_options'
 import { Configurations } from './configurations'
+import { InventoryConfiguration } from './inventory_configuration'
 import { Users } from './users'
 import { Branches } from './branches'
 import { BranchGroups } from './branch_groups'
@@ -79,6 +80,7 @@ export {
   ExpenseAccounts,
   PaymentOptions,
   Configurations,
+  InventoryConfiguration,
   Users,
   Branches,
   BranchGroups,

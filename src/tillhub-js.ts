@@ -288,6 +288,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated inventory configurations instance
+   *
+   */
+  inventoryConfiguration (): v0.InventoryConfiguration {
+    return this.generateAuthenticatedInstance(v0.InventoryConfiguration)
+  }
+
+  /**
    * Create an authenticated configurations instance
    *
    */
