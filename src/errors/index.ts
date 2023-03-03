@@ -596,6 +596,17 @@ export class ConfigurationFetchFailed extends BaseError {
   }
 }
 
+export class InventoryConfigurationFetchFailed extends BaseError {
+  public name = 'InventoryConfigurationFetchFailed'
+  constructor (
+    public message: string = 'Could not fetch inventory configuration',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, InventoryConfigurationFetchFailed.prototype)
+  }
+}
+
 export class ConfigurationPutFailed extends BaseError {
   public name = 'ConfigurationPutFailed'
   constructor (
