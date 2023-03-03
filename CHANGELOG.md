@@ -1,3 +1,10 @@
+# [4.61.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.60.2...v4.61.0) (2023-03-03)
+
+
+### Features
+
+* **inventory configuration:** add invertory configuration for suppliers ([#482](https://github.com/tillhub/tillhub-sdk-javascript/issues/482)) ([2973227](https://github.com/tillhub/tillhub-sdk-javascript/commit/297322785d805bd50bf11b59f00ee2f25a144c0b))
+
 ## [4.60.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.60.1...v4.60.2) (2023-02-20)
 
 

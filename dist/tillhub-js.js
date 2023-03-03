@@ -144,6 +144,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.configurations = function () {
         return this.generateAuthenticatedInstance(v0.Configurations);
     };
+    TillhubClient.prototype.inventoryConfiguration = function () {
+        return this.generateAuthenticatedInstance(v0.InventoryConfiguration);
+    };
     TillhubClient.prototype.users = function (configurationId) {
         return this.generateAuthenticatedInstance(v0.Users, { configurationId: configurationId });
     };

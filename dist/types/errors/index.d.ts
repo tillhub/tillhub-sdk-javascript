@@ -270,6 +270,11 @@ export declare class ConfigurationFetchFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
 }
+export declare class InventoryConfigurationFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
 export declare class ConfigurationPutFailed extends BaseError {
     message: string;
     name: string;
