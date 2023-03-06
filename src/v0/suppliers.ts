@@ -52,6 +52,15 @@ export interface SupplierResponse {
   errors?: ErrorObject[]
 }
 
+export interface SuppliersExportResponse {
+  data?: {
+    url?: string
+    filename?: string
+    expiresAt?: string
+  }
+  msg?: string
+}
+
 export interface SupplierQuery {
   supplier_number_template?: string
   generate_supplier_number?: boolean
@@ -294,6 +303,25 @@ export class Suppliers extends ThBaseHandler {
       throw new SupplierDeleteFailed(error.message, { error })
     }
   }
+
+  async export (query?: SuppliersQuery | undefined): Promise<SuppliersExportResponse> {
+    const base = this.uriHelper.generateBaseUri('/export')
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new SuppliersExportFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results,
+        msg: response.data.msg
+      }
+    } catch (error: any) {
+      throw new SuppliersExportFailed(error.message, { error })
+    }
+  }
 }
 
 export class SuppliersFetchFailed extends BaseError {
@@ -403,5 +431,16 @@ export class SupplierDeleteFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, SupplierDeleteFailed.prototype)
+  }
+}
+
+export class SuppliersExportFailed extends BaseError {
+  public name = 'SuppliersExportFailed'
+  constructor (
+    public message: string = 'Could not export suppliers',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, SuppliersExportFailed.prototype)
   }
 }
