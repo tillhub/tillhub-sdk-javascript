@@ -45,6 +45,14 @@ export interface SupplierResponse {
     msg?: string;
     errors?: ErrorObject[];
 }
+export interface SuppliersExportResponse {
+    data?: {
+        url?: string;
+        filename?: string;
+        expiresAt?: string;
+    };
+    msg?: string;
+}
 export interface SupplierQuery {
     supplier_number_template?: string;
     generate_supplier_number?: boolean;
@@ -128,6 +136,7 @@ export declare class Suppliers extends ThBaseHandler {
     bulkCreate(suppliers: Supplier[], query?: HandlerSupplierQuery): Promise<SuppliersBulkResponse>;
     meta(q?: SuppliersMetaQuery | undefined): Promise<SuppliersResponse>;
     delete(supplierId: string): Promise<SupplierResponse>;
+    export(query?: SuppliersQuery | undefined): Promise<SuppliersExportResponse>;
 }
 export declare class SuppliersFetchFailed extends BaseError {
     message: string;
@@ -175,6 +184,11 @@ export declare class SuppliersSearchFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class SupplierDeleteFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class SuppliersExportFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

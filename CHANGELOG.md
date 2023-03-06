@@ -1,3 +1,10 @@
+# [4.62.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.61.0...v4.62.0) (2023-03-06)
+
+
+### Features
+
+* **suppliers:** adding export method ([3cf3903](https://github.com/tillhub/tillhub-sdk-javascript/commit/3cf3903a38e01972f007718a98e3e74061c567a3))
+
 # [4.61.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.60.2...v4.61.0) (2023-03-03)
 
 

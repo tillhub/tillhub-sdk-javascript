@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SupplierDeleteFailed = exports.SuppliersSearchFailed = exports.SuppliersCountFailed = exports.SuppliersMetaFailed = exports.SuppliersBulkCreateFailed = exports.SupplierCreationFailed = exports.SupplierNoteCreationFailed = exports.SupplierPutFailed = exports.SupplierFetchFailed = exports.SuppliersFetchFailed = exports.Suppliers = void 0;
+exports.SuppliersExportFailed = exports.SupplierDeleteFailed = exports.SuppliersSearchFailed = exports.SuppliersCountFailed = exports.SuppliersMetaFailed = exports.SuppliersBulkCreateFailed = exports.SupplierCreationFailed = exports.SupplierNoteCreationFailed = exports.SupplierPutFailed = exports.SupplierFetchFailed = exports.SuppliersFetchFailed = exports.Suppliers = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -238,6 +238,35 @@ var Suppliers = (function (_super) {
             });
         });
     };
+    Suppliers.prototype.export = function (query) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_8;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        base = this.uriHelper.generateBaseUri('/export');
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new SuppliersExportFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results,
+                                msg: response.data.msg
+                            }];
+                    case 3:
+                        error_8 = _a.sent();
+                        throw new SuppliersExportFailed(error_8.message, { error: error_8 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     Suppliers.baseEndpoint = '/api/v0/business-partners';
     return Suppliers;
 }(base_1.ThBaseHandler));
@@ -372,4 +401,17 @@ var SupplierDeleteFailed = (function (_super) {
     return SupplierDeleteFailed;
 }(errors_1.BaseError));
 exports.SupplierDeleteFailed = SupplierDeleteFailed;
+var SuppliersExportFailed = (function (_super) {
+    tslib_1.__extends(SuppliersExportFailed, _super);
+    function SuppliersExportFailed(message, properties) {
+        if (message === void 0) { message = 'Could not export suppliers'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'SuppliersExportFailed';
+        Object.setPrototypeOf(_this, SuppliersExportFailed.prototype);
+        return _this;
+    }
+    return SuppliersExportFailed;
+}(errors_1.BaseError));
+exports.SuppliersExportFailed = SuppliersExportFailed;
 //# sourceMappingURL=suppliers.js.map
