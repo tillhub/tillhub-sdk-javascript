@@ -16,6 +16,7 @@ export interface AuthOptions {
   base?: string | undefined
   user?: string
   token?: string
+  whitelabel?: string
 }
 
 export interface UsernameAuth {
@@ -107,6 +108,7 @@ export class Auth {
   public options: AuthOptions
   public token?: string
   public user?: string
+  public whitelabel?: string | undefined
 
   constructor (options: AuthOptions) {
     this.options = options
@@ -118,7 +120,7 @@ export class Auth {
     this.determineAuthType()
 
     if (this.options.user && this.options.type === AuthTypes.token) {
-      this.setDefaultHeader(this.options.user, (this.options.credentials as TokenAuth).token)
+      this.setDefaultHeader(this.options.user, (this.options.credentials as TokenAuth).token, this.options.whitelabel)
     }
   }
 
@@ -233,23 +235,26 @@ export class Auth {
     }
   }
 
-  protected setDefaultHeader (user: string, token: string): void {
+  protected setDefaultHeader (user: string, token: string, whitelabel?: string): void {
     const clientOptions: ClientOptions = {
       headers: {
         Authorization: `Bearer ${token}`,
-        'X-Client-ID': user
+        'X-Client-ID': user,
+        'x-whitelabel': whitelabel
       }
     }
 
     this.token = token
     this.user = user
+    this.whitelabel = whitelabel
     this.authenticated = true
 
     Client.getInstance(clientOptions).setDefaults(clientOptions)
   }
 
-  public async logout (token?: string): Promise<LogoutResponse> {
+  public async logout (token?: string, whitelabel?: string): Promise<LogoutResponse> {
     const _token = token ?? this.token ?? ''
+    const _whitelabel = whitelabel ?? this.whitelabel ?? ''
     if (!_token) {
       throw new LogoutMissingToken()
     }
@@ -257,7 +262,8 @@ export class Auth {
     try {
       const { data } = await axios.get(this.getEndpoint('/api/v0/users/logout'), {
         headers: {
-          Authorization: `Bearer ${_token}`
+          Authorization: `Bearer ${_token}`,
+          'x-whitelabel': _whitelabel
         }
       })
 

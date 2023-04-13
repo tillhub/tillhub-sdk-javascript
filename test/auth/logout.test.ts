@@ -98,6 +98,58 @@ describe('Auth: logout', () => {
     }
   })
 
+  it('can log out whitelabel', async () => {
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE,
+      whitelabel: 'black-label'
+    }
+
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+        return [
+          200,
+          {
+            token: 'something',
+            user: {
+              id: '123',
+              legacy_id: '4564',
+              scopes: ['admin'],
+              role: 'manager'
+            },
+            features: {
+              inventory: true
+            }
+          }
+        ]
+      })
+
+      mock.onGet('https://api.tillhub.com/api/v0/users/logout').reply(() => {
+        return [
+          200,
+          {
+            msg: 'Logout successful.'
+          }
+        ]
+      })
+    }
+
+    const auth = new v0.Auth(options)
+    expect(auth.options.whitelabel).toBe('black-label')
+
+    try {
+      await auth.authenticate()
+      const data = await auth.logout()
+      expect(data).toBeTruthy()
+      expect(data.msg === 'Logout successful.').toBe(true)
+    } catch (err: any) {
+      throw err
+    }
+  })
+
   it('rejects', async () => {
     const options = {
       credentials: {

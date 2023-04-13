@@ -40,6 +40,19 @@ describe('SDK: can instantiate SDK', () => {
     expect(th.auth).toBeInstanceOf(Auth)
   })
 
+  it('Can call init with whitelabel', () => {
+    th.init({
+      base: 'https://staging-api.tillhub.com',
+      whitelabel: 'black-label'
+    })
+
+    if (!th.options) throw new Error('Options must be defined')
+
+    expect(th.options.base).toBe('https://staging-api.tillhub.com')
+    expect(th.options.whitelabel).toBe('black-label')
+    expect(th.auth).toBeInstanceOf(Auth)
+  })
+
   it('Can do login from instance', async () => {
     const options = {
       username: user.username,

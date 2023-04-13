@@ -115,6 +115,41 @@ describe('SDK: can destroy SDK', () => {
     expect(transactions).toBeInstanceOf(v1.Transactions)
   })
 
+  it('can destroy and re-hydrate externally with whitelabel', () => {
+    th.destroy()
+
+    const clientInstance = Client.getInstance({})
+
+    expect(clientInstance.getClient().defaults.headers.common.Authorization).toBeUndefined()
+
+    expect(th.auth).toBeDefined()
+    expect(th.options).toBeUndefined()
+    expect(th.http).toBeUndefined()
+    expect(th.auth.authenticated).toBe(false)
+
+    th.init({
+      base: 'https://staging-api.tillhub.com',
+      credentials: {
+        token: localStorage.getItem('token')
+      },
+      user: localStorage.getItem('user'),
+      whitelabel: 'black-label'
+    })
+
+    expect(th.auth.token).toBe('mockToken')
+    expect(clientInstance.getClient().defaults.headers.common.Authorization).toBe(
+      'Bearer mockToken'
+    )
+    expect(clientInstance.getClient().defaults.headers['x-whitelabel']).toBe(
+      'black-label'
+    )
+    expect(th.auth.authenticated).toBe(true)
+
+    const transactions = th.transactions()
+
+    expect(transactions).toBeInstanceOf(v1.Transactions)
+  })
+
   it('can destroy and login', async () => {
     th.destroy()
 
