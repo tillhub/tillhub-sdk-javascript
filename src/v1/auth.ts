@@ -30,7 +30,7 @@ export class Auth extends v0.Auth {
     this.determineAuthType()
 
     if (this.options.user && this.options.type === AuthTypes.token) {
-      this.setDefaultHeader(this.options.user, (this.options.credentials as TokenAuth).token)
+      this.setDefaultHeader(this.options.user, (this.options.credentials as TokenAuth).token, this.options.whitelabel)
     }
   }
 

@@ -27,6 +27,7 @@ export interface TillhubSDKOptions {
   credentials?: UsernameAuth | KeyAuth | TokenAuth | undefined
   base?: string
   user?: string
+  whitelabel?: string
   responseInterceptors?: Fn[]
   requestInterceptors?: Fn[]
 }
@@ -129,6 +130,10 @@ export class TillhubClient extends events.EventEmitter {
         clientOptions.headers.Authorization = `Bearer ${
           (options.credentials as TokenAuth).token
         }`
+      }
+
+      if (options.whitelabel && clientOptions.headers) {
+        clientOptions.headers['x-whitelabel'] = options.whitelabel
       }
 
       this.auth = new v1.Auth(authOptions)

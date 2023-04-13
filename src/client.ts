@@ -115,6 +115,7 @@ export class Client {
   clearDefaults (): void {
     Client.instance.axiosInstance.defaults.headers.common.Authorization = undefined
     Client.instance.axiosInstance.defaults.headers.Authorization = undefined
+    Client.instance.axiosInstance.defaults.headers['x-whitelabel'] = undefined
     Client.instance.axiosInstance.defaults.headers.common = {
       ...defaultHeaders
     }
