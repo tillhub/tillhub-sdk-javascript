@@ -16,6 +16,7 @@ export interface TillhubSDKOptions {
     credentials?: UsernameAuth | KeyAuth | TokenAuth | undefined;
     base?: string;
     user?: string;
+    whitelabel?: string;
     responseInterceptors?: Fn[];
     requestInterceptors?: Fn[];
 }

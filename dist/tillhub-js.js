@@ -75,6 +75,9 @@ var TillhubClient = (function (_super) {
             if (options.credentials.token && clientOptions.headers) {
                 clientOptions.headers.Authorization = "Bearer " + options.credentials.token;
             }
+            if (options.whitelabel && clientOptions.headers) {
+                clientOptions.headers['x-whitelabel'] = options.whitelabel;
+            }
             this.auth = new v1.Auth(authOptions);
             this.http = client_1.Client.getInstance(clientOptions).setDefaults(clientOptions);
             return true;

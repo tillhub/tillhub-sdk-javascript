@@ -58,6 +58,7 @@ var Client = (function () {
     Client.prototype.clearDefaults = function () {
         Client.instance.axiosInstance.defaults.headers.common.Authorization = undefined;
         Client.instance.axiosInstance.defaults.headers.Authorization = undefined;
+        Client.instance.axiosInstance.defaults.headers['x-whitelabel'] = undefined;
         Client.instance.axiosInstance.defaults.headers.common = tslib_1.__assign({}, defaultHeaders);
     };
     return Client;

@@ -12,6 +12,7 @@ export interface AuthOptions {
     base?: string | undefined;
     user?: string;
     token?: string;
+    whitelabel?: string;
 }
 export interface UsernameAuth {
     username: string;
@@ -77,6 +78,7 @@ export declare class Auth {
     options: AuthOptions;
     token?: string;
     user?: string;
+    whitelabel?: string | undefined;
     constructor(options: AuthOptions);
     getEndpoint(path?: string): string;
     clearInstance(): void;
@@ -85,8 +87,8 @@ export declare class Auth {
     loginUsername(authData: UsernameAuth): Promise<AuthResponse>;
     requestPasswordReset(target: PasswordResetRequest): Promise<PasswordResetRequestResponse>;
     setNewPassword(nonce: PasswordResetNonce): Promise<PasswordResetRequestResponse>;
-    protected setDefaultHeader(user: string, token: string): void;
-    logout(token?: string): Promise<LogoutResponse>;
+    protected setDefaultHeader(user: string, token: string, whitelabel?: string): void;
+    logout(token?: string, whitelabel?: string): Promise<LogoutResponse>;
 }
 export declare class LogoutMissingToken extends errors.BaseError {
     message: string;

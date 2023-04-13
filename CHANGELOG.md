@@ -1,3 +1,10 @@
+# [4.63.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.62.0...v4.63.0) (2023-04-13)
+
+
+### Features
+
+* **unified-commerce:** add whitelabel header UNTIL-6412 ([c105751](https://github.com/tillhub/tillhub-sdk-javascript/commit/c1057518b2a928a80c208ffd4286e67b10bcbe27))
+
 # [4.62.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.61.0...v4.62.0) (2023-03-06)
 
 

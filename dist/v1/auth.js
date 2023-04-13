@@ -18,7 +18,7 @@ var Auth = (function (_super) {
             return _this;
         _this.determineAuthType();
         if (_this.options.user && _this.options.type === auth_1.AuthTypes.token) {
-            _this.setDefaultHeader(_this.options.user, _this.options.credentials.token);
+            _this.setDefaultHeader(_this.options.user, _this.options.credentials.token, _this.options.whitelabel);
         }
         return _this;
     }
