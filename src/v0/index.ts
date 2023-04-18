@@ -19,6 +19,7 @@ import { Contents } from './contents'
 import { ContentTemplates } from './content_templates'
 import { Customers } from './customers'
 import { Suppliers } from './suppliers'
+import { SuppliersProductsRelation } from './suppliers_products_relation'
 import { Vouchers, VoucherLogs } from './vouchers'
 import { Invoices } from './invoices'
 import { Stocks, StocksBook } from './stocks'
@@ -89,6 +90,7 @@ export {
   ContentTemplates,
   Customers,
   Suppliers,
+  SuppliersProductsRelation,
   Discounts,
   Vouchers,
   VoucherLogs,
