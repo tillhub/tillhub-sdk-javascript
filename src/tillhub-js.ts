@@ -389,6 +389,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated links between suppliers and products
+   *
+   */
+  suppliersProductsRelation (): v0.SuppliersProductsRelation {
+    return this.generateAuthenticatedInstance(v0.SuppliersProductsRelation)
+  }
+
+  /**
    * Create an authenticated vouchers instance
    *
    */
