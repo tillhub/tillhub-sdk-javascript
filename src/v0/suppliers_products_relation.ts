@@ -10,15 +10,15 @@ export interface SuppliersProductsRelationOptions {
 }
 
 export interface SuppliersProductsRelationBulkCreateQuery {
-  productId: []
+  productId: string[]
 }
 
 export interface SuppliersProductsRelationMapQuery {
-  productId: []
+  productId: string[]
 }
 
 export interface SuppliersProductsRelationBulkDeleteQuery {
-  productId: []
+  productId: string[]
 }
 
 export interface SuppliersProductsRelationDefaultResponse {
@@ -112,7 +112,7 @@ export class SuppliersProductsRelation extends ThBaseHandler {
         productId: query.productId
       })
       if (response.status !== 200) {
-        throw new SuppliersProductsRelationSuppliersFailed(undefined, { status: response.status })
+        throw new SuppliersProductsRelationMapFailed(undefined, { status: response.status })
       }
 
       return {
@@ -120,7 +120,7 @@ export class SuppliersProductsRelation extends ThBaseHandler {
         msg: response.data.msg
       }
     } catch (error: any) {
-      throw new SuppliersProductsRelationSuppliersFailed(error.message, { error })
+      throw new SuppliersProductsRelationMapFailed(error.message, { error })
     }
   }
 
@@ -178,8 +178,10 @@ export class SuppliersProductsRelation extends ThBaseHandler {
   async bulkDelete (supplierId: string, query: SuppliersProductsRelationBulkDeleteQuery): Promise<SuppliersProductsRelationDefaultResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${supplierId}`)
     try {
-      const response = await this.http.getClient().post(uri, {
-        productId: query.productId
+      const response = await this.http.getClient().delete(uri, {
+        data: {
+          productId: query.productId
+        }
       })
 
       if (response.status !== 200) {
