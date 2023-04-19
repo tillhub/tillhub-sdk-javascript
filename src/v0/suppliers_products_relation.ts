@@ -9,31 +9,38 @@ export interface SuppliersProductsRelationOptions {
   base?: string
 }
 
-export interface SuppliersProductsRelationCreateQuery {
+export interface SuppliersProductsRelationBulkCreateQuery {
   productId: []
 }
 
-export interface SuppliersProductsRelationResponse {
+export interface SuppliersProductsRelationMapQuery {
+  productId: []
+}
+
+export interface SuppliersProductsRelationBulkDeleteQuery {
+  productId: []
+}
+
+export interface SuppliersProductsRelationDefaultResponse {
+  data: {
+    businessPartners: Supplier[]
+    productId: string
+  }
+  msg: string
+}
+
+export interface SuppliersProductsRelationProductIdsResponse {
   data: {
     productId: string[]
   }
   msg: string
 }
 
-export interface SuppliersProductsRelationCreateResponse {
+export interface SuppliersProductsRelationMapResponse {
   data: {
-    productsToBusinessPartnersMap: Record<string, string>
+    productsToBusinessPartnersMap: Record<string, string[]>
     businessPartners: Record<string, Supplier>
   }
-  msg: string
-}
-
-export interface SuppliersProductsRelationDeleteResponse {
-  msg: string
-}
-
-export interface SuppliersProductsRelationLookupResponse {
-  data: Supplier[]
   msg: string
 }
 
@@ -61,36 +68,71 @@ export class SuppliersProductsRelation extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async get (supplierId: string): Promise<SuppliersProductsRelationResponse> {
+  async getProductIds (supplierId: string): Promise<SuppliersProductsRelationProductIdsResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${supplierId}`)
 
     try {
       const response = await this.http.getClient().get(uri)
 
       if (response.status !== 200) {
-        throw new SuppliersProductsRelationFetchFailed(undefined, { status: response.status })
+        throw new SuppliersProductsRelationProductIdsFailed(undefined, { status: response.status })
       }
       return {
-        data: response.data[0],
+        data: response.data.results[0],
         msg: response.data.msg
       }
     } catch (error: any) {
-      throw new SuppliersProductsRelationFetchFailed(error.message, { error })
+      throw new SuppliersProductsRelationProductIdsFailed(error.message, { error })
     }
   }
 
-  async create (supplierId: string, query: SuppliersProductsRelationCreateQuery): Promise<SuppliersProductsRelationCreateResponse> {
-    const uri = this.uriHelper.generateBaseUri(`/${supplierId}`)
+  async getSuppliers (productId: string): Promise<SuppliersProductsRelationDefaultResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/lookup/${productId}`)
+
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new SuppliersProductsRelationSuppliersFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results[0],
+        msg: response.data.msg
+      }
+    } catch (error: any) {
+      throw new SuppliersProductsRelationSuppliersFailed(error.message, { error })
+    }
+  }
+
+  async getMap (query: SuppliersProductsRelationMapQuery): Promise<SuppliersProductsRelationMapResponse> {
+    const uri = this.uriHelper.generateBaseUri('/map')
+
     try {
       const response = await this.http.getClient().post(uri, {
         productId: query.productId
       })
+      if (response.status !== 200) {
+        throw new SuppliersProductsRelationSuppliersFailed(undefined, { status: response.status })
+      }
 
+      return {
+        data: response.data.results[0],
+        msg: response.data.msg
+      }
+    } catch (error: any) {
+      throw new SuppliersProductsRelationSuppliersFailed(error.message, { error })
+    }
+  }
+
+  async create (supplierId: string, productId: string): Promise<SuppliersProductsRelationDefaultResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${supplierId}/${productId}`)
+    try {
+      const response = await this.http.getClient().post(uri)
       if (response.status !== 200) {
         throw new SuppliersProductsRelationCreationFailed(undefined, { status: response.status })
       }
       return {
-        data: response.data[0],
+        data: response.data.results[0],
         msg: response.data.msg
       }
     } catch (error: any) {
@@ -98,7 +140,26 @@ export class SuppliersProductsRelation extends ThBaseHandler {
     }
   }
 
-  async delete (supplierId: string, productId: string): Promise<SuppliersProductsRelationDeleteResponse> {
+  async bulkCreate (supplierId: string, query: SuppliersProductsRelationBulkCreateQuery): Promise<SuppliersProductsRelationDefaultResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${supplierId}`)
+    try {
+      const response = await this.http.getClient().post(uri, {
+        productId: query.productId
+      })
+
+      if (response.status !== 200) {
+        throw new SuppliersProductsRelationBulkCreationFailed(undefined, { status: response.status })
+      }
+      return {
+        data: response.data.results[0],
+        msg: response.data.msg
+      }
+    } catch (error: any) {
+      throw new SuppliersProductsRelationBulkCreationFailed(error.message, { error })
+    }
+  }
+
+  async delete (supplierId: string, productId: string): Promise<SuppliersProductsRelationDefaultResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${supplierId}/${productId}`)
     try {
       const response = await this.http.getClient().delete(uri)
@@ -106,6 +167,7 @@ export class SuppliersProductsRelation extends ThBaseHandler {
         throw new SuppliersProductsRelationDeleteFailed(undefined, { status: response.status })
       }
       return {
+        data: response.data.results[0],
         msg: response.data.msg
       }
     } catch (error: any) {
@@ -113,33 +175,56 @@ export class SuppliersProductsRelation extends ThBaseHandler {
     }
   }
 
-  async lookup (productId: string): Promise<SuppliersProductsRelationLookupResponse> {
-    const uri = this.uriHelper.generateBaseUri(`/lookup/${productId}`)
-
+  async bulkDelete (supplierId: string, query: SuppliersProductsRelationBulkDeleteQuery): Promise<SuppliersProductsRelationDefaultResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${supplierId}`)
     try {
-      const response = await this.http.getClient().get(uri)
-      if (response.status !== 200) {
-        throw new SuppliersProductsRelationLookupFailed(undefined, { status: response.status })
-      }
+      const response = await this.http.getClient().post(uri, {
+        productId: query.productId
+      })
 
+      if (response.status !== 200) {
+        throw new SuppliersProductsRelationBulkDeleteFailed(undefined, { status: response.status })
+      }
       return {
-        data: response.data,
+        data: response.data.results[0],
         msg: response.data.msg
       }
     } catch (error: any) {
-      throw new SuppliersProductsRelationLookupFailed(error.message, { error })
+      throw new SuppliersProductsRelationBulkDeleteFailed(error.message, { error })
     }
   }
 }
 
-export class SuppliersProductsRelationFetchFailed extends BaseError {
-  public name = 'SuppliersProductsRelationFetchFailed'
+export class SuppliersProductsRelationProductIdsFailed extends BaseError {
+  public name = 'SuppliersProductsRelationProductIdsFailed'
   constructor (
     public message: string = 'Could not fetch supplier and product relation',
     properties?: Record<string, unknown>
   ) {
     super(message, properties)
-    Object.setPrototypeOf(this, SuppliersProductsRelationFetchFailed.prototype)
+    Object.setPrototypeOf(this, SuppliersProductsRelationProductIdsFailed.prototype)
+  }
+}
+
+export class SuppliersProductsRelationSuppliersFailed extends BaseError {
+  public name = 'SuppliersProductsRelationSuppliersFailed'
+  constructor (
+    public message: string = 'Could not make a lookup for supplier and product relation',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, SuppliersProductsRelationSuppliersFailed.prototype)
+  }
+}
+
+export class SuppliersProductsRelationMapFailed extends BaseError {
+  public name = 'SuppliersProductsRelationMapFailed'
+  constructor (
+    public message: string = 'Could not make a map for supplier and product relation',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, SuppliersProductsRelationMapFailed.prototype)
   }
 }
 
@@ -154,6 +239,17 @@ export class SuppliersProductsRelationCreationFailed extends BaseError {
   }
 }
 
+export class SuppliersProductsRelationBulkCreationFailed extends BaseError {
+  public name = 'SuppliersProductsRelationBulkCreationFailed'
+  constructor (
+    public message: string = 'Could not bulk create supplier and product relation',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, SuppliersProductsRelationBulkCreationFailed.prototype)
+  }
+}
+
 export class SuppliersProductsRelationDeleteFailed extends BaseError {
   public name = 'SuppliersProductsRelationDeleteFailed'
   constructor (
@@ -165,13 +261,13 @@ export class SuppliersProductsRelationDeleteFailed extends BaseError {
   }
 }
 
-export class SuppliersProductsRelationLookupFailed extends BaseError {
-  public name = 'SuppliersProductsRelationLookupFailed'
+export class SuppliersProductsRelationBulkDeleteFailed extends BaseError {
+  public name = 'SuppliersProductsRelationBulkDeleteFailed'
   constructor (
-    public message: string = 'Could not make a lookup for supplier and product relation',
+    public message: string = 'Could not bulk delete the supplier and product relation',
     properties?: Record<string, unknown>
   ) {
     super(message, properties)
-    Object.setPrototypeOf(this, SuppliersProductsRelationLookupFailed.prototype)
+    Object.setPrototypeOf(this, SuppliersProductsRelationBulkDeleteFailed.prototype)
   }
 }
