@@ -1,3 +1,12 @@
+# [4.64.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.63.0...v4.64.0) (2023-04-19)
+
+
+### Features
+
+* **suppliers-products-relation:** added new API group ([0491abf](https://github.com/tillhub/tillhub-sdk-javascript/commit/0491abfb6bccc688e6366605031541b120d4898e))
+* **suppliers-products-relation:** adding tests ([0028e31](https://github.com/tillhub/tillhub-sdk-javascript/commit/0028e31c32e712ee915e9b1a11e9ee16f7f29567))
+* **suppliers-products-relation:** tuning methods and its responses ([e0bb458](https://github.com/tillhub/tillhub-sdk-javascript/commit/e0bb458d4ba532b9d3205840c63cc67c7f6e6e69))
+
 # [4.63.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.62.0...v4.63.0) (2023-04-13)
 
 
