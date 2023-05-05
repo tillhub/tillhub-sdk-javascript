@@ -1,3 +1,4 @@
+import { PurchaseOrder } from './v0/purchase_orders';
 // Import here Polyfills if needed. Recommended core-js (npm i -D core-js)
 // import 'core-js/fn/array.find'
 // import * as EventEmitter from 'events'
@@ -1135,6 +1136,14 @@ export class TillhubClient extends events.EventEmitter {
    */
   dbBackups (): v0.DbBackups {
     return this.generateAuthenticatedInstance(v0.DbBackups)
+  }
+
+  /**
+   * Create an authenticated WebhookEvents instance
+   *
+   */
+  purchaseOrders (): v0.PurchaseOrders {
+    return this.generateAuthenticatedInstance(v0.PurchaseOrders)
   }
 }
 

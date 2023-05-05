@@ -67,6 +67,7 @@ import { CountingProtocols } from './counting-protocols'
 import { StockTakings } from './stock_takings'
 import { UserPermissionsTemplates } from './user_permissions_templates'
 import { DbBackups } from './db_backups'
+import { PurchaseOrders } from './purchase_orders'
 
 export {
   Auth,
@@ -140,5 +141,6 @@ export {
   CountingProtocols,
   StockTakings,
   UserPermissionsTemplates,
-  DbBackups
+  DbBackups,
+  PurchaseOrders
 }
