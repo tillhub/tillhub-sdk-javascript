@@ -28,6 +28,14 @@ export interface PurchaseOrdersUpdateQuery {
   recipients?: string[] // list of emails normally
 }
 
+export interface PurchaseOrdersBulkAddProductsQuery {
+  products: PurchaseOrderProduct[]
+}
+
+export interface PurchaseOrdersBulkDeleteProductsQuery {
+  products: string[] // product IDs
+}
+
 export interface PurchaseOrdersSingleResponse {
   data: PurchaseOrder
   msg: string
@@ -140,20 +148,39 @@ export class PurchaseOrders extends ThBaseHandler {
     }
   }
 
-  async upsertProducts (purchaseOrderId: string, purchaseOrder: PurchaseOrderProduct): Promise<PurchaseOrdersSingleResponse> {
+  async bulkAddProducts (purchaseOrderId: string, purchaseOrder: PurchaseOrdersBulkAddProductsQuery): Promise<PurchaseOrdersSingleResponse> {
     const base = this.uriHelper.generateBaseUri(`/${purchaseOrderId}`)
     const uri = this.uriHelper.generateUriWithQuery(base)
     try {
       const response = await this.http.getClient().post(uri, purchaseOrder)
       if (response.status !== 200) {
-        throw new PurchaseOrdersProductsUpsertFailed(undefined, { status: response.status })
+        throw new PurchaseOrdersBulkAddProductsFailed(undefined, { status: response.status })
       }
       return {
         data: response.data.results[0],
         msg: response.data.msg
       }
     } catch (error: any) {
-      throw new PurchaseOrdersProductsUpsertFailed(error.message, { error })
+      throw new PurchaseOrdersBulkAddProductsFailed(error.message, { error })
+    }
+  }
+
+  async bulkDeleteProducts (purchaseOrderId: string, purchaseOrder: PurchaseOrdersBulkDeleteProductsQuery): Promise<PurchaseOrdersSingleResponse> {
+    const base = this.uriHelper.generateBaseUri(`/${purchaseOrderId}/products`)
+    const uri = this.uriHelper.generateUriWithQuery(base)
+    try {
+      const response = await this.http.getClient().delete(uri, {
+        data: purchaseOrder
+      })
+      if (response.status !== 200) {
+        throw new PurchaseOrdersBulkDeleteProductsFailed(undefined, { status: response.status })
+      }
+      return {
+        data: response.data.results[0],
+        msg: response.data.msg
+      }
+    } catch (error: any) {
+      throw new PurchaseOrdersBulkDeleteProductsFailed(error.message, { error })
     }
   }
 }
@@ -191,13 +218,24 @@ export class PurchaseOrdersUpdateFailed extends BaseError {
   }
 }
 
-export class PurchaseOrdersProductsUpsertFailed extends BaseError {
-  public name = 'PurchaseOrdersProductsUpsertFailed'
+export class PurchaseOrdersBulkAddProductsFailed extends BaseError {
+  public name = 'PurchaseOrdersBulkAddProductsFailed'
   constructor (
-    public message: string = 'Could upsert products for purchase order',
+    public message: string = 'Could not bulk add products for purchase order',
     properties?: Record<string, unknown>
   ) {
     super(message, properties)
-    Object.setPrototypeOf(this, PurchaseOrdersProductsUpsertFailed.prototype)
+    Object.setPrototypeOf(this, PurchaseOrdersBulkAddProductsFailed.prototype)
+  }
+}
+
+export class PurchaseOrdersBulkDeleteProductsFailed extends BaseError {
+  public name = 'PurchaseOrdersBulkDeleteProductsFailed'
+  constructor (
+    public message: string = 'Could not bulk delete products for purchase order',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, PurchaseOrdersBulkDeleteProductsFailed.prototype)
   }
 }
