@@ -24,6 +24,12 @@ export interface PurchaseOrdersUpdateQuery {
     notes?: string | null;
     recipients?: string[];
 }
+export interface PurchaseOrdersBulkAddProductsQuery {
+    products: PurchaseOrderProduct[];
+}
+export interface PurchaseOrdersBulkDeleteProductsQuery {
+    products: string[];
+}
 export interface PurchaseOrdersSingleResponse {
     data: PurchaseOrder;
     msg: string;
@@ -68,7 +74,8 @@ export declare class PurchaseOrders extends ThBaseHandler {
     get(purchaseOrderId: string): Promise<PurchaseOrdersSingleResponse>;
     create(purchaseOrder: PurchaseOrdersCreateQuery): Promise<PurchaseOrdersSingleResponse>;
     put(purchaseOrderId: string, purchaseOrder: PurchaseOrdersUpdateQuery): Promise<PurchaseOrdersSingleResponse>;
-    upsertProducts(purchaseOrderId: string, purchaseOrder: PurchaseOrderProduct): Promise<PurchaseOrdersSingleResponse>;
+    bulkAddProducts(purchaseOrderId: string, purchaseOrder: PurchaseOrdersBulkAddProductsQuery): Promise<PurchaseOrdersSingleResponse>;
+    bulkDeleteProducts(purchaseOrderId: string, purchaseOrder: PurchaseOrdersBulkDeleteProductsQuery): Promise<PurchaseOrdersSingleResponse>;
 }
 export declare class PurchaseOrdersGetFailed extends BaseError {
     message: string;
@@ -85,7 +92,12 @@ export declare class PurchaseOrdersUpdateFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
 }
-export declare class PurchaseOrdersProductsUpsertFailed extends BaseError {
+export declare class PurchaseOrdersBulkAddProductsFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class PurchaseOrdersBulkDeleteProductsFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

@@ -1,3 +1,10 @@
+# [4.66.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.65.0...v4.66.0) (2023-05-05)
+
+
+### Features
+
+* **purchase-orders:** adadding bulk create/delete methods ([fd05dac](https://github.com/tillhub/tillhub-sdk-javascript/commit/fd05dacffdebd03b7faaecdb1e1bc993f37ef0c4))
+
 # [4.65.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.64.0...v4.65.0) (2023-05-05)
 
 
