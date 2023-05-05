@@ -526,6 +526,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.dbBackups = function () {
         return this.generateAuthenticatedInstance(v0.DbBackups);
     };
+    TillhubClient.prototype.purchaseOrders = function () {
+        return this.generateAuthenticatedInstance(v0.PurchaseOrders);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));

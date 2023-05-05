@@ -1,3 +1,10 @@
+# [4.65.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.64.0...v4.65.0) (2023-05-05)
+
+
+### Features
+
+* **purchase-orders:** adding new endpoints group ([580f216](https://github.com/tillhub/tillhub-sdk-javascript/commit/580f216b39ef3a47ee294473374198e17642b6f6))
+
 # [4.64.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.63.0...v4.64.0) (2023-04-19)
 
 
