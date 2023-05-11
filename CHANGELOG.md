@@ -1,3 +1,10 @@
+## [4.66.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.66.0...v4.66.1) (2023-05-11)
+
+
+### Bug Fixes
+
+* **purchase_orders:** change API path ([#488](https://github.com/tillhub/tillhub-sdk-javascript/issues/488)) ([6b211f2](https://github.com/tillhub/tillhub-sdk-javascript/commit/6b211f2c7a52e55e4e6b6a38aeb3167276e17eb4))
+
 # [4.66.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.65.0...v4.66.0) (2023-05-05)
 
 
