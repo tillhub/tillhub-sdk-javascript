@@ -35,7 +35,7 @@ describe('v0: Purchase Orders: can create purchase order', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/purchase-orders/${legacyId}`).reply(() => {
+      mock.onPost(`https://api.tillhub.com/api/v0/purchase-orders/${legacyId}/products`).reply(() => {
         return [
           200,
           {
@@ -72,7 +72,7 @@ describe('v0: Purchase Orders: can create purchase order', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/purchase-orders/${legacyId}`).reply(() => {
+      mock.onPost(`https://api.tillhub.com/api/v0/purchase-orders/${legacyId}/products`).reply(() => {
         return [205]
       })
     }
