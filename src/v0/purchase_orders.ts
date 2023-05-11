@@ -115,7 +115,7 @@ export class PurchaseOrders extends ThBaseHandler {
   }
 
   async create (purchaseOrder: PurchaseOrdersCreateQuery): Promise<PurchaseOrdersSingleResponse> {
-    const base = this.uriHelper.generateBaseUri()
+    const base = this.uriHelper.generateBaseUri('/products')
     const uri = this.uriHelper.generateUriWithQuery(base)
     try {
       const response = await this.http.getClient().post(uri, purchaseOrder)
@@ -132,7 +132,7 @@ export class PurchaseOrders extends ThBaseHandler {
   }
 
   async put (purchaseOrderId: string, purchaseOrder: PurchaseOrdersUpdateQuery): Promise<PurchaseOrdersSingleResponse> {
-    const base = this.uriHelper.generateBaseUri(`/${purchaseOrderId}`)
+    const base = this.uriHelper.generateBaseUri(`/${purchaseOrderId}/products`)
     const uri = this.uriHelper.generateUriWithQuery(base)
     try {
       const response = await this.http.getClient().put(uri, purchaseOrder)
@@ -149,7 +149,7 @@ export class PurchaseOrders extends ThBaseHandler {
   }
 
   async bulkAddProducts (purchaseOrderId: string, purchaseOrder: PurchaseOrdersBulkAddProductsQuery): Promise<PurchaseOrdersSingleResponse> {
-    const base = this.uriHelper.generateBaseUri(`/${purchaseOrderId}`)
+    const base = this.uriHelper.generateBaseUri(`/${purchaseOrderId}/products`)
     const uri = this.uriHelper.generateUriWithQuery(base)
     try {
       const response = await this.http.getClient().post(uri, purchaseOrder)
