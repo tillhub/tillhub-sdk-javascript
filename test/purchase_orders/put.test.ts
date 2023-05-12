@@ -36,7 +36,7 @@ describe('v0: Purchase Orders: can alter the order', () => {
         ]
       })
 
-      mock.onPut(`https://api.tillhub.com/api/v0/purchase-orders/${legacyId}/${purchaseOrderId}/products`).reply(() => {
+      mock.onPut(`https://api.tillhub.com/api/v0/purchase-orders/${legacyId}/${purchaseOrderId}`).reply(() => {
         return [
           200,
           {
@@ -72,7 +72,7 @@ describe('v0: Purchase Orders: can alter the order', () => {
           }
         ]
       })
-      mock.onPut(`https://api.tillhub.com/api/v0/purchase-orders/${legacyId}/${purchaseOrderId}/products`).reply(() => {
+      mock.onPut(`https://api.tillhub.com/api/v0/purchase-orders/${legacyId}/${purchaseOrderId}`).reply(() => {
         return [205]
       })
     }
