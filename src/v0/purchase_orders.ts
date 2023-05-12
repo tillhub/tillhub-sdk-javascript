@@ -43,7 +43,8 @@ export interface PurchaseOrdersSingleResponse {
 
 export interface PurchaseOrdersMultipleResponse {
   data: PurchaseOrder[]
-  msg: string
+  metadata?: Record<string, unknown>
+  next?: () => Promise<PurchaseOrdersMultipleResponse>
 }
 
 export type PurchaseOrderStatus = 'draft' | 'sent' | 'done'
@@ -93,6 +94,32 @@ export class PurchaseOrders extends ThBaseHandler {
     this.endpoint = PurchaseOrders.baseEndpoint
     this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
+  }
+
+  async getAll (query?: Record<string, unknown>): Promise<PurchaseOrdersMultipleResponse> {
+    let next
+
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      const response = await this.http.getClient().get(uri)
+
+      if (response.status !== 200) {
+        throw new PurchaseOrdersGetFailed(undefined, { status: response.status })
+      }
+      if (response.data.cursor?.next) {
+        next = (): Promise<PurchaseOrdersMultipleResponse> => this.getAll({ uri: response.data.cursor.next })
+      }
+
+      return {
+        data: response.data.results,
+        metadata: { cursor: response.data.cursor },
+        next
+      }
+    } catch (error: any) {
+      throw new PurchaseOrdersGetFailed(error.message, { error })
+    }
   }
 
   async get (purchaseOrderId: string): Promise<PurchaseOrdersSingleResponse> {
