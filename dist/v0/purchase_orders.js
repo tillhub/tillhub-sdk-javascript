@@ -55,7 +55,7 @@ var PurchaseOrders = (function (_super) {
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        base = this.uriHelper.generateBaseUri('/products');
+                        base = this.uriHelper.generateBaseUri();
                         uri = this.uriHelper.generateUriWithQuery(base);
                         _a.label = 1;
                     case 1:
@@ -84,7 +84,7 @@ var PurchaseOrders = (function (_super) {
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        base = this.uriHelper.generateBaseUri("/" + purchaseOrderId + "/products");
+                        base = this.uriHelper.generateBaseUri("/" + purchaseOrderId);
                         uri = this.uriHelper.generateUriWithQuery(base);
                         _a.label = 1;
                     case 1:

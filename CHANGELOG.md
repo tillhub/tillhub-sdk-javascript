@@ -1,3 +1,10 @@
+## [4.66.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.66.1...v4.66.2) (2023-05-12)
+
+
+### Bug Fixes
+
+* **purchase_orders:** remove wront API paths for create and update ([942ab7a](https://github.com/tillhub/tillhub-sdk-javascript/commit/942ab7abed2c6aa53cd8e525d011781c044d1a4c))
+
 ## [4.66.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.66.0...v4.66.1) (2023-05-11)
 
 
