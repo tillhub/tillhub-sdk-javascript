@@ -76,6 +76,11 @@ export interface PurchaseOrderProduct {
   totalWithTax?: number
 }
 
+export interface PurchaseOrderMetaQuery {
+  deleted?: boolean
+  location?: string
+}
+
 export class PurchaseOrders extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/purchase-orders'
   endpoint: string
@@ -175,6 +180,27 @@ export class PurchaseOrders extends ThBaseHandler {
     }
   }
 
+  async meta (q?: PurchaseOrderMetaQuery | undefined): Promise<PurchaseOrdersMultipleResponse> {
+    const base = this.uriHelper.generateBaseUri('/meta')
+    const uri = this.uriHelper.generateUriWithQuery(base, q)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new PurchaseOrdersMetaFailed(undefined, { status: response.status })
+      }
+      if (!response.data.results[0]) {
+        throw new PurchaseOrdersMetaFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new PurchaseOrdersMetaFailed(error.message, { error })
+    }
+  }
+
   async bulkAddProducts (purchaseOrderId: string, purchaseOrder: PurchaseOrdersBulkAddProductsQuery): Promise<PurchaseOrdersSingleResponse> {
     const base = this.uriHelper.generateBaseUri(`/${purchaseOrderId}/products`)
     const uri = this.uriHelper.generateUriWithQuery(base)
@@ -264,5 +290,16 @@ export class PurchaseOrdersBulkDeleteProductsFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, PurchaseOrdersBulkDeleteProductsFailed.prototype)
+  }
+}
+
+export class PurchaseOrdersMetaFailed extends BaseError {
+  public name = 'PurchaseOrdersMetaFailed'
+  constructor (
+    public message: string = 'Could not get PurchaseOrder metadata',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, PurchaseOrdersMetaFailed.prototype)
   }
 }
