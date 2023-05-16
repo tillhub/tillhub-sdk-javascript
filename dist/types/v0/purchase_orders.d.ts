@@ -65,6 +65,10 @@ export interface PurchaseOrderProduct {
     totalUntaxed?: number;
     totalWithTax?: number;
 }
+export interface PurchaseOrderMetaQuery {
+    deleted?: boolean;
+    location?: string;
+}
 export declare class PurchaseOrders extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
@@ -76,6 +80,7 @@ export declare class PurchaseOrders extends ThBaseHandler {
     get(purchaseOrderId: string): Promise<PurchaseOrdersSingleResponse>;
     create(purchaseOrder: PurchaseOrdersCreateQuery): Promise<PurchaseOrdersSingleResponse>;
     put(purchaseOrderId: string, purchaseOrder: PurchaseOrdersUpdateQuery): Promise<PurchaseOrdersSingleResponse>;
+    meta(q?: PurchaseOrderMetaQuery | undefined): Promise<PurchaseOrdersMultipleResponse>;
     bulkAddProducts(purchaseOrderId: string, purchaseOrder: PurchaseOrdersBulkAddProductsQuery): Promise<PurchaseOrdersSingleResponse>;
     bulkDeleteProducts(purchaseOrderId: string, purchaseOrder: PurchaseOrdersBulkDeleteProductsQuery): Promise<PurchaseOrdersSingleResponse>;
 }
@@ -100,6 +105,11 @@ export declare class PurchaseOrdersBulkAddProductsFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class PurchaseOrdersBulkDeleteProductsFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class PurchaseOrdersMetaFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

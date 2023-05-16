@@ -1,3 +1,10 @@
+# [4.68.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.67.0...v4.68.0) (2023-05-16)
+
+
+### Features
+
+* **purchase-order:** add meta call ([#489](https://github.com/tillhub/tillhub-sdk-javascript/issues/489)) ([403fa03](https://github.com/tillhub/tillhub-sdk-javascript/commit/403fa035c0cc11914dc9ad148f96042a78acca84))
+
 # [4.67.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.66.2...v4.67.0) (2023-05-12)
 
 
