@@ -81,6 +81,17 @@ export interface PurchaseOrderMetaQuery {
   location?: string
 }
 
+export interface PurchaseOrderExport {
+  url?: string
+  filename?: string
+  expiresAt?: string
+}
+
+export interface PurchaseOrdersExportResponse {
+  data?: PurchaseOrderExport
+  msg?: string
+}
+
 export class PurchaseOrders extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/purchase-orders'
   endpoint: string
@@ -236,6 +247,25 @@ export class PurchaseOrders extends ThBaseHandler {
       throw new PurchaseOrdersBulkDeleteProductsFailed(error.message, { error })
     }
   }
+
+  async export (q?: PurchaseOrderMetaQuery | undefined): Promise<PurchaseOrdersExportResponse> {
+    const base = this.uriHelper.generateBaseUri('/export')
+    const uri = this.uriHelper.generateUriWithQuery(base, q)
+
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new PurchaseOrdersExportFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results[0],
+        msg: response.data.msg
+      }
+    } catch (error: any) {
+      throw new PurchaseOrdersExportFailed(error.message, { error })
+    }
+  }
 }
 
 export class PurchaseOrdersGetFailed extends BaseError {
@@ -301,5 +331,16 @@ export class PurchaseOrdersMetaFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, PurchaseOrdersMetaFailed.prototype)
+  }
+}
+
+export class PurchaseOrdersExportFailed extends BaseError {
+  public name = 'PurchaseOrdersExportFailed'
+  constructor (
+    public message: string = 'Could not export purchase orders',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, PurchaseOrdersExportFailed.prototype)
   }
 }
