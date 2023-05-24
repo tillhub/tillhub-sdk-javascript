@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PurchaseOrdersMetaFailed = exports.PurchaseOrdersBulkDeleteProductsFailed = exports.PurchaseOrdersBulkAddProductsFailed = exports.PurchaseOrdersUpdateFailed = exports.PurchaseOrdersCreationFailed = exports.PurchaseOrdersGetFailed = exports.PurchaseOrders = void 0;
+exports.PurchaseOrdersExportFailed = exports.PurchaseOrdersMetaFailed = exports.PurchaseOrdersBulkDeleteProductsFailed = exports.PurchaseOrdersBulkAddProductsFailed = exports.PurchaseOrdersUpdateFailed = exports.PurchaseOrdersCreationFailed = exports.PurchaseOrdersGetFailed = exports.PurchaseOrders = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -232,6 +232,35 @@ var PurchaseOrders = (function (_super) {
             });
         });
     };
+    PurchaseOrders.prototype.export = function (q) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_8;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        base = this.uriHelper.generateBaseUri('/export');
+                        uri = this.uriHelper.generateUriWithQuery(base, q);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new PurchaseOrdersExportFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results[0],
+                                msg: response.data.msg
+                            }];
+                    case 3:
+                        error_8 = _a.sent();
+                        throw new PurchaseOrdersExportFailed(error_8.message, { error: error_8 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     PurchaseOrders.baseEndpoint = '/api/v0/purchase-orders';
     return PurchaseOrders;
 }(base_1.ThBaseHandler));
@@ -314,4 +343,17 @@ var PurchaseOrdersMetaFailed = (function (_super) {
     return PurchaseOrdersMetaFailed;
 }(errors_1.BaseError));
 exports.PurchaseOrdersMetaFailed = PurchaseOrdersMetaFailed;
+var PurchaseOrdersExportFailed = (function (_super) {
+    tslib_1.__extends(PurchaseOrdersExportFailed, _super);
+    function PurchaseOrdersExportFailed(message, properties) {
+        if (message === void 0) { message = 'Could not export purchase orders'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PurchaseOrdersExportFailed';
+        Object.setPrototypeOf(_this, PurchaseOrdersExportFailed.prototype);
+        return _this;
+    }
+    return PurchaseOrdersExportFailed;
+}(errors_1.BaseError));
+exports.PurchaseOrdersExportFailed = PurchaseOrdersExportFailed;
 //# sourceMappingURL=purchase_orders.js.map

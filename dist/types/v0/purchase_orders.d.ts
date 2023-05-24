@@ -69,6 +69,15 @@ export interface PurchaseOrderMetaQuery {
     deleted?: boolean;
     location?: string;
 }
+export interface PurchaseOrderExport {
+    url?: string;
+    filename?: string;
+    expiresAt?: string;
+}
+export interface PurchaseOrdersExportResponse {
+    data?: PurchaseOrderExport;
+    msg?: string;
+}
 export declare class PurchaseOrders extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
@@ -83,6 +92,7 @@ export declare class PurchaseOrders extends ThBaseHandler {
     meta(q?: PurchaseOrderMetaQuery | undefined): Promise<PurchaseOrdersMultipleResponse>;
     bulkAddProducts(purchaseOrderId: string, purchaseOrder: PurchaseOrdersBulkAddProductsQuery): Promise<PurchaseOrdersSingleResponse>;
     bulkDeleteProducts(purchaseOrderId: string, purchaseOrder: PurchaseOrdersBulkDeleteProductsQuery): Promise<PurchaseOrdersSingleResponse>;
+    export(q?: PurchaseOrderMetaQuery | undefined): Promise<PurchaseOrdersExportResponse>;
 }
 export declare class PurchaseOrdersGetFailed extends BaseError {
     message: string;
@@ -110,6 +120,11 @@ export declare class PurchaseOrdersBulkDeleteProductsFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class PurchaseOrdersMetaFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class PurchaseOrdersExportFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

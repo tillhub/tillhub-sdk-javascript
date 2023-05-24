@@ -1,3 +1,10 @@
+# [4.69.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.68.0...v4.69.0) (2023-05-24)
+
+
+### Features
+
+* **purchase_orders:** add export function ([#490](https://github.com/tillhub/tillhub-sdk-javascript/issues/490)) ([1e43a14](https://github.com/tillhub/tillhub-sdk-javascript/commit/1e43a14ea390e21af930c7971f778d586ac4a090))
+
 # [4.68.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.67.0...v4.68.0) (2023-05-16)
 
 
