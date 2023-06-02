@@ -19,10 +19,46 @@ export interface OrdersQuery {
     limit?: number
     uri?: string
     query?: {
-        deleted?: boolean
-        active?: boolean
-        extended?: boolean
+        orderId?: string
+        amount?: string
+        currency?: string
+        paymentMethod?: string
+        brand?: string
+        status?: string
+        txnNumber?: string
+        customerName?: string
+        email?: string
+        customerId?: string
+        curstomerBirthdate?: string
+        usage?: string
+        receiptNumber?: string
+        staff?: string
+        registerId?: string
         location?: string
+        recurring?: string
+        paymentId?: string
+        cardNumber?: number
+        account?: string
+        bankName?: string
+        bic?: string
+        insuranceName?: string
+        insuraceId?: string
+        cashierNumber?: number
+        balanceNumber?: number
+        basketId?: string
+        basketItemId?: string
+        basketItemStatus?: string
+        basketItemName?: string
+        basketItemType?: string
+        transactionShortId?: string
+        trnasactionId?: string
+        terminalId?: string
+        cutoverId?: string
+        cutoverDate?: string
+        disputeId?: string
+        disputeType?: string
+        disputeStatus?: string
+        invoiceId?: string
     }
 }
 
@@ -277,9 +313,9 @@ export class Orders extends ThBaseHandler {
         this.uriHelper = new UriHelper(this.endpoint, this.options)
     }
 
-    async getAll (query?: OrdersQuery | undefined): Promise<OrdersResponse> {
+    async getAll (tenantId: string, query?: OrdersQuery | undefined): Promise<OrdersResponse> {
         let next
-        const base = this.uriHelper.generateBaseUri()
+        const base = this.uriHelper.generateBaseUri(`/${tenantId}`)
         const uri = this.uriHelper.generateUriWithQuery(base, query)
     
         try {
@@ -289,7 +325,7 @@ export class Orders extends ThBaseHandler {
             }
     
             if (response.data.cursor?.next) {
-                next = (): Promise<OrdersResponse> => this.getAll({ uri: response.data.cursor.next })
+                next = (): Promise<OrdersResponse> => this.getAll(uri)
             }
     
             return {
@@ -302,9 +338,9 @@ export class Orders extends ThBaseHandler {
         }
     }
 
-    async get (orderId: string, query: OrdersQuery): Promise<OrdersResponse> {
-        const base = this.uriHelper.generateBaseUri(`/${orderId}`)
-        const uri = this.uriHelper.generateUriWithQuery(base, query)
+    async get (tenantId: string, orderId: string): Promise<OrdersResponse> {
+        const base = this.uriHelper.generateBaseUri(`/${tenantId}/${orderId}`)
+        const uri = this.uriHelper.generateUriWithQuery(base)
     
         try {
             const response = await this.http.getClient().get(uri)
@@ -313,7 +349,7 @@ export class Orders extends ThBaseHandler {
                 throw new OrderFetchFailed(undefined, { status: response.status })
             }
             return {
-                data: response.data.results[0] as Order,
+                data: response.data.results[0] as OrderDetails,
                 msg: response.data.msg,
                 metadata: { count: response.data.count }
             }
