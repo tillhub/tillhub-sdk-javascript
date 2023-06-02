@@ -329,7 +329,7 @@ export class Orders extends ThBaseHandler {
             }
     
             return {
-                data: response.data.results,
+                data: response.data.results as Order[],
                 metadata: { cursor: response.data.cursor },
                 next
             }
