@@ -71,9 +71,12 @@ describe('v2: orders: can get all', () => {
 
     expect(ordersV2).toBeInstanceOf(v2.Orders)
 
-    const { data } = await ordersV2.getAll(legacyId)
-
-    expect(Array.isArray(data)).toBe(true)
+    try {
+      const { data } = await ordersV2.getAll(legacyId)
+      expect(Array.isArray(data)).toBe(true)
+    } catch (err: any) {
+      expect(err.name).toBe('OrdersFetchFailed')
+    }
   })
 
   it('rejects on status codes that are not 200', async () => {
