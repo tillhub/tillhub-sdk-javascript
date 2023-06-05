@@ -14,6 +14,19 @@ export interface OrdersResponse {
   next?: () => Promise<OrdersResponse>
 }
 
+export interface OrderResponse {
+  data: OrderDetails
+  metadata: Record<string, unknown>
+  msg?: string
+  errors?: ErrorObject[]
+}
+
+export interface ErrorObject {
+  id: string
+  label: string
+  errorDetails: Record<string, unknown>
+}
+
 export interface OrdersQuery {
   limit?: number
   uri?: string
@@ -336,7 +349,7 @@ export class Orders extends ThBaseHandler {
     }
   }
 
-  async get (tenantId: string, orderId: string): Promise<OrdersResponse> {
+  async get (tenantId: string, orderId: string): Promise<OrderResponse> {
     const base = this.uriHelper.generateBaseUri(`/${tenantId}/${orderId}`)
     const uri = this.uriHelper.generateUriWithQuery(base)
 
