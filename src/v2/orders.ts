@@ -102,6 +102,27 @@ export interface Order {
   status?: string | null
   customerName?: string | null
   lastUpdate?: string | null // todo: can be timestamp
+  txnNumber?: string | null
+  email?: string | null
+  customerId?: string | null
+  usage?: string | null
+  receiptNumber?: number | null
+  staff?: string | null
+  registerId?: string | null
+  entity?: string | null // todo: check what this is, as it is not elsewhere in the model
+  paymentId?: string | null
+  cardNumber?: string | null // info: this is combined with account in our data model, since it can be account or card
+  accountNumber?: string | null // info: the field is shared with the above, under account, as it can be one or another
+  bankName?: string | null // info: name in model is just bank, might need changing
+  bic?: string | null
+  insuranceName?: string | null
+  insuranceId?: string | null
+  cashierNumber?: string | null
+  balanceNumber?: number | null
+  basketId?: number | null // info: it is just id under Basket model
+  terminalId?: string | null
+  cutoverId?: string | null
+  cutoverDate?: string | null // todo: can be timestamp
 }
 
 export interface Payment {
