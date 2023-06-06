@@ -115,7 +115,7 @@ export interface Order {
   accountNumber?: string | null // info: the field is shared with the above, under account, as it can be one or another
   bankName?: string | null // info: name in model is just bank, might need changing
   bic?: string | null
-  insuranceName?: string | null // todo: in Insurance > provider, but in FE we keep insuranceProvider - might need changing
+  insuranceName?: string | null
   insuranceId?: string | null
   cashierNumber?: string | null
   balanceNumber?: number | null
