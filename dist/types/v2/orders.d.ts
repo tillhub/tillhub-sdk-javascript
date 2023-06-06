@@ -94,6 +94,27 @@ export interface Order {
     status?: string | null;
     customerName?: string | null;
     lastUpdate?: string | null;
+    txnNumber?: string | null;
+    email?: string | null;
+    customerId?: string | null;
+    usage?: string | null;
+    receiptNumber?: number | null;
+    staff?: string | null;
+    registerId?: string | null;
+    entity?: string | null;
+    paymentId?: string | null;
+    cardNumber?: string | null;
+    accountNumber?: string | null;
+    bankName?: string | null;
+    bic?: string | null;
+    insuranceName?: string | null;
+    insuranceId?: string | null;
+    cashierNumber?: string | null;
+    balanceNumber?: number | null;
+    basketId?: number | null;
+    terminalId?: string | null;
+    cutoverId?: string | null;
+    cutoverDate?: string | null;
 }
 export interface Payment {
     id?: string;

@@ -1,3 +1,11 @@
+## [4.70.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.70.1...v4.70.2) (2023-06-06)
+
+
+### Bug Fixes
+
+* **UNTIL-6762:** remove comment ([40db3b6](https://github.com/tillhub/tillhub-sdk-javascript/commit/40db3b6abc0d624392fa3e7e0a8941ad9fa54834))
+* **UNTIL-6762:** update model for getAll order ([6fe9d3b](https://github.com/tillhub/tillhub-sdk-javascript/commit/6fe9d3bfa24434645c14da4b800ee28edde4f4a0))
+
 ## [4.70.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.70.0...v4.70.1) (2023-06-06)
 
 
