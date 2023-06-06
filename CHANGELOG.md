@@ -1,3 +1,23 @@
+# [4.70.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.69.0...v4.70.0) (2023-06-06)
+
+
+### Bug Fixes
+
+* **UNTIL-6762:** add get all orders test mock ([8e45914](https://github.com/tillhub/tillhub-sdk-javascript/commit/8e459144d0b300f7b3d1481c620cd8febadf27c0))
+* **UNTIL-6762:** add test for fetching one order ([9e90369](https://github.com/tillhub/tillhub-sdk-javascript/commit/9e90369880d341c8d82c5b2f53b9faf0601f110d))
+* **UNTIL-6762:** fix test ([6e4b545](https://github.com/tillhub/tillhub-sdk-javascript/commit/6e4b545a0614ae400894ebebabd5b17ec5445403))
+* **UNTIL-6762:** individual type response fix ([a572733](https://github.com/tillhub/tillhub-sdk-javascript/commit/a572733c88ce11f2d5cce8df5ceff46245694d2a))
+* **UNTIL-6762:** order eslint issue ([ec07d61](https://github.com/tillhub/tillhub-sdk-javascript/commit/ec07d611f207acc431350678644ae06306ddb473))
+* **UNTIL-6762:** try test fix ([d02e250](https://github.com/tillhub/tillhub-sdk-javascript/commit/d02e250fe8fe8d4e596e9db0ab501f6919e300a7))
+
+
+### Features
+
+* **UNTIL-6762:** add transaction params ([1acdbf9](https://github.com/tillhub/tillhub-sdk-javascript/commit/1acdbf907ddfc5cd5fd41f81c19fcecdd0eab4a8))
+* **UNTIL-6762:** fix fetch type ([d5d9115](https://github.com/tillhub/tillhub-sdk-javascript/commit/d5d9115c62272f3efeb6e45ac69181c0a48f85ab))
+* **UNTIL-6762:** order maangement endpoints ([1bf46a0](https://github.com/tillhub/tillhub-sdk-javascript/commit/1bf46a028435f610713c2c1609b434809b4d0f37))
+* **UNTIL-6762:** updated models ([a2b6d6f](https://github.com/tillhub/tillhub-sdk-javascript/commit/a2b6d6ffd976b792b7422c022a7a14e54eaff07e))
+
 # [4.69.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.68.0...v4.69.0) (2023-05-24)
 
 

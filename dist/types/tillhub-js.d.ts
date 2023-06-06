@@ -83,6 +83,7 @@ export declare class TillhubClient extends events.EventEmitter {
     transactionsLegacy(): v1.TransactionsLegacy;
     transactions(axiosOptions?: AxiosOptions): v1.Transactions;
     transactionsV2(): v2.Transactions;
+    ordersV2(): v2.Orders;
     exportsV1(): v1.ExportsV1;
     staff(): v0.Staff;
     auditActions(): v0.AuditActions;
