@@ -1,3 +1,10 @@
+## [4.70.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.70.0...v4.70.1) (2023-06-06)
+
+
+### Bug Fixes
+
+* **UNTIL-6762:** remove tenantId from call header ([577c669](https://github.com/tillhub/tillhub-sdk-javascript/commit/577c6694a892824b956977b34bc88ceb5927c812))
+
 # [4.70.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.69.0...v4.70.0) (2023-06-06)
 
 

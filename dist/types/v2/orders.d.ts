@@ -285,8 +285,8 @@ export declare class Orders extends ThBaseHandler {
     options: OrdersOptions;
     uriHelper: UriHelper;
     constructor(options: OrdersOptions, http: Client);
-    getAll(tenantId: string, query?: OrdersQuery | undefined): Promise<OrdersResponse>;
-    get(tenantId: string, orderId: string): Promise<OrderResponse>;
+    getAll(query?: OrdersQuery | undefined): Promise<OrdersResponse>;
+    get(orderId: string): Promise<OrderResponse>;
 }
 export declare class OrdersFetchFailed extends BaseError {
     message: string;

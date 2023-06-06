@@ -20,7 +20,7 @@ var Orders = (function (_super) {
         _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
         return _this;
     }
-    Orders.prototype.getAll = function (tenantId, query) {
+    Orders.prototype.getAll = function (query) {
         var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var next, base, uri, response, error_1;
@@ -28,7 +28,7 @@ var Orders = (function (_super) {
             return tslib_1.__generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        base = this.uriHelper.generateBaseUri("/" + tenantId);
+                        base = this.uriHelper.generateBaseUri('/');
                         uri = this.uriHelper.generateUriWithQuery(base, query);
                         _b.label = 1;
                     case 1:
@@ -40,7 +40,7 @@ var Orders = (function (_super) {
                             throw new OrdersFetchFailed(undefined, { status: response.status });
                         }
                         if ((_a = response.data.cursor) === null || _a === void 0 ? void 0 : _a.next) {
-                            next = function () { return _this.getAll(uri); };
+                            next = function () { return _this.getAll({ uri: uri }); };
                         }
                         return [2, {
                                 data: response.data.results,
@@ -55,13 +55,13 @@ var Orders = (function (_super) {
             });
         });
     };
-    Orders.prototype.get = function (tenantId, orderId) {
+    Orders.prototype.get = function (orderId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        base = this.uriHelper.generateBaseUri("/" + tenantId + "/" + orderId);
+                        base = this.uriHelper.generateBaseUri("/" + orderId);
                         uri = this.uriHelper.generateUriWithQuery(base);
                         _a.label = 1;
                     case 1:
