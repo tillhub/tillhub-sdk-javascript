@@ -1,5 +1,6 @@
 import analytics from './analytics'
 import { Transactions } from './transactions'
+import { Orders } from './orders'
 
 export interface AnalyticsHandlerTypes {
   analytics: {
@@ -20,5 +21,6 @@ export interface AnalyticsHandlerTypes {
 
 export {
   analytics,
-  Transactions
+  Transactions,
+  Orders
 }
