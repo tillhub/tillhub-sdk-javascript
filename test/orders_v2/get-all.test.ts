@@ -72,7 +72,7 @@ describe('v2: orders: can get all', () => {
     expect(ordersV2).toBeInstanceOf(v2.Orders)
 
     try {
-      const { data } = await ordersV2.getAll(legacyId)
+      const { data } = await ordersV2.getAll()
       expect(Array.isArray(data)).toBe(true)
     } catch (err: any) {
       expect(err.name).toBe('OrdersFetchFailed')
@@ -116,7 +116,7 @@ describe('v2: orders: can get all', () => {
     })
 
     try {
-      await th.ordersV2().getAll(legacyId)
+      await th.ordersV2().getAll()
     } catch (err: any) {
       expect(err.name).toBe('OrdersFetchFailed')
     }
