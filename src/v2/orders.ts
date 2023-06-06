@@ -324,9 +324,9 @@ export class Orders extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async getAll (tenantId: string, query?: OrdersQuery | undefined): Promise<OrdersResponse> {
+  async getAll (query?: OrdersQuery | undefined): Promise<OrdersResponse> {
     let next
-    const base = this.uriHelper.generateBaseUri(`/${tenantId}`)
+    const base = this.uriHelper.generateBaseUri('/')
     const uri = this.uriHelper.generateUriWithQuery(base, query)
 
     try {
@@ -336,7 +336,7 @@ export class Orders extends ThBaseHandler {
       }
 
       if (response.data.cursor?.next) {
-        next = (): Promise<OrdersResponse> => this.getAll(uri)
+        next = (): Promise<OrdersResponse> => this.getAll({ uri })
       }
 
       return {
@@ -349,8 +349,8 @@ export class Orders extends ThBaseHandler {
     }
   }
 
-  async get (tenantId: string, orderId: string): Promise<OrderResponse> {
-    const base = this.uriHelper.generateBaseUri(`/${tenantId}/${orderId}`)
+  async get (orderId: string): Promise<OrderResponse> {
+    const base = this.uriHelper.generateBaseUri(`/${orderId}`)
     const uri = this.uriHelper.generateUriWithQuery(base)
 
     try {
