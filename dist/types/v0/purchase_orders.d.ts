@@ -39,6 +39,9 @@ export interface PurchaseOrdersMultipleResponse {
     metadata?: Record<string, unknown>;
     next?: () => Promise<PurchaseOrdersMultipleResponse>;
 }
+export interface PurchaseOrdersPdfResponse {
+    data: Record<string, unknown>;
+}
 export declare type PurchaseOrderStatus = 'draft' | 'sent' | 'done';
 export interface PurchaseOrder {
     purchaseOrderNumber: string;
@@ -89,6 +92,7 @@ export declare class PurchaseOrders extends ThBaseHandler {
     get(purchaseOrderId: string): Promise<PurchaseOrdersSingleResponse>;
     create(purchaseOrder: PurchaseOrdersCreateQuery): Promise<PurchaseOrdersSingleResponse>;
     put(purchaseOrderId: string, purchaseOrder: PurchaseOrdersUpdateQuery): Promise<PurchaseOrdersSingleResponse>;
+    pdfUri(purchaseOrderId: string): Promise<PurchaseOrdersPdfResponse>;
     meta(q?: PurchaseOrderMetaQuery | undefined): Promise<PurchaseOrdersMultipleResponse>;
     bulkAddProducts(purchaseOrderId: string, purchaseOrder: PurchaseOrdersBulkAddProductsQuery): Promise<PurchaseOrdersSingleResponse>;
     bulkDeleteProducts(purchaseOrderId: string, purchaseOrder: PurchaseOrdersBulkDeleteProductsQuery): Promise<PurchaseOrdersSingleResponse>;

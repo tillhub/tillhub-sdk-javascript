@@ -1,3 +1,10 @@
+# [4.71.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.70.2...v4.71.0) (2023-06-21)
+
+
+### Features
+
+* **purchase-order:** add get PDF uri function ([#496](https://github.com/tillhub/tillhub-sdk-javascript/issues/496)) ([0df5e7a](https://github.com/tillhub/tillhub-sdk-javascript/commit/0df5e7a424de2c46677204b6cb28dd62ac202cbd))
+
 ## [4.70.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.70.1...v4.70.2) (2023-06-06)
 
 
