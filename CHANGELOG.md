@@ -1,3 +1,10 @@
+## [4.71.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.71.0...v4.71.1) (2023-06-21)
+
+
+### Bug Fixes
+
+* **purchase-order:** change function returned value ([3113c1e](https://github.com/tillhub/tillhub-sdk-javascript/commit/3113c1e792f396274fd2bb1e3464a63bdb0322a5))
+
 # [4.71.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.70.2...v4.71.0) (2023-06-21)
 
 

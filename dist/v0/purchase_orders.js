@@ -153,7 +153,7 @@ var PurchaseOrders = (function (_super) {
                     case 1:
                         response = _a.sent();
                         return [2, {
-                                data: response.data.result
+                                data: response.data
                             }];
                     case 2:
                         error_5 = _a.sent();
