@@ -47,6 +47,10 @@ export interface PurchaseOrdersMultipleResponse {
   next?: () => Promise<PurchaseOrdersMultipleResponse>
 }
 
+export interface PurchaseOrdersPdfResponse {
+  data: Record<string, unknown>
+}
+
 export type PurchaseOrderStatus = 'draft' | 'sent' | 'done'
 
 export interface PurchaseOrder {
@@ -191,6 +195,21 @@ export class PurchaseOrders extends ThBaseHandler {
     }
   }
 
+  async pdfUri (purchaseOrderId: string): Promise<PurchaseOrdersPdfResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri(`/${purchaseOrderId}/pdf`)
+      const uri = this.uriHelper.generateUriWithQuery(base)
+
+      const response = await this.http.getClient().get(uri)
+
+      return {
+        data: response.data.result
+      }
+    } catch (error: any) {
+      throw new PurchaseOrdersPdfFailed(error.message)
+    }
+  }
+
   async meta (q?: PurchaseOrderMetaQuery | undefined): Promise<PurchaseOrdersMultipleResponse> {
     const base = this.uriHelper.generateBaseUri('/meta')
     const uri = this.uriHelper.generateUriWithQuery(base, q)
@@ -320,6 +339,17 @@ export class PurchaseOrdersBulkDeleteProductsFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, PurchaseOrdersBulkDeleteProductsFailed.prototype)
+  }
+}
+
+class PurchaseOrdersPdfFailed extends BaseError {
+  public name = 'PurchaseOrdersPdfFailed'
+  constructor (
+    public message: string = 'Could not create pdf',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, PurchaseOrdersPdfFailed.prototype)
   }
 }
 
