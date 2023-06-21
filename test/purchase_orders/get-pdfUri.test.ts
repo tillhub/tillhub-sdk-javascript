@@ -34,9 +34,7 @@ describe('v0: Purchase Orders: can get PDF', () => {
       mock.onGet(`https://api.tillhub.com/api/v0/purchase-orders/${legacyId}/${purchaseOrderId}/pdf`).reply(() => {
         return [
           200,
-          {
-            result
-          }
+          result
         ]
       })
     }

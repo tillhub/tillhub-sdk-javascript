@@ -203,7 +203,7 @@ export class PurchaseOrders extends ThBaseHandler {
       const response = await this.http.getClient().get(uri)
 
       return {
-        data: response.data.result
+        data: response.data
       }
     } catch (error: any) {
       throw new PurchaseOrdersPdfFailed(error.message)
