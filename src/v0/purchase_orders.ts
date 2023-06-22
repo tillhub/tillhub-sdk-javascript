@@ -51,6 +51,13 @@ export interface PurchaseOrdersPdfResponse {
   data: Record<string, unknown>
 }
 
+export interface PurchaseOrdersPreviewResponse {
+  data: {
+    subject?: string
+    body?: string
+  }
+}
+
 export type PurchaseOrderStatus = 'draft' | 'sent' | 'done'
 
 export interface PurchaseOrder {
@@ -210,6 +217,21 @@ export class PurchaseOrders extends ThBaseHandler {
     }
   }
 
+  async preview (purchaseOrderId: string): Promise<PurchaseOrdersPreviewResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri(`/${purchaseOrderId}/preview`)
+      const uri = this.uriHelper.generateUriWithQuery(base)
+
+      const response = await this.http.getClient().get(uri)
+
+      return {
+        data: response.data.results[0]
+      }
+    } catch (error: any) {
+      throw new PurchaseOrdersPreviewFailed(error.message)
+    }
+  }
+
   async meta (q?: PurchaseOrderMetaQuery | undefined): Promise<PurchaseOrdersMultipleResponse> {
     const base = this.uriHelper.generateBaseUri('/meta')
     const uri = this.uriHelper.generateUriWithQuery(base, q)
@@ -350,6 +372,17 @@ class PurchaseOrdersPdfFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, PurchaseOrdersPdfFailed.prototype)
+  }
+}
+
+class PurchaseOrdersPreviewFailed extends BaseError {
+  public name = 'PurchaseOrdersPreviewFailed'
+  constructor (
+    public message: string = 'Could not create preview',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, PurchaseOrdersPreviewFailed.prototype)
   }
 }
 
