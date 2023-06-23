@@ -1,3 +1,10 @@
+# [4.72.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.71.1...v4.72.0) (2023-06-23)
+
+
+### Features
+
+* **purchase-order:** add email preview call function ([#497](https://github.com/tillhub/tillhub-sdk-javascript/issues/497)) ([570c107](https://github.com/tillhub/tillhub-sdk-javascript/commit/570c1076334b31325fe8db9f8f6b5f27563b7bd8))
+
 ## [4.71.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.71.0...v4.71.1) (2023-06-21)
 
 
