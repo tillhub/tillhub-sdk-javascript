@@ -40,7 +40,9 @@ export interface PurchaseOrdersMultipleResponse {
     next?: () => Promise<PurchaseOrdersMultipleResponse>;
 }
 export interface PurchaseOrdersPdfResponse {
-    data: Record<string, unknown>;
+    data?: string;
+    contentType?: string;
+    filename?: string;
 }
 export interface PurchaseOrdersPreviewResponse {
     data: {

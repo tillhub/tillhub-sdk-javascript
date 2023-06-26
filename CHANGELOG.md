@@ -1,3 +1,10 @@
+## [4.72.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.72.0...v4.72.1) (2023-06-26)
+
+
+### Bug Fixes
+
+* **purchase-order:** get pdf as 64Base encoded format ([#498](https://github.com/tillhub/tillhub-sdk-javascript/issues/498)) ([d4b0e45](https://github.com/tillhub/tillhub-sdk-javascript/commit/d4b0e45316dc2f21084945e6817b9ef6239f5f76))
+
 # [4.72.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.71.1...v4.72.0) (2023-06-23)
 
 

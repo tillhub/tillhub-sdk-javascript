@@ -142,7 +142,7 @@ var PurchaseOrders = (function (_super) {
     };
     PurchaseOrders.prototype.pdfUri = function (purchaseOrderId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_5;
+            var base, uri, response, pdfObj, error_5;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -152,8 +152,11 @@ var PurchaseOrders = (function (_super) {
                         return [4, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
+                        pdfObj = response.data.results[0];
                         return [2, {
-                                data: response.data
+                                data: pdfObj.base64Content,
+                                contentType: pdfObj.contentType,
+                                filename: pdfObj.filename
                             }];
                     case 2:
                         error_5 = _a.sent();
@@ -379,7 +382,7 @@ exports.PurchaseOrdersBulkDeleteProductsFailed = PurchaseOrdersBulkDeleteProduct
 var PurchaseOrdersPdfFailed = (function (_super) {
     tslib_1.__extends(PurchaseOrdersPdfFailed, _super);
     function PurchaseOrdersPdfFailed(message, properties) {
-        if (message === void 0) { message = 'Could not create pdf'; }
+        if (message === void 0) { message = 'Could not download pdf'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
         _this.name = 'PurchaseOrdersPdfFailed';
