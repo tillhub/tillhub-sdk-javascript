@@ -48,7 +48,9 @@ export interface PurchaseOrdersMultipleResponse {
 }
 
 export interface PurchaseOrdersPdfResponse {
-  data: Record<string, unknown>
+  data?: string
+  contentType?: string
+  filename?: string
 }
 
 export interface PurchaseOrdersPreviewResponse {
@@ -208,9 +210,12 @@ export class PurchaseOrders extends ThBaseHandler {
       const uri = this.uriHelper.generateUriWithQuery(base)
 
       const response = await this.http.getClient().get(uri)
+      const pdfObj = response.data.results[0]
 
       return {
-        data: response.data
+        data: pdfObj.base64Content,
+        contentType: pdfObj.contentType,
+        filename: pdfObj.filename
       }
     } catch (error: any) {
       throw new PurchaseOrdersPdfFailed(error.message)
@@ -367,7 +372,7 @@ export class PurchaseOrdersBulkDeleteProductsFailed extends BaseError {
 class PurchaseOrdersPdfFailed extends BaseError {
   public name = 'PurchaseOrdersPdfFailed'
   constructor (
-    public message: string = 'Could not create pdf',
+    public message: string = 'Could not download pdf',
     properties?: Record<string, unknown>
   ) {
     super(message, properties)

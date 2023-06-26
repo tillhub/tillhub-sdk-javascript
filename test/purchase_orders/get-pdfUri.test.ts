@@ -13,7 +13,11 @@ afterEach(() => {
 })
 
 const purchaseOrderId = 'f8314183-8199-4cb7-b152-04f6ad4ebc7e'
-const result = 'some pdf uri'
+const results = [{
+  base64Content: 'sdfsdf',
+  contentType: 'sdfsdf',
+  filename: 'sdfsdf'
+}]
 
 describe('v0: Purchase Orders: can get PDF', () => {
   it("Tillhub's purchase orders are instantiable", async () => {
@@ -34,7 +38,7 @@ describe('v0: Purchase Orders: can get PDF', () => {
       mock.onGet(`https://api.tillhub.com/api/v0/purchase-orders/${legacyId}/${purchaseOrderId}/pdf`).reply(() => {
         return [
           200,
-          result
+          { results }
         ]
       })
     }
@@ -45,9 +49,11 @@ describe('v0: Purchase Orders: can get PDF', () => {
 
     expect(PurchaseOrders).toBeInstanceOf(v0.PurchaseOrders)
 
-    const { data } = await PurchaseOrders.pdfUri(purchaseOrderId)
+    const { data, contentType, filename } = await PurchaseOrders.pdfUri(purchaseOrderId)
 
-    expect(data).toMatch(result)
+    expect(data).toMatch(results[0].base64Content)
+    expect(contentType).toMatch(results[0].contentType)
+    expect(filename).toMatch(results[0].filename)
   })
 
   it('rejects on status codes that are not 200', async () => {
