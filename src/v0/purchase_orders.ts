@@ -60,6 +60,10 @@ export interface PurchaseOrdersPreviewResponse {
   }
 }
 
+export interface PurchaseOrdersSendQuery {
+  recipients: string[] // list of emails
+}
+
 export type PurchaseOrderStatus = 'draft' | 'sent' | 'done'
 
 export interface PurchaseOrder {
@@ -237,6 +241,22 @@ export class PurchaseOrders extends ThBaseHandler {
     }
   }
 
+  async send (purchaseOrderId: string, sendQuery: PurchaseOrdersSendQuery): Promise<PurchaseOrdersSingleResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri(`/${purchaseOrderId}/send`)
+      const uri = this.uriHelper.generateUriWithQuery(base)
+
+      const response = await this.http.getClient().post(uri, sendQuery)
+
+      return {
+        data: response.data.results[0],
+        msg: response.data.msg
+      }
+    } catch (error: any) {
+      throw new PurchaseOrdersSendFailed(error.message)
+    }
+  }
+
   async meta (q?: PurchaseOrderMetaQuery | undefined): Promise<PurchaseOrdersMultipleResponse> {
     const base = this.uriHelper.generateBaseUri('/meta')
     const uri = this.uriHelper.generateUriWithQuery(base, q)
@@ -410,5 +430,16 @@ export class PurchaseOrdersExportFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, PurchaseOrdersExportFailed.prototype)
+  }
+}
+
+class PurchaseOrdersSendFailed extends BaseError {
+  public name = 'PurchaseOrdersSendFailed'
+  constructor (
+    public message: string = 'Could not send email',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, PurchaseOrdersSendFailed.prototype)
   }
 }
