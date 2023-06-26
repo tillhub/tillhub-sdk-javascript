@@ -50,6 +50,9 @@ export interface PurchaseOrdersPreviewResponse {
         body?: string;
     };
 }
+export interface PurchaseOrdersSendQuery {
+    recipients: string[];
+}
 export declare type PurchaseOrderStatus = 'draft' | 'sent' | 'done';
 export interface PurchaseOrder {
     purchaseOrderNumber: string;
@@ -102,6 +105,7 @@ export declare class PurchaseOrders extends ThBaseHandler {
     put(purchaseOrderId: string, purchaseOrder: PurchaseOrdersUpdateQuery): Promise<PurchaseOrdersSingleResponse>;
     pdfUri(purchaseOrderId: string): Promise<PurchaseOrdersPdfResponse>;
     preview(purchaseOrderId: string): Promise<PurchaseOrdersPreviewResponse>;
+    send(purchaseOrderId: string, sendQuery: PurchaseOrdersSendQuery): Promise<PurchaseOrdersSingleResponse>;
     meta(q?: PurchaseOrderMetaQuery | undefined): Promise<PurchaseOrdersMultipleResponse>;
     bulkAddProducts(purchaseOrderId: string, purchaseOrder: PurchaseOrdersBulkAddProductsQuery): Promise<PurchaseOrdersSingleResponse>;
     bulkDeleteProducts(purchaseOrderId: string, purchaseOrder: PurchaseOrdersBulkDeleteProductsQuery): Promise<PurchaseOrdersSingleResponse>;

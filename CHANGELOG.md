@@ -1,3 +1,10 @@
+# [4.73.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.72.1...v4.73.0) (2023-06-26)
+
+
+### Features
+
+* **purchase-order:** add send email function call ([#499](https://github.com/tillhub/tillhub-sdk-javascript/issues/499)) ([eab42b2](https://github.com/tillhub/tillhub-sdk-javascript/commit/eab42b2404afbe12594a10255cd547f083f1c681))
+
 ## [4.72.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.72.0...v4.72.1) (2023-06-26)
 
 

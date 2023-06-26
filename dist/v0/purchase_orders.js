@@ -189,9 +189,33 @@ var PurchaseOrders = (function (_super) {
             });
         });
     };
-    PurchaseOrders.prototype.meta = function (q) {
+    PurchaseOrders.prototype.send = function (purchaseOrderId, sendQuery) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_7;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri("/" + purchaseOrderId + "/send");
+                        uri = this.uriHelper.generateUriWithQuery(base);
+                        return [4, this.http.getClient().post(uri, sendQuery)];
+                    case 1:
+                        response = _a.sent();
+                        return [2, {
+                                data: response.data.results[0],
+                                msg: response.data.msg
+                            }];
+                    case 2:
+                        error_7 = _a.sent();
+                        throw new PurchaseOrdersSendFailed(error_7.message);
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    PurchaseOrders.prototype.meta = function (q) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_8;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -214,8 +238,8 @@ var PurchaseOrders = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_7 = _a.sent();
-                        throw new PurchaseOrdersMetaFailed(error_7.message, { error: error_7 });
+                        error_8 = _a.sent();
+                        throw new PurchaseOrdersMetaFailed(error_8.message, { error: error_8 });
                     case 4: return [2];
                 }
             });
@@ -223,7 +247,7 @@ var PurchaseOrders = (function (_super) {
     };
     PurchaseOrders.prototype.bulkAddProducts = function (purchaseOrderId, purchaseOrder) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_8;
+            var base, uri, response, error_9;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -243,8 +267,8 @@ var PurchaseOrders = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        error_8 = _a.sent();
-                        throw new PurchaseOrdersBulkAddProductsFailed(error_8.message, { error: error_8 });
+                        error_9 = _a.sent();
+                        throw new PurchaseOrdersBulkAddProductsFailed(error_9.message, { error: error_9 });
                     case 4: return [2];
                 }
             });
@@ -252,7 +276,7 @@ var PurchaseOrders = (function (_super) {
     };
     PurchaseOrders.prototype.bulkDeleteProducts = function (purchaseOrderId, purchaseOrder) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_9;
+            var base, uri, response, error_10;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -274,8 +298,8 @@ var PurchaseOrders = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        error_9 = _a.sent();
-                        throw new PurchaseOrdersBulkDeleteProductsFailed(error_9.message, { error: error_9 });
+                        error_10 = _a.sent();
+                        throw new PurchaseOrdersBulkDeleteProductsFailed(error_10.message, { error: error_10 });
                     case 4: return [2];
                 }
             });
@@ -283,7 +307,7 @@ var PurchaseOrders = (function (_super) {
     };
     PurchaseOrders.prototype.export = function (q) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_10;
+            var base, uri, response, error_11;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -303,8 +327,8 @@ var PurchaseOrders = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        error_10 = _a.sent();
-                        throw new PurchaseOrdersExportFailed(error_10.message, { error: error_10 });
+                        error_11 = _a.sent();
+                        throw new PurchaseOrdersExportFailed(error_11.message, { error: error_11 });
                     case 4: return [2];
                 }
             });
@@ -429,4 +453,16 @@ var PurchaseOrdersExportFailed = (function (_super) {
     return PurchaseOrdersExportFailed;
 }(errors_1.BaseError));
 exports.PurchaseOrdersExportFailed = PurchaseOrdersExportFailed;
+var PurchaseOrdersSendFailed = (function (_super) {
+    tslib_1.__extends(PurchaseOrdersSendFailed, _super);
+    function PurchaseOrdersSendFailed(message, properties) {
+        if (message === void 0) { message = 'Could not send email'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PurchaseOrdersSendFailed';
+        Object.setPrototypeOf(_this, PurchaseOrdersSendFailed.prototype);
+        return _this;
+    }
+    return PurchaseOrdersSendFailed;
+}(errors_1.BaseError));
 //# sourceMappingURL=purchase_orders.js.map
