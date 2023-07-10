@@ -27,12 +27,16 @@ export interface ErrorObject {
   errorDetails: Record<string, unknown>
 }
 
-export interface TransactionsQuery {
+export interface TransactionsQueryHandler {
   limit?: number
   uri?: string
-  query?: {
-    transactionId?: string
-  }
+  query?: TransactionsQuery
+}
+
+export interface TransactionsQuery extends TransactionDetails {
+  deleted?: boolean
+  active?: boolean
+  orderFields?: string[] | string
 }
 
 declare type CommerceTypes = 'eCommerce' | 'moto' | 'pos' | 'undefined' | 'unknown'
@@ -111,7 +115,7 @@ export interface Transaction {
   instalmentInterestRate?: string | null
 }
 
-export interface TransactionDetails extends Transaction{
+export interface TransactionDetails extends Transaction {
   accountTokenProvider?: string | null
   ProcessingStatusCode?: number | null
   processingResult?: string | null
@@ -346,7 +350,7 @@ export class Transactions extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async getAll (query?: TransactionsQuery | undefined): Promise<TransactionsResponse> {
+  async getAll (query?: TransactionsQueryHandler | undefined): Promise<TransactionsResponse> {
     let next
     const base = this.uriHelper.generateBaseUri('/')
     const uri = this.uriHelper.generateUriWithQuery(base, query)
