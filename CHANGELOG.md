@@ -1,3 +1,11 @@
+# [4.74.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.73.0...v4.74.0) (2023-07-10)
+
+
+### Features
+
+* **transactions:** transactions v3 ([0aa93ec](https://github.com/tillhub/tillhub-sdk-javascript/commit/0aa93ec542144d8c01d4ec0b18d2a0e21df547f0))
+* **transactionsV3:** extend query object ([edce1ce](https://github.com/tillhub/tillhub-sdk-javascript/commit/edce1cec3b9fb98985ad45a38d37c22b233e8dfc))
+
 # [4.73.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.72.1...v4.73.0) (2023-06-26)
 
 

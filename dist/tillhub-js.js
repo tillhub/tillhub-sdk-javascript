@@ -9,8 +9,8 @@ var v1 = tslib_1.__importStar(require("./v1"));
 exports.v1 = v1;
 var v2 = tslib_1.__importStar(require("./v2"));
 exports.v2 = v2;
-var v3_1 = tslib_1.__importDefault(require("./v3"));
-exports.v3 = v3_1.default;
+var v3 = tslib_1.__importStar(require("./v3"));
+exports.v3 = v3;
 var client_1 = require("./client");
 var errors = tslib_1.__importStar(require("./errors"));
 var environment_1 = require("./environment");
@@ -303,6 +303,9 @@ var TillhubClient = (function (_super) {
             }
         };
     };
+    TillhubClient.prototype.transactionsV3 = function () {
+        return this.generateAuthenticatedInstance(v3.Transactions);
+    };
     TillhubClient.prototype.analyticsHandlersV3 = function (axiosOptions) {
         if (!this.options ||
             !this.options.base ||
@@ -314,11 +317,11 @@ var TillhubClient = (function (_super) {
         return {
             analytics: {
                 reports: {
-                    AnalyticsReportsDatev: v3_1.default.analytics.reports.AnalyticsReportsDatev.create({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
-                    AnalyticsReportsTransactions: v3_1.default.analytics.reports.AnalyticsReportsTransactions.create({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
-                    AnalyticsReportsBalances: v3_1.default.analytics.reports.AnalyticsReportsBalances.create({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
-                    AnalyticsReportsCountingProtocols: v3_1.default.analytics.reports.AnalyticsReportsCountingProtocols.create({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
-                    AnalyticsReportsRevenues: v3_1.default.analytics.reports.AnalyticsReportsRevenues.create({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http)
+                    AnalyticsReportsDatev: v3.analytics.reports.AnalyticsReportsDatev.create({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
+                    AnalyticsReportsTransactions: v3.analytics.reports.AnalyticsReportsTransactions.create({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
+                    AnalyticsReportsBalances: v3.analytics.reports.AnalyticsReportsBalances.create({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
+                    AnalyticsReportsCountingProtocols: v3.analytics.reports.AnalyticsReportsCountingProtocols.create({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
+                    AnalyticsReportsRevenues: v3.analytics.reports.AnalyticsReportsRevenues.create({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http)
                 }
             }
         };
