@@ -1,4 +1,3 @@
-import { PurchaseOrder } from './v0/purchase_orders';
 // Import here Polyfills if needed. Recommended core-js (npm i -D core-js)
 // import 'core-js/fn/array.find'
 // import * as EventEmitter from 'events'
@@ -9,9 +8,10 @@ import { Auth } from './v1/auth'
 import * as v0 from './v0'
 import * as v1 from './v1'
 import * as v2 from './v2'
+import * as v3 from './v3'
 import { AnalyticsHandlersV1Types } from './v1'
 import { AnalyticsHandlerTypes } from './v2'
-import v3, { AnalyticsHandlerTypesV3 } from './v3'
+import { AnalyticsHandlerTypesV3 } from './v3'
 import { Client, ClientOptions, Timeout } from './client'
 import * as errors from './errors'
 import { environment } from './environment'
@@ -621,6 +621,14 @@ export class TillhubClient extends events.EventEmitter {
         }
       }
     }
+  }
+
+  /**
+   * Create an authenticated Transactions V3 instance
+   *
+   */
+  transactionsV3 (): v3.Transactions {
+    return this.generateAuthenticatedInstance(v3.Transactions)
   }
 
   /**
