@@ -47,6 +47,11 @@ export interface PasswordResetRequest {
   email: string
 }
 
+export interface PasswordOrgResetRequest {
+  email: string
+  organisation: string
+}
+
 export interface PasswordResetNonce {
   password: string
   password_reset_id: string
@@ -210,6 +215,21 @@ export class Auth {
     try {
       const { data } = await axios.post(this.getEndpoint('/api/v0/users/login/reset'), {
         email: target.email
+      })
+
+      return {
+        msg: data.msg
+      }
+    } catch (error: any) {
+      throw new errors.PasswordResetRequestFailed(error.message, { error })
+    }
+  }
+
+  async requestPasswordResetWithOrganisation (target: PasswordOrgResetRequest): Promise<PasswordResetRequestResponse> {
+    try {
+      const { data } = await axios.post(this.getEndpoint('/api/v0/users/login/reset'), {
+        email: target.email,
+        organisation: target.organisation
       })
 
       return {
