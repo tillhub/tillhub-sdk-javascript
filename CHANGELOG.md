@@ -1,3 +1,10 @@
+# [4.75.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.74.0...v4.75.0) (2023-07-12)
+
+
+### Features
+
+* **auth:** method for password reset with organization ([604032b](https://github.com/tillhub/tillhub-sdk-javascript/commit/604032b0e149f6109e2e53f7dc3e055897c2401a))
+
 # [4.74.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.73.0...v4.74.0) (2023-07-10)
 
 

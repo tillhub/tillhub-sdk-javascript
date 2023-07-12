@@ -154,9 +154,33 @@ var Auth = (function () {
             });
         });
     };
-    Auth.prototype.setNewPassword = function (nonce) {
+    Auth.prototype.requestPasswordResetWithOrganisation = function (target) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var data, error_2;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4, axios_1.default.post(this.getEndpoint('/api/v0/users/login/reset'), {
+                                email: target.email,
+                                organisation: target.organisation
+                            })];
+                    case 1:
+                        data = (_a.sent()).data;
+                        return [2, {
+                                msg: data.msg
+                            }];
+                    case 2:
+                        error_2 = _a.sent();
+                        throw new errors.PasswordResetRequestFailed(error_2.message, { error: error_2 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    Auth.prototype.setNewPassword = function (nonce) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var data, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -171,8 +195,8 @@ var Auth = (function () {
                                 msg: data.msg
                             }];
                     case 2:
-                        error_2 = _a.sent();
-                        throw new errors.PasswordSetRequestFailed(error_2.message, { error: error_2 });
+                        error_3 = _a.sent();
+                        throw new errors.PasswordSetRequestFailed(error_3.message, { error: error_3 });
                     case 3: return [2];
                 }
             });
@@ -195,7 +219,7 @@ var Auth = (function () {
     Auth.prototype.logout = function (token, whitelabel) {
         var _a, _b;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var _token, _whitelabel, data, error_3;
+            var _token, _whitelabel, data, error_4;
             return tslib_1.__generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -219,8 +243,8 @@ var Auth = (function () {
                                 msg: data.msg
                             }];
                     case 3:
-                        error_3 = _c.sent();
-                        throw new LogoutFailed(error_3.message, { error: error_3 });
+                        error_4 = _c.sent();
+                        throw new LogoutFailed(error_4.message, { error: error_4 });
                     case 4: return [2];
                 }
             });

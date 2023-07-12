@@ -37,6 +37,10 @@ export interface SupportAuth {
 export interface PasswordResetRequest {
     email: string;
 }
+export interface PasswordOrgResetRequest {
+    email: string;
+    organisation: string;
+}
 export interface PasswordResetNonce {
     password: string;
     password_reset_id: string;
@@ -86,6 +90,7 @@ export declare class Auth {
     authenticate(): Promise<AuthResponse>;
     loginUsername(authData: UsernameAuth): Promise<AuthResponse>;
     requestPasswordReset(target: PasswordResetRequest): Promise<PasswordResetRequestResponse>;
+    requestPasswordResetWithOrganisation(target: PasswordOrgResetRequest): Promise<PasswordResetRequestResponse>;
     setNewPassword(nonce: PasswordResetNonce): Promise<PasswordResetRequestResponse>;
     protected setDefaultHeader(user: string, token: string, whitelabel?: string): void;
     logout(token?: string, whitelabel?: string): Promise<LogoutResponse>;
