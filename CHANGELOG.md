@@ -1,3 +1,10 @@
+# [4.76.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.75.0...v4.76.0) (2023-07-13)
+
+
+### Features
+
+* **webhooks events:** add meta call for events ([#502](https://github.com/tillhub/tillhub-sdk-javascript/issues/502)) ([cc85b4b](https://github.com/tillhub/tillhub-sdk-javascript/commit/cc85b4bc8018eb4c4c22ea2b517615c17f718e3f))
+
 # [4.75.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.74.0...v4.75.0) (2023-07-12)
 
 
