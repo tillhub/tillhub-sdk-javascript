@@ -105,6 +105,28 @@ export class WebhookEvents extends ThBaseHandler {
     }
   }
 
+  async meta (webhookId: string, query?: WebhookEventQuery | undefined): Promise<WebhookEventResponse> {
+    const base = this.uriHelper.generateBaseUri(`/${webhookId}/meta`)
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new WebhookEventMetaFailed(undefined, { status: response.status })
+      }
+      if (!response.data.results[0]) {
+        throw new WebhookEventMetaFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new WebhookEventMetaFailed(error.message, { error })
+    }
+  }
+
   async get (webhookId: string, eventId: string): Promise<WebhookEventResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${webhookId}/${eventId}`)
     try {
@@ -151,6 +173,17 @@ class WebhookEventFetchFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, WebhookEventFetchFailed.prototype)
+  }
+}
+
+class WebhookEventMetaFailed extends BaseError {
+  public name = 'WebhookEventMetaFailed'
+  constructor (
+    public message: string = 'Could not meta events from webhook',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, WebhookEventMetaFailed.prototype)
   }
 }
 
