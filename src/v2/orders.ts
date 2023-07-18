@@ -41,7 +41,7 @@ export interface OrdersQuery {
     customerName?: string
     email?: string
     customerId?: string
-    curstomerBirthdate?: string
+    customerBirthdate?: string
     usage?: string
     receiptNumber?: string
     staff?: string
@@ -54,7 +54,7 @@ export interface OrdersQuery {
     bankName?: string
     bic?: string
     insuranceName?: string
-    insuraceId?: string
+    insuranceId?: string
     cashierNumber?: number
     balanceNumber?: number
     basketId?: string
