@@ -1,3 +1,10 @@
+## [4.76.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.76.0...v4.76.1) (2023-07-18)
+
+
+### Bug Fixes
+
+* **UNTIL-6762:** fix some old typo's ([135b75d](https://github.com/tillhub/tillhub-sdk-javascript/commit/135b75df06bbff007eccab3a11cc2aa621625248))
+
 # [4.76.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.75.0...v4.76.0) (2023-07-13)
 
 
