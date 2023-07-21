@@ -62,7 +62,7 @@ describe('v0: Service Category: can create a service category', () => {
     const serviceCategory = th.serviceCategory()
     expect(serviceCategory).toBeInstanceOf(v0.ServiceCategory)
     const { data } = await serviceCategory.create(serviceCategoryObject)
-    expect(Array.isArray(data)).toBe(true)
+    expect(data).toMatchObject(serviceCategoryObject)
   })
 
   it('rejects on status codes that are not 200', async () => {
