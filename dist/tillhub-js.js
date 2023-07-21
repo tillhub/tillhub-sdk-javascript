@@ -466,6 +466,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.staffGroups = function () {
         return this.generateAuthenticatedInstance(v0.StaffGroups);
     };
+    TillhubClient.prototype.serviceCategory = function () {
+        return this.generateAuthenticatedInstance(v0.ServiceCategory);
+    };
     TillhubClient.prototype.exports = function () {
         return this.generateAuthenticatedInstance(v0.Exports);
     };

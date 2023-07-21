@@ -1,3 +1,11 @@
+# [4.77.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.76.1...v4.77.0) (2023-07-21)
+
+
+### Features
+
+* **reservations:** create a new service category ([#7135](https://github.com/tillhub/tillhub-sdk-javascript/issues/7135)) ([786ab2c](https://github.com/tillhub/tillhub-sdk-javascript/commit/786ab2cc7a34bf7acb980dd576764b4311ba9d79))
+* **reservations:** fix creation test ([#7135](https://github.com/tillhub/tillhub-sdk-javascript/issues/7135)) ([2e33187](https://github.com/tillhub/tillhub-sdk-javascript/commit/2e3318764414251eb8287a8099ebfe806dc65582))
+
 ## [4.76.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.76.0...v4.76.1) (2023-07-18)
 
 
