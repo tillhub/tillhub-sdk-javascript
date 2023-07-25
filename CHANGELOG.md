@@ -1,3 +1,10 @@
+# [4.78.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.77.0...v4.78.0) (2023-07-25)
+
+
+### Features
+
+* **reservations:** add getAll service categories ([#7137](https://github.com/tillhub/tillhub-sdk-javascript/issues/7137)) ([10725c8](https://github.com/tillhub/tillhub-sdk-javascript/commit/10725c89828952b92991463255125862316d9160))
+
 # [4.77.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.76.1...v4.77.0) (2023-07-21)
 
 

@@ -20,9 +20,39 @@ var ServiceCategory = (function (_super) {
         _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
         return _this;
     }
+    ServiceCategory.prototype.getAll = function (query) {
+        var _a;
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var next, base, uri, response_1, error_1;
+            var _this = this;
+            return tslib_1.__generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _b.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri();
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        return [4, this.http.getClient().get(uri)];
+                    case 1:
+                        response_1 = _b.sent();
+                        if ((_a = response_1.data.cursor) === null || _a === void 0 ? void 0 : _a.next) {
+                            next = function () { return _this.getAll({ uri: response_1.data.cursor.next }); };
+                        }
+                        return [2, {
+                                data: response_1.data.results,
+                                metadata: { count: response_1.data.count, cursor: response_1.data.cursor },
+                                next: next
+                            }];
+                    case 2:
+                        error_1 = _b.sent();
+                        throw new ServiceCategoriesFetchAllFailed(error_1.message, { error: error_1 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
     ServiceCategory.prototype.create = function (serviceCategory) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_1;
+            var uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -38,8 +68,8 @@ var ServiceCategory = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_1 = _a.sent();
-                        throw new ServiceCategoryCreationFailed(error_1.message, { error: error_1 });
+                        error_2 = _a.sent();
+                        throw new ServiceCategoryCreationFailed(error_2.message, { error: error_2 });
                     case 4: return [2];
                 }
             });
@@ -62,4 +92,16 @@ var ServiceCategoryCreationFailed = (function (_super) {
     return ServiceCategoryCreationFailed;
 }(baseError_1.BaseError));
 exports.ServiceCategoryCreationFailed = ServiceCategoryCreationFailed;
+var ServiceCategoriesFetchAllFailed = (function (_super) {
+    tslib_1.__extends(ServiceCategoriesFetchAllFailed, _super);
+    function ServiceCategoriesFetchAllFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch all service categories'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ServiceCategoriesFetchAllFailed';
+        Object.setPrototypeOf(_this, ServiceCategoriesFetchAllFailed.prototype);
+        return _this;
+    }
+    return ServiceCategoriesFetchAllFailed;
+}(baseError_1.BaseError));
 //# sourceMappingURL=service_category.js.map
