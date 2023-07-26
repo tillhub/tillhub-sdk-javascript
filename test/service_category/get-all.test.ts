@@ -41,7 +41,7 @@ describe('v0: Service Categories: can get all', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/service_categories/${legacyId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/product_groups/${legacyId}?is_service_category=true`).reply(() => {
         return [
           200,
           {
@@ -91,7 +91,7 @@ describe('v0: Service Categories: can get all', () => {
           }
         ]
       })
-      mock.onGet(`https://api.tillhub.com/api/v0/staff_groups/${legacyId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/product_groups/${legacyId}?is_service_category=true`).reply(() => {
         return [205]
       })
     }

@@ -62,8 +62,9 @@ export class ServiceCategory extends ThBaseHandler {
     let next
 
     try {
-      const base = this.uriHelper.generateBaseUri()
-      const uri = this.uriHelper.generateUriWithQuery(base, query)
+      const localUriHelper = new UriHelper('/api/v0/product_groups', this.options)
+      const base = localUriHelper.generateBaseUri()
+      const uri = localUriHelper.generateUriWithQuery(base, { is_service_category: true, ...query })
 
       const response = await this.http.getClient().get(uri)
 
