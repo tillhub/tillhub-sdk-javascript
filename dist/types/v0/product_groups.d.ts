@@ -13,6 +13,7 @@ export interface ProductGroupsQuery {
         embed?: ProductGroupsEmbedOptions | ProductGroupsEmbedOptions[];
         deleted?: boolean;
         active?: boolean;
+        is_service_category?: boolean;
     };
 }
 export interface ProductGroupsResponse {

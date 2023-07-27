@@ -1,3 +1,11 @@
+# [4.79.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.78.0...v4.79.0) (2023-07-27)
+
+
+### Features
+
+* **reservations:** change getAll - utilize the existing product groups ([#7137](https://github.com/tillhub/tillhub-sdk-javascript/issues/7137)) ([4ec8f97](https://github.com/tillhub/tillhub-sdk-javascript/commit/4ec8f975faa35aa85b53e5468e90a460168e3845))
+* **reservations:** remove getAll for service category - getAll from product groups will be use instead ([#7137](https://github.com/tillhub/tillhub-sdk-javascript/issues/7137)) ([c143487](https://github.com/tillhub/tillhub-sdk-javascript/commit/c14348779cc4d05f6d9611c524902850d16261c3))
+
 # [4.78.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.77.0...v4.78.0) (2023-07-25)
 
 

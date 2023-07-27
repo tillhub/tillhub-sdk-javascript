@@ -20,18 +20,6 @@ export interface ServiceCategoryItem {
     active?: boolean;
     deleted?: boolean;
 }
-export interface ServiceCategoriesQuery {
-    deleted?: boolean;
-    active?: boolean;
-    name?: string;
-    q?: string;
-    uri?: string;
-}
-export interface ServiceCategoriesResponse {
-    data: Array<Record<string, unknown>>;
-    metadata: Record<string, unknown>;
-    next?: () => Promise<ServiceCategoriesResponse>;
-}
 export declare class ServiceCategory extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
@@ -39,7 +27,6 @@ export declare class ServiceCategory extends ThBaseHandler {
     options: ServiceCategoryOptions;
     uriHelper: UriHelper;
     constructor(options: ServiceCategoryOptions, http: Client);
-    getAll(query?: ServiceCategoriesQuery | undefined): Promise<ServiceCategoriesResponse>;
     create(serviceCategory: ServiceCategoryItem): Promise<ServiceCategoryResponse>;
 }
 export declare class ServiceCategoryCreationFailed extends BaseError {
