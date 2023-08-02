@@ -20,6 +20,7 @@ export interface ServiceCategoryResponse {
 export interface ServiceCategoryItem {
   name: string
   description?: string
+  id?: string
   active?: boolean
   deleted?: boolean
 }
@@ -57,6 +58,21 @@ export class ServiceCategory extends ThBaseHandler {
       throw new ServiceCategoryCreationFailed(error.message, { error })
     }
   }
+
+  async put (serviceCategoryId: string, serviceCategory: ServiceCategoryItem): Promise<ServiceCategoryResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${serviceCategoryId}`)
+
+    try {
+      const response = await this.http.getClient().put(uri, serviceCategory)
+
+      return {
+        data: response.data.results[0] as ServiceCategoryItem,
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new ServiceCategoryPutFailed(error.message, { error })
+    }
+  }
 }
 
 export class ServiceCategoryCreationFailed extends BaseError {
@@ -67,5 +83,16 @@ export class ServiceCategoryCreationFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, ServiceCategoryCreationFailed.prototype)
+  }
+}
+
+export class ServiceCategoryPutFailed extends BaseError {
+  public name = 'ServiceCategoryPutFailed'
+  constructor (
+    public message: string = 'Could not alter the service category',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, ServiceCategoryPutFailed.prototype)
   }
 }
