@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ServiceCategoryCreationFailed = exports.ServiceCategory = void 0;
+exports.ServiceCategoryPutFailed = exports.ServiceCategoryCreationFailed = exports.ServiceCategory = void 0;
 var tslib_1 = require("tslib");
 var uri_helper_1 = require("../uri-helper");
 var baseError_1 = require("../errors/baseError");
@@ -45,6 +45,31 @@ var ServiceCategory = (function (_super) {
             });
         });
     };
+    ServiceCategory.prototype.put = function (serviceCategoryId, serviceCategory) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_2;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri("/" + serviceCategoryId);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().put(uri, serviceCategory)];
+                    case 2:
+                        response = _a.sent();
+                        return [2, {
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            }];
+                    case 3:
+                        error_2 = _a.sent();
+                        throw new ServiceCategoryPutFailed(error_2.message, { error: error_2 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     ServiceCategory.baseEndpoint = '/api/v0/service_categories';
     return ServiceCategory;
 }(base_1.ThBaseHandler));
@@ -62,4 +87,17 @@ var ServiceCategoryCreationFailed = (function (_super) {
     return ServiceCategoryCreationFailed;
 }(baseError_1.BaseError));
 exports.ServiceCategoryCreationFailed = ServiceCategoryCreationFailed;
+var ServiceCategoryPutFailed = (function (_super) {
+    tslib_1.__extends(ServiceCategoryPutFailed, _super);
+    function ServiceCategoryPutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not alter the service category'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ServiceCategoryPutFailed';
+        Object.setPrototypeOf(_this, ServiceCategoryPutFailed.prototype);
+        return _this;
+    }
+    return ServiceCategoryPutFailed;
+}(baseError_1.BaseError));
+exports.ServiceCategoryPutFailed = ServiceCategoryPutFailed;
 //# sourceMappingURL=service_category.js.map

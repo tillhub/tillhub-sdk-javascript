@@ -1,3 +1,10 @@
+# [4.80.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.79.0...v4.80.0) (2023-08-02)
+
+
+### Features
+
+* **reservations:** add put service categories ([#7139](https://github.com/tillhub/tillhub-sdk-javascript/issues/7139)) ([74ce327](https://github.com/tillhub/tillhub-sdk-javascript/commit/74ce3278dd198088ef8641c6402e449419f41c5a))
+
 # [4.79.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.78.0...v4.79.0) (2023-07-27)
 
 
