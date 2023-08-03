@@ -69,7 +69,7 @@ describe('v0: Analytics: gets product s transactions report', () => {
 
     expect(analytics).toBeInstanceOf(v0.Analytics)
 
-    const { data } = await analytics.getProductsReport()
+    const { data } = await analytics.getTopProductsReport()
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -109,7 +109,7 @@ describe('v0: Analytics: gets product s transactions report', () => {
 
     expect(analytics).toBeInstanceOf(v0.Analytics)
 
-    const { data } = await analytics.getProductsReport(reportOptions)
+    const { data } = await analytics.getTopProductsReport(reportOptions)
 
     expect(Array.isArray(data)).toBe(true)
   })
@@ -155,7 +155,7 @@ describe('v0: Analytics: gets product s transactions report', () => {
     })
 
     try {
-      await th.analytics().getProductsReport(reportOptions)
+      await th.analytics().getTopProductsReport(reportOptions)
     } catch (err: any) {
       expect(err.name).toBe('ProductsReportFetchFailed')
     }
