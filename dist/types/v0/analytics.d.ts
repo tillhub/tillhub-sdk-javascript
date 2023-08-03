@@ -165,6 +165,7 @@ export declare class Analytics {
     getDiscountsReports(query?: DiscountOptions | undefined): Promise<AnalyticsResponse>;
     getProductsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse>;
     getPaymentsReport(query?: PaymentsReportOptions): Promise<AnalyticsResponse>;
+    getTopProductsReport(options?: ReportOptions | undefined): Promise<AnalyticsResponse>;
     getTopPaymentsReport(query?: TopPaymentsReportOptions): Promise<AnalyticsResponse>;
     getSimpleSalesCartItems(query?: SimpleSalesCartItemsOptions | undefined): Promise<AnalyticsResponse>;
     getCustomersReport(query?: ExportFormatOptions | undefined): Promise<AnalyticsResponse>;

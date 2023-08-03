@@ -1,3 +1,11 @@
+# [4.81.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.80.0...v4.81.0) (2023-08-03)
+
+
+### Features
+
+* **home:** add new top products method ([6fc7a3d](https://github.com/tillhub/tillhub-sdk-javascript/commit/6fc7a3de7e899c7e6d12e04af97e52dafb906cf9))
+* **home:** update unit test ([ea2360f](https://github.com/tillhub/tillhub-sdk-javascript/commit/ea2360f5376d23b0bb56290b867a6c6b25072df5))
+
 # [4.80.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.79.0...v4.80.0) (2023-08-02)
 
 
