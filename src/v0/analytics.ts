@@ -427,6 +427,23 @@ export class Analytics {
     }
   }
 
+  async getTopProductsReport (options?: ReportOptions | undefined): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/reports/products/top')
+      const uri = this.uriHelper.generateUriWithQuery(base, options)
+
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
+      if (response.status !== 200) throw new ProductsReportFetchFailed(undefined, { status: response.status })
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new ProductsReportFetchFailed(error.message, { error })
+    }
+  }
+
   async getTopPaymentsReport (query?: TopPaymentsReportOptions): Promise<AnalyticsResponse> {
     try {
       const base = this.uriHelper.generateBaseUri('/reports/payments/top')
