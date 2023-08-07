@@ -69,6 +69,7 @@ import { UserPermissionsTemplates } from './user_permissions_templates'
 import { DbBackups } from './db_backups'
 import { PurchaseOrders } from './purchase_orders'
 import { ServiceCategory } from './service_category'
+import { Services } from './services'
 
 export {
   Auth,
@@ -144,5 +145,6 @@ export {
   UserPermissionsTemplates,
   DbBackups,
   PurchaseOrders,
-  ServiceCategory
+  ServiceCategory,
+  Services
 }
