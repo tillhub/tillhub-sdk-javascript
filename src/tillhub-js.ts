@@ -987,6 +987,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated Services instance
+   *
+   */
+  services (): v0.Services {
+    return this.generateAuthenticatedInstance(v0.Services)
+  }
+
+  /**
    * Create an authenticated Exports instance
    *
    */
