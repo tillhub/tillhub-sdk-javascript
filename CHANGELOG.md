@@ -1,3 +1,10 @@
+# [4.82.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.81.0...v4.82.0) (2023-08-07)
+
+
+### Features
+
+* **reservations:** create service ([#7145](https://github.com/tillhub/tillhub-sdk-javascript/issues/7145)) ([9775982](https://github.com/tillhub/tillhub-sdk-javascript/commit/9775982e48b79583ced24d638493ff56e796dcba))
+
 # [4.81.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.80.0...v4.81.0) (2023-08-03)
 
 

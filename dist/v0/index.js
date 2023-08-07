@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductServiceQuestionGroups = exports.Exports = exports.StaffGroups = exports.Videos = exports.SupportedEvents = exports.WebhookEvents = exports.Webhooks = exports.Warehouses = exports.SafesLogBook = exports.Safes = exports.Tags = exports.LegacySettings = exports.Favourites = exports.Messages = exports.Print = exports.Notifications = exports.Images = exports.AuditLogs = exports.AuditActions = exports.Staff = exports.Analytics = exports.Orders = exports.StocksBook = exports.Stocks = exports.Invoices = exports.VoucherLogs = exports.Vouchers = exports.Discounts = exports.SuppliersProductsRelation = exports.Suppliers = exports.Customers = exports.ContentTemplates = exports.Contents = exports.Devices = exports.BranchGroups = exports.Branches = exports.Users = exports.InventoryConfiguration = exports.Configurations = exports.PaymentOptions = exports.ExpenseAccounts = exports.Accounts = exports.ProductBranchCustomizations = exports.ProductAddons = exports.ProductAddonGroups = exports.ProductTemplates = exports.ProductGroups = exports.Deliveries = exports.Taxes = exports.Auth = void 0;
-exports.ServiceCategory = exports.PurchaseOrders = exports.DbBackups = exports.UserPermissionsTemplates = exports.StockTakings = exports.CountingProtocols = exports.Timetracking = exports.Trash = exports.Dependencies = exports.CategoryTrees = exports.Categories = exports.Storefronts = exports.Correspondences = exports.DeviceGroups = exports.Functions = exports.AbocardSystems = exports.VoucherSystems = exports.StaffPermissionsTemplates = exports.Promotions = exports.Processes = exports.Me = exports.Reasons = exports.Data = exports.ProductServiceQuestions = void 0;
+exports.Services = exports.ServiceCategory = exports.PurchaseOrders = exports.DbBackups = exports.UserPermissionsTemplates = exports.StockTakings = exports.CountingProtocols = exports.Timetracking = exports.Trash = exports.Dependencies = exports.CategoryTrees = exports.Categories = exports.Storefronts = exports.Correspondences = exports.DeviceGroups = exports.Functions = exports.AbocardSystems = exports.VoucherSystems = exports.StaffPermissionsTemplates = exports.Promotions = exports.Processes = exports.Me = exports.Reasons = exports.Data = exports.ProductServiceQuestions = void 0;
 var auth_1 = require("./auth");
 Object.defineProperty(exports, "Auth", { enumerable: true, get: function () { return auth_1.Auth; } });
 var taxes_1 = require("./taxes");
@@ -147,4 +147,6 @@ var purchase_orders_1 = require("./purchase_orders");
 Object.defineProperty(exports, "PurchaseOrders", { enumerable: true, get: function () { return purchase_orders_1.PurchaseOrders; } });
 var service_category_1 = require("./service_category");
 Object.defineProperty(exports, "ServiceCategory", { enumerable: true, get: function () { return service_category_1.ServiceCategory; } });
+var services_1 = require("./services");
+Object.defineProperty(exports, "Services", { enumerable: true, get: function () { return services_1.Services; } });
 //# sourceMappingURL=index.js.map
