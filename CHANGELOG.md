@@ -1,3 +1,10 @@
+# [4.83.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.82.0...v4.83.0) (2023-08-08)
+
+
+### Features
+
+* **order:** refactor orders and transactions ([3d99a99](https://github.com/tillhub/tillhub-sdk-javascript/commit/3d99a99cf7ab64602b8673c690f839a14619f8d0))
+
 # [4.82.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.81.0...v4.82.0) (2023-08-07)
 
 

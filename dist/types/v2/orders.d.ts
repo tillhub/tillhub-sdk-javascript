@@ -2,17 +2,25 @@ import { Client } from '../client';
 import { BaseError } from '../errors';
 import { UriHelper } from '../uri-helper';
 import { ThBaseHandler } from '../base';
+import { TransactionEntity } from '../v3/transactions';
+declare type RecurringFormatType = 'scheduled' | 'unscheduled' | 'oneclick';
+declare type PaymentType = 'unzer' | 'external';
+declare type OrderType = 'refundable' | 'capturable' | 'cancelable';
+declare type OrderStatus = 'completed';
+declare type Currency = 'EUR';
+declare type PaymentMethod = 'card';
+declare type BasketItemStatus = 'collected';
 export interface OrdersOptions {
     user?: string;
     base?: string;
 }
 export interface OrdersResponse {
-    data: Order[];
+    data: OrderEntity[];
     metadata: Record<string, unknown>;
     next?: () => Promise<OrdersResponse>;
 }
 export interface OrderResponse {
-    data: OrderDetails;
+    data: OrderEntity;
     metadata: Record<string, unknown>;
     msg?: string;
     errors?: ErrorObject[];
@@ -28,24 +36,21 @@ export interface OrdersQuery {
     query?: {
         orderId?: string;
         amount?: string;
-        currency?: string;
-        paymentMethod?: string;
+        currency?: Currency;
+        paymentMethod?: PaymentMethod;
         brand?: string;
         status?: string;
         txnNumber?: string;
         customerName?: string;
         email?: string;
         customerId?: string;
-        customerBirthdate?: string;
-        usage?: string;
+        customerBirthdate?: Date;
         receiptNumber?: string;
-        staff?: string;
-        registerId?: string;
+        staffId?: string;
         location?: string;
-        recurring?: string;
+        recurring?: RecurringFormatType;
         paymentId?: string;
         cardNumber?: number;
-        account?: string;
         bankName?: string;
         bic?: string;
         insuranceName?: string;
@@ -58,244 +63,188 @@ export interface OrdersQuery {
         basketItemName?: string;
         basketItemType?: string;
         transactionShortId?: string;
-        trnasactionId?: string;
+        transactionId?: string;
         terminalId?: string;
         cutoverId?: string;
-        cutoverDate?: string;
+        cutoverDate?: Date;
         disputeId?: string;
         disputeType?: string;
         disputeStatus?: string;
         invoiceId?: string;
+        q?: string;
     };
 }
-declare type RecurringFormatType = 'scheduled' | 'unscheduled' | 'oneclick';
-declare type ReturnFormatType = 'refundable' | 'capturable' | 'cancellable';
-declare type PaymentTypeFormat = 'unzer' | 'external';
-export interface OrderDetails {
-    orderMeta?: Order;
-    payment?: Payment[] | null;
-    basket?: Basket | null;
-    customer?: Customer | null;
-    transactions?: Transaction[] | null;
-    instoreInfo?: StoreInfo[] | null;
-    attachments?: Attachment[] | null;
-    disputes?: Dispute[] | null;
-}
-export interface Order {
-    id?: string;
-    orderStatus?: string;
+export interface OrderEntity {
+    status?: OrderStatus | null;
+    orderId?: string | null;
     totalAmount?: number | null;
-    currency?: string | null;
+    currency?: Currency | null;
     salesChannel?: string | null;
-    location?: string | null;
+    origin?: string | null;
     recurring?: RecurringFormatType | null;
-    returnable?: ReturnFormatType | null;
-    paymentMethod?: string | null;
-    status?: string | null;
-    customerName?: string | null;
-    lastUpdate?: string | null;
-    txnNumber?: string | null;
-    email?: string | null;
-    customerId?: string | null;
-    usage?: string | null;
-    receiptNumber?: number | null;
-    staff?: string | null;
-    registerId?: string | null;
-    entity?: string | null;
-    paymentId?: string | null;
-    cardNumber?: string | null;
-    accountNumber?: string | null;
-    bankName?: string | null;
-    bic?: string | null;
-    insuranceName?: string | null;
-    insuranceId?: string | null;
-    cashierNumber?: string | null;
-    balanceNumber?: number | null;
-    basketId?: number | null;
-    terminalId?: string | null;
-    cutoverId?: string | null;
-    cutoverDate?: string | null;
+    type?: OrderType | null;
+    transactions?: TransactionEntity[] | null;
+    payments?: PaymentEntity[] | null;
+    customer?: CustomerEntity | null;
+    instores?: InStoreEntity[] | null;
+    basket?: BasketEntity | null;
+    disputes?: DisputeEntity[] | null;
+    createdAt?: Date | null;
+    updatedAt?: Date | null;
 }
-export interface Payment {
-    id?: string;
-    paymentMethod?: string | null;
+export interface PaymentEntity {
+    paymentId?: string;
+    paymentMethod?: PaymentMethod | null;
     brand?: string | null;
     description?: string | null;
-    account?: Account | null;
-    insurance?: Insurance | null;
+    card?: CardEntity | null;
+    insurance?: InsuranceEntity | null;
     cashierNumber?: string | null;
     balanceNumber?: number | null;
-    paymentLocation?: string | null;
-    paymentType?: PaymentTypeFormat | null;
+    location?: string | null;
+    type?: PaymentType | null;
+    order?: OrderEntity | null;
 }
-export interface Account {
-    number?: string | null;
-    expiry?: string | null;
-    holder?: string | null;
-    clearingDate?: string | null;
-    description?: string | null;
-    bank?: string | null;
+export interface CardEntity {
+    cardNumber?: string | null;
+    expiryDate?: Date | null;
+    cardHolder?: string | null;
+    clearingDate?: Date | null;
+    descriptor?: string | null;
+    bankName?: string | null;
     bic?: string | null;
 }
-export interface Insurance {
-    id?: string;
+export interface InsuranceEntity {
     provider?: string | null;
-    shippingDate?: string | null;
-    interestRate?: number | null;
-    nrInstalments?: number | null;
+    insuranceId?: string;
+    finalizeDate?: Date | null;
+    effectiveInterestRate?: number | null;
+    numberInstallments?: number | null;
 }
-export interface Basket {
-    id?: string;
-    total?: number | null;
+export interface BasketEntity {
+    basketId?: string;
+    totalGrossValue?: number | null;
     currency?: string | null;
-    items?: BasketItem[];
+    items?: BasketItemEntity[] | null;
+    order?: OrderEntity | null;
 }
-export interface BasketItem {
-    id?: string;
-    status?: string | null;
+export interface BasketItemEntity {
+    itemId?: string;
+    status?: BasketItemStatus | null;
     quantity?: number | null;
-    vat?: number | null;
+    vatPercentage?: number | null;
     name?: string | null;
     type?: string | null;
-    description?: string | null;
-    unitName?: string | null;
+    descriptor?: string | null;
+    unit?: string | null;
     imageUrl?: string | null;
     amountPerUnit?: number | null;
-    unitsQuantity?: number | null;
+    unitNumber?: number | null;
     totalAmount?: number | null;
     discount?: number | null;
-    shippingId?: string | null;
+    shippingAddress?: AddressEntity | null;
+    basket?: BasketEntity | null;
 }
-export interface Customer {
-    id?: string;
-    title?: string | null;
-    firstName?: string | null;
-    lastName?: string | null;
+export interface CustomerEntity {
+    address: AddressEntity | null;
+    birthDate?: Date | null;
+    businessCompany?: BusinessCompanyEntity | null;
     company?: string | null;
-    email?: string | null;
-    birthdate?: string | null;
-    phone?: string | null;
-    mobile?: string | null;
-    language?: string | null;
-    billingAddress: Address | null;
-    shippingAddress: Address[] | null;
-}
-export interface Address {
-    id?: string;
-    customerName?: string | null;
-    street?: string | null;
-    zip?: string | null;
-    city?: string | null;
-    state?: string | null;
     country?: string | null;
+    customerId?: string;
+    displayName?: string | null;
+    email?: string | null;
+    firstName?: string | null;
+    ip?: string | null;
+    ipCountry?: string | null;
+    language?: string | null;
+    lastName?: string | null;
+    mobile?: string | null;
+    optIn?: boolean | null;
+    optIn2?: boolean | null;
+    phone?: string | null;
+    salutation?: string | null;
+    shippingAddress: AddressEntity[] | null;
+    shippingNameFirstName?: string | null;
+    shippingNameLastName?: string | null;
+    shippingNameTitle?: string | null;
+    shippingNameCompany?: string | null;
+    shippingNameSalutation?: string | null;
+    shippingNameBirthDate?: Date | null;
+    timezone?: string | null;
+    title?: string | null;
+    transactions?: TransactionEntity[] | null;
     type?: string | null;
+    userName?: string | null;
 }
-export interface Transaction {
-    transactionId?: TransactionId;
-    type?: string | null;
-    amount?: number | null;
-    currency?: string | null;
-    timestamp?: string | null;
-    result?: string | null;
-    salesChannel?: string | null;
-    recurranceMode?: string | null;
-    countryBank?: string | null;
-    countryIP?: string | null;
-    riskScore?: string | null;
-    processingData?: Processing | null;
-    source?: string | null;
-    mode?: string | null;
-    bankSecuritySignature?: PaymentAuthDetails | null;
-    billingFee?: {
-        percentage?: number | null;
-        amount?: number | null;
-    };
-    paymentReversalType?: string | null;
-    tokenProvider?: string | null;
-    shippingInfo?: {
-        deliveryTrackingId?: string | null;
-        deliveryService?: string | null;
-        returnTrackingId?: string | null;
-    };
-    criteriaMeta?: {
-        sdkName?: string | null;
-        sdkVersion?: string | null;
-    };
+export interface BusinessCompanyEntity {
+    clientCustomerId: string | null;
+    commercialRegisterNumber?: string | null;
+    commercialSector?: string | null;
+    companyName?: string | null;
+    companyURL?: string | null;
+    districtCourt?: string | null;
+    duns?: string | null;
+    easyNumber?: string | null;
+    executive?: string | null;
+    locationCountry?: string | null;
+    locationHouseNumber?: string | null;
+    locationPoBox?: string | null;
+    locationStreet?: string | null;
+    locationZip?: string | null;
+    registrationType?: string | null;
+    taxNumber?: string | null;
+    vatId?: string | null;
 }
-export interface TransactionId {
-    paymentId?: string | null;
-    terminalId?: string | null;
-    transactionId?: string | null;
-    orderId?: string | null;
-    uniqueId?: string | null;
-    shortId?: string | null;
-    refId?: string | null;
-    invoiceId?: string | null;
-    channelId?: string | null;
-    linkpayId?: string | null;
-    customerId?: string | null;
-    typeId?: string | null;
-    metadataId?: string | null;
-    basketId?: string | null;
+export interface AddressEntity {
+    country?: string | null;
+    city?: string | null;
+    houseExtension?: string | null;
+    state?: string | null;
+    street?: string | null;
+    street2?: string | null;
+    zip?: string | null;
 }
-export interface Processing {
-    statusCode?: number | null;
-    statusMessage?: string | null;
-    returnMessage?: string | null;
-    returnCode?: string | null;
-    reason?: string | null;
-}
-export interface PaymentAuthDetails {
-    threeDS?: string | null;
-    resetIndicator?: string | null;
-    dsTransactionId?: string | null;
-    protocolVersion?: string | null;
-    authStatus?: string | null;
-    xid?: string | null;
-}
-export interface StoreInfo {
-    id?: string;
+export interface InStoreEntity {
     branchNumber?: number | null;
     registerId?: string | null;
     staffId?: string | null;
-    terminalId?: string | null;
-    cutoverId?: string | null;
-    cutoverDate?: string | null;
+    cutOverId?: string | null;
+    cutOverDate?: Date | null;
     receiptNumber?: number | null;
     balance?: number | null;
+    order?: OrderEntity | null;
 }
-export interface Attachment {
-    id?: string;
+export interface AttachmentEntity {
     fileName?: string | null;
     fileType?: string | null;
-    attachmentType?: string | null;
     size?: string | null;
-    created?: string | null;
+    type?: string | null;
+    dispute?: DisputeEntity | null;
 }
-export interface Dispute {
-    id?: string;
+export interface DisputeEntity {
+    disputeId?: string;
     reason?: string | null;
     type?: string | null;
     status?: string | null;
     amount?: number | null;
     currency?: string | null;
-    openedOn?: string | null;
-    dueOn?: string | null;
-    disputedTransactionId?: string | null;
-    messages?: Message[] | null;
-    events?: DisputeEvent[] | null;
-    attachments?: Attachment[] | null;
+    openedOn?: Date | null;
+    dueOn?: Date | null;
+    transactionId?: string | null;
+    messages?: MessageEntity[] | null;
+    events?: EventEntity[] | null;
+    attachments?: AttachmentEntity[] | null;
+    order?: OrderEntity | null;
 }
-export interface Message {
-    id?: string;
+export interface MessageEntity {
+    dispute?: DisputeEntity | null;
     sender?: string | null;
-    createdOn?: string | null;
     message?: string | null;
 }
-export interface DisputeEvent {
-    id?: string;
-    type?: string | null;
-    createdOn?: string | null;
+export interface EventEntity {
+    dispute?: DisputeEntity | null;
+    eventType?: string | null;
     description?: string | null;
     amount?: number | null;
 }
