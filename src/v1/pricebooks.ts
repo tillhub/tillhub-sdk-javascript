@@ -149,6 +149,21 @@ export class Pricebooks {
       throw new PricebookDeleteFailed(error.message, { error })
     }
   }
+
+  async copy (pricebookIds: string[]): Promise<PricebookResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri('/prices/book/copy')
+      const response = await this.http.getClient().post(uri, pricebookIds)
+
+      if (response.status !== 200) throw new PricebooksCopyFailed()
+
+      return {
+        data: response.data.results
+      }
+    } catch (error: any) {
+      throw new PricebooksCopyFailed(error.message, { error })
+    }
+  }
 }
 
 export class PricebooksFetchFailed extends BaseError {
@@ -214,5 +229,16 @@ export class PricebookDeleteFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, PricebookDeleteFailed.prototype)
+  }
+}
+
+export class PricebooksCopyFailed extends BaseError {
+  public name = 'PricebooksCopyFailed'
+  constructor (
+    public message: string = 'Could not copy pricebook',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, PricebooksCopyFailed.prototype)
   }
 }
