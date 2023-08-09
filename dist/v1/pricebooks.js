@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PricebookDeleteFailed = exports.PricebookCreationFailed = exports.PricebookPutFailed = exports.PricebookFetchFailed = exports.PricebooksFetchFailed = exports.Pricebooks = void 0;
+exports.PricebooksCopyFailed = exports.PricebookDeleteFailed = exports.PricebookCreationFailed = exports.PricebookPutFailed = exports.PricebookFetchFailed = exports.PricebooksFetchFailed = exports.Pricebooks = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var Pricebooks = (function () {
@@ -169,6 +169,30 @@ var Pricebooks = (function () {
             });
         });
     };
+    Pricebooks.prototype.copy = function (pricebookIds) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_7;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = this.uriHelper.generateBaseUri('/prices/book/copy');
+                        return [4, this.http.getClient().post(uri, pricebookIds)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200)
+                            throw new PricebooksCopyFailed();
+                        return [2, {
+                                data: response.data.results
+                            }];
+                    case 2:
+                        error_7 = _a.sent();
+                        throw new PricebooksCopyFailed(error_7.message, { error: error_7 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
     return Pricebooks;
 }());
 exports.Pricebooks = Pricebooks;
@@ -249,4 +273,17 @@ var PricebookDeleteFailed = (function (_super) {
     return PricebookDeleteFailed;
 }(errors_1.BaseError));
 exports.PricebookDeleteFailed = PricebookDeleteFailed;
+var PricebooksCopyFailed = (function (_super) {
+    tslib_1.__extends(PricebooksCopyFailed, _super);
+    function PricebooksCopyFailed(message, properties) {
+        if (message === void 0) { message = 'Could not copy pricebook'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PricebooksCopyFailed';
+        Object.setPrototypeOf(_this, PricebooksCopyFailed.prototype);
+        return _this;
+    }
+    return PricebooksCopyFailed;
+}(errors_1.BaseError));
+exports.PricebooksCopyFailed = PricebooksCopyFailed;
 //# sourceMappingURL=pricebooks.js.map

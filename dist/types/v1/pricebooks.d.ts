@@ -45,6 +45,7 @@ export declare class Pricebooks {
     put(pricebookId: string, pricebook: Pricebook): Promise<PricebookResponse>;
     create(pricebook: Pricebook): Promise<PricebookResponse>;
     delete(pricebookId: string): Promise<PricebookResponse>;
+    copy(pricebookIds: string[]): Promise<PricebookResponse>;
 }
 export declare class PricebooksFetchFailed extends BaseError {
     message: string;
@@ -67,6 +68,11 @@ export declare class PricebookCreationFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class PricebookDeleteFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class PricebooksCopyFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

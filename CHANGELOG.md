@@ -1,3 +1,10 @@
+# [4.84.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.83.0...v4.84.0) (2023-08-09)
+
+
+### Features
+
+* **pricebook:** add copy item function call ([#511](https://github.com/tillhub/tillhub-sdk-javascript/issues/511)) ([fced720](https://github.com/tillhub/tillhub-sdk-javascript/commit/fced72068a13b6cc26e3d61557a1bf19acd0ccc2))
+
 # [4.83.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.82.0...v4.83.0) (2023-08-08)
 
 
