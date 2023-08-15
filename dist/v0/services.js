@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ServiceCreationFailed = exports.Services = void 0;
+exports.ServicePutFailed = exports.ServiceCreationFailed = exports.Services = void 0;
 var tslib_1 = require("tslib");
 var uri_helper_1 = require("../uri-helper");
 var baseError_1 = require("../errors/baseError");
@@ -45,6 +45,31 @@ var Services = (function (_super) {
             });
         });
     };
+    Services.prototype.put = function (serviceId, service) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_2;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri("/" + serviceId);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().put(uri, service)];
+                    case 2:
+                        response = _a.sent();
+                        return [2, {
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            }];
+                    case 3:
+                        error_2 = _a.sent();
+                        throw new ServicePutFailed(error_2.message, { error: error_2 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     Services.baseEndpoint = '/api/v0/services';
     return Services;
 }(base_1.ThBaseHandler));
@@ -62,4 +87,17 @@ var ServiceCreationFailed = (function (_super) {
     return ServiceCreationFailed;
 }(baseError_1.BaseError));
 exports.ServiceCreationFailed = ServiceCreationFailed;
+var ServicePutFailed = (function (_super) {
+    tslib_1.__extends(ServicePutFailed, _super);
+    function ServicePutFailed(message, properties) {
+        if (message === void 0) { message = 'Could not alter the service'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ServicePutFailed';
+        Object.setPrototypeOf(_this, ServicePutFailed.prototype);
+        return _this;
+    }
+    return ServicePutFailed;
+}(baseError_1.BaseError));
+exports.ServicePutFailed = ServicePutFailed;
 //# sourceMappingURL=services.js.map

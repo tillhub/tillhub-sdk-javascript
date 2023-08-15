@@ -31,8 +31,14 @@ export declare class Services extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: ServicesOptions, http: Client);
     create(service: ServicesObject): Promise<ServiceResponse>;
+    put(serviceId: string, service: ServicesObject): Promise<ServiceResponse>;
 }
 export declare class ServiceCreationFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class ServicePutFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

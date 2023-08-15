@@ -1,3 +1,10 @@
+# [4.85.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.84.0...v4.85.0) (2023-08-15)
+
+
+### Features
+
+* **reservations:** update service ([#7319](https://github.com/tillhub/tillhub-sdk-javascript/issues/7319)) ([fc5596a](https://github.com/tillhub/tillhub-sdk-javascript/commit/fc5596a6cdf710ca3234929a9de26d0f64eeec05))
+
 # [4.84.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.83.0...v4.84.0) (2023-08-09)
 
 
