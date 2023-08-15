@@ -60,6 +60,21 @@ export class Services extends ThBaseHandler {
       throw new ServiceCreationFailed(error.message, { error })
     }
   }
+
+  async put (serviceId: string, service: ServicesObject): Promise<ServiceResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${serviceId}`)
+
+    try {
+      const response = await this.http.getClient().put(uri, service)
+
+      return {
+        data: response.data.results[0] as ServicesObject,
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new ServicePutFailed(error.message, { error })
+    }
+  }
 }
 
 export class ServiceCreationFailed extends BaseError {
@@ -70,5 +85,16 @@ export class ServiceCreationFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, ServiceCreationFailed.prototype)
+  }
+}
+
+export class ServicePutFailed extends BaseError {
+  public name = 'ServicePutFailed'
+  constructor (
+    public message: string = 'Could not alter the service',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, ServicePutFailed.prototype)
   }
 }
