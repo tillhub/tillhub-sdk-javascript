@@ -13,6 +13,10 @@ export interface HandlerQuery {
   [key: string]: any
 }
 
+export interface GenerateOptions {
+  indices?: boolean
+}
+
 export class UriHelper {
   public baseUri: string
 
@@ -27,7 +31,11 @@ export class UriHelper {
     return `${this.baseUri}${additionalPath}`
   }
 
-  public generateUriWithQuery (basePath: string, query?: HandlerQuery): string {
+  public generateUriWithQuery(
+    basePath: string,
+    query?: HandlerQuery,
+    options?: GenerateOptions
+  ): string {
     if (!query) return `${basePath}`
 
     if (query.uri ?? (query?.query?.uri)) {
@@ -37,9 +45,15 @@ export class UriHelper {
     if (query.query) {
       const flattenQuery = { ...query, ...query.query }
       delete flattenQuery.query
-      return `${basePath}${qs.stringify(flattenQuery, { addQueryPrefix: true })}`
+      return `${basePath}${qs.stringify(flattenQuery, {
+        addQueryPrefix: true,
+        ...(options ?? {})
+      })}`
     }
 
-    return `${basePath}${qs.stringify(query, { addQueryPrefix: true })}`
+    return `${basePath}${qs.stringify(query, {
+      addQueryPrefix: true,
+      ...(options ?? {})
+    })}`
   }
 }

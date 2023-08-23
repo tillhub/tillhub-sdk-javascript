@@ -134,7 +134,7 @@ export class PurchaseOrders extends ThBaseHandler {
 
     try {
       const base = this.uriHelper.generateBaseUri()
-      const uri = this.uriHelper.generateUriWithQuery(base, query)
+      const uri = this.uriHelper.generateUriWithQuery(base, query, { indices: false })
 
       const response = await this.http.getClient().get(uri)
 
@@ -157,7 +157,7 @@ export class PurchaseOrders extends ThBaseHandler {
 
   async get (purchaseOrderId: string): Promise<PurchaseOrdersSingleResponse> {
     const base = this.uriHelper.generateBaseUri(`/${purchaseOrderId}`)
-    const uri = this.uriHelper.generateUriWithQuery(base)
+    const uri = this.uriHelper.generateUriWithQuery(base, { indices: false })
 
     try {
       const response = await this.http.getClient().get(uri)
@@ -176,7 +176,7 @@ export class PurchaseOrders extends ThBaseHandler {
 
   async create (purchaseOrder: PurchaseOrdersCreateQuery): Promise<PurchaseOrdersSingleResponse> {
     const base = this.uriHelper.generateBaseUri()
-    const uri = this.uriHelper.generateUriWithQuery(base)
+    const uri = this.uriHelper.generateUriWithQuery(base, { indices: false })
     try {
       const response = await this.http.getClient().post(uri, purchaseOrder)
       if (response.status !== 200) {
@@ -193,7 +193,7 @@ export class PurchaseOrders extends ThBaseHandler {
 
   async put (purchaseOrderId: string, purchaseOrder: PurchaseOrdersUpdateQuery): Promise<PurchaseOrdersSingleResponse> {
     const base = this.uriHelper.generateBaseUri(`/${purchaseOrderId}`)
-    const uri = this.uriHelper.generateUriWithQuery(base)
+    const uri = this.uriHelper.generateUriWithQuery(base, { indices: false })
     try {
       const response = await this.http.getClient().put(uri, purchaseOrder)
       if (response.status !== 200) {
@@ -211,7 +211,7 @@ export class PurchaseOrders extends ThBaseHandler {
   async pdfUri (purchaseOrderId: string): Promise<PurchaseOrdersPdfResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/${purchaseOrderId}/pdf`)
-      const uri = this.uriHelper.generateUriWithQuery(base)
+      const uri = this.uriHelper.generateUriWithQuery(base, { indices: false })
 
       const response = await this.http.getClient().get(uri)
       const pdfObj = response.data.results[0]
@@ -229,7 +229,7 @@ export class PurchaseOrders extends ThBaseHandler {
   async preview (purchaseOrderId: string): Promise<PurchaseOrdersPreviewResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/${purchaseOrderId}/preview`)
-      const uri = this.uriHelper.generateUriWithQuery(base)
+      const uri = this.uriHelper.generateUriWithQuery(base, { indices: false })
 
       const response = await this.http.getClient().get(uri)
 
@@ -244,7 +244,7 @@ export class PurchaseOrders extends ThBaseHandler {
   async send (purchaseOrderId: string, sendQuery: PurchaseOrdersSendQuery): Promise<PurchaseOrdersSingleResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/${purchaseOrderId}/send`)
-      const uri = this.uriHelper.generateUriWithQuery(base)
+      const uri = this.uriHelper.generateUriWithQuery(base, { indices: false })
 
       const response = await this.http.getClient().post(uri, sendQuery)
 
@@ -280,7 +280,7 @@ export class PurchaseOrders extends ThBaseHandler {
 
   async bulkAddProducts (purchaseOrderId: string, purchaseOrder: PurchaseOrdersBulkAddProductsQuery): Promise<PurchaseOrdersSingleResponse> {
     const base = this.uriHelper.generateBaseUri(`/${purchaseOrderId}/products`)
-    const uri = this.uriHelper.generateUriWithQuery(base)
+    const uri = this.uriHelper.generateUriWithQuery(base, { indices: false })
     try {
       const response = await this.http.getClient().post(uri, purchaseOrder)
       if (response.status !== 200) {
@@ -297,7 +297,7 @@ export class PurchaseOrders extends ThBaseHandler {
 
   async bulkDeleteProducts (purchaseOrderId: string, purchaseOrder: PurchaseOrdersBulkDeleteProductsQuery): Promise<PurchaseOrdersSingleResponse> {
     const base = this.uriHelper.generateBaseUri(`/${purchaseOrderId}/products`)
-    const uri = this.uriHelper.generateUriWithQuery(base)
+    const uri = this.uriHelper.generateUriWithQuery(base, { indices: false })
     try {
       const response = await this.http.getClient().delete(uri, {
         data: purchaseOrder
