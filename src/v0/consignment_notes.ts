@@ -21,7 +21,7 @@ export class ConsignmentNotes extends ThBaseHandler {
   public options: ConsignmentNotesOptions
   public uriHelper: UriHelper
 
-  constructor(options: ConsignmentNotesOptions, http: Client) {
+  constructor (options: ConsignmentNotesOptions, http: Client) {
     super(http, {
       endpoint: ConsignmentNotes.baseEndpoint,
       base: options.base ?? 'https://api.tillhub.com'
@@ -34,7 +34,7 @@ export class ConsignmentNotes extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async pdfUri(consignmentNoteId: string): Promise<ConsignmentNotesPdfResponse> {
+  async pdfUri (consignmentNoteId: string): Promise<ConsignmentNotesPdfResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/${consignmentNoteId}/pdf`)
       const uri = this.uriHelper.generateUriWithQuery(base)
@@ -55,7 +55,7 @@ export class ConsignmentNotes extends ThBaseHandler {
 
 class ConsignmentNotesPdfFailed extends BaseError {
   public name = 'ConsignmentNotesPdfFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not download pdf',
     properties?: Record<string, unknown>
   ) {
