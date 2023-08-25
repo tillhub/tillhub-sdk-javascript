@@ -1,4 +1,3 @@
-import safeGet from 'just-safe-get'
 import { ThAnalyticsBaseHandler } from '../../../base'
 import { VoucherOptions } from '../../../v0/analytics'
 import { Client, Timeout } from '../../../client'
@@ -59,9 +58,9 @@ export class AnalyticsReportsVouchers extends ThAnalyticsBaseHandler {
       if (response.status !== 200) throw new AnalyticsReportsV1VouchersFetchError()
 
       return {
-        data: safeGet(response.data, 'results.0.values') || [],
+        data: response.data.results,
         metadata: {
-          count: safeGet(response.data, 'results.2.values.0.count') || 0
+          count: response.data.count
         },
         next
       }

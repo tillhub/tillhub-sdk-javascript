@@ -37,8 +37,14 @@ const vouchersData = [
   { values: [{ count: 2 }] } // metadata for filtered items
 ]
 
+const vouchersCsvData = [
+  {
+    correlationId: 'asdf-1234-zxcv-4567'
+  }
+]
+
 describe('v1: AnalyticsReportsVouchers', () => {
-  it('can get vouchers analytics reports export', async () => {
+  it('can get vouchers analytics reports', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
         .onGet(`https://api.tillhub.com/api/v1/analytics/${legacyId}/reports/vouchers?${qs.stringify(query)}`)
@@ -62,11 +68,40 @@ describe('v1: AnalyticsReportsVouchers', () => {
 
     expect(analyticsReportsVouchers).toBeInstanceOf(v1.analytics.reports.AnalyticsReportsVouchers)
 
-    const { data, metadata } = await analyticsReportsVouchers.getAll({ query })
+    const { data } = await analyticsReportsVouchers.getAll({ query })
 
     expect(Array.isArray(data)).toBe(true)
-    expect(data).toEqual(vouchersData[0].values) // items
-    expect(metadata).toEqual(vouchersData[2].values[0]) // metadata count is of filtered values
+    expect(data).toEqual(vouchersData)
+  })
+
+  it('can get vouchers analytics reports export', async () => {
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock
+        .onGet(`https://api.tillhub.com/api/v1/analytics/${legacyId}/reports/vouchers?${qs.stringify(query)}`)
+        .reply(() => {
+          return [
+            200,
+            {
+              count: 1,
+              cursor: {
+                next: faker.internet.url()
+              },
+              results: vouchersCsvData
+            }
+          ]
+        })
+    }
+
+    const th = await initThInstance()
+
+    const analyticsReportsVouchers = th.analyticsHandlersV1().analytics.reports.AnalyticsReportsVouchers
+
+    expect(analyticsReportsVouchers).toBeInstanceOf(v1.analytics.reports.AnalyticsReportsVouchers)
+
+    const { data } = await analyticsReportsVouchers.getAll({ query })
+
+    expect(Array.isArray(data)).toBe(true)
+    expect(data).toEqual(vouchersCsvData) // items
   })
 
   it('rejects on status codes that are not 200', async () => {

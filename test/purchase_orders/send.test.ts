@@ -52,7 +52,6 @@ describe('v0: Purchase Orders: can get PDF', () => {
 
     expect(purchaseOrders).toBeInstanceOf(v0.PurchaseOrders)
 
-    console.log({ recipients: ['fake@email.com'] })
     const { data } = await purchaseOrders.send(purchaseOrderId, { recipients: ['fake@email.com'] })
     expect(data).toMatchObject(purchaseOrder)
   })
