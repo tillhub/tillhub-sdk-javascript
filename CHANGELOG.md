@@ -1,3 +1,10 @@
+# [4.87.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.86.0...v4.87.0) (2023-08-25)
+
+
+### Features
+
+* **vouchers:** changing v1 analytics vouchers response back to normal ([35650e5](https://github.com/tillhub/tillhub-sdk-javascript/commit/35650e557225a9670e3e36988add176148b8c0c8))
+
 # [4.86.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.85.0...v4.86.0) (2023-08-25)
 
 
