@@ -70,6 +70,7 @@ import { DbBackups } from './db_backups'
 import { PurchaseOrders } from './purchase_orders'
 import { ServiceCategory } from './service_category'
 import { Services } from './services'
+import { ConsignmentNotes } from './consignment_notes'
 
 export {
   Auth,
@@ -146,5 +147,6 @@ export {
   DbBackups,
   PurchaseOrders,
   ServiceCategory,
-  Services
+  Services,
+  ConsignmentNotes
 }
