@@ -135,6 +135,7 @@ export declare class TillhubClient extends events.EventEmitter {
     userPermissionsTemplates(): v0.UserPermissionsTemplates;
     dbBackups(): v0.DbBackups;
     purchaseOrders(): v0.PurchaseOrders;
+    consignmentNotes(): v0.ConsignmentNotes;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;

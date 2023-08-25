@@ -541,6 +541,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.purchaseOrders = function () {
         return this.generateAuthenticatedInstance(v0.PurchaseOrders);
     };
+    TillhubClient.prototype.consignmentNotes = function () {
+        return this.generateAuthenticatedInstance(v0.ConsignmentNotes);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));
