@@ -291,7 +291,7 @@ export class Orders extends ThBaseHandler {
 
   async getAll (query?: OrdersQuery | undefined): Promise<OrdersResponse> {
     let next
-    const base = this.uriHelper.generateBaseUri()
+    const base = this.uriHelper.generateBaseUri('/')
     const uri = this.uriHelper.generateUriWithQuery(base, query)
 
     try {
