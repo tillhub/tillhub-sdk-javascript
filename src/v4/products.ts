@@ -135,7 +135,7 @@ export class Products extends ThBaseHandler {
   public options: ProductsOptions
   public uriHelper: UriHelper
 
-  constructor(options: ProductsOptions, http: Client) {
+  constructor (options: ProductsOptions, http: Client) {
     super(http, {
       endpoint: Products.baseEndpoint,
       base: options.base ?? 'https://api.tillhub.com'
@@ -148,8 +148,8 @@ export class Products extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async bulkBookStock(requestOptions: BulkBookStockQuery): Promise<ProductResponse> {
-    const uri = this.uriHelper.generateBaseUri(`/stock/book/bulk`)
+  async bulkBookStock (requestOptions: BulkBookStockQuery): Promise<ProductResponse> {
+    const uri = this.uriHelper.generateBaseUri (`/stock/book/bulk`)
     try {
       const response = await this.http.getClient().post(uri, requestOptions.body)
       if (response.status !== 200) throw new ProductsBulkBookStockFailed()
@@ -167,7 +167,7 @@ export class Products extends ThBaseHandler {
 
 export class ProductsBulkBookStockFailed extends BaseError {
   public name = 'ProductsBulkBookStockFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not bulk book stock for the products',
     properties?: Record<string, unknown>
   ) {
