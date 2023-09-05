@@ -1,3 +1,12 @@
+# [4.88.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.87.0...v4.88.0) (2023-09-05)
+
+
+### Features
+
+* **stock management:** add v4 products endpoints ([2cf0d79](https://github.com/tillhub/tillhub-sdk-javascript/commit/2cf0d79fb5b4920c83f883bb37b22cc69953bd3c))
+* **stock management:** fix formatting issue ([cbe84bf](https://github.com/tillhub/tillhub-sdk-javascript/commit/cbe84bf6bab217594010a4d14da473136eec5515))
+* **stock management:** fix linting issues ([f270cf9](https://github.com/tillhub/tillhub-sdk-javascript/commit/f270cf935460ce9f15da0e96bee4d7fe2dd45a2c))
+
 # [4.87.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.86.0...v4.87.0) (2023-08-25)
 
 

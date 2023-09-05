@@ -6,11 +6,12 @@ import * as v0 from './v0';
 import * as v1 from './v1';
 import * as v2 from './v2';
 import * as v3 from './v3';
+import * as v4 from './v4';
 import { AnalyticsHandlersV1Types } from './v1';
 import { AnalyticsHandlerTypes } from './v2';
 import { AnalyticsHandlerTypesV3 } from './v3';
 import { Client, Timeout } from './client';
-export { v0, v1, v2, v3 };
+export { v0, v1, v2, v3, v4 };
 export declare const defaultOptions: TillhubSDKOptions;
 declare type Fn = () => any;
 export interface TillhubSDKOptions {
@@ -43,6 +44,7 @@ export declare class TillhubClient extends events.EventEmitter {
     private generateAuthenticatedInstance;
     taxes(): v0.Taxes;
     products(): v1.Products;
+    productsV4(): v4.Products;
     productGroups(): v0.ProductGroups;
     productTemplates(): v0.ProductTemplates;
     productAddonGroups(): v0.ProductAddonGroups;

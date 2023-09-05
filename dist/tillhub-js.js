@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Tillhub = exports.TillhubClient = exports.defaultOptions = exports.v3 = exports.v2 = exports.v1 = exports.v0 = void 0;
+exports.Tillhub = exports.TillhubClient = exports.defaultOptions = exports.v4 = exports.v3 = exports.v2 = exports.v1 = exports.v0 = void 0;
 var tslib_1 = require("tslib");
 var events_1 = tslib_1.__importDefault(require("events"));
 var v0 = tslib_1.__importStar(require("./v0"));
@@ -11,6 +11,8 @@ var v2 = tslib_1.__importStar(require("./v2"));
 exports.v2 = v2;
 var v3 = tslib_1.__importStar(require("./v3"));
 exports.v3 = v3;
+var v4 = tslib_1.__importStar(require("./v4"));
+exports.v4 = v4;
 var client_1 = require("./client");
 var errors = tslib_1.__importStar(require("./errors"));
 var environment_1 = require("./environment");
@@ -99,6 +101,9 @@ var TillhubClient = (function (_super) {
     };
     TillhubClient.prototype.products = function () {
         return this.generateAuthenticatedInstance(v1.Products);
+    };
+    TillhubClient.prototype.productsV4 = function () {
+        return this.generateAuthenticatedInstance(v4.Products);
     };
     TillhubClient.prototype.productGroups = function () {
         return this.generateAuthenticatedInstance(v0.ProductGroups);
