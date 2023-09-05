@@ -149,7 +149,7 @@ export class Products extends ThBaseHandler {
   }
 
   async bulkBookStock (requestOptions: BulkBookStockQuery): Promise<ProductResponse> {
-    const uri = this.uriHelper.generateBaseUri (`/stock/book/bulk`)
+    const uri = this.uriHelper.generateBaseUri('/stock/book/bulk')
     try {
       const response = await this.http.getClient().post(uri, requestOptions.body)
       if (response.status !== 200) throw new ProductsBulkBookStockFailed()
