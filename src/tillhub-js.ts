@@ -9,6 +9,7 @@ import * as v0 from './v0'
 import * as v1 from './v1'
 import * as v2 from './v2'
 import * as v3 from './v3'
+import * as v4 from './v4'
 import { AnalyticsHandlersV1Types } from './v1'
 import { AnalyticsHandlerTypes } from './v2'
 import { AnalyticsHandlerTypesV3 } from './v3'
@@ -16,7 +17,7 @@ import { Client, ClientOptions, Timeout } from './client'
 import * as errors from './errors'
 import { environment } from './environment'
 
-export { v0, v1, v2, v3 }
+export { v0, v1, v2, v3, v4 }
 
 export const defaultOptions: TillhubSDKOptions = {
   base: 'https://api.tillhub.com'
@@ -40,7 +41,8 @@ interface AxiosOptions {
 type MaybeOptions = Record<string, unknown>
 
 export declare interface TillhubClient {
-  on: ((event: 'raw-error' | 'error', listener: (error: Error) => void) => this) & ((event: string, listener: Fn) => this)
+  on: ((event: 'raw-error' | 'error', listener: (error: Error) => void) => this) &
+  ((event: string, listener: Fn) => this)
 }
 
 export class TillhubClient extends events.EventEmitter {
@@ -128,9 +130,7 @@ export class TillhubClient extends events.EventEmitter {
       }
 
       if ((options.credentials as TokenAuth).token && clientOptions.headers) {
-        clientOptions.headers.Authorization = `Bearer ${
-          (options.credentials as TokenAuth).token
-        }`
+        clientOptions.headers.Authorization = `Bearer ${(options.credentials as TokenAuth).token}`
       }
 
       if (options.whitelabel && clientOptions.headers) {
@@ -183,6 +183,14 @@ export class TillhubClient extends events.EventEmitter {
    */
   products (): v1.Products {
     return this.generateAuthenticatedInstance(v1.Products)
+  }
+
+  /**
+   * Create an authenticated products instance
+   *
+   */
+  productsV4 (): v4.Products {
+    return this.generateAuthenticatedInstance(v4.Products)
   }
 
   /**
@@ -531,7 +539,10 @@ export class TillhubClient extends events.EventEmitter {
       throw new errors.UninstantiatedClient()
     }
 
-    return new v0.Analytics({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http)
+    return new v0.Analytics(
+      { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
+      this.http
+    )
   }
 
   /**
@@ -552,15 +563,42 @@ export class TillhubClient extends events.EventEmitter {
     return {
       analytics: {
         reports: {
-          AnalyticsReportsCustomers: new v1.analytics.reports.AnalyticsReportsCustomers({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http),
-          AnalyticsReportsPayments: new v1.analytics.reports.AnalyticsReportsPayments({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http),
-          AnalyticsReportsVouchers: new v1.analytics.reports.AnalyticsReportsVouchers({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http),
-          AnalyticsReportsDiscounts: new v1.analytics.reports.AnalyticsReportsDiscounts({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http),
-          AnalyticsReportsVat: new v1.analytics.reports.AnalyticsReportsVat({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http),
-          AnalyticsReportsProductGroups: new v1.analytics.reports.AnalyticsReportsProductGroups({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http),
-          AnalyticsReportsPaymentOptions: new v1.analytics.reports.AnalyticsReportsPaymentOptions({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http),
-          AnalyticsReportsStockTakings: new v1.analytics.reports.AnalyticsReportsStockTakings({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http),
-          AnalyticsReportsProcesses: new v1.analytics.reports.AnalyticsReportsProcesses({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http)
+          AnalyticsReportsCustomers: new v1.analytics.reports.AnalyticsReportsCustomers(
+            { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
+            this.http
+          ),
+          AnalyticsReportsPayments: new v1.analytics.reports.AnalyticsReportsPayments(
+            { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
+            this.http
+          ),
+          AnalyticsReportsVouchers: new v1.analytics.reports.AnalyticsReportsVouchers(
+            { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
+            this.http
+          ),
+          AnalyticsReportsDiscounts: new v1.analytics.reports.AnalyticsReportsDiscounts(
+            { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
+            this.http
+          ),
+          AnalyticsReportsVat: new v1.analytics.reports.AnalyticsReportsVat(
+            { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
+            this.http
+          ),
+          AnalyticsReportsProductGroups: new v1.analytics.reports.AnalyticsReportsProductGroups(
+            { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
+            this.http
+          ),
+          AnalyticsReportsPaymentOptions: new v1.analytics.reports.AnalyticsReportsPaymentOptions(
+            { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
+            this.http
+          ),
+          AnalyticsReportsStockTakings: new v1.analytics.reports.AnalyticsReportsStockTakings(
+            { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
+            this.http
+          ),
+          AnalyticsReportsProcesses: new v1.analytics.reports.AnalyticsReportsProcesses(
+            { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
+            this.http
+          )
         }
       }
     }
@@ -616,8 +654,14 @@ export class TillhubClient extends events.EventEmitter {
             { user: this.auth.user, base: this.options.base },
             this.http
           ),
-          AnalyticsReportsProducts: new v2.analytics.reports.AnalyticsReportsProducts({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http),
-          AnalyticsReportsStocks: v2.analytics.reports.AnalyticsReportsStocks.create({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http)
+          AnalyticsReportsProducts: new v2.analytics.reports.AnalyticsReportsProducts(
+            { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
+            this.http
+          ),
+          AnalyticsReportsStocks: v2.analytics.reports.AnalyticsReportsStocks.create(
+            { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
+            this.http
+          )
         }
       }
     }
@@ -707,7 +751,10 @@ export class TillhubClient extends events.EventEmitter {
       throw new errors.UninstantiatedClient()
     }
 
-    return new v1.Transactions({ user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout }, this.http)
+    return new v1.Transactions(
+      { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
+      this.http
+    )
   }
 
   /**
