@@ -1,3 +1,10 @@
+# [4.89.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.88.0...v4.89.0) (2023-09-05)
+
+
+### Features
+
+* **order:** clean slash ([657420c](https://github.com/tillhub/tillhub-sdk-javascript/commit/657420c60fe366faae2363efac521165b55bba3e))
+
 # [4.88.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.87.0...v4.88.0) (2023-09-05)
 
 

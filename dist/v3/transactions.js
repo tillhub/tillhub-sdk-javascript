@@ -28,7 +28,7 @@ var Transactions = (function (_super) {
             return tslib_1.__generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        base = this.uriHelper.generateBaseUri('/');
+                        base = this.uriHelper.generateBaseUri();
                         uri = this.uriHelper.generateUriWithQuery(base, query);
                         _b.label = 1;
                     case 1:
