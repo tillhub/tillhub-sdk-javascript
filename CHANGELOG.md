@@ -1,3 +1,11 @@
+# [4.90.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.89.0...v4.90.0) (2023-09-06)
+
+
+### Features
+
+* **stock management:** add getAll method for consignment notes entity ([a74c6ef](https://github.com/tillhub/tillhub-sdk-javascript/commit/a74c6ef77db5a5ec116fdb909abc5db11c796ae5))
+* **stock management:** fix linting issues ([4eb5fd9](https://github.com/tillhub/tillhub-sdk-javascript/commit/4eb5fd91964359ad8a77be6e3cae29843e5d1b85))
+
 # [4.89.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.88.0...v4.89.0) (2023-09-05)
 
 

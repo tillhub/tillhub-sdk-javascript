@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ConsignmentNotes = void 0;
+exports.ConsignmentNotesFetchFailed = exports.ConsignmentNotes = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -20,9 +20,44 @@ var ConsignmentNotes = (function (_super) {
         _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
         return _this;
     }
+    ConsignmentNotes.prototype.getAll = function (options) {
+        var _a;
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var next, base, uri, response_1, error_1;
+            var _this = this;
+            return tslib_1.__generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _b.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri();
+                        uri = this.uriHelper.generateUriWithQuery(base, options);
+                        return [4, this.http.getClient().get(uri)];
+                    case 1:
+                        response_1 = _b.sent();
+                        if (response_1.status !== 200) {
+                            throw new ConsignmentNotesFetchFailed(undefined, { status: response_1.status });
+                        }
+                        if ((_a = response_1.data.cursor) === null || _a === void 0 ? void 0 : _a.next) {
+                            next = function () {
+                                return _this.getAll({ uri: response_1.data.cursor.next });
+                            };
+                        }
+                        return [2, {
+                                data: response_1.data.results,
+                                metadata: { count: response_1.data.count, cursor: response_1.data.cursor },
+                                next: next
+                            }];
+                    case 2:
+                        error_1 = _b.sent();
+                        throw new ConsignmentNotesFetchFailed(error_1.message, { error: error_1 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
     ConsignmentNotes.prototype.pdfUri = function (consignmentNoteId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, pdfObj, error_1;
+            var base, uri, response, pdfObj, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -39,8 +74,8 @@ var ConsignmentNotes = (function (_super) {
                                 filename: pdfObj.filename
                             }];
                     case 2:
-                        error_1 = _a.sent();
-                        throw new ConsignmentNotesPdfFailed(error_1.message);
+                        error_2 = _a.sent();
+                        throw new ConsignmentNotesPdfFailed(error_2.message);
                     case 3: return [2];
                 }
             });
@@ -50,6 +85,19 @@ var ConsignmentNotes = (function (_super) {
     return ConsignmentNotes;
 }(base_1.ThBaseHandler));
 exports.ConsignmentNotes = ConsignmentNotes;
+var ConsignmentNotesFetchFailed = (function (_super) {
+    tslib_1.__extends(ConsignmentNotesFetchFailed, _super);
+    function ConsignmentNotesFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the consignment notes'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ConsignmentNotesFetchFailed';
+        Object.setPrototypeOf(_this, ConsignmentNotesFetchFailed.prototype);
+        return _this;
+    }
+    return ConsignmentNotesFetchFailed;
+}(errors_1.BaseError));
+exports.ConsignmentNotesFetchFailed = ConsignmentNotesFetchFailed;
 var ConsignmentNotesPdfFailed = (function (_super) {
     tslib_1.__extends(ConsignmentNotesPdfFailed, _super);
     function ConsignmentNotesPdfFailed(message, properties) {
