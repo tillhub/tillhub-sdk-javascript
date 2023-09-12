@@ -19,9 +19,11 @@ if (process.env.SYSTEM_TEST) {
   user.apiKey = process.env.SYSTEM_TEST_API_KEY ?? user.apiKey
 }
 
-const query = {}
+const query = {
+  consignmentNoteNumber: '123'
+}
 
-function queryString () {
+function queryString() {
   return qs.stringify(query)
 }
 
