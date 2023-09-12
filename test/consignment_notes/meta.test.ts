@@ -21,7 +21,7 @@ if (process.env.SYSTEM_TEST) {
 
 const query = {}
 
-function queryString() {
+function queryString () {
   return qs.stringify(query)
 }
 
@@ -33,7 +33,7 @@ afterEach(() => {
 })
 
 describe('v0: Consignment Notes: can get count number of all consignment notes', () => {
-  it("Tillhub's branches are instantiable", async () => {
+  it("Tillhub's consignment Notes are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [

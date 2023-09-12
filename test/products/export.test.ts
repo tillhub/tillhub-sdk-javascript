@@ -27,7 +27,7 @@ const query = {
   deleted: false
 }
 
-function queryString() {
+function queryString () {
   return qs.stringify(query)
 }
 
@@ -48,12 +48,12 @@ afterEach(() => {
 })
 
 describe('v1: products:', () => {
-  it('can export transactions items reports', async () => {
+  it('can export products', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
-        .onGet(`https://api.tillhub.com/api/v0/products/${legacyId}/export?${queryString()}`)
+        .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/export?${queryString()}`)
         .reply(() => {
-          return [200, { results: [{ url: urlPath, filename: 'filename' }] }]
+          return [200, { results: { url: urlPath, filename: 'filename' } }]
         })
     }
 
@@ -84,7 +84,7 @@ describe('v1: products:', () => {
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
-        .onGet(`https://api.tillhub.com/api/v0/products/${legacyId}/export?${queryString()}`)
+        .onGet(`https://api.tillhub.com/api/v1/products/${legacyId}/export?${queryString()}`)
         .reply(() => {
           return [205]
         })
