@@ -80,6 +80,14 @@ export interface ProductsQuery {
     extended?: boolean;
     [key: string]: any;
 }
+export interface ProductsExportResponse {
+    data?: {
+        url?: string;
+        filename?: string;
+        expiresAt?: string;
+    };
+    msg?: string;
+}
 export interface ProductsOptions {
     user?: string;
     base?: string;
@@ -159,6 +167,7 @@ export declare class Products extends ThBaseHandler {
     getAll(options?: ProductsOptions | undefined): Promise<ProductsResponse>;
     import(options?: ProductsOptions | undefined): Promise<ProductsResponse>;
     get(productId: string): Promise<ProductResponse>;
+    export(query?: ProductsQuery | undefined): Promise<ProductsExportResponse>;
     getDetails(productId: string, options?: ProductsOptions | undefined): Promise<ProductResponse>;
     getChildrenDetails(productId: string, hideStock?: boolean): Promise<ProductResponse>;
     meta(q?: ProductsQuery | undefined): Promise<ProductsResponse>;
@@ -189,6 +198,11 @@ export declare class ProductsFetchFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ProductsImportFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class ProductsExportFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

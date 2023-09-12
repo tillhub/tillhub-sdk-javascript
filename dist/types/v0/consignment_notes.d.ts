@@ -17,6 +17,9 @@ export interface ConsignmentNote {
     };
     consignmentNoteNumber: string;
 }
+export interface ConsignmentNotesMetaQuery {
+    consignmentNoteNumber?: string;
+}
 export interface ConsignmentNotesOptions {
     base?: string;
     limit?: number;
@@ -40,9 +43,15 @@ export declare class ConsignmentNotes extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: ConsignmentNotesOptions, http: Client);
     getAll(options?: ConsignmentNotesOptions | undefined): Promise<ConsignmentNotesResponse>;
+    meta(q?: ConsignmentNotesMetaQuery | undefined): Promise<ConsignmentNotesResponse>;
     pdfUri(consignmentNoteId: string): Promise<ConsignmentNotesPdfResponse>;
 }
 export declare class ConsignmentNotesFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class ConsignmentNotesMetaFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

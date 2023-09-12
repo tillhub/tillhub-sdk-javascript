@@ -1,3 +1,15 @@
+# [4.91.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.90.0...v4.91.0) (2023-09-12)
+
+
+### Features
+
+* **stock management:** add meta method to consignment notes ([6f7f678](https://github.com/tillhub/tillhub-sdk-javascript/commit/6f7f67878328e2ee35978e36a55295c575b1f992))
+* **stock management:** add products export method ([78141e5](https://github.com/tillhub/tillhub-sdk-javascript/commit/78141e554488af87077d237102cf50c6ccd8bc2c))
+* **stock management:** add tests ([b147aba](https://github.com/tillhub/tillhub-sdk-javascript/commit/b147aba63c5a61b6e046a17e89dbc288e2440ac6))
+* **stock management:** fix linting issues ([d4b2b84](https://github.com/tillhub/tillhub-sdk-javascript/commit/d4b2b846ecfaf417df859c2bcfa678c5eca87979))
+* **stock management:** fix linting issues ([855fa82](https://github.com/tillhub/tillhub-sdk-javascript/commit/855fa82fd793bad7fc18c3e57436e657c9b8b5bf))
+* **stock management:** fix unit tests ([768d230](https://github.com/tillhub/tillhub-sdk-javascript/commit/768d2308e57d22610ff0c7d70e83c77871424827))
+
 # [4.90.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.89.0...v4.90.0) (2023-09-06)
 
 

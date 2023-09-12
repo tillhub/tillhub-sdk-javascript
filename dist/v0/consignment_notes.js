@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ConsignmentNotesFetchFailed = exports.ConsignmentNotes = void 0;
+exports.ConsignmentNotesMetaFailed = exports.ConsignmentNotesFetchFailed = exports.ConsignmentNotes = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -55,9 +55,41 @@ var ConsignmentNotes = (function (_super) {
             });
         });
     };
+    ConsignmentNotes.prototype.meta = function (q) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_2;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        base = this.uriHelper.generateBaseUri('/meta');
+                        uri = this.uriHelper.generateUriWithQuery(base, q);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new ConsignmentNotesMetaFailed(undefined, { status: response.status });
+                        }
+                        if (!response.data.results[0]) {
+                            throw new ConsignmentNotesMetaFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            }];
+                    case 3:
+                        error_2 = _a.sent();
+                        throw new ConsignmentNotesMetaFailed(error_2.message, { error: error_2 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     ConsignmentNotes.prototype.pdfUri = function (consignmentNoteId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, pdfObj, error_2;
+            var base, uri, response, pdfObj, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -74,8 +106,8 @@ var ConsignmentNotes = (function (_super) {
                                 filename: pdfObj.filename
                             }];
                     case 2:
-                        error_2 = _a.sent();
-                        throw new ConsignmentNotesPdfFailed(error_2.message);
+                        error_3 = _a.sent();
+                        throw new ConsignmentNotesPdfFailed(error_3.message);
                     case 3: return [2];
                 }
             });
@@ -98,6 +130,19 @@ var ConsignmentNotesFetchFailed = (function (_super) {
     return ConsignmentNotesFetchFailed;
 }(errors_1.BaseError));
 exports.ConsignmentNotesFetchFailed = ConsignmentNotesFetchFailed;
+var ConsignmentNotesMetaFailed = (function (_super) {
+    tslib_1.__extends(ConsignmentNotesMetaFailed, _super);
+    function ConsignmentNotesMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get consignment notes metadata'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ConsignmentNotesMetaFailed';
+        Object.setPrototypeOf(_this, ConsignmentNotesMetaFailed.prototype);
+        return _this;
+    }
+    return ConsignmentNotesMetaFailed;
+}(errors_1.BaseError));
+exports.ConsignmentNotesMetaFailed = ConsignmentNotesMetaFailed;
 var ConsignmentNotesPdfFailed = (function (_super) {
     tslib_1.__extends(ConsignmentNotesPdfFailed, _super);
     function ConsignmentNotesPdfFailed(message, properties) {
