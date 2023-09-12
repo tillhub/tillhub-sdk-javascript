@@ -20,6 +20,10 @@ export interface ConsignmentNote {
   consignmentNoteNumber: string
 }
 
+export interface ConsignmentNotesMetaQuery {
+  consignmentNoteNumber?: string
+}
+
 export interface ConsignmentNotesOptions {
   base?: string
   limit?: number
@@ -44,7 +48,7 @@ export class ConsignmentNotes extends ThBaseHandler {
   public options: ConsignmentNotesOptions
   public uriHelper: UriHelper
 
-  constructor (options: ConsignmentNotesOptions, http: Client) {
+  constructor(options: ConsignmentNotesOptions, http: Client) {
     super(http, {
       endpoint: ConsignmentNotes.baseEndpoint,
       base: options.base ?? 'https://api.tillhub.com'
@@ -57,7 +61,7 @@ export class ConsignmentNotes extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async getAll (options?: ConsignmentNotesOptions | undefined): Promise<ConsignmentNotesResponse> {
+  async getAll(options?: ConsignmentNotesOptions | undefined): Promise<ConsignmentNotesResponse> {
     let next
 
     try {
@@ -85,7 +89,28 @@ export class ConsignmentNotes extends ThBaseHandler {
     }
   }
 
-  async pdfUri (consignmentNoteId: string): Promise<ConsignmentNotesPdfResponse> {
+  async meta(q?: ConsignmentNotesMetaQuery | undefined): Promise<ConsignmentNotesResponse> {
+    const base = this.uriHelper.generateBaseUri('/meta')
+    const uri = this.uriHelper.generateUriWithQuery(base, q)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new ConsignmentNotesMetaFailed(undefined, { status: response.status })
+      }
+      if (!response.data.results[0]) {
+        throw new ConsignmentNotesMetaFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new ConsignmentNotesMetaFailed(error.message, { error })
+    }
+  }
+
+  async pdfUri(consignmentNoteId: string): Promise<ConsignmentNotesPdfResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/${consignmentNoteId}/pdf`)
       const uri = this.uriHelper.generateUriWithQuery(base)
@@ -106,7 +131,7 @@ export class ConsignmentNotes extends ThBaseHandler {
 
 export class ConsignmentNotesFetchFailed extends BaseError {
   public name = 'ConsignmentNotesFetchFailed'
-  constructor (
+  constructor(
     public message: string = 'Could not fetch the consignment notes',
     properties?: Record<string, unknown>
   ) {
@@ -114,9 +139,20 @@ export class ConsignmentNotesFetchFailed extends BaseError {
     Object.setPrototypeOf(this, ConsignmentNotesFetchFailed.prototype)
   }
 }
+
+export class ConsignmentNotesMetaFailed extends BaseError {
+  public name = 'ConsignmentNotesMetaFailed'
+  constructor(
+    public message: string = 'Could not get consignment notes metadata',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, ConsignmentNotesMetaFailed.prototype)
+  }
+}
 class ConsignmentNotesPdfFailed extends BaseError {
   public name = 'ConsignmentNotesPdfFailed'
-  constructor (
+  constructor(
     public message: string = 'Could not download pdf',
     properties?: Record<string, unknown>
   ) {
