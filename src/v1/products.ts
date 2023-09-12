@@ -92,6 +92,15 @@ export interface ProductsQuery {
   [key: string]: any
 }
 
+export interface ProductsExportResponse {
+  data?: {
+    url?: string
+    filename?: string
+    expiresAt?: string
+  }
+  msg?: string
+}
+
 export interface ProductsOptions {
   user?: string
   base?: string
@@ -279,6 +288,25 @@ export class Products extends ThBaseHandler {
       }
     } catch (error: any) {
       throw new ProductFetchFailed(error.message, { error })
+    }
+  }
+
+  async export (query?: ProductsQuery | undefined): Promise<ProductsExportResponse> {
+    const base = this.uriHelper.generateBaseUri('/export')
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new ProductsExportFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results,
+        msg: response.data.msg
+      }
+    } catch (error: any) {
+      throw new ProductsExportFailed(error.message, { error })
     }
   }
 
@@ -551,6 +579,17 @@ export class ProductsImportFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsImportFailed.prototype)
+  }
+}
+
+export class ProductsExportFailed extends BaseError {
+  public name = 'ProductsExportFailed'
+  constructor (
+    public message: string = 'Could not export the products',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, ProductsExportFailed.prototype)
   }
 }
 
