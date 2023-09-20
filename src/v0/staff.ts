@@ -142,7 +142,7 @@ export class Staff extends ThBaseHandler {
   public options: StaffOptions
   public uriHelper: UriHelper
 
-  constructor(options: StaffOptions, http: Client) {
+  constructor (options: StaffOptions, http: Client) {
     super(http, { endpoint: Staff.baseEndpoint, base: options.base ?? 'https://api.tillhub.com' })
     this.options = options
     this.http = http
@@ -152,7 +152,7 @@ export class Staff extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async getAll(queryOrOptions?: StaffQueryOrOptions): Promise<StaffResponse> {
+  async getAll (queryOrOptions?: StaffQueryOrOptions): Promise<StaffResponse> {
     let next
 
     try {
@@ -178,7 +178,7 @@ export class Staff extends ThBaseHandler {
     }
   }
 
-  async create(staffMember: StaffMember, query?: HandleStaffQuery): Promise<StaffMemberResponse> {
+  async create (staffMember: StaffMember, query?: HandleStaffQuery): Promise<StaffMemberResponse> {
     const base = this.uriHelper.generateBaseUri()
     const uri = this.uriHelper.generateUriWithQuery(base, query)
 
@@ -196,7 +196,7 @@ export class Staff extends ThBaseHandler {
     }
   }
 
-  async getOne(staffId: string): Promise<StaffMemberResponse> {
+  async getOne (staffId: string): Promise<StaffMemberResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${staffId}`)
     try {
       const response = await this.http.getClient().get(uri)
@@ -216,7 +216,7 @@ export class Staff extends ThBaseHandler {
 
   // the following is a ducplicate of getOne, in order to stay consistent with the method names in other handlers;
   // "get" is a method name expected by frontend components, e.g. remote-search-select
-  async get(staffId: string): Promise<StaffMemberResponse> {
+  async get (staffId: string): Promise<StaffMemberResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${staffId}`)
     try {
       const response = await this.http.getClient().get(uri)
@@ -234,7 +234,7 @@ export class Staff extends ThBaseHandler {
     }
   }
 
-  async put(staffId: string, staff: StaffMember): Promise<StaffMemberResponse> {
+  async put (staffId: string, staff: StaffMember): Promise<StaffMemberResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${staffId}`)
     try {
       const response = await this.http.getClient().put(uri, staff)
@@ -251,7 +251,7 @@ export class Staff extends ThBaseHandler {
     }
   }
 
-  async delete(staffId: string): Promise<StaffMemberResponse> {
+  async delete (staffId: string): Promise<StaffMemberResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${staffId}`)
     try {
       const response = await this.http.getClient().delete(uri)
@@ -265,7 +265,7 @@ export class Staff extends ThBaseHandler {
     }
   }
 
-  async getPin(providedPin?: PinRequest): Promise<StaffMemberResponse> {
+  async getPin (providedPin?: PinRequest): Promise<StaffMemberResponse> {
     const base = this.uriHelper.generateBaseUri('/pin')
     const uri = this.uriHelper.generateUriWithQuery(base, providedPin)
     try {
@@ -292,7 +292,7 @@ export class Staff extends ThBaseHandler {
     }
   }
 
-  async getStaffNumber(providedStaffNumber?: StaffNumberRequest): Promise<StaffMemberResponse> {
+  async getStaffNumber (providedStaffNumber?: StaffNumberRequest): Promise<StaffMemberResponse> {
     const base = this.uriHelper.generateBaseUri('/staff_number')
     const uri = this.uriHelper.generateUriWithQuery(base, providedStaffNumber)
     try {
@@ -319,7 +319,7 @@ export class Staff extends ThBaseHandler {
     }
   }
 
-  async getFilters(queryOrOptions?: StaffQueryOrOptions): Promise<StaffResponse> {
+  async getFilters (queryOrOptions?: StaffQueryOrOptions): Promise<StaffResponse> {
     try {
       const base = this.uriHelper.generateBaseUri()
       const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
@@ -363,7 +363,7 @@ export class Staff extends ThBaseHandler {
     }
   }
 
-  async getServices(staffId: string): Promise<StaffServicesResponse> {
+  async getServices (staffId: string): Promise<StaffServicesResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/${staffId}/services`)
       const uri = this.uriHelper.generateUriWithQuery(base)
@@ -383,7 +383,7 @@ export class Staff extends ThBaseHandler {
     }
   }
 
-  async makeUser(staffID: string, makeUserObj: MakeUserRequest): Promise<StaffMemberResponse> {
+  async makeUser (staffID: string, makeUserObj: MakeUserRequest): Promise<StaffMemberResponse> {
     const base = this.uriHelper.generateBaseUri(`/${staffID}/make_user`)
 
     try {
@@ -399,7 +399,7 @@ export class Staff extends ThBaseHandler {
     }
   }
 
-  async meta(query?: StaffQueryOrOptions | undefined): Promise<StaffMemberResponse> {
+  async meta (query?: StaffQueryOrOptions | undefined): Promise<StaffMemberResponse> {
     const base = this.uriHelper.generateBaseUri('/meta')
     const uri = this.uriHelper.generateUriWithQuery(base, query)
 
@@ -421,7 +421,7 @@ export class Staff extends ThBaseHandler {
     }
   }
 
-  async search(query: string | SearchQuery): Promise<StaffMemberResponse> {
+  async search (query: string | SearchQuery): Promise<StaffMemberResponse> {
     let uri
     if (typeof query === 'string') {
       uri = this.uriHelper.generateBaseUri(`/search?q=${query}`)
@@ -450,7 +450,7 @@ export class Staff extends ThBaseHandler {
 
 export class StaffFetchFailed extends BaseError {
   public name = 'StaffFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch all the Staff members',
     properties?: Record<string, unknown>
   ) {
@@ -461,7 +461,7 @@ export class StaffFetchFailed extends BaseError {
 
 export class StaffFetchOneFailed extends BaseError {
   public name = 'StaffFetchOneFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the Staff member',
     properties?: Record<string, unknown>
   ) {
@@ -472,7 +472,7 @@ export class StaffFetchOneFailed extends BaseError {
 
 export class StaffPutFailed extends BaseError {
   public name = 'StaffPutFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not alter the Staff member',
     properties?: Record<string, unknown>
   ) {
@@ -483,7 +483,7 @@ export class StaffPutFailed extends BaseError {
 
 export class StaffDeleteFailed extends BaseError {
   public name = 'StaffDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete the Staff member',
     properties?: Record<string, unknown>
   ) {
@@ -494,7 +494,7 @@ export class StaffDeleteFailed extends BaseError {
 
 export class StaffMemberCreateFailed extends BaseError {
   public name = 'StaffMemberCreateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create the Staff member',
     properties?: Record<string, unknown>
   ) {
@@ -505,7 +505,7 @@ export class StaffMemberCreateFailed extends BaseError {
 
 export class StaffPinGetFailed extends BaseError {
   public name = 'StaffPinGetFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get a unique Staff pin number',
     properties?: Record<string, unknown>
   ) {
@@ -516,7 +516,7 @@ export class StaffPinGetFailed extends BaseError {
 
 export class StaffNumberGetFailed extends BaseError {
   public name = 'StaffNumberGetFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get a unique Staff number',
     properties?: Record<string, unknown>
   ) {
@@ -527,7 +527,7 @@ export class StaffNumberGetFailed extends BaseError {
 
 export class MakeUserStaffFailed extends BaseError {
   public name = 'MakeUserStaffFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not make the staff member a user',
     properties?: Record<string, unknown>
   ) {
@@ -537,7 +537,7 @@ export class MakeUserStaffFailed extends BaseError {
 }
 export class StaffMetaFailed extends BaseError {
   public name = 'StaffMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get meta of staff',
     properties?: Record<string, unknown>
   ) {
@@ -547,7 +547,7 @@ export class StaffMetaFailed extends BaseError {
 }
 export class StaffSearchFailed extends BaseError {
   public name = 'StaffSearchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not search for staff',
     properties?: Record<string, unknown>
   ) {
