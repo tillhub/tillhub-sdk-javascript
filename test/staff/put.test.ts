@@ -16,7 +16,8 @@ const staffId = 'asdf5566'
 const updateObject = {
   firstname: 'Charlie',
   lastname: 'Chaplin',
-  pin: 1234
+  pin: 1234,
+  services: null
 }
 
 describe('v0: Staff: can alter the Staff member', () => {

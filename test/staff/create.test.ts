@@ -34,7 +34,8 @@ const staffMember = {
   staff_number: 7894,
   discounts: {},
   short_code: 7894,
-  default: true
+  default: true,
+  services: null
 }
 
 describe('v0: Staff: can create one staff member', () => {
