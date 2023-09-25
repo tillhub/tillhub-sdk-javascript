@@ -132,7 +132,7 @@ export interface SearchQuery {
 }
 
 export interface StaffServicesResponse {
-  data: ServicesObject[]
+  data: ServicesObject[] | null
   metadata: { count: number }
 }
 export class Staff extends ThBaseHandler {
@@ -376,7 +376,7 @@ export class Staff extends ThBaseHandler {
 
       return {
         data: response.data.results,
-        metadata: { count: response.data.results.length }
+        metadata: { count: response.data.results?.length ?? 0 }
       }
     } catch (error: any) {
       throw new StaffFetchFailed(error.message, { error })
