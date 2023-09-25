@@ -3,6 +3,7 @@ import { Client } from '../client'
 import { BaseError } from '../errors'
 import { UriHelper, HandlerQuery } from '../uri-helper'
 import { ThBaseHandler } from '../base'
+import { ServicesObject } from './services'
 
 export interface StaffOptions {
   user?: string
@@ -110,6 +111,7 @@ export interface StaffMember {
   short_code?: number
   locations?: string[]
   default?: boolean
+  services: null | string[]
 }
 
 export interface StaffItem {
@@ -129,6 +131,10 @@ export interface SearchQuery {
   fields?: string[]
 }
 
+export interface StaffServicesResponse {
+  data: ServicesObject[] | null
+  metadata: { count: number }
+}
 export class Staff extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/staff'
   endpoint: string
@@ -194,7 +200,9 @@ export class Staff extends ThBaseHandler {
     const uri = this.uriHelper.generateBaseUri(`/${staffId}`)
     try {
       const response = await this.http.getClient().get(uri)
-      if (response.status !== 200) { throw new StaffFetchOneFailed(undefined, { status: response.status }) }
+      if (response.status !== 200) {
+        throw new StaffFetchOneFailed(undefined, { status: response.status })
+      }
 
       return {
         data: response.data.results[0] as StaffMember,
@@ -212,7 +220,9 @@ export class Staff extends ThBaseHandler {
     const uri = this.uriHelper.generateBaseUri(`/${staffId}`)
     try {
       const response = await this.http.getClient().get(uri)
-      if (response.status !== 200) { throw new StaffFetchOneFailed(undefined, { status: response.status }) }
+      if (response.status !== 200) {
+        throw new StaffFetchOneFailed(undefined, { status: response.status })
+      }
 
       return {
         data: response.data.results[0] as StaffMember,
@@ -228,7 +238,9 @@ export class Staff extends ThBaseHandler {
     const uri = this.uriHelper.generateBaseUri(`/${staffId}`)
     try {
       const response = await this.http.getClient().put(uri, staff)
-      if (response.status !== 200) { throw new StaffPutFailed(undefined, { status: response.status }) }
+      if (response.status !== 200) {
+        throw new StaffPutFailed(undefined, { status: response.status })
+      }
 
       return {
         data: response.data.results[0] as StaffMember,
@@ -243,7 +255,9 @@ export class Staff extends ThBaseHandler {
     const uri = this.uriHelper.generateBaseUri(`/${staffId}`)
     try {
       const response = await this.http.getClient().delete(uri)
-      if (response.status !== 200) { throw new StaffDeleteFailed(undefined, { status: response.status }) }
+      if (response.status !== 200) {
+        throw new StaffDeleteFailed(undefined, { status: response.status })
+      }
 
       return { msg: response.data.msg }
     } catch (error: any) {
@@ -326,12 +340,12 @@ export class Staff extends ThBaseHandler {
           let currValue = curr[key]
           if (key === 'phonenumbers' && currValue) {
             currValue =
-                currValue.mobile ||
-                currValue.main ||
-                currValue.home ||
-                currValue.work ||
-                currValue.any ||
-                null
+              currValue.mobile ||
+              currValue.main ||
+              currValue.home ||
+              currValue.work ||
+              currValue.any ||
+              null
           }
           if (currValue && !obj[key].includes(currValue)) {
             obj[key].push(currValue)
@@ -343,6 +357,26 @@ export class Staff extends ThBaseHandler {
       return {
         data: list,
         metadata: { resources: resources }
+      }
+    } catch (error: any) {
+      throw new StaffFetchFailed(error.message, { error })
+    }
+  }
+
+  async getServices (staffId: string): Promise<StaffServicesResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri(`/${staffId}/services`)
+      const uri = this.uriHelper.generateUriWithQuery(base)
+
+      const response = await this.http.getClient().get(uri)
+
+      if (response.status !== 200) {
+        throw new StaffFetchFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.results?.length ?? 0 }
       }
     } catch (error: any) {
       throw new StaffFetchFailed(error.message, { error })
@@ -400,7 +434,9 @@ export class Staff extends ThBaseHandler {
 
     try {
       const response = await this.http.getClient().get(uri)
-      if (response.status !== 200) { throw new StaffSearchFailed(undefined, { status: response.status }) }
+      if (response.status !== 200) {
+        throw new StaffSearchFailed(undefined, { status: response.status })
+      }
 
       return {
         data: response.data.results,

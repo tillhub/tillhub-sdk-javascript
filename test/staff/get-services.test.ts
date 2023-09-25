@@ -13,15 +13,20 @@ afterEach(() => {
 })
 
 const staffId = 'asdf5566'
-const updateObject = {
-  firstname: 'Charlie',
-  lastname: 'Chaplin',
-  pin: 1234,
-  services: null
-}
+const services = [
+  {
+    name: 'service name',
+    category: null,
+    duration: 35,
+    description: 'description',
+    linked_product: '0f20c60f-2ed9-4685-8cd1-23970071f7eb',
+    id: '0f20c60f-2ed9-4685-8cd1-23970071f7eb',
+    deleted: false
+  }
+]
 
-describe('v0: Staff: can alter the Staff member', () => {
-  it("Tillhub's staff are instantiable", async () => {
+describe('v0: Staff: can get services', () => {
+  it('Can get services for existing staff member', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
@@ -36,26 +41,28 @@ describe('v0: Staff: can alter the Staff member', () => {
         ]
       })
 
-      mock.onPut(`https://api.tillhub.com/api/v0/staff/${legacyId}/${staffId}`).reply(() => {
-        return [
-          200,
-          {
-            count: 1,
-            results: [updateObject]
-          }
-        ]
-      })
+      mock
+        .onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/${staffId}/services`)
+        .reply(() => {
+          return [
+            200,
+            {
+              count: 1,
+              results: services
+            }
+          ]
+        })
     }
 
     const th = await initThInstance()
 
-    const staff = th.staff()
+    const Staff = th.staff()
 
-    expect(staff).toBeInstanceOf(v0.Staff)
+    expect(Staff).toBeInstanceOf(v0.Staff)
 
-    const { data } = await staff.put(staffId, updateObject)
+    const { data } = await Staff.getServices(staffId)
 
-    expect(data).toMatchObject(updateObject)
+    expect(data).toMatchObject(services)
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -72,17 +79,17 @@ describe('v0: Staff: can alter the Staff member', () => {
           }
         ]
       })
-      mock.onPut(`https://api.tillhub.com/api/v0/staff/${legacyId}/${staffId}`).reply(() => {
+
+      mock.onGet(`https://api.tillhub.com/api/v0/staff/${legacyId}/${staffId}`).reply(() => {
         return [205]
       })
     }
 
-    const th = await initThInstance()
-
     try {
-      await th.staff().put(staffId, updateObject)
+      const th = await initThInstance()
+      await th.staff().getServices(staffId)
     } catch (err: any) {
-      expect(err.name).toBe('StaffPutFailed')
+      expect(err.name).toBe('StaffFetchFailed')
     }
   })
 })
