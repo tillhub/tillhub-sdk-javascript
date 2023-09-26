@@ -150,6 +150,7 @@ export class ConsignmentNotesMetaFailed extends BaseError {
     Object.setPrototypeOf(this, ConsignmentNotesMetaFailed.prototype)
   }
 }
+
 class ConsignmentNotesPdfFailed extends BaseError {
   public name = 'ConsignmentNotesPdfFailed'
   constructor (
