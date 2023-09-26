@@ -2,6 +2,7 @@ import { Client } from '../client';
 import { BaseError } from '../errors';
 import { UriHelper, HandlerQuery } from '../uri-helper';
 import { ThBaseHandler } from '../base';
+import { ServicesObject } from './services';
 export interface StaffOptions {
     user?: string;
     base?: string;
@@ -95,6 +96,7 @@ export interface StaffMember {
     short_code?: number;
     locations?: string[];
     default?: boolean;
+    services: null | string[];
 }
 export interface StaffItem {
     staff_number?: string;
@@ -109,6 +111,12 @@ export interface MakeUserRequest {
 export interface SearchQuery {
     q: string;
     fields?: string[];
+}
+export interface StaffServicesResponse {
+    data: ServicesObject[] | null;
+    metadata: {
+        count: number;
+    };
 }
 export declare class Staff extends ThBaseHandler {
     static baseEndpoint: string;
@@ -126,6 +134,7 @@ export declare class Staff extends ThBaseHandler {
     getPin(providedPin?: PinRequest): Promise<StaffMemberResponse>;
     getStaffNumber(providedStaffNumber?: StaffNumberRequest): Promise<StaffMemberResponse>;
     getFilters(queryOrOptions?: StaffQueryOrOptions): Promise<StaffResponse>;
+    getServices(staffId: string): Promise<StaffServicesResponse>;
     makeUser(staffID: string, makeUserObj: MakeUserRequest): Promise<StaffMemberResponse>;
     meta(query?: StaffQueryOrOptions | undefined): Promise<StaffMemberResponse>;
     search(query: string | SearchQuery): Promise<StaffMemberResponse>;

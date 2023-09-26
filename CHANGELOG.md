@@ -1,3 +1,10 @@
+# [4.92.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.91.0...v4.92.0) (2023-09-26)
+
+
+### Features
+
+* **release:** trying to release ([2d5569a](https://github.com/tillhub/tillhub-sdk-javascript/commit/2d5569a3bb92aa4af9b983ed5f19873c0a65194e))
+
 # [4.91.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.90.0...v4.91.0) (2023-09-12)
 
 

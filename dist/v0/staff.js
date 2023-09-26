@@ -316,9 +316,37 @@ var Staff = (function (_super) {
             });
         });
     };
+    Staff.prototype.getServices = function (staffId) {
+        var _a, _b;
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_10;
+            return tslib_1.__generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri("/" + staffId + "/services");
+                        uri = this.uriHelper.generateUriWithQuery(base);
+                        return [4, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _c.sent();
+                        if (response.status !== 200) {
+                            throw new StaffFetchFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results,
+                                metadata: { count: (_b = (_a = response.data.results) === null || _a === void 0 ? void 0 : _a.length) !== null && _b !== void 0 ? _b : 0 }
+                            }];
+                    case 2:
+                        error_10 = _c.sent();
+                        throw new StaffFetchFailed(error_10.message, { error: error_10 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
     Staff.prototype.makeUser = function (staffID, makeUserObj) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, response, error_10;
+            var base, response, error_11;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -336,8 +364,8 @@ var Staff = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_10 = _a.sent();
-                        throw new MakeUserStaffFailed(error_10.message, { error: error_10 });
+                        error_11 = _a.sent();
+                        throw new MakeUserStaffFailed(error_11.message, { error: error_11 });
                     case 4: return [2];
                 }
             });
@@ -345,7 +373,7 @@ var Staff = (function (_super) {
     };
     Staff.prototype.meta = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_11;
+            var base, uri, response, error_12;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -368,8 +396,8 @@ var Staff = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_11 = _a.sent();
-                        throw new StaffMetaFailed(error_11.message, { error: error_11 });
+                        error_12 = _a.sent();
+                        throw new StaffMetaFailed(error_12.message, { error: error_12 });
                     case 4: return [2];
                 }
             });
@@ -377,7 +405,7 @@ var Staff = (function (_super) {
     };
     Staff.prototype.search = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, base, response, error_12;
+            var uri, base, response, error_13;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -405,8 +433,8 @@ var Staff = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_12 = _a.sent();
-                        throw new StaffSearchFailed(error_12.message, { error: error_12 });
+                        error_13 = _a.sent();
+                        throw new StaffSearchFailed(error_13.message, { error: error_13 });
                     case 4: return [2];
                 }
             });
