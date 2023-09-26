@@ -1,7 +1,0 @@
-{
-  "release": {
-    "parserOpts": {
-      "mergePattern": "/^Merge pull request #(\\d+) from (.*)$/"
-    }
-  }
-}
