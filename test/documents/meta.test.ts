@@ -23,7 +23,7 @@ const query = {
   documentNumber: '123'
 }
 
-function queryString() {
+function queryString () {
   return qs.stringify(query)
 }
 
