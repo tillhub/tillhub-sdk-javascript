@@ -40,7 +40,7 @@ describe('v0: documents: can get all', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/purchase-orders/${legacyId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/documents/${legacyId}`).reply(() => {
         return [
           200,
           {
@@ -91,7 +91,7 @@ describe('v0: documents: can get all', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/purchase-orders/${legacyId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/documents/${legacyId}`).reply(() => {
         return [205]
       })
     }
