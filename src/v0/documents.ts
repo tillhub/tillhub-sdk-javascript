@@ -31,7 +31,7 @@ export class Documents extends ThBaseHandler {
   public options: DocumentsOptions
   public uriHelper: UriHelper
 
-  constructor(options: DocumentsOptions, http: Client) {
+  constructor (options: DocumentsOptions, http: Client) {
     super(http, {
       endpoint: Documents.baseEndpoint,
       base: options.base ?? 'https://api.tillhub.com'
@@ -44,7 +44,7 @@ export class Documents extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async getAll(query?: Record<string, unknown>): Promise<DocumentsMultipleResponse> {
+  async getAll (query?: Record<string, unknown>): Promise<DocumentsMultipleResponse> {
     let next
 
     try {
@@ -74,7 +74,7 @@ export class Documents extends ThBaseHandler {
 
 export class DocumentsGetFailed extends BaseError {
   public name = 'DocumentsGetFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get document',
     properties?: Record<string, unknown>
   ) {
