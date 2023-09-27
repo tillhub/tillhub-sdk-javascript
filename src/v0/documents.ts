@@ -8,10 +8,6 @@ export interface DocumentsOptions {
   base?: string
 }
 
-export interface DocumentsMetaQuery {
-  documentNumber?: string
-}
-
 export interface DocumentsMultipleResponse {
   data: Document[]
   metadata?: Record<string, unknown>
@@ -75,9 +71,9 @@ export class Documents extends ThBaseHandler {
     }
   }
 
-  async meta (q?: DocumentsMetaQuery | undefined): Promise<DocumentsMultipleResponse> {
+  async meta (query?: Record<string, unknown>): Promise<DocumentsMultipleResponse> {
     const base = this.uriHelper.generateBaseUri('/meta')
-    const uri = this.uriHelper.generateUriWithQuery(base, q)
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
     try {
       const response = await this.http.getClient().get(uri)
       if (response.status !== 200) {

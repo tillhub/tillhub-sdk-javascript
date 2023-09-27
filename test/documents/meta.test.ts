@@ -1,4 +1,3 @@
-import qs from 'qs'
 import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
@@ -17,14 +16,6 @@ if (process.env.SYSTEM_TEST) {
   user.password = process.env.SYSTEM_TEST_PASSWORD ?? user.password
   user.clientAccount = process.env.SYSTEM_TEST_CLIENT_ACCOUNT_ID ?? user.clientAccount
   user.apiKey = process.env.SYSTEM_TEST_API_KEY ?? user.apiKey
-}
-
-const query = {
-  documentNumber: '123'
-}
-
-function queryString () {
-  return qs.stringify(query)
 }
 
 const legacyId = '4564'
@@ -50,16 +41,14 @@ describe('v0: Documents: can get count number of all documents', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/documents/${legacyId}/meta?${queryString()}`)
-        .reply(() => {
-          return [
-            200,
-            {
-              results: [{ count: 50 }]
-            }
-          ]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/documents/${legacyId}/meta`).reply(() => {
+        return [
+          200,
+          {
+            results: [{ count: 50 }]
+          }
+        ]
+      })
     }
 
     const options = {
@@ -82,7 +71,7 @@ describe('v0: Documents: can get count number of all documents', () => {
 
     expect(documents).toBeInstanceOf(v0.Documents)
 
-    const { data } = await documents.meta(query)
+    const { data } = await documents.meta()
 
     expect(data).toEqual({ count: 50 })
   })
@@ -102,11 +91,9 @@ describe('v0: Documents: can get count number of all documents', () => {
         ]
       })
 
-      mock
-        .onGet(`https://api.tillhub.com/api/v0/documents/${legacyId}/meta?${queryString()}`)
-        .reply(() => {
-          return [302]
-        })
+      mock.onGet(`https://api.tillhub.com/api/v0/documents/${legacyId}/meta`).reply(() => {
+        return [302]
+      })
     }
 
     const options = {
@@ -126,7 +113,7 @@ describe('v0: Documents: can get count number of all documents', () => {
     })
 
     try {
-      await th.documents().meta(query)
+      await th.documents().meta()
     } catch (err: any) {
       expect(err.name).toBe('DocumentsMetaFailed')
     }
