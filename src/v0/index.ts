@@ -71,6 +71,7 @@ import { PurchaseOrders } from './purchase_orders'
 import { ServiceCategory } from './service_category'
 import { Services } from './services'
 import { ConsignmentNotes } from './consignment_notes'
+import { Documents } from './documents'
 
 export {
   Auth,
@@ -148,5 +149,6 @@ export {
   PurchaseOrders,
   ServiceCategory,
   Services,
-  ConsignmentNotes
+  ConsignmentNotes,
+  Documents
 }
