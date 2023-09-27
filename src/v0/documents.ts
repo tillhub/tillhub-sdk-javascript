@@ -8,6 +8,10 @@ export interface DocumentsOptions {
   base?: string
 }
 
+export interface DocumentsMetaQuery {
+  documentNumber?: string
+}
+
 export interface DocumentsMultipleResponse {
   data: Document[]
   metadata?: Record<string, unknown>
@@ -31,7 +35,7 @@ export class Documents extends ThBaseHandler {
   public options: DocumentsOptions
   public uriHelper: UriHelper
 
-  constructor (options: DocumentsOptions, http: Client) {
+  constructor(options: DocumentsOptions, http: Client) {
     super(http, {
       endpoint: Documents.baseEndpoint,
       base: options.base ?? 'https://api.tillhub.com'
@@ -44,7 +48,7 @@ export class Documents extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async getAll (query?: Record<string, unknown>): Promise<DocumentsMultipleResponse> {
+  async getAll(query?: Record<string, unknown>): Promise<DocumentsMultipleResponse> {
     let next
 
     try {
@@ -70,15 +74,47 @@ export class Documents extends ThBaseHandler {
       throw new DocumentsGetFailed(error.message, { error })
     }
   }
+
+  async meta(q?: DocumentsMetaQuery | undefined): Promise<DocumentsMultipleResponse> {
+    const base = this.uriHelper.generateBaseUri('/meta')
+    const uri = this.uriHelper.generateUriWithQuery(base, q)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new DocumentsMetaFailed(undefined, { status: response.status })
+      }
+      if (!response.data.results[0]) {
+        throw new DocumentsMetaFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new DocumentsMetaFailed(error.message, { error })
+    }
+  }
 }
 
 export class DocumentsGetFailed extends BaseError {
   public name = 'DocumentsGetFailed'
-  constructor (
+  constructor(
     public message: string = 'Could not get document',
     properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, DocumentsGetFailed.prototype)
+  }
+}
+
+export class DocumentsMetaFailed extends BaseError {
+  public name = 'DocumentsMetaFailed'
+  constructor(
+    public message: string = 'Could not get documents metadata',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, DocumentsMetaFailed.prototype)
   }
 }
