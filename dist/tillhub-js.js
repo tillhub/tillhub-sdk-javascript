@@ -549,6 +549,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.consignmentNotes = function () {
         return this.generateAuthenticatedInstance(v0.ConsignmentNotes);
     };
+    TillhubClient.prototype.documents = function () {
+        return this.generateAuthenticatedInstance(v0.Documents);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));

@@ -1,3 +1,15 @@
+# [4.93.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.92.0...v4.93.0) (2023-09-28)
+
+
+### Features
+
+* **document management:** add documents entity and the getAll endpoint ([9d9dd21](https://github.com/tillhub/tillhub-sdk-javascript/commit/9d9dd2144631825deaf4c7fd35bb839a44985139))
+* **document management:** add meta method ([31302e9](https://github.com/tillhub/tillhub-sdk-javascript/commit/31302e9d1e59e88bf9ae534b59f17384ef9300f0))
+* **document management:** address code review comments ([591575c](https://github.com/tillhub/tillhub-sdk-javascript/commit/591575c016c6fde2c572440e8c415ea4bbb40941))
+* **document management:** fix failing unit test ([a96b20e](https://github.com/tillhub/tillhub-sdk-javascript/commit/a96b20e1c4a7b55afcdc37bea661753061c2acc4))
+* **document management:** fix linting issue ([503c6b9](https://github.com/tillhub/tillhub-sdk-javascript/commit/503c6b91d061f519e1263ef81d5de4d378ba11f2))
+* **document management:** fix linting issue ([c615f0c](https://github.com/tillhub/tillhub-sdk-javascript/commit/c615f0c7e17f5ea12432c5e66880f84521ec4be5))
+
 # [4.92.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.91.0...v4.92.0) (2023-09-26)
 
 
