@@ -1232,6 +1232,14 @@ export class TillhubClient extends events.EventEmitter {
   consignmentNotes (): v0.ConsignmentNotes {
     return this.generateAuthenticatedInstance(v0.ConsignmentNotes)
   }
+
+  /**
+   * Create an authenticated Documents instance
+   *
+   */
+  documents (): v0.Documents {
+    return this.generateAuthenticatedInstance(v0.Documents)
+  }
 }
 
 export class Tillhub extends TillhubClient {
