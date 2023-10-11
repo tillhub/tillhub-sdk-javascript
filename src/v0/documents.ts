@@ -24,6 +24,16 @@ export interface Document {
   expireDate: string | null
 }
 
+export interface DocumentsSendQuery {
+  partnerName: string
+  recipients: string[]
+}
+
+export interface DocumentsSendResponse {
+  data: Document
+  msg: string
+}
+
 export class Documents extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/documents'
   endpoint: string
@@ -91,6 +101,22 @@ export class Documents extends ThBaseHandler {
       throw new DocumentsMetaFailed(error.message, { error })
     }
   }
+
+  async send (documentId: string, sendQuery: DocumentsSendQuery): Promise<DocumentsSendResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri(`/${documentId}/send`)
+      const uri = this.uriHelper.generateUriWithQuery(base)
+
+      const response = await this.http.getClient().post(uri, sendQuery)
+
+      return {
+        data: response.data.results[0],
+        msg: response.data.msg
+      }
+    } catch (error: any) {
+      throw new DocumentsSendFailed(error.message)
+    }
+  }
 }
 
 export class DocumentsGetFailed extends BaseError {
@@ -112,5 +138,16 @@ export class DocumentsMetaFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, DocumentsMetaFailed.prototype)
+  }
+}
+
+export class DocumentsSendFailed extends BaseError {
+  public name = 'DocumentsSendFailed'
+  constructor (
+    public message: string = 'Could not send email',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, DocumentsSendFailed.prototype)
   }
 }
