@@ -15,13 +15,11 @@ export interface DocumentsMultipleResponse {
 }
 
 export interface Document {
-  id: string
   createdAt?: string
-  createdBy?: string
+  documentNumber: string
   documentType: string
-  filter: Record<string, any>
-  location: string | null
-  expireDate: string | null
+  id: string
+  updatedAt?: string
 }
 
 export interface DocumentsSendQuery {
