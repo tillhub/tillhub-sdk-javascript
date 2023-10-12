@@ -28,6 +28,11 @@ export interface DocumentsSendResponse {
     };
     msg: string;
 }
+export interface DocumentsDownloadResponse {
+    data?: string;
+    contentType?: string;
+    filename?: string;
+}
 export declare class Documents extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
@@ -38,6 +43,7 @@ export declare class Documents extends ThBaseHandler {
     getAll(query?: Record<string, unknown>): Promise<DocumentsMultipleResponse>;
     meta(query?: Record<string, unknown>): Promise<DocumentsMultipleResponse>;
     send(documentId: string, sendQuery: DocumentsSendQuery): Promise<DocumentsSendResponse>;
+    download(documentId: string): Promise<DocumentsDownloadResponse>;
 }
 export declare class DocumentsGetFailed extends BaseError {
     message: string;
@@ -50,6 +56,11 @@ export declare class DocumentsMetaFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class DocumentsSendFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class DocumentsDownloadFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

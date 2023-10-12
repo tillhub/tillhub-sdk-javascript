@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DocumentsSendFailed = exports.DocumentsMetaFailed = exports.DocumentsGetFailed = exports.Documents = void 0;
+exports.DocumentsDownloadFailed = exports.DocumentsSendFailed = exports.DocumentsMetaFailed = exports.DocumentsGetFailed = exports.Documents = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -111,6 +111,32 @@ var Documents = (function (_super) {
             });
         });
     };
+    Documents.prototype.download = function (documentId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, pdfObj, error_4;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri("/" + documentId + "/download");
+                        uri = this.uriHelper.generateUriWithQuery(base);
+                        return [4, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        pdfObj = response.data.results[0];
+                        return [2, {
+                                data: pdfObj.base64Content,
+                                contentType: pdfObj.contentType,
+                                filename: pdfObj.fileName
+                            }];
+                    case 2:
+                        error_4 = _a.sent();
+                        throw new DocumentsDownloadFailed(error_4.message);
+                    case 3: return [2];
+                }
+            });
+        });
+    };
     Documents.baseEndpoint = '/api/v0/documents';
     return Documents;
 }(base_1.ThBaseHandler));
@@ -154,4 +180,17 @@ var DocumentsSendFailed = (function (_super) {
     return DocumentsSendFailed;
 }(errors_1.BaseError));
 exports.DocumentsSendFailed = DocumentsSendFailed;
+var DocumentsDownloadFailed = (function (_super) {
+    tslib_1.__extends(DocumentsDownloadFailed, _super);
+    function DocumentsDownloadFailed(message, properties) {
+        if (message === void 0) { message = 'Could not download file'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'DocumentsDownloadFailed';
+        Object.setPrototypeOf(_this, DocumentsDownloadFailed.prototype);
+        return _this;
+    }
+    return DocumentsDownloadFailed;
+}(errors_1.BaseError));
+exports.DocumentsDownloadFailed = DocumentsDownloadFailed;
 //# sourceMappingURL=documents.js.map

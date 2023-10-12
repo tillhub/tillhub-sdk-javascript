@@ -1,3 +1,10 @@
+# [4.95.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.94.0...v4.95.0) (2023-10-12)
+
+
+### Features
+
+* **documents:** add download method ([9d3471e](https://github.com/tillhub/tillhub-sdk-javascript/commit/9d3471eac556a40ac183cd367949695ac30238ca))
+
 # [4.94.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.93.0...v4.94.0) (2023-10-12)
 
 
