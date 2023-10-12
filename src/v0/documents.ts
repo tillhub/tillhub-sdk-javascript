@@ -28,8 +28,7 @@ export interface DocumentsSendQuery {
 }
 
 export interface DocumentsSendResponse {
-  data: Document
-  msg: string
+  success: boolean
 }
 
 export class Documents extends ThBaseHandler {
@@ -108,8 +107,7 @@ export class Documents extends ThBaseHandler {
       const response = await this.http.getClient().post(uri, sendQuery)
 
       return {
-        data: response.data.results[0],
-        msg: response.data.msg
+        success: response.data.success
       }
     } catch (error: any) {
       throw new DocumentsSendFailed(error.message)

@@ -13,13 +13,6 @@ afterEach(() => {
 })
 
 const documentId = 'f8314183-8199-4cb7-b152-04f6ad4ebc7e'
-const document = {
-  createdAt: '2023-03-13T11:21:47.296Z',
-  documentNumber: 'DN-002',
-  documentType: 'PurchaseOrder',
-  id: 'test',
-  updatedAt: '2023-03-13T11:21:47.296Z'
-}
 const documentPayload = { partnerName: 'Unzer', recipients: ['fake@email.com'] }
 
 describe('v0: Documents: can send emails', () => {
@@ -44,7 +37,7 @@ describe('v0: Documents: can send emails', () => {
           return [
             200,
             {
-              results: [document]
+              success: true
             }
           ]
         })
@@ -56,8 +49,8 @@ describe('v0: Documents: can send emails', () => {
 
     expect(documents).toBeInstanceOf(v0.Documents)
 
-    const { data } = await documents.send(documentId, documentPayload)
-    expect(data).toMatchObject(document)
+    const { success } = await documents.send(documentId, documentPayload)
+    expect(success).toBe(true)
   })
 
   it('rejects on status codes that are not 200', async () => {
