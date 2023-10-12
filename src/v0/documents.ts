@@ -32,6 +32,12 @@ export interface DocumentsSendResponse {
   msg: string
 }
 
+export interface DocumentsDownloadResponse {
+  data?: string
+  contentType?: string
+  filename?: string
+}
+
 export class Documents extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/documents'
   endpoint: string
@@ -115,6 +121,24 @@ export class Documents extends ThBaseHandler {
       throw new DocumentsSendFailed(error.message)
     }
   }
+
+  async download (documentId: string): Promise<DocumentsDownloadResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri(`/${documentId}/download`)
+      const uri = this.uriHelper.generateUriWithQuery(base)
+
+      const response = await this.http.getClient().get(uri)
+      const pdfObj = response.data.results[0]
+
+      return {
+        data: pdfObj.base64Content,
+        contentType: pdfObj.contentType,
+        filename: pdfObj.fileName
+      }
+    } catch (error: any) {
+      throw new DocumentsDownloadFailed(error.message)
+    }
+  }
 }
 
 export class DocumentsGetFailed extends BaseError {
@@ -147,5 +171,16 @@ export class DocumentsSendFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, DocumentsSendFailed.prototype)
+  }
+}
+
+export class DocumentsDownloadFailed extends BaseError {
+  public name = 'DocumentsDownloadFailed'
+  constructor (
+    public message: string = 'Could not download file',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, DocumentsDownloadFailed.prototype)
   }
 }
