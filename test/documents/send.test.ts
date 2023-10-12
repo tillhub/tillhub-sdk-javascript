@@ -51,7 +51,7 @@ describe('v0: Documents: can send emails', () => {
     expect(documents).toBeInstanceOf(v0.Documents)
 
     const { data } = await documents.send(documentId, documentPayload)
-    expect(data).toBe(responseData)
+    expect(data).toMatchObject(responseData)
   })
 
   it('rejects on status codes that are not 200', async () => {
