@@ -12,13 +12,21 @@ export interface DocumentsMultipleResponse {
     next?: () => Promise<DocumentsMultipleResponse>;
 }
 export interface Document {
-    id: string;
     createdAt?: string;
-    createdBy?: string;
+    documentNumber: string;
     documentType: string;
-    filter: Record<string, any>;
-    location: string | null;
-    expireDate: string | null;
+    id: string;
+    updatedAt?: string;
+}
+export interface DocumentsSendQuery {
+    partnerName: string;
+    recipients: string[];
+}
+export interface DocumentsSendResponse {
+    data: {
+        success: true;
+    };
+    msg: string;
 }
 export declare class Documents extends ThBaseHandler {
     static baseEndpoint: string;
@@ -29,6 +37,7 @@ export declare class Documents extends ThBaseHandler {
     constructor(options: DocumentsOptions, http: Client);
     getAll(query?: Record<string, unknown>): Promise<DocumentsMultipleResponse>;
     meta(query?: Record<string, unknown>): Promise<DocumentsMultipleResponse>;
+    send(documentId: string, sendQuery: DocumentsSendQuery): Promise<DocumentsSendResponse>;
 }
 export declare class DocumentsGetFailed extends BaseError {
     message: string;
@@ -36,6 +45,11 @@ export declare class DocumentsGetFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class DocumentsMetaFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class DocumentsSendFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

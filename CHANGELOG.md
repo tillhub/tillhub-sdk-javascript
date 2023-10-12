@@ -1,3 +1,14 @@
+# [4.94.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.93.0...v4.94.0) (2023-10-12)
+
+
+### Features
+
+* **documents:** add send method ([c4361dc](https://github.com/tillhub/tillhub-sdk-javascript/commit/c4361dc0fd992894ca3cb4fe2339f28827701444))
+* **documents:** add tests ([f1f6392](https://github.com/tillhub/tillhub-sdk-javascript/commit/f1f63925749efcd6f5c3f057e8b4a7f0c0dcaf2f))
+* **documents:** fix unit tests ([74f28e2](https://github.com/tillhub/tillhub-sdk-javascript/commit/74f28e2e793897ce5114060326ec342bc7022824))
+* **documents:** update response ([6f3c411](https://github.com/tillhub/tillhub-sdk-javascript/commit/6f3c4113c0556a7fa0d4deac3bd2947dc7e52347))
+* **documents:** update response ([b6194ef](https://github.com/tillhub/tillhub-sdk-javascript/commit/b6194ef676bbcf10a5b15d5e2950e160bc93862c))
+
 # [4.93.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.92.0...v4.93.0) (2023-09-28)
 
 

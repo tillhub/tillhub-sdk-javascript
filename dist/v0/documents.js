@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DocumentsMetaFailed = exports.DocumentsGetFailed = exports.Documents = void 0;
+exports.DocumentsSendFailed = exports.DocumentsMetaFailed = exports.DocumentsGetFailed = exports.Documents = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -87,6 +87,30 @@ var Documents = (function (_super) {
             });
         });
     };
+    Documents.prototype.send = function (documentId, sendQuery) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_3;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri("/" + documentId + "/send");
+                        uri = this.uriHelper.generateUriWithQuery(base);
+                        return [4, this.http.getClient().post(uri, sendQuery)];
+                    case 1:
+                        response = _a.sent();
+                        return [2, {
+                                data: response.data.results[0],
+                                msg: response.data.msg
+                            }];
+                    case 2:
+                        error_3 = _a.sent();
+                        throw new DocumentsSendFailed(error_3.message);
+                    case 3: return [2];
+                }
+            });
+        });
+    };
     Documents.baseEndpoint = '/api/v0/documents';
     return Documents;
 }(base_1.ThBaseHandler));
@@ -117,4 +141,17 @@ var DocumentsMetaFailed = (function (_super) {
     return DocumentsMetaFailed;
 }(errors_1.BaseError));
 exports.DocumentsMetaFailed = DocumentsMetaFailed;
+var DocumentsSendFailed = (function (_super) {
+    tslib_1.__extends(DocumentsSendFailed, _super);
+    function DocumentsSendFailed(message, properties) {
+        if (message === void 0) { message = 'Could not send email'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'DocumentsSendFailed';
+        Object.setPrototypeOf(_this, DocumentsSendFailed.prototype);
+        return _this;
+    }
+    return DocumentsSendFailed;
+}(errors_1.BaseError));
+exports.DocumentsSendFailed = DocumentsSendFailed;
 //# sourceMappingURL=documents.js.map
