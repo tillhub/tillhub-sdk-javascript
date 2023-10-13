@@ -7,7 +7,6 @@ export interface HolidaysOptions {
   user?: string
   base?: string
 }
-
 export interface HolidaysResponse {
   msg?: string
   data?: Holiday[]
