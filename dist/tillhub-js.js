@@ -552,6 +552,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.documents = function () {
         return this.generateAuthenticatedInstance(v0.Documents);
     };
+    TillhubClient.prototype.holidays = function () {
+        return this.generateAuthenticatedInstance(v0.Holidays);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));

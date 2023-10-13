@@ -1,3 +1,10 @@
+# [4.96.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.95.0...v4.96.0) (2023-10-13)
+
+
+### Features
+
+* **holidays:** test trigger release ([f58a519](https://github.com/tillhub/tillhub-sdk-javascript/commit/f58a5193863a056c873f0db8f208a39643510e1b))
+
 # [4.95.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.94.0...v4.95.0) (2023-10-12)
 
 
