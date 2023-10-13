@@ -72,6 +72,7 @@ import { ServiceCategory } from './service_category'
 import { Services } from './services'
 import { ConsignmentNotes } from './consignment_notes'
 import { Documents } from './documents'
+import { Holidays } from './holidays'
 
 export {
   Auth,
@@ -150,5 +151,6 @@ export {
   ServiceCategory,
   Services,
   ConsignmentNotes,
-  Documents
+  Documents,
+  Holidays
 }
