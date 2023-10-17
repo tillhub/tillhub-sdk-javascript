@@ -27,6 +27,13 @@ export interface DocumentsSendQuery {
   recipients: string[]
 }
 
+export interface DocumentsPreviewResponse {
+  data: {
+    subject?: string
+    body?: string
+  }
+}
+
 export interface DocumentsSendResponse {
   data: { success: true }
   msg: string
@@ -106,6 +113,21 @@ export class Documents extends ThBaseHandler {
     }
   }
 
+  async preview (documentId: string): Promise<DocumentsPreviewResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri(`/${documentId}/preview`)
+      const uri = this.uriHelper.generateUriWithQuery(base)
+
+      const response = await this.http.getClient().get(uri)
+
+      return {
+        data: response.data.results[0]
+      }
+    } catch (error: any) {
+      throw new DocumentsPreviewFailed(error.message)
+    }
+  }
+
   async send (documentId: string, sendQuery: DocumentsSendQuery): Promise<DocumentsSendResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/${documentId}/send`)
@@ -160,6 +182,17 @@ export class DocumentsMetaFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, DocumentsMetaFailed.prototype)
+  }
+}
+
+class DocumentsPreviewFailed extends BaseError {
+  public name = 'DocumentsPreviewFailed'
+  constructor (
+    public message: string = 'Could not create preview',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, DocumentsPreviewFailed.prototype)
   }
 }
 
