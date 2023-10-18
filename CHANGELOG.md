@@ -1,3 +1,15 @@
+# [4.98.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.97.0...v4.98.0) (2023-10-18)
+
+
+### Bug Fixes
+
+* remove query from the meta endpoint ([e3cceb8](https://github.com/tillhub/tillhub-sdk-javascript/commit/e3cceb8e77030ae5efba72755db4d15deb90f34d))
+
+
+### Features
+
+* **order-transactions:** add a separate call for transactions meta data ([54f9a5e](https://github.com/tillhub/tillhub-sdk-javascript/commit/54f9a5e47beb2306c780aa91848c67a637658933))
+
 # [4.97.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.96.0...v4.97.0) (2023-10-18)
 
 

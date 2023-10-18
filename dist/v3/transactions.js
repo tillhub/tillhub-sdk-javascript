@@ -55,9 +55,36 @@ var Transactions = (function (_super) {
             });
         });
     };
-    Transactions.prototype.get = function (transactionId) {
+    Transactions.prototype.getAllMeta = function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_2;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        base = this.uriHelper.generateBaseUri();
+                        uri = this.uriHelper.generateUriWithQuery(base) + '/meta';
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        return [2, {
+                                results: response.data.count,
+                                msg: response.data.msg,
+                                status: response.data.status
+                            }];
+                    case 3:
+                        error_2 = _a.sent();
+                        throw new TransactionsFetchFailed(error_2.message, { error: error_2 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
+    Transactions.prototype.get = function (transactionId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -78,8 +105,8 @@ var Transactions = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_2 = _a.sent();
-                        throw new TransactionFetchFailed(error_2.message, { error: error_2 });
+                        error_3 = _a.sent();
+                        throw new TransactionFetchFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });
