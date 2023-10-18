@@ -15,6 +15,16 @@ export interface TransactionsResponse {
   next?: () => Promise<TransactionsResponse>
 }
 
+export interface TransactionsMetaResponse {
+  results?: MetaEntity[]
+  msg?: string
+  status?: number
+}
+
+export interface MetaEntity {
+  count?: number
+}
+
 export interface TransactionResponse {
   data: TransactionEntity
   metadata: Record<string, unknown>
@@ -301,6 +311,22 @@ export class Transactions extends ThBaseHandler {
         data: response.data.results as TransactionEntity[],
         metadata: { cursor: response.data.cursor },
         next
+      }
+    } catch (error: any) {
+      throw new TransactionsFetchFailed(error.message, { error })
+    }
+  }
+
+  async getAllMeta (): Promise<TransactionsMetaResponse> {
+    const base = this.uriHelper.generateBaseUri()
+    const uri = this.uriHelper.generateUriWithQuery(base) + '/meta'
+
+    try {
+      const response = await this.http.getClient().get(uri)
+      return {
+        results: response.data.count,
+        msg: response.data.msg,
+        status: response.data.status
       }
     } catch (error: any) {
       throw new TransactionsFetchFailed(error.message, { error })
