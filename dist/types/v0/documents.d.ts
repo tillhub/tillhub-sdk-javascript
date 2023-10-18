@@ -22,6 +22,12 @@ export interface DocumentsSendQuery {
     partnerName: string;
     recipients: string[];
 }
+export interface DocumentsPreviewResponse {
+    data: {
+        subject?: string;
+        body?: string;
+    };
+}
 export interface DocumentsSendResponse {
     data: {
         success: true;
@@ -42,6 +48,7 @@ export declare class Documents extends ThBaseHandler {
     constructor(options: DocumentsOptions, http: Client);
     getAll(query?: Record<string, unknown>): Promise<DocumentsMultipleResponse>;
     meta(query?: Record<string, unknown>): Promise<DocumentsMultipleResponse>;
+    preview(documentId: string): Promise<DocumentsPreviewResponse>;
     send(documentId: string, sendQuery: DocumentsSendQuery): Promise<DocumentsSendResponse>;
     download(documentId: string): Promise<DocumentsDownloadResponse>;
 }

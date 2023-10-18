@@ -87,9 +87,32 @@ var Documents = (function (_super) {
             });
         });
     };
-    Documents.prototype.send = function (documentId, sendQuery) {
+    Documents.prototype.preview = function (documentId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_3;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri("/" + documentId + "/preview");
+                        uri = this.uriHelper.generateUriWithQuery(base);
+                        return [4, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        return [2, {
+                                data: response.data.results[0]
+                            }];
+                    case 2:
+                        error_3 = _a.sent();
+                        throw new DocumentsPreviewFailed(error_3.message);
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    Documents.prototype.send = function (documentId, sendQuery) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -104,8 +127,8 @@ var Documents = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 2:
-                        error_3 = _a.sent();
-                        throw new DocumentsSendFailed(error_3.message);
+                        error_4 = _a.sent();
+                        throw new DocumentsSendFailed(error_4.message);
                     case 3: return [2];
                 }
             });
@@ -113,7 +136,7 @@ var Documents = (function (_super) {
     };
     Documents.prototype.download = function (documentId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, pdfObj, error_4;
+            var base, uri, response, pdfObj, error_5;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -130,8 +153,8 @@ var Documents = (function (_super) {
                                 filename: pdfObj.fileName
                             }];
                     case 2:
-                        error_4 = _a.sent();
-                        throw new DocumentsDownloadFailed(error_4.message);
+                        error_5 = _a.sent();
+                        throw new DocumentsDownloadFailed(error_5.message);
                     case 3: return [2];
                 }
             });
@@ -167,6 +190,18 @@ var DocumentsMetaFailed = (function (_super) {
     return DocumentsMetaFailed;
 }(errors_1.BaseError));
 exports.DocumentsMetaFailed = DocumentsMetaFailed;
+var DocumentsPreviewFailed = (function (_super) {
+    tslib_1.__extends(DocumentsPreviewFailed, _super);
+    function DocumentsPreviewFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create preview'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'DocumentsPreviewFailed';
+        Object.setPrototypeOf(_this, DocumentsPreviewFailed.prototype);
+        return _this;
+    }
+    return DocumentsPreviewFailed;
+}(errors_1.BaseError));
 var DocumentsSendFailed = (function (_super) {
     tslib_1.__extends(DocumentsSendFailed, _super);
     function DocumentsSendFailed(message, properties) {

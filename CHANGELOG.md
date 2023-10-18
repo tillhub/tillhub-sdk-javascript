@@ -1,3 +1,10 @@
+# [4.97.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.96.0...v4.97.0) (2023-10-18)
+
+
+### Features
+
+* **documents:** add preview method for documents ([3003fbf](https://github.com/tillhub/tillhub-sdk-javascript/commit/3003fbf4a59a435e01395364c46a0ceeb35acd38))
+
 # [4.96.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.95.0...v4.96.0) (2023-10-13)
 
 
