@@ -317,9 +317,9 @@ export class Transactions extends ThBaseHandler {
     }
   }
 
-  async getAllMeta (query?: TransactionsQueryHandler | undefined): Promise<TransactionsMetaResponse> {
+  async getAllMeta (): Promise<TransactionsMetaResponse> {
     const base = this.uriHelper.generateBaseUri()
-    const uri = this.uriHelper.generateUriWithQuery(base, query) + '/meta'
+    const uri = this.uriHelper.generateUriWithQuery(base) + '/meta'
 
     try {
       const response = await this.http.getClient().get(uri)
