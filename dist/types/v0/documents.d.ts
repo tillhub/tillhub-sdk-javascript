@@ -18,9 +18,12 @@ export interface Document {
     id: string;
     updatedAt?: string;
 }
-export interface DocumentsSendQuery {
+export interface DocumentsSendBody {
     partnerName: string;
     recipients: string[];
+}
+export interface DocumentsPreviewQuery {
+    partnerName: string;
 }
 export interface DocumentsPreviewResponse {
     data: {
@@ -48,8 +51,8 @@ export declare class Documents extends ThBaseHandler {
     constructor(options: DocumentsOptions, http: Client);
     getAll(query?: Record<string, unknown>): Promise<DocumentsMultipleResponse>;
     meta(query?: Record<string, unknown>): Promise<DocumentsMultipleResponse>;
-    preview(documentId: string): Promise<DocumentsPreviewResponse>;
-    send(documentId: string, sendQuery: DocumentsSendQuery): Promise<DocumentsSendResponse>;
+    preview(documentId: string, query: DocumentsPreviewQuery): Promise<DocumentsPreviewResponse>;
+    send(documentId: string, body: DocumentsSendBody): Promise<DocumentsSendResponse>;
     download(documentId: string): Promise<DocumentsDownloadResponse>;
 }
 export declare class DocumentsGetFailed extends BaseError {

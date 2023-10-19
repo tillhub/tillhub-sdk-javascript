@@ -1,3 +1,11 @@
+# [4.99.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.98.0...v4.99.0) (2023-10-19)
+
+
+### Features
+
+* **documents:** update preview method ([e855132](https://github.com/tillhub/tillhub-sdk-javascript/commit/e8551322a4d05b391865e9f75f35f633ec561851))
+* **documents:** update unit tests ([dd88041](https://github.com/tillhub/tillhub-sdk-javascript/commit/dd88041f450e4bc825bf2519599578fa74983ed3))
+
 # [4.98.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.97.0...v4.98.0) (2023-10-18)
 
 

@@ -87,7 +87,7 @@ var Documents = (function (_super) {
             });
         });
     };
-    Documents.prototype.preview = function (documentId) {
+    Documents.prototype.preview = function (documentId, query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
@@ -95,7 +95,7 @@ var Documents = (function (_super) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri("/" + documentId + "/preview");
-                        uri = this.uriHelper.generateUriWithQuery(base);
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         return [4, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
@@ -110,7 +110,7 @@ var Documents = (function (_super) {
             });
         });
     };
-    Documents.prototype.send = function (documentId, sendQuery) {
+    Documents.prototype.send = function (documentId, body) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
@@ -119,7 +119,7 @@ var Documents = (function (_super) {
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri("/" + documentId + "/send");
                         uri = this.uriHelper.generateUriWithQuery(base);
-                        return [4, this.http.getClient().post(uri, sendQuery)];
+                        return [4, this.http.getClient().post(uri, body)];
                     case 1:
                         response = _a.sent();
                         return [2, {
