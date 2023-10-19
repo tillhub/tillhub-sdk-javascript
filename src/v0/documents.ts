@@ -22,9 +22,13 @@ export interface Document {
   updatedAt?: string
 }
 
-export interface DocumentsSendQuery {
+export interface DocumentsSendBody {
   partnerName: string
   recipients: string[]
+}
+
+export interface DocumentsPreviewQuery {
+  partnerName: string
 }
 
 export interface DocumentsPreviewResponse {
@@ -113,10 +117,10 @@ export class Documents extends ThBaseHandler {
     }
   }
 
-  async preview (documentId: string): Promise<DocumentsPreviewResponse> {
+  async preview (documentId: string, query: DocumentsPreviewQuery): Promise<DocumentsPreviewResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/${documentId}/preview`)
-      const uri = this.uriHelper.generateUriWithQuery(base)
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri)
 
@@ -128,12 +132,12 @@ export class Documents extends ThBaseHandler {
     }
   }
 
-  async send (documentId: string, sendQuery: DocumentsSendQuery): Promise<DocumentsSendResponse> {
+  async send (documentId: string, body: DocumentsSendBody): Promise<DocumentsSendResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/${documentId}/send`)
       const uri = this.uriHelper.generateUriWithQuery(base)
 
-      const response = await this.http.getClient().post(uri, sendQuery)
+      const response = await this.http.getClient().post(uri, body)
 
       return {
         data: response.data.results[0],
