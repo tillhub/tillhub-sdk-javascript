@@ -22,13 +22,13 @@ export interface Document {
   updatedAt?: string
 }
 
-export interface DocumentsSendBody {
-  partnerName: string
-  recipients: string[]
-}
-
 export interface DocumentsPreviewQuery {
   partnerName: string
+}
+
+export interface DocumentsBulkPreviewBody {
+  partnerName: string
+  documentIds: string[]
 }
 
 export interface DocumentsPreviewResponse {
@@ -36,6 +36,17 @@ export interface DocumentsPreviewResponse {
     subject?: string
     body?: string
   }
+}
+
+export interface DocumentsSendBody {
+  partnerName: string
+  recipients: string[]
+}
+
+export interface DocumentsBulkSendBody {
+  partnerName: string
+  recipients: string[]
+  documentIds: string[]
 }
 
 export interface DocumentsSendResponse {
@@ -136,6 +147,20 @@ export class Documents extends ThBaseHandler {
     }
   }
 
+  async bulkPreview (body: DocumentsBulkPreviewBody): Promise<DocumentsPreviewResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri('/preview')
+
+      const response = await this.http.getClient().post(uri, body)
+
+      return {
+        data: response.data.results[0]
+      }
+    } catch (error: any) {
+      throw new DocumentsBulkPreviewFailed(error.message)
+    }
+  }
+
   async send (documentId: string, body: DocumentsSendBody): Promise<DocumentsSendResponse> {
     try {
       const uri = this.uriHelper.generateBaseUri(`/${documentId}/send`)
@@ -148,6 +173,21 @@ export class Documents extends ThBaseHandler {
       }
     } catch (error: any) {
       throw new DocumentsSendFailed(error.message)
+    }
+  }
+
+  async bulkSend (body: DocumentsBulkSendBody): Promise<DocumentsSendResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri('send')
+
+      const response = await this.http.getClient().post(uri, body)
+
+      return {
+        data: response.data.results[0],
+        msg: response.data.msg
+      }
+    } catch (error: any) {
+      throw new DocumentsBulkSendFailed(error.message)
     }
   }
 
@@ -219,6 +259,17 @@ class DocumentsPreviewFailed extends BaseError {
   }
 }
 
+class DocumentsBulkPreviewFailed extends BaseError {
+  public name = 'DocumentsBulkPreviewFailed'
+  constructor (
+    public message: string = 'Could not create preview',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, DocumentsBulkPreviewFailed.prototype)
+  }
+}
+
 export class DocumentsSendFailed extends BaseError {
   public name = 'DocumentsSendFailed'
   constructor (
@@ -227,6 +278,17 @@ export class DocumentsSendFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, DocumentsSendFailed.prototype)
+  }
+}
+
+export class DocumentsBulkSendFailed extends BaseError {
+  public name = 'DocumentsBulkSendFailed'
+  constructor (
+    public message: string = 'Could not send email',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, DocumentsBulkSendFailed.prototype)
   }
 }
 
