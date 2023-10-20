@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DocumentsDownloadFailed = exports.DocumentsSendFailed = exports.DocumentsMetaFailed = exports.DocumentsGetFailed = exports.Documents = void 0;
+exports.DocumentsBulkDownloadFailed = exports.DocumentsDownloadFailed = exports.DocumentsSendFailed = exports.DocumentsMetaFailed = exports.DocumentsGetFailed = exports.Documents = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -112,13 +112,12 @@ var Documents = (function (_super) {
     };
     Documents.prototype.send = function (documentId, body) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_4;
+            var uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        base = this.uriHelper.generateBaseUri("/" + documentId + "/send");
-                        uri = this.uriHelper.generateUriWithQuery(base);
+                        uri = this.uriHelper.generateBaseUri("/" + documentId + "/send");
                         return [4, this.http.getClient().post(uri, body)];
                     case 1:
                         response = _a.sent();
@@ -136,13 +135,12 @@ var Documents = (function (_super) {
     };
     Documents.prototype.download = function (documentId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, pdfObj, error_5;
+            var uri, response, pdfObj, error_5;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        base = this.uriHelper.generateBaseUri("/" + documentId + "/download");
-                        uri = this.uriHelper.generateUriWithQuery(base);
+                        uri = this.uriHelper.generateBaseUri("/" + documentId + "/download");
                         return [4, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
@@ -155,6 +153,31 @@ var Documents = (function (_super) {
                     case 2:
                         error_5 = _a.sent();
                         throw new DocumentsDownloadFailed(error_5.message);
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    Documents.prototype.bulkDownload = function (body) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, pdfObj, error_6;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = this.uriHelper.generateBaseUri('/download');
+                        return [4, this.http.getClient().post(uri, body)];
+                    case 1:
+                        response = _a.sent();
+                        pdfObj = response.data.results[0];
+                        return [2, {
+                                data: pdfObj.base64Content,
+                                contentType: pdfObj.contentType,
+                                filename: pdfObj.fileName
+                            }];
+                    case 2:
+                        error_6 = _a.sent();
+                        throw new DocumentsBulkDownloadFailed(error_6.message);
                     case 3: return [2];
                 }
             });
@@ -228,4 +251,17 @@ var DocumentsDownloadFailed = (function (_super) {
     return DocumentsDownloadFailed;
 }(errors_1.BaseError));
 exports.DocumentsDownloadFailed = DocumentsDownloadFailed;
+var DocumentsBulkDownloadFailed = (function (_super) {
+    tslib_1.__extends(DocumentsBulkDownloadFailed, _super);
+    function DocumentsBulkDownloadFailed(message, properties) {
+        if (message === void 0) { message = 'Could not download files'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'DocumentsBulkDownloadFailed';
+        Object.setPrototypeOf(_this, DocumentsBulkDownloadFailed.prototype);
+        return _this;
+    }
+    return DocumentsBulkDownloadFailed;
+}(errors_1.BaseError));
+exports.DocumentsBulkDownloadFailed = DocumentsBulkDownloadFailed;
 //# sourceMappingURL=documents.js.map

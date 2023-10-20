@@ -42,6 +42,9 @@ export interface DocumentsDownloadResponse {
     contentType?: string;
     filename?: string;
 }
+export interface DocumentsBulkDownloadBody {
+    documentIds: string[];
+}
 export declare class Documents extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
@@ -54,6 +57,7 @@ export declare class Documents extends ThBaseHandler {
     preview(documentId: string, query: DocumentsPreviewQuery): Promise<DocumentsPreviewResponse>;
     send(documentId: string, body: DocumentsSendBody): Promise<DocumentsSendResponse>;
     download(documentId: string): Promise<DocumentsDownloadResponse>;
+    bulkDownload(body: DocumentsBulkDownloadBody): Promise<DocumentsDownloadResponse>;
 }
 export declare class DocumentsGetFailed extends BaseError {
     message: string;
@@ -71,6 +75,11 @@ export declare class DocumentsSendFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class DocumentsDownloadFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class DocumentsBulkDownloadFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

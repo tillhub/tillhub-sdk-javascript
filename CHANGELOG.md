@@ -1,3 +1,12 @@
+# [4.100.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.99.0...v4.100.0) (2023-10-20)
+
+
+### Features
+
+* **documents:** add bulkDownload method ([3f220f1](https://github.com/tillhub/tillhub-sdk-javascript/commit/3f220f1e7d281ec754bfc8c598db83d940f06e8f))
+* **documents:** fix failing unit test ([7fe0fff](https://github.com/tillhub/tillhub-sdk-javascript/commit/7fe0fffcf31c7e7cc5914d6be5435b244a2459f5))
+* **documents:** fix linting issue ([7272ba3](https://github.com/tillhub/tillhub-sdk-javascript/commit/7272ba3382eaf5073655da13f0bae4abcb6500e9))
+
 # [4.99.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.98.0...v4.99.0) (2023-10-19)
 
 
