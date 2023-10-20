@@ -49,6 +49,10 @@ export interface DocumentsDownloadResponse {
   filename?: string
 }
 
+export interface DocumentsBulkDownloadBody {
+  documentIds: string[]
+}
+
 export class Documents extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/documents'
   endpoint: string
@@ -134,8 +138,7 @@ export class Documents extends ThBaseHandler {
 
   async send (documentId: string, body: DocumentsSendBody): Promise<DocumentsSendResponse> {
     try {
-      const base = this.uriHelper.generateBaseUri(`/${documentId}/send`)
-      const uri = this.uriHelper.generateUriWithQuery(base)
+      const uri = this.uriHelper.generateBaseUri(`/${documentId}/send`)
 
       const response = await this.http.getClient().post(uri, body)
 
@@ -150,8 +153,7 @@ export class Documents extends ThBaseHandler {
 
   async download (documentId: string): Promise<DocumentsDownloadResponse> {
     try {
-      const base = this.uriHelper.generateBaseUri(`/${documentId}/download`)
-      const uri = this.uriHelper.generateUriWithQuery(base)
+      const uri = this.uriHelper.generateBaseUri(`/${documentId}/download`)
 
       const response = await this.http.getClient().get(uri)
       const pdfObj = response.data.results[0]
@@ -163,6 +165,23 @@ export class Documents extends ThBaseHandler {
       }
     } catch (error: any) {
       throw new DocumentsDownloadFailed(error.message)
+    }
+  }
+
+  async bulkDownload (body: DocumentsBulkDownloadBody): Promise<DocumentsDownloadResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri('/download')
+
+      const response = await this.http.getClient().post(uri, body)
+      const pdfObj = response.data.results[0]
+
+      return {
+        data: pdfObj.base64Content,
+        contentType: pdfObj.contentType,
+        filename: pdfObj.fileName
+      }
+    } catch (error: any) {
+      throw new DocumentsBulkDownloadFailed(error.message)
     }
   }
 }
@@ -219,5 +238,16 @@ export class DocumentsDownloadFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, DocumentsDownloadFailed.prototype)
+  }
+}
+
+export class DocumentsBulkDownloadFailed extends BaseError {
+  public name = 'DocumentsBulkDownloadFailed'
+  constructor (
+    public message: string = 'Could not download files',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, DocumentsBulkDownloadFailed.prototype)
   }
 }
