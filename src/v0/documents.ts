@@ -170,7 +170,7 @@ export class Documents extends ThBaseHandler {
 
   async bulkDownload (body: DocumentsBulkDownloadBody): Promise<DocumentsDownloadResponse> {
     try {
-      const uri = this.uriHelper.generateBaseUri(`/download`)
+      const uri = this.uriHelper.generateBaseUri('/download')
 
       const response = await this.http.getClient().post(uri, body)
       const pdfObj = response.data.results[0]
