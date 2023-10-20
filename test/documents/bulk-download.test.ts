@@ -37,7 +37,7 @@ describe('v0: Documents: can get files', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/documents/${legacyId}/download`).reply(() => {
+      mock.onPost(`https://api.tillhub.com/api/v0/documents/${legacyId}/download`).reply(() => {
         return [200, { results }]
       })
     }
@@ -72,7 +72,7 @@ describe('v0: Documents: can get files', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/documents/${legacyId}/download`).reply(() => {
+      mock.onPost(`https://api.tillhub.com/api/v0/documents/${legacyId}/download`).reply(() => {
         return [205]
       })
     }
