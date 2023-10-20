@@ -178,7 +178,7 @@ export class Documents extends ThBaseHandler {
 
   async bulkSend (body: DocumentsBulkSendBody): Promise<DocumentsSendResponse> {
     try {
-      const uri = this.uriHelper.generateBaseUri('send')
+      const uri = this.uriHelper.generateBaseUri('/send')
 
       const response = await this.http.getClient().post(uri, body)
 
