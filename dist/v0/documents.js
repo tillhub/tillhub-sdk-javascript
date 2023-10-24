@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DocumentsBulkDownloadFailed = exports.DocumentsDownloadFailed = exports.DocumentsSendFailed = exports.DocumentsMetaFailed = exports.DocumentsGetFailed = exports.Documents = void 0;
+exports.DocumentsBulkDownloadFailed = exports.DocumentsDownloadFailed = exports.DocumentsBulkSendFailed = exports.DocumentsSendFailed = exports.DocumentsMetaFailed = exports.DocumentsGetFailed = exports.Documents = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -110,9 +110,31 @@ var Documents = (function (_super) {
             });
         });
     };
-    Documents.prototype.send = function (documentId, body) {
+    Documents.prototype.bulkPreview = function (body) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var uri, response, error_4;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = this.uriHelper.generateBaseUri('/preview');
+                        return [4, this.http.getClient().post(uri, body)];
+                    case 1:
+                        response = _a.sent();
+                        return [2, {
+                                data: response.data.results[0]
+                            }];
+                    case 2:
+                        error_4 = _a.sent();
+                        throw new DocumentsBulkPreviewFailed(error_4.message);
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    Documents.prototype.send = function (documentId, body) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_5;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -126,8 +148,31 @@ var Documents = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 2:
-                        error_4 = _a.sent();
-                        throw new DocumentsSendFailed(error_4.message);
+                        error_5 = _a.sent();
+                        throw new DocumentsSendFailed(error_5.message);
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    Documents.prototype.bulkSend = function (body) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_6;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = this.uriHelper.generateBaseUri('/send');
+                        return [4, this.http.getClient().post(uri, body)];
+                    case 1:
+                        response = _a.sent();
+                        return [2, {
+                                data: response.data.results[0],
+                                msg: response.data.msg
+                            }];
+                    case 2:
+                        error_6 = _a.sent();
+                        throw new DocumentsBulkSendFailed(error_6.message);
                     case 3: return [2];
                 }
             });
@@ -135,7 +180,7 @@ var Documents = (function (_super) {
     };
     Documents.prototype.download = function (documentId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, pdfObj, error_5;
+            var uri, response, pdfObj, error_7;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -151,8 +196,8 @@ var Documents = (function (_super) {
                                 filename: pdfObj.fileName
                             }];
                     case 2:
-                        error_5 = _a.sent();
-                        throw new DocumentsDownloadFailed(error_5.message);
+                        error_7 = _a.sent();
+                        throw new DocumentsDownloadFailed(error_7.message);
                     case 3: return [2];
                 }
             });
@@ -160,7 +205,7 @@ var Documents = (function (_super) {
     };
     Documents.prototype.bulkDownload = function (body) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, pdfObj, error_6;
+            var uri, response, pdfObj, error_8;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -176,8 +221,8 @@ var Documents = (function (_super) {
                                 filename: pdfObj.fileName
                             }];
                     case 2:
-                        error_6 = _a.sent();
-                        throw new DocumentsBulkDownloadFailed(error_6.message);
+                        error_8 = _a.sent();
+                        throw new DocumentsBulkDownloadFailed(error_8.message);
                     case 3: return [2];
                 }
             });
@@ -225,6 +270,18 @@ var DocumentsPreviewFailed = (function (_super) {
     }
     return DocumentsPreviewFailed;
 }(errors_1.BaseError));
+var DocumentsBulkPreviewFailed = (function (_super) {
+    tslib_1.__extends(DocumentsBulkPreviewFailed, _super);
+    function DocumentsBulkPreviewFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create preview'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'DocumentsBulkPreviewFailed';
+        Object.setPrototypeOf(_this, DocumentsBulkPreviewFailed.prototype);
+        return _this;
+    }
+    return DocumentsBulkPreviewFailed;
+}(errors_1.BaseError));
 var DocumentsSendFailed = (function (_super) {
     tslib_1.__extends(DocumentsSendFailed, _super);
     function DocumentsSendFailed(message, properties) {
@@ -238,6 +295,19 @@ var DocumentsSendFailed = (function (_super) {
     return DocumentsSendFailed;
 }(errors_1.BaseError));
 exports.DocumentsSendFailed = DocumentsSendFailed;
+var DocumentsBulkSendFailed = (function (_super) {
+    tslib_1.__extends(DocumentsBulkSendFailed, _super);
+    function DocumentsBulkSendFailed(message, properties) {
+        if (message === void 0) { message = 'Could not send email'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'DocumentsBulkSendFailed';
+        Object.setPrototypeOf(_this, DocumentsBulkSendFailed.prototype);
+        return _this;
+    }
+    return DocumentsBulkSendFailed;
+}(errors_1.BaseError));
+exports.DocumentsBulkSendFailed = DocumentsBulkSendFailed;
 var DocumentsDownloadFailed = (function (_super) {
     tslib_1.__extends(DocumentsDownloadFailed, _super);
     function DocumentsDownloadFailed(message, properties) {

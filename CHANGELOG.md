@@ -1,3 +1,11 @@
+# [4.101.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.100.0...v4.101.0) (2023-10-24)
+
+
+### Features
+
+* **documents:** add bulk preview & send methods ([03e124a](https://github.com/tillhub/tillhub-sdk-javascript/commit/03e124a1855a1d9a68f2cfa77a00007bafeee3a6))
+* **documents:** fix url for bulk send ([6505616](https://github.com/tillhub/tillhub-sdk-javascript/commit/65056169b324000280a16b1d942393f6dc2abfd1))
+
 # [4.100.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.99.0...v4.100.0) (2023-10-20)
 
 

@@ -18,18 +18,27 @@ export interface Document {
     id: string;
     updatedAt?: string;
 }
-export interface DocumentsSendBody {
-    partnerName: string;
-    recipients: string[];
-}
 export interface DocumentsPreviewQuery {
     partnerName: string;
+}
+export interface DocumentsBulkPreviewBody {
+    partnerName: string;
+    documentIds: string[];
 }
 export interface DocumentsPreviewResponse {
     data: {
         subject?: string;
         body?: string;
     };
+}
+export interface DocumentsSendBody {
+    partnerName: string;
+    recipients: string[];
+}
+export interface DocumentsBulkSendBody {
+    partnerName: string;
+    recipients: string[];
+    documentIds: string[];
 }
 export interface DocumentsSendResponse {
     data: {
@@ -55,7 +64,9 @@ export declare class Documents extends ThBaseHandler {
     getAll(query?: Record<string, unknown>): Promise<DocumentsMultipleResponse>;
     meta(query?: Record<string, unknown>): Promise<DocumentsMultipleResponse>;
     preview(documentId: string, query: DocumentsPreviewQuery): Promise<DocumentsPreviewResponse>;
+    bulkPreview(body: DocumentsBulkPreviewBody): Promise<DocumentsPreviewResponse>;
     send(documentId: string, body: DocumentsSendBody): Promise<DocumentsSendResponse>;
+    bulkSend(body: DocumentsBulkSendBody): Promise<DocumentsSendResponse>;
     download(documentId: string): Promise<DocumentsDownloadResponse>;
     bulkDownload(body: DocumentsBulkDownloadBody): Promise<DocumentsDownloadResponse>;
 }
@@ -70,6 +81,11 @@ export declare class DocumentsMetaFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class DocumentsSendFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class DocumentsBulkSendFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
