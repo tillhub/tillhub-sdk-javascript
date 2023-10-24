@@ -34,6 +34,7 @@ import { Print } from './print'
 import { Discounts } from './discounts'
 import { Messages } from './messages'
 import { Favourites } from './favourites'
+import { Fiscalization } from './fiscalization'
 import { LegacySettings } from './settings_old'
 import { Tags } from './tags'
 import { Safes, SafesLogBook } from './safes'
@@ -113,6 +114,7 @@ export {
   Print,
   Messages,
   Favourites,
+  Fiscalization,
   LegacySettings,
   Tags,
   Safes,
