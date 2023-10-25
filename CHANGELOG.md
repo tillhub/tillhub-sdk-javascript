@@ -1,3 +1,10 @@
+# [4.102.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.101.0...v4.102.0) (2023-10-25)
+
+
+### Features
+
+* **fiscalization:** add init function for austrian fiscaly ([#535](https://github.com/tillhub/tillhub-sdk-javascript/issues/535)) ([f643e27](https://github.com/tillhub/tillhub-sdk-javascript/commit/f643e2709ece6378b0437bae3fa489440b28bfc4))
+
 # [4.101.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.100.0...v4.101.0) (2023-10-24)
 
 

@@ -100,6 +100,7 @@ export declare class TillhubClient extends events.EventEmitter {
     messages(): v0.Messages;
     print(): v0.Print;
     favourites(): v0.Favourites;
+    fiscalization(): v0.Fiscalization;
     balances(): v1.Balances;
     settings_old(): v0.LegacySettings;
     tags(): v0.Tags;
@@ -122,7 +123,6 @@ export declare class TillhubClient extends events.EventEmitter {
     reasons(): v0.Reasons;
     processes(): v0.Processes;
     functions(): v0.Functions;
-    fiscalization(): v0.Fiscalization;
     deviceGroups(): v0.DeviceGroups;
     carts(): v1.Carts;
     staffPermissionsTemplates(): v0.StaffPermissionsTemplates;

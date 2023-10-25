@@ -435,6 +435,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.favourites = function () {
         return this.generateAuthenticatedInstance(v0.Favourites);
     };
+    TillhubClient.prototype.fiscalization = function () {
+        return this.generateAuthenticatedInstance(v0.Fiscalization);
+    };
     TillhubClient.prototype.balances = function () {
         return this.generateAuthenticatedInstance(v1.Balances);
     };
