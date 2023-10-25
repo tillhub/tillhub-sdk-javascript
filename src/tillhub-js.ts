@@ -930,6 +930,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated Fiscalization instance
+   *
+   */
+  fiscalization(): v0.Fiscalization {
+    return this.generateAuthenticatedInstance(v0.Fiscalization)
+  }
+
+  /**
    * Create an authenticated Balances instance
    *
    */
