@@ -26,7 +26,7 @@ const query = {
   documentIds: [documentId]
 }
 
-function queryString() {
+function queryString () {
   return qs.stringify(query)
 }
 
