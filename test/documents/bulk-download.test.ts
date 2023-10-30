@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv'
 import axios from 'axios'
+import qs from 'qs'
 import MockAdapter from 'axios-mock-adapter'
 import { v0 } from '../../src/tillhub-js'
 import { initThInstance } from '../util'
@@ -21,6 +22,14 @@ const results = [
   }
 ]
 
+const query = {
+  documentIds: [documentId]
+}
+
+function queryString() {
+  return qs.stringify(query)
+}
+
 describe('v0: Documents: can get files', () => {
   it("Tillhub's documents are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
@@ -37,9 +46,11 @@ describe('v0: Documents: can get files', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/documents/${legacyId}/download`).reply(() => {
-        return [200, { results }]
-      })
+      mock
+        .onGet(`https://api.tillhub.com/api/v0/documents/${legacyId}/download?${queryString()}`)
+        .reply(() => {
+          return [200, { results }]
+        })
     }
 
     const th = await initThInstance()
@@ -72,9 +83,11 @@ describe('v0: Documents: can get files', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/documents/${legacyId}/download`).reply(() => {
-        return [205]
-      })
+      mock
+        .onGet(`https://api.tillhub.com/api/v0/documents/${legacyId}/download?${queryString()}`)
+        .reply(() => {
+          return [205]
+        })
     }
 
     try {

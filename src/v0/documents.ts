@@ -60,7 +60,7 @@ export interface DocumentsDownloadResponse {
   filename?: string
 }
 
-export interface DocumentsBulkDownloadBody {
+export interface DocumentsBulkDownloadQuery {
   documentIds: string[]
 }
 
@@ -208,11 +208,12 @@ export class Documents extends ThBaseHandler {
     }
   }
 
-  async bulkDownload (body: DocumentsBulkDownloadBody): Promise<DocumentsDownloadResponse> {
+  async bulkDownload (query: DocumentsBulkDownloadQuery): Promise<DocumentsDownloadResponse> {
     try {
-      const uri = this.uriHelper.generateBaseUri('/download')
+      const base = this.uriHelper.generateBaseUri('/download')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
-      const response = await this.http.getClient().post(uri, body)
+      const response = await this.http.getClient().get(uri)
       const pdfObj = response.data.results[0]
 
       return {
