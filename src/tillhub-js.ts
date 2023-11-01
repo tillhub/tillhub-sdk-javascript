@@ -1258,7 +1258,7 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
-   * Create an authenticated Holidays instance
+   * Create an authenticated Shift plan instance
    *
    */
   shiftPlan(): v0.ShiftPlan {
