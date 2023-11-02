@@ -12,7 +12,6 @@ afterEach(() => {
   mock.reset()
 })
 
-const partnerName = 'Partner1'
 const documentId = 'f8314183-8199-4cb7-b152-04f6ad4ebc7e'
 const results = [
   {
@@ -40,7 +39,7 @@ describe('v0: Documents: can preview email', () => {
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v0/documents/${legacyId}/${documentId}/preview?partnerName=${partnerName}`
+          `https://api.tillhub.com/api/v0/documents/${legacyId}/${documentId}/preview`
         )
         .reply(() => {
           return [200, { results }]
@@ -53,8 +52,7 @@ describe('v0: Documents: can preview email', () => {
 
     expect(documents).toBeInstanceOf(v0.Documents)
 
-    const { data } = await documents.preview(documentId, { partnerName })
-
+    const { data } = await documents.preview(documentId)
     expect(data).toMatchObject(results[0])
   })
 
@@ -75,7 +73,7 @@ describe('v0: Documents: can preview email', () => {
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v0/documents/${legacyId}/${documentId}/preview?partnerName=${partnerName}`
+          `https://api.tillhub.com/api/v0/documents/${legacyId}/${documentId}/preview`
         )
         .reply(() => {
           return [205]
@@ -84,7 +82,7 @@ describe('v0: Documents: can preview email', () => {
 
     try {
       const th = await initThInstance()
-      await th.documents().preview(documentId, { partnerName })
+      await th.documents().preview(documentId)
     } catch (err: any) {
       expect(err.name).toBe('DocumentsPreviewFailed')
     }

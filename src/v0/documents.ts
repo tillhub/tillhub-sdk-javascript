@@ -22,12 +22,7 @@ export interface Document {
   updatedAt?: string
 }
 
-export interface DocumentsPreviewQuery {
-  partnerName: string
-}
-
 export interface DocumentsBulkPreviewBody {
-  partnerName: string
   documentIds: string[]
 }
 
@@ -39,12 +34,10 @@ export interface DocumentsPreviewResponse {
 }
 
 export interface DocumentsSendBody {
-  partnerName: string
   recipients: string[]
 }
 
 export interface DocumentsBulkSendBody {
-  partnerName: string
   recipients: string[]
   documentIds: string[]
 }
@@ -132,10 +125,10 @@ export class Documents extends ThBaseHandler {
     }
   }
 
-  async preview (documentId: string, query: DocumentsPreviewQuery): Promise<DocumentsPreviewResponse> {
+  async preview (documentId: string): Promise<DocumentsPreviewResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/${documentId}/preview`)
-      const uri = this.uriHelper.generateUriWithQuery(base, query)
+      const uri = this.uriHelper.generateUriWithQuery(base)
 
       const response = await this.http.getClient().get(uri)
 
