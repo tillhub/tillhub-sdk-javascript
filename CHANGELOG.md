@@ -1,3 +1,10 @@
+# [4.103.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.102.0...v4.103.0) (2023-11-02)
+
+
+### Features
+
+* **shift plan:** Add get/put requests for Shift Plan (Feat/until 8334) ([#537](https://github.com/tillhub/tillhub-sdk-javascript/issues/537)) ([6943329](https://github.com/tillhub/tillhub-sdk-javascript/commit/6943329640aff566ebb7c6197d41af89e740418f))
+
 # [4.102.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.101.0...v4.102.0) (2023-10-25)
 
 
