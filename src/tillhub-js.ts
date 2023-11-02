@@ -1256,6 +1256,14 @@ export class TillhubClient extends events.EventEmitter {
   holidays(): v0.Holidays {
     return this.generateAuthenticatedInstance(v0.Holidays)
   }
+
+  /**
+   * Create an authenticated Shift plan instance
+   *
+   */
+  shiftPlan(): v0.ShiftPlan {
+    return this.generateAuthenticatedInstance(v0.ShiftPlan)
+  }
 }
 
 export class Tillhub extends TillhubClient {

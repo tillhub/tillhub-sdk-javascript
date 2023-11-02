@@ -74,6 +74,7 @@ import { Services } from './services'
 import { ConsignmentNotes } from './consignment_notes'
 import { Documents } from './documents'
 import { Holidays } from './holidays'
+import { ShiftPlan } from './shift_plan'
 
 export {
   Auth,
@@ -154,5 +155,6 @@ export {
   Services,
   ConsignmentNotes,
   Documents,
-  Holidays
+  Holidays,
+  ShiftPlan
 }
