@@ -3,7 +3,7 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import { v0 } from '../../src/tillhub-js'
 import { initThInstance } from '../util'
-import { ShiftPlanObject } from '../../src/v0/shift_plan'
+import { ShiftPlanUpdateOptions } from '../../src/v0/shift_plan'
 dotenv.config()
 
 const legacyId = '4564'
@@ -14,12 +14,12 @@ afterEach(() => {
 })
 
 const branchId = '0505ce68-9cd9-4b0c-ac5c-7cb6804e8956'
-const mockShiftPlan: ShiftPlanObject = {
+const mockShiftPlan: ShiftPlanUpdateOptions = {
   shift_plan_enabled: true,
-  plan: [
+  shift_plan: [
     {
       staff_member_id: '0505ce68-9cd9-4b0c-ac5c-7cb6804e8956',
-      date: '2020',
+      date: '2020-01-01',
       plan: [{ start: '10:00', end: '12:00' }]
     }
   ]
@@ -46,7 +46,7 @@ describe('v0: Shift plan: can alter the shift plan', () => {
           200,
           {
             count: 1,
-            results: [mockShiftPlan]
+            results: mockShiftPlan.shift_plan
           }
         ]
       })
@@ -60,7 +60,7 @@ describe('v0: Shift plan: can alter the shift plan', () => {
 
     const { data } = await shiftPlan.put(branchId, mockShiftPlan)
 
-    expect(data).toMatchObject(mockShiftPlan)
+    expect(data).toMatchObject(mockShiftPlan.shift_plan)
   })
 
   it('rejects on status codes that are not 200', async () => {
