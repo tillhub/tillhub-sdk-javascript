@@ -1,3 +1,10 @@
+# [4.104.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.103.0...v4.104.0) (2023-11-03)
+
+
+### Features
+
+* **documents:** getting rid of partnerName param ([9f6b7a0](https://github.com/tillhub/tillhub-sdk-javascript/commit/9f6b7a0f4160439bc645e027ece79d60d2b4d504))
+
 # [4.103.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.102.0...v4.103.0) (2023-11-02)
 
 

@@ -18,11 +18,7 @@ export interface Document {
     id: string;
     updatedAt?: string;
 }
-export interface DocumentsPreviewQuery {
-    partnerName: string;
-}
 export interface DocumentsBulkPreviewBody {
-    partnerName: string;
     documentIds: string[];
 }
 export interface DocumentsPreviewResponse {
@@ -32,11 +28,9 @@ export interface DocumentsPreviewResponse {
     };
 }
 export interface DocumentsSendBody {
-    partnerName: string;
     recipients: string[];
 }
 export interface DocumentsBulkSendBody {
-    partnerName: string;
     recipients: string[];
     documentIds: string[];
 }
@@ -63,7 +57,7 @@ export declare class Documents extends ThBaseHandler {
     constructor(options: DocumentsOptions, http: Client);
     getAll(query?: Record<string, unknown>): Promise<DocumentsMultipleResponse>;
     meta(query?: Record<string, unknown>): Promise<DocumentsMultipleResponse>;
-    preview(documentId: string, query: DocumentsPreviewQuery): Promise<DocumentsPreviewResponse>;
+    preview(documentId: string): Promise<DocumentsPreviewResponse>;
     bulkPreview(body: DocumentsBulkPreviewBody): Promise<DocumentsPreviewResponse>;
     send(documentId: string, body: DocumentsSendBody): Promise<DocumentsSendResponse>;
     bulkSend(body: DocumentsBulkSendBody): Promise<DocumentsSendResponse>;

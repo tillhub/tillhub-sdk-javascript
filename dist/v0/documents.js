@@ -87,7 +87,7 @@ var Documents = (function (_super) {
             });
         });
     };
-    Documents.prototype.preview = function (documentId, query) {
+    Documents.prototype.preview = function (documentId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
@@ -95,7 +95,7 @@ var Documents = (function (_super) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri("/" + documentId + "/preview");
-                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        uri = this.uriHelper.generateUriWithQuery(base);
                         return [4, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
