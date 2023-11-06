@@ -3,7 +3,7 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import { v0 } from '../../src/tillhub-js'
 import { initThInstance } from '../util'
-import { ShiftPlanObject } from '../../src/v0/shift_plan'
+import { ShiftPlanItem } from '../../src/v0/shift_plan'
 dotenv.config()
 
 const legacyId = '4564'
@@ -14,16 +14,13 @@ afterEach(() => {
 })
 
 const branchId = 'asdf5566'
-const mockShiftPlan: ShiftPlanObject = {
-  shift_plan_enabled: true,
-  plan: [
-    {
-      staff_member_id: '0505ce68-9cd9-4b0c-ac5c-7cb6804e8956',
-      date: '2020',
-      plan: [{ start: '10:00', end: '12:00' }]
-    }
-  ]
-}
+const mockShiftPlan: ShiftPlanItem[] = [
+  {
+    staff_member_id: '0505ce68-9cd9-4b0c-ac5c-7cb6804e8956',
+    date: '2020-01-01',
+    plan: [{ start: '10:00', end: '12:00' }]
+  }
+]
 
 describe('v0: Shift Plan: can get one shift plan', () => {
   it("Tillhub's shift plan are instantiable", async () => {
@@ -46,7 +43,7 @@ describe('v0: Shift Plan: can get one shift plan', () => {
           200,
           {
             count: 1,
-            results: [mockShiftPlan]
+            results: mockShiftPlan
           }
         ]
       })

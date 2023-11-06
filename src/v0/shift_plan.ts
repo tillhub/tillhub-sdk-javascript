@@ -10,11 +10,11 @@ export interface ShiftPlanOptions {
 
 export interface ShiftPlanResponse {
   msg?: string
-  data?: ShiftPlanObject
+  data?: ShiftPlanItem[]
   metadata?: Record<string, unknown>
 }
 
-export interface Shift {
+export interface ShiftPlanShift {
   start: string
   end: string
 }
@@ -22,12 +22,12 @@ export interface Shift {
 export interface ShiftPlanItem {
   staff_member_id: string
   date: string
-  plan: Shift[]
+  plan: ShiftPlanShift[]
 }
 
-export interface ShiftPlanObject {
+export interface ShiftPlanUpdateOptions {
   shift_plan_enabled: boolean
-  plan: ShiftPlanItem[]
+  shift_plan: ShiftPlanItem[]
 }
 
 export class ShiftPlan extends ThBaseHandler {
@@ -62,7 +62,7 @@ export class ShiftPlan extends ThBaseHandler {
 
       return {
         msg: response.data.msg,
-        data: response.data.results[0],
+        data: response.data.results,
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
@@ -70,14 +70,14 @@ export class ShiftPlan extends ThBaseHandler {
     }
   }
 
-  async put (branchId: string, shiftPlan: ShiftPlanObject): Promise<ShiftPlanResponse> {
+  async put (branchId: string, shiftPlanOptions: ShiftPlanUpdateOptions): Promise<ShiftPlanResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${branchId}`)
 
     try {
-      const response = await this.http.getClient().put(uri, shiftPlan)
+      const response = await this.http.getClient().put(uri, shiftPlanOptions)
 
       return {
-        data: response.data.results[0] as ShiftPlanObject,
+        data: response.data.results as ShiftPlanItem[],
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
