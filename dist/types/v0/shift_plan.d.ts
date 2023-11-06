@@ -8,21 +8,21 @@ export interface ShiftPlanOptions {
 }
 export interface ShiftPlanResponse {
     msg?: string;
-    data?: ShiftPlanObject;
+    data?: ShiftPlanItem[];
     metadata?: Record<string, unknown>;
 }
-export interface Shift {
+export interface ShiftPlanShift {
     start: string;
     end: string;
 }
 export interface ShiftPlanItem {
     staff_member_id: string;
     date: string;
-    plan: Shift[];
+    plan: ShiftPlanShift[];
 }
-export interface ShiftPlanObject {
+export interface ShiftPlanUpdateOptions {
     shift_plan_enabled: boolean;
-    plan: ShiftPlanItem[];
+    shift_plan: ShiftPlanItem[];
 }
 export declare class ShiftPlan extends ThBaseHandler {
     static baseEndpoint: string;
@@ -32,7 +32,7 @@ export declare class ShiftPlan extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: ShiftPlanOptions, http: Client);
     get(branchId: string): Promise<ShiftPlanResponse>;
-    put(branchId: string, shiftPlan: ShiftPlanObject): Promise<ShiftPlanResponse>;
+    put(branchId: string, shiftPlanOptions: ShiftPlanUpdateOptions): Promise<ShiftPlanResponse>;
 }
 export declare class ShiftPlanPutFailed extends BaseError {
     message: string;

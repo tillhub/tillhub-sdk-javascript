@@ -36,7 +36,7 @@ var ShiftPlan = (function (_super) {
                         }
                         return [2, {
                                 msg: response.data.msg,
-                                data: response.data.results[0],
+                                data: response.data.results,
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
@@ -47,7 +47,7 @@ var ShiftPlan = (function (_super) {
             });
         });
     };
-    ShiftPlan.prototype.put = function (branchId, shiftPlan) {
+    ShiftPlan.prototype.put = function (branchId, shiftPlanOptions) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
@@ -57,11 +57,11 @@ var ShiftPlan = (function (_super) {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.http.getClient().put(uri, shiftPlan)];
+                        return [4, this.http.getClient().put(uri, shiftPlanOptions)];
                     case 2:
                         response = _a.sent();
                         return [2, {
-                                data: response.data.results[0],
+                                data: response.data.results,
                                 metadata: { count: response.data.count }
                             }];
                     case 3:

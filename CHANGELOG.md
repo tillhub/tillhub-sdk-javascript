@@ -1,3 +1,10 @@
+# [4.105.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.104.0...v4.105.0) (2023-11-06)
+
+
+### Features
+
+* **shift plan:** refactor types to use an array syntax ([#538](https://github.com/tillhub/tillhub-sdk-javascript/issues/538)) ([5d8363a](https://github.com/tillhub/tillhub-sdk-javascript/commit/5d8363ac2ba2ea619543ee8cb82ab57ce29f85e7))
+
 # [4.104.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.103.0...v4.104.0) (2023-11-03)
 
 
