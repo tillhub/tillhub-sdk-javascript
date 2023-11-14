@@ -8,6 +8,7 @@ import { FiscalizationItem } from '../../src/v0/fiscalization'
 dotenv.config()
 
 const legacyId = '4564'
+const branchId = '1234'
 
 const mock = new MockAdapter(axios)
 afterEach(() => {
@@ -50,7 +51,7 @@ describe('v0: Fiscalization: can send emails', () => {
       })
 
       mock
-        .onPost(`https://api.tillhub.com/api/v0/fiscalization/${legacyId}/initialize`)
+        .onPost(`https://api.tillhub.com/api/v0/fiscalization/${legacyId}/branches/${branchId}/set-license`)
         .reply(() => {
           return [
             200,
@@ -67,7 +68,7 @@ describe('v0: Fiscalization: can send emails', () => {
 
     expect(fiscalization).toBeInstanceOf(v0.Fiscalization)
 
-    const { data } = await fiscalization.init(fiscalizationConfiguration)
+    const { data } = await fiscalization.setLicense(branchId, fiscalizationConfiguration)
     expect(data).toMatchObject(fiscalizationConfiguration)
   })
 
@@ -87,7 +88,7 @@ describe('v0: Fiscalization: can send emails', () => {
       })
 
       mock
-        .onPost(`https://api.tillhub.com/api/v0/fiscalization/${legacyId}/initialize`)
+        .onPost(`https://api.tillhub.com/api/v0/fiscalization/${legacyId}/branches/${branchId}/set-license`)
         .reply(() => {
           return [205]
         })
@@ -95,7 +96,7 @@ describe('v0: Fiscalization: can send emails', () => {
 
     try {
       const th = await initThInstance()
-      await th.fiscalization().init(fiscalizationConfiguration)
+      await th.fiscalization().setLicense(branchId, fiscalizationConfiguration)
     } catch (err: any) {
       expect(err.name).toBe('FiscalizationInitFailed')
     }

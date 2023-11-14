@@ -58,8 +58,8 @@ export class Fiscalization extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async init (options: FiscalizationItem): Promise<FiscalizationResponse> {
-    const uri = this.uriHelper.generateBaseUri('/initialize')
+  async setLicense (branchId: string, options: FiscalizationItem): Promise<FiscalizationResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/branches/${branchId}/set-license`)
 
     try {
       const response = await this.http.getClient().post(uri, options)
