@@ -1,3 +1,10 @@
+## [4.105.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.105.0...v4.105.1) (2023-11-14)
+
+
+### Bug Fixes
+
+* **fiscalization:** aPI path change ([6611ab7](https://github.com/tillhub/tillhub-sdk-javascript/commit/6611ab706d69478b9d83a25c6d597bce7aa83d41))
+
 # [4.105.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.104.0...v4.105.0) (2023-11-06)
 
 

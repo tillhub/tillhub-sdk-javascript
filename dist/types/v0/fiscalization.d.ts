@@ -38,7 +38,7 @@ export declare class Fiscalization extends ThBaseHandler {
     options: FiscalizationOptions;
     uriHelper: UriHelper;
     constructor(options: FiscalizationOptions, http: Client);
-    init(options: FiscalizationItem): Promise<FiscalizationResponse>;
+    setLicense(branchId: string, options: FiscalizationItem): Promise<FiscalizationResponse>;
 }
 export declare class FiscalizationInitFailed extends BaseError {
     message: string;
