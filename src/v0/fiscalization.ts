@@ -62,7 +62,7 @@ export class Fiscalization extends ThBaseHandler {
     const uri = this.uriHelper.generateBaseUri(`/branches/${branchId}/set-license`)
 
     try {
-      const response = await this.http.getClient().post(uri, options)
+      const response = await this.http.getClient().put(uri, options)
       if (response.status !== 200) { throw new FiscalizationInitFailed(undefined, { status: response.status }) }
 
       return {

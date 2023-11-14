@@ -51,7 +51,7 @@ describe('v0: Fiscalization: can send emails', () => {
       })
 
       mock
-        .onPost(`https://api.tillhub.com/api/v0/fiscalization/${legacyId}/branches/${branchId}/set-license`)
+        .onPut(`https://api.tillhub.com/api/v0/fiscalization/${legacyId}/branches/${branchId}/set-license`)
         .reply(() => {
           return [
             200,
@@ -88,7 +88,7 @@ describe('v0: Fiscalization: can send emails', () => {
       })
 
       mock
-        .onPost(`https://api.tillhub.com/api/v0/fiscalization/${legacyId}/branches/${branchId}/set-license`)
+        .onPut(`https://api.tillhub.com/api/v0/fiscalization/${legacyId}/branches/${branchId}/set-license`)
         .reply(() => {
           return [205]
         })
