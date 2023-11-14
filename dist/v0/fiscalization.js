@@ -30,7 +30,7 @@ var Fiscalization = (function (_super) {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.http.getClient().post(uri, options)];
+                        return [4, this.http.getClient().put(uri, options)];
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {

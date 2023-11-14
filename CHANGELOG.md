@@ -1,3 +1,10 @@
+## [4.105.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.105.1...v4.105.2) (2023-11-14)
+
+
+### Bug Fixes
+
+* **fiscalization:** change method from post to put ([69cba29](https://github.com/tillhub/tillhub-sdk-javascript/commit/69cba29c3ddbfd12f179d2bf27399d7521a09847))
+
 ## [4.105.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.105.0...v4.105.1) (2023-11-14)
 
 
