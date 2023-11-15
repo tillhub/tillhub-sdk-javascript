@@ -51,7 +51,7 @@ describe('v0: Fiscalization: can send emails', () => {
       })
 
       mock
-        .onPut(`https://api.tillhub.com/api/v0/fiscalization/${legacyId}/branches/${branchId}/set-license`)
+        .onPut(`https://api.tillhub.com/api/v0/fiscalization/${legacyId}/initialize`)
         .reply(() => {
           return [
             200,
@@ -68,7 +68,7 @@ describe('v0: Fiscalization: can send emails', () => {
 
     expect(fiscalization).toBeInstanceOf(v0.Fiscalization)
 
-    const { data } = await fiscalization.setLicense(branchId, fiscalizationConfiguration)
+    const { data } = await fiscalization.init(fiscalizationConfiguration)
     expect(data).toMatchObject(fiscalizationConfiguration)
   })
 
@@ -88,7 +88,7 @@ describe('v0: Fiscalization: can send emails', () => {
       })
 
       mock
-        .onPut(`https://api.tillhub.com/api/v0/fiscalization/${legacyId}/branches/${branchId}/set-license`)
+        .onPut(`https://api.tillhub.com/api/v0/fiscalization/${legacyId}/initialize`)
         .reply(() => {
           return [205]
         })
@@ -96,7 +96,7 @@ describe('v0: Fiscalization: can send emails', () => {
 
     try {
       const th = await initThInstance()
-      await th.fiscalization().setLicense(branchId, fiscalizationConfiguration)
+      await th.fiscalization().init(fiscalizationConfiguration)
     } catch (err: any) {
       expect(err.name).toBe('FiscalizationInitFailed')
     }

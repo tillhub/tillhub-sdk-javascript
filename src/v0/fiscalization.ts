@@ -33,6 +33,10 @@ export interface FiscalizationItem {
   }
 }
 
+export interface fiscalizationLicenseKey {
+  licenseKey: string | null
+}
+
 export interface FiscalizationResponse {
   data?: FiscalizationItem
   msg?: string
@@ -58,8 +62,8 @@ export class Fiscalization extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async setLicense (branchId: string, options: FiscalizationItem): Promise<FiscalizationResponse> {
-    const uri = this.uriHelper.generateBaseUri(`/branches/${branchId}/set-license`)
+  async init (options: FiscalizationItem): Promise<FiscalizationResponse> {
+    const uri = this.uriHelper.generateBaseUri('/initialize')
 
     try {
       const response = await this.http.getClient().put(uri, options)
@@ -73,6 +77,22 @@ export class Fiscalization extends ThBaseHandler {
       throw new FiscalizationInitFailed(error.message, { error })
     }
   }
+
+  async setLicense (branchId: string, options: fiscalizationLicenseKey): Promise<FiscalizationResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/branches/${branchId}/set-license`)
+
+    try {
+      const response = await this.http.getClient().put(uri, options)
+      if (response.status !== 200) { throw new FiscalizationSetLicenseFailed(undefined, { status: response.status }) }
+
+      return {
+        data: response.data.results[0] as fiscalizationLicenseKey,
+        msg: response.data.msg
+      }
+    } catch (error: any) {
+      throw new FiscalizationSetLicenseFailed(error.message, { error })
+    }
+  }
 }
 
 export class FiscalizationInitFailed extends BaseError {
@@ -83,5 +103,15 @@ export class FiscalizationInitFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, FiscalizationInitFailed.prototype)
+  }
+}
+export class FiscalizationSetLicenseFailed extends BaseError {
+  public name = 'FiscalizationSetLicenseFailed'
+  constructor (
+    public message: string = 'Could not set license fiscalization',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, FiscalizationSetLicenseFailed.prototype)
   }
 }
