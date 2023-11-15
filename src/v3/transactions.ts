@@ -16,13 +16,8 @@ export interface TransactionsResponse {
 }
 
 export interface TransactionsMetaResponse {
-  results?: MetaEntity[]
+  metadata?: Record<string, unknown>
   msg?: string
-  status?: number
-}
-
-export interface MetaEntity {
-  count?: number
 }
 
 export interface TransactionResponse {
@@ -317,16 +312,16 @@ export class Transactions extends ThBaseHandler {
     }
   }
 
-  async getAllMeta (): Promise<TransactionsMetaResponse> {
-    const base = this.uriHelper.generateBaseUri()
-    const uri = this.uriHelper.generateUriWithQuery(base) + '/meta'
-
+  async meta (): Promise<TransactionsMetaResponse> {
     try {
+      const uri = this.uriHelper.generateBaseUri('/meta')
       const response = await this.http.getClient().get(uri)
+
+      if (response.status !== 200) throw new TransactionsGetMetaFailed()
+
       return {
-        results: response.data.count,
         msg: response.data.msg,
-        status: response.data.status
+        metadata: { count: response.data.count }
       }
     } catch (error: any) {
       throw new TransactionsFetchFailed(error.message, { error })
@@ -351,6 +346,17 @@ export class Transactions extends ThBaseHandler {
     } catch (error: any) {
       throw new TransactionFetchFailed(error.message, { error })
     }
+  }
+}
+
+export class TransactionsGetMetaFailed extends BaseError {
+  public name = 'TransactionsGetMetaFailed'
+  constructor (
+    public message: string = 'Could not fetch meta data for transactions',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, TransactionsGetMetaFailed.prototype)
   }
 }
 
