@@ -34,7 +34,7 @@ const fiscalizationConfiguration: FiscalizationItem = {
   }
 }
 
-describe('v0: Fiscalization: can send emails', () => {
+describe('v0: Fiscalization', () => {
   it("Tillhub's fiscalization are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
@@ -51,7 +51,7 @@ describe('v0: Fiscalization: can send emails', () => {
       })
 
       mock
-        .onPut(`https://api.tillhub.com/api/v0/fiscalization/${legacyId}/initialize`)
+        .onPost(`https://api.tillhub.com/api/v0/fiscalization/${legacyId}/initialize`)
         .reply(() => {
           return [
             200,
@@ -88,7 +88,7 @@ describe('v0: Fiscalization: can send emails', () => {
       })
 
       mock
-        .onPut(`https://api.tillhub.com/api/v0/fiscalization/${legacyId}/initialize`)
+        .onPost(`https://api.tillhub.com/api/v0/fiscalization/${legacyId}/initialize`)
         .reply(() => {
           return [205]
         })

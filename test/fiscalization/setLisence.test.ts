@@ -19,7 +19,7 @@ const options: fiscalizationLicenseKey = {
   licenseKey: faker.datatype.string(10)
 }
 
-describe('v0: Fiscalization: can send emails', () => {
+describe('v0: Fiscalization', () => {
   it("Tillhub's fiscalization are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
