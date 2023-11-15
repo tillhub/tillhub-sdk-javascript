@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FiscalizationInitFailed = exports.Fiscalization = void 0;
+exports.FiscalizationSetLicenseFailed = exports.FiscalizationInitFailed = exports.Fiscalization = void 0;
 var tslib_1 = require("tslib");
 var baseError_1 = require("../errors/baseError");
 var uri_helper_1 = require("../uri-helper");
@@ -20,17 +20,17 @@ var Fiscalization = (function (_super) {
         _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
         return _this;
     }
-    Fiscalization.prototype.setLicense = function (branchId, options) {
+    Fiscalization.prototype.init = function (options) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var uri, response, error_1;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = this.uriHelper.generateBaseUri("/branches/" + branchId + "/set-license");
+                        uri = this.uriHelper.generateBaseUri('/initialize');
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.http.getClient().put(uri, options)];
+                        return [4, this.http.getClient().post(uri, options)];
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
@@ -43,6 +43,34 @@ var Fiscalization = (function (_super) {
                     case 3:
                         error_1 = _a.sent();
                         throw new FiscalizationInitFailed(error_1.message, { error: error_1 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
+    Fiscalization.prototype.setLicense = function (branchId, options) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_2;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri("/branches/" + branchId + "/set-license");
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().put(uri, options)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new FiscalizationSetLicenseFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results[0],
+                                msg: response.data.msg
+                            }];
+                    case 3:
+                        error_2 = _a.sent();
+                        throw new FiscalizationSetLicenseFailed(error_2.message, { error: error_2 });
                     case 4: return [2];
                 }
             });
@@ -65,4 +93,17 @@ var FiscalizationInitFailed = (function (_super) {
     return FiscalizationInitFailed;
 }(baseError_1.BaseError));
 exports.FiscalizationInitFailed = FiscalizationInitFailed;
+var FiscalizationSetLicenseFailed = (function (_super) {
+    tslib_1.__extends(FiscalizationSetLicenseFailed, _super);
+    function FiscalizationSetLicenseFailed(message, properties) {
+        if (message === void 0) { message = 'Could not set license fiscalization'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'FiscalizationSetLicenseFailed';
+        Object.setPrototypeOf(_this, FiscalizationSetLicenseFailed.prototype);
+        return _this;
+    }
+    return FiscalizationSetLicenseFailed;
+}(baseError_1.BaseError));
+exports.FiscalizationSetLicenseFailed = FiscalizationSetLicenseFailed;
 //# sourceMappingURL=fiscalization.js.map

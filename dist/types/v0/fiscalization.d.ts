@@ -27,6 +27,9 @@ export interface FiscalizationItem {
         fon: fiscalizationConfiguration;
     };
 }
+export interface fiscalizationLicenseKey {
+    licenseKey: string | null;
+}
 export interface FiscalizationResponse {
     data?: FiscalizationItem;
     msg?: string;
@@ -38,9 +41,15 @@ export declare class Fiscalization extends ThBaseHandler {
     options: FiscalizationOptions;
     uriHelper: UriHelper;
     constructor(options: FiscalizationOptions, http: Client);
-    setLicense(branchId: string, options: FiscalizationItem): Promise<FiscalizationResponse>;
+    init(options: FiscalizationItem): Promise<FiscalizationResponse>;
+    setLicense(branchId: string, options: fiscalizationLicenseKey): Promise<FiscalizationResponse>;
 }
 export declare class FiscalizationInitFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class FiscalizationSetLicenseFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

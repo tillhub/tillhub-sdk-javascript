@@ -1,3 +1,16 @@
+# [4.107.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.106.0...v4.107.0) (2023-11-15)
+
+
+### Bug Fixes
+
+* **fiscalization:** change method to post ([a7a9dca](https://github.com/tillhub/tillhub-sdk-javascript/commit/a7a9dcac20e841cd56cc1505a0a7a1863f2f20bf))
+* **fiscalization:** test fail ([69e60d3](https://github.com/tillhub/tillhub-sdk-javascript/commit/69e60d3bf8efa2137adfc323888cbb2e89792cbf))
+
+
+### Features
+
+* **fiscalization:** add initalize function ([4f66720](https://github.com/tillhub/tillhub-sdk-javascript/commit/4f667209b4aad62bf3cf7ba8fc41864776aa2107))
+
 # [4.106.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.105.2...v4.106.0) (2023-11-15)
 
 
