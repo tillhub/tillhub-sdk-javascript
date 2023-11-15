@@ -66,7 +66,7 @@ export class Fiscalization extends ThBaseHandler {
     const uri = this.uriHelper.generateBaseUri('/initialize')
 
     try {
-      const response = await this.http.getClient().put(uri, options)
+      const response = await this.http.getClient().post(uri, options)
       if (response.status !== 200) { throw new FiscalizationInitFailed(undefined, { status: response.status }) }
 
       return {
@@ -86,7 +86,7 @@ export class Fiscalization extends ThBaseHandler {
       if (response.status !== 200) { throw new FiscalizationSetLicenseFailed(undefined, { status: response.status }) }
 
       return {
-        data: response.data.results[0] as fiscalizationLicenseKey,
+        data: response.data.results[0] as FiscalizationItem,
         msg: response.data.msg
       }
     } catch (error: any) {
