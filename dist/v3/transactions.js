@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TransactionFetchFailed = exports.TransactionsFetchFailed = exports.Transactions = void 0;
+exports.TransactionFetchFailed = exports.TransactionsFetchFailed = exports.TransactionsGetMetaFailed = exports.Transactions = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -55,29 +55,27 @@ var Transactions = (function (_super) {
             });
         });
     };
-    Transactions.prototype.getAllMeta = function () {
+    Transactions.prototype.meta = function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_2;
+            var uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        base = this.uriHelper.generateBaseUri();
-                        uri = this.uriHelper.generateUriWithQuery(base) + '/meta';
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
+                        _a.trys.push([0, 2, , 3]);
+                        uri = this.uriHelper.generateBaseUri('/meta');
                         return [4, this.http.getClient().get(uri)];
-                    case 2:
+                    case 1:
                         response = _a.sent();
+                        if (response.status !== 200)
+                            throw new TransactionsGetMetaFailed();
                         return [2, {
-                                results: response.data.count,
                                 msg: response.data.msg,
-                                status: response.data.status
+                                metadata: { count: response.data.count }
                             }];
-                    case 3:
+                    case 2:
                         error_2 = _a.sent();
                         throw new TransactionsFetchFailed(error_2.message, { error: error_2 });
-                    case 4: return [2];
+                    case 3: return [2];
                 }
             });
         });
@@ -116,6 +114,19 @@ var Transactions = (function (_super) {
     return Transactions;
 }(base_1.ThBaseHandler));
 exports.Transactions = Transactions;
+var TransactionsGetMetaFailed = (function (_super) {
+    tslib_1.__extends(TransactionsGetMetaFailed, _super);
+    function TransactionsGetMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch meta data for transactions'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TransactionsGetMetaFailed';
+        Object.setPrototypeOf(_this, TransactionsGetMetaFailed.prototype);
+        return _this;
+    }
+    return TransactionsGetMetaFailed;
+}(errors_1.BaseError));
+exports.TransactionsGetMetaFailed = TransactionsGetMetaFailed;
 var TransactionsFetchFailed = (function (_super) {
     tslib_1.__extends(TransactionsFetchFailed, _super);
     function TransactionsFetchFailed(message, properties) {

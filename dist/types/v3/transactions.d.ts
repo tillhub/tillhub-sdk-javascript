@@ -13,12 +13,8 @@ export interface TransactionsResponse {
     next?: () => Promise<TransactionsResponse>;
 }
 export interface TransactionsMetaResponse {
-    results?: MetaEntity[];
+    metadata?: Record<string, unknown>;
     msg?: string;
-    status?: number;
-}
-export interface MetaEntity {
-    count?: number;
 }
 export interface TransactionResponse {
     data: TransactionEntity;
@@ -266,8 +262,13 @@ export declare class Transactions extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: TransactionsOptions, http: Client);
     getAll(query?: TransactionsQueryHandler | undefined): Promise<TransactionsResponse>;
-    getAllMeta(): Promise<TransactionsMetaResponse>;
+    meta(): Promise<TransactionsMetaResponse>;
     get(transactionId: string): Promise<TransactionResponse>;
+}
+export declare class TransactionsGetMetaFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class TransactionsFetchFailed extends BaseError {
     message: string;

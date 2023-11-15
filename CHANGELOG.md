@@ -1,3 +1,10 @@
+# [4.106.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.105.2...v4.106.0) (2023-11-15)
+
+
+### Features
+
+* **transactions:** update meta function ([e387d87](https://github.com/tillhub/tillhub-sdk-javascript/commit/e387d87868fa6aea9382ce00659da83bcb42b375))
+
 ## [4.105.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.105.1...v4.105.2) (2023-11-14)
 
 
