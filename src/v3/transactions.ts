@@ -37,12 +37,12 @@ export interface TransactionsQueryHandler {
   limit?: number
   uri?: string
   query?: TransactionsQuery
+  orderFields?: string[] | string
 }
 
 export interface TransactionsQuery extends TransactionEntity {
   deleted?: boolean
   active?: boolean
-  orderFields?: string[] | string
 }
 
 declare type CommerceTypes = 'eCommerce' | 'moto' | 'pos' | 'undefined' | 'unknown'
