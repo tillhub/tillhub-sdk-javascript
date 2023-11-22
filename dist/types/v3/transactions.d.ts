@@ -31,11 +31,11 @@ export interface TransactionsQueryHandler {
     limit?: number;
     uri?: string;
     query?: TransactionsQuery;
+    orderFields?: string[] | string;
 }
 export interface TransactionsQuery extends TransactionEntity {
     deleted?: boolean;
     active?: boolean;
-    orderFields?: string[] | string;
 }
 declare type CommerceTypes = 'eCommerce' | 'moto' | 'pos' | 'undefined' | 'unknown';
 declare type PaymentMethodCodeTypes = 'undefined' | 'alipay' | 'applepay' | 'bancontact' | 'bank_transfer' | 'billpay_installment' | 'billpay_invoice' | 'credit_card' | 'debit_card' | 'easycredit_installment' | 'eps' | 'fleetcard' | 'girocard' | 'giropay' | 'googlepay' | 'ideal' | 'installment' | 'invoice' | 'klarna' | 'klarna_installment' | 'klarna_invoice' | 'loyalty' | 'monthly_invoice' | 'paypal' | 'paypal_express' | 'paysafecard' | 'paysafecash' | 'post_finance_card' | 'post_finance_efinance' | 'prepayment' | 'przelewy24' | 'santander_installment' | 'santander_purchase_on_account' | 'sepa_direct_debit' | 'sofort' | 'wechatpay' | 'unknown';

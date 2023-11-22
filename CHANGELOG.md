@@ -1,3 +1,10 @@
+# [4.108.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.107.0...v4.108.0) (2023-11-22)
+
+
+### Features
+
+* **transactions:** taking out the ordering outside of the filtering ([634cc20](https://github.com/tillhub/tillhub-sdk-javascript/commit/634cc201ffe8793295ed21c66ad3c7e51a5b713c))
+
 # [4.107.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.106.0...v4.107.0) (2023-11-15)
 
 
