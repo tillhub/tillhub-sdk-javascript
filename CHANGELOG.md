@@ -1,3 +1,10 @@
+# [4.109.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.108.1...v4.109.0) (2023-11-27)
+
+
+### Features
+
+* **transaction:** add filtering by requestTimestamp ([b8ffcd5](https://github.com/tillhub/tillhub-sdk-javascript/commit/b8ffcd53fe5819a76a6ba859d4f1f6b67f643353))
+
 ## [4.108.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.108.0...v4.108.1) (2023-11-27)
 
 
