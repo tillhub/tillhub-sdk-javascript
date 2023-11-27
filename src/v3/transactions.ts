@@ -16,8 +16,8 @@ export interface TransactionsResponse {
 }
 
 export interface TransactionsMetaResponse {
-  metadata?: Record<string, unknown>
-  msg?: string
+  metadata: Record<string, unknown>
+  msg: string
 }
 
 export interface TransactionResponse {
@@ -321,7 +321,7 @@ export class Transactions extends ThBaseHandler {
 
       return {
         msg: response.data.msg,
-        metadata: { count: response.data.count }
+        metadata: { count: response.data.results[0]?.count || 0 }
       }
     } catch (error: any) {
       throw new TransactionsFetchFailed(error.message, { error })
