@@ -240,7 +240,10 @@ export interface TransactionEntity {
   processingStatusCode?: string | null
   processingStatusDescription?: string | null
   response?: TransactionResponseType | null
-  requestTimestamp?: string | null
+  requestTimestamp?: string | {
+    start: Date
+    end: Date
+  } | null
   shippingCarrier?: string | null
   shippingTrackingId?: string | null
   source?: string | null
