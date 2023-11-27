@@ -1,3 +1,10 @@
+## [4.108.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.108.0...v4.108.1) (2023-11-27)
+
+
+### Bug Fixes
+
+* **transactions:** update metadata to unwrap the object ([b71c685](https://github.com/tillhub/tillhub-sdk-javascript/commit/b71c685df627996795b9a19c72f5a6680a4bf364))
+
 # [4.108.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.107.0...v4.108.0) (2023-11-22)
 
 

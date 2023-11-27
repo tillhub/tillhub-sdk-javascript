@@ -56,24 +56,25 @@ var Transactions = (function (_super) {
         });
     };
     Transactions.prototype.meta = function () {
+        var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var uri, response, error_2;
-            return tslib_1.__generator(this, function (_a) {
-                switch (_a.label) {
+            return tslib_1.__generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _b.trys.push([0, 2, , 3]);
                         uri = this.uriHelper.generateBaseUri('/meta');
                         return [4, this.http.getClient().get(uri)];
                     case 1:
-                        response = _a.sent();
+                        response = _b.sent();
                         if (response.status !== 200)
                             throw new TransactionsGetMetaFailed();
                         return [2, {
                                 msg: response.data.msg,
-                                metadata: { count: response.data.count }
+                                metadata: { count: ((_a = response.data.results[0]) === null || _a === void 0 ? void 0 : _a.count) || 0 }
                             }];
                     case 2:
-                        error_2 = _a.sent();
+                        error_2 = _b.sent();
                         throw new TransactionsFetchFailed(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }

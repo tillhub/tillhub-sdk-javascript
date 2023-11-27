@@ -13,8 +13,8 @@ export interface TransactionsResponse {
     next?: () => Promise<TransactionsResponse>;
 }
 export interface TransactionsMetaResponse {
-    metadata?: Record<string, unknown>;
-    msg?: string;
+    metadata: Record<string, unknown>;
+    msg: string;
 }
 export interface TransactionResponse {
     data: TransactionEntity;
