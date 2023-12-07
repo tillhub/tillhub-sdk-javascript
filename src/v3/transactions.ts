@@ -16,6 +16,7 @@ export interface TransactionsResponse {
 }
 
 export interface TransactionsMetaResponse {
+  data: Record<string, unknown>
   metadata: Record<string, unknown>
   msg: string
 }
@@ -312,14 +313,17 @@ export class Transactions extends ThBaseHandler {
     }
   }
 
-  async meta (): Promise<TransactionsMetaResponse> {
+  async meta (query?: TransactionsQueryHandler | undefined): Promise<TransactionsMetaResponse> {
+    const base = this.uriHelper.generateBaseUri()
+    const uri = this.uriHelper.generateUriWithQuery(`${base}/meta`, query)
+
     try {
-      const uri = this.uriHelper.generateBaseUri('/meta')
       const response = await this.http.getClient().get(uri)
 
       if (response.status !== 200) throw new TransactionsGetMetaFailed()
 
       return {
+        data: response.data.results[0].count || 0,
         msg: response.data.msg,
         metadata: { count: response.data.results[0]?.count || 0 }
       }
