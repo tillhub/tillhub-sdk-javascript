@@ -302,13 +302,13 @@ export class Transactions extends ThBaseHandler {
         throw new TransactionsFetchFailed(undefined, { status: response.status })
       }
 
-      if (response.data.cursor?.next) {
-        next = (): Promise<TransactionsResponse> => this.getAll({ uri })
+      if (response.data.cursors?.after) {
+        next = (): Promise<TransactionsResponse> => this.getAll({ uri: response.data.cursors.after })
       }
 
       return {
         data: response.data.results as TransactionEntity[],
-        metadata: { cursor: response.data.cursor },
+        metadata: { cursor: response.data.cursors },
         next
       }
     } catch (error: any) {
@@ -326,7 +326,7 @@ export class Transactions extends ThBaseHandler {
       if (response.status !== 200) throw new TransactionsGetMetaFailed()
 
       return {
-        data: response.data.results[0].count || 0,
+        data: response.data.results[0],
         msg: response.data.msg,
         metadata: { count: response.data.results[0]?.count || 0 }
       }
