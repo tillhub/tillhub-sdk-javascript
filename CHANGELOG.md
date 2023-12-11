@@ -1,3 +1,10 @@
+# [4.110.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.109.1...v4.110.0) (2023-12-11)
+
+
+### Features
+
+* **transactions:** fix meta & cursor pagination ([340345c](https://github.com/tillhub/tillhub-sdk-javascript/commit/340345c1dd98a83635c3ab6c6fa5b8347eaf9b2a))
+
 ## [4.109.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.109.0...v4.109.1) (2023-12-11)
 
 

@@ -23,7 +23,7 @@ var Transactions = (function (_super) {
     Transactions.prototype.getAll = function (query) {
         var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var next, base, uri, response, error_1;
+            var next, base, uri, response_1, error_1;
             var _this = this;
             return tslib_1.__generator(this, function (_b) {
                 switch (_b.label) {
@@ -35,16 +35,16 @@ var Transactions = (function (_super) {
                         _b.trys.push([1, 3, , 4]);
                         return [4, this.http.getClient().get(uri)];
                     case 2:
-                        response = _b.sent();
-                        if (response.status !== 200) {
-                            throw new TransactionsFetchFailed(undefined, { status: response.status });
+                        response_1 = _b.sent();
+                        if (response_1.status !== 200) {
+                            throw new TransactionsFetchFailed(undefined, { status: response_1.status });
                         }
-                        if ((_a = response.data.cursor) === null || _a === void 0 ? void 0 : _a.next) {
-                            next = function () { return _this.getAll({ uri: uri }); };
+                        if ((_a = response_1.data.cursors) === null || _a === void 0 ? void 0 : _a.after) {
+                            next = function () { return _this.getAll({ uri: response_1.data.cursors.after }); };
                         }
                         return [2, {
-                                data: response.data.results,
-                                metadata: { cursor: response.data.cursor },
+                                data: response_1.data.results,
+                                metadata: { cursor: response_1.data.cursors },
                                 next: next
                             }];
                     case 3:
@@ -73,7 +73,7 @@ var Transactions = (function (_super) {
                         if (response.status !== 200)
                             throw new TransactionsGetMetaFailed();
                         return [2, {
-                                data: response.data.results[0].count || 0,
+                                data: response.data.results[0],
                                 msg: response.data.msg,
                                 metadata: { count: ((_a = response.data.results[0]) === null || _a === void 0 ? void 0 : _a.count) || 0 }
                             }];
