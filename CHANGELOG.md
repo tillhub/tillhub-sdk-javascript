@@ -1,3 +1,10 @@
+## [4.109.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.109.0...v4.109.1) (2023-12-11)
+
+
+### Bug Fixes
+
+* **transactions:** meta call update ([02b92bf](https://github.com/tillhub/tillhub-sdk-javascript/commit/02b92bf887b1ed51b2230b807889a3c4361095c9))
+
 # [4.109.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.108.1...v4.109.0) (2023-11-27)
 
 

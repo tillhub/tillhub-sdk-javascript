@@ -13,6 +13,7 @@ export interface TransactionsResponse {
     next?: () => Promise<TransactionsResponse>;
 }
 export interface TransactionsMetaResponse {
+    data: Record<string, unknown>;
     metadata: Record<string, unknown>;
     msg: string;
 }
@@ -265,7 +266,7 @@ export declare class Transactions extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: TransactionsOptions, http: Client);
     getAll(query?: TransactionsQueryHandler | undefined): Promise<TransactionsResponse>;
-    meta(): Promise<TransactionsMetaResponse>;
+    meta(query?: TransactionsQueryHandler | undefined): Promise<TransactionsMetaResponse>;
     get(transactionId: string): Promise<TransactionResponse>;
 }
 export declare class TransactionsGetMetaFailed extends BaseError {

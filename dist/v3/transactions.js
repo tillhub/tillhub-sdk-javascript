@@ -55,28 +55,32 @@ var Transactions = (function (_super) {
             });
         });
     };
-    Transactions.prototype.meta = function () {
+    Transactions.prototype.meta = function (query) {
         var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_2;
+            var base, uri, response, error_2;
             return tslib_1.__generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        _b.trys.push([0, 2, , 3]);
-                        uri = this.uriHelper.generateBaseUri('/meta');
-                        return [4, this.http.getClient().get(uri)];
+                        base = this.uriHelper.generateBaseUri();
+                        uri = this.uriHelper.generateUriWithQuery(base + "/meta", query);
+                        _b.label = 1;
                     case 1:
+                        _b.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().get(uri)];
+                    case 2:
                         response = _b.sent();
                         if (response.status !== 200)
                             throw new TransactionsGetMetaFailed();
                         return [2, {
+                                data: response.data.results[0].count || 0,
                                 msg: response.data.msg,
                                 metadata: { count: ((_a = response.data.results[0]) === null || _a === void 0 ? void 0 : _a.count) || 0 }
                             }];
-                    case 2:
+                    case 3:
                         error_2 = _b.sent();
                         throw new TransactionsFetchFailed(error_2.message, { error: error_2 });
-                    case 3: return [2];
+                    case 4: return [2];
                 }
             });
         });
