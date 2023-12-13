@@ -8,22 +8,24 @@ export interface AnalyticsOptions {
   base?: string
 }
 
-export interface AnalyticsGetRevenueAverageQuery {
+export interface AnalyticsQuery {
   compare?: boolean
   branch?: string
   end: Date
   start: Date
 }
 
-export interface AnalyticsGetRevenueAverageResponse {
+export interface AnalyticsResponse {
   data: {
-    series: Array<{
-      period: 'current' | 'previous'
-      data: number[]
-      total: number
-      unit: string
-    }>
+    series: AnalyticsResponseSeries[]
   }
+}
+
+interface AnalyticsResponseSeries {
+  period: 'current' | 'previous'
+  data: number[]
+  total: number
+  unit: string
 }
 
 export class Analytics extends ThBaseHandler {
@@ -46,9 +48,26 @@ export class Analytics extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
+  async getRevenue (
+    query?: AnalyticsQuery
+  ): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/revenue')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      const response = await this.http.getClient().get(uri)
+
+      return {
+        data: response.data.results[0]
+      }
+    } catch (error: any) {
+      throw new AnalyticsGetRevenueFailed(error.message)
+    }
+  }
+
   async getRevenueAverage (
-    query?: AnalyticsGetRevenueAverageQuery
-  ): Promise<AnalyticsGetRevenueAverageResponse> {
+    query?: AnalyticsQuery
+  ): Promise<AnalyticsResponse> {
     try {
       const base = this.uriHelper.generateBaseUri('/revenue/average')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -61,6 +80,17 @@ export class Analytics extends ThBaseHandler {
     } catch (error: any) {
       throw new AnalyticsGetRevenueAverageFailed(error.message)
     }
+  }
+}
+
+export class AnalyticsGetRevenueFailed extends BaseError {
+  public name = 'AnalyticsGetRevenueFailed'
+  constructor (
+    public message: string = 'Could not get revenue',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, AnalyticsGetRevenueFailed.prototype)
   }
 }
 
