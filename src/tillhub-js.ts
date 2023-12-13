@@ -1264,6 +1264,14 @@ export class TillhubClient extends events.EventEmitter {
   shiftPlan(): v0.ShiftPlan {
     return this.generateAuthenticatedInstance(v0.ShiftPlan)
   }
+  
+  /**
+   * Create an authenticated AnalyticsV4 instance
+   *
+   */
+  analyticsV4(): v4.Analytics {
+    return this.generateAuthenticatedInstance(v4.Analytics)
+  }
 }
 
 export class Tillhub extends TillhubClient {

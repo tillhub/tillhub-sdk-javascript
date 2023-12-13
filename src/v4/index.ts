@@ -1,3 +1,4 @@
+import { Analytics } from './analytics'
 import { Products } from './products'
 
-export { Products }
+export { Analytics, Products }
