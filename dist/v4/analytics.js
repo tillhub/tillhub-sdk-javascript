@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AnalyticsGetRevenueAverageFailed = exports.Analytics = void 0;
+exports.AnalyticsGetRevenueAverageFailed = exports.AnalyticsGetRevenueFailed = exports.Analytics = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -20,9 +20,32 @@ var Analytics = (function (_super) {
         _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
         return _this;
     }
-    Analytics.prototype.getRevenueAverage = function (query) {
+    Analytics.prototype.getRevenue = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_1;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri('/revenue');
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        return [4, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        return [2, {
+                                data: response.data.results[0]
+                            }];
+                    case 2:
+                        error_1 = _a.sent();
+                        throw new AnalyticsGetRevenueFailed(error_1.message);
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    Analytics.prototype.getRevenueAverage = function (query) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -36,8 +59,8 @@ var Analytics = (function (_super) {
                                 data: response.data.results[0]
                             }];
                     case 2:
-                        error_1 = _a.sent();
-                        throw new AnalyticsGetRevenueAverageFailed(error_1.message);
+                        error_2 = _a.sent();
+                        throw new AnalyticsGetRevenueAverageFailed(error_2.message);
                     case 3: return [2];
                 }
             });
@@ -47,6 +70,19 @@ var Analytics = (function (_super) {
     return Analytics;
 }(base_1.ThBaseHandler));
 exports.Analytics = Analytics;
+var AnalyticsGetRevenueFailed = (function (_super) {
+    tslib_1.__extends(AnalyticsGetRevenueFailed, _super);
+    function AnalyticsGetRevenueFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get revenue'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'AnalyticsGetRevenueFailed';
+        Object.setPrototypeOf(_this, AnalyticsGetRevenueFailed.prototype);
+        return _this;
+    }
+    return AnalyticsGetRevenueFailed;
+}(errors_1.BaseError));
+exports.AnalyticsGetRevenueFailed = AnalyticsGetRevenueFailed;
 var AnalyticsGetRevenueAverageFailed = (function (_super) {
     tslib_1.__extends(AnalyticsGetRevenueAverageFailed, _super);
     function AnalyticsGetRevenueAverageFailed(message, properties) {

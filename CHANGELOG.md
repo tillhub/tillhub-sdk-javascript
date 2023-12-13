@@ -1,3 +1,10 @@
+# [4.112.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.111.0...v4.112.0) (2023-12-13)
+
+
+### Features
+
+* **home:** add get revenue method to analytics v4 ([a9d1379](https://github.com/tillhub/tillhub-sdk-javascript/commit/a9d13797ea4d1b30d499710eb1e8bc6b445896f4))
+
 # [4.111.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.110.0...v4.111.0) (2023-12-13)
 
 

@@ -6,21 +6,22 @@ export interface AnalyticsOptions {
     user?: string;
     base?: string;
 }
-export interface AnalyticsGetRevenueAverageQuery {
+export interface AnalyticsQuery {
     compare?: boolean;
     branch?: string;
     end: Date;
     start: Date;
 }
-export interface AnalyticsGetRevenueAverageResponse {
+export interface AnalyticsResponse {
     data: {
-        series: Array<{
-            period: 'current' | 'previous';
-            data: number[];
-            total: number;
-            unit: string;
-        }>;
+        series: AnalyticsResponseSeries[];
     };
+}
+interface AnalyticsResponseSeries {
+    period: 'current' | 'previous';
+    data: number[];
+    total: number;
+    unit: string;
 }
 export declare class Analytics extends ThBaseHandler {
     static baseEndpoint: string;
@@ -29,10 +30,17 @@ export declare class Analytics extends ThBaseHandler {
     options: AnalyticsOptions;
     uriHelper: UriHelper;
     constructor(options: AnalyticsOptions, http: Client);
-    getRevenueAverage(query?: AnalyticsGetRevenueAverageQuery): Promise<AnalyticsGetRevenueAverageResponse>;
+    getRevenue(query?: AnalyticsQuery): Promise<AnalyticsResponse>;
+    getRevenueAverage(query?: AnalyticsQuery): Promise<AnalyticsResponse>;
+}
+export declare class AnalyticsGetRevenueFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class AnalyticsGetRevenueAverageFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
 }
+export {};
