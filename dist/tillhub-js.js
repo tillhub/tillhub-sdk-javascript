@@ -561,6 +561,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.shiftPlan = function () {
         return this.generateAuthenticatedInstance(v0.ShiftPlan);
     };
+    TillhubClient.prototype.analyticsV4 = function () {
+        return this.generateAuthenticatedInstance(v4.Analytics);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));
