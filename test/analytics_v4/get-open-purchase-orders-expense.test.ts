@@ -27,21 +27,21 @@ const results = [
     series: [
       {
         period: 'current',
-        data: [5.5],
-        total: 5.5,
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14],
+        total: 14,
         unit: 'EUR'
       },
       {
         period: 'previous',
-        data: [0],
-        total: 0,
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12],
+        total: 12,
         unit: 'EUR'
       }
     ]
   }
 ]
 
-describe('v4: Analytics: can get revenue average', () => {
+describe('v4: Analytics: can get open purchase orders expense', () => {
   it("Tillhub's analytics are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
@@ -58,7 +58,7 @@ describe('v4: Analytics: can get revenue average', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v4/analytics/${legacyId}/revenue/average`)
+        .onGet(`https://api.tillhub.com/api/v4/analytics/${legacyId}/open-purchase-orders/expense`)
         .reply(() => {
           return [200, { results }]
         })
@@ -70,7 +70,7 @@ describe('v4: Analytics: can get revenue average', () => {
 
     expect(analytics).toBeInstanceOf(v4.Analytics)
 
-    const { data } = await analytics.getRevenueAverage()
+    const { data } = await analytics.getOpenPurchaseOrdersExpense()
     expect(data).toMatchObject(results[0])
   })
 
@@ -90,7 +90,7 @@ describe('v4: Analytics: can get revenue average', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v4/analytics/${legacyId}/revenue/average`)
+        .onGet(`https://api.tillhub.com/api/v4/analytics/${legacyId}/open-purchase-orders/expense`)
         .reply(() => {
           return [205]
         })
@@ -98,9 +98,9 @@ describe('v4: Analytics: can get revenue average', () => {
 
     try {
       const th = await initThInstance()
-      await th.analyticsV4().getRevenueAverage()
+      await th.analyticsV4().getOpenPurchaseOrdersExpense()
     } catch (err: any) {
-      expect(err.name).toBe('AnalyticsGetRevenueAverageFailed')
+      expect(err.name).toBe('AnalyticsGetOpenPurchaseOrdersExpenseFailed')
     }
   })
 })
