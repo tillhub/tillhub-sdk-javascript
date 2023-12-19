@@ -17,10 +17,21 @@ export interface AnalyticsQuery {
 
 export interface AnalyticsResponse {
   data: {
+    periods: AnalyticsResponsePeriods
     series: AnalyticsResponseSeries[]
   }
 }
 
+interface AnalyticsResponsePeriods {
+  current: {
+    end: Date
+    start: Date
+  }
+  previous: {
+    end: Date
+    start: Date
+  }
+}
 interface AnalyticsResponseSeries {
   period: 'current' | 'previous'
   data: number[]
@@ -48,9 +59,7 @@ export class Analytics extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async getRevenue (
-    query?: AnalyticsQuery
-  ): Promise<AnalyticsResponse> {
+  async getRevenue (query?: AnalyticsQuery): Promise<AnalyticsResponse> {
     try {
       const base = this.uriHelper.generateBaseUri('/revenue')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -65,9 +74,7 @@ export class Analytics extends ThBaseHandler {
     }
   }
 
-  async getRevenueAverage (
-    query?: AnalyticsQuery
-  ): Promise<AnalyticsResponse> {
+  async getRevenueAverage (query?: AnalyticsQuery): Promise<AnalyticsResponse> {
     try {
       const base = this.uriHelper.generateBaseUri('/revenue/average')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -79,6 +86,36 @@ export class Analytics extends ThBaseHandler {
       }
     } catch (error: any) {
       throw new AnalyticsGetRevenueAverageFailed(error.message)
+    }
+  }
+
+  async getOpenPurchaseOrdersCount (query?: AnalyticsQuery): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/open-purchase-orders/count')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      const response = await this.http.getClient().get(uri)
+
+      return {
+        data: response.data.results[0]
+      }
+    } catch (error: any) {
+      throw new AnalyticsGetOpenPurchaseOrdersCountFailed(error.message)
+    }
+  }
+
+  async getOpenPurchaseOrdersExpense (query?: AnalyticsQuery): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/open-purchase-orders/expense')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      const response = await this.http.getClient().get(uri)
+
+      return {
+        data: response.data.results[0]
+      }
+    } catch (error: any) {
+      throw new AnalyticsGetOpenPurchaseOrdersExpenseFailed(error.message)
     }
   }
 }
@@ -102,5 +139,27 @@ export class AnalyticsGetRevenueAverageFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsGetRevenueAverageFailed.prototype)
+  }
+}
+
+export class AnalyticsGetOpenPurchaseOrdersCountFailed extends BaseError {
+  public name = 'AnalyticsGetOpenPurchaseOrdersCountFailed'
+  constructor (
+    public message: string = 'Could not get open purchase orders count',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, AnalyticsGetOpenPurchaseOrdersCountFailed.prototype)
+  }
+}
+
+export class AnalyticsGetOpenPurchaseOrdersExpenseFailed extends BaseError {
+  public name = 'AnalyticsGetOpenPurchaseOrdersExpenseFailed'
+  constructor (
+    public message: string = 'Could not get open purchase orders expense',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, AnalyticsGetOpenPurchaseOrdersExpenseFailed.prototype)
   }
 }
