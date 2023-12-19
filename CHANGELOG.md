@@ -1,3 +1,11 @@
+# [4.113.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.112.0...v4.113.0) (2023-12-19)
+
+
+### Features
+
+* **home:** add open purchase orders methods ([e4bc10f](https://github.com/tillhub/tillhub-sdk-javascript/commit/e4bc10f7a66c3c4ec521dfe4ddac5fce53e43786))
+* **home:** add unit tests for the methods ([74c6ce7](https://github.com/tillhub/tillhub-sdk-javascript/commit/74c6ce7f9aa989fd16d2c3e7a2ead0aa079f6a43))
+
 # [4.112.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.111.0...v4.112.0) (2023-12-13)
 
 
