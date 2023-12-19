@@ -14,6 +14,16 @@ afterEach(() => {
 
 const results = [
   {
+    periods: {
+      current: {
+        start: '2023-12-11T12:00:00.000Z',
+        end: '2023-12-18T12:59:59.999Z'
+      },
+      previous: {
+        start: '2023-12-04T11:00:00.000Z',
+        end: '2023-12-11T11:59:59.999Z'
+      }
+    },
     series: [
       {
         period: 'current',
