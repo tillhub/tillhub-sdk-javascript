@@ -119,6 +119,21 @@ export class Analytics extends ThBaseHandler {
       throw new AnalyticsGetOpenPurchaseOrdersExpenseFailed(error.message)
     }
   }
+
+  async getProductsReturnRate (query?: AnalyticsQuery): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/products-return-rate')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      const response = await this.http.getClient().get(uri)
+
+      return {
+        data: response.data.results[0]
+      }
+    } catch (error: any) {
+      throw new AnalyticsGetProductsReturnRateFailed(error.message)
+    }
+  }
 }
 
 export class AnalyticsGetRevenueFailed extends BaseError {
@@ -162,5 +177,16 @@ export class AnalyticsGetOpenPurchaseOrdersExpenseFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsGetOpenPurchaseOrdersExpenseFailed.prototype)
+  }
+}
+
+export class AnalyticsGetProductsReturnRateFailed extends BaseError {
+  public name = 'AnalyticsGetProductsReturnRateFailed'
+  constructor (
+    public message: string = 'Could not get products return rate',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, AnalyticsGetProductsReturnRateFailed.prototype)
   }
 }
