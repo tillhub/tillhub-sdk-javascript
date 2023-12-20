@@ -11,6 +11,7 @@ export interface AnalyticsOptions {
 export interface AnalyticsQuery {
   compare?: boolean
   branch?: string
+  currency: string
   end: Date
   start: Date
 }
