@@ -9,6 +9,7 @@ export interface AnalyticsOptions {
 export interface AnalyticsQuery {
     compare?: boolean;
     branch?: string;
+    currency: string;
     end: Date;
     start: Date;
 }
@@ -45,6 +46,7 @@ export declare class Analytics extends ThBaseHandler {
     getRevenueAverage(query?: AnalyticsQuery): Promise<AnalyticsResponse>;
     getOpenPurchaseOrdersCount(query?: AnalyticsQuery): Promise<AnalyticsResponse>;
     getOpenPurchaseOrdersExpense(query?: AnalyticsQuery): Promise<AnalyticsResponse>;
+    getProductsReturnRate(query?: AnalyticsQuery): Promise<AnalyticsResponse>;
 }
 export declare class AnalyticsGetRevenueFailed extends BaseError {
     message: string;
@@ -62,6 +64,11 @@ export declare class AnalyticsGetOpenPurchaseOrdersCountFailed extends BaseError
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class AnalyticsGetOpenPurchaseOrdersExpenseFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class AnalyticsGetProductsReturnRateFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

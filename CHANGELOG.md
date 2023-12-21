@@ -1,3 +1,11 @@
+# [4.114.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.113.0...v4.114.0) (2023-12-21)
+
+
+### Features
+
+* **home:** add new required param ([3a00a61](https://github.com/tillhub/tillhub-sdk-javascript/commit/3a00a611bb2d71358c809b76507550764c39dd33))
+* **home:** add products return rate method for analytics ([57df02d](https://github.com/tillhub/tillhub-sdk-javascript/commit/57df02d499aeaae94c6a19230a9e2cec1eb351be))
+
 # [4.113.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.112.0...v4.113.0) (2023-12-19)
 
 
