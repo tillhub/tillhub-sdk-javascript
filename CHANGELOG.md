@@ -1,3 +1,10 @@
+# [4.115.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.114.0...v4.115.0) (2024-01-02)
+
+
+### Features
+
+* **exports:** add functionality to toggle the active status of a recurring export ([#551](https://github.com/tillhub/tillhub-sdk-javascript/issues/551)) ([5e1fa06](https://github.com/tillhub/tillhub-sdk-javascript/commit/5e1fa06805c68c912278121f8eaf4191e511802f))
+
 # [4.114.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.113.0...v4.114.0) (2023-12-21)
 
 
