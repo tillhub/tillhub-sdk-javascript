@@ -1272,6 +1272,14 @@ export class TillhubClient extends events.EventEmitter {
   analyticsV4(): v4.Analytics {
     return this.generateAuthenticatedInstance(v4.Analytics)
   }
+
+  /**
+   * Create an authenticated ScheduledExports instance
+   *
+   */
+  scheduledExports(): v0.ScheduledExports {
+    return this.generateAuthenticatedInstance(v0.ScheduledExports)
+  }
 }
 
 export class Tillhub extends TillhubClient {
