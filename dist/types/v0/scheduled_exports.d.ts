@@ -13,12 +13,12 @@ export interface ScheduledExportsToggleResponse {
     data: ScheduledExport;
 }
 export interface ScheduledExport {
-    id: string;
+    id?: string;
     documentType: string;
     startDate: string;
-    lastExportedAt: string | null;
+    lastExportedAt?: string | null;
     email: string;
-    active: boolean;
+    active?: boolean;
     interval: {
         years?: number;
         months?: number;
@@ -39,8 +39,13 @@ export declare class ScheduledExports extends ThBaseHandler {
     options: ScheduledExportsOptions;
     uriHelper: UriHelper;
     constructor(options: ScheduledExportsOptions, http: Client);
-    create(): Promise<ScheduledExportsCreateResponse>;
+    create(options: ScheduledExport): Promise<ScheduledExportsCreateResponse>;
     toggle(scheduleId: string): Promise<ScheduledExportsToggleResponse>;
+}
+export declare class ScheduledExportsCreationFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ScheduledExportsToggleFailed extends BaseError {
     message: string;

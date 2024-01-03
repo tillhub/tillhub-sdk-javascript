@@ -1,3 +1,10 @@
+# [4.116.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.115.0...v4.116.0) (2024-01-03)
+
+
+### Features
+
+* **exports:** add export create function ([#552](https://github.com/tillhub/tillhub-sdk-javascript/issues/552)) ([2103cd6](https://github.com/tillhub/tillhub-sdk-javascript/commit/2103cd672f17e08d4c04146af02e5f57d3d6ded6))
+
 # [4.115.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.114.0...v4.115.0) (2024-01-02)
 
 
