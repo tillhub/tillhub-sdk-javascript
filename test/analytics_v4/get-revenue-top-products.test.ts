@@ -27,15 +27,27 @@ const results = [
     series: [
       {
         period: 'current',
-        data: [5.5],
-        total: 5.5,
+        data: [],
+        total: 0,
+        unit: 'EUR'
+      },
+      {
+        period: 'current',
+        data: [],
+        total: 0,
+        unit: 'productUnitsSold'
+      },
+      {
+        period: 'previous',
+        data: [],
+        total: 0,
         unit: 'EUR'
       },
       {
         period: 'previous',
-        data: [0],
+        data: [],
         total: 0,
-        unit: 'EUR'
+        unit: 'productUnitsSold'
       }
     ]
   }
