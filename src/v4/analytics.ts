@@ -16,6 +16,11 @@ export interface AnalyticsQuery {
   start: Date
 }
 
+export interface AnalyticsRevenueTopProductsQuery extends AnalyticsQuery {
+  orderBy?: string
+  orderDirection?: string
+}
+
 export interface AnalyticsResponse {
   data: {
     periods: AnalyticsResponsePeriods
@@ -87,6 +92,21 @@ export class Analytics extends ThBaseHandler {
       }
     } catch (error: any) {
       throw new AnalyticsGetRevenueAverageFailed(error.message)
+    }
+  }
+
+  async getRevenueTopProducts (query?: AnalyticsRevenueTopProductsQuery): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/revenue/top-products')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      const response = await this.http.getClient().get(uri)
+
+      return {
+        data: response.data.results[0]
+      }
+    } catch (error: any) {
+      throw new AnalyticsGetRevenueTopProductsFailed(error.message)
     }
   }
 
@@ -170,6 +190,17 @@ export class AnalyticsGetRevenueAverageFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsGetRevenueAverageFailed.prototype)
+  }
+}
+
+export class AnalyticsGetRevenueTopProductsFailed extends BaseError {
+  public name = 'AnalyticsGetRevenueTopProductsFailed'
+  constructor (
+    public message: string = 'Could not get revenue top products',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, AnalyticsGetRevenueTopProductsFailed.prototype)
   }
 }
 
