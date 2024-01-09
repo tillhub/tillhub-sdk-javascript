@@ -1,3 +1,11 @@
+# [4.117.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.116.0...v4.117.0) (2024-01-09)
+
+
+### Features
+
+* **home:** add top product groups method to analytics ([c5f9eae](https://github.com/tillhub/tillhub-sdk-javascript/commit/c5f9eaea7e64d41e6b5749d6e36b3a4d64b3648d))
+* **home:** address code review comments ([c92db92](https://github.com/tillhub/tillhub-sdk-javascript/commit/c92db9256f7fa97a38fc535a278444eb15dfb602))
+
 # [4.116.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.115.0...v4.116.0) (2024-01-03)
 
 
