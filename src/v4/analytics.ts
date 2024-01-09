@@ -134,6 +134,21 @@ export class Analytics extends ThBaseHandler {
       throw new AnalyticsGetProductsReturnRateFailed(error.message)
     }
   }
+
+  async getProductsTopGroups (query?: AnalyticsQuery): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/revenue/top-product-groups')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      const response = await this.http.getClient().get(uri)
+
+      return {
+        data: response.data.results[0]
+      }
+    } catch (error: any) {
+      throw new AnalyticsGetProductsTopGroupsFailed(error.message)
+    }
+  }
 }
 
 export class AnalyticsGetRevenueFailed extends BaseError {
@@ -188,5 +203,16 @@ export class AnalyticsGetProductsReturnRateFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsGetProductsReturnRateFailed.prototype)
+  }
+}
+
+export class AnalyticsGetProductsTopGroupsFailed extends BaseError {
+  public name = 'AnalyticsGetProductsTopGroupsFailed'
+  constructor (
+    public message: string = 'Could not get products top groups',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, AnalyticsGetProductsTopGroupsFailed.prototype)
   }
 }
