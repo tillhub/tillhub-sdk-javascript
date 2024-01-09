@@ -13,6 +13,10 @@ export interface AnalyticsQuery {
     end: Date;
     start: Date;
 }
+export interface AnalyticsRevenueTopProductsQuery extends AnalyticsQuery {
+    orderBy?: string;
+    orderDirection?: string;
+}
 export interface AnalyticsResponse {
     data: {
         periods: AnalyticsResponsePeriods;
@@ -44,6 +48,7 @@ export declare class Analytics extends ThBaseHandler {
     constructor(options: AnalyticsOptions, http: Client);
     getRevenue(query?: AnalyticsQuery): Promise<AnalyticsResponse>;
     getRevenueAverage(query?: AnalyticsQuery): Promise<AnalyticsResponse>;
+    getRevenueTopProducts(query?: AnalyticsRevenueTopProductsQuery): Promise<AnalyticsResponse>;
     getOpenPurchaseOrdersCount(query?: AnalyticsQuery): Promise<AnalyticsResponse>;
     getOpenPurchaseOrdersExpense(query?: AnalyticsQuery): Promise<AnalyticsResponse>;
     getProductsReturnRate(query?: AnalyticsQuery): Promise<AnalyticsResponse>;
@@ -55,6 +60,11 @@ export declare class AnalyticsGetRevenueFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class AnalyticsGetRevenueAverageFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class AnalyticsGetRevenueTopProductsFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

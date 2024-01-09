@@ -1,3 +1,11 @@
+# [4.118.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.117.0...v4.118.0) (2024-01-09)
+
+
+### Features
+
+* **home:** add revenue top products methods ([002431f](https://github.com/tillhub/tillhub-sdk-javascript/commit/002431f7a3b9d64d6ab96044912748be58c88171))
+* **home:** update mock response ([4e6d741](https://github.com/tillhub/tillhub-sdk-javascript/commit/4e6d741d1a075076ab02bc80ba6cf224c10694d6))
+
 # [4.117.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.116.0...v4.117.0) (2024-01-09)
 
 
