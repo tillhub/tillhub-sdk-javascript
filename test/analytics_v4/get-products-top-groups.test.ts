@@ -58,7 +58,7 @@ describe('v4: Analytics: can get products top groups', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v4/analytics/${legacyId}/top-product-groups`)
+        .onGet(`https://api.tillhub.com/api/v4/analytics/${legacyId}/revenue/top-product-groups`)
         .reply(() => {
           return [200, { results }]
         })
@@ -90,7 +90,7 @@ describe('v4: Analytics: can get products top groups', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v4/analytics/${legacyId}/top-product-groups`)
+        .onGet(`https://api.tillhub.com/api/v4/analytics/${legacyId}/revenue/top-product-groups`)
         .reply(() => {
           return [205]
         })

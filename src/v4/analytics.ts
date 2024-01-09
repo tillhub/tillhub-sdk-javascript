@@ -137,7 +137,7 @@ export class Analytics extends ThBaseHandler {
 
   async getProductsTopGroups (query?: AnalyticsQuery): Promise<AnalyticsResponse> {
     try {
-      const base = this.uriHelper.generateBaseUri('/top-product-groups')
+      const base = this.uriHelper.generateBaseUri('/revenue/top-product-groups')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri)
