@@ -3,6 +3,15 @@ import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
 import { ThBaseHandler } from '../base'
 
+enum AggregationWindow {
+  HOURLY = 'hourly',
+  DAILY = 'daily',
+  WEEKLY = 'weekly',
+  MONTHLY = 'monthly',
+  QUARTERLY = 'quarterly',
+  YEARLY = 'yearly'
+}
+
 export interface AnalyticsOptions {
   user?: string
   base?: string
@@ -23,8 +32,10 @@ export interface AnalyticsRevenueTopProductsQuery extends AnalyticsQuery {
 
 export interface AnalyticsResponse {
   data: {
+    axisLabels?: string[]
     periods: AnalyticsResponsePeriods
     series: AnalyticsResponseSeries[]
+    window: AggregationWindow
   }
 }
 
@@ -107,6 +118,21 @@ export class Analytics extends ThBaseHandler {
       }
     } catch (error: any) {
       throw new AnalyticsGetRevenueTopProductsFailed(error.message)
+    }
+  }
+
+  async getRevenuePaymentTypes (query?: AnalyticsQuery): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/payment-options')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      const response = await this.http.getClient().get(uri)
+
+      return {
+        data: response.data.results[0]
+      }
+    } catch (error: any) {
+      throw new AnalyticsGetRevenuePaymentTypesFailed(error.message)
     }
   }
 
@@ -201,6 +227,17 @@ export class AnalyticsGetRevenueTopProductsFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsGetRevenueTopProductsFailed.prototype)
+  }
+}
+
+export class AnalyticsGetRevenuePaymentTypesFailed extends BaseError {
+  public name = 'AnalyticsGetRevenuePaymentTypesFailed'
+  constructor (
+    public message: string = 'Could not get revenue payment types',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, AnalyticsGetRevenuePaymentTypesFailed.prototype)
   }
 }
 
