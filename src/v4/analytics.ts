@@ -110,6 +110,21 @@ export class Analytics extends ThBaseHandler {
     }
   }
 
+  async getRevenuePaymentTypes (query?: AnalyticsQuery): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/payment-options')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      const response = await this.http.getClient().get(uri)
+
+      return {
+        data: response.data.results[0]
+      }
+    } catch (error: any) {
+      throw new AnalyticsGetRevenuePaymentTypesFailed(error.message)
+    }
+  }
+
   async getOpenPurchaseOrdersCount (query?: AnalyticsQuery): Promise<AnalyticsResponse> {
     try {
       const base = this.uriHelper.generateBaseUri('/open-purchase-orders/count')
@@ -201,6 +216,17 @@ export class AnalyticsGetRevenueTopProductsFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsGetRevenueTopProductsFailed.prototype)
+  }
+}
+
+export class AnalyticsGetRevenuePaymentTypesFailed extends BaseError {
+  public name = 'AnalyticsGetRevenuePaymentTypesFailed'
+  constructor (
+    public message: string = 'Could not get revenue payment types',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, AnalyticsGetRevenuePaymentTypesFailed.prototype)
   }
 }
 
