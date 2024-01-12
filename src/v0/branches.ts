@@ -48,6 +48,21 @@ export interface SearchQuery {
   fields?: string[]
 }
 
+export interface BranchClosingDay {
+  start_date?: string
+  end_date?: string
+  reason?: string
+}
+
+export interface BranchWorkingSchedule {
+  day_index?: number
+  closed?: boolean
+  open_from?: string
+  open_to?: string
+  break_from?: string
+  break_to?: string
+}
+
 export interface Branch {
   id?: string
   branch_number?: number
@@ -63,6 +78,10 @@ export interface Branch {
   configuration?: string
   timezone_default?: string | null
   currency_default?: string | null
+  use_individual_closing_days?: boolean
+  closing_days?: BranchClosingDay[]
+  use_individual_opening_hours?: boolean
+  opening_hours?: BranchWorkingSchedule[]
 }
 
 export class Branches extends ThBaseHandler {
