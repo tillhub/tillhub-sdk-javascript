@@ -2,6 +2,14 @@ import { Client } from '../client';
 import { BaseError } from '../errors';
 import { UriHelper } from '../uri-helper';
 import { ThBaseHandler } from '../base';
+declare enum AggregationWindow {
+    HOURLY = "hourly",
+    DAILY = "daily",
+    WEEKLY = "weekly",
+    MONTHLY = "monthly",
+    QUARTERLY = "quarterly",
+    YEARLY = "yearly"
+}
 export interface AnalyticsOptions {
     user?: string;
     base?: string;
@@ -19,8 +27,10 @@ export interface AnalyticsRevenueTopProductsQuery extends AnalyticsQuery {
 }
 export interface AnalyticsResponse {
     data: {
+        axisLabels?: string[];
         periods: AnalyticsResponsePeriods;
         series: AnalyticsResponseSeries[];
+        window: AggregationWindow;
     };
 }
 interface AnalyticsResponsePeriods {
@@ -49,6 +59,7 @@ export declare class Analytics extends ThBaseHandler {
     getRevenue(query?: AnalyticsQuery): Promise<AnalyticsResponse>;
     getRevenueAverage(query?: AnalyticsQuery): Promise<AnalyticsResponse>;
     getRevenueTopProducts(query?: AnalyticsRevenueTopProductsQuery): Promise<AnalyticsResponse>;
+    getRevenuePaymentTypes(query?: AnalyticsQuery): Promise<AnalyticsResponse>;
     getOpenPurchaseOrdersCount(query?: AnalyticsQuery): Promise<AnalyticsResponse>;
     getOpenPurchaseOrdersExpense(query?: AnalyticsQuery): Promise<AnalyticsResponse>;
     getProductsReturnRate(query?: AnalyticsQuery): Promise<AnalyticsResponse>;
@@ -65,6 +76,11 @@ export declare class AnalyticsGetRevenueAverageFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class AnalyticsGetRevenueTopProductsFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class AnalyticsGetRevenuePaymentTypesFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

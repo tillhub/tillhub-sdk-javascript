@@ -1,3 +1,12 @@
+# [4.119.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.118.0...v4.119.0) (2024-01-12)
+
+
+### Features
+
+* **home:** add aggregation window enum to response ([dc4f414](https://github.com/tillhub/tillhub-sdk-javascript/commit/dc4f41457389cc155fa36159da2cccdf249476bc))
+* **home:** add axisLabels to Analytics response ([b8dcb2d](https://github.com/tillhub/tillhub-sdk-javascript/commit/b8dcb2d481223cda519d01e9db54848b9f5dc2ea))
+* **home:** add payment types method to analytics ([a281d7f](https://github.com/tillhub/tillhub-sdk-javascript/commit/a281d7f4e5a8744246f9e79a1b575e3d3c5a487f))
+
 # [4.118.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.117.0...v4.118.0) (2024-01-09)
 
 

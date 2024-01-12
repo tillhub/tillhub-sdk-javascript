@@ -1,10 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AnalyticsGetProductsTopGroupsFailed = exports.AnalyticsGetProductsReturnRateFailed = exports.AnalyticsGetOpenPurchaseOrdersExpenseFailed = exports.AnalyticsGetOpenPurchaseOrdersCountFailed = exports.AnalyticsGetRevenueTopProductsFailed = exports.AnalyticsGetRevenueAverageFailed = exports.AnalyticsGetRevenueFailed = exports.Analytics = void 0;
+exports.AnalyticsGetProductsTopGroupsFailed = exports.AnalyticsGetProductsReturnRateFailed = exports.AnalyticsGetOpenPurchaseOrdersExpenseFailed = exports.AnalyticsGetOpenPurchaseOrdersCountFailed = exports.AnalyticsGetRevenuePaymentTypesFailed = exports.AnalyticsGetRevenueTopProductsFailed = exports.AnalyticsGetRevenueAverageFailed = exports.AnalyticsGetRevenueFailed = exports.Analytics = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
+var AggregationWindow;
+(function (AggregationWindow) {
+    AggregationWindow["HOURLY"] = "hourly";
+    AggregationWindow["DAILY"] = "daily";
+    AggregationWindow["WEEKLY"] = "weekly";
+    AggregationWindow["MONTHLY"] = "monthly";
+    AggregationWindow["QUARTERLY"] = "quarterly";
+    AggregationWindow["YEARLY"] = "yearly";
+})(AggregationWindow || (AggregationWindow = {}));
 var Analytics = (function (_super) {
     tslib_1.__extends(Analytics, _super);
     function Analytics(options, http) {
@@ -89,9 +98,32 @@ var Analytics = (function (_super) {
             });
         });
     };
-    Analytics.prototype.getOpenPurchaseOrdersCount = function (query) {
+    Analytics.prototype.getRevenuePaymentTypes = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_4;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri('/payment-options');
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        return [4, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        return [2, {
+                                data: response.data.results[0]
+                            }];
+                    case 2:
+                        error_4 = _a.sent();
+                        throw new AnalyticsGetRevenuePaymentTypesFailed(error_4.message);
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    Analytics.prototype.getOpenPurchaseOrdersCount = function (query) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_5;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -105,8 +137,8 @@ var Analytics = (function (_super) {
                                 data: response.data.results[0]
                             }];
                     case 2:
-                        error_4 = _a.sent();
-                        throw new AnalyticsGetOpenPurchaseOrdersCountFailed(error_4.message);
+                        error_5 = _a.sent();
+                        throw new AnalyticsGetOpenPurchaseOrdersCountFailed(error_5.message);
                     case 3: return [2];
                 }
             });
@@ -114,7 +146,7 @@ var Analytics = (function (_super) {
     };
     Analytics.prototype.getOpenPurchaseOrdersExpense = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_5;
+            var base, uri, response, error_6;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -128,8 +160,8 @@ var Analytics = (function (_super) {
                                 data: response.data.results[0]
                             }];
                     case 2:
-                        error_5 = _a.sent();
-                        throw new AnalyticsGetOpenPurchaseOrdersExpenseFailed(error_5.message);
+                        error_6 = _a.sent();
+                        throw new AnalyticsGetOpenPurchaseOrdersExpenseFailed(error_6.message);
                     case 3: return [2];
                 }
             });
@@ -137,7 +169,7 @@ var Analytics = (function (_super) {
     };
     Analytics.prototype.getProductsReturnRate = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_6;
+            var base, uri, response, error_7;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -151,8 +183,8 @@ var Analytics = (function (_super) {
                                 data: response.data.results[0]
                             }];
                     case 2:
-                        error_6 = _a.sent();
-                        throw new AnalyticsGetProductsReturnRateFailed(error_6.message);
+                        error_7 = _a.sent();
+                        throw new AnalyticsGetProductsReturnRateFailed(error_7.message);
                     case 3: return [2];
                 }
             });
@@ -160,7 +192,7 @@ var Analytics = (function (_super) {
     };
     Analytics.prototype.getProductsTopGroups = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_7;
+            var base, uri, response, error_8;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -174,8 +206,8 @@ var Analytics = (function (_super) {
                                 data: response.data.results[0]
                             }];
                     case 2:
-                        error_7 = _a.sent();
-                        throw new AnalyticsGetProductsTopGroupsFailed(error_7.message);
+                        error_8 = _a.sent();
+                        throw new AnalyticsGetProductsTopGroupsFailed(error_8.message);
                     case 3: return [2];
                 }
             });
@@ -224,6 +256,19 @@ var AnalyticsGetRevenueTopProductsFailed = (function (_super) {
     return AnalyticsGetRevenueTopProductsFailed;
 }(errors_1.BaseError));
 exports.AnalyticsGetRevenueTopProductsFailed = AnalyticsGetRevenueTopProductsFailed;
+var AnalyticsGetRevenuePaymentTypesFailed = (function (_super) {
+    tslib_1.__extends(AnalyticsGetRevenuePaymentTypesFailed, _super);
+    function AnalyticsGetRevenuePaymentTypesFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get revenue payment types'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'AnalyticsGetRevenuePaymentTypesFailed';
+        Object.setPrototypeOf(_this, AnalyticsGetRevenuePaymentTypesFailed.prototype);
+        return _this;
+    }
+    return AnalyticsGetRevenuePaymentTypesFailed;
+}(errors_1.BaseError));
+exports.AnalyticsGetRevenuePaymentTypesFailed = AnalyticsGetRevenuePaymentTypesFailed;
 var AnalyticsGetOpenPurchaseOrdersCountFailed = (function (_super) {
     tslib_1.__extends(AnalyticsGetOpenPurchaseOrdersCountFailed, _super);
     function AnalyticsGetOpenPurchaseOrdersCountFailed(message, properties) {
