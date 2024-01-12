@@ -32,6 +32,7 @@ export interface AnalyticsRevenueTopProductsQuery extends AnalyticsQuery {
 
 export interface AnalyticsResponse {
   data: {
+    axisLabels?: string[]
     periods: AnalyticsResponsePeriods
     series: AnalyticsResponseSeries[]
     window: AggregationWindow
