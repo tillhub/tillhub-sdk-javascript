@@ -3,6 +3,15 @@ import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
 import { ThBaseHandler } from '../base'
 
+enum AggregationWindow {
+  HOURLY = 'hourly',
+  DAILY = 'daily',
+  WEEKLY = 'weekly',
+  MONTHLY = 'monthly',
+  QUARTERLY = 'quarterly',
+  YEARLY = 'yearly'
+}
+
 export interface AnalyticsOptions {
   user?: string
   base?: string
@@ -25,6 +34,7 @@ export interface AnalyticsResponse {
   data: {
     periods: AnalyticsResponsePeriods
     series: AnalyticsResponseSeries[]
+    window: AggregationWindow
   }
 }
 
