@@ -106,7 +106,7 @@ export class CustomerAppointments extends ThBaseHandler {
 export class CustomerAppointmentsFetchFailed extends BaseError {
   public name = 'CustomerAppointmentsFetchFailed'
   constructor (
-    public message: string = 'Could not delete the customer',
+    public message: string = 'Could not fetch transactions',
     properties?: Record<string, unknown>
   ) {
     super(message, properties)
