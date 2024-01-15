@@ -567,6 +567,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.scheduledExports = function () {
         return this.generateAuthenticatedInstance(v0.ScheduledExports);
     };
+    TillhubClient.prototype.customerAppointments = function () {
+        return this.generateAuthenticatedInstance(v0.CustomerAppointments);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));

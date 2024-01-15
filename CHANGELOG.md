@@ -1,3 +1,10 @@
+# [4.120.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.119.0...v4.120.0) (2024-01-15)
+
+
+### Features
+
+* **customer_appointments:** add sdk (until 9228) ([#555](https://github.com/tillhub/tillhub-sdk-javascript/issues/555)) ([3ebc80a](https://github.com/tillhub/tillhub-sdk-javascript/commit/3ebc80a37aa523290b9ce1c4751bda6215cb846b)), closes [#9228](https://github.com/tillhub/tillhub-sdk-javascript/issues/9228)
+
 # [4.119.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.118.0...v4.119.0) (2024-01-12)
 
 

@@ -144,6 +144,7 @@ export declare class TillhubClient extends events.EventEmitter {
     shiftPlan(): v0.ShiftPlan;
     analyticsV4(): v4.Analytics;
     scheduledExports(): v0.ScheduledExports;
+    customerAppointments(): v0.CustomerAppointments;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;
