@@ -77,6 +77,7 @@ import { Holidays } from './holidays'
 import { ShiftPlan } from './shift_plan'
 import { ScheduledExports } from './scheduled_exports'
 import { CustomerAppointments } from './customer_appointments'
+import { DocumentExports } from './document_exports'
 
 export {
   Auth,
@@ -160,5 +161,6 @@ export {
   Holidays,
   ShiftPlan,
   ScheduledExports,
-  CustomerAppointments
+  CustomerAppointments,
+  DocumentExports
 }

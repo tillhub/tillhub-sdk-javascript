@@ -18,6 +18,7 @@ export interface Document {
   createdAt?: string
   documentNumber: string
   documentType: string
+  isSuccess: boolean
   id: string
   updatedAt?: string
 }
