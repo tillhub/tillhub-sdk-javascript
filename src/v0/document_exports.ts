@@ -21,7 +21,7 @@ export interface DocumentExport {
   createdAt: string | null
   updatedAt: string | null
   isSuccess: boolean | null
-  status: 'pending' | 'success' | 'error'
+  status: 'pending' | 'completed' | 'error'
   documentNumber: string | null
   schedule: null | {
     id: string
