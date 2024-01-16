@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import { TillhubClient, v0 } from '../../src/tillhub-js'
+
 dotenv.config()
 
 const user = {
