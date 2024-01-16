@@ -570,6 +570,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.customerAppointments = function () {
         return this.generateAuthenticatedInstance(v0.CustomerAppointments);
     };
+    TillhubClient.prototype.documentExports = function () {
+        return this.generateAuthenticatedInstance(v0.DocumentExports);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));

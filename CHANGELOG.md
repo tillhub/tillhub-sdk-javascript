@@ -1,3 +1,10 @@
+# [4.121.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.120.0...v4.121.0) (2024-01-16)
+
+
+### Features
+
+* **exports:** trigger build ([63da39b](https://github.com/tillhub/tillhub-sdk-javascript/commit/63da39ba03564bc9abb79d9fc03c76797f4af938))
+
 # [4.120.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.119.0...v4.120.0) (2024-01-15)
 
 
