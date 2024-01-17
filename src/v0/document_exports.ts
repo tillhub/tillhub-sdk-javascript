@@ -89,6 +89,27 @@ export class DocumentExports extends ThBaseHandler {
       throw new DocumentExportsGetFailed(error.message, { error })
     }
   }
+
+  async meta (query?: Record<string, unknown>): Promise<DocumentExportssMultipleResponse> {
+    const base = this.uriHelper.generateBaseUri('/meta')
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new DocumentExportsMetaFailed(undefined, { status: response.status })
+      }
+      if (!response.data.results[0]) {
+        throw new DocumentExportsMetaFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new DocumentExportsMetaFailed(error.message, { error })
+    }
+  }
 }
 
 export class DocumentExportsGetFailed extends BaseError {
@@ -99,5 +120,16 @@ export class DocumentExportsGetFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, DocumentExportsGetFailed.prototype)
+  }
+}
+
+export class DocumentExportsMetaFailed extends BaseError {
+  public name = 'DocumentExportsMetaFailed'
+  constructor (
+    public message: string = 'Could not get document exports metadata',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, DocumentExportsMetaFailed.prototype)
   }
 }
