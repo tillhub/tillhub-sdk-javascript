@@ -266,7 +266,7 @@ export class Auth {
 
     // Add 'x-client-account' header conditionally, when user is logging in as support
     if (loginAsSupport && clientOptions.headers) {
-      clientOptions.headers['x-client-account'] = user;
+      clientOptions.headers['x-client-account'] = user
     }
 
     this.token = token
