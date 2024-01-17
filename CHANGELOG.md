@@ -1,3 +1,10 @@
+# [4.122.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.121.0...v4.122.0) (2024-01-17)
+
+
+### Features
+
+* **exports:** add meta support for DocumentExports ([#559](https://github.com/tillhub/tillhub-sdk-javascript/issues/559)) ([101190b](https://github.com/tillhub/tillhub-sdk-javascript/commit/101190b3d058242db05744dfe5969dd992bbdb86))
+
 # [4.121.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.120.0...v4.121.0) (2024-01-16)
 
 

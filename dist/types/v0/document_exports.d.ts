@@ -46,8 +46,14 @@ export declare class DocumentExports extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: DocumentExportsOptions, http: Client);
     getAll(query?: Record<string, unknown>): Promise<DocumentExportssMultipleResponse>;
+    meta(query?: Record<string, unknown>): Promise<DocumentExportssMultipleResponse>;
 }
 export declare class DocumentExportsGetFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class DocumentExportsMetaFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
