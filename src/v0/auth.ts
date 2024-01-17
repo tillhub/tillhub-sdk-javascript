@@ -265,7 +265,7 @@ export class Auth {
     }
 
     // Add 'x-client-account' header conditionally, when user is logging in as support
-    if (loginAsSupport && clientOptions.headers) {
+    if (loginAsSupport && clientOptions.headers && user) {
       clientOptions.headers['x-client-account'] = user
     }
 
