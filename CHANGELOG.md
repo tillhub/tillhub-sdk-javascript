@@ -1,3 +1,12 @@
+# [4.123.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.122.0...v4.123.0) (2024-01-17)
+
+
+### Features
+
+* **auth:** client-account header addition ([65712da](https://github.com/tillhub/tillhub-sdk-javascript/commit/65712da9bdc54b927fb16c4ba7d6ef8ec51c9313))
+* **auth:** code review ([971b3fe](https://github.com/tillhub/tillhub-sdk-javascript/commit/971b3fe82ee551f40dae7144fb912f1ae5b93f39))
+* **auth:** remove semicolon ([347dec0](https://github.com/tillhub/tillhub-sdk-javascript/commit/347dec0d48e657552bbbf58a1554b08ae680ac7c))
+
 # [4.122.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.121.0...v4.122.0) (2024-01-17)
 
 

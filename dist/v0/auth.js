@@ -202,7 +202,8 @@ var Auth = (function () {
             });
         });
     };
-    Auth.prototype.setDefaultHeader = function (user, token, whitelabel) {
+    Auth.prototype.setDefaultHeader = function (user, token, whitelabel, loginAsSupport) {
+        if (loginAsSupport === void 0) { loginAsSupport = false; }
         var clientOptions = {
             headers: {
                 Authorization: "Bearer " + token,
@@ -210,6 +211,9 @@ var Auth = (function () {
                 'x-whitelabel': whitelabel
             }
         };
+        if (loginAsSupport && clientOptions.headers && user) {
+            clientOptions.headers['x-client-account'] = user;
+        }
         this.token = token;
         this.user = user;
         this.whitelabel = whitelabel;
