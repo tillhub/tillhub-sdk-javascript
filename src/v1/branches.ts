@@ -21,6 +21,7 @@ export interface BranchesQuery {
   postal_code?: string
   city?: string
   street?: string
+  extended?: string
 }
 
 export interface BranchesResponse {
