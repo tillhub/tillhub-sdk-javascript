@@ -74,6 +74,10 @@ export interface Branch {
   cost_center?: string
   custom_properties?: object
   default_favourite?: string
+  mms_id?: string
+  mms_state?: string
+  mms_type?: string
+  mms_unit_unzer_id?: string
 }
 
 export class Branches extends ThBaseHandler {
