@@ -44,6 +44,7 @@ export interface TransactionsQueryHandler {
 export interface TransactionsQuery extends TransactionEntity {
   deleted?: boolean
   active?: boolean
+  branch?: string
 }
 
 declare type CommerceTypes = 'eCommerce' | 'moto' | 'pos' | 'undefined' | 'unknown'
