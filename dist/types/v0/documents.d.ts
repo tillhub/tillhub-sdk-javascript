@@ -45,6 +45,7 @@ export interface DocumentsDownloadResponse {
     data?: string;
     contentType?: string;
     filename?: string;
+    correlationId?: string;
 }
 export interface DocumentsBulkDownloadBody {
     documentIds: string[];

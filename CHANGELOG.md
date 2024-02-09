@@ -1,3 +1,10 @@
+# [4.124.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.123.0...v4.124.0) (2024-02-09)
+
+
+### Features
+
+* **documents:** support correlation id when downloading expired document ([#562](https://github.com/tillhub/tillhub-sdk-javascript/issues/562)) ([392f688](https://github.com/tillhub/tillhub-sdk-javascript/commit/392f68843cc1da0d913736fcdc9c2d02c45542a2))
+
 # [4.123.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.122.0...v4.123.0) (2024-01-17)
 
 

@@ -190,6 +190,11 @@ var Documents = (function (_super) {
                     case 1:
                         response = _a.sent();
                         pdfObj = response.data.results[0];
+                        if ('correlationId' in pdfObj) {
+                            return [2, {
+                                    correlationId: pdfObj.correlationId
+                                }];
+                        }
                         return [2, {
                                 data: pdfObj.base64Content,
                                 contentType: pdfObj.contentType,
