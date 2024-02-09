@@ -50,11 +50,18 @@ export class Me extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async get (): Promise<MeResponse> {
+  async get (clientAccount?: string | null): Promise<MeResponse> {
     const base = this.options.base ?? 'https://api.tillhub.com'
     const uri = `${base}${this.endpoint}`
     try {
-      const response = await this.http.getClient().get(uri)
+      const headers: Record<string, string> = {}
+
+      // Check if clientAccount is provided and not null. Then, add x-client-account header
+      if (clientAccount !== undefined && clientAccount !== null) {
+        headers['x-client-account'] = clientAccount
+      }
+
+      const response = await this.http.getClient().get(uri, { headers })
       if (response.status !== 200) throw new MeFetchFailed(undefined, { status: response.status })
 
       return {
