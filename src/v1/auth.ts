@@ -130,9 +130,7 @@ export class Auth extends v0.Auth {
 
       this.setDefaultHeader(
         response.data.user.legacy_id || response.data.user.id,
-        response.data.token,
-        undefined,
-        true
+        response.data.token
       )
 
       return {
