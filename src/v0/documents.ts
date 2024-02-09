@@ -52,6 +52,7 @@ export interface DocumentsDownloadResponse {
   data?: string
   contentType?: string
   filename?: string
+  correlationId?: string
 }
 
 export interface DocumentsBulkDownloadBody {
@@ -191,6 +192,13 @@ export class Documents extends ThBaseHandler {
 
       const response = await this.http.getClient().get(uri)
       const pdfObj = response.data.results[0]
+
+      if ('correlationId' in pdfObj) {
+        // File is being regenerated. Return the correlation id.
+        return {
+          correlationId: pdfObj.correlationId
+        }
+      }
 
       return {
         data: pdfObj.base64Content,
