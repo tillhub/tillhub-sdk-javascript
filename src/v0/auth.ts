@@ -255,18 +255,13 @@ export class Auth {
     }
   }
 
-  protected setDefaultHeader (user: string, token: string, whitelabel?: string, loginAsSupport: boolean = false): void {
+  protected setDefaultHeader (user: string, token: string, whitelabel?: string): void {
     const clientOptions: ClientOptions = {
       headers: {
         Authorization: `Bearer ${token}`,
         'X-Client-ID': user,
         'x-whitelabel': whitelabel
       }
-    }
-
-    // Add 'x-client-account' header conditionally, when user is logging in as support
-    if (loginAsSupport && clientOptions.headers && user) {
-      clientOptions.headers['x-client-account'] = user
     }
 
     this.token = token
