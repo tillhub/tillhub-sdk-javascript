@@ -1,3 +1,10 @@
+# [4.126.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.125.0...v4.126.0) (2024-02-12)
+
+
+### Features
+
+* **services:** add fields for multi-branch support ([#9184](https://github.com/tillhub/tillhub-sdk-javascript/issues/9184)) ([#554](https://github.com/tillhub/tillhub-sdk-javascript/issues/554)) ([ef1067e](https://github.com/tillhub/tillhub-sdk-javascript/commit/ef1067e8817340c3d2900635a12c6c2ee8913778))
+
 # [4.125.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.124.0...v4.125.0) (2024-02-12)
 
 

@@ -22,6 +22,7 @@ export interface ServicesObject {
     linked_product: string;
     id?: string;
     deleted?: boolean;
+    locations?: null | string[];
 }
 export declare class Services extends ThBaseHandler {
     static baseEndpoint: string;
