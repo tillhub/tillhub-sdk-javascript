@@ -134,7 +134,7 @@ var Auth = (function (_super) {
                             })];
                     case 1:
                         response = _c.sent();
-                        this.setDefaultHeader(response.data.user.legacy_id || response.data.user.id, response.data.token, undefined, true);
+                        this.setDefaultHeader(response.data.user.legacy_id || response.data.user.id, response.data.token);
                         return [2, {
                                 token: response.data.token,
                                 user: response.data.user.legacy_id || response.data.user.id,

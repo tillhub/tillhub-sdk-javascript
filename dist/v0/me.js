@@ -20,10 +20,10 @@ var Me = (function (_super) {
         _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
         return _this;
     }
-    Me.prototype.get = function () {
+    Me.prototype.get = function (clientAccount) {
         var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_1;
+            var base, uri, headers, response, error_1;
             return tslib_1.__generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -32,7 +32,11 @@ var Me = (function (_super) {
                         _b.label = 1;
                     case 1:
                         _b.trys.push([1, 3, , 4]);
-                        return [4, this.http.getClient().get(uri)];
+                        headers = {};
+                        if (clientAccount !== undefined && clientAccount !== null) {
+                            headers['x-client-account'] = clientAccount;
+                        }
+                        return [4, this.http.getClient().get(uri, { headers: headers })];
                     case 2:
                         response = _b.sent();
                         if (response.status !== 200)

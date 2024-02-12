@@ -1,3 +1,10 @@
+# [4.125.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.124.0...v4.125.0) (2024-02-12)
+
+
+### Features
+
+* **me:** Client-account as header to /me endpoint ([#563](https://github.com/tillhub/tillhub-sdk-javascript/issues/563)) ([9e9608e](https://github.com/tillhub/tillhub-sdk-javascript/commit/9e9608effff90e5846d2a42a6ed9cbe3d28ddaba))
+
 # [4.124.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.123.0...v4.124.0) (2024-02-09)
 
 

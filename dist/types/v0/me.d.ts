@@ -32,7 +32,7 @@ export declare class Me extends ThBaseHandler {
     options: MeOptions;
     uriHelper: UriHelper;
     constructor(options: MeOptions, http: Client);
-    get(): Promise<MeResponse>;
+    get(clientAccount?: string | null): Promise<MeResponse>;
 }
 export declare class MeFetchFailed extends BaseError {
     message: string;
