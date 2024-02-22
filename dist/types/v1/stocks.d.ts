@@ -10,4 +10,5 @@ export declare class StocksBook extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: StocksOptions, http: Client);
     getAll(query?: StocksBookQuery | undefined): Promise<StocksResponse>;
+    meta(query?: StocksBookQuery | undefined): Promise<StocksResponse>;
 }

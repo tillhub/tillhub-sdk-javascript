@@ -53,6 +53,33 @@ var StocksBook = (function (_super) {
             });
         });
     };
+    StocksBook.prototype.meta = function (query) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_2;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri('/book/meta');
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        return [4, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new stocks_1.StocksBookGetMetaFailed();
+                        }
+                        return [2, {
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            }];
+                    case 2:
+                        error_2 = _a.sent();
+                        throw new stocks_1.StocksBookGetMetaFailed(error_2.message, { error: error_2 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
     StocksBook.baseEndpoint = '/api/v1/stock';
     return StocksBook;
 }(base_1.ThBaseHandler));

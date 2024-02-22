@@ -1,3 +1,10 @@
+# [4.127.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.126.0...v4.127.0) (2024-02-22)
+
+
+### Features
+
+* **stock_management:** add meta method to stocks book ([408f364](https://github.com/tillhub/tillhub-sdk-javascript/commit/408f364afecc5bf1b93c57f2f6b10bdb249d910d))
+
 # [4.126.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.125.0...v4.126.0) (2024-02-12)
 
 

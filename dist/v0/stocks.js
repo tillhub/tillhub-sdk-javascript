@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StocksBookFetchFailed = exports.StocksBook = exports.Stocks = void 0;
+exports.StocksBookGetMetaFailed = exports.StocksBookFetchFailed = exports.StocksBook = exports.Stocks = void 0;
 var tslib_1 = require("tslib");
 var baseError_1 = require("../errors/baseError");
 var uri_helper_1 = require("../uri-helper");
@@ -339,6 +339,7 @@ var StocksBookGetMetaFailed = (function (_super) {
     }
     return StocksBookGetMetaFailed;
 }(baseError_1.BaseError));
+exports.StocksBookGetMetaFailed = StocksBookGetMetaFailed;
 var StocksTransferFailed = (function (_super) {
     tslib_1.__extends(StocksTransferFailed, _super);
     function StocksTransferFailed(message, properties) {
