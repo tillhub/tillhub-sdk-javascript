@@ -1,7 +1,7 @@
 import { Client } from '../client'
 import { ThBaseHandler } from '../base'
 import { UriHelper } from '../uri-helper'
-import { StocksOptions, StocksBookFetchFailed, StocksBookQuery, StocksResponse } from '../v0/stocks'
+import { StocksOptions, StocksBookFetchFailed, StocksBookQuery, StocksResponse, StocksBookGetMetaFailed } from '../v0/stocks'
 
 export class StocksBook extends ThBaseHandler {
   public static baseEndpoint = '/api/v1/stock'
@@ -45,6 +45,26 @@ export class StocksBook extends ThBaseHandler {
       }
     } catch (error: any) {
       throw new StocksBookFetchFailed(error.message, { error })
+    }
+  }
+
+  async meta (query?: StocksBookQuery | undefined): Promise<StocksResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/book/meta')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      const response = await this.http.getClient().get(uri)
+
+      if (response.status !== 200) {
+        throw new StocksBookGetMetaFailed()
+      }
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new StocksBookGetMetaFailed(error.message, { error })
     }
   }
 }
