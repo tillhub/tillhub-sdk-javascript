@@ -312,7 +312,7 @@ export class StocksBookFetchFailed extends BaseError {
   }
 }
 
-class StocksBookGetMetaFailed extends BaseError {
+export class StocksBookGetMetaFailed extends BaseError {
   public name = 'StocksBookGetMetaFailed'
   constructor (
     public message: string = 'Could not fetch stocks book meta',
