@@ -23,6 +23,14 @@ export interface TransactionResponse {
     msg?: string;
     errors?: ErrorObject[];
 }
+export interface TransactionExportCorrelation {
+    correlationId: string;
+}
+export interface TransactionExportResponse {
+    data: TransactionExportCorrelation;
+    msg?: string;
+    errors?: ErrorObject[];
+}
 export interface ErrorObject {
     id: string;
     label: string;
@@ -37,6 +45,20 @@ export interface TransactionsQueryHandler {
 export interface TransactionsQuery extends TransactionEntity {
     deleted?: boolean;
     active?: boolean;
+}
+export interface TransactionsExportQueryHandler extends TransactionsQuery {
+    exportMetaData: {
+        columnNames: boolean;
+        columns: string[] | null;
+        delimiter: string;
+        documentType: string;
+        enclosure: '\'' | '"';
+        email: string;
+        emailTemplate?: string;
+        format: 'CSV' | 'XLS';
+        recurringInterval?: string | null;
+        recurringStartDate?: string | null;
+    };
 }
 declare type CommerceTypes = 'eCommerce' | 'moto' | 'pos' | 'undefined' | 'unknown';
 declare type PaymentMethodCodeTypes = 'undefined' | 'alipay' | 'applepay' | 'bancontact' | 'bank_transfer' | 'billpay_installment' | 'billpay_invoice' | 'credit_card' | 'debit_card' | 'easycredit_installment' | 'eps' | 'fleetcard' | 'girocard' | 'giropay' | 'googlepay' | 'ideal' | 'installment' | 'invoice' | 'klarna' | 'klarna_installment' | 'klarna_invoice' | 'loyalty' | 'monthly_invoice' | 'paypal' | 'paypal_express' | 'paysafecard' | 'paysafecash' | 'post_finance_card' | 'post_finance_efinance' | 'prepayment' | 'przelewy24' | 'santander_installment' | 'santander_purchase_on_account' | 'sepa_direct_debit' | 'sofort' | 'wechatpay' | 'unknown';
@@ -102,8 +124,8 @@ export interface TransactionEntity {
     frontendLanguageId?: string | null;
     frontendResponseUrl?: string | null;
     frontendSessionId?: string | null;
-    identificationContractId: string | null;
-    identificationContractOwner: string | null;
+    identificationContractId?: string | null;
+    identificationContractOwner?: string | null;
     identificationCreditorId?: string | null;
     identificationCutoverId?: string | null;
     identificationExtMerchantId?: string | null;
@@ -266,6 +288,7 @@ export declare class Transactions extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: TransactionsOptions, http: Client);
     getAll(query?: TransactionsQueryHandler | undefined): Promise<TransactionsResponse>;
+    export(query: TransactionsExportQueryHandler): Promise<TransactionExportResponse>;
     meta(query?: TransactionsQueryHandler | undefined): Promise<TransactionsMetaResponse>;
     get(transactionId: string): Promise<TransactionResponse>;
 }
@@ -275,6 +298,11 @@ export declare class TransactionsGetMetaFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class TransactionsFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class TransactionsExportFetchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

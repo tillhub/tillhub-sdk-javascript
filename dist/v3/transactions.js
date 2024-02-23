@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TransactionFetchFailed = exports.TransactionsFetchFailed = exports.TransactionsGetMetaFailed = exports.Transactions = void 0;
+exports.TransactionFetchFailed = exports.TransactionsExportFetchFailed = exports.TransactionsFetchFailed = exports.TransactionsGetMetaFailed = exports.Transactions = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -55,10 +55,39 @@ var Transactions = (function (_super) {
             });
         });
     };
+    Transactions.prototype.export = function (query) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_2;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        base = this.uriHelper.generateBaseUri();
+                        uri = this.uriHelper.generateUriWithQuery(base + "/export", query);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new TransactionsExportFetchFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results[0],
+                                msg: response.data.msg
+                            }];
+                    case 3:
+                        error_2 = _a.sent();
+                        throw new TransactionsExportFetchFailed(error_2.message, { error: error_2 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     Transactions.prototype.meta = function (query) {
         var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_2;
+            var base, uri, response, error_3;
             return tslib_1.__generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -78,8 +107,8 @@ var Transactions = (function (_super) {
                                 metadata: { count: ((_a = response.data.results[0]) === null || _a === void 0 ? void 0 : _a.count) || 0 }
                             }];
                     case 3:
-                        error_2 = _b.sent();
-                        throw new TransactionsFetchFailed(error_2.message, { error: error_2 });
+                        error_3 = _b.sent();
+                        throw new TransactionsFetchFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });
@@ -87,7 +116,7 @@ var Transactions = (function (_super) {
     };
     Transactions.prototype.get = function (transactionId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_3;
+            var base, uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -108,8 +137,8 @@ var Transactions = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_3 = _a.sent();
-                        throw new TransactionFetchFailed(error_3.message, { error: error_3 });
+                        error_4 = _a.sent();
+                        throw new TransactionFetchFailed(error_4.message, { error: error_4 });
                     case 4: return [2];
                 }
             });
@@ -145,6 +174,19 @@ var TransactionsFetchFailed = (function (_super) {
     return TransactionsFetchFailed;
 }(errors_1.BaseError));
 exports.TransactionsFetchFailed = TransactionsFetchFailed;
+var TransactionsExportFetchFailed = (function (_super) {
+    tslib_1.__extends(TransactionsExportFetchFailed, _super);
+    function TransactionsExportFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not export transactions'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TransactionsExportFetchFailed';
+        Object.setPrototypeOf(_this, TransactionsExportFetchFailed.prototype);
+        return _this;
+    }
+    return TransactionsExportFetchFailed;
+}(errors_1.BaseError));
+exports.TransactionsExportFetchFailed = TransactionsExportFetchFailed;
 var TransactionFetchFailed = (function (_super) {
     tslib_1.__extends(TransactionFetchFailed, _super);
     function TransactionFetchFailed(message, properties) {

@@ -1,3 +1,10 @@
+# [4.128.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.127.0...v4.128.0) (2024-02-23)
+
+
+### Features
+
+* **transactions:** add export to v3 ([b55ccf1](https://github.com/tillhub/tillhub-sdk-javascript/commit/b55ccf1bfa582dec0744b56914971a47104a57cc))
+
 # [4.127.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.126.0...v4.127.0) (2024-02-22)
 
 
