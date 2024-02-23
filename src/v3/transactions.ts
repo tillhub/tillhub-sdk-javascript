@@ -28,6 +28,16 @@ export interface TransactionResponse {
   errors?: ErrorObject[]
 }
 
+export interface TransactionExportCorrelation {
+  correlationId: string
+}
+
+export interface TransactionExportResponse {
+  data: TransactionExportCorrelation
+  msg?: string
+  errors?: ErrorObject[]
+}
+
 export interface ErrorObject {
   id: string
   label: string
@@ -44,6 +54,21 @@ export interface TransactionsQueryHandler {
 export interface TransactionsQuery extends TransactionEntity {
   deleted?: boolean
   active?: boolean
+}
+
+export interface TransactionsExportQueryHandler extends TransactionsQuery {
+  exportMetaData: {
+    columnNames: boolean
+    columns: string[] | null
+    delimiter: string
+    documentType: string
+    enclosure: '\'' | '"'
+    email: string
+    emailTemplate?: string
+    format: 'CSV' | 'XLS'
+    recurringInterval?: string | null
+    recurringStartDate?: string | null
+  }
 }
 
 declare type CommerceTypes = 'eCommerce' | 'moto' | 'pos' | 'undefined' | 'unknown'
@@ -112,8 +137,8 @@ export interface TransactionEntity {
   frontendLanguageId?: string | null
   frontendResponseUrl?: string | null
   frontendSessionId?: string | null
-  identificationContractId: string | null
-  identificationContractOwner: string | null
+  identificationContractId?: string | null
+  identificationContractOwner?: string | null
   identificationCreditorId?: string | null
   identificationCutoverId?: string | null
   identificationExtMerchantId?: string | null
@@ -316,6 +341,25 @@ export class Transactions extends ThBaseHandler {
     }
   }
 
+  async export (query: TransactionsExportQueryHandler): Promise<TransactionExportResponse> {
+    const base = this.uriHelper.generateBaseUri()
+    const uri = this.uriHelper.generateUriWithQuery(`${base}/export`, query)
+
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new TransactionsExportFetchFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results[0] as TransactionExportCorrelation,
+        msg: response.data.msg
+      }
+    } catch (error: any) {
+      throw new TransactionsExportFetchFailed(error.message, { error })
+    }
+  }
+
   async meta (query?: TransactionsQueryHandler | undefined): Promise<TransactionsMetaResponse> {
     const base = this.uriHelper.generateBaseUri()
     const uri = this.uriHelper.generateUriWithQuery(`${base}/meta`, query)
@@ -375,6 +419,17 @@ export class TransactionsFetchFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionsFetchFailed.prototype)
+  }
+}
+
+export class TransactionsExportFetchFailed extends BaseError {
+  public name = 'TransactionsExportFetchFailed'
+  constructor (
+    public message: string = 'Could not export transactions',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, TransactionsExportFetchFailed.prototype)
   }
 }
 
