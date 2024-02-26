@@ -3,6 +3,7 @@ import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
 import { ThBaseHandler } from '../base'
 import { OrderEntity, CustomerEntity } from '../v2/orders'
+import { exportJobQuery } from '../shared_interfaces'
 
 export interface TransactionsOptions {
   user?: string
@@ -57,18 +58,7 @@ export interface TransactionsQuery extends TransactionEntity {
 }
 
 export interface TransactionsExportQueryHandler extends TransactionsQuery {
-  exportMetaData: {
-    columnNames: boolean
-    columns: string[] | null
-    delimiter: string
-    documentType: string
-    enclosure: '\'' | '"'
-    email: string
-    emailTemplate?: string
-    format: 'CSV' | 'XLS'
-    recurringInterval?: string | null
-    recurringStartDate?: string | null
-  }
+  exportMetaData: exportJobQuery
 }
 
 declare type CommerceTypes = 'eCommerce' | 'moto' | 'pos' | 'undefined' | 'unknown'
