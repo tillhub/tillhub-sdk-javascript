@@ -1,3 +1,12 @@
+# [4.129.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.128.0...v4.129.0) (2024-02-26)
+
+
+### Features
+
+* **exportJob:** add proper query params ([bfbf716](https://github.com/tillhub/tillhub-sdk-javascript/commit/bfbf7168598fad98d808fb3719484a1935c99896))
+* **exportJob:** fix test ([e7552e5](https://github.com/tillhub/tillhub-sdk-javascript/commit/e7552e5e8a37a33b9d98c681363ae897a4af837c))
+* **exportJob:** fix test ([11498b9](https://github.com/tillhub/tillhub-sdk-javascript/commit/11498b92b64c7dca6d14eee4bbb51fc8230899e3))
+
 # [4.128.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.127.0...v4.128.0) (2024-02-23)
 
 
