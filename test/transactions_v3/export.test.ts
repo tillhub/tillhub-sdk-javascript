@@ -132,16 +132,18 @@ describe('v3: transactions: export', () => {
     try {
       await th.transactionsV3().export({
         exportMetaData: {
-          columnNames: false,
-          columns: null,
-          delimiter: '',
-          documentType: '',
-          enclosure: '\'',
-          email: '',
-          emailTemplate: undefined,
-          format: 'CSV',
-          recurringInterval: undefined,
-          recurringStartDate: undefined
+          show_column_name: true,
+          column_selection: ['column1', 'column2'],
+          delimiter: 'semicolon',
+          documentType: 'documentTypeSomething',
+          enclosure: 'single',
+          email: 'email@email.de',
+          emailTemplate: 'template_xxxx',
+          timezone: 'Europe/Berlin',
+          filename_prefix: 'Prefix--',
+          format: 'csv',
+          interval: '1 day',
+          startDate: '2024-02-27'
         }
       })
     } catch (err: any) {
