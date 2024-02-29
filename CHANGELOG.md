@@ -1,3 +1,11 @@
+# [4.130.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.129.0...v4.130.0) (2024-02-29)
+
+
+### Features
+
+* **exportJob:** change query schema ([c813aba](https://github.com/tillhub/tillhub-sdk-javascript/commit/c813abab7498287265c0e2bf1b47d13b159cfa55))
+* **exportJob:** rollback to 1 mons ([52e3885](https://github.com/tillhub/tillhub-sdk-javascript/commit/52e388562c07886c22c21591701b2407c0923b55))
+
 # [4.129.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.128.0...v4.129.0) (2024-02-26)
 
 
