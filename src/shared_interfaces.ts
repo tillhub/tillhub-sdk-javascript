@@ -9,6 +9,6 @@ export interface exportJobQuery {
   timezone?: string | null
   filenamePrefix?: string | null
   format: 'csv' | 'xls'
-  interval?: '1 day' | '7 days' | '1 months'
+  interval?: '1 day' | '7 days' | '1 mons'
   startDate?: string | null
 }
