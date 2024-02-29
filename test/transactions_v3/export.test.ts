@@ -73,15 +73,15 @@ describe('v3: transactions: export', () => {
     try {
       const { data } = await transactionsV3.export({
         exportMetaData: {
-          show_column_name: true,
-          column_selection: ['column1', 'column2'],
+          columnNames: true,
+          columns: ['column1', 'column2'],
           delimiter: 'semicolon',
           documentType: 'documentTypeSomething',
           enclosure: 'single',
           email: 'email@email.de',
           emailTemplate: 'template_xxxx',
           timezone: 'Europe/Berlin',
-          filename_prefix: 'Prefix--',
+          filenamePrefix: 'Prefix--',
           format: 'csv',
           interval: '1 day',
           startDate: '2024-02-27'
@@ -132,15 +132,15 @@ describe('v3: transactions: export', () => {
     try {
       await th.transactionsV3().export({
         exportMetaData: {
-          show_column_name: true,
-          column_selection: ['column1', 'column2'],
+          columnNames: true,
+          columns: ['column1', 'column2'],
           delimiter: 'semicolon',
           documentType: 'documentTypeSomething',
           enclosure: 'single',
           email: 'email@email.de',
           emailTemplate: 'template_xxxx',
           timezone: 'Europe/Berlin',
-          filename_prefix: 'Prefix--',
+          filenamePrefix: 'Prefix--',
           format: 'csv',
           interval: '1 day',
           startDate: '2024-02-27'
