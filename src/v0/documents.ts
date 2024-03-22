@@ -49,6 +49,7 @@ export interface DocumentsSendResponse {
 }
 
 export interface DocumentsDownloadResponse {
+  url?: string
   data?: string
   contentType?: string
   filename?: string
@@ -197,6 +198,14 @@ export class Documents extends ThBaseHandler {
         // File is being regenerated. Return the correlation id.
         return {
           correlationId: pdfObj.correlationId
+        }
+      }
+
+      if ('url' in pdfObj) {
+        // Direct url to the file is available. Return it alongside the filename
+        return {
+          url: pdfObj.url,
+          filename: pdfObj.fileName
         }
       }
 
