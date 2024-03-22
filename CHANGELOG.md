@@ -1,3 +1,10 @@
+# [4.131.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.130.0...v4.131.0) (2024-03-22)
+
+
+### Features
+
+* **documents:** support document url in response to download request ([#569](https://github.com/tillhub/tillhub-sdk-javascript/issues/569)) ([d6481aa](https://github.com/tillhub/tillhub-sdk-javascript/commit/d6481aa853bacb75f25d44dd49b5ffe1a99a0015))
+
 # [4.130.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.129.0...v4.130.0) (2024-02-29)
 
 

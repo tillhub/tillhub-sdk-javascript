@@ -42,6 +42,7 @@ export interface DocumentsSendResponse {
     msg: string;
 }
 export interface DocumentsDownloadResponse {
+    url?: string;
     data?: string;
     contentType?: string;
     filename?: string;

@@ -195,6 +195,12 @@ var Documents = (function (_super) {
                                     correlationId: pdfObj.correlationId
                                 }];
                         }
+                        if ('url' in pdfObj) {
+                            return [2, {
+                                    url: pdfObj.url,
+                                    filename: pdfObj.fileName
+                                }];
+                        }
                         return [2, {
                                 data: pdfObj.base64Content,
                                 contentType: pdfObj.contentType,
