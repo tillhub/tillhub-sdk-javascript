@@ -1,3 +1,10 @@
+# [4.132.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.131.0...v4.132.0) (2024-03-26)
+
+
+### Features
+
+* **configuration:** add reservations key (UNTIL 9144) ([#570](https://github.com/tillhub/tillhub-sdk-javascript/issues/570)) ([f7a568a](https://github.com/tillhub/tillhub-sdk-javascript/commit/f7a568af3d322459506dda999ed4e2d169f19a02))
+
 # [4.131.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.130.0...v4.131.0) (2024-03-22)
 
 
