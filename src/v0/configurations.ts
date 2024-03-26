@@ -65,6 +65,7 @@ export interface Configuration {
   level?: 'client_account' | 'registers' | 'branches'
   taxes?: Record<string, unknown> | null
   analytics?: Record<string, unknown>
+  reservations?: Record<string, unknown>
   custom_dashboards?: Record<string, unknown>
 }
 
