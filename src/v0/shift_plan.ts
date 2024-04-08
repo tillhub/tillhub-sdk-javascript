@@ -21,13 +21,16 @@ export interface ShiftPlanShift {
 
 export interface ShiftPlanItem {
   staff_member_id: string
+  branch_id: string
   date: string
   plan: ShiftPlanShift[]
 }
 
 export interface ShiftPlanUpdateOptions {
-  shift_plan_enabled: boolean
-  shift_plan: ShiftPlanItem[]
+  shifts: Array<{
+    branch_id: string
+    shift_plan: ShiftPlanItem[]
+  }>
 }
 
 export class ShiftPlan extends ThBaseHandler {
@@ -50,9 +53,9 @@ export class ShiftPlan extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async get (branchId: string): Promise<ShiftPlanResponse> {
+  async getAll (): Promise<ShiftPlanResponse> {
     try {
-      const uri = this.uriHelper.generateBaseUri(`/${branchId}`)
+      const uri = this.uriHelper.generateBaseUri()
 
       const response = await this.http.getClient().get(uri)
 
@@ -70,8 +73,8 @@ export class ShiftPlan extends ThBaseHandler {
     }
   }
 
-  async put (branchId: string, shiftPlanOptions: ShiftPlanUpdateOptions): Promise<ShiftPlanResponse> {
-    const uri = this.uriHelper.generateBaseUri(`/${branchId}`)
+  async put (shiftPlanOptions: ShiftPlanUpdateOptions): Promise<ShiftPlanResponse> {
+    const uri = this.uriHelper.generateBaseUri()
 
     try {
       const response = await this.http.getClient().put(uri, shiftPlanOptions)
