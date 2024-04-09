@@ -17,12 +17,15 @@ export interface ShiftPlanShift {
 }
 export interface ShiftPlanItem {
     staff_member_id: string;
+    branch_id: string;
     date: string;
     plan: ShiftPlanShift[];
 }
 export interface ShiftPlanUpdateOptions {
-    shift_plan_enabled: boolean;
-    shift_plan: ShiftPlanItem[];
+    shifts: Array<{
+        branch_id: string;
+        shift_plan: ShiftPlanItem[];
+    }>;
 }
 export declare class ShiftPlan extends ThBaseHandler {
     static baseEndpoint: string;
@@ -31,8 +34,8 @@ export declare class ShiftPlan extends ThBaseHandler {
     options: ShiftPlanOptions;
     uriHelper: UriHelper;
     constructor(options: ShiftPlanOptions, http: Client);
-    get(branchId: string): Promise<ShiftPlanResponse>;
-    put(branchId: string, shiftPlanOptions: ShiftPlanUpdateOptions): Promise<ShiftPlanResponse>;
+    getAll(): Promise<ShiftPlanResponse>;
+    put(shiftPlanOptions: ShiftPlanUpdateOptions): Promise<ShiftPlanResponse>;
 }
 export declare class ShiftPlanPutFailed extends BaseError {
     message: string;

@@ -20,14 +20,14 @@ var ShiftPlan = (function (_super) {
         _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
         return _this;
     }
-    ShiftPlan.prototype.get = function (branchId) {
+    ShiftPlan.prototype.getAll = function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var uri, response, error_1;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        uri = this.uriHelper.generateBaseUri("/" + branchId);
+                        uri = this.uriHelper.generateBaseUri();
                         return [4, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
@@ -47,13 +47,13 @@ var ShiftPlan = (function (_super) {
             });
         });
     };
-    ShiftPlan.prototype.put = function (branchId, shiftPlanOptions) {
+    ShiftPlan.prototype.put = function (shiftPlanOptions) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = this.uriHelper.generateBaseUri("/" + branchId);
+                        uri = this.uriHelper.generateBaseUri();
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);

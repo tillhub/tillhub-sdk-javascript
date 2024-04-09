@@ -1,3 +1,10 @@
+# [4.133.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.132.0...v4.133.0) (2024-04-09)
+
+
+### Features
+
+* **shift plan:** remove branch id parameter (UNTIL 9124) ([#571](https://github.com/tillhub/tillhub-sdk-javascript/issues/571)) ([400b804](https://github.com/tillhub/tillhub-sdk-javascript/commit/400b804640f2eb1d13a231533c225a368bba5645))
+
 # [4.132.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.131.0...v4.132.0) (2024-03-26)
 
 

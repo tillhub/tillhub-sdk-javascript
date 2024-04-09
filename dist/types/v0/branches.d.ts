@@ -53,6 +53,7 @@ export interface Branch {
     configuration?: string;
     timezone_default?: string | null;
     currency_default?: string | null;
+    shift_plan_enabled?: boolean;
 }
 export declare class Branches extends ThBaseHandler {
     static baseEndpoint: string;
