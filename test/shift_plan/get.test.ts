@@ -17,6 +17,7 @@ const branchId = 'asdf5566'
 const mockShiftPlan: ShiftPlanItem[] = [
   {
     staff_member_id: '0505ce68-9cd9-4b0c-ac5c-7cb6804e8956',
+    branch_id: '0505ce68-9cd9-4b0c-ac5c-7cb6804e8956',
     date: '2020-01-01',
     plan: [{ start: '10:00', end: '12:00' }]
   }
@@ -38,7 +39,7 @@ describe('v0: Shift Plan: can get one shift plan', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/shift_plan/${legacyId}/${branchId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/shift_plan/${legacyId}`).reply(() => {
         return [
           200,
           {
@@ -55,7 +56,7 @@ describe('v0: Shift Plan: can get one shift plan', () => {
 
     expect(ShiftPlan).toBeInstanceOf(v0.ShiftPlan)
 
-    const { data } = await ShiftPlan.get(branchId)
+    const { data } = await ShiftPlan.getAll()
 
     expect(data).toMatchObject(mockShiftPlan)
   })
@@ -75,14 +76,14 @@ describe('v0: Shift Plan: can get one shift plan', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/shift_plan/${legacyId}/${branchId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/shift_plan/${legacyId}`).reply(() => {
         return [205]
       })
     }
 
     try {
       const th = await initThInstance()
-      await th.shiftPlan().get(branchId)
+      await th.shiftPlan().getAll()
     } catch (err: any) {
       expect(err.name).toBe('ShiftPlanFetchFailed')
     }
