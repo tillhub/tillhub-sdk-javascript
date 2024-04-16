@@ -75,14 +75,14 @@ export class DocumentExports extends ThBaseHandler {
       if (response.status !== 200) {
         throw new DocumentExportsGetFailed(undefined, { status: response.status })
       }
-      if (response.data.cursor?.next) {
+      if (response.data.cursors?.after) {
         next = (): Promise<DocumentExportssMultipleResponse> =>
-          this.getAll({ uri: response.data.cursor.next })
+          this.getAll({ uri: response.data.cursors.after })
       }
 
       return {
         data: response.data.results,
-        metadata: { cursor: response.data.cursor },
+        metadata: { cursor: response.data.cursors },
         next
       }
     } catch (error: any) {
