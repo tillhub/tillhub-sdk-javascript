@@ -1,3 +1,10 @@
+## [4.133.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.133.0...v4.133.1) (2024-04-16)
+
+
+### Bug Fixes
+
+* **documents:** fix paging for documents and exports ([#572](https://github.com/tillhub/tillhub-sdk-javascript/issues/572)) ([4a322ef](https://github.com/tillhub/tillhub-sdk-javascript/commit/4a322efa278ff30b47f5599d6cc6011c7b07f152))
+
 # [4.133.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.132.0...v4.133.0) (2024-04-09)
 
 
