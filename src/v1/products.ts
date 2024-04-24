@@ -92,6 +92,10 @@ export interface ProductsQuery {
   [key: string]: any
 }
 
+export interface SelectProductsQuery {
+  product_ids: string[]
+}
+
 export interface ProductsExportResponse {
   data?: {
     url?: string
@@ -241,6 +245,25 @@ export class Products extends ThBaseHandler {
         data: response.data.results,
         metadata: { count: response.data.count, cursor: response.data.cursor },
         next
+      }
+    } catch (error: any) {
+      throw new ProductsFetchFailed(error.message, { error })
+    }
+  }
+
+  async select (options: SelectProductsQuery): Promise<ProductsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/selection')
+      const uri = this.uriHelper.generateUriWithQuery(base)
+
+      const response = await this.http.getClient().post(uri, options)
+
+      if (response.status !== 200) {
+        throw new ProductsFetchFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results
       }
     } catch (error: any) {
       throw new ProductsFetchFailed(error.message, { error })
