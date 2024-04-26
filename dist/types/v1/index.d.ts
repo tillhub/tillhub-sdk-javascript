@@ -15,7 +15,8 @@ import { Branches } from './branches';
 import { Tags } from './tags';
 import analytics from './analytics';
 import { AuditLogs } from './audit_logs';
-export { Auth, Pricebooks, Products, Templates, Transactions, TransactionsLegacy, Registers, Balances, Vouchers, Customers, Carts, Tags, SafesLogBook, ExportsV1, StocksBook, analytics, AuditLogs, Branches };
+import { Configurations } from './configurations';
+export { Auth, Pricebooks, Products, Templates, Transactions, TransactionsLegacy, Registers, Balances, Vouchers, Customers, Carts, Tags, SafesLogBook, ExportsV1, StocksBook, analytics, AuditLogs, Branches, Configurations };
 export interface AnalyticsHandlersV1Types {
     analytics: {
         reports: {

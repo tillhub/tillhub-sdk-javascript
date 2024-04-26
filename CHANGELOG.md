@@ -1,3 +1,10 @@
+# [4.134.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.133.1...v4.134.0) (2024-04-26)
+
+
+### Features
+
+* **configuration:** add V1 Patch method ([#574](https://github.com/tillhub/tillhub-sdk-javascript/issues/574)) ([6866c0c](https://github.com/tillhub/tillhub-sdk-javascript/commit/6866c0c6976a00dc6ae086083d0f9e0e48bd0a83))
+
 ## [4.133.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.133.0...v4.133.1) (2024-04-16)
 
 
