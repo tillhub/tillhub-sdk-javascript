@@ -15,6 +15,7 @@ import { Branches } from './branches'
 import { Tags } from './tags'
 import analytics from './analytics'
 import { AuditLogs } from './audit_logs'
+import { Configurations } from './configurations'
 
 export {
   Auth,
@@ -34,7 +35,8 @@ export {
   StocksBook,
   analytics,
   AuditLogs,
-  Branches
+  Branches,
+  Configurations
 }
 
 export interface AnalyticsHandlersV1Types {
