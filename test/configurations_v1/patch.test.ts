@@ -89,5 +89,6 @@ describe('v1: Configurations: patch existing config', () => {
 
     expect(Array.isArray(data)).toBe(false)
     expect(data).toEqual(combinedConf)
+    expect(mock.history.patch[0].headers['Content-Type']).toBe('application/json-patch+json')
   })
 })

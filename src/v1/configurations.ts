@@ -86,6 +86,7 @@ export class Configurations extends ThBaseHandler {
     this.endpoint = Configurations.baseEndpoint
     this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
+    this.http.setDefaults({ headers: { 'Content-Type': 'application/json-patch+json' } }) // extra header is needed for the patch method
   }
 
   async patch (configurationId: string, configuration: Configuration): Promise<ConfigurationResponse> {
