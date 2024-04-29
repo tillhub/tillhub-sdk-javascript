@@ -18,6 +18,7 @@ var Configurations = (function (_super) {
         _this.endpoint = Configurations.baseEndpoint;
         _this.options.base = (_b = _this.options.base) !== null && _b !== void 0 ? _b : 'https://api.tillhub.com';
         _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
+        _this.http.setDefaults({ headers: { 'Content-Type': 'application/json-patch+json' } });
         return _this;
     }
     Configurations.prototype.patch = function (configurationId, configuration) {

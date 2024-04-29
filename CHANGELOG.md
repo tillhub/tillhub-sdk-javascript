@@ -1,3 +1,10 @@
+## [4.134.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.134.0...v4.134.1) (2024-04-29)
+
+
+### Bug Fixes
+
+* **configuration:** set application/json-patch+json header to patch call ([db6af53](https://github.com/tillhub/tillhub-sdk-javascript/commit/db6af53d1b24f74097c7a8fd39b711b1b90b75ec))
+
 # [4.134.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.133.1...v4.134.0) (2024-04-26)
 
 
