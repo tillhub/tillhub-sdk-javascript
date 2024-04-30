@@ -80,6 +80,9 @@ export interface ProductsQuery {
     extended?: boolean;
     [key: string]: any;
 }
+export interface SelectProductsQuery {
+    product_ids: string[];
+}
 export interface ProductsExportResponse {
     data?: {
         url?: string;
@@ -165,6 +168,7 @@ export declare class Products extends ThBaseHandler {
     constructor(options: ProductsOptions, http: Client);
     create(product: Product, query?: HandlerProductsQuery): Promise<ProductResponse>;
     getAll(options?: ProductsOptions | undefined): Promise<ProductsResponse>;
+    select(options: SelectProductsQuery): Promise<ProductsResponse>;
     import(options?: ProductsOptions | undefined): Promise<ProductsResponse>;
     get(productId: string): Promise<ProductResponse>;
     export(query?: ProductsQuery | undefined): Promise<ProductsExportResponse>;

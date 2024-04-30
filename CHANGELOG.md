@@ -1,3 +1,10 @@
+# [4.135.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.134.1...v4.135.0) (2024-04-30)
+
+
+### Features
+
+* **products:** add list method for fetching products by ids (UNTIL 10440) ([#573](https://github.com/tillhub/tillhub-sdk-javascript/issues/573)) ([4ab19ba](https://github.com/tillhub/tillhub-sdk-javascript/commit/4ab19ba1bd70d6395ca7a2e776b2d646a0646b69))
+
 ## [4.134.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.134.0...v4.134.1) (2024-04-29)
 
 
