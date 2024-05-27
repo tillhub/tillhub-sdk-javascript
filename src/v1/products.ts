@@ -42,7 +42,7 @@ export interface Product {
   released_at?: string | null
   purchased_at?: string | null
   produced_at?: string | null
-  custom_id?: string | null
+  custom_id?: string | string[] | null
   tax?: string
   taxes_options?: any[] | Record<string, unknown> | null
   season?: string | null
