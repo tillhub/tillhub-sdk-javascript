@@ -1,3 +1,10 @@
+# [4.136.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.135.0...v4.136.0) (2024-05-27)
+
+
+### Features
+
+* **products:** allowing custom_id filter to be multiple ([5431274](https://github.com/tillhub/tillhub-sdk-javascript/commit/5431274edd118ecde213f0e7e720f8aabb7a4c92))
+
 # [4.135.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.134.1...v4.135.0) (2024-04-30)
 
 
