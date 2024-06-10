@@ -23,7 +23,7 @@ const query = {
   limit: 120
 }
 
-function queryString() {
+function queryString () {
   return qs.stringify(query)
 }
 
