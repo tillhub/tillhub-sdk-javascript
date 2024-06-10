@@ -904,6 +904,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Notifications v1
+   *
+   */
+  notificationsV1(): v1.Notifications {
+    return this.generateAuthenticatedInstance(v1.Notifications)
+  }
+
+  /**
    * Create an authenticated Messages instance
    *
    */

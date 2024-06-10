@@ -4,30 +4,30 @@ import { UriHelper } from '../uri-helper'
 import { ThBaseHandler } from '../base'
 
 export interface Notification {
-  active: boolean
-  createdAt: string
-  criteria: {
+  active?: boolean
+  createdAt?: string
+  criteria?: {
     targetEntitiesIds: string[]
   }
-  deletedAt: string
-  emails: string[]
-  id: string
-  locations: string[]
-  name: string
-  nextRunAt: string | null
-  period: string
-  schedule: string[] | null
-  startAt: string | null
-  updatedAt: string
+  deletedAt?: string
+  emails?: string[]
+  id?: string
+  locations?: string[]
+  name?: string
+  nextRunAt?: string | null
+  period?: string
+  schedule?: string[] | null
+  startAt?: string | null
+  updatedAt?: string
 }
 
 export interface NotificationsQuery {
-  start: string
-  end: string
-  limit: number
-  offset: number
-  orderFields: string[]
-  q: string
+  start?: string
+  end?: string
+  limit?: number
+  offset?: number
+  orderFields?: string[]
+  q?: string
 }
 
 export interface NotificationsOptions {
@@ -57,7 +57,7 @@ export class Notifications extends ThBaseHandler {
   public options: NotificationsOptions
   public uriHelper: UriHelper
 
-  constructor (options: NotificationsOptions, http: Client) {
+  constructor(options: NotificationsOptions, http: Client) {
     super(http, {
       endpoint: Notifications.baseEndpoint,
       base: options.base ?? 'https://api.tillhub.com'
@@ -70,7 +70,7 @@ export class Notifications extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async getAll (options?: NotificationsOptions | undefined): Promise<NotificationsResponse> {
+  async getAll(options?: NotificationsOptions | undefined): Promise<NotificationsResponse> {
     let next
 
     try {
@@ -97,7 +97,7 @@ export class Notifications extends ThBaseHandler {
     }
   }
 
-  async meta (q?: NotificationsQuery | undefined): Promise<NotificationsResponse> {
+  async meta(q?: NotificationsQuery | undefined): Promise<NotificationsResponse> {
     const base = this.uriHelper.generateBaseUri('/meta')
     const uri = this.uriHelper.generateUriWithQuery(base, q)
     try {
@@ -118,7 +118,7 @@ export class Notifications extends ThBaseHandler {
     }
   }
 
-  async create (notification: Notification): Promise<NotificationsResponse> {
+  async create(notification: Notification): Promise<NotificationsResponse> {
     const uri = this.uriHelper.generateBaseUri()
 
     try {
@@ -136,7 +136,7 @@ export class Notifications extends ThBaseHandler {
     }
   }
 
-  async update (notificationId: string, product: Notification): Promise<NotificationsResponse> {
+  async update(notificationId: string, product: Notification): Promise<NotificationsResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${notificationId}`)
 
     try {
@@ -154,7 +154,7 @@ export class Notifications extends ThBaseHandler {
     }
   }
 
-  async delete (notificationId: string): Promise<NotificationsResponse> {
+  async delete(notificationId: string): Promise<NotificationsResponse> {
     try {
       const uri = this.uriHelper.generateBaseUri(`/${notificationId}`)
 
@@ -174,7 +174,7 @@ export class Notifications extends ThBaseHandler {
 
 export class NotificationsFetchFailed extends BaseError {
   public name = 'NotificationsFetchFailed'
-  constructor (
+  constructor(
     public message: string = 'Could not fetch the notifications',
     properties?: Record<string, unknown>
   ) {
@@ -185,7 +185,7 @@ export class NotificationsFetchFailed extends BaseError {
 
 export class NotificationsMetaFailed extends BaseError {
   public name = 'NotificationsMetaFailed'
-  constructor (
+  constructor(
     public message: string = 'Could not fetch the notifications meta',
     properties?: Record<string, unknown>
   ) {
@@ -196,7 +196,7 @@ export class NotificationsMetaFailed extends BaseError {
 
 export class NotificationsCreateFailed extends BaseError {
   public name = 'NotificationsCreateFailed'
-  constructor (
+  constructor(
     public message: string = 'Could not create the notification',
     properties?: Record<string, unknown>
   ) {
@@ -207,7 +207,7 @@ export class NotificationsCreateFailed extends BaseError {
 
 export class NotificationsUpdateFailed extends BaseError {
   public name = 'NotificationsUpdateFailed'
-  constructor (
+  constructor(
     public message: string = 'Could not update the notification',
     properties?: Record<string, unknown>
   ) {
@@ -218,7 +218,7 @@ export class NotificationsUpdateFailed extends BaseError {
 
 export class NotificationsDeleteFailed extends BaseError {
   public name = 'NotificationsDeleteFailed'
-  constructor (
+  constructor(
     public message: string = 'Could not delete the notification',
     properties?: Record<string, unknown>
   ) {
