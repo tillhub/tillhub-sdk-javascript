@@ -16,6 +16,7 @@ import { Tags } from './tags'
 import analytics from './analytics'
 import { AuditLogs } from './audit_logs'
 import { Configurations } from './configurations'
+import { Promotions } from './promotions'
 
 export {
   Auth,
@@ -36,7 +37,8 @@ export {
   analytics,
   AuditLogs,
   Branches,
-  Configurations
+  Configurations,
+  Promotions
 }
 
 export interface AnalyticsHandlersV1Types {

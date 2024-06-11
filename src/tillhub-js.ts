@@ -1074,6 +1074,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated Promotions V1 instance
+   *
+   */
+  promotionsV1(): v1.Promotions {
+    return this.generateAuthenticatedInstance(v1.Promotions)
+  }
+
+  /**
    * Create an authenticated ProductServiceQuestionGroups instance
    *
    */
