@@ -210,6 +210,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated product template defaults instance
+   *
+   */
+  productTemplateDefaults(): v0.ProductTemplateDefaults {
+    return this.generateAuthenticatedInstance(v0.ProductTemplateDefaults)
+  }
+
+  /**
    * Create an authenticated product addon groups instance
    *
    */
