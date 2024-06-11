@@ -111,6 +111,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.productTemplates = function () {
         return this.generateAuthenticatedInstance(v0.ProductTemplates);
     };
+    TillhubClient.prototype.productTemplateDefaults = function () {
+        return this.generateAuthenticatedInstance(v0.ProductTemplateDefaults);
+    };
     TillhubClient.prototype.productAddonGroups = function () {
         return this.generateAuthenticatedInstance(v0.ProductAddonGroups);
     };
