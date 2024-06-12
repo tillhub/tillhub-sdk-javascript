@@ -492,6 +492,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.promotions = function () {
         return this.generateAuthenticatedInstance(v0.Promotions);
     };
+    TillhubClient.prototype.promotionsV1 = function () {
+        return this.generateAuthenticatedInstance(v1.Promotions);
+    };
     TillhubClient.prototype.productServiceQuestionGroups = function () {
         return this.generateAuthenticatedInstance(v0.ProductServiceQuestionGroups);
     };

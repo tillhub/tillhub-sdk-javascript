@@ -1,3 +1,10 @@
+# [4.138.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.137.0...v4.138.0) (2024-06-12)
+
+
+### Features
+
+* **promotions:** add promotions V1 api ([#578](https://github.com/tillhub/tillhub-sdk-javascript/issues/578)) ([574fc90](https://github.com/tillhub/tillhub-sdk-javascript/commit/574fc906a2cf97b0486e7feaa789bf206dd20d74))
+
 # [4.137.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.136.0...v4.137.0) (2024-06-11)
 
 
