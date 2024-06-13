@@ -3,6 +3,7 @@ import { Taxes } from './taxes'
 import { Deliveries } from './deliveries'
 import { ProductGroups } from './product_groups'
 import { ProductTemplates } from './product_templates'
+import { ProductTemplateDefaults } from './product_template_defaults'
 import { ProductAddonGroups } from './product_addon_groups'
 import { ProductAddons } from './product_addons'
 import { ProductBranchCustomizations } from './product_branch_customizations'
@@ -85,6 +86,7 @@ export {
   Deliveries,
   ProductGroups,
   ProductTemplates,
+  ProductTemplateDefaults,
   ProductAddonGroups,
   ProductAddons,
   ProductBranchCustomizations,

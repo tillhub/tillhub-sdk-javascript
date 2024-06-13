@@ -17,6 +17,7 @@ import analytics from './analytics'
 import { AuditLogs } from './audit_logs'
 import { Configurations } from './configurations'
 import { Notifications } from './notifications'
+import { Promotions } from './promotions'
 
 export {
   Auth,
@@ -38,7 +39,8 @@ export {
   AuditLogs,
   Branches,
   Configurations,
-  Notifications
+  Notifications,
+  Promotions
 }
 
 export interface AnalyticsHandlersV1Types {

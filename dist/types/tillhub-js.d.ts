@@ -47,6 +47,7 @@ export declare class TillhubClient extends events.EventEmitter {
     productsV4(): v4.Products;
     productGroups(): v0.ProductGroups;
     productTemplates(): v0.ProductTemplates;
+    productTemplateDefaults(): v0.ProductTemplateDefaults;
     productAddonGroups(): v0.ProductAddonGroups;
     productAddons(): v0.ProductAddons;
     productBranchCustomizations(): v0.ProductBranchCustomizations;
@@ -118,6 +119,7 @@ export declare class TillhubClient extends events.EventEmitter {
     services(): v0.Services;
     exports(): v0.Exports;
     promotions(): v0.Promotions;
+    promotionsV1(): v1.Promotions;
     productServiceQuestionGroups(): v0.ProductServiceQuestionGroups;
     productServiceQuestions(): v0.ProductServiceQuestions;
     data(): v0.Data;

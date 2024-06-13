@@ -210,6 +210,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated product template defaults instance
+   *
+   */
+  productTemplateDefaults(): v0.ProductTemplateDefaults {
+    return this.generateAuthenticatedInstance(v0.ProductTemplateDefaults)
+  }
+
+  /**
    * Create an authenticated product addon groups instance
    *
    */
@@ -1079,6 +1087,14 @@ export class TillhubClient extends events.EventEmitter {
    */
   promotions(): v0.Promotions {
     return this.generateAuthenticatedInstance(v0.Promotions)
+  }
+
+  /**
+   * Create an authenticated Promotions V1 instance
+   *
+   */
+  promotionsV1(): v1.Promotions {
+    return this.generateAuthenticatedInstance(v1.Promotions)
   }
 
   /**
