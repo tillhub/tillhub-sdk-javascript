@@ -16,6 +16,7 @@ import { Tags } from './tags'
 import analytics from './analytics'
 import { AuditLogs } from './audit_logs'
 import { Configurations } from './configurations'
+import { Notifications } from './notifications'
 import { Promotions } from './promotions'
 
 export {
@@ -38,6 +39,7 @@ export {
   AuditLogs,
   Branches,
   Configurations,
+  Notifications,
   Promotions
 }
 
