@@ -1,3 +1,13 @@
+# [4.139.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.138.0...v4.139.0) (2024-06-13)
+
+
+### Features
+
+* **stock_management:** add notifications crud methods ([5dced73](https://github.com/tillhub/tillhub-sdk-javascript/commit/5dced73db2c33ecfb07664bcede6e40de6360f7d))
+* **stock_management:** add unit tests ([51574e1](https://github.com/tillhub/tillhub-sdk-javascript/commit/51574e19cd0087e6ceaa6922739f162f2a3cb2e1))
+* **stock_management:** fix linting issues ([2c2389d](https://github.com/tillhub/tillhub-sdk-javascript/commit/2c2389dd97b90b8f5f5c5a3537bf2564c01214a1))
+* **stock_management:** fix linting issues ([af21f28](https://github.com/tillhub/tillhub-sdk-javascript/commit/af21f28f7aa8cf9ef22920ead68e83699a798d01))
+
 # [4.138.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.137.0...v4.138.0) (2024-06-12)
 
 
