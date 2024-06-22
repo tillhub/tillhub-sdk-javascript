@@ -136,11 +136,30 @@ export class Notifications extends ThBaseHandler {
     }
   }
 
-  async update (notificationId: string, product: Notification): Promise<NotificationsResponse> {
+  async get (notificationId: string): Promise<NotificationsResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${notificationId}`)
 
     try {
-      const response = await this.http.getClient().put(uri, product)
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new NotificationsFetchOneFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results[0],
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new NotificationsFetchOneFailed(error.message, { error })
+    }
+  }
+
+  async update (notificationId: string, notification: Notification): Promise<NotificationsResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${notificationId}`)
+
+    try {
+      const response = await this.http.getClient().put(uri, notification)
       if (response.status !== 200) {
         throw new NotificationsUpdateFailed(undefined, { status: response.status })
       }
@@ -202,6 +221,17 @@ export class NotificationsCreateFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, NotificationsCreateFailed.prototype)
+  }
+}
+
+export class NotificationsFetchOneFailed extends BaseError {
+  public name = 'NotificationsFetchOneFailed'
+  constructor (
+    public message: string = 'Could not fetch the notification',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, NotificationsFetchOneFailed.prototype)
   }
 }
 
