@@ -19,7 +19,7 @@ export interface Notification {
     startAt?: string | null;
     updatedAt?: string;
 }
-export interface NotificationsQuery {
+export interface NotificationsMsuQuery {
     start?: string;
     end?: string;
     limit?: number;
@@ -27,57 +27,57 @@ export interface NotificationsQuery {
     orderFields?: string[];
     q?: string;
 }
-export interface NotificationsOptions {
+export interface NotificationsMsuOptions {
     base?: string;
     limit?: number;
     uri?: string;
-    query?: NotificationsQuery;
+    query?: NotificationsMsuQuery;
 }
-export interface NotificationsResponse {
+export interface NotificationsMsuResponse {
     data?: Notification[];
     metadata?: Record<string, unknown>;
     msg?: string;
-    next?: () => Promise<NotificationsResponse>;
+    next?: () => Promise<NotificationsMsuResponse>;
 }
 export interface ErrorObject {
     id: string;
     label: string;
     errorDetails: Record<string, unknown>;
 }
-export declare class Notifications extends ThBaseHandler {
+export declare class NotificationsMsu extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
     http: Client;
-    options: NotificationsOptions;
+    options: NotificationsMsuOptions;
     uriHelper: UriHelper;
-    constructor(options: NotificationsOptions, http: Client);
-    getAll(options?: NotificationsOptions | undefined): Promise<NotificationsResponse>;
-    meta(q?: NotificationsQuery | undefined): Promise<NotificationsResponse>;
-    create(notification: Notification): Promise<NotificationsResponse>;
-    update(notificationId: string, product: Notification): Promise<NotificationsResponse>;
-    delete(notificationId: string): Promise<NotificationsResponse>;
+    constructor(options: NotificationsMsuOptions, http: Client);
+    getAll(options?: NotificationsMsuOptions | undefined): Promise<NotificationsMsuResponse>;
+    meta(q?: NotificationsMsuQuery | undefined): Promise<NotificationsMsuResponse>;
+    create(notification: Notification): Promise<NotificationsMsuResponse>;
+    update(notificationId: string, product: Notification): Promise<NotificationsMsuResponse>;
+    delete(notificationId: string): Promise<NotificationsMsuResponse>;
 }
-export declare class NotificationsFetchFailed extends BaseError {
+export declare class NotificationsMsuFetchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
 }
-export declare class NotificationsMetaFailed extends BaseError {
+export declare class NotificationsMsuMetaFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
 }
-export declare class NotificationsCreateFailed extends BaseError {
+export declare class NotificationsMsuCreateFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
 }
-export declare class NotificationsUpdateFailed extends BaseError {
+export declare class NotificationsMsuUpdateFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
 }
-export declare class NotificationsDeleteFailed extends BaseError {
+export declare class NotificationsMsuDeleteFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

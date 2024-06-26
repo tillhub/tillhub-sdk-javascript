@@ -425,8 +425,8 @@ var TillhubClient = (function (_super) {
         }
         return new v0.Notifications({ user: this.auth.user, base: this.options.base }, this.http);
     };
-    TillhubClient.prototype.notificationsV1 = function () {
-        return this.generateAuthenticatedInstance(v1.Notifications);
+    TillhubClient.prototype.notificationsMsu = function () {
+        return this.generateAuthenticatedInstance(v1.NotificationsMsu);
     };
     TillhubClient.prototype.messages = function () {
         if (!this.options ||

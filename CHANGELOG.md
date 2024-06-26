@@ -1,3 +1,10 @@
+# [4.140.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.139.0...v4.140.0) (2024-06-26)
+
+
+### Features
+
+* **notifications:** adding MSU namespace for notifications v1 ([e528391](https://github.com/tillhub/tillhub-sdk-javascript/commit/e528391763be0156924c160aa47e7053074bb7e5))
+
 # [4.139.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.138.0...v4.139.0) (2024-06-13)
 
 

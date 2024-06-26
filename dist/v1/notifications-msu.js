@@ -1,26 +1,26 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.NotificationsDeleteFailed = exports.NotificationsUpdateFailed = exports.NotificationsCreateFailed = exports.NotificationsMetaFailed = exports.NotificationsFetchFailed = exports.Notifications = void 0;
+exports.NotificationsMsuDeleteFailed = exports.NotificationsMsuUpdateFailed = exports.NotificationsMsuCreateFailed = exports.NotificationsMsuMetaFailed = exports.NotificationsMsuFetchFailed = exports.NotificationsMsu = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
-var Notifications = (function (_super) {
-    tslib_1.__extends(Notifications, _super);
-    function Notifications(options, http) {
+var NotificationsMsu = (function (_super) {
+    tslib_1.__extends(NotificationsMsu, _super);
+    function NotificationsMsu(options, http) {
         var _a, _b;
         var _this = _super.call(this, http, {
-            endpoint: Notifications.baseEndpoint,
+            endpoint: NotificationsMsu.baseEndpoint,
             base: (_a = options.base) !== null && _a !== void 0 ? _a : 'https://api.tillhub.com'
         }) || this;
         _this.options = options;
         _this.http = http;
-        _this.endpoint = Notifications.baseEndpoint;
+        _this.endpoint = NotificationsMsu.baseEndpoint;
         _this.options.base = (_b = _this.options.base) !== null && _b !== void 0 ? _b : 'https://api.tillhub.com';
         _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
         return _this;
     }
-    Notifications.prototype.getAll = function (options) {
+    NotificationsMsu.prototype.getAll = function (options) {
         var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var next, base, uri, response_1, error_1;
@@ -35,7 +35,7 @@ var Notifications = (function (_super) {
                     case 1:
                         response_1 = _b.sent();
                         if (response_1.status !== 200) {
-                            throw new NotificationsFetchFailed(undefined, { status: response_1.status });
+                            throw new NotificationsMsuFetchFailed(undefined, { status: response_1.status });
                         }
                         if ((_a = response_1.data.cursor) === null || _a === void 0 ? void 0 : _a.next) {
                             next = function () { return _this.getAll({ uri: response_1.data.cursor.next }); };
@@ -47,13 +47,13 @@ var Notifications = (function (_super) {
                             }];
                     case 2:
                         error_1 = _b.sent();
-                        throw new NotificationsFetchFailed(error_1.message, { error: error_1 });
+                        throw new NotificationsMsuFetchFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
             });
         });
     };
-    Notifications.prototype.meta = function (q) {
+    NotificationsMsu.prototype.meta = function (q) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
@@ -68,10 +68,10 @@ var Notifications = (function (_super) {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            throw new NotificationsMetaFailed(undefined, { status: response.status });
+                            throw new NotificationsMsuMetaFailed(undefined, { status: response.status });
                         }
                         if (!response.data.results[0]) {
-                            throw new NotificationsMetaFailed(undefined, { status: response.status });
+                            throw new NotificationsMsuMetaFailed(undefined, { status: response.status });
                         }
                         return [2, {
                                 data: response.data.results[0],
@@ -79,13 +79,13 @@ var Notifications = (function (_super) {
                             }];
                     case 3:
                         error_2 = _a.sent();
-                        throw new NotificationsMetaFailed(error_2.message, { error: error_2 });
+                        throw new NotificationsMsuMetaFailed(error_2.message, { error: error_2 });
                     case 4: return [2];
                 }
             });
         });
     };
-    Notifications.prototype.create = function (notification) {
+    NotificationsMsu.prototype.create = function (notification) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
@@ -99,7 +99,7 @@ var Notifications = (function (_super) {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            throw new NotificationsCreateFailed(undefined, { status: response.status });
+                            throw new NotificationsMsuCreateFailed(undefined, { status: response.status });
                         }
                         return [2, {
                                 data: response.data.results[0],
@@ -107,13 +107,13 @@ var Notifications = (function (_super) {
                             }];
                     case 3:
                         error_3 = _a.sent();
-                        throw new NotificationsCreateFailed(error_3.message, { error: error_3 });
+                        throw new NotificationsMsuCreateFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });
         });
     };
-    Notifications.prototype.update = function (notificationId, product) {
+    NotificationsMsu.prototype.update = function (notificationId, product) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
@@ -127,7 +127,7 @@ var Notifications = (function (_super) {
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            throw new NotificationsUpdateFailed(undefined, { status: response.status });
+                            throw new NotificationsMsuUpdateFailed(undefined, { status: response.status });
                         }
                         return [2, {
                                 data: response.data.results[0],
@@ -135,13 +135,13 @@ var Notifications = (function (_super) {
                             }];
                     case 3:
                         error_4 = _a.sent();
-                        throw new NotificationsUpdateFailed(error_4.message, { error: error_4 });
+                        throw new NotificationsMsuUpdateFailed(error_4.message, { error: error_4 });
                     case 4: return [2];
                 }
             });
         });
     };
-    Notifications.prototype.delete = function (notificationId) {
+    NotificationsMsu.prototype.delete = function (notificationId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var uri, response, error_5;
             return tslib_1.__generator(this, function (_a) {
@@ -153,86 +153,86 @@ var Notifications = (function (_super) {
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200) {
-                            throw new NotificationsDeleteFailed(undefined, { status: response.status });
+                            throw new NotificationsMsuDeleteFailed(undefined, { status: response.status });
                         }
                         return [2, {
                                 msg: response.data.msg
                             }];
                     case 2:
                         error_5 = _a.sent();
-                        throw new NotificationsDeleteFailed(error_5.message, { error: error_5 });
+                        throw new NotificationsMsuDeleteFailed(error_5.message, { error: error_5 });
                     case 3: return [2];
                 }
             });
         });
     };
-    Notifications.baseEndpoint = '/api/v1/notifications';
-    return Notifications;
+    NotificationsMsu.baseEndpoint = '/api/v1/notifications/msu';
+    return NotificationsMsu;
 }(base_1.ThBaseHandler));
-exports.Notifications = Notifications;
-var NotificationsFetchFailed = (function (_super) {
-    tslib_1.__extends(NotificationsFetchFailed, _super);
-    function NotificationsFetchFailed(message, properties) {
+exports.NotificationsMsu = NotificationsMsu;
+var NotificationsMsuFetchFailed = (function (_super) {
+    tslib_1.__extends(NotificationsMsuFetchFailed, _super);
+    function NotificationsMsuFetchFailed(message, properties) {
         if (message === void 0) { message = 'Could not fetch the notifications'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
-        _this.name = 'NotificationsFetchFailed';
-        Object.setPrototypeOf(_this, NotificationsFetchFailed.prototype);
+        _this.name = 'NotificationsMsuFetchFailed';
+        Object.setPrototypeOf(_this, NotificationsMsuFetchFailed.prototype);
         return _this;
     }
-    return NotificationsFetchFailed;
+    return NotificationsMsuFetchFailed;
 }(errors_1.BaseError));
-exports.NotificationsFetchFailed = NotificationsFetchFailed;
-var NotificationsMetaFailed = (function (_super) {
-    tslib_1.__extends(NotificationsMetaFailed, _super);
-    function NotificationsMetaFailed(message, properties) {
+exports.NotificationsMsuFetchFailed = NotificationsMsuFetchFailed;
+var NotificationsMsuMetaFailed = (function (_super) {
+    tslib_1.__extends(NotificationsMsuMetaFailed, _super);
+    function NotificationsMsuMetaFailed(message, properties) {
         if (message === void 0) { message = 'Could not fetch the notifications meta'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
-        _this.name = 'NotificationsMetaFailed';
-        Object.setPrototypeOf(_this, NotificationsMetaFailed.prototype);
+        _this.name = 'NotificationsMsuMetaFailed';
+        Object.setPrototypeOf(_this, NotificationsMsuMetaFailed.prototype);
         return _this;
     }
-    return NotificationsMetaFailed;
+    return NotificationsMsuMetaFailed;
 }(errors_1.BaseError));
-exports.NotificationsMetaFailed = NotificationsMetaFailed;
-var NotificationsCreateFailed = (function (_super) {
-    tslib_1.__extends(NotificationsCreateFailed, _super);
-    function NotificationsCreateFailed(message, properties) {
+exports.NotificationsMsuMetaFailed = NotificationsMsuMetaFailed;
+var NotificationsMsuCreateFailed = (function (_super) {
+    tslib_1.__extends(NotificationsMsuCreateFailed, _super);
+    function NotificationsMsuCreateFailed(message, properties) {
         if (message === void 0) { message = 'Could not create the notification'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
-        _this.name = 'NotificationsCreateFailed';
-        Object.setPrototypeOf(_this, NotificationsCreateFailed.prototype);
+        _this.name = 'NotificationsMsuCreateFailed';
+        Object.setPrototypeOf(_this, NotificationsMsuCreateFailed.prototype);
         return _this;
     }
-    return NotificationsCreateFailed;
+    return NotificationsMsuCreateFailed;
 }(errors_1.BaseError));
-exports.NotificationsCreateFailed = NotificationsCreateFailed;
-var NotificationsUpdateFailed = (function (_super) {
-    tslib_1.__extends(NotificationsUpdateFailed, _super);
-    function NotificationsUpdateFailed(message, properties) {
+exports.NotificationsMsuCreateFailed = NotificationsMsuCreateFailed;
+var NotificationsMsuUpdateFailed = (function (_super) {
+    tslib_1.__extends(NotificationsMsuUpdateFailed, _super);
+    function NotificationsMsuUpdateFailed(message, properties) {
         if (message === void 0) { message = 'Could not update the notification'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
-        _this.name = 'NotificationsUpdateFailed';
-        Object.setPrototypeOf(_this, NotificationsUpdateFailed.prototype);
+        _this.name = 'NotificationsMsuUpdateFailed';
+        Object.setPrototypeOf(_this, NotificationsMsuUpdateFailed.prototype);
         return _this;
     }
-    return NotificationsUpdateFailed;
+    return NotificationsMsuUpdateFailed;
 }(errors_1.BaseError));
-exports.NotificationsUpdateFailed = NotificationsUpdateFailed;
-var NotificationsDeleteFailed = (function (_super) {
-    tslib_1.__extends(NotificationsDeleteFailed, _super);
-    function NotificationsDeleteFailed(message, properties) {
+exports.NotificationsMsuUpdateFailed = NotificationsMsuUpdateFailed;
+var NotificationsMsuDeleteFailed = (function (_super) {
+    tslib_1.__extends(NotificationsMsuDeleteFailed, _super);
+    function NotificationsMsuDeleteFailed(message, properties) {
         if (message === void 0) { message = 'Could not delete the notification'; }
         var _this = _super.call(this, message, properties) || this;
         _this.message = message;
-        _this.name = 'NotificationsDeleteFailed';
-        Object.setPrototypeOf(_this, NotificationsDeleteFailed.prototype);
+        _this.name = 'NotificationsMsuDeleteFailed';
+        Object.setPrototypeOf(_this, NotificationsMsuDeleteFailed.prototype);
         return _this;
     }
-    return NotificationsDeleteFailed;
+    return NotificationsMsuDeleteFailed;
 }(errors_1.BaseError));
-exports.NotificationsDeleteFailed = NotificationsDeleteFailed;
-//# sourceMappingURL=notifications.js.map
+exports.NotificationsMsuDeleteFailed = NotificationsMsuDeleteFailed;
+//# sourceMappingURL=notifications-msu.js.map
