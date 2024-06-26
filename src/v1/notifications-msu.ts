@@ -44,6 +44,11 @@ export interface NotificationsMsuResponse {
   next?: () => Promise<NotificationsMsuResponse>
 }
 
+export interface NotificationSingleResponse {
+  data: Notification
+  msg: string
+}
+
 export interface ErrorObject {
   id: string
   label: string
@@ -94,6 +99,25 @@ export class NotificationsMsu extends ThBaseHandler {
       }
     } catch (error: any) {
       throw new NotificationsMsuFetchFailed(error.message, { error })
+    }
+  }
+
+  async get (notificationId: string): Promise<NotificationSingleResponse> {
+    const base = this.uriHelper.generateBaseUri(`/${notificationId}`)
+    const uri = this.uriHelper.generateUriWithQuery(base)
+
+    try {
+      const response = await this.http.getClient().get(uri)
+
+      if (response.status !== 200) {
+        throw new NotificationsMsuGetFailed(undefined, { status: response.status })
+      }
+      return {
+        data: response.data.results[0],
+        msg: response.data.msg
+      }
+    } catch (error: any) {
+      throw new NotificationsMsuGetFailed(error.message, { error })
     }
   }
 
@@ -175,11 +199,22 @@ export class NotificationsMsu extends ThBaseHandler {
 export class NotificationsMsuFetchFailed extends BaseError {
   public name = 'NotificationsMsuFetchFailed'
   constructor (
-    public message: string = 'Could not fetch the notifications',
+    public message: string = 'Could not fetch notifications',
     properties?: Record<string, unknown>
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, NotificationsMsuFetchFailed.prototype)
+  }
+}
+
+export class NotificationsMsuGetFailed extends BaseError {
+  public name = 'NotificationsMsuGetFailed'
+  constructor (
+    public message: string = 'Could not get the notification',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, NotificationsMsuCreateFailed.prototype)
   }
 }
 

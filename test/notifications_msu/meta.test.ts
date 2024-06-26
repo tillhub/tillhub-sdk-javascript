@@ -34,7 +34,7 @@ afterEach(() => {
   mock.reset()
 })
 
-describe('v1: Notifications: can get count number of all Notifications', () => {
+describe('v1: Notifications MSU: can get count number of all Notifications', () => {
   it("Tillhub's notifications are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {

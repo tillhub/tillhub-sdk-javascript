@@ -15,7 +15,7 @@ afterEach(() => {
 const notificationId = 'asdf5566'
 const respMsg = `Deleted notification ${notificationId}`
 
-describe('v1: Notifications: can delete the notification', () => {
+describe('v1: Notifications MSU: can delete the notification', () => {
   it("Tillhub's notifications are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
