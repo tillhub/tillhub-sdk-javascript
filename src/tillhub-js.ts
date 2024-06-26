@@ -42,7 +42,7 @@ type MaybeOptions = Record<string, unknown>
 
 export declare interface TillhubClient {
   on: ((event: 'raw-error' | 'error', listener: (error: Error) => void) => this) &
-    ((event: string, listener: Fn) => this)
+  ((event: string, listener: Fn) => this)
 }
 
 export class TillhubClient extends events.EventEmitter {
@@ -912,11 +912,11 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
-   * Notifications v1
+   * Notifications Minimum Stock Unit
    *
    */
-  notificationsV1(): v1.Notifications {
-    return this.generateAuthenticatedInstance(v1.Notifications)
+  notificationsMsu(): v1.NotificationsMsu {
+    return this.generateAuthenticatedInstance(v1.NotificationsMsu)
   }
 
   /**
@@ -1296,7 +1296,7 @@ export class TillhubClient extends events.EventEmitter {
   shiftPlan(): v0.ShiftPlan {
     return this.generateAuthenticatedInstance(v0.ShiftPlan)
   }
-  
+
   /**
    * Create an authenticated AnalyticsV4 instance
    *

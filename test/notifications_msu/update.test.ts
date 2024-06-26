@@ -12,11 +12,12 @@ afterEach(() => {
   mock.reset()
 })
 
-const notificationObj = {
-  name: 'testName2'
+const notificationId = 'asdf5566'
+const updateObject = {
+  name: 'some notification name'
 }
 
-describe('v1: Notifications: can create one notifications', () => {
+describe('v1: Notifications: can alter a notification', () => {
   it("Tillhub's notifications are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
@@ -32,26 +33,28 @@ describe('v1: Notifications: can create one notifications', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v1/notifications/${legacyId}`).reply(() => {
-        return [
-          200,
-          {
-            count: 1,
-            results: [notificationObj]
-          }
-        ]
-      })
+      mock
+        .onPut(`https://api.tillhub.com/api/v1/notifications/msu/${legacyId}/${notificationId}`)
+        .reply(() => {
+          return [
+            200,
+            {
+              count: 1,
+              results: [updateObject]
+            }
+          ]
+        })
     }
 
     const th = await initThInstance()
 
-    const notifications = th.notificationsV1()
+    const notifications = th.notificationsMsu()
 
-    expect(notifications).toBeInstanceOf(v1.Notifications)
+    expect(notifications).toBeInstanceOf(v1.NotificationsMsu)
 
-    const { data } = await notifications.create(notificationObj)
+    const { data } = await notifications.update(notificationId, updateObject)
 
-    expect(data).toMatchObject(notificationObj)
+    expect(data).toMatchObject(updateObject)
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -68,17 +71,24 @@ describe('v1: Notifications: can create one notifications', () => {
           }
         ]
       })
-
-      mock.onPost(`https://api.tillhub.com/api/v1/notifications/${legacyId}`).reply(() => {
-        return [205]
-      })
+      mock
+        .onPut(`https://api.tillhub.com/api/v1/notifications/msu/${legacyId}/${notificationId}`)
+        .reply(() => {
+          return [
+            400,
+            {
+              msg: 'Notification could not be updated.'
+            }
+          ]
+        })
     }
 
+    const th = await initThInstance()
+
     try {
-      const th = await initThInstance()
-      await th.notificationsV1().create(notificationObj)
+      await th.notificationsMsu().update(notificationId, updateObject)
     } catch (err: any) {
-      expect(err.name).toBe('NotificationsCreateFailed')
+      expect(err.name).toBe('NotificationsMsuUpdateFailed')
     }
   })
 })
