@@ -24,7 +24,7 @@ afterEach(() => {
   mock.reset()
 })
 
-describe('v1: Notifications: can get all', () => {
+describe('v1: Notifications MSU: can get all', () => {
   it("Tillhub's notifications are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {

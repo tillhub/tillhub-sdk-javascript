@@ -12,12 +12,13 @@ afterEach(() => {
   mock.reset()
 })
 
-const notificationObj = {
-  name: 'testName2'
+const notificationId = 'f8314183-8199-4cb7-b152-04f6ad4ebc7e'
+const notification = {
+  name: 'testName'
 }
 
-describe('v1: Notifications MSU: can create one notifications', () => {
-  it("Tillhub's notifications are instantiable", async () => {
+describe('v1: Notifications MSU: can get one', () => {
+  it("Tillhub's notifications msu are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
@@ -32,12 +33,12 @@ describe('v1: Notifications MSU: can create one notifications', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v1/notifications/msu/${legacyId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v1/notifications/msu/${legacyId}/${notificationId}`).reply(() => {
         return [
           200,
           {
             count: 1,
-            results: [notificationObj]
+            results: [notification]
           }
         ]
       })
@@ -45,13 +46,13 @@ describe('v1: Notifications MSU: can create one notifications', () => {
 
     const th = await initThInstance()
 
-    const notifications = th.notificationsMsu()
+    const NotificationsMsu = th.notificationsMsu()
 
-    expect(notifications).toBeInstanceOf(v1.NotificationsMsu)
+    expect(NotificationsMsu).toBeInstanceOf(v1.NotificationsMsu)
 
-    const { data } = await notifications.create(notificationObj)
+    const { data } = await NotificationsMsu.get(notificationId)
 
-    expect(data).toMatchObject(notificationObj)
+    expect(data).toMatchObject(notification)
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -69,16 +70,16 @@ describe('v1: Notifications MSU: can create one notifications', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v1/notifications/msu/${legacyId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v1/notifications/msu/${legacyId}/${notificationId}`).reply(() => {
         return [205]
       })
     }
 
     try {
       const th = await initThInstance()
-      await th.notificationsMsu().create(notificationObj)
+      await th.notificationsMsu().get(notificationId)
     } catch (err: any) {
-      expect(err.name).toBe('NotificationsMsuCreateFailed')
+      expect(err.name).toBe('NotificationsMsuGetFailed')
     }
   })
 })
