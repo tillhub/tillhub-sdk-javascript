@@ -32,7 +32,7 @@ describe('v1: Notifications: can delete the notification', () => {
       })
 
       mock
-        .onDelete(`https://api.tillhub.com/api/v1/notifications/${legacyId}/${notificationId}`)
+        .onDelete(`https://api.tillhub.com/api/v1/notifications/msu/${legacyId}/${notificationId}`)
         .reply(() => {
           return [
             200,
@@ -45,9 +45,9 @@ describe('v1: Notifications: can delete the notification', () => {
 
     const th = await initThInstance()
 
-    const notifications = th.notificationsV1()
+    const notifications = th.notificationsMsu()
 
-    expect(notifications).toBeInstanceOf(v1.Notifications)
+    expect(notifications).toBeInstanceOf(v1.NotificationsMsu)
 
     const { msg } = await notifications.delete(notificationId)
 
@@ -69,7 +69,7 @@ describe('v1: Notifications: can delete the notification', () => {
         ]
       })
       mock
-        .onDelete(`https://api.tillhub.com/api/v1/notifications/${legacyId}/${notificationId}`)
+        .onDelete(`https://api.tillhub.com/api/v1/notifications/msu/${legacyId}/${notificationId}`)
         .reply(() => {
           return [
             400,
@@ -83,9 +83,9 @@ describe('v1: Notifications: can delete the notification', () => {
     const th = await initThInstance()
 
     try {
-      await th.notificationsV1().delete(notificationId)
+      await th.notificationsMsu().delete(notificationId)
     } catch (err: any) {
-      expect(err.name).toBe('NotificationsDeleteFailed')
+      expect(err.name).toBe('NotificationsMsuDeleteFailed')
     }
   })
 })

@@ -51,7 +51,7 @@ describe('v1: Notifications: can get count number of all Notifications', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v1/notifications/${legacyId}/meta?${queryString()}`)
+        .onGet(`https://api.tillhub.com/api/v1/notifications/msu/${legacyId}/meta?${queryString()}`)
         .reply(() => {
           return [
             200,
@@ -78,9 +78,9 @@ describe('v1: Notifications: can get count number of all Notifications', () => {
       password: user.password
     })
 
-    const notifications = th.notificationsV1()
+    const notifications = th.notificationsMsu()
 
-    expect(notifications).toBeInstanceOf(v1.Notifications)
+    expect(notifications).toBeInstanceOf(v1.NotificationsMsu)
 
     const { data } = await notifications.meta(query)
 
@@ -103,7 +103,7 @@ describe('v1: Notifications: can get count number of all Notifications', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v1/notifications/${legacyId}/meta?${queryString()}`)
+        .onGet(`https://api.tillhub.com/api/v1/notifications/msu/${legacyId}/meta?${queryString()}`)
         .reply(() => {
           return [302]
         })
@@ -126,9 +126,9 @@ describe('v1: Notifications: can get count number of all Notifications', () => {
     })
 
     try {
-      await th.notificationsV1().meta(query)
+      await th.notificationsMsu().meta(query)
     } catch (err: any) {
-      expect(err.name).toBe('NotificationsMetaFailed')
+      expect(err.name).toBe('NotificationsMsuMetaFailed')
     }
   })
 })

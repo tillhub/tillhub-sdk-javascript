@@ -40,7 +40,7 @@ describe('v1: Notifications: can get all', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v1/notifications/${legacyId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v1/notifications/msu/${legacyId}`).reply(() => {
         return [
           200,
           {
@@ -67,9 +67,9 @@ describe('v1: Notifications: can get all', () => {
       password: user.password
     })
 
-    const notifications = th.notificationsV1()
+    const notifications = th.notificationsMsu()
 
-    expect(notifications).toBeInstanceOf(v1.Notifications)
+    expect(notifications).toBeInstanceOf(v1.NotificationsMsu)
 
     const { data } = await notifications.getAll()
 
@@ -102,7 +102,7 @@ describe('v1: Notifications: can get all', () => {
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v1/notifications/${legacyId}?${queryProp1}=${queryValue1}&${queryProp2}=${queryValue2}`
+          `https://api.tillhub.com/api/v1/notifications/msu/${legacyId}?${queryProp1}=${queryValue1}&${queryProp2}=${queryValue2}`
         )
         .reply(() => {
           return [
@@ -131,9 +131,9 @@ describe('v1: Notifications: can get all', () => {
       password: user.password
     })
 
-    const notifications = th.notificationsV1()
+    const notifications = th.notificationsMsu()
 
-    expect(notifications).toBeInstanceOf(v1.Notifications)
+    expect(notifications).toBeInstanceOf(v1.NotificationsMsu)
 
     const { data } = await notifications.getAll({ query: queryOptions })
 
@@ -155,7 +155,7 @@ describe('v1: Notifications: can get all', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v1/notifications/${legacyId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v1/notifications/msu/${legacyId}`).reply(() => {
         return [205]
       })
     }
@@ -177,9 +177,9 @@ describe('v1: Notifications: can get all', () => {
     })
 
     try {
-      await th.notificationsV1().getAll()
+      await th.notificationsMsu().getAll()
     } catch (err: any) {
-      expect(err.name).toBe('NotificationsFetchFailed')
+      expect(err.name).toBe('NotificationsMsuFetchFailed')
     }
   })
 })
