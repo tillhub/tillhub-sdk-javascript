@@ -1,3 +1,10 @@
+# [4.141.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.140.0...v4.141.0) (2024-06-26)
+
+
+### Features
+
+* **notifications:** adding GET method for v1/notifications/msu ([008f2cb](https://github.com/tillhub/tillhub-sdk-javascript/commit/008f2cb69775bc45328ccae5a1699da142a4c45a))
+
 # [4.140.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.139.0...v4.140.0) (2024-06-26)
 
 

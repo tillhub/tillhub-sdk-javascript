@@ -39,6 +39,10 @@ export interface NotificationsMsuResponse {
     msg?: string;
     next?: () => Promise<NotificationsMsuResponse>;
 }
+export interface NotificationSingleResponse {
+    data: Notification;
+    msg: string;
+}
 export interface ErrorObject {
     id: string;
     label: string;
@@ -52,12 +56,18 @@ export declare class NotificationsMsu extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: NotificationsMsuOptions, http: Client);
     getAll(options?: NotificationsMsuOptions | undefined): Promise<NotificationsMsuResponse>;
+    get(notificationId: string): Promise<NotificationSingleResponse>;
     meta(q?: NotificationsMsuQuery | undefined): Promise<NotificationsMsuResponse>;
     create(notification: Notification): Promise<NotificationsMsuResponse>;
     update(notificationId: string, product: Notification): Promise<NotificationsMsuResponse>;
     delete(notificationId: string): Promise<NotificationsMsuResponse>;
 }
 export declare class NotificationsMsuFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class NotificationsMsuGetFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
