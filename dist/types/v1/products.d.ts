@@ -15,6 +15,7 @@ export interface Product {
     description?: string | null;
     attributes?: Record<string, unknown> | null;
     parent?: string | null;
+    parent_custom_id?: string | null;
     tags?: any[] | null;
     linked_products?: any[] | null;
     prices?: Record<string, unknown>;

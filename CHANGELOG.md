@@ -1,3 +1,10 @@
+# [4.142.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.141.0...v4.142.0) (2024-07-05)
+
+
+### Features
+
+* **products:** add parent_custom_id field to products ([#582](https://github.com/tillhub/tillhub-sdk-javascript/issues/582)) ([ed9538f](https://github.com/tillhub/tillhub-sdk-javascript/commit/ed9538fc64f71705f1c7ab76c2750813457519ad))
+
 # [4.141.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.140.0...v4.141.0) (2024-06-26)
 
 
