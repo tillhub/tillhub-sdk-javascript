@@ -34,6 +34,15 @@ export const initThInstance = async (): Promise<TillhubClient> => {
   return instance
 }
 
+/**
+ * Instantiate TillhubClient without auth in the tests - reduce boilerplate
+ */
+export const initThInstanceNoAuth = async (): Promise<TillhubClient> => {
+  const instance = new TillhubClient()
+  instance.init(options)
+  return instance
+}
+
 const user = {
   username: 'test@example.com',
   password: '12345678',

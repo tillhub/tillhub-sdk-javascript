@@ -17,6 +17,7 @@ import analytics from './analytics'
 import { AuditLogs } from './audit_logs'
 import { Configurations } from './configurations'
 import { NotificationsMsu } from './notifications-msu'
+import { NotificationsUnsubscribe } from './notifications-unsubscribe'
 import { Promotions } from './promotions'
 
 export {
@@ -40,6 +41,7 @@ export {
   Branches,
   Configurations,
   NotificationsMsu,
+  NotificationsUnsubscribe,
   Promotions
 }
 

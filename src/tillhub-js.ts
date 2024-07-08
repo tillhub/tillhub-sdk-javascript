@@ -920,6 +920,22 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Notifications Unsubscribe
+   *
+   */
+  notificationsUnsubscribe(): v1.NotificationsUnsubscribe {
+    if (
+      !this.options ||
+      !this.options.base ||
+      !this.http
+    ) {
+      throw new errors.UninstantiatedClient()
+    }
+
+    return new v1.NotificationsUnsubscribe({ user: undefined, base: this.options.base }, this.http)
+  }
+
+  /**
    * Create an authenticated Messages instance
    *
    */
