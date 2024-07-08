@@ -100,6 +100,7 @@ export declare class TillhubClient extends events.EventEmitter {
     videos(): v0.Videos;
     notifications(): v0.Notifications;
     notificationsMsu(): v1.NotificationsMsu;
+    notificationsUnsubscribe(): v1.NotificationsUnsubscribe;
     messages(): v0.Messages;
     print(): v0.Print;
     favourites(): v0.Favourites;

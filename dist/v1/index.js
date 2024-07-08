@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Promotions = exports.NotificationsMsu = exports.Configurations = exports.Branches = exports.AuditLogs = exports.analytics = exports.StocksBook = exports.ExportsV1 = exports.SafesLogBook = exports.Tags = exports.Carts = exports.Customers = exports.Vouchers = exports.Balances = exports.Registers = exports.TransactionsLegacy = exports.Transactions = exports.Templates = exports.Products = exports.Pricebooks = exports.Auth = void 0;
+exports.Promotions = exports.NotificationsUnsubscribe = exports.NotificationsMsu = exports.Configurations = exports.Branches = exports.AuditLogs = exports.analytics = exports.StocksBook = exports.ExportsV1 = exports.SafesLogBook = exports.Tags = exports.Carts = exports.Customers = exports.Vouchers = exports.Balances = exports.Registers = exports.TransactionsLegacy = exports.Transactions = exports.Templates = exports.Products = exports.Pricebooks = exports.Auth = void 0;
 var tslib_1 = require("tslib");
 var auth_1 = require("./auth");
 Object.defineProperty(exports, "Auth", { enumerable: true, get: function () { return auth_1.Auth; } });
@@ -41,6 +41,8 @@ var configurations_1 = require("./configurations");
 Object.defineProperty(exports, "Configurations", { enumerable: true, get: function () { return configurations_1.Configurations; } });
 var notifications_msu_1 = require("./notifications-msu");
 Object.defineProperty(exports, "NotificationsMsu", { enumerable: true, get: function () { return notifications_msu_1.NotificationsMsu; } });
+var notifications_unsubscribe_1 = require("./notifications-unsubscribe");
+Object.defineProperty(exports, "NotificationsUnsubscribe", { enumerable: true, get: function () { return notifications_unsubscribe_1.NotificationsUnsubscribe; } });
 var promotions_1 = require("./promotions");
 Object.defineProperty(exports, "Promotions", { enumerable: true, get: function () { return promotions_1.Promotions; } });
 //# sourceMappingURL=index.js.map

@@ -428,6 +428,14 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.notificationsMsu = function () {
         return this.generateAuthenticatedInstance(v1.NotificationsMsu);
     };
+    TillhubClient.prototype.notificationsUnsubscribe = function () {
+        if (!this.options ||
+            !this.options.base ||
+            !this.http) {
+            throw new errors.UninstantiatedClient();
+        }
+        return new v1.NotificationsUnsubscribe({ user: undefined, base: this.options.base }, this.http);
+    };
     TillhubClient.prototype.messages = function () {
         if (!this.options ||
             !this.options.base ||

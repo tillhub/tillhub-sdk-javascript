@@ -1,3 +1,10 @@
+# [4.143.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.142.0...v4.143.0) (2024-07-08)
+
+
+### Features
+
+* **notifications:** unsubscribe method - DELETE v1/notifications/unsubscrribe ([305ff9e](https://github.com/tillhub/tillhub-sdk-javascript/commit/305ff9e8597ede54f1aee04ecb1bac136889c3cb))
+
 # [4.142.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.141.0...v4.142.0) (2024-07-05)
 
 

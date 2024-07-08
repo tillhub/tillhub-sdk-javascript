@@ -17,8 +17,9 @@ import analytics from './analytics';
 import { AuditLogs } from './audit_logs';
 import { Configurations } from './configurations';
 import { NotificationsMsu } from './notifications-msu';
+import { NotificationsUnsubscribe } from './notifications-unsubscribe';
 import { Promotions } from './promotions';
-export { Auth, Pricebooks, Products, Templates, Transactions, TransactionsLegacy, Registers, Balances, Vouchers, Customers, Carts, Tags, SafesLogBook, ExportsV1, StocksBook, analytics, AuditLogs, Branches, Configurations, NotificationsMsu, Promotions };
+export { Auth, Pricebooks, Products, Templates, Transactions, TransactionsLegacy, Registers, Balances, Vouchers, Customers, Carts, Tags, SafesLogBook, ExportsV1, StocksBook, analytics, AuditLogs, Branches, Configurations, NotificationsMsu, NotificationsUnsubscribe, Promotions };
 export interface AnalyticsHandlersV1Types {
     analytics: {
         reports: {
