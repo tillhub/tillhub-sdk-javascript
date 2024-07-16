@@ -43,6 +43,19 @@ export interface DocumentExport {
   }
 }
 
+export interface DocumentExportsMetric {
+  tags: {
+    operation: string
+    documentType: string
+    result: 'success' | 'error'
+  }
+}
+
+export interface DocumentExportsMetricResponse {
+  data: DocumentExportsMetric
+  metadata: Record<string, unknown>
+}
+
 export class DocumentExports extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/documents/exports'
   endpoint: string
@@ -110,6 +123,22 @@ export class DocumentExports extends ThBaseHandler {
       throw new DocumentExportsMetaFailed(error.message, { error })
     }
   }
+
+  async metric (metric: DocumentExportsMetric): Promise<DocumentExportsMetricResponse> {
+    const uri = this.uriHelper.generateBaseUri('/metric')
+    try {
+      const response = await this.http.getClient().post(uri, metric)
+      if (response.status !== 200) {
+        throw new DocumentExportsMetricFailed(undefined, { status: response.status })
+      }
+      return {
+        data: response.data,
+        metadata: {}
+      }
+    } catch (error: any) {
+      throw new DocumentExportsMetricFailed(error.message, { error })
+    }
+  }
 }
 
 export class DocumentExportsGetFailed extends BaseError {
@@ -131,5 +160,16 @@ export class DocumentExportsMetaFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, DocumentExportsMetaFailed.prototype)
+  }
+}
+
+export class DocumentExportsMetricFailed extends BaseError {
+  public name = 'DocumentExportsMetricFailed'
+  constructor (
+    public message: string = 'Could not send document exports metric',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, DocumentExportsMetricFailed.prototype)
   }
 }
