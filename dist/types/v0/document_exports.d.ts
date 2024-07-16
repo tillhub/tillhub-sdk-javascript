@@ -38,6 +38,17 @@ export interface DocumentExport {
         updatedAt: string;
     };
 }
+export interface DocumentExportsMetric {
+    tags: {
+        operation: string;
+        documentType: string;
+        result: 'success' | 'error';
+    };
+}
+export interface DocumentExportsMetricResponse {
+    data: DocumentExportsMetric;
+    metadata: Record<string, unknown>;
+}
 export declare class DocumentExports extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
@@ -47,6 +58,7 @@ export declare class DocumentExports extends ThBaseHandler {
     constructor(options: DocumentExportsOptions, http: Client);
     getAll(query?: Record<string, unknown>): Promise<DocumentExportssMultipleResponse>;
     meta(query?: Record<string, unknown>): Promise<DocumentExportssMultipleResponse>;
+    metric(metric: DocumentExportsMetric): Promise<DocumentExportsMetricResponse>;
 }
 export declare class DocumentExportsGetFailed extends BaseError {
     message: string;
@@ -54,6 +66,11 @@ export declare class DocumentExportsGetFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class DocumentExportsMetaFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class DocumentExportsMetricFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

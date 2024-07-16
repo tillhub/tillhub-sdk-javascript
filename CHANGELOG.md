@@ -1,3 +1,10 @@
+# [4.144.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.143.0...v4.144.0) (2024-07-16)
+
+
+### Features
+
+* **document-export:** add metric function for DataDog ([#584](https://github.com/tillhub/tillhub-sdk-javascript/issues/584)) ([d9f29df](https://github.com/tillhub/tillhub-sdk-javascript/commit/d9f29df52b980e04f2f0a38c7e368d07aae2ba4f))
+
 # [4.143.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.142.0...v4.143.0) (2024-07-08)
 
 

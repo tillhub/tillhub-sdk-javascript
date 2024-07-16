@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DocumentExportsMetaFailed = exports.DocumentExportsGetFailed = exports.DocumentExports = void 0;
+exports.DocumentExportsMetricFailed = exports.DocumentExportsMetaFailed = exports.DocumentExportsGetFailed = exports.DocumentExports = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -87,6 +87,34 @@ var DocumentExports = (function (_super) {
             });
         });
     };
+    DocumentExports.prototype.metric = function (metric) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_3;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri('/metric');
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().post(uri, metric)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new DocumentExportsMetricFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data,
+                                metadata: {}
+                            }];
+                    case 3:
+                        error_3 = _a.sent();
+                        throw new DocumentExportsMetricFailed(error_3.message, { error: error_3 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     DocumentExports.baseEndpoint = '/api/v0/documents/exports';
     return DocumentExports;
 }(base_1.ThBaseHandler));
@@ -117,4 +145,17 @@ var DocumentExportsMetaFailed = (function (_super) {
     return DocumentExportsMetaFailed;
 }(errors_1.BaseError));
 exports.DocumentExportsMetaFailed = DocumentExportsMetaFailed;
+var DocumentExportsMetricFailed = (function (_super) {
+    tslib_1.__extends(DocumentExportsMetricFailed, _super);
+    function DocumentExportsMetricFailed(message, properties) {
+        if (message === void 0) { message = 'Could not send document exports metric'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'DocumentExportsMetricFailed';
+        Object.setPrototypeOf(_this, DocumentExportsMetricFailed.prototype);
+        return _this;
+    }
+    return DocumentExportsMetricFailed;
+}(errors_1.BaseError));
+exports.DocumentExportsMetricFailed = DocumentExportsMetricFailed;
 //# sourceMappingURL=document_exports.js.map
