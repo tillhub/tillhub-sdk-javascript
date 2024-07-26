@@ -44,6 +44,7 @@ export interface BranchGroup {
   client_id?: string
   active?: boolean
   deleted?: boolean
+  available_in_online_booking?: boolean
 }
 
 export class BranchGroups extends ThBaseHandler {
