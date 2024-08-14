@@ -1,3 +1,10 @@
+# [4.145.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.144.0...v4.145.0) (2024-08-14)
+
+
+### Features
+
+* **branches:** add extended as query option ([#561](https://github.com/tillhub/tillhub-sdk-javascript/issues/561)) ([8d1ae7e](https://github.com/tillhub/tillhub-sdk-javascript/commit/8d1ae7eef83a2e2d3be9737ccf5e3ef92e0ebd76))
+
 # [4.144.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.143.0...v4.144.0) (2024-07-16)
 
 
