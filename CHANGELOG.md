@@ -1,3 +1,10 @@
+# [4.146.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.145.0...v4.146.0) (2024-08-19)
+
+
+### Features
+
+* **branches:** add businessUnitId on query of trx filtering ([#587](https://github.com/tillhub/tillhub-sdk-javascript/issues/587)) ([660107c](https://github.com/tillhub/tillhub-sdk-javascript/commit/660107cca0423880aee50feb0535ba99b399a167))
+
 # [4.145.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.144.0...v4.145.0) (2024-08-14)
 
 

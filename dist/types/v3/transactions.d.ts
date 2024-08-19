@@ -46,6 +46,7 @@ export interface TransactionsQueryHandler {
 export interface TransactionsQuery extends TransactionEntity {
     deleted?: boolean;
     active?: boolean;
+    businessUnitId?: string;
 }
 export interface TransactionsExportQueryHandler extends TransactionsQuery {
     exportMetaData: exportJobQuery;
