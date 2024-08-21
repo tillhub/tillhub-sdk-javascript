@@ -195,6 +195,21 @@ export class Analytics extends ThBaseHandler {
       throw new AnalyticsGetProductsTopGroupsFailed(error.message)
     }
   }
+
+  async getCartItemsAverage (query?: AnalyticsQuery): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/cartitems/average')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      const response = await this.http.getClient().get(uri)
+
+      return {
+        data: response.data.results[0]
+      }
+    } catch (error: any) {
+      throw new AnalyticsGetCartItemsAverageFailed(error.message)
+    }
+  }
 }
 
 export class AnalyticsGetRevenueFailed extends BaseError {
@@ -282,5 +297,16 @@ export class AnalyticsGetProductsTopGroupsFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsGetProductsTopGroupsFailed.prototype)
+  }
+}
+
+export class AnalyticsGetCartItemsAverageFailed extends BaseError {
+  public name = 'AnalyticsGetCartItemsAverageFailed'
+  constructor (
+    public message: string = 'Could not get cart items average',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, AnalyticsGetCartItemsAverageFailed.prototype)
   }
 }
