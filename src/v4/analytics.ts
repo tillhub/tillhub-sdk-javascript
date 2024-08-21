@@ -136,6 +136,21 @@ export class Analytics extends ThBaseHandler {
     }
   }
 
+  async getRevenueTopStaff (query?: AnalyticsQuery): Promise<AnalyticsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/revenue/top-staff')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      const response = await this.http.getClient().get(uri)
+
+      return {
+        data: response.data.results[0]
+      }
+    } catch (error: any) {
+      throw new AnalyticsGetRevenueTopStaffFailed(error.message)
+    }
+  }
+
   async getOpenPurchaseOrdersCount (query?: AnalyticsQuery): Promise<AnalyticsResponse> {
     try {
       const base = this.uriHelper.generateBaseUri('/open-purchase-orders/count')
@@ -308,5 +323,16 @@ export class AnalyticsGetCartItemsAverageFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsGetCartItemsAverageFailed.prototype)
+  }
+}
+
+export class AnalyticsGetRevenueTopStaffFailed extends BaseError {
+  public name = 'AnalyticsGetRevenueTopStaffFailed'
+  constructor (
+    public message: string = 'Could not get revenue top staff',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, AnalyticsGetRevenueTopStaffFailed.prototype)
   }
 }
