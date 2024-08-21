@@ -1,3 +1,10 @@
+# [4.148.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.147.0...v4.148.0) (2024-08-21)
+
+
+### Features
+
+* **home:** add get revenue top staff method to analytics ([eca088b](https://github.com/tillhub/tillhub-sdk-javascript/commit/eca088b81370ed1e3b6e3a54c0a7aee93d74d52a))
+
 # [4.147.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.146.0...v4.147.0) (2024-08-21)
 
 
