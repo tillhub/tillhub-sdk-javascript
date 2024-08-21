@@ -200,9 +200,9 @@ export class Analytics extends ThBaseHandler {
     try {
       const base = this.uriHelper.generateBaseUri('/cartitems/average')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
-  
+
       const response = await this.http.getClient().get(uri)
-  
+
       return {
         data: response.data.results[0]
       }
