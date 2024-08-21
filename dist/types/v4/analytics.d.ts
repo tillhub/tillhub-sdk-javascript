@@ -64,6 +64,7 @@ export declare class Analytics extends ThBaseHandler {
     getOpenPurchaseOrdersExpense(query?: AnalyticsQuery): Promise<AnalyticsResponse>;
     getProductsReturnRate(query?: AnalyticsQuery): Promise<AnalyticsResponse>;
     getProductsTopGroups(query?: AnalyticsQuery): Promise<AnalyticsResponse>;
+    getCartItemsAverage(query?: AnalyticsQuery): Promise<AnalyticsResponse>;
 }
 export declare class AnalyticsGetRevenueFailed extends BaseError {
     message: string;
@@ -101,6 +102,11 @@ export declare class AnalyticsGetProductsReturnRateFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class AnalyticsGetProductsTopGroupsFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class AnalyticsGetCartItemsAverageFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

@@ -1,3 +1,11 @@
+# [4.147.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.146.0...v4.147.0) (2024-08-21)
+
+
+### Features
+
+* **home:** add cart items average method to analytics ([75c6551](https://github.com/tillhub/tillhub-sdk-javascript/commit/75c6551cc130f782a1e19a89775840185b6f7644))
+* **home:** fix linting issues ([959c8d2](https://github.com/tillhub/tillhub-sdk-javascript/commit/959c8d2eb99d92507ba613f91783058cee465ba1))
+
 # [4.146.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.145.0...v4.146.0) (2024-08-19)
 
 

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AnalyticsGetProductsTopGroupsFailed = exports.AnalyticsGetProductsReturnRateFailed = exports.AnalyticsGetOpenPurchaseOrdersExpenseFailed = exports.AnalyticsGetOpenPurchaseOrdersCountFailed = exports.AnalyticsGetRevenuePaymentTypesFailed = exports.AnalyticsGetRevenueTopProductsFailed = exports.AnalyticsGetRevenueAverageFailed = exports.AnalyticsGetRevenueFailed = exports.Analytics = void 0;
+exports.AnalyticsGetCartItemsAverageFailed = exports.AnalyticsGetProductsTopGroupsFailed = exports.AnalyticsGetProductsReturnRateFailed = exports.AnalyticsGetOpenPurchaseOrdersExpenseFailed = exports.AnalyticsGetOpenPurchaseOrdersCountFailed = exports.AnalyticsGetRevenuePaymentTypesFailed = exports.AnalyticsGetRevenueTopProductsFailed = exports.AnalyticsGetRevenueAverageFailed = exports.AnalyticsGetRevenueFailed = exports.Analytics = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -213,6 +213,29 @@ var Analytics = (function (_super) {
             });
         });
     };
+    Analytics.prototype.getCartItemsAverage = function (query) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_9;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri('/cartitems/average');
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        return [4, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        return [2, {
+                                data: response.data.results[0]
+                            }];
+                    case 2:
+                        error_9 = _a.sent();
+                        throw new AnalyticsGetCartItemsAverageFailed(error_9.message);
+                    case 3: return [2];
+                }
+            });
+        });
+    };
     Analytics.baseEndpoint = '/api/v4/analytics';
     return Analytics;
 }(base_1.ThBaseHandler));
@@ -321,4 +344,17 @@ var AnalyticsGetProductsTopGroupsFailed = (function (_super) {
     return AnalyticsGetProductsTopGroupsFailed;
 }(errors_1.BaseError));
 exports.AnalyticsGetProductsTopGroupsFailed = AnalyticsGetProductsTopGroupsFailed;
+var AnalyticsGetCartItemsAverageFailed = (function (_super) {
+    tslib_1.__extends(AnalyticsGetCartItemsAverageFailed, _super);
+    function AnalyticsGetCartItemsAverageFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get cart items average'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'AnalyticsGetCartItemsAverageFailed';
+        Object.setPrototypeOf(_this, AnalyticsGetCartItemsAverageFailed.prototype);
+        return _this;
+    }
+    return AnalyticsGetCartItemsAverageFailed;
+}(errors_1.BaseError));
+exports.AnalyticsGetCartItemsAverageFailed = AnalyticsGetCartItemsAverageFailed;
 //# sourceMappingURL=analytics.js.map
