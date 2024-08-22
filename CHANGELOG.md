@@ -1,3 +1,10 @@
+# [4.149.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.148.0...v4.149.0) (2024-08-22)
+
+
+### Features
+
+* **functions:** update functions query type ([#590](https://github.com/tillhub/tillhub-sdk-javascript/issues/590)) ([19b54ce](https://github.com/tillhub/tillhub-sdk-javascript/commit/19b54ce9d44bdcfd0d183f1c17316bd3538aabee))
+
 # [4.148.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.147.0...v4.148.0) (2024-08-21)
 
 
