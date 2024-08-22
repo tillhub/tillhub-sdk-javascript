@@ -14,6 +14,7 @@ export interface FunctionsQuery {
   query?: {
     deleted?: boolean
     active?: boolean
+    q?: string
   }
 }
 
