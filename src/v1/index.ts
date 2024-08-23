@@ -19,6 +19,7 @@ import { Configurations } from './configurations'
 import { NotificationsMsu } from './notifications-msu'
 import { NotificationsUnsubscribe } from './notifications-unsubscribe'
 import { Promotions } from './promotions'
+import { AppointmentReminders } from './appointment_reminders'
 
 export {
   Auth,
@@ -42,7 +43,8 @@ export {
   Configurations,
   NotificationsMsu,
   NotificationsUnsubscribe,
-  Promotions
+  Promotions,
+  AppointmentReminders
 }
 
 export interface AnalyticsHandlersV1Types {
