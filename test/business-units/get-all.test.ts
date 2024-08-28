@@ -25,7 +25,7 @@ describe('v0: business units: can get all', () => {
     mock.reset()
   })
 
-  it("Tillhub's customers are instantiable", async () => {
+  it("Tillhub's business-units are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
@@ -40,7 +40,7 @@ describe('v0: business units: can get all', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/customers/${legacyId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/business-units/${legacyId}`).reply(() => {
         return [
           200,
           {
@@ -91,7 +91,7 @@ describe('v0: business units: can get all', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/customers/${legacyId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/business-units/${legacyId}`).reply(() => {
         return [205]
       })
     }
