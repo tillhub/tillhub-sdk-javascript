@@ -151,6 +151,7 @@ export declare class TillhubClient extends events.EventEmitter {
     scheduledExports(): v0.ScheduledExports;
     customerAppointments(): v0.CustomerAppointments;
     documentExports(): v0.DocumentExports;
+    appointmentReminders(): v1.AppointmentReminders;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;

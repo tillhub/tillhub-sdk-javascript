@@ -1,3 +1,11 @@
+# [4.151.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.150.0...v4.151.0) (2024-09-05)
+
+
+### Features
+
+* **appointment_reminder:** add appointment reminder entity (UNTIL 11465) ([#591](https://github.com/tillhub/tillhub-sdk-javascript/issues/591)) ([0e68e0f](https://github.com/tillhub/tillhub-sdk-javascript/commit/0e68e0fbd327fac33192b84447b3be50961ede46))
+* **branches:** add available in online booking field (UNTIL 11239) ([#586](https://github.com/tillhub/tillhub-sdk-javascript/issues/586)) ([3f4f3d3](https://github.com/tillhub/tillhub-sdk-javascript/commit/3f4f3d32b73da26037a733b53e3465c25fa068c8))
+
 # [4.150.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.149.0...v4.150.0) (2024-09-05)
 
 
