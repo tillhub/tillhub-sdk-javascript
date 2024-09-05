@@ -1,3 +1,10 @@
+# [4.150.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.149.0...v4.150.0) (2024-09-05)
+
+
+### Features
+
+* **branch_groups:** add available_in_online_booking prop (UNTIL 11238) ([#585](https://github.com/tillhub/tillhub-sdk-javascript/issues/585)) ([6b5c485](https://github.com/tillhub/tillhub-sdk-javascript/commit/6b5c4858e8d6d3fc3b8d73c74d750c543918c82c))
+
 # [4.149.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.148.0...v4.149.0) (2024-08-22)
 
 

@@ -39,6 +39,7 @@ export interface BranchGroup {
     client_id?: string;
     active?: boolean;
     deleted?: boolean;
+    available_in_online_booking?: boolean;
 }
 export declare class BranchGroups extends ThBaseHandler {
     static baseEndpoint: string;
