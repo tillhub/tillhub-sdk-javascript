@@ -79,6 +79,7 @@ import { ShiftPlan } from './shift_plan'
 import { ScheduledExports } from './scheduled_exports'
 import { CustomerAppointments } from './customer_appointments'
 import { DocumentExports } from './document_exports'
+import { BusinessUnits } from './business_units'
 
 export {
   Auth,
@@ -164,5 +165,6 @@ export {
   ShiftPlan,
   ScheduledExports,
   CustomerAppointments,
-  DocumentExports
+  DocumentExports,
+  BusinessUnits
 }
