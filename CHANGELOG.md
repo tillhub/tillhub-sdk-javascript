@@ -1,3 +1,11 @@
+# [4.152.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.151.0...v4.152.0) (2024-09-10)
+
+
+### Features
+
+* **business-units:** fix tests - UOD-144 ([fbfc56a](https://github.com/tillhub/tillhub-sdk-javascript/commit/fbfc56a6fdbcfa59642c5a30b94c445bd127645a))
+* **business-units:** getAll - UOD-144 ([79ee30e](https://github.com/tillhub/tillhub-sdk-javascript/commit/79ee30e77870ea9469ffbe11259639855aad7328))
+
 # [4.151.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.150.0...v4.151.0) (2024-09-05)
 
 
