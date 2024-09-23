@@ -94,7 +94,13 @@ export interface ProductsQuery {
 }
 
 export interface SelectProductsQuery {
-  product_ids: string[]
+  product_ids?: string[]
+  custom_ids?: string[]
+  query?: {
+    deleted?: boolean
+    exclude_system_products?: boolean
+    types?: ProductTypes[]
+  }
 }
 
 export interface ProductsExportResponse {
@@ -255,9 +261,13 @@ export class Products extends ThBaseHandler {
   async select (options: SelectProductsQuery): Promise<ProductsResponse> {
     try {
       const base = this.uriHelper.generateBaseUri('/selection')
-      const uri = this.uriHelper.generateUriWithQuery(base)
 
-      const response = await this.http.getClient().post(uri, options)
+      // Note that this POST endpoint accepts a body containing product_ids
+      // and/or custom_ids and filters as part of the query string.
+      const { query, ...body } = options
+
+      const uri = this.uriHelper.generateUriWithQuery(base, { query })
+      const response = await this.http.getClient().post(uri, body)
 
       if (response.status !== 200) {
         throw new ProductsFetchFailed(undefined, { status: response.status })
