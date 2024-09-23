@@ -264,9 +264,7 @@ export class Products extends ThBaseHandler {
 
       // Note that this POST endpoint accepts a body containing product_ids
       // and/or custom_ids and filters as part of the query string.
-      const query = options.query
-      const body = { ...options }
-      delete body.query
+      const { query, ...body } = options
 
       const uri = this.uriHelper.generateUriWithQuery(base, { query })
       const response = await this.http.getClient().post(uri, body)
