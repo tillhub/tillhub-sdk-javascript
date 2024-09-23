@@ -82,7 +82,13 @@ export interface ProductsQuery {
     [key: string]: any;
 }
 export interface SelectProductsQuery {
-    product_ids: string[];
+    product_ids?: string[];
+    custom_ids?: string[];
+    query?: {
+        deleted?: boolean;
+        exclude_system_products?: boolean;
+        types?: ProductTypes[];
+    };
 }
 export interface ProductsExportResponse {
     data?: {

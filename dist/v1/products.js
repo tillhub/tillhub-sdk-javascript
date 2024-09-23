@@ -87,14 +87,15 @@ var Products = (function (_super) {
     };
     Products.prototype.select = function (options) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_3;
+            var base, query, body, uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/selection');
-                        uri = this.uriHelper.generateUriWithQuery(base);
-                        return [4, this.http.getClient().post(uri, options)];
+                        query = options.query, body = tslib_1.__rest(options, ["query"]);
+                        uri = this.uriHelper.generateUriWithQuery(base, { query: query });
+                        return [4, this.http.getClient().post(uri, body)];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200) {

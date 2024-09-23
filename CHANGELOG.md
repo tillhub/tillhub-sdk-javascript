@@ -1,3 +1,10 @@
+# [4.153.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.152.0...v4.153.0) (2024-09-23)
+
+
+### Features
+
+* **products:** products select to accept custom_ids and filters ([#593](https://github.com/tillhub/tillhub-sdk-javascript/issues/593)) ([0823f18](https://github.com/tillhub/tillhub-sdk-javascript/commit/0823f1839186d162bd744beae497d637b462930a))
+
 # [4.152.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.151.0...v4.152.0) (2024-09-10)
 
 
