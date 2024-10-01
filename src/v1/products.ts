@@ -183,6 +183,7 @@ export interface BookStockQuery {
 export interface BookStock {
   location: string
   qty: number
+  reason?: string
 }
 
 export interface BarcodeResponse {
