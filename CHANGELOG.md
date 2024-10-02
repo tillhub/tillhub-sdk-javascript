@@ -1,3 +1,10 @@
+# [4.154.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.153.0...v4.154.0) (2024-10-02)
+
+
+### Features
+
+* **business-units:** change salesStream naming - UOD-144 ([#594](https://github.com/tillhub/tillhub-sdk-javascript/issues/594)) ([58fcfcf](https://github.com/tillhub/tillhub-sdk-javascript/commit/58fcfcfe320a677695a7f76108c78ad72b6abf4b))
+
 # [4.153.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.152.0...v4.153.0) (2024-09-23)
 
 
