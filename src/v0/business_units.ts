@@ -27,7 +27,7 @@ export interface BusinessUnitsResponse {
 export interface BusinessUnit {
   id?: string
   name?: string | null
-  salesStreams?: SaleStream[] | null
+  salesStream?: SaleStream[] | null
 }
 
 export interface SaleStream {
