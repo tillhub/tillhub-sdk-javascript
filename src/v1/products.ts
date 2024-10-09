@@ -379,7 +379,7 @@ export class Products extends ThBaseHandler {
   ): Promise<ProductResponse> {
     const query = {
       ...options,
-      stock: hideStock ?? false
+      ...(hideStock ? { stock: false } : {})
     }
     const base = this.uriHelper.generateBaseUri(`/${productId}/children/details`)
     const uri = this.uriHelper.generateUriWithQuery(base, query)
