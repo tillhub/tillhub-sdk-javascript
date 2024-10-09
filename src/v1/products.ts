@@ -119,6 +119,11 @@ export interface ProductsOptions {
   uri?: string
   query?: ProductsQuery
 }
+export interface ProductsDetailsOptions {
+  stockLocation?: string
+  stockFilters?: string
+  shortOnStock?: number
+}
 
 export interface ProductDeleteOptions {
   delete_dependencies?: boolean
@@ -344,7 +349,10 @@ export class Products extends ThBaseHandler {
     }
   }
 
-  async getDetails (productId: string, options?: ProductsOptions | undefined): Promise<ProductResponse> {
+  async getDetails (
+    productId: string,
+    options?: ProductsOptions | undefined
+  ): Promise<ProductResponse> {
     const base = this.uriHelper.generateBaseUri(`/${productId}/details`)
     const uri = this.uriHelper.generateUriWithQuery(base, options)
 
@@ -364,8 +372,18 @@ export class Products extends ThBaseHandler {
     }
   }
 
-  async getChildrenDetails (productId: string, hideStock?: boolean): Promise<ProductResponse> {
-    const uri = this.uriHelper.generateBaseUri(`/${productId}/children/details${hideStock ? '?stock=false' : ''}`)
+  async getChildrenDetails (
+    productId: string,
+    hideStock?: boolean,
+    options?: ProductsDetailsOptions | undefined
+  ): Promise<ProductResponse> {
+    const query = {
+      ...options,
+      ...(hideStock ? { stock: false } : {})
+    }
+    const base = this.uriHelper.generateBaseUri(`/${productId}/children/details`)
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
+
     try {
       const response = await this.http.getClient().get(uri)
       if (response.status !== 200) {
@@ -423,7 +441,10 @@ export class Products extends ThBaseHandler {
     }
   }
 
-  async bulkCreate (products: Product[], query?: HandlerProductsQuery): Promise<ProductsBulkResponse> {
+  async bulkCreate (
+    products: Product[],
+    query?: HandlerProductsQuery
+  ): Promise<ProductsBulkResponse> {
     const base = this.uriHelper.generateBaseUri('/bulk_create')
     const uri = this.uriHelper.generateUriWithQuery(base, query)
 
