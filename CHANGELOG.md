@@ -1,3 +1,13 @@
+# [4.155.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.154.0...v4.155.0) (2024-10-09)
+
+
+### Features
+
+* **stock_management:** add children details options ([0cc6c46](https://github.com/tillhub/tillhub-sdk-javascript/commit/0cc6c4625680fe164d1abee2d58ca6eed3293a52))
+* **stock_management:** fix linting ([f7470e4](https://github.com/tillhub/tillhub-sdk-javascript/commit/f7470e4ddfc643c44ef76efb97c93b8e68cd7052))
+* **stock_management:** update options for children details ([767730c](https://github.com/tillhub/tillhub-sdk-javascript/commit/767730c50894ab63154ef6ec4af292cb3d00e608))
+* **stock_management:** update url param name ([bba5970](https://github.com/tillhub/tillhub-sdk-javascript/commit/bba59709b22c7347474f263bbc2d0c77ba725265))
+
 # [4.154.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.153.0...v4.154.0) (2024-10-02)
 
 

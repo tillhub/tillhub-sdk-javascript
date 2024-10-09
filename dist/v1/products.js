@@ -233,13 +233,15 @@ var Products = (function (_super) {
             });
         });
     };
-    Products.prototype.getChildrenDetails = function (productId, hideStock) {
+    Products.prototype.getChildrenDetails = function (productId, hideStock, options) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_8;
+            var query, base, uri, response, error_8;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = this.uriHelper.generateBaseUri("/" + productId + "/children/details" + (hideStock ? '?stock=false' : ''));
+                        query = tslib_1.__assign(tslib_1.__assign({}, options), (hideStock ? { stock: false } : {}));
+                        base = this.uriHelper.generateBaseUri("/" + productId + "/children/details");
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);

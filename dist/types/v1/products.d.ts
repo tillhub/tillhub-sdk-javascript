@@ -105,6 +105,11 @@ export interface ProductsOptions {
     uri?: string;
     query?: ProductsQuery;
 }
+export interface ProductsDetailsOptions {
+    stockLocation?: string;
+    stockFilters?: string;
+    shortOnStock?: number;
+}
 export interface ProductDeleteOptions {
     delete_dependencies?: boolean;
 }
@@ -180,7 +185,7 @@ export declare class Products extends ThBaseHandler {
     get(productId: string): Promise<ProductResponse>;
     export(query?: ProductsQuery | undefined): Promise<ProductsExportResponse>;
     getDetails(productId: string, options?: ProductsOptions | undefined): Promise<ProductResponse>;
-    getChildrenDetails(productId: string, hideStock?: boolean): Promise<ProductResponse>;
+    getChildrenDetails(productId: string, hideStock?: boolean, options?: ProductsDetailsOptions | undefined): Promise<ProductResponse>;
     meta(q?: ProductsQuery | undefined): Promise<ProductsResponse>;
     put(productId: string, product: Product): Promise<ProductResponse>;
     bulkCreate(products: Product[], query?: HandlerProductsQuery): Promise<ProductsBulkResponse>;
