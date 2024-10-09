@@ -119,6 +119,11 @@ export interface ProductsOptions {
   uri?: string
   query?: ProductsQuery
 }
+export interface ProductsDetailsOptions {
+  stockLocation?: string
+  stockFilters?: string
+  shortOnStock?: number
+}
 
 export interface ProductDeleteOptions {
   delete_dependencies?: boolean
@@ -364,8 +369,14 @@ export class Products extends ThBaseHandler {
     }
   }
 
-  async getChildrenDetails (productId: string, hideStock?: boolean): Promise<ProductResponse> {
-    const uri = this.uriHelper.generateBaseUri(`/${productId}/children/details${hideStock ? '?stock=false' : ''}`)
+  async getChildrenDetails (productId: string, hideStock?: boolean, options?: ProductsDetailsOptions | undefined): Promise<ProductResponse> {
+    const query = {
+      ...options,
+      hideStock: hideStock ?? false
+    }
+    const base = this.uriHelper.generateBaseUri(`/${productId}/children/details`)
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
+    
     try {
       const response = await this.http.getClient().get(uri)
       if (response.status !== 200) {
