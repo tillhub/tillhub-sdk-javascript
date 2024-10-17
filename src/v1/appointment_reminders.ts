@@ -2,6 +2,7 @@ import { Client } from '../client'
 import { UriHelper } from '../uri-helper'
 import { ThBaseHandler } from '../base'
 import { BaseError } from '../errors'
+import { AppointmentReminderTemplates } from './appointment-reminder-templates'
 
 export interface AppointmentRemindersOptions {
   user?: string
@@ -19,7 +20,7 @@ export interface AppointmentReminderEntity {
   locationId?: string
   active?: boolean
   reminderLeadTime?: {
-    type: 'day'| 'hour' | 'month'
+    type: 'day' | 'hour' | 'month'
     value: number
   }
 }
@@ -106,6 +107,10 @@ export class AppointmentReminders extends ThBaseHandler {
     } catch (error: any) {
       throw new AppointmentReminderPatchFailed(error.message, { error })
     }
+  }
+
+  templates (): AppointmentReminderTemplates {
+    return new AppointmentReminderTemplates(this.options, this.http)
   }
 }
 
