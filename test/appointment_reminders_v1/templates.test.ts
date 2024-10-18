@@ -3,7 +3,6 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import { v1 } from '../../src/tillhub-js'
 import { initThInstance } from '../util'
-import { AppointmentReminderEntity } from '../../src/v1/appointment_reminders'
 
 dotenv.config()
 
@@ -14,13 +13,6 @@ const mock = new MockAdapter(axios)
 afterEach(() => {
   mock.reset()
 })
-
-const appointmentReminder: AppointmentReminderEntity = {
-  type: 'email',
-  text: 'Lorem ipsum dolor sit',
-  emailSubject: 'Lorem ipsum',
-  smsSender: ''
-}
 
 describe('v1: AppointmentReminders', () => {
   it("Tillhub's Appointment Reminder Templates are instantiable", async () => {
