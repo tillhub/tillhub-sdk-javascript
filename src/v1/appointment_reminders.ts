@@ -8,16 +8,14 @@ export interface AppointmentRemindersOptions {
   base?: string
 }
 
-export type ReminderType = 'email' | 'sms' | 'sms_with_email_fallback'
+export type ReminderType = 'email' | 'sms'
 
 export interface AppointmentReminderEntity {
   id?: string
   type?: ReminderType
-  emailSubject?: string
-  smsSender?: string
-  text?: string
   locationId?: string
   active?: boolean
+  templateId?: string
   reminderLeadTime?: {
     type: 'day'| 'hour' | 'month'
     value: number

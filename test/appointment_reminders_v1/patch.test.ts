@@ -18,9 +18,8 @@ afterEach(() => {
 const appointmentReminderId = '1234'
 const appointmentReminder: AppointmentReminderEntity = {
   type: 'email',
-  text: 'Lorem ipsum dolor sit',
-  emailSubject: 'Lorem ipsum',
-  smsSender: ''
+  locationId: '1234',
+  templateId: '1234'
 }
 
 describe('v1: AppointmentReminders: can patch appointment reminder', () => {
