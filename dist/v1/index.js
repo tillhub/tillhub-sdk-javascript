@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppointmentReminders = exports.Promotions = exports.NotificationsUnsubscribe = exports.NotificationsMsu = exports.Configurations = exports.Branches = exports.AuditLogs = exports.analytics = exports.StocksBook = exports.ExportsV1 = exports.SafesLogBook = exports.Tags = exports.Carts = exports.Customers = exports.Vouchers = exports.Balances = exports.Registers = exports.TransactionsLegacy = exports.Transactions = exports.Templates = exports.Products = exports.Pricebooks = exports.Auth = void 0;
+exports.AppointmentReminderTemplates = exports.AppointmentReminders = exports.Promotions = exports.NotificationsUnsubscribe = exports.NotificationsMsu = exports.Configurations = exports.Branches = exports.AuditLogs = exports.analytics = exports.StocksBook = exports.ExportsV1 = exports.SafesLogBook = exports.Tags = exports.Carts = exports.Customers = exports.Vouchers = exports.Balances = exports.Registers = exports.TransactionsLegacy = exports.Transactions = exports.Templates = exports.Products = exports.Pricebooks = exports.Auth = void 0;
 var tslib_1 = require("tslib");
 var auth_1 = require("./auth");
 Object.defineProperty(exports, "Auth", { enumerable: true, get: function () { return auth_1.Auth; } });
@@ -47,4 +47,6 @@ var promotions_1 = require("./promotions");
 Object.defineProperty(exports, "Promotions", { enumerable: true, get: function () { return promotions_1.Promotions; } });
 var appointment_reminders_1 = require("./appointment_reminders");
 Object.defineProperty(exports, "AppointmentReminders", { enumerable: true, get: function () { return appointment_reminders_1.AppointmentReminders; } });
+var appointment_reminder_templates_1 = require("./appointment-reminder-templates");
+Object.defineProperty(exports, "AppointmentReminderTemplates", { enumerable: true, get: function () { return appointment_reminder_templates_1.AppointmentReminderTemplates; } });
 //# sourceMappingURL=index.js.map

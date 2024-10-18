@@ -20,7 +20,8 @@ import { NotificationsMsu } from './notifications-msu';
 import { NotificationsUnsubscribe } from './notifications-unsubscribe';
 import { Promotions } from './promotions';
 import { AppointmentReminders } from './appointment_reminders';
-export { Auth, Pricebooks, Products, Templates, Transactions, TransactionsLegacy, Registers, Balances, Vouchers, Customers, Carts, Tags, SafesLogBook, ExportsV1, StocksBook, analytics, AuditLogs, Branches, Configurations, NotificationsMsu, NotificationsUnsubscribe, Promotions, AppointmentReminders };
+import { AppointmentReminderTemplates } from './appointment-reminder-templates';
+export { Auth, Pricebooks, Products, Templates, Transactions, TransactionsLegacy, Registers, Balances, Vouchers, Customers, Carts, Tags, SafesLogBook, ExportsV1, StocksBook, analytics, AuditLogs, Branches, Configurations, NotificationsMsu, NotificationsUnsubscribe, Promotions, AppointmentReminders, AppointmentReminderTemplates };
 export interface AnalyticsHandlersV1Types {
     analytics: {
         reports: {

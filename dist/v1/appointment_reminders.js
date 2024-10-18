@@ -5,6 +5,7 @@ var tslib_1 = require("tslib");
 var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
 var errors_1 = require("../errors");
+var appointment_reminder_templates_1 = require("./appointment-reminder-templates");
 var AppointmentReminders = (function (_super) {
     tslib_1.__extends(AppointmentReminders, _super);
     function AppointmentReminders(options, http) {
@@ -98,6 +99,9 @@ var AppointmentReminders = (function (_super) {
                 }
             });
         });
+    };
+    AppointmentReminders.prototype.templates = function () {
+        return new appointment_reminder_templates_1.AppointmentReminderTemplates(this.options, this.http);
     };
     AppointmentReminders.baseEndpoint = '/api/v1/notifications/appointment-reminders';
     return AppointmentReminders;

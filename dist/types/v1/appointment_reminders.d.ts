@@ -2,19 +2,18 @@ import { Client } from '../client';
 import { UriHelper } from '../uri-helper';
 import { ThBaseHandler } from '../base';
 import { BaseError } from '../errors';
+import { AppointmentReminderTemplates } from './appointment-reminder-templates';
 export interface AppointmentRemindersOptions {
     user?: string;
     base?: string;
 }
-export declare type ReminderType = 'email' | 'sms' | 'sms_with_email_fallback';
+export declare type ReminderType = 'email' | 'sms';
 export interface AppointmentReminderEntity {
     id?: string;
     type?: ReminderType;
-    emailSubject?: string;
-    smsSender?: string;
-    text?: string;
     locationId?: string;
     active?: boolean;
+    templateId?: string;
     reminderLeadTime?: {
         type: 'day' | 'hour' | 'month';
         value: number;
@@ -38,6 +37,7 @@ export declare class AppointmentReminders extends ThBaseHandler {
     get(): Promise<AppointmentRemindersResponse>;
     post(appointmentReminder: AppointmentReminderEntity): Promise<AppointmentRemindersResponse>;
     patch(id: string, appointmentReminder: AppointmentReminderEntity): Promise<AppointmentRemindersResponse>;
+    templates(): AppointmentReminderTemplates;
 }
 export declare class AppointmentReminderPatchFailed extends BaseError {
     message: string;

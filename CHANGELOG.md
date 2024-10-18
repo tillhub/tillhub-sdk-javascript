@@ -1,3 +1,16 @@
+# [4.156.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.155.0...v4.156.0) (2024-10-18)
+
+
+### Bug Fixes
+
+* **appointment_reminders_v1:** remove unused variable (UNTIL 12146) ([#598](https://github.com/tillhub/tillhub-sdk-javascript/issues/598)) ([4986841](https://github.com/tillhub/tillhub-sdk-javascript/commit/4986841637dc93f59803e4f671722a406301b1a8))
+* **appointment-reminders:** update appointment reminder type (UNTIL 12146) ([#596](https://github.com/tillhub/tillhub-sdk-javascript/issues/596)) ([ed3b514](https://github.com/tillhub/tillhub-sdk-javascript/commit/ed3b514f95b41094bd4d3b74fd5bf84a4afc8aa9))
+
+
+### Features
+
+* **appointment-reminders:** add endpoint for templates (UNTIL 12146) ([#597](https://github.com/tillhub/tillhub-sdk-javascript/issues/597)) ([b05e9b5](https://github.com/tillhub/tillhub-sdk-javascript/commit/b05e9b5f867962f80139be24bf93129ad45d41e9))
+
 # [4.155.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.154.0...v4.155.0) (2024-10-09)
 
 
