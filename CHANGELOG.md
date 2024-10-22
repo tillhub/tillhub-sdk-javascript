@@ -1,3 +1,10 @@
+# [4.157.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.156.0...v4.157.0) (2024-10-22)
+
+
+### Features
+
+* **uod-invoices:** getAll Invoices - UOD-868 ([#599](https://github.com/tillhub/tillhub-sdk-javascript/issues/599)) ([e6da19e](https://github.com/tillhub/tillhub-sdk-javascript/commit/e6da19e454fd529915260a3822d976c45946cf2c))
+
 # [4.156.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.155.0...v4.156.0) (2024-10-18)
 
 
