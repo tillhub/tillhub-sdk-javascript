@@ -54,17 +54,6 @@ export interface ErrorObject {
   errorDetails: Record<string, unknown>
 }
 
-// export interface BusinessUnit {
-//   id?: string
-//   name?: string | null
-//   salesStream?: SaleStream[] | null
-// }
-
-// export interface SaleStream {
-//   id?: string
-//   terminalId?: string | null
-// }
-
 export class UodInvoices extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/invoices'
   endpoint: string
