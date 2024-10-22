@@ -80,6 +80,7 @@ import { ScheduledExports } from './scheduled_exports'
 import { CustomerAppointments } from './customer_appointments'
 import { DocumentExports } from './document_exports'
 import { BusinessUnits } from './business_units'
+import { UodInvoices } from './invoices_uod'
 
 export {
   Auth,
@@ -166,5 +167,6 @@ export {
   ScheduledExports,
   CustomerAppointments,
   DocumentExports,
-  BusinessUnits
+  BusinessUnits,
+  UodInvoices
 }
