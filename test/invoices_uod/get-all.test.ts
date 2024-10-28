@@ -41,7 +41,7 @@ describe('v0: UOD invoices: can get all', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/invoices/${legacyId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/unzer-one-invoices/${legacyId}`).reply(() => {
         return [
           200,
           {
@@ -92,7 +92,7 @@ describe('v0: UOD invoices: can get all', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/invoices/${legacyId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/unzer-one-invoices/${legacyId}`).reply(() => {
         return [205]
       })
     }
