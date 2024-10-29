@@ -55,7 +55,7 @@ var UodInvoices = (function (_super) {
             });
         });
     };
-    UodInvoices.baseEndpoint = '/api/v0/invoices';
+    UodInvoices.baseEndpoint = '/api/v0/unzer-one-invoices';
     return UodInvoices;
 }(base_1.ThBaseHandler));
 exports.UodInvoices = UodInvoices;
