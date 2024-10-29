@@ -1,3 +1,10 @@
+# [4.159.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.158.0...v4.159.0) (2024-10-29)
+
+
+### Features
+
+* **iamUsers:** add iamUsers SDK ([1345061](https://github.com/tillhub/tillhub-sdk-javascript/commit/1345061d102946f45938fb4cd88fe7ea2e3bf0af))
+
 # [4.158.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.157.0...v4.158.0) (2024-10-29)
 
 
