@@ -13,6 +13,7 @@ import { PaymentOptions } from './payment_options'
 import { Configurations } from './configurations'
 import { InventoryConfiguration } from './inventory_configuration'
 import { Users } from './users'
+import { IamUsers } from './iam_users'
 import { Branches } from './branches'
 import { BranchGroups } from './branch_groups'
 import { Devices } from './devices'
@@ -98,6 +99,7 @@ export {
   Configurations,
   InventoryConfiguration,
   Users,
+  IamUsers,
   Branches,
   BranchGroups,
   Devices,

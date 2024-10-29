@@ -334,6 +334,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+     * Create an authenticated configurations instance
+     *
+     */
+  iamUsers (): v0.IamUsers {
+    return this.generateAuthenticatedInstance(v0.IamUsers)
+  }
+
+  /**
    * Create an authenticated branches instance
    *
    */
@@ -1365,7 +1373,7 @@ export class TillhubClient extends events.EventEmitter {
    * Create an authenticated AppointmentReminder instance
    *
    */
-  appointmentReminders(): v1.AppointmentReminders {
+  appointmentReminders (): v1.AppointmentReminders {
     return this.generateAuthenticatedInstance(v1.AppointmentReminders)
   }
 }
