@@ -55,7 +55,7 @@ export interface ErrorObject {
 }
 
 export class UodInvoices extends ThBaseHandler {
-  public static baseEndpoint = '/api/v0/unzer-one-invoices'
+  public static baseEndpoint = '/api/v0/documents/unzer-one-invoices'
   endpoint: string
   http: Client
   public options: UodInvoicesOptions
