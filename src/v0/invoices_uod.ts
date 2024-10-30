@@ -6,6 +6,7 @@ import { ThBaseHandler } from '../base'
 declare type StatusTypes = 'Open' | 'Paid' | 'Dunning' | 'Encashment' | 'Cancellation' | 'Cancellation paid'
 declare type DocumentTypes = 'Standard' | 'Credit Note' | 'Partial Cancellation' | 'Full Cancellation'
 declare type OriginTypes = 'Ecom' | 'POS'
+declare type InvoiceType = 'pdf' | 'csv'
 
 export interface UodInvoicesResponse {
   data: UodInvoicesEntity[]
@@ -54,6 +55,14 @@ export interface ErrorObject {
   errorDetails: Record<string, unknown>
 }
 
+export interface DocumentsDownloadResponse {
+  url?: string
+  data?: string
+  contentType?: string
+  filename?: string
+  correlationId?: string
+}
+
 export class UodInvoices extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/documents/unzer-one-invoices'
   endpoint: string
@@ -98,6 +107,38 @@ export class UodInvoices extends ThBaseHandler {
       throw new UodInvoicesFetchFailed(error.message, { error })
     }
   }
+
+  async download (documentId: string, type: InvoiceType): Promise<DocumentsDownloadResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri(`/download/${documentId}/type/${type}`)
+
+      const response = await this.http.getClient().get(uri)
+      const pdfObj = response.data.results[0]
+
+      if ('correlationId' in pdfObj) {
+        // File is being regenerated. Return the correlation id.
+        return {
+          correlationId: pdfObj.correlationId
+        }
+      }
+
+      if ('url' in pdfObj) {
+        // Direct url to the file is available. Return it alongside the filename
+        return {
+          url: pdfObj.url,
+          filename: pdfObj.fileName
+        }
+      }
+
+      return {
+        data: pdfObj.base64Content,
+        contentType: pdfObj.contentType,
+        filename: pdfObj.fileName
+      }
+    } catch (error: any) {
+      throw new DocumentsDownloadFailed(error.message)
+    }
+  }
 }
 
 export class UodInvoicesFetchFailed extends BaseError {
@@ -108,5 +149,16 @@ export class UodInvoicesFetchFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, UodInvoicesFetchFailed.prototype)
+  }
+}
+
+export class DocumentsDownloadFailed extends BaseError {
+  public name = 'DocumentsDownloadFailed'
+  constructor (
+    public message: string = 'Could not download file',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, DocumentsDownloadFailed.prototype)
   }
 }
