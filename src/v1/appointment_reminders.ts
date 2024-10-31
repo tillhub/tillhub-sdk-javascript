@@ -32,6 +32,18 @@ export interface AppointmentRemindersResponse {
   msg?: string
 }
 
+export interface AppointmentRemindersTestReminderPayload {
+  templateId?: string
+  branchId?: string
+  type?: ReminderType
+  email?: string
+  phoneNumber?: string
+}
+
+export interface AppointmentRemindersTestReminderResponse {
+  msg?: string
+}
+
 export class AppointmentReminders extends ThBaseHandler {
   public static baseEndpoint = '/api/v1/notifications/appointment-reminders'
   endpoint: string
@@ -107,6 +119,20 @@ export class AppointmentReminders extends ThBaseHandler {
     }
   }
 
+  async sendTestReminder (payload: AppointmentRemindersTestReminderPayload): Promise<AppointmentRemindersTestReminderResponse> {
+    const uri = this.uriHelper.generateBaseUri('/test-reminder')
+
+    try {
+      const response = await this.http.getClient().post(uri, payload)
+
+      return {
+        msg: response.data.results[0].msg
+      }
+    } catch (error: any) {
+      throw new AppointmentReminderSendTestReminderFailed(error.message, { error })
+    }
+  }
+
   templates (): AppointmentReminderTemplates {
     return new AppointmentReminderTemplates(this.options, this.http)
   }
@@ -142,5 +168,16 @@ export class AppointmentReminderFetchFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, AppointmentReminderFetchFailed.prototype)
+  }
+}
+
+export class AppointmentReminderSendTestReminderFailed extends BaseError {
+  public name = 'AppointmentReminderSendTestReminderFailed'
+  constructor (
+    public message: string = 'Could not send test reminder.',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, AppointmentReminderSendTestReminderFailed.prototype)
   }
 }
