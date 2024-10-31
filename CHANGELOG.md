@@ -1,3 +1,10 @@
+# [4.161.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.160.0...v4.161.0) (2024-10-31)
+
+
+### Features
+
+* **products:** add duplicate products method ([2a787ce](https://github.com/tillhub/tillhub-sdk-javascript/commit/2a787ce1127011289f5f89db3d296c4fde5ccf4c))
+
 # [4.160.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.159.0...v4.160.0) (2024-10-30)
 
 

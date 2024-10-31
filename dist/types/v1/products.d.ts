@@ -137,6 +137,18 @@ export interface ProductResponse {
     msg?: string;
     errors?: ErrorObject[];
 }
+export interface ProductsDuplicateResponse {
+    data: Product[];
+    metadata?: {
+        count?: number;
+        patch?: any;
+    };
+    msg?: string;
+    errors?: ErrorObject[];
+}
+export interface ProductsDuplicateBody {
+    productIds: string[];
+}
 export interface ErrorObject {
     id: string;
     label: string;
@@ -179,6 +191,7 @@ export declare class Products extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: ProductsOptions, http: Client);
     create(product: Product, query?: HandlerProductsQuery): Promise<ProductResponse>;
+    duplicate(body: ProductsDuplicateBody): Promise<ProductsDuplicateResponse>;
     getAll(options?: ProductsOptions | undefined): Promise<ProductsResponse>;
     select(options: SelectProductsQuery): Promise<ProductsResponse>;
     import(options?: ProductsOptions | undefined): Promise<ProductsResponse>;
@@ -199,6 +212,11 @@ export declare class Products extends ThBaseHandler {
     pricebookEntries(): PricebookEntries;
 }
 export declare class ProductsCreateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class ProductsDuplicateFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
