@@ -1,3 +1,10 @@
+# [4.162.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.161.0...v4.162.0) (2024-10-31)
+
+
+### Features
+
+* **appointment-reminders:** add endpoint for sending test reminders ([#604](https://github.com/tillhub/tillhub-sdk-javascript/issues/604)) ([0c6deaa](https://github.com/tillhub/tillhub-sdk-javascript/commit/0c6deaa72f2e93fb8aeb5aaa85fc48bbecd60ce8))
+
 # [4.161.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.160.0...v4.161.0) (2024-10-31)
 
 

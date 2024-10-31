@@ -23,6 +23,9 @@ export interface AppointmentReminderTemplatesResponse {
     };
     msg?: string;
 }
+export interface AppointmentReminderTemplatesQuery {
+    language?: string;
+}
 export declare class AppointmentReminderTemplates extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
@@ -30,7 +33,7 @@ export declare class AppointmentReminderTemplates extends ThBaseHandler {
     options: AppointmentReminderTemplatesOptions;
     uriHelper: UriHelper;
     constructor(options: AppointmentReminderTemplatesOptions, http: Client);
-    getAll(): Promise<AppointmentReminderTemplatesResponse>;
+    getAll(query?: AppointmentReminderTemplatesQuery | undefined): Promise<AppointmentReminderTemplatesResponse>;
 }
 export declare class AppointmentReminderTemplatesFetchFailed extends BaseError {
     message: string;

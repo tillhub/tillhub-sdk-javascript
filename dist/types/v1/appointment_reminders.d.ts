@@ -27,6 +27,16 @@ export interface AppointmentRemindersResponse {
     };
     msg?: string;
 }
+export interface AppointmentRemindersTestReminderPayload {
+    templateId?: string;
+    branchId?: string;
+    type?: ReminderType;
+    email?: string;
+    phoneNumber?: string;
+}
+export interface AppointmentRemindersTestReminderResponse {
+    msg?: string;
+}
 export declare class AppointmentReminders extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
@@ -37,6 +47,7 @@ export declare class AppointmentReminders extends ThBaseHandler {
     get(): Promise<AppointmentRemindersResponse>;
     post(appointmentReminder: AppointmentReminderEntity): Promise<AppointmentRemindersResponse>;
     patch(id: string, appointmentReminder: AppointmentReminderEntity): Promise<AppointmentRemindersResponse>;
+    sendTestReminder(payload: AppointmentRemindersTestReminderPayload): Promise<AppointmentRemindersTestReminderResponse>;
     templates(): AppointmentReminderTemplates;
 }
 export declare class AppointmentReminderPatchFailed extends BaseError {
@@ -50,6 +61,11 @@ export declare class AppointmentReminderPostFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class AppointmentReminderFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class AppointmentReminderSendTestReminderFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

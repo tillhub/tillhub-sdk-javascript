@@ -20,13 +20,14 @@ var AppointmentReminderTemplates = (function (_super) {
         _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
         return _this;
     }
-    AppointmentReminderTemplates.prototype.getAll = function () {
+    AppointmentReminderTemplates.prototype.getAll = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_1;
+            var base, uri, response, error_1;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uri = this.uriHelper.generateBaseUri('/templates');
+                        base = this.uriHelper.generateBaseUri('/templates');
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);

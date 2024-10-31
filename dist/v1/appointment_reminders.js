@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppointmentReminderFetchFailed = exports.AppointmentReminderPostFailed = exports.AppointmentReminderPatchFailed = exports.AppointmentReminders = void 0;
+exports.AppointmentReminderSendTestReminderFailed = exports.AppointmentReminderFetchFailed = exports.AppointmentReminderPostFailed = exports.AppointmentReminderPatchFailed = exports.AppointmentReminders = void 0;
 var tslib_1 = require("tslib");
 var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
@@ -100,6 +100,30 @@ var AppointmentReminders = (function (_super) {
             });
         });
     };
+    AppointmentReminders.prototype.sendTestReminder = function (payload) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_4;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri('/test-reminder');
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().post(uri, payload)];
+                    case 2:
+                        response = _a.sent();
+                        return [2, {
+                                msg: response.data.results[0].msg
+                            }];
+                    case 3:
+                        error_4 = _a.sent();
+                        throw new AppointmentReminderSendTestReminderFailed(error_4.message, { error: error_4 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     AppointmentReminders.prototype.templates = function () {
         return new appointment_reminder_templates_1.AppointmentReminderTemplates(this.options, this.http);
     };
@@ -146,4 +170,17 @@ var AppointmentReminderFetchFailed = (function (_super) {
     return AppointmentReminderFetchFailed;
 }(errors_1.BaseError));
 exports.AppointmentReminderFetchFailed = AppointmentReminderFetchFailed;
+var AppointmentReminderSendTestReminderFailed = (function (_super) {
+    tslib_1.__extends(AppointmentReminderSendTestReminderFailed, _super);
+    function AppointmentReminderSendTestReminderFailed(message, properties) {
+        if (message === void 0) { message = 'Could not send test reminder.'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'AppointmentReminderSendTestReminderFailed';
+        Object.setPrototypeOf(_this, AppointmentReminderSendTestReminderFailed.prototype);
+        return _this;
+    }
+    return AppointmentReminderSendTestReminderFailed;
+}(errors_1.BaseError));
+exports.AppointmentReminderSendTestReminderFailed = AppointmentReminderSendTestReminderFailed;
 //# sourceMappingURL=appointment_reminders.js.map
