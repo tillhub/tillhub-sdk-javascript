@@ -28,6 +28,10 @@ export interface AppointmentReminderTemplatesResponse {
   msg?: string
 }
 
+export interface AppointmentReminderTemplatesQuery {
+  language?: string
+}
+
 export class AppointmentReminderTemplates extends ThBaseHandler {
   public static baseEndpoint = '/api/v1/notifications/appointment-reminders'
   endpoint: string
@@ -48,8 +52,9 @@ export class AppointmentReminderTemplates extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async getAll (): Promise<AppointmentReminderTemplatesResponse> {
-    const uri = this.uriHelper.generateBaseUri('/templates')
+  async getAll (query?: AppointmentReminderTemplatesQuery | undefined): Promise<AppointmentReminderTemplatesResponse> {
+    const base = this.uriHelper.generateBaseUri('/templates')
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
 
     try {
       const response = await this.http.getClient().get(uri)

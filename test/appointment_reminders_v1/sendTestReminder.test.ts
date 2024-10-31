@@ -3,7 +3,7 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import { v1 } from '../../src/tillhub-js'
 import { initThInstance } from '../util'
-import { AppointmentReminderTemplateTypeEntity } from '../../src/v1/appointment-reminder-templates'
+import { AppointmentRemindersTestReminderPayload } from '../../src/v1/appointment_reminders'
 
 dotenv.config()
 
@@ -15,16 +15,16 @@ afterEach(() => {
   mock.reset()
 })
 
-const template: AppointmentReminderTemplateTypeEntity = {
+const testReminderPayload: AppointmentRemindersTestReminderPayload = {
   type: 'email',
-  content: 'Lorem ipsum dolor sit',
-  subject: 'Lorem ipsum',
-  name: 'Lorem ipsum',
-  id: '1'
+  branchId: '1234',
+  templateId: '1234',
+  email: 'email@somewhere.com'
 }
 
-describe('v1: AppointmentReminderTemplates: can get templates', () => {
-  it("Tillhub's appointmentReminders are instantiable", async () => {
+describe('v1: AppointmentReminders: can send test appointment reminder', () => {
+  it("Tillhub's appointmentReminder are instantiable", async () => {
+    const successMessage = 'Test reminder successfully sent'
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
@@ -40,13 +40,14 @@ describe('v1: AppointmentReminderTemplates: can get templates', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v1/notifications/appointment-reminders/${legacyId}/templates?language=en-US`)
+        .onPost(`https://api.tillhub.com/api/v1/notifications/appointment-reminders/${legacyId}/test-reminder`)
         .reply(() => {
           return [
             200,
             {
-              count: 1,
-              results: [template]
+              results: [{
+                msg: successMessage
+              }]
             }
           ]
         })
@@ -54,13 +55,13 @@ describe('v1: AppointmentReminderTemplates: can get templates', () => {
 
     const th = await initThInstance()
 
-    const instance = th.appointmentReminders().templates()
+    const instance = th.appointmentReminders()
 
-    expect(instance).toBeInstanceOf(v1.AppointmentReminderTemplates)
+    expect(instance).toBeInstanceOf(v1.AppointmentReminders)
 
-    const { data } = await instance.getAll({ language: 'en-US' })
+    const { msg } = await instance.sendTestReminder(testReminderPayload)
 
-    expect(data).toMatchObject([template])
+    expect(msg).toBe(successMessage)
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -77,9 +78,8 @@ describe('v1: AppointmentReminderTemplates: can get templates', () => {
           }
         ]
       })
-
       mock
-        .onGet(`https://api.tillhub.com/api/v1/notifications/appointment-reminders/${legacyId}/templates`)
+        .onPost(`https://api.tillhub.com/api/v1/notifications/appointment-reminders/${legacyId}/test-reminder`)
         .reply(() => {
           return [205]
         })
@@ -88,9 +88,9 @@ describe('v1: AppointmentReminderTemplates: can get templates', () => {
     const th = await initThInstance()
 
     try {
-      await th.appointmentReminders().templates().getAll()
+      await th.appointmentReminders().sendTestReminder(testReminderPayload)
     } catch (err: any) {
-      expect(err.name).toBe('AppointmentReminderTemplatesFetchFailed')
+      expect(err.name).toBe('AppointmentReminderSendTestReminderFailed')
     }
   })
 })
