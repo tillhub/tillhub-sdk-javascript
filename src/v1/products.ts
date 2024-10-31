@@ -156,6 +156,20 @@ export interface ProductResponse {
   errors?: ErrorObject[]
 }
 
+export interface ProductsDuplicateResponse {
+  data: Product[]
+  metadata?: {
+    count?: number
+    patch?: any
+  }
+  msg?: string
+  errors?: ErrorObject[]
+}
+
+export interface ProductsDuplicateBody {
+  productIds: string[]
+}
+
 export interface ErrorObject {
   id: string
   label: string
@@ -234,6 +248,24 @@ export class Products extends ThBaseHandler {
       }
     } catch (error: any) {
       throw new ProductsCreateFailed(error.message, { error })
+    }
+  }
+
+  async duplicate (body: ProductsDuplicateBody): Promise<ProductsDuplicateResponse> {
+    const uri = this.uriHelper.generateBaseUri('/duplicate')
+    try {
+      const response = await this.http.getClient().post(uri, body)
+      if (response.status !== 200) {
+        throw new ProductsDuplicateFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results as Product[],
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new ProductsDuplicateFailed(error.message, { error })
     }
   }
 
@@ -603,6 +635,17 @@ export class ProductsCreateFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsCreateFailed.prototype)
+  }
+}
+
+export class ProductsDuplicateFailed extends BaseError {
+  public name = 'ProductsDuplicateFailed'
+  constructor (
+    public message: string = 'Could not duplicate the products',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, ProductsDuplicateFailed.prototype)
   }
 }
 
