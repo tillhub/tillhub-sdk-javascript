@@ -3,7 +3,7 @@ import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
 import { ThBaseHandler } from '../base'
 
-declare type StatusTypes = 'Open' | 'Paid' | 'Dunning' | 'Encashment' | 'Cancellation' | 'Cancellation paid'
+declare type StateTypes = 'Open' | 'Paid' | 'Dunning' | 'Encashment' | 'Cancellation' | 'Cancellation paid'
 declare type DocumentTypes = 'Standard' | 'Credit Note' | 'Partial Cancellation' | 'Full Cancellation'
 declare type OriginTypes = 'Ecom' | 'POS'
 declare type InvoiceType = 'pdf' | 'csv'
@@ -28,25 +28,24 @@ export interface UodInvoicesQueryHandler {
 
 export interface UodInvoicesQuery extends UodInvoicesEntity {
   active?: boolean
-  billingPeriodStart?: Date | string
-  billingPeriodEnd?: Date | string
 }
 
 export interface UodInvoicesEntity {
-  id?: string
-  documentNumber?: string
-  billingPeriod?: string | PeriodTimestamp
-  createdAt?: Date | string
-  status?: StatusTypes
+  document: Document
+  billingPeriodStart: Date | string
+  billingPeriodEnd: Date | string
+  origin?: OriginTypes
+  state?: StateTypes
   type?: DocumentTypes
   csvUrl?: string
   pdfUrl?: string
-  origin?: OriginTypes
 }
 
-export interface PeriodTimestamp {
-  billingPeriodStart: Date | string
-  billingPeriodEnd: Date | string
+export interface Document {
+  id?: string
+  documentNumber?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export interface ErrorObject {
