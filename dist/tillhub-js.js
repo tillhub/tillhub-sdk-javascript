@@ -200,6 +200,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.uodInvoices = function () {
         return this.generateAuthenticatedInstance(v0.UodInvoices);
     };
+    TillhubClient.prototype.uodInvoicesDownload = function () {
+        return this.generateAuthenticatedInstance(v0.UodInvoices);
+    };
     TillhubClient.prototype.suppliers = function () {
         return this.generateAuthenticatedInstance(v0.Suppliers);
     };

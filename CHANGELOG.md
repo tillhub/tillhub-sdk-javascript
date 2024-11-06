@@ -1,3 +1,10 @@
+# [4.164.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.163.0...v4.164.0) (2024-11-06)
+
+
+### Features
+
+* **invoice:** download uod-invoices instance added ([#607](https://github.com/tillhub/tillhub-sdk-javascript/issues/607)) ([8fd4ca0](https://github.com/tillhub/tillhub-sdk-javascript/commit/8fd4ca0f8665f8162e3f8e982a78f0f16a5c6cdf))
+
 # [4.163.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.162.0...v4.163.0) (2024-11-06)
 
 
