@@ -1,3 +1,10 @@
+# [4.163.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.162.0...v4.163.0) (2024-11-06)
+
+
+### Features
+
+* **invoices:** just to trigger new build ([#606](https://github.com/tillhub/tillhub-sdk-javascript/issues/606)) ([f7ffbd4](https://github.com/tillhub/tillhub-sdk-javascript/commit/f7ffbd457fadc1e7f714a19e77e946060144009a))
+
 # [4.162.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.161.0...v4.162.0) (2024-10-31)
 
 

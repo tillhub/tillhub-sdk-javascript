@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UodInvoicesFetchFailed = exports.UodInvoices = void 0;
+exports.DocumentsDownloadFailed = exports.UodInvoicesFetchFailed = exports.UodInvoices = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -55,6 +55,42 @@ var UodInvoices = (function (_super) {
             });
         });
     };
+    UodInvoices.prototype.download = function (documentId, type) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, pdfObj, error_2;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = this.uriHelper.generateBaseUri("/download/" + documentId + "/type/" + type);
+                        return [4, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        pdfObj = response.data.results[0];
+                        if ('correlationId' in pdfObj) {
+                            return [2, {
+                                    correlationId: pdfObj.correlationId
+                                }];
+                        }
+                        if ('url' in pdfObj) {
+                            return [2, {
+                                    url: pdfObj.url,
+                                    filename: pdfObj.fileName
+                                }];
+                        }
+                        return [2, {
+                                data: pdfObj.base64Content,
+                                contentType: pdfObj.contentType,
+                                filename: pdfObj.fileName
+                            }];
+                    case 2:
+                        error_2 = _a.sent();
+                        throw new DocumentsDownloadFailed(error_2.message);
+                    case 3: return [2];
+                }
+            });
+        });
+    };
     UodInvoices.baseEndpoint = '/api/v0/documents/unzer-one-invoices';
     return UodInvoices;
 }(base_1.ThBaseHandler));
@@ -72,4 +108,17 @@ var UodInvoicesFetchFailed = (function (_super) {
     return UodInvoicesFetchFailed;
 }(errors_1.BaseError));
 exports.UodInvoicesFetchFailed = UodInvoicesFetchFailed;
+var DocumentsDownloadFailed = (function (_super) {
+    tslib_1.__extends(DocumentsDownloadFailed, _super);
+    function DocumentsDownloadFailed(message, properties) {
+        if (message === void 0) { message = 'Could not download file'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'DocumentsDownloadFailed';
+        Object.setPrototypeOf(_this, DocumentsDownloadFailed.prototype);
+        return _this;
+    }
+    return DocumentsDownloadFailed;
+}(errors_1.BaseError));
+exports.DocumentsDownloadFailed = DocumentsDownloadFailed;
 //# sourceMappingURL=invoices_uod.js.map
