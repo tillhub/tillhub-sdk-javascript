@@ -115,7 +115,7 @@ export class UodInvoices extends ThBaseHandler {
       const pdfObj = response.data.results[0]
 
       if ('correlationId' in pdfObj) {
-        // File is being regenerated. Return the correlation id.
+        // File is being regenerated. Return the correlationId.
         return {
           correlationId: pdfObj.correlationId
         }
