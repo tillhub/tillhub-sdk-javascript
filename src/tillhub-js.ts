@@ -430,6 +430,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+  * Create an authenticated UODInvoicesDownload instance v0
+  *
+  */
+  uodInvoicesDownload (): v0.UodInvoices {
+    return this.generateAuthenticatedInstance(v0.UodInvoices)
+  }
+
+  /**
    * Create an authenticated suppliers instance
    *
    */
