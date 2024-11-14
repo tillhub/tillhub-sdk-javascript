@@ -57,7 +57,7 @@ var UodInvoices = (function (_super) {
     };
     UodInvoices.prototype.download = function (documentId, type) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, pdfObj, error_2;
+            var uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -66,26 +66,16 @@ var UodInvoices = (function (_super) {
                         return [4, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
-                        pdfObj = response.data.results[0];
-                        if ('correlationId' in pdfObj) {
-                            return [2, {
-                                    correlationId: pdfObj.correlationId
-                                }];
+                        if (response.status !== 200) {
+                            throw new DocumentsDownloadFailed(undefined, { status: response.status });
                         }
-                        if ('url' in pdfObj) {
-                            return [2, {
-                                    url: pdfObj.url,
-                                    filename: pdfObj.fileName
-                                }];
+                        if (response.status === 200) {
+                            return [2, response];
                         }
-                        return [2, {
-                                data: pdfObj.base64Content,
-                                contentType: pdfObj.contentType,
-                                filename: pdfObj.fileName
-                            }];
+                        return [3, 3];
                     case 2:
                         error_2 = _a.sent();
-                        throw new DocumentsDownloadFailed(error_2.message);
+                        throw new DocumentsDownloadFailed(error_2 === null || error_2 === void 0 ? void 0 : error_2.message);
                     case 3: return [2];
                 }
             });

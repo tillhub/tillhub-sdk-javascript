@@ -1,3 +1,10 @@
+# [4.165.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.164.0...v4.165.0) (2024-11-14)
+
+
+### Features
+
+* **invoices:** download pdf/csv changes ([#608](https://github.com/tillhub/tillhub-sdk-javascript/issues/608)) ([d54a7f2](https://github.com/tillhub/tillhub-sdk-javascript/commit/d54a7f218a02bcadfbebc68d8c18519e4bd296cb))
+
 # [4.164.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.163.0...v4.164.0) (2024-11-06)
 
 

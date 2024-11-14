@@ -60,7 +60,7 @@ export declare class UodInvoices extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: UodInvoicesOptions, http: Client);
     getAll(query?: UodInvoicesQueryHandler | undefined): Promise<UodInvoicesResponse>;
-    download(documentId: string, type: InvoiceType): Promise<DocumentsDownloadResponse>;
+    download(documentId: string, type: InvoiceType): Promise<any>;
 }
 export declare class UodInvoicesFetchFailed extends BaseError {
     message: string;
