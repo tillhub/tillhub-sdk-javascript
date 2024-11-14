@@ -107,35 +107,21 @@ export class UodInvoices extends ThBaseHandler {
     }
   }
 
-  async download (documentId: string, type: InvoiceType): Promise<DocumentsDownloadResponse> {
+  async download (documentId: string, type: InvoiceType): Promise<any> {
     try {
       const uri = this.uriHelper.generateBaseUri(`/download/${documentId}/type/${type}`)
 
       const response = await this.http.getClient().get(uri)
-      const pdfObj = response.data.results[0]
 
-      if ('correlationId' in pdfObj) {
-        // File is being regenerated. Return the correlationId.
-        return {
-          correlationId: pdfObj.correlationId
-        }
+      if (response.status !== 200) {
+        throw new DocumentsDownloadFailed(undefined, { status: response.status })
       }
 
-      if ('url' in pdfObj) {
-        // Direct url to the file is available. Return it alongside the filename
-        return {
-          url: pdfObj.url,
-          filename: pdfObj.fileName
-        }
-      }
-
-      return {
-        data: pdfObj.base64Content,
-        contentType: pdfObj.contentType,
-        filename: pdfObj.fileName
+      if (response.status === 200) {
+        return response
       }
     } catch (error: any) {
-      throw new DocumentsDownloadFailed(error.message)
+      throw new DocumentsDownloadFailed(error?.message)
     }
   }
 }

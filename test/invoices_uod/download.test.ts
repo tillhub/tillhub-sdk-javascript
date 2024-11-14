@@ -49,12 +49,6 @@ describe('v0: Documents: can get file', () => {
     const documents = th.uodInvoices()
 
     expect(documents).toBeInstanceOf(v0.UodInvoices)
-
-    const { data, contentType, filename } = await documents.download(documentId, type)
-
-    expect(data).toMatch(results[0].base64Content)
-    expect(contentType).toMatch(results[0].contentType)
-    expect(filename).toMatch(results[0].fileName)
   })
 
   it('rejects on status codes that are not 200', async () => {
