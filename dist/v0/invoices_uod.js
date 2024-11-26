@@ -63,7 +63,9 @@ var UodInvoices = (function (_super) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         uri = this.uriHelper.generateBaseUri("/download/" + documentId + "/type/" + type);
-                        return [4, this.http.getClient().get(uri)];
+                        return [4, this.http.getClient().get(uri, {
+                                responseType: 'arraybuffer'
+                            })];
                     case 1:
                         response = _a.sent();
                         if (response.status !== 200) {
