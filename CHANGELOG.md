@@ -1,3 +1,10 @@
+# [4.168.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.167.0...v4.168.0) (2024-11-28)
+
+
+### Features
+
+* **owner:** add CODEOWNER - UOD-1021 ([833d100](https://github.com/tillhub/tillhub-sdk-javascript/commit/833d100b5ca74663ed47228ef417c676ff0fac50))
+
 # [4.167.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.166.0...v4.167.0) (2024-11-28)
 
 
