@@ -31,8 +31,9 @@ export interface IamUser {
     id?: string;
     email?: string;
     username?: string;
-    firstname?: string;
-    lastname?: string;
+    firstName?: string;
+    lastName?: string;
+    attributes?: Record<string, unknown>;
 }
 export interface IamUsersQueryHandler {
     limit?: number;
@@ -50,7 +51,6 @@ export declare class IamUsers extends ThBaseHandler {
     endpoint: string;
     http: Client;
     options: IamUsersOptions;
-    configurationId?: string;
     uriHelper: UriHelper;
     constructor(options: IamUsersOptions, http: Client);
     getAll(query?: IamUsersQueryHandler | undefined): Promise<IamUsersResponse>;

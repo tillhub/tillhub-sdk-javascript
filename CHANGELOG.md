@@ -1,3 +1,10 @@
+# [4.167.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.166.0...v4.167.0) (2024-11-28)
+
+
+### Features
+
+* **iam-user:** change route - UOD-1018 ([0160f66](https://github.com/tillhub/tillhub-sdk-javascript/commit/0160f66b49d3f0e8e1269fb018db1a6afc7de5e8))
+
 # [4.166.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.165.0...v4.166.0) (2024-11-26)
 
 
