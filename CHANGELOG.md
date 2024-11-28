@@ -1,3 +1,10 @@
+# [4.169.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.168.0...v4.169.0) (2024-11-28)
+
+
+### Features
+
+* **invoices:** update UodInvoices interface ([#612](https://github.com/tillhub/tillhub-sdk-javascript/issues/612)) ([8c400f4](https://github.com/tillhub/tillhub-sdk-javascript/commit/8c400f4569afceda924af40786556969cad16b2b))
+
 # [4.168.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.167.0...v4.168.0) (2024-11-28)
 
 

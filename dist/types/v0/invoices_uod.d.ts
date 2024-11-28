@@ -4,7 +4,7 @@ import { UriHelper } from '../uri-helper';
 import { ThBaseHandler } from '../base';
 declare type StateTypes = 'Open' | 'Paid' | 'Dunning' | 'Encashment' | 'Cancellation' | 'Cancellation paid';
 declare type DocumentTypes = 'Standard' | 'Credit Note' | 'Partial Cancellation' | 'Full Cancellation';
-declare type OriginTypes = 'Ecom' | 'POS';
+declare type TxnOriginTypes = 'Ecom' | 'POS';
 declare type InvoiceType = 'pdf' | 'csv';
 export interface UodInvoicesResponse {
     data: UodInvoicesEntity[];
@@ -28,7 +28,7 @@ export interface UodInvoicesEntity {
     document: Document;
     billingPeriodStart: Date | string;
     billingPeriodEnd: Date | string;
-    origin?: OriginTypes;
+    txnOrigin?: TxnOriginTypes;
     state?: StateTypes;
     type?: DocumentTypes;
     csvUrl?: string;
