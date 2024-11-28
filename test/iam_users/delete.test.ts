@@ -15,10 +15,9 @@ afterEach(() => {
 const iamUserId = '1234'
 
 const iamUser = {
-  firstname: 'Pepe',
-  lastname: 'Pipon',
+  firstName: 'Pepe',
+  lastName: 'Pipon',
   email: 'pepe_pipon@unzer.com'
-
 }
 
 describe('v0: IamUsers: can delete one user', () => {
@@ -37,7 +36,7 @@ describe('v0: IamUsers: can delete one user', () => {
         ]
       })
 
-      mock.onDelete(`https://api.tillhub.com/api/v0/iam-users/${legacyId}/${iamUserId}`).reply(() => {
+      mock.onDelete(`https://api.tillhub.com/api/v0/iam/users/${legacyId}/${iamUserId}`).reply(() => {
         return [
           200,
           {
@@ -74,7 +73,7 @@ describe('v0: IamUsers: can delete one user', () => {
         ]
       })
 
-      mock.onDelete(`https://api.tillhub.com/api/v0/iam-users/${legacyId}/${iamUserId}`).reply(() => {
+      mock.onDelete(`https://api.tillhub.com/api/v0/iam/users/${legacyId}/${iamUserId}`).reply(() => {
         return [205]
       })
     }

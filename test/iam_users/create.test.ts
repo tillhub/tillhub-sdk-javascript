@@ -13,10 +13,9 @@ afterEach(() => {
 })
 
 const iamUser = {
-  firstname: 'Pepe',
-  lastname: 'Pipon',
+  firstName: 'Pepe',
+  lastName: 'Pipon',
   email: 'pepe_pipon@unzer.com'
-
 }
 
 describe('v0: IamUsers: can create one user', () => {
@@ -35,7 +34,7 @@ describe('v0: IamUsers: can create one user', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/iam-users/${legacyId}`).reply(() => {
+      mock.onPost(`https://api.tillhub.com/api/v0/iam/users/${legacyId}`).reply(() => {
         return [
           200,
           {
@@ -72,7 +71,7 @@ describe('v0: IamUsers: can create one user', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/iam-users/${legacyId}`).reply(() => {
+      mock.onPost(`https://api.tillhub.com/api/v0/iam/users/${legacyId}`).reply(() => {
         return [205]
       })
     }
