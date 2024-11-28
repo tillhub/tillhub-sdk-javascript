@@ -38,8 +38,9 @@ export interface IamUser {
   id?: string
   email?: string
   username?: string
-  firstname?: string
-  lastname?: string
+  firstName?: string
+  lastName?: string
+  attributes?: Record<string, unknown>
 }
 
 export interface IamUsersQueryHandler {
@@ -56,11 +57,10 @@ export interface IamUsersQuery extends IamUser {
 }
 
 export class IamUsers extends ThBaseHandler {
-  public static baseEndpoint = '/api/v0/iam-users'
+  public static baseEndpoint = '/api/v0/iam/users'
   endpoint: string
   http: Client
   public options: IamUsersOptions
-  public configurationId?: string
   public uriHelper: UriHelper
 
   constructor (options: IamUsersOptions, http: Client) {
