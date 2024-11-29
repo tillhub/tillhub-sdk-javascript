@@ -54,12 +54,18 @@ export declare class IamUsers extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: IamUsersOptions, http: Client);
     getAll(query?: IamUsersQueryHandler | undefined): Promise<IamUsersResponse>;
+    meta(query?: IamUsersQueryHandler | undefined): Promise<IamUsersResponse>;
     get(iamUserId: string): Promise<IamUserResponse>;
     put(iamUserId: string, iamUser: IamUser): Promise<IamUserResponse>;
     create(iamUser: IamUser): Promise<IamUserResponse>;
     delete(iamUserId: string): Promise<IamUserResponse>;
 }
 export declare class IamUsersFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class IamUsersMetaFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

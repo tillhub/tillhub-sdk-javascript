@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.IamUserDeleteFailed = exports.IamUserCreationFailed = exports.IamUserPutFailed = exports.IamUserFetchFailed = exports.IamUsersFetchFailed = exports.IamUsers = void 0;
+exports.IamUserDeleteFailed = exports.IamUserCreationFailed = exports.IamUserPutFailed = exports.IamUserFetchFailed = exports.IamUsersMetaFailed = exports.IamUsersFetchFailed = exports.IamUsers = void 0;
 var tslib_1 = require("tslib");
 var baseError_1 = require("../errors/baseError");
 var uri_helper_1 = require("../uri-helper");
@@ -52,9 +52,35 @@ var IamUsers = (function (_super) {
             });
         });
     };
-    IamUsers.prototype.get = function (iamUserId) {
+    IamUsers.prototype.meta = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_2;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri('/meta');
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        return [4, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200)
+                            throw new IamUsersMetaFailed();
+                        return [2, {
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            }];
+                    case 2:
+                        error_2 = _a.sent();
+                        throw new IamUsersMetaFailed(error_2.message, { error: error_2 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    IamUsers.prototype.get = function (iamUserId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -75,8 +101,8 @@ var IamUsers = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_2 = _a.sent();
-                        throw new IamUserFetchFailed(error_2.message, { error: error_2 });
+                        error_3 = _a.sent();
+                        throw new IamUserFetchFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });
@@ -84,7 +110,7 @@ var IamUsers = (function (_super) {
     };
     IamUsers.prototype.put = function (iamUserId, iamUser) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_3;
+            var base, uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -105,8 +131,8 @@ var IamUsers = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_3 = _a.sent();
-                        throw new IamUserPutFailed(error_3.message, { error: error_3 });
+                        error_4 = _a.sent();
+                        throw new IamUserPutFailed(error_4.message, { error: error_4 });
                     case 4: return [2];
                 }
             });
@@ -114,7 +140,7 @@ var IamUsers = (function (_super) {
     };
     IamUsers.prototype.create = function (iamUser) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_4;
+            var base, uri, response, error_5;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -135,8 +161,8 @@ var IamUsers = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_4 = _a.sent();
-                        throw new IamUserCreationFailed(error_4.message, { error: error_4 });
+                        error_5 = _a.sent();
+                        throw new IamUserCreationFailed(error_5.message, { error: error_5 });
                     case 4: return [2];
                 }
             });
@@ -144,7 +170,7 @@ var IamUsers = (function (_super) {
     };
     IamUsers.prototype.delete = function (iamUserId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_5;
+            var base, uri, response, error_6;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -165,14 +191,14 @@ var IamUsers = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_5 = _a.sent();
-                        throw new IamUserDeleteFailed(error_5.message, { error: error_5 });
+                        error_6 = _a.sent();
+                        throw new IamUserDeleteFailed(error_6.message, { error: error_6 });
                     case 4: return [2];
                 }
             });
         });
     };
-    IamUsers.baseEndpoint = '/api/v0/iam/users';
+    IamUsers.baseEndpoint = '/api/v0/iam-users';
     return IamUsers;
 }(base_1.ThBaseHandler));
 exports.IamUsers = IamUsers;
@@ -189,6 +215,19 @@ var IamUsersFetchFailed = (function (_super) {
     return IamUsersFetchFailed;
 }(baseError_1.BaseError));
 exports.IamUsersFetchFailed = IamUsersFetchFailed;
+var IamUsersMetaFailed = (function (_super) {
+    tslib_1.__extends(IamUsersMetaFailed, _super);
+    function IamUsersMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch meta iam user'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'IamUsersMetaFailed';
+        Object.setPrototypeOf(_this, IamUsersFetchFailed.prototype);
+        return _this;
+    }
+    return IamUsersMetaFailed;
+}(baseError_1.BaseError));
+exports.IamUsersMetaFailed = IamUsersMetaFailed;
 var IamUserFetchFailed = (function (_super) {
     tslib_1.__extends(IamUserFetchFailed, _super);
     function IamUserFetchFailed(message, properties) {

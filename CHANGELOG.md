@@ -1,3 +1,12 @@
+# [4.170.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.169.0...v4.170.0) (2024-11-29)
+
+
+### Features
+
+* **iam-user:** add meta - UOD-999 ([3be34d4](https://github.com/tillhub/tillhub-sdk-javascript/commit/3be34d4e19e73d16cb2b10772d451c0e233cf967))
+* **iam-user:** fix test - UOD-999 ([564e283](https://github.com/tillhub/tillhub-sdk-javascript/commit/564e2839614e4dfb0d8d83ed2a5a10d99df8b9e7))
+* **meta:** add missing - UOD-999 ([577653e](https://github.com/tillhub/tillhub-sdk-javascript/commit/577653eb14844535fb97bfe91724d7c630d957aa))
+
 # [4.169.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.168.0...v4.169.0) (2024-11-28)
 
 
