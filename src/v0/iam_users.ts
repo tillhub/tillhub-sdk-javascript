@@ -57,7 +57,7 @@ export interface IamUsersQuery extends IamUser {
 }
 
 export class IamUsers extends ThBaseHandler {
-  public static baseEndpoint = '/api/v0/iam/users'
+  public static baseEndpoint = '/api/v0/iam-users'
   endpoint: string
   http: Client
   public options: IamUsersOptions
@@ -95,6 +95,24 @@ export class IamUsers extends ThBaseHandler {
       }
     } catch (error: any) {
       throw new IamUsersFetchFailed(error.message, { error })
+    }
+  }
+
+  async meta (query?: IamUsersQueryHandler | undefined): Promise<IamUsersResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/meta')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      const response = await this.http.getClient().get(uri)
+
+      if (response.status !== 200) throw new IamUsersMetaFailed()
+
+      return {
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new IamUsersMetaFailed(error.message, { error })
     }
   }
 
@@ -183,6 +201,17 @@ export class IamUsersFetchFailed extends BaseError {
   public name = 'IamUsersFetchFailed'
   constructor (
     public message: string = 'Could not fetch iam user',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, IamUsersFetchFailed.prototype)
+  }
+}
+
+export class IamUsersMetaFailed extends BaseError {
+  public name = 'IamUsersMetaFailed'
+  constructor (
+    public message: string = 'Could not fetch meta iam user',
     properties?: Record<string, unknown>
   ) {
     super(message, properties)

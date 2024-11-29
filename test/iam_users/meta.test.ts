@@ -5,23 +5,14 @@ import { v0 } from '../../src/tillhub-js'
 import { initThInstance } from '../util'
 dotenv.config()
 
-const legacyId = '45641'
+const legacyId = '4564'
 
 const mock = new MockAdapter(axios)
 afterEach(() => {
   mock.reset()
 })
 
-const iamUserId = '1234'
-
-const iamUser = {
-  firstName: 'Pepe',
-  lastName: 'Pipon',
-  email: 'pepe_pipon@unzer.com'
-
-}
-
-describe('v0: IamUsers: can update one user', () => {
+describe('v0: IamUsers: can get meta users', () => {
   it("Tillhub's iam users are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
@@ -37,26 +28,28 @@ describe('v0: IamUsers: can update one user', () => {
         ]
       })
 
-      mock.onPut(`https://api.tillhub.com/api/v0/iam-users/${legacyId}/${iamUserId}`).reply(() => {
-        return [
-          200,
-          {
-            count: 1,
-            results: [iamUser]
-          }
-        ]
-      })
+      mock
+        .onGet(`https://api.tillhub.com/api/v0/iam-users/${legacyId}/meta`)
+        .reply(() => {
+          return [
+            200,
+            {
+              count: 1,
+              results: [{}]
+            }
+          ]
+        })
     }
 
     const th = await initThInstance()
 
-    const iamUsers = th.iamUsers()
+    const IamUsers = th.iamUsers()
 
-    expect(iamUsers).toBeInstanceOf(v0.IamUsers)
+    expect(IamUsers).toBeInstanceOf(v0.IamUsers)
 
-    const { data } = await iamUsers.put(iamUserId, iamUser)
+    const { data } = await IamUsers.meta()
 
-    expect(data).toMatchObject(iamUser)
+    expect(Array.isArray(data)).toBe(true)
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -74,16 +67,18 @@ describe('v0: IamUsers: can update one user', () => {
         ]
       })
 
-      mock.onPut(`https://api.tillhub.com/api/v0/iam-users/${legacyId}/${iamUserId}`).reply(() => {
-        return [205]
-      })
+      mock
+        .onGet(`https://api.tillhub.com/api/v0/iam-users/${legacyId}/meta`)
+        .reply(() => {
+          return [205]
+        })
     }
 
     try {
       const th = await initThInstance()
-      await th.iamUsers().put(iamUserId, iamUser)
+      await th.iamUsers().meta()
     } catch (err: any) {
-      expect(err.name).toBe('IamUserPutFailed')
+      expect(err.name).toBe('IamUsersMetaFailed')
     }
   })
 })
