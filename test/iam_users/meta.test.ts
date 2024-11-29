@@ -76,7 +76,7 @@ describe('v0: IamUsers: can get meta users', () => {
 
     try {
       const th = await initThInstance()
-      await th.iamUsers().getAll()
+      await th.iamUsers().meta()
     } catch (err: any) {
       expect(err.name).toBe('IamUsersMetaFailed')
     }
