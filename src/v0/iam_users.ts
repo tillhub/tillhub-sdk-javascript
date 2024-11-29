@@ -100,7 +100,7 @@ export class IamUsers extends ThBaseHandler {
 
   async meta (query?: IamUsersQueryHandler | undefined): Promise<IamUsersResponse> {
     try {
-      const base = this.uriHelper.generateBaseUri()
+      const base = this.uriHelper.generateBaseUri('/meta')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri)
