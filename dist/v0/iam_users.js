@@ -67,7 +67,7 @@ var IamUsers = (function (_super) {
                         if (response.status !== 200)
                             throw new IamUsersMetaFailed();
                         return [2, {
-                                data: response.data.results,
+                                data: response.data.results[0],
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
