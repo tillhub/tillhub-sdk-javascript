@@ -49,7 +49,7 @@ describe('v0: IamUsers: can get meta users', () => {
 
     const { data } = await IamUsers.meta()
 
-    expect(Array.isArray(data)).toBe(true)
+    expect(Array.isArray(data)).toBe(false)
   })
 
   it('rejects on status codes that are not 200', async () => {

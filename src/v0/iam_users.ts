@@ -108,7 +108,7 @@ export class IamUsers extends ThBaseHandler {
       if (response.status !== 200) throw new IamUsersMetaFailed()
 
       return {
-        data: response.data.results,
+        data: response.data.results[0],
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
