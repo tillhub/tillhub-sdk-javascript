@@ -35,7 +35,7 @@ describe('v0: IamUser: can get one user', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/iam-users/${legacyId}/${iamUserId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/iam/users/${legacyId}/${iamUserId}`).reply(() => {
         return [
           200,
           {
@@ -86,7 +86,7 @@ describe('v0: IamUser: can get one user', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/iam-users/${legacyId}/${iamUserId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/iam/users/${legacyId}/${iamUserId}`).reply(() => {
         return [400]
       })
     }
