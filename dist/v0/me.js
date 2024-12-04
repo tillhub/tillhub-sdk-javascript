@@ -49,7 +49,7 @@ var Me = (function (_super) {
                             }];
                     case 3:
                         error_1 = _d.sent();
-                        throw new MeFetchFailed(((_c = (_b = error_1 === null || error_1 === void 0 ? void 0 : error_1.response) === null || _b === void 0 ? void 0 : _b.data) === null || _c === void 0 ? void 0 : _c.message) || error_1.message, { error: error_1 });
+                        throw new MeFetchFailed(((_c = (_b = error_1 === null || error_1 === void 0 ? void 0 : error_1.response) === null || _b === void 0 ? void 0 : _b.data) === null || _c === void 0 ? void 0 : _c.msg) || error_1.message, { error: error_1 });
                     case 4: return [2];
                 }
             });
