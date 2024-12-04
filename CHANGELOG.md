@@ -1,3 +1,10 @@
+# [4.172.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.171.0...v4.172.0) (2024-12-04)
+
+
+### Features
+
+* **me:** fix error msg - UOD-288 ([9e2392b](https://github.com/tillhub/tillhub-sdk-javascript/commit/9e2392b4b1a2714394e231fb4dd3595407e92e70))
+
 # [4.171.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.170.0...v4.171.0) (2024-12-02)
 
 

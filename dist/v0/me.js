@@ -21,24 +21,24 @@ var Me = (function (_super) {
         return _this;
     }
     Me.prototype.get = function (clientAccount) {
-        var _a;
+        var _a, _b, _c;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, headers, response, error_1;
-            return tslib_1.__generator(this, function (_b) {
-                switch (_b.label) {
+            return tslib_1.__generator(this, function (_d) {
+                switch (_d.label) {
                     case 0:
                         base = (_a = this.options.base) !== null && _a !== void 0 ? _a : 'https://api.tillhub.com';
                         uri = "" + base + this.endpoint;
-                        _b.label = 1;
+                        _d.label = 1;
                     case 1:
-                        _b.trys.push([1, 3, , 4]);
+                        _d.trys.push([1, 3, , 4]);
                         headers = {};
                         if (clientAccount !== undefined && clientAccount !== null) {
                             headers['x-client-account'] = clientAccount;
                         }
                         return [4, this.http.getClient().get(uri, { headers: headers })];
                     case 2:
-                        response = _b.sent();
+                        response = _d.sent();
                         if (response.status !== 200)
                             throw new MeFetchFailed(undefined, { status: response.status });
                         return [2, {
@@ -48,8 +48,8 @@ var Me = (function (_super) {
                                 errors: response.data.errors || []
                             }];
                     case 3:
-                        error_1 = _b.sent();
-                        throw new MeFetchFailed(error_1.message, { error: error_1 });
+                        error_1 = _d.sent();
+                        throw new MeFetchFailed(((_c = (_b = error_1 === null || error_1 === void 0 ? void 0 : error_1.response) === null || _b === void 0 ? void 0 : _b.data) === null || _c === void 0 ? void 0 : _c.message) || error_1.message, { error: error_1 });
                     case 4: return [2];
                 }
             });
