@@ -71,7 +71,7 @@ export class Me extends ThBaseHandler {
         errors: response.data.errors || []
       }
     } catch (error: any) {
-      throw new MeFetchFailed(error?.response?.data?.message || error.message, { error })
+      throw new MeFetchFailed(error?.response?.data?.msg || error.message, { error })
     }
   }
 }
