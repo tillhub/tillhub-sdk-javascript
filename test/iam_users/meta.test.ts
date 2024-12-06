@@ -29,7 +29,7 @@ describe('v0: IamUsers: can get meta users', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/iam-users/${legacyId}/meta`)
+        .onGet(`https://api.tillhub.com/api/v0/iam/users/${legacyId}/meta`)
         .reply(() => {
           return [
             200,
@@ -68,7 +68,7 @@ describe('v0: IamUsers: can get meta users', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/iam-users/${legacyId}/meta`)
+        .onGet(`https://api.tillhub.com/api/v0/iam/users/${legacyId}/meta`)
         .reply(() => {
           return [205]
         })
