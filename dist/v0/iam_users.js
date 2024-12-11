@@ -198,7 +198,7 @@ var IamUsers = (function (_super) {
             });
         });
     };
-    IamUsers.baseEndpoint = '/api/v0/iam-users';
+    IamUsers.baseEndpoint = '/api/v0/iam/users';
     return IamUsers;
 }(base_1.ThBaseHandler));
 exports.IamUsers = IamUsers;
