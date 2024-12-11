@@ -57,7 +57,7 @@ export interface IamUsersQuery extends IamUser {
 }
 
 export class IamUsers extends ThBaseHandler {
-  public static baseEndpoint = '/api/v0/iam-users'
+  public static baseEndpoint = '/api/v0/iam/users'
   endpoint: string
   http: Client
   public options: IamUsersOptions

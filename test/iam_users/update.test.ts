@@ -37,7 +37,7 @@ describe('v0: IamUsers: can update one user', () => {
         ]
       })
 
-      mock.onPut(`https://api.tillhub.com/api/v0/iam-users/${legacyId}/${iamUserId}`).reply(() => {
+      mock.onPut(`https://api.tillhub.com/api/v0/iam/users/${legacyId}/${iamUserId}`).reply(() => {
         return [
           200,
           {
@@ -74,7 +74,7 @@ describe('v0: IamUsers: can update one user', () => {
         ]
       })
 
-      mock.onPut(`https://api.tillhub.com/api/v0/iam-users/${legacyId}/${iamUserId}`).reply(() => {
+      mock.onPut(`https://api.tillhub.com/api/v0/iam/users/${legacyId}/${iamUserId}`).reply(() => {
         return [205]
       })
     }
