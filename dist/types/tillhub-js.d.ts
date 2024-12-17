@@ -44,6 +44,7 @@ export declare class TillhubClient extends events.EventEmitter {
     private generateAuthenticatedInstance;
     taxes(): v0.Taxes;
     products(): v1.Products;
+    productsV2(): v2.Products;
     productsV4(): v4.Products;
     productGroups(): v0.ProductGroups;
     productTemplates(): v0.ProductTemplates;

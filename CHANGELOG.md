@@ -1,3 +1,10 @@
+# [4.175.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.174.0...v4.175.0) (2024-12-17)
+
+
+### Features
+
+* **products:** add v2 interface with bulk import method (UNTIL 12640) ([#618](https://github.com/tillhub/tillhub-sdk-javascript/issues/618)) ([20ebb3f](https://github.com/tillhub/tillhub-sdk-javascript/commit/20ebb3f68cb6419e24713d09d84433f432ea0c9e))
+
 # [4.174.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.173.0...v4.174.0) (2024-12-11)
 
 
