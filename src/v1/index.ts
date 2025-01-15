@@ -22,6 +22,7 @@ import { Promotions } from './promotions'
 import { AppointmentReminders } from './appointment_reminders'
 import { AppointmentReminderTemplates } from './appointment-reminder-templates'
 import { TableLayouts } from './table-layouts'
+import { Devices } from './devices'
 
 export {
   Auth,
@@ -48,7 +49,8 @@ export {
   Promotions,
   AppointmentReminders,
   AppointmentReminderTemplates,
-  TableLayouts
+  TableLayouts,
+  Devices
 }
 
 export interface AnalyticsHandlersV1Types {
