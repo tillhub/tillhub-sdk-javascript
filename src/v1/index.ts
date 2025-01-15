@@ -21,6 +21,7 @@ import { NotificationsUnsubscribe } from './notifications-unsubscribe'
 import { Promotions } from './promotions'
 import { AppointmentReminders } from './appointment_reminders'
 import { AppointmentReminderTemplates } from './appointment-reminder-templates'
+import { Devices } from './devices'
 
 export {
   Auth,
@@ -46,7 +47,8 @@ export {
   NotificationsUnsubscribe,
   Promotions,
   AppointmentReminders,
-  AppointmentReminderTemplates
+  AppointmentReminderTemplates,
+  Devices
 }
 
 export interface AnalyticsHandlersV1Types {
