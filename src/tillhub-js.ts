@@ -1392,6 +1392,14 @@ export class TillhubClient extends events.EventEmitter {
   appointmentReminders (): v1.AppointmentReminders {
     return this.generateAuthenticatedInstance(v1.AppointmentReminders)
   }
+
+  /**
+   * TableLayouts v1
+   *
+   */
+  tableLayouts (): v1.TableLayouts {
+    return this.generateAuthenticatedInstance(v1.TableLayouts)
+  }
 }
 
 export class Tillhub extends TillhubClient {
