@@ -611,6 +611,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.appointmentReminders = function () {
         return this.generateAuthenticatedInstance(v1.AppointmentReminders);
     };
+    TillhubClient.prototype.tableLayouts = function () {
+        return this.generateAuthenticatedInstance(v1.TableLayouts);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));

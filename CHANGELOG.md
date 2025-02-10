@@ -1,3 +1,10 @@
+# [4.176.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.175.0...v4.176.0) (2025-02-10)
+
+
+### Features
+
+* **table_layouts:** add v1 instance (UNTIL 12921) ([#621](https://github.com/tillhub/tillhub-sdk-javascript/issues/621)) ([697ee7e](https://github.com/tillhub/tillhub-sdk-javascript/commit/697ee7e4b5edc23b51f4fb6944d4c91cc87ff4db))
+
 # [4.175.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.174.0...v4.175.0) (2024-12-17)
 
 
