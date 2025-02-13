@@ -1400,6 +1400,14 @@ export class TillhubClient extends events.EventEmitter {
   tableLayouts (): v1.TableLayouts {
     return this.generateAuthenticatedInstance(v1.TableLayouts)
   }
+
+  /**
+   * Devices <v1></v1>
+   *
+   */
+  devicesV1 (): v1.Devices {
+    return this.generateAuthenticatedInstance(v1.Devices)
+  }
 }
 
 export class Tillhub extends TillhubClient {
