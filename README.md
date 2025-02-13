@@ -52,6 +52,18 @@ import Auth from '@tillhub/javascript-sdk/dist/lib/Auth'
 - `npm run lint`: Lints code
 - `npm run commit`: Commit using conventional commit style ([husky](https://github.com/typicode/husky) will tell you to use it if you haven't :wink:)
 
+## Installation on mac
+
+If you encounter an error installing the project on macOS, this section is for you.
+Error: Cannot find module 'node-darwin-arm64/package.json'
+
+Then nothing to worry, this happens when one try to install an x86_64 app on a arch64 system. There are a few solutions: 
+* Duplicate your terminal app and force run it with rosetta (using get info button). And then you can run your x86_64 app.
+* Also we can add an architecture to node, to add x86 use “arch -x86_64 [cmd]”. 
+* Also note that node 16+ works natively on arm processor. 
+
+Helpful links:  https://stackoverflow.com/a/67907214
+
 ### Utilities
 
 **TODO:** The SDK will rely on inherited base handlers as utilities.
