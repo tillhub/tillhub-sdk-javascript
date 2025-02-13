@@ -614,6 +614,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.tableLayouts = function () {
         return this.generateAuthenticatedInstance(v1.TableLayouts);
     };
+    TillhubClient.prototype.devicesV1 = function () {
+        return this.generateAuthenticatedInstance(v1.Devices);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));

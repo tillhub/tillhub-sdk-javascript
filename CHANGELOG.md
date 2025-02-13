@@ -1,3 +1,10 @@
+# [4.177.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.176.0...v4.177.0) (2025-02-13)
+
+
+### Features
+
+* **devices:** add v1 interface (UNTIL 12951) ([#620](https://github.com/tillhub/tillhub-sdk-javascript/issues/620)) ([5d3e7f8](https://github.com/tillhub/tillhub-sdk-javascript/commit/5d3e7f885f5bc3d960c1d231990c0b7e2dfda6e0))
+
 # [4.176.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.175.0...v4.176.0) (2025-02-10)
 
 
