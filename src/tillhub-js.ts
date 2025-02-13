@@ -350,6 +350,38 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated configurations instance
+   *
+   */
+  iamUserGroups (): v0.IamUserGroups {
+    return this.generateAuthenticatedInstance(v0.IamUserGroups)
+  }
+
+  /**
+   * Create an authenticated configurations instance
+   *
+   */
+  iamRoles (): v0.IamRoles {
+    return this.generateAuthenticatedInstance(v0.IamRoles)
+  }
+
+  /**
+   * Create an authenticated configurations instance
+   *
+   */
+  iamPermissions (): v0.IamPermissions {
+    return this.generateAuthenticatedInstance(v0.IamPermissions)
+  }
+
+  /**
+   * Create an authenticated configurations instance
+   *
+   */
+  iamMeClass (): v0.IamMeClass {
+    return this.generateAuthenticatedInstance(v0.IamMeClass)
+  }
+
+  /**
    * Create an authenticated branches instance
    *
    */

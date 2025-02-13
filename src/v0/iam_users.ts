@@ -41,6 +41,7 @@ export interface IamUser {
   firstName?: string
   lastName?: string
   attributes?: Record<string, unknown>
+  groups?: string[]
 }
 
 export interface IamUsersQueryHandler {
