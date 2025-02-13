@@ -170,6 +170,18 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.iamUsers = function () {
         return this.generateAuthenticatedInstance(v0.IamUsers);
     };
+    TillhubClient.prototype.iamUserGroups = function () {
+        return this.generateAuthenticatedInstance(v0.IamUserGroups);
+    };
+    TillhubClient.prototype.iamRoles = function () {
+        return this.generateAuthenticatedInstance(v0.IamRoles);
+    };
+    TillhubClient.prototype.iamPermissions = function () {
+        return this.generateAuthenticatedInstance(v0.IamPermissions);
+    };
+    TillhubClient.prototype.iamMeClass = function () {
+        return this.generateAuthenticatedInstance(v0.IamMeClass);
+    };
     TillhubClient.prototype.branches = function () {
         return this.generateAuthenticatedInstance(v0.Branches);
     };

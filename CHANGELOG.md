@@ -1,3 +1,10 @@
+# [4.178.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.177.0...v4.178.0) (2025-02-13)
+
+
+### Features
+
+* **iam:** add new endpoints - UOD-1132 ([f089053](https://github.com/tillhub/tillhub-sdk-javascript/commit/f089053a5f7e37d9e464e2ab74bbdec1aaecbd92))
+
 # [4.177.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.176.0...v4.177.0) (2025-02-13)
 
 
