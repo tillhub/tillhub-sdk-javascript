@@ -1,3 +1,10 @@
+# [4.179.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.178.0...v4.179.0) (2025-02-17)
+
+
+### Features
+
+* **readme:** Adding instructions for error resolution on arch64 ([#625](https://github.com/tillhub/tillhub-sdk-javascript/issues/625)) ([adb966d](https://github.com/tillhub/tillhub-sdk-javascript/commit/adb966d81574acddafc470a99206404645059fc3))
+
 # [4.178.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.177.0...v4.178.0) (2025-02-13)
 
 
