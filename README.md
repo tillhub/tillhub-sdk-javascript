@@ -41,7 +41,6 @@ Additionally, you can import the transpiled modules from `dist/lib` in case you 
 import Auth from '@tillhub/javascript-sdk/dist/lib/Auth'
 ```
 
-
 ## Development
 
 - `npm t`: Run test suite
@@ -51,6 +50,20 @@ import Auth from '@tillhub/javascript-sdk/dist/lib/Auth'
 - `npm run build`: Generate bundles and typings, create docs
 - `npm run lint`: Lints code
 - `npm run commit`: Commit using conventional commit style ([husky](https://github.com/typicode/husky) will tell you to use it if you haven't :wink:)
+
+### Troubleshooting Installation Errors on macOS
+
+If you encounter an error while installing the project on macOS, this section is just for you.
+
+Error: `Cannot find module 'node-darwin-arm64/package.json'`
+
+No need to worry—this happens when installing an x86_64 application on an ARM64 system. Here are a few solutions:
+
+- **Run with Rosetta**: Duplicate your Terminal app, right-click it, select Get Info, and check “Open using Rosetta”. This allows you to run x86_64 applications.
+- **Use x86 architecture for Node**: You can prepend your command with `arch -x86_64 [cmd]` to run it in x86 mode.
+- **Consider using Node 16+**: Node.js 16 and later versions run natively on ARM processors, which might resolve the issue without additional steps.
+
+For more information see: https://stackoverflow.com/a/67907214
 
 ### Utilities
 
