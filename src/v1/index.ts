@@ -56,6 +56,7 @@ export {
 export interface AnalyticsHandlersV1Types {
   analytics: {
     reports: {
+      AnalyticsReportsInventory: any
       AnalyticsReportsCustomers: any
       AnalyticsReportsPayments: any
       AnalyticsReportsVouchers: any
