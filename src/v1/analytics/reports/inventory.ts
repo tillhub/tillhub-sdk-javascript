@@ -45,7 +45,7 @@ export class AnalyticsReportsInventory extends ThAnalyticsBaseHandler {
   ): Promise<AnalyticsReportsInventoryResponseItem> {
     try {
       let nextFn
-      const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
+      const localUriHelper = new UriHelper('/api/v1/analytics', this.options)
       const uri = localUriHelper.generateBaseUri('/reports/inventory')
       const { results: d, next } = await this.handleGet(uri, query, { timeout: this.timeout })
 
@@ -54,11 +54,11 @@ export class AnalyticsReportsInventory extends ThAnalyticsBaseHandler {
       }
 
       const data = d?.find(
-        (item: ThAnalyticsBaseResultItem) => item.metric.job === 'reports_inventory_items_v2_data'
+        (item: ThAnalyticsBaseResultItem) => item.metric.job === 'reports_inventory'
       )?.values ?? []
 
       const summary = d?.find(
-        (item: ThAnalyticsBaseResultItem) => item.metric.job === 'reports_inventory_items_v2_summary'
+        (item: ThAnalyticsBaseResultItem) => item.metric.job === 'reports_inventory_summary'
       )?.values ?? []
 
       if (next) {
@@ -81,7 +81,7 @@ export class AnalyticsReportsInventory extends ThAnalyticsBaseHandler {
     query?: Record<string, unknown>
   ): Promise<AnalyticsReportsInventoryExportResponseItem> {
     try {
-      const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
+      const localUriHelper = new UriHelper('/api/v1/analytics', this.options)
       const uri = localUriHelper.generateBaseUri('/reports/inventory')
       const result = await this.handleExport(uri, query)
 
