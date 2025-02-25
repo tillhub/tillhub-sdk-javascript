@@ -77,19 +77,6 @@ export class AnalyticsReportsInventory extends ThAnalyticsBaseHandler {
     }
   }
 
-  public async export (
-    query?: Record<string, unknown>
-  ): Promise<AnalyticsReportsInventoryExportResponseItem> {
-    try {
-      const localUriHelper = new UriHelper('/api/v1/analytics', this.options)
-      const uri = localUriHelper.generateBaseUri('/reports/inventory')
-      const result = await this.handleExport(uri, query)
-
-      return result
-    } catch (error: any) {
-      throw new AnalyticsReportsInventoryExportFetchError(error.message, { error })
-    }
-  }
 }
 
 export class AnalyticsReportsInventoryFetchError extends BaseError {
