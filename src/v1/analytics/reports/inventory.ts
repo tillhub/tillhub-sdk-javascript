@@ -11,7 +11,7 @@ import { AnalyticsOptions } from '../../../v0/analytics'
 export interface AnalyticsReportsInventoryResponseItem {
   data: Array<Record<string, unknown>>
   summary: Array<Record<string, unknown>>
-  metaData: {
+  metadata: {
     count?: number
     total_count?: number
   }
@@ -61,17 +61,24 @@ export class AnalyticsReportsInventory extends ThAnalyticsBaseHandler {
         (item: ThAnalyticsBaseResultItem) => item.metric.job === 'reports_inventory_summary'
       )?.values ?? []
 
+      const count = d?.find(
+        (item: ThAnalyticsBaseResultItem) =>
+          item.metric.job === 'reports_inventory_filtered_meta'
+      )?.values[0] ?? {}
+
       if (next) {
         nextFn = (): Promise<AnalyticsReportsInventoryResponseItem> =>
           this.getAll({ uri: next })
       }
-
-      return {
+     
+      let output = {
         data: data,
         summary: summary,
-        metaData: {},
+        metadata: count,
         next: nextFn
       }
+      console.log('output: ', output);
+      return output
     } catch (error: any) {
       throw new AnalyticsReportsInventoryFetchError(error.message, { error })
     }

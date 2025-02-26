@@ -80,12 +80,11 @@ describe('v1: AnalyticsReportsInventory', () => {
 
     expect(analyticsReportsInventory).toBeInstanceOf(v1.analytics.reports.AnalyticsReportsInventory)
 
-    const { data, metaData, next } = await analyticsReportsInventory.getAll()
+    const { data, metadata, next } = await analyticsReportsInventory.getAll()
 
     expect(Array.isArray(data)).toBe(true)
     expect(data).toEqual(dataItems)
-    // expect(metaData.count).toEqual(countFiltered)
-    // expect(metaData.total_count).toEqual(countTotal)
+    expect(metadata.count).toEqual(dataItems.length)
 
     // Also able to paginate
     expect(typeof next).toBe('function')
