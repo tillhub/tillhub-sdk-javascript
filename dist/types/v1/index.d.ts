@@ -27,6 +27,7 @@ export { Auth, Pricebooks, Products, Templates, Transactions, TransactionsLegacy
 export interface AnalyticsHandlersV1Types {
     analytics: {
         reports: {
+            AnalyticsReportsInventory: any;
             AnalyticsReportsCustomers: any;
             AnalyticsReportsPayments: any;
             AnalyticsReportsVouchers: any;

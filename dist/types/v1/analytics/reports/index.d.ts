@@ -7,6 +7,7 @@ import { AnalyticsReportsProductGroups } from './product_groups';
 import { AnalyticsReportsPaymentOptions } from './payment_options';
 import { AnalyticsReportsStockTakings } from './stock_takings';
 import { AnalyticsReportsProcesses } from './processes';
+import { AnalyticsReportsInventory } from './inventory';
 declare const _default: {
     AnalyticsReportsCustomers: typeof AnalyticsReportsCustomers;
     AnalyticsReportsPayments: typeof AnalyticsReportsPayments;
@@ -17,5 +18,6 @@ declare const _default: {
     AnalyticsReportsPaymentOptions: typeof AnalyticsReportsPaymentOptions;
     AnalyticsReportsStockTakings: typeof AnalyticsReportsStockTakings;
     AnalyticsReportsProcesses: typeof AnalyticsReportsProcesses;
+    AnalyticsReportsInventory: typeof AnalyticsReportsInventory;
 };
 export default _default;

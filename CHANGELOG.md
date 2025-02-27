@@ -1,3 +1,10 @@
+# [4.180.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.179.0...v4.180.0) (2025-02-27)
+
+
+### Features
+
+* **inventory:** Add inventory methods ([#626](https://github.com/tillhub/tillhub-sdk-javascript/issues/626)) ([dacf278](https://github.com/tillhub/tillhub-sdk-javascript/commit/dacf2789f5315c19fa760eb8a94fd970eb5ad90d))
+
 # [4.179.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.178.0...v4.179.0) (2025-02-17)
 
 
