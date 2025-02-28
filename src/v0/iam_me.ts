@@ -53,8 +53,8 @@ export class IamMeClass extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async get (): Promise<IamMeResponse> {
-    const base = this.uriHelper.generateBaseUri()
+  async get (tenantId: string): Promise<IamMeResponse> {
+    const base = this.uriHelper.generateBaseUri(`/${tenantId}`)
     const uri = this.uriHelper.generateUriWithQuery(base)
 
     try {
