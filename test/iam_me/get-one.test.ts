@@ -67,7 +67,7 @@ describe('v0: IamMeClass: can get me', () => {
 
     expect(iamMeClass).toBeInstanceOf(v0.IamMeClass)
 
-    const { data } = await iamMeClass.get(tenantId)
+    const { data } = await iamMeClass.get(legacyId)
 
     expect(data).toEqual({ name })
   })
@@ -109,7 +109,7 @@ describe('v0: IamMeClass: can get me', () => {
     })
 
     try {
-      await th.iamMeClass().get(tenantId)
+      await th.iamMeClass().get(legacyId)
     } catch (err: any) {
       expect(err.name).toBe('IamMeFetchFailed')
     }

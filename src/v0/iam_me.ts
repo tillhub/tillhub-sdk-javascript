@@ -54,7 +54,8 @@ export class IamMeClass extends ThBaseHandler {
   }
 
   async get (tenantId: string): Promise<IamMeResponse> {
-    const uri = this.uriHelper.generateBaseUri(`/${tenantId}`)
+    const base = this.uriHelper.generateBaseUri(`/${tenantId}`)
+    const uri = this.uriHelper.generateUriWithQuery(base)
 
     try {
       const response = await this.http.getClient().get(uri)
