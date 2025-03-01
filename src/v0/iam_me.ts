@@ -53,9 +53,8 @@ export class IamMeClass extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async get (): Promise<IamMeResponse> {
-    const base = this.uriHelper.generateBaseUri()
-    const uri = this.uriHelper.generateUriWithQuery(base)
+  async get (tenantId: string): Promise<IamMeResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${tenantId}`)
 
     try {
       const response = await this.http.getClient().get(uri)
@@ -66,7 +65,8 @@ export class IamMeClass extends ThBaseHandler {
       return {
         data: response.data.results[0] as IamMe,
         msg: response.data.msg,
-        metadata: { count: response.data.count }
+        metadata: { count: response.data.count },
+        errors: response.data.errors || []
       }
     } catch (error: any) {
       throw new IamMeFetchFailed(error.message, { error })

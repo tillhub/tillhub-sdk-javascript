@@ -13,6 +13,7 @@ const user = {
 
 const legacyId = '4564'
 const name = 'abc123'
+const tenantId = 'abc12345'
 
 const mock = new MockAdapter(axios)
 afterEach(() => {
@@ -35,7 +36,7 @@ describe('v0: IamMeClass: can get me', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/iam/me/${legacyId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/iam/me/${legacyId}/${tenantId}`).reply(() => {
         return [
           200,
           {
@@ -66,7 +67,7 @@ describe('v0: IamMeClass: can get me', () => {
 
     expect(iamMeClass).toBeInstanceOf(v0.IamMeClass)
 
-    const { data } = await iamMeClass.get()
+    const { data } = await iamMeClass.get(tenantId)
 
     expect(data).toEqual({ name })
   })
@@ -86,7 +87,7 @@ describe('v0: IamMeClass: can get me', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/iam/me/${legacyId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/iam/me/${legacyId}/${tenantId}`).reply(() => {
         return [400]
       })
     }
@@ -108,7 +109,7 @@ describe('v0: IamMeClass: can get me', () => {
     })
 
     try {
-      await th.iamMeClass().get()
+      await th.iamMeClass().get(tenantId)
     } catch (err: any) {
       expect(err.name).toBe('IamMeFetchFailed')
     }
