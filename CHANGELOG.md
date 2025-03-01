@@ -1,3 +1,10 @@
+# [4.181.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.180.0...v4.181.0) (2025-03-01)
+
+
+### Features
+
+* **iam_me:** update get me parameter ([#627](https://github.com/tillhub/tillhub-sdk-javascript/issues/627)) ([0b0b6eb](https://github.com/tillhub/tillhub-sdk-javascript/commit/0b0b6eb83a3fd5e820dfbf581132eb60c904024f))
+
 # [4.180.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.179.0...v4.180.0) (2025-02-27)
 
 

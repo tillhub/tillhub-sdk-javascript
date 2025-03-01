@@ -37,7 +37,7 @@ export declare class IamMeClass extends ThBaseHandler {
     options: IamMeClassOptions;
     uriHelper: UriHelper;
     constructor(options: IamMeClassOptions, http: Client);
-    get(): Promise<IamMeResponse>;
+    get(tenantId: string): Promise<IamMeResponse>;
 }
 export declare class IamMeFetchFailed extends BaseError {
     message: string;

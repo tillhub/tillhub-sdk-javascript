@@ -17,14 +17,13 @@ var IamMeClass = (function (_super) {
         _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
         return _this;
     }
-    IamMeClass.prototype.get = function () {
+    IamMeClass.prototype.get = function (tenantId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_1;
+            var uri, response, error_1;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        base = this.uriHelper.generateBaseUri();
-                        uri = this.uriHelper.generateUriWithQuery(base);
+                        uri = this.uriHelper.generateBaseUri("/" + tenantId);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -37,7 +36,8 @@ var IamMeClass = (function (_super) {
                         return [2, {
                                 data: response.data.results[0],
                                 msg: response.data.msg,
-                                metadata: { count: response.data.count }
+                                metadata: { count: response.data.count },
+                                errors: response.data.errors || []
                             }];
                     case 3:
                         error_1 = _a.sent();
