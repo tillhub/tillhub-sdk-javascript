@@ -18,18 +18,20 @@ var IamMeClass = (function (_super) {
         return _this;
     }
     IamMeClass.prototype.get = function (tenantId) {
+        var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_1;
-            return tslib_1.__generator(this, function (_a) {
-                switch (_a.label) {
+            var base, uri, response, error_1;
+            return tslib_1.__generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
-                        uri = this.uriHelper.generateBaseUri("/" + tenantId);
-                        _a.label = 1;
+                        base = (_a = this.options.base) !== null && _a !== void 0 ? _a : 'https://api.tillhub.com';
+                        uri = "" + base + this.endpoint + "/" + tenantId;
+                        _b.label = 1;
                     case 1:
-                        _a.trys.push([1, 3, , 4]);
+                        _b.trys.push([1, 3, , 4]);
                         return [4, this.http.getClient().get(uri)];
                     case 2:
-                        response = _a.sent();
+                        response = _b.sent();
                         if (response.status !== 200) {
                             throw new IamMeFetchFailed(undefined, { status: response.status });
                         }
@@ -40,7 +42,7 @@ var IamMeClass = (function (_super) {
                                 errors: response.data.errors || []
                             }];
                     case 3:
-                        error_1 = _a.sent();
+                        error_1 = _b.sent();
                         throw new IamMeFetchFailed(error_1.message, { error: error_1 });
                     case 4: return [2];
                 }

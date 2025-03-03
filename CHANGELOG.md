@@ -1,3 +1,10 @@
+# [4.182.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.181.0...v4.182.0) (2025-03-03)
+
+
+### Features
+
+* **iamme:** comment added ([#629](https://github.com/tillhub/tillhub-sdk-javascript/issues/629)) ([aebd01c](https://github.com/tillhub/tillhub-sdk-javascript/commit/aebd01c291b3b43430746fdb38b8f4fa6c6b5fc4))
+
 # [4.181.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.180.0...v4.181.0) (2025-03-01)
 
 
