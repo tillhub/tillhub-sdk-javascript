@@ -54,6 +54,7 @@ export class IamMeClass extends ThBaseHandler {
   }
 
   async get (tenantId: string): Promise<IamMeResponse> {
+    // We dont need to pass the legacyId with the base URL.
     const base = this.options.base ?? 'https://api.tillhub.com'
     const uri = `${base}${this.endpoint}/${tenantId}`
 
