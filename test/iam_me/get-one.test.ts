@@ -36,7 +36,7 @@ describe('v0: IamMeClass: can get me', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/iam/me/${legacyId}/${tenantId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/iam/me/${tenantId}`).reply(() => {
         return [
           200,
           {
@@ -87,7 +87,7 @@ describe('v0: IamMeClass: can get me', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/iam/me/${legacyId}/${tenantId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/iam/me/${tenantId}`).reply(() => {
         return [400]
       })
     }

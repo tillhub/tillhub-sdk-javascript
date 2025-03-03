@@ -54,7 +54,8 @@ export class IamMeClass extends ThBaseHandler {
   }
 
   async get (tenantId: string): Promise<IamMeResponse> {
-    const uri = this.uriHelper.generateBaseUri(`/${tenantId}`)
+    const base = this.options.base ?? 'https://api.tillhub.com'
+    const uri = `${base}${this.endpoint}/${tenantId}`
 
     try {
       const response = await this.http.getClient().get(uri)
