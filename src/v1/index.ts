@@ -24,6 +24,7 @@ import { AppointmentReminderTemplates } from './appointment-reminder-templates'
 import { TableLayouts } from './table-layouts'
 import { Devices } from './devices'
 import { Contents } from './contents'
+import { ContentTemplates } from './content-templates'
 
 export {
   Auth,
@@ -52,7 +53,8 @@ export {
   AppointmentReminderTemplates,
   TableLayouts,
   Devices,
-  Contents
+  Contents,
+  ContentTemplates
 }
 
 export interface AnalyticsHandlersV1Types {
