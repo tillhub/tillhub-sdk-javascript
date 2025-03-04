@@ -1438,11 +1438,19 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
-   * Devices <v1></v1>
+   * Devices v1
    *
    */
   devicesV1 (): v1.Devices {
     return this.generateAuthenticatedInstance(v1.Devices)
+  }
+
+  /**
+   * Contents v1
+   *
+   */
+  contentsV1 (): v1.Contents {
+    return this.generateAuthenticatedInstance(v1.Contents)
   }
 }
 
