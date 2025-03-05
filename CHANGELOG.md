@@ -1,3 +1,10 @@
+# [4.183.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.182.0...v4.183.0) (2025-03-05)
+
+
+### Features
+
+* **contents_v1:** add contents v1 instance (UNTIL 13250) ([#630](https://github.com/tillhub/tillhub-sdk-javascript/issues/630)) ([0c1a3e1](https://github.com/tillhub/tillhub-sdk-javascript/commit/0c1a3e1eee5ecf6aa06efe5d30a5f626dc7cccad))
+
 # [4.182.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.181.0...v4.182.0) (2025-03-03)
 
 

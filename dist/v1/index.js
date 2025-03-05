@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Devices = exports.TableLayouts = exports.AppointmentReminderTemplates = exports.AppointmentReminders = exports.Promotions = exports.NotificationsUnsubscribe = exports.NotificationsMsu = exports.Configurations = exports.Branches = exports.AuditLogs = exports.analytics = exports.StocksBook = exports.ExportsV1 = exports.SafesLogBook = exports.Tags = exports.Carts = exports.Customers = exports.Vouchers = exports.Balances = exports.Registers = exports.TransactionsLegacy = exports.Transactions = exports.Templates = exports.Products = exports.Pricebooks = exports.Auth = void 0;
+exports.Contents = exports.Devices = exports.TableLayouts = exports.AppointmentReminderTemplates = exports.AppointmentReminders = exports.Promotions = exports.NotificationsUnsubscribe = exports.NotificationsMsu = exports.Configurations = exports.Branches = exports.AuditLogs = exports.analytics = exports.StocksBook = exports.ExportsV1 = exports.SafesLogBook = exports.Tags = exports.Carts = exports.Customers = exports.Vouchers = exports.Balances = exports.Registers = exports.TransactionsLegacy = exports.Transactions = exports.Templates = exports.Products = exports.Pricebooks = exports.Auth = void 0;
 var tslib_1 = require("tslib");
 var auth_1 = require("./auth");
 Object.defineProperty(exports, "Auth", { enumerable: true, get: function () { return auth_1.Auth; } });
@@ -53,4 +53,6 @@ var table_layouts_1 = require("./table-layouts");
 Object.defineProperty(exports, "TableLayouts", { enumerable: true, get: function () { return table_layouts_1.TableLayouts; } });
 var devices_1 = require("./devices");
 Object.defineProperty(exports, "Devices", { enumerable: true, get: function () { return devices_1.Devices; } });
+var contents_1 = require("./contents");
+Object.defineProperty(exports, "Contents", { enumerable: true, get: function () { return contents_1.Contents; } });
 //# sourceMappingURL=index.js.map

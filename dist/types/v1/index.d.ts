@@ -23,7 +23,8 @@ import { AppointmentReminders } from './appointment_reminders';
 import { AppointmentReminderTemplates } from './appointment-reminder-templates';
 import { TableLayouts } from './table-layouts';
 import { Devices } from './devices';
-export { Auth, Pricebooks, Products, Templates, Transactions, TransactionsLegacy, Registers, Balances, Vouchers, Customers, Carts, Tags, SafesLogBook, ExportsV1, StocksBook, analytics, AuditLogs, Branches, Configurations, NotificationsMsu, NotificationsUnsubscribe, Promotions, AppointmentReminders, AppointmentReminderTemplates, TableLayouts, Devices };
+import { Contents } from './contents';
+export { Auth, Pricebooks, Products, Templates, Transactions, TransactionsLegacy, Registers, Balances, Vouchers, Customers, Carts, Tags, SafesLogBook, ExportsV1, StocksBook, analytics, AuditLogs, Branches, Configurations, NotificationsMsu, NotificationsUnsubscribe, Promotions, AppointmentReminders, AppointmentReminderTemplates, TableLayouts, Devices, Contents };
 export interface AnalyticsHandlersV1Types {
     analytics: {
         reports: {
