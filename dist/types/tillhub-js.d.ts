@@ -164,6 +164,7 @@ export declare class TillhubClient extends events.EventEmitter {
     tableLayouts(): v1.TableLayouts;
     devicesV1(): v1.Devices;
     contentsV1(): v1.Contents;
+    contentTemplatesV1(): v1.ContentTemplates;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;
