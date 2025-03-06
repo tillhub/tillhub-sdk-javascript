@@ -174,7 +174,7 @@ export class ContentTemplates extends ThBaseHandler {
   async delete (templateId: string): Promise<ContentTemplateResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${templateId}`)
     try {
-      const response = await this.http.getClient().patch(uri, { deleted: true, active: false })
+      const response = await this.http.getClient().delete(uri)
       if (response.status !== 200) throw new ContentTemplateDeleteFailed()
 
       return {

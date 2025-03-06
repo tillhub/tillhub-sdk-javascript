@@ -13,13 +13,11 @@ afterEach(() => {
 })
 
 const templateId = 'asdf5566'
-const updateObject = {
-  deleted: true,
-  active: false
-}
 
 describe('v1: Contents Templates: can delete the templates', () => {
   it("Tillhub's contents templates are instantiable", async () => {
+    const successMsg = 'Deleted'
+
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
@@ -35,13 +33,14 @@ describe('v1: Contents Templates: can delete the templates', () => {
       })
 
       mock
-        .onPatch(`https://api.tillhub.com/api/v1/content_templates/${legacyId}/${templateId}`)
+        .onDelete(`https://api.tillhub.com/api/v1/content_templates/${legacyId}/${templateId}`)
         .reply(() => {
           return [
             200,
             {
               count: 1,
-              results: [updateObject]
+              results: [],
+              msg: successMsg
             }
           ]
         })
@@ -53,9 +52,9 @@ describe('v1: Contents Templates: can delete the templates', () => {
 
     expect(contentTemplates).toBeInstanceOf(v1.ContentTemplates)
 
-    const { data } = await contentTemplates.delete(templateId)
+    const { msg } = await contentTemplates.delete(templateId)
 
-    expect(data).toMatchObject(updateObject)
+    expect(msg).toEqual(successMsg)
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -73,7 +72,7 @@ describe('v1: Contents Templates: can delete the templates', () => {
         ]
       })
       mock
-        .onPatch(`https://api.tillhub.com/api/v1/content_templates/${legacyId}/${templateId}`)
+        .onDelete(`https://api.tillhub.com/api/v1/content_templates/${legacyId}/${templateId}`)
         .reply(() => {
           return [205]
         })
