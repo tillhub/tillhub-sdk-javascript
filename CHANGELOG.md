@@ -1,3 +1,10 @@
+## [4.184.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.184.0...v4.184.1) (2025-03-06)
+
+
+### Bug Fixes
+
+* **content_templates_v1:** fix wrong endpoint for delete (UNTIL 13251) ([#632](https://github.com/tillhub/tillhub-sdk-javascript/issues/632)) ([ea26c86](https://github.com/tillhub/tillhub-sdk-javascript/commit/ea26c86f766933eb01d52965a378e21427c94fc7))
+
 # [4.184.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.183.0...v4.184.0) (2025-03-05)
 
 

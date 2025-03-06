@@ -176,7 +176,7 @@ var ContentTemplates = (function (_super) {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.http.getClient().patch(uri, { deleted: true, active: false })];
+                        return [4, this.http.getClient().delete(uri)];
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200)
