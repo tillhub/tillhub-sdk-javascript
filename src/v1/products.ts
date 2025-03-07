@@ -181,6 +181,10 @@ export interface ProductsCreateQuery {
   generate_product_id?: boolean
 }
 
+export interface ProductsBulkDeleteBody {
+  productIds: string[]
+}
+
 export interface HandlerProductsQuery extends HandlerQuery {
   query?: ProductsCreateQuery
 }
@@ -518,6 +522,27 @@ export class Products extends ThBaseHandler {
     }
   }
 
+  async bulkDelete (body: ProductsBulkDeleteBody): Promise<ProductsResponse> {
+    const uri = this.uriHelper.generateBaseUri('/bulk')
+
+    try {
+      const response = await this.http.getClient().delete(uri, {
+        data: body
+      })
+
+      if (response.status !== 200) {
+        throw new ProductsBulkDeleteFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results[0],
+        msg: response.data.msg
+      }
+    } catch (error: any) {
+      throw new ProductsBulkDeleteFailed(error.message, { error })
+    }
+  }
+
   async count (): Promise<ProductsResponse> {
     const uri = this.uriHelper.generateBaseUri('/meta')
 
@@ -764,6 +789,17 @@ export class ProductsBulkEditFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsBulkEditFailed.prototype)
+  }
+}
+
+export class ProductsBulkDeleteFailed extends BaseError {
+  public name = 'ProductsBulkDeleteFailed'
+  constructor (
+    public message: string = 'Could not bulk delete the products',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, ProductsBulkDeleteFailed.prototype)
   }
 }
 
