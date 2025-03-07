@@ -222,7 +222,7 @@ export class Products extends ThBaseHandler {
   public options: ProductsOptions
   public uriHelper: UriHelper
 
-  constructor(options: ProductsOptions, http: Client) {
+  constructor (options: ProductsOptions, http: Client) {
     super(http, {
       endpoint: Products.baseEndpoint,
       base: options.base ?? 'https://api.tillhub.com'
@@ -235,7 +235,7 @@ export class Products extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async create(product: Product, query?: HandlerProductsQuery): Promise<ProductResponse> {
+  async create (product: Product, query?: HandlerProductsQuery): Promise<ProductResponse> {
     const base = this.uriHelper.generateBaseUri()
     const uri = this.uriHelper.generateUriWithQuery(base, query)
 
@@ -255,7 +255,7 @@ export class Products extends ThBaseHandler {
     }
   }
 
-  async duplicate(body: ProductsDuplicateBody): Promise<ProductsDuplicateResponse> {
+  async duplicate (body: ProductsDuplicateBody): Promise<ProductsDuplicateResponse> {
     const uri = this.uriHelper.generateBaseUri('/duplicate')
     try {
       const response = await this.http.getClient().post(uri, body)
@@ -273,7 +273,7 @@ export class Products extends ThBaseHandler {
     }
   }
 
-  async getAll(options?: ProductsOptions | undefined): Promise<ProductsResponse> {
+  async getAll (options?: ProductsOptions | undefined): Promise<ProductsResponse> {
     let next
 
     try {
@@ -299,7 +299,7 @@ export class Products extends ThBaseHandler {
     }
   }
 
-  async select(options: SelectProductsQuery): Promise<ProductsResponse> {
+  async select (options: SelectProductsQuery): Promise<ProductsResponse> {
     try {
       const base = this.uriHelper.generateBaseUri('/selection')
 
@@ -322,7 +322,7 @@ export class Products extends ThBaseHandler {
     }
   }
 
-  async import(options?: ProductsOptions | undefined): Promise<ProductsResponse> {
+  async import (options?: ProductsOptions | undefined): Promise<ProductsResponse> {
     let next
 
     try {
@@ -348,7 +348,7 @@ export class Products extends ThBaseHandler {
     }
   }
 
-  async get(productId: string): Promise<ProductResponse> {
+  async get (productId: string): Promise<ProductResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${productId}`)
     try {
       const response = await this.http.getClient().get(uri)
@@ -366,7 +366,7 @@ export class Products extends ThBaseHandler {
     }
   }
 
-  async export(query?: ProductsQuery | undefined): Promise<ProductsExportResponse> {
+  async export (query?: ProductsQuery | undefined): Promise<ProductsExportResponse> {
     const base = this.uriHelper.generateBaseUri('/export')
     const uri = this.uriHelper.generateUriWithQuery(base, query)
 
@@ -385,7 +385,7 @@ export class Products extends ThBaseHandler {
     }
   }
 
-  async getDetails(
+  async getDetails (
     productId: string,
     options?: ProductsOptions | undefined
   ): Promise<ProductResponse> {
@@ -408,7 +408,7 @@ export class Products extends ThBaseHandler {
     }
   }
 
-  async getChildrenDetails(
+  async getChildrenDetails (
     productId: string,
     hideStock?: boolean,
     options?: ProductsDetailsOptions | undefined
@@ -436,7 +436,7 @@ export class Products extends ThBaseHandler {
     }
   }
 
-  async meta(q?: ProductsQuery | undefined): Promise<ProductsResponse> {
+  async meta (q?: ProductsQuery | undefined): Promise<ProductsResponse> {
     const base = this.uriHelper.generateBaseUri('/meta')
     const uri = this.uriHelper.generateUriWithQuery(base, q)
     try {
@@ -459,7 +459,7 @@ export class Products extends ThBaseHandler {
     }
   }
 
-  async put(productId: string, product: Product): Promise<ProductResponse> {
+  async put (productId: string, product: Product): Promise<ProductResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${productId}`)
 
     try {
@@ -477,7 +477,7 @@ export class Products extends ThBaseHandler {
     }
   }
 
-  async bulkCreate(
+  async bulkCreate (
     products: Product[],
     query?: HandlerProductsQuery
   ): Promise<ProductsBulkResponse> {
@@ -504,7 +504,7 @@ export class Products extends ThBaseHandler {
     }
   }
 
-  async bulkEdit(products: Product[]): Promise<ProductsResponse> {
+  async bulkEdit (products: Product[]): Promise<ProductsResponse> {
     const uri = this.uriHelper.generateBaseUri('/bulk')
 
     try {
@@ -522,7 +522,7 @@ export class Products extends ThBaseHandler {
     }
   }
 
-  async bulkDelete(body: ProductsBulkDeleteBody): Promise<ProductsResponse> {
+  async bulkDelete (body: ProductsBulkDeleteBody): Promise<ProductsResponse> {
     const uri = this.uriHelper.generateBaseUri('/bulk')
 
     try {
@@ -543,7 +543,7 @@ export class Products extends ThBaseHandler {
     }
   }
 
-  async count(): Promise<ProductsResponse> {
+  async count (): Promise<ProductsResponse> {
     const uri = this.uriHelper.generateBaseUri('/meta')
 
     try {
@@ -561,7 +561,7 @@ export class Products extends ThBaseHandler {
     }
   }
 
-  async delete(productId: string, deleteOptions?: ProductDeleteOptions): Promise<ProductsResponse> {
+  async delete (productId: string, deleteOptions?: ProductDeleteOptions): Promise<ProductsResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/${productId}`)
       const uri = this.uriHelper.generateUriWithQuery(base, deleteOptions)
@@ -579,7 +579,7 @@ export class Products extends ThBaseHandler {
     }
   }
 
-  async search(query: SearchQuery | string): Promise<ProductsResponse> {
+  async search (query: SearchQuery | string): Promise<ProductsResponse> {
     const _query: SearchQuery = typeof query === 'string' ? { q: query } : query
 
     const base = this.uriHelper.generateBaseUri('/search')
@@ -599,7 +599,7 @@ export class Products extends ThBaseHandler {
     }
   }
 
-  async bookStock(requestOptions: BookStockQuery): Promise<ProductResponse> {
+  async bookStock (requestOptions: BookStockQuery): Promise<ProductResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${requestOptions.productId}/stock/book`)
     try {
       const response = await this.http.getClient().post(uri, requestOptions.body)
@@ -614,7 +614,7 @@ export class Products extends ThBaseHandler {
     }
   }
 
-  async checkBarcode(code: string): Promise<ProductResponse> {
+  async checkBarcode (code: string): Promise<ProductResponse> {
     const base = this.uriHelper.generateBaseUri('/barcode')
     const uri = this.uriHelper.generateUriWithQuery(base, { code })
 
@@ -643,18 +643,18 @@ export class Products extends ThBaseHandler {
     }
   }
 
-  pricebooks(): Pricebooks {
+  pricebooks (): Pricebooks {
     return new Pricebooks(this.options, this.http, this.uriHelper)
   }
 
-  pricebookEntries(): PricebookEntries {
+  pricebookEntries (): PricebookEntries {
     return new PricebookEntries(this.options, this.http, this.uriHelper)
   }
 }
 
 export class ProductsCreateFailed extends BaseError {
   public name = 'ProductsCreateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not create the product',
     properties?: Record<string, unknown>
   ) {
@@ -665,7 +665,7 @@ export class ProductsCreateFailed extends BaseError {
 
 export class ProductsDuplicateFailed extends BaseError {
   public name = 'ProductsDuplicateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not duplicate the products',
     properties?: Record<string, unknown>
   ) {
@@ -676,7 +676,7 @@ export class ProductsDuplicateFailed extends BaseError {
 
 export class ProductFetchFailed extends BaseError {
   public name = 'ProductFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the product',
     properties?: Record<string, unknown>
   ) {
@@ -686,7 +686,7 @@ export class ProductFetchFailed extends BaseError {
 }
 export class ProductsFetchFailed extends BaseError {
   public name = 'ProductsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the products',
     properties?: Record<string, unknown>
   ) {
@@ -696,7 +696,7 @@ export class ProductsFetchFailed extends BaseError {
 }
 export class ProductsImportFailed extends BaseError {
   public name = 'ProductsImportFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not import the products',
     properties?: Record<string, unknown>
   ) {
@@ -707,7 +707,7 @@ export class ProductsImportFailed extends BaseError {
 
 export class ProductsExportFailed extends BaseError {
   public name = 'ProductsExportFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not export the products',
     properties?: Record<string, unknown>
   ) {
@@ -718,7 +718,7 @@ export class ProductsExportFailed extends BaseError {
 
 export class ProductDetailsFetchFailed extends BaseError {
   public name = 'ProductDetailsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the details of the product',
     properties?: Record<string, unknown>
   ) {
@@ -728,7 +728,7 @@ export class ProductDetailsFetchFailed extends BaseError {
 }
 export class ProductChildrenDetailsFetchFailed extends BaseError {
   public name = 'ProductChildrenDetailsFetchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not fetch the details of the children products',
     properties?: Record<string, unknown>
   ) {
@@ -739,7 +739,7 @@ export class ProductChildrenDetailsFetchFailed extends BaseError {
 
 export class ProductsCountFailed extends BaseError {
   public name = 'ProductsCountFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not count the products',
     properties?: Record<string, unknown>
   ) {
@@ -750,7 +750,7 @@ export class ProductsCountFailed extends BaseError {
 
 export class ProductsMetaFailed extends BaseError {
   public name = 'ProductsMetaFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not get products metadata',
     properties?: Record<string, unknown>
   ) {
@@ -761,7 +761,7 @@ export class ProductsMetaFailed extends BaseError {
 
 export class ProductsUpdateFailed extends BaseError {
   public name = 'ProductsUpdateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not update the product',
     properties?: Record<string, unknown>
   ) {
@@ -772,7 +772,7 @@ export class ProductsUpdateFailed extends BaseError {
 
 export class ProductsBulkCreateFailed extends BaseError {
   public name = 'ProductsBulkCreateFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not bulk create the products',
     properties?: Record<string, unknown>
   ) {
@@ -783,7 +783,7 @@ export class ProductsBulkCreateFailed extends BaseError {
 
 export class ProductsBulkEditFailed extends BaseError {
   public name = 'ProductsBulkEditFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not bulk edit the products',
     properties?: Record<string, unknown>
   ) {
@@ -794,7 +794,7 @@ export class ProductsBulkEditFailed extends BaseError {
 
 export class ProductsBulkDeleteFailed extends BaseError {
   public name = 'ProductsBulkDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not bulk delete the products',
     properties?: Record<string, unknown>
   ) {
@@ -805,7 +805,7 @@ export class ProductsBulkDeleteFailed extends BaseError {
 
 export class ProductsDeleteFailed extends BaseError {
   public name = 'ProductsDeleteFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not delete the product',
     properties?: Record<string, unknown>
   ) {
@@ -816,7 +816,7 @@ export class ProductsDeleteFailed extends BaseError {
 
 export class ProductsSearchFailed extends BaseError {
   public name = 'ProductsSearchFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not search for the product',
     properties?: Record<string, unknown>
   ) {
@@ -827,7 +827,7 @@ export class ProductsSearchFailed extends BaseError {
 
 export class ProductsBookStockFailed extends BaseError {
   public name = 'ProductsBookStockFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not book stock for the product',
     properties?: Record<string, unknown>
   ) {
@@ -838,7 +838,7 @@ export class ProductsBookStockFailed extends BaseError {
 
 export class BarcodeGetFailed extends BaseError {
   public name = 'BarcodeGetFailed'
-  constructor(
+  constructor (
     public message: string = 'Could not check for barcode collision',
     properties?: Record<string, unknown>
   ) {

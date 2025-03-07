@@ -14,7 +14,7 @@ afterEach(() => {
 
 const productIds = ['12345', '67890']
 
-const respMsg = `Deleted products`
+const respMsg = 'Deleted products'
 
 describe('v1: Products: can bulk delete multiple products', () => {
   it("Tillhub's products are instantiable", async () => {
