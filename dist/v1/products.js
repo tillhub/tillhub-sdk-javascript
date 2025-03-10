@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BarcodeGetFailed = exports.ProductsBookStockFailed = exports.ProductsSearchFailed = exports.ProductsDeleteFailed = exports.ProductsBulkEditFailed = exports.ProductsBulkCreateFailed = exports.ProductsUpdateFailed = exports.ProductsMetaFailed = exports.ProductsCountFailed = exports.ProductChildrenDetailsFetchFailed = exports.ProductDetailsFetchFailed = exports.ProductsExportFailed = exports.ProductsImportFailed = exports.ProductsFetchFailed = exports.ProductFetchFailed = exports.ProductsDuplicateFailed = exports.ProductsCreateFailed = exports.Products = void 0;
+exports.BarcodeGetFailed = exports.ProductsBookStockFailed = exports.ProductsSearchFailed = exports.ProductsDeleteFailed = exports.ProductsBulkDeleteFailed = exports.ProductsBulkEditFailed = exports.ProductsBulkCreateFailed = exports.ProductsUpdateFailed = exports.ProductsMetaFailed = exports.ProductsCountFailed = exports.ProductChildrenDetailsFetchFailed = exports.ProductDetailsFetchFailed = exports.ProductsExportFailed = exports.ProductsImportFailed = exports.ProductsFetchFailed = exports.ProductFetchFailed = exports.ProductsDuplicateFailed = exports.ProductsCreateFailed = exports.Products = void 0;
 var tslib_1 = require("tslib");
 var baseError_1 = require("../errors/baseError");
 var uri_helper_1 = require("../uri-helper");
@@ -417,9 +417,39 @@ var Products = (function (_super) {
             });
         });
     };
-    Products.prototype.count = function () {
+    Products.prototype.bulkDelete = function (body) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var uri, response, error_14;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri('/bulk');
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().delete(uri, {
+                                data: body
+                            })];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new ProductsBulkDeleteFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results[0],
+                                msg: response.data.msg
+                            }];
+                    case 3:
+                        error_14 = _a.sent();
+                        throw new ProductsBulkDeleteFailed(error_14.message, { error: error_14 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
+    Products.prototype.count = function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_15;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -438,8 +468,8 @@ var Products = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_14 = _a.sent();
-                        throw new ProductsCountFailed(error_14.message, { error: error_14 });
+                        error_15 = _a.sent();
+                        throw new ProductsCountFailed(error_15.message, { error: error_15 });
                     case 4: return [2];
                 }
             });
@@ -447,7 +477,7 @@ var Products = (function (_super) {
     };
     Products.prototype.delete = function (productId, deleteOptions) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_15;
+            var base, uri, response, error_16;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -464,8 +494,8 @@ var Products = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 2:
-                        error_15 = _a.sent();
-                        throw new ProductsDeleteFailed(error_15.message, { error: error_15 });
+                        error_16 = _a.sent();
+                        throw new ProductsDeleteFailed(error_16.message, { error: error_16 });
                     case 3: return [2];
                 }
             });
@@ -473,7 +503,7 @@ var Products = (function (_super) {
     };
     Products.prototype.search = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var _query, base, uri, response, error_16;
+            var _query, base, uri, response, error_17;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -494,8 +524,8 @@ var Products = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_16 = _a.sent();
-                        throw new ProductsSearchFailed(error_16.message, { error: error_16 });
+                        error_17 = _a.sent();
+                        throw new ProductsSearchFailed(error_17.message, { error: error_17 });
                     case 4: return [2];
                 }
             });
@@ -503,7 +533,7 @@ var Products = (function (_super) {
     };
     Products.prototype.bookStock = function (requestOptions) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_17;
+            var uri, response, error_18;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -521,8 +551,8 @@ var Products = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_17 = _a.sent();
-                        throw new ProductsBookStockFailed(error_17.message, { error: error_17 });
+                        error_18 = _a.sent();
+                        throw new ProductsBookStockFailed(error_18.message, { error: error_18 });
                     case 4: return [2];
                 }
             });
@@ -530,7 +560,7 @@ var Products = (function (_super) {
     };
     Products.prototype.checkBarcode = function (code) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_18;
+            var base, uri, response, error_19;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -553,15 +583,15 @@ var Products = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_18 = _a.sent();
-                        if (error_18.response && error_18.response.status === 409) {
+                        error_19 = _a.sent();
+                        if (error_19.response && error_19.response.status === 409) {
                             throw new BarcodeGetFailed(undefined, {
-                                status: error_18.response.status,
-                                name: error_18.response.data.name,
-                                data: error_18.response.data.results
+                                status: error_19.response.status,
+                                name: error_19.response.data.name,
+                                data: error_19.response.data.results
                             });
                         }
-                        throw new BarcodeGetFailed(error_18.message, { error: error_18 });
+                        throw new BarcodeGetFailed(error_19.message, { error: error_19 });
                     case 4: return [2];
                 }
             });
@@ -746,6 +776,19 @@ var ProductsBulkEditFailed = (function (_super) {
     return ProductsBulkEditFailed;
 }(baseError_1.BaseError));
 exports.ProductsBulkEditFailed = ProductsBulkEditFailed;
+var ProductsBulkDeleteFailed = (function (_super) {
+    tslib_1.__extends(ProductsBulkDeleteFailed, _super);
+    function ProductsBulkDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not bulk delete the products'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductsBulkDeleteFailed';
+        Object.setPrototypeOf(_this, ProductsBulkDeleteFailed.prototype);
+        return _this;
+    }
+    return ProductsBulkDeleteFailed;
+}(baseError_1.BaseError));
+exports.ProductsBulkDeleteFailed = ProductsBulkDeleteFailed;
 var ProductsDeleteFailed = (function (_super) {
     tslib_1.__extends(ProductsDeleteFailed, _super);
     function ProductsDeleteFailed(message, properties) {

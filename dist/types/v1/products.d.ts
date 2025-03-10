@@ -158,6 +158,9 @@ export interface ProductsCreateQuery {
     product_id_template?: string;
     generate_product_id?: boolean;
 }
+export interface ProductsBulkDeleteBody {
+    productIds: string[];
+}
 export interface HandlerProductsQuery extends HandlerQuery {
     query?: ProductsCreateQuery;
 }
@@ -203,6 +206,7 @@ export declare class Products extends ThBaseHandler {
     put(productId: string, product: Product): Promise<ProductResponse>;
     bulkCreate(products: Product[], query?: HandlerProductsQuery): Promise<ProductsBulkResponse>;
     bulkEdit(products: Product[]): Promise<ProductsResponse>;
+    bulkDelete(body: ProductsBulkDeleteBody): Promise<ProductsResponse>;
     count(): Promise<ProductsResponse>;
     delete(productId: string, deleteOptions?: ProductDeleteOptions): Promise<ProductsResponse>;
     search(query: SearchQuery | string): Promise<ProductsResponse>;
@@ -272,6 +276,11 @@ export declare class ProductsBulkCreateFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class ProductsBulkEditFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class ProductsBulkDeleteFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

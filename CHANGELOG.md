@@ -1,3 +1,11 @@
+# [4.185.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.184.1...v4.185.0) (2025-03-10)
+
+
+### Features
+
+* **products:** add bulk delete method ([09fb675](https://github.com/tillhub/tillhub-sdk-javascript/commit/09fb67557adfa88fd76976dcd456c8c7ab20e7a3))
+* **products:** fix linting issues ([8ceaef3](https://github.com/tillhub/tillhub-sdk-javascript/commit/8ceaef36ee2549fbbc9d17cf1ec7395c639ee2d0))
+
 ## [4.184.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.184.0...v4.184.1) (2025-03-06)
 
 
