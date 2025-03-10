@@ -535,7 +535,6 @@ export class Products extends ThBaseHandler {
       }
 
       return {
-        data: response.data.results[0],
         msg: response.data.msg
       }
     } catch (error: any) {

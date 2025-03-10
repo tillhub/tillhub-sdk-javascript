@@ -36,8 +36,7 @@ describe('v1: Products: can bulk delete multiple products', () => {
         return [
           200,
           {
-            msg: respMsg,
-            results: [{}]
+            msg: respMsg
           }
         ]
       })
