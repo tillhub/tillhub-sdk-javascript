@@ -436,7 +436,6 @@ var Products = (function (_super) {
                             throw new ProductsBulkDeleteFailed(undefined, { status: response.status });
                         }
                         return [2, {
-                                data: response.data.results[0],
                                 msg: response.data.msg
                             }];
                     case 3:

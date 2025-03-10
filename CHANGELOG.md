@@ -1,3 +1,10 @@
+# [4.186.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.185.0...v4.186.0) (2025-03-10)
+
+
+### Features
+
+* **products:** update response for product bulk delete ([ff4ca51](https://github.com/tillhub/tillhub-sdk-javascript/commit/ff4ca512d1434171a4636e0b1f2f6e08ddfcb9e0))
+
 # [4.185.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.184.1...v4.185.0) (2025-03-10)
 
 
