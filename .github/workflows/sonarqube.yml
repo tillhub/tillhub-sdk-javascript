@@ -1,0 +1,16 @@
+# INFO
+## gh-runner has to be tillhub-org-runner | unzer-org-self-hosted-runner
+name: SonarQube
+concurrency: sonarqube-check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  ci:
+    uses: unzercorp/js-tech-toolbox/.github/workflows/sonarqube.yml@main
+    with:
+      gh-runner: tillhub-org-runner
+    secrets:
+      inherit
