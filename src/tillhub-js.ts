@@ -1406,6 +1406,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated AnalyticsUodV4 instance
+   *
+   */
+  analyticsUodV4 (): v4.AnalyticsUod {
+    return this.generateAuthenticatedInstance(v4.AnalyticsUod)
+  }
+
+  /**
    * Create an authenticated ScheduledExports instance
    *
    */
