@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios'
+import axios, { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 
 import { environment } from './environment'
 
@@ -102,9 +102,8 @@ export class Client {
       this.requestInterceptorIds = options.requestInterceptors.map((interceptor: Fn) => {
         return Client.instance.axiosInstance.interceptors.request.use(
           interceptor as (
-            value: AxiosRequestConfig
-          ) => AxiosRequestConfig | Promise<AxiosRequestConfig>,
-          undefined
+            value: InternalAxiosRequestConfig
+          ) => InternalAxiosRequestConfig | Promise<InternalAxiosRequestConfig>
         )
       })
     }
@@ -113,9 +112,9 @@ export class Client {
   }
 
   clearDefaults (): void {
-    Client.instance.axiosInstance.defaults.headers.common.Authorization = undefined
-    Client.instance.axiosInstance.defaults.headers.Authorization = undefined
-    Client.instance.axiosInstance.defaults.headers['x-whitelabel'] = undefined
+    delete Client.instance.axiosInstance.defaults.headers.common.Authorization
+    delete Client.instance.axiosInstance.defaults.headers.Authorization
+    delete Client.instance.axiosInstance.defaults.headers['x-whitelabel']
     Client.instance.axiosInstance.defaults.headers.common = {
       ...defaultHeaders
     }
