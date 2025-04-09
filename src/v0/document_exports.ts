@@ -58,14 +58,14 @@ export interface DocumentExportsMetricResponse {
 
 export interface DocumentsExportsCreateResponse {
   data: {
-    correlationId: string;
+    correlationId: string
   }
 }
 
 export interface DocumentsExportsCreatePayload {
-  documentType: string;
-  email: string;
-  filter: Record<string, unknown>;
+  documentType: string
+  email: string
+  filter: Record<string, unknown>
 }
 
 export class DocumentExports extends ThBaseHandler {
@@ -158,7 +158,7 @@ export class DocumentExports extends ThBaseHandler {
       const response = await this.http.getClient().post(uri, options)
 
       return {
-        data: response.data.results[0],
+        data: response.data.results[0]
       }
     } catch (error: any) {
       throw new DocumentExportsCreateFailed(error.message, { error })
