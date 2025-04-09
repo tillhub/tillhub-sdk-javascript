@@ -50,15 +50,15 @@ var Client = (function () {
                 return Client.instance.axiosInstance.interceptors.request.eject(id);
             });
             this.requestInterceptorIds = options.requestInterceptors.map(function (interceptor) {
-                return Client.instance.axiosInstance.interceptors.request.use(interceptor, undefined);
+                return Client.instance.axiosInstance.interceptors.request.use(interceptor);
             });
         }
         return Client.instance;
     };
     Client.prototype.clearDefaults = function () {
-        Client.instance.axiosInstance.defaults.headers.common.Authorization = undefined;
-        Client.instance.axiosInstance.defaults.headers.Authorization = undefined;
-        Client.instance.axiosInstance.defaults.headers['x-whitelabel'] = undefined;
+        delete Client.instance.axiosInstance.defaults.headers.common.Authorization;
+        delete Client.instance.axiosInstance.defaults.headers.Authorization;
+        delete Client.instance.axiosInstance.defaults.headers['x-whitelabel'];
         Client.instance.axiosInstance.defaults.headers.common = tslib_1.__assign({}, defaultHeaders);
     };
     return Client;

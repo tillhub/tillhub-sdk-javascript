@@ -49,6 +49,16 @@ export interface DocumentExportsMetricResponse {
     data: DocumentExportsMetric;
     metadata: Record<string, unknown>;
 }
+export interface DocumentsExportsCreateResponse {
+    data: {
+        correlationId: string;
+    };
+}
+export interface DocumentsExportsCreatePayload {
+    documentType: string;
+    email: string;
+    filter: Record<string, unknown>;
+}
 export declare class DocumentExports extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
@@ -59,8 +69,14 @@ export declare class DocumentExports extends ThBaseHandler {
     getAll(query?: Record<string, unknown>): Promise<DocumentExportssMultipleResponse>;
     meta(query?: Record<string, unknown>): Promise<DocumentExportssMultipleResponse>;
     metric(metric: DocumentExportsMetric): Promise<DocumentExportsMetricResponse>;
+    create(options: DocumentsExportsCreatePayload): Promise<DocumentsExportsCreateResponse>;
 }
 export declare class DocumentExportsGetFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class DocumentExportsCreateFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

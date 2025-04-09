@@ -1,3 +1,10 @@
+# [4.187.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.186.0...v4.187.0) (2025-04-09)
+
+
+### Features
+
+* **reports:** add new documents export endpoint ([7b31f64](https://github.com/tillhub/tillhub-sdk-javascript/commit/7b31f64fdcb023464594c20927c6c58b69e1f615))
+
 # [4.186.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.185.0...v4.186.0) (2025-03-10)
 
 

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DocumentExportsMetricFailed = exports.DocumentExportsMetaFailed = exports.DocumentExportsGetFailed = exports.DocumentExports = void 0;
+exports.DocumentExportsMetricFailed = exports.DocumentExportsMetaFailed = exports.DocumentExportsCreateFailed = exports.DocumentExportsGetFailed = exports.DocumentExports = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -115,6 +115,30 @@ var DocumentExports = (function (_super) {
             });
         });
     };
+    DocumentExports.prototype.create = function (options) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_4;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri();
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().post(uri, options)];
+                    case 2:
+                        response = _a.sent();
+                        return [2, {
+                                data: response.data.results[0]
+                            }];
+                    case 3:
+                        error_4 = _a.sent();
+                        throw new DocumentExportsCreateFailed(error_4.message, { error: error_4 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     DocumentExports.baseEndpoint = '/api/v0/documents/exports';
     return DocumentExports;
 }(base_1.ThBaseHandler));
@@ -132,6 +156,19 @@ var DocumentExportsGetFailed = (function (_super) {
     return DocumentExportsGetFailed;
 }(errors_1.BaseError));
 exports.DocumentExportsGetFailed = DocumentExportsGetFailed;
+var DocumentExportsCreateFailed = (function (_super) {
+    tslib_1.__extends(DocumentExportsCreateFailed, _super);
+    function DocumentExportsCreateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create document exports'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'DocumentExportsCreateFailed';
+        Object.setPrototypeOf(_this, DocumentExportsCreateFailed.prototype);
+        return _this;
+    }
+    return DocumentExportsCreateFailed;
+}(errors_1.BaseError));
+exports.DocumentExportsCreateFailed = DocumentExportsCreateFailed;
 var DocumentExportsMetaFailed = (function (_super) {
     tslib_1.__extends(DocumentExportsMetaFailed, _super);
     function DocumentExportsMetaFailed(message, properties) {
