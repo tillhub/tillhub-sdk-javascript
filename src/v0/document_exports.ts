@@ -56,6 +56,18 @@ export interface DocumentExportsMetricResponse {
   metadata: Record<string, unknown>
 }
 
+export interface DocumentsExportsCreateResponse {
+  data: {
+    correlationId: string
+  }
+}
+
+export interface DocumentsExportsCreatePayload {
+  documentType: string
+  email: string
+  filter: Record<string, unknown>
+}
+
 export class DocumentExports extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/documents/exports'
   endpoint: string
@@ -139,6 +151,19 @@ export class DocumentExports extends ThBaseHandler {
       throw new DocumentExportsMetricFailed(error.message, { error })
     }
   }
+
+  async create (options: DocumentsExportsCreatePayload): Promise<DocumentsExportsCreateResponse> {
+    const uri = this.uriHelper.generateBaseUri()
+    try {
+      const response = await this.http.getClient().post(uri, options)
+
+      return {
+        data: response.data.results[0]
+      }
+    } catch (error: any) {
+      throw new DocumentExportsCreateFailed(error.message, { error })
+    }
+  }
 }
 
 export class DocumentExportsGetFailed extends BaseError {
@@ -149,6 +174,17 @@ export class DocumentExportsGetFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, DocumentExportsGetFailed.prototype)
+  }
+}
+
+export class DocumentExportsCreateFailed extends BaseError {
+  public name = 'DocumentExportsCreateFailed'
+  constructor (
+    public message: string = 'Could not create document exports',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, DocumentExportsCreateFailed.prototype)
   }
 }
 
