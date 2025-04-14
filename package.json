@@ -149,7 +149,6 @@
     "just-has": "^1.0.0",
     "just-safe-get": "^2.0.0",
     "just-typeof": "^2.0.0",
-    "mqtt": "^4.2.6",
     "qs": "^6.9.6",
     "serialize-error": "^8.0.1"
   },
