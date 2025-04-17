@@ -1,3 +1,10 @@
+## [4.187.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.187.0...v4.187.1) (2025-04-17)
+
+
+### Bug Fixes
+
+* **realtime:** remove unused class and dependencies (UNTIL-13547) ([#639](https://github.com/tillhub/tillhub-sdk-javascript/issues/639)) ([9072c29](https://github.com/tillhub/tillhub-sdk-javascript/commit/9072c290579fa60969cfb245a2a785d7b776e61d))
+
 # [4.187.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.186.0...v4.187.0) (2025-04-09)
 
 
