@@ -1453,12 +1453,20 @@ export class TillhubClient extends events.EventEmitter {
     return this.generateAuthenticatedInstance(v1.Contents)
   }
 
-  /* 
+  /*
    * ContentTemplates v1
    *
    */
   contentTemplatesV1 (): v1.ContentTemplates {
     return this.generateAuthenticatedInstance(v1.ContentTemplates)
+  }
+
+  /*
+   * Import v1
+   *
+   */
+  import (): v1.Import {
+    return this.generateAuthenticatedInstance(v1.Import)
   }
 }
 

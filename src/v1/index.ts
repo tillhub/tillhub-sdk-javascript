@@ -25,6 +25,7 @@ import { TableLayouts } from './table-layouts'
 import { Devices } from './devices'
 import { Contents } from './contents'
 import { ContentTemplates } from './content-templates'
+import { Import } from './import'
 
 export {
   Auth,
@@ -54,7 +55,8 @@ export {
   TableLayouts,
   Devices,
   Contents,
-  ContentTemplates
+  ContentTemplates,
+  Import
 }
 
 export interface AnalyticsHandlersV1Types {
