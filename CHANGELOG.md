@@ -1,3 +1,12 @@
+# [4.188.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.187.1...v4.188.0) (2025-04-25)
+
+
+### Features
+
+* **sonar:** add sonar - UOD-1259 ([fa87bf5](https://github.com/tillhub/tillhub-sdk-javascript/commit/fa87bf58f27c2805653de3562b7cd8f5d7097ba8))
+* **workflows:** add prebuild workflow for frontend CI - UOD-1259 ([5cfab79](https://github.com/tillhub/tillhub-sdk-javascript/commit/5cfab79c940347865d2fc81b9f6f911855eb4776))
+* **workflows:** add SonarQube workflow configuration - UOD-1259 ([fcdf7a8](https://github.com/tillhub/tillhub-sdk-javascript/commit/fcdf7a84a3384f1733b61fe0edb36adbd923ee66))
+
 ## [4.187.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.187.0...v4.187.1) (2025-04-17)
 
 
