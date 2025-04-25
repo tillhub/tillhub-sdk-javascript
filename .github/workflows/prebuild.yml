@@ -1,0 +1,48 @@
+# INFO
+# Check frontend-ci.yml for all the possible inputs and their descriptions
+# It will run npm run build:NAME_OF_SELECTED_ENVIRONMENT:gh (npm run build:integration:gh)
+## If not found it will run npm run build:NAME_OF_SELECTED_ENVIROMENT (npm run build:integration)
+## If not found it will run npm run build
+## Procur that the package.json has for each environment a build or it will default to just build for any environment
+name: Prebuild
+concurrency: frontend-build
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  ci:
+    uses: unzercorp/js-tech-toolbox/.github/workflows/frontend-ci.yml@main
+    with:
+      build-image: false
+      environment: ${{ github.event.inputs.environment }}
+      node-version: 18
+    secrets:
+      inherit
+
+#   inputs:
+#       build-image:
+#         description: Defines if the step to build a new image should be run.
+#         required: false
+#         default: false
+#         type: boolean
+#       environment:
+#         description: Defines the environment (integration/testing/production) where we want to deploy the image, this will also affect which script for building will run (npm run build:integration:gh). Will also form part of the image naming, check env `IMAGE_NAME`.
+#         required: false
+#         default: integration
+#         type: string
+#       node-version:
+#         description: The number version of the node that will run in each step of the job.
+#         required: true
+#         type: string
+#       version-bump:
+#         description: If defined, it will create a new commit with the new version, depending on the value passed (patch, minor or major). If none, this step will be skipped.
+#         required: false
+#         default: none
+#         type: string
+#       build-repository:
+#         description: Name of the project, that will be part of the path used to identify where to store the new image.
+#         required: false
+#         type: string
+#         default: tillhub-dashboard
