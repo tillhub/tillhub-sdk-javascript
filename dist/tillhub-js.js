@@ -636,6 +636,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.contentTemplatesV1 = function () {
         return this.generateAuthenticatedInstance(v1.ContentTemplates);
     };
+    TillhubClient.prototype.import = function () {
+        return this.generateAuthenticatedInstance(v1.Import);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));

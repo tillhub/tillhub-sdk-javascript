@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ContentTemplates = exports.Contents = exports.Devices = exports.TableLayouts = exports.AppointmentReminderTemplates = exports.AppointmentReminders = exports.Promotions = exports.NotificationsUnsubscribe = exports.NotificationsMsu = exports.Configurations = exports.Branches = exports.AuditLogs = exports.analytics = exports.StocksBook = exports.ExportsV1 = exports.SafesLogBook = exports.Tags = exports.Carts = exports.Customers = exports.Vouchers = exports.Balances = exports.Registers = exports.TransactionsLegacy = exports.Transactions = exports.Templates = exports.Products = exports.Pricebooks = exports.Auth = void 0;
+exports.Import = exports.ContentTemplates = exports.Contents = exports.Devices = exports.TableLayouts = exports.AppointmentReminderTemplates = exports.AppointmentReminders = exports.Promotions = exports.NotificationsUnsubscribe = exports.NotificationsMsu = exports.Configurations = exports.Branches = exports.AuditLogs = exports.analytics = exports.StocksBook = exports.ExportsV1 = exports.SafesLogBook = exports.Tags = exports.Carts = exports.Customers = exports.Vouchers = exports.Balances = exports.Registers = exports.TransactionsLegacy = exports.Transactions = exports.Templates = exports.Products = exports.Pricebooks = exports.Auth = void 0;
 var tslib_1 = require("tslib");
 var auth_1 = require("./auth");
 Object.defineProperty(exports, "Auth", { enumerable: true, get: function () { return auth_1.Auth; } });
@@ -57,4 +57,6 @@ var contents_1 = require("./contents");
 Object.defineProperty(exports, "Contents", { enumerable: true, get: function () { return contents_1.Contents; } });
 var content_templates_1 = require("./content-templates");
 Object.defineProperty(exports, "ContentTemplates", { enumerable: true, get: function () { return content_templates_1.ContentTemplates; } });
+var import_1 = require("./import");
+Object.defineProperty(exports, "Import", { enumerable: true, get: function () { return import_1.Import; } });
 //# sourceMappingURL=index.js.map

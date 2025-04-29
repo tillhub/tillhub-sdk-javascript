@@ -1,3 +1,10 @@
+# [4.189.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.188.0...v4.189.0) (2025-04-29)
+
+
+### Features
+
+* **products:** add new import chunks for products ([9cbac7d](https://github.com/tillhub/tillhub-sdk-javascript/commit/9cbac7d912bb9680a0da9e578ca260f8f6eec423))
+
 # [4.188.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.187.1...v4.188.0) (2025-04-25)
 
 
