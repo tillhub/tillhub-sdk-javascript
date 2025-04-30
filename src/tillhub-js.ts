@@ -768,6 +768,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated Payment Methods V3 instance
+   *
+   */
+  paymentMethodsV3 (): v3.PaymentMethods {
+    return this.generateAuthenticatedInstance(v3.PaymentMethods)
+  }
+
+  /**
    * Create an authenticated Analytics v3 instance
    *
    */
@@ -1395,6 +1403,14 @@ export class TillhubClient extends events.EventEmitter {
    */
   analyticsV4 (): v4.Analytics {
     return this.generateAuthenticatedInstance(v4.Analytics)
+  }
+
+  /**
+   * Create an authenticated AnalyticsUodV4 instance
+   *
+   */
+  analyticsUodV4 (): v4.AnalyticsUod {
+    return this.generateAuthenticatedInstance(v4.AnalyticsUod)
   }
 
   /**
