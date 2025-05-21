@@ -96,7 +96,7 @@ describe('v4: Analytics: can get revenue', () => {
       const th = await initThInstance()
       await th.analyticsUodV4().getRevenueTopBranchRate()
     } catch (err: any) {
-      expect(err.name).toBe('AnalyticsGetRevenueTopBranchRateFailed')
+      expect(err.name).toBe('GetRevenueTopBranchRateFailed')
     }
   })
 })

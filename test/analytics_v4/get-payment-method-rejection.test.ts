@@ -57,7 +57,7 @@ describe('v4: Analytics: can get payment method rejection', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v4/analytics/${legacyId}/oms/payment-methods/rejection`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v4/analytics/${legacyId}/oms/rejection`).reply(() => {
         return [200, { results }]
       })
     }
@@ -96,7 +96,7 @@ describe('v4: Analytics: can get payment method rejection', () => {
       const th = await initThInstance()
       await th.analyticsUodV4().getPaymentMethodRejection()
     } catch (err: any) {
-      expect(err.name).toBe('AnalyticsGetPaymentMethodRejectionFailed')
+      expect(err.name).toBe('GetPaymentMethodRejectionFailed')
     }
   })
 })

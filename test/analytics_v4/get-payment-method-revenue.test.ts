@@ -96,7 +96,7 @@ describe('v4: Analytics: can get payment method revenue', () => {
       const th = await initThInstance()
       await th.analyticsUodV4().getPaymentMethodRevenue()
     } catch (err: any) {
-      expect(err.name).toBe('AnalyticsGetPaymentMethodRevenueFailed')
+      expect(err.name).toBe('GetPaymentMethodRevenueFailed')
     }
   })
 })
