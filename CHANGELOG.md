@@ -1,3 +1,10 @@
+# [4.191.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.190.0...v4.191.0) (2025-05-21)
+
+
+### Features
+
+* **analytics:** contracts updates ([0358095](https://github.com/tillhub/tillhub-sdk-javascript/commit/0358095bcbc74b4067066f0d893ce85ec3143a4e))
+
 # [4.190.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.189.0...v4.190.0) (2025-05-21)
 
 

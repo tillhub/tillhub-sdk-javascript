@@ -20,11 +20,9 @@ export interface AnalyticsUodQuery {
     currency: string;
     end: Date;
     start: Date;
-    paymentMethodeCode: string;
 }
-export interface AnalyticsRevenueTopProductsQuery extends AnalyticsUodQuery {
-    orderBy?: string;
-    orderDirection?: string;
+export interface AnalyticsUodRevenueQuery extends AnalyticsUodQuery {
+    paymentMethodeCode?: string;
 }
 export interface AnalyticsUodResponse {
     data: {
@@ -57,7 +55,6 @@ interface TopBranchResponse {
         window: AggregationWindow;
         totalBranch: number;
         totalAll: number;
-        rate: number;
     };
 }
 interface PaymentMethodRevenueResponse {
@@ -95,11 +92,11 @@ export declare class AnalyticsUod extends ThBaseHandler {
     options: AnalyticsUodOptions;
     uriHelper: UriHelper;
     constructor(options: AnalyticsUodOptions, http: Client);
-    getRevenue(query?: AnalyticsUodQuery): Promise<AnalyticsUodResponse>;
-    getRevenueTopBranchRate(): Promise<TopBranchResponse>;
-    getPaymentMethodRevenue(): Promise<PaymentMethodRevenueResponse>;
-    getPaymentMethodAcceptance(): Promise<PaymentMethodAcceptanceResponse>;
-    getPaymentMethodRejection(): Promise<PaymentMethodRejectionResponse>;
+    getRevenue(query?: AnalyticsUodRevenueQuery): Promise<AnalyticsUodResponse>;
+    getRevenueTopBranchRate(query?: AnalyticsUodQuery): Promise<TopBranchResponse>;
+    getPaymentMethodRevenue(query?: AnalyticsUodQuery): Promise<PaymentMethodRevenueResponse>;
+    getPaymentMethodAcceptance(query?: AnalyticsUodQuery): Promise<PaymentMethodAcceptanceResponse>;
+    getPaymentMethodRejection(query?: AnalyticsUodQuery): Promise<PaymentMethodRejectionResponse>;
 }
 export declare class AnalyticsGetRevenueFailed extends BaseError {
     message: string;

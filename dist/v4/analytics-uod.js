@@ -52,7 +52,7 @@ var AnalyticsUod = (function (_super) {
             });
         });
     };
-    AnalyticsUod.prototype.getRevenueTopBranchRate = function () {
+    AnalyticsUod.prototype.getRevenueTopBranchRate = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
@@ -60,7 +60,7 @@ var AnalyticsUod = (function (_super) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/revenue/top-branch-rate');
-                        uri = this.uriHelper.generateUriWithQuery(base);
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         return [4, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
@@ -75,7 +75,7 @@ var AnalyticsUod = (function (_super) {
             });
         });
     };
-    AnalyticsUod.prototype.getPaymentMethodRevenue = function () {
+    AnalyticsUod.prototype.getPaymentMethodRevenue = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
@@ -83,7 +83,7 @@ var AnalyticsUod = (function (_super) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/oms/payment-methods/revenue');
-                        uri = this.uriHelper.generateUriWithQuery(base);
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         return [4, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
@@ -98,7 +98,7 @@ var AnalyticsUod = (function (_super) {
             });
         });
     };
-    AnalyticsUod.prototype.getPaymentMethodAcceptance = function () {
+    AnalyticsUod.prototype.getPaymentMethodAcceptance = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
@@ -106,7 +106,7 @@ var AnalyticsUod = (function (_super) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/oms/payment-methods/acceptance');
-                        uri = this.uriHelper.generateUriWithQuery(base);
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         return [4, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
@@ -121,7 +121,7 @@ var AnalyticsUod = (function (_super) {
             });
         });
     };
-    AnalyticsUod.prototype.getPaymentMethodRejection = function () {
+    AnalyticsUod.prototype.getPaymentMethodRejection = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_5;
             return tslib_1.__generator(this, function (_a) {
@@ -129,7 +129,7 @@ var AnalyticsUod = (function (_super) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri('/oms/rejection');
-                        uri = this.uriHelper.generateUriWithQuery(base);
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
                         return [4, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
