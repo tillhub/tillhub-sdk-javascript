@@ -63,6 +63,7 @@ interface TopBranchResponse {
     window: AggregationWindow
     totalBranch: number
     totalAll: number
+    rate: number
   }
 }
 
