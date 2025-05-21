@@ -72,7 +72,7 @@ describe('v3: payment-methods: can get all', () => {
     expect(paymentMethodsV3).toBeInstanceOf(v3.PaymentMethods)
 
     try {
-      const { data } = await paymentMethodsV3.getAllPaymentMethods()
+      const { data } = await paymentMethodsV3.getAll()
       expect(Array.isArray(data)).toBe(true)
     } catch (err: any) {
       expect(err.name).toBe('PaymentMethodFetchFailed')
@@ -116,7 +116,7 @@ describe('v3: payment-methods: can get all', () => {
     })
 
     try {
-      await th.paymentMethodsV3().getAllPaymentMethods()
+      await th.paymentMethodsV3().getAll()
     } catch (err: any) {
       expect(err.name).toBe('PaymentMethodFetchFailed')
     }

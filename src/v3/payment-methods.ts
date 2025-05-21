@@ -51,7 +51,7 @@ export class PaymentMethods extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async getAllPaymentMethods (query?: PaymentMethodsQueryHandler | undefined): Promise<PaymentMethodResponse> {
+  async getAll (query?: PaymentMethodsQueryHandler | undefined): Promise<PaymentMethodResponse> {
     const base = this.uriHelper.generateBaseUri('')
     const uri = this.uriHelper.generateUriWithQuery(`${base}/payment-method`, query)
 
@@ -63,7 +63,7 @@ export class PaymentMethods extends ThBaseHandler {
       }
 
       if (response.data.cursors?.after) {
-        next = (): Promise<PaymentMethodResponse> => this.getAllPaymentMethods({ uri: response.data.cursors.after })
+        next = (): Promise<PaymentMethodResponse> => this.getAll({ uri: response.data.cursors.after })
       }
 
       return {
