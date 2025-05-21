@@ -1,5 +1,6 @@
 import analytics from './analytics';
 import { Transactions } from './transactions';
+import { PaymentMethods } from './payment-methods';
 export interface AnalyticsHandlerTypesV3 {
     analytics: {
         reports: {
@@ -11,4 +12,4 @@ export interface AnalyticsHandlerTypesV3 {
         };
     };
 }
-export { analytics, Transactions };
+export { analytics, Transactions, PaymentMethods };

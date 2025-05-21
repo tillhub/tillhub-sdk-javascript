@@ -94,6 +94,7 @@ export declare class TillhubClient extends events.EventEmitter {
     analyticsHandlersV1(axiosOptions?: AxiosOptions): AnalyticsHandlersV1Types;
     analyticsHandlers(axiosOptions?: AxiosOptions): AnalyticsHandlerTypes;
     transactionsV3(): v3.Transactions;
+    paymentMethodsV3(): v3.PaymentMethods;
     analyticsHandlersV3(axiosOptions?: AxiosOptions): AnalyticsHandlerTypesV3;
     transactionsLegacy(): v1.TransactionsLegacy;
     transactions(axiosOptions?: AxiosOptions): v1.Transactions;
@@ -157,6 +158,7 @@ export declare class TillhubClient extends events.EventEmitter {
     holidays(): v0.Holidays;
     shiftPlan(): v0.ShiftPlan;
     analyticsV4(): v4.Analytics;
+    analyticsUodV4(): v4.AnalyticsUod;
     scheduledExports(): v0.ScheduledExports;
     customerAppointments(): v0.CustomerAppointments;
     documentExports(): v0.DocumentExports;

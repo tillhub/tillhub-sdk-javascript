@@ -1,3 +1,10 @@
+# [4.190.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.189.0...v4.190.0) (2025-05-21)
+
+
+### Features
+
+* **analytics:** field added ([aefd46a](https://github.com/tillhub/tillhub-sdk-javascript/commit/aefd46a9d2c08c17407a364af227ae6a3d2e21c8))
+
 # [4.189.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.188.0...v4.189.0) (2025-04-29)
 
 

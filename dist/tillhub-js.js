@@ -345,6 +345,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.transactionsV3 = function () {
         return this.generateAuthenticatedInstance(v3.Transactions);
     };
+    TillhubClient.prototype.paymentMethodsV3 = function () {
+        return this.generateAuthenticatedInstance(v3.PaymentMethods);
+    };
     TillhubClient.prototype.analyticsHandlersV3 = function (axiosOptions) {
         if (!this.options ||
             !this.options.base ||
@@ -611,6 +614,9 @@ var TillhubClient = (function (_super) {
     };
     TillhubClient.prototype.analyticsV4 = function () {
         return this.generateAuthenticatedInstance(v4.Analytics);
+    };
+    TillhubClient.prototype.analyticsUodV4 = function () {
+        return this.generateAuthenticatedInstance(v4.AnalyticsUod);
     };
     TillhubClient.prototype.scheduledExports = function () {
         return this.generateAuthenticatedInstance(v0.ScheduledExports);
