@@ -1,4 +1,5 @@
 import { Analytics } from './analytics'
+import { AnalyticsUod } from './analytics-uod'
 import { Products } from './products'
 
-export { Analytics, Products }
+export { Analytics, AnalyticsUod, Products }
