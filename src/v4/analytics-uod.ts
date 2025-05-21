@@ -23,12 +23,10 @@ export interface AnalyticsUodQuery {
   currency: string
   end: Date
   start: Date
-  paymentMethodeCode: string
 }
 
-export interface AnalyticsRevenueTopProductsQuery extends AnalyticsUodQuery {
-  orderBy?: string
-  orderDirection?: string
+export interface AnalyticsUodRevenueQuery extends AnalyticsUodQuery {
+  paymentMethodeCode?: string
 }
 
 export interface AnalyticsUodResponse {
@@ -63,7 +61,6 @@ interface TopBranchResponse {
     window: AggregationWindow
     totalBranch: number
     totalAll: number
-    rate: number
   }
 }
 
@@ -117,7 +114,7 @@ export class AnalyticsUod extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async getRevenue (query?: AnalyticsUodQuery): Promise<AnalyticsUodResponse> {
+  async getRevenue (query?: AnalyticsUodRevenueQuery): Promise<AnalyticsUodResponse> {
     try {
       const base = this.uriHelper.generateBaseUri('/oms/revenue')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -132,10 +129,10 @@ export class AnalyticsUod extends ThBaseHandler {
     }
   }
 
-  async getRevenueTopBranchRate (): Promise<TopBranchResponse> {
+  async getRevenueTopBranchRate (query?: AnalyticsUodQuery): Promise<TopBranchResponse> {
     try {
       const base = this.uriHelper.generateBaseUri('/revenue/top-branch-rate')
-      const uri = this.uriHelper.generateUriWithQuery(base)
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri)
 
@@ -147,10 +144,10 @@ export class AnalyticsUod extends ThBaseHandler {
     }
   }
 
-  async getPaymentMethodRevenue (): Promise<PaymentMethodRevenueResponse> {
+  async getPaymentMethodRevenue (query?: AnalyticsUodQuery): Promise<PaymentMethodRevenueResponse> {
     try {
       const base = this.uriHelper.generateBaseUri('/oms/payment-methods/revenue')
-      const uri = this.uriHelper.generateUriWithQuery(base)
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri)
 
@@ -162,10 +159,10 @@ export class AnalyticsUod extends ThBaseHandler {
     }
   }
 
-  async getPaymentMethodAcceptance (): Promise<PaymentMethodAcceptanceResponse> {
+  async getPaymentMethodAcceptance (query?: AnalyticsUodQuery): Promise<PaymentMethodAcceptanceResponse> {
     try {
       const base = this.uriHelper.generateBaseUri('/oms/payment-methods/acceptance')
-      const uri = this.uriHelper.generateUriWithQuery(base)
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri)
 
@@ -177,10 +174,10 @@ export class AnalyticsUod extends ThBaseHandler {
     }
   }
 
-  async getPaymentMethodRejection (): Promise<PaymentMethodRejectionResponse> {
+  async getPaymentMethodRejection (query?: AnalyticsUodQuery): Promise<PaymentMethodRejectionResponse> {
     try {
       const base = this.uriHelper.generateBaseUri('/oms/rejection')
-      const uri = this.uriHelper.generateUriWithQuery(base)
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri)
 
