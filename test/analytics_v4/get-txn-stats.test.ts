@@ -57,7 +57,7 @@ describe('v4: Analytics: can get txn stats', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v4/analytics/${legacyId}/revenue/stats`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v4/analytics/${legacyId}/oms/revenue/stats`).reply(() => {
         return [200, { results }]
       })
     }
@@ -87,7 +87,7 @@ describe('v4: Analytics: can get txn stats', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v4/analytics/${legacyId}/revenue/stats`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v4/analytics/${legacyId}/oms/revenue/stats`).reply(() => {
         return [205]
       })
     }

@@ -142,7 +142,7 @@ export class AnalyticsUod extends ThBaseHandler {
 
   async getTxnStats (query?: AnalyticsUodQuery): Promise<TxnStatsResponse> {
     try {
-      const base = this.uriHelper.generateBaseUri('/revenue/stats')
+      const base = this.uriHelper.generateBaseUri('/oms/revenue/stats')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri)
