@@ -142,13 +142,13 @@ export class AnalyticsUod extends ThBaseHandler {
 
   async getTxnStats (query?: AnalyticsUodQuery): Promise<TxnStatsResponse> {
     try {
-      const base = this.uriHelper.generateBaseUri('/revenue/stats')
+      const base = this.uriHelper.generateBaseUri('/oms/revenue/stats')
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri)
 
       return {
-        data: response.data.results[0]
+        data: response.data.results
       }
     } catch (error: any) {
       throw new GetTxnStatsFailed(error.message)
@@ -163,7 +163,7 @@ export class AnalyticsUod extends ThBaseHandler {
       const response = await this.http.getClient().get(uri)
 
       return {
-        data: response.data.results[0]
+        data: response.data.results
       }
     } catch (error: any) {
       throw new GetRevenueTopBranchRateFailed(error.message)
@@ -178,7 +178,7 @@ export class AnalyticsUod extends ThBaseHandler {
       const response = await this.http.getClient().get(uri)
 
       return {
-        data: response.data.results[0]
+        data: response.data.results
       }
     } catch (error: any) {
       throw new GetPaymentMethodRevenueFailed(error.message)
@@ -193,7 +193,7 @@ export class AnalyticsUod extends ThBaseHandler {
       const response = await this.http.getClient().get(uri)
 
       return {
-        data: response.data.results[0]
+        data: response.data.results
       }
     } catch (error: any) {
       throw new GetPaymentMethodAcceptanceFailed(error.message)
@@ -208,7 +208,7 @@ export class AnalyticsUod extends ThBaseHandler {
       const response = await this.http.getClient().get(uri)
 
       return {
-        data: response.data.results[0]
+        data: response.data.results
       }
     } catch (error: any) {
       throw new GetPaymentMethodRejectionFailed(error.message)

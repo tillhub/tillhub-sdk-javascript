@@ -57,7 +57,7 @@ describe('v4: Analytics: can get txn stats', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v4/analytics/${legacyId}/revenue/stats`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v4/analytics/${legacyId}/oms/revenue/stats`).reply(() => {
         return [200, { results }]
       })
     }
@@ -69,7 +69,7 @@ describe('v4: Analytics: can get txn stats', () => {
     expect(analytics).toBeInstanceOf(v4.AnalyticsUod)
 
     const { data } = await analytics.getTxnStats()
-    expect(data).toMatchObject(results[0])
+    expect(data).toMatchObject(results)
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -87,7 +87,7 @@ describe('v4: Analytics: can get txn stats', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v4/analytics/${legacyId}/revenue/stats`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v4/analytics/${legacyId}/oms/revenue/stats`).reply(() => {
         return [205]
       })
     }
