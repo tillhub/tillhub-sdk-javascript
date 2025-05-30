@@ -69,7 +69,7 @@ describe('v4: Analytics: can get txn stats', () => {
     expect(analytics).toBeInstanceOf(v4.AnalyticsUod)
 
     const { data } = await analytics.getTxnStats()
-    expect(data).toMatchObject(results[0])
+    expect(data).toMatchObject(results)
   })
 
   it('rejects on status codes that are not 200', async () => {

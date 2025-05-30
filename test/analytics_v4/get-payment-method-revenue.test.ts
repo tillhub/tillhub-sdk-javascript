@@ -69,7 +69,7 @@ describe('v4: Analytics: can get payment method revenue', () => {
     expect(analytics).toBeInstanceOf(v4.AnalyticsUod)
 
     const { data } = await analytics.getPaymentMethodRevenue()
-    expect(data).toMatchObject(results[0])
+    expect(data).toMatchObject(results)
   })
 
   it('rejects on status codes that are not 200', async () => {
