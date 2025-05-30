@@ -38,6 +38,14 @@ export interface AnalyticsUodResponse {
   }
 }
 
+export interface TxnStatsResponse {
+  data: {
+    periods: AnalyticsResponsePeriods
+    series: AnalyticsResponseSeries[]
+    window: AggregationWindow
+  }
+}
+
 interface AnalyticsResponsePeriods {
   current: {
     end: Date
@@ -48,16 +56,19 @@ interface AnalyticsResponsePeriods {
     start: Date
   }
 }
+
 interface AnalyticsResponseSeries {
   period: 'current' | 'previous'
   data: number[]
   total: number
   unit: string
 }
+
 interface TopBranchResponse {
   data: {
     branch: string
     currency: string
+    rate: number
     window: AggregationWindow
     totalBranch: number
     totalAll: number
@@ -79,9 +90,9 @@ interface PaymentMethodAcceptanceResponse {
   data: {
     paymentMethodCode: string
     currency: string
-    successfulCount: number
-    totalCount: number
-    successRate: number
+    successfulCount: number | string
+    totalCount: number | string
+    successRate: number | string
   }
 }
 
@@ -126,6 +137,21 @@ export class AnalyticsUod extends ThBaseHandler {
       }
     } catch (error: any) {
       throw new AnalyticsGetRevenueFailed(error.message)
+    }
+  }
+
+  async getTxnStats (query?: AnalyticsUodQuery): Promise<TxnStatsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/revenue/stats')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+      const response = await this.http.getClient().get(uri)
+
+      return {
+        data: response.data.results[0]
+      }
+    } catch (error: any) {
+      throw new GetTxnStatsFailed(error.message)
     }
   }
 
@@ -197,6 +223,17 @@ export class AnalyticsGetRevenueFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsGetRevenueFailed.prototype)
+  }
+}
+
+export class GetTxnStatsFailed extends BaseError {
+  public name = 'GetTxnStatsFailed'
+  constructor (
+    public message: string = 'Could not get transaction stats',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, GetTxnStatsFailed.prototype)
   }
 }
 
