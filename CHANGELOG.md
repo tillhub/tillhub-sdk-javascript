@@ -1,3 +1,11 @@
+# [4.193.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.192.0...v4.193.0) (2025-05-30)
+
+
+### Features
+
+* **analytics:** fix responses - UOD-1275 ([c7b15f5](https://github.com/tillhub/tillhub-sdk-javascript/commit/c7b15f5848ee619c8649c1d0d04ff2c49fb660dc))
+* **analytics:** fix url - UOD-1275 ([61244bf](https://github.com/tillhub/tillhub-sdk-javascript/commit/61244bfdf06a7a487bd8ca5635999a9b0baf3218))
+
 # [4.192.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.191.0...v4.192.0) (2025-05-30)
 
 

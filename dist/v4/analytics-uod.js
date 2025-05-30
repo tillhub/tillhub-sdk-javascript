@@ -59,13 +59,13 @@ var AnalyticsUod = (function (_super) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        base = this.uriHelper.generateBaseUri('/revenue/stats');
+                        base = this.uriHelper.generateBaseUri('/oms/revenue/stats');
                         uri = this.uriHelper.generateUriWithQuery(base, query);
                         return [4, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
                         return [2, {
-                                data: response.data.results[0]
+                                data: response.data.results
                             }];
                     case 2:
                         error_2 = _a.sent();
@@ -88,7 +88,7 @@ var AnalyticsUod = (function (_super) {
                     case 1:
                         response = _a.sent();
                         return [2, {
-                                data: response.data.results[0]
+                                data: response.data.results
                             }];
                     case 2:
                         error_3 = _a.sent();
@@ -111,7 +111,7 @@ var AnalyticsUod = (function (_super) {
                     case 1:
                         response = _a.sent();
                         return [2, {
-                                data: response.data.results[0]
+                                data: response.data.results
                             }];
                     case 2:
                         error_4 = _a.sent();
@@ -134,7 +134,7 @@ var AnalyticsUod = (function (_super) {
                     case 1:
                         response = _a.sent();
                         return [2, {
-                                data: response.data.results[0]
+                                data: response.data.results
                             }];
                     case 2:
                         error_5 = _a.sent();
@@ -157,7 +157,7 @@ var AnalyticsUod = (function (_super) {
                     case 1:
                         response = _a.sent();
                         return [2, {
-                                data: response.data.results[0]
+                                data: response.data.results
                             }];
                     case 2:
                         error_6 = _a.sent();
