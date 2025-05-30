@@ -1,3 +1,10 @@
+# [4.192.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.191.0...v4.192.0) (2025-05-30)
+
+
+### Features
+
+* **analytics:** added new endpoint for txn stats - UOD-1275 ([4be4e4f](https://github.com/tillhub/tillhub-sdk-javascript/commit/4be4e4f957a4bf869f20b40d26d0e149404e1060))
+
 # [4.191.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.190.0...v4.191.0) (2025-05-21)
 
 

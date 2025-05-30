@@ -32,6 +32,13 @@ export interface AnalyticsUodResponse {
         window: AggregationWindow;
     };
 }
+export interface TxnStatsResponse {
+    data: {
+        periods: AnalyticsResponsePeriods;
+        series: AnalyticsResponseSeries[];
+        window: AggregationWindow;
+    };
+}
 interface AnalyticsResponsePeriods {
     current: {
         end: Date;
@@ -52,6 +59,7 @@ interface TopBranchResponse {
     data: {
         branch: string;
         currency: string;
+        rate: number;
         window: AggregationWindow;
         totalBranch: number;
         totalAll: number;
@@ -71,9 +79,9 @@ interface PaymentMethodAcceptanceResponse {
     data: {
         paymentMethodCode: string;
         currency: string;
-        successfulCount: number;
-        totalCount: number;
-        successRate: number;
+        successfulCount: number | string;
+        totalCount: number | string;
+        successRate: number | string;
     };
 }
 interface PaymentMethodRejectionResponse {
@@ -93,12 +101,18 @@ export declare class AnalyticsUod extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: AnalyticsUodOptions, http: Client);
     getRevenue(query?: AnalyticsUodRevenueQuery): Promise<AnalyticsUodResponse>;
+    getTxnStats(query?: AnalyticsUodQuery): Promise<TxnStatsResponse>;
     getRevenueTopBranchRate(query?: AnalyticsUodQuery): Promise<TopBranchResponse>;
     getPaymentMethodRevenue(query?: AnalyticsUodQuery): Promise<PaymentMethodRevenueResponse>;
     getPaymentMethodAcceptance(query?: AnalyticsUodQuery): Promise<PaymentMethodAcceptanceResponse>;
     getPaymentMethodRejection(query?: AnalyticsUodQuery): Promise<PaymentMethodRejectionResponse>;
 }
 export declare class AnalyticsGetRevenueFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class GetTxnStatsFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
