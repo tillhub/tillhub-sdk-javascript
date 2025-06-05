@@ -1,3 +1,11 @@
+# [4.195.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.194.0...v4.195.0) (2025-06-05)
+
+
+### Features
+
+* **docs:** correct minor typo in macOS installation troubleshooting section ([6c92e71](https://github.com/tillhub/tillhub-sdk-javascript/commit/6c92e71a132142315e1b9f40d61cc60329f25c0f))
+* **docs:** correct minor typo in macOS installation troubleshooting section ([6256bfe](https://github.com/tillhub/tillhub-sdk-javascript/commit/6256bfebae261629240977422efd15a205acb476))
+
 # [4.194.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.193.0...v4.194.0) (2025-06-05)
 
 

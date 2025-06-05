@@ -45,7 +45,12 @@ var Client = (function () {
                 return Client.instance.axiosInstance.interceptors.response.use(function (response) {
                     response.headers = tslib_1.__assign(tslib_1.__assign(tslib_1.__assign({}, response.headers), Client.instance.axiosInstance.defaults.headers.common), Client.instance.axiosInstance.defaults.headers);
                     return response;
-                }, interceptor);
+                }, function (error) {
+                    if (error.response) {
+                        error.response.headers = tslib_1.__assign(tslib_1.__assign(tslib_1.__assign({}, error.response.headers), Client.instance.axiosInstance.defaults.headers.common), Client.instance.axiosInstance.defaults.headers);
+                    }
+                    return interceptor(error);
+                });
             });
         }
         if ((_b = options === null || options === void 0 ? void 0 : options.requestInterceptors) === null || _b === void 0 ? void 0 : _b.length) {
