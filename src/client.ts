@@ -101,10 +101,15 @@ export class Client {
           (error) => {
             // Include all headers in error response
             if (error.response) {
+              const originalHeaders = { ...error.response.headers }
               error.response.headers = {
-                ...error.response.headers,
+                ...originalHeaders,
                 ...Client.instance.axiosInstance.defaults.headers.common,
                 ...Client.instance.axiosInstance.defaults.headers
+              }
+              // Ensure www-authenticate header is preserved
+              if (originalHeaders['Www-authenticate']) {
+                error.response.headers['Www-authenticate'] = originalHeaders['Www-authenticate']
               }
             }
             return interceptor(error)
