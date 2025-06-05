@@ -1,8 +1,9 @@
-import axios, { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
+import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosError } from 'axios'
 
 import { environment } from './environment'
 
-type Fn = () => any
+type ResponseInterceptorFn = (error?: AxiosError) => any
+type RequestInterceptorFn = (config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig | Promise<InternalAxiosRequestConfig>
 
 export type Timeout = number | undefined
 
@@ -13,8 +14,8 @@ export interface ClientOptions {
     [key: string]: any
   }
   token?: string
-  responseInterceptors?: Fn[]
-  requestInterceptors?: Fn[]
+  responseInterceptors?: ResponseInterceptorFn[]
+  requestInterceptors?: RequestInterceptorFn[]
 }
 
 const defaultHeaders = {
@@ -85,7 +86,7 @@ export class Client {
         Client.instance.axiosInstance.interceptors.response.eject(id)
       )
 
-      this.responseInterceptorIds = options.responseInterceptors.map((interceptor: Fn) => {
+      this.responseInterceptorIds = options.responseInterceptors.map((interceptor: ResponseInterceptorFn) => {
         // Add success interceptor to include all headers
         return Client.instance.axiosInstance.interceptors.response.use(
           (response) => {
@@ -97,7 +98,17 @@ export class Client {
             }
             return response
           },
-          interceptor as (value: AxiosResponse) => AxiosResponse | Promise<AxiosResponse>
+          (error) => {
+            // Include all headers in error response
+            if (error.response) {
+              error.response.headers = {
+                ...error.response.headers,
+                ...Client.instance.axiosInstance.defaults.headers.common,
+                ...Client.instance.axiosInstance.defaults.headers
+              }
+            }
+            return interceptor(error)
+          }
         )
       })
     }
