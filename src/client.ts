@@ -86,9 +86,17 @@ export class Client {
       )
 
       this.responseInterceptorIds = options.responseInterceptors.map((interceptor: Fn) => {
-        // first arg is on success, but we want to only listen for errors
+        // Add success interceptor to include all headers
         return Client.instance.axiosInstance.interceptors.response.use(
-          undefined,
+          (response) => {
+            // Include all headers in the response
+            response.headers = {
+              ...response.headers,
+              ...Client.instance.axiosInstance.defaults.headers.common,
+              ...Client.instance.axiosInstance.defaults.headers
+            }
+            return response
+          },
           interceptor as (value: AxiosResponse) => AxiosResponse | Promise<AxiosResponse>
         )
       })
