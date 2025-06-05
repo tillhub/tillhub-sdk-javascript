@@ -47,7 +47,11 @@ var Client = (function () {
                     return response;
                 }, function (error) {
                     if (error.response) {
-                        error.response.headers = tslib_1.__assign(tslib_1.__assign(tslib_1.__assign({}, error.response.headers), Client.instance.axiosInstance.defaults.headers.common), Client.instance.axiosInstance.defaults.headers);
+                        var originalHeaders = tslib_1.__assign({}, error.response.headers);
+                        error.response.headers = tslib_1.__assign(tslib_1.__assign(tslib_1.__assign({}, originalHeaders), Client.instance.axiosInstance.defaults.headers.common), Client.instance.axiosInstance.defaults.headers);
+                        if (originalHeaders['Www-authenticate']) {
+                            error.response.headers['Www-authenticate'] = originalHeaders['Www-authenticate'];
+                        }
                     }
                     return interceptor(error);
                 });

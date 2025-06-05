@@ -1,3 +1,11 @@
+# [4.196.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.195.0...v4.196.0) (2025-06-05)
+
+
+### Features
+
+* **error:** add missing header ([9ec346e](https://github.com/tillhub/tillhub-sdk-javascript/commit/9ec346e8639e165b56569cf33aa11991384bacb9))
+* **error:** add missing header ([887d234](https://github.com/tillhub/tillhub-sdk-javascript/commit/887d2344a6e14a10672b276c606f0be7c05e2dce))
+
 # [4.195.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.194.0...v4.195.0) (2025-06-05)
 
 
