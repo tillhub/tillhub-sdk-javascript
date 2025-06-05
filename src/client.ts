@@ -2,8 +2,8 @@ import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosError } from 'ax
 
 import { environment } from './environment'
 
+type Fn = () => any
 type ResponseInterceptorFn = (error?: AxiosError) => any
-type RequestInterceptorFn = (config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig | Promise<InternalAxiosRequestConfig>
 
 export type Timeout = number | undefined
 
@@ -15,7 +15,7 @@ export interface ClientOptions {
   }
   token?: string
   responseInterceptors?: ResponseInterceptorFn[]
-  requestInterceptors?: RequestInterceptorFn[]
+  requestInterceptors?: Fn[]
 }
 
 const defaultHeaders = {
