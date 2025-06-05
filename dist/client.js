@@ -42,7 +42,10 @@ var Client = (function () {
                 return Client.instance.axiosInstance.interceptors.response.eject(id);
             });
             this.responseInterceptorIds = options.responseInterceptors.map(function (interceptor) {
-                return Client.instance.axiosInstance.interceptors.response.use(undefined, interceptor);
+                return Client.instance.axiosInstance.interceptors.response.use(function (response) {
+                    response.headers = tslib_1.__assign(tslib_1.__assign(tslib_1.__assign({}, response.headers), Client.instance.axiosInstance.defaults.headers.common), Client.instance.axiosInstance.defaults.headers);
+                    return response;
+                }, interceptor);
             });
         }
         if ((_b = options === null || options === void 0 ? void 0 : options.requestInterceptors) === null || _b === void 0 ? void 0 : _b.length) {

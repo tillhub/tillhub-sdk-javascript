@@ -1,3 +1,10 @@
+# [4.194.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.193.0...v4.194.0) (2025-06-05)
+
+
+### Features
+
+* **client:** enhance response interceptor to include all headers in responses ([ca6e393](https://github.com/tillhub/tillhub-sdk-javascript/commit/ca6e393d4533499cb69f4142c1a861772a0d33cf))
+
 # [4.193.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.192.0...v4.193.0) (2025-05-30)
 
 
