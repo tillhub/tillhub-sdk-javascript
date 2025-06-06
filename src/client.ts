@@ -91,10 +91,17 @@ export class Client {
         return Client.instance.axiosInstance.interceptors.response.use(
           (response) => {
             // Include all headers in the response
+            const originalHeaders = { ...response.headers }
+            // First preserve the www-authenticate header if it exists
+            const wwwAuth = originalHeaders['www-authenticate'] ?? originalHeaders['Www-authenticate']
             response.headers = {
               ...response.headers,
               ...Client.instance.axiosInstance.defaults.headers.common,
               ...Client.instance.axiosInstance.defaults.headers
+            }
+            // Ensure www-authenticate header is preserved with original value
+            if (wwwAuth) {
+              response.headers['www-authenticate'] = wwwAuth
             }
             return response
           },
@@ -102,14 +109,17 @@ export class Client {
             // Include all headers in error response
             if (error.response) {
               const originalHeaders = { ...error.response.headers }
+              // First preserve the www-authenticate header if it exists
+              const wwwAuth = originalHeaders['www-authenticate'] ?? originalHeaders['Www-authenticate']
               error.response.headers = {
                 ...originalHeaders,
                 ...Client.instance.axiosInstance.defaults.headers.common,
                 ...Client.instance.axiosInstance.defaults.headers
               }
-              // Ensure www-authenticate header is preserved
-              if (originalHeaders['Www-authenticate']) {
-                error.response.headers['Www-authenticate'] = originalHeaders['Www-authenticate']
+
+              // Ensure www-authenticate header is preserved with original value
+              if (wwwAuth) {
+                error.response.headers['www-authenticate'] = wwwAuth
               }
             }
             return interceptor(error)
