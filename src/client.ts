@@ -1,9 +1,8 @@
-import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosError } from 'axios'
+import axios, { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 
 import { environment } from './environment'
 
 type Fn = () => any
-type ResponseInterceptorFn = (error?: AxiosError) => any
 
 export type Timeout = number | undefined
 
@@ -14,7 +13,7 @@ export interface ClientOptions {
     [key: string]: any
   }
   token?: string
-  responseInterceptors?: ResponseInterceptorFn[]
+  responseInterceptors?: Fn[]
   requestInterceptors?: Fn[]
 }
 
@@ -86,44 +85,11 @@ export class Client {
         Client.instance.axiosInstance.interceptors.response.eject(id)
       )
 
-      this.responseInterceptorIds = options.responseInterceptors.map((interceptor: ResponseInterceptorFn) => {
-        // Add success interceptor to include all headers
+      this.responseInterceptorIds = options.responseInterceptors.map((interceptor: Fn) => {
+        // first arg is on success, but we want to only listen for errors
         return Client.instance.axiosInstance.interceptors.response.use(
-          (response) => {
-            // Include all headers in the response
-            const originalHeaders = { ...response.headers }
-            // First preserve the www-authenticate header if it exists
-            const wwwAuth = originalHeaders['www-authenticate'] ?? originalHeaders['Www-authenticate']
-            response.headers = {
-              ...response.headers,
-              ...Client.instance.axiosInstance.defaults.headers.common,
-              ...Client.instance.axiosInstance.defaults.headers
-            }
-            // Ensure www-authenticate header is preserved with original value
-            if (wwwAuth) {
-              response.headers['www-authenticate'] = wwwAuth
-            }
-            return response
-          },
-          (error) => {
-            // Include all headers in error response
-            if (error.response) {
-              const originalHeaders = { ...error.response.headers }
-              // First preserve the www-authenticate header if it exists
-              const wwwAuth = originalHeaders['www-authenticate'] ?? originalHeaders['Www-authenticate']
-              error.response.headers = {
-                ...originalHeaders,
-                ...Client.instance.axiosInstance.defaults.headers.common,
-                ...Client.instance.axiosInstance.defaults.headers
-              }
-
-              // Ensure www-authenticate header is preserved with original value
-              if (wwwAuth) {
-                error.response.headers['www-authenticate'] = wwwAuth
-              }
-            }
-            return interceptor(error)
-          }
+          undefined,
+          interceptor as (value: AxiosResponse) => AxiosResponse | Promise<AxiosResponse>
         )
       })
     }
