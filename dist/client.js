@@ -42,27 +42,7 @@ var Client = (function () {
                 return Client.instance.axiosInstance.interceptors.response.eject(id);
             });
             this.responseInterceptorIds = options.responseInterceptors.map(function (interceptor) {
-                return Client.instance.axiosInstance.interceptors.response.use(function (response) {
-                    var _a;
-                    var originalHeaders = tslib_1.__assign({}, response.headers);
-                    var wwwAuth = (_a = originalHeaders['www-authenticate']) !== null && _a !== void 0 ? _a : originalHeaders['Www-authenticate'];
-                    response.headers = tslib_1.__assign(tslib_1.__assign(tslib_1.__assign({}, response.headers), Client.instance.axiosInstance.defaults.headers.common), Client.instance.axiosInstance.defaults.headers);
-                    if (wwwAuth) {
-                        response.headers['www-authenticate'] = wwwAuth;
-                    }
-                    return response;
-                }, function (error) {
-                    var _a;
-                    if (error.response) {
-                        var originalHeaders = tslib_1.__assign({}, error.response.headers);
-                        var wwwAuth = (_a = originalHeaders['www-authenticate']) !== null && _a !== void 0 ? _a : originalHeaders['Www-authenticate'];
-                        error.response.headers = tslib_1.__assign(tslib_1.__assign(tslib_1.__assign({}, originalHeaders), Client.instance.axiosInstance.defaults.headers.common), Client.instance.axiosInstance.defaults.headers);
-                        if (wwwAuth) {
-                            error.response.headers['www-authenticate'] = wwwAuth;
-                        }
-                    }
-                    return interceptor(error);
-                });
+                return Client.instance.axiosInstance.interceptors.response.use(undefined, interceptor);
             });
         }
         if ((_b = options === null || options === void 0 ? void 0 : options.requestInterceptors) === null || _b === void 0 ? void 0 : _b.length) {

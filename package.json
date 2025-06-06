@@ -1,6 +1,6 @@
 {
   "name": "@tillhub/javascript-sdk",
-  "version": "4.196.1",
+  "version": "4.196.2",
   "description": "The JavaScript (Browser) SDK for the Tillhub API.",
   "keywords": [],
   "main": "dist/tillhub-js.js",

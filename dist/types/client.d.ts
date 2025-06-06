@@ -1,6 +1,5 @@
-import { AxiosInstance, AxiosError } from 'axios';
+import { AxiosInstance } from 'axios';
 declare type Fn = () => any;
-declare type ResponseInterceptorFn = (error?: AxiosError) => any;
 export declare type Timeout = number | undefined;
 export interface ClientOptions {
     base?: string;
@@ -9,7 +8,7 @@ export interface ClientOptions {
         [key: string]: any;
     };
     token?: string;
-    responseInterceptors?: ResponseInterceptorFn[];
+    responseInterceptors?: Fn[];
     requestInterceptors?: Fn[];
 }
 export declare class Client {
