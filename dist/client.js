@@ -43,14 +43,22 @@ var Client = (function () {
             });
             this.responseInterceptorIds = options.responseInterceptors.map(function (interceptor) {
                 return Client.instance.axiosInstance.interceptors.response.use(function (response) {
+                    var _a;
+                    var originalHeaders = tslib_1.__assign({}, response.headers);
+                    var wwwAuth = (_a = originalHeaders['www-authenticate']) !== null && _a !== void 0 ? _a : originalHeaders['Www-authenticate'];
                     response.headers = tslib_1.__assign(tslib_1.__assign(tslib_1.__assign({}, response.headers), Client.instance.axiosInstance.defaults.headers.common), Client.instance.axiosInstance.defaults.headers);
+                    if (wwwAuth) {
+                        response.headers['www-authenticate'] = wwwAuth;
+                    }
                     return response;
                 }, function (error) {
+                    var _a;
                     if (error.response) {
                         var originalHeaders = tslib_1.__assign({}, error.response.headers);
+                        var wwwAuth = (_a = originalHeaders['www-authenticate']) !== null && _a !== void 0 ? _a : originalHeaders['Www-authenticate'];
                         error.response.headers = tslib_1.__assign(tslib_1.__assign(tslib_1.__assign({}, originalHeaders), Client.instance.axiosInstance.defaults.headers.common), Client.instance.axiosInstance.defaults.headers);
-                        if (originalHeaders['Www-authenticate']) {
-                            error.response.headers['Www-authenticate'] = originalHeaders['Www-authenticate'];
+                        if (wwwAuth) {
+                            error.response.headers['www-authenticate'] = wwwAuth;
                         }
                     }
                     return interceptor(error);

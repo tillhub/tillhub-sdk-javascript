@@ -1,3 +1,10 @@
+## [4.196.1](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.196.0...v4.196.1) (2025-06-06)
+
+
+### Bug Fixes
+
+* **client:** preserve www-authenticate header in response and error interceptors ([7f2ef15](https://github.com/tillhub/tillhub-sdk-javascript/commit/7f2ef150497fcd728eceb70a610ddfc5f76fb192))
+
 # [4.196.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.195.0...v4.196.0) (2025-06-05)
 
 
