@@ -53,7 +53,7 @@ import Auth from '@tillhub/javascript-sdk/dist/lib/Auth'
 
 ### Troubleshooting Installation Errors on macOS
 
-If you encounter an error while installing the project on macOS, this section is just for you
+If you encounter an error while installing the project on macOS, this section is just for you.ß
 
 Error: `Cannot find module 'node-darwin-arm64/package.json'`
 
