@@ -167,6 +167,34 @@ var Webhooks = (function (_super) {
             });
         });
     };
+    Webhooks.prototype.regenerateSecret = function (webhookId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_6;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri("/" + webhookId + "/regenerate-secret");
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().post(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new WebhookRegenerateSecretFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                msg: response.data.msg,
+                                data: response.data.results[0]
+                            }];
+                    case 3:
+                        error_6 = _a.sent();
+                        throw new WebhookRegenerateSecretFailed(error_6.message, { error: error_6 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     Webhooks.baseEndpoint = '/api/v0/webhooks';
     return Webhooks;
 }(base_1.ThBaseHandler));
@@ -230,5 +258,17 @@ var WebhookDeleteFailed = (function (_super) {
         return _this;
     }
     return WebhookDeleteFailed;
+}(baseError_1.BaseError));
+var WebhookRegenerateSecretFailed = (function (_super) {
+    tslib_1.__extends(WebhookRegenerateSecretFailed, _super);
+    function WebhookRegenerateSecretFailed(message, properties) {
+        if (message === void 0) { message = 'Could not regenerate the secret of the webhook'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'WebhookRegenerateSecretFailed';
+        Object.setPrototypeOf(_this, WebhookRegenerateSecretFailed.prototype);
+        return _this;
+    }
+    return WebhookRegenerateSecretFailed;
 }(baseError_1.BaseError));
 //# sourceMappingURL=webhooks.js.map

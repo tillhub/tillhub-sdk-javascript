@@ -16,6 +16,12 @@ export interface WebhookResponse {
     metadata?: Record<string, unknown>;
     next?: () => Promise<WebhookResponse>;
 }
+export interface WebhookRegenerateSecretResponse {
+    msg?: string;
+    data: {
+        secret: string;
+    };
+}
 export interface Webhook {
     id?: string;
     createdBy?: string;
@@ -39,4 +45,5 @@ export declare class Webhooks extends ThBaseHandler {
     create(webhook: Webhook): Promise<WebhookResponse>;
     put(webhookId: string, webhook: Webhook): Promise<WebhookResponse>;
     delete(webhookId: string): Promise<WebhookResponse>;
+    regenerateSecret(webhookId: string): Promise<WebhookRegenerateSecretResponse>;
 }

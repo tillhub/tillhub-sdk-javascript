@@ -1,3 +1,13 @@
+# [4.197.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.196.2...v4.197.0) (2025-06-10)
+
+
+### Features
+
+* **webhooks:** add new webhooks method ([29f1468](https://github.com/tillhub/tillhub-sdk-javascript/commit/29f14685bf2b0ebdeb17d5318a3534825c521406))
+* **webhooks:** add unit tests ([c3b90a1](https://github.com/tillhub/tillhub-sdk-javascript/commit/c3b90a17f6c92a2a4fd420e0bd992bd95933b226))
+* **webhooks:** change eol ([76bc744](https://github.com/tillhub/tillhub-sdk-javascript/commit/76bc744e80507041e95eec15aecc86d9712f8219))
+* **webhooks:** fix linting ([a305a61](https://github.com/tillhub/tillhub-sdk-javascript/commit/a305a6116ea7d9d19995fc232b6181f176a40959))
+
 ## [4.196.2](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.196.1...v4.196.2) (2025-06-06)
 
 
