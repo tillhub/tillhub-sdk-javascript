@@ -14,7 +14,7 @@ afterEach(() => {
 
 const webhookId = 'asdf5566'
 const secretObject = {
-  secret: 'myL1ttl3D1rtyS3cr3tGotUpdat3d',
+  secret: 'myL1ttl3D1rtyS3cr3tGotUpdat3d'
 }
 
 describe('v0: Webhooks: can regenerate the secret of the webhook', () => {

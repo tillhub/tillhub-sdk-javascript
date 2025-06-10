@@ -157,7 +157,7 @@ export class Webhooks extends ThBaseHandler {
       throw new WebhookDeleteFailed(error.message, { error })
     }
   }
-  
+
   async regenerateSecret (webhookId: string): Promise<WebhookRegenerateSecretResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${webhookId}/regenerate-secret`)
 
@@ -169,7 +169,7 @@ export class Webhooks extends ThBaseHandler {
 
       return {
         msg: response.data.msg,
-        data: response.data.results[0],
+        data: response.data.results[0]
       }
     } catch (error: any) {
       throw new WebhookRegenerateSecretFailed(error.message, { error })
