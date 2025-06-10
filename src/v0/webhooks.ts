@@ -21,6 +21,13 @@ export interface WebhookResponse {
   next?: () => Promise<WebhookResponse>
 }
 
+export interface WebhookRegenerateSecretResponse {
+  msg?: string
+  data: {
+    secret: string
+  }
+}
+
 export interface Webhook {
   id?: string
   createdBy?: string
@@ -150,6 +157,24 @@ export class Webhooks extends ThBaseHandler {
       throw new WebhookDeleteFailed(error.message, { error })
     }
   }
+  
+  async regenerateSecret (webhookId: string): Promise<WebhookRegenerateSecretResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${webhookId}/regenerate-secret`)
+
+    try {
+      const response = await this.http.getClient().post(uri)
+      if (response.status !== 200) {
+        throw new WebhookRegenerateSecretFailed(undefined, { status: response.status })
+      }
+
+      return {
+        msg: response.data.msg,
+        data: response.data.results[0],
+      }
+    } catch (error: any) {
+      throw new WebhookRegenerateSecretFailed(error.message, { error })
+    }
+  }
 }
 
 class WebhookFetchFailed extends BaseError {
@@ -204,5 +229,16 @@ class WebhookDeleteFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, WebhookDeleteFailed.prototype)
+  }
+}
+
+class WebhookRegenerateSecretFailed extends BaseError {
+  public name = 'WebhookRegenerateSecretFailed'
+  constructor (
+    public message: string = 'Could not regenerate the secret of the webhook',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, WebhookRegenerateSecretFailed.prototype)
   }
 }
