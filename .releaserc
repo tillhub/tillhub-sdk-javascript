@@ -6,14 +6,8 @@
         {
           "preset": "angular",
           "releaseRules": [
-            { "type": "docs", "scope": "README", "release": "patch" },
-            { "type": "refactor", "release": "patch" },
-            { "type": "style", "release": "patch" },
-            { "type": "*", "release": "patch" }
-          ],
-          "parserOpts": {
-            "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES"]
-          }
+            { "type": "*", "release": "minor" }
+          ]
         }
       ],
       "@semantic-release/release-notes-generator"
