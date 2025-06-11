@@ -170,6 +170,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.iamUsers = function () {
         return this.generateAuthenticatedInstance(v0.IamUsers);
     };
+    TillhubClient.prototype.iamApiKeys = function () {
+        return this.generateAuthenticatedInstance(v0.IamApiKeys);
+    };
     TillhubClient.prototype.iamUserGroups = function () {
         return this.generateAuthenticatedInstance(v0.IamUserGroups);
     };

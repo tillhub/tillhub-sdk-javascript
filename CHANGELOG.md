@@ -1,3 +1,10 @@
+# [4.203.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.202.0...v4.203.0) (2025-06-11)
+
+
+### Features
+
+* **package:** update SDK description to remove trailing period ([232464e](https://github.com/tillhub/tillhub-sdk-javascript/commit/232464ec18f3f52d0eda1feb1b0b05b27bc0a7c5))
+
 # [4.198.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.197.0...v4.198.0) (2025-06-11)
 
 
