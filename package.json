@@ -151,5 +151,30 @@
     "just-typeof": "^2.0.0",
     "qs": "^6.9.6",
     "serialize-error": "^8.0.1"
+  },
+  "release": {
+    "verifyConditions": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git"
+    ],
+    "prepare": [
+      "@semantic-release/npm",
+      "@semantic-release/changelog",
+      {
+        "path": "@semantic-release/git",
+        "assets": [
+          "package.json",
+          "package-lock.json",
+          "dist",
+          "CHANGELOG.md"
+        ],
+        "message": "chore(release): Release ${nextRelease.version} - <%=new Date().toLocaleDateString('en-US', {year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' })%> [skip ci]\n\n${nextRelease.notes}"
+      }
+    ],
+    "publish": [
+      "@semantic-release/npm",
+      "@semantic-release/github"
+    ]
   }
 }
