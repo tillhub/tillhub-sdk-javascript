@@ -195,6 +195,34 @@ var Webhooks = (function (_super) {
             });
         });
     };
+    Webhooks.prototype.test = function (webhookId, payload) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_7;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri("/" + webhookId + "/test");
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().post(uri, payload)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new WebhookTestFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                msg: response.data.msg,
+                                data: response.data.results[0]
+                            }];
+                    case 3:
+                        error_7 = _a.sent();
+                        throw new WebhookTestFailed(error_7.message, { error: error_7 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     Webhooks.baseEndpoint = '/api/v0/webhooks';
     return Webhooks;
 }(base_1.ThBaseHandler));
@@ -270,5 +298,17 @@ var WebhookRegenerateSecretFailed = (function (_super) {
         return _this;
     }
     return WebhookRegenerateSecretFailed;
+}(baseError_1.BaseError));
+var WebhookTestFailed = (function (_super) {
+    tslib_1.__extends(WebhookTestFailed, _super);
+    function WebhookTestFailed(message, properties) {
+        if (message === void 0) { message = 'Could not test the webhook'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'WebhookTestFailed';
+        Object.setPrototypeOf(_this, WebhookTestFailed.prototype);
+        return _this;
+    }
+    return WebhookTestFailed;
 }(baseError_1.BaseError));
 //# sourceMappingURL=webhooks.js.map

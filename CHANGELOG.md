@@ -1,3 +1,11 @@
+# [4.198.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.197.0...v4.198.0) (2025-06-11)
+
+
+### Features
+
+* **webhooks:** add test method to webhooks ([8959695](https://github.com/tillhub/tillhub-sdk-javascript/commit/89596954b692e17b51be6c2c95f641102c62fbd1))
+* **webhooks:** add unit tests ([260810c](https://github.com/tillhub/tillhub-sdk-javascript/commit/260810c32e8706c571c3d648ffb4c6dc50e5dc8a))
+
 # [4.197.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.196.2...v4.197.0) (2025-06-10)
 
 
