@@ -25,11 +25,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      #- name: Test
-      #  run: npm run test:prod && npm run build
+      - name: Test
+        run: npm run test:prod && npm run build
       
-      #- name: Coverage
-      #  run: npm run coverage
+      - name: Coverage
+        run: npm run coverage
       
       - name: Deploy docs
         env:
