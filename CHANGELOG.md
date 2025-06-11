@@ -1,3 +1,5 @@
+# [4.205.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.204.0...v4.205.0) (2025-06-11)
+
 # [4.204.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.203.0...v4.204.0) (2025-06-11)
 
 
