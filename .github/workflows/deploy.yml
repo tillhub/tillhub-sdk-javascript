@@ -29,6 +29,8 @@ jobs:
         run: npm run test:prod && npm run build
       
       - name: Coverage
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: npm run coverage
       
       - name: Deploy docs
