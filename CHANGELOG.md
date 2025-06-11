@@ -1,3 +1,10 @@
+# [4.204.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.203.0...v4.204.0) (2025-06-11)
+
+
+### Features
+
+* **deploy:** add GH_TOKEN to deployment workflow for GitHub integration ([21a1c78](https://github.com/tillhub/tillhub-sdk-javascript/commit/21a1c7843791a1a3e4b0f0265234f5f8f4b2cd64))
+
 # [4.203.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.202.0...v4.203.0) (2025-06-11)
 
 
