@@ -154,19 +154,16 @@
   },
   "release": {
     "verifyConditions": [
-      [
-        "@semantic-release/commit-analyzer",
-        {
-          "preset": "angular",
-          "releaseRules": [
-            { "type": "*", "release": "minor" }
-          ]
-        }
-      ],
       "@semantic-release/changelog",
       "@semantic-release/npm",
       "@semantic-release/git"
     ],
+    "analyzeCommits": {
+      "preset": "angular",
+      "releaseRules": [
+        { "type": "*", "release": "minor" }
+      ]
+    },
     "prepare": [
       "@semantic-release/npm",
       "@semantic-release/changelog",
