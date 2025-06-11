@@ -1,0 +1,41 @@
+name: Build & Deploy
+concurrency: frontend-deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: Environment
+        required: true
+        options:
+          - production
+jobs:
+   build-deploy:
+    runs-on: tillhub-org-runner
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Test
+        run: npm run test:prod && npm run build
+      
+      - name: Coverage
+        run: npm run coverage
+      
+      - name: Deploy docs
+        run: npm run deploy-docs
+
+      - name: Release
+        run: npm run semantic-release || true
+      
