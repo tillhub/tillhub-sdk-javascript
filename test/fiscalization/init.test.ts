@@ -8,7 +8,6 @@ import { FiscalizationItem } from '../../src/v0/fiscalization'
 dotenv.config()
 
 const legacyId = '4564'
-const branchId = '1234'
 
 const mock = new MockAdapter(axios)
 afterEach(() => {

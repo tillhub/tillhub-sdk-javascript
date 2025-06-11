@@ -13,7 +13,6 @@ afterEach(() => {
   mock.reset()
 })
 
-const branchId = 'asdf5566'
 const mockShiftPlan: ShiftPlanItem[] = [
   {
     staff_member_id: '0505ce68-9cd9-4b0c-ac5c-7cb6804e8956',

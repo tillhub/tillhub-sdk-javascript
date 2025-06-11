@@ -73,7 +73,7 @@ describe('v1: Devices: can get devices meta', () => {
 
     expect(devices).toBeInstanceOf(v1.Devices)
 
-    const { data } = await devices.meta()
+    await devices.meta()
 
     expect({}).toEqual({})
   })
