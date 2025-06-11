@@ -37,5 +37,7 @@ jobs:
         run: npm run deploy-docs
 
       - name: Release
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm run semantic-release || true
       

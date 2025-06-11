@@ -8,6 +8,9 @@ jobs:
     docker:
       - image: 'circleci/node:latest'
     steps:
+      - run:
+          name: printenv
+          command: printenv
       - checkout
       - run:
           name: install
