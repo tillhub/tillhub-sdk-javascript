@@ -34,18 +34,10 @@ jobs:
       #- name: Coverage
       #  run: npm run coverage
       
-      - name: Build docs
-        run: npm run build:docs
-
       - name: Deploy docs
-        run: |
-          cd docs
-          git init
-          git config user.name "Tillhub Engineer"
-          git config user.email "engineering@tillhub.de"
-          git add .
-          git commit -m "docs(docs): update gh-pages [ci skip]"
-          git push --force --quiet "https://${{ secrets.GH_TOKEN }}@github.com/tillhub/tillhub-sdk-javascript.git" master:gh-pages
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: npm run deploy-docs
 
       - name: Release
         env:
