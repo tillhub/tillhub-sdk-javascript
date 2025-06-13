@@ -64,7 +64,7 @@ export interface WebhookEventLog {
   webhookEvent?: WebhookEvent
 }
 
-export interface WebhookTestPayload {
+export interface WebhookEventTestPayload {
   events: string[]
 }
 
@@ -173,7 +173,7 @@ export class WebhookEvents extends ThBaseHandler {
     }
   }
 
-  async test (webhookId: string, payload: WebhookTestPayload): Promise<WebhookEventTestResponse> {
+  async test (webhookId: string, payload: WebhookEventTestPayload): Promise<WebhookEventTestResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${webhookId}/test`)
 
     try {
