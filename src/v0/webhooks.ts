@@ -28,10 +28,6 @@ export interface WebhookRegenerateSecretResponse {
   }
 }
 
-export interface WebhookTestPayload {
-  events: string[]
-}
-
 export interface Webhook {
   id?: string
   createdBy?: string
@@ -179,24 +175,6 @@ export class Webhooks extends ThBaseHandler {
       throw new WebhookRegenerateSecretFailed(error.message, { error })
     }
   }
-
-  async test (webhookId: string, payload: WebhookTestPayload): Promise<WebhookResponse> {
-    const uri = this.uriHelper.generateBaseUri(`/${webhookId}/test`)
-
-    try {
-      const response = await this.http.getClient().post(uri, payload)
-      if (response.status !== 200) {
-        throw new WebhookTestFailed(undefined, { status: response.status })
-      }
-
-      return {
-        msg: response.data.msg,
-        data: response.data.results[0]
-      }
-    } catch (error: any) {
-      throw new WebhookTestFailed(error.message, { error })
-    }
-  }
 }
 
 class WebhookFetchFailed extends BaseError {
@@ -262,16 +240,5 @@ class WebhookRegenerateSecretFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, WebhookRegenerateSecretFailed.prototype)
-  }
-}
-
-class WebhookTestFailed extends BaseError {
-  public name = 'WebhookTestFailed'
-  constructor (
-    public message: string = 'Could not test the webhook',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, WebhookTestFailed.prototype)
   }
 }

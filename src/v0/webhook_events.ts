@@ -33,6 +33,11 @@ export interface WebhookEventResponse {
   next?: () => Promise<WebhookEventResponse>
 }
 
+export interface WebhookEventTestResponse {
+  msg: string
+  data: WebhookEvent[]
+}
+
 export type EventType = 'create' | 'update' | 'delete'
 
 export interface WebhookEvent {
@@ -57,6 +62,10 @@ export interface WebhookEventLog {
   createdAt?: Date
   updatedAt?: Date
   webhookEvent?: WebhookEvent
+}
+
+export interface WebhookEventTestPayload {
+  events: string[]
 }
 
 export class WebhookEvents extends ThBaseHandler {
@@ -163,6 +172,24 @@ export class WebhookEvents extends ThBaseHandler {
       throw new WebhookEventReplayFailed(error.message, { error })
     }
   }
+
+  async test (webhookId: string, payload: WebhookEventTestPayload): Promise<WebhookEventTestResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/${webhookId}/test`)
+
+    try {
+      const response = await this.http.getClient().post(uri, payload)
+      if (response.status !== 200) {
+        throw new WebhookEventTestFailed(undefined, { status: response.status })
+      }
+
+      return {
+        msg: response.data.msg,
+        data: response.data.results
+      }
+    } catch (error: any) {
+      throw new WebhookEventTestFailed(error.message, { error })
+    }
+  }
 }
 
 class WebhookEventFetchFailed extends BaseError {
@@ -206,5 +233,16 @@ class WebhookEventReplayFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, WebhookEventReplayFailed.prototype)
+  }
+}
+
+class WebhookEventTestFailed extends BaseError {
+  public name = 'WebhookEventTestFailed'
+  constructor (
+    public message: string = 'Could not test the webhook',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, WebhookEventTestFailed.prototype)
   }
 }
