@@ -1,3 +1,10 @@
+# [4.206.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.205.0...v4.206.0) (2025-06-16)
+
+
+### Features
+
+* **api:** add IamApiKey retrieval functionality and error handling ([114bb61](https://github.com/tillhub/tillhub-sdk-javascript/commit/114bb6139c750671ff60bfab2d0621d7ecf45bd7))
+
 # [4.205.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.204.0...v4.205.0) (2025-06-11)
 
 # [4.204.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.203.0...v4.204.0) (2025-06-11)

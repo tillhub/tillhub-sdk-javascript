@@ -11,6 +11,17 @@ export interface IamApiKeysResponse {
     metadata: Record<string, unknown>;
     next?: () => Promise<IamApiKeysResponse>;
 }
+export interface IamApiKeyResponse {
+    data: MerchantApiKey;
+    metadata: Record<string, unknown>;
+    msg?: string;
+    errors?: ErrorObject[];
+}
+export interface ErrorObject {
+    id: string;
+    label: string;
+    errorDetails: Record<string, unknown>;
+}
 export interface IamApiKeysPrivateKeyResponse {
     privateKey?: string;
 }
@@ -54,6 +65,7 @@ export declare class IamApiKeys extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: IamApiKeysOptions, http: Client);
     getAll(query?: IamApiKeysQueryHandler | undefined): Promise<IamApiKeysResponse>;
+    get(apiKeyId: string): Promise<IamApiKeyResponse>;
     getPrivateKey(publicKey: string): Promise<IamApiKeysPrivateKeyResponse>;
     meta(query?: IamApiKeysQueryHandler | undefined): Promise<IamApiKeysResponse>;
 }
@@ -63,6 +75,11 @@ export declare class IamApiKeysFetchFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class IamApiKeysMetaFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class IamApiKeyFetchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
