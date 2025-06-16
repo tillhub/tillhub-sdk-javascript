@@ -15,6 +15,19 @@ export interface IamApiKeysResponse {
   next?: () => Promise<IamApiKeysResponse>
 }
 
+export interface IamApiKeyResponse {
+  data: MerchantApiKey
+  metadata: Record<string, unknown>
+  msg?: string
+  errors?: ErrorObject[]
+}
+
+export interface ErrorObject {
+  id: string
+  label: string
+  errorDetails: Record<string, unknown>
+}
+
 export interface IamApiKeysPrivateKeyResponse {
   privateKey?: string
 }
@@ -98,6 +111,26 @@ export class IamApiKeys extends ThBaseHandler {
     }
   }
 
+  async get (apiKeyId: string): Promise<IamApiKeyResponse> {
+    const base = this.uriHelper.generateBaseUri(`/${apiKeyId}`)
+    const uri = this.uriHelper.generateUriWithQuery(base)
+
+    try {
+      const response = await this.http.getClient().get(uri)
+
+      if (response.status !== 200) {
+        throw new IamApiKeyFetchFailed(undefined, { status: response.status })
+      }
+      return {
+        data: response.data.results[0] as MerchantApiKey,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new IamApiKeyFetchFailed(error.message, { error })
+    }
+  }
+
   async getPrivateKey (publicKey: string): Promise<IamApiKeysPrivateKeyResponse> {
     const base = this.uriHelper.generateBaseUri('/private-key')
     const uri = this.uriHelper.generateUriWithQuery(base)
@@ -138,7 +171,7 @@ export class IamApiKeys extends ThBaseHandler {
 export class IamApiKeysFetchFailed extends BaseError {
   public name = 'IamApiKeysFetchFailed'
   constructor (
-    public message: string = 'Could not fetch iam roles',
+    public message: string = 'Could not fetch meta api keys',
     properties?: Record<string, unknown>
   ) {
     super(message, properties)
@@ -154,6 +187,17 @@ export class IamApiKeysMetaFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, IamApiKeysMetaFailed.prototype)
+  }
+}
+
+export class IamApiKeyFetchFailed extends BaseError {
+  public name = 'IamApiKeyFetchFailed'
+  constructor (
+    public message: string = 'Could not meta api key',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, IamApiKeyFetchFailed.prototype)
   }
 }
 
