@@ -1,3 +1,12 @@
+# [4.207.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.206.0...v4.207.0) (2025-06-17)
+
+
+### Features
+
+* **webhooks:** eol change ([ec76c25](https://github.com/tillhub/tillhub-sdk-javascript/commit/ec76c2540bcd5233e594fd4e8a53f1f9669553f4))
+* **webhooks:** move test method to webhook events ([04dd266](https://github.com/tillhub/tillhub-sdk-javascript/commit/04dd266111dd17e96b8f93693720bed260812273))
+* **webhooks:** update naming ([015dd4b](https://github.com/tillhub/tillhub-sdk-javascript/commit/015dd4bc84e5a616ff263419e883e5242c3a3f78))
+
 # [4.206.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.205.0...v4.206.0) (2025-06-16)
 
 

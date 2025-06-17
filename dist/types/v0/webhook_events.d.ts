@@ -28,6 +28,10 @@ export interface WebhookEventResponse {
     metadata: Record<string, unknown>;
     next?: () => Promise<WebhookEventResponse>;
 }
+export interface WebhookEventTestResponse {
+    msg: string;
+    data: WebhookEvent[];
+}
 export declare type EventType = 'create' | 'update' | 'delete';
 export interface WebhookEvent {
     id?: string;
@@ -51,6 +55,9 @@ export interface WebhookEventLog {
     updatedAt?: Date;
     webhookEvent?: WebhookEvent;
 }
+export interface WebhookEventTestPayload {
+    events: string[];
+}
 export declare class WebhookEvents extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
@@ -62,4 +69,5 @@ export declare class WebhookEvents extends ThBaseHandler {
     meta(webhookId: string, query?: WebhookEventQuery | undefined): Promise<WebhookEventResponse>;
     get(webhookId: string, eventId: string): Promise<WebhookEventResponse>;
     replay(webhookId: string, query?: WebhookEventQuery | undefined): Promise<WebhookEventResponse>;
+    test(webhookId: string, payload: WebhookEventTestPayload): Promise<WebhookEventTestResponse>;
 }

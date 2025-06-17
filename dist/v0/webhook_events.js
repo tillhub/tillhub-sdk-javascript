@@ -145,6 +145,34 @@ var WebhookEvents = (function (_super) {
             });
         });
     };
+    WebhookEvents.prototype.test = function (webhookId, payload) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_5;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri("/" + webhookId + "/test");
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().post(uri, payload)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new WebhookEventTestFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                msg: response.data.msg,
+                                data: response.data.results
+                            }];
+                    case 3:
+                        error_5 = _a.sent();
+                        throw new WebhookEventTestFailed(error_5.message, { error: error_5 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     WebhookEvents.baseEndpoint = '/api/v0/events';
     return WebhookEvents;
 }(base_1.ThBaseHandler));
@@ -196,5 +224,17 @@ var WebhookEventReplayFailed = (function (_super) {
         return _this;
     }
     return WebhookEventReplayFailed;
+}(baseError_1.BaseError));
+var WebhookEventTestFailed = (function (_super) {
+    tslib_1.__extends(WebhookEventTestFailed, _super);
+    function WebhookEventTestFailed(message, properties) {
+        if (message === void 0) { message = 'Could not test the webhook'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'WebhookEventTestFailed';
+        Object.setPrototypeOf(_this, WebhookEventTestFailed.prototype);
+        return _this;
+    }
+    return WebhookEventTestFailed;
 }(baseError_1.BaseError));
 //# sourceMappingURL=webhook_events.js.map
