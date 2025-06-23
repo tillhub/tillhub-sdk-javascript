@@ -30,6 +30,12 @@ export interface OrderResponse {
   errors?: ErrorObject[]
 }
 
+export interface OrdersMetaResponse {
+  data: Record<string, unknown>
+  metadata: Record<string, unknown>
+  msg: string
+}
+
 export interface ErrorObject {
   id: string
   label: string
@@ -314,6 +320,25 @@ export class Orders extends ThBaseHandler {
     }
   }
 
+  async meta (query?: OrdersQuery | undefined): Promise<OrdersMetaResponse> {
+    const base = this.uriHelper.generateBaseUri()
+    const uri = this.uriHelper.generateUriWithQuery(`${base}/meta`, query)
+
+    try {
+      const response = await this.http.getClient().get(uri)
+
+      if (response.status !== 200) throw new OrdersFetchMetaFailed()
+
+      return {
+        data: response.data.results[0],
+        msg: response.data.msg,
+        metadata: { count: response.data.results[0]?.count || 0 }
+      }
+    } catch (error: any) {
+      throw new OrdersFetchMetaFailed(error.message, { error })
+    }
+  }
+
   async get (orderId: string): Promise<OrderResponse> {
     const base = this.uriHelper.generateBaseUri(`/${orderId}`)
     const uri = this.uriHelper.generateUriWithQuery(base)
@@ -343,6 +368,17 @@ export class OrdersFetchFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, OrdersFetchFailed.prototype)
+  }
+}
+
+export class OrdersFetchMetaFailed extends BaseError {
+  public name = 'OrdersFetchMetaFailed'
+  constructor (
+    public message: string = 'Could not fetch meta data for orders',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, OrdersFetchMetaFailed.prototype)
   }
 }
 
