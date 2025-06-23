@@ -41,6 +41,11 @@ export interface UodInvoicesEntity {
   pdfUrl?: string
 }
 
+export interface UodInvoicesMetaResponse {
+  data: Record<string, unknown>
+  metadata: Record<string, unknown>
+  msg: string
+}
 export interface Document {
   id?: string
   documentNumber?: string
@@ -93,17 +98,36 @@ export class UodInvoices extends ThBaseHandler {
         throw new UodInvoicesFetchFailed(undefined, { status: response.status })
       }
 
-      if (response.data.cursor?.next) {
+      if (response.data.cursors?.after) {
         next = (): Promise<UodInvoicesResponse> => this.getAll({ uri: response.data.cursors.after })
       }
 
       return {
         data: response.data.results as UodInvoicesEntity[],
-        metadata: { cursor: response.data.cursor },
+        metadata: { cursor: response.data.cursors },
         next
       }
     } catch (error: any) {
       throw new UodInvoicesFetchFailed(error.message, { error })
+    }
+  }
+
+  async meta (query?: UodInvoicesQueryHandler | undefined): Promise<UodInvoicesMetaResponse> {
+    const base = this.uriHelper.generateBaseUri()
+    const uri = this.uriHelper.generateUriWithQuery(`${base}/meta`, query)
+
+    try {
+      const response = await this.http.getClient().get(uri)
+
+      if (response.status !== 200) throw new UodInvoicesGetMetaFailed()
+
+      return {
+        data: response.data.results[0],
+        msg: response.data.msg,
+        metadata: { count: response.data.results[0]?.count || 0 }
+      }
+    } catch (error: any) {
+      throw new UodInvoicesGetMetaFailed(error.message, { error })
     }
   }
 
@@ -136,6 +160,17 @@ export class UodInvoicesFetchFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, UodInvoicesFetchFailed.prototype)
+  }
+}
+
+export class UodInvoicesGetMetaFailed extends BaseError {
+  public name = 'UodInvoicesGetMetaFailed'
+  constructor (
+    public message: string = 'Could not fetch meta data for invoices',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, UodInvoicesGetMetaFailed.prototype)
   }
 }
 
