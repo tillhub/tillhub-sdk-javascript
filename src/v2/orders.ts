@@ -306,8 +306,8 @@ export class Orders extends ThBaseHandler {
         throw new OrdersFetchFailed(undefined, { status: response.status })
       }
 
-      if (response.data.cursor?.after) {
-        next = (): Promise<OrdersResponse> => this.getAll({ uri: response.data.cursor.after })
+      if (response.data.cursors?.after) {
+        next = (): Promise<OrdersResponse> => this.getAll({ uri: response.data.cursors.after })
       }
 
       return {
