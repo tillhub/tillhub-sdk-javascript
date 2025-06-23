@@ -34,6 +34,11 @@ export interface UodInvoicesEntity {
     csvUrl?: string;
     pdfUrl?: string;
 }
+export interface UodInvoicesMetaResponse {
+    data: Record<string, unknown>;
+    metadata: Record<string, unknown>;
+    msg: string;
+}
 export interface Document {
     id?: string;
     documentNumber?: string;
@@ -60,9 +65,15 @@ export declare class UodInvoices extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: UodInvoicesOptions, http: Client);
     getAll(query?: UodInvoicesQueryHandler | undefined): Promise<UodInvoicesResponse>;
+    meta(query?: UodInvoicesQueryHandler | undefined): Promise<UodInvoicesMetaResponse>;
     download(documentId: string, type: InvoiceType): Promise<any>;
 }
 export declare class UodInvoicesFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class UodInvoicesGetMetaFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
