@@ -1,3 +1,10 @@
+# [4.209.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.208.0...v4.209.0) (2025-06-23)
+
+
+### Features
+
+* **orders:** handle metadata of pagination - UOD-1603 ([3764081](https://github.com/tillhub/tillhub-sdk-javascript/commit/37640814a12f3c8333a5d59845817a29f6659e1a))
+
 # [4.208.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.207.0...v4.208.0) (2025-06-23)
 
 
