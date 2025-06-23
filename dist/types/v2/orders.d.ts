@@ -25,6 +25,11 @@ export interface OrderResponse {
     msg?: string;
     errors?: ErrorObject[];
 }
+export interface OrdersMetaResponse {
+    data: Record<string, unknown>;
+    metadata: Record<string, unknown>;
+    msg: string;
+}
 export interface ErrorObject {
     id: string;
     label: string;
@@ -256,9 +261,15 @@ export declare class Orders extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: OrdersOptions, http: Client);
     getAll(query?: OrdersQuery | undefined): Promise<OrdersResponse>;
+    meta(query?: OrdersQuery | undefined): Promise<OrdersMetaResponse>;
     get(orderId: string): Promise<OrderResponse>;
 }
 export declare class OrdersFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class OrdersFetchMetaFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

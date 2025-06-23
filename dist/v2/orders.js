@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OrderFetchFailed = exports.OrdersFetchFailed = exports.Orders = void 0;
+exports.OrderFetchFailed = exports.OrdersFetchMetaFailed = exports.OrdersFetchFailed = exports.Orders = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -55,9 +55,39 @@ var Orders = (function (_super) {
             });
         });
     };
-    Orders.prototype.get = function (orderId) {
+    Orders.prototype.meta = function (query) {
+        var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_2;
+            return tslib_1.__generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        base = this.uriHelper.generateBaseUri();
+                        uri = this.uriHelper.generateUriWithQuery(base + "/meta", query);
+                        _b.label = 1;
+                    case 1:
+                        _b.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _b.sent();
+                        if (response.status !== 200)
+                            throw new OrdersFetchMetaFailed();
+                        return [2, {
+                                data: response.data.results[0],
+                                msg: response.data.msg,
+                                metadata: { count: ((_a = response.data.results[0]) === null || _a === void 0 ? void 0 : _a.count) || 0 }
+                            }];
+                    case 3:
+                        error_2 = _b.sent();
+                        throw new OrdersFetchMetaFailed(error_2.message, { error: error_2 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
+    Orders.prototype.get = function (orderId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -78,8 +108,8 @@ var Orders = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_2 = _a.sent();
-                        throw new OrderFetchFailed(error_2.message, { error: error_2 });
+                        error_3 = _a.sent();
+                        throw new OrderFetchFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });
@@ -102,6 +132,19 @@ var OrdersFetchFailed = (function (_super) {
     return OrdersFetchFailed;
 }(errors_1.BaseError));
 exports.OrdersFetchFailed = OrdersFetchFailed;
+var OrdersFetchMetaFailed = (function (_super) {
+    tslib_1.__extends(OrdersFetchMetaFailed, _super);
+    function OrdersFetchMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch meta data for orders'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'OrdersFetchMetaFailed';
+        Object.setPrototypeOf(_this, OrdersFetchMetaFailed.prototype);
+        return _this;
+    }
+    return OrdersFetchMetaFailed;
+}(errors_1.BaseError));
+exports.OrdersFetchMetaFailed = OrdersFetchMetaFailed;
 var OrderFetchFailed = (function (_super) {
     tslib_1.__extends(OrderFetchFailed, _super);
     function OrderFetchFailed(message, properties) {

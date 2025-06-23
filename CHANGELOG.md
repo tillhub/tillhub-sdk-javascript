@@ -1,3 +1,11 @@
+# [4.208.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.207.0...v4.208.0) (2025-06-23)
+
+
+### Features
+
+* **orders:** add tests - UOD-1248 ([e343740](https://github.com/tillhub/tillhub-sdk-javascript/commit/e34374015b5d3349b2def050e0ccfedd2b540c34))
+* **orders:** fetch meta - UOD-1248 ([2145c33](https://github.com/tillhub/tillhub-sdk-javascript/commit/2145c33c80b9016b76db861875d7641f8a6fd18e))
+
 # [4.207.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.206.0...v4.207.0) (2025-06-17)
 
 
