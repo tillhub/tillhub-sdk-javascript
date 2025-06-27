@@ -25,13 +25,24 @@ export interface TableLayoutDuplicateOptions {
 }
 
 export interface TableLayoutsResponse {
-  data: TableLayoutEntity[]
+  data: TableLayoutsEntity[]
   metadata?: {
     count?: number
     cursor?: { next?: string }
   }
   next?: () => Promise<TableLayoutsResponse>
   msg?: string
+}
+
+export interface TableLayoutsEntity {
+  id?: string
+  name?: string
+  location?: string
+  active?: boolean
+  tablesCount?: number
+  combinationsCount?: number
+  bookableTablesCount?: number
+  bookableCombinationsCount?: number
 }
 
 export interface TableLayoutResponse {
@@ -46,9 +57,17 @@ export interface TableLayoutEntity {
   id?: string
   name?: string
   location?: string
-  tables_count?: number
   active?: boolean
   layout?: Record<string, any>
+  combinations?: Combination[]
+}
+
+export interface Combination {
+  id: string
+  isBookableExternally: boolean
+  maxPartySize: number
+  minPartySize: number
+  tables: string[]
 }
 
 export class TableLayouts extends ThBaseHandler {
