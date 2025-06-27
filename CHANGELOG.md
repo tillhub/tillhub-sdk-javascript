@@ -1,3 +1,10 @@
+# [4.212.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.211.0...v4.212.0) (2025-06-27)
+
+
+### Features
+
+* **table-layouts:** update types ([#662](https://github.com/tillhub/tillhub-sdk-javascript/issues/662)) ([bc5ce51](https://github.com/tillhub/tillhub-sdk-javascript/commit/bc5ce510fe642e9abfa529c6e2c9e59868815a5b))
+
 # [4.211.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.210.0...v4.211.0) (2025-06-23)
 
 
