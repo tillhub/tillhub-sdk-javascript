@@ -1492,6 +1492,14 @@ export class TillhubClient extends events.EventEmitter {
   import (): v1.Import {
     return this.generateAuthenticatedInstance(v1.Import)
   }
+
+  /*
+   * Submissions v0
+   *
+   */
+  submissions (): v0.Submissions {
+    return this.generateAuthenticatedInstance(v0.Submissions)
+  }
 }
 
 export class Tillhub extends TillhubClient {
