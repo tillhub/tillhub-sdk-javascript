@@ -1,3 +1,10 @@
+# [4.213.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.212.0...v4.213.0) (2025-07-08)
+
+
+### Features
+
+* **iam_api_keys:** add optional businessUnitUnzerId field to IamApiKeysQuery interface ([286dfa3](https://github.com/tillhub/tillhub-sdk-javascript/commit/286dfa34c2a217016c65edc15ae2a733ea4c9839))
+
 # [4.212.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.211.0...v4.212.0) (2025-06-27)
 
 
