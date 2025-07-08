@@ -64,6 +64,7 @@ export interface IamApiKeysQueryHandler {
 }
 
 export interface IamApiKeysQuery extends MerchantApiKey {
+  businessUnitUnzerId?: string
   deleted?: boolean
   active?: boolean
   q?: string
