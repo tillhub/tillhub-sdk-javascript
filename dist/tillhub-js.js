@@ -648,6 +648,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.import = function () {
         return this.generateAuthenticatedInstance(v1.Import);
     };
+    TillhubClient.prototype.submissions = function () {
+        return this.generateAuthenticatedInstance(v0.Submissions);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));

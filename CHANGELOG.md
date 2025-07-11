@@ -1,3 +1,10 @@
+# [4.214.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.213.0...v4.214.0) (2025-07-11)
+
+
+### Features
+
+* **submissions:** add submission fetching interfaces (UNTIL 14210) ([#663](https://github.com/tillhub/tillhub-sdk-javascript/issues/663)) ([cf40710](https://github.com/tillhub/tillhub-sdk-javascript/commit/cf40710fef5d0313f6a237f1d36893e385c79d90))
+
 # [4.213.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.212.0...v4.213.0) (2025-07-08)
 
 
