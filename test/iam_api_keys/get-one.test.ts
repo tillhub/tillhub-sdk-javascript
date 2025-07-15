@@ -13,6 +13,7 @@ const user = {
 
 const legacyId = '4564'
 const iamApiKeyId = 'abc123'
+const branchUnzerId = '12345678'
 
 const mock = new MockAdapter(axios)
 afterEach(() => {
@@ -35,7 +36,7 @@ describe('v0: IamApiKey: can get one user', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/iam/api-keys/${legacyId}/${iamApiKeyId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/iam/api-keys/${legacyId}/${branchUnzerId}/${iamApiKeyId}`).reply(() => {
         return [
           200,
           {
@@ -66,7 +67,7 @@ describe('v0: IamApiKey: can get one user', () => {
 
     expect(iamApiKeys).toBeInstanceOf(v0.IamApiKeys)
 
-    const { data } = await iamApiKeys.get(iamApiKeyId)
+    const { data } = await iamApiKeys.get(branchUnzerId, iamApiKeyId)
 
     expect(data).toEqual({ id: iamApiKeyId })
   })
@@ -86,7 +87,7 @@ describe('v0: IamApiKey: can get one user', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/iam/api-keys/${legacyId}/${iamApiKeyId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/iam/api-keys/${legacyId}/${branchUnzerId}/${iamApiKeyId}`).reply(() => {
         return [400]
       })
     }
@@ -108,7 +109,7 @@ describe('v0: IamApiKey: can get one user', () => {
     })
 
     try {
-      await th.iamApiKeys().get(iamApiKeyId)
+      await th.iamApiKeys().get(branchUnzerId, iamApiKeyId)
     } catch (err: any) {
       expect(err.name).toBe('IamApiKeyFetchFailed')
     }

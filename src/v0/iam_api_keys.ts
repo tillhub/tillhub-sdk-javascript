@@ -112,8 +112,8 @@ export class IamApiKeys extends ThBaseHandler {
     }
   }
 
-  async get (apiKeyId: string): Promise<IamApiKeyResponse> {
-    const base = this.uriHelper.generateBaseUri(`/${apiKeyId}`)
+  async get (branchUnzerId: string, apiKeyId: string): Promise<IamApiKeyResponse> {
+    const base = this.uriHelper.generateBaseUri(`/${branchUnzerId}/${apiKeyId}`)
     const uri = this.uriHelper.generateUriWithQuery(base)
 
     try {
