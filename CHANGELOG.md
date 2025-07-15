@@ -1,3 +1,10 @@
+# [4.215.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.214.0...v4.215.0) (2025-07-15)
+
+
+### Features
+
+* **iam-api-keys:** fix get endpoint ([13a7073](https://github.com/tillhub/tillhub-sdk-javascript/commit/13a7073700aceeb8b2e97cbacf54e81f611ed14a))
+
 # [4.214.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.213.0...v4.214.0) (2025-07-11)
 
 

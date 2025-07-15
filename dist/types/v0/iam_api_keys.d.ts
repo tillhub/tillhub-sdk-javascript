@@ -66,7 +66,7 @@ export declare class IamApiKeys extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: IamApiKeysOptions, http: Client);
     getAll(query?: IamApiKeysQueryHandler | undefined): Promise<IamApiKeysResponse>;
-    get(apiKeyId: string): Promise<IamApiKeyResponse>;
+    get(branchUnzerId: string, apiKeyId: string): Promise<IamApiKeyResponse>;
     getPrivateKey(publicKey: string): Promise<IamApiKeysPrivateKeyResponse>;
     meta(query?: IamApiKeysQueryHandler | undefined): Promise<IamApiKeysResponse>;
 }

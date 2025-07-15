@@ -52,13 +52,13 @@ var IamApiKeys = (function (_super) {
             });
         });
     };
-    IamApiKeys.prototype.get = function (apiKeyId) {
+    IamApiKeys.prototype.get = function (branchUnzerId, apiKeyId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        base = this.uriHelper.generateBaseUri("/" + apiKeyId);
+                        base = this.uriHelper.generateBaseUri("/" + branchUnzerId + "/" + apiKeyId);
                         uri = this.uriHelper.generateUriWithQuery(base);
                         _a.label = 1;
                     case 1:
