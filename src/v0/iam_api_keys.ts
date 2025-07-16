@@ -143,7 +143,7 @@ export class IamApiKeys extends ThBaseHandler {
       }
 
       return {
-        privateKey: response.data.results[0].privateKey as string
+        privateKey: response.data.results[0] as string
       }
     } catch (error: any) {
       throw new IamApiKeysPrivateKeyFetchFailed(error.msg, { error })

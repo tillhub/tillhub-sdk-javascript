@@ -37,7 +37,7 @@ describe('v0: IamApiKeys: can get private key', () => {
           200,
           {
             count: 1,
-            results: [{ privateKey: '123' }]
+            results: ['123']
           }
         ]
       })
