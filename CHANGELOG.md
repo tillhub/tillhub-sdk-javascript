@@ -1,3 +1,10 @@
+# [4.216.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.215.0...v4.216.0) (2025-07-16)
+
+
+### Bug Fixes
+
+* **iam-api-keys:** update privateKey response structure in get endpoint ([3e7dbbc](https://github.com/tillhub/tillhub-sdk-javascript/commit/3e7dbbc0b9c9ebe638cfb37750b16afa411e8809))
+
 # [4.215.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.214.0...v4.215.0) (2025-07-15)
 
 

@@ -100,7 +100,7 @@ var IamApiKeys = (function (_super) {
                             throw new IamApiKeysPrivateKeyFetchFailed(undefined, { status: response.status });
                         }
                         return [2, {
-                                privateKey: response.data.results[0].privateKey
+                                privateKey: response.data.results[0]
                             }];
                     case 3:
                         error_3 = _a.sent();
