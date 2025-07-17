@@ -1,3 +1,10 @@
+# [4.217.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.216.0...v4.217.0) (2025-07-17)
+
+
+### Features
+
+* **submissions:** add location filter to get overview (UNTIL 14210) ([#664](https://github.com/tillhub/tillhub-sdk-javascript/issues/664)) ([f1da9c9](https://github.com/tillhub/tillhub-sdk-javascript/commit/f1da9c9f0f5072eac474383a51101c2795758324))
+
 # [4.216.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.215.0...v4.216.0) (2025-07-16)
 
 

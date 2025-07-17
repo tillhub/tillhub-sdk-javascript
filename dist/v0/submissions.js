@@ -36,7 +36,7 @@ var Submissions = (function (_super) {
         _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
         return _this;
     }
-    Submissions.prototype.getOverview = function (query) {
+    Submissions.prototype.getOverview = function (queryOrOptions) {
         var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var next, base, uri, response_1, error_1;
@@ -47,7 +47,7 @@ var Submissions = (function (_super) {
                         _b.trys.push([0, 2, , 3]);
                         next = void 0;
                         base = this.uriHelper.generateBaseUri('/submissions/overview');
-                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions);
                         return [4, this.http.getClient().get(uri)];
                     case 1:
                         response_1 = _b.sent();

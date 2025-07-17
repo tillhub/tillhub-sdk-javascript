@@ -10,6 +10,10 @@ export interface SubmissionsOverviewQuery {
     limit?: number;
     offset?: number;
     uri?: string;
+    query?: {
+        deleted?: boolean;
+        location?: string;
+    };
 }
 export interface SubmissionsOverviewResponse {
     msg?: string;
@@ -82,7 +86,7 @@ export declare class Submissions extends ThBaseHandler {
     options: SubmissionsOptions;
     uriHelper: UriHelper;
     constructor(options: SubmissionsOptions, http: Client);
-    getOverview(query?: SubmissionsOverviewQuery | undefined): Promise<SubmissionsOverviewResponse>;
+    getOverview(queryOrOptions?: SubmissionsOverviewQuery | undefined): Promise<SubmissionsOverviewResponse>;
     getCurrent(branchId: string): Promise<SubmissionResponse>;
     create(branchId: string, submissionId: string): Promise<SubmissionResponse>;
     trigger(branchId: string, submissionId: string): Promise<SubmissionResponse>;
