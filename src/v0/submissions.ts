@@ -13,6 +13,10 @@ export interface SubmissionsOverviewQuery {
   limit?: number
   offset?: number
   uri?: string
+  query?: {
+    deleted?: boolean
+    location?: string
+  }
 }
 
 export interface SubmissionsOverviewResponse {
@@ -107,12 +111,12 @@ export class Submissions extends ThBaseHandler {
   }
 
   async getOverview (
-    query?: SubmissionsOverviewQuery | undefined
+    queryOrOptions?: SubmissionsOverviewQuery | undefined
   ): Promise<SubmissionsOverviewResponse> {
     try {
       let next
       const base = this.uriHelper.generateBaseUri('/submissions/overview')
-      const uri = this.uriHelper.generateUriWithQuery(base, query)
+      const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
 
       const response = await this.http.getClient().get(uri)
 
