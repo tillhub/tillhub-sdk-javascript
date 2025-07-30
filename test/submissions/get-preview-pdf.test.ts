@@ -24,7 +24,7 @@ const submission = {
 const result = 'pdf'
 
 describe('v0: Submissions: can get preview pdf', () => {
-  it("Tillhub's webhooks are instantiable", async () => {
+  it("Tillhub's submissions are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [

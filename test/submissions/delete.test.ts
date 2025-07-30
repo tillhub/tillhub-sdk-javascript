@@ -21,8 +21,10 @@ const submission = {
   id: '2'
 }
 
-describe('v0: Submissions: can trigger submission', () => {
+describe('v0: Submissions: can delete submission', () => {
   it("Tillhub's submissions are instantiable", async () => {
+    const msg = 'Submission deleted successfully'
+
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
@@ -38,17 +40,11 @@ describe('v0: Submissions: can trigger submission', () => {
       })
 
       mock
-        .onPut(
-          `https://api.tillhub.com/api/v0/submissions/${legacyId}/branches/${branch.id}/submissions/${submission.id}/trigger`
+        .onDelete(
+          `https://api.tillhub.com/api/v0/submissions/${legacyId}/branches/${branch.id}/submissions/${submission.id}`
         )
         .reply(() => {
-          return [
-            200,
-            {
-              count: 1,
-              results: [submission]
-            }
-          ]
+          return [200, { msg }]
         })
     }
 
@@ -58,9 +54,9 @@ describe('v0: Submissions: can trigger submission', () => {
 
     expect(submissions).toBeInstanceOf(v0.Submissions)
 
-    const { data } = await submissions.trigger(branch.id, submission.id)
+    const response = await submissions.delete(branch.id, submission.id)
 
-    expect(data).toEqual(submission)
+    expect(response.msg).toEqual(msg)
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -80,7 +76,7 @@ describe('v0: Submissions: can trigger submission', () => {
 
       mock
         .onPut(
-          `https://api.tillhub.com/api/v0/submissions/${legacyId}/branches/${branch.id}/submissions/${submission.id}/trigger`
+          `https://api.tillhub.com/api/v0/submissions/${legacyId}/branches/${branch.id}/submissions/${submission.id}/create`
         )
         .reply(() => {
           return [205]
@@ -89,9 +85,9 @@ describe('v0: Submissions: can trigger submission', () => {
 
     try {
       const th = await initThInstance()
-      await th.submissions().trigger(branch.id, submission.id)
+      await th.submissions().delete(branch.id, submission.id)
     } catch (err: any) {
-      expect(err.name).toBe('SubmissionTriggerFailed')
+      expect(err.name).toBe('SubmissionDeleteFailed')
     }
   })
 })

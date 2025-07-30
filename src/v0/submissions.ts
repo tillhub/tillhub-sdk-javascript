@@ -179,6 +179,26 @@ export class Submissions extends ThBaseHandler {
     }
   }
 
+  async delete (branchId: string, submissionId: string): Promise<SubmissionResponse> {
+    const uri = this.uriHelper.generateBaseUri(
+      `/branches/${branchId}/submissions/${submissionId}`
+    )
+
+    try {
+      const response = await this.http.getClient().delete(uri)
+
+      if (response.status !== 200) {
+        throw new SubmissionDeleteFailed(undefined, { status: response.status })
+      }
+
+      return {
+        msg: response.data.msg
+      }
+    } catch (error: any) {
+      throw new SubmissionDeleteFailed(error.message, { error })
+    }
+  }
+
   async trigger (branchId: string, submissionId: string): Promise<SubmissionResponse> {
     const uri = this.uriHelper.generateBaseUri(
       `/branches/${branchId}/submissions/${submissionId}/trigger`
@@ -254,6 +274,17 @@ class SubmissionCreateFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, SubmissionCreateFailed.prototype)
+  }
+}
+
+class SubmissionDeleteFailed extends BaseError {
+  public name = 'SubmissionDeleteFailed'
+  constructor (
+    public message: string = 'Could not delete submission',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, SubmissionDeleteFailed.prototype)
   }
 }
 
