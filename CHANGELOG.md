@@ -1,3 +1,10 @@
+# [4.218.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.217.0...v4.218.0) (2025-07-30)
+
+
+### Features
+
+* **submissions:** add delete api (UNTIL 14523) ([#665](https://github.com/tillhub/tillhub-sdk-javascript/issues/665)) ([ef18f17](https://github.com/tillhub/tillhub-sdk-javascript/commit/ef18f1748bc53add538f8013a2c0bea13a34bddb))
+
 # [4.217.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.216.0...v4.217.0) (2025-07-17)
 
 

@@ -89,6 +89,7 @@ export declare class Submissions extends ThBaseHandler {
     getOverview(queryOrOptions?: SubmissionsOverviewQuery | undefined): Promise<SubmissionsOverviewResponse>;
     getCurrent(branchId: string): Promise<SubmissionResponse>;
     create(branchId: string, submissionId: string): Promise<SubmissionResponse>;
+    delete(branchId: string, submissionId: string): Promise<SubmissionResponse>;
     trigger(branchId: string, submissionId: string): Promise<SubmissionResponse>;
     getPreviewPdf(branchId: string, submissionId: string): Promise<SubmissionPdfResponse>;
     getPdf(branchId: string, submissionId: string): Promise<SubmissionPdfResponse>;

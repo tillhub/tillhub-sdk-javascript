@@ -130,9 +130,36 @@ var Submissions = (function (_super) {
             });
         });
     };
-    Submissions.prototype.trigger = function (branchId, submissionId) {
+    Submissions.prototype.delete = function (branchId, submissionId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var uri, response, error_4;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri("/branches/" + branchId + "/submissions/" + submissionId);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().delete(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new SubmissionDeleteFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                msg: response.data.msg
+                            }];
+                    case 3:
+                        error_4 = _a.sent();
+                        throw new SubmissionDeleteFailed(error_4.message, { error: error_4 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
+    Submissions.prototype.trigger = function (branchId, submissionId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_5;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -151,8 +178,8 @@ var Submissions = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_4 = _a.sent();
-                        throw new SubmissionTriggerFailed(error_4.message, { error: error_4 });
+                        error_5 = _a.sent();
+                        throw new SubmissionTriggerFailed(error_5.message, { error: error_5 });
                     case 4: return [2];
                 }
             });
@@ -160,7 +187,7 @@ var Submissions = (function (_super) {
     };
     Submissions.prototype.getPreviewPdf = function (branchId, submissionId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, data, error_5;
+            var uri, data, error_6;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -175,8 +202,8 @@ var Submissions = (function (_super) {
                         data = (_a.sent()).data;
                         return [2, data];
                     case 3:
-                        error_5 = _a.sent();
-                        throw new SubmissionsGetPreviewPdfFailed(error_5.message, { error: error_5 });
+                        error_6 = _a.sent();
+                        throw new SubmissionsGetPreviewPdfFailed(error_6.message, { error: error_6 });
                     case 4: return [2];
                 }
             });
@@ -184,7 +211,7 @@ var Submissions = (function (_super) {
     };
     Submissions.prototype.getPdf = function (branchId, submissionId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, data, error_6;
+            var uri, data, error_7;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -199,8 +226,8 @@ var Submissions = (function (_super) {
                         data = (_a.sent()).data;
                         return [2, data];
                     case 3:
-                        error_6 = _a.sent();
-                        throw new SubmissionsGetPdfFailed(error_6.message, { error: error_6 });
+                        error_7 = _a.sent();
+                        throw new SubmissionsGetPdfFailed(error_7.message, { error: error_7 });
                     case 4: return [2];
                 }
             });
@@ -236,6 +263,18 @@ var SubmissionCreateFailed = (function (_super) {
         return _this;
     }
     return SubmissionCreateFailed;
+}(baseError_1.BaseError));
+var SubmissionDeleteFailed = (function (_super) {
+    tslib_1.__extends(SubmissionDeleteFailed, _super);
+    function SubmissionDeleteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not delete submission'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'SubmissionDeleteFailed';
+        Object.setPrototypeOf(_this, SubmissionDeleteFailed.prototype);
+        return _this;
+    }
+    return SubmissionDeleteFailed;
 }(baseError_1.BaseError));
 var SubmissionTriggerFailed = (function (_super) {
     tslib_1.__extends(SubmissionTriggerFailed, _super);
