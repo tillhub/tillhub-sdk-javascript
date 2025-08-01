@@ -59,6 +59,9 @@ export interface SubmissionRegister {
   tssId?: string
   clientId?: string
   status?: SubmissionRegisterStatus
+  acquisitionDate?: string
+  commissionDate?: string
+  decommissionDate?: string | null
 }
 
 export enum SubmissionStatus {
@@ -80,6 +83,12 @@ export interface Submission {
   status?: SubmissionStatus
   registers?: SubmissionRegister[]
   submittedAt?: string | null
+}
+
+export interface PatchRegisterPayload {
+  acquisitionDate?: string
+  commissionDate?: string
+  decommissionDate?: string | null
 }
 
 export interface SubmissionResponse {
@@ -250,6 +259,26 @@ export class Submissions extends ThBaseHandler {
     }
   }
 
+  async patchRegister (branchId: string, registerId: string, payload: PatchRegisterPayload): Promise<SubmissionResponse> {
+    const uri = this.uriHelper.generateBaseUri(
+      `/branches/${branchId}/submissions/registers/${registerId}`
+    )
+    try {
+      const response = await this.http.getClient().patch(uri, payload)
+
+      if (response.status !== 200) {
+        throw new SubmissionRegisterPatchFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results[0] as Submission,
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new SubmissionRegisterPatchFailed(error.message, { error })
+    }
+  }
+
   taxpayer (): Taxpayer {
     return new Taxpayer(this.options, this.http, this.uriHelper)
   }
@@ -329,5 +358,16 @@ class SubmissionsGetPdfFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, SubmissionsGetPdfFailed.prototype)
+  }
+}
+
+class SubmissionRegisterPatchFailed extends BaseError {
+  public name = 'SubmissionRegisterPatchFailed'
+  constructor (
+    public message: string = 'Could not alter submission register',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, SubmissionRegisterPatchFailed.prototype)
   }
 }
