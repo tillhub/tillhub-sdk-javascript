@@ -233,6 +233,34 @@ var Submissions = (function (_super) {
             });
         });
     };
+    Submissions.prototype.patchRegister = function (branchId, registerId, payload) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_8;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri("/branches/" + branchId + "/submissions/registers/" + registerId);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().patch(uri, payload)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new SubmissionRegisterPatchFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            }];
+                    case 3:
+                        error_8 = _a.sent();
+                        throw new SubmissionRegisterPatchFailed(error_8.message, { error: error_8 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     Submissions.prototype.taxpayer = function () {
         return new taxpayer_1.Taxpayer(this.options, this.http, this.uriHelper);
     };
@@ -323,5 +351,17 @@ var SubmissionsGetPdfFailed = (function (_super) {
         return _this;
     }
     return SubmissionsGetPdfFailed;
+}(baseError_1.BaseError));
+var SubmissionRegisterPatchFailed = (function (_super) {
+    tslib_1.__extends(SubmissionRegisterPatchFailed, _super);
+    function SubmissionRegisterPatchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not alter submission register'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'SubmissionRegisterPatchFailed';
+        Object.setPrototypeOf(_this, SubmissionRegisterPatchFailed.prototype);
+        return _this;
+    }
+    return SubmissionRegisterPatchFailed;
 }(baseError_1.BaseError));
 //# sourceMappingURL=submissions.js.map

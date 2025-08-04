@@ -1,3 +1,10 @@
+# [4.219.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.218.0...v4.219.0) (2025-08-04)
+
+
+### Features
+
+* **submissions:** add register update method (UNTIL 14570) ([#666](https://github.com/tillhub/tillhub-sdk-javascript/issues/666)) ([f5cbdc2](https://github.com/tillhub/tillhub-sdk-javascript/commit/f5cbdc2b71520d2089ae87a42f6fe72e11f1e0e2))
+
 # [4.218.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.217.0...v4.218.0) (2025-07-30)
 
 
