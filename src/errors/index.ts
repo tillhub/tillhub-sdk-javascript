@@ -530,6 +530,28 @@ export class PaymentOptionDeleteFailed extends BaseError {
   }
 }
 
+export class PaymentLinksFetchFailed extends BaseError {
+  public name = 'PaymentLinksFetchFailed'
+  constructor (
+    public message: string = 'Could not fetch payment links',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, PaymentLinksFetchFailed.prototype)
+  }
+}
+
+export class PaymentLinksMetaFailed extends BaseError {
+  public name = 'PaymentLinksMetaFailed'
+  constructor (
+    public message: string = 'Could not fetch payment links meta',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, PaymentLinksMetaFailed.prototype)
+  }
+}
+
 export class TemplatesCreationFailed extends BaseError {
   public name = 'TemplatesCreationFailed'
   constructor (
