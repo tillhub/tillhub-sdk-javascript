@@ -70,6 +70,11 @@ export interface IamApiKeysQuery extends MerchantApiKey {
   q?: string
 }
 
+export interface IamApiKeysUnitChannelQuery {
+  businessUnitUnzerId?: string
+  channel?: string
+}
+
 export class IamApiKeys extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/iam/api-keys'
   endpoint: string
@@ -150,6 +155,25 @@ export class IamApiKeys extends ThBaseHandler {
     }
   }
 
+  async getKeypairsByUnitAndChannel (query?: IamApiKeysUnitChannelQuery): Promise<IamApiKeysResponse> {
+    const base = this.uriHelper.generateBaseUri()
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new IamApiKeysGetByUnitAndChannelFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results as MerchantApiKey[],
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new IamApiKeysGetByUnitAndChannelFailed(error.msg, { error })
+    }
+  }
+
   async meta (query?: IamApiKeysQueryHandler | undefined): Promise<IamApiKeysResponse> {
     try {
       const base = this.uriHelper.generateBaseUri('/meta')
@@ -210,5 +234,16 @@ export class IamApiKeysPrivateKeyFetchFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, IamApiKeysMetaFailed.prototype)
+  }
+}
+
+export class IamApiKeysGetByUnitAndChannelFailed extends BaseError {
+  public name = 'IamApiKeysGetByUnitAndChannelFailed'
+  constructor (
+    public message: string = 'Could not fetch api keys by unit and channel',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, IamApiKeysGetByUnitAndChannelFailed.prototype)
   }
 }
