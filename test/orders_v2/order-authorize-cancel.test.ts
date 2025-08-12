@@ -15,6 +15,8 @@ const results = {
 }
 
 const payload = {
+  keypairId: '123',
+  paymentId: '123',
   amount: 100,
   paymentReference: '123',
   reasonCode: 'RETURN'

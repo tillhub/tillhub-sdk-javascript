@@ -9,8 +9,10 @@ export interface OrderActionsOptions {
 }
 
 export interface ChargeCancelRequest {
-  amount?: number
+  keypairId: string
+  paymentId?: string
   paymentReference?: string
+  amount?: number
 }
 
 export interface ChargeCancelResponse {
@@ -26,9 +28,10 @@ export interface ChargeCancelResult {
 }
 
 export interface AuthorizeCancelRequest {
-  amount?: number
+  keypairId: string
+  paymentId?: string
   paymentReference?: string
-  reasonCode?: string
+  amount?: number
 }
 
 export interface AuthorizeCancelResponse {
@@ -44,8 +47,10 @@ export interface AuthorizeCancelResult {
 }
 
 export interface AuthorizeChargeRequest {
-  amount?: number
+  keypairId: string
+  paymentId?: string
   paymentReference?: string
+  amount?: number
 }
 
 export interface AuthorizeChargeResponse {
