@@ -397,6 +397,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.ordersV2 = function () {
         return this.generateAuthenticatedInstance(v2.Orders);
     };
+    TillhubClient.prototype.orderActionsV2 = function () {
+        return this.generateAuthenticatedInstance(v2.OrderActions);
+    };
     TillhubClient.prototype.exportsV1 = function () {
         return this.generateAuthenticatedInstance(v1.ExportsV1);
     };

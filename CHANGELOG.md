@@ -1,3 +1,11 @@
+# [4.220.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.219.0...v4.220.0) (2025-08-13)
+
+
+### Features
+
+* **order-actions:** adjusted added endpoints & new endpoint for keypairs added  - UOD-1627 ([aab61fd](https://github.com/tillhub/tillhub-sdk-javascript/commit/aab61fd4458397d413b2420e67f368a838e27e5e))
+* **orderActions:** added endpoints for order actions - UOD-1627 ([048d780](https://github.com/tillhub/tillhub-sdk-javascript/commit/048d7803dea9a7666c63d9ed572e89631b641cd6))
+
 # [4.219.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.218.0...v4.219.0) (2025-08-04)
 
 

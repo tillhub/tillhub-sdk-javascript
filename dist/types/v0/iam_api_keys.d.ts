@@ -58,6 +58,10 @@ export interface IamApiKeysQuery extends MerchantApiKey {
     active?: boolean;
     q?: string;
 }
+export interface IamApiKeysUnitChannelQuery {
+    businessUnitUnzerId?: string;
+    channel?: string;
+}
 export declare class IamApiKeys extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
@@ -68,6 +72,7 @@ export declare class IamApiKeys extends ThBaseHandler {
     getAll(query?: IamApiKeysQueryHandler | undefined): Promise<IamApiKeysResponse>;
     get(branchUnzerId: string, apiKeyId: string): Promise<IamApiKeyResponse>;
     getPrivateKey(publicKey: string): Promise<IamApiKeysPrivateKeyResponse>;
+    getKeypairsByUnitAndChannel(query?: IamApiKeysUnitChannelQuery): Promise<IamApiKeysResponse>;
     meta(query?: IamApiKeysQueryHandler | undefined): Promise<IamApiKeysResponse>;
 }
 export declare class IamApiKeysFetchFailed extends BaseError {
@@ -86,6 +91,11 @@ export declare class IamApiKeyFetchFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class IamApiKeysPrivateKeyFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class IamApiKeysGetByUnitAndChannelFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
