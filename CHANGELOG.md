@@ -1,3 +1,10 @@
+# [4.221.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.220.0...v4.221.0) (2025-08-20)
+
+
+### Features
+
+* **transactions:** add create basket, authorize, and charge transaction functionalities with corresponding error handling - UOD-1794 ([3f2102e](https://github.com/tillhub/tillhub-sdk-javascript/commit/3f2102e44e66ba90e04a876fc300aead97927180))
+
 # [4.220.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.219.0...v4.220.0) (2025-08-13)
 
 
