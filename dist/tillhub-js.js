@@ -194,6 +194,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.branchGroups = function () {
         return this.generateAuthenticatedInstance(v0.BranchGroups);
     };
+    TillhubClient.prototype.paymentProducts = function () {
+        return this.generateAuthenticatedInstance(v0.PaymentProducts);
+    };
     TillhubClient.prototype.devices = function () {
         return this.generateAuthenticatedInstance(v0.Devices);
     };

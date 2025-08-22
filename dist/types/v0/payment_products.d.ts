@@ -20,7 +20,7 @@ export interface PaymentProduct {
     state?: string;
     type?: string;
     processingPlatformIdentifier?: string;
-    salesStream?: SaleStream[];
+    salesStream?: SaleStream;
 }
 export interface SaleStream {
     id?: string;

@@ -70,6 +70,7 @@ export declare class TillhubClient extends events.EventEmitter {
     branches(): v0.Branches;
     branchesV1(): v1.Branches;
     branchGroups(): v0.BranchGroups;
+    paymentProducts(): v0.PaymentProducts;
     devices(): v0.Devices;
     contents(): v0.Contents;
     contentTemplates(): v0.ContentTemplates;

@@ -1,3 +1,10 @@
+# [4.223.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.222.0...v4.223.0) (2025-08-22)
+
+
+### Features
+
+* **payment-products:** add paymentProducts method and update salesStream type ([27fb457](https://github.com/tillhub/tillhub-sdk-javascript/commit/27fb457dc50297e5a2cfda00dbb5c0f69d41860e))
+
 # [4.222.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.221.0...v4.222.0) (2025-08-22)
 
 
