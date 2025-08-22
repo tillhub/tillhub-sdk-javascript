@@ -414,6 +414,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated payment products instance
+   *
+   */
+  paymentProducts (): v0.PaymentProducts {
+    return this.generateAuthenticatedInstance(v0.PaymentProducts)
+  }
+
+  /**
    * Create an authenticated devices instance
    *
    */
