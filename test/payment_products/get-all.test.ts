@@ -49,7 +49,7 @@ afterEach(() => {
 })
 
 describe('v0: PaymentProducts: can get all', () => {
-  it("PaymentProducts class is instantiable and can fetch all payment products", async () => {
+  it('PaymentProducts class is instantiable and can fetch all payment products', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
@@ -79,7 +79,8 @@ describe('v0: PaymentProducts: can get all', () => {
     const th = await initThInstance()
 
     // Direct instantiation since it might not be exposed in the main client yet
-    const paymentProducts = new PaymentProducts({ user: legacyId }, th.http!)
+    if (!th.http) throw new Error('HTTP client not initialized')
+    const paymentProducts = new PaymentProducts({ user: legacyId }, th.http)
 
     expect(paymentProducts).toBeInstanceOf(PaymentProducts)
 
@@ -128,7 +129,8 @@ describe('v0: PaymentProducts: can get all', () => {
 
     const th = await initThInstance()
 
-    const paymentProducts = new PaymentProducts({ user: legacyId }, th.http!)
+    if (!th.http) throw new Error('HTTP client not initialized')
+    const paymentProducts = new PaymentProducts({ user: legacyId }, th.http)
 
     const { data } = await paymentProducts.getAll({
       limit: 10,
@@ -187,7 +189,8 @@ describe('v0: PaymentProducts: can get all', () => {
 
     const th = await initThInstance()
 
-    const paymentProducts = new PaymentProducts({ user: legacyId }, th.http!)
+    if (!th.http) throw new Error('HTTP client not initialized')
+    const paymentProducts = new PaymentProducts({ user: legacyId }, th.http)
 
     // First page
     const firstPage = await paymentProducts.getAll()
@@ -262,7 +265,8 @@ describe('v0: PaymentProducts: can get all', () => {
 
     const th = await initThInstance()
 
-    const paymentProducts = new PaymentProducts({ user: legacyId }, th.http!)
+    if (!th.http) throw new Error('HTTP client not initialized')
+    const paymentProducts = new PaymentProducts({ user: legacyId }, th.http)
 
     const { data } = await paymentProducts.getAll()
 
@@ -309,7 +313,8 @@ describe('v0: PaymentProducts: can get all', () => {
 
     const th = await initThInstance()
 
-    const paymentProducts = new PaymentProducts({ user: legacyId }, th.http!)
+    if (!th.http) throw new Error('HTTP client not initialized')
+    const paymentProducts = new PaymentProducts({ user: legacyId }, th.http)
 
     try {
       await paymentProducts.getAll()
@@ -339,7 +344,8 @@ describe('v0: PaymentProducts: can get all', () => {
 
     const th = await initThInstance()
 
-    const paymentProducts = new PaymentProducts({ user: legacyId }, th.http!)
+    if (!th.http) throw new Error('HTTP client not initialized')
+    const paymentProducts = new PaymentProducts({ user: legacyId }, th.http)
 
     try {
       await paymentProducts.getAll()
@@ -378,7 +384,8 @@ describe('v0: PaymentProducts: can get all', () => {
 
     const th = await initThInstance()
 
-    const paymentProducts = new PaymentProducts({ user: legacyId }, th.http!)
+    if (!th.http) throw new Error('HTTP client not initialized')
+    const paymentProducts = new PaymentProducts({ user: legacyId }, th.http)
 
     const { data } = await paymentProducts.getAll()
 
