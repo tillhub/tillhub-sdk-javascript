@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ChargeTransactionFailed = exports.AuthorizeTransactionFailed = exports.CreateBasketFailed = exports.TransactionFetchFailed = exports.TransactionsExportFetchFailed = exports.TransactionsFetchFailed = exports.TransactionsGetMetaFailed = exports.Transactions = void 0;
+exports.TransactionFetchFailed = exports.TransactionsExportFetchFailed = exports.TransactionsFetchFailed = exports.TransactionsGetMetaFailed = exports.Transactions = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -114,84 +114,9 @@ var Transactions = (function (_super) {
             });
         });
     };
-    Transactions.prototype.createBasket = function (keypairId, basket) {
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_4;
-            return tslib_1.__generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        base = this.uriHelper.generateBaseUri();
-                        uri = this.uriHelper.generateUriWithQuery(base + "/baskets");
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        return [4, this.http.getClient().post(uri, { keypairId: keypairId, payload: basket })];
-                    case 2:
-                        response = _a.sent();
-                        return [2, {
-                                data: response.data.results[0]
-                            }];
-                    case 3:
-                        error_4 = _a.sent();
-                        throw new CreateBasketFailed(error_4.message, { error: error_4 });
-                    case 4: return [2];
-                }
-            });
-        });
-    };
-    Transactions.prototype.authorize = function (keypairId, transaction) {
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_5;
-            return tslib_1.__generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        base = this.uriHelper.generateBaseUri();
-                        uri = this.uriHelper.generateUriWithQuery(base + "/authorize");
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        return [4, this.http.getClient().post(uri, { keypairId: keypairId, payload: transaction })];
-                    case 2:
-                        response = _a.sent();
-                        return [2, {
-                                data: response.data.results[0]
-                            }];
-                    case 3:
-                        error_5 = _a.sent();
-                        throw new AuthorizeTransactionFailed(error_5.message, { error: error_5 });
-                    case 4: return [2];
-                }
-            });
-        });
-    };
-    Transactions.prototype.charge = function (keypairId, transaction) {
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_6;
-            return tslib_1.__generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        base = this.uriHelper.generateBaseUri();
-                        uri = this.uriHelper.generateUriWithQuery(base + "/charge");
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        return [4, this.http.getClient().post(uri, { keypairId: keypairId, payload: transaction })];
-                    case 2:
-                        response = _a.sent();
-                        return [2, {
-                                data: response.data.results[0]
-                            }];
-                    case 3:
-                        error_6 = _a.sent();
-                        throw new ChargeTransactionFailed(error_6.message, { error: error_6 });
-                    case 4: return [2];
-                }
-            });
-        });
-    };
     Transactions.prototype.get = function (transactionId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_7;
+            var base, uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -212,8 +137,8 @@ var Transactions = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_7 = _a.sent();
-                        throw new TransactionFetchFailed(error_7.message, { error: error_7 });
+                        error_4 = _a.sent();
+                        throw new TransactionFetchFailed(error_4.message, { error: error_4 });
                     case 4: return [2];
                 }
             });
@@ -275,43 +200,4 @@ var TransactionFetchFailed = (function (_super) {
     return TransactionFetchFailed;
 }(errors_1.BaseError));
 exports.TransactionFetchFailed = TransactionFetchFailed;
-var CreateBasketFailed = (function (_super) {
-    tslib_1.__extends(CreateBasketFailed, _super);
-    function CreateBasketFailed(message, properties) {
-        if (message === void 0) { message = 'Could not create basket'; }
-        var _this = _super.call(this, message, properties) || this;
-        _this.message = message;
-        _this.name = 'CreateBasketFailed';
-        Object.setPrototypeOf(_this, CreateBasketFailed.prototype);
-        return _this;
-    }
-    return CreateBasketFailed;
-}(errors_1.BaseError));
-exports.CreateBasketFailed = CreateBasketFailed;
-var AuthorizeTransactionFailed = (function (_super) {
-    tslib_1.__extends(AuthorizeTransactionFailed, _super);
-    function AuthorizeTransactionFailed(message, properties) {
-        if (message === void 0) { message = 'Could not authorize transaction'; }
-        var _this = _super.call(this, message, properties) || this;
-        _this.message = message;
-        _this.name = 'AuthorizeTransactionFailed';
-        Object.setPrototypeOf(_this, AuthorizeTransactionFailed.prototype);
-        return _this;
-    }
-    return AuthorizeTransactionFailed;
-}(errors_1.BaseError));
-exports.AuthorizeTransactionFailed = AuthorizeTransactionFailed;
-var ChargeTransactionFailed = (function (_super) {
-    tslib_1.__extends(ChargeTransactionFailed, _super);
-    function ChargeTransactionFailed(message, properties) {
-        if (message === void 0) { message = 'Could not charge transaction'; }
-        var _this = _super.call(this, message, properties) || this;
-        _this.message = message;
-        _this.name = 'ChargeTransactionFailed';
-        Object.setPrototypeOf(_this, ChargeTransactionFailed.prototype);
-        return _this;
-    }
-    return ChargeTransactionFailed;
-}(errors_1.BaseError));
-exports.ChargeTransactionFailed = ChargeTransactionFailed;
 //# sourceMappingURL=transactions.js.map

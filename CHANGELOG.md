@@ -1,3 +1,16 @@
+# [4.222.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.221.0...v4.222.0) (2025-08-22)
+
+
+### Features
+
+* **payment:** fix tests ([5c48ad4](https://github.com/tillhub/tillhub-sdk-javascript/commit/5c48ad4836db73826d764d4c97c694311e5cef3d))
+* **payment-products:** add PaymentProducts class and integrate with existing API structure ([f62646f](https://github.com/tillhub/tillhub-sdk-javascript/commit/f62646fbd6c6cf03f1805d2a32d3eae24d43b9f3))
+
+
+### Reverts
+
+* Revert "feat(transactions): add create basket, authorize, and charge transaction functionalities with corresponding error handling - UOD-1794" ([fd5f592](https://github.com/tillhub/tillhub-sdk-javascript/commit/fd5f5927514ad99507e323a3787fc88d02061f11))
+
 # [4.221.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.220.0...v4.221.0) (2025-08-20)
 
 
