@@ -52,7 +52,7 @@ export interface CreatePaymentLinkRequest {
   subtotal?: number
   deliveryMethod?: string
   deliveryCost?: number
-  customer: PaymentLinkCustomer
+  customer?: PaymentLinkCustomer
   items?: PaymentLinkItem[]
 }
 
@@ -70,7 +70,7 @@ export interface CreatePaymentLinkResponse {
   subtotal?: number
   deliveryMethod?: string
   deliveryCost?: number
-  customer: PaymentLinkCustomer & { id: string }
+  customer?: PaymentLinkCustomer & { id: string }
   items?: Array<PaymentLinkItem & { id: string }>
   createdAt: string
   updatedAt: string
