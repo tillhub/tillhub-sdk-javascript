@@ -8,10 +8,79 @@ export interface PaymentLinksOptions {
   base?: string
 }
 
+export interface PaymentLinkAddress {
+  salutation?: string
+  firstName: string
+  lastName: string
+  country: string
+  address: string
+  postalCode: string
+  city: string
+}
+
+export interface PaymentLinkCustomer {
+  salutation?: string
+  firstName: string
+  lastName: string
+  dateOfBirth?: string
+  email: string
+  mobileNo?: string
+  phoneNo?: string
+  language?: string
+  billing?: PaymentLinkAddress
+  shipping?: PaymentLinkAddress
+  sameAsShipping?: boolean
+}
+
+export interface PaymentLinkItem {
+  name: string
+  quantity: number
+  unitPrice: number
+  totalPrice: number
+}
+
+export interface CreatePaymentLinkRequest {
+  usage?: string
+  paymentLinkType?: 'items_sale' | 'quick_charge'
+  linkedOrderId?: string
+  branch: string
+  branchId: string
+  status?: 'READY_TO_ORDER' | 'ORDER_SUCCESSFULL'
+  createdBy: string
+  total: number
+  currency: string
+  subtotal?: number
+  deliveryMethod?: string
+  deliveryCost?: number
+  customer: PaymentLinkCustomer
+  items?: PaymentLinkItem[]
+}
+
+export interface CreatePaymentLinkResponse {
+  id: string
+  usage?: string
+  paymentLinkType: 'items_sale' | 'quick_charge'
+  linkedOrderId?: string
+  branch: string
+  branchId: string
+  status: 'READY_TO_ORDER' | 'ORDER_SUCCESSFULL'
+  createdBy: string
+  total: number
+  currency: string
+  subtotal?: number
+  deliveryMethod?: string
+  deliveryCost?: number
+  customer: PaymentLinkCustomer & { id: string }
+  items?: Array<PaymentLinkItem & { id: string }>
+  createdAt: string
+  updatedAt: string
+}
+
 export interface PaymentLinksQuery {
   limit?: number
   uri?: string
   query?: Record<string, unknown>
+  tenantId?: string
 }
 
 export interface PaymentLinksResponse {
@@ -22,7 +91,7 @@ export interface PaymentLinksResponse {
 }
 
 export interface PaymentLinkResponse {
-  data?: Record<string, unknown>
+  data?: CreatePaymentLinkResponse
   metadata?: Record<string, unknown>
   msg?: string
 }
@@ -51,7 +120,9 @@ export class PaymentLinks extends ThBaseHandler {
     let next
 
     try {
-      const base = this.uriHelper.generateBaseUri()
+      // If tenantId is provided in query, use it in the path
+      const tenantPath = query?.tenantId ? `/${query.tenantId}` : ''
+      const base = this.uriHelper.generateBaseUri(tenantPath)
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri)
@@ -73,9 +144,28 @@ export class PaymentLinks extends ThBaseHandler {
     }
   }
 
-  async meta (): Promise<PaymentLinksResponse> {
+  async create (paymentLinkData: CreatePaymentLinkRequest): Promise<PaymentLinkResponse> {
     try {
-      const uri = this.uriHelper.generateBaseUri('/meta')
+      const uri = this.uriHelper.generateBaseUri()
+      const response = await this.http.getClient().post(uri, paymentLinkData)
+
+      if (response.status !== 200 && response.status !== 201) {
+        throw new errors.PaymentLinksCreateFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data,
+        metadata: {}
+      }
+    } catch (error: any) {
+      throw new errors.PaymentLinksCreateFailed(error.message, { error })
+    }
+  }
+
+  async meta (tenantId?: string): Promise<PaymentLinksResponse> {
+    try {
+      const tenantPath = tenantId ? `/${tenantId}` : ''
+      const uri = this.uriHelper.generateBaseUri(`${tenantPath}/meta`)
       const response = await this.http.getClient().get(uri)
 
       if (response.status !== 200) throw new errors.PaymentLinksMetaFailed(undefined, { status: response.status })

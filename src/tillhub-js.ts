@@ -296,7 +296,6 @@ export class TillhubClient extends events.EventEmitter {
    *
    */
   paymentLinks (): v0.PaymentLinks {
-    console.log('calling payment links')
     return this.generateAuthenticatedInstance(v0.PaymentLinks)
   }
 
