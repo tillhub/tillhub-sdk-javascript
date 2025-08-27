@@ -635,3 +635,18 @@ export declare class LegacySettingUpdateFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
 }
+export declare class PaymentLinkBrandingConfigPatchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class PaymentLinkBrandingConfigNotFound extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class PaymentLinkBrandingConfigFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}

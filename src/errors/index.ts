@@ -1394,3 +1394,33 @@ export class LegacySettingUpdateFailed extends BaseError {
     Object.setPrototypeOf(this, LegacySettingUpdateFailed.prototype)
   }
 }
+
+export class PaymentLinkBrandingConfigPatchFailed extends BaseError {
+  public name = 'PaymentLinkBrandingConfigPatchFailed'
+  constructor (public message: string = 'Could not patch payment link branding config', properties?: any) {
+    super(message, properties)
+    Object.setPrototypeOf(this, PaymentLinkBrandingConfigPatchFailed.prototype)
+  }
+}
+
+export class PaymentLinkBrandingConfigNotFound extends BaseError {
+  public name = 'PaymentLinkBrandingConfigNotFound'
+  constructor (
+    public message: string = 'Payment link branding config not found',
+    properties?: any
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, PaymentLinkBrandingConfigNotFound.prototype)
+  }
+}
+
+export class PaymentLinkBrandingConfigFetchFailed extends BaseError {
+  public name = 'PaymentLinkBrandingConfigFetchFailed'
+  constructor (
+    public message: string = 'Could not fetch payment link branding config',
+    properties?: any
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, PaymentLinkBrandingConfigFetchFailed.prototype)
+  }
+}

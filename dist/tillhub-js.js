@@ -149,6 +149,10 @@ var TillhubClient = (function (_super) {
         console.log('calling payment links');
         return this.generateAuthenticatedInstance(v0.PaymentLinks);
     };
+    TillhubClient.prototype.paymentLinkBrandingConfigs = function () {
+        console.log('calling payment link branding config');
+        return this.generateAuthenticatedInstance(v0.PaymentLinkBrandingConfigs);
+    };
     TillhubClient.prototype.templates = function () {
         if (!this.options ||
             !this.options.base ||
