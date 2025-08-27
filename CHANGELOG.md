@@ -1,3 +1,10 @@
+# [4.224.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.223.0...v4.224.0) (2025-08-27)
+
+
+### Features
+
+* **orders:** update interfaces ([296ce37](https://github.com/tillhub/tillhub-sdk-javascript/commit/296ce37344fd8e5e3c1469fb11c9c55e9ad94b43))
+
 # [4.223.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.222.0...v4.223.0) (2025-08-22)
 
 
