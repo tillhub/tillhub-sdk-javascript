@@ -102,6 +102,13 @@ export interface OrderEntity {
   instores?: InStoreEntity[] | null
   basket?: BasketEntity | null
   disputes?: DisputeEntity[] | null
+  availableActions?: AvailableActionEntity | null
+  capturedAmount?: string | null
+  refundedAmount?: string | null
+  remainingAmount?: string | null
+  chargebackAmount?: string | null
+  refundable?: boolean | null
+  partiallyRefundable?: boolean | null
   createdAt?: Date | null
   updatedAt?: Date | null
 }
@@ -262,6 +269,11 @@ export interface DisputeEntity {
   order?: OrderEntity | null
 }
 
+export interface AvailableActionEntity {
+  cancel: boolean
+  capture: boolean
+  refund: boolean
+}
 export interface MessageEntity {
   dispute?: DisputeEntity | null
   sender?: string | null
