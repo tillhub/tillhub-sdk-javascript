@@ -250,6 +250,11 @@ export declare class PaymentLinksMetaFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
 }
+export declare class PaymentLinksCreateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
 export declare class TemplatesCreationFailed extends BaseError {
     message: string;
     name: string;
