@@ -52,6 +52,9 @@ export interface SubmissionRegister {
     tssId?: string;
     clientId?: string;
     status?: SubmissionRegisterStatus;
+    acquisitionDate?: string;
+    commissionDate?: string;
+    decommissionDate?: string | null;
 }
 export declare enum SubmissionStatus {
     Draft = "DRAFT",
@@ -71,6 +74,11 @@ export interface Submission {
     status?: SubmissionStatus;
     registers?: SubmissionRegister[];
     submittedAt?: string | null;
+}
+export interface PatchRegisterPayload {
+    acquisitionDate?: string;
+    commissionDate?: string;
+    decommissionDate?: string | null;
 }
 export interface SubmissionResponse {
     msg?: string;
@@ -93,5 +101,6 @@ export declare class Submissions extends ThBaseHandler {
     trigger(branchId: string, submissionId: string): Promise<SubmissionResponse>;
     getPreviewPdf(branchId: string, submissionId: string): Promise<SubmissionPdfResponse>;
     getPdf(branchId: string, submissionId: string): Promise<SubmissionPdfResponse>;
+    patchRegister(branchId: string, registerId: string, payload: PatchRegisterPayload): Promise<SubmissionResponse>;
     taxpayer(): Taxpayer;
 }

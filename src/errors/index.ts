@@ -552,6 +552,17 @@ export class PaymentLinksMetaFailed extends BaseError {
   }
 }
 
+export class PaymentLinksCreateFailed extends BaseError {
+  public name = 'PaymentLinksCreateFailed'
+  constructor (
+    public message: string = 'Could not create payment link',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, PaymentLinksCreateFailed.prototype)
+  }
+}
+
 export class TemplatesCreationFailed extends BaseError {
   public name = 'TemplatesCreationFailed'
   constructor (

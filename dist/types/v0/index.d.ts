@@ -19,6 +19,7 @@ import { IamUserGroups } from './iam_user_groups';
 import { IamRoles } from './iam_roles';
 import { IamPermissions } from './iam_permissions';
 import { IamMeClass } from './iam_me';
+import { PaymentProducts } from './payment_products';
 import { Branches } from './branches';
 import { BranchGroups } from './branch_groups';
 import { Devices } from './devices';

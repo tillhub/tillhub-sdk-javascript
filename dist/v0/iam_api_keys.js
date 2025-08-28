@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.IamApiKeysPrivateKeyFetchFailed = exports.IamApiKeyFetchFailed = exports.IamApiKeysMetaFailed = exports.IamApiKeysFetchFailed = exports.IamApiKeys = void 0;
+exports.IamApiKeysGetByUnitAndChannelFailed = exports.IamApiKeysPrivateKeyFetchFailed = exports.IamApiKeyFetchFailed = exports.IamApiKeysMetaFailed = exports.IamApiKeysFetchFailed = exports.IamApiKeys = void 0;
 var tslib_1 = require("tslib");
 var baseError_1 = require("../errors/baseError");
 var uri_helper_1 = require("../uri-helper");
@@ -110,9 +110,38 @@ var IamApiKeys = (function (_super) {
             });
         });
     };
-    IamApiKeys.prototype.meta = function (query) {
+    IamApiKeys.prototype.getKeypairsByUnitAndChannel = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_4;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        base = this.uriHelper.generateBaseUri();
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new IamApiKeysGetByUnitAndChannelFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            }];
+                    case 3:
+                        error_4 = _a.sent();
+                        throw new IamApiKeysGetByUnitAndChannelFailed(error_4.msg, { error: error_4 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
+    IamApiKeys.prototype.meta = function (query) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_5;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -129,8 +158,8 @@ var IamApiKeys = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        error_4 = _a.sent();
-                        throw new IamApiKeysMetaFailed(error_4.msg, { error: error_4 });
+                        error_5 = _a.sent();
+                        throw new IamApiKeysMetaFailed(error_5.msg, { error: error_5 });
                     case 3: return [2];
                 }
             });
@@ -192,4 +221,17 @@ var IamApiKeysPrivateKeyFetchFailed = (function (_super) {
     return IamApiKeysPrivateKeyFetchFailed;
 }(baseError_1.BaseError));
 exports.IamApiKeysPrivateKeyFetchFailed = IamApiKeysPrivateKeyFetchFailed;
+var IamApiKeysGetByUnitAndChannelFailed = (function (_super) {
+    tslib_1.__extends(IamApiKeysGetByUnitAndChannelFailed, _super);
+    function IamApiKeysGetByUnitAndChannelFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch api keys by unit and channel'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'IamApiKeysGetByUnitAndChannelFailed';
+        Object.setPrototypeOf(_this, IamApiKeysGetByUnitAndChannelFailed.prototype);
+        return _this;
+    }
+    return IamApiKeysGetByUnitAndChannelFailed;
+}(baseError_1.BaseError));
+exports.IamApiKeysGetByUnitAndChannelFailed = IamApiKeysGetByUnitAndChannelFailed;
 //# sourceMappingURL=iam_api_keys.js.map

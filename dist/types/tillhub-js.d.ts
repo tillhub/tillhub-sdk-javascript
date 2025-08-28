@@ -72,6 +72,7 @@ export declare class TillhubClient extends events.EventEmitter {
     branches(): v0.Branches;
     branchesV1(): v1.Branches;
     branchGroups(): v0.BranchGroups;
+    paymentProducts(): v0.PaymentProducts;
     devices(): v0.Devices;
     contents(): v0.Contents;
     contentTemplates(): v0.ContentTemplates;
@@ -103,6 +104,7 @@ export declare class TillhubClient extends events.EventEmitter {
     transactions(axiosOptions?: AxiosOptions): v1.Transactions;
     transactionsV2(): v2.Transactions;
     ordersV2(): v2.Orders;
+    orderActionsV2(): v2.OrderActions;
     exportsV1(): v1.ExportsV1;
     staff(): v0.Staff;
     auditActions(): v0.AuditActions;

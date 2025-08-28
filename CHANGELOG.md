@@ -1,3 +1,45 @@
+# [4.223.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.222.0...v4.223.0) (2025-08-22)
+
+
+### Features
+
+* **payment-products:** add paymentProducts method and update salesStream type ([27fb457](https://github.com/tillhub/tillhub-sdk-javascript/commit/27fb457dc50297e5a2cfda00dbb5c0f69d41860e))
+
+# [4.222.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.221.0...v4.222.0) (2025-08-22)
+
+
+### Features
+
+* **payment:** fix tests ([5c48ad4](https://github.com/tillhub/tillhub-sdk-javascript/commit/5c48ad4836db73826d764d4c97c694311e5cef3d))
+* **payment-products:** add PaymentProducts class and integrate with existing API structure ([f62646f](https://github.com/tillhub/tillhub-sdk-javascript/commit/f62646fbd6c6cf03f1805d2a32d3eae24d43b9f3))
+
+
+### Reverts
+
+* Revert "feat(transactions): add create basket, authorize, and charge transaction functionalities with corresponding error handling - UOD-1794" ([fd5f592](https://github.com/tillhub/tillhub-sdk-javascript/commit/fd5f5927514ad99507e323a3787fc88d02061f11))
+
+# [4.221.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.220.0...v4.221.0) (2025-08-20)
+
+
+### Features
+
+* **transactions:** add create basket, authorize, and charge transaction functionalities with corresponding error handling - UOD-1794 ([3f2102e](https://github.com/tillhub/tillhub-sdk-javascript/commit/3f2102e44e66ba90e04a876fc300aead97927180))
+
+# [4.220.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.219.0...v4.220.0) (2025-08-13)
+
+
+### Features
+
+* **order-actions:** adjusted added endpoints & new endpoint for keypairs added  - UOD-1627 ([aab61fd](https://github.com/tillhub/tillhub-sdk-javascript/commit/aab61fd4458397d413b2420e67f368a838e27e5e))
+* **orderActions:** added endpoints for order actions - UOD-1627 ([048d780](https://github.com/tillhub/tillhub-sdk-javascript/commit/048d7803dea9a7666c63d9ed572e89631b641cd6))
+
+# [4.219.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.218.0...v4.219.0) (2025-08-04)
+
+
+### Features
+
+* **submissions:** add register update method (UNTIL 14570) ([#666](https://github.com/tillhub/tillhub-sdk-javascript/issues/666)) ([f5cbdc2](https://github.com/tillhub/tillhub-sdk-javascript/commit/f5cbdc2b71520d2089ae87a42f6fe72e11f1e0e2))
+
 # [4.218.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.217.0...v4.218.0) (2025-07-30)
 
 
