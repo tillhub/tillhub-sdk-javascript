@@ -1668,4 +1668,43 @@ var LegacySettingUpdateFailed = (function (_super) {
     return LegacySettingUpdateFailed;
 }(baseError_1.BaseError));
 exports.LegacySettingUpdateFailed = LegacySettingUpdateFailed;
+var PaymentLinkBrandingConfigPatchFailed = (function (_super) {
+    tslib_1.__extends(PaymentLinkBrandingConfigPatchFailed, _super);
+    function PaymentLinkBrandingConfigPatchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not patch payment link branding config'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PaymentLinkBrandingConfigPatchFailed';
+        Object.setPrototypeOf(_this, PaymentLinkBrandingConfigPatchFailed.prototype);
+        return _this;
+    }
+    return PaymentLinkBrandingConfigPatchFailed;
+}(baseError_1.BaseError));
+exports.PaymentLinkBrandingConfigPatchFailed = PaymentLinkBrandingConfigPatchFailed;
+var PaymentLinkBrandingConfigNotFound = (function (_super) {
+    tslib_1.__extends(PaymentLinkBrandingConfigNotFound, _super);
+    function PaymentLinkBrandingConfigNotFound(message, properties) {
+        if (message === void 0) { message = 'Payment link branding config not found'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PaymentLinkBrandingConfigNotFound';
+        Object.setPrototypeOf(_this, PaymentLinkBrandingConfigNotFound.prototype);
+        return _this;
+    }
+    return PaymentLinkBrandingConfigNotFound;
+}(baseError_1.BaseError));
+exports.PaymentLinkBrandingConfigNotFound = PaymentLinkBrandingConfigNotFound;
+var PaymentLinkBrandingConfigFetchFailed = (function (_super) {
+    tslib_1.__extends(PaymentLinkBrandingConfigFetchFailed, _super);
+    function PaymentLinkBrandingConfigFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch payment link branding config'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PaymentLinkBrandingConfigFetchFailed';
+        Object.setPrototypeOf(_this, PaymentLinkBrandingConfigFetchFailed.prototype);
+        return _this;
+    }
+    return PaymentLinkBrandingConfigFetchFailed;
+}(baseError_1.BaseError));
+exports.PaymentLinkBrandingConfigFetchFailed = PaymentLinkBrandingConfigFetchFailed;
 //# sourceMappingURL=index.js.map

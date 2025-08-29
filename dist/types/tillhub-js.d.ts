@@ -57,6 +57,7 @@ export declare class TillhubClient extends events.EventEmitter {
     expenseAccounts(): v0.ExpenseAccounts;
     paymentOptions(): v0.PaymentOptions;
     paymentLinks(): v0.PaymentLinks;
+    paymentLinkBrandingConfigs(): v0.PaymentLinkBrandingConfigs;
     templates(): v1.Templates;
     configurations(): v0.Configurations;
     configurationsV1(): v1.Configurations;

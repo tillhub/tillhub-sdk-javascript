@@ -90,6 +90,7 @@ import { BusinessUnits } from './business_units'
 import { UodInvoices } from './invoices_uod'
 import { Submissions } from './submissions'
 import { PaymentLinks } from './payment_links'
+import { PaymentLinkBrandingConfigs } from './payment_link_branding_config'
 
 export {
   Auth,
@@ -186,5 +187,6 @@ export {
   BusinessUnits,
   UodInvoices,
   Submissions,
-  PaymentLinks
+  PaymentLinks,
+  PaymentLinkBrandingConfigs
 }

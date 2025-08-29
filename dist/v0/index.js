@@ -189,4 +189,6 @@ var submissions_1 = require("./submissions");
 Object.defineProperty(exports, "Submissions", { enumerable: true, get: function () { return submissions_1.Submissions; } });
 var payment_links_1 = require("./payment_links");
 Object.defineProperty(exports, "PaymentLinks", { enumerable: true, get: function () { return payment_links_1.PaymentLinks; } });
+var payment_link_branding_config_1 = require("./payment_link_branding_config");
+Object.defineProperty(exports, "PaymentLinkBrandingConfigs", { enumerable: true, get: function () { return payment_link_branding_config_1.PaymentLinkBrandingConfigs; } });
 //# sourceMappingURL=index.js.map
