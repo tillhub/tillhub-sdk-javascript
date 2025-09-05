@@ -72,6 +72,17 @@ export interface CustomMailjetDefaultSenderResponse {
   status?: number
 }
 
+export interface CustomMailjetCredentialStatusResponse {
+  data?: {
+    hasCredentials: boolean
+    isValid: boolean
+    lastValidated: string | null
+    error?: string
+  }
+  msg?: string
+  status?: number
+}
+
 export class Email extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/email'
   endpoint: string
@@ -102,7 +113,7 @@ export class Email extends ThBaseHandler {
       }
 
       return {
-        data: response.data.results,
+        data: response.data.results || null,
         msg: response.data.msg,
         status: response.data.status
       }
@@ -203,6 +214,25 @@ export class Email extends ThBaseHandler {
       }
     } catch (error: any) {
       throw new errors.EmailCustomMailjetDefaultSenderSetFailed(error.message, { error })
+    }
+  }
+
+  async getCustomMailjetCredentialStatus (): Promise<CustomMailjetCredentialStatusResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri('/custom-mailjet-credential-status')
+      const response = await this.http.getClient().get(uri)
+
+      if (response.status !== 200) {
+        throw new errors.EmailCustomMailjetCredentialStatusGetFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results,
+        msg: response.data.msg,
+        status: response.data.status
+      }
+    } catch (error: any) {
+      throw new errors.EmailCustomMailjetCredentialStatusGetFailed(error.message, { error })
     }
   }
 }

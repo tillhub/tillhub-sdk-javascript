@@ -1438,3 +1438,14 @@ export class EmailCustomMailjetDefaultSenderSetFailed extends BaseError {
     Object.setPrototypeOf(this, EmailCustomMailjetDefaultSenderSetFailed.prototype)
   }
 }
+
+export class EmailCustomMailjetCredentialStatusGetFailed extends BaseError {
+  public name = 'EmailCustomMailjetCredentialStatusGetFailed'
+  constructor (
+    public message: string = 'Could not get custom mailjet credential status',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, EmailCustomMailjetCredentialStatusGetFailed.prototype)
+  }
+}
