@@ -25,29 +25,11 @@ afterEach(() => {
   mock.reset()
 })
 
-describe('v0: Email: can set mailjet configuration', () => {
-  const mockCredentials = {
-    apiKey: 'test-api-key',
-    apiSecret: 'test-api-secret'
-  }
+describe('v0: Email: can set custom mailjet default sender', () => {
+  it("Tillhub's email handler can set custom mailjet default sender", async () => {
+    const request = { email: 'sender@example.com' }
+    const mockResponse = { success: true }
 
-  const mockMailjetConfiguration = {
-    credentials: {
-      apiKey: 'test-api-key',
-      apiSecret: 'test-api-secret'
-    },
-    settings: {
-      emails: [
-        {
-          name: 'Test User',
-          email: 'test@example.com',
-          isDefault: true
-        }
-      ]
-    }
-  }
-
-  it("Tillhub's email handler can set mailjet configuration", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
@@ -62,11 +44,11 @@ describe('v0: Email: can set mailjet configuration', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/email/${legacyId}/mailjet-configuration`).reply(() => {
+      mock.onPost(`https://api.tillhub.com/api/v0/email/${legacyId}/custom-mailjet-default-sender`).reply(() => {
         return [
           200,
           {
-            results: mockMailjetConfiguration,
+            results: mockResponse,
             status: 200,
             msg: 'Success'
           }
@@ -92,15 +74,10 @@ describe('v0: Email: can set mailjet configuration', () => {
     const email = th.email()
     expect(email).toBeInstanceOf(v0.Email)
 
-    const { data, status, msg } = await email.setMailjetConfiguration(mockCredentials)
+    const { data, status, msg } = await email.setCustomMailjetDefaultSender(request)
 
     expect(typeof data).toBe('object')
-    expect(data?.credentials.apiKey).toBe(mockCredentials.apiKey)
-    expect(data?.credentials.apiSecret).toBe(mockCredentials.apiSecret)
-    expect(Array.isArray(data?.settings.emails)).toBe(true)
-    expect(data?.settings.emails[0].name).toBe('Test User')
-    expect(data?.settings.emails[0].email).toBe('test@example.com')
-    expect(data?.settings.emails[0].isDefault).toBe(true)
+    expect(data?.success).toBe(true)
     expect(status).toBe(200)
     expect(msg).toBe('Success')
   })
@@ -120,7 +97,7 @@ describe('v0: Email: can set mailjet configuration', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/email/${legacyId}/mailjet-configuration`).reply(() => {
+      mock.onPost(`https://api.tillhub.com/api/v0/email/${legacyId}/custom-mailjet-default-sender`).reply(() => {
         return [400]
       })
     }
@@ -141,9 +118,9 @@ describe('v0: Email: can set mailjet configuration', () => {
     })
 
     try {
-      await th.email().setMailjetConfiguration(mockCredentials)
+      await th.email().setCustomMailjetDefaultSender({ email: 'sender@example.com' })
     } catch (err: any) {
-      expect(err.name).toBe('EmailCredentialsSetFailed')
+      expect(err.name).toBe('EmailCustomMailjetDefaultSenderSetFailed')
     }
   })
 })

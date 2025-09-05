@@ -28,7 +28,7 @@ afterEach(() => {
 describe('v0: Email: can test custom mailjet', () => {
   it("Tillhub's email handler can test custom mailjet", async () => {
     const request = { email: 'test@example.com' }
-    const mockResponse = [{ success: true, message: 'Test email sent successfully' }]
+    const mockResponse = { success: true, message: 'Test email sent successfully' }
 
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
@@ -76,9 +76,9 @@ describe('v0: Email: can test custom mailjet', () => {
 
     const { data, status, msg } = await email.testCustomMailjet(request)
 
-    expect(Array.isArray(data)).toBe(true)
-    expect(data?.[0]?.success).toBe(true)
-    expect(data?.[0]?.message).toBe('Test email sent successfully')
+    expect(typeof data).toBe('object')
+    expect(data?.success).toBe(true)
+    expect(data?.message).toBe('Test email sent successfully')
     expect(status).toBe(200)
     expect(msg).toBe('Success')
   })

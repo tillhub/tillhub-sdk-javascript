@@ -28,7 +28,7 @@ afterEach(() => {
 describe('v0: Email: can set custom mailjet active', () => {
   it("Tillhub's email handler can set custom mailjet active status", async () => {
     const request = { enabled: true }
-    const mockResponse = [{ isCustomMailjetActive: true }]
+    const mockResponse = { isCustomMailjetActive: true }
 
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
@@ -76,8 +76,8 @@ describe('v0: Email: can set custom mailjet active', () => {
 
     const { data, status, msg } = await email.setCustomMailjetActive(request)
 
-    expect(Array.isArray(data)).toBe(true)
-    expect(data?.[0]?.isCustomMailjetActive).toBe(true)
+    expect(typeof data).toBe('object')
+    expect(data?.isCustomMailjetActive).toBe(true)
     expect(status).toBe(200)
     expect(msg).toBe('Success')
   })

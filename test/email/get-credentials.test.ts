@@ -25,15 +25,24 @@ afterEach(() => {
   mock.reset()
 })
 
-describe('v0: Email: can get credentials', () => {
-  const mockCredentialsResult = {
-    apiKey: 'test-api-key',
-    apiSecret: 'test-api-secret',
-    email: 'test@example.com',
-    name: 'Test User'
+describe('v0: Email: can get mailjet configuration', () => {
+  const mockMailjetConfiguration = {
+    credentials: {
+      apiKey: 'test-api-key',
+      apiSecret: 'test-api-secret'
+    },
+    settings: {
+      emails: [
+        {
+          name: 'Test User',
+          email: 'test@example.com',
+          isDefault: true
+        }
+      ]
+    }
   }
 
-  it("Tillhub's email handler can get credentials", async () => {
+  it("Tillhub's email handler can get mailjet configuration", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
@@ -48,11 +57,11 @@ describe('v0: Email: can get credentials', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/email/${legacyId}/credentials`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/email/${legacyId}/mailjet-configuration`).reply(() => {
         return [
           200,
           {
-            results: [mockCredentialsResult],
+            results: mockMailjetConfiguration,
             status: 200,
             msg: 'Success'
           }
@@ -78,9 +87,15 @@ describe('v0: Email: can get credentials', () => {
     const email = th.email()
     expect(email).toBeInstanceOf(v0.Email)
 
-    const { data, status, msg } = await email.getCredentials()
+    const { data, status, msg } = await email.getMailjetConfiguration()
 
-    expect(Array.isArray(data)).toBe(true)
+    expect(typeof data).toBe('object')
+    expect(data?.credentials.apiKey).toBe('test-api-key')
+    expect(data?.credentials.apiSecret).toBe('test-api-secret')
+    expect(Array.isArray(data?.settings.emails)).toBe(true)
+    expect(data?.settings.emails[0].name).toBe('Test User')
+    expect(data?.settings.emails[0].email).toBe('test@example.com')
+    expect(data?.settings.emails[0].isDefault).toBe(true)
     expect(status).toBe(200)
     expect(msg).toBe('Success')
   })
@@ -100,7 +115,7 @@ describe('v0: Email: can get credentials', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/email/${legacyId}/credentials`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/email/${legacyId}/mailjet-configuration`).reply(() => {
         return [500]
       })
     }
@@ -121,7 +136,7 @@ describe('v0: Email: can get credentials', () => {
     })
 
     try {
-      await th.email().getCredentials()
+      await th.email().getMailjetConfiguration()
     } catch (err: any) {
       expect(err.name).toBe('EmailCredentialsFetchFailed')
     }

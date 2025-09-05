@@ -8,26 +8,29 @@ export interface EmailOptions {
   base?: string
 }
 
-export interface EmailCredentials {
+export interface MailjetCredentials {
   apiKey: string
   apiSecret: string
 }
 
-export interface EmailCredentialsResponse {
-  data?: EmailCredentialsResult
-  msg?: string
-  status?: number
-}
-
-export interface EmailCredentialsResult {
-  apiKey: string
-  apiSecret: string
-  email: string
+export interface MailjetEmail {
   name: string
+  email: string
+  isDefault: boolean
 }
 
-export interface EmailCredentialsListResponse {
-  data: EmailCredentialsResult[]
+export interface MailjetConfiguration {
+  credentials: {
+    apiKey: string
+    apiSecret: string
+  }
+  settings: {
+    emails: MailjetEmail[]
+  }
+}
+
+export interface MailjetConfigurationResponse {
+  data?: MailjetConfiguration | null
   msg?: string
   status?: number
 }
@@ -37,13 +40,11 @@ export interface CustomMailjetActiveRequest {
 }
 
 export interface CustomMailjetActiveResponse {
-  data?: CustomMailjetActiveResult[]
+  data?: {
+    isCustomMailjetActive: boolean
+  }
   msg?: string
   status?: number
-}
-
-export interface CustomMailjetActiveResult {
-  isCustomMailjetActive: boolean
 }
 
 export interface TestCustomMailjetRequest {
@@ -51,14 +52,24 @@ export interface TestCustomMailjetRequest {
 }
 
 export interface TestCustomMailjetResponse {
-  data?: TestCustomMailjetResult[]
+  data?: {
+    success: boolean
+    message: string
+  }
   msg?: string
   status?: number
 }
 
-export interface TestCustomMailjetResult {
-  success: boolean
-  message: string
+export interface CustomMailjetDefaultSenderRequest {
+  email: string
+}
+
+export interface CustomMailjetDefaultSenderResponse {
+  data?: {
+    success: boolean
+  }
+  msg?: string
+  status?: number
 }
 
 export class Email extends ThBaseHandler {
@@ -81,9 +92,9 @@ export class Email extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async getCredentials (): Promise<EmailCredentialsListResponse> {
+  async getMailjetConfiguration (): Promise<MailjetConfigurationResponse> {
     try {
-      const uri = this.uriHelper.generateBaseUri('/credentials')
+      const uri = this.uriHelper.generateBaseUri('/mailjet-configuration')
       const response = await this.http.getClient().get(uri)
 
       if (response.status !== 200) {
@@ -100,9 +111,9 @@ export class Email extends ThBaseHandler {
     }
   }
 
-  async setCredentials (credentials: EmailCredentials): Promise<EmailCredentialsResponse> {
+  async setMailjetConfiguration (credentials: MailjetCredentials): Promise<MailjetConfigurationResponse> {
     try {
-      const uri = this.uriHelper.generateBaseUri('/credentials')
+      const uri = this.uriHelper.generateBaseUri('/mailjet-configuration')
       const response = await this.http.getClient().post(uri, credentials)
 
       if (response.status !== 200) {
@@ -110,7 +121,7 @@ export class Email extends ThBaseHandler {
       }
 
       return {
-        data: response.data.results[0] as EmailCredentialsResult,
+        data: response.data.results,
         msg: response.data.msg,
         status: response.data.status
       }
@@ -173,6 +184,25 @@ export class Email extends ThBaseHandler {
       }
     } catch (error: any) {
       throw new errors.EmailTestCustomMailjetFailed(error.message, { error })
+    }
+  }
+
+  async setCustomMailjetDefaultSender (request: CustomMailjetDefaultSenderRequest): Promise<CustomMailjetDefaultSenderResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri('/custom-mailjet-default-sender')
+      const response = await this.http.getClient().post(uri, request)
+
+      if (response.status !== 200) {
+        throw new errors.EmailCustomMailjetDefaultSenderSetFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results,
+        msg: response.data.msg,
+        status: response.data.status
+      }
+    } catch (error: any) {
+      throw new errors.EmailCustomMailjetDefaultSenderSetFailed(error.message, { error })
     }
   }
 }
