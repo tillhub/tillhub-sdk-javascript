@@ -1,92 +1,109 @@
 import { ThBaseHandler } from '../base';
 import { Client } from '../client';
 import { UriHelper } from '../uri-helper';
+declare type PaymentLinkType = 'items_sale' | 'quick_charge';
+declare type PaymentLinkStatus = 'Open' | 'Expired' | 'Closed';
+export interface PaymentLinkEntity {
+    id?: string | null;
+    usage?: string | null;
+    paymentLinkType: PaymentLinkType;
+    linkedOrderId?: string | null;
+    branch?: string | null;
+    branchId?: string | null;
+    status?: PaymentLinkStatus | null;
+    createdBy: string | null;
+    total?: number | null;
+    currency?: string | null;
+    subtotal?: number | null;
+    deliveryMethod?: string | null;
+    deliveryCost?: number | null;
+    customer?: PaymentLinkCustomer | null;
+    items?: PaymentLinkItem[] | null;
+    paymentPageUrl?: string | null;
+    createdAt: string | {
+        start: Date;
+        end: Date;
+    } | null;
+    updatedAt?: string | null;
+}
 export interface PaymentLinksOptions {
     user?: string;
     base?: string;
 }
 export interface PaymentLinkAddress {
-    salutation?: string;
-    firstName: string;
-    lastName: string;
-    country: string;
-    address: string;
-    postalCode: string;
-    city: string;
+    salutation?: string | null;
+    firstName?: string | null;
+    lastName?: string | null;
+    country?: string | null;
+    address?: string | null;
+    postalCode?: string | null;
+    city?: string | null;
 }
 export interface PaymentLinkCustomer {
-    salutation?: string;
-    firstName: string;
-    lastName: string;
-    dateOfBirth?: string;
-    email: string;
-    mobileNo?: string;
-    phoneNo?: string;
-    language?: string;
-    billing?: PaymentLinkAddress;
-    shipping?: PaymentLinkAddress;
-    sameAsShipping?: boolean;
+    salutation?: string | null;
+    firstName?: string | null;
+    lastName?: string | null;
+    dateOfBirth?: string | null;
+    email?: string | null;
+    mobileNo?: string | null;
+    phoneNo?: string | null;
+    language?: string | null;
+    billing?: PaymentLinkAddress | null;
+    shipping?: PaymentLinkAddress | null;
+    sameAsShipping?: boolean | false;
 }
 export interface PaymentLinkItem {
-    name: string;
-    quantity: number;
-    unitPrice: number;
-    totalPrice: number;
+    name?: string | null;
+    quantity?: number | null;
+    unitPrice?: number | null;
+    totalPrice?: number | null;
 }
 export interface CreatePaymentLinkRequest {
     usage?: string;
-    paymentLinkType?: 'items_sale' | 'quick_charge';
+    paymentLinkType?: PaymentLinkType;
     linkedOrderId?: string;
     branch: string;
     branchId: string;
-    status?: 'READY_TO_ORDER' | 'ORDER_SUCCESSFULL';
+    status?: PaymentLinkStatus;
     createdBy: string;
     total: number;
     currency: string;
     subtotal?: number;
     deliveryMethod?: string;
     deliveryCost?: number;
-    customer?: PaymentLinkCustomer;
-    items?: PaymentLinkItem[];
+    customer?: PaymentLinkCustomer | null;
+    items?: PaymentLinkItem[] | null;
 }
-export interface CreatePaymentLinkResponse {
-    id: string;
-    usage?: string;
-    paymentLinkType: 'items_sale' | 'quick_charge';
-    linkedOrderId?: string;
-    branch: string;
-    branchId: string;
-    status: 'READY_TO_ORDER' | 'ORDER_SUCCESSFULL';
-    createdBy: string;
-    total: number;
-    currency: string;
-    subtotal?: number;
-    deliveryMethod?: string;
-    deliveryCost?: number;
-    customer?: PaymentLinkCustomer & {
-        id: string;
-    };
-    items?: Array<PaymentLinkItem & {
-        id: string;
-    }>;
-    createdAt: string;
-    updatedAt: string;
+export interface PaymentLinkQuery {
+    branch?: string | null;
+    customerEmail?: string | null;
+    createdBy?: string | null;
+    createdAt?: string | {
+        start: Date;
+        end: Date;
+    } | null;
+    status?: string | null;
+    amount?: number | null;
 }
-export interface PaymentLinksQuery {
+export interface PaymentLinkQueryHandler {
     limit?: number;
     uri?: string;
-    query?: Record<string, unknown>;
-    tenantId?: string;
+    query?: PaymentLinkQuery;
+    orderFields?: string[] | string;
 }
 export interface PaymentLinksResponse {
-    data?: Array<Record<string, unknown>>;
+    data?: PaymentLinkEntity[];
     metadata?: Record<string, unknown>;
     msg?: string;
     next?: () => Promise<PaymentLinksResponse>;
 }
-export interface PaymentLinkResponse {
-    data?: CreatePaymentLinkResponse;
-    metadata?: Record<string, unknown>;
+export interface PaymentPageResponse {
+    paymentPageUrl: string;
+    id: string;
+    qrCodeSvg: string;
+}
+export interface CreatePaymentLinkResponse {
+    data?: PaymentPageResponse;
     msg?: string;
 }
 export declare class PaymentLinks extends ThBaseHandler {
@@ -96,7 +113,8 @@ export declare class PaymentLinks extends ThBaseHandler {
     options: PaymentLinksOptions;
     uriHelper: UriHelper;
     constructor(options: PaymentLinksOptions, http: Client);
-    getAll(query?: PaymentLinksQuery | undefined): Promise<PaymentLinksResponse>;
-    create(paymentLinkData: CreatePaymentLinkRequest): Promise<PaymentLinkResponse>;
-    meta(tenantId?: string): Promise<PaymentLinksResponse>;
+    getAll(query?: PaymentLinkQueryHandler | undefined): Promise<PaymentLinksResponse>;
+    create(paymentLinkData: CreatePaymentLinkRequest): Promise<CreatePaymentLinkResponse>;
+    meta(query?: PaymentLinkQueryHandler | undefined): Promise<PaymentLinksResponse>;
 }
+export {};
