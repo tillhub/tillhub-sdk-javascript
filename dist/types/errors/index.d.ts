@@ -240,6 +240,21 @@ export declare class PaymentOptionDeleteFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
 }
+export declare class PaymentLinksFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class PaymentLinksMetaFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class PaymentLinksCreateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
 export declare class TemplatesCreationFailed extends BaseError {
     message: string;
     name: string;
@@ -624,4 +639,19 @@ export declare class LegacySettingUpdateFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class PaymentLinkBrandingConfigPatchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class PaymentLinkBrandingConfigNotFound extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
+}
+export declare class PaymentLinkBrandingConfigFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: any);
 }

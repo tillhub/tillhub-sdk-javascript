@@ -530,6 +530,39 @@ export class PaymentOptionDeleteFailed extends BaseError {
   }
 }
 
+export class PaymentLinksFetchFailed extends BaseError {
+  public name = 'PaymentLinksFetchFailed'
+  constructor (
+    public message: string = 'Could not fetch payment links',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, PaymentLinksFetchFailed.prototype)
+  }
+}
+
+export class PaymentLinksMetaFailed extends BaseError {
+  public name = 'PaymentLinksMetaFailed'
+  constructor (
+    public message: string = 'Could not fetch payment links meta',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, PaymentLinksMetaFailed.prototype)
+  }
+}
+
+export class PaymentLinksCreateFailed extends BaseError {
+  public name = 'PaymentLinksCreateFailed'
+  constructor (
+    public message: string = 'Could not create payment link',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, PaymentLinksCreateFailed.prototype)
+  }
+}
+
 export class TemplatesCreationFailed extends BaseError {
   public name = 'TemplatesCreationFailed'
   constructor (
@@ -1370,5 +1403,35 @@ export class LegacySettingUpdateFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, LegacySettingUpdateFailed.prototype)
+  }
+}
+
+export class PaymentLinkBrandingConfigPatchFailed extends BaseError {
+  public name = 'PaymentLinkBrandingConfigPatchFailed'
+  constructor (public message: string = 'Could not patch payment link branding config', properties?: any) {
+    super(message, properties)
+    Object.setPrototypeOf(this, PaymentLinkBrandingConfigPatchFailed.prototype)
+  }
+}
+
+export class PaymentLinkBrandingConfigNotFound extends BaseError {
+  public name = 'PaymentLinkBrandingConfigNotFound'
+  constructor (
+    public message: string = 'Payment link branding config not found',
+    properties?: any
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, PaymentLinkBrandingConfigNotFound.prototype)
+  }
+}
+
+export class PaymentLinkBrandingConfigFetchFailed extends BaseError {
+  public name = 'PaymentLinkBrandingConfigFetchFailed'
+  constructor (
+    public message: string = 'Could not fetch payment link branding config',
+    properties?: any
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, PaymentLinkBrandingConfigFetchFailed.prototype)
   }
 }
