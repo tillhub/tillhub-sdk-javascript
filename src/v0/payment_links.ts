@@ -56,6 +56,11 @@ export interface CreatePaymentLinkRequest {
   items?: PaymentLinkItem[]
 }
 
+export interface SendSmsRequest {
+  to: string
+  paymentLink: string
+}
+
 export interface CreatePaymentLinkResponse {
   id: string
   usage?: string
@@ -106,13 +111,13 @@ export class PaymentLinks extends ThBaseHandler {
   constructor (options: PaymentLinksOptions, http: Client) {
     super(http, {
       endpoint: PaymentLinks.baseEndpoint,
-      base: options.base ?? 'https://api.tillhub.com'
+      base: 'http://localhost:3000'
     })
     this.options = options
     this.http = http
 
     this.endpoint = PaymentLinks.baseEndpoint
-    this.options.base = this.options.base ?? 'https://api.tillhub.com'
+    this.options.base = 'http://localhost:3000'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
@@ -159,6 +164,24 @@ export class PaymentLinks extends ThBaseHandler {
       }
     } catch (error: any) {
       throw new errors.PaymentLinksCreateFailed(error.message, { error })
+    }
+  }
+
+  async sendSms (sendSmsRequest: SendSmsRequest): Promise<PaymentLinkResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri() + '/send-sms'
+      const response = await this.http.getClient().post(uri, sendSmsRequest)
+
+      if (response.status !== 200 && response.status !== 201) {
+        throw new errors.SendSmsFailedFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data,
+        metadata: {}
+      }
+    } catch (error: any) {
+      throw new errors.SendSmsFailedFailed(error.message, { error })
     }
   }
 

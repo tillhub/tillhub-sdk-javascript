@@ -563,6 +563,17 @@ export class PaymentLinksCreateFailed extends BaseError {
   }
 }
 
+export class SendSmsFailedFailed extends BaseError {
+  public name = 'SendSmsFailedFailed'
+  constructor (
+    public message: string = 'Could not send Sms',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, SendSmsFailedFailed.prototype)
+  }
+}
+
 export class TemplatesCreationFailed extends BaseError {
   public name = 'TemplatesCreationFailed'
   constructor (
