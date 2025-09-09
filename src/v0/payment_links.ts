@@ -111,13 +111,13 @@ export class PaymentLinks extends ThBaseHandler {
   constructor (options: PaymentLinksOptions, http: Client) {
     super(http, {
       endpoint: PaymentLinks.baseEndpoint,
-      base: 'http://localhost:3000'
+      base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
     this.endpoint = PaymentLinks.baseEndpoint
-    this.options.base = 'http://localhost:3000'
+    this.options.base = options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
