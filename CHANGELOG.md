@@ -1,3 +1,12 @@
+# [4.225.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.224.0...v4.225.0) (2025-09-09)
+
+
+### Features
+
+* **integrations:** add new credentials status handler (UNTIL 14800) ([400bfa2](https://github.com/tillhub/tillhub-sdk-javascript/commit/400bfa2cd853740ac087f406fb08a9933a6b0fa0))
+* **integrations:** add tests for email handler (UNTIL 14800) ([ad7b3d0](https://github.com/tillhub/tillhub-sdk-javascript/commit/ad7b3d050cb3826ee93a354cf0b1c65e40552c62))
+* **integrations:** create email handler (UNTIL 14800) ([61b1194](https://github.com/tillhub/tillhub-sdk-javascript/commit/61b1194501e3e134d75f8cbd643095c8d7f415d2))
+
 # [4.224.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.223.0...v4.224.0) (2025-08-27)
 
 

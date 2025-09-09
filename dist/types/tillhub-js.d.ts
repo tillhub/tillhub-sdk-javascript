@@ -172,6 +172,7 @@ export declare class TillhubClient extends events.EventEmitter {
     contentTemplatesV1(): v1.ContentTemplates;
     import(): v1.Import;
     submissions(): v0.Submissions;
+    email(): v0.Email;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;
