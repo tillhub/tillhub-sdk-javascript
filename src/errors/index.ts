@@ -1372,3 +1372,80 @@ export class LegacySettingUpdateFailed extends BaseError {
     Object.setPrototypeOf(this, LegacySettingUpdateFailed.prototype)
   }
 }
+
+export class EmailCredentialsFetchFailed extends BaseError {
+  public name = 'EmailCredentialsFetchFailed'
+  constructor (
+    public message: string = 'Could not get email credentials',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, EmailCredentialsFetchFailed.prototype)
+  }
+}
+
+export class EmailCredentialsSetFailed extends BaseError {
+  public name = 'EmailCredentialsSetFailed'
+  constructor (
+    public message: string = 'Could not set email credentials',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, EmailCredentialsSetFailed.prototype)
+  }
+}
+
+export class EmailCustomMailjetActiveGetFailed extends BaseError {
+  public name = 'EmailCustomMailjetActiveGetFailed'
+  constructor (
+    public message: string = 'Could not get custom mailjet active status',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, EmailCustomMailjetActiveGetFailed.prototype)
+  }
+}
+
+export class EmailCustomMailjetActiveSetFailed extends BaseError {
+  public name = 'EmailCustomMailjetActiveSetFailed'
+  constructor (
+    public message: string = 'Could not set custom mailjet active status',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, EmailCustomMailjetActiveSetFailed.prototype)
+  }
+}
+
+export class EmailTestCustomMailjetFailed extends BaseError {
+  public name = 'EmailTestCustomMailjetFailed'
+  constructor (
+    public message: string = 'Could not test custom mailjet',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, EmailTestCustomMailjetFailed.prototype)
+  }
+}
+
+export class EmailCustomMailjetDefaultSenderSetFailed extends BaseError {
+  public name = 'EmailCustomMailjetDefaultSenderSetFailed'
+  constructor (
+    public message: string = 'Could not set custom mailjet default sender',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, EmailCustomMailjetDefaultSenderSetFailed.prototype)
+  }
+}
+
+export class EmailCustomMailjetCredentialStatusGetFailed extends BaseError {
+  public name = 'EmailCustomMailjetCredentialStatusGetFailed'
+  constructor (
+    public message: string = 'Could not get custom mailjet credential status',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, EmailCustomMailjetCredentialStatusGetFailed.prototype)
+  }
+}

@@ -89,6 +89,7 @@ import { DocumentExports } from './document_exports'
 import { BusinessUnits } from './business_units'
 import { UodInvoices } from './invoices_uod'
 import { Submissions } from './submissions'
+import { Email } from './email'
 
 export {
   Auth,
@@ -184,5 +185,6 @@ export {
   DocumentExports,
   BusinessUnits,
   UodInvoices,
-  Submissions
+  Submissions,
+  Email
 }
