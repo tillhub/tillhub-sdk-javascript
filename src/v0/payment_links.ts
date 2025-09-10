@@ -5,7 +5,8 @@ import * as errors from '../errors'
 import {
   PaymentLinksCreateFailed,
   PaymentLinksFetchFailed,
-  PaymentLinksMetaFailed
+  PaymentLinksMetaFailed,
+  PaymentLinksSendEmailFailed
 } from '../errors'
 
 declare type PaymentLinkType = 'items_sale' | 'quick_charge'
@@ -122,7 +123,14 @@ export interface PaymentLinksResponse {
 export interface PaymentPageResponse {
   paymentPageUrl: string
   id: string
+  customerEmail?: string
+  customerMobileNo?: string
   qrCodeSvg: string
+}
+
+export interface SendPaymentLinkEmailDto {
+  paymentLinkId: string
+  customerEmail: string
 }
 
 export interface CreatePaymentLinkResponse {
@@ -220,6 +228,19 @@ export class PaymentLinks extends ThBaseHandler {
       }
     } catch (error: any) {
       throw new errors.SendSmsFailedFailed(error.message, { error })
+    }
+  }
+
+  async sendEmail (sendPaymentLinkEmailDto: SendPaymentLinkEmailDto): Promise<void> {
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const response = await this.http.getClient().post(`${base}/send-email`, sendPaymentLinkEmailDto)
+
+      if (response.status !== 200) {
+        throw new PaymentLinksSendEmailFailed(undefined, { status: response.status })
+      }
+    } catch (error: any) {
+      throw new PaymentLinksSendEmailFailed(error.message, { error })
     }
   }
 }

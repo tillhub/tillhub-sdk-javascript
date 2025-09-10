@@ -541,6 +541,17 @@ export class PaymentLinksFetchFailed extends BaseError {
   }
 }
 
+export class PaymentLinksSendEmailFailed extends BaseError {
+  public name = 'PaymentLinksSendEmailFailed'
+  constructor (
+    public message: string = 'Could not send email for payment link',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, PaymentLinksSendEmailFailed.prototype)
+  }
+}
+
 export class PaymentLinksMetaFailed extends BaseError {
   public name = 'PaymentLinksMetaFailed'
   constructor (
