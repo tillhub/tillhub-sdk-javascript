@@ -27,22 +27,11 @@ export interface MailjetConfiguration {
   settings: {
     emails: MailjetEmail[]
   }
+  isActive: boolean
 }
 
 export interface MailjetConfigurationResponse {
   data?: MailjetConfiguration | null
-  msg?: string
-  status?: number
-}
-
-export interface CustomMailjetActiveRequest {
-  enabled: boolean
-}
-
-export interface CustomMailjetActiveResponse {
-  data?: {
-    isCustomMailjetActive: boolean
-  }
   msg?: string
   status?: number
 }
@@ -141,43 +130,6 @@ export class Email extends ThBaseHandler {
     }
   }
 
-  async getCustomMailjetActive (): Promise<CustomMailjetActiveResponse> {
-    try {
-      const uri = this.uriHelper.generateBaseUri('/custom-mailjet-active')
-      const response = await this.http.getClient().get(uri)
-
-      if (response.status !== 200) {
-        throw new errors.EmailCustomMailjetActiveGetFailed(undefined, { status: response.status })
-      }
-
-      return {
-        data: response.data.results,
-        msg: response.data.msg,
-        status: response.data.status
-      }
-    } catch (error: any) {
-      throw new errors.EmailCustomMailjetActiveGetFailed(error.message, { error })
-    }
-  }
-
-  async setCustomMailjetActive (request: CustomMailjetActiveRequest): Promise<CustomMailjetActiveResponse> {
-    try {
-      const uri = this.uriHelper.generateBaseUri('/custom-mailjet-active')
-      const response = await this.http.getClient().post(uri, request)
-
-      if (response.status !== 200) {
-        throw new errors.EmailCustomMailjetActiveSetFailed(undefined, { status: response.status })
-      }
-
-      return {
-        data: response.data.results,
-        msg: response.data.msg,
-        status: response.data.status
-      }
-    } catch (error: any) {
-      throw new errors.EmailCustomMailjetActiveSetFailed(error.message, { error })
-    }
-  }
 
   async testCustomMailjet (request: TestCustomMailjetRequest): Promise<TestCustomMailjetResponse> {
     try {

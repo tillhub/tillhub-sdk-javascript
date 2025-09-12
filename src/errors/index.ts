@@ -1395,28 +1395,6 @@ export class EmailCredentialsSetFailed extends BaseError {
   }
 }
 
-export class EmailCustomMailjetActiveGetFailed extends BaseError {
-  public name = 'EmailCustomMailjetActiveGetFailed'
-  constructor (
-    public message: string = 'Could not get custom mailjet active status',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, EmailCustomMailjetActiveGetFailed.prototype)
-  }
-}
-
-export class EmailCustomMailjetActiveSetFailed extends BaseError {
-  public name = 'EmailCustomMailjetActiveSetFailed'
-  constructor (
-    public message: string = 'Could not set custom mailjet active status',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, EmailCustomMailjetActiveSetFailed.prototype)
-  }
-}
-
 export class EmailTestCustomMailjetFailed extends BaseError {
   public name = 'EmailTestCustomMailjetFailed'
   constructor (

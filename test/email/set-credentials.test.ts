@@ -44,7 +44,8 @@ describe('v0: Email: can set mailjet configuration', () => {
           isDefault: true
         }
       ]
-    }
+    },
+    isActive: true
   }
 
   it("Tillhub's email handler can set mailjet configuration", async () => {
@@ -101,6 +102,7 @@ describe('v0: Email: can set mailjet configuration', () => {
     expect(data?.settings.emails[0].name).toBe('Test User')
     expect(data?.settings.emails[0].email).toBe('test@example.com')
     expect(data?.settings.emails[0].isDefault).toBe(true)
+    expect(data?.isActive).toBe(true)
     expect(status).toBe(200)
     expect(msg).toBe('Success')
   })
