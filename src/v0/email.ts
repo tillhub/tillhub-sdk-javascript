@@ -130,7 +130,6 @@ export class Email extends ThBaseHandler {
     }
   }
 
-
   async testCustomMailjet (request: TestCustomMailjetRequest): Promise<TestCustomMailjetResponse> {
     try {
       const uri = this.uriHelper.generateBaseUri('/test-custom-mailjet')
