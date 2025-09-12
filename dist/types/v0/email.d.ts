@@ -22,19 +22,10 @@ export interface MailjetConfiguration {
     settings: {
         emails: MailjetEmail[];
     };
+    isActive: boolean;
 }
 export interface MailjetConfigurationResponse {
     data?: MailjetConfiguration | null;
-    msg?: string;
-    status?: number;
-}
-export interface CustomMailjetActiveRequest {
-    enabled: boolean;
-}
-export interface CustomMailjetActiveResponse {
-    data?: {
-        isCustomMailjetActive: boolean;
-    };
     msg?: string;
     status?: number;
 }
@@ -78,8 +69,6 @@ export declare class Email extends ThBaseHandler {
     constructor(options: EmailOptions, http: Client);
     getMailjetConfiguration(): Promise<MailjetConfigurationResponse>;
     setMailjetConfiguration(credentials: MailjetCredentials): Promise<MailjetConfigurationResponse>;
-    getCustomMailjetActive(): Promise<CustomMailjetActiveResponse>;
-    setCustomMailjetActive(request: CustomMailjetActiveRequest): Promise<CustomMailjetActiveResponse>;
     testCustomMailjet(request: TestCustomMailjetRequest): Promise<TestCustomMailjetResponse>;
     setCustomMailjetDefaultSender(request: CustomMailjetDefaultSenderRequest): Promise<CustomMailjetDefaultSenderResponse>;
     getCustomMailjetCredentialStatus(): Promise<CustomMailjetCredentialStatusResponse>;

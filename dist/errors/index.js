@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TemplatesCreationFailed = exports.PaymentOptionDeleteFailed = exports.PaymentOptionCreationFailed = exports.PaymentOptionPutFailed = exports.PaymentOptionFetchFailed = exports.ExpenseAccountDeleteFailed = exports.PaymentOptionsFetchFailed = exports.ExpenseAccountCreationFailed = exports.ExpenseAccountPutFailed = exports.ExpenseAccountFetchFailed = exports.ExpenseAccountsFetchFailed = exports.AccountDeleteFailed = exports.AccountCreationFailed = exports.AccountPutFailed = exports.AccountFetchFailed = exports.AccountsFetchFailed = exports.ProductGroupDeleteFailed = exports.ProuctGroupsCountFailed = exports.ProductGroupsSearchFailed = exports.ProductGroupCreationFailed = exports.ProductGroupPutFailed = exports.ProductGroupFetchFailed = exports.ProductGroupsFetchFailed = exports.DeliveryItemUpdateFailed = exports.DeliveryItemsFetchAllFailed = exports.DeliveryItemsCreateFailed = exports.DeliveriesDeleteFailed = exports.DeliveriesDispatchFailed = exports.DeliveriesInProgressFailed = exports.DeliveriesUpdateFailed = exports.DeliveriesPDFFailed = exports.DeliveriesCreateFailed = exports.DeliveriesFetchOneFailed = exports.DeliveriesFetchAllFailed = exports.TaxDeleteFailed = exports.TaxesCreationFailed = exports.TaxesPutFailed = exports.TaxesFetchFailed = exports.TransactionsGetMetaFailed = exports.TransactionSigningZeroReceiptFailed = exports.TransactionSigningMonthlyReceiptFailed = exports.TransactionSigningYearlyReceiptFailed = exports.TransactionSigningInitialisationFailed = exports.TransactionPdfFailed = exports.TransactionFetchFailed = exports.UninstantiatedClient = exports.PasswordSetRequestFailed = exports.PasswordResetRequestFailed = exports.AuthenticationFailed = exports.BaseError = void 0;
 exports.StaffCountFailed = exports.ImagePutFailed = exports.ImageCreationFailed = exports.AuditActionsTypesFetchFailed = exports.AuditActionsCreateFailed = exports.AuditActionsGetMetaFailed = exports.AuditActionsFetchOneFailed = exports.AuditActionsFetchAllFailed = exports.RegistersSearchFailed = exports.RegisterDeviceConfigurationPutFailed = exports.RegisterNotificationCreateFailed = exports.RegisterPutFailed = exports.RegisterFetchFailed = exports.RegistersFetchFailed = exports.OpenOrderFetchFailed = exports.BookStockFailed = exports.HistoricOrderItemsFetchFailed = exports.OrderSuggestionsFetchFailed = exports.OrderItemsDeleteFailed = exports.OrderItemsUpdateFailed = exports.OrderItemUpdateFailed = exports.OrderItemsCreateFailed = exports.OrderItemsFetchFailed = exports.OutgoingOrdersFetchFailed = exports.IncomingOrdersFetchFailed = exports.OrdersUpdateFailed = exports.OrdersCreateFailed = exports.OrdersFetchFailed = exports.InvoicesGetMetaFailed = exports.InvoicesDeleteFailed = exports.InvoicesUpdateFailed = exports.InvoicesCreateFailed = exports.InvoicesFetchOneFailed = exports.InvoicesFetchAllFailed = exports.DiscountDeleteFailed = exports.DiscountsCountFailed = exports.DiscountCreationFailed = exports.DiscountPutFailed = exports.DiscountFetchFailed = exports.DiscountsFetchFailed = exports.ConfigurationDeleteFailed = exports.ConfigurationCreationFailed = exports.ConfigurationPatchFailed = exports.ConfigurationPutFailed = exports.InventoryConfigurationFetchFailed = exports.ConfigurationFetchFailed = exports.ConfigurationsFetchFailed = exports.TemplatesPreviewFailed = exports.TemplatesFetchFailed = exports.TemplatesPutFailed = void 0;
-exports.EmailCustomMailjetCredentialStatusGetFailed = exports.EmailCustomMailjetDefaultSenderSetFailed = exports.EmailTestCustomMailjetFailed = exports.EmailCustomMailjetActiveSetFailed = exports.EmailCustomMailjetActiveGetFailed = exports.EmailCredentialsSetFailed = exports.EmailCredentialsFetchFailed = exports.LegacySettingUpdateFailed = exports.LegacySettingFetchFailed = exports.LegacySettingsFetchFailed = exports.BalancesMetaFailed = exports.BalancesFetchOneFailed = exports.BalancesFetchFailed = exports.MessagesUpdateFailed = exports.MessagesFetchFailed = exports.PrinterUpdateFailed = exports.PrinterDeleteFailed = exports.PrinterCreateFailed = exports.PrinterFetchFailed = exports.PrintersFetchFailed = exports.PrintMessageUpdateFailed = exports.PrintMessageDeleteFailed = exports.PrintMessageCreateFailed = exports.PrintMessageFetchFailed = exports.PrintMessagesFetchFailed = exports.PrintJobDataFetchFailed = exports.PrintJobUpdateFailed = exports.PrintJobDeleteFailed = exports.PrintJobCreateFailed = exports.PrintJobFetchFailed = exports.PrintJobsFetchFailed = exports.ProductGroupsFiltersFetchFailed = exports.NotificationsEmailError = void 0;
+exports.EmailCustomMailjetCredentialStatusGetFailed = exports.EmailCustomMailjetDefaultSenderSetFailed = exports.EmailTestCustomMailjetFailed = exports.EmailCredentialsSetFailed = exports.EmailCredentialsFetchFailed = exports.LegacySettingUpdateFailed = exports.LegacySettingFetchFailed = exports.LegacySettingsFetchFailed = exports.BalancesMetaFailed = exports.BalancesFetchOneFailed = exports.BalancesFetchFailed = exports.MessagesUpdateFailed = exports.MessagesFetchFailed = exports.PrinterUpdateFailed = exports.PrinterDeleteFailed = exports.PrinterCreateFailed = exports.PrinterFetchFailed = exports.PrintersFetchFailed = exports.PrintMessageUpdateFailed = exports.PrintMessageDeleteFailed = exports.PrintMessageCreateFailed = exports.PrintMessageFetchFailed = exports.PrintMessagesFetchFailed = exports.PrintJobDataFetchFailed = exports.PrintJobUpdateFailed = exports.PrintJobDeleteFailed = exports.PrintJobCreateFailed = exports.PrintJobFetchFailed = exports.PrintJobsFetchFailed = exports.ProductGroupsFiltersFetchFailed = exports.NotificationsEmailError = void 0;
 var tslib_1 = require("tslib");
 var baseError_1 = require("./baseError");
 Object.defineProperty(exports, "BaseError", { enumerable: true, get: function () { return baseError_1.BaseError; } });
@@ -1655,32 +1655,6 @@ var EmailCredentialsSetFailed = (function (_super) {
     return EmailCredentialsSetFailed;
 }(baseError_1.BaseError));
 exports.EmailCredentialsSetFailed = EmailCredentialsSetFailed;
-var EmailCustomMailjetActiveGetFailed = (function (_super) {
-    tslib_1.__extends(EmailCustomMailjetActiveGetFailed, _super);
-    function EmailCustomMailjetActiveGetFailed(message, properties) {
-        if (message === void 0) { message = 'Could not get custom mailjet active status'; }
-        var _this = _super.call(this, message, properties) || this;
-        _this.message = message;
-        _this.name = 'EmailCustomMailjetActiveGetFailed';
-        Object.setPrototypeOf(_this, EmailCustomMailjetActiveGetFailed.prototype);
-        return _this;
-    }
-    return EmailCustomMailjetActiveGetFailed;
-}(baseError_1.BaseError));
-exports.EmailCustomMailjetActiveGetFailed = EmailCustomMailjetActiveGetFailed;
-var EmailCustomMailjetActiveSetFailed = (function (_super) {
-    tslib_1.__extends(EmailCustomMailjetActiveSetFailed, _super);
-    function EmailCustomMailjetActiveSetFailed(message, properties) {
-        if (message === void 0) { message = 'Could not set custom mailjet active status'; }
-        var _this = _super.call(this, message, properties) || this;
-        _this.message = message;
-        _this.name = 'EmailCustomMailjetActiveSetFailed';
-        Object.setPrototypeOf(_this, EmailCustomMailjetActiveSetFailed.prototype);
-        return _this;
-    }
-    return EmailCustomMailjetActiveSetFailed;
-}(baseError_1.BaseError));
-exports.EmailCustomMailjetActiveSetFailed = EmailCustomMailjetActiveSetFailed;
 var EmailTestCustomMailjetFailed = (function (_super) {
     tslib_1.__extends(EmailTestCustomMailjetFailed, _super);
     function EmailTestCustomMailjetFailed(message, properties) {

@@ -635,16 +635,6 @@ export declare class EmailCredentialsSetFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
 }
-export declare class EmailCustomMailjetActiveGetFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: Record<string, unknown>);
-}
-export declare class EmailCustomMailjetActiveSetFailed extends BaseError {
-    message: string;
-    name: string;
-    constructor(message?: string, properties?: Record<string, unknown>);
-}
 export declare class EmailTestCustomMailjetFailed extends BaseError {
     message: string;
     name: string;

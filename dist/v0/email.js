@@ -74,63 +74,9 @@ var Email = (function (_super) {
             });
         });
     };
-    Email.prototype.getCustomMailjetActive = function () {
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_3;
-            return tslib_1.__generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        uri = this.uriHelper.generateBaseUri('/custom-mailjet-active');
-                        return [4, this.http.getClient().get(uri)];
-                    case 1:
-                        response = _a.sent();
-                        if (response.status !== 200) {
-                            throw new errors.EmailCustomMailjetActiveGetFailed(undefined, { status: response.status });
-                        }
-                        return [2, {
-                                data: response.data.results,
-                                msg: response.data.msg,
-                                status: response.data.status
-                            }];
-                    case 2:
-                        error_3 = _a.sent();
-                        throw new errors.EmailCustomMailjetActiveGetFailed(error_3.message, { error: error_3 });
-                    case 3: return [2];
-                }
-            });
-        });
-    };
-    Email.prototype.setCustomMailjetActive = function (request) {
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_4;
-            return tslib_1.__generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        uri = this.uriHelper.generateBaseUri('/custom-mailjet-active');
-                        return [4, this.http.getClient().post(uri, request)];
-                    case 1:
-                        response = _a.sent();
-                        if (response.status !== 200) {
-                            throw new errors.EmailCustomMailjetActiveSetFailed(undefined, { status: response.status });
-                        }
-                        return [2, {
-                                data: response.data.results,
-                                msg: response.data.msg,
-                                status: response.data.status
-                            }];
-                    case 2:
-                        error_4 = _a.sent();
-                        throw new errors.EmailCustomMailjetActiveSetFailed(error_4.message, { error: error_4 });
-                    case 3: return [2];
-                }
-            });
-        });
-    };
     Email.prototype.testCustomMailjet = function (request) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_5;
+            var uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -148,8 +94,8 @@ var Email = (function (_super) {
                                 status: response.data.status
                             }];
                     case 2:
-                        error_5 = _a.sent();
-                        throw new errors.EmailTestCustomMailjetFailed(error_5.message, { error: error_5 });
+                        error_3 = _a.sent();
+                        throw new errors.EmailTestCustomMailjetFailed(error_3.message, { error: error_3 });
                     case 3: return [2];
                 }
             });
@@ -157,7 +103,7 @@ var Email = (function (_super) {
     };
     Email.prototype.setCustomMailjetDefaultSender = function (request) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_6;
+            var uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -175,8 +121,8 @@ var Email = (function (_super) {
                                 status: response.data.status
                             }];
                     case 2:
-                        error_6 = _a.sent();
-                        throw new errors.EmailCustomMailjetDefaultSenderSetFailed(error_6.message, { error: error_6 });
+                        error_4 = _a.sent();
+                        throw new errors.EmailCustomMailjetDefaultSenderSetFailed(error_4.message, { error: error_4 });
                     case 3: return [2];
                 }
             });
@@ -184,7 +130,7 @@ var Email = (function (_super) {
     };
     Email.prototype.getCustomMailjetCredentialStatus = function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_7;
+            var uri, response, error_5;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -202,8 +148,8 @@ var Email = (function (_super) {
                                 status: response.data.status
                             }];
                     case 2:
-                        error_7 = _a.sent();
-                        throw new errors.EmailCustomMailjetCredentialStatusGetFailed(error_7.message, { error: error_7 });
+                        error_5 = _a.sent();
+                        throw new errors.EmailCustomMailjetCredentialStatusGetFailed(error_5.message, { error: error_5 });
                     case 3: return [2];
                 }
             });
