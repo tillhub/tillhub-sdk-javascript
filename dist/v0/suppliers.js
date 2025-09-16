@@ -39,12 +39,12 @@ var Suppliers = (function (_super) {
                         if (response_1.status !== 200) {
                             throw new SuppliersFetchFailed(undefined, { status: response_1.status });
                         }
-                        if ((_a = response_1.data.cursor) === null || _a === void 0 ? void 0 : _a.next) {
-                            next = function () { return _this.getAll({ uri: response_1.data.cursor.next }); };
+                        if ((_a = response_1.data.cursors) === null || _a === void 0 ? void 0 : _a.next) {
+                            next = function () { return _this.getAll({ uri: response_1.data.cursors.next }); };
                         }
                         return [2, {
                                 data: response_1.data.results,
-                                metadata: { cursor: response_1.data.cursor },
+                                metadata: { cursor: response_1.data.cursors },
                                 next: next
                             }];
                     case 3:
