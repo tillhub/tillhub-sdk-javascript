@@ -100,6 +100,11 @@ export interface PaymentLinkQuery {
   amount?: number | null
 }
 
+export interface SendSmsRequest {
+  to: string
+  paymentLink: string
+}
+
 export interface PaymentLinkQueryHandler {
   limit?: number
   uri?: string
@@ -202,6 +207,24 @@ export class PaymentLinks extends ThBaseHandler {
       }
     } catch (error: any) {
       throw new PaymentLinksMetaFailed(error.message, { error })
+    }
+  }
+
+  async sendSms (sendSmsRequest: SendSmsRequest): Promise<PaymentLinkResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri() + '/send-sms'
+      const response = await this.http.getClient().post(uri, sendSmsRequest)
+
+      if (response.status !== 200 && response.status !== 201) {
+        throw new errors.SendSmsFailedFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data,
+        metadata: {}
+      }
+    } catch (error: any) {
+      throw new errors.SendSmsFailedFailed(error.message, { error })
     }
   }
 }
