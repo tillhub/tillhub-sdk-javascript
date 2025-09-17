@@ -210,18 +210,13 @@ export class PaymentLinks extends ThBaseHandler {
     }
   }
 
-  async sendSms (sendSmsRequest: SendSmsRequest): Promise<PaymentLinkResponse> {
+  async sendSms (sendSmsRequest: SendSmsRequest): Promise<void> {
     try {
       const uri = this.uriHelper.generateBaseUri() + '/send-sms'
       const response = await this.http.getClient().post(uri, sendSmsRequest)
 
       if (response.status !== 200 && response.status !== 201) {
         throw new errors.SendSmsFailedFailed(undefined, { status: response.status })
-      }
-
-      return {
-        data: response.data,
-        metadata: {}
       }
     } catch (error: any) {
       throw new errors.SendSmsFailedFailed(error.message, { error })
