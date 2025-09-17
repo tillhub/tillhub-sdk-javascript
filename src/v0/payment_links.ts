@@ -19,6 +19,10 @@ export interface PaymentLinkEntity {
   linkedOrderId?: string | null
   branch?: string | null
   branchId?: string | null
+  businessUnitUnzerId: string
+  externalInvoiceId?: string
+  externalOrderId?: string
+  externalCustomerId?: string
   status?: PaymentLinkStatus | null
   createdBy: string | null
   total?: number | null
@@ -85,6 +89,9 @@ export interface CreatePaymentLinkRequest {
   subtotal?: number
   deliveryMethod?: string
   deliveryCost?: number
+  invoiceId?: string
+  externalOrderId?: string
+  externalCustomerId?: string
   customer?: PaymentLinkCustomer | null
   items?: PaymentLinkItem[] | null
 }
