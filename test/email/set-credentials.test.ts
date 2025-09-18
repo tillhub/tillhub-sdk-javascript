@@ -28,7 +28,8 @@ afterEach(() => {
 describe('v0: Email: can set mailjet configuration', () => {
   const mockCredentials = {
     apiKey: 'test-api-key',
-    apiSecret: 'test-api-secret'
+    apiSecret: 'test-api-secret',
+    defaultSenderMail: 'sender@example.com'
   }
 
   const mockMailjetConfiguration = {
@@ -147,5 +148,64 @@ describe('v0: Email: can set mailjet configuration', () => {
     } catch (err: any) {
       expect(err.name).toBe('EmailCredentialsSetFailed')
     }
+  })
+
+  it("can set mailjet configuration with default sender mail", async () => {
+    const credentialsWithDefaultSender = {
+      apiKey: 'test-api-key',
+      apiSecret: 'test-api-secret',
+      defaultSenderMail: 'default@example.com'
+    }
+
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+
+      mock.onPost(`https://api.tillhub.com/api/v0/email/${legacyId}/mailjet-configuration`).reply((config) => {
+        const requestData = JSON.parse(config.data)
+        expect(requestData.defaultSenderMail).toBe('default@example.com')
+
+        return [
+          200,
+          {
+            results: mockMailjetConfiguration,
+            status: 200,
+            msg: 'Success'
+          }
+        ]
+      })
+    }
+
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE
+    }
+
+    const th = new TillhubClient()
+    th.init(options)
+    await th.auth.loginUsername({
+      username: user.username,
+      password: user.password
+    })
+
+    const email = th.email()
+    const { data, status, msg } = await email.setMailjetConfiguration(credentialsWithDefaultSender)
+
+    expect(typeof data).toBe('object')
+    expect(status).toBe(200)
+    expect(msg).toBe('Success')
   })
 })
