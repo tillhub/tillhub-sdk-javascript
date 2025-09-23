@@ -150,7 +150,7 @@ describe('v0: Email: can set mailjet configuration', () => {
     }
   })
 
-  it("can set mailjet configuration with default sender mail", async () => {
+  it('can set mailjet configuration with default sender mail', async () => {
     const credentialsWithDefaultSender = {
       apiKey: 'test-api-key',
       apiSecret: 'test-api-secret',

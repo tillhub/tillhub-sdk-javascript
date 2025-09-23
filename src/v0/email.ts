@@ -50,7 +50,6 @@ export interface TestCustomMailjetResponse {
   status?: number
 }
 
-
 export interface CustomMailjetCredentialStatusResponse {
   data?: {
     hasCredentials: boolean
@@ -138,7 +137,6 @@ export class Email extends ThBaseHandler {
       throw new errors.EmailTestCustomMailjetFailed(error.message, { error })
     }
   }
-
 
   async getCustomMailjetCredentialStatus (): Promise<CustomMailjetCredentialStatusResponse> {
     try {
