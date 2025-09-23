@@ -10,6 +10,10 @@ export interface PaymentLinkEntity {
     linkedOrderId?: string | null;
     branch?: string | null;
     branchId?: string | null;
+    businessUnitUnzerId: string;
+    externalInvoiceId?: string;
+    externalOrderId?: string;
+    externalCustomerId?: string;
     status?: PaymentLinkStatus | null;
     createdBy: string | null;
     total?: number | null;
@@ -71,6 +75,9 @@ export interface CreatePaymentLinkRequest {
     subtotal?: number;
     deliveryMethod?: string;
     deliveryCost?: number;
+    invoiceId?: string;
+    externalOrderId?: string;
+    externalCustomerId?: string;
     customer?: PaymentLinkCustomer | null;
     items?: PaymentLinkItem[] | null;
 }
@@ -84,6 +91,13 @@ export interface PaymentLinkQuery {
     } | null;
     status?: string | null;
     amount?: number | null;
+}
+export interface SendSmsRequest {
+    to: string;
+    paymentLinkId: string;
+}
+export interface NotificationResponse {
+    success: boolean;
 }
 export interface PaymentLinkQueryHandler {
     limit?: number;
@@ -100,11 +114,23 @@ export interface PaymentLinksResponse {
 export interface PaymentPageResponse {
     paymentPageUrl: string;
     id: string;
+    customerEmail?: string;
+    customerMobileNo?: string;
     qrCodeSvg: string;
+}
+export interface SendPaymentLinkEmailDto {
+    paymentLinkId: string;
+    customerEmail: string;
 }
 export interface CreatePaymentLinkResponse {
     data?: PaymentPageResponse;
     msg?: string;
+}
+export interface PaymentPageUrlResponse {
+    paymentPageUrl: string;
+}
+export interface PaymentLinkQrCodeResponse {
+    qrCodeSvg: string;
 }
 export declare class PaymentLinks extends ThBaseHandler {
     static baseEndpoint: string;
@@ -116,5 +142,9 @@ export declare class PaymentLinks extends ThBaseHandler {
     getAll(query?: PaymentLinkQueryHandler | undefined): Promise<PaymentLinksResponse>;
     create(paymentLinkData: CreatePaymentLinkRequest): Promise<CreatePaymentLinkResponse>;
     meta(query?: PaymentLinkQueryHandler | undefined): Promise<PaymentLinksResponse>;
+    sendSms(sendSmsRequest: SendSmsRequest): Promise<NotificationResponse>;
+    sendEmail(sendPaymentLinkEmailDto: SendPaymentLinkEmailDto): Promise<NotificationResponse>;
+    getPaymentPageUrl(paymentLinkId: string): Promise<PaymentPageUrlResponse>;
+    getQrCodeSvg(paymentLinkId: string): Promise<PaymentLinkQrCodeResponse>;
 }
 export {};

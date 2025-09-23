@@ -146,7 +146,16 @@ var TillhubClient = (function (_super) {
         return this.generateAuthenticatedInstance(v0.PaymentOptions);
     };
     TillhubClient.prototype.paymentLinks = function () {
-        return this.generateAuthenticatedInstance(v0.PaymentLinks);
+        if (!this.options ||
+            !this.http ||
+            !this.auth ||
+            !this.auth.authenticated) {
+            throw new errors.UninstantiatedClient();
+        }
+        return new v0.PaymentLinks({
+            user: this.auth.user,
+            base: 'http://localhost:3000'
+        }, this.http);
     };
     TillhubClient.prototype.paymentLinkBrandingConfigs = function () {
         return this.generateAuthenticatedInstance(v0.PaymentLinkBrandingConfigs);

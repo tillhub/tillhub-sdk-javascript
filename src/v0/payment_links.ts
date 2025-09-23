@@ -5,7 +5,10 @@ import * as errors from '../errors'
 import {
   PaymentLinksCreateFailed,
   PaymentLinksFetchFailed,
-  PaymentLinksMetaFailed
+  PaymentLinksMetaFailed,
+  PaymentLinksSendEmailFailed,
+  PaymentLinksGetUrlFailed,
+  PaymentLinksGetQrCodeFailed
 } from '../errors'
 
 declare type PaymentLinkType = 'items_sale' | 'quick_charge'
@@ -18,6 +21,10 @@ export interface PaymentLinkEntity {
   linkedOrderId?: string | null
   branch?: string | null
   branchId?: string | null
+  businessUnitUnzerId: string
+  externalInvoiceId?: string
+  externalOrderId?: string
+  externalCustomerId?: string
   status?: PaymentLinkStatus | null
   createdBy: string | null
   total?: number | null
@@ -84,6 +91,9 @@ export interface CreatePaymentLinkRequest {
   subtotal?: number
   deliveryMethod?: string
   deliveryCost?: number
+  invoiceId?: string
+  externalOrderId?: string
+  externalCustomerId?: string
   customer?: PaymentLinkCustomer | null
   items?: PaymentLinkItem[] | null
 }
@@ -102,7 +112,11 @@ export interface PaymentLinkQuery {
 
 export interface SendSmsRequest {
   to: string
-  paymentLink: string
+  paymentLinkId: string
+}
+
+export interface NotificationResponse {
+  success: boolean
 }
 
 export interface PaymentLinkQueryHandler {
@@ -122,12 +136,26 @@ export interface PaymentLinksResponse {
 export interface PaymentPageResponse {
   paymentPageUrl: string
   id: string
-  qrCodeSvg: string
+  customerEmail?: string
+  customerMobileNo?: string
+}
+
+export interface SendPaymentLinkEmailDto {
+  paymentLinkId: string
+  customerEmail: string
 }
 
 export interface CreatePaymentLinkResponse {
   data?: PaymentPageResponse
   msg?: string
+}
+
+export interface PaymentPageUrlResponse {
+  paymentPageUrl: string
+}
+
+export interface PaymentLinkQrCodeResponse {
+  qrCodeSvg: string
 }
 
 export class PaymentLinks extends ThBaseHandler {
@@ -210,7 +238,7 @@ export class PaymentLinks extends ThBaseHandler {
     }
   }
 
-  async sendSms (sendSmsRequest: SendSmsRequest): Promise<void> {
+  async sendSms (sendSmsRequest: SendSmsRequest): Promise<NotificationResponse> {
     try {
       const uri = this.uriHelper.generateBaseUri() + '/send-sms'
       const response = await this.http.getClient().post(uri, sendSmsRequest)
@@ -218,8 +246,61 @@ export class PaymentLinks extends ThBaseHandler {
       if (response.status !== 200 && response.status !== 201) {
         throw new errors.SendSmsFailedFailed(undefined, { status: response.status })
       }
+
+      return response.data.results[0]
     } catch (error: any) {
       throw new errors.SendSmsFailedFailed(error.message, { error })
+    }
+  }
+
+  async sendEmail (sendPaymentLinkEmailDto: SendPaymentLinkEmailDto): Promise<NotificationResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const response = await this.http.getClient().post(`${base}/send-email`, sendPaymentLinkEmailDto)
+
+      if (response.status !== 200) {
+        throw new PaymentLinksSendEmailFailed(undefined, { status: response.status })
+      }
+
+      return response.data.results[0]
+    } catch (error: any) {
+      throw new PaymentLinksSendEmailFailed(error.message, { error })
+    }
+  }
+
+  async getPaymentPageUrl (paymentLinkId: string): Promise<PaymentPageUrlResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = `${base}/${paymentLinkId}/payment-url`
+      const response = await this.http.getClient().get(uri)
+
+      if (response.status !== 200) {
+        throw new PaymentLinksGetUrlFailed(undefined, { status: response.status })
+      }
+
+      return {
+        paymentPageUrl: response.data.results[0]?.paymentPageUrl
+      }
+    } catch (error: any) {
+      throw new PaymentLinksGetUrlFailed(error.message, { error })
+    }
+  }
+
+  async getQrCodeSvg (paymentLinkId: string): Promise<PaymentLinkQrCodeResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = `${base}/${paymentLinkId}/qr-code`
+      const response = await this.http.getClient().get(uri)
+
+      if (response.status !== 200) {
+        throw new PaymentLinksGetQrCodeFailed(undefined, { status: response.status })
+      }
+
+      return {
+        qrCodeSvg: response.data.results[0]?.qrCodeSvg
+      }
+    } catch (error: any) {
+      throw new PaymentLinksGetQrCodeFailed(error.message, { error })
     }
   }
 }

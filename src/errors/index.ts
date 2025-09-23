@@ -541,6 +541,17 @@ export class PaymentLinksFetchFailed extends BaseError {
   }
 }
 
+export class PaymentLinksSendEmailFailed extends BaseError {
+  public name = 'PaymentLinksSendEmailFailed'
+  constructor (
+    public message: string = 'Could not send email for payment link',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, PaymentLinksSendEmailFailed.prototype)
+  }
+}
+
 export class PaymentLinksMetaFailed extends BaseError {
   public name = 'PaymentLinksMetaFailed'
   constructor (
@@ -560,6 +571,28 @@ export class PaymentLinksCreateFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, PaymentLinksCreateFailed.prototype)
+  }
+}
+
+export class PaymentLinksGetUrlFailed extends BaseError {
+  public name = 'PaymentLinksGetUrlFailed'
+  constructor (
+    public message: string = 'Could not get payment page URL',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, PaymentLinksGetUrlFailed.prototype)
+  }
+}
+
+export class PaymentLinksGetQrCodeFailed extends BaseError {
+  public name = 'PaymentLinksGetQrCodeFailed'
+  constructor (
+    public message: string = 'Could not get payment link QR code',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, PaymentLinksGetQrCodeFailed.prototype)
   }
 }
 

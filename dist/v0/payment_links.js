@@ -110,6 +110,106 @@ var PaymentLinks = (function (_super) {
             });
         });
     };
+    PaymentLinks.prototype.sendSms = function (sendSmsRequest) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_4;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = this.uriHelper.generateBaseUri() + '/send-sms';
+                        return [4, this.http.getClient().post(uri, sendSmsRequest)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200 && response.status !== 201) {
+                            throw new errors.SendSmsFailedFailed(undefined, { status: response.status });
+                        }
+                        return [2, response.data.results[0]];
+                    case 2:
+                        error_4 = _a.sent();
+                        throw new errors.SendSmsFailedFailed(error_4.message, { error: error_4 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    PaymentLinks.prototype.sendEmail = function (sendPaymentLinkEmailDto) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, response, error_5;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri();
+                        return [4, this.http.getClient().post(base + "/send-email", sendPaymentLinkEmailDto)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new errors_1.PaymentLinksSendEmailFailed(undefined, { status: response.status });
+                        }
+                        return [2, response.data.results[0]];
+                    case 2:
+                        error_5 = _a.sent();
+                        throw new errors_1.PaymentLinksSendEmailFailed(error_5.message, { error: error_5 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    PaymentLinks.prototype.getPaymentPageUrl = function (paymentLinkId) {
+        var _a;
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_6;
+            return tslib_1.__generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _b.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri();
+                        uri = base + "/" + paymentLinkId + "/payment-url";
+                        return [4, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _b.sent();
+                        if (response.status !== 200) {
+                            throw new errors_1.PaymentLinksGetUrlFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                paymentPageUrl: (_a = response.data.results[0]) === null || _a === void 0 ? void 0 : _a.paymentPageUrl
+                            }];
+                    case 2:
+                        error_6 = _b.sent();
+                        throw new errors_1.PaymentLinksGetUrlFailed(error_6.message, { error: error_6 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    PaymentLinks.prototype.getQrCodeSvg = function (paymentLinkId) {
+        var _a;
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_7;
+            return tslib_1.__generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _b.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri();
+                        uri = base + "/" + paymentLinkId + "/qr-code";
+                        return [4, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _b.sent();
+                        if (response.status !== 200) {
+                            throw new errors_1.PaymentLinksGetQrCodeFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                qrCodeSvg: (_a = response.data.results[0]) === null || _a === void 0 ? void 0 : _a.qrCodeSvg
+                            }];
+                    case 2:
+                        error_7 = _b.sent();
+                        throw new errors_1.PaymentLinksGetQrCodeFailed(error_7.message, { error: error_7 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
     PaymentLinks.baseEndpoint = '/api/v0/payment-links';
     return PaymentLinks;
 }(base_1.ThBaseHandler));
