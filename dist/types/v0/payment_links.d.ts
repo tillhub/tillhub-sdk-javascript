@@ -2,8 +2,8 @@ import { ThBaseHandler } from '../base';
 import { Client } from '../client';
 import { UriHelper } from '../uri-helper';
 declare type PaymentLinkType = 'items_sale' | 'quick_charge';
-declare type PaymentLinkStatus = 'Open' | 'Expired' | 'Closed';
-export interface PaymentLinkEntity {
+declare type PaymentLinkStatus = 'open' | 'expired' | 'closed';
+export interface PaymentLinkDto {
     id?: string | null;
     usage?: string | null;
     paymentLinkType: PaymentLinkType;
@@ -68,7 +68,6 @@ export interface CreatePaymentLinkRequest {
     linkedOrderId?: string;
     branch: string;
     branchId: string;
-    status?: PaymentLinkStatus;
     createdBy: string;
     total: number;
     currency: string;
@@ -106,7 +105,7 @@ export interface PaymentLinkQueryHandler {
     orderFields?: string[] | string;
 }
 export interface PaymentLinksResponse {
-    data?: PaymentLinkEntity[];
+    data?: PaymentLinkDto[];
     metadata?: Record<string, unknown>;
     msg?: string;
     next?: () => Promise<PaymentLinksResponse>;
@@ -116,7 +115,6 @@ export interface PaymentPageResponse {
     id: string;
     customerEmail?: string;
     customerMobileNo?: string;
-    qrCodeSvg: string;
 }
 export interface SendPaymentLinkEmailDto {
     paymentLinkId: string;

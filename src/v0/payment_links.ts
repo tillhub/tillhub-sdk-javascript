@@ -12,9 +12,9 @@ import {
 } from '../errors'
 
 declare type PaymentLinkType = 'items_sale' | 'quick_charge'
-declare type PaymentLinkStatus = 'Open' | 'Expired' | 'Closed'
+declare type PaymentLinkStatus = 'open' | 'expired' | 'closed'
 
-export interface PaymentLinkEntity {
+export interface PaymentLinkDto {
   id?: string | null
   usage?: string | null
   paymentLinkType: PaymentLinkType
@@ -84,7 +84,6 @@ export interface CreatePaymentLinkRequest {
   linkedOrderId?: string
   branch: string
   branchId: string
-  status?: PaymentLinkStatus
   createdBy: string
   total: number
   currency: string
@@ -127,7 +126,7 @@ export interface PaymentLinkQueryHandler {
 }
 
 export interface PaymentLinksResponse {
-  data?: PaymentLinkEntity[]
+  data?: PaymentLinkDto[]
   metadata?: Record<string, unknown>
   msg?: string
   next?: () => Promise<PaymentLinksResponse>
@@ -194,7 +193,7 @@ export class PaymentLinks extends ThBaseHandler {
       }
 
       return {
-        data: response.data.results as PaymentLinkEntity[],
+        data: response.data.results as PaymentLinkDto[],
         metadata: { cursor: response.data.cursors },
         next
       }
