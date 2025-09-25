@@ -11,6 +11,7 @@ export interface EmailOptions {
 export interface MailjetCredentials {
   apiKey: string
   apiSecret: string
+  defaultSenderMail?: string
 }
 
 export interface MailjetEmail {
@@ -44,18 +45,6 @@ export interface TestCustomMailjetResponse {
   data?: {
     success: boolean
     message: string
-  }
-  msg?: string
-  status?: number
-}
-
-export interface CustomMailjetDefaultSenderRequest {
-  email: string
-}
-
-export interface CustomMailjetDefaultSenderResponse {
-  data?: {
-    success: boolean
   }
   msg?: string
   status?: number
@@ -146,25 +135,6 @@ export class Email extends ThBaseHandler {
       }
     } catch (error: any) {
       throw new errors.EmailTestCustomMailjetFailed(error.message, { error })
-    }
-  }
-
-  async setCustomMailjetDefaultSender (request: CustomMailjetDefaultSenderRequest): Promise<CustomMailjetDefaultSenderResponse> {
-    try {
-      const uri = this.uriHelper.generateBaseUri('/custom-mailjet-default-sender')
-      const response = await this.http.getClient().post(uri, request)
-
-      if (response.status !== 200) {
-        throw new errors.EmailCustomMailjetDefaultSenderSetFailed(undefined, { status: response.status })
-      }
-
-      return {
-        data: response.data.results,
-        msg: response.data.msg,
-        status: response.data.status
-      }
-    } catch (error: any) {
-      throw new errors.EmailCustomMailjetDefaultSenderSetFailed(error.message, { error })
     }
   }
 

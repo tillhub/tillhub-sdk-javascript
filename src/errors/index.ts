@@ -1513,17 +1513,6 @@ export class EmailTestCustomMailjetFailed extends BaseError {
   }
 }
 
-export class EmailCustomMailjetDefaultSenderSetFailed extends BaseError {
-  public name = 'EmailCustomMailjetDefaultSenderSetFailed'
-  constructor (
-    public message: string = 'Could not set custom mailjet default sender',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, EmailCustomMailjetDefaultSenderSetFailed.prototype)
-  }
-}
-
 export class EmailCustomMailjetCredentialStatusGetFailed extends BaseError {
   public name = 'EmailCustomMailjetCredentialStatusGetFailed'
   constructor (
