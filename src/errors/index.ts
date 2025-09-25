@@ -1479,3 +1479,58 @@ export class PaymentLinkBrandingConfigFetchFailed extends BaseError {
     Object.setPrototypeOf(this, PaymentLinkBrandingConfigFetchFailed.prototype)
   }
 }
+
+export class EmailCredentialsFetchFailed extends BaseError {
+  public name = 'EmailCredentialsFetchFailed'
+  constructor (
+    public message: string = 'Could not get email credentials',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, EmailCredentialsFetchFailed.prototype)
+  }
+}
+
+export class EmailCredentialsSetFailed extends BaseError {
+  public name = 'EmailCredentialsSetFailed'
+  constructor (
+    public message: string = 'Could not set email credentials',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, EmailCredentialsSetFailed.prototype)
+  }
+}
+
+export class EmailTestCustomMailjetFailed extends BaseError {
+  public name = 'EmailTestCustomMailjetFailed'
+  constructor (
+    public message: string = 'Could not test custom mailjet',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, EmailTestCustomMailjetFailed.prototype)
+  }
+}
+
+export class EmailCustomMailjetDefaultSenderSetFailed extends BaseError {
+  public name = 'EmailCustomMailjetDefaultSenderSetFailed'
+  constructor (
+    public message: string = 'Could not set custom mailjet default sender',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, EmailCustomMailjetDefaultSenderSetFailed.prototype)
+  }
+}
+
+export class EmailCustomMailjetCredentialStatusGetFailed extends BaseError {
+  public name = 'EmailCustomMailjetCredentialStatusGetFailed'
+  constructor (
+    public message: string = 'Could not get custom mailjet credential status',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, EmailCustomMailjetCredentialStatusGetFailed.prototype)
+  }
+}

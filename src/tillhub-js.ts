@@ -1532,6 +1532,14 @@ export class TillhubClient extends events.EventEmitter {
   submissions (): v0.Submissions {
     return this.generateAuthenticatedInstance(v0.Submissions)
   }
+
+  /**
+   * Create an authenticated email instance
+   *
+   */
+  email (): v0.Email {
+    return this.generateAuthenticatedInstance(v0.Email)
+  }
 }
 
 export class Tillhub extends TillhubClient {
