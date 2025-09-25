@@ -292,6 +292,22 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated payment links instance
+   *
+   */
+  paymentLinks(): v0.PaymentLinks {
+    return this.generateAuthenticatedInstance(v0.PaymentLinks)
+  }
+
+  /**
+   * Create an authenticated payment link branding config instance
+   *
+   */
+  paymentLinkBrandingConfigs(): v0.PaymentLinkBrandingConfigs {
+    return this.generateAuthenticatedInstance(v0.PaymentLinkBrandingConfigs)
+  }
+
+  /**
    * Create an authenticated templates instance
    *
    */

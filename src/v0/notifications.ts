@@ -12,6 +12,11 @@ export interface EmailOptions {
   body?: Record<string, unknown>
 }
 
+export interface SmsOptions {
+  to: string
+  body?: Record<string, unknown>
+}
+
 export interface NotificationsResponse {
   msg?: string
 }
@@ -39,6 +44,21 @@ export class Notifications {
       const uri = this.uriHelper.generateUriWithQuery(base)
 
       const response = await this.http.getClient().post(uri, body)
+
+      return {
+        msg: response.data.msg
+      }
+    } catch (error: any) {
+      throw new errors.NotificationsEmailError()
+    }
+  }
+
+  async sms (requestObject: SmsOptions): Promise<NotificationsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/sms/send')
+      const uri = this.uriHelper.generateUriWithQuery(base)
+
+      const response = await this.http.getClient().post(uri, requestObject)
 
       return {
         msg: response.data.msg
