@@ -1,7 +1,7 @@
-import {Client} from '../client'
+import { Client } from '../client'
 import * as errors from '../errors'
-import {UriHelper} from '../uri-helper'
-import {ThBaseHandler} from '../base'
+import { UriHelper } from '../uri-helper'
+import { ThBaseHandler } from '../base'
 
 export interface PaymentLinkBrandingConfigurationOptions {
   user?: string
@@ -69,7 +69,7 @@ class PaymentLinkBrandingConfigurationReference {
   private readonly options: PaymentLinkBrandingConfigurationOptions
   private readonly http: Client
 
-  constructor(response: PaymentLinkBrandingConfigurationResponse, http: Client, options: PaymentLinkBrandingConfigurationOptions) {
+  constructor (response: PaymentLinkBrandingConfigurationResponse, http: Client, options: PaymentLinkBrandingConfigurationOptions) {
     this.data = response.data
     this.id = response.data.id
     this.metadata = response.metadata
@@ -86,7 +86,7 @@ export class PaymentLinkBrandingConfigs extends ThBaseHandler {
   public options: PaymentLinkBrandingConfigurationOptions
   public uriHelper: UriHelper
 
-  constructor(options: PaymentLinkBrandingConfigurationOptions, http: Client) {
+  constructor (options: PaymentLinkBrandingConfigurationOptions, http: Client) {
     super(http, {
       endpoint: PaymentLinkBrandingConfigs.baseEndpoint,
       base: options.base ?? 'https://api.tillhub.com'
@@ -116,13 +116,13 @@ export class PaymentLinkBrandingConfigs extends ThBaseHandler {
     }
   }
 
-  async get(configurationId: string): Promise<PaymentLinkBrandingConfigurationReference> {
+  async get (configurationId: string): Promise<PaymentLinkBrandingConfigurationReference> {
     const uri = this.uriHelper.generateBaseUri(`/${configurationId}`)
 
     try {
       const response = await this.http.getClient().get(uri)
       if (response.status !== 200) {
-        throw new errors.ConfigurationFetchFailed(undefined, {status: response.status})
+        throw new errors.ConfigurationFetchFailed(undefined, { status: response.status })
       }
 
       // we are wrapping the response into a class to reference sub APIs more easily
@@ -130,60 +130,59 @@ export class PaymentLinkBrandingConfigs extends ThBaseHandler {
         {
           data: response.data.results[0] as PaymentLinkBrandingConfiguration,
           msg: response.data.msg,
-          metadata: {count: response.data.count}
+          metadata: { count: response.data.count }
         },
         this.http,
         this.options
       )
     } catch (error: any) {
-      throw new errors.ConfigurationFetchFailed(error.message, {error})
+      throw new errors.ConfigurationFetchFailed(error.message, { error })
     }
   }
 
-  async put(configurationId: string, configuration: PaymentLinkBrandingConfiguration): Promise<PaymentLinkBrandingConfigurationResponse> {
-
+  async put (configurationId: string, configuration: PaymentLinkBrandingConfiguration): Promise<PaymentLinkBrandingConfigurationResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${configurationId}`)
     try {
       const response = await this.http.getClient().put(uri, configuration)
 
       return {
         data: response.data.results[0] as PaymentLinkBrandingConfiguration,
-        metadata: {count: response.data.count}
+        metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.ConfigurationPutFailed(error.message, {error})
+      throw new errors.ConfigurationPutFailed(error.message, { error })
     }
   }
 
-  async patch(configurationId: string, configuration: PaymentLinkBrandingConfiguration): Promise<PaymentLinkBrandingConfigurationResponse> {
+  async patch (configurationId: string, configuration: PaymentLinkBrandingConfiguration): Promise<PaymentLinkBrandingConfigurationResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${configurationId}`)
     try {
       const response = await this.http.getClient().patch(uri, configuration)
 
       return {
         data: response.data.results[0] as PaymentLinkBrandingConfiguration,
-        metadata: {count: response.data.count}
+        metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.ConfigurationPatchFailed(error.message, {error})
+      throw new errors.ConfigurationPatchFailed(error.message, { error })
     }
   }
 
-  async create(configuration: PaymentLinkBrandingConfiguration): Promise<PaymentLinkBrandingConfigurationResponse> {
+  async create (configuration: PaymentLinkBrandingConfiguration): Promise<PaymentLinkBrandingConfigurationResponse> {
     const uri = this.uriHelper.generateBaseUri()
     try {
       const response = await this.http.getClient().post(uri, configuration)
 
       return {
         data: response.data.results[0] as PaymentLinkBrandingConfiguration,
-        metadata: {count: response.data.count}
+        metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.ConfigurationCreationFailed(error.message, {error})
+      throw new errors.ConfigurationCreationFailed(error.message, { error })
     }
   }
 
-  async delete(configurationId: string): Promise<PaymentLinkBrandingConfigurationResponse> {
+  async delete (configurationId: string): Promise<PaymentLinkBrandingConfigurationResponse> {
     try {
       const uri = this.uriHelper.generateBaseUri(`/${configurationId}`)
       const response = await this.http.getClient().delete(uri)
@@ -193,7 +192,7 @@ export class PaymentLinkBrandingConfigs extends ThBaseHandler {
         msg: response.data.msg
       }
     } catch (error: any) {
-      throw new errors.ConfigurationDeleteFailed(error.message, {error})
+      throw new errors.ConfigurationDeleteFailed(error.message, { error })
     }
   }
 }
