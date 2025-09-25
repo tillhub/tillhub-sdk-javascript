@@ -145,6 +145,12 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.paymentOptions = function () {
         return this.generateAuthenticatedInstance(v0.PaymentOptions);
     };
+    TillhubClient.prototype.paymentLinks = function () {
+        return this.generateAuthenticatedInstance(v0.PaymentLinks);
+    };
+    TillhubClient.prototype.paymentLinkBrandingConfigs = function () {
+        return this.generateAuthenticatedInstance(v0.PaymentLinkBrandingConfigs);
+    };
     TillhubClient.prototype.templates = function () {
         if (!this.options ||
             !this.options.base ||

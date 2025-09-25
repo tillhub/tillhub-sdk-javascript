@@ -8,6 +8,7 @@ export interface EmailOptions {
 export interface MailjetCredentials {
     apiKey: string;
     apiSecret: string;
+    defaultSenderMail?: string;
 }
 export interface MailjetEmail {
     name: string;
@@ -40,16 +41,6 @@ export interface TestCustomMailjetResponse {
     msg?: string;
     status?: number;
 }
-export interface CustomMailjetDefaultSenderRequest {
-    email: string;
-}
-export interface CustomMailjetDefaultSenderResponse {
-    data?: {
-        success: boolean;
-    };
-    msg?: string;
-    status?: number;
-}
 export interface CustomMailjetCredentialStatusResponse {
     data?: {
         hasCredentials: boolean;
@@ -70,6 +61,5 @@ export declare class Email extends ThBaseHandler {
     getMailjetConfiguration(): Promise<MailjetConfigurationResponse>;
     setMailjetConfiguration(credentials: MailjetCredentials): Promise<MailjetConfigurationResponse>;
     testCustomMailjet(request: TestCustomMailjetRequest): Promise<TestCustomMailjetResponse>;
-    setCustomMailjetDefaultSender(request: CustomMailjetDefaultSenderRequest): Promise<CustomMailjetDefaultSenderResponse>;
     getCustomMailjetCredentialStatus(): Promise<CustomMailjetCredentialStatusResponse>;
 }

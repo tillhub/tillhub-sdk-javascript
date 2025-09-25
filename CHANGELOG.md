@@ -1,3 +1,10 @@
+# [4.228.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.227.0...v4.228.0) (2025-09-25)
+
+
+### Features
+
+* **email:** merge "custom-mailjet-default-sender" endpoint into "mailjet-configuration" endpoint (UNTIL-15071) ([#674](https://github.com/tillhub/tillhub-sdk-javascript/issues/674)) ([94f9c5b](https://github.com/tillhub/tillhub-sdk-javascript/commit/94f9c5be116e1f02df2eb41f6aba899ad6fa33b6))
+
 # [4.227.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.226.0...v4.227.0) (2025-09-16)
 
 

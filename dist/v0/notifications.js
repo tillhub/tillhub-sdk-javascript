@@ -39,6 +39,29 @@ var Notifications = (function () {
             });
         });
     };
+    Notifications.prototype.sms = function (requestObject) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_2;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri('/sms/send');
+                        uri = this.uriHelper.generateUriWithQuery(base);
+                        return [4, this.http.getClient().post(uri, requestObject)];
+                    case 1:
+                        response = _a.sent();
+                        return [2, {
+                                msg: response.data.msg
+                            }];
+                    case 2:
+                        error_2 = _a.sent();
+                        throw new errors.NotificationsEmailError();
+                    case 3: return [2];
+                }
+            });
+        });
+    };
     return Notifications;
 }());
 exports.Notifications = Notifications;

@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TemplatesCreationFailed = exports.PaymentOptionDeleteFailed = exports.PaymentOptionCreationFailed = exports.PaymentOptionPutFailed = exports.PaymentOptionFetchFailed = exports.ExpenseAccountDeleteFailed = exports.PaymentOptionsFetchFailed = exports.ExpenseAccountCreationFailed = exports.ExpenseAccountPutFailed = exports.ExpenseAccountFetchFailed = exports.ExpenseAccountsFetchFailed = exports.AccountDeleteFailed = exports.AccountCreationFailed = exports.AccountPutFailed = exports.AccountFetchFailed = exports.AccountsFetchFailed = exports.ProductGroupDeleteFailed = exports.ProuctGroupsCountFailed = exports.ProductGroupsSearchFailed = exports.ProductGroupCreationFailed = exports.ProductGroupPutFailed = exports.ProductGroupFetchFailed = exports.ProductGroupsFetchFailed = exports.DeliveryItemUpdateFailed = exports.DeliveryItemsFetchAllFailed = exports.DeliveryItemsCreateFailed = exports.DeliveriesDeleteFailed = exports.DeliveriesDispatchFailed = exports.DeliveriesInProgressFailed = exports.DeliveriesUpdateFailed = exports.DeliveriesPDFFailed = exports.DeliveriesCreateFailed = exports.DeliveriesFetchOneFailed = exports.DeliveriesFetchAllFailed = exports.TaxDeleteFailed = exports.TaxesCreationFailed = exports.TaxesPutFailed = exports.TaxesFetchFailed = exports.TransactionsGetMetaFailed = exports.TransactionSigningZeroReceiptFailed = exports.TransactionSigningMonthlyReceiptFailed = exports.TransactionSigningYearlyReceiptFailed = exports.TransactionSigningInitialisationFailed = exports.TransactionPdfFailed = exports.TransactionFetchFailed = exports.UninstantiatedClient = exports.PasswordSetRequestFailed = exports.PasswordResetRequestFailed = exports.AuthenticationFailed = exports.BaseError = void 0;
-exports.StaffCountFailed = exports.ImagePutFailed = exports.ImageCreationFailed = exports.AuditActionsTypesFetchFailed = exports.AuditActionsCreateFailed = exports.AuditActionsGetMetaFailed = exports.AuditActionsFetchOneFailed = exports.AuditActionsFetchAllFailed = exports.RegistersSearchFailed = exports.RegisterDeviceConfigurationPutFailed = exports.RegisterNotificationCreateFailed = exports.RegisterPutFailed = exports.RegisterFetchFailed = exports.RegistersFetchFailed = exports.OpenOrderFetchFailed = exports.BookStockFailed = exports.HistoricOrderItemsFetchFailed = exports.OrderSuggestionsFetchFailed = exports.OrderItemsDeleteFailed = exports.OrderItemsUpdateFailed = exports.OrderItemUpdateFailed = exports.OrderItemsCreateFailed = exports.OrderItemsFetchFailed = exports.OutgoingOrdersFetchFailed = exports.IncomingOrdersFetchFailed = exports.OrdersUpdateFailed = exports.OrdersCreateFailed = exports.OrdersFetchFailed = exports.InvoicesGetMetaFailed = exports.InvoicesDeleteFailed = exports.InvoicesUpdateFailed = exports.InvoicesCreateFailed = exports.InvoicesFetchOneFailed = exports.InvoicesFetchAllFailed = exports.DiscountDeleteFailed = exports.DiscountsCountFailed = exports.DiscountCreationFailed = exports.DiscountPutFailed = exports.DiscountFetchFailed = exports.DiscountsFetchFailed = exports.ConfigurationDeleteFailed = exports.ConfigurationCreationFailed = exports.ConfigurationPatchFailed = exports.ConfigurationPutFailed = exports.InventoryConfigurationFetchFailed = exports.ConfigurationFetchFailed = exports.ConfigurationsFetchFailed = exports.TemplatesPreviewFailed = exports.TemplatesFetchFailed = exports.TemplatesPutFailed = void 0;
-exports.EmailCustomMailjetCredentialStatusGetFailed = exports.EmailCustomMailjetDefaultSenderSetFailed = exports.EmailTestCustomMailjetFailed = exports.EmailCredentialsSetFailed = exports.EmailCredentialsFetchFailed = exports.LegacySettingUpdateFailed = exports.LegacySettingFetchFailed = exports.LegacySettingsFetchFailed = exports.BalancesMetaFailed = exports.BalancesFetchOneFailed = exports.BalancesFetchFailed = exports.MessagesUpdateFailed = exports.MessagesFetchFailed = exports.PrinterUpdateFailed = exports.PrinterDeleteFailed = exports.PrinterCreateFailed = exports.PrinterFetchFailed = exports.PrintersFetchFailed = exports.PrintMessageUpdateFailed = exports.PrintMessageDeleteFailed = exports.PrintMessageCreateFailed = exports.PrintMessageFetchFailed = exports.PrintMessagesFetchFailed = exports.PrintJobDataFetchFailed = exports.PrintJobUpdateFailed = exports.PrintJobDeleteFailed = exports.PrintJobCreateFailed = exports.PrintJobFetchFailed = exports.PrintJobsFetchFailed = exports.ProductGroupsFiltersFetchFailed = exports.NotificationsEmailError = void 0;
+exports.PaymentLinksFetchFailed = exports.PaymentOptionDeleteFailed = exports.PaymentOptionCreationFailed = exports.PaymentOptionPutFailed = exports.PaymentOptionFetchFailed = exports.ExpenseAccountDeleteFailed = exports.PaymentOptionsFetchFailed = exports.ExpenseAccountCreationFailed = exports.ExpenseAccountPutFailed = exports.ExpenseAccountFetchFailed = exports.ExpenseAccountsFetchFailed = exports.AccountDeleteFailed = exports.AccountCreationFailed = exports.AccountPutFailed = exports.AccountFetchFailed = exports.AccountsFetchFailed = exports.ProductGroupDeleteFailed = exports.ProuctGroupsCountFailed = exports.ProductGroupsSearchFailed = exports.ProductGroupCreationFailed = exports.ProductGroupPutFailed = exports.ProductGroupFetchFailed = exports.ProductGroupsFetchFailed = exports.DeliveryItemUpdateFailed = exports.DeliveryItemsFetchAllFailed = exports.DeliveryItemsCreateFailed = exports.DeliveriesDeleteFailed = exports.DeliveriesDispatchFailed = exports.DeliveriesInProgressFailed = exports.DeliveriesUpdateFailed = exports.DeliveriesPDFFailed = exports.DeliveriesCreateFailed = exports.DeliveriesFetchOneFailed = exports.DeliveriesFetchAllFailed = exports.TaxDeleteFailed = exports.TaxesCreationFailed = exports.TaxesPutFailed = exports.TaxesFetchFailed = exports.TransactionsGetMetaFailed = exports.TransactionSigningZeroReceiptFailed = exports.TransactionSigningMonthlyReceiptFailed = exports.TransactionSigningYearlyReceiptFailed = exports.TransactionSigningInitialisationFailed = exports.TransactionPdfFailed = exports.TransactionFetchFailed = exports.UninstantiatedClient = exports.PasswordSetRequestFailed = exports.PasswordResetRequestFailed = exports.AuthenticationFailed = exports.BaseError = void 0;
+exports.AuditActionsFetchAllFailed = exports.RegistersSearchFailed = exports.RegisterDeviceConfigurationPutFailed = exports.RegisterNotificationCreateFailed = exports.RegisterPutFailed = exports.RegisterFetchFailed = exports.RegistersFetchFailed = exports.OpenOrderFetchFailed = exports.BookStockFailed = exports.HistoricOrderItemsFetchFailed = exports.OrderSuggestionsFetchFailed = exports.OrderItemsDeleteFailed = exports.OrderItemsUpdateFailed = exports.OrderItemUpdateFailed = exports.OrderItemsCreateFailed = exports.OrderItemsFetchFailed = exports.OutgoingOrdersFetchFailed = exports.IncomingOrdersFetchFailed = exports.OrdersUpdateFailed = exports.OrdersCreateFailed = exports.OrdersFetchFailed = exports.InvoicesGetMetaFailed = exports.InvoicesDeleteFailed = exports.InvoicesUpdateFailed = exports.InvoicesCreateFailed = exports.InvoicesFetchOneFailed = exports.InvoicesFetchAllFailed = exports.DiscountDeleteFailed = exports.DiscountsCountFailed = exports.DiscountCreationFailed = exports.DiscountPutFailed = exports.DiscountFetchFailed = exports.DiscountsFetchFailed = exports.ConfigurationDeleteFailed = exports.ConfigurationCreationFailed = exports.ConfigurationPatchFailed = exports.ConfigurationPutFailed = exports.InventoryConfigurationFetchFailed = exports.ConfigurationFetchFailed = exports.ConfigurationsFetchFailed = exports.TemplatesPreviewFailed = exports.TemplatesFetchFailed = exports.TemplatesPutFailed = exports.TemplatesCreationFailed = exports.SendSmsFailedFailed = exports.PaymentLinksGetQrCodeFailed = exports.PaymentLinksGetUrlFailed = exports.PaymentLinksCreateFailed = exports.PaymentLinksMetaFailed = exports.PaymentLinksSendEmailFailed = void 0;
+exports.EmailCustomMailjetCredentialStatusGetFailed = exports.EmailTestCustomMailjetFailed = exports.EmailCredentialsSetFailed = exports.EmailCredentialsFetchFailed = exports.PaymentLinkBrandingConfigFetchFailed = exports.PaymentLinkBrandingConfigNotFound = exports.PaymentLinkBrandingConfigPatchFailed = exports.LegacySettingUpdateFailed = exports.LegacySettingFetchFailed = exports.LegacySettingsFetchFailed = exports.BalancesMetaFailed = exports.BalancesFetchOneFailed = exports.BalancesFetchFailed = exports.MessagesUpdateFailed = exports.MessagesFetchFailed = exports.PrinterUpdateFailed = exports.PrinterDeleteFailed = exports.PrinterCreateFailed = exports.PrinterFetchFailed = exports.PrintersFetchFailed = exports.PrintMessageUpdateFailed = exports.PrintMessageDeleteFailed = exports.PrintMessageCreateFailed = exports.PrintMessageFetchFailed = exports.PrintMessagesFetchFailed = exports.PrintJobDataFetchFailed = exports.PrintJobUpdateFailed = exports.PrintJobDeleteFailed = exports.PrintJobCreateFailed = exports.PrintJobFetchFailed = exports.PrintJobsFetchFailed = exports.ProductGroupsFiltersFetchFailed = exports.NotificationsEmailError = exports.StaffCountFailed = exports.ImagePutFailed = exports.ImageCreationFailed = exports.AuditActionsTypesFetchFailed = exports.AuditActionsCreateFailed = exports.AuditActionsGetMetaFailed = exports.AuditActionsFetchOneFailed = void 0;
 var tslib_1 = require("tslib");
 var baseError_1 = require("./baseError");
 Object.defineProperty(exports, "BaseError", { enumerable: true, get: function () { return baseError_1.BaseError; } });
@@ -630,6 +630,97 @@ var PaymentOptionDeleteFailed = (function (_super) {
     return PaymentOptionDeleteFailed;
 }(baseError_1.BaseError));
 exports.PaymentOptionDeleteFailed = PaymentOptionDeleteFailed;
+var PaymentLinksFetchFailed = (function (_super) {
+    tslib_1.__extends(PaymentLinksFetchFailed, _super);
+    function PaymentLinksFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch payment links'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PaymentLinksFetchFailed';
+        Object.setPrototypeOf(_this, PaymentLinksFetchFailed.prototype);
+        return _this;
+    }
+    return PaymentLinksFetchFailed;
+}(baseError_1.BaseError));
+exports.PaymentLinksFetchFailed = PaymentLinksFetchFailed;
+var PaymentLinksSendEmailFailed = (function (_super) {
+    tslib_1.__extends(PaymentLinksSendEmailFailed, _super);
+    function PaymentLinksSendEmailFailed(message, properties) {
+        if (message === void 0) { message = 'Could not send email for payment link'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PaymentLinksSendEmailFailed';
+        Object.setPrototypeOf(_this, PaymentLinksSendEmailFailed.prototype);
+        return _this;
+    }
+    return PaymentLinksSendEmailFailed;
+}(baseError_1.BaseError));
+exports.PaymentLinksSendEmailFailed = PaymentLinksSendEmailFailed;
+var PaymentLinksMetaFailed = (function (_super) {
+    tslib_1.__extends(PaymentLinksMetaFailed, _super);
+    function PaymentLinksMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch payment links meta'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PaymentLinksMetaFailed';
+        Object.setPrototypeOf(_this, PaymentLinksMetaFailed.prototype);
+        return _this;
+    }
+    return PaymentLinksMetaFailed;
+}(baseError_1.BaseError));
+exports.PaymentLinksMetaFailed = PaymentLinksMetaFailed;
+var PaymentLinksCreateFailed = (function (_super) {
+    tslib_1.__extends(PaymentLinksCreateFailed, _super);
+    function PaymentLinksCreateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create payment link'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PaymentLinksCreateFailed';
+        Object.setPrototypeOf(_this, PaymentLinksCreateFailed.prototype);
+        return _this;
+    }
+    return PaymentLinksCreateFailed;
+}(baseError_1.BaseError));
+exports.PaymentLinksCreateFailed = PaymentLinksCreateFailed;
+var PaymentLinksGetUrlFailed = (function (_super) {
+    tslib_1.__extends(PaymentLinksGetUrlFailed, _super);
+    function PaymentLinksGetUrlFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get payment page URL'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PaymentLinksGetUrlFailed';
+        Object.setPrototypeOf(_this, PaymentLinksGetUrlFailed.prototype);
+        return _this;
+    }
+    return PaymentLinksGetUrlFailed;
+}(baseError_1.BaseError));
+exports.PaymentLinksGetUrlFailed = PaymentLinksGetUrlFailed;
+var PaymentLinksGetQrCodeFailed = (function (_super) {
+    tslib_1.__extends(PaymentLinksGetQrCodeFailed, _super);
+    function PaymentLinksGetQrCodeFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get payment link QR code'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PaymentLinksGetQrCodeFailed';
+        Object.setPrototypeOf(_this, PaymentLinksGetQrCodeFailed.prototype);
+        return _this;
+    }
+    return PaymentLinksGetQrCodeFailed;
+}(baseError_1.BaseError));
+exports.PaymentLinksGetQrCodeFailed = PaymentLinksGetQrCodeFailed;
+var SendSmsFailedFailed = (function (_super) {
+    tslib_1.__extends(SendSmsFailedFailed, _super);
+    function SendSmsFailedFailed(message, properties) {
+        if (message === void 0) { message = 'Could not send Sms'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'SendSmsFailedFailed';
+        Object.setPrototypeOf(_this, SendSmsFailedFailed.prototype);
+        return _this;
+    }
+    return SendSmsFailedFailed;
+}(baseError_1.BaseError));
+exports.SendSmsFailedFailed = SendSmsFailedFailed;
 var TemplatesCreationFailed = (function (_super) {
     tslib_1.__extends(TemplatesCreationFailed, _super);
     function TemplatesCreationFailed(message, properties) {
@@ -1629,6 +1720,45 @@ var LegacySettingUpdateFailed = (function (_super) {
     return LegacySettingUpdateFailed;
 }(baseError_1.BaseError));
 exports.LegacySettingUpdateFailed = LegacySettingUpdateFailed;
+var PaymentLinkBrandingConfigPatchFailed = (function (_super) {
+    tslib_1.__extends(PaymentLinkBrandingConfigPatchFailed, _super);
+    function PaymentLinkBrandingConfigPatchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not patch payment link branding config'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PaymentLinkBrandingConfigPatchFailed';
+        Object.setPrototypeOf(_this, PaymentLinkBrandingConfigPatchFailed.prototype);
+        return _this;
+    }
+    return PaymentLinkBrandingConfigPatchFailed;
+}(baseError_1.BaseError));
+exports.PaymentLinkBrandingConfigPatchFailed = PaymentLinkBrandingConfigPatchFailed;
+var PaymentLinkBrandingConfigNotFound = (function (_super) {
+    tslib_1.__extends(PaymentLinkBrandingConfigNotFound, _super);
+    function PaymentLinkBrandingConfigNotFound(message, properties) {
+        if (message === void 0) { message = 'Payment link branding config not found'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PaymentLinkBrandingConfigNotFound';
+        Object.setPrototypeOf(_this, PaymentLinkBrandingConfigNotFound.prototype);
+        return _this;
+    }
+    return PaymentLinkBrandingConfigNotFound;
+}(baseError_1.BaseError));
+exports.PaymentLinkBrandingConfigNotFound = PaymentLinkBrandingConfigNotFound;
+var PaymentLinkBrandingConfigFetchFailed = (function (_super) {
+    tslib_1.__extends(PaymentLinkBrandingConfigFetchFailed, _super);
+    function PaymentLinkBrandingConfigFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch payment link branding config'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'PaymentLinkBrandingConfigFetchFailed';
+        Object.setPrototypeOf(_this, PaymentLinkBrandingConfigFetchFailed.prototype);
+        return _this;
+    }
+    return PaymentLinkBrandingConfigFetchFailed;
+}(baseError_1.BaseError));
+exports.PaymentLinkBrandingConfigFetchFailed = PaymentLinkBrandingConfigFetchFailed;
 var EmailCredentialsFetchFailed = (function (_super) {
     tslib_1.__extends(EmailCredentialsFetchFailed, _super);
     function EmailCredentialsFetchFailed(message, properties) {
@@ -1668,19 +1798,6 @@ var EmailTestCustomMailjetFailed = (function (_super) {
     return EmailTestCustomMailjetFailed;
 }(baseError_1.BaseError));
 exports.EmailTestCustomMailjetFailed = EmailTestCustomMailjetFailed;
-var EmailCustomMailjetDefaultSenderSetFailed = (function (_super) {
-    tslib_1.__extends(EmailCustomMailjetDefaultSenderSetFailed, _super);
-    function EmailCustomMailjetDefaultSenderSetFailed(message, properties) {
-        if (message === void 0) { message = 'Could not set custom mailjet default sender'; }
-        var _this = _super.call(this, message, properties) || this;
-        _this.message = message;
-        _this.name = 'EmailCustomMailjetDefaultSenderSetFailed';
-        Object.setPrototypeOf(_this, EmailCustomMailjetDefaultSenderSetFailed.prototype);
-        return _this;
-    }
-    return EmailCustomMailjetDefaultSenderSetFailed;
-}(baseError_1.BaseError));
-exports.EmailCustomMailjetDefaultSenderSetFailed = EmailCustomMailjetDefaultSenderSetFailed;
 var EmailCustomMailjetCredentialStatusGetFailed = (function (_super) {
     tslib_1.__extends(EmailCustomMailjetCredentialStatusGetFailed, _super);
     function EmailCustomMailjetCredentialStatusGetFailed(message, properties) {

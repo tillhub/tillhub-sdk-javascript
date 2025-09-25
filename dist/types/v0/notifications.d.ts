@@ -8,6 +8,10 @@ export interface EmailOptions {
     type: string;
     body?: Record<string, unknown>;
 }
+export interface SmsOptions {
+    to: string;
+    body?: Record<string, unknown>;
+}
 export interface NotificationsResponse {
     msg?: string;
 }
@@ -18,4 +22,5 @@ export declare class Notifications {
     uriHelper: UriHelper;
     constructor(options: NotificationsOpions, http: Client);
     email(requestObject: EmailOptions): Promise<NotificationsResponse>;
+    sms(requestObject: SmsOptions): Promise<NotificationsResponse>;
 }

@@ -101,36 +101,9 @@ var Email = (function (_super) {
             });
         });
     };
-    Email.prototype.setCustomMailjetDefaultSender = function (request) {
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_4;
-            return tslib_1.__generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        uri = this.uriHelper.generateBaseUri('/custom-mailjet-default-sender');
-                        return [4, this.http.getClient().post(uri, request)];
-                    case 1:
-                        response = _a.sent();
-                        if (response.status !== 200) {
-                            throw new errors.EmailCustomMailjetDefaultSenderSetFailed(undefined, { status: response.status });
-                        }
-                        return [2, {
-                                data: response.data.results,
-                                msg: response.data.msg,
-                                status: response.data.status
-                            }];
-                    case 2:
-                        error_4 = _a.sent();
-                        throw new errors.EmailCustomMailjetDefaultSenderSetFailed(error_4.message, { error: error_4 });
-                    case 3: return [2];
-                }
-            });
-        });
-    };
     Email.prototype.getCustomMailjetCredentialStatus = function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_5;
+            var uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -148,8 +121,8 @@ var Email = (function (_super) {
                                 status: response.data.status
                             }];
                     case 2:
-                        error_5 = _a.sent();
-                        throw new errors.EmailCustomMailjetCredentialStatusGetFailed(error_5.message, { error: error_5 });
+                        error_4 = _a.sent();
+                        throw new errors.EmailCustomMailjetCredentialStatusGetFailed(error_4.message, { error: error_4 });
                     case 3: return [2];
                 }
             });
