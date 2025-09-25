@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TemplatesCreationFailed = exports.PaymentOptionDeleteFailed = exports.PaymentOptionCreationFailed = exports.PaymentOptionPutFailed = exports.PaymentOptionFetchFailed = exports.ExpenseAccountDeleteFailed = exports.PaymentOptionsFetchFailed = exports.ExpenseAccountCreationFailed = exports.ExpenseAccountPutFailed = exports.ExpenseAccountFetchFailed = exports.ExpenseAccountsFetchFailed = exports.AccountDeleteFailed = exports.AccountCreationFailed = exports.AccountPutFailed = exports.AccountFetchFailed = exports.AccountsFetchFailed = exports.ProductGroupDeleteFailed = exports.ProuctGroupsCountFailed = exports.ProductGroupsSearchFailed = exports.ProductGroupCreationFailed = exports.ProductGroupPutFailed = exports.ProductGroupFetchFailed = exports.ProductGroupsFetchFailed = exports.DeliveryItemUpdateFailed = exports.DeliveryItemsFetchAllFailed = exports.DeliveryItemsCreateFailed = exports.DeliveriesDeleteFailed = exports.DeliveriesDispatchFailed = exports.DeliveriesInProgressFailed = exports.DeliveriesUpdateFailed = exports.DeliveriesPDFFailed = exports.DeliveriesCreateFailed = exports.DeliveriesFetchOneFailed = exports.DeliveriesFetchAllFailed = exports.TaxDeleteFailed = exports.TaxesCreationFailed = exports.TaxesPutFailed = exports.TaxesFetchFailed = exports.TransactionsGetMetaFailed = exports.TransactionSigningZeroReceiptFailed = exports.TransactionSigningMonthlyReceiptFailed = exports.TransactionSigningYearlyReceiptFailed = exports.TransactionSigningInitialisationFailed = exports.TransactionPdfFailed = exports.TransactionFetchFailed = exports.UninstantiatedClient = exports.PasswordSetRequestFailed = exports.PasswordResetRequestFailed = exports.AuthenticationFailed = exports.BaseError = void 0;
 exports.StaffCountFailed = exports.ImagePutFailed = exports.ImageCreationFailed = exports.AuditActionsTypesFetchFailed = exports.AuditActionsCreateFailed = exports.AuditActionsGetMetaFailed = exports.AuditActionsFetchOneFailed = exports.AuditActionsFetchAllFailed = exports.RegistersSearchFailed = exports.RegisterDeviceConfigurationPutFailed = exports.RegisterNotificationCreateFailed = exports.RegisterPutFailed = exports.RegisterFetchFailed = exports.RegistersFetchFailed = exports.OpenOrderFetchFailed = exports.BookStockFailed = exports.HistoricOrderItemsFetchFailed = exports.OrderSuggestionsFetchFailed = exports.OrderItemsDeleteFailed = exports.OrderItemsUpdateFailed = exports.OrderItemUpdateFailed = exports.OrderItemsCreateFailed = exports.OrderItemsFetchFailed = exports.OutgoingOrdersFetchFailed = exports.IncomingOrdersFetchFailed = exports.OrdersUpdateFailed = exports.OrdersCreateFailed = exports.OrdersFetchFailed = exports.InvoicesGetMetaFailed = exports.InvoicesDeleteFailed = exports.InvoicesUpdateFailed = exports.InvoicesCreateFailed = exports.InvoicesFetchOneFailed = exports.InvoicesFetchAllFailed = exports.DiscountDeleteFailed = exports.DiscountsCountFailed = exports.DiscountCreationFailed = exports.DiscountPutFailed = exports.DiscountFetchFailed = exports.DiscountsFetchFailed = exports.ConfigurationDeleteFailed = exports.ConfigurationCreationFailed = exports.ConfigurationPatchFailed = exports.ConfigurationPutFailed = exports.InventoryConfigurationFetchFailed = exports.ConfigurationFetchFailed = exports.ConfigurationsFetchFailed = exports.TemplatesPreviewFailed = exports.TemplatesFetchFailed = exports.TemplatesPutFailed = void 0;
-exports.LegacySettingUpdateFailed = exports.LegacySettingFetchFailed = exports.LegacySettingsFetchFailed = exports.BalancesMetaFailed = exports.BalancesFetchOneFailed = exports.BalancesFetchFailed = exports.MessagesUpdateFailed = exports.MessagesFetchFailed = exports.PrinterUpdateFailed = exports.PrinterDeleteFailed = exports.PrinterCreateFailed = exports.PrinterFetchFailed = exports.PrintersFetchFailed = exports.PrintMessageUpdateFailed = exports.PrintMessageDeleteFailed = exports.PrintMessageCreateFailed = exports.PrintMessageFetchFailed = exports.PrintMessagesFetchFailed = exports.PrintJobDataFetchFailed = exports.PrintJobUpdateFailed = exports.PrintJobDeleteFailed = exports.PrintJobCreateFailed = exports.PrintJobFetchFailed = exports.PrintJobsFetchFailed = exports.ProductGroupsFiltersFetchFailed = exports.NotificationsEmailError = void 0;
+exports.EmailCustomMailjetCredentialStatusGetFailed = exports.EmailCustomMailjetDefaultSenderSetFailed = exports.EmailTestCustomMailjetFailed = exports.EmailCredentialsSetFailed = exports.EmailCredentialsFetchFailed = exports.LegacySettingUpdateFailed = exports.LegacySettingFetchFailed = exports.LegacySettingsFetchFailed = exports.BalancesMetaFailed = exports.BalancesFetchOneFailed = exports.BalancesFetchFailed = exports.MessagesUpdateFailed = exports.MessagesFetchFailed = exports.PrinterUpdateFailed = exports.PrinterDeleteFailed = exports.PrinterCreateFailed = exports.PrinterFetchFailed = exports.PrintersFetchFailed = exports.PrintMessageUpdateFailed = exports.PrintMessageDeleteFailed = exports.PrintMessageCreateFailed = exports.PrintMessageFetchFailed = exports.PrintMessagesFetchFailed = exports.PrintJobDataFetchFailed = exports.PrintJobUpdateFailed = exports.PrintJobDeleteFailed = exports.PrintJobCreateFailed = exports.PrintJobFetchFailed = exports.PrintJobsFetchFailed = exports.ProductGroupsFiltersFetchFailed = exports.NotificationsEmailError = void 0;
 var tslib_1 = require("tslib");
 var baseError_1 = require("./baseError");
 Object.defineProperty(exports, "BaseError", { enumerable: true, get: function () { return baseError_1.BaseError; } });
@@ -1629,4 +1629,69 @@ var LegacySettingUpdateFailed = (function (_super) {
     return LegacySettingUpdateFailed;
 }(baseError_1.BaseError));
 exports.LegacySettingUpdateFailed = LegacySettingUpdateFailed;
+var EmailCredentialsFetchFailed = (function (_super) {
+    tslib_1.__extends(EmailCredentialsFetchFailed, _super);
+    function EmailCredentialsFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get email credentials'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'EmailCredentialsFetchFailed';
+        Object.setPrototypeOf(_this, EmailCredentialsFetchFailed.prototype);
+        return _this;
+    }
+    return EmailCredentialsFetchFailed;
+}(baseError_1.BaseError));
+exports.EmailCredentialsFetchFailed = EmailCredentialsFetchFailed;
+var EmailCredentialsSetFailed = (function (_super) {
+    tslib_1.__extends(EmailCredentialsSetFailed, _super);
+    function EmailCredentialsSetFailed(message, properties) {
+        if (message === void 0) { message = 'Could not set email credentials'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'EmailCredentialsSetFailed';
+        Object.setPrototypeOf(_this, EmailCredentialsSetFailed.prototype);
+        return _this;
+    }
+    return EmailCredentialsSetFailed;
+}(baseError_1.BaseError));
+exports.EmailCredentialsSetFailed = EmailCredentialsSetFailed;
+var EmailTestCustomMailjetFailed = (function (_super) {
+    tslib_1.__extends(EmailTestCustomMailjetFailed, _super);
+    function EmailTestCustomMailjetFailed(message, properties) {
+        if (message === void 0) { message = 'Could not test custom mailjet'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'EmailTestCustomMailjetFailed';
+        Object.setPrototypeOf(_this, EmailTestCustomMailjetFailed.prototype);
+        return _this;
+    }
+    return EmailTestCustomMailjetFailed;
+}(baseError_1.BaseError));
+exports.EmailTestCustomMailjetFailed = EmailTestCustomMailjetFailed;
+var EmailCustomMailjetDefaultSenderSetFailed = (function (_super) {
+    tslib_1.__extends(EmailCustomMailjetDefaultSenderSetFailed, _super);
+    function EmailCustomMailjetDefaultSenderSetFailed(message, properties) {
+        if (message === void 0) { message = 'Could not set custom mailjet default sender'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'EmailCustomMailjetDefaultSenderSetFailed';
+        Object.setPrototypeOf(_this, EmailCustomMailjetDefaultSenderSetFailed.prototype);
+        return _this;
+    }
+    return EmailCustomMailjetDefaultSenderSetFailed;
+}(baseError_1.BaseError));
+exports.EmailCustomMailjetDefaultSenderSetFailed = EmailCustomMailjetDefaultSenderSetFailed;
+var EmailCustomMailjetCredentialStatusGetFailed = (function (_super) {
+    tslib_1.__extends(EmailCustomMailjetCredentialStatusGetFailed, _super);
+    function EmailCustomMailjetCredentialStatusGetFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get custom mailjet credential status'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'EmailCustomMailjetCredentialStatusGetFailed';
+        Object.setPrototypeOf(_this, EmailCustomMailjetCredentialStatusGetFailed.prototype);
+        return _this;
+    }
+    return EmailCustomMailjetCredentialStatusGetFailed;
+}(baseError_1.BaseError));
+exports.EmailCustomMailjetCredentialStatusGetFailed = EmailCustomMailjetCredentialStatusGetFailed;
 //# sourceMappingURL=index.js.map

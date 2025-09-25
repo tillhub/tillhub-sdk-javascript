@@ -194,6 +194,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.branchGroups = function () {
         return this.generateAuthenticatedInstance(v0.BranchGroups);
     };
+    TillhubClient.prototype.paymentProducts = function () {
+        return this.generateAuthenticatedInstance(v0.PaymentProducts);
+    };
     TillhubClient.prototype.devices = function () {
         return this.generateAuthenticatedInstance(v0.Devices);
     };
@@ -653,6 +656,9 @@ var TillhubClient = (function (_super) {
     };
     TillhubClient.prototype.submissions = function () {
         return this.generateAuthenticatedInstance(v0.Submissions);
+    };
+    TillhubClient.prototype.email = function () {
+        return this.generateAuthenticatedInstance(v0.Email);
     };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
