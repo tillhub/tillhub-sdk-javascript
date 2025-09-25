@@ -56,8 +56,6 @@ export declare class TillhubClient extends events.EventEmitter {
     accounts(): v0.Accounts;
     expenseAccounts(): v0.ExpenseAccounts;
     paymentOptions(): v0.PaymentOptions;
-    paymentLinks(): v0.PaymentLinks;
-    paymentLinkBrandingConfigs(): v0.PaymentLinkBrandingConfigs;
     templates(): v1.Templates;
     configurations(): v0.Configurations;
     configurationsV1(): v1.Configurations;
@@ -72,7 +70,6 @@ export declare class TillhubClient extends events.EventEmitter {
     branches(): v0.Branches;
     branchesV1(): v1.Branches;
     branchGroups(): v0.BranchGroups;
-    paymentProducts(): v0.PaymentProducts;
     devices(): v0.Devices;
     contents(): v0.Contents;
     contentTemplates(): v0.ContentTemplates;
