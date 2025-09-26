@@ -1,3 +1,10 @@
+# [4.229.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.228.0...v4.229.0) (2025-09-26)
+
+
+### Features
+
+* **appointment-reminder-templates:** add vertical query variable (UNTIL 15280) ([#678](https://github.com/tillhub/tillhub-sdk-javascript/issues/678)) ([6fcccfe](https://github.com/tillhub/tillhub-sdk-javascript/commit/6fcccfe68ed666e015bf785e65410cb6bb5ec8b6))
+
 # [4.228.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.227.0...v4.228.0) (2025-09-25)
 
 

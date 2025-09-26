@@ -25,6 +25,7 @@ export interface AppointmentReminderTemplatesResponse {
 }
 export interface AppointmentReminderTemplatesQuery {
     language?: string;
+    vertical?: 'beauty' | 'gastro';
 }
 export declare class AppointmentReminderTemplates extends ThBaseHandler {
     static baseEndpoint: string;
