@@ -30,6 +30,7 @@ export interface AppointmentReminderTemplatesResponse {
 
 export interface AppointmentReminderTemplatesQuery {
   language?: string
+  vertical?: 'beauty' | 'gastro'
 }
 
 export class AppointmentReminderTemplates extends ThBaseHandler {
