@@ -172,8 +172,8 @@ export class Suppliers extends ThBaseHandler {
         throw new SuppliersFetchFailed(undefined, { status: response.status })
       }
 
-      if (response.data.cursors?.next) {
-        next = (): Promise<SuppliersResponse> => this.getAll({ uri: response.data.cursors.next })
+      if (response.data.cursors?.after) {
+        next = (): Promise<SuppliersResponse> => this.getAll({ uri: response.data.cursors.after })
       }
 
       return {
