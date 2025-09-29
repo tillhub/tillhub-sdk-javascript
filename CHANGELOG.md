@@ -1,3 +1,10 @@
+# [4.230.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.229.0...v4.230.0) (2025-09-29)
+
+
+### Bug Fixes
+
+* **suppliers:** update outdated  api property (UNTIL-15108) ([#677](https://github.com/tillhub/tillhub-sdk-javascript/issues/677)) ([3cc7e31](https://github.com/tillhub/tillhub-sdk-javascript/commit/3cc7e31bab702f733003063cf707a42671838d47))
+
 # [4.229.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.228.0...v4.229.0) (2025-09-26)
 
 
