@@ -596,6 +596,17 @@ export class PaymentLinksGetQrCodeFailed extends BaseError {
   }
 }
 
+export class PaymentLinksGetByIdFailed extends BaseError {
+  public name = 'PaymentLinksGetByIdFailed'
+  constructor (
+    public message: string = 'Could not fetch payment link by ID',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, PaymentLinksGetByIdFailed.prototype)
+  }
+}
+
 export class SendSmsFailedFailed extends BaseError {
   public name = 'SendSmsFailedFailed'
   constructor (
