@@ -56,6 +56,11 @@ export interface CustomMailjetCredentialStatusResponse {
     isValid: boolean
     lastValidated: string | null
     error?: string
+    emailsUpdated: boolean
+    defaultSenderChanged: boolean
+    updateCode: 'NONE' | 'MAILJET_SENDER_LIST_SYNCED' | 'MAILJET_DEFAULT_SENDER_CHANGED'
+    previousDefaultEmail: string | null
+    newDefaultEmail: string | null
   }
   msg?: string
   status?: number
@@ -115,6 +120,7 @@ export class Email extends ThBaseHandler {
         status: response.data.status
       }
     } catch (error: any) {
+      console.log('error :>> ', error);
       throw new errors.EmailCredentialsSetFailed(error.message, { error })
     }
   }
