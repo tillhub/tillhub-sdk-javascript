@@ -8,7 +8,8 @@ import {
   PaymentLinksMetaFailed,
   PaymentLinksSendEmailFailed,
   PaymentLinksGetUrlFailed,
-  PaymentLinksGetQrCodeFailed
+  PaymentLinksGetQrCodeFailed,
+  PaymentLinksGetByIdFailed
 } from '../errors'
 
 declare type PaymentLinkType = 'items_sale' | 'quick_charge'
@@ -300,6 +301,22 @@ export class PaymentLinks extends ThBaseHandler {
       }
     } catch (error: any) {
       throw new PaymentLinksGetQrCodeFailed(error.message, { error })
+    }
+  }
+
+  async getById (id: string): Promise<PaymentLinkDto> {
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = `${base}/${id}`
+      const response = await this.http.getClient().get(uri)
+
+      if (response.status !== 200) {
+        throw new PaymentLinksGetByIdFailed(undefined, { status: response.status })
+      }
+
+      return response.data as PaymentLinkDto
+    } catch (error: any) {
+      throw new PaymentLinksGetByIdFailed(error.message, { error })
     }
   }
 }
