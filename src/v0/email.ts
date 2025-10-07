@@ -120,7 +120,6 @@ export class Email extends ThBaseHandler {
         status: response.data.status
       }
     } catch (error: any) {
-      console.log('error :>> ', error);
       throw new errors.EmailCredentialsSetFailed(error.message, { error })
     }
   }
