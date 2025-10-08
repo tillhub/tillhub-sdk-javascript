@@ -70,5 +70,5 @@ For more information see: https://stackoverflow.com/a/67907214
 **TODO:** The SDK will rely on inherited base handlers as utilities.
 
 ## LICENSE
-
+  
 Apache-2.0
