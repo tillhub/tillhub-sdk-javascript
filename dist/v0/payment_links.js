@@ -210,6 +210,30 @@ var PaymentLinks = (function (_super) {
             });
         });
     };
+    PaymentLinks.prototype.getById = function (id) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_8;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri();
+                        uri = base + "/" + id;
+                        return [4, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new errors_1.PaymentLinksGetByIdFailed(undefined, { status: response.status });
+                        }
+                        return [2, response.data];
+                    case 2:
+                        error_8 = _a.sent();
+                        throw new errors_1.PaymentLinksGetByIdFailed(error_8.message, { error: error_8 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
     PaymentLinks.baseEndpoint = '/api/v0/payment-links';
     return PaymentLinks;
 }(base_1.ThBaseHandler));

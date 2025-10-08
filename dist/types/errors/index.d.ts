@@ -270,6 +270,11 @@ export declare class PaymentLinksGetQrCodeFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
 }
+export declare class PaymentLinksGetByIdFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
 export declare class SendSmsFailedFailed extends BaseError {
     message: string;
     name: string;

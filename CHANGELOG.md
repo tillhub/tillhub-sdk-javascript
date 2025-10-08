@@ -1,3 +1,10 @@
+# [4.231.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.230.0...v4.231.0) (2025-10-08)
+
+
+### Features
+
+* **payment-links:** add new api for link status ([#681](https://github.com/tillhub/tillhub-sdk-javascript/issues/681)) ([9e486e3](https://github.com/tillhub/tillhub-sdk-javascript/commit/9e486e36078254333db22df98137257136ff718f))
+
 # [4.230.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.229.0...v4.230.0) (2025-09-29)
 
 

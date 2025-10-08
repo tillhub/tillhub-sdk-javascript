@@ -144,5 +144,6 @@ export declare class PaymentLinks extends ThBaseHandler {
     sendEmail(sendPaymentLinkEmailDto: SendPaymentLinkEmailDto): Promise<NotificationResponse>;
     getPaymentPageUrl(paymentLinkId: string): Promise<PaymentPageUrlResponse>;
     getQrCodeSvg(paymentLinkId: string): Promise<PaymentLinkQrCodeResponse>;
+    getById(id: string): Promise<PaymentLinkDto>;
 }
 export {};
