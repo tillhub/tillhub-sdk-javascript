@@ -1,3 +1,10 @@
+# [4.232.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.231.0...v4.232.0) (2025-10-13)
+
+
+### Features
+
+* **mailjet:** update credentialStatus response (UNTIL-15306) ([#680](https://github.com/tillhub/tillhub-sdk-javascript/issues/680)) ([cf91f73](https://github.com/tillhub/tillhub-sdk-javascript/commit/cf91f7313383d7ee4c4c02094c04833da28c691f))
+
 # [4.231.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.230.0...v4.231.0) (2025-10-08)
 
 

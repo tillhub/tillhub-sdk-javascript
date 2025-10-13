@@ -47,6 +47,11 @@ export interface CustomMailjetCredentialStatusResponse {
         isValid: boolean;
         lastValidated: string | null;
         error?: string;
+        emailsUpdated: boolean;
+        defaultSenderChanged: boolean;
+        updateCode: 'NONE' | 'MAILJET_SENDER_LIST_SYNCED' | 'MAILJET_DEFAULT_SENDER_CHANGED';
+        previousDefaultEmail: string | null;
+        newDefaultEmail: string | null;
     };
     msg?: string;
     status?: number;
