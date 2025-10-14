@@ -36,6 +36,11 @@ export interface OrdersMetaResponse {
   msg: string
 }
 
+export interface FeaturesResponse {
+  data: { moto: boolean }
+  msg: string
+}
+
 export interface ErrorObject {
   id: string
   label: string
@@ -370,6 +375,25 @@ export class Orders extends ThBaseHandler {
       throw new OrderFetchFailed(error.message, { error })
     }
   }
+
+  async features (): Promise<FeaturesResponse> {
+    const base = this.uriHelper.generateBaseUri()
+    const uri = this.uriHelper.generateUriWithQuery(`${base}/features`)
+
+    try {
+      const response = await this.http.getClient().get(uri)
+
+      if (response.status !== 200) {
+        throw new OrderFeaturesFetchFailed(undefined, { status: response.status })
+      }
+      return {
+        data: response.data,
+        msg: response.data.msg
+      }
+    } catch (error: any) {
+      throw new OrderFeaturesFetchFailed(error.message, { error })
+    }
+  }
 }
 
 export class OrdersFetchFailed extends BaseError {
@@ -402,5 +426,16 @@ export class OrderFetchFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, OrderFetchFailed.prototype)
+  }
+}
+
+export class OrderFeaturesFetchFailed extends BaseError {
+  public name = 'OrderFeaturesFetchFailed'
+  constructor (
+    public message: string = 'Could not fetch order features',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, OrderFeaturesFetchFailed.prototype)
   }
 }
