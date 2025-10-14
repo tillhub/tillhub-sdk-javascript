@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OrderFetchFailed = exports.OrdersFetchMetaFailed = exports.OrdersFetchFailed = exports.Orders = void 0;
+exports.OrderFeaturesFetchFailed = exports.OrderFetchFailed = exports.OrdersFetchMetaFailed = exports.OrdersFetchFailed = exports.Orders = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -115,6 +115,35 @@ var Orders = (function (_super) {
             });
         });
     };
+    Orders.prototype.features = function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_4;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        base = this.uriHelper.generateBaseUri();
+                        uri = this.uriHelper.generateUriWithQuery(base + "/features");
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new OrderFeaturesFetchFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data,
+                                msg: response.data.msg
+                            }];
+                    case 3:
+                        error_4 = _a.sent();
+                        throw new OrderFeaturesFetchFailed(error_4.message, { error: error_4 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     Orders.baseEndpoint = '/api/v2/orders';
     return Orders;
 }(base_1.ThBaseHandler));
@@ -158,4 +187,17 @@ var OrderFetchFailed = (function (_super) {
     return OrderFetchFailed;
 }(errors_1.BaseError));
 exports.OrderFetchFailed = OrderFetchFailed;
+var OrderFeaturesFetchFailed = (function (_super) {
+    tslib_1.__extends(OrderFeaturesFetchFailed, _super);
+    function OrderFeaturesFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch order features'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'OrderFeaturesFetchFailed';
+        Object.setPrototypeOf(_this, OrderFeaturesFetchFailed.prototype);
+        return _this;
+    }
+    return OrderFeaturesFetchFailed;
+}(errors_1.BaseError));
+exports.OrderFeaturesFetchFailed = OrderFeaturesFetchFailed;
 //# sourceMappingURL=orders.js.map

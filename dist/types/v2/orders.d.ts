@@ -30,6 +30,12 @@ export interface OrdersMetaResponse {
     metadata: Record<string, unknown>;
     msg: string;
 }
+export interface FeaturesResponse {
+    data: {
+        moto: boolean;
+    };
+    msg: string;
+}
 export interface ErrorObject {
     id: string;
     label: string;
@@ -275,6 +281,7 @@ export declare class Orders extends ThBaseHandler {
     getAll(query?: OrdersQuery | undefined): Promise<OrdersResponse>;
     meta(query?: OrdersQuery | undefined): Promise<OrdersMetaResponse>;
     get(orderId: string): Promise<OrderResponse>;
+    features(): Promise<FeaturesResponse>;
 }
 export declare class OrdersFetchFailed extends BaseError {
     message: string;
@@ -287,6 +294,11 @@ export declare class OrdersFetchMetaFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class OrderFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class OrderFeaturesFetchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

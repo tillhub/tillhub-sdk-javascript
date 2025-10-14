@@ -1,3 +1,11 @@
+# [4.233.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.232.0...v4.233.0) (2025-10-14)
+
+
+### Features
+
+* **orders:** add features API and response handling - MOTO ([c3e374b](https://github.com/tillhub/tillhub-sdk-javascript/commit/c3e374b3b76d7d9e6fbf322568911e5feaf6485f))
+* **payment-links:** update payment link api ([#683](https://github.com/tillhub/tillhub-sdk-javascript/issues/683)) ([eeaf5b7](https://github.com/tillhub/tillhub-sdk-javascript/commit/eeaf5b7fb80a43e2f9f6ad9497fb30ba73e8dd9f))
+
 # [4.232.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.231.0...v4.232.0) (2025-10-13)
 
 

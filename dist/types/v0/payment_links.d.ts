@@ -59,8 +59,8 @@ export interface PaymentLinkCustomer {
 export interface PaymentLinkItem {
     name?: string | null;
     quantity?: number | null;
-    unitPrice?: number | null;
-    totalPrice?: number | null;
+    unitPrice?: string | null;
+    totalPrice?: string | null;
 }
 export interface CreatePaymentLinkRequest {
     usage?: string;
@@ -69,11 +69,11 @@ export interface CreatePaymentLinkRequest {
     branch: string;
     branchId: string;
     createdBy: string;
-    total: number;
+    total?: string;
     currency: string;
-    subtotal?: number;
+    subtotal?: string;
     deliveryMethod?: string;
-    deliveryCost?: number;
+    deliveryCost?: string;
     invoiceId?: string;
     externalOrderId?: string;
     externalCustomerId?: string;
