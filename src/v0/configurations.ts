@@ -30,6 +30,30 @@ export interface ConfigurationResponse {
   msg?: string
 }
 
+export interface BulkFetchRequestBody {
+  sections?: string[]
+  owners?: string[]
+}
+
+export interface BulkFetchResponse {
+  data: Configuration[]
+  metadata?: Record<string, unknown>
+}
+
+export interface BulkUpdateRequestBody {
+  configurations: Configuration[]
+}
+
+export interface BulkUpdateResult {
+  id: string
+  success: boolean
+}
+
+export interface BulkUpdateResponse {
+  data: BulkUpdateResult[]
+  metadata?: Record<string, unknown>
+}
+
 export interface Configuration {
   id?: string
   vouchers?: Record<string, unknown>
@@ -207,6 +231,42 @@ export class Configurations extends ThBaseHandler {
       }
     } catch (error: any) {
       throw new errors.ConfigurationDeleteFailed(error.message, { error })
+    }
+  }
+
+  async bulkFetch (body: BulkFetchRequestBody): Promise<BulkFetchResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri('/bulk-fetch')
+      const response = await this.http.getClient().post(uri, body)
+
+      if (response.status !== 200) {
+        throw new errors.ConfigurationBulkFetchFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results as Configuration[],
+        metadata: response.data.metadata
+      }
+    } catch (error: any) {
+      throw new errors.ConfigurationBulkFetchFailed(error.message, { error })
+    }
+  }
+
+  async bulkUpdate (body: BulkUpdateRequestBody): Promise<BulkUpdateResponse> {
+    try {
+      const uri = this.uriHelper.generateBaseUri('/bulk-update')
+      const response = await this.http.getClient().patch(uri, body)
+
+      if (response.status !== 200) {
+        throw new errors.ConfigurationBulkUpdateFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results as BulkUpdateResult[],
+        metadata: response.data.metadata
+      }
+    } catch (error: any) {
+      throw new errors.ConfigurationBulkUpdateFailed(error.message, { error })
     }
   }
 }
