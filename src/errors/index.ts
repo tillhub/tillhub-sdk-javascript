@@ -739,6 +739,28 @@ export class ConfigurationDeleteFailed extends BaseError {
   }
 }
 
+export class ConfigurationBulkFetchFailed extends BaseError {
+  public name = 'ConfigurationBulkFetchFailed'
+  constructor (
+    public message: string = 'Could not bulk fetch configurations',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, ConfigurationBulkFetchFailed.prototype)
+  }
+}
+
+export class ConfigurationBulkUpdateFailed extends BaseError {
+  public name = 'ConfigurationBulkUpdateFailed'
+  constructor (
+    public message: string = 'Could not bulk update configurations',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, ConfigurationBulkUpdateFailed.prototype)
+  }
+}
+
 export class DiscountsFetchFailed extends BaseError {
   public name = 'DiscountsFetchFailed'
   constructor (
