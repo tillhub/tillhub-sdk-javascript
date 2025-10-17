@@ -152,4 +152,3 @@ describe('v0: Configurations: can bulk update', () => {
     }
   })
 })
-
