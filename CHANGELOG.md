@@ -1,3 +1,10 @@
+# [4.234.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.233.0...v4.234.0) (2025-10-17)
+
+
+### Features
+
+* **checkout_questions:** add new configurations bulk endpoints (UNTIL-15270) ([#685](https://github.com/tillhub/tillhub-sdk-javascript/issues/685)) ([52f579c](https://github.com/tillhub/tillhub-sdk-javascript/commit/52f579c54c5f62ec39cb45345674ade50e9ce6f4))
+
 # [4.233.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.232.0...v4.233.0) (2025-10-14)
 
 

@@ -24,6 +24,25 @@ export interface ConfigurationResponse {
     };
     msg?: string;
 }
+export interface BulkFetchRequestBody {
+    sections?: string[];
+    owners?: string[];
+}
+export interface BulkFetchResponse {
+    data: Configuration[];
+    metadata?: Record<string, unknown>;
+}
+export interface BulkUpdateRequestBody {
+    configurations: Configuration[];
+}
+export interface BulkUpdateResult {
+    id: string;
+    success: boolean;
+}
+export interface BulkUpdateResponse {
+    data: BulkUpdateResult[];
+    metadata?: Record<string, unknown>;
+}
 export interface Configuration {
     id?: string;
     vouchers?: Record<string, unknown>;
@@ -88,5 +107,7 @@ export declare class Configurations extends ThBaseHandler {
     patch(configurationId: string, configuration: Configuration): Promise<ConfigurationResponse>;
     create(configuration: Configuration): Promise<ConfigurationResponse>;
     delete(configurationId: string): Promise<ConfigurationResponse>;
+    bulkFetch(body: BulkFetchRequestBody): Promise<BulkFetchResponse>;
+    bulkUpdate(body: BulkUpdateRequestBody): Promise<BulkUpdateResponse>;
 }
 export {};

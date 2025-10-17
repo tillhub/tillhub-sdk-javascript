@@ -188,6 +188,58 @@ var Configurations = (function (_super) {
             });
         });
     };
+    Configurations.prototype.bulkFetch = function (body) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_7;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = this.uriHelper.generateBaseUri('/bulk-fetch');
+                        return [4, this.http.getClient().post(uri, body)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new errors.ConfigurationBulkFetchFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results,
+                                metadata: response.data.metadata
+                            }];
+                    case 2:
+                        error_7 = _a.sent();
+                        throw new errors.ConfigurationBulkFetchFailed(error_7.message, { error: error_7 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    Configurations.prototype.bulkUpdate = function (body) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_8;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        uri = this.uriHelper.generateBaseUri('/bulk-update');
+                        return [4, this.http.getClient().patch(uri, body)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new errors.ConfigurationBulkUpdateFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results,
+                                metadata: response.data.metadata
+                            }];
+                    case 2:
+                        error_8 = _a.sent();
+                        throw new errors.ConfigurationBulkUpdateFailed(error_8.message, { error: error_8 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
     Configurations.baseEndpoint = '/api/v0/configurations';
     return Configurations;
 }(base_1.ThBaseHandler));

@@ -335,6 +335,16 @@ export declare class ConfigurationDeleteFailed extends BaseError {
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
 }
+export declare class ConfigurationBulkFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class ConfigurationBulkUpdateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
 export declare class DiscountsFetchFailed extends BaseError {
     message: string;
     name: string;
