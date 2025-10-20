@@ -1,3 +1,10 @@
+# [4.235.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.234.0...v4.235.0) (2025-10-20)
+
+
+### Features
+
+* **sale_streams:** add SaleStreams class and related functionality ([8c27064](https://github.com/tillhub/tillhub-sdk-javascript/commit/8c270641c0158ef128e6ace6e1879d61c3c87806))
+
 # [4.234.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.233.0...v4.234.0) (2025-10-17)
 
 

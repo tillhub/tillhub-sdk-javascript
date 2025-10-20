@@ -203,6 +203,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.paymentProducts = function () {
         return this.generateAuthenticatedInstance(v0.PaymentProducts);
     };
+    TillhubClient.prototype.saleStreams = function () {
+        return this.generateAuthenticatedInstance(v0.SaleStreams);
+    };
     TillhubClient.prototype.devices = function () {
         return this.generateAuthenticatedInstance(v0.Devices);
     };
