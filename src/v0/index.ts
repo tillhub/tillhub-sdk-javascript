@@ -20,6 +20,7 @@ import { IamRoles } from './iam_roles'
 import { IamPermissions } from './iam_permissions'
 import { IamMeClass } from './iam_me'
 import { PaymentProducts } from './payment_products'
+import { SaleStreams } from './sale_streams'
 import { Branches } from './branches'
 import { BranchGroups } from './branch_groups'
 import { Devices } from './devices'
@@ -116,6 +117,7 @@ export {
   IamPermissions,
   IamMeClass,
   PaymentProducts,
+  SaleStreams,
   Branches,
   BranchGroups,
   Devices,
