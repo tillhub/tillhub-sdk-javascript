@@ -41,7 +41,7 @@ describe('v0: SaleStreams: can get MOTO sale streams', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/sale-streams/${legacyId}/moto`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/sales-streams/${legacyId}/moto`).reply(() => {
         return [
           200,
           {
@@ -79,7 +79,7 @@ describe('v0: SaleStreams: can get MOTO sale streams', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/sale-streams/${legacyId}/moto`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/sales-streams/${legacyId}/moto`).reply(() => {
         return [404, { error: 'Not found' }]
       })
     }
