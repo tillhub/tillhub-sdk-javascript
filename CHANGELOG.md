@@ -1,3 +1,10 @@
+# [4.237.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.236.0...v4.237.0) (2025-10-21)
+
+
+### Features
+
+* **checkout_questions:** add new endpoints for exporting checkout questions (UNTIL-15271) ([#688](https://github.com/tillhub/tillhub-sdk-javascript/issues/688)) ([ecc19d6](https://github.com/tillhub/tillhub-sdk-javascript/commit/ecc19d6f2cc352ad0a28daf1ca5a43c7bb5e7549))
+
 # [4.236.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.235.0...v4.236.0) (2025-10-21)
 
 

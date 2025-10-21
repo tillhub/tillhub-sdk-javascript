@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Signing = exports.TransactionsLegacy = exports.Transactions = void 0;
+exports.TransactionQuestionnaireExportFailed = exports.Signing = exports.TransactionsLegacy = exports.Transactions = void 0;
 var tslib_1 = require("tslib");
 var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
@@ -154,6 +154,30 @@ var Transactions = (function (_super) {
             });
         });
     };
+    Transactions.prototype.exportQuestionnaire = function (query) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_6;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri('/exports/questionnaire');
+                        uri = this.uriHelper.generateUriWithQuery(base, tslib_1.__assign({ format: 'csv' }, query));
+                        return [4, this.http.getClient().get(uri, { timeout: this.timeout })];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new TransactionQuestionnaireExportFailed(undefined, { status: response.status });
+                        }
+                        return [2, response.data.results];
+                    case 2:
+                        error_6 = _a.sent();
+                        throw new TransactionQuestionnaireExportFailed(error_6.message, { error: error_6 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
     Transactions.baseEndpoint = '/api/v1/transactions';
     return Transactions;
 }(base_1.ThBaseHandler));
@@ -171,7 +195,7 @@ var TransactionsLegacy = (function () {
     TransactionsLegacy.prototype.getAll = function (query) {
         var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var next, base, uri, response_2, error_6;
+            var next, base, uri, response_2, error_7;
             var _this = this;
             return tslib_1.__generator(this, function (_b) {
                 switch (_b.label) {
@@ -191,8 +215,8 @@ var TransactionsLegacy = (function () {
                                 next: next
                             }];
                     case 2:
-                        error_6 = _b.sent();
-                        throw new TransactionFetchFailed(error_6.message, { error: error_6 });
+                        error_7 = _b.sent();
+                        throw new TransactionFetchFailed(error_7.message, { error: error_7 });
                     case 3: return [2];
                 }
             });
@@ -200,7 +224,7 @@ var TransactionsLegacy = (function () {
     };
     TransactionsLegacy.prototype.pdfUri = function (requestObject) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var query, transactionId, template, base, uri, response, error_7;
+            var query, transactionId, template, base, uri, response, error_8;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -221,8 +245,8 @@ var TransactionsLegacy = (function () {
                                 data: response.data.results
                             }];
                     case 3:
-                        error_7 = _a.sent();
-                        throw new TransactionPdfFailed(error_7.message);
+                        error_8 = _a.sent();
+                        throw new TransactionPdfFailed(error_8.message);
                     case 4: return [2];
                 }
             });
@@ -230,7 +254,7 @@ var TransactionsLegacy = (function () {
     };
     TransactionsLegacy.prototype.meta = function (q) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_8;
+            var base, uri, response, error_9;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -247,8 +271,8 @@ var TransactionsLegacy = (function () {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        error_8 = _a.sent();
-                        throw new TransactionsGetMetaFailed(error_8.message, { error: error_8 });
+                        error_9 = _a.sent();
+                        throw new TransactionsGetMetaFailed(error_9.message, { error: error_9 });
                     case 3: return [2];
                 }
             });
@@ -268,7 +292,7 @@ var Signing = (function () {
     }
     Signing.prototype.initialise = function (singingResourceType, singingResource, signingSystem, signingConfiguration) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_9;
+            var uri, response, error_10;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -285,8 +309,8 @@ var Signing = (function () {
                                 data: response.data.results
                             }];
                     case 2:
-                        error_9 = _a.sent();
-                        throw new TransactionSigningInitialisationFailed(error_9.message, { error: error_9 });
+                        error_10 = _a.sent();
+                        throw new TransactionSigningInitialisationFailed(error_10.message, { error: error_10 });
                     case 3: return [2];
                 }
             });
@@ -294,7 +318,7 @@ var Signing = (function () {
     };
     Signing.prototype.yearly = function (singingResourceType, singingResource, signingSystem) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_10;
+            var uri, response, error_11;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -311,8 +335,8 @@ var Signing = (function () {
                                 data: response.data.results
                             }];
                     case 2:
-                        error_10 = _a.sent();
-                        throw new TransactionSigningYearlyReceiptFailed(error_10.message, { error: error_10 });
+                        error_11 = _a.sent();
+                        throw new TransactionSigningYearlyReceiptFailed(error_11.message, { error: error_11 });
                     case 3: return [2];
                 }
             });
@@ -320,7 +344,7 @@ var Signing = (function () {
     };
     Signing.prototype.monthly = function (singingResourceType, singingResource, signingSystem) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_11;
+            var uri, response, error_12;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -337,8 +361,8 @@ var Signing = (function () {
                                 data: response.data.results
                             }];
                     case 2:
-                        error_11 = _a.sent();
-                        throw new TransactionSigningMonthlyReceiptFailed(error_11.message, { error: error_11 });
+                        error_12 = _a.sent();
+                        throw new TransactionSigningMonthlyReceiptFailed(error_12.message, { error: error_12 });
                     case 3: return [2];
                 }
             });
@@ -346,7 +370,7 @@ var Signing = (function () {
     };
     Signing.prototype.zero = function (singingResourceType, singingResource, signingSystem) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_12;
+            var uri, response, error_13;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -363,8 +387,8 @@ var Signing = (function () {
                                 data: response.data.results
                             }];
                     case 2:
-                        error_12 = _a.sent();
-                        throw new TransactionSigningZeroReceiptFailed(error_12.message, { error: error_12 });
+                        error_13 = _a.sent();
+                        throw new TransactionSigningZeroReceiptFailed(error_13.message, { error: error_13 });
                     case 3: return [2];
                 }
             });
@@ -493,4 +517,17 @@ var TransactionsImageCreateFailed = (function (_super) {
     }
     return TransactionsImageCreateFailed;
 }(baseError_1.BaseError));
+var TransactionQuestionnaireExportFailed = (function (_super) {
+    tslib_1.__extends(TransactionQuestionnaireExportFailed, _super);
+    function TransactionQuestionnaireExportFailed(message, properties) {
+        if (message === void 0) { message = 'Could not export questionnaire'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'TransactionQuestionnaireExportFailed';
+        Object.setPrototypeOf(_this, TransactionQuestionnaireExportFailed.prototype);
+        return _this;
+    }
+    return TransactionQuestionnaireExportFailed;
+}(baseError_1.BaseError));
+exports.TransactionQuestionnaireExportFailed = TransactionQuestionnaireExportFailed;
 //# sourceMappingURL=transactions.js.map

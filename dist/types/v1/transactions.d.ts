@@ -1,6 +1,7 @@
 import { Client, Timeout } from '../client';
 import { UriHelper } from '../uri-helper';
 import { ThBaseHandler } from '../base';
+import { BaseError } from '../errors/baseError';
 import { AnalyticsOptions } from '../v0/analytics';
 export interface PdfRequestObject {
     transactionId: string;
@@ -17,6 +18,14 @@ export interface TransactionsMetaQuery {
     type?: string | string[];
     legacy?: boolean;
     query?: Record<string, unknown>;
+}
+export interface QuestionnaireExportQuery {
+    date_start: string;
+    date_end: string;
+    format?: string;
+}
+export interface QuestionnaireExportResult {
+    correlationId: string;
 }
 export interface TransactionResponse {
     data: Array<Record<string, unknown>>;
@@ -49,6 +58,7 @@ export declare class Transactions extends ThBaseHandler {
     getImages(transactionId: string): Promise<TransactionResponse>;
     putImage(transactionId: string, image: TransactionImage): Promise<TransactionImageResponse>;
     createImage(transactionId: string, image: TransactionImage): Promise<TransactionImageResponse>;
+    exportQuestionnaire(query: QuestionnaireExportQuery): Promise<QuestionnaireExportResult[]>;
 }
 export declare class TransactionsLegacy {
     endpoint: string;
@@ -71,5 +81,10 @@ export declare class Signing {
     yearly(singingResourceType: string, singingResource: string, signingSystem: string): Promise<TransactionResponse>;
     monthly(singingResourceType: string, singingResource: string, signingSystem: string): Promise<TransactionResponse>;
     zero(singingResourceType: string, singingResource: string, signingSystem: string): Promise<TransactionResponse>;
+}
+export declare class TransactionQuestionnaireExportFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
 }
 export {};
