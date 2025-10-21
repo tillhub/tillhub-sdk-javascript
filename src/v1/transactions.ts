@@ -23,6 +23,16 @@ export interface TransactionsMetaQuery {
   query?: Record<string, unknown>
 }
 
+export interface QuestionnaireExportQuery {
+  date_start: string
+  date_end: string
+  format?: string
+}
+
+export interface QuestionnaireExportResult {
+  correlationId: string
+}
+
 export interface TransactionResponse {
   data: Array<Record<string, unknown>>
   metadata?: Record<string, unknown>
@@ -153,6 +163,23 @@ export class Transactions extends ThBaseHandler {
       }
     } catch (error: any) {
       throw new TransactionsImageCreateFailed(error.message, { error })
+    }
+  }
+
+  async exportQuestionnaire (query: QuestionnaireExportQuery): Promise<QuestionnaireExportResult[]> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/exports/questionnaire')
+      const uri = this.uriHelper.generateUriWithQuery(base, { format: 'csv', ...query })
+
+      const response = await this.http.getClient().get(uri, { timeout: this.timeout })
+
+      if (response.status !== 200) {
+        throw new TransactionQuestionnaireExportFailed(undefined, { status: response.status })
+      }
+
+      return response.data.results
+    } catch (error: any) {
+      throw new TransactionQuestionnaireExportFailed(error.message, { error })
     }
   }
 }
@@ -446,5 +473,16 @@ class TransactionsImageCreateFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionsImageCreateFailed.prototype)
+  }
+}
+
+export class TransactionQuestionnaireExportFailed extends BaseError {
+  public name = 'TransactionQuestionnaireExportFailed'
+  constructor (
+    public message: string = 'Could not export questionnaire',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, TransactionQuestionnaireExportFailed.prototype)
   }
 }
