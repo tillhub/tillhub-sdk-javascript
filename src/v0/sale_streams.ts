@@ -34,7 +34,7 @@ export interface BusinessUnit {
 }
 
 export class SaleStreams extends ThBaseHandler {
-  public static baseEndpoint = '/api/v0/sale-streams'
+  public static baseEndpoint = '/api/v0/sales-streams'
   endpoint: string
   http: Client
   public options: SaleStreamsOptions
