@@ -45,7 +45,7 @@ var SaleStreams = (function (_super) {
             });
         });
     };
-    SaleStreams.baseEndpoint = '/api/v0/sale-streams';
+    SaleStreams.baseEndpoint = '/api/v0/sales-streams';
     return SaleStreams;
 }(base_1.ThBaseHandler));
 exports.SaleStreams = SaleStreams;

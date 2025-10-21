@@ -1,3 +1,10 @@
+# [4.236.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.235.0...v4.236.0) (2025-10-21)
+
+
+### Features
+
+* **sale_streams:** correct endpoint ([ee415e3](https://github.com/tillhub/tillhub-sdk-javascript/commit/ee415e3c7df6d2f7973cad340ac0ce7b24cef1a2))
+
 # [4.235.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.234.0...v4.235.0) (2025-10-20)
 
 
