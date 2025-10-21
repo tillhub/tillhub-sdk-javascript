@@ -55,17 +55,6 @@ interface FiskaltrustAuth {
   cashbox_auth: string
 }
 
-class TransactionQuestionnaireExportFailed extends BaseError {
-  public name = 'TransactionQuestionnaireExportFailed'
-  constructor (
-    public message: string = 'Could not export questionnaire',
-    properties?: Record<string, unknown>
-  ) {
-    super(message, properties)
-    Object.setPrototypeOf(this, TransactionQuestionnaireExportFailed.prototype)
-  }
-}
-
 export class Transactions extends ThBaseHandler {
   public static baseEndpoint = '/api/v1/transactions'
   endpoint: string
@@ -484,5 +473,16 @@ class TransactionsImageCreateFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, TransactionsImageCreateFailed.prototype)
+  }
+}
+
+export class TransactionQuestionnaireExportFailed extends BaseError {
+  public name = 'TransactionQuestionnaireExportFailed'
+  constructor (
+    public message: string = 'Could not export questionnaire',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, TransactionQuestionnaireExportFailed.prototype)
   }
 }
