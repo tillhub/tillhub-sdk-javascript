@@ -189,8 +189,8 @@ export class PaymentLinks extends ThBaseHandler {
         throw new PaymentLinksFetchFailed(undefined, { status: response.status })
       }
 
-      if (response.data.cursor?.after) {
-        next = (): Promise<PaymentLinksResponse> => this.getAll({ uri: response.data.cursor.after })
+      if (response.data.cursors?.after) {
+        next = (): Promise<PaymentLinksResponse> => this.getAll({ uri: response.data.cursors.after })
       }
 
       return {
