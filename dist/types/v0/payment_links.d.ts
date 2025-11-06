@@ -3,6 +3,7 @@ import { Client } from '../client';
 import { UriHelper } from '../uri-helper';
 declare type PaymentLinkType = 'items_sale' | 'quick_charge';
 declare type PaymentLinkStatus = 'open' | 'expired' | 'closed';
+declare type BasketItemType = 'goods' | 'shipment' | 'voucher' | 'digital';
 export interface PaymentLinkDto {
     id?: string | null;
     usage?: string | null;
@@ -18,9 +19,6 @@ export interface PaymentLinkDto {
     createdBy: string | null;
     total?: number | null;
     currency?: string | null;
-    subtotal?: number | null;
-    deliveryMethod?: string | null;
-    deliveryCost?: number | null;
     customer?: PaymentLinkCustomer | null;
     items?: PaymentLinkItem[] | null;
     paymentPageUrl?: string | null;
@@ -57,23 +55,21 @@ export interface PaymentLinkCustomer {
     sameAsShipping?: boolean | false;
 }
 export interface PaymentLinkItem {
+    type: BasketItemType;
     name?: string | null;
     quantity?: number | null;
     unitPrice?: string | null;
-    totalPrice?: string | null;
+    vat?: string | null;
 }
 export interface CreatePaymentLinkRequest {
-    usage?: string;
+    paymentLinkDescription?: string;
     paymentLinkType?: PaymentLinkType;
     linkedOrderId?: string;
     branch: string;
     branchId: string;
     createdBy: string;
-    total?: string;
+    totalAmount?: string;
     currency: string;
-    subtotal?: string;
-    deliveryMethod?: string;
-    deliveryCost?: string;
     invoiceId?: string;
     externalOrderId?: string;
     externalCustomerId?: string;

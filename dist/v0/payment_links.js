@@ -40,8 +40,8 @@ var PaymentLinks = (function (_super) {
                         if (response_1.status !== 200) {
                             throw new errors_1.PaymentLinksFetchFailed(undefined, { status: response_1.status });
                         }
-                        if ((_a = response_1.data.cursor) === null || _a === void 0 ? void 0 : _a.after) {
-                            next = function () { return _this.getAll({ uri: response_1.data.cursor.after }); };
+                        if ((_a = response_1.data.cursors) === null || _a === void 0 ? void 0 : _a.after) {
+                            next = function () { return _this.getAll({ uri: response_1.data.cursors.after }); };
                         }
                         return [2, {
                                 data: response_1.data.results,

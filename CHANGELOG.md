@@ -1,3 +1,11 @@
+# [4.238.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.237.0...v4.238.0) (2025-11-06)
+
+
+### Features
+
+* **payment-link:** cleanup paymentLinkBrandingConfig ([24b315c](https://github.com/tillhub/tillhub-sdk-javascript/commit/24b315c53519ba92492008f73321775f1fdd4e98))
+* **payment-links:** fix pagination issue ([b7a67fd](https://github.com/tillhub/tillhub-sdk-javascript/commit/b7a67fd1068b1cc95b64d5119f16bd0c306f369a))
+
 # [4.237.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.236.0...v4.237.0) (2025-10-21)
 
 
