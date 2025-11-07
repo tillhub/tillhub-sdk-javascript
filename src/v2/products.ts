@@ -83,11 +83,28 @@ export interface StockConfigurationLocation {
   reorder_point?: number | null
 }
 
+export interface ProductsQuery {
+  deleted?: boolean
+  active?: boolean
+  exclude_system_products?: boolean
+  location?: string
+  extended?: boolean
+  [key: string]: any
+}
+
 export interface ProductsOptions {
   user?: string
   base?: string
   limit?: number
   uri?: string
+  query?: ProductsQuery
+}
+
+export interface ProductsResponse {
+  data?: Product[]
+  metaData?: Record<string, unknown>
+  msg?: string
+  next?: () => Promise<ProductsResponse>
 }
 
 export interface ProductsBulkImportResponse {
@@ -119,6 +136,26 @@ export class Products extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
+  async getAll (options?: ProductsOptions | undefined): Promise<ProductsResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, options)
+
+      const response = await this.http.getClient().get(uri)
+
+      if (response.status !== 200) {
+        throw new ProductsFetchFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results,
+        metaData: { count: response.data.pagination?.total, pagination: response.data.pagination }
+      }
+    } catch (error: any) {
+      throw new ProductsFetchFailed(error.message, { error })
+    }
+  }
+
   async bulkImport (payload: ProductsBulkImportRequestObject): Promise<ProductsBulkImportResponse> {
     const uri = this.uriHelper.generateBaseUri('/bulk')
 
@@ -146,5 +183,16 @@ export class ProductsBulkImportFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, ProductsBulkImportFailed.prototype)
+  }
+}
+
+export class ProductsFetchFailed extends BaseError {
+  public name = 'ProductsFetchFailed'
+  constructor (
+    public message: string = 'Could not fetch products',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, ProductsFetchFailed.prototype)
   }
 }
