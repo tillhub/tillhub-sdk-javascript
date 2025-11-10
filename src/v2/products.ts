@@ -149,7 +149,7 @@ export class Products extends ThBaseHandler {
 
       return {
         data: response.data.results,
-        metaData: { count: response.data.pagination?.total, pagination: response.data.pagination }
+        metaData: { count: response.data.pagination?.total || 0, pagination: response.data.pagination }
       }
     } catch (error: any) {
       throw new ProductsFetchFailed(error.message, { error })
