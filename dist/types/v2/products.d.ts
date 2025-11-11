@@ -72,11 +72,26 @@ export interface StockConfigurationLocation {
     reorder_qty?: number | null;
     reorder_point?: number | null;
 }
+export interface ProductsQuery {
+    deleted?: boolean;
+    active?: boolean;
+    exclude_system_products?: boolean;
+    location?: string;
+    extended?: boolean;
+    [key: string]: any;
+}
 export interface ProductsOptions {
     user?: string;
     base?: string;
     limit?: number;
     uri?: string;
+    query?: ProductsQuery;
+}
+export interface ProductsResponse {
+    data?: Product[];
+    metaData?: Record<string, unknown>;
+    msg?: string;
+    next?: () => Promise<ProductsResponse>;
 }
 export interface ProductsBulkImportResponse {
     msg?: string;
@@ -92,9 +107,15 @@ export declare class Products extends ThBaseHandler {
     options: ProductsOptions;
     uriHelper: UriHelper;
     constructor(options: ProductsOptions, http: Client);
+    getAll(options?: ProductsOptions | undefined): Promise<ProductsResponse>;
     bulkImport(payload: ProductsBulkImportRequestObject): Promise<ProductsBulkImportResponse>;
 }
 export declare class ProductsBulkImportFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class ProductsFetchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

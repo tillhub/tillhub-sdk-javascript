@@ -1,3 +1,10 @@
+# [4.239.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.238.0...v4.239.0) (2025-11-11)
+
+
+### Features
+
+* **products:** add getAll function for v2 products endpoint (UNTIL-15271) ([#692](https://github.com/tillhub/tillhub-sdk-javascript/issues/692)) ([ec7b0aa](https://github.com/tillhub/tillhub-sdk-javascript/commit/ec7b0aac26359ddc1c7eba40161e4d8b56f18e57))
+
 # [4.238.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.237.0...v4.238.0) (2025-11-06)
 
 

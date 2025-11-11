@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProductsBulkImportFailed = exports.Products = void 0;
+exports.ProductsFetchFailed = exports.ProductsBulkImportFailed = exports.Products = void 0;
 var tslib_1 = require("tslib");
 var baseError_1 = require("../errors/baseError");
 var uri_helper_1 = require("../uri-helper");
@@ -20,9 +20,37 @@ var Products = (function (_super) {
         _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
         return _this;
     }
+    Products.prototype.getAll = function (options) {
+        var _a;
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_1;
+            return tslib_1.__generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _b.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri();
+                        uri = this.uriHelper.generateUriWithQuery(base, options);
+                        return [4, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _b.sent();
+                        if (response.status !== 200) {
+                            throw new ProductsFetchFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results,
+                                metaData: { count: ((_a = response.data.pagination) === null || _a === void 0 ? void 0 : _a.total) || 0, pagination: response.data.pagination }
+                            }];
+                    case 2:
+                        error_1 = _b.sent();
+                        throw new ProductsFetchFailed(error_1.message, { error: error_1 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
     Products.prototype.bulkImport = function (payload) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_1;
+            var uri, response, error_2;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -40,8 +68,8 @@ var Products = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        error_1 = _a.sent();
-                        throw new ProductsBulkImportFailed(error_1.message, { error: error_1 });
+                        error_2 = _a.sent();
+                        throw new ProductsBulkImportFailed(error_2.message, { error: error_2 });
                     case 4: return [2];
                 }
             });
@@ -64,4 +92,17 @@ var ProductsBulkImportFailed = (function (_super) {
     return ProductsBulkImportFailed;
 }(baseError_1.BaseError));
 exports.ProductsBulkImportFailed = ProductsBulkImportFailed;
+var ProductsFetchFailed = (function (_super) {
+    tslib_1.__extends(ProductsFetchFailed, _super);
+    function ProductsFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch products'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ProductsFetchFailed';
+        Object.setPrototypeOf(_this, ProductsFetchFailed.prototype);
+        return _this;
+    }
+    return ProductsFetchFailed;
+}(baseError_1.BaseError));
+exports.ProductsFetchFailed = ProductsFetchFailed;
 //# sourceMappingURL=products.js.map
