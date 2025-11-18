@@ -150,3 +150,14 @@ export class CustomersMetaFailed extends BaseError {
     Object.setPrototypeOf(this, CustomersMetaFailed.prototype)
   }
 }
+
+export class ReportsGastroReservationsFetchAllFailed extends BaseError {
+  public name = 'ReportsGastroReservationsFetchAllFailed'
+  constructor (
+    public message: string = 'Could not fetch all the gastro reservations',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, ReportsGastroReservationsFetchAllFailed.prototype)
+  }
+}

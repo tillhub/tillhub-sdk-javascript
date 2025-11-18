@@ -7,6 +7,7 @@ import { Payments } from './analytics/reports/payments'
 import { Vat } from './analytics/reports/vat'
 import { CashBook } from './analytics/reports/cash_book'
 import { Customers } from './analytics/reports/customers'
+import { GastroReservations } from './analytics/reports/gastro-reservations'
 
 export type StaffID = string | null
 
@@ -629,6 +630,10 @@ export class Analytics {
 
   customers (): Customers {
     return new Customers(this.options, this.http, this.uriHelper)
+  }
+
+  gastroReservations (): GastroReservations {
+    return new GastroReservations(this.options, this.http)
   }
 }
 
