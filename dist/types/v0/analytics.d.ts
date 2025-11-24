@@ -7,6 +7,7 @@ import { Payments } from './analytics/reports/payments';
 import { Vat } from './analytics/reports/vat';
 import { CashBook } from './analytics/reports/cash_book';
 import { Customers } from './analytics/reports/customers';
+import { GastroReservations } from './analytics/reports/gastro-reservations';
 export declare type StaffID = string | null;
 export interface AnalyticsOptions {
     user?: string;
@@ -181,6 +182,7 @@ export declare class Analytics {
     vat(): Vat;
     cashBook(): CashBook;
     customers(): Customers;
+    gastroReservations(): GastroReservations;
 }
 export declare class ReportsStocksFetchFailed extends BaseError {
     message: string;

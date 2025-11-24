@@ -1,3 +1,10 @@
+# [4.240.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.239.0...v4.240.0) (2025-11-24)
+
+
+### Features
+
+* **analytics:** add gastro reservations reports (UNTIL 14788) ([#693](https://github.com/tillhub/tillhub-sdk-javascript/issues/693)) ([70d9db7](https://github.com/tillhub/tillhub-sdk-javascript/commit/70d9db76393ff57c948836e40ac33575446a9246))
+
 # [4.239.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.238.0...v4.239.0) (2025-11-11)
 
 

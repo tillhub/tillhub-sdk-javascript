@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CustomersMetaFailed = exports.CustomerOverviewFetchFailed = exports.CustomerTransactionFetchFailed = exports.CustomerFilterFetchFailed = exports.CustomerFetchFailed = exports.VatReportFetchMetaFailed = exports.VatReportFetchFailed = exports.ReportsPaymentsMetaFailed = exports.ReportsPaymentsFetchAllFailed = exports.ReportsPaymentOptionsMetaFailed = exports.ReportsPaymentOptionsFetchAllFailed = exports.ReportsBalancesMetaFailed = exports.ReportsBalancesFetchOneFailed = exports.ReportsBalancesFetchAllFailed = void 0;
+exports.ReportsGastroReservationsFetchAllFailed = exports.CustomersMetaFailed = exports.CustomerOverviewFetchFailed = exports.CustomerTransactionFetchFailed = exports.CustomerFilterFetchFailed = exports.CustomerFetchFailed = exports.VatReportFetchMetaFailed = exports.VatReportFetchFailed = exports.ReportsPaymentsMetaFailed = exports.ReportsPaymentsFetchAllFailed = exports.ReportsPaymentOptionsMetaFailed = exports.ReportsPaymentOptionsFetchAllFailed = exports.ReportsBalancesMetaFailed = exports.ReportsBalancesFetchOneFailed = exports.ReportsBalancesFetchAllFailed = void 0;
 var tslib_1 = require("tslib");
 var baseError_1 = require("./baseError");
 var ReportsBalancesFetchAllFailed = (function (_super) {
@@ -185,4 +185,17 @@ var CustomersMetaFailed = (function (_super) {
     return CustomersMetaFailed;
 }(baseError_1.BaseError));
 exports.CustomersMetaFailed = CustomersMetaFailed;
+var ReportsGastroReservationsFetchAllFailed = (function (_super) {
+    tslib_1.__extends(ReportsGastroReservationsFetchAllFailed, _super);
+    function ReportsGastroReservationsFetchAllFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch all the gastro reservations'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ReportsGastroReservationsFetchAllFailed';
+        Object.setPrototypeOf(_this, ReportsGastroReservationsFetchAllFailed.prototype);
+        return _this;
+    }
+    return ReportsGastroReservationsFetchAllFailed;
+}(baseError_1.BaseError));
+exports.ReportsGastroReservationsFetchAllFailed = ReportsGastroReservationsFetchAllFailed;
 //# sourceMappingURL=analytics.js.map

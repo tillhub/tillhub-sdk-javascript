@@ -10,6 +10,7 @@ var payments_1 = require("./analytics/reports/payments");
 var vat_1 = require("./analytics/reports/vat");
 var cash_book_1 = require("./analytics/reports/cash_book");
 var customers_1 = require("./analytics/reports/customers");
+var gastro_reservations_1 = require("./analytics/reports/gastro-reservations");
 var Analytics = (function () {
     function Analytics(options, http) {
         var _a, _b;
@@ -676,6 +677,9 @@ var Analytics = (function () {
     };
     Analytics.prototype.customers = function () {
         return new customers_1.Customers(this.options, this.http, this.uriHelper);
+    };
+    Analytics.prototype.gastroReservations = function () {
+        return new gastro_reservations_1.GastroReservations(this.options, this.http);
     };
     return Analytics;
 }());
