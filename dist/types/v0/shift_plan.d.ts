@@ -6,6 +6,11 @@ export interface ShiftPlanOptions {
     user?: string;
     base?: string;
 }
+export interface ShiftPlanQueryOptions {
+    start?: string;
+    end?: string;
+    branch_id?: string;
+}
 export interface ShiftPlanResponse {
     msg?: string;
     data?: ShiftPlanItem[];
@@ -34,7 +39,8 @@ export declare class ShiftPlan extends ThBaseHandler {
     options: ShiftPlanOptions;
     uriHelper: UriHelper;
     constructor(options: ShiftPlanOptions, http: Client);
-    getAll(): Promise<ShiftPlanResponse>;
+    get(branchId: string, options?: ShiftPlanQueryOptions): Promise<ShiftPlanResponse>;
+    getAll(options?: ShiftPlanQueryOptions): Promise<ShiftPlanResponse>;
     put(shiftPlanOptions: ShiftPlanUpdateOptions): Promise<ShiftPlanResponse>;
 }
 export declare class ShiftPlanPutFailed extends BaseError {

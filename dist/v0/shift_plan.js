@@ -20,14 +20,16 @@ var ShiftPlan = (function (_super) {
         _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
         return _this;
     }
-    ShiftPlan.prototype.getAll = function () {
+    ShiftPlan.prototype.get = function (branchId, options) {
+        if (options === void 0) { options = {}; }
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_1;
+            var base, uri, response, error_1;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        uri = this.uriHelper.generateBaseUri();
+                        base = this.uriHelper.generateBaseUri();
+                        uri = this.uriHelper.generateUriWithQuery(base, tslib_1.__assign(tslib_1.__assign({}, options), { branch_id: branchId }));
                         return [4, this.http.getClient().get(uri)];
                     case 1:
                         response = _a.sent();
@@ -47,9 +49,38 @@ var ShiftPlan = (function (_super) {
             });
         });
     };
+    ShiftPlan.prototype.getAll = function (options) {
+        if (options === void 0) { options = {}; }
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_2;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri();
+                        uri = this.uriHelper.generateUriWithQuery(base, options);
+                        return [4, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new ShiftPlanFetchFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                msg: response.data.msg,
+                                data: response.data.results,
+                                metadata: { count: response.data.count }
+                            }];
+                    case 2:
+                        error_2 = _a.sent();
+                        throw new ShiftPlanFetchFailed(error_2.message, { error: error_2 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
     ShiftPlan.prototype.put = function (shiftPlanOptions) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_2;
+            var uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -65,8 +96,8 @@ var ShiftPlan = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_2 = _a.sent();
-                        throw new ShiftPlanPutFailed(error_2.message, { error: error_2 });
+                        error_3 = _a.sent();
+                        throw new ShiftPlanPutFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });

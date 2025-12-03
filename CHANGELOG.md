@@ -1,3 +1,10 @@
+# [4.241.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.240.0...v4.241.0) (2025-12-03)
+
+
+### Features
+
+* **shift_plan:** add endpoint to fetch shift plan by branch id (UNTIL 17734) ([#695](https://github.com/tillhub/tillhub-sdk-javascript/issues/695)) ([aeebeaa](https://github.com/tillhub/tillhub-sdk-javascript/commit/aeebeaa49a7aca3077eefd499f86b8a380b3bc8e))
+
 # [4.240.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.239.0...v4.240.0) (2025-11-24)
 
 
