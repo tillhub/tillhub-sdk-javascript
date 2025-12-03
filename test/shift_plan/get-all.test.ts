@@ -13,12 +13,10 @@ afterEach(() => {
   mock.reset()
 })
 
-const branchId = '0505ce68-9cd9-4b0c-ac5c-7cb6804e8956'
-
 const mockShiftPlan: ShiftPlanItem[] = [
   {
     staff_member_id: '0505ce68-9cd9-4b0c-ac5c-7cb6804e8956',
-    branch_id: branchId,
+    branch_id: '0505ce68-9cd9-4b0c-ac5c-7cb6804e8956',
     date: '2020-01-01',
     plan: [{ start: '10:00', end: '12:00' }]
   }
@@ -40,7 +38,7 @@ describe('v0: Shift Plan: can get one shift plan', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/shift_plan/${legacyId}?branch_id=${branchId}`).reply((request) => {
+      mock.onGet(`https://api.tillhub.com/api/v0/shift_plan/${legacyId}`).reply(() => {
         return [
           200,
           {
@@ -57,7 +55,7 @@ describe('v0: Shift Plan: can get one shift plan', () => {
 
     expect(ShiftPlan).toBeInstanceOf(v0.ShiftPlan)
 
-    const { data } = await ShiftPlan.get('0505ce68-9cd9-4b0c-ac5c-7cb6804e8956')
+    const { data } = await ShiftPlan.getAll()
 
     expect(data).toMatchObject(mockShiftPlan)
   })
@@ -77,14 +75,14 @@ describe('v0: Shift Plan: can get one shift plan', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v0/shift_plan/${legacyId}?branch_id=${branchId}`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v0/shift_plan/${legacyId}`).reply(() => {
         return [205]
       })
     }
 
     try {
       const th = await initThInstance()
-      await th.shiftPlan().get('0505ce68-9cd9-4b0c-ac5c-7cb6804e8956')
+      await th.shiftPlan().getAll()
     } catch (err: any) {
       expect(err.name).toBe('ShiftPlanFetchFailed')
     }
