@@ -8,6 +8,12 @@ export interface ShiftPlanOptions {
   base?: string
 }
 
+export interface ShiftPlanQueryOptions {
+  start?: string
+  end?: string
+  branch_id?: string
+}
+
 export interface ShiftPlanResponse {
   msg?: string
   data?: ShiftPlanItem[]
@@ -53,9 +59,34 @@ export class ShiftPlan extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async getAll (): Promise<ShiftPlanResponse> {
+  async get (branchId: string, options: ShiftPlanQueryOptions = {}): Promise<ShiftPlanResponse> {
     try {
-      const uri = this.uriHelper.generateBaseUri()
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, {
+        ...options,
+        branch_id: branchId
+      })
+
+      const response = await this.http.getClient().get(uri)
+
+      if (response.status !== 200) {
+        throw new ShiftPlanFetchFailed(undefined, { status: response.status })
+      }
+
+      return {
+        msg: response.data.msg,
+        data: response.data.results,
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new ShiftPlanFetchFailed(error.message, { error })
+    }
+  }
+
+  async getAll (options: ShiftPlanQueryOptions = {}): Promise<ShiftPlanResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri()
+      const uri = this.uriHelper.generateUriWithQuery(base, options)
 
       const response = await this.http.getClient().get(uri)
 
