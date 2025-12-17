@@ -6,8 +6,14 @@ export interface AnalyticsOptions {
 }
 export interface AnalyticsResponse {
     data: Array<Record<string, unknown>>;
+    summary: Array<Record<string, unknown>>;
     metadata: Record<string, unknown>;
     msg?: string;
+    next?: () => Promise<AnalyticsResponse>;
+}
+export interface AnalyticsMetaResponse {
+    data: Array<Record<string, unknown>>;
+    metadata: Record<string, unknown>;
 }
 export declare enum ReservationStatus {
     RESERVED = "reserved",
@@ -30,6 +36,7 @@ export interface GastroReservationsQuery {
     branchId?: string;
     source?: ReservationStatus | ReservationSource[];
     layoutId?: string;
+    uri?: string;
 }
 export declare class GastroReservations {
     endpoint: string;
@@ -39,4 +46,5 @@ export declare class GastroReservations {
     timeout: Timeout;
     constructor(options: AnalyticsOptions, http: Client);
     getAll(query?: GastroReservationsQuery): Promise<AnalyticsResponse>;
+    meta(queryOrOptions?: GastroReservationsQuery | undefined): Promise<AnalyticsMetaResponse>;
 }

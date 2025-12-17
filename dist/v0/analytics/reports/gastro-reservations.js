@@ -28,26 +28,64 @@ var GastroReservations = (function () {
         this.uriHelper = new uri_helper_1.UriHelper(this.endpoint, this.options);
     }
     GastroReservations.prototype.getAll = function (query) {
+        var _a, _b, _c, _d, _e;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_1;
-            return tslib_1.__generator(this, function (_a) {
-                switch (_a.label) {
+            var next, base, uri, response_1, error_1;
+            var _this = this;
+            return tslib_1.__generator(this, function (_f) {
+                switch (_f.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _f.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri();
                         uri = this.uriHelper.generateUriWithQuery(base, query);
                         return [4, this.http.getClient().get(uri)];
                     case 1:
-                        response = _a.sent();
-                        if (response.status !== 200)
-                            throw new errors.ReportsGastroReservationsFetchAllFailed();
+                        response_1 = _f.sent();
+                        if (response_1.status !== 200) {
+                            throw new errors.ReportsGastroReservationsFetchAllFailed(undefined, { status: response_1.status });
+                        }
+                        if ((_a = response_1.data.cursors) === null || _a === void 0 ? void 0 : _a.after) {
+                            next = function () { return _this.getAll({ uri: response_1.data.cursors.after }); };
+                        }
                         return [2, {
-                                data: response.data.results,
+                                data: (_c = (_b = response_1.data.results[0]) === null || _b === void 0 ? void 0 : _b.values) !== null && _c !== void 0 ? _c : [],
+                                summary: [(_e = (_d = response_1.data.results[1]) === null || _d === void 0 ? void 0 : _d.values) !== null && _e !== void 0 ? _e : {}],
+                                metadata: { cursor: response_1.data.cursors },
+                                next: next
+                            }];
+                    case 2:
+                        error_1 = _f.sent();
+                        throw new errors.ReportsGastroReservationsFetchAllFailed(error_1.message, { error: error_1 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    GastroReservations.prototype.meta = function (queryOrOptions) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_2;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri('/meta');
+                        uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions);
+                        return [4, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new errors.ReportsGastroReservationsMetaFailed(undefined, { status: response.status });
+                        }
+                        if (!response.data.results[0]) {
+                            throw new errors.ReportsGastroReservationsMetaFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results[0],
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        error_1 = _a.sent();
-                        throw new errors.ReportsGastroReservationsFetchAllFailed();
+                        error_2 = _a.sent();
+                        throw new errors.ReportsGastroReservationsMetaFailed(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }
             });

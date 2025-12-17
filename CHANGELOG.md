@@ -1,3 +1,10 @@
+# [4.242.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.241.0...v4.242.0) (2025-12-17)
+
+
+### Features
+
+* **analytics:** add meta call for gastro reservations ([#696](https://github.com/tillhub/tillhub-sdk-javascript/issues/696)) ([d894e30](https://github.com/tillhub/tillhub-sdk-javascript/commit/d894e3019a38201c45b90724fdaed5451d169dc2))
+
 # [4.241.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.240.0...v4.241.0) (2025-12-03)
 
 

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ReportsGastroReservationsFetchAllFailed = exports.CustomersMetaFailed = exports.CustomerOverviewFetchFailed = exports.CustomerTransactionFetchFailed = exports.CustomerFilterFetchFailed = exports.CustomerFetchFailed = exports.VatReportFetchMetaFailed = exports.VatReportFetchFailed = exports.ReportsPaymentsMetaFailed = exports.ReportsPaymentsFetchAllFailed = exports.ReportsPaymentOptionsMetaFailed = exports.ReportsPaymentOptionsFetchAllFailed = exports.ReportsBalancesMetaFailed = exports.ReportsBalancesFetchOneFailed = exports.ReportsBalancesFetchAllFailed = void 0;
+exports.ReportsGastroReservationsMetaFailed = exports.ReportsGastroReservationsFetchAllFailed = exports.CustomersMetaFailed = exports.CustomerOverviewFetchFailed = exports.CustomerTransactionFetchFailed = exports.CustomerFilterFetchFailed = exports.CustomerFetchFailed = exports.VatReportFetchMetaFailed = exports.VatReportFetchFailed = exports.ReportsPaymentsMetaFailed = exports.ReportsPaymentsFetchAllFailed = exports.ReportsPaymentOptionsMetaFailed = exports.ReportsPaymentOptionsFetchAllFailed = exports.ReportsBalancesMetaFailed = exports.ReportsBalancesFetchOneFailed = exports.ReportsBalancesFetchAllFailed = void 0;
 var tslib_1 = require("tslib");
 var baseError_1 = require("./baseError");
 var ReportsBalancesFetchAllFailed = (function (_super) {
@@ -198,4 +198,17 @@ var ReportsGastroReservationsFetchAllFailed = (function (_super) {
     return ReportsGastroReservationsFetchAllFailed;
 }(baseError_1.BaseError));
 exports.ReportsGastroReservationsFetchAllFailed = ReportsGastroReservationsFetchAllFailed;
+var ReportsGastroReservationsMetaFailed = (function (_super) {
+    tslib_1.__extends(ReportsGastroReservationsMetaFailed, _super);
+    function ReportsGastroReservationsMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch gastro reservations report metadata'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ReportsGastroReservationsMetaFailed';
+        Object.setPrototypeOf(_this, ReportsGastroReservationsMetaFailed.prototype);
+        return _this;
+    }
+    return ReportsGastroReservationsMetaFailed;
+}(baseError_1.BaseError));
+exports.ReportsGastroReservationsMetaFailed = ReportsGastroReservationsMetaFailed;
 //# sourceMappingURL=analytics.js.map
