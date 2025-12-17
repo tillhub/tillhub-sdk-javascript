@@ -161,3 +161,14 @@ export class ReportsGastroReservationsFetchAllFailed extends BaseError {
     Object.setPrototypeOf(this, ReportsGastroReservationsFetchAllFailed.prototype)
   }
 }
+
+export class ReportsGastroReservationsMetaFailed extends BaseError {
+  public name = 'ReportsGastroReservationsMetaFailed'
+  constructor (
+    public message: string = 'Could not fetch gastro reservations report metadata',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, ReportsGastroReservationsMetaFailed.prototype)
+  }
+}

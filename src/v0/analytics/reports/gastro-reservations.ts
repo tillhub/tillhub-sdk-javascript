@@ -9,8 +9,15 @@ export interface AnalyticsOptions {
 
 export interface AnalyticsResponse {
   data: Array<Record<string, unknown>>
+  summary: Array<Record<string, unknown>>
   metadata: Record<string, unknown>
   msg?: string
+  next?: () => Promise<AnalyticsResponse>
+}
+
+export interface AnalyticsMetaResponse {
+  data: Array<Record<string, unknown>>
+  metadata: Record<string, unknown>
 }
 
 export enum ReservationStatus {
@@ -36,6 +43,7 @@ export interface GastroReservationsQuery {
   branchId?: string
   source?: ReservationStatus | ReservationSource[]
   layoutId?: string
+  uri?: string
 }
 
 export class GastroReservations {
@@ -54,19 +62,46 @@ export class GastroReservations {
   }
 
   async getAll (query?: GastroReservationsQuery): Promise<AnalyticsResponse> {
+    let next
+
     try {
       const base = this.uriHelper.generateBaseUri()
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri)
-      if (response.status !== 200) throw new errors.ReportsGastroReservationsFetchAllFailed()
+      if (response.status !== 200) {
+        throw new errors.ReportsGastroReservationsFetchAllFailed(undefined, { status: response.status })
+      }
+
+      if (response.data.cursors?.after) {
+        next = (): Promise<AnalyticsResponse> => this.getAll({ uri: response.data.cursors.after })
+      }
 
       return {
-        data: response.data.results,
+        data: response.data.results[0]?.values ?? [],
+        summary: [response.data.results[1]?.values ?? {}],
+        metadata: { cursor: response.data.cursors },
+        next
+      }
+    } catch (error: any) {
+      throw new errors.ReportsGastroReservationsFetchAllFailed(error.message, { error })
+    }
+  }
+
+  async meta (queryOrOptions?: GastroReservationsQuery | undefined): Promise<AnalyticsMetaResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/meta')
+      const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) { throw new errors.ReportsGastroReservationsMetaFailed(undefined, { status: response.status }) }
+      if (!response.data.results[0]) { throw new errors.ReportsGastroReservationsMetaFailed(undefined, { status: response.status }) }
+
+      return {
+        data: response.data.results[0],
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
-      throw new errors.ReportsGastroReservationsFetchAllFailed()
+      throw new errors.ReportsGastroReservationsMetaFailed(error.message, { error })
     }
   }
 }
