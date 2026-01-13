@@ -26,6 +26,7 @@ import { Devices } from './devices'
 import { Contents } from './contents'
 import { ContentTemplates } from './content-templates'
 import { Import } from './import'
+import { SuppliersProductsRelation } from './suppliers_products_relation'
 
 export {
   Auth,
@@ -56,7 +57,8 @@ export {
   Devices,
   Contents,
   ContentTemplates,
-  Import
+  Import,
+  SuppliersProductsRelation
 }
 
 export interface AnalyticsHandlersV1Types {
