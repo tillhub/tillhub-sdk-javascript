@@ -722,6 +722,10 @@ export class TillhubClient extends events.EventEmitter {
           AnalyticsReportsProcesses: new v1.analytics.reports.AnalyticsReportsProcesses(
             { user: this.auth.user, base: this.options.base, timeout: axiosOptions?.timeout },
             this.http
+          ),
+          AnalyticsReportsCommunications: new v1.analytics.reports.AnalyticsReportsCommunications(
+            { user: this.auth.user, base: this.options.base },
+            this.http
           )
         }
       }
