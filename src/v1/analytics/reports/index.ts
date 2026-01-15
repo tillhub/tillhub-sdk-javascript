@@ -8,6 +8,7 @@ import { AnalyticsReportsPaymentOptions } from './payment_options'
 import { AnalyticsReportsStockTakings } from './stock_takings'
 import { AnalyticsReportsProcesses } from './processes'
 import { AnalyticsReportsInventory } from './inventory'
+import { AnalyticsReportsCommunications } from './communications'
 
 export default {
   AnalyticsReportsCustomers,
@@ -19,5 +20,6 @@ export default {
   AnalyticsReportsPaymentOptions,
   AnalyticsReportsStockTakings,
   AnalyticsReportsProcesses,
-  AnalyticsReportsInventory
+  AnalyticsReportsInventory,
+  AnalyticsReportsCommunications
 }
