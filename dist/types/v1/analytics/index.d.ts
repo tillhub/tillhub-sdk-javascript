@@ -10,6 +10,7 @@ declare const _default: {
         AnalyticsReportsStockTakings: typeof import("./reports/stock_takings").AnalyticsReportsStockTakings;
         AnalyticsReportsProcesses: typeof import("./reports/processes").AnalyticsReportsProcesses;
         AnalyticsReportsInventory: typeof import("./reports/inventory").AnalyticsReportsInventory;
+        AnalyticsReportsCommunications: typeof import("./reports/communications").AnalyticsReportsCommunications;
     };
 };
 export default _default;

@@ -10,6 +10,7 @@ var payment_options_1 = require("./payment_options");
 var stock_takings_1 = require("./stock_takings");
 var processes_1 = require("./processes");
 var inventory_1 = require("./inventory");
+var communications_1 = require("./communications");
 exports.default = {
     AnalyticsReportsCustomers: customers_1.AnalyticsReportsCustomers,
     AnalyticsReportsPayments: payments_1.AnalyticsReportsPayments,
@@ -20,6 +21,7 @@ exports.default = {
     AnalyticsReportsPaymentOptions: payment_options_1.AnalyticsReportsPaymentOptions,
     AnalyticsReportsStockTakings: stock_takings_1.AnalyticsReportsStockTakings,
     AnalyticsReportsProcesses: processes_1.AnalyticsReportsProcesses,
-    AnalyticsReportsInventory: inventory_1.AnalyticsReportsInventory
+    AnalyticsReportsInventory: inventory_1.AnalyticsReportsInventory,
+    AnalyticsReportsCommunications: communications_1.AnalyticsReportsCommunications
 };
 //# sourceMappingURL=index.js.map

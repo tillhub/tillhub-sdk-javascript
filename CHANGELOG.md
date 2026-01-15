@@ -1,3 +1,10 @@
+# [4.243.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.242.0...v4.243.0) (2026-01-15)
+
+
+### Features
+
+* **analytics:** add endpoint to fetch communications statistics ([#698](https://github.com/tillhub/tillhub-sdk-javascript/issues/698)) ([2b37741](https://github.com/tillhub/tillhub-sdk-javascript/commit/2b377416bc6288465a4f160da0838ace85dc6626))
+
 # [4.242.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.241.0...v4.242.0) (2025-12-17)
 
 

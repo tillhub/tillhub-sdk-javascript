@@ -324,7 +324,8 @@ var TillhubClient = (function (_super) {
                     AnalyticsReportsProductGroups: new v1.analytics.reports.AnalyticsReportsProductGroups({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
                     AnalyticsReportsPaymentOptions: new v1.analytics.reports.AnalyticsReportsPaymentOptions({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
                     AnalyticsReportsStockTakings: new v1.analytics.reports.AnalyticsReportsStockTakings({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
-                    AnalyticsReportsProcesses: new v1.analytics.reports.AnalyticsReportsProcesses({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http)
+                    AnalyticsReportsProcesses: new v1.analytics.reports.AnalyticsReportsProcesses({ user: this.auth.user, base: this.options.base, timeout: axiosOptions === null || axiosOptions === void 0 ? void 0 : axiosOptions.timeout }, this.http),
+                    AnalyticsReportsCommunications: new v1.analytics.reports.AnalyticsReportsCommunications({ user: this.auth.user, base: this.options.base }, this.http)
                 }
             }
         };
