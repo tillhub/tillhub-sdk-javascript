@@ -1,7 +1,8 @@
 import * as dotenv from 'dotenv'
 import axios from 'axios'
+import faker from '@faker-js/faker'
 import MockAdapter from 'axios-mock-adapter'
-import { TillhubClient, v0 } from '../../src/tillhub-js'
+import th, { TillhubClient, v1 } from '../../src/tillhub-js'
 dotenv.config()
 
 const user = {
@@ -18,17 +19,18 @@ if (process.env.SYSTEM_TEST) {
   user.apiKey = process.env.SYSTEM_TEST_API_KEY ?? user.apiKey
 }
 
+const businessPartnerId = faker.datatype.uuid()
+const productId = faker.datatype.uuid()
+const respMsg = 'Deleted supplier and product relation'
 const legacyId = '4564'
-
-const queryString = 'legacy=true&type=sale&branch_custom_id=192837'
-
 const mock = new MockAdapter(axios)
+
 afterEach(() => {
   mock.reset()
 })
 
-describe('v0: UodInvoices: can get meta', () => {
-  it("Tillhub's uod invoices are instantiable", async () => {
+describe('v1: SuppliersProductsRelation: can bulk delete supplier to product relation', () => {
+  it('can bulk delete', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
@@ -44,12 +46,15 @@ describe('v0: UodInvoices: can get meta', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/document/unzer-one-invoices/${legacyId}/meta?${queryString}`)
+        .onDelete(`https://api.tillhub.com/api/v1/business-partner-products/${legacyId}/bulk`)
         .reply(() => {
           return [
             200,
             {
-              results: [{ count: 50 }]
+              results: [{
+                deleted: true
+              }],
+              msg: respMsg
             }
           ]
         })
@@ -63,44 +68,51 @@ describe('v0: UodInvoices: can get meta', () => {
       base: process.env.TILLHUB_BASE
     }
 
-    const th = new TillhubClient()
-
     th.init(options)
     await th.auth.loginUsername({
       username: user.username,
       password: user.password
     })
 
-    const uodInvoices = th.uodInvoices()
+    const suppliersProductsRelation = th.suppliersProductsRelationV1()
 
-    expect(uodInvoices).toBeInstanceOf(v0.UodInvoices)
+    expect(suppliersProductsRelation).toBeInstanceOf(v1.SuppliersProductsRelation)
 
-    try {
-      const { data } = await uodInvoices.meta()
-      expect(data).toEqual({ count: 50 })
-    } catch (err: any) {
-      expect(err.name).toBe('UodInvoicesGetMetaFailed')
-    }
+    const { data, msg } = await suppliersProductsRelation.bulkDelete({
+      items: [
+        {
+          businessPartnerId,
+          productId: [productId]
+        }
+      ]
+    })
+
+    expect(data).toMatchObject({
+      deleted: true
+    })
+    expect(msg).toEqual(respMsg)
   })
 
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
-      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
-        return [
-          200,
-          {
-            token: '',
-            user: {
-              id: '123',
-              legacy_id: legacyId
-            }
-          }
-        ]
-      })
       mock
-        .onGet(`https://api.tillhub.com/api/v2/orders/${legacyId}/meta?${queryString}`)
+        .onPost('https://api.tillhub.com/api/v0/users/login')
         .reply(() => {
-          return [400]
+          return [
+            200,
+            {
+              token: '',
+              user: {
+                id: '123',
+                legacy_id: legacyId
+              }
+            }
+          ]
+        })
+
+        .onDelete(`https://api.tillhub.com/api/v1/business-partner-products/${legacyId}/bulk`)
+        .reply(() => {
+          return [500]
         })
     }
 
@@ -121,9 +133,16 @@ describe('v0: UodInvoices: can get meta', () => {
     })
 
     try {
-      await th.uodInvoices().meta()
+      await th.suppliersProductsRelationV1().bulkDelete({
+        items: [
+          {
+            businessPartnerId,
+            productId: [productId]
+          }
+        ]
+      })
     } catch (err: any) {
-      expect(err.name).toBe('UodInvoicesGetMetaFailed')
+      expect(err.name).toBe('SuppliersProductsRelationBulkDeleteFailed')
     }
   })
 })
