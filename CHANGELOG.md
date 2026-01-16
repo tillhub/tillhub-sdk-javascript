@@ -1,3 +1,10 @@
+# [4.244.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.243.0...v4.244.0) (2026-01-16)
+
+
+### Features
+
+* **products:** create new v1 supplier-products-relation endpoint handler (UNTIL-16861) ([#697](https://github.com/tillhub/tillhub-sdk-javascript/issues/697)) ([6a12a43](https://github.com/tillhub/tillhub-sdk-javascript/commit/6a12a43b62f11d656f7431671ca1f2f7da5944c6))
+
 # [4.243.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.242.0...v4.243.0) (2026-01-15)
 
 

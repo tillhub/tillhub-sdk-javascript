@@ -236,6 +236,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.suppliersProductsRelation = function () {
         return this.generateAuthenticatedInstance(v0.SuppliersProductsRelation);
     };
+    TillhubClient.prototype.suppliersProductsRelationV1 = function () {
+        return this.generateAuthenticatedInstance(v1.SuppliersProductsRelation);
+    };
     TillhubClient.prototype.vouchers = function () {
         return this.generateAuthenticatedInstance(v1.Vouchers);
     };
