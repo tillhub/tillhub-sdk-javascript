@@ -98,6 +98,55 @@ describe('v0: vouchers: can patch one', () => {
     expect((data as any).id).toBe(voucherId)
   })
 
+  it('returns source data without API call when no changes', async () => {
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+
+      // No mock for PATCH - if it's called, the test will fail
+    }
+
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE
+    }
+
+    const th = new TillhubClient()
+
+    th.init(options)
+    await th.auth.loginUsername({
+      username: user.username,
+      password: user.password
+    })
+
+    const unchangedVoucher = {
+      id: voucherId,
+      amount: 9.99
+    }
+
+    const { data, metadata } = await th.vouchers().patch(unchangedVoucher as any, unchangedVoucher as any)
+
+    if (!metadata) throw new Error('metadata must be defined')
+
+    expect(metadata.patch).toEqual([])
+    expect(metadata.count).toBe(1)
+    expect((data as any).id).toBe(voucherId)
+    expect((data as any).amount).toBe(9.99)
+  })
+
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {

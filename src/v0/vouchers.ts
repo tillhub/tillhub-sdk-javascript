@@ -277,6 +277,14 @@ export class Vouchers extends ThBaseHandler {
     try {
       const patch = diff(source, target, jsonPatchPathConverter)
 
+      // If no changes, return early without calling the API
+      if (patch.length === 0) {
+        return {
+          data: source,
+          metadata: { count: 1, patch }
+        }
+      }
+
       const response = await this.http.getClient()({
         method: 'PATCH',
         url: uri,
