@@ -241,6 +241,12 @@ var Vouchers = (function (_super) {
                     case 1:
                         _a.trys.push([1, 3, , 4]);
                         patch = just_diff_1.diff(source, target, just_diff_1.jsonPatchPathConverter);
+                        if (patch.length === 0) {
+                            return [2, {
+                                    data: source,
+                                    metadata: { count: 1, patch: patch }
+                                }];
+                        }
                         return [4, this.http.getClient()({
                                 method: 'PATCH',
                                 url: uri,

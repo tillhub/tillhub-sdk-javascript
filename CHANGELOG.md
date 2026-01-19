@@ -1,3 +1,10 @@
+# [4.245.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.244.0...v4.245.0) (2026-01-19)
+
+
+### Features
+
+* **vouchers:** add early return for no changes in patch operation (UNTIL-18152) ([#699](https://github.com/tillhub/tillhub-sdk-javascript/issues/699)) ([2223731](https://github.com/tillhub/tillhub-sdk-javascript/commit/2223731a9a7e3ffe297ab8df3e5c2aa08409f740))
+
 # [4.244.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.243.0...v4.244.0) (2026-01-16)
 
 
