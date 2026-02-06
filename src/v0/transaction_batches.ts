@@ -16,7 +16,7 @@ export enum FileStatus {
 export interface FileBatch {
   id: number
   inputFileName: string
-  inputFileFormat: string
+  inputFileFormat: 'csv'
   uploadedOn: string
   inputFileSize: number
   state: FileStatus
