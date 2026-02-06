@@ -1274,6 +1274,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated TransactionBatches instance
+   *
+   */
+  transactionBatches (): v0.TransactionBatches {
+    return this.generateAuthenticatedInstance(v0.TransactionBatches)
+  }
+
+  /**
    * Create an authenticated Reasons instance
    *
    */

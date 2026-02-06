@@ -92,6 +92,7 @@ import { UodInvoices } from './invoices_uod'
 import { Submissions } from './submissions'
 import { PaymentLinks } from './payment_links'
 import { Email } from './email'
+import { TransactionBatches } from './transaction_batches'
 
 export {
   Auth,
@@ -190,5 +191,6 @@ export {
   UodInvoices,
   Submissions,
   PaymentLinks,
-  Email
+  Email,
+  TransactionBatches
 }
