@@ -1,3 +1,15 @@
+# [4.246.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.245.0...v4.246.0) (2026-02-06)
+
+
+### Bug Fixes
+
+* **transaction_batches:** restrict inputFileFormat to 'csv' - UOD-2848 ([71b5122](https://github.com/tillhub/tillhub-sdk-javascript/commit/71b51226f16670c6e46b5c767c35a9d1f00771b4))
+
+
+### Features
+
+* **transaction_batches:** add endpoints - UOD-2848 ([3870d04](https://github.com/tillhub/tillhub-sdk-javascript/commit/3870d041b78a1f98576edb8d01665c5f9a17a26e))
+
 # [4.245.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.244.0...v4.245.0) (2026-01-19)
 
 

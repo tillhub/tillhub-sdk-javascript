@@ -565,6 +565,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.data = function () {
         return this.generateAuthenticatedInstance(v0.Data);
     };
+    TillhubClient.prototype.transactionBatches = function () {
+        return this.generateAuthenticatedInstance(v0.TransactionBatches);
+    };
     TillhubClient.prototype.reasons = function () {
         return this.generateAuthenticatedInstance(v0.Reasons);
     };
