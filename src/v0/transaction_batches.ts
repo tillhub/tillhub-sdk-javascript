@@ -2,8 +2,6 @@ import { Client } from '../client'
 import { BaseError } from '../errors/baseError'
 import { UriHelper } from '../uri-helper'
 
-export type TransactionBatchUploadSource = 'UOD'
-
 export enum FileStatus {
   UPLOADING = 'UPLOADING',
   UPLOADED = 'UPLOADED',
@@ -44,9 +42,6 @@ export interface TransactionBatchesQueryHandler {
 
 export interface FileUploadPayload {
   publicKey: string
-  unzerId: string
-  createdBy: string
-  source: TransactionBatchUploadSource
   file: File
 }
 
@@ -187,9 +182,6 @@ export class TransactionBatches {
   async upload (payload: FileUploadPayload): Promise<TransactionBatchUploadResponse> {
     const formData = new FormData()
     formData.append('publicKey', payload.publicKey)
-    formData.append('unzerId', payload.unzerId)
-    formData.append('createdBy', payload.createdBy)
-    formData.append('source', payload.source)
     formData.append('file', payload.file)
 
     const uri = this.uriHelper.generateBaseUri('/upload')

@@ -52,9 +52,6 @@ describe('v0: TransactionBatches: can upload', () => {
         : (new Blob(['content'], { type: 'text/csv' }) as File)
     const payload = {
       publicKey: 'pk-test',
-      unzerId: 'unzer-123',
-      createdBy: 'user@example.com',
-      source: 'UOD' as const,
       file
     }
 
@@ -96,9 +93,6 @@ describe('v0: TransactionBatches: can upload', () => {
         : (new Blob(['content'], { type: 'text/csv' }) as File)
     const payload = {
       publicKey: 'pk-test',
-      unzerId: 'unzer-123',
-      createdBy: 'user@example.com',
-      source: 'UOD' as const,
       file
     }
 
