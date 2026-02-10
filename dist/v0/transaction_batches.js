@@ -153,9 +153,6 @@ var TransactionBatches = (function () {
                     case 0:
                         formData = new FormData();
                         formData.append('publicKey', payload.publicKey);
-                        formData.append('unzerId', payload.unzerId);
-                        formData.append('createdBy', payload.createdBy);
-                        formData.append('source', payload.source);
                         formData.append('file', payload.file);
                         uri = this.uriHelper.generateBaseUri('/upload');
                         _f.label = 1;

@@ -1,3 +1,10 @@
+# [4.247.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.246.0...v4.247.0) (2026-02-10)
+
+
+### Features
+
+* **batches:** clean upload payload - UOD-2697 ([f944f68](https://github.com/tillhub/tillhub-sdk-javascript/commit/f944f689989fdce45a15896b56fb02841d2b03f8))
+
 # [4.246.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.245.0...v4.246.0) (2026-02-06)
 
 

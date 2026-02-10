@@ -1,7 +1,6 @@
 import { Client } from '../client';
 import { BaseError } from '../errors/baseError';
 import { UriHelper } from '../uri-helper';
-export declare type TransactionBatchUploadSource = 'UOD';
 export declare enum FileStatus {
     UPLOADING = "UPLOADING",
     UPLOADED = "UPLOADED",
@@ -37,9 +36,6 @@ export interface TransactionBatchesQueryHandler {
 }
 export interface FileUploadPayload {
     publicKey: string;
-    unzerId: string;
-    createdBy: string;
-    source: TransactionBatchUploadSource;
     file: File;
 }
 export interface TransactionBatchesOptions {
