@@ -137,9 +137,9 @@ export class TransactionBatches {
    * Download the processed batch file.
    * GET /api/v0/transaction-batches/:id/download
    */
-  async download (id: string | number): Promise<Blob> {
+  async download (id: string | number, fileName: string): Promise<Blob> {
     const base = this.uriHelper.generateBaseUri(`/${id}/download`)
-    const uri = this.uriHelper.generateUriWithQuery(base)
+    const uri = this.uriHelper.generateUriWithQuery(base, { query: { fileName } })
 
     try {
       const response = await this.http.getClient().get(uri, {
@@ -158,9 +158,9 @@ export class TransactionBatches {
    * Download the originally uploaded file (before processing).
    * GET /api/v0/transaction-batches/:id/download-input
    */
-  async downloadInput (id: string | number): Promise<Blob> {
+  async downloadInput (id: string | number, inputFileName: string): Promise<Blob> {
     const base = this.uriHelper.generateBaseUri(`/${id}/download-input`)
-    const uri = this.uriHelper.generateUriWithQuery(base)
+    const uri = this.uriHelper.generateUriWithQuery(base, { query: { inputFileName } })
 
     try {
       const response = await this.http.getClient().get(uri, {

@@ -14,6 +14,7 @@ afterEach(() => {
 })
 
 const blobContent = 'original-input-file-content'
+const inputFileName = 'input.csv'
 
 describe('v0: TransactionBatches: can download input file', () => {
   it("Tillhub's transaction batches downloadInput returns blob", async () => {
@@ -33,7 +34,9 @@ describe('v0: TransactionBatches: can download input file', () => {
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v0/transaction-batches/${legacyId}/${batchId}/download-input`
+          new RegExp(
+            `https://api\\.tillhub\\.com/api/v0/transaction-batches/${legacyId}/${batchId}/download-input\\?.*inputFileName=`
+          )
         )
         .reply((config) => {
           if (config.responseType === 'blob') {
@@ -48,7 +51,7 @@ describe('v0: TransactionBatches: can download input file', () => {
 
     expect(transactionBatches).toBeInstanceOf(v0.TransactionBatches)
 
-    const result = await transactionBatches.downloadInput(batchId)
+    const result = await transactionBatches.downloadInput(batchId, inputFileName)
 
     expect(result).toBeDefined()
     if (process.env.SYSTEM_TEST !== 'true') {
@@ -73,7 +76,9 @@ describe('v0: TransactionBatches: can download input file', () => {
 
       mock
         .onGet(
-          `https://api.tillhub.com/api/v0/transaction-batches/${legacyId}/${batchId}/download-input`
+          new RegExp(
+            `https://api\\.tillhub\\.com/api/v0/transaction-batches/${legacyId}/${batchId}/download-input\\?.*inputFileName=`
+          )
         )
         .reply(() => {
           return [404]
@@ -82,7 +87,7 @@ describe('v0: TransactionBatches: can download input file', () => {
 
     try {
       const th = await initThInstance()
-      await th.transactionBatches().downloadInput(batchId)
+      await th.transactionBatches().downloadInput(batchId, inputFileName)
     } catch (err: any) {
       expect(err.name).toBe('TransactionBatchDownloadInputFailed')
     }
