@@ -63,8 +63,8 @@ export declare class TransactionBatches {
     constructor(options: TransactionBatchesOptions, http: Client);
     getAll(query?: TransactionBatchesQueryHandler | undefined): Promise<TransactionBatchesListResponse>;
     meta(query?: TransactionBatchesQueryHandler | undefined): Promise<TransactionBatchesMetaData>;
-    download(id: string | number): Promise<Blob>;
-    downloadInput(id: string | number): Promise<Blob>;
+    download(id: string | number, fileName: string): Promise<Blob>;
+    downloadInput(id: string | number, inputFileName: string): Promise<Blob>;
     upload(payload: FileUploadPayload): Promise<TransactionBatchUploadResponse>;
 }
 export declare class TransactionBatchUploadFailed extends BaseError {

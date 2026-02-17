@@ -1,3 +1,10 @@
+# [4.248.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.247.0...v4.248.0) (2026-02-17)
+
+
+### Features
+
+* **batch:** fix download and downloadInput - UOD-2697 ([3148bf9](https://github.com/tillhub/tillhub-sdk-javascript/commit/3148bf9a59907ddff211f5fcb744004e9dedee62))
+
 # [4.247.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.246.0...v4.247.0) (2026-02-10)
 
 

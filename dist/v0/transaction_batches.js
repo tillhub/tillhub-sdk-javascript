@@ -88,14 +88,14 @@ var TransactionBatches = (function () {
             });
         });
     };
-    TransactionBatches.prototype.download = function (id) {
+    TransactionBatches.prototype.download = function (id, fileName) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         base = this.uriHelper.generateBaseUri("/" + id + "/download");
-                        uri = this.uriHelper.generateUriWithQuery(base);
+                        uri = this.uriHelper.generateUriWithQuery(base, { query: { fileName: fileName } });
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -116,14 +116,14 @@ var TransactionBatches = (function () {
             });
         });
     };
-    TransactionBatches.prototype.downloadInput = function (id) {
+    TransactionBatches.prototype.downloadInput = function (id, inputFileName) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         base = this.uriHelper.generateBaseUri("/" + id + "/download-input");
-                        uri = this.uriHelper.generateUriWithQuery(base);
+                        uri = this.uriHelper.generateUriWithQuery(base, { query: { inputFileName: inputFileName } });
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
