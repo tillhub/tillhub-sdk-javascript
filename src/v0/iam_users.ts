@@ -196,6 +196,21 @@ export class IamUsers extends ThBaseHandler {
       throw new IamUserDeleteFailed(error.message, { error })
     }
   }
+
+  async reset2fa (iamUserId: string): Promise<void> {
+    const base = this.uriHelper.generateBaseUri(`/${iamUserId}/reset-2fa`)
+    const uri = this.uriHelper.generateUriWithQuery(base)
+
+    try {
+      const response = await this.http.getClient().post(uri)
+
+      if (response.status !== 200) {
+        throw new IamUserReset2faFailed(undefined, { status: response.status })
+      }
+    } catch (error: any) {
+      throw new IamUserReset2faFailed(error.message, { error })
+    }
+  }
 }
 
 export class IamUsersFetchFailed extends BaseError {
@@ -261,5 +276,16 @@ export class IamUserDeleteFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, IamUserDeleteFailed.prototype)
+  }
+}
+
+export class IamUserReset2faFailed extends BaseError {
+  public name = 'IamUserReset2faFailed'
+  constructor (
+    public message: string = 'Could not reset 2FA for iam user',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, IamUserReset2faFailed.prototype)
   }
 }
