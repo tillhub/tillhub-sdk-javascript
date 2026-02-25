@@ -1,3 +1,10 @@
+# [4.250.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.249.0...v4.250.0) (2026-02-25)
+
+
+### Bug Fixes
+
+* **invoices:** increase timeout for document download to 60 seconds - UOD-2923 ([#704](https://github.com/tillhub/tillhub-sdk-javascript/issues/704)) ([95e2f60](https://github.com/tillhub/tillhub-sdk-javascript/commit/95e2f6024606be8546b9644c22bf805c2a66a6c2))
+
 # [4.249.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.248.0...v4.249.0) (2026-02-25)
 
 

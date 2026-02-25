@@ -94,7 +94,8 @@ var UodInvoices = (function (_super) {
                         _a.trys.push([0, 2, , 3]);
                         uri = this.uriHelper.generateBaseUri("/download/" + documentId + "/type/" + type);
                         return [4, this.http.getClient().get(uri, {
-                                responseType: 'arraybuffer'
+                                responseType: 'arraybuffer',
+                                timeout: 60000
                             })];
                     case 1:
                         response = _a.sent();
