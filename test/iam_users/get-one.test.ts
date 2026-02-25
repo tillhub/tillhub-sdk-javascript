@@ -71,6 +71,70 @@ describe('v0: IamUser: can get one user', () => {
     expect(data).toEqual({ id: iamUserId })
   })
 
+  it('can get user with requiredActions field', async () => {
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+
+      mock.onGet(`https://api.tillhub.com/api/v0/iam/users/${legacyId}/${iamUserId}`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            results: [
+              {
+                id: iamUserId,
+                email: 'test@example.com',
+                firstName: 'Test',
+                lastName: 'User',
+                requiredActions: ['CONFIGURE_TOTP', 'UPDATE_PASSWORD']
+              }
+            ]
+          }
+        ]
+      })
+    }
+
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE
+    }
+
+    const th = new TillhubClient()
+
+    th.init(options)
+    await th.auth.loginUsername({
+      username: user.username,
+      password: user.password
+    })
+
+    const iamUsers = th.iamUsers()
+
+    const { data } = await iamUsers.get(iamUserId)
+
+    expect(data).toEqual({
+      id: iamUserId,
+      email: 'test@example.com',
+      firstName: 'Test',
+      lastName: 'User',
+      requiredActions: ['CONFIGURE_TOTP', 'UPDATE_PASSWORD']
+    })
+    expect(data.requiredActions).toContain('CONFIGURE_TOTP')
+  })
+
   it('rejects on status codes that are not 200', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
