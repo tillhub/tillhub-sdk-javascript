@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.IamUserDeleteFailed = exports.IamUserCreationFailed = exports.IamUserPutFailed = exports.IamUserFetchFailed = exports.IamUsersMetaFailed = exports.IamUsersFetchFailed = exports.IamUsers = void 0;
+exports.IamUserReset2faFailed = exports.IamUserDeleteFailed = exports.IamUserCreationFailed = exports.IamUserPutFailed = exports.IamUserFetchFailed = exports.IamUsersMetaFailed = exports.IamUsersFetchFailed = exports.IamUsers = void 0;
 var tslib_1 = require("tslib");
 var baseError_1 = require("../errors/baseError");
 var uri_helper_1 = require("../uri-helper");
@@ -198,6 +198,32 @@ var IamUsers = (function (_super) {
             });
         });
     };
+    IamUsers.prototype.reset2fa = function (iamUserId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_7;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        base = this.uriHelper.generateBaseUri("/" + iamUserId + "/reset-2fa");
+                        uri = this.uriHelper.generateUriWithQuery(base);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().post(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new IamUserReset2faFailed(undefined, { status: response.status });
+                        }
+                        return [3, 4];
+                    case 3:
+                        error_7 = _a.sent();
+                        throw new IamUserReset2faFailed(error_7.message, { error: error_7 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     IamUsers.baseEndpoint = '/api/v0/iam/users';
     return IamUsers;
 }(base_1.ThBaseHandler));
@@ -280,4 +306,17 @@ var IamUserDeleteFailed = (function (_super) {
     return IamUserDeleteFailed;
 }(baseError_1.BaseError));
 exports.IamUserDeleteFailed = IamUserDeleteFailed;
+var IamUserReset2faFailed = (function (_super) {
+    tslib_1.__extends(IamUserReset2faFailed, _super);
+    function IamUserReset2faFailed(message, properties) {
+        if (message === void 0) { message = 'Could not reset 2FA for iam user'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'IamUserReset2faFailed';
+        Object.setPrototypeOf(_this, IamUserReset2faFailed.prototype);
+        return _this;
+    }
+    return IamUserReset2faFailed;
+}(baseError_1.BaseError));
+exports.IamUserReset2faFailed = IamUserReset2faFailed;
 //# sourceMappingURL=iam_users.js.map

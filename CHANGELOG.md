@@ -1,3 +1,10 @@
+# [4.249.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.248.0...v4.249.0) (2026-02-25)
+
+
+### Features
+
+* **2FA:** add reset 2FA functionality and error handling - UOD-2975 ([#703](https://github.com/tillhub/tillhub-sdk-javascript/issues/703)) ([6c24831](https://github.com/tillhub/tillhub-sdk-javascript/commit/6c24831ecaf341d0dd79d08de4525e6ffa98b005))
+
 # [4.248.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.247.0...v4.248.0) (2026-02-17)
 
 
