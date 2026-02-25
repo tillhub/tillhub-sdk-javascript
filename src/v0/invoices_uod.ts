@@ -136,7 +136,8 @@ export class UodInvoices extends ThBaseHandler {
       const uri = this.uriHelper.generateBaseUri(`/download/${documentId}/type/${type}`)
 
       const response = await this.http.getClient().get(uri, {
-        responseType: 'arraybuffer'
+        responseType: 'arraybuffer',
+        timeout: 60000
       })
 
       if (response.status !== 200) {
