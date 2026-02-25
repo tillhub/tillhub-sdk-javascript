@@ -1,3 +1,10 @@
+# [4.251.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.250.0...v4.251.0) (2026-02-25)
+
+
+### Features
+
+* **UOD-2975:** Add requiredActions field to IamUser interface - UOD-2975 ([#705](https://github.com/tillhub/tillhub-sdk-javascript/issues/705)) ([f7bde0e](https://github.com/tillhub/tillhub-sdk-javascript/commit/f7bde0ee5475853eebfa362a2e5e4dc96d422cf1))
+
 # [4.250.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.249.0...v4.250.0) (2026-02-25)
 
 
