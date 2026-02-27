@@ -42,7 +42,7 @@ export interface IamUser {
   lastName?: string
   attributes?: Record<string, unknown>
   groups?: string[]
-  requiredActions?: string[]
+  has2faConfigured?: boolean
 }
 
 export interface IamUsersQueryHandler {
