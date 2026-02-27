@@ -31,7 +31,18 @@ describe('v0: IamUsers: can reset 2FA for one user', () => {
       })
 
       mock.onPost(`https://api.tillhub.com/api/v0/iam/users/${legacyId}/${iamUserId}/reset-2fa`).reply(() => {
-        return [200, {}]
+        return [200, {
+          results: [{
+            id: iamUserId,
+            firstName: 'Test',
+            lastName: 'User',
+            email: 'test@example.com',
+            username: 'test@example.com',
+            has2faConfigured: false
+          }],
+          msg: '2FA reset successfully',
+          count: 1
+        }]
       })
     }
 
