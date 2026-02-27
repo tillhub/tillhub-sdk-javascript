@@ -1,3 +1,10 @@
+# [4.252.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.251.0...v4.252.0) (2026-02-27)
+
+
+### Features
+
+* **2FA:** replace vairable to check totp status - UOD-2975 ([#706](https://github.com/tillhub/tillhub-sdk-javascript/issues/706)) ([aeb111b](https://github.com/tillhub/tillhub-sdk-javascript/commit/aeb111b2a1f227a95cd7c0f29f433ed3cce56db9))
+
 # [4.251.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.250.0...v4.251.0) (2026-02-25)
 
 
