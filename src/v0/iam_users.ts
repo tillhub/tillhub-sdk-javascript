@@ -198,7 +198,7 @@ export class IamUsers extends ThBaseHandler {
     }
   }
 
-  async reset2fa (iamUserId: string): Promise<void> {
+  async reset2fa (iamUserId: string): Promise<IamUserResponse> {
     const base = this.uriHelper.generateBaseUri(`/${iamUserId}/reset-2fa`)
     const uri = this.uriHelper.generateUriWithQuery(base)
 
@@ -207,6 +207,11 @@ export class IamUsers extends ThBaseHandler {
 
       if (response.status !== 200) {
         throw new IamUserReset2faFailed(undefined, { status: response.status })
+      }
+      return {
+        data: response.data.results[0] as IamUser,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
       }
     } catch (error: any) {
       throw new IamUserReset2faFailed(error.message, { error })
