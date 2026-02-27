@@ -71,7 +71,7 @@ describe('v0: IamUser: can get one user', () => {
     expect(data).toEqual({ id: iamUserId })
   })
 
-  it('can get user with requiredActions field', async () => {
+  it('can get user with has2faConfigured field', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
@@ -97,7 +97,7 @@ describe('v0: IamUser: can get one user', () => {
                 email: 'test@example.com',
                 firstName: 'Test',
                 lastName: 'User',
-                requiredActions: ['CONFIGURE_TOTP', 'UPDATE_PASSWORD']
+                has2faConfigured: true
               }
             ]
           }
@@ -130,9 +130,9 @@ describe('v0: IamUser: can get one user', () => {
       email: 'test@example.com',
       firstName: 'Test',
       lastName: 'User',
-      requiredActions: ['CONFIGURE_TOTP', 'UPDATE_PASSWORD']
+      has2faConfigured: true
     })
-    expect(data.requiredActions).toContain('CONFIGURE_TOTP')
+    expect(data.has2faConfigured).toBe(true)
   })
 
   it('rejects on status codes that are not 200', async () => {
