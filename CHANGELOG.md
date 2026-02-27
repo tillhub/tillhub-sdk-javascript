@@ -1,3 +1,10 @@
+# [4.253.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.252.0...v4.253.0) (2026-02-27)
+
+
+### Bug Fixes
+
+* **2FA:** test error - UOD-2975 ([#708](https://github.com/tillhub/tillhub-sdk-javascript/issues/708)) ([281cd05](https://github.com/tillhub/tillhub-sdk-javascript/commit/281cd0541eb71de51e79365972b845fd15f6c8d5))
+
 # [4.252.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.251.0...v4.252.0) (2026-02-27)
 
 
