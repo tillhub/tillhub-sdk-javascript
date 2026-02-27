@@ -215,7 +215,11 @@ var IamUsers = (function (_super) {
                         if (response.status !== 200) {
                             throw new IamUserReset2faFailed(undefined, { status: response.status });
                         }
-                        return [3, 4];
+                        return [2, {
+                                data: response.data.results[0],
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            }];
                     case 3:
                         error_7 = _a.sent();
                         throw new IamUserReset2faFailed(error_7.message, { error: error_7 });
