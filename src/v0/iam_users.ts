@@ -217,6 +217,26 @@ export class IamUsers extends ThBaseHandler {
       throw new IamUserReset2faFailed(error.message, { error })
     }
   }
+
+  async sendBackupCodesRegenerationEmail (iamUserId: string): Promise<IamUserResponse> {
+    const base = this.uriHelper.generateBaseUri(`/${iamUserId}/send-backup-codes-regeneration-email`)
+    const uri = this.uriHelper.generateUriWithQuery(base)
+
+    try {
+      const response = await this.http.getClient().post(uri)
+
+      if (response.status !== 200) {
+        throw new IamUserRegenerateBackupCodesFailed(undefined, { status: response.status })
+      }
+      return {
+        data: response.data.results[0] as IamUser,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new IamUserRegenerateBackupCodesFailed(error.message, { error })
+    }
+  }
 }
 
 export class IamUsersFetchFailed extends BaseError {
@@ -293,5 +313,16 @@ export class IamUserReset2faFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, IamUserReset2faFailed.prototype)
+  }
+}
+
+export class IamUserRegenerateBackupCodesFailed extends BaseError {
+  public name = 'IamUserRegenerateBackupCodesFailed'
+  constructor (
+    public message: string = 'Could not regenerate backup codes for iam user',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, IamUserRegenerateBackupCodesFailed.prototype)
   }
 }

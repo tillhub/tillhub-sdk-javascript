@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.IamUserReset2faFailed = exports.IamUserDeleteFailed = exports.IamUserCreationFailed = exports.IamUserPutFailed = exports.IamUserFetchFailed = exports.IamUsersMetaFailed = exports.IamUsersFetchFailed = exports.IamUsers = void 0;
+exports.IamUserRegenerateBackupCodesFailed = exports.IamUserReset2faFailed = exports.IamUserDeleteFailed = exports.IamUserCreationFailed = exports.IamUserPutFailed = exports.IamUserFetchFailed = exports.IamUsersMetaFailed = exports.IamUsersFetchFailed = exports.IamUsers = void 0;
 var tslib_1 = require("tslib");
 var baseError_1 = require("../errors/baseError");
 var uri_helper_1 = require("../uri-helper");
@@ -228,6 +228,36 @@ var IamUsers = (function (_super) {
             });
         });
     };
+    IamUsers.prototype.sendBackupCodesRegenerationEmail = function (iamUserId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_8;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        base = this.uriHelper.generateBaseUri("/" + iamUserId + "/send-backup-codes-regeneration-email");
+                        uri = this.uriHelper.generateUriWithQuery(base);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().post(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new IamUserRegenerateBackupCodesFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results[0],
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            }];
+                    case 3:
+                        error_8 = _a.sent();
+                        throw new IamUserRegenerateBackupCodesFailed(error_8.message, { error: error_8 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     IamUsers.baseEndpoint = '/api/v0/iam/users';
     return IamUsers;
 }(base_1.ThBaseHandler));
@@ -323,4 +353,17 @@ var IamUserReset2faFailed = (function (_super) {
     return IamUserReset2faFailed;
 }(baseError_1.BaseError));
 exports.IamUserReset2faFailed = IamUserReset2faFailed;
+var IamUserRegenerateBackupCodesFailed = (function (_super) {
+    tslib_1.__extends(IamUserRegenerateBackupCodesFailed, _super);
+    function IamUserRegenerateBackupCodesFailed(message, properties) {
+        if (message === void 0) { message = 'Could not regenerate backup codes for iam user'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'IamUserRegenerateBackupCodesFailed';
+        Object.setPrototypeOf(_this, IamUserRegenerateBackupCodesFailed.prototype);
+        return _this;
+    }
+    return IamUserRegenerateBackupCodesFailed;
+}(baseError_1.BaseError));
+exports.IamUserRegenerateBackupCodesFailed = IamUserRegenerateBackupCodesFailed;
 //# sourceMappingURL=iam_users.js.map
