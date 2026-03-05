@@ -1,3 +1,10 @@
+# [4.254.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.253.0...v4.254.0) (2026-03-05)
+
+
+### Features
+
+* **2FA:** add regenerate backup codes functionality - UOD-3086 ([#710](https://github.com/tillhub/tillhub-sdk-javascript/issues/710)) ([166aa47](https://github.com/tillhub/tillhub-sdk-javascript/commit/166aa471f415a26a7009de4b4c448f4b496ab85b))
+
 # [4.253.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.252.0...v4.253.0) (2026-02-27)
 
 
