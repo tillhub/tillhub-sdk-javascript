@@ -1560,6 +1560,14 @@ export class TillhubClient extends events.EventEmitter {
   email (): v0.Email {
     return this.generateAuthenticatedInstance(v0.Email)
   }
+
+  /**
+   * Create an authenticated remote ordering API users instance
+   *
+   */
+  remoteOrderingApiUsers (): v0.RemoteOrderingApiUsers {
+    return this.generateAuthenticatedInstance(v0.RemoteOrderingApiUsers)
+  }
 }
 
 export class Tillhub extends TillhubClient {

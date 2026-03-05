@@ -93,6 +93,7 @@ import { Submissions } from './submissions'
 import { PaymentLinks } from './payment_links'
 import { Email } from './email'
 import { TransactionBatches } from './transaction_batches'
+import { RemoteOrderingApiUsers } from './remote_ordering_api_users'
 
 export {
   Auth,
@@ -192,5 +193,6 @@ export {
   Submissions,
   PaymentLinks,
   Email,
-  TransactionBatches
+  TransactionBatches,
+  RemoteOrderingApiUsers
 }
