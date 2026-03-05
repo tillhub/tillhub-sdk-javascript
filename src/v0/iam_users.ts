@@ -218,8 +218,8 @@ export class IamUsers extends ThBaseHandler {
     }
   }
 
-  async regenerateBackupCodes (iamUserId: string): Promise<IamUserResponse> {
-    const base = this.uriHelper.generateBaseUri(`/${iamUserId}/regenerate-backup-codes`)
+  async sendBackupCodesRegenerationEmail (iamUserId: string): Promise<IamUserResponse> {
+    const base = this.uriHelper.generateBaseUri(`/${iamUserId}/send-backup-codes-regeneration-email`)
     const uri = this.uriHelper.generateUriWithQuery(base)
 
     try {

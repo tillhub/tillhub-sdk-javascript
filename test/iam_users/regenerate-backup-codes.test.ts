@@ -14,7 +14,7 @@ afterEach(() => {
 
 const iamUserId = '1234'
 
-describe('v0: IamUsers: can regenerate backup codes for one user', () => {
+describe('v0: IamUsers: can send backup codes regeneration email for one user', () => {
   it("Tillhub's iam users are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
@@ -30,7 +30,7 @@ describe('v0: IamUsers: can regenerate backup codes for one user', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/iam/users/${legacyId}/${iamUserId}/regenerate-backup-codes`).reply(() => {
+      mock.onPost(`https://api.tillhub.com/api/v0/iam/users/${legacyId}/${iamUserId}/send-backup-codes-regeneration-email`).reply(() => {
         return [200, {
           results: [{
             id: iamUserId,
@@ -51,7 +51,7 @@ describe('v0: IamUsers: can regenerate backup codes for one user', () => {
 
     expect(iamUsers).toBeInstanceOf(v0.IamUsers)
 
-    await iamUsers.regenerateBackupCodes(iamUserId)
+    await iamUsers.sendBackupCodesRegenerationEmail(iamUserId)
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -69,14 +69,14 @@ describe('v0: IamUsers: can regenerate backup codes for one user', () => {
         ]
       })
 
-      mock.onPost(`https://api.tillhub.com/api/v0/iam/users/${legacyId}/${iamUserId}/regenerate-backup-codes`).reply(() => {
+      mock.onPost(`https://api.tillhub.com/api/v0/iam/users/${legacyId}/${iamUserId}/send-backup-codes-regeneration-email`).reply(() => {
         return [205]
       })
     }
 
     try {
       const th = await initThInstance()
-      await th.iamUsers().regenerateBackupCodes(iamUserId)
+      await th.iamUsers().sendBackupCodesRegenerationEmail(iamUserId)
     } catch (err: any) {
       expect(err.name).toBe('IamUserRegenerateBackupCodesFailed')
     }
