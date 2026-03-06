@@ -1,3 +1,10 @@
+# [4.255.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.254.0...v4.255.0) (2026-03-06)
+
+
+### Bug Fixes
+
+* **SDK:** check client instance before destroy - UOD-3069 ([#709](https://github.com/tillhub/tillhub-sdk-javascript/issues/709)) ([e6d088b](https://github.com/tillhub/tillhub-sdk-javascript/commit/e6d088b6319f60783503c3c36da96642461bc1eb))
+
 # [4.254.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.253.0...v4.254.0) (2026-03-05)
 
 
