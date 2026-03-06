@@ -1,3 +1,10 @@
+# [4.256.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.255.0...v4.256.0) (2026-03-06)
+
+
+### Features
+
+* **2FA:** add hasBackupCodesConfigured field to IamUser interface - UOD-3087 ([#711](https://github.com/tillhub/tillhub-sdk-javascript/issues/711)) ([64ece96](https://github.com/tillhub/tillhub-sdk-javascript/commit/64ece96b3ddc4fa6700d3c7b86547b169e84136f))
+
 # [4.255.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.254.0...v4.255.0) (2026-03-06)
 
 
