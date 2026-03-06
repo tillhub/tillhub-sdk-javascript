@@ -36,6 +36,7 @@ export interface IamUser {
     attributes?: Record<string, unknown>;
     groups?: string[];
     has2faConfigured?: boolean;
+    hasBackupCodesConfigured?: boolean;
 }
 export interface IamUsersQueryHandler {
     limit?: number;
