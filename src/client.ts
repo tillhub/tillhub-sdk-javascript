@@ -60,7 +60,9 @@ export class Client {
   }
 
   static clearInstance (): void {
-    Client.instance.clearDefaults()
+    if (Client.instance) {
+      Client.instance.clearDefaults()
+    }
   }
 
   getClient (): AxiosInstance {

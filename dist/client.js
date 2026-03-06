@@ -28,7 +28,9 @@ var Client = (function () {
         return Client.instance;
     };
     Client.clearInstance = function () {
-        Client.instance.clearDefaults();
+        if (Client.instance) {
+            Client.instance.clearDefaults();
+        }
     };
     Client.prototype.getClient = function () {
         return Client.instance.axiosInstance;
