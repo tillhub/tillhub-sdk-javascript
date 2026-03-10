@@ -1,3 +1,10 @@
+# [4.257.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.256.0...v4.257.0) (2026-03-10)
+
+
+### Features
+
+* **2FA:** add hasActiveSessions field to IamUser interface - UOD-3156 ([#712](https://github.com/tillhub/tillhub-sdk-javascript/issues/712)) ([60f57b9](https://github.com/tillhub/tillhub-sdk-javascript/commit/60f57b939c531a7d9cc12a0202a2207822e53aa7))
+
 # [4.256.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.255.0...v4.256.0) (2026-03-06)
 
 
