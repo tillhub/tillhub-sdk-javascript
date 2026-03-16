@@ -1,3 +1,10 @@
+# [4.258.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.257.0...v4.258.0) (2026-03-16)
+
+
+### Features
+
+* **payment-links:** update payload shape for creating payment links ([#713](https://github.com/tillhub/tillhub-sdk-javascript/issues/713)) ([7bb0b91](https://github.com/tillhub/tillhub-sdk-javascript/commit/7bb0b91d549b2184299612036cd5e9620c71d14e))
+
 # [4.257.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.256.0...v4.257.0) (2026-03-10)
 
 
