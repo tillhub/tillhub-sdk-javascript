@@ -19,8 +19,8 @@ afterEach(() => {
   mock.reset()
 })
 
-describe('v0: IamMeClass: can prepare backup codes access', () => {
-  it('successfully prepares backup codes access', async () => {
+describe('v0: IamMeClass: can verify 2FA for backup codes', () => {
+  it('successfully verifies 2FA for backup codes', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
@@ -36,7 +36,7 @@ describe('v0: IamMeClass: can prepare backup codes access', () => {
       })
 
       mock
-        .onPost(`https://api.tillhub.com/api/v0/iam/me/${tenantId}/backup-codes/prepare`)
+        .onPost(`https://api.tillhub.com/api/v0/iam/me/${tenantId}/backup-codes/2fa`)
         .reply(() => {
           return [
             200,
@@ -67,7 +67,7 @@ describe('v0: IamMeClass: can prepare backup codes access', () => {
 
     expect(iamMeClass).toBeInstanceOf(v0.IamMeClass)
 
-    const response = await iamMeClass.prepareBackupCodesAccess(tenantId)
+    const response = await iamMeClass.backupCodes2fa(tenantId)
 
     expect(response).toEqual({ success: true })
   })
@@ -88,7 +88,7 @@ describe('v0: IamMeClass: can prepare backup codes access', () => {
       })
 
       mock
-        .onPost(`https://api.tillhub.com/api/v0/iam/me/${tenantId}/backup-codes/prepare`)
+        .onPost(`https://api.tillhub.com/api/v0/iam/me/${tenantId}/backup-codes/2fa`)
         .reply(() => {
           return [400]
         })
@@ -111,9 +111,9 @@ describe('v0: IamMeClass: can prepare backup codes access', () => {
     })
 
     try {
-      await th.iamMeClass().prepareBackupCodesAccess(tenantId)
+      await th.iamMeClass().backupCodes2fa(tenantId)
     } catch (err: any) {
-      expect(err.name).toBe('IamMePrepareBackupCodesFailed')
+      expect(err.name).toBe('IamMeBackupCodes2faFailed')
     }
   })
 
@@ -133,7 +133,7 @@ describe('v0: IamMeClass: can prepare backup codes access', () => {
       })
 
       mock
-        .onPost(`https://api.tillhub.com/api/v0/iam/me/${tenantId}/backup-codes/prepare`)
+        .onPost(`https://api.tillhub.com/api/v0/iam/me/${tenantId}/backup-codes/2fa`)
         .reply(() => {
           return [500]
         })
@@ -156,9 +156,9 @@ describe('v0: IamMeClass: can prepare backup codes access', () => {
     })
 
     try {
-      await th.iamMeClass().prepareBackupCodesAccess(tenantId)
+      await th.iamMeClass().backupCodes2fa(tenantId)
     } catch (err: any) {
-      expect(err.name).toBe('IamMePrepareBackupCodesFailed')
+      expect(err.name).toBe('IamMeBackupCodes2faFailed')
     }
   })
 })
