@@ -16,7 +16,7 @@ export interface IamMeResponse {
   errors?: ErrorObject[]
 }
 
-export interface IamMePrepareBackupCodesResponse {
+export interface IamMeBackupCodes2faResponse {
   success: boolean
 }
 
@@ -79,21 +79,21 @@ export class IamMeClass extends ThBaseHandler {
     }
   }
 
-  async prepareBackupCodesAccess (tenantId: string): Promise<IamMePrepareBackupCodesResponse> {
+  async backupCodes2fa (tenantId: string): Promise<IamMeBackupCodes2faResponse> {
     const base = this.options.base ?? 'https://api.tillhub.com'
-    const uri = `${base}${this.endpoint}/${tenantId}/backup-codes/prepare`
+    const uri = `${base}${this.endpoint}/${tenantId}/backup-codes/2fa`
 
     try {
       const response = await this.http.getClient().post(uri)
 
       if (response.status !== 200) {
-        throw new IamMePrepareBackupCodesFailed(undefined, { status: response.status })
+        throw new IamMeBackupCodes2faFailed(undefined, { status: response.status })
       }
       return {
         success: response.data.success ?? true
       }
     } catch (error: any) {
-      throw new IamMePrepareBackupCodesFailed(error.message, { error })
+      throw new IamMeBackupCodes2faFailed(error.message, { error })
     }
   }
 }
@@ -109,13 +109,13 @@ export class IamMeFetchFailed extends BaseError {
   }
 }
 
-export class IamMePrepareBackupCodesFailed extends BaseError {
-  public name = 'IamMePrepareBackupCodesFailed'
+export class IamMeBackupCodes2faFailed extends BaseError {
+  public name = 'IamMeBackupCodes2faFailed'
   constructor (
-    public message: string = 'Could not prepare backup codes access',
+    public message: string = 'Could not verify 2fa for backup codes',
     properties?: Record<string, unknown>
   ) {
     super(message, properties)
-    Object.setPrototypeOf(this, IamMePrepareBackupCodesFailed.prototype)
+    Object.setPrototypeOf(this, IamMeBackupCodes2faFailed.prototype)
   }
 }
