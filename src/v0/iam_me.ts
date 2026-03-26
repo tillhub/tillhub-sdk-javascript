@@ -16,6 +16,10 @@ export interface IamMeResponse {
   errors?: ErrorObject[]
 }
 
+export interface IamMeBackupCodes2faResponse {
+  success: boolean
+}
+
 export interface ErrorObject {
   id: string
   label: string
@@ -74,6 +78,24 @@ export class IamMeClass extends ThBaseHandler {
       throw new IamMeFetchFailed(error.message, { error })
     }
   }
+
+  async backupCodes2fa (tenantId: string): Promise<IamMeBackupCodes2faResponse> {
+    const base = this.options.base ?? 'https://api.tillhub.com'
+    const uri = `${base}${this.endpoint}/${tenantId}/backup-codes/2fa`
+
+    try {
+      const response = await this.http.getClient().post(uri)
+
+      if (response.status !== 200) {
+        throw new IamMeBackupCodes2faFailed(undefined, { status: response.status })
+      }
+      return {
+        success: response.data.success ?? true
+      }
+    } catch (error: any) {
+      throw new IamMeBackupCodes2faFailed(error.message, { error })
+    }
+  }
 }
 
 export class IamMeFetchFailed extends BaseError {
@@ -84,5 +106,16 @@ export class IamMeFetchFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, IamMeFetchFailed.prototype)
+  }
+}
+
+export class IamMeBackupCodes2faFailed extends BaseError {
+  public name = 'IamMeBackupCodes2faFailed'
+  constructor (
+    public message: string = 'Could not verify 2fa for backup codes',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, IamMeBackupCodes2faFailed.prototype)
   }
 }
