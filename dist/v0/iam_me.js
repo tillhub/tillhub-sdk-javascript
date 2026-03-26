@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.IamMeFetchFailed = exports.IamMeClass = void 0;
+exports.IamMeBackupCodes2faFailed = exports.IamMeFetchFailed = exports.IamMeClass = void 0;
 var tslib_1 = require("tslib");
 var baseError_1 = require("../errors/baseError");
 var uri_helper_1 = require("../uri-helper");
@@ -49,6 +49,35 @@ var IamMeClass = (function (_super) {
             });
         });
     };
+    IamMeClass.prototype.backupCodes2fa = function (tenantId) {
+        var _a, _b;
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_2;
+            return tslib_1.__generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        base = (_a = this.options.base) !== null && _a !== void 0 ? _a : 'https://api.tillhub.com';
+                        uri = "" + base + this.endpoint + "/" + tenantId + "/backup-codes/2fa";
+                        _c.label = 1;
+                    case 1:
+                        _c.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().post(uri)];
+                    case 2:
+                        response = _c.sent();
+                        if (response.status !== 200) {
+                            throw new IamMeBackupCodes2faFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                success: (_b = response.data.success) !== null && _b !== void 0 ? _b : true
+                            }];
+                    case 3:
+                        error_2 = _c.sent();
+                        throw new IamMeBackupCodes2faFailed(error_2.message, { error: error_2 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     IamMeClass.baseEndpoint = '/api/v0/iam/me';
     return IamMeClass;
 }(base_1.ThBaseHandler));
@@ -66,4 +95,17 @@ var IamMeFetchFailed = (function (_super) {
     return IamMeFetchFailed;
 }(baseError_1.BaseError));
 exports.IamMeFetchFailed = IamMeFetchFailed;
+var IamMeBackupCodes2faFailed = (function (_super) {
+    tslib_1.__extends(IamMeBackupCodes2faFailed, _super);
+    function IamMeBackupCodes2faFailed(message, properties) {
+        if (message === void 0) { message = 'Could not verify 2fa for backup codes'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'IamMeBackupCodes2faFailed';
+        Object.setPrototypeOf(_this, IamMeBackupCodes2faFailed.prototype);
+        return _this;
+    }
+    return IamMeBackupCodes2faFailed;
+}(baseError_1.BaseError));
+exports.IamMeBackupCodes2faFailed = IamMeBackupCodes2faFailed;
 //# sourceMappingURL=iam_me.js.map
