@@ -1022,6 +1022,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated Images V2 instance with strict sanitization
+   *
+   */
+  imagesV2 (): v2.Images {
+    return this.generateAuthenticatedInstance(v2.Images)
+  }
+
+  /**
    * Create an authenticated Videos instance
    *
    */
