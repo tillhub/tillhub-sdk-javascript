@@ -1,3 +1,11 @@
+# [4.259.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.258.0...v4.259.0) (2026-03-27)
+
+
+### Features
+
+* **2FA:** add backup codes 2fa functionality - UOD3210 ([#715](https://github.com/tillhub/tillhub-sdk-javascript/issues/715)) ([133f88a](https://github.com/tillhub/tillhub-sdk-javascript/commit/133f88add6fc5b28980b3435348de1e2a5ce0a42))
+* **2FA:** build backup codes 2fa verification endpoint - UOD-3210 ([#717](https://github.com/tillhub/tillhub-sdk-javascript/issues/717)) ([4a4f5b0](https://github.com/tillhub/tillhub-sdk-javascript/commit/4a4f5b0cf507c9be70463db5a5e799eda00ed3a8))
+
 # [4.258.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.257.0...v4.258.0) (2026-03-16)
 
 
