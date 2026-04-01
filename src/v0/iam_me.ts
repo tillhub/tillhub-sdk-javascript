@@ -3,6 +3,7 @@ import { Client } from '../client'
 import { BaseError } from '../errors/baseError'
 import { UriHelper } from '../uri-helper'
 import { ThBaseHandler } from '../base'
+import { IamUser, IamUserResponse } from './iam_users'
 
 export interface IamMeClassOptions {
   user?: string
@@ -96,6 +97,26 @@ export class IamMeClass extends ThBaseHandler {
       throw new IamMeBackupCodes2faFailed(error.message, { error })
     }
   }
+
+  async setup2faActionMe (tenantId: string): Promise<IamUserResponse> {
+    const base = this.options.base ?? 'https://api.tillhub.com'
+    const uri = `${base}${this.endpoint}/${tenantId}/reset-2fa`
+
+    try {
+      const response = await this.http.getClient().post(uri)
+
+      if (response.status !== 200) {
+        throw new IamMeSetup2faActionFailed(undefined, { status: response.status })
+      }
+      return {
+        data: response.data.results[0] as IamUser,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new IamMeSetup2faActionFailed(error.message, { error })
+    }
+  }
 }
 
 export class IamMeFetchFailed extends BaseError {
@@ -108,7 +129,6 @@ export class IamMeFetchFailed extends BaseError {
     Object.setPrototypeOf(this, IamMeFetchFailed.prototype)
   }
 }
-
 export class IamMeBackupCodes2faFailed extends BaseError {
   public name = 'IamMeBackupCodes2faFailed'
   constructor (
@@ -117,5 +137,15 @@ export class IamMeBackupCodes2faFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, IamMeBackupCodes2faFailed.prototype)
+  }
+}
+export class IamMeSetup2faActionFailed extends BaseError {
+  public name = 'IamMeSetup2faActionFailed'
+  constructor (
+    public message: string = 'Could not setup 2fa action',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, IamMeSetup2faActionFailed.prototype)
   }
 }
