@@ -64,6 +64,7 @@ export declare class IamUsers extends ThBaseHandler {
     create(iamUser: IamUser): Promise<IamUserResponse>;
     delete(iamUserId: string): Promise<IamUserResponse>;
     reset2fa(iamUserId: string): Promise<IamUserResponse>;
+    setup2faActionMe(): Promise<IamUserResponse>;
     sendBackupCodesRegenerationEmail(iamUserId: string): Promise<IamUserResponse>;
 }
 export declare class IamUsersFetchFailed extends BaseError {

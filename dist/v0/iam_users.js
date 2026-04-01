@@ -228,9 +228,39 @@ var IamUsers = (function (_super) {
             });
         });
     };
-    IamUsers.prototype.sendBackupCodesRegenerationEmail = function (iamUserId) {
+    IamUsers.prototype.setup2faActionMe = function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_8;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        base = this.uriHelper.generateBaseUri('/reset-2fa');
+                        uri = this.uriHelper.generateUriWithQuery(base);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().post(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new IamUserReset2faFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results[0],
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            }];
+                    case 3:
+                        error_8 = _a.sent();
+                        throw new IamUserReset2faFailed(error_8.message, { error: error_8 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
+    IamUsers.prototype.sendBackupCodesRegenerationEmail = function (iamUserId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_9;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -251,8 +281,8 @@ var IamUsers = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_8 = _a.sent();
-                        throw new IamUserRegenerateBackupCodesFailed(error_8.message, { error: error_8 });
+                        error_9 = _a.sent();
+                        throw new IamUserRegenerateBackupCodesFailed(error_9.message, { error: error_9 });
                     case 4: return [2];
                 }
             });

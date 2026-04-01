@@ -1,3 +1,10 @@
+# [4.260.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.259.0...v4.260.0) (2026-04-01)
+
+
+### Features
+
+* **me:** add setup 2fa action method - UOD-3227 ([12f9a49](https://github.com/tillhub/tillhub-sdk-javascript/commit/12f9a492447bc1700c41378e59b7cf6585bc7e93))
+
 # [4.259.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.258.0...v4.259.0) (2026-03-27)
 
 
