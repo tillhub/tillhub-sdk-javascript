@@ -220,6 +220,26 @@ export class IamUsers extends ThBaseHandler {
     }
   }
 
+  async setup2faActionMe (): Promise<IamUserResponse> {
+    const base = this.uriHelper.generateBaseUri('/reset-2fa')
+    const uri = this.uriHelper.generateUriWithQuery(base)
+
+    try {
+      const response = await this.http.getClient().post(uri)
+
+      if (response.status !== 200) {
+        throw new IamUserReset2faFailed(undefined, { status: response.status })
+      }
+      return {
+        data: response.data.results[0] as IamUser,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new IamUserReset2faFailed(error.message, { error })
+    }
+  }
+
   async sendBackupCodesRegenerationEmail (iamUserId: string): Promise<IamUserResponse> {
     const base = this.uriHelper.generateBaseUri(`/${iamUserId}/send-backup-codes-regeneration-email`)
     const uri = this.uriHelper.generateUriWithQuery(base)
