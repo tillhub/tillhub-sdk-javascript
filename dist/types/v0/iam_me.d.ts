@@ -2,6 +2,7 @@ import { Client } from '../client';
 import { BaseError } from '../errors/baseError';
 import { UriHelper } from '../uri-helper';
 import { ThBaseHandler } from '../base';
+import { IamUserResponse } from './iam_users';
 export interface IamMeClassOptions {
     user?: string;
     base?: string;
@@ -42,6 +43,7 @@ export declare class IamMeClass extends ThBaseHandler {
     constructor(options: IamMeClassOptions, http: Client);
     get(tenantId: string): Promise<IamMeResponse>;
     backupCodes2fa(tenantId: string): Promise<IamMeBackupCodes2faResponse>;
+    setup2faActionMe(tenantId: string): Promise<IamUserResponse>;
 }
 export declare class IamMeFetchFailed extends BaseError {
     message: string;
@@ -49,6 +51,11 @@ export declare class IamMeFetchFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class IamMeBackupCodes2faFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class IamMeSetup2faActionFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

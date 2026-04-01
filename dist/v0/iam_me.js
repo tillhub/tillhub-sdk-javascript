@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.IamMeBackupCodes2faFailed = exports.IamMeFetchFailed = exports.IamMeClass = void 0;
+exports.IamMeSetup2faActionFailed = exports.IamMeBackupCodes2faFailed = exports.IamMeFetchFailed = exports.IamMeClass = void 0;
 var tslib_1 = require("tslib");
 var baseError_1 = require("../errors/baseError");
 var uri_helper_1 = require("../uri-helper");
@@ -78,6 +78,37 @@ var IamMeClass = (function (_super) {
             });
         });
     };
+    IamMeClass.prototype.setup2faActionMe = function (tenantId) {
+        var _a;
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_3;
+            return tslib_1.__generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        base = (_a = this.options.base) !== null && _a !== void 0 ? _a : 'https://api.tillhub.com';
+                        uri = "" + base + this.endpoint + "/" + tenantId + "/reset-2fa";
+                        _b.label = 1;
+                    case 1:
+                        _b.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().post(uri)];
+                    case 2:
+                        response = _b.sent();
+                        if (response.status !== 200) {
+                            throw new IamMeSetup2faActionFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results[0],
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            }];
+                    case 3:
+                        error_3 = _b.sent();
+                        throw new IamMeSetup2faActionFailed(error_3.message, { error: error_3 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     IamMeClass.baseEndpoint = '/api/v0/iam/me';
     return IamMeClass;
 }(base_1.ThBaseHandler));
@@ -108,4 +139,17 @@ var IamMeBackupCodes2faFailed = (function (_super) {
     return IamMeBackupCodes2faFailed;
 }(baseError_1.BaseError));
 exports.IamMeBackupCodes2faFailed = IamMeBackupCodes2faFailed;
+var IamMeSetup2faActionFailed = (function (_super) {
+    tslib_1.__extends(IamMeSetup2faActionFailed, _super);
+    function IamMeSetup2faActionFailed(message, properties) {
+        if (message === void 0) { message = 'Could not setup 2fa action'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'IamMeSetup2faActionFailed';
+        Object.setPrototypeOf(_this, IamMeSetup2faActionFailed.prototype);
+        return _this;
+    }
+    return IamMeSetup2faActionFailed;
+}(baseError_1.BaseError));
+exports.IamMeSetup2faActionFailed = IamMeSetup2faActionFailed;
 //# sourceMappingURL=iam_me.js.map
