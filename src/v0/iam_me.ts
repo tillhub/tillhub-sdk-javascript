@@ -17,10 +17,6 @@ export interface IamMeResponse {
   errors?: ErrorObject[]
 }
 
-export interface IamMeBackupCodes2faResponse {
-  success: boolean
-}
-
 export interface ErrorObject {
   id: string
   label: string
@@ -77,24 +73,6 @@ export class IamMeClass extends ThBaseHandler {
       }
     } catch (error: any) {
       throw new IamMeFetchFailed(error.message, { error })
-    }
-  }
-
-  async backupCodes2fa (tenantId: string): Promise<IamMeBackupCodes2faResponse> {
-    const base = this.options.base ?? 'https://api.tillhub.com'
-    const uri = `${base}${this.endpoint}/${tenantId}/backup-codes/2fa`
-
-    try {
-      const response = await this.http.getClient().post(uri)
-
-      if (response.status !== 200) {
-        throw new IamMeBackupCodes2faFailed(undefined, { status: response.status })
-      }
-      return {
-        success: response.data.success ?? true
-      }
-    } catch (error: any) {
-      throw new IamMeBackupCodes2faFailed(error.message, { error })
     }
   }
 

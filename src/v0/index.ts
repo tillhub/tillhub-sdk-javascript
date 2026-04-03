@@ -19,6 +19,7 @@ import { IamUserGroups } from './iam_user_groups'
 import { IamRoles } from './iam_roles'
 import { IamPermissions } from './iam_permissions'
 import { IamMeClass } from './iam_me'
+import { IamBackupCodes } from './iam_backup_codes'
 import { PaymentProducts } from './payment_products'
 import { SaleStreams } from './sale_streams'
 import { Branches } from './branches'
@@ -192,5 +193,6 @@ export {
   Submissions,
   PaymentLinks,
   Email,
-  TransactionBatches
+  TransactionBatches,
+  IamBackupCodes
 }

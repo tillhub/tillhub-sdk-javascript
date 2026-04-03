@@ -398,6 +398,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated IAM backup codes instance
+   *
+   */
+  iamBackupCodes (): v0.IamBackupCodes {
+    return this.generateAuthenticatedInstance(v0.IamBackupCodes)
+  }
+
+  /**
    * Create an authenticated branches instance
    *
    */
