@@ -49,10 +49,39 @@ var IamMeClass = (function (_super) {
             });
         });
     };
+    IamMeClass.prototype.backupCodes2fa = function (tenantId) {
+        var _a, _b;
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_2;
+            return tslib_1.__generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        base = (_a = this.options.base) !== null && _a !== void 0 ? _a : 'https://api.tillhub.com';
+                        uri = "" + base + this.endpoint + "/" + tenantId + "/backup-codes/2fa";
+                        _c.label = 1;
+                    case 1:
+                        _c.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().post(uri)];
+                    case 2:
+                        response = _c.sent();
+                        if (response.status !== 200) {
+                            throw new IamMeBackupCodes2faFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                success: (_b = response.data.success) !== null && _b !== void 0 ? _b : true
+                            }];
+                    case 3:
+                        error_2 = _c.sent();
+                        throw new IamMeBackupCodes2faFailed(error_2.message, { error: error_2 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     IamMeClass.prototype.setup2faActionMe = function (tenantId) {
         var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_2;
+            var base, uri, response, error_3;
             return tslib_1.__generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -73,8 +102,8 @@ var IamMeClass = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_2 = _b.sent();
-                        throw new IamMeSetup2faActionFailed(error_2.message, { error: error_2 });
+                        error_3 = _b.sent();
+                        throw new IamMeSetup2faActionFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });

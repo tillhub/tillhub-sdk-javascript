@@ -68,7 +68,6 @@ export declare class TillhubClient extends events.EventEmitter {
     iamRoles(): v0.IamRoles;
     iamPermissions(): v0.IamPermissions;
     iamMeClass(): v0.IamMeClass;
-    iamBackupCodes(): v0.IamBackupCodes;
     branches(): v0.Branches;
     branchesV1(): v1.Branches;
     branchGroups(): v0.BranchGroups;
