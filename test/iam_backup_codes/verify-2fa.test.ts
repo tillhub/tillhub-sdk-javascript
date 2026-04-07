@@ -19,7 +19,7 @@ afterEach(() => {
   mock.reset()
 })
 
-describe('v0: IamMeClass: can verify 2FA for backup codes', () => {
+describe('v0: IamBackupCodes: can verify 2FA for backup codes', () => {
   it('successfully verifies 2FA for backup codes', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
@@ -36,7 +36,7 @@ describe('v0: IamMeClass: can verify 2FA for backup codes', () => {
       })
 
       mock
-        .onPost(`https://api.tillhub.com/api/v0/iam/me/${tenantId}/backup-codes/2fa`)
+        .onPost(`https://api.tillhub.com/api/v0/iam/backup-codes/${tenantId}`)
         .reply(() => {
           return [
             200,
@@ -63,11 +63,11 @@ describe('v0: IamMeClass: can verify 2FA for backup codes', () => {
       password: user.password
     })
 
-    const iamMeClass = th.iamMeClass()
+    const iamBackupCodes = th.iamBackupCodes()
 
-    expect(iamMeClass).toBeInstanceOf(v0.IamMeClass)
+    expect(iamBackupCodes).toBeInstanceOf(v0.IamBackupCodes)
 
-    const response = await iamMeClass.backupCodes2fa(tenantId)
+    const response = await iamBackupCodes.verify2fa(tenantId)
 
     expect(response).toEqual({ success: true })
   })
@@ -88,7 +88,7 @@ describe('v0: IamMeClass: can verify 2FA for backup codes', () => {
       })
 
       mock
-        .onPost(`https://api.tillhub.com/api/v0/iam/me/${tenantId}/backup-codes/2fa`)
+        .onPost(`https://api.tillhub.com/api/v0/iam/backup-codes/${tenantId}`)
         .reply(() => {
           return [400]
         })
@@ -111,9 +111,9 @@ describe('v0: IamMeClass: can verify 2FA for backup codes', () => {
     })
 
     try {
-      await th.iamMeClass().backupCodes2fa(tenantId)
+      await th.iamBackupCodes().verify2fa(tenantId)
     } catch (err: any) {
-      expect(err.name).toBe('IamMeBackupCodes2faFailed')
+      expect(err.name).toBe('IamBackupCodesVerify2faFailed')
     }
   })
 
@@ -133,7 +133,7 @@ describe('v0: IamMeClass: can verify 2FA for backup codes', () => {
       })
 
       mock
-        .onPost(`https://api.tillhub.com/api/v0/iam/me/${tenantId}/backup-codes/2fa`)
+        .onPost(`https://api.tillhub.com/api/v0/iam/backup-codes/${tenantId}`)
         .reply(() => {
           return [500]
         })
@@ -156,9 +156,9 @@ describe('v0: IamMeClass: can verify 2FA for backup codes', () => {
     })
 
     try {
-      await th.iamMeClass().backupCodes2fa(tenantId)
+      await th.iamBackupCodes().verify2fa(tenantId)
     } catch (err: any) {
-      expect(err.name).toBe('IamMeBackupCodes2faFailed')
+      expect(err.name).toBe('IamBackupCodesVerify2faFailed')
     }
   })
 })
