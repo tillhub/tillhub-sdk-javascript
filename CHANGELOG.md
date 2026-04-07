@@ -1,3 +1,10 @@
+# [4.262.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.261.0...v4.262.0) (2026-04-07)
+
+
+### Features
+
+* **2FA:** create new endpoint for backup code 2fa - UOD-3210 ([#720](https://github.com/tillhub/tillhub-sdk-javascript/issues/720)) ([e30a659](https://github.com/tillhub/tillhub-sdk-javascript/commit/e30a659cda3cfe99651982114b02bc93074ee1f2))
+
 # [4.261.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.260.0...v4.261.0) (2026-04-01)
 
 
