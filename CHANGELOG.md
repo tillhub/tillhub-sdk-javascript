@@ -1,3 +1,10 @@
+# [4.263.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.262.0...v4.263.0) (2026-04-09)
+
+
+### Bug Fixes
+
+* **UNTIL-19740:** add nullish check before clearing defaults ([#721](https://github.com/tillhub/tillhub-sdk-javascript/issues/721)) ([6df33c0](https://github.com/tillhub/tillhub-sdk-javascript/commit/6df33c0b51148600730858b20d650b42ffaee57a))
+
 # [4.262.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.261.0...v4.262.0) (2026-04-07)
 
 
