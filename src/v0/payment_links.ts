@@ -74,18 +74,16 @@ export interface PaymentLinkItem {
   type: BasketItemType
   name?: string | null
   quantity?: number | null
-  unitPrice?: string | null
-  vat?: string | null
+  unitPrice?: number | null
+  vat?: number | null
 }
 
 export interface CreatePaymentLinkRequest {
   paymentLinkDescription?: string
   paymentLinkType?: PaymentLinkType
   linkedOrderId?: string
-  branch: string
   branchId: string
-  createdBy: string
-  totalAmount?: string
+  totalAmount?: number
   currency: string
   invoiceId?: string
   externalOrderId?: string

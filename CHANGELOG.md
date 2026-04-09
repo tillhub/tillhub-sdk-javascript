@@ -1,3 +1,81 @@
+# [4.264.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.263.0...v4.264.0) (2026-04-09)
+
+
+### Features
+
+* **orders:** update FeatureResponse interface (UOD-3243) ([2c4e3c0](https://github.com/tillhub/tillhub-sdk-javascript/commit/2c4e3c037f2355cbd100644e0312299b2e65b5a2))
+
+# [4.263.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.262.0...v4.263.0) (2026-04-09)
+
+
+### Bug Fixes
+
+* **UNTIL-19740:** add nullish check before clearing defaults ([#721](https://github.com/tillhub/tillhub-sdk-javascript/issues/721)) ([6df33c0](https://github.com/tillhub/tillhub-sdk-javascript/commit/6df33c0b51148600730858b20d650b42ffaee57a))
+
+# [4.262.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.261.0...v4.262.0) (2026-04-07)
+
+
+### Features
+
+* **2FA:** create new endpoint for backup code 2fa - UOD-3210 ([#720](https://github.com/tillhub/tillhub-sdk-javascript/issues/720)) ([e30a659](https://github.com/tillhub/tillhub-sdk-javascript/commit/e30a659cda3cfe99651982114b02bc93074ee1f2))
+
+# [4.261.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.260.0...v4.261.0) (2026-04-01)
+
+
+### Features
+
+* **me:** add setup 2fa action method - UOD-3227 ([c19646f](https://github.com/tillhub/tillhub-sdk-javascript/commit/c19646f9e952ecbebe27581c11a614a858bacb08))
+
+# [4.260.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.259.0...v4.260.0) (2026-04-01)
+
+
+### Features
+
+* **me:** add setup 2fa action method - UOD-3227 ([12f9a49](https://github.com/tillhub/tillhub-sdk-javascript/commit/12f9a492447bc1700c41378e59b7cf6585bc7e93))
+
+# [4.259.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.258.0...v4.259.0) (2026-03-27)
+
+
+### Features
+
+* **2FA:** add backup codes 2fa functionality - UOD3210 ([#715](https://github.com/tillhub/tillhub-sdk-javascript/issues/715)) ([133f88a](https://github.com/tillhub/tillhub-sdk-javascript/commit/133f88add6fc5b28980b3435348de1e2a5ce0a42))
+* **2FA:** build backup codes 2fa verification endpoint - UOD-3210 ([#717](https://github.com/tillhub/tillhub-sdk-javascript/issues/717)) ([4a4f5b0](https://github.com/tillhub/tillhub-sdk-javascript/commit/4a4f5b0cf507c9be70463db5a5e799eda00ed3a8))
+
+# [4.258.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.257.0...v4.258.0) (2026-03-16)
+
+
+### Features
+
+* **payment-links:** update payload shape for creating payment links ([#713](https://github.com/tillhub/tillhub-sdk-javascript/issues/713)) ([7bb0b91](https://github.com/tillhub/tillhub-sdk-javascript/commit/7bb0b91d549b2184299612036cd5e9620c71d14e))
+
+# [4.257.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.256.0...v4.257.0) (2026-03-10)
+
+
+### Features
+
+* **2FA:** add hasActiveSessions field to IamUser interface - UOD-3156 ([#712](https://github.com/tillhub/tillhub-sdk-javascript/issues/712)) ([60f57b9](https://github.com/tillhub/tillhub-sdk-javascript/commit/60f57b939c531a7d9cc12a0202a2207822e53aa7))
+
+# [4.256.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.255.0...v4.256.0) (2026-03-06)
+
+
+### Features
+
+* **2FA:** add hasBackupCodesConfigured field to IamUser interface - UOD-3087 ([#711](https://github.com/tillhub/tillhub-sdk-javascript/issues/711)) ([64ece96](https://github.com/tillhub/tillhub-sdk-javascript/commit/64ece96b3ddc4fa6700d3c7b86547b169e84136f))
+
+# [4.255.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.254.0...v4.255.0) (2026-03-06)
+
+
+### Bug Fixes
+
+* **SDK:** check client instance before destroy - UOD-3069 ([#709](https://github.com/tillhub/tillhub-sdk-javascript/issues/709)) ([e6d088b](https://github.com/tillhub/tillhub-sdk-javascript/commit/e6d088b6319f60783503c3c36da96642461bc1eb))
+
+# [4.254.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.253.0...v4.254.0) (2026-03-05)
+
+
+### Features
+
+* **2FA:** add regenerate backup codes functionality - UOD-3086 ([#710](https://github.com/tillhub/tillhub-sdk-javascript/issues/710)) ([166aa47](https://github.com/tillhub/tillhub-sdk-javascript/commit/166aa471f415a26a7009de4b4c448f4b496ab85b))
+
 # [4.253.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.252.0...v4.253.0) (2026-02-27)
 
 
