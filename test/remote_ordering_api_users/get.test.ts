@@ -12,10 +12,11 @@ afterEach(() => {
   mock.reset()
 })
 
-const apiUser = {
+const listRow = {
   id: 'keycloak-user-uuid',
-  username: 'api-user@example.com',
-  exists: true
+  username: 'api-user',
+  email: 'api-user@so-use.partners.tillhub.com',
+  groups: ['remote-ordering']
 }
 
 describe('v0: RemoteOrderingApiUsers: can get api user', () => {
@@ -35,13 +36,13 @@ describe('v0: RemoteOrderingApiUsers: can get api user', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/remote-ordering-api-users/${legacyId}`)
+        .onGet(`https://api.tillhub.com/api/v0/remote-ordering-inner/${legacyId}/service-accounts`)
         .reply(() => {
           return [
             200,
             {
               count: 1,
-              results: [apiUser]
+              results: [listRow]
             }
           ]
         })
@@ -53,10 +54,39 @@ describe('v0: RemoteOrderingApiUsers: can get api user', () => {
 
     expect(remoteOrderingApiUsers).toBeInstanceOf(v0.RemoteOrderingApiUsers)
 
-    const { data } = await remoteOrderingApiUsers.get()
+    const { data, metadata } = await remoteOrderingApiUsers.get()
 
-    expect(data).toMatchObject(apiUser)
-    expect(data.exists).toBe(true)
+    expect(data).toEqual([listRow])
+    expect(metadata.count).toBe(1)
+  })
+
+  it('returns an empty list when results are missing or not an array', async () => {
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+
+      mock
+        .onGet(`https://api.tillhub.com/api/v0/remote-ordering-inner/${legacyId}/service-accounts`)
+        .reply(() => {
+          return [200, { count: 0, results: undefined }]
+        })
+    }
+
+    const th = await initThInstance()
+    const { data, metadata } = await th.remoteOrderingApiUsers().get()
+
+    expect(data).toEqual([])
+    expect(metadata.count).toBe(0)
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -75,7 +105,7 @@ describe('v0: RemoteOrderingApiUsers: can get api user', () => {
       })
 
       mock
-        .onGet(`https://api.tillhub.com/api/v0/remote-ordering-api-users/${legacyId}`)
+        .onGet(`https://api.tillhub.com/api/v0/remote-ordering-inner/${legacyId}/service-accounts`)
         .reply(() => {
           return [400]
         })

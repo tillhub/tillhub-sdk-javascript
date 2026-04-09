@@ -6,6 +6,7 @@ import { initThInstance } from '../util'
 dotenv.config()
 
 const legacyId = '4564'
+const serviceAccountId = 'svc-acc-id'
 
 const mock = new MockAdapter(axios)
 afterEach(() => {
@@ -29,7 +30,9 @@ describe('v0: RemoteOrderingApiUsers: can delete api user', () => {
       })
 
       mock
-        .onDelete(`https://api.tillhub.com/api/v0/remote-ordering-api-users/${legacyId}`)
+        .onDelete(
+          `https://api.tillhub.com/api/v0/remote-ordering-inner/${legacyId}/service-accounts/${serviceAccountId}`
+        )
         .reply(() => {
           return [204]
         })
@@ -41,7 +44,9 @@ describe('v0: RemoteOrderingApiUsers: can delete api user', () => {
 
     expect(remoteOrderingApiUsers).toBeInstanceOf(v0.RemoteOrderingApiUsers)
 
-    await remoteOrderingApiUsers.delete()
+    const { data } = await remoteOrderingApiUsers.delete(serviceAccountId)
+
+    expect(data).toBeNull()
   })
 
   it('rejects on status codes that are not 200 or 204', async () => {
@@ -60,7 +65,9 @@ describe('v0: RemoteOrderingApiUsers: can delete api user', () => {
       })
 
       mock
-        .onDelete(`https://api.tillhub.com/api/v0/remote-ordering-api-users/${legacyId}`)
+        .onDelete(
+          `https://api.tillhub.com/api/v0/remote-ordering-inner/${legacyId}/service-accounts/${serviceAccountId}`
+        )
         .reply(() => {
           return [400]
         })
@@ -68,9 +75,36 @@ describe('v0: RemoteOrderingApiUsers: can delete api user', () => {
 
     try {
       const th = await initThInstance()
-      await th.remoteOrderingApiUsers().delete()
+      await th.remoteOrderingApiUsers().delete(serviceAccountId)
     } catch (err: any) {
       expect(err.name).toBe('RemoteOrderingApiUserDeleteFailed')
     }
+  })
+
+  it('rejects when serviceAccountId is missing or blank (no list/delete-first)', async () => {
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+    }
+
+    const th = await initThInstance()
+
+    await expect(th.remoteOrderingApiUsers().delete('')).rejects.toMatchObject({
+      name: 'RemoteOrderingApiUserDeleteFailed'
+    })
+
+    await expect(th.remoteOrderingApiUsers().delete('   ')).rejects.toMatchObject({
+      name: 'RemoteOrderingApiUserDeleteFailed'
+    })
   })
 })

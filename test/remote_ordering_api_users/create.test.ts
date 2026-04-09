@@ -13,9 +13,15 @@ afterEach(() => {
   mock.reset()
 })
 
-const createResponse = {
+const createResultRow = {
   id: 'keycloak-user-uuid',
-  location: 'https://keycloak.example.com/admin/realms/realm/users/keycloak-user-uuid'
+  username: 'john.doe',
+  email: 'john.doe@so-use.partners.tillhub.com',
+  enabled: true,
+  attributes: {
+    clientAccountId: legacyId,
+    partner: 'so-use'
+  }
 }
 
 describe('v0: RemoteOrderingApiUsers: can create api user', () => {
@@ -35,13 +41,17 @@ describe('v0: RemoteOrderingApiUsers: can create api user', () => {
       })
 
       mock
-        .onPost(`https://api.tillhub.com/api/v0/remote-ordering-api-users/${legacyId}`)
-        .reply(() => {
+        .onPost(`https://api.tillhub.com/api/v0/remote-ordering-inner/${legacyId}/service-accounts`)
+        .reply((config) => {
+          expect(JSON.parse(config.data)).toEqual({
+            partner: 'so-use',
+            password: 'SecureP4ss!'
+          })
           return [
             201,
             {
               count: 1,
-              results: [createResponse]
+              results: [createResultRow]
             }
           ]
         })
@@ -53,10 +63,12 @@ describe('v0: RemoteOrderingApiUsers: can create api user', () => {
 
     expect(remoteOrderingApiUsers).toBeInstanceOf(v0.RemoteOrderingApiUsers)
 
-    const { data } = await remoteOrderingApiUsers.create({ password: 'SecureP4ss!' })
+    const { data } = await remoteOrderingApiUsers.create({
+      partner: 'so-use',
+      password: 'SecureP4ss!'
+    })
 
-    expect(data).toMatchObject(createResponse)
-    expect(data.id).toBe(createResponse.id)
+    expect(data).toEqual(createResultRow)
   })
 
   it('rejects on status codes that are not 200 or 201', async () => {
@@ -75,7 +87,7 @@ describe('v0: RemoteOrderingApiUsers: can create api user', () => {
       })
 
       mock
-        .onPost(`https://api.tillhub.com/api/v0/remote-ordering-api-users/${legacyId}`)
+        .onPost(`https://api.tillhub.com/api/v0/remote-ordering-inner/${legacyId}/service-accounts`)
         .reply(() => {
           return [400]
         })
@@ -83,7 +95,9 @@ describe('v0: RemoteOrderingApiUsers: can create api user', () => {
 
     try {
       const th = await initThInstance()
-      await th.remoteOrderingApiUsers().create({ password: 'SecureP4ss!' })
+      await th
+        .remoteOrderingApiUsers()
+        .create({ partner: 'so-use', password: 'SecureP4ss!' })
     } catch (err: any) {
       expect(err.name).toBe('RemoteOrderingApiUserCreateFailed')
     }

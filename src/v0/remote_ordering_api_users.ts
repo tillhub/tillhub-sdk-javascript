@@ -8,31 +8,48 @@ export interface RemoteOrderingApiUsersOptions {
   base?: string
 }
 
-export interface RemoteOrderingApiUserResponse {
-  data: RemoteOrderingApiUser
-  metadata: Record<string, unknown>
-  msg?: string
-  errors?: ErrorObject[]
-}
-
 export interface ErrorObject {
   id: string
   label: string
   errorDetails: Record<string, unknown>
 }
 
-export interface RemoteOrderingApiUser {
-  id: string
-  username: string
-  exists: boolean
+export interface RemoteOrderingServiceAccount {
+  id?: string
+  createdTimestamp?: number
+  username?: string
+  email?: string
+  enabled?: boolean
+  totp?: boolean
+  emailVerified?: boolean
+  attributes?: {
+    partner?: string
+    clientAccountId?: string
+  }
+  groups?: string[]
+}
+
+export interface RemoteOrderingApiUsersListResponse {
+  data: RemoteOrderingServiceAccount[]
+  metadata: Record<string, unknown>
+  msg?: string
+  errors?: ErrorObject[]
+}
+
+export interface RemoteOrderingApiUserMutationResponse {
+  data: RemoteOrderingServiceAccount | null
+  metadata: Record<string, unknown>
+  msg?: string
+  errors?: ErrorObject[]
 }
 
 export interface RemoteOrderingApiUserCreatePayload {
   password: string
+  partner?: string
 }
 
 export class RemoteOrderingApiUsers extends ThBaseHandler {
-  public static baseEndpoint = '/api/v0/remote-ordering-api-users'
+  public static baseEndpoint = '/api/v0/remote-ordering-inner'
   endpoint: string
   http: Client
   public options: RemoteOrderingApiUsersOptions
@@ -51,8 +68,8 @@ export class RemoteOrderingApiUsers extends ThBaseHandler {
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
-  async get (): Promise<RemoteOrderingApiUserResponse> {
-    const base = this.uriHelper.generateBaseUri()
+  async get (): Promise<RemoteOrderingApiUsersListResponse> {
+    const base = this.uriHelper.generateBaseUri('/service-accounts')
     const uri = this.uriHelper.generateUriWithQuery(base)
 
     try {
@@ -63,67 +80,65 @@ export class RemoteOrderingApiUsers extends ThBaseHandler {
           status: response.status
         })
       }
+      const rows = Array.isArray(response.data.results) ? response.data.results : []
+
       return {
-        data: response.data.results?.[0] ?? response.data,
+        data: rows as RemoteOrderingServiceAccount[],
         msg: response.data.msg,
-        metadata: { count: response.data.count }
+        metadata: {
+          count: response.data.count ?? rows.length
+        }
       }
     } catch (error: any) {
+      if (error instanceof RemoteOrderingApiUserFetchFailed) throw error
       throw new RemoteOrderingApiUserFetchFailed(error.message, { error })
     }
   }
 
   async create (
     payload: RemoteOrderingApiUserCreatePayload
-  ): Promise<RemoteOrderingApiUserResponse> {
-    const base = this.uriHelper.generateBaseUri()
+  ): Promise<RemoteOrderingApiUserMutationResponse> {
+    const base = this.uriHelper.generateBaseUri('/service-accounts')
     const uri = this.uriHelper.generateUriWithQuery(base)
+    const body = {
+      partner: payload.partner,
+      password: payload.password
+    }
 
     try {
-      const response = await this.http.getClient().post(uri, payload)
+      const response = await this.http.getClient().post(uri, body)
 
       if (response.status !== 200 && response.status !== 201) {
         throw new RemoteOrderingApiUserCreateFailed(undefined, {
           status: response.status
         })
       }
+      const row = response.data.results?.[0] as RemoteOrderingServiceAccount | undefined
+
       return {
-        data: response.data.results?.[0] ?? response.data,
+        data: row ?? null,
         msg: response.data.msg,
-        metadata: { count: response.data.count }
+        metadata: {
+          count: response.data.count ?? response.data.results?.length
+        }
       }
     } catch (error: any) {
+      if (error instanceof RemoteOrderingApiUserCreateFailed) throw error
       throw new RemoteOrderingApiUserCreateFailed(error.message, { error })
     }
   }
 
-  async updatePassword (
-    payload: RemoteOrderingApiUserCreatePayload
-  ): Promise<RemoteOrderingApiUserResponse> {
-    const base = this.uriHelper.generateBaseUri()
-    const uri = this.uriHelper.generateUriWithQuery(base)
-
-    try {
-      const response = await this.http.getClient().post(uri, payload)
-
-      if (response.status !== 200) {
-        throw new RemoteOrderingApiUserUpdateFailed(undefined, {
-          status: response.status
-        })
-      }
-      return {
-        data: response.data.results?.[0] ?? response.data,
-        msg: response.data.msg,
-        metadata: { count: response.data.count }
-      }
-    } catch (error: any) {
-      throw new RemoteOrderingApiUserUpdateFailed(error.message, { error })
+  async delete (serviceAccountId: string): Promise<RemoteOrderingApiUserMutationResponse> {
+    const id = typeof serviceAccountId === 'string' ? serviceAccountId.trim() : ''
+    if (!id) {
+      throw new RemoteOrderingApiUserDeleteFailed(
+        'serviceAccountId is required to delete a remote ordering API user',
+        {}
+      )
     }
-  }
 
-  async delete (): Promise<RemoteOrderingApiUserResponse> {
-    const base = this.uriHelper.generateBaseUri()
-    const uri = this.uriHelper.generateUriWithQuery(base)
+    const base = this.uriHelper.generateBaseUri('/service-accounts')
+    const uri = this.uriHelper.generateUriWithQuery(`${base}/${encodeURIComponent(id)}`)
 
     try {
       const response = await this.http.getClient().delete(uri)
@@ -133,12 +148,18 @@ export class RemoteOrderingApiUsers extends ThBaseHandler {
           status: response.status
         })
       }
+
+      const row = response.data?.results?.[0] as RemoteOrderingServiceAccount | undefined
+
       return {
-        data: response.data?.results?.[0] ?? response.data ?? {},
+        data: row ?? null,
         msg: response.data?.msg,
-        metadata: { count: response.data?.count }
+        metadata: {
+          count: response.data?.count
+        }
       }
     } catch (error: any) {
+      if (error instanceof RemoteOrderingApiUserDeleteFailed) throw error
       throw new RemoteOrderingApiUserDeleteFailed(error.message, { error })
     }
   }
