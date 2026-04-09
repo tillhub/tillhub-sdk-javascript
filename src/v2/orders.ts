@@ -37,7 +37,10 @@ export interface OrdersMetaResponse {
 }
 
 export interface FeaturesResponse {
-  data: { moto: boolean }
+  data: {
+    moto: boolean
+    ecom: boolean
+  }
   msg: string
 }
 
