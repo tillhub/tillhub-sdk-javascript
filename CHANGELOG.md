@@ -1,3 +1,10 @@
+# [4.264.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.263.0...v4.264.0) (2026-04-09)
+
+
+### Features
+
+* **orders:** update FeatureResponse interface (UOD-3243) ([2c4e3c0](https://github.com/tillhub/tillhub-sdk-javascript/commit/2c4e3c037f2355cbd100644e0312299b2e65b5a2))
+
 # [4.263.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.262.0...v4.263.0) (2026-04-09)
 
 
