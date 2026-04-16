@@ -10,6 +10,9 @@ export interface ImagesResponse {
 export interface ImagesQuery {
     subsystem: 'products' | 'customers' | 'branches' | 'staff';
     prefix: string;
+    acceptFormats?: string[];
+    metadata?: boolean;
+    flatten?: Record<string, unknown> | null;
 }
 export declare class Images {
     endpoint: string;

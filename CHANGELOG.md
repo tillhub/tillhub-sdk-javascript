@@ -1,3 +1,11 @@
+# [4.265.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.264.0...v4.265.0) (2026-04-16)
+
+
+### Features
+
+* **products:** support products query request ([#724](https://github.com/tillhub/tillhub-sdk-javascript/issues/724)) ([8e146ad](https://github.com/tillhub/tillhub-sdk-javascript/commit/8e146ad733227b2bbef952d0d63cca0704448447))
+* **sanitization:** image sanitization service - UOD-3205 ([#714](https://github.com/tillhub/tillhub-sdk-javascript/issues/714)) ([720981a](https://github.com/tillhub/tillhub-sdk-javascript/commit/720981a8837eca896af5c3934c03314e4556b7b3))
+
 # [4.264.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.263.0...v4.264.0) (2026-04-09)
 
 
