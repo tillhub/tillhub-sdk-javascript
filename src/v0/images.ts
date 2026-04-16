@@ -14,6 +14,9 @@ export interface ImagesResponse {
 export interface ImagesQuery {
   subsystem: 'products' | 'customers' | 'branches' | 'staff'
   prefix: string
+  acceptFormats?: string[]
+  metadata?: boolean
+  flatten?: Record<string, unknown> | null
 }
 
 export class Images {
@@ -32,7 +35,12 @@ export class Images {
   }
 
   async put (query: ImagesQuery, payload: FormData): Promise<ImagesResponse> {
-    const uri = this.uriHelper.generateBaseUri(`/${query.subsystem}/${query.prefix}`)
+    const base = this.uriHelper.generateBaseUri(`/${query.subsystem}/${query.prefix}`)
+    const uri = this.uriHelper.generateUriWithQuery(base, {
+      acceptFormats: query.acceptFormats ?? ['jpeg', 'png'],
+      metadata: query.metadata ?? true,
+      flatten: query.flatten !== undefined ? query.flatten : null
+    })
     try {
       const response = await this.http
         .getClient()
@@ -46,7 +54,12 @@ export class Images {
   }
 
   async create (query: ImagesQuery, payload: FormData): Promise<ImagesResponse> {
-    const uri = this.uriHelper.generateBaseUri(`/${query.subsystem}/${query.prefix}`)
+    const base = this.uriHelper.generateBaseUri(`/${query.subsystem}/${query.prefix}`)
+    const uri = this.uriHelper.generateUriWithQuery(base, {
+      acceptFormats: query.acceptFormats ?? ['jpeg', 'png'],
+      metadata: query.metadata ?? true,
+      flatten: query.flatten !== undefined ? query.flatten : null
+    })
     try {
       const response = await this.http
         .getClient()
