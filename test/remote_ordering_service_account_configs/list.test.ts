@@ -122,4 +122,32 @@ describe('v0: RemoteOrderingServiceAccountConfigs: list', () => {
     expect(all[0].id).toBe(configRow.id)
     expect(all[1].id).toBe('55555555-5555-5555-5555-555555555555')
   })
+
+  it('rejects when serviceAccountId is missing or blank', async () => {
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+    }
+
+    const th = await initThInstance()
+    const api = th.remoteOrderingServiceAccountConfigs()
+
+    await expect(api.list('')).rejects.toMatchObject({
+      name: 'RemoteOrderingServiceAccountConfigsFailed'
+    })
+
+    await expect(api.list('   ')).rejects.toMatchObject({
+      name: 'RemoteOrderingServiceAccountConfigsFailed'
+    })
+  })
 })

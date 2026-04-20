@@ -106,11 +106,18 @@ export class RemoteOrderingServiceAccountConfigs extends ThBaseHandler {
   async listAll (serviceAccountId: string): Promise<RemoteOrderingServiceAccountConfig[]> {
     const aggregated: RemoteOrderingServiceAccountConfig[] = []
     let page = await this.list(serviceAccountId)
-    aggregated.push(...page.data)
+
+    for (const row of page.data) {
+      aggregated.push(row)
+    }
+
     while (page.next) {
       page = await page.next()
-      aggregated.push(...page.data)
+      for (const row of page.data) {
+        aggregated.push(row)
+      }
     }
+
     return aggregated
   }
 
@@ -149,15 +156,17 @@ export class RemoteOrderingServiceAccountConfigs extends ThBaseHandler {
     body: RemoteOrderingServiceAccountConfigBody
   ): Promise<RemoteOrderingServiceAccountConfigMutationResponse> {
     const saId = typeof serviceAccountId === 'string' ? serviceAccountId.trim() : ''
-    const cfgId = typeof configurationId === 'string' ? configurationId.trim() : ''
-    if (!cfgId) {
+    const configId = typeof configurationId === 'string' ? configurationId.trim() : ''
+
+    if (!configId) {
       throw new RemoteOrderingServiceAccountConfigsFailed(
         'configurationId is required to update a service account configuration',
         {}
       )
     }
+
     const base = this.uriHelper.generateBaseUri(
-      `${this.basePath(saId)}/configuration/${encodeURIComponent(cfgId)}`
+      `${this.basePath(saId)}/configuration/${encodeURIComponent(configId)}`
     )
     const uri = this.uriHelper.generateUriWithQuery(base)
 
@@ -183,17 +192,22 @@ export class RemoteOrderingServiceAccountConfigs extends ThBaseHandler {
     }
   }
 
-  async delete (serviceAccountId: string, configurationId: string): Promise<RemoteOrderingServiceAccountConfigMutationResponse> {
+  async delete (
+    serviceAccountId: string,
+    configurationId: string
+  ): Promise<RemoteOrderingServiceAccountConfigMutationResponse> {
     const saId = typeof serviceAccountId === 'string' ? serviceAccountId.trim() : ''
-    const cfgId = typeof configurationId === 'string' ? configurationId.trim() : ''
-    if (!cfgId) {
+    const configId = typeof configurationId === 'string' ? configurationId.trim() : ''
+
+    if (!configId) {
       throw new RemoteOrderingServiceAccountConfigsFailed(
         'configurationId is required to delete a service account configuration',
         {}
       )
     }
+
     const base = this.uriHelper.generateBaseUri(
-      `${this.basePath(saId)}/configuration/${encodeURIComponent(cfgId)}`
+      `${this.basePath(saId)}/configuration/${encodeURIComponent(configId)}`
     )
     const uri = this.uriHelper.generateUriWithQuery(base)
 
