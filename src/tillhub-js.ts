@@ -1576,6 +1576,13 @@ export class TillhubClient extends events.EventEmitter {
   remoteOrderingApiUsers (): v0.RemoteOrderingApiUsers {
     return this.generateAuthenticatedInstance(v0.RemoteOrderingApiUsers)
   }
+
+  /**
+   * Remote ordering inner API: service account branch + register bindings
+   */
+  remoteOrderingServiceAccountConfigs (): v0.RemoteOrderingServiceAccountConfigs {
+    return this.generateAuthenticatedInstance(v0.RemoteOrderingServiceAccountConfigs)
+  }
 }
 
 export class Tillhub extends TillhubClient {
