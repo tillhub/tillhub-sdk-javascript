@@ -1,3 +1,10 @@
+# [4.266.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.265.0...v4.266.0) (2026-04-22)
+
+
+### Features
+
+* **sdk:** publish remote ordering API clients ([#726](https://github.com/tillhub/tillhub-sdk-javascript/issues/726)) ([650207d](https://github.com/tillhub/tillhub-sdk-javascript/commit/650207da0cccebee07a5b777b2b0d40448221b9e))
+
 # [4.265.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.264.0...v4.265.0) (2026-04-16)
 
 

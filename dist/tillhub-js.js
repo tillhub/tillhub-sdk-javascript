@@ -676,6 +676,12 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.email = function () {
         return this.generateAuthenticatedInstance(v0.Email);
     };
+    TillhubClient.prototype.remoteOrderingApiUsers = function () {
+        return this.generateAuthenticatedInstance(v0.RemoteOrderingApiUsers);
+    };
+    TillhubClient.prototype.remoteOrderingServiceAccountConfigs = function () {
+        return this.generateAuthenticatedInstance(v0.RemoteOrderingServiceAccountConfigs);
+    };
     TillhubClient.environment = environment_1.environment;
     return TillhubClient;
 }(events_1.default.EventEmitter));
