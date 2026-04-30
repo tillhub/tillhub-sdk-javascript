@@ -93,26 +93,6 @@ export interface ProductsQuery {
   [key: string]: any
 }
 
-const ProductQueryBodyKeys = new Set<string>([
-  'location',
-  'locations',
-  'branch_group',
-  'product_group',
-  'product_ids',
-  'custom_id',
-  'business_partner_id',
-  'tag',
-  'tags',
-  'type',
-  'types',
-  'linked_product_id',
-  'client',
-  'purchase_order_id',
-  'field',
-  'include',
-  'exclude'
-])
-
 export interface SelectProductsQuery {
   product_ids?: string[]
   custom_ids?: string[]
@@ -301,66 +281,6 @@ export class Products extends ThBaseHandler {
       const uri = this.uriHelper.generateUriWithQuery(base, options)
 
       const response = await this.http.getClient().get(uri)
-      if (response.status !== 200) {
-        throw new ProductsFetchFailed(undefined, { status: response.status })
-      }
-
-      if (response.data.cursor?.next) {
-        next = (): Promise<ProductsResponse> => this.getAll({ uri: response.data.cursor.next })
-      }
-
-      return {
-        data: response.data.results,
-        metadata: { count: response.data.count, cursor: response.data.cursor },
-        next
-      }
-    } catch (error: any) {
-      throw new ProductsFetchFailed(error.message, { error })
-    }
-  }
-
-  async query (options?: ProductsOptions | undefined): Promise<ProductsResponse> {
-    let next
-
-    const splitBodyAndQuery = (flat: Record<string, unknown>): {
-      body: Record<string, unknown>
-      query: Record<string, unknown>
-    } => {
-      const body: Record<string, unknown> = {}
-      const query: Record<string, unknown> = {}
-      for (const key of Object.keys(flat)) {
-        if (ProductQueryBodyKeys.has(key)) {
-          body[key] = flat[key]
-        } else {
-          query[key] = flat[key]
-        }
-      }
-      return { body, query }
-    }
-
-    try {
-      let uri: string
-      let bodyPayload: Record<string, unknown>
-
-      if (options?.uri ?? options?.query?.uri) {
-        uri = (options?.uri ?? options?.query?.uri) as string
-        bodyPayload = {}
-      } else {
-        let flat = { ...(options ?? {}) }
-        if (flat.query) {
-          flat = { ...(flat), ...flat.query }
-          delete flat.query
-        }
-        const { body, query } = splitBodyAndQuery(flat)
-        const base = this.uriHelper.generateBaseUri('/query')
-        uri = this.uriHelper.generateUriWithQuery(
-          base,
-          Object.keys(query).length > 0 ? { query } : undefined
-        )
-        bodyPayload = body
-      }
-
-      const response = await this.http.getClient().post(uri, bodyPayload)
       if (response.status !== 200) {
         throw new ProductsFetchFailed(undefined, { status: response.status })
       }
