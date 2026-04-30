@@ -76,7 +76,7 @@ export interface ProductsQuery {
     deleted?: boolean;
     active?: boolean;
     exclude_system_products?: boolean;
-    location?: string;
+    location?: string | string[];
     extended?: boolean;
     [key: string]: any;
 }
@@ -84,6 +84,7 @@ export interface ProductsOptions {
     user?: string;
     base?: string;
     limit?: number;
+    offset?: number;
     uri?: string;
     query?: ProductsQuery;
 }
@@ -108,6 +109,7 @@ export declare class Products extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: ProductsOptions, http: Client);
     getAll(options?: ProductsOptions | undefined): Promise<ProductsResponse>;
+    query(options?: ProductsOptions | undefined): Promise<ProductsResponse>;
     bulkImport(payload: ProductsBulkImportRequestObject): Promise<ProductsBulkImportResponse>;
 }
 export declare class ProductsBulkImportFailed extends BaseError {

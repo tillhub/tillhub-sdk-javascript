@@ -5,6 +5,25 @@ var tslib_1 = require("tslib");
 var baseError_1 = require("../errors/baseError");
 var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
+var ProductQueryBodyKeys = new Set([
+    'location',
+    'locations',
+    'branch_group',
+    'product_group',
+    'product_ids',
+    'custom_id',
+    'business_partner_id',
+    'tag',
+    'tags',
+    'type',
+    'types',
+    'linked_product_id',
+    'client',
+    'purchase_order_id',
+    'field',
+    'include',
+    'exclude'
+]);
 var Products = (function (_super) {
     tslib_1.__extends(Products, _super);
     function Products(options, http) {
@@ -48,9 +67,67 @@ var Products = (function (_super) {
             });
         });
     };
+    Products.prototype.query = function (options) {
+        var _a;
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var next, splitBodyAndQuery, flat, _b, body, query, base, uri, response_1, error_2;
+            var _this = this;
+            return tslib_1.__generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        splitBodyAndQuery = function (flat) {
+                            var body = {};
+                            var query = {};
+                            for (var _i = 0, _a = Object.keys(flat); _i < _a.length; _i++) {
+                                var key = _a[_i];
+                                if (ProductQueryBodyKeys.has(key)) {
+                                    body[key] = flat[key];
+                                }
+                                else {
+                                    query[key] = flat[key];
+                                }
+                            }
+                            return { body: body, query: query };
+                        };
+                        _c.label = 1;
+                    case 1:
+                        _c.trys.push([1, 3, , 4]);
+                        flat = tslib_1.__assign({}, (options !== null && options !== void 0 ? options : {}));
+                        if (flat.query) {
+                            flat = tslib_1.__assign(tslib_1.__assign({}, flat), flat.query);
+                            delete flat.query;
+                        }
+                        _b = splitBodyAndQuery(flat), body = _b.body, query = _b.query;
+                        base = this.uriHelper.generateBaseUri('/query');
+                        uri = this.uriHelper.generateUriWithQuery(base, Object.keys(query).length > 0 ? { query: query } : undefined);
+                        return [4, this.http.getClient().post(uri, body)];
+                    case 2:
+                        response_1 = _c.sent();
+                        if (response_1.status !== 200) {
+                            throw new ProductsFetchFailed(undefined, { status: response_1.status });
+                        }
+                        if (response_1.data.count > 0 && response_1.data.count === ((_a = response_1.data.pagination) === null || _a === void 0 ? void 0 : _a.limit)) {
+                            next = function () {
+                                var _a, _b;
+                                return _this.query(tslib_1.__assign(tslib_1.__assign({}, options), { offset: Number((_b = (_a = response_1.data.pagination) === null || _a === void 0 ? void 0 : _a.offset) !== null && _b !== void 0 ? _b : 0) + Number(response_1.data.pagination.limit) }));
+                            };
+                        }
+                        return [2, {
+                                data: response_1.data.results,
+                                metaData: { count: response_1.data.count || 0, pagination: response_1.data.pagination },
+                                next: next
+                            }];
+                    case 3:
+                        error_2 = _c.sent();
+                        throw new ProductsFetchFailed(error_2.message, { error: error_2 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     Products.prototype.bulkImport = function (payload) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_2;
+            var uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -68,8 +145,8 @@ var Products = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        error_2 = _a.sent();
-                        throw new ProductsBulkImportFailed(error_2.message, { error: error_2 });
+                        error_3 = _a.sent();
+                        throw new ProductsBulkImportFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });

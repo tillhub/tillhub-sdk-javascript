@@ -1,3 +1,10 @@
+# [4.267.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.266.0...v4.267.0) (2026-04-30)
+
+
+### Features
+
+* **until-19328:** add v2 products query handler ([#727](https://github.com/tillhub/tillhub-sdk-javascript/issues/727)) ([6e70709](https://github.com/tillhub/tillhub-sdk-javascript/commit/6e70709abde55ed26ef9ee22b426f3aef888b7e5))
+
 # [4.266.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.265.0...v4.266.0) (2026-04-22)
 
 

@@ -196,7 +196,6 @@ export declare class Products extends ThBaseHandler {
     create(product: Product, query?: HandlerProductsQuery): Promise<ProductResponse>;
     duplicate(body: ProductsDuplicateBody): Promise<ProductsDuplicateResponse>;
     getAll(options?: ProductsOptions | undefined): Promise<ProductsResponse>;
-    query(options?: ProductsOptions | undefined): Promise<ProductsResponse>;
     select(options: SelectProductsQuery): Promise<ProductsResponse>;
     import(options?: ProductsOptions | undefined): Promise<ProductsResponse>;
     get(productId: string): Promise<ProductResponse>;

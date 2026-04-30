@@ -7,25 +7,6 @@ var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
 var pricebooks_1 = require("./pricebooks");
 var pricebook_entries_1 = require("./pricebook-entries");
-var ProductQueryBodyKeys = new Set([
-    'location',
-    'locations',
-    'branch_group',
-    'product_group',
-    'product_ids',
-    'custom_id',
-    'business_partner_id',
-    'tag',
-    'tags',
-    'type',
-    'types',
-    'linked_product_id',
-    'client',
-    'purchase_order_id',
-    'field',
-    'include',
-    'exclude'
-]);
 var Products = (function (_super) {
     tslib_1.__extends(Products, _super);
     function Products(options, http) {
@@ -133,73 +114,9 @@ var Products = (function (_super) {
             });
         });
     };
-    Products.prototype.query = function (options) {
-        var _a, _b, _c, _d, _e;
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var next, splitBodyAndQuery, uri, bodyPayload, flat, _f, body, query, base, response_2, error_4;
-            var _this = this;
-            return tslib_1.__generator(this, function (_g) {
-                switch (_g.label) {
-                    case 0:
-                        splitBodyAndQuery = function (flat) {
-                            var body = {};
-                            var query = {};
-                            for (var _i = 0, _a = Object.keys(flat); _i < _a.length; _i++) {
-                                var key = _a[_i];
-                                if (ProductQueryBodyKeys.has(key)) {
-                                    body[key] = flat[key];
-                                }
-                                else {
-                                    query[key] = flat[key];
-                                }
-                            }
-                            return { body: body, query: query };
-                        };
-                        _g.label = 1;
-                    case 1:
-                        _g.trys.push([1, 3, , 4]);
-                        uri = void 0;
-                        bodyPayload = void 0;
-                        if ((_a = options === null || options === void 0 ? void 0 : options.uri) !== null && _a !== void 0 ? _a : (_b = options === null || options === void 0 ? void 0 : options.query) === null || _b === void 0 ? void 0 : _b.uri) {
-                            uri = ((_c = options === null || options === void 0 ? void 0 : options.uri) !== null && _c !== void 0 ? _c : (_d = options === null || options === void 0 ? void 0 : options.query) === null || _d === void 0 ? void 0 : _d.uri);
-                            bodyPayload = {};
-                        }
-                        else {
-                            flat = tslib_1.__assign({}, (options !== null && options !== void 0 ? options : {}));
-                            if (flat.query) {
-                                flat = tslib_1.__assign(tslib_1.__assign({}, (flat)), flat.query);
-                                delete flat.query;
-                            }
-                            _f = splitBodyAndQuery(flat), body = _f.body, query = _f.query;
-                            base = this.uriHelper.generateBaseUri('/query');
-                            uri = this.uriHelper.generateUriWithQuery(base, Object.keys(query).length > 0 ? { query: query } : undefined);
-                            bodyPayload = body;
-                        }
-                        return [4, this.http.getClient().post(uri, bodyPayload)];
-                    case 2:
-                        response_2 = _g.sent();
-                        if (response_2.status !== 200) {
-                            throw new ProductsFetchFailed(undefined, { status: response_2.status });
-                        }
-                        if ((_e = response_2.data.cursor) === null || _e === void 0 ? void 0 : _e.next) {
-                            next = function () { return _this.getAll({ uri: response_2.data.cursor.next }); };
-                        }
-                        return [2, {
-                                data: response_2.data.results,
-                                metadata: { count: response_2.data.count, cursor: response_2.data.cursor },
-                                next: next
-                            }];
-                    case 3:
-                        error_4 = _g.sent();
-                        throw new ProductsFetchFailed(error_4.message, { error: error_4 });
-                    case 4: return [2];
-                }
-            });
-        });
-    };
     Products.prototype.select = function (options) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, query, body, uri, response, error_5;
+            var base, query, body, uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -217,8 +134,8 @@ var Products = (function (_super) {
                                 data: response.data.results
                             }];
                     case 2:
-                        error_5 = _a.sent();
-                        throw new ProductsFetchFailed(error_5.message, { error: error_5 });
+                        error_4 = _a.sent();
+                        throw new ProductsFetchFailed(error_4.message, { error: error_4 });
                     case 3: return [2];
                 }
             });
@@ -227,7 +144,7 @@ var Products = (function (_super) {
     Products.prototype.import = function (options) {
         var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var next, base, uri, response_3, error_6;
+            var next, base, uri, response_2, error_5;
             var _this = this;
             return tslib_1.__generator(this, function (_b) {
                 switch (_b.label) {
@@ -237,21 +154,21 @@ var Products = (function (_super) {
                         uri = this.uriHelper.generateUriWithQuery(base, options);
                         return [4, this.http.getClient().get(uri)];
                     case 1:
-                        response_3 = _b.sent();
-                        if (response_3.status !== 200) {
-                            throw new ProductsImportFailed(undefined, { status: response_3.status });
+                        response_2 = _b.sent();
+                        if (response_2.status !== 200) {
+                            throw new ProductsImportFailed(undefined, { status: response_2.status });
                         }
-                        if ((_a = response_3.data.cursor) === null || _a === void 0 ? void 0 : _a.next) {
-                            next = function () { return _this.import({ uri: response_3.data.cursor.next }); };
+                        if ((_a = response_2.data.cursor) === null || _a === void 0 ? void 0 : _a.next) {
+                            next = function () { return _this.import({ uri: response_2.data.cursor.next }); };
                         }
                         return [2, {
-                                data: response_3.data.results,
-                                metadata: { count: response_3.data.count, cursor: response_3.data.cursor },
+                                data: response_2.data.results,
+                                metadata: { count: response_2.data.count, cursor: response_2.data.cursor },
                                 next: next
                             }];
                     case 2:
-                        error_6 = _b.sent();
-                        throw new ProductsImportFailed(error_6.message, { error: error_6 });
+                        error_5 = _b.sent();
+                        throw new ProductsImportFailed(error_5.message, { error: error_5 });
                     case 3: return [2];
                 }
             });
@@ -259,7 +176,7 @@ var Products = (function (_super) {
     };
     Products.prototype.get = function (productId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_7;
+            var uri, response, error_6;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -279,8 +196,8 @@ var Products = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_7 = _a.sent();
-                        throw new ProductFetchFailed(error_7.message, { error: error_7 });
+                        error_6 = _a.sent();
+                        throw new ProductFetchFailed(error_6.message, { error: error_6 });
                     case 4: return [2];
                 }
             });
@@ -288,7 +205,7 @@ var Products = (function (_super) {
     };
     Products.prototype.export = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_8;
+            var base, uri, response, error_7;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -308,8 +225,8 @@ var Products = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        error_8 = _a.sent();
-                        throw new ProductsExportFailed(error_8.message, { error: error_8 });
+                        error_7 = _a.sent();
+                        throw new ProductsExportFailed(error_7.message, { error: error_7 });
                     case 4: return [2];
                 }
             });
@@ -317,7 +234,7 @@ var Products = (function (_super) {
     };
     Products.prototype.getDetails = function (productId, options) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_9;
+            var base, uri, response, error_8;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -338,8 +255,8 @@ var Products = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_9 = _a.sent();
-                        throw new ProductDetailsFetchFailed(error_9.message, { error: error_9 });
+                        error_8 = _a.sent();
+                        throw new ProductDetailsFetchFailed(error_8.message, { error: error_8 });
                     case 4: return [2];
                 }
             });
@@ -347,7 +264,7 @@ var Products = (function (_super) {
     };
     Products.prototype.getChildrenDetails = function (productId, hideStock, options) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var query, base, uri, response, error_10;
+            var query, base, uri, response, error_9;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -369,8 +286,8 @@ var Products = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_10 = _a.sent();
-                        throw new ProductChildrenDetailsFetchFailed(error_10.message, { error: error_10 });
+                        error_9 = _a.sent();
+                        throw new ProductChildrenDetailsFetchFailed(error_9.message, { error: error_9 });
                     case 4: return [2];
                 }
             });
@@ -378,7 +295,7 @@ var Products = (function (_super) {
     };
     Products.prototype.meta = function (q) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_11;
+            var base, uri, response, error_10;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -403,8 +320,8 @@ var Products = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_11 = _a.sent();
-                        throw new ProductsMetaFailed(error_11.message, { error: error_11 });
+                        error_10 = _a.sent();
+                        throw new ProductsMetaFailed(error_10.message, { error: error_10 });
                     case 4: return [2];
                 }
             });
@@ -412,7 +329,7 @@ var Products = (function (_super) {
     };
     Products.prototype.put = function (productId, product) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_12;
+            var uri, response, error_11;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -431,8 +348,8 @@ var Products = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_12 = _a.sent();
-                        throw new ProductsUpdateFailed(error_12.message, { error: error_12 });
+                        error_11 = _a.sent();
+                        throw new ProductsUpdateFailed(error_11.message, { error: error_11 });
                     case 4: return [2];
                 }
             });
@@ -440,7 +357,7 @@ var Products = (function (_super) {
     };
     Products.prototype.bulkCreate = function (products, query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_13;
+            var base, uri, response, error_12;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -465,8 +382,8 @@ var Products = (function (_super) {
                                 }
                             }];
                     case 3:
-                        error_13 = _a.sent();
-                        throw new ProductsBulkCreateFailed(error_13.message, { error: error_13 });
+                        error_12 = _a.sent();
+                        throw new ProductsBulkCreateFailed(error_12.message, { error: error_12 });
                     case 4: return [2];
                 }
             });
@@ -474,7 +391,7 @@ var Products = (function (_super) {
     };
     Products.prototype.bulkEdit = function (products) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_14;
+            var uri, response, error_13;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -493,8 +410,8 @@ var Products = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_14 = _a.sent();
-                        throw new ProductsBulkEditFailed(error_14.message, { error: error_14 });
+                        error_13 = _a.sent();
+                        throw new ProductsBulkEditFailed(error_13.message, { error: error_13 });
                     case 4: return [2];
                 }
             });
@@ -502,7 +419,7 @@ var Products = (function (_super) {
     };
     Products.prototype.bulkDelete = function (body) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_15;
+            var uri, response, error_14;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -522,8 +439,8 @@ var Products = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        error_15 = _a.sent();
-                        throw new ProductsBulkDeleteFailed(error_15.message, { error: error_15 });
+                        error_14 = _a.sent();
+                        throw new ProductsBulkDeleteFailed(error_14.message, { error: error_14 });
                     case 4: return [2];
                 }
             });
@@ -531,7 +448,7 @@ var Products = (function (_super) {
     };
     Products.prototype.count = function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_16;
+            var uri, response, error_15;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -550,8 +467,8 @@ var Products = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_16 = _a.sent();
-                        throw new ProductsCountFailed(error_16.message, { error: error_16 });
+                        error_15 = _a.sent();
+                        throw new ProductsCountFailed(error_15.message, { error: error_15 });
                     case 4: return [2];
                 }
             });
@@ -559,7 +476,7 @@ var Products = (function (_super) {
     };
     Products.prototype.delete = function (productId, deleteOptions) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_17;
+            var base, uri, response, error_16;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -576,8 +493,8 @@ var Products = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 2:
-                        error_17 = _a.sent();
-                        throw new ProductsDeleteFailed(error_17.message, { error: error_17 });
+                        error_16 = _a.sent();
+                        throw new ProductsDeleteFailed(error_16.message, { error: error_16 });
                     case 3: return [2];
                 }
             });
@@ -585,7 +502,7 @@ var Products = (function (_super) {
     };
     Products.prototype.search = function (query) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var _query, base, uri, response, error_18;
+            var _query, base, uri, response, error_17;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -606,8 +523,8 @@ var Products = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_18 = _a.sent();
-                        throw new ProductsSearchFailed(error_18.message, { error: error_18 });
+                        error_17 = _a.sent();
+                        throw new ProductsSearchFailed(error_17.message, { error: error_17 });
                     case 4: return [2];
                 }
             });
@@ -615,7 +532,7 @@ var Products = (function (_super) {
     };
     Products.prototype.bookStock = function (requestOptions) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_19;
+            var uri, response, error_18;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -633,8 +550,8 @@ var Products = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_19 = _a.sent();
-                        throw new ProductsBookStockFailed(error_19.message, { error: error_19 });
+                        error_18 = _a.sent();
+                        throw new ProductsBookStockFailed(error_18.message, { error: error_18 });
                     case 4: return [2];
                 }
             });
@@ -642,7 +559,7 @@ var Products = (function (_super) {
     };
     Products.prototype.checkBarcode = function (code) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_20;
+            var base, uri, response, error_19;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -665,15 +582,15 @@ var Products = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_20 = _a.sent();
-                        if (error_20.response && error_20.response.status === 409) {
+                        error_19 = _a.sent();
+                        if (error_19.response && error_19.response.status === 409) {
                             throw new BarcodeGetFailed(undefined, {
-                                status: error_20.response.status,
-                                name: error_20.response.data.name,
-                                data: error_20.response.data.results
+                                status: error_19.response.status,
+                                name: error_19.response.data.name,
+                                data: error_19.response.data.results
                             });
                         }
-                        throw new BarcodeGetFailed(error_20.message, { error: error_20 });
+                        throw new BarcodeGetFailed(error_19.message, { error: error_19 });
                     case 4: return [2];
                 }
             });
