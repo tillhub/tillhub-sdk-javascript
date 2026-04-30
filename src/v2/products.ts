@@ -87,15 +87,36 @@ export interface ProductsQuery {
   deleted?: boolean
   active?: boolean
   exclude_system_products?: boolean
-  location?: string
+  location?: string | string[]
   extended?: boolean
   [key: string]: any
 }
+
+const ProductQueryBodyKeys = new Set<string>([
+  'location',
+  'locations',
+  'branch_group',
+  'product_group',
+  'product_ids',
+  'custom_id',
+  'business_partner_id',
+  'tag',
+  'tags',
+  'type',
+  'types',
+  'linked_product_id',
+  'client',
+  'purchase_order_id',
+  'field',
+  'include',
+  'exclude'
+])
 
 export interface ProductsOptions {
   user?: string
   base?: string
   limit?: number
+  offset?: number
   uri?: string
   query?: ProductsQuery
 }
@@ -150,6 +171,61 @@ export class Products extends ThBaseHandler {
       return {
         data: response.data.results,
         metaData: { count: response.data.pagination?.total || 0, pagination: response.data.pagination }
+      }
+    } catch (error: any) {
+      throw new ProductsFetchFailed(error.message, { error })
+    }
+  }
+
+  async query (options?: ProductsOptions | undefined): Promise<ProductsResponse> {
+    let next
+
+    const splitBodyAndQuery = (flat: Record<string, unknown>): {
+      body: Record<string, unknown>
+      query: Record<string, unknown>
+    } => {
+      const body: Record<string, unknown> = {}
+      const query: Record<string, unknown> = {}
+      for (const key of Object.keys(flat)) {
+        if (ProductQueryBodyKeys.has(key)) {
+          body[key] = flat[key]
+        } else {
+          query[key] = flat[key]
+        }
+      }
+      return { body, query }
+    }
+
+    try {
+      let flat = { ...(options ?? {}) }
+      if (flat.query) {
+        flat = { ...flat, ...flat.query }
+        delete flat.query
+      }
+
+      const { body, query } = splitBodyAndQuery(flat)
+      const base = this.uriHelper.generateBaseUri('/query')
+      const uri = this.uriHelper.generateUriWithQuery(
+        base,
+        Object.keys(query).length > 0 ? { query } : undefined
+      )
+
+      const response = await this.http.getClient().post(uri, body)
+      if (response.status !== 200) {
+        throw new ProductsFetchFailed(undefined, { status: response.status })
+      }
+
+      if (response.data.count > 0 && response.data.count === response.data.pagination?.limit) {
+        next = (): Promise<ProductsResponse> => this.query({
+          ...options,
+          offset: Number(response.data.pagination?.offset ?? 0) + Number(response.data.pagination.limit)
+        })
+      }
+
+      return {
+        data: response.data.results,
+        metaData: { count: response.data.count || 0, pagination: response.data.pagination },
+        next
       }
     } catch (error: any) {
       throw new ProductsFetchFailed(error.message, { error })
