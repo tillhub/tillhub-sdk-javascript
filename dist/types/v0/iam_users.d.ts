@@ -60,6 +60,7 @@ export declare class IamUsers extends ThBaseHandler {
     getAll(query?: IamUsersQueryHandler | undefined): Promise<IamUsersResponse>;
     meta(query?: IamUsersQueryHandler | undefined): Promise<IamUsersResponse>;
     get(iamUserId: string): Promise<IamUserResponse>;
+    profile(iamUserId: string): Promise<IamUserResponse>;
     put(iamUserId: string, iamUser: IamUser): Promise<IamUserResponse>;
     create(iamUser: IamUser): Promise<IamUserResponse>;
     delete(iamUserId: string): Promise<IamUserResponse>;
@@ -102,6 +103,11 @@ export declare class IamUserReset2faFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class IamUserRegenerateBackupCodesFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class IamUserProfileFetchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

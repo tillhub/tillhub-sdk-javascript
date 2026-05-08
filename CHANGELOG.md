@@ -1,3 +1,10 @@
+# [4.268.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.267.0...v4.268.0) (2026-05-08)
+
+
+### Features
+
+* **user:** add profile request ([6af40aa](https://github.com/tillhub/tillhub-sdk-javascript/commit/6af40aab5c5a4d57077137657fab801dfac91211))
+
 # [4.267.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.266.0...v4.267.0) (2026-04-30)
 
 
