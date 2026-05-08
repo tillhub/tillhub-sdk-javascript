@@ -140,6 +140,26 @@ export class IamUsers extends ThBaseHandler {
     }
   }
 
+  async profile (iamUserId: string): Promise<IamUserResponse> {
+    const base = this.uriHelper.generateBaseUri(`/${iamUserId}/profile`)
+    const uri = this.uriHelper.generateUriWithQuery(base)
+
+    try {
+      const response = await this.http.getClient().get(uri)
+
+      if (response.status !== 200) {
+        throw new IamUserProfileFetchFailed(undefined, { status: response.status })
+      }
+      return {
+        data: response.data.results[0] as IamUser,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new IamUserProfileFetchFailed(error.message, { error })
+    }
+  }
+
   async put (iamUserId: string, iamUser: IamUser): Promise<IamUserResponse> {
     const base = this.uriHelper.generateBaseUri(`/${iamUserId}`)
     const uri = this.uriHelper.generateUriWithQuery(base)
@@ -326,5 +346,16 @@ export class IamUserRegenerateBackupCodesFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, IamUserRegenerateBackupCodesFailed.prototype)
+  }
+}
+
+export class IamUserProfileFetchFailed extends BaseError {
+  public name = 'IamUserProfileFetchFailed'
+  constructor (
+    public message: string = 'Could not fetch iam user profile',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, IamUserProfileFetchFailed.prototype)
   }
 }
