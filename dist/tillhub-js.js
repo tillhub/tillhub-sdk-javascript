@@ -679,6 +679,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.remoteOrderingApiUsers = function () {
         return this.generateAuthenticatedInstance(v0.RemoteOrderingApiUsers);
     };
+    TillhubClient.prototype.remoteOrderingMigration = function () {
+        return this.generateAuthenticatedInstance(v0.RemoteOrderingMigration);
+    };
     TillhubClient.prototype.remoteOrderingServiceAccountConfigs = function () {
         return this.generateAuthenticatedInstance(v0.RemoteOrderingServiceAccountConfigs);
     };

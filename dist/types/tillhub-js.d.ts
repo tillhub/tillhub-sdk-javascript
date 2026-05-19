@@ -179,6 +179,7 @@ export declare class TillhubClient extends events.EventEmitter {
     submissions(): v0.Submissions;
     email(): v0.Email;
     remoteOrderingApiUsers(): v0.RemoteOrderingApiUsers;
+    remoteOrderingMigration(): v0.RemoteOrderingMigration;
     remoteOrderingServiceAccountConfigs(): v0.RemoteOrderingServiceAccountConfigs;
 }
 export declare class Tillhub extends TillhubClient {

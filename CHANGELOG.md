@@ -1,3 +1,10 @@
+# [4.269.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.268.0...v4.269.0) (2026-05-19)
+
+
+### Features
+
+* **UNTIL-20165:** create ros data migration endpoint ([#729](https://github.com/tillhub/tillhub-sdk-javascript/issues/729)) ([9316f44](https://github.com/tillhub/tillhub-sdk-javascript/commit/9316f448a01d73e1bccc13088d4ad1aa9bd8a0a1))
+
 # [4.268.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.267.0...v4.268.0) (2026-05-08)
 
 
