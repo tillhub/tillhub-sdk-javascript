@@ -1578,6 +1578,13 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Remote ordering inner API: migration state
+   */
+  remoteOrderingMigration (): v0.RemoteOrderingMigration {
+    return this.generateAuthenticatedInstance(v0.RemoteOrderingMigration)
+  }
+
+  /**
    * Remote ordering inner API: service account branch + register bindings
    */
   remoteOrderingServiceAccountConfigs (): v0.RemoteOrderingServiceAccountConfigs {
