@@ -95,6 +95,7 @@ import { PaymentLinks } from './payment_links'
 import { Email } from './email'
 import { TransactionBatches } from './transaction_batches'
 import { RemoteOrderingApiUsers } from './remote_ordering_api_users'
+import { RemoteOrderingMigration } from './remote_ordering_migration'
 import { RemoteOrderingServiceAccountConfigs } from './remote_ordering_service_account_configs'
 
 export {
@@ -198,5 +199,6 @@ export {
   TransactionBatches,
   IamBackupCodes,
   RemoteOrderingApiUsers,
+  RemoteOrderingMigration,
   RemoteOrderingServiceAccountConfigs
 }
