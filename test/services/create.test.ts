@@ -24,7 +24,8 @@ const legacyId = '4564'
 const serviceItem = {
   name: 'Test name',
   duration: 5,
-  linked_product: '0f20c60f-2ed9-4685-8cd1-23970071f7eb'
+  linked_product: '0f20c60f-2ed9-4685-8cd1-23970071f7eb',
+  bookable_online: true
 }
 
 beforeEach(() => {
