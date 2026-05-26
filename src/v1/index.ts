@@ -27,6 +27,7 @@ import { Contents } from './contents'
 import { ContentTemplates } from './content-templates'
 import { Import } from './import'
 import { SuppliersProductsRelation } from './suppliers_products_relation'
+import { ServiceSteps } from './service_steps'
 
 export {
   Auth,
@@ -58,7 +59,8 @@ export {
   Contents,
   ContentTemplates,
   Import,
-  SuppliersProductsRelation
+  SuppliersProductsRelation,
+  ServiceSteps
 }
 
 export interface AnalyticsHandlersV1Types {
