@@ -2,6 +2,7 @@ import { Client } from '../client'
 import { UriHelper } from '../uri-helper'
 import { BaseError } from '../errors/baseError'
 import { ThBaseHandler } from '../base'
+import { ServiceStepAssignments } from '../v1/service_step_assignments'
 
 export interface ServicesOptions {
   user?: string
@@ -78,6 +79,10 @@ export class Services extends ThBaseHandler {
     } catch (error: any) {
       throw new ServicePutFailed(error.message, { error })
     }
+  }
+
+  steps (): ServiceStepAssignments {
+    return new ServiceStepAssignments(this.options, this.http)
   }
 }
 
