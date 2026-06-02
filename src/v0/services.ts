@@ -26,6 +26,9 @@ export interface ServicesObject {
   id?: string
   deleted?: boolean
   locations?: null | string[]
+  // Whether the service is exposed in Online Booking. Defaults to true server-side
+  // for reservation services; null/undefined for non-reservation product rows.
+  bookable_online?: boolean
 }
 
 export class Services extends ThBaseHandler {
