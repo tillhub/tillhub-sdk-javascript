@@ -550,6 +550,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.services = function () {
         return this.generateAuthenticatedInstance(v0.Services);
     };
+    TillhubClient.prototype.serviceSteps = function () {
+        return this.generateAuthenticatedInstance(v1.ServiceSteps);
+    };
     TillhubClient.prototype.exports = function () {
         return this.generateAuthenticatedInstance(v0.Exports);
     };

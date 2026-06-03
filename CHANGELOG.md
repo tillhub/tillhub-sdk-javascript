@@ -1,3 +1,12 @@
+# [4.270.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.269.0...v4.270.0) (2026-06-03)
+
+
+### Features
+
+* **UNTIL-20267:** add bookable_online to ServicesObject ([#730](https://github.com/tillhub/tillhub-sdk-javascript/issues/730)) ([4d2b3df](https://github.com/tillhub/tillhub-sdk-javascript/commit/4d2b3df3bbb4d906fd362b5f574d139bea97a547)), closes [#3453](https://github.com/tillhub/tillhub-sdk-javascript/issues/3453)
+* **UNTIL-20270:** add v1 ServiceSteps resource ([#731](https://github.com/tillhub/tillhub-sdk-javascript/issues/731)) ([8e606bd](https://github.com/tillhub/tillhub-sdk-javascript/commit/8e606bdaef32b77c5e7eb39c62d9b7819bbe067c))
+* **UNTL-20271:** implement service step assignments interface ([#732](https://github.com/tillhub/tillhub-sdk-javascript/issues/732)) ([d124ed1](https://github.com/tillhub/tillhub-sdk-javascript/commit/d124ed11b7b3d076d4e80c858fd2eaea647fbbb6))
+
 # [4.269.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.268.0...v4.269.0) (2026-05-19)
 
 

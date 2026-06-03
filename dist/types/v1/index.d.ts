@@ -27,7 +27,8 @@ import { Contents } from './contents';
 import { ContentTemplates } from './content-templates';
 import { Import } from './import';
 import { SuppliersProductsRelation } from './suppliers_products_relation';
-export { Auth, Pricebooks, Products, Templates, Transactions, TransactionsLegacy, Registers, Balances, Vouchers, Customers, Carts, Tags, SafesLogBook, ExportsV1, StocksBook, analytics, AuditLogs, Branches, Configurations, NotificationsMsu, NotificationsUnsubscribe, Promotions, AppointmentReminders, AppointmentReminderTemplates, TableLayouts, Devices, Contents, ContentTemplates, Import, SuppliersProductsRelation };
+import { ServiceSteps } from './service_steps';
+export { Auth, Pricebooks, Products, Templates, Transactions, TransactionsLegacy, Registers, Balances, Vouchers, Customers, Carts, Tags, SafesLogBook, ExportsV1, StocksBook, analytics, AuditLogs, Branches, Configurations, NotificationsMsu, NotificationsUnsubscribe, Promotions, AppointmentReminders, AppointmentReminderTemplates, TableLayouts, Devices, Contents, ContentTemplates, Import, SuppliersProductsRelation, ServiceSteps };
 export interface AnalyticsHandlersV1Types {
     analytics: {
         reports: {

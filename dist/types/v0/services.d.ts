@@ -2,6 +2,7 @@ import { Client } from '../client';
 import { UriHelper } from '../uri-helper';
 import { BaseError } from '../errors/baseError';
 import { ThBaseHandler } from '../base';
+import { ServiceStepAssignments } from '../v1/service_step_assignments';
 export interface ServicesOptions {
     user?: string;
     base?: string;
@@ -23,6 +24,7 @@ export interface ServicesObject {
     id?: string;
     deleted?: boolean;
     locations?: null | string[];
+    bookable_online?: boolean;
 }
 export declare class Services extends ThBaseHandler {
     static baseEndpoint: string;
@@ -33,6 +35,7 @@ export declare class Services extends ThBaseHandler {
     constructor(options: ServicesOptions, http: Client);
     create(service: ServicesObject): Promise<ServiceResponse>;
     put(serviceId: string, service: ServicesObject): Promise<ServiceResponse>;
+    steps(): ServiceStepAssignments;
 }
 export declare class ServiceCreationFailed extends BaseError {
     message: string;

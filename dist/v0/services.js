@@ -5,6 +5,7 @@ var tslib_1 = require("tslib");
 var uri_helper_1 = require("../uri-helper");
 var baseError_1 = require("../errors/baseError");
 var base_1 = require("../base");
+var service_step_assignments_1 = require("../v1/service_step_assignments");
 var Services = (function (_super) {
     tslib_1.__extends(Services, _super);
     function Services(options, http) {
@@ -69,6 +70,9 @@ var Services = (function (_super) {
                 }
             });
         });
+    };
+    Services.prototype.steps = function () {
+        return new service_step_assignments_1.ServiceStepAssignments(this.options, this.http);
     };
     Services.baseEndpoint = '/api/v0/services';
     return Services;
