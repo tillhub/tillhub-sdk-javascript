@@ -398,6 +398,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated MMS connected-dashboards instance
+   *
+   */
+  iamConnectedDashboards (): v0.IamConnectedDashboards {
+    return this.generateAuthenticatedInstance(v0.IamConnectedDashboards)
+  }
+
+  /**
    * Create an authenticated IAM backup codes instance
    *
    */

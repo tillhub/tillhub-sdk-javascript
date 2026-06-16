@@ -22,6 +22,9 @@ export interface Me {
   id: string
   role: string
   scopes: string[]
+  // MMS: { [unzerId]: ROLE } — the dashboards this user can access. Scopes above
+  // are resolved for the account named by the `x-client-account` header.
+  connectedDashboards?: Record<string, string>
 }
 
 export interface ErrorObject {

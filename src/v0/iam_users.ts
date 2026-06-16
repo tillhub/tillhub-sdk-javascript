@@ -45,6 +45,13 @@ export interface IamUser {
   has2faConfigured?: boolean
   hasBackupCodesConfigured?: boolean
   hasActiveSessions?: boolean
+  // MMS: per-connection access for this user — { [unzerId]: ROLE }. Accepted on
+  // create/update and returned on read.
+  connectedDashboards?: Record<string, string>
+  // MMS (read-only): the unzerIds this user can access (keys of connectedDashboards).
+  accessableBy?: string[]
+  // MMS (read-only): whether the user is a guest on the current dashboard.
+  isGuest?: boolean
 }
 
 export interface IamUsersQueryHandler {
