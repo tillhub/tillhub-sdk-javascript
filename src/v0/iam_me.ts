@@ -35,8 +35,8 @@ export interface IamMe {
   role?: string
   scopes?: string[]
   whitelabel?: string
-  // MMS: { [unzerId]: ROLE } — the dashboards this user can access.
-  connectedDashboards?: Record<string, string>
+  // MMS: { [unzerId]: roleId[] } — the dashboards this user can access.
+  connectedDashboards?: Record<string, string[]>
 }
 
 export class IamMeClass extends ThBaseHandler {

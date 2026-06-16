@@ -19,7 +19,7 @@ import { IamUserGroups } from './iam_user_groups'
 import { IamRoles } from './iam_roles'
 import { IamPermissions } from './iam_permissions'
 import { IamMeClass } from './iam_me'
-import { IamConnectedDashboards } from './iam_connected_dashboards'
+import { ClientAccounts } from './client_accounts'
 import { IamBackupCodes } from './iam_backup_codes'
 import { PaymentProducts } from './payment_products'
 import { SaleStreams } from './sale_streams'
@@ -121,7 +121,7 @@ export {
   IamRoles,
   IamPermissions,
   IamMeClass,
-  IamConnectedDashboards,
+  ClientAccounts,
   PaymentProducts,
   SaleStreams,
   Branches,

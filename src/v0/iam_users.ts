@@ -45,13 +45,11 @@ export interface IamUser {
   has2faConfigured?: boolean
   hasBackupCodesConfigured?: boolean
   hasActiveSessions?: boolean
-  // MMS: per-connection access for this user — { [unzerId]: ROLE }. Accepted on
-  // create/update and returned on read.
-  connectedDashboards?: Record<string, string>
-  // MMS (read-only): the unzerIds this user can access (keys of connectedDashboards).
-  accessableBy?: string[]
-  // MMS (read-only): whether the user is a guest on the current dashboard.
-  isGuest?: boolean
+  // MMS: per-connection access for this user — { [unzerId]: roleId[] }. Accepted
+  // on create/update and stored as a Keycloak attribute.
+  connectedDashboards?: Record<string, string[]>
+  // MMS: 'true' once the user has acknowledged their first login.
+  isFirstLoginDone?: string
 }
 
 export interface IamUsersQueryHandler {
@@ -266,6 +264,32 @@ export class IamUsers extends ThBaseHandler {
       throw new IamUserRegenerateBackupCodesFailed(error.message, { error })
     }
   }
+
+  /**
+   * MMS: acknowledge the user's first login.
+   *
+   * Marks `isFirstLoginDone` and, for an account owner, lazily populates their
+   * connected dashboards. Takes no body; `tenantId` is the client account.
+   */
+  async acknowledgeFirstLogin (tenantId: string): Promise<IamUserResponse> {
+    const base = this.options.base ?? 'https://api.tillhub.com'
+    const uri = `${base}${this.endpoint}/${tenantId}/first_login_ack`
+
+    try {
+      const response = await this.http.getClient().post(uri)
+
+      if (response.status !== 200) {
+        throw new IamUserAcknowledgeFirstLoginFailed(undefined, { status: response.status })
+      }
+      return {
+        data: response.data.results?.[0] as IamUser,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new IamUserAcknowledgeFirstLoginFailed(error.message, { error })
+    }
+  }
 }
 
 export class IamUsersFetchFailed extends BaseError {
@@ -364,5 +388,16 @@ export class IamUserProfileFetchFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, IamUserProfileFetchFailed.prototype)
+  }
+}
+
+export class IamUserAcknowledgeFirstLoginFailed extends BaseError {
+  public name = 'IamUserAcknowledgeFirstLoginFailed'
+  constructor (
+    public message: string = 'Could not acknowledge first login for iam user',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, IamUserAcknowledgeFirstLoginFailed.prototype)
   }
 }
