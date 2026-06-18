@@ -1,3 +1,10 @@
+# [4.271.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.270.0...v4.271.0) (2026-06-18)
+
+
+### Features
+
+* **UNTIL-20313:** add SMS v1 service-categories and services clients ([#735](https://github.com/tillhub/tillhub-sdk-javascript/issues/735)) ([fbfecd1](https://github.com/tillhub/tillhub-sdk-javascript/commit/fbfecd154e0a820e5a889aab3ecfb0871b697c2c))
+
 # [4.270.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.269.0...v4.270.0) (2026-06-03)
 
 
