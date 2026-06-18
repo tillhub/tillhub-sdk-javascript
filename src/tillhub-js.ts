@@ -1242,6 +1242,22 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated ServiceCategories (SMS v1) instance
+   *
+   */
+  serviceCategories (): v1.ServiceCategories {
+    return this.generateAuthenticatedInstance(v1.ServiceCategories)
+  }
+
+  /**
+   * Create an authenticated Services (SMS v1) instance
+   *
+   */
+  servicesV1 (): v1.Services {
+    return this.generateAuthenticatedInstance(v1.Services)
+  }
+
+  /**
    * Create an authenticated Exports instance
    *
    */

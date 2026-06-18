@@ -28,6 +28,8 @@ import { ContentTemplates } from './content-templates'
 import { Import } from './import'
 import { SuppliersProductsRelation } from './suppliers_products_relation'
 import { ServiceSteps } from './service_steps'
+import { ServiceCategories } from './service_categories'
+import { Services } from './services'
 
 export {
   Auth,
@@ -60,7 +62,9 @@ export {
   ContentTemplates,
   Import,
   SuppliersProductsRelation,
-  ServiceSteps
+  ServiceSteps,
+  ServiceCategories,
+  Services
 }
 
 export interface AnalyticsHandlersV1Types {
