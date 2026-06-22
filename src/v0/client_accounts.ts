@@ -12,6 +12,7 @@ export interface ClientAccountsOptions {
 /** MMS: display details for a connected dashboard. */
 export interface ConnectedDashboardDetails {
   name: string | null
+  clientAccountId?: string | null
 }
 
 /**
