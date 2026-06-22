@@ -2,6 +2,7 @@ import { Client } from '../client'
 import { UriHelper } from '../uri-helper'
 import { BaseError } from '../errors/baseError'
 import { ThBaseHandler } from '../base'
+import { ServiceStepAssignment } from './service_step_assignments'
 
 export interface ServicesOptions {
   user?: string
@@ -44,6 +45,7 @@ export interface Service {
   createdAt?: string
   updatedAt?: string
   deletedAt?: string | null
+  assignments?: ServiceStepAssignment[]
 }
 
 export class Services extends ThBaseHandler {
