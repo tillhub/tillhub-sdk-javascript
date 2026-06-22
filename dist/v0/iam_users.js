@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.IamUserProfileFetchFailed = exports.IamUserRegenerateBackupCodesFailed = exports.IamUserReset2faFailed = exports.IamUserDeleteFailed = exports.IamUserCreationFailed = exports.IamUserPutFailed = exports.IamUserFetchFailed = exports.IamUsersMetaFailed = exports.IamUsersFetchFailed = exports.IamUsers = void 0;
+exports.IamUserAcknowledgeFirstLoginFailed = exports.IamUserProfileFetchFailed = exports.IamUserRegenerateBackupCodesFailed = exports.IamUserReset2faFailed = exports.IamUserDeleteFailed = exports.IamUserCreationFailed = exports.IamUserPutFailed = exports.IamUserFetchFailed = exports.IamUsersMetaFailed = exports.IamUsersFetchFailed = exports.IamUsers = void 0;
 var tslib_1 = require("tslib");
 var baseError_1 = require("../errors/baseError");
 var uri_helper_1 = require("../uri-helper");
@@ -288,6 +288,37 @@ var IamUsers = (function (_super) {
             });
         });
     };
+    IamUsers.prototype.acknowledgeFirstLogin = function (tenantId) {
+        var _a, _b;
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_10;
+            return tslib_1.__generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        base = (_a = this.options.base) !== null && _a !== void 0 ? _a : 'https://api.tillhub.com';
+                        uri = "" + base + this.endpoint + "/" + tenantId + "/first_login_ack";
+                        _c.label = 1;
+                    case 1:
+                        _c.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().post(uri)];
+                    case 2:
+                        response = _c.sent();
+                        if (response.status !== 200) {
+                            throw new IamUserAcknowledgeFirstLoginFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: (_b = response.data.results) === null || _b === void 0 ? void 0 : _b[0],
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            }];
+                    case 3:
+                        error_10 = _c.sent();
+                        throw new IamUserAcknowledgeFirstLoginFailed(error_10.message, { error: error_10 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     IamUsers.baseEndpoint = '/api/v0/iam/users';
     return IamUsers;
 }(base_1.ThBaseHandler));
@@ -409,4 +440,17 @@ var IamUserProfileFetchFailed = (function (_super) {
     return IamUserProfileFetchFailed;
 }(baseError_1.BaseError));
 exports.IamUserProfileFetchFailed = IamUserProfileFetchFailed;
+var IamUserAcknowledgeFirstLoginFailed = (function (_super) {
+    tslib_1.__extends(IamUserAcknowledgeFirstLoginFailed, _super);
+    function IamUserAcknowledgeFirstLoginFailed(message, properties) {
+        if (message === void 0) { message = 'Could not acknowledge first login for iam user'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'IamUserAcknowledgeFirstLoginFailed';
+        Object.setPrototypeOf(_this, IamUserAcknowledgeFirstLoginFailed.prototype);
+        return _this;
+    }
+    return IamUserAcknowledgeFirstLoginFailed;
+}(baseError_1.BaseError));
+exports.IamUserAcknowledgeFirstLoginFailed = IamUserAcknowledgeFirstLoginFailed;
 //# sourceMappingURL=iam_users.js.map

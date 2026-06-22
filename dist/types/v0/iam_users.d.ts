@@ -38,6 +38,8 @@ export interface IamUser {
     has2faConfigured?: boolean;
     hasBackupCodesConfigured?: boolean;
     hasActiveSessions?: boolean;
+    connectedDashboards?: Record<string, string[]>;
+    isFirstLoginDone?: string;
 }
 export interface IamUsersQueryHandler {
     limit?: number;
@@ -66,6 +68,7 @@ export declare class IamUsers extends ThBaseHandler {
     delete(iamUserId: string): Promise<IamUserResponse>;
     reset2fa(iamUserId: string): Promise<IamUserResponse>;
     sendBackupCodesRegenerationEmail(iamUserId: string): Promise<IamUserResponse>;
+    acknowledgeFirstLogin(tenantId: string): Promise<IamUserResponse>;
 }
 export declare class IamUsersFetchFailed extends BaseError {
     message: string;
@@ -108,6 +111,11 @@ export declare class IamUserRegenerateBackupCodesFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class IamUserProfileFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class IamUserAcknowledgeFirstLoginFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

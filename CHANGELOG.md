@@ -1,3 +1,10 @@
+# [4.273.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.272.0...v4.273.0) (2026-06-22)
+
+
+### Features
+
+* **MMS:** switch dashboard SDK surface - UOD-3446 ([#738](https://github.com/tillhub/tillhub-sdk-javascript/issues/738)) ([1596733](https://github.com/tillhub/tillhub-sdk-javascript/commit/1596733e453dbd9b16eb137af42295e8107a8d23))
+
 # [4.272.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.271.0...v4.272.0) (2026-06-22)
 
 # [4.271.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.270.0...v4.271.0) (2026-06-18)

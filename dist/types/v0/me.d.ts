@@ -19,6 +19,7 @@ export interface Me {
     id: string;
     role: string;
     scopes: string[];
+    connectedDashboards?: Record<string, string[]>;
 }
 export interface ErrorObject {
     id: string;

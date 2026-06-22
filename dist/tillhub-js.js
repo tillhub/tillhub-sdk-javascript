@@ -188,6 +188,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.iamMeClass = function () {
         return this.generateAuthenticatedInstance(v0.IamMeClass);
     };
+    TillhubClient.prototype.clientAccounts = function () {
+        return this.generateAuthenticatedInstance(v0.ClientAccounts);
+    };
     TillhubClient.prototype.iamBackupCodes = function () {
         return this.generateAuthenticatedInstance(v0.IamBackupCodes);
     };

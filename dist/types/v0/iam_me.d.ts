@@ -30,6 +30,7 @@ export interface IamMe {
     role?: string;
     scopes?: string[];
     whitelabel?: string;
+    connectedDashboards?: Record<string, string[]>;
 }
 export declare class IamMeClass extends ThBaseHandler {
     static baseEndpoint: string;
