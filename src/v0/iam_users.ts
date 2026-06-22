@@ -45,6 +45,8 @@ export interface IamUser {
   has2faConfigured?: boolean
   hasBackupCodesConfigured?: boolean
   hasActiveSessions?: boolean
+  connectedDashboards?: Record<string, string[]>
+  isFirstLoginDone?: string
 }
 
 export interface IamUsersQueryHandler {
@@ -259,6 +261,26 @@ export class IamUsers extends ThBaseHandler {
       throw new IamUserRegenerateBackupCodesFailed(error.message, { error })
     }
   }
+
+  async acknowledgeFirstLogin (tenantId: string): Promise<IamUserResponse> {
+    const base = this.options.base ?? 'https://api.tillhub.com'
+    const uri = `${base}${this.endpoint}/${tenantId}/first_login_ack`
+
+    try {
+      const response = await this.http.getClient().post(uri)
+
+      if (response.status !== 200) {
+        throw new IamUserAcknowledgeFirstLoginFailed(undefined, { status: response.status })
+      }
+      return {
+        data: response.data.results?.[0] as IamUser,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new IamUserAcknowledgeFirstLoginFailed(error.message, { error })
+    }
+  }
 }
 
 export class IamUsersFetchFailed extends BaseError {
@@ -357,5 +379,16 @@ export class IamUserProfileFetchFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, IamUserProfileFetchFailed.prototype)
+  }
+}
+
+export class IamUserAcknowledgeFirstLoginFailed extends BaseError {
+  public name = 'IamUserAcknowledgeFirstLoginFailed'
+  constructor (
+    public message: string = 'Could not acknowledge first login for iam user',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, IamUserAcknowledgeFirstLoginFailed.prototype)
   }
 }

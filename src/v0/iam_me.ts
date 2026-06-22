@@ -35,6 +35,7 @@ export interface IamMe {
   role?: string
   scopes?: string[]
   whitelabel?: string
+  connectedDashboards?: Record<string, string[]>
 }
 
 export class IamMeClass extends ThBaseHandler {
