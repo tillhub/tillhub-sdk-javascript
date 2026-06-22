@@ -89,8 +89,9 @@ var PaymentOptions = (function (_super) {
                         return [4, this.http.getClient().put(uri, paymentOption)];
                     case 2:
                         response = _a.sent();
-                        if (response.status !== 200)
+                        if (response.status !== 200) {
                             throw new errors.PaymentOptionPutFailed(undefined, { status: response.status });
+                        }
                         return [2, {
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count }
@@ -116,8 +117,9 @@ var PaymentOptions = (function (_super) {
                         return [4, this.http.getClient().post(uri, paymentOption)];
                     case 2:
                         response = _a.sent();
-                        if (response.status !== 200)
+                        if (response.status !== 200) {
                             throw new errors.PaymentOptionCreationFailed(undefined, { status: response.status });
+                        }
                         return [2, {
                                 data: response.data.results[0],
                                 metadata: { count: response.data.count }
@@ -143,8 +145,9 @@ var PaymentOptions = (function (_super) {
                         return [4, this.http.getClient().delete(uri)];
                     case 2:
                         response = _a.sent();
-                        if (response.status !== 200)
+                        if (response.status !== 200) {
                             throw new errors.PaymentOptionDeleteFailed();
+                        }
                         return [2, {
                                 msg: response.data.msg
                             }];
