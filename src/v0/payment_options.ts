@@ -31,19 +31,55 @@ export interface PaymentOptionResponse {
   msg?: string
 }
 
-export type PaymentOptionType = 'expense' | 'deposit' | 'bank'
+export type PaymentOptionType =
+  | 'cash'
+  | 'card'
+  | 'invoice'
+  | 'card_opi'
+  | 'card_concardis'
+  | 'card_tim'
+  | 'card_adyen'
+  | 'gift_card'
+  | 'terminal_gift_card'
+  | 'default'
+  | 'undefined'
+  | 'voucher'
+  | 'sumup'
+  | 'buy_now_pay_later'
+  | 'unzer_installment'
+  | 'unzer_invoice'
+  | 'applepay'
+  | 'googlepay'
+  | 'paypal'
+  | 'ideal'
+  | 'wechatpay'
+  | 'alipay'
+  | 'twint'
+  | 'trustly'
 
 export interface PaymentOption {
-  id?: string
-  active?: boolean
+  id: string
   type: PaymentOptionType
-  name: string
-  cost_center?: string
-  currency: string
-  accounts: string[]
-  discrepancy_account: string
-  order_index: number
+  name: string | null
+  active: boolean
+  metadata: Record<string, unknown>
+  cost_center: string | null
+  currency: string | null
+  discrepancy_account: string | null
   summable: boolean
+  order_index: number | null
+  fa_account_number: string | null
+  accounts: string[] | null
+  account: string | null
+  card_circuits: string[] | null
+  financial_accounts: string[] | null
+  diff_account: string | null
+  price_range: Record<string, unknown> | null
+  is_mms: boolean
+  registers: string[] | null
+  deleted: boolean
+  created_at: string
+  updated_at: string | null
 }
 
 export class PaymentOptions extends ThBaseHandler {
@@ -90,7 +126,7 @@ export class PaymentOptions extends ThBaseHandler {
       }
 
       return {
-        data: response.data.results,
+        data: response.data.results as PaymentOption[],
         metadata: { count: response.data.count }
       }
     } catch (error: any) {
@@ -103,7 +139,9 @@ export class PaymentOptions extends ThBaseHandler {
 
     try {
       const response = await this.http.getClient().get(uri)
-      if (response.status !== 200) { throw new errors.PaymentOptionFetchFailed(undefined, { status: response.status }) }
+      if (response.status !== 200) {
+        throw new errors.PaymentOptionFetchFailed(undefined, { status: response.status })
+      }
 
       return {
         data: response.data.results[0] as PaymentOption,
@@ -119,7 +157,9 @@ export class PaymentOptions extends ThBaseHandler {
     const uri = this.uriHelper.generateBaseUri(`/${paymentOptionId}`)
     try {
       const response = await this.http.getClient().put(uri, paymentOption)
-      if (response.status !== 200) throw new errors.PaymentOptionPutFailed(undefined, { status: response.status })
+      if (response.status !== 200) {
+        throw new errors.PaymentOptionPutFailed(undefined, { status: response.status })
+      }
 
       return {
         data: response.data.results[0] as PaymentOption,
@@ -134,7 +174,9 @@ export class PaymentOptions extends ThBaseHandler {
     const uri = this.uriHelper.generateBaseUri()
     try {
       const response = await this.http.getClient().post(uri, paymentOption)
-      if (response.status !== 200) throw new errors.PaymentOptionCreationFailed(undefined, { status: response.status })
+      if (response.status !== 200) {
+        throw new errors.PaymentOptionCreationFailed(undefined, { status: response.status })
+      }
 
       return {
         data: response.data.results[0] as PaymentOption,
@@ -149,7 +191,9 @@ export class PaymentOptions extends ThBaseHandler {
     const uri = this.uriHelper.generateBaseUri(`/${paymentOptionId}`)
     try {
       const response = await this.http.getClient().delete(uri)
-      if (response.status !== 200) throw new errors.PaymentOptionDeleteFailed()
+      if (response.status !== 200) {
+        throw new errors.PaymentOptionDeleteFailed()
+      }
 
       return {
         msg: response.data.msg
