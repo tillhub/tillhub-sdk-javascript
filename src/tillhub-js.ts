@@ -398,6 +398,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated client accounts instance (MMS connections live here)
+   *
+   */
+  clientAccounts (): v0.ClientAccounts {
+    return this.generateAuthenticatedInstance(v0.ClientAccounts)
+  }
+
+  /**
    * Create an authenticated IAM backup codes instance
    *
    */
