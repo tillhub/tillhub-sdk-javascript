@@ -222,6 +222,26 @@ export class IamUsers extends ThBaseHandler {
     }
   }
 
+  async deleteGuestConnection (iamUserId: string): Promise<IamUserResponse> {
+    const base = this.uriHelper.generateBaseUri(`/${iamUserId}/guest-connection`)
+    const uri = this.uriHelper.generateUriWithQuery(base)
+
+    try {
+      const response = await this.http.getClient().delete(uri)
+
+      if (response.status !== 200) {
+        throw new IamUserDeleteGuestConnectionFailed(undefined, { status: response.status })
+      }
+      return {
+        data: response.data.results?.[0] as IamUser,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new IamUserDeleteGuestConnectionFailed(error.message, { error })
+    }
+  }
+
   async reset2fa (iamUserId: string): Promise<IamUserResponse> {
     const base = this.uriHelper.generateBaseUri(`/${iamUserId}/reset-2fa`)
     const uri = this.uriHelper.generateUriWithQuery(base)
@@ -346,6 +366,17 @@ export class IamUserDeleteFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, IamUserDeleteFailed.prototype)
+  }
+}
+
+export class IamUserDeleteGuestConnectionFailed extends BaseError {
+  public name = 'IamUserDeleteGuestConnectionFailed'
+  constructor (
+    public message: string = 'Could not remove guest connection for iam user',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, IamUserDeleteGuestConnectionFailed.prototype)
   }
 }
 
