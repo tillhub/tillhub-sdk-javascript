@@ -1,3 +1,10 @@
+# [4.274.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.273.0...v4.274.0) (2026-06-23)
+
+
+### Features
+
+* **MMS:** add deleteGuestConnection method - UOD-3450 ([#739](https://github.com/tillhub/tillhub-sdk-javascript/issues/739)) ([4d334cd](https://github.com/tillhub/tillhub-sdk-javascript/commit/4d334cd191cfa00c24eafd2342e3762e705b01bc))
+
 # [4.273.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.272.0...v4.273.0) (2026-06-22)
 
 
