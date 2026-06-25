@@ -1,3 +1,10 @@
+# [4.275.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.274.0...v4.275.0) (2026-06-25)
+
+
+### Features
+
+* **UNTIL-20476:** embed step assignments on v1 Service interface ([#737](https://github.com/tillhub/tillhub-sdk-javascript/issues/737)) ([25b9528](https://github.com/tillhub/tillhub-sdk-javascript/commit/25b95288900491502302ee7be43460c51e496578))
+
 # [4.274.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.273.0...v4.274.0) (2026-06-23)
 
 
