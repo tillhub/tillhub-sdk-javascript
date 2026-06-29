@@ -242,6 +242,26 @@ export class IamUsers extends ThBaseHandler {
     }
   }
 
+  async updateGuestConnection (iamUserId: string, iamUser: IamUser): Promise<IamUserResponse> {
+    const base = this.uriHelper.generateBaseUri(`/${iamUserId}/guest-connection`)
+    const uri = this.uriHelper.generateUriWithQuery(base)
+
+    try {
+      const response = await this.http.getClient().put(uri, iamUser)
+
+      if (response.status !== 200) {
+        throw new IamUserUpdateGuestConnectionFailed(undefined, { status: response.status })
+      }
+      return {
+        data: response.data.results?.[0] as IamUser,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new IamUserUpdateGuestConnectionFailed(error.message, { error })
+    }
+  }
+
   async reset2fa (iamUserId: string): Promise<IamUserResponse> {
     const base = this.uriHelper.generateBaseUri(`/${iamUserId}/reset-2fa`)
     const uri = this.uriHelper.generateUriWithQuery(base)
@@ -377,6 +397,17 @@ export class IamUserDeleteGuestConnectionFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, IamUserDeleteGuestConnectionFailed.prototype)
+  }
+}
+
+export class IamUserUpdateGuestConnectionFailed extends BaseError {
+  public name = 'IamUserUpdateGuestConnectionFailed'
+  constructor (
+    public message: string = 'Could not update guest connection for iam user',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, IamUserUpdateGuestConnectionFailed.prototype)
   }
 }
 
