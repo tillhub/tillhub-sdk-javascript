@@ -67,6 +67,7 @@ export declare class IamUsers extends ThBaseHandler {
     create(iamUser: IamUser): Promise<IamUserResponse>;
     delete(iamUserId: string): Promise<IamUserResponse>;
     deleteGuestConnection(iamUserId: string): Promise<IamUserResponse>;
+    updateGuestConnection(iamUserId: string, iamUser: IamUser): Promise<IamUserResponse>;
     reset2fa(iamUserId: string): Promise<IamUserResponse>;
     sendBackupCodesRegenerationEmail(iamUserId: string): Promise<IamUserResponse>;
     acknowledgeFirstLogin(tenantId: string): Promise<IamUserResponse>;
@@ -102,6 +103,11 @@ export declare class IamUserDeleteFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class IamUserDeleteGuestConnectionFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class IamUserUpdateGuestConnectionFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

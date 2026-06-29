@@ -1,3 +1,10 @@
+# [4.276.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.275.0...v4.276.0) (2026-06-29)
+
+
+### Features
+
+* **MMS:** add endpoint to edit guest user role - UOD-3540 ([#740](https://github.com/tillhub/tillhub-sdk-javascript/issues/740)) ([2148496](https://github.com/tillhub/tillhub-sdk-javascript/commit/2148496841387844364b6e67db10a24e25659038))
+
 # [4.275.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.274.0...v4.275.0) (2026-06-25)
 
 

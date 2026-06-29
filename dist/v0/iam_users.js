@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.IamUserAcknowledgeFirstLoginFailed = exports.IamUserProfileFetchFailed = exports.IamUserRegenerateBackupCodesFailed = exports.IamUserReset2faFailed = exports.IamUserDeleteGuestConnectionFailed = exports.IamUserDeleteFailed = exports.IamUserCreationFailed = exports.IamUserPutFailed = exports.IamUserFetchFailed = exports.IamUsersMetaFailed = exports.IamUsersFetchFailed = exports.IamUsers = void 0;
+exports.IamUserAcknowledgeFirstLoginFailed = exports.IamUserProfileFetchFailed = exports.IamUserRegenerateBackupCodesFailed = exports.IamUserReset2faFailed = exports.IamUserUpdateGuestConnectionFailed = exports.IamUserDeleteGuestConnectionFailed = exports.IamUserDeleteFailed = exports.IamUserCreationFailed = exports.IamUserPutFailed = exports.IamUserFetchFailed = exports.IamUsersMetaFailed = exports.IamUsersFetchFailed = exports.IamUsers = void 0;
 var tslib_1 = require("tslib");
 var baseError_1 = require("../errors/baseError");
 var uri_helper_1 = require("../uri-helper");
@@ -259,9 +259,40 @@ var IamUsers = (function (_super) {
             });
         });
     };
-    IamUsers.prototype.reset2fa = function (iamUserId) {
+    IamUsers.prototype.updateGuestConnection = function (iamUserId, iamUser) {
+        var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_9;
+            return tslib_1.__generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        base = this.uriHelper.generateBaseUri("/" + iamUserId + "/guest-connection");
+                        uri = this.uriHelper.generateUriWithQuery(base);
+                        _b.label = 1;
+                    case 1:
+                        _b.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().put(uri, iamUser)];
+                    case 2:
+                        response = _b.sent();
+                        if (response.status !== 200) {
+                            throw new IamUserUpdateGuestConnectionFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: (_a = response.data.results) === null || _a === void 0 ? void 0 : _a[0],
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            }];
+                    case 3:
+                        error_9 = _b.sent();
+                        throw new IamUserUpdateGuestConnectionFailed(error_9.message, { error: error_9 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
+    IamUsers.prototype.reset2fa = function (iamUserId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_10;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -282,8 +313,8 @@ var IamUsers = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_9 = _a.sent();
-                        throw new IamUserReset2faFailed(error_9.message, { error: error_9 });
+                        error_10 = _a.sent();
+                        throw new IamUserReset2faFailed(error_10.message, { error: error_10 });
                     case 4: return [2];
                 }
             });
@@ -291,7 +322,7 @@ var IamUsers = (function (_super) {
     };
     IamUsers.prototype.sendBackupCodesRegenerationEmail = function (iamUserId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_10;
+            var base, uri, response, error_11;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -312,8 +343,8 @@ var IamUsers = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_10 = _a.sent();
-                        throw new IamUserRegenerateBackupCodesFailed(error_10.message, { error: error_10 });
+                        error_11 = _a.sent();
+                        throw new IamUserRegenerateBackupCodesFailed(error_11.message, { error: error_11 });
                     case 4: return [2];
                 }
             });
@@ -322,7 +353,7 @@ var IamUsers = (function (_super) {
     IamUsers.prototype.acknowledgeFirstLogin = function (tenantId) {
         var _a, _b;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_11;
+            var base, uri, response, error_12;
             return tslib_1.__generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -343,8 +374,8 @@ var IamUsers = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_11 = _c.sent();
-                        throw new IamUserAcknowledgeFirstLoginFailed(error_11.message, { error: error_11 });
+                        error_12 = _c.sent();
+                        throw new IamUserAcknowledgeFirstLoginFailed(error_12.message, { error: error_12 });
                     case 4: return [2];
                 }
             });
@@ -445,6 +476,19 @@ var IamUserDeleteGuestConnectionFailed = (function (_super) {
     return IamUserDeleteGuestConnectionFailed;
 }(baseError_1.BaseError));
 exports.IamUserDeleteGuestConnectionFailed = IamUserDeleteGuestConnectionFailed;
+var IamUserUpdateGuestConnectionFailed = (function (_super) {
+    tslib_1.__extends(IamUserUpdateGuestConnectionFailed, _super);
+    function IamUserUpdateGuestConnectionFailed(message, properties) {
+        if (message === void 0) { message = 'Could not update guest connection for iam user'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'IamUserUpdateGuestConnectionFailed';
+        Object.setPrototypeOf(_this, IamUserUpdateGuestConnectionFailed.prototype);
+        return _this;
+    }
+    return IamUserUpdateGuestConnectionFailed;
+}(baseError_1.BaseError));
+exports.IamUserUpdateGuestConnectionFailed = IamUserUpdateGuestConnectionFailed;
 var IamUserReset2faFailed = (function (_super) {
     tslib_1.__extends(IamUserReset2faFailed, _super);
     function IamUserReset2faFailed(message, properties) {
