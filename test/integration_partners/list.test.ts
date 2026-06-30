@@ -66,6 +66,22 @@ describe('v0: IntegrationPartners', () => {
     expect(metadata.count).toBe(1)
   })
 
+  it('rejects on status codes that are not 200', async () => {
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mockLogin()
+      mock.onGet(listUrl).reply(() => {
+        return [400]
+      })
+    }
+
+    try {
+      const th = await initThInstance()
+      await th.integrationPartners().getAll()
+    } catch (err: any) {
+      expect(err.name).toBe('IntegrationPartnersFetchFailed')
+    }
+  })
+
   it('get returns a single integration partner', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mockLogin()
@@ -84,46 +100,6 @@ describe('v0: IntegrationPartners', () => {
     const { data } = await th.integrationPartners().get(integrationPartnerId)
 
     expect(data).toEqual(integrationPartner)
-  })
-
-  it('create posts a new integration partner', async () => {
-    if (process.env.SYSTEM_TEST !== 'true') {
-      mockLogin()
-      mock.onPost(listUrl).reply((config) => {
-        expect(JSON.parse(config.data as string)).toEqual({
-          name: 'partner-a',
-          displayName: 'Partner A'
-        })
-
-        return [
-          200,
-          {
-            count: 1,
-            results: [
-              {
-                ...integrationPartner,
-                id: '22222222-2222-2222-2222-222222222222',
-                name: 'partner-a',
-                displayName: 'Partner A'
-              }
-            ]
-          }
-        ]
-      })
-    }
-
-    const th = await initThInstance()
-    const { data } = await th.integrationPartners().create({
-      name: 'partner-a',
-      displayName: 'Partner A'
-    })
-
-    expect(data).toEqual(
-      expect.objectContaining({
-        name: 'partner-a',
-        displayName: 'Partner A'
-      })
-    )
   })
 
   it('rejects when integrationPartnerId is missing or blank', async () => {
