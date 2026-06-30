@@ -98,6 +98,7 @@ import { TransactionBatches } from './transaction_batches'
 import { RemoteOrderingApiUsers } from './remote_ordering_api_users'
 import { RemoteOrderingMigration } from './remote_ordering_migration'
 import { RemoteOrderingServiceAccountConfigs } from './remote_ordering_service_account_configs'
+import { IntegrationPartners } from './integration_partners'
 
 export {
   Auth,
@@ -202,5 +203,6 @@ export {
   IamBackupCodes,
   RemoteOrderingApiUsers,
   RemoteOrderingMigration,
-  RemoteOrderingServiceAccountConfigs
+  RemoteOrderingServiceAccountConfigs,
+  IntegrationPartners
 }

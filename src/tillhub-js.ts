@@ -1622,6 +1622,13 @@ export class TillhubClient extends events.EventEmitter {
   remoteOrderingServiceAccountConfigs (): v0.RemoteOrderingServiceAccountConfigs {
     return this.generateAuthenticatedInstance(v0.RemoteOrderingServiceAccountConfigs)
   }
+
+  /**
+   * Configuration service: integration partners dictionary
+   */
+  integrationPartners (): v0.IntegrationPartners {
+    return this.generateAuthenticatedInstance(v0.IntegrationPartners)
+  }
 }
 
 export class Tillhub extends TillhubClient {
