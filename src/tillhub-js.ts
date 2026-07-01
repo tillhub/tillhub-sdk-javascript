@@ -1239,7 +1239,7 @@ export class TillhubClient extends events.EventEmitter {
    * Create an authenticated Services instance
    *
    * @deprecated v0 deprecated, use the following v1 endpoint instead: {@link servicesV1}
-   * (`/api/v1/services`, service payload with embedded `steps[]`).
+   * (`/api/v1/services`).
    */
   services (): v0.Services {
     return this.generateAuthenticatedInstance(v0.Services)

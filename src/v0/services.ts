@@ -34,7 +34,7 @@ export interface ServicesObject {
 
 /**
  * @deprecated v0 deprecated, use the following v1 endpoint instead: `th.servicesV1()`
- * (`/api/v1/services`, service payload with embedded `steps[]`).
+ * (`/api/v1/services`).
  */
 export class Services extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/services'
