@@ -32,6 +32,10 @@ export interface ServicesObject {
   bookable_online?: boolean
 }
 
+/**
+ * @deprecated v0 deprecated, use the following v1 endpoint instead: `th.servicesV1()`
+ * (`/api/v1/services`, service payload with embedded `steps[]`).
+ */
 export class Services extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/services'
   endpoint: string

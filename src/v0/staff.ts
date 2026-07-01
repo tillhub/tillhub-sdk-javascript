@@ -363,6 +363,12 @@ export class Staff extends ThBaseHandler {
     }
   }
 
+  /**
+   * Fetch the reservation services assigned to a staff member.
+   *
+   * @deprecated v0 deprecated, use the following v1 endpoint instead: `th.servicesV1()`
+   * (`/api/v1/services`).
+   */
   async getServices (staffId: string): Promise<StaffServicesResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/${staffId}/services`)
