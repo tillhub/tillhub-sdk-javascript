@@ -1228,6 +1228,8 @@ export class TillhubClient extends events.EventEmitter {
   /**
    * Create an authenticated ServiceCategory instance
    *
+   * @deprecated v0 deprecated, use the following v1 endpoint instead: {@link serviceCategories}
+   * (`/api/v1/service-categories`).
    */
   serviceCategory (): v0.ServiceCategory {
     return this.generateAuthenticatedInstance(v0.ServiceCategory)
@@ -1236,6 +1238,8 @@ export class TillhubClient extends events.EventEmitter {
   /**
    * Create an authenticated Services instance
    *
+   * @deprecated v0 deprecated, use the following v1 endpoint instead: {@link servicesV1}
+   * (`/api/v1/services`, service payload with embedded `steps[]`).
    */
   services (): v0.Services {
     return this.generateAuthenticatedInstance(v0.Services)

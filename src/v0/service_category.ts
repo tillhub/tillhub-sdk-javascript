@@ -25,6 +25,10 @@ export interface ServiceCategoryItem {
   deleted?: boolean
 }
 
+/**
+ * @deprecated v0 deprecated, use the following v1 endpoint instead: `th.serviceCategories()`
+ * (`/api/v1/service-categories`).
+ */
 export class ServiceCategory extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/service_categories'
   endpoint: string
