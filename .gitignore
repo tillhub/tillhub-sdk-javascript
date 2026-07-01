@@ -11,3 +11,4 @@ compiled
 docs
 .env
 stats.html
+dist
