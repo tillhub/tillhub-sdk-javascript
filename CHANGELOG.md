@@ -1,3 +1,11 @@
+# [4.279.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.278.0...v4.279.0) (2026-07-03)
+
+
+### Bug Fixes
+
+* **UNTIL-20668:** do not append tenant id to integration partners URI ([dfaded4](https://github.com/tillhub/tillhub-sdk-javascript/commit/dfaded41bc5a562764a9cbf2aba0241a3ab72791))
+* **UNTIL-20668:** use single quotes for non-interpolated integration partners test URLs ([fccacfd](https://github.com/tillhub/tillhub-sdk-javascript/commit/fccacfde142bed97dd88e1d6b24f49683d6a2ecf))
+
 # [4.278.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.277.0...v4.278.0) (2026-07-03)
 
 

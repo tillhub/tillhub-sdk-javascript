@@ -17,7 +17,7 @@ var IntegrationPartners = (function (_super) {
         _this.http = http;
         _this.endpoint = IntegrationPartners.baseEndpoint;
         _this.options.base = (_b = _this.options.base) !== null && _b !== void 0 ? _b : 'https://api.tillhub.com';
-        _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, _this.options);
+        _this.uriHelper = new uri_helper_1.UriHelper(_this.endpoint, { base: _this.options.base });
         return _this;
     }
     IntegrationPartners.prototype.partnerPath = function (integrationPartnerId) {
