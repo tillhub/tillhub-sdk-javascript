@@ -1,3 +1,10 @@
+# [4.278.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.277.0...v4.278.0) (2026-07-03)
+
+
+### Features
+
+* **UNTIL-20668:** send integrationPartnerId on remote ordering api user create ([d70e813](https://github.com/tillhub/tillhub-sdk-javascript/commit/d70e813db260f08c55488d96597b5a34141bec8a))
+
 # [4.277.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.276.0...v4.277.0) (2026-07-03)
 
 # [4.276.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.275.0...v4.276.0) (2026-06-29)

@@ -20,7 +20,7 @@ export interface RemoteOrderingServiceAccount {
     totp?: boolean;
     emailVerified?: boolean;
     attributes?: {
-        partner?: string;
+        integrationPartnerId?: string;
         clientAccountId?: string;
     };
     groups?: string[];
@@ -39,7 +39,7 @@ export interface RemoteOrderingApiUserMutationResponse {
 }
 export interface RemoteOrderingApiUserCreatePayload {
     password: string;
-    partner?: string;
+    integrationPartnerId: string;
 }
 export declare class RemoteOrderingApiUsers extends ThBaseHandler {
     static baseEndpoint: string;

@@ -68,7 +68,7 @@ var RemoteOrderingApiUsers = (function (_super) {
                         base = this.uriHelper.generateBaseUri('/service-accounts');
                         uri = this.uriHelper.generateUriWithQuery(base);
                         body = {
-                            partner: payload.partner,
+                            integrationPartnerId: payload.integrationPartnerId,
                             password: payload.password
                         };
                         _d.label = 1;
