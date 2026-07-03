@@ -22,7 +22,7 @@ const updatedPartner = {
   deletedAt: null
 }
 
-const detailsUrl = `https://api.tillhub.com/api/v0/integration-partners/${legacyId}/${integrationPartnerId}`
+const detailsUrl = `https://api.tillhub.com/api/v0/integration-partners/${integrationPartnerId}`
 
 describe('v0: IntegrationPartners: update', () => {
   it('is instantiable and patches an existing integration partner', async () => {
