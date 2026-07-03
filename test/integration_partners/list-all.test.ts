@@ -22,7 +22,7 @@ const integrationPartner = {
   deletedAt: null
 }
 
-const listUrl = `https://api.tillhub.com/api/v0/integration-partners`
+const listUrl = 'https://api.tillhub.com/api/v0/integration-partners'
 
 describe('v0: IntegrationPartners: listAll', () => {
   it('aggregates all pages', async () => {
