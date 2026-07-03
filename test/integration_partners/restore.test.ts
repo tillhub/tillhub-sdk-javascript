@@ -22,7 +22,7 @@ const restoredPartner = {
   deletedAt: null
 }
 
-const restoreUrl = `https://api.tillhub.com/api/v0/integration-partners/${legacyId}/${integrationPartnerId}/restore`
+const restoreUrl = `https://api.tillhub.com/api/v0/integration-partners/${integrationPartnerId}/restore`
 
 describe('v0: IntegrationPartners: restore', () => {
   it('is instantiable and restores a deleted integration partner', async () => {

@@ -22,7 +22,7 @@ const integrationPartner = {
   deletedAt: null
 }
 
-const listUrl = `https://api.tillhub.com/api/v0/integration-partners/${legacyId}`
+const listUrl = `https://api.tillhub.com/api/v0/integration-partners`
 
 describe('v0: IntegrationPartners: create', () => {
   it('is instantiable and posts a new integration partner', async () => {

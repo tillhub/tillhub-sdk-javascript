@@ -62,7 +62,9 @@ export class IntegrationPartners extends ThBaseHandler {
 
     this.endpoint = IntegrationPartners.baseEndpoint
     this.options.base = this.options.base ?? 'https://api.tillhub.com'
-    this.uriHelper = new UriHelper(this.endpoint, this.options)
+    // Integration partners is a global (non-tenanted) dictionary, so the
+    // authenticated user id must not be appended to the base URI.
+    this.uriHelper = new UriHelper(this.endpoint, { base: this.options.base })
   }
 
   private partnerPath (integrationPartnerId: string): string {

@@ -14,7 +14,7 @@ afterEach(() => {
   mock.reset()
 })
 
-const detailsUrl = `https://api.tillhub.com/api/v0/integration-partners/${legacyId}/${integrationPartnerId}`
+const detailsUrl = `https://api.tillhub.com/api/v0/integration-partners/${integrationPartnerId}`
 
 describe('v0: IntegrationPartners: delete', () => {
   it('is instantiable and deletes an integration partner (204)', async () => {
