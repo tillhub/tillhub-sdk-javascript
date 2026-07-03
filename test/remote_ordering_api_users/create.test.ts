@@ -6,6 +6,7 @@ import { initThInstance } from '../util'
 dotenv.config()
 
 const legacyId = '4564'
+const integrationPartnerId = 'b3f3c9e2-1c2d-4e5f-8a9b-0c1d2e3f4a5b'
 
 const mock = new MockAdapter(axios)
 
@@ -20,7 +21,7 @@ const createResultRow = {
   enabled: true,
   attributes: {
     clientAccountId: legacyId,
-    partner: 'so-use'
+    integrationPartnerId
   }
 }
 
@@ -44,7 +45,7 @@ describe('v0: RemoteOrderingApiUsers: can create api user', () => {
         .onPost(`https://api.tillhub.com/api/v0/remote-ordering-inner/${legacyId}/service-accounts`)
         .reply((config) => {
           expect(JSON.parse(config.data)).toEqual({
-            partner: 'so-use',
+            integrationPartnerId,
             password: 'SecureP4ss!'
           })
           return [
@@ -64,7 +65,7 @@ describe('v0: RemoteOrderingApiUsers: can create api user', () => {
     expect(remoteOrderingApiUsers).toBeInstanceOf(v0.RemoteOrderingApiUsers)
 
     const { data } = await remoteOrderingApiUsers.create({
-      partner: 'so-use',
+      integrationPartnerId,
       password: 'SecureP4ss!'
     })
 
@@ -97,7 +98,7 @@ describe('v0: RemoteOrderingApiUsers: can create api user', () => {
       const th = await initThInstance()
       await th
         .remoteOrderingApiUsers()
-        .create({ partner: 'so-use', password: 'SecureP4ss!' })
+        .create({ integrationPartnerId, password: 'SecureP4ss!' })
     } catch (err: any) {
       expect(err.name).toBe('RemoteOrderingApiUserCreateFailed')
     }

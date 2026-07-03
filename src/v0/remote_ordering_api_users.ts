@@ -23,7 +23,7 @@ export interface RemoteOrderingServiceAccount {
   totp?: boolean
   emailVerified?: boolean
   attributes?: {
-    partner?: string
+    integrationPartnerId?: string
     clientAccountId?: string
   }
   groups?: string[]
@@ -45,7 +45,7 @@ export interface RemoteOrderingApiUserMutationResponse {
 
 export interface RemoteOrderingApiUserCreatePayload {
   password: string
-  partner?: string
+  integrationPartnerId: string
 }
 
 export class RemoteOrderingApiUsers extends ThBaseHandler {
@@ -101,7 +101,7 @@ export class RemoteOrderingApiUsers extends ThBaseHandler {
     const base = this.uriHelper.generateBaseUri('/service-accounts')
     const uri = this.uriHelper.generateUriWithQuery(base)
     const body = {
-      partner: payload.partner,
+      integrationPartnerId: payload.integrationPartnerId,
       password: payload.password
     }
 
