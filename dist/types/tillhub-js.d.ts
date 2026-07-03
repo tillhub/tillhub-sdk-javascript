@@ -185,6 +185,7 @@ export declare class TillhubClient extends events.EventEmitter {
     remoteOrderingApiUsers(): v0.RemoteOrderingApiUsers;
     remoteOrderingMigration(): v0.RemoteOrderingMigration;
     remoteOrderingServiceAccountConfigs(): v0.RemoteOrderingServiceAccountConfigs;
+    integrationPartners(): v0.IntegrationPartners;
 }
 export declare class Tillhub extends TillhubClient {
     private static instance;
