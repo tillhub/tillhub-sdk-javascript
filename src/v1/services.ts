@@ -7,6 +7,10 @@ import { ServiceStepAssignment } from './service_step_assignments'
 export interface ServicesOptions {
   user?: string
   base?: string
+  limit?: number
+  offset?: number
+  uri?: string
+  query?: ServicesQuery
 }
 
 export interface ServicesQuery {
@@ -17,11 +21,15 @@ export interface ServicesQuery {
   active?: boolean
   deleted?: boolean
   serviceCategoryId?: string
+  id?: string[]
 }
+
+const ServiceQueryBodyKeys = new Set<string>(['id'])
 
 export interface ServicesResponse {
   data: Service[]
   metadata: Record<string, unknown>
+  next?: () => Promise<ServicesResponse>
 }
 
 export interface ServiceResponse {
@@ -78,6 +86,68 @@ export class Services extends ThBaseHandler {
       return {
         data: response.data.results,
         metadata: { count: response.data.results?.length, cursors: response.data.cursors }
+      }
+    } catch (error: any) {
+      throw new ServicesFetchAllFailed(error.message, { error })
+    }
+  }
+
+  async query (options?: ServicesOptions | undefined): Promise<ServicesResponse> {
+    let next
+
+    const splitBodyAndQuery = (flat: Record<string, unknown>): {
+      body: Record<string, unknown>
+      query: Record<string, unknown>
+    } => {
+      const body: Record<string, unknown> = {}
+      const query: Record<string, unknown> = {}
+      for (const key of Object.keys(flat)) {
+        if (ServiceQueryBodyKeys.has(key)) {
+          body[key] = flat[key]
+        } else {
+          query[key] = flat[key]
+        }
+      }
+      return { body, query }
+    }
+
+    try {
+      let flat: Record<string, unknown> = { ...(options ?? {}) }
+      if (flat.query) {
+        flat = { ...flat, ...(flat.query as Record<string, unknown>) }
+        delete flat.query
+      }
+
+      const uri = typeof flat.uri === 'string' ? flat.uri : undefined
+      if (uri !== undefined) {
+        delete flat.uri
+      }
+
+      const { body, query } = splitBodyAndQuery(flat)
+      const postUri = uri ?? this.uriHelper.generateUriWithQuery(
+        this.uriHelper.generateBaseUri('/query'),
+        Object.keys(query).length > 0 ? { query } : undefined
+      )
+
+      const response = await this.http.getClient().post(postUri, body)
+      if (response.status !== 200) {
+        throw new ServicesFetchAllFailed(undefined, { status: response.status })
+      }
+
+      if (response.data.cursors?.after) {
+        next = (): Promise<ServicesResponse> => this.query({
+          ...options,
+          uri: response.data.cursors.after
+        })
+      }
+
+      return {
+        data: response.data.results ?? [],
+        metadata: {
+          count: response.data.results?.length ?? 0,
+          cursors: response.data.cursors
+        },
+        next
       }
     } catch (error: any) {
       throw new ServicesFetchAllFailed(error.message, { error })
