@@ -363,6 +363,12 @@ export class Staff extends ThBaseHandler {
     }
   }
 
+  /**
+   * Fetch the reservation services assigned to a staff member.
+   *
+   * @deprecated Use `th.servicesV1().query({ query: { id } })` with the staff
+   * member's `services` ID array from the staff record instead.
+   */
   async getServices (staffId: string): Promise<StaffServicesResponse> {
     try {
       const base = this.uriHelper.generateBaseUri(`/${staffId}/services`)
