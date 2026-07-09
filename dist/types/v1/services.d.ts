@@ -6,6 +6,10 @@ import { ServiceStepAssignment } from './service_step_assignments';
 export interface ServicesOptions {
     user?: string;
     base?: string;
+    limit?: number;
+    offset?: number;
+    uri?: string;
+    query?: ServicesQuery;
 }
 export interface ServicesQuery {
     q?: string;
@@ -15,10 +19,12 @@ export interface ServicesQuery {
     active?: boolean;
     deleted?: boolean;
     serviceCategoryId?: string;
+    id?: string[];
 }
 export interface ServicesResponse {
     data: Service[];
     metadata: Record<string, unknown>;
+    next?: () => Promise<ServicesResponse>;
 }
 export interface ServiceResponse {
     data?: Service;
@@ -50,6 +56,7 @@ export declare class Services extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: ServicesOptions, http: Client);
     getAll(query?: ServicesQuery | undefined): Promise<ServicesResponse>;
+    query(options?: ServicesOptions | undefined): Promise<ServicesResponse>;
     get(serviceId: string): Promise<ServiceResponse>;
     create(service: Service): Promise<ServiceResponse>;
     put(serviceId: string, service: Service): Promise<ServiceResponse>;

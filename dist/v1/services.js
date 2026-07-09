@@ -5,6 +5,7 @@ var tslib_1 = require("tslib");
 var uri_helper_1 = require("../uri-helper");
 var baseError_1 = require("../errors/baseError");
 var base_1 = require("../base");
+var ServiceQueryBodyKeys = new Set(['id']);
 var Services = (function (_super) {
     tslib_1.__extends(Services, _super);
     function Services(options, http) {
@@ -45,9 +46,70 @@ var Services = (function (_super) {
             });
         });
     };
+    Services.prototype.query = function (options) {
+        var _a, _b, _c, _d;
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var next, splitBodyAndQuery, flat, uri, _e, body, query, postUri, response_1, error_2;
+            var _this = this;
+            return tslib_1.__generator(this, function (_f) {
+                switch (_f.label) {
+                    case 0:
+                        splitBodyAndQuery = function (flat) {
+                            var body = {};
+                            var query = {};
+                            for (var _i = 0, _a = Object.keys(flat); _i < _a.length; _i++) {
+                                var key = _a[_i];
+                                if (ServiceQueryBodyKeys.has(key)) {
+                                    body[key] = flat[key];
+                                }
+                                else {
+                                    query[key] = flat[key];
+                                }
+                            }
+                            return { body: body, query: query };
+                        };
+                        _f.label = 1;
+                    case 1:
+                        _f.trys.push([1, 3, , 4]);
+                        flat = tslib_1.__assign({}, (options !== null && options !== void 0 ? options : {}));
+                        if (flat.query) {
+                            flat = tslib_1.__assign(tslib_1.__assign({}, flat), flat.query);
+                            delete flat.query;
+                        }
+                        uri = typeof flat.uri === 'string' ? flat.uri : undefined;
+                        if (uri !== undefined) {
+                            delete flat.uri;
+                        }
+                        _e = splitBodyAndQuery(flat), body = _e.body, query = _e.query;
+                        postUri = uri !== null && uri !== void 0 ? uri : this.uriHelper.generateUriWithQuery(this.uriHelper.generateBaseUri('/query'), Object.keys(query).length > 0 ? { query: query } : undefined);
+                        return [4, this.http.getClient().post(postUri, body)];
+                    case 2:
+                        response_1 = _f.sent();
+                        if (response_1.status !== 200) {
+                            throw new ServicesFetchAllFailed(undefined, { status: response_1.status });
+                        }
+                        if ((_a = response_1.data.cursors) === null || _a === void 0 ? void 0 : _a.after) {
+                            next = function () { return _this.query(tslib_1.__assign(tslib_1.__assign({}, options), { uri: response_1.data.cursors.after })); };
+                        }
+                        return [2, {
+                                data: (_b = response_1.data.results) !== null && _b !== void 0 ? _b : [],
+                                metadata: {
+                                    count: (_d = (_c = response_1.data.results) === null || _c === void 0 ? void 0 : _c.length) !== null && _d !== void 0 ? _d : 0,
+                                    cursors: response_1.data.cursors
+                                },
+                                next: next
+                            }];
+                    case 3:
+                        error_2 = _f.sent();
+                        throw new ServicesFetchAllFailed(error_2.message, { error: error_2 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     Services.prototype.get = function (serviceId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_2;
+            var uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -67,8 +129,8 @@ var Services = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_2 = _a.sent();
-                        throw new ServiceFetchFailed(error_2.message, { error: error_2 });
+                        error_3 = _a.sent();
+                        throw new ServiceFetchFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });
@@ -76,7 +138,7 @@ var Services = (function (_super) {
     };
     Services.prototype.create = function (service) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_3;
+            var uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -92,8 +154,8 @@ var Services = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_3 = _a.sent();
-                        throw new ServiceCreationFailed(error_3.message, { error: error_3 });
+                        error_4 = _a.sent();
+                        throw new ServiceCreationFailed(error_4.message, { error: error_4 });
                     case 4: return [2];
                 }
             });
@@ -101,7 +163,7 @@ var Services = (function (_super) {
     };
     Services.prototype.put = function (serviceId, service) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_4;
+            var uri, response, error_5;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -117,8 +179,8 @@ var Services = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_4 = _a.sent();
-                        throw new ServicePutFailed(error_4.message, { error: error_4 });
+                        error_5 = _a.sent();
+                        throw new ServicePutFailed(error_5.message, { error: error_5 });
                     case 4: return [2];
                 }
             });
@@ -126,7 +188,7 @@ var Services = (function (_super) {
     };
     Services.prototype.delete = function (serviceId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_5;
+            var uri, response, error_6;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -143,8 +205,8 @@ var Services = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        error_5 = _a.sent();
-                        throw new ServiceDeleteFailed(error_5.message, { error: error_5 });
+                        error_6 = _a.sent();
+                        throw new ServiceDeleteFailed(error_6.message, { error: error_6 });
                     case 4: return [2];
                 }
             });

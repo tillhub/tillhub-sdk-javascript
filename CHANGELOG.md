@@ -1,3 +1,10 @@
+# [4.280.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.279.0...v4.280.0) (2026-07-09)
+
+
+### Features
+
+* **UNTIL-21284:** add servicesV1 batch query method ([#750](https://github.com/tillhub/tillhub-sdk-javascript/issues/750)) ([a2a9770](https://github.com/tillhub/tillhub-sdk-javascript/commit/a2a977003437092b14a83e36b8120b381320fde4))
+
 # [4.279.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.278.0...v4.279.0) (2026-07-03)
 
 
