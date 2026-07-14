@@ -42,9 +42,13 @@ export interface IamUser {
   lastName?: string
   attributes?: Record<string, unknown>
   groups?: string[]
+  enabled?: boolean
   has2faConfigured?: boolean
   hasBackupCodesConfigured?: boolean
   hasActiveSessions?: boolean
+  hasPasswordConfigured?: boolean
+  lastInviteSentAt?: string
+  invitationExpired?: boolean
   connectedDashboards?: Record<string, string[]>
   isFirstLoginDone?: string
 }
@@ -302,6 +306,26 @@ export class IamUsers extends ThBaseHandler {
     }
   }
 
+  async resendInvite (iamUserId: string): Promise<IamUserResponse> {
+    const base = this.uriHelper.generateBaseUri(`/${iamUserId}/resend-invite`)
+    const uri = this.uriHelper.generateUriWithQuery(base)
+
+    try {
+      const response = await this.http.getClient().post(uri)
+
+      if (response.status !== 200) {
+        throw new IamUserResendInviteFailed(undefined, { status: response.status })
+      }
+      return {
+        data: response.data.results[0] as IamUser,
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new IamUserResendInviteFailed(error.message, { error })
+    }
+  }
+
   async acknowledgeFirstLogin (tenantId: string): Promise<IamUserResponse> {
     const base = this.options.base ?? 'https://api.tillhub.com'
     const uri = `${base}${this.endpoint}/${tenantId}/first_login_ack`
@@ -430,6 +454,17 @@ export class IamUserRegenerateBackupCodesFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, IamUserRegenerateBackupCodesFailed.prototype)
+  }
+}
+
+export class IamUserResendInviteFailed extends BaseError {
+  public name = 'IamUserResendInviteFailed'
+  constructor (
+    public message: string = 'Could not resend invitation for iam user',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, IamUserResendInviteFailed.prototype)
   }
 }
 
