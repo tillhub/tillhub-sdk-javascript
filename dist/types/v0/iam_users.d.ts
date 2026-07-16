@@ -35,9 +35,13 @@ export interface IamUser {
     lastName?: string;
     attributes?: Record<string, unknown>;
     groups?: string[];
+    enabled?: boolean;
     has2faConfigured?: boolean;
     hasBackupCodesConfigured?: boolean;
     hasActiveSessions?: boolean;
+    hasPasswordConfigured?: boolean;
+    lastInviteSentAt?: string;
+    invitationExpired?: boolean;
     connectedDashboards?: Record<string, string[]>;
     isFirstLoginDone?: string;
 }
@@ -70,6 +74,7 @@ export declare class IamUsers extends ThBaseHandler {
     updateGuestConnection(iamUserId: string, iamUser: IamUser): Promise<IamUserResponse>;
     reset2fa(iamUserId: string): Promise<IamUserResponse>;
     sendBackupCodesRegenerationEmail(iamUserId: string): Promise<IamUserResponse>;
+    resendInvite(iamUserId: string): Promise<IamUserResponse>;
     acknowledgeFirstLogin(tenantId: string): Promise<IamUserResponse>;
 }
 export declare class IamUsersFetchFailed extends BaseError {
@@ -118,6 +123,11 @@ export declare class IamUserReset2faFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class IamUserRegenerateBackupCodesFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class IamUserResendInviteFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

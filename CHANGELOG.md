@@ -1,3 +1,10 @@
+# [4.281.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.280.0...v4.281.0) (2026-07-16)
+
+
+### Features
+
+* **resend:** integrate resend feature from iam service - UOD-3694 ([#751](https://github.com/tillhub/tillhub-sdk-javascript/issues/751)) ([b61a2f7](https://github.com/tillhub/tillhub-sdk-javascript/commit/b61a2f7c92eeebf0b4900284abca4b223b977e4a))
+
 # [4.280.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.279.0...v4.280.0) (2026-07-09)
 
 

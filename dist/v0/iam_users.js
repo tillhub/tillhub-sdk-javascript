@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.IamUserAcknowledgeFirstLoginFailed = exports.IamUserProfileFetchFailed = exports.IamUserRegenerateBackupCodesFailed = exports.IamUserReset2faFailed = exports.IamUserUpdateGuestConnectionFailed = exports.IamUserDeleteGuestConnectionFailed = exports.IamUserDeleteFailed = exports.IamUserCreationFailed = exports.IamUserPutFailed = exports.IamUserFetchFailed = exports.IamUsersMetaFailed = exports.IamUsersFetchFailed = exports.IamUsers = void 0;
+exports.IamUserAcknowledgeFirstLoginFailed = exports.IamUserProfileFetchFailed = exports.IamUserResendInviteFailed = exports.IamUserRegenerateBackupCodesFailed = exports.IamUserReset2faFailed = exports.IamUserUpdateGuestConnectionFailed = exports.IamUserDeleteGuestConnectionFailed = exports.IamUserDeleteFailed = exports.IamUserCreationFailed = exports.IamUserPutFailed = exports.IamUserFetchFailed = exports.IamUsersMetaFailed = exports.IamUsersFetchFailed = exports.IamUsers = void 0;
 var tslib_1 = require("tslib");
 var baseError_1 = require("../errors/baseError");
 var uri_helper_1 = require("../uri-helper");
@@ -350,10 +350,40 @@ var IamUsers = (function (_super) {
             });
         });
     };
+    IamUsers.prototype.resendInvite = function (iamUserId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_12;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        base = this.uriHelper.generateBaseUri("/" + iamUserId + "/resend-invite");
+                        uri = this.uriHelper.generateUriWithQuery(base);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().post(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new IamUserResendInviteFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results[0],
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            }];
+                    case 3:
+                        error_12 = _a.sent();
+                        throw new IamUserResendInviteFailed(error_12.message, { error: error_12 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     IamUsers.prototype.acknowledgeFirstLogin = function (tenantId) {
         var _a, _b;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_12;
+            var base, uri, response, error_13;
             return tslib_1.__generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -374,8 +404,8 @@ var IamUsers = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_12 = _c.sent();
-                        throw new IamUserAcknowledgeFirstLoginFailed(error_12.message, { error: error_12 });
+                        error_13 = _c.sent();
+                        throw new IamUserAcknowledgeFirstLoginFailed(error_13.message, { error: error_13 });
                     case 4: return [2];
                 }
             });
@@ -515,6 +545,19 @@ var IamUserRegenerateBackupCodesFailed = (function (_super) {
     return IamUserRegenerateBackupCodesFailed;
 }(baseError_1.BaseError));
 exports.IamUserRegenerateBackupCodesFailed = IamUserRegenerateBackupCodesFailed;
+var IamUserResendInviteFailed = (function (_super) {
+    tslib_1.__extends(IamUserResendInviteFailed, _super);
+    function IamUserResendInviteFailed(message, properties) {
+        if (message === void 0) { message = 'Could not resend invitation for iam user'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'IamUserResendInviteFailed';
+        Object.setPrototypeOf(_this, IamUserResendInviteFailed.prototype);
+        return _this;
+    }
+    return IamUserResendInviteFailed;
+}(baseError_1.BaseError));
+exports.IamUserResendInviteFailed = IamUserResendInviteFailed;
 var IamUserProfileFetchFailed = (function (_super) {
     tslib_1.__extends(IamUserProfileFetchFailed, _super);
     function IamUserProfileFetchFailed(message, properties) {
