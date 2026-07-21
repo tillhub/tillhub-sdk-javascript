@@ -3,16 +3,36 @@ import { UriHelper } from '../../../uri-helper'
 import { BaseError } from '../../../errors'
 import { ThAnalyticsBaseHandler } from '../../../base'
 import { AnalyticsOptions } from '../../../v0/analytics'
+import { exportJobQuery } from '../../../shared_interfaces'
+
+export interface AnalyticsReportsCommunicationsItem {
+  id: string
+  contentType: CommunicationsContentType | null
+  recipient: string | null
+  sentScheduledOn: string | null
+  createdBy: CommunicationsCreatedBy
+  status: CommunicationsDeliveryStatus
+  content: string | null
+  reservationId: string | null
+}
 
 export interface AnalyticsReportsCommunicationsResponse {
-  data: Array<Record<string, unknown>>
-  metadata: Record<string, unknown>
+  data: AnalyticsReportsCommunicationsItem[]
+  metadata: {
+    count?: number
+    cursor?: {
+      before?: string | null
+      after?: string | null
+    }
+  }
   msg?: string
   next?: () => Promise<AnalyticsReportsCommunicationsResponse>
 }
 
 export interface AnalyticsReportsCommunicationsMetaResponse {
-  data: Array<Record<string, unknown>>
+  data: {
+    count: number
+  }
   metadata: Record<string, unknown>
 }
 
@@ -20,20 +40,43 @@ export type CommunicationsChannel = 'sms' | 'email'
 
 export type CommunicationsContentType = 'reservation_reminder' | 'msu' | 'pay_od' | 'unknown'
 
-export type CommunicationsDeliveryStatus = 'scheduled' | 'pending' | 'delivered' | 'undelivered'
+export type CommunicationsDeliveryStatus = 'scheduled' | 'pending' | 'delivered' | 'undelivered' | 'sent' | 'unknown' | 'failed'
 
 export type CommunicationsCreatedBy = 'customer' | 'staff' | 'unknown'
 
-export interface AnalyticsReportsCommunicationsQuery {
+export interface AnalyticsReportsCommunicationsFilters {
   limit?: number
   channel?: CommunicationsChannel
   start?: string
   end?: string
   contentType?: CommunicationsContentType
   branchId?: string
-  status?: CommunicationsDeliveryStatus | CommunicationsDeliveryStatus[]
+  status?: CommunicationsDeliveryStatus
   createdBy?: CommunicationsCreatedBy
+}
+
+export interface AnalyticsReportsCommunicationsQuery extends AnalyticsReportsCommunicationsFilters {
   uri?: string
+}
+
+export type AnalyticsReportsCommunicationsExportQuery =
+  AnalyticsReportsCommunicationsFilters &
+  Omit<exportJobQuery, 'documentType' | 'emailTemplate' | 'timezone' | 'filenamePrefix' | 'startDate'> & {
+    documentType: 'CommunicationsStatisticsExport'
+    emailLayout?: string
+    language?: string
+    timezone?: string
+    filenamePrefix?: string
+    startDate?: string
+  }
+
+export interface AnalyticsReportsCommunicationsExportResult {
+  correlationId: string
+}
+
+export interface AnalyticsReportsCommunicationsExportResponse {
+  data: AnalyticsReportsCommunicationsExportResult
+  msg?: string
 }
 
 export class AnalyticsReportsCommunications extends ThAnalyticsBaseHandler {
@@ -83,7 +126,26 @@ export class AnalyticsReportsCommunications extends ThAnalyticsBaseHandler {
     }
   }
 
-  async meta (queryOrOptions?: AnalyticsReportsCommunicationsQuery | undefined): Promise<AnalyticsReportsCommunicationsMetaResponse> {
+  async export (query: AnalyticsReportsCommunicationsExportQuery): Promise<AnalyticsReportsCommunicationsExportResponse> {
+    try {
+      const base = this.uriHelper.generateBaseUri('/export')
+      const uri = this.uriHelper.generateUriWithQuery(base, query)
+      const response = await this.http.getClient().get(uri)
+
+      if (response.status !== 200 || !response.data.results?.[0]) {
+        throw new AnalyticsReportsCommunicationsExportFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: response.data.results[0],
+        msg: response.data.msg
+      }
+    } catch (error: any) {
+      throw new AnalyticsReportsCommunicationsExportFailed(error.message, { error })
+    }
+  }
+
+  async meta (queryOrOptions?: AnalyticsReportsCommunicationsFilters | undefined): Promise<AnalyticsReportsCommunicationsMetaResponse> {
     try {
       const base = this.uriHelper.generateBaseUri('/meta')
       const uri = this.uriHelper.generateUriWithQuery(base, queryOrOptions)
@@ -120,5 +182,16 @@ export class AnalyticsReportsCommunicationsMetaFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, AnalyticsReportsCommunicationsMetaFailed.prototype)
+  }
+}
+
+export class AnalyticsReportsCommunicationsExportFailed extends BaseError {
+  public name = 'ReportsCommunicationsExportFailed'
+  constructor (
+    public message: string = 'Could not export communications report',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, AnalyticsReportsCommunicationsExportFailed.prototype)
   }
 }
