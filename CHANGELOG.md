@@ -1,3 +1,10 @@
+# [4.282.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.281.0...v4.282.0) (2026-07-21)
+
+
+### Features
+
+* **until-14716:** add export for AnalyticsReportsCommunications ([#752](https://github.com/tillhub/tillhub-sdk-javascript/issues/752)) ([6aca6df](https://github.com/tillhub/tillhub-sdk-javascript/commit/6aca6df060ec06e27f664097a2ca7835a10a0fdb))
+
 # [4.281.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.280.0...v4.281.0) (2026-07-16)
 
 

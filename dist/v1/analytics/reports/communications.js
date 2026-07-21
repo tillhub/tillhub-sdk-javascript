@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AnalyticsReportsCommunicationsMetaFailed = exports.AnalyticsReportsCommunicationsFetchAllFailed = exports.AnalyticsReportsCommunications = void 0;
+exports.AnalyticsReportsCommunicationsExportFailed = exports.AnalyticsReportsCommunicationsMetaFailed = exports.AnalyticsReportsCommunicationsFetchAllFailed = exports.AnalyticsReportsCommunications = void 0;
 var tslib_1 = require("tslib");
 var uri_helper_1 = require("../../../uri-helper");
 var errors_1 = require("../../../errors");
@@ -53,9 +53,37 @@ var AnalyticsReportsCommunications = (function (_super) {
             });
         });
     };
-    AnalyticsReportsCommunications.prototype.meta = function (queryOrOptions) {
+    AnalyticsReportsCommunications.prototype.export = function (query) {
+        var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var base, uri, response, error_2;
+            return tslib_1.__generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _b.trys.push([0, 2, , 3]);
+                        base = this.uriHelper.generateBaseUri('/export');
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        return [4, this.http.getClient().get(uri)];
+                    case 1:
+                        response = _b.sent();
+                        if (response.status !== 200 || !((_a = response.data.results) === null || _a === void 0 ? void 0 : _a[0])) {
+                            throw new AnalyticsReportsCommunicationsExportFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results[0],
+                                msg: response.data.msg
+                            }];
+                    case 2:
+                        error_2 = _b.sent();
+                        throw new AnalyticsReportsCommunicationsExportFailed(error_2.message, { error: error_2 });
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    AnalyticsReportsCommunications.prototype.meta = function (queryOrOptions) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_3;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -76,8 +104,8 @@ var AnalyticsReportsCommunications = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 2:
-                        error_2 = _a.sent();
-                        throw new AnalyticsReportsCommunicationsMetaFailed(error_2.message, { error: error_2 });
+                        error_3 = _a.sent();
+                        throw new AnalyticsReportsCommunicationsMetaFailed(error_3.message, { error: error_3 });
                     case 3: return [2];
                 }
             });
@@ -112,4 +140,17 @@ var AnalyticsReportsCommunicationsMetaFailed = (function (_super) {
     return AnalyticsReportsCommunicationsMetaFailed;
 }(errors_1.BaseError));
 exports.AnalyticsReportsCommunicationsMetaFailed = AnalyticsReportsCommunicationsMetaFailed;
+var AnalyticsReportsCommunicationsExportFailed = (function (_super) {
+    tslib_1.__extends(AnalyticsReportsCommunicationsExportFailed, _super);
+    function AnalyticsReportsCommunicationsExportFailed(message, properties) {
+        if (message === void 0) { message = 'Could not export communications report'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ReportsCommunicationsExportFailed';
+        Object.setPrototypeOf(_this, AnalyticsReportsCommunicationsExportFailed.prototype);
+        return _this;
+    }
+    return AnalyticsReportsCommunicationsExportFailed;
+}(errors_1.BaseError));
+exports.AnalyticsReportsCommunicationsExportFailed = AnalyticsReportsCommunicationsExportFailed;
 //# sourceMappingURL=communications.js.map
