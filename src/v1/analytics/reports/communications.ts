@@ -7,6 +7,7 @@ import { exportJobQuery } from '../../../shared_interfaces'
 
 export interface AnalyticsReportsCommunicationsItem {
   id: string
+  channel: CommunicationsChannel | null
   contentType: CommunicationsContentType | null
   recipient: string | null
   sentScheduledOn: string | null
