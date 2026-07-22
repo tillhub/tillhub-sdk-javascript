@@ -25,6 +25,7 @@ describe('v1: AnalyticsReportsCommunications', () => {
   it('can get communications analytics reports', async () => {
     const dataItems = [{
       id: 'b57b9baa-c0ea-49d8-b1ca-7e7d2a3f835f',
+      channel: 'sms',
       contentType: 'reservation_reminder',
       recipient: null,
       sentScheduledOn: '2026-07-21T08:00:00.000Z',
