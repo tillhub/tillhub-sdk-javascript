@@ -1,3 +1,10 @@
+# [4.283.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.282.0...v4.283.0) (2026-07-22)
+
+
+### Features
+
+* **until-14716:** update AnalyticsReportsCommunications schema ([#753](https://github.com/tillhub/tillhub-sdk-javascript/issues/753)) ([8273333](https://github.com/tillhub/tillhub-sdk-javascript/commit/82733333958cc33c8906c44747e92653271d361c))
+
 # [4.282.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.281.0...v4.282.0) (2026-07-21)
 
 
