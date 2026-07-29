@@ -1,3 +1,10 @@
+# [4.284.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.283.0...v4.284.0) (2026-07-29)
+
+
+### Features
+
+* **UNTIL-21688:** add meta to v1 services and service categories ([fbb6923](https://github.com/tillhub/tillhub-sdk-javascript/commit/fbb69235ba95a70bba2570b690ce8310a1978b77))
+
 # [4.283.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.282.0...v4.283.0) (2026-07-22)
 
 

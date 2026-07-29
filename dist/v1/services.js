@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ServiceDeleteFailed = exports.ServicePutFailed = exports.ServiceCreationFailed = exports.ServiceFetchFailed = exports.ServicesFetchAllFailed = exports.Services = void 0;
+exports.ServiceDeleteFailed = exports.ServicePutFailed = exports.ServiceCreationFailed = exports.ServiceFetchFailed = exports.ServicesMetaFailed = exports.ServicesFetchAllFailed = exports.Services = void 0;
 var tslib_1 = require("tslib");
 var uri_helper_1 = require("../uri-helper");
 var baseError_1 = require("../errors/baseError");
@@ -46,10 +46,45 @@ var Services = (function (_super) {
             });
         });
     };
+    Services.prototype.meta = function (q) {
+        var _a;
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_2;
+            return tslib_1.__generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        base = this.uriHelper.generateBaseUri('/meta');
+                        uri = this.uriHelper.generateUriWithQuery(base, q);
+                        _b.label = 1;
+                    case 1:
+                        _b.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _b.sent();
+                        if (response.status !== 200) {
+                            throw new ServicesMetaFailed(undefined, { status: response.status });
+                        }
+                        if (!((_a = response.data.results) === null || _a === void 0 ? void 0 : _a[0])) {
+                            throw new ServicesMetaFailed('could not get services metadata unexpectedly', {
+                                status: response.status
+                            });
+                        }
+                        return [2, {
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            }];
+                    case 3:
+                        error_2 = _b.sent();
+                        throw new ServicesMetaFailed(error_2.message, { error: error_2 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     Services.prototype.query = function (options) {
         var _a, _b, _c, _d;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var next, splitBodyAndQuery, flat, uri, _e, body, query, postUri, response_1, error_2;
+            var next, splitBodyAndQuery, flat, uri, _e, body, query, postUri, response_1, error_3;
             var _this = this;
             return tslib_1.__generator(this, function (_f) {
                 switch (_f.label) {
@@ -100,8 +135,8 @@ var Services = (function (_super) {
                                 next: next
                             }];
                     case 3:
-                        error_2 = _f.sent();
-                        throw new ServicesFetchAllFailed(error_2.message, { error: error_2 });
+                        error_3 = _f.sent();
+                        throw new ServicesFetchAllFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });
@@ -109,7 +144,7 @@ var Services = (function (_super) {
     };
     Services.prototype.get = function (serviceId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_3;
+            var uri, response, error_4;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -129,8 +164,8 @@ var Services = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_3 = _a.sent();
-                        throw new ServiceFetchFailed(error_3.message, { error: error_3 });
+                        error_4 = _a.sent();
+                        throw new ServiceFetchFailed(error_4.message, { error: error_4 });
                     case 4: return [2];
                 }
             });
@@ -138,7 +173,7 @@ var Services = (function (_super) {
     };
     Services.prototype.create = function (service) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_4;
+            var uri, response, error_5;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -154,8 +189,8 @@ var Services = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_4 = _a.sent();
-                        throw new ServiceCreationFailed(error_4.message, { error: error_4 });
+                        error_5 = _a.sent();
+                        throw new ServiceCreationFailed(error_5.message, { error: error_5 });
                     case 4: return [2];
                 }
             });
@@ -163,7 +198,7 @@ var Services = (function (_super) {
     };
     Services.prototype.put = function (serviceId, service) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_5;
+            var uri, response, error_6;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -179,8 +214,8 @@ var Services = (function (_super) {
                                 metadata: { count: response.data.count }
                             }];
                     case 3:
-                        error_5 = _a.sent();
-                        throw new ServicePutFailed(error_5.message, { error: error_5 });
+                        error_6 = _a.sent();
+                        throw new ServicePutFailed(error_6.message, { error: error_6 });
                     case 4: return [2];
                 }
             });
@@ -188,7 +223,7 @@ var Services = (function (_super) {
     };
     Services.prototype.delete = function (serviceId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var uri, response, error_6;
+            var uri, response, error_7;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -205,8 +240,8 @@ var Services = (function (_super) {
                                 msg: response.data.msg
                             }];
                     case 3:
-                        error_6 = _a.sent();
-                        throw new ServiceDeleteFailed(error_6.message, { error: error_6 });
+                        error_7 = _a.sent();
+                        throw new ServiceDeleteFailed(error_7.message, { error: error_7 });
                     case 4: return [2];
                 }
             });
@@ -229,6 +264,19 @@ var ServicesFetchAllFailed = (function (_super) {
     return ServicesFetchAllFailed;
 }(baseError_1.BaseError));
 exports.ServicesFetchAllFailed = ServicesFetchAllFailed;
+var ServicesMetaFailed = (function (_super) {
+    tslib_1.__extends(ServicesMetaFailed, _super);
+    function ServicesMetaFailed(message, properties) {
+        if (message === void 0) { message = 'Could not get services metadata'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'ServicesMetaFailed';
+        Object.setPrototypeOf(_this, ServicesMetaFailed.prototype);
+        return _this;
+    }
+    return ServicesMetaFailed;
+}(baseError_1.BaseError));
+exports.ServicesMetaFailed = ServicesMetaFailed;
 var ServiceFetchFailed = (function (_super) {
     tslib_1.__extends(ServiceFetchFailed, _super);
     function ServiceFetchFailed(message, properties) {

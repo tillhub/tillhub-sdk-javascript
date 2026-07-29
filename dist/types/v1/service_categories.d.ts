@@ -15,9 +15,29 @@ export interface ServiceCategoriesQuery {
     deleted?: boolean;
     branchId?: string;
 }
+export interface ServiceCategoriesMetaQuery {
+    q?: string;
+    limit?: number;
+    offset?: number;
+    uri?: string;
+    active?: boolean;
+    deleted?: boolean;
+    branchId?: string;
+    start?: string;
+    end?: string;
+    orderFields?: string[];
+}
 export interface ServiceCategoriesResponse {
     data: ServiceCategory[];
     metadata: Record<string, unknown>;
+}
+export interface ServiceCategoriesMetaResponse {
+    data: {
+        count: number;
+    };
+    metadata: {
+        count?: number;
+    };
 }
 export interface ServiceCategoryResponse {
     data?: ServiceCategory;
@@ -43,12 +63,18 @@ export declare class ServiceCategories extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: ServiceCategoriesOptions, http: Client);
     getAll(query?: ServiceCategoriesQuery | undefined): Promise<ServiceCategoriesResponse>;
+    meta(q?: ServiceCategoriesMetaQuery | undefined): Promise<ServiceCategoriesMetaResponse>;
     get(serviceCategoryId: string): Promise<ServiceCategoryResponse>;
     create(serviceCategory: ServiceCategory): Promise<ServiceCategoryResponse>;
     put(serviceCategoryId: string, serviceCategory: ServiceCategory): Promise<ServiceCategoryResponse>;
     delete(serviceCategoryId: string): Promise<ServiceCategoryResponse>;
 }
 export declare class ServiceCategoriesFetchAllFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class ServiceCategoriesMetaFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

@@ -21,6 +21,21 @@ export interface ServicesQuery {
     serviceCategoryId?: string;
     id?: string[];
 }
+export interface ServicesMetaQuery {
+    q?: string;
+    limit?: number;
+    offset?: number;
+    uri?: string;
+    active?: boolean;
+    deleted?: boolean;
+    id?: string | string[];
+    serviceCategoryId?: string | string[];
+    linkedProductId?: string | string[];
+    locations?: string | string[];
+    start?: string;
+    end?: string;
+    orderFields?: string[];
+}
 export interface ServicesResponse {
     data: Service[];
     metadata: Record<string, unknown>;
@@ -32,6 +47,14 @@ export interface ServiceResponse {
         count?: number;
     };
     msg?: string;
+}
+export interface ServicesMetaResponse {
+    data: {
+        count: number;
+    };
+    metadata: {
+        count?: number;
+    };
 }
 export interface Service {
     id?: string;
@@ -56,6 +79,7 @@ export declare class Services extends ThBaseHandler {
     uriHelper: UriHelper;
     constructor(options: ServicesOptions, http: Client);
     getAll(query?: ServicesQuery | undefined): Promise<ServicesResponse>;
+    meta(q?: ServicesMetaQuery | undefined): Promise<ServicesMetaResponse>;
     query(options?: ServicesOptions | undefined): Promise<ServicesResponse>;
     get(serviceId: string): Promise<ServiceResponse>;
     create(service: Service): Promise<ServiceResponse>;
@@ -63,6 +87,11 @@ export declare class Services extends ThBaseHandler {
     delete(serviceId: string): Promise<ServiceResponse>;
 }
 export declare class ServicesFetchAllFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class ServicesMetaFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);
