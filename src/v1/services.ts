@@ -24,6 +24,22 @@ export interface ServicesQuery {
   id?: string[]
 }
 
+export interface ServicesMetaQuery {
+  q?: string
+  limit?: number
+  offset?: number
+  uri?: string
+  active?: boolean
+  deleted?: boolean
+  id?: string | string[]
+  serviceCategoryId?: string | string[]
+  linkedProductId?: string | string[]
+  locations?: string | string[]
+  start?: string
+  end?: string
+  orderFields?: string[]
+}
+
 const ServiceQueryBodyKeys = new Set<string>(['id'])
 
 export interface ServicesResponse {
@@ -38,6 +54,15 @@ export interface ServiceResponse {
     count?: number
   }
   msg?: string
+}
+
+export interface ServicesMetaResponse {
+  data: {
+    count: number
+  }
+  metadata: {
+    count?: number
+  }
 }
 
 export interface Service {
@@ -89,6 +114,29 @@ export class Services extends ThBaseHandler {
       }
     } catch (error: any) {
       throw new ServicesFetchAllFailed(error.message, { error })
+    }
+  }
+
+  async meta (q?: ServicesMetaQuery | undefined): Promise<ServicesMetaResponse> {
+    const base = this.uriHelper.generateBaseUri('/meta')
+    const uri = this.uriHelper.generateUriWithQuery(base, q)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new ServicesMetaFailed(undefined, { status: response.status })
+      }
+      if (!response.data.results?.[0]) {
+        throw new ServicesMetaFailed('could not get services metadata unexpectedly', {
+          status: response.status
+        })
+      }
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new ServicesMetaFailed(error.message, { error })
     }
   }
 
@@ -223,6 +271,17 @@ export class ServicesFetchAllFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, ServicesFetchAllFailed.prototype)
+  }
+}
+
+export class ServicesMetaFailed extends BaseError {
+  public name = 'ServicesMetaFailed'
+  constructor (
+    public message: string = 'Could not get services metadata',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, ServicesMetaFailed.prototype)
   }
 }
 
