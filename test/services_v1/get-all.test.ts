@@ -59,6 +59,72 @@ describe('v1: Services: can get all', () => {
     expect(Array.isArray(data)).toBe(true)
   })
 
+  it('exposes no next when there is no cursors.after', async () => {
+    if (process.env.SYSTEM_TEST === 'true') return
+
+    mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+      return [200, { token: '', user: { id: '123', legacy_id: legacyId } }]
+    })
+    mock.onGet(`https://api.tillhub.com/api/v1/services/${legacyId}`).reply(() => {
+      return [
+        200,
+        {
+          results: [service],
+          cursors: { before: null, after: null }
+        }
+      ]
+    })
+
+    const th = await initThInstance()
+
+    const firstPage = await th.servicesV1().getAll()
+
+    expect(firstPage.next).toBeUndefined()
+  })
+
+  it('follows cursors.after via next', async () => {
+    if (process.env.SYSTEM_TEST === 'true') return
+
+    const cursorAfter = `https://api.tillhub.com/api/v1/services/${legacyId}?cursor=abc`
+
+    mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+      return [200, { token: '', user: { id: '123', legacy_id: legacyId } }]
+    })
+    mock.onGet(new RegExp(`/api/v1/services/${legacyId}`)).reply((config) => {
+      if (String(config.url).includes('cursor=abc')) {
+        return [
+          200,
+          {
+            results: [{ ...service, id: 'svc-2' }],
+            cursors: { before: null, after: null }
+          }
+        ]
+      }
+
+      return [
+        200,
+        {
+          results: [service],
+          cursors: { before: null, after: cursorAfter }
+        }
+      ]
+    })
+
+    const th = await initThInstance()
+
+    const firstPage = await th.servicesV1().getAll({ deleted: false })
+
+    expect(firstPage.data).toHaveLength(1)
+    expect(typeof firstPage.next).toBe('function')
+    expect(firstPage.metadata).toMatchObject({ cursors: { after: cursorAfter } })
+
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const secondPage = await firstPage.next!()
+
+    expect(secondPage.data).toEqual([{ ...service, id: 'svc-2' }])
+    expect(secondPage.next).toBeUndefined()
+  })
+
   it('rejects on errored response', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
