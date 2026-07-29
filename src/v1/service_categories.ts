@@ -18,9 +18,31 @@ export interface ServiceCategoriesQuery {
   branchId?: string
 }
 
+export interface ServiceCategoriesMetaQuery {
+  q?: string
+  limit?: number
+  offset?: number
+  uri?: string
+  active?: boolean
+  deleted?: boolean
+  branchId?: string
+  start?: string
+  end?: string
+  orderFields?: string[]
+}
+
 export interface ServiceCategoriesResponse {
   data: ServiceCategory[]
   metadata: Record<string, unknown>
+}
+
+export interface ServiceCategoriesMetaResponse {
+  data: {
+    count: number
+  }
+  metadata: {
+    count?: number
+  }
 }
 
 export interface ServiceCategoryResponse {
@@ -74,6 +96,29 @@ export class ServiceCategories extends ThBaseHandler {
       }
     } catch (error: any) {
       throw new ServiceCategoriesFetchAllFailed(error.message, { error })
+    }
+  }
+
+  async meta (q?: ServiceCategoriesMetaQuery | undefined): Promise<ServiceCategoriesMetaResponse> {
+    const base = this.uriHelper.generateBaseUri('/meta')
+    const uri = this.uriHelper.generateUriWithQuery(base, q)
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new ServiceCategoriesMetaFailed(undefined, { status: response.status })
+      }
+      if (!response.data.results?.[0]) {
+        throw new ServiceCategoriesMetaFailed('could not get service categories metadata unexpectedly', {
+          status: response.status
+        })
+      }
+
+      return {
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new ServiceCategoriesMetaFailed(error.message, { error })
     }
   }
 
@@ -146,6 +191,17 @@ export class ServiceCategoriesFetchAllFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, ServiceCategoriesFetchAllFailed.prototype)
+  }
+}
+
+export class ServiceCategoriesMetaFailed extends BaseError {
+  public name = 'ServiceCategoriesMetaFailed'
+  constructor (
+    public message: string = 'Could not get service categories metadata',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, ServiceCategoriesMetaFailed.prototype)
   }
 }
 
