@@ -1,3 +1,10 @@
+# [4.285.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.284.0...v4.285.0) (2026-07-29)
+
+
+### Features
+
+* **UNTIL-21688:** return next cursor from v1 services and service categories getAll ([3510a96](https://github.com/tillhub/tillhub-sdk-javascript/commit/3510a96e1c4c03df9ed1c9a156af92811d87dcef))
+
 # [4.284.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.283.0...v4.284.0) (2026-07-29)
 
 

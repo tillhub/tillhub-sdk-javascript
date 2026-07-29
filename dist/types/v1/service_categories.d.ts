@@ -30,6 +30,7 @@ export interface ServiceCategoriesMetaQuery {
 export interface ServiceCategoriesResponse {
     data: ServiceCategory[];
     metadata: Record<string, unknown>;
+    next?: () => Promise<ServiceCategoriesResponse>;
 }
 export interface ServiceCategoriesMetaResponse {
     data: {

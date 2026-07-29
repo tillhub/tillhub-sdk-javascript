@@ -21,24 +21,31 @@ var ServiceCategories = (function (_super) {
         return _this;
     }
     ServiceCategories.prototype.getAll = function (query) {
-        var _a;
+        var _a, _b;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var base, uri, response, error_1;
-            return tslib_1.__generator(this, function (_b) {
-                switch (_b.label) {
+            var next, base, uri, response_1, error_1;
+            var _this = this;
+            return tslib_1.__generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _b.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         base = this.uriHelper.generateBaseUri();
                         uri = this.uriHelper.generateUriWithQuery(base, query);
                         return [4, this.http.getClient().get(uri)];
                     case 1:
-                        response = _b.sent();
+                        response_1 = _c.sent();
+                        if ((_a = response_1.data.cursors) === null || _a === void 0 ? void 0 : _a.after) {
+                            next = function () {
+                                return _this.getAll({ uri: response_1.data.cursors.after });
+                            };
+                        }
                         return [2, {
-                                data: response.data.results,
-                                metadata: { count: (_a = response.data.results) === null || _a === void 0 ? void 0 : _a.length, cursors: response.data.cursors }
+                                data: response_1.data.results,
+                                metadata: { count: (_b = response_1.data.results) === null || _b === void 0 ? void 0 : _b.length, cursors: response_1.data.cursors },
+                                next: next
                             }];
                     case 2:
-                        error_1 = _b.sent();
+                        error_1 = _c.sent();
                         throw new ServiceCategoriesFetchAllFailed(error_1.message, { error: error_1 });
                     case 3: return [2];
                 }
