@@ -34,6 +34,7 @@ export interface ServiceCategoriesMetaQuery {
 export interface ServiceCategoriesResponse {
   data: ServiceCategory[]
   metadata: Record<string, unknown>
+  next?: () => Promise<ServiceCategoriesResponse>
 }
 
 export interface ServiceCategoriesMetaResponse {
@@ -84,15 +85,23 @@ export class ServiceCategories extends ThBaseHandler {
   }
 
   async getAll (query?: ServiceCategoriesQuery | undefined): Promise<ServiceCategoriesResponse> {
+    let next
+
     try {
       const base = this.uriHelper.generateBaseUri()
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri)
 
+      if (response.data.cursors?.after) {
+        next = (): Promise<ServiceCategoriesResponse> =>
+          this.getAll({ uri: response.data.cursors.after })
+      }
+
       return {
         data: response.data.results,
-        metadata: { count: response.data.results?.length, cursors: response.data.cursors }
+        metadata: { count: response.data.results?.length, cursors: response.data.cursors },
+        next
       }
     } catch (error: any) {
       throw new ServiceCategoriesFetchAllFailed(error.message, { error })

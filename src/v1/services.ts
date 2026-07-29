@@ -102,15 +102,23 @@ export class Services extends ThBaseHandler {
   }
 
   async getAll (query?: ServicesQuery | undefined): Promise<ServicesResponse> {
+    let next
+
     try {
       const base = this.uriHelper.generateBaseUri()
       const uri = this.uriHelper.generateUriWithQuery(base, query)
 
       const response = await this.http.getClient().get(uri)
 
+      if (response.data.cursors?.after) {
+        next = (): Promise<ServicesResponse> =>
+          this.getAll({ uri: response.data.cursors.after })
+      }
+
       return {
         data: response.data.results,
-        metadata: { count: response.data.results?.length, cursors: response.data.cursors }
+        metadata: { count: response.data.results?.length, cursors: response.data.cursors },
+        next
       }
     } catch (error: any) {
       throw new ServicesFetchAllFailed(error.message, { error })
