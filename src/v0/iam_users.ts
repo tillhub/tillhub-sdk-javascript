@@ -51,6 +51,7 @@ export interface IamUser {
   invitationExpired?: boolean
   connectedDashboards?: Record<string, string[]>
   isFirstLoginDone?: string
+  mmsId?: string | null
 }
 
 export interface IamUsersQueryHandler {
