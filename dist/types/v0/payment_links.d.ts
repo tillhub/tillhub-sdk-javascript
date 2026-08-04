@@ -73,6 +73,7 @@ export interface CreatePaymentLinkRequest {
     externalCustomerId?: string;
     customer?: PaymentLinkCustomer | null;
     items?: PaymentLinkItem[] | null;
+    keypairId?: string;
 }
 export interface PaymentLinkQuery {
     branch?: string | null;
@@ -110,13 +111,19 @@ export interface PaymentPageResponse {
     customerEmail?: string;
     customerMobileNo?: string;
 }
+export interface CreatePaymentLinkPayload {
+    results?: PaymentPageResponse[];
+    msg?: string;
+    count?: number;
+}
 export interface SendPaymentLinkEmailDto {
     paymentLinkId: string;
     customerEmail: string;
 }
 export interface CreatePaymentLinkResponse {
-    data?: PaymentPageResponse;
+    data?: CreatePaymentLinkPayload;
     msg?: string;
+    metadata?: Record<string, unknown>;
 }
 export interface PaymentPageUrlResponse {
     paymentPageUrl: string;

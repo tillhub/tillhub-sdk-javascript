@@ -30,12 +30,49 @@ export interface OrdersMetaResponse {
     metadata: Record<string, unknown>;
     msg: string;
 }
+export interface OrderFeatures {
+    moto: boolean;
+    ecom: boolean;
+}
 export interface FeaturesResponse {
     data: {
-        moto: boolean;
-        ecom: boolean;
+        results?: OrderFeatures[];
+        msg?: string;
     };
-    msg: string;
+    msg?: string;
+}
+export declare type KeypairProductType = 'ECOM' | 'MOTO' | 'POS';
+export interface KeypairsQuery {
+    type?: KeypairProductType;
+}
+export interface OmsKeyPairScope {
+    channel?: string;
+    pmpId?: string;
+    brands?: string[];
+    currency?: string[];
+    countries?: string[];
+}
+export interface OmsKeyPairPaymentType {
+    type?: string;
+    allowCustomerTypes?: string;
+    allowCreditTransaction?: string;
+    supports?: OmsKeyPairScope[];
+}
+export interface OmsKeyPair {
+    keyPairId?: string;
+    publicKey?: string;
+    secureLevel?: string;
+    alias?: string;
+    productType?: string;
+    keyPairState?: string;
+    enableCrossChannelReferencing?: boolean;
+    unzerId?: string;
+    paymentTypes?: OmsKeyPairPaymentType[];
+}
+export interface KeypairsResponse {
+    data: OmsKeyPair[];
+    metadata: Record<string, unknown>;
+    msg?: string;
 }
 export interface ErrorObject {
     id: string;
@@ -283,6 +320,7 @@ export declare class Orders extends ThBaseHandler {
     meta(query?: OrdersQuery | undefined): Promise<OrdersMetaResponse>;
     get(orderId: string): Promise<OrderResponse>;
     features(): Promise<FeaturesResponse>;
+    keypairs(query?: KeypairsQuery): Promise<KeypairsResponse>;
 }
 export declare class OrdersFetchFailed extends BaseError {
     message: string;
@@ -300,6 +338,11 @@ export declare class OrderFetchFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class OrderFeaturesFetchFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class OrderKeypairsFetchFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

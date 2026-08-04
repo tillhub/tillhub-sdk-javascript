@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OrderFeaturesFetchFailed = exports.OrderFetchFailed = exports.OrdersFetchMetaFailed = exports.OrdersFetchFailed = exports.Orders = void 0;
+exports.OrderKeypairsFetchFailed = exports.OrderFeaturesFetchFailed = exports.OrderFetchFailed = exports.OrdersFetchMetaFailed = exports.OrdersFetchFailed = exports.Orders = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
 var uri_helper_1 = require("../uri-helper");
@@ -144,6 +144,36 @@ var Orders = (function (_super) {
             });
         });
     };
+    Orders.prototype.keypairs = function (query) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_5;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        base = this.uriHelper.generateBaseUri();
+                        uri = this.uriHelper.generateUriWithQuery(base + "/keypairs", query);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new OrderKeypairsFetchFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results,
+                                msg: response.data.msg,
+                                metadata: { count: response.data.count }
+                            }];
+                    case 3:
+                        error_5 = _a.sent();
+                        throw new OrderKeypairsFetchFailed(error_5.message, { error: error_5 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     Orders.baseEndpoint = '/api/v2/orders';
     return Orders;
 }(base_1.ThBaseHandler));
@@ -200,4 +230,17 @@ var OrderFeaturesFetchFailed = (function (_super) {
     return OrderFeaturesFetchFailed;
 }(errors_1.BaseError));
 exports.OrderFeaturesFetchFailed = OrderFeaturesFetchFailed;
+var OrderKeypairsFetchFailed = (function (_super) {
+    tslib_1.__extends(OrderKeypairsFetchFailed, _super);
+    function OrderKeypairsFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch order keypairs'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'OrderKeypairsFetchFailed';
+        Object.setPrototypeOf(_this, OrderKeypairsFetchFailed.prototype);
+        return _this;
+    }
+    return OrderKeypairsFetchFailed;
+}(errors_1.BaseError));
+exports.OrderKeypairsFetchFailed = OrderKeypairsFetchFailed;
 //# sourceMappingURL=orders.js.map

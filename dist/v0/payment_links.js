@@ -57,24 +57,27 @@ var PaymentLinks = (function (_super) {
         });
     };
     PaymentLinks.prototype.create = function (paymentLinkData) {
+        var _a, _b;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var uri, response, error_2;
-            return tslib_1.__generator(this, function (_a) {
-                switch (_a.label) {
+            return tslib_1.__generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         uri = this.uriHelper.generateBaseUri();
                         return [4, this.http.getClient().post(uri, paymentLinkData, { timeout: 30000 })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         if (response.status !== 200 && response.status !== 201) {
                             throw new errors_1.PaymentLinksCreateFailed(undefined, { status: response.status });
                         }
                         return [2, {
-                                data: response.data
+                                data: response.data,
+                                msg: (_a = response.data) === null || _a === void 0 ? void 0 : _a.msg,
+                                metadata: { count: (_b = response.data) === null || _b === void 0 ? void 0 : _b.count }
                             }];
                     case 2:
-                        error_2 = _a.sent();
+                        error_2 = _c.sent();
                         throw new errors_1.PaymentLinksCreateFailed(error_2.message, { error: error_2 });
                     case 3: return [2];
                 }
