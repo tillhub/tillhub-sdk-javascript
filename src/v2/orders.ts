@@ -41,7 +41,46 @@ export interface FeaturesResponse {
     moto: boolean
     ecom: boolean
   }
-  msg: string
+  msg?: string
+}
+
+export type KeypairProductType = 'ECOM' | 'MOTO' | 'POS'
+
+export interface KeypairsQuery {
+  type?: KeypairProductType
+}
+
+export interface OmsKeyPairScope {
+  channel?: string
+  pmpId?: string
+  brands?: string[]
+  currency?: string[]
+  countries?: string[]
+}
+
+export interface OmsKeyPairPaymentType {
+  type?: string
+  allowCustomerTypes?: string
+  allowCreditTransaction?: string
+  supports?: OmsKeyPairScope[]
+}
+
+export interface OmsKeyPair {
+  keyPairId?: string
+  publicKey?: string
+  secureLevel?: string
+  alias?: string
+  productType?: string
+  keyPairState?: string
+  enableCrossChannelReferencing?: boolean
+  unzerId?: string
+  paymentTypes?: OmsKeyPairPaymentType[]
+}
+
+export interface KeypairsResponse {
+  data: OmsKeyPair[]
+  metadata: Record<string, unknown>
+  msg?: string
 }
 
 export interface ErrorObject {
@@ -390,11 +429,31 @@ export class Orders extends ThBaseHandler {
         throw new OrderFeaturesFetchFailed(undefined, { status: response.status })
       }
       return {
-        data: response.data,
+        data: response.data.results[0],
         msg: response.data.msg
       }
     } catch (error: any) {
       throw new OrderFeaturesFetchFailed(error.message, { error })
+    }
+  }
+
+  async keypairs (query?: KeypairsQuery): Promise<KeypairsResponse> {
+    const base = this.uriHelper.generateBaseUri()
+    const uri = this.uriHelper.generateUriWithQuery(`${base}/keypairs`, query)
+
+    try {
+      const response = await this.http.getClient().get(uri)
+
+      if (response.status !== 200) {
+        throw new OrderKeypairsFetchFailed(undefined, { status: response.status })
+      }
+      return {
+        data: response.data.results as OmsKeyPair[],
+        msg: response.data.msg,
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new OrderKeypairsFetchFailed(error.message, { error })
     }
   }
 }
@@ -440,5 +499,16 @@ export class OrderFeaturesFetchFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, OrderFeaturesFetchFailed.prototype)
+  }
+}
+
+export class OrderKeypairsFetchFailed extends BaseError {
+  public name = 'OrderKeypairsFetchFailed'
+  constructor (
+    public message: string = 'Could not fetch order keypairs',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, OrderKeypairsFetchFailed.prototype)
   }
 }

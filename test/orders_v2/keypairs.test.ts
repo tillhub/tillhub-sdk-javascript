@@ -18,12 +18,24 @@ if (process.env.SYSTEM_TEST) {
   user.apiKey = process.env.SYSTEM_TEST_API_KEY ?? user.apiKey
 }
 
-describe('v2: orders: can get features', () => {
+describe('v2: orders: can get keypairs', () => {
   const legacyId = '4564'
   const mock = new MockAdapter(axios)
   afterEach(() => {
     mock.reset()
   })
+
+  const keypair = {
+    keyPairId: 'kp-1',
+    publicKey: 's-pub-xxx',
+    secureLevel: 'SAQ-A',
+    alias: 'ECOM key',
+    productType: 'ECOM',
+    keyPairState: 'ACTIVE',
+    enableCrossChannelReferencing: false,
+    unzerId: 'unzer-1',
+    paymentTypes: []
+  }
 
   it("Tillhub's orders are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
@@ -40,15 +52,13 @@ describe('v2: orders: can get features', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v2/orders/${legacyId}/features`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v2/orders/${legacyId}/keypairs?type=ECOM`).reply(() => {
         return [
           200,
           {
+            count: 1,
             msg: 'Success',
-            results: [{
-              moto: true,
-              ecom: false
-            }]
+            results: [keypair]
           }
         ]
       })
@@ -74,13 +84,10 @@ describe('v2: orders: can get features', () => {
 
     expect(ordersV2).toBeInstanceOf(v2.Orders)
 
-    try {
-      const { data, msg } = await ordersV2.features()
-      expect(data).toEqual({ moto: true, ecom: false })
-      expect(msg).toBe('Success')
-    } catch (err: any) {
-      expect(err.name).toBe('OrderFeaturesFetchFailed')
-    }
+    const { data, msg, metadata } = await ordersV2.keypairs({ type: 'ECOM' })
+    expect(data).toEqual([keypair])
+    expect(msg).toBe('Success')
+    expect(metadata.count).toBe(1)
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -98,7 +105,7 @@ describe('v2: orders: can get features', () => {
         ]
       })
 
-      mock.onGet(`https://api.tillhub.com/api/v2/orders/${legacyId}/features`).reply(() => {
+      mock.onGet(`https://api.tillhub.com/api/v2/orders/${legacyId}/keypairs?type=ECOM`).reply(() => {
         return [205]
       })
     }
@@ -120,9 +127,9 @@ describe('v2: orders: can get features', () => {
     })
 
     try {
-      await th.ordersV2().features()
+      await th.ordersV2().keypairs({ type: 'ECOM' })
     } catch (err: any) {
-      expect(err.name).toBe('OrderFeaturesFetchFailed')
+      expect(err.name).toBe('OrderKeypairsFetchFailed')
     }
   })
 })

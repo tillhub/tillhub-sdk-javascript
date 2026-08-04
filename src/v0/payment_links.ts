@@ -90,6 +90,7 @@ export interface CreatePaymentLinkRequest {
   externalCustomerId?: string
   customer?: PaymentLinkCustomer | null
   items?: PaymentLinkItem[] | null
+  keypairId?: string
 }
 
 export interface PaymentLinkQuery {
@@ -128,10 +129,18 @@ export interface PaymentLinksResponse {
 }
 
 export interface PaymentPageResponse {
-  paymentPageUrl: string
-  id: string
+  paymentPageUrl?: string
+  id?: string
   customerEmail?: string
   customerMobileNo?: string
+  results?: Array<{
+    paymentPageUrl: string
+    id: string
+    customerEmail?: string
+    customerMobileNo?: string
+  }>
+  msg?: string
+  count?: number
 }
 
 export interface SendPaymentLinkEmailDto {
@@ -142,6 +151,7 @@ export interface SendPaymentLinkEmailDto {
 export interface CreatePaymentLinkResponse {
   data?: PaymentPageResponse
   msg?: string
+  metadata?: Record<string, unknown>
 }
 
 export interface PaymentPageUrlResponse {
@@ -207,7 +217,9 @@ export class PaymentLinks extends ThBaseHandler {
       }
 
       return {
-        data: response.data
+        data: response.data,
+        msg: response.data?.msg,
+        metadata: { count: response.data?.count }
       }
     } catch (error: any) {
       throw new PaymentLinksCreateFailed(error.message, { error })
