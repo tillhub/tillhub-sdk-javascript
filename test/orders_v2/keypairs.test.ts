@@ -126,10 +126,8 @@ describe('v2: orders: can get keypairs', () => {
       password: user.password
     })
 
-    try {
-      await th.ordersV2().keypairs({ type: 'ECOM' })
-    } catch (err: any) {
-      expect(err.name).toBe('OrderKeypairsFetchFailed')
-    }
+    await expect(th.ordersV2().keypairs({ type: 'ECOM' })).rejects.toMatchObject({
+      name: 'OrderKeypairsFetchFailed'
+    })
   })
 })

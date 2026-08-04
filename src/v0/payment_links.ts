@@ -129,16 +129,14 @@ export interface PaymentLinksResponse {
 }
 
 export interface PaymentPageResponse {
-  paymentPageUrl?: string
-  id?: string
+  paymentPageUrl: string
+  id: string
   customerEmail?: string
   customerMobileNo?: string
-  results?: Array<{
-    paymentPageUrl: string
-    id: string
-    customerEmail?: string
-    customerMobileNo?: string
-  }>
+}
+
+export interface CreatePaymentLinkPayload {
+  results?: PaymentPageResponse[]
   msg?: string
   count?: number
 }
@@ -149,7 +147,7 @@ export interface SendPaymentLinkEmailDto {
 }
 
 export interface CreatePaymentLinkResponse {
-  data?: PaymentPageResponse
+  data?: CreatePaymentLinkPayload
   msg?: string
   metadata?: Record<string, unknown>
 }
@@ -217,7 +215,7 @@ export class PaymentLinks extends ThBaseHandler {
       }
 
       return {
-        data: response.data,
+        data: response.data as CreatePaymentLinkPayload,
         msg: response.data?.msg,
         metadata: { count: response.data?.count }
       }

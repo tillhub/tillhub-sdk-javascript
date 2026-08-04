@@ -132,10 +132,8 @@ describe('v0: paymentLinks: can create payment link', () => {
       password: user.password
     })
 
-    try {
-      await th.paymentLinks().create(createRequest)
-    } catch (err: any) {
-      expect(err.name).toBe('PaymentLinksCreateFailed')
-    }
+    await expect(th.paymentLinks().create(createRequest)).rejects.toMatchObject({
+      name: 'PaymentLinksCreateFailed'
+    })
   })
 })

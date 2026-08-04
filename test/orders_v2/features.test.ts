@@ -74,13 +74,9 @@ describe('v2: orders: can get features', () => {
 
     expect(ordersV2).toBeInstanceOf(v2.Orders)
 
-    try {
-      const { data, msg } = await ordersV2.features()
-      expect(data).toEqual({ moto: true, ecom: false })
-      expect(msg).toBe('Success')
-    } catch (err: any) {
-      expect(err.name).toBe('OrderFeaturesFetchFailed')
-    }
+    const { data, msg } = await ordersV2.features()
+    expect(data).toEqual({ moto: true, ecom: false })
+    expect(msg).toBe('Success')
   })
 
   it('rejects on status codes that are not 200', async () => {
@@ -119,10 +115,8 @@ describe('v2: orders: can get features', () => {
       password: user.password
     })
 
-    try {
-      await th.ordersV2().features()
-    } catch (err: any) {
-      expect(err.name).toBe('OrderFeaturesFetchFailed')
-    }
+    await expect(th.ordersV2().features()).rejects.toMatchObject({
+      name: 'OrderFeaturesFetchFailed'
+    })
   })
 })
