@@ -36,10 +36,15 @@ export interface OrdersMetaResponse {
   msg: string
 }
 
+export interface OrderFeatures {
+  moto: boolean
+  ecom: boolean
+}
+
 export interface FeaturesResponse {
   data: {
-    moto: boolean
-    ecom: boolean
+    results?: OrderFeatures[]
+    msg?: string
   }
   msg?: string
 }
@@ -429,7 +434,7 @@ export class Orders extends ThBaseHandler {
         throw new OrderFeaturesFetchFailed(undefined, { status: response.status })
       }
       return {
-        data: response.data.results[0],
+        data: response.data,
         msg: response.data.msg
       }
     } catch (error: any) {

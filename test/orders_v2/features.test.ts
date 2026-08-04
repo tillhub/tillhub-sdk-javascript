@@ -75,8 +75,12 @@ describe('v2: orders: can get features', () => {
     expect(ordersV2).toBeInstanceOf(v2.Orders)
 
     const { data, msg } = await ordersV2.features()
-    expect(data).toEqual({ moto: true, ecom: false })
+    expect(data).toEqual({
+      msg: 'Success',
+      results: [{ moto: true, ecom: false }]
+    })
     expect(msg).toBe('Success')
+    expect(data.results?.[0]).toEqual({ moto: true, ecom: false })
   })
 
   it('rejects on status codes that are not 200', async () => {
