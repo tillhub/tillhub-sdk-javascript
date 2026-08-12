@@ -130,4 +130,59 @@ describe('v2: orders: can get keypairs', () => {
       name: 'OrderKeypairsFetchFailed'
     })
   })
+
+  it('can get PAYLATER keypairs', async () => {
+    const paylaterKeypair = {
+      ...keypair,
+      alias: 'PAYLATER key',
+      productType: 'PAYLATER'
+    }
+
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+
+      mock.onGet(`https://api.tillhub.com/api/v2/orders/${legacyId}/keypairs?type=PAYLATER`).reply(() => {
+        return [
+          200,
+          {
+            count: 1,
+            msg: 'Success',
+            results: [paylaterKeypair]
+          }
+        ]
+      })
+    }
+
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE
+    }
+
+    const th = new TillhubClient()
+
+    th.init(options)
+    await th.auth.loginUsername({
+      username: user.username,
+      password: user.password
+    })
+
+    const { data, msg, metadata } = await th.ordersV2().keypairs({ type: 'PAYLATER' })
+    expect(data).toEqual([paylaterKeypair])
+    expect(msg).toBe('Success')
+    expect(metadata.count).toBe(1)
+  })
 })
