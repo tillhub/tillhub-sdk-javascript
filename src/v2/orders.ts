@@ -39,6 +39,7 @@ export interface OrdersMetaResponse {
 export interface OrderFeatures {
   moto: boolean
   ecom: boolean
+  paylater: boolean
 }
 
 export interface FeaturesResponse {
@@ -49,7 +50,7 @@ export interface FeaturesResponse {
   msg?: string
 }
 
-export type KeypairProductType = 'ECOM' | 'MOTO' | 'POS'
+export type KeypairProductType = 'ECOM' | 'MOTO' | 'POS' | 'PAYLATER'
 
 export interface KeypairsQuery {
   type?: KeypairProductType
