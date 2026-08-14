@@ -33,11 +33,30 @@ export interface Webhook {
   createdBy?: string
   description?: string
   eventList?: string[]
+  ratePerSecond?: number | null
+  maxInFlight?: number | null
+  burst?: number | null
+  connectTimeoutMs?: number | null
+  requestTimeoutMs?: number | null
   secret?: string
   updatedBy?: string
   url?: string
   active?: boolean
   deletedAt?: Date
+}
+
+export interface WebhookDeliveryLimitDefaults {
+  ratePerSecond: number
+  burst: number
+  maxInFlight: number
+  connectTimeoutMs: number
+  requestTimeoutMs: number
+}
+
+export interface WebhookDeliveryLimitDefaultsResponse {
+  msg?: string
+  data?: WebhookDeliveryLimitDefaults
+  metadata?: Record<string, unknown>
 }
 
 export class Webhooks extends ThBaseHandler {
@@ -158,6 +177,27 @@ export class Webhooks extends ThBaseHandler {
     }
   }
 
+  async defaults (): Promise<WebhookDeliveryLimitDefaultsResponse> {
+    // Not tenant-scoped: bypass the uriHelper (which would insert the tenant id)
+    // and hit /api/v0/webhooks/defaults directly.
+    const uri = `${this.options.base ?? 'https://api.tillhub.com'}${Webhooks.baseEndpoint}/defaults`
+
+    try {
+      const response = await this.http.getClient().get(uri)
+      if (response.status !== 200) {
+        throw new WebhookDeliveryLimitDefaultsFetchFailed(undefined, { status: response.status })
+      }
+
+      return {
+        msg: response.data.msg,
+        data: response.data.results[0],
+        metadata: { count: response.data.count }
+      }
+    } catch (error: any) {
+      throw new WebhookDeliveryLimitDefaultsFetchFailed(error.message, { error })
+    }
+  }
+
   async regenerateSecret (webhookId: string): Promise<WebhookRegenerateSecretResponse> {
     const uri = this.uriHelper.generateBaseUri(`/${webhookId}/regenerate-secret`)
 
@@ -229,6 +269,17 @@ class WebhookDeleteFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, WebhookDeleteFailed.prototype)
+  }
+}
+
+class WebhookDeliveryLimitDefaultsFetchFailed extends BaseError {
+  public name = 'WebhookDeliveryLimitDefaultsFetchFailed'
+  constructor (
+    public message: string = 'Could not fetch the webhook delivery limit defaults',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, WebhookDeliveryLimitDefaultsFetchFailed.prototype)
   }
 }
 

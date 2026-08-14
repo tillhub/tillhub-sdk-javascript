@@ -18,7 +18,9 @@ const webhook = {
   eventList: ['products:create:v0', 'products:update:v0', 'products:delete:v0', 'transactions:create:v1'],
   secret: 'myL1ttl3D1rtyS3cr3t',
   updatedBy: 'update_uuid',
-  url: 'https://bestherethanthere.com'
+  url: 'https://bestherethanthere.com',
+  ratePerSecond: 10,
+  maxInFlight: 5
 }
 
 describe('v0: Webhooks: can create a webhook', () => {
@@ -57,6 +59,50 @@ describe('v0: Webhooks: can create a webhook', () => {
     const { data } = await webhooks.create(webhook)
 
     expect(data).toMatchObject(webhook)
+  })
+
+  it('forwards limiter fields in the request body, including null to clear an override', async () => {
+    const webhookWithNullOverride = {
+      ...webhook,
+      ratePerSecond: null
+    }
+
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+
+      mock.onPost(`https://api.tillhub.com/api/v0/webhooks/${legacyId}`).reply((config) => {
+        const body = JSON.parse(config.data)
+        expect(body.ratePerSecond).toBeNull()
+        expect(body.maxInFlight).toBe(webhook.maxInFlight)
+
+        return [
+          200,
+          {
+            count: 1,
+            results: [{ ...webhookWithNullOverride }],
+            errors: []
+          }
+        ]
+      })
+    }
+
+    const th = await initThInstance()
+    const webhooks = th.webhooks()
+
+    const { data } = await webhooks.create(webhookWithNullOverride)
+
+    expect(data).toMatchObject(webhookWithNullOverride)
   })
 
   it('rejects on status codes that are not 200', async () => {
