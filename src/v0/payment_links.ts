@@ -24,6 +24,7 @@ export interface PaymentLinkDto {
   linkedOrderId?: string | null
   branch?: string | null
   branchId?: string | null
+  branchName?: string | null
   businessUnitUnzerId: string
   externalInvoiceId?: string
   externalOrderId?: string
@@ -34,6 +35,7 @@ export interface PaymentLinkDto {
   currency?: string | null
   customer?: PaymentLinkCustomer | null
   items?: PaymentLinkItem[] | null
+  paymentPageId?: string | null
   paymentPageUrl?: string | null
   createdAt: string | {
     start: Date
