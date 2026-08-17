@@ -13,7 +13,7 @@ import {
 } from '../errors'
 
 declare type PaymentLinkType = 'items_sale' | 'quick_charge'
-declare type PaymentLinkStatus = 'open' | 'expired' | 'closed'
+declare type PaymentLinkStatus = 'sent' | 'paid' | 'expired' | 'authorized' | 'cancelled' | 'refunded' | 'failed'
 declare type BasketItemType = 'goods' | 'shipment' | 'voucher' | 'digital'
 declare type PaymentLinkSolutionType = 'BNPL_INSTORE' | 'LINKPAY'
 
