@@ -33,6 +33,7 @@ export interface OrdersMetaResponse {
 export interface OrderFeatures {
     moto: boolean;
     ecom: boolean;
+    paylater: boolean;
 }
 export interface FeaturesResponse {
     data: {
@@ -41,7 +42,7 @@ export interface FeaturesResponse {
     };
     msg?: string;
 }
-export declare type KeypairProductType = 'ECOM' | 'MOTO' | 'POS';
+export declare type KeypairProductType = 'ECOM' | 'MOTO' | 'POS' | 'PAYLATER';
 export interface KeypairsQuery {
     type?: KeypairProductType;
 }

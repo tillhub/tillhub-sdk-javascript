@@ -1,3 +1,10 @@
+# [4.288.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.287.0...v4.288.0) (2026-08-18)
+
+
+### Features
+
+* **2FA:** remove 2FA required modal - UOD-3895 ([#760](https://github.com/tillhub/tillhub-sdk-javascript/issues/760)) ([ae33793](https://github.com/tillhub/tillhub-sdk-javascript/commit/ae33793f963c9833a651d06055da9ce656a0e993))
+
 # [4.287.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.286.0...v4.287.0) (2026-08-04)
 
 
