@@ -88,7 +88,9 @@ describe('v0: paymentLinks: can get payment link by id', () => {
 
     const result = await paymentLinks.getById(paymentLinkId)
 
-    expect(result).toEqual(paymentLink)
+    expect(result.msg).toBe('Success')
+    expect(result.count).toBe(1)
+    expect(result.results?.[0]).toEqual(paymentLink)
   })
 
   it('rejects on status codes that are not 200', async () => {
