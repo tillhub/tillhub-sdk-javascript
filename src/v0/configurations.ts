@@ -54,12 +54,24 @@ export interface BulkUpdateResponse {
   metadata?: Record<string, unknown>
 }
 
+export type PaymentLinkDefaultUsageMode = 'single_use' | 'multi_use'
+
+export interface PaymentLinksConfigurationSettings {
+  default_expiry_days?: number
+  default_usage_mode?: PaymentLinkDefaultUsageMode
+}
+
+export interface ConfigurationSettings {
+  payment_links?: PaymentLinksConfigurationSettings
+  [key: string]: unknown
+}
+
 export interface Configuration {
   id?: string
   vouchers?: Record<string, unknown>
   scan_prefixes?: Array<Record<string, unknown>>
   voucher_actions?: Array<Record<string, unknown>>
-  settings?: Record<string, unknown>
+  settings?: ConfigurationSettings
   hooks?: Array<Record<string, unknown>>
   themes?: Record<string, unknown>
   name?: string
