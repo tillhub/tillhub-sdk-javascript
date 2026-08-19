@@ -167,9 +167,39 @@ var Webhooks = (function (_super) {
             });
         });
     };
-    Webhooks.prototype.regenerateSecret = function (webhookId) {
+    Webhooks.prototype.defaults = function () {
+        var _a;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var uri, response, error_6;
+            return tslib_1.__generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        uri = "" + ((_a = this.options.base) !== null && _a !== void 0 ? _a : 'https://api.tillhub.com') + Webhooks.baseEndpoint + "/defaults";
+                        _b.label = 1;
+                    case 1:
+                        _b.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().get(uri)];
+                    case 2:
+                        response = _b.sent();
+                        if (response.status !== 200) {
+                            throw new WebhookDeliveryLimitDefaultsFetchFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                msg: response.data.msg,
+                                data: response.data.results[0],
+                                metadata: { count: response.data.count }
+                            }];
+                    case 3:
+                        error_6 = _b.sent();
+                        throw new WebhookDeliveryLimitDefaultsFetchFailed(error_6.message, { error: error_6 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
+    Webhooks.prototype.regenerateSecret = function (webhookId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_7;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -188,8 +218,8 @@ var Webhooks = (function (_super) {
                                 data: response.data.results[0]
                             }];
                     case 3:
-                        error_6 = _a.sent();
-                        throw new WebhookRegenerateSecretFailed(error_6.message, { error: error_6 });
+                        error_7 = _a.sent();
+                        throw new WebhookRegenerateSecretFailed(error_7.message, { error: error_7 });
                     case 4: return [2];
                 }
             });
@@ -258,6 +288,18 @@ var WebhookDeleteFailed = (function (_super) {
         return _this;
     }
     return WebhookDeleteFailed;
+}(baseError_1.BaseError));
+var WebhookDeliveryLimitDefaultsFetchFailed = (function (_super) {
+    tslib_1.__extends(WebhookDeliveryLimitDefaultsFetchFailed, _super);
+    function WebhookDeliveryLimitDefaultsFetchFailed(message, properties) {
+        if (message === void 0) { message = 'Could not fetch the webhook delivery limit defaults'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'WebhookDeliveryLimitDefaultsFetchFailed';
+        Object.setPrototypeOf(_this, WebhookDeliveryLimitDefaultsFetchFailed.prototype);
+        return _this;
+    }
+    return WebhookDeliveryLimitDefaultsFetchFailed;
 }(baseError_1.BaseError));
 var WebhookRegenerateSecretFailed = (function (_super) {
     tslib_1.__extends(WebhookRegenerateSecretFailed, _super);

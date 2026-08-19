@@ -1,3 +1,10 @@
+# [4.289.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.288.0...v4.289.0) (2026-08-19)
+
+
+### Features
+
+* **webhooks:** update types and add defaults ([#762](https://github.com/tillhub/tillhub-sdk-javascript/issues/762)) ([546d9f0](https://github.com/tillhub/tillhub-sdk-javascript/commit/546d9f0c00de14418e3e3c5d2baab7b5362244fa))
+
 # [4.288.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.287.0...v4.288.0) (2026-08-18)
 
 

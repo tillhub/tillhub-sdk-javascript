@@ -2,8 +2,9 @@ import { ThBaseHandler } from '../base';
 import { Client } from '../client';
 import { UriHelper } from '../uri-helper';
 declare type PaymentLinkType = 'items_sale' | 'quick_charge';
-declare type PaymentLinkStatus = 'open' | 'expired' | 'closed';
+declare type PaymentLinkStatus = 'sent' | 'paid' | 'expired' | 'authorized' | 'cancelled' | 'refunded' | 'failed';
 declare type BasketItemType = 'goods' | 'shipment' | 'voucher' | 'digital';
+declare type PaymentLinkSolutionType = 'BNPL_INSTORE' | 'LINKPAY';
 export interface PaymentLinkDto {
     id?: string | null;
     usage?: string | null;
@@ -11,6 +12,7 @@ export interface PaymentLinkDto {
     linkedOrderId?: string | null;
     branch?: string | null;
     branchId?: string | null;
+    branchName?: string | null;
     businessUnitUnzerId: string;
     externalInvoiceId?: string;
     externalOrderId?: string;
@@ -21,12 +23,18 @@ export interface PaymentLinkDto {
     currency?: string | null;
     customer?: PaymentLinkCustomer | null;
     items?: PaymentLinkItem[] | null;
+    paymentPageId?: string | null;
     paymentPageUrl?: string | null;
     createdAt: string | {
         start: Date;
         end: Date;
     } | null;
     updatedAt?: string | null;
+    solutionType?: PaymentLinkSolutionType;
+    multiUse?: boolean;
+    expiresAt?: string | Date | null;
+    alias?: string | null;
+    orderCount?: number;
 }
 export interface PaymentLinksOptions {
     user?: string;
@@ -77,14 +85,19 @@ export interface CreatePaymentLinkRequest {
 }
 export interface PaymentLinkQuery {
     branch?: string | null;
+    branchId?: string | null;
     customerEmail?: string | null;
     createdBy?: string | null;
     createdAt?: string | {
         start: Date;
         end: Date;
     } | null;
-    status?: string | null;
+    status?: PaymentLinkStatus | null;
     amount?: number | null;
+    paymentLinkDescription?: string | null;
+    linkedOrderId?: string | null;
+    externalOrderId?: string | null;
+    deleted?: boolean | null;
 }
 export interface SendSmsRequest {
     to: string;
@@ -104,6 +117,11 @@ export interface PaymentLinksResponse {
     metadata?: Record<string, unknown>;
     msg?: string;
     next?: () => Promise<PaymentLinksResponse>;
+}
+export interface PaymentLinkDetailResponse {
+    results?: PaymentLinkDto[];
+    msg?: string;
+    count?: number;
 }
 export interface PaymentPageResponse {
     paymentPageUrl: string;
@@ -145,6 +163,6 @@ export declare class PaymentLinks extends ThBaseHandler {
     sendEmail(sendPaymentLinkEmailDto: SendPaymentLinkEmailDto): Promise<NotificationResponse>;
     getPaymentPageUrl(paymentLinkId: string): Promise<PaymentPageUrlResponse>;
     getQrCodeSvg(paymentLinkId: string): Promise<PaymentLinkQrCodeResponse>;
-    getById(id: string): Promise<PaymentLinkDto>;
+    getById(id: string): Promise<PaymentLinkDetailResponse>;
 }
 export {};
