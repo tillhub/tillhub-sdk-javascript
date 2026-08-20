@@ -91,6 +91,49 @@ describe('v2: AnalyticsReportsStocks', () => {
     expect(typeof next).toBe('function')
   })
 
+  it('passes as_of through to the stocks report query string', async () => {
+    const asOf = '2025-12-31T23:59:00.000Z'
+    const dataItems = [{ qty_available: 12 }]
+
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock
+        .onGet(new RegExp(`/api/v2/analytics/${legacyId}/reports/stocks\\?as_of=`))
+        .reply((config) => {
+          expect(config.url).toContain(`as_of=${encodeURIComponent(asOf)}`)
+          return [
+            200,
+            {
+              count: 1,
+              results: [
+                {
+                  metric: { job: 'reports_stocks', user: faker.datatype.uuid() },
+                  count: 1,
+                  values: dataItems
+                },
+                {
+                  metric: { job: 'reports_stocks_meta', user: faker.datatype.uuid() },
+                  count: 1,
+                  values: [{ count: 1 }]
+                },
+                {
+                  metric: { job: 'reports_stocks_filtered_meta', user: faker.datatype.uuid() },
+                  count: 1,
+                  values: [{ count: 1 }]
+                }
+              ]
+            }
+          ]
+        })
+    }
+
+    const th = await initThInstance()
+    const analyticsReportsStocks = th.analyticsHandlers().analytics.reports.AnalyticsReportsStocks
+
+    const { data } = await analyticsReportsStocks.getAll({ as_of: asOf })
+
+    expect(data).toEqual(dataItems)
+  })
+
   it('can get stocks analytics export', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock
