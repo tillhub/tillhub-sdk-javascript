@@ -21,6 +21,9 @@ export interface StocksExportOptions {
   format?: string
   branch_number?: number
   uri?: string
+  as_of?: string
+  start?: string
+  end?: string
 }
 
 export class AnalyticsReportsStocks extends ThAnalyticsBaseHandler {
