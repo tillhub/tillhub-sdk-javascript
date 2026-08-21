@@ -15,11 +15,11 @@ import {
 declare type PaymentLinkType = 'items_sale' | 'quick_charge'
 declare type PaymentLinkStatus = 'sent' | 'paid' | 'expired' | 'authorized' | 'cancelled' | 'refunded' | 'failed'
 declare type BasketItemType = 'goods' | 'shipment' | 'voucher' | 'digital'
-declare type PaymentLinkSolutionType = 'BNPL_INSTORE' | 'LINKPAY'
+declare type PaymentLinkSolutionType = 'bnpl_instore' | 'linkpay'
 
 export interface PaymentLinkDto {
   id?: string | null
-  usage?: string | null
+  paymentLinkDescription?: string | null
   paymentLinkType: PaymentLinkType
   linkedOrderId?: string | null
   branch?: string | null
@@ -86,6 +86,13 @@ export interface PaymentLinkItem {
   vat?: number | null
 }
 
+export interface PaymentMethodConfig {
+  order?: number
+  enabled?: boolean
+}
+
+export type PaymentMethodsConfigs = Record<string, PaymentMethodConfig>
+
 export interface CreatePaymentLinkRequest {
   paymentLinkDescription?: string
   paymentLinkType?: PaymentLinkType
@@ -96,9 +103,14 @@ export interface CreatePaymentLinkRequest {
   invoiceId?: string
   externalOrderId?: string
   externalCustomerId?: string
+  solutionType?: PaymentLinkSolutionType
   customer?: PaymentLinkCustomer | null
   items?: PaymentLinkItem[] | null
   keypairId?: string
+  alias?: string
+  multiUse?: boolean
+  expirationDate?: string | Date | null
+  paymentMethodsConfigs?: PaymentMethodsConfigs
 }
 
 export interface PaymentLinkQuery {
