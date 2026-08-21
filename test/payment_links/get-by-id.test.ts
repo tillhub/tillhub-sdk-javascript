@@ -32,7 +32,7 @@ describe('v0: paymentLinks: can get payment link by id', () => {
     businessUnitUnzerId: 'bu-1',
     createdBy: 'test@example.com',
     createdAt: '2026-08-01T00:00:00.000Z',
-    solutionType: 'LINKPAY',
+    solutionType: 'linkpay',
     multiUse: true,
     expiresAt: '2026-09-01T00:00:00.000Z',
     alias: 'summer-sale',
