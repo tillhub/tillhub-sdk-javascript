@@ -109,7 +109,7 @@ export interface CreatePaymentLinkRequest {
   keypairId?: string
   alias?: string
   multiUse?: boolean
-  expirationDate?: string | Date | null
+  expiresAt?: string | Date | null
   paymentMethodsConfigs?: PaymentMethodsConfigs
 }
 
