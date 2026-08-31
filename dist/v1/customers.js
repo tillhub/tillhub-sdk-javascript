@@ -230,6 +230,40 @@ var Customers = (function (_super) {
             });
         });
     };
+    Customers.prototype.bulkCreate = function (customers, query) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var base, uri, response, error_8;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        base = this.uriHelper.generateBaseUri('/bulk-create');
+                        uri = this.uriHelper.generateUriWithQuery(base, query);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().post(uri, customers)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new customers_1.CustomersBulkCreateFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: {
+                                    created_customers: response.data.created_customers,
+                                    skipped_customers: response.data.skipped_customers,
+                                    invalid_customers: response.data.invalid_customers
+                                },
+                                metadata: response.data.metadata,
+                                msg: response.data.msg
+                            }];
+                    case 3:
+                        error_8 = _a.sent();
+                        throw new customers_1.CustomersBulkCreateFailed(error_8.message, { error: error_8 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     Customers.baseEndpoint = '/api/v1/customers';
     return Customers;
 }(base_1.ThBaseHandler));

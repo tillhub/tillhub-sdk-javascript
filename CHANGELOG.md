@@ -1,3 +1,10 @@
+# [4.292.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.291.0...v4.292.0) (2026-08-31)
+
+
+### Features
+
+* **UNTIL-21468:** add customersV1 bulkCreate ([#770](https://github.com/tillhub/tillhub-sdk-javascript/issues/770)) ([d266960](https://github.com/tillhub/tillhub-sdk-javascript/commit/d2669608aab187d34672e265aca4a258530f5958))
+
 # [4.291.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.290.0...v4.291.0) (2026-08-31)
 
 # [4.290.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.289.0...v4.290.0) (2026-08-31)
