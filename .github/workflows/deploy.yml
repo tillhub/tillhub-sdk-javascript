@@ -45,10 +45,6 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: npm run deploy-docs
 
-      # npm trusted publishing (OIDC) needs npm CLI >= 11.5.1; Node 22 ships 10.9.x
-      - name: Upgrade npm CLI for trusted publishing
-        run: npm install -g npm@^11
-
       - name: Release
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
