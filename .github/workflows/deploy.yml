@@ -10,6 +10,13 @@ on:
         required: true
         options:
           - production
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  id-token: write
+
 jobs:
    build-deploy:
     runs-on: ubuntu-latest
@@ -19,7 +26,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'npm'
 
       - name: Install dependencies
@@ -38,9 +45,11 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: npm run deploy-docs
 
+      # npm trusted publishing (OIDC) needs npm CLI >= 11.5.1; Node 22 ships 10.9.x
+      - name: Upgrade npm CLI for trusted publishing
+        run: npm install -g npm@^11
+
       - name: Release
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: npm run semantic-release || true
-      
+        run: npm run semantic-release
