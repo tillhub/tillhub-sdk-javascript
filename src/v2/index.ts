@@ -2,6 +2,7 @@ import analytics from './analytics'
 import { Transactions } from './transactions'
 import { Orders } from './orders'
 import { Products } from './products'
+import { Customers } from './customers'
 import { OrderActions } from './order-actions'
 
 export interface AnalyticsHandlerTypes {
@@ -26,5 +27,6 @@ export {
   Transactions,
   Orders,
   OrderActions,
-  Products
+  Products,
+  Customers
 }
