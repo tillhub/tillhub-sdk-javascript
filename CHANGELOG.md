@@ -1,3 +1,12 @@
+# [4.290.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.289.0...v4.290.0) (2026-08-31)
+
+
+### Features
+
+* **UNTIL-20334:** deprecate v0 services/serviceCategory getters & staff.getServices in favor of v1 ([#745](https://github.com/tillhub/tillhub-sdk-javascript/issues/745)) ([815b196](https://github.com/tillhub/tillhub-sdk-javascript/commit/815b19643eead14ae30556b665fa22cb4cbfb78a))
+* **UNTIL-21467:** add customersV2 create and put ([#766](https://github.com/tillhub/tillhub-sdk-javascript/issues/766)) ([b20c103](https://github.com/tillhub/tillhub-sdk-javascript/commit/b20c1035f1b394f3a22611b5c6f1946631c74eb9))
+* **UNTIL-21674:** stocks report as of query param ([#763](https://github.com/tillhub/tillhub-sdk-javascript/issues/763)) ([0967e52](https://github.com/tillhub/tillhub-sdk-javascript/commit/0967e52065b9c3017bc28fda607ea2996c489a55))
+
 # [4.289.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.288.0...v4.289.0) (2026-08-19)
 
 
