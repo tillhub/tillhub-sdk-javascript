@@ -8,6 +8,7 @@ import {
   CustomerFetchFailed,
   CustomerPutFailed,
   CustomerResponse,
+  CustomersBulkCreateFailed,
   CustomersCountFailed,
   CustomersFetchFailed,
   CustomersMetaFailed,
@@ -17,6 +18,44 @@ import {
   CustomersResponse,
   HandlerCustomerQuery
 } from '../v0/customers'
+
+export type CustomersBulkCreateMatchTier = 'customer_number' | 'email' | 'phonenumber'
+
+export interface CustomersBulkCreateMatch {
+  customer: Customer
+  matched_by: CustomersBulkCreateMatchTier[]
+}
+
+export interface CustomersBulkCreateRow {
+  input_index: number
+  input: Customer
+}
+
+export interface CustomersBulkCreateCreatedRow extends CustomersBulkCreateRow {
+  customer: Customer
+}
+
+export interface CustomersBulkCreateSkippedRow extends CustomersBulkCreateRow {
+  matches: CustomersBulkCreateMatch[]
+}
+
+export interface CustomersBulkCreateInvalidRow extends CustomersBulkCreateRow {
+  errors: Array<{ message?: string, [key: string]: unknown }>
+}
+
+export interface CustomersBulkCreateResponse {
+  data: {
+    created_customers: CustomersBulkCreateCreatedRow[]
+    skipped_customers: CustomersBulkCreateSkippedRow[]
+    invalid_customers: CustomersBulkCreateInvalidRow[]
+  }
+  metadata: {
+    created: number
+    skipped: number
+    invalid: number
+  }
+  msg?: string
+}
 
 export class Customers extends ThBaseHandler {
   public static baseEndpoint = '/api/v1/customers'
@@ -169,6 +208,33 @@ export class Customers extends ThBaseHandler {
       }
     } catch (error: any) {
       throw new CustomersCountFailed(error.message, { error })
+    }
+  }
+
+  async bulkCreate (
+    customers: Customer[],
+    query?: HandlerCustomerQuery
+  ): Promise<CustomersBulkCreateResponse> {
+    const base = this.uriHelper.generateBaseUri('/bulk-create')
+    const uri = this.uriHelper.generateUriWithQuery(base, query)
+
+    try {
+      const response = await this.http.getClient().post(uri, customers)
+      if (response.status !== 200) {
+        throw new CustomersBulkCreateFailed(undefined, { status: response.status })
+      }
+
+      return {
+        data: {
+          created_customers: response.data.created_customers,
+          skipped_customers: response.data.skipped_customers,
+          invalid_customers: response.data.invalid_customers
+        },
+        metadata: response.data.metadata,
+        msg: response.data.msg
+      }
+    } catch (error: any) {
+      throw new CustomersBulkCreateFailed(error.message, { error })
     }
   }
 }
