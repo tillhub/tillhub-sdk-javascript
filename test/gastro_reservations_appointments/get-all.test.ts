@@ -92,7 +92,7 @@ describe('v0: Gastro Reservations Appointments: can get all', () => {
 })
 
 describe('v0: Gastro Reservations Appointments: can count opening hours conflicts', () => {
-  it('posts the previous and next opening hours snapshots', async () => {
+  it('posts a date range and optional daily time window', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
@@ -114,7 +114,7 @@ describe('v0: Gastro Reservations Appointments: can count opening hours conflict
             200,
             {
               msg: 'Success',
-              results: [{ count: 2, skipped: false }],
+              results: [{ count: 2 }],
               status: 200
             }
           ]
@@ -123,14 +123,16 @@ describe('v0: Gastro Reservations Appointments: can count opening hours conflict
 
     const th = await initThInstance()
     const body = {
-      previousReservations: { opening_hours: [] },
-      nextReservations: { opening_hours: [] },
+      startDate: '2026-12-20',
+      endDate: '2026-12-20',
+      from: '10:00',
+      to: '15:00',
       timeZone: 'Europe/Berlin'
     }
 
     const { data } = await th.gastroReservationsAppointments().countOpeningHoursConflicts(body)
 
-    expect(data).toEqual({ count: 2, skipped: false })
+    expect(data).toEqual({ count: 2 })
   })
 
   it('rejects when the conflict count request fails', async () => {
@@ -159,8 +161,8 @@ describe('v0: Gastro Reservations Appointments: can count opening hours conflict
 
     try {
       await th.gastroReservationsAppointments().countOpeningHoursConflicts({
-        previousReservations: {},
-        nextReservations: {}
+        startDate: '2026-12-20',
+        endDate: '2026-12-20'
       })
     } catch (err: any) {
       expect(err.name).toBe('GastroReservationsOpeningHoursConflictsFailed')

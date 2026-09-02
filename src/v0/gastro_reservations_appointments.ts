@@ -40,43 +40,17 @@ export interface GastroReservationsAppointmentsResponse {
   next?: () => Promise<GastroReservationsAppointmentsResponse>
 }
 
-export interface OpeningHoursSnapshot {
-  opening_hours?: Array<{
-    closed: boolean
-    day_index: number
-    open_from: string
-    open_to: string
-    break_from?: string
-    break_to?: string
-  }>
-  closing_days?: Array<{
-    reason: string
-    start_date: string
-    end_date: string
-  }>
-  opening_hours_exceptions?: Array<{
-    type: 'open' | 'closed'
-    start_date: string
-    end_date: string
-    weekdays?: number[]
-    from: string | null
-    to: string | null
-    reason?: string
-    break_from?: string | null
-    break_to?: string | null
-  }>
-}
-
 export interface CountOpeningHoursConflictsBody {
-  previousReservations: OpeningHoursSnapshot
-  nextReservations: OpeningHoursSnapshot
+  startDate: string
+  endDate: string
+  from?: string | null
+  to?: string | null
   branchId?: string
   timeZone?: string
 }
 
 export interface OpeningHoursConflictsResult {
   count: number
-  skipped: boolean
 }
 
 export interface CountOpeningHoursConflictsResponse {
