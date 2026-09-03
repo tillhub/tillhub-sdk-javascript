@@ -64,28 +64,28 @@ export interface CountOpeningHoursConflictsResponse {
 }
 
 export interface ReservationsConfigBody {
-  opening_hours: Array<{
+  openingHours: Array<{
     closed: boolean
-    day_index: number
-    open_from: string
-    open_to: string
-    break_from?: string
-    break_to?: string
+    dayIndex: number
+    openFrom: string
+    openTo: string
+    breakFrom?: string | null
+    breakTo?: string | null
   }>
-  closing_days: Array<{
+  closingDays: Array<{
     reason: string
-    start_date: string
-    end_date: string
+    startDate: string
+    endDate: string
   }>
-  opening_hours_exceptions: Array<{
+  openingHoursExceptions: Array<{
     type: 'open' | 'closed'
-    start_date: string
-    end_date: string
+    startDate: string
+    endDate: string
     from: string | null
     to: string | null
     weekdays?: number[]
-    break_from?: string | null
-    break_to?: string | null
+    breakFrom?: string | null
+    breakTo?: string | null
   }>
 }
 
