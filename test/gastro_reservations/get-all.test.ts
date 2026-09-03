@@ -14,15 +14,15 @@ afterEach(() => {
   mock.reset()
 })
 
-const appointment = {
+const reservation = {
   id: '12356',
   status: 'reserved',
   start: '2026-09-15T12:00:00.000Z',
   end: '2026-09-15T13:00:00.000Z'
 }
 
-describe('v0: Gastro Reservations Appointments: can get all', () => {
-  it("Tillhub's Gastro Reservations Appointments are instantiable", async () => {
+describe('v0: Gastro Reservations: can get all', () => {
+  it("Tillhub's Gastro Reservations are instantiable", async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
         return [
@@ -44,18 +44,18 @@ describe('v0: Gastro Reservations Appointments: can get all', () => {
             200,
             {
               count: 1,
-              results: [appointment]
+              results: [reservation]
             }
           ]
         })
     }
 
     const th = await initThInstance()
-    const gastroReservationsAppointments = th.gastroReservationsAppointments()
+    const gastroReservations = th.gastroReservations()
 
-    expect(gastroReservationsAppointments).toBeInstanceOf(v0.GastroReservationsAppointments)
+    expect(gastroReservations).toBeInstanceOf(v0.GastroReservations)
 
-    const { data } = await gastroReservationsAppointments.getAll()
+    const { data } = await gastroReservations.getAll()
     expect(Array.isArray(data)).toBe(true)
   })
 
@@ -84,14 +84,14 @@ describe('v0: Gastro Reservations Appointments: can get all', () => {
     const th = await initThInstance()
 
     try {
-      await th.gastroReservationsAppointments().getAll()
+      await th.gastroReservations().getAll()
     } catch (err: any) {
-      expect(err.name).toBe('GastroReservationsAppointmentsFetchFailed')
+      expect(err.name).toBe('GastroReservationsFetchFailed')
     }
   })
 })
 
-describe('v0: Gastro Reservations Appointments: can count opening hours conflicts', () => {
+describe('v0: Gastro Reservations: can count opening hours conflicts', () => {
   it('posts a date range and optional daily time window', async () => {
     if (process.env.SYSTEM_TEST !== 'true') {
       mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
@@ -108,7 +108,9 @@ describe('v0: Gastro Reservations Appointments: can count opening hours conflict
       })
 
       mock
-        .onPost(`https://api.tillhub.com/api/v0/gastro/reservations/appointments/${legacyId}/opening-hours-conflicts`)
+        .onPost(
+          `https://api.tillhub.com/api/v0/gastro/reservations/appointments/${legacyId}/opening-hours-conflicts`
+        )
         .reply(() => {
           return [
             200,
@@ -125,12 +127,14 @@ describe('v0: Gastro Reservations Appointments: can count opening hours conflict
     const body = {
       startDate: '2026-12-20',
       endDate: '2026-12-20',
+      type: 'open' as const,
       from: '10:00',
       to: '15:00',
+      weekdays: [0],
       timeZone: 'Europe/Berlin'
     }
 
-    const { data } = await th.gastroReservationsAppointments().countOpeningHoursConflicts(body)
+    const { data } = await th.gastroReservations().countOpeningHoursConflicts(body)
 
     expect(data).toEqual({ count: 2 })
   })
@@ -151,7 +155,9 @@ describe('v0: Gastro Reservations Appointments: can count opening hours conflict
       })
 
       mock
-        .onPost(`https://api.tillhub.com/api/v0/gastro/reservations/appointments/${legacyId}/opening-hours-conflicts`)
+        .onPost(
+          `https://api.tillhub.com/api/v0/gastro/reservations/appointments/${legacyId}/opening-hours-conflicts`
+        )
         .reply(() => {
           return [500]
         })
@@ -160,9 +166,10 @@ describe('v0: Gastro Reservations Appointments: can count opening hours conflict
     const th = await initThInstance()
 
     try {
-      await th.gastroReservationsAppointments().countOpeningHoursConflicts({
+      await th.gastroReservations().countOpeningHoursConflicts({
         startDate: '2026-12-20',
-        endDate: '2026-12-20'
+        endDate: '2026-12-20',
+        type: 'closed'
       })
     } catch (err: any) {
       expect(err.name).toBe('GastroReservationsOpeningHoursConflictsFailed')

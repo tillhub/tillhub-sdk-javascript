@@ -3,14 +3,14 @@ import { UriHelper } from '../uri-helper'
 import { ThBaseHandler } from '../base'
 import { BaseError } from '../errors'
 
-export interface GastroReservationsAppointmentsOptions {
+export interface GastroReservationsOptions {
   user?: string
   base?: string
 }
 
 export type GastroReservationStatus = 'reserved' | 'seated' | 'completed' | 'cancelled' | 'no_show'
 
-export interface GastroReservationsAppointment {
+export interface GastroReservation {
   id?: string
   start?: string
   end?: string
@@ -20,7 +20,7 @@ export interface GastroReservationsAppointment {
   [key: string]: unknown
 }
 
-export interface GastroReservationsAppointmentsQuery {
+export interface GastroReservationsQuery {
   start?: string | Date
   end?: string | Date
   limit?: number
@@ -33,11 +33,11 @@ export interface GastroReservationsAppointmentsQuery {
   uri?: string
 }
 
-export interface GastroReservationsAppointmentsResponse {
-  data?: GastroReservationsAppointment[]
+export interface GastroReservationsResponse {
+  data?: GastroReservation[]
   metadata?: Record<string, unknown>
   msg?: string
-  next?: () => Promise<GastroReservationsAppointmentsResponse>
+  next?: () => Promise<GastroReservationsResponse>
 }
 
 export interface CountOpeningHoursConflictsBody {
@@ -63,29 +63,29 @@ export interface CountOpeningHoursConflictsResponse {
   msg?: string
 }
 
-export class GastroReservationsAppointments extends ThBaseHandler {
+export class GastroReservations extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/gastro/reservations/appointments'
   endpoint: string
   http: Client
-  public options: GastroReservationsAppointmentsOptions
+  public options: GastroReservationsOptions
   public uriHelper: UriHelper
 
-  constructor(options: GastroReservationsAppointmentsOptions, http: Client) {
+  constructor (options: GastroReservationsOptions, http: Client) {
     super(http, {
-      endpoint: GastroReservationsAppointments.baseEndpoint,
+      endpoint: GastroReservations.baseEndpoint,
       base: options.base ?? 'https://api.tillhub.com'
     })
     this.options = options
     this.http = http
 
-    this.endpoint = GastroReservationsAppointments.baseEndpoint
+    this.endpoint = GastroReservations.baseEndpoint
     this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
   }
 
   async getAll (
-    query?: GastroReservationsAppointmentsQuery
-  ): Promise<GastroReservationsAppointmentsResponse> {
+    query?: GastroReservationsQuery
+  ): Promise<GastroReservationsResponse> {
     let next
     const base = this.uriHelper.generateBaseUri()
     const uri = this.uriHelper.generateUriWithQuery(base, query)
@@ -94,11 +94,11 @@ export class GastroReservationsAppointments extends ThBaseHandler {
       const response = await this.http.getClient().get(uri)
 
       if (response.status !== 200) {
-        throw new GastroReservationsAppointmentsFetchFailed(undefined, { status: response.status })
+        throw new GastroReservationsFetchFailed(undefined, { status: response.status })
       }
 
       if (response.data.cursors?.after) {
-        next = (): Promise<GastroReservationsAppointmentsResponse> =>
+        next = (): Promise<GastroReservationsResponse> =>
           this.getAll({ uri: response.data.cursors.after })
       }
 
@@ -108,7 +108,7 @@ export class GastroReservationsAppointments extends ThBaseHandler {
         next
       }
     } catch (error: any) {
-      throw new GastroReservationsAppointmentsFetchFailed(error.message, { error })
+      throw new GastroReservationsFetchFailed(error.message, { error })
     }
   }
 
@@ -137,14 +137,14 @@ export class GastroReservationsAppointments extends ThBaseHandler {
   }
 }
 
-export class GastroReservationsAppointmentsFetchFailed extends BaseError {
-  public name = 'GastroReservationsAppointmentsFetchFailed'
+export class GastroReservationsFetchFailed extends BaseError {
+  public name = 'GastroReservationsFetchFailed'
   constructor (
     public message: string = 'Could not fetch gastro reservations',
     properties?: Record<string, unknown>
   ) {
     super(message, properties)
-    Object.setPrototypeOf(this, GastroReservationsAppointmentsFetchFailed.prototype)
+    Object.setPrototypeOf(this, GastroReservationsFetchFailed.prototype)
   }
 }
 

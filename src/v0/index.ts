@@ -88,7 +88,7 @@ import { Holidays } from './holidays'
 import { ShiftPlan } from './shift_plan'
 import { ScheduledExports } from './scheduled_exports'
 import { CustomerAppointments } from './customer_appointments'
-import { GastroReservationsAppointments } from './gastro_reservations_appointments'
+import { GastroReservations } from './gastro_reservations'
 import { DocumentExports } from './document_exports'
 import { BusinessUnits } from './business_units'
 import { UodInvoices } from './invoices_uod'
@@ -194,7 +194,7 @@ export {
   ShiftPlan,
   ScheduledExports,
   CustomerAppointments,
-  GastroReservationsAppointments,
+  GastroReservations,
   DocumentExports,
   BusinessUnits,
   UodInvoices,

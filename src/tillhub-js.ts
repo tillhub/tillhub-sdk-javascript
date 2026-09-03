@@ -1542,11 +1542,11 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
-   * Create an authenticated Gastro reservations appointments instance
+   * Create an authenticated Gastro reservations instance
    *
    */
-  gastroReservationsAppointments (): v0.GastroReservationsAppointments {
-    return this.generateAuthenticatedInstance(v0.GastroReservationsAppointments)
+  gastroReservations (): v0.GastroReservations {
+    return this.generateAuthenticatedInstance(v0.GastroReservations)
   }
 
   /**
