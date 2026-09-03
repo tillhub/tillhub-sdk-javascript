@@ -63,6 +63,45 @@ export interface CountOpeningHoursConflictsResponse {
   msg?: string
 }
 
+export interface ReservationsConfigBody {
+  openingHours: Array<{
+    closed: boolean
+    dayIndex: number
+    openFrom: string
+    openTo: string
+    breakFrom?: string | null
+    breakTo?: string | null
+  }>
+  closingDays: Array<{
+    reason: string
+    startDate: string
+    endDate: string
+  }>
+  openingHoursExceptions: Array<{
+    type: 'open' | 'closed'
+    startDate: string
+    endDate: string
+    from: string | null
+    to: string | null
+    weekdays?: number[]
+    breakFrom?: string | null
+    breakTo?: string | null
+  }>
+}
+
+export interface CountOpeningHoursConfigConflictsBody {
+  previousReservations: ReservationsConfigBody
+  nextReservations: ReservationsConfigBody
+  timeZone: string
+  branchId?: string
+}
+
+export interface CountOpeningHoursConfigConflictsResponse {
+  data?: OpeningHoursConflictsResult
+  metadata?: Record<string, unknown>
+  msg?: string
+}
+
 export class GastroReservations extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/gastro/reservations/appointments'
   endpoint: string
@@ -132,7 +171,33 @@ export class GastroReservations extends ThBaseHandler {
         msg: response.data.msg
       }
     } catch (error: any) {
+      if (error instanceof GastroReservationsOpeningHoursConflictsFailed) throw error
       throw new GastroReservationsOpeningHoursConflictsFailed(error.message, { error })
+    }
+  }
+
+  async countOpeningHoursConfigConflicts (
+    body: CountOpeningHoursConfigConflictsBody
+  ): Promise<CountOpeningHoursConfigConflictsResponse> {
+    const uri = this.uriHelper.generateBaseUri('/opening-hours-config-conflicts')
+
+    try {
+      const response = await this.http.getClient().post(uri, body)
+
+      if (response.status !== 200) {
+        throw new GastroReservationsOpeningHoursConfigConflictsFailed(undefined, {
+          status: response.status
+        })
+      }
+
+      return {
+        data: response.data.results?.[0] as OpeningHoursConflictsResult,
+        metadata: { count: response.data.count },
+        msg: response.data.msg
+      }
+    } catch (error: any) {
+      if (error instanceof GastroReservationsOpeningHoursConfigConflictsFailed) throw error
+      throw new GastroReservationsOpeningHoursConfigConflictsFailed(error.message, { error })
     }
   }
 }
@@ -156,5 +221,16 @@ export class GastroReservationsOpeningHoursConflictsFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, GastroReservationsOpeningHoursConflictsFailed.prototype)
+  }
+}
+
+export class GastroReservationsOpeningHoursConfigConflictsFailed extends BaseError {
+  public name = 'GastroReservationsOpeningHoursConfigConflictsFailed'
+  constructor (
+    public message: string = 'Could not count opening hours config conflicts',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, GastroReservationsOpeningHoursConfigConflictsFailed.prototype)
   }
 }
