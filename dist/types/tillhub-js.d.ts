@@ -174,6 +174,7 @@ export declare class TillhubClient extends events.EventEmitter {
     analyticsUodV4(): v4.AnalyticsUod;
     scheduledExports(): v0.ScheduledExports;
     customerAppointments(): v0.CustomerAppointments;
+    gastroReservations(): v0.GastroReservations;
     documentExports(): v0.DocumentExports;
     appointmentReminders(): v1.AppointmentReminders;
     tableLayouts(): v1.TableLayouts;

@@ -1,3 +1,10 @@
+# [4.293.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.292.0...v4.293.0) (2026-09-03)
+
+
+### Features
+
+* **UNTIL-22176:** Gastro Reservation Appointments ([#771](https://github.com/tillhub/tillhub-sdk-javascript/issues/771)) ([2f84034](https://github.com/tillhub/tillhub-sdk-javascript/commit/2f8403485f39d05b022327209bfcc2f619244794))
+
 # [4.292.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.291.0...v4.292.0) (2026-08-31)
 
 

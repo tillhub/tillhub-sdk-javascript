@@ -664,6 +664,9 @@ var TillhubClient = (function (_super) {
     TillhubClient.prototype.customerAppointments = function () {
         return this.generateAuthenticatedInstance(v0.CustomerAppointments);
     };
+    TillhubClient.prototype.gastroReservations = function () {
+        return this.generateAuthenticatedInstance(v0.GastroReservations);
+    };
     TillhubClient.prototype.documentExports = function () {
         return this.generateAuthenticatedInstance(v0.DocumentExports);
     };
