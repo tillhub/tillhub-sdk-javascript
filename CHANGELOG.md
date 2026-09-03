@@ -1,3 +1,10 @@
+# [4.294.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.293.0...v4.294.0) (2026-09-03)
+
+
+### Features
+
+* **UNTIL-22176:** Gastro Opening Hours total conflicts ([#772](https://github.com/tillhub/tillhub-sdk-javascript/issues/772)) ([9c07b15](https://github.com/tillhub/tillhub-sdk-javascript/commit/9c07b157d44fcabd1598fe9fda81761063ec9d34))
+
 # [4.293.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.292.0...v4.293.0) (2026-09-03)
 
 

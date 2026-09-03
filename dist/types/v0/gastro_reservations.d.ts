@@ -54,6 +54,42 @@ export interface CountOpeningHoursConflictsResponse {
     metadata?: Record<string, unknown>;
     msg?: string;
 }
+export interface ReservationsConfigBody {
+    openingHours: Array<{
+        closed: boolean;
+        dayIndex: number;
+        openFrom: string;
+        openTo: string;
+        breakFrom?: string | null;
+        breakTo?: string | null;
+    }>;
+    closingDays: Array<{
+        reason: string;
+        startDate: string;
+        endDate: string;
+    }>;
+    openingHoursExceptions: Array<{
+        type: 'open' | 'closed';
+        startDate: string;
+        endDate: string;
+        from: string | null;
+        to: string | null;
+        weekdays?: number[];
+        breakFrom?: string | null;
+        breakTo?: string | null;
+    }>;
+}
+export interface CountOpeningHoursConfigConflictsBody {
+    previousReservations: ReservationsConfigBody;
+    nextReservations: ReservationsConfigBody;
+    timeZone: string;
+    branchId?: string;
+}
+export interface CountOpeningHoursConfigConflictsResponse {
+    data?: OpeningHoursConflictsResult;
+    metadata?: Record<string, unknown>;
+    msg?: string;
+}
 export declare class GastroReservations extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
@@ -63,6 +99,7 @@ export declare class GastroReservations extends ThBaseHandler {
     constructor(options: GastroReservationsOptions, http: Client);
     getAll(query?: GastroReservationsQuery): Promise<GastroReservationsResponse>;
     countOpeningHoursConflicts(body: CountOpeningHoursConflictsBody): Promise<CountOpeningHoursConflictsResponse>;
+    countOpeningHoursConfigConflicts(body: CountOpeningHoursConfigConflictsBody): Promise<CountOpeningHoursConfigConflictsResponse>;
 }
 export declare class GastroReservationsFetchFailed extends BaseError {
     message: string;
@@ -70,6 +107,11 @@ export declare class GastroReservationsFetchFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class GastroReservationsOpeningHoursConflictsFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class GastroReservationsOpeningHoursConfigConflictsFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

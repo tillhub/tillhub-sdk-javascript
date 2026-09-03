@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GastroReservationsOpeningHoursConflictsFailed = exports.GastroReservationsFetchFailed = exports.GastroReservations = void 0;
+exports.GastroReservationsOpeningHoursConfigConflictsFailed = exports.GastroReservationsOpeningHoursConflictsFailed = exports.GastroReservationsFetchFailed = exports.GastroReservations = void 0;
 var tslib_1 = require("tslib");
 var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
@@ -83,7 +83,43 @@ var GastroReservations = (function (_super) {
                             }];
                     case 3:
                         error_2 = _b.sent();
+                        if (error_2 instanceof GastroReservationsOpeningHoursConflictsFailed)
+                            throw error_2;
                         throw new GastroReservationsOpeningHoursConflictsFailed(error_2.message, { error: error_2 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
+    GastroReservations.prototype.countOpeningHoursConfigConflicts = function (body) {
+        var _a;
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_3;
+            return tslib_1.__generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri('/opening-hours-config-conflicts');
+                        _b.label = 1;
+                    case 1:
+                        _b.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().post(uri, body)];
+                    case 2:
+                        response = _b.sent();
+                        if (response.status !== 200) {
+                            throw new GastroReservationsOpeningHoursConfigConflictsFailed(undefined, {
+                                status: response.status
+                            });
+                        }
+                        return [2, {
+                                data: (_a = response.data.results) === null || _a === void 0 ? void 0 : _a[0],
+                                metadata: { count: response.data.count },
+                                msg: response.data.msg
+                            }];
+                    case 3:
+                        error_3 = _b.sent();
+                        if (error_3 instanceof GastroReservationsOpeningHoursConfigConflictsFailed)
+                            throw error_3;
+                        throw new GastroReservationsOpeningHoursConfigConflictsFailed(error_3.message, { error: error_3 });
                     case 4: return [2];
                 }
             });
@@ -119,4 +155,17 @@ var GastroReservationsOpeningHoursConflictsFailed = (function (_super) {
     return GastroReservationsOpeningHoursConflictsFailed;
 }(errors_1.BaseError));
 exports.GastroReservationsOpeningHoursConflictsFailed = GastroReservationsOpeningHoursConflictsFailed;
+var GastroReservationsOpeningHoursConfigConflictsFailed = (function (_super) {
+    tslib_1.__extends(GastroReservationsOpeningHoursConfigConflictsFailed, _super);
+    function GastroReservationsOpeningHoursConfigConflictsFailed(message, properties) {
+        if (message === void 0) { message = 'Could not count opening hours config conflicts'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'GastroReservationsOpeningHoursConfigConflictsFailed';
+        Object.setPrototypeOf(_this, GastroReservationsOpeningHoursConfigConflictsFailed.prototype);
+        return _this;
+    }
+    return GastroReservationsOpeningHoursConfigConflictsFailed;
+}(errors_1.BaseError));
+exports.GastroReservationsOpeningHoursConfigConflictsFailed = GastroReservationsOpeningHoursConfigConflictsFailed;
 //# sourceMappingURL=gastro_reservations.js.map
