@@ -290,8 +290,8 @@ describe('v0: Gastro Reservations: can count opening hours config conflicts', ()
 
     const th = await initThInstance()
 
-    try {
-      await th.gastroReservations().countOpeningHoursConfigConflicts({
+    await expect(
+      th.gastroReservations().countOpeningHoursConfigConflicts({
         previousReservations: {
           openingHours: weeklyHours,
           closingDays: [],
@@ -304,9 +304,7 @@ describe('v0: Gastro Reservations: can count opening hours config conflicts', ()
         },
         timeZone: 'UTC'
       })
-    } catch (err: any) {
-      expect(err.name).toBe('GastroReservationsOpeningHoursConfigConflictsFailed')
-    }
+    ).rejects.toMatchObject({ name: 'GastroReservationsOpeningHoursConfigConflictsFailed' })
   })
 
   it('rejects on non-200 success statuses', async () => {
@@ -335,8 +333,8 @@ describe('v0: Gastro Reservations: can count opening hours config conflicts', ()
 
     const th = await initThInstance()
 
-    try {
-      await th.gastroReservations().countOpeningHoursConfigConflicts({
+    await expect(
+      th.gastroReservations().countOpeningHoursConfigConflicts({
         previousReservations: {
           openingHours: [],
           closingDays: [],
@@ -349,8 +347,9 @@ describe('v0: Gastro Reservations: can count opening hours config conflicts', ()
         },
         timeZone: 'UTC'
       })
-    } catch (err: any) {
-      expect(err.name).toBe('GastroReservationsOpeningHoursConfigConflictsFailed')
-    }
+    ).rejects.toMatchObject({
+      name: 'GastroReservationsOpeningHoursConfigConflictsFailed',
+      properties: { status: 205 }
+    })
   })
 })

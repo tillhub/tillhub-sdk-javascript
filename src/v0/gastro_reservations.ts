@@ -171,6 +171,7 @@ export class GastroReservations extends ThBaseHandler {
         msg: response.data.msg
       }
     } catch (error: any) {
+      if (error instanceof GastroReservationsOpeningHoursConflictsFailed) throw error
       throw new GastroReservationsOpeningHoursConflictsFailed(error.message, { error })
     }
   }
@@ -195,6 +196,7 @@ export class GastroReservations extends ThBaseHandler {
         msg: response.data.msg
       }
     } catch (error: any) {
+      if (error instanceof GastroReservationsOpeningHoursConfigConflictsFailed) throw error
       throw new GastroReservationsOpeningHoursConfigConflictsFailed(error.message, { error })
     }
   }
