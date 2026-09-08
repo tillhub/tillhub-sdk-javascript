@@ -16,7 +16,7 @@ const iamUser = {
   firstName: 'Pepe',
   lastName: 'Pipon',
   email: 'pepe_pipon@unzer.com',
-  language: 'de'
+  locale: 'de'
 }
 
 describe('v0: IamUsers: can create one user', () => {
