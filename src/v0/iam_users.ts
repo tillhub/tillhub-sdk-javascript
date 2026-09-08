@@ -40,6 +40,7 @@ export interface IamUser {
   username?: string
   firstName?: string
   lastName?: string
+  language?: string | null
   attributes?: Record<string, unknown>
   groups?: string[]
   enabled?: boolean
