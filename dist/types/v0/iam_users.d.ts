@@ -33,6 +33,7 @@ export interface IamUser {
     username?: string;
     firstName?: string;
     lastName?: string;
+    locale?: string | null;
     attributes?: Record<string, unknown>;
     groups?: string[];
     enabled?: boolean;

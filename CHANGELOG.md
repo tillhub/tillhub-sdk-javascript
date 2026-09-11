@@ -1,3 +1,10 @@
+# [4.295.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.294.0...v4.295.0) (2026-09-11)
+
+
+### Features
+
+* **language:** add language field to IamUser interface and update te… ([#773](https://github.com/tillhub/tillhub-sdk-javascript/issues/773)) ([0c56fa3](https://github.com/tillhub/tillhub-sdk-javascript/commit/0c56fa3851cffdd0beaaef119205c25e7244bfcc))
+
 # [4.294.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.293.0...v4.294.0) (2026-09-03)
 
 
