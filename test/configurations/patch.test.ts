@@ -90,4 +90,76 @@ describe('v0: Configurations: patch existing config', () => {
     expect(Array.isArray(data)).toBe(false)
     expect(data).toEqual(combinedConf)
   })
+
+  it('can patch payment_links merchant_notification settings', async () => {
+    const paymentLinksSettings = {
+      default_expiry_days: 7,
+      default_usage_mode: 'single_use' as const,
+      merchant_notification: {
+        enabled: true,
+        email: 'merchant@example.com'
+      }
+    }
+
+    const patchConf = {
+      settings: {
+        payment_links: paymentLinksSettings
+      }
+    }
+
+    const combinedConf = { owner: 'self', ...patchConf }
+
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+
+      mock
+        .onPatch(`https://api.tillhub.com/api/v0/configurations/${legacyId}/${configId}`)
+        .reply((config) => {
+          expect(JSON.parse(config.data)).toEqual(patchConf)
+
+          return [
+            200,
+            {
+              count: 1,
+              results: [combinedConf]
+            }
+          ]
+        })
+    }
+
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE
+    }
+
+    const th = new TillhubClient()
+
+    th.init(options)
+    await th.auth.loginUsername({
+      username: user.username,
+      password: user.password
+    })
+
+    const { data } = await th.configurations().patch(configId, patchConf)
+
+    expect(data.settings?.payment_links).toEqual(paymentLinksSettings)
+    expect(data.settings?.payment_links?.merchant_notification).toEqual({
+      enabled: true,
+      email: 'merchant@example.com'
+    })
+  })
 })
