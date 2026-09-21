@@ -1,4 +1,4 @@
-import { AnalyticsReportsStocksFetchFailed } from './../../../src/v2/analytics/reports/stocks'
+import { AnalyticsReportsStocksFetchFailed, StocksExportOptions } from './../../../src/v2/analytics/reports/stocks'
 import * as dotenv from 'dotenv'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
@@ -174,7 +174,7 @@ describe('v2: AnalyticsReportsStocks', () => {
     const th = await initThInstance()
     const analyticsReportsStocks = th.analyticsHandlers().analytics.reports.AnalyticsReportsStocks
 
-    const legacyQuery = {
+    const legacyQuery: StocksExportOptions = {
       as_of: asOf,
       start: '2026-01-01T00:00:00.000Z',
       end: '2026-01-31T23:59:59.999Z'
@@ -224,7 +224,7 @@ describe('v2: AnalyticsReportsStocks', () => {
     const th = await initThInstance()
     const analyticsReportsStocks = th.analyticsHandlers().analytics.reports.AnalyticsReportsStocks
 
-    const nestedLegacyQuery = {
+    const nestedLegacyQuery: StocksExportOptions = {
       query: {
         as_of: asOf,
         start: '2026-01-01T00:00:00.000Z',
@@ -256,7 +256,7 @@ describe('v2: AnalyticsReportsStocks', () => {
     const th = await initThInstance()
     const analyticsReportsStocks = th.analyticsHandlers().analytics.reports.AnalyticsReportsStocks
 
-    const legacyExportQuery = {
+    const legacyExportQuery: StocksExportOptions = {
       query: {
         as_of: '2025-12-31T23:59:00.000Z',
         format: 'csv',

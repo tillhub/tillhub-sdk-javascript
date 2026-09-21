@@ -22,24 +22,34 @@ export interface StocksExportOptions {
   branch_number?: number
   uri?: string
   as_of?: string
+  /**
+   * @deprecated The stocks report no longer accepts a date range. Use `as_of` instead.
+   * Values are stripped before the request is sent.
+   */
+  start?: string
+  /**
+   * @deprecated The stocks report no longer accepts a date range. Use `as_of` instead.
+   * Values are stripped before the request is sent.
+   */
+  end?: string
+  query?: Omit<StocksExportOptions, 'query'>
 }
 
 function omitStocksDateRange (query?: StocksExportOptions): StocksExportOptions | undefined {
   if (!query) return query
 
-  const rest: Record<string, unknown> = { ...query }
+  const rest = { ...query }
   delete rest.start
   delete rest.end
 
-  const nested = rest.query
-  if (nested && typeof nested === 'object' && !Array.isArray(nested)) {
-    const nestedRest: Record<string, unknown> = { ...(nested as Record<string, unknown>) }
+  if (rest.query) {
+    const nestedRest = { ...rest.query }
     delete nestedRest.start
     delete nestedRest.end
     rest.query = nestedRest
   }
 
-  return rest as StocksExportOptions
+  return rest
 }
 
 export class AnalyticsReportsStocks extends ThAnalyticsBaseHandler {
