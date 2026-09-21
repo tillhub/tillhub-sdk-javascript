@@ -22,8 +22,24 @@ export interface StocksExportOptions {
   branch_number?: number
   uri?: string
   as_of?: string
-  start?: string
-  end?: string
+}
+
+function omitStocksDateRange (query?: StocksExportOptions): StocksExportOptions | undefined {
+  if (!query) return query
+
+  const rest: Record<string, unknown> = { ...query }
+  delete rest.start
+  delete rest.end
+
+  const nested = rest.query
+  if (nested && typeof nested === 'object' && !Array.isArray(nested)) {
+    const nestedRest: Record<string, unknown> = { ...(nested as Record<string, unknown>) }
+    delete nestedRest.start
+    delete nestedRest.end
+    rest.query = nestedRest
+  }
+
+  return rest as StocksExportOptions
 }
 
 export class AnalyticsReportsStocks extends ThAnalyticsBaseHandler {
@@ -51,7 +67,7 @@ export class AnalyticsReportsStocks extends ThAnalyticsBaseHandler {
       let nextFn
       const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
       const uri = localUriHelper.generateBaseUri('/reports/stocks')
-      const { results: d, next } = await this.handleGet(uri, query, { timeout: this.timeout })
+      const { results: d, next } = await this.handleGet(uri, omitStocksDateRange(query), { timeout: this.timeout })
 
       if (!d) {
         throw new TypeError('Unexpectedly did not return data.')
@@ -94,7 +110,7 @@ export class AnalyticsReportsStocks extends ThAnalyticsBaseHandler {
     try {
       const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
       const uri = localUriHelper.generateBaseUri('/reports/stocks')
-      const result = await this.handleSocketsExport(uri, query)
+      const result = await this.handleSocketsExport(uri, omitStocksDateRange(query))
 
       return result
     } catch (error: any) {
