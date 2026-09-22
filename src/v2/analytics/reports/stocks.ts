@@ -22,8 +22,34 @@ export interface StocksExportOptions {
   branch_number?: number
   uri?: string
   as_of?: string
+  /**
+   * @deprecated The stocks report no longer accepts a date range. Use `as_of` instead.
+   * Values are stripped before the request is sent.
+   */
   start?: string
+  /**
+   * @deprecated The stocks report no longer accepts a date range. Use `as_of` instead.
+   * Values are stripped before the request is sent.
+   */
   end?: string
+  query?: Omit<StocksExportOptions, 'query'>
+}
+
+function omitStocksDateRange (query?: StocksExportOptions): StocksExportOptions | undefined {
+  if (!query) return query
+
+  const rest = { ...query }
+  delete rest.start
+  delete rest.end
+
+  if (rest.query) {
+    const nestedRest = { ...rest.query }
+    delete nestedRest.start
+    delete nestedRest.end
+    rest.query = nestedRest
+  }
+
+  return rest
 }
 
 export class AnalyticsReportsStocks extends ThAnalyticsBaseHandler {
@@ -51,7 +77,7 @@ export class AnalyticsReportsStocks extends ThAnalyticsBaseHandler {
       let nextFn
       const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
       const uri = localUriHelper.generateBaseUri('/reports/stocks')
-      const { results: d, next } = await this.handleGet(uri, query, { timeout: this.timeout })
+      const { results: d, next } = await this.handleGet(uri, omitStocksDateRange(query), { timeout: this.timeout })
 
       if (!d) {
         throw new TypeError('Unexpectedly did not return data.')
@@ -94,7 +120,7 @@ export class AnalyticsReportsStocks extends ThAnalyticsBaseHandler {
     try {
       const localUriHelper = new UriHelper('/api/v2/analytics', this.options)
       const uri = localUriHelper.generateBaseUri('/reports/stocks')
-      const result = await this.handleSocketsExport(uri, query)
+      const result = await this.handleSocketsExport(uri, omitStocksDateRange(query))
 
       return result
     } catch (error: any) {
