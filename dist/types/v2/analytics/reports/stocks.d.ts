@@ -17,6 +17,7 @@ export interface StocksExportOptions {
     as_of?: string;
     start?: string;
     end?: string;
+    query?: Omit<StocksExportOptions, 'query'>;
 }
 export declare class AnalyticsReportsStocks extends ThAnalyticsBaseHandler {
     http: Client;

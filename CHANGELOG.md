@@ -1,3 +1,10 @@
+# [4.296.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.295.0...v4.296.0) (2026-09-25)
+
+
+### Bug Fixes
+
+* **UNTIL-21741:** Remove Stocks date range ([#775](https://github.com/tillhub/tillhub-sdk-javascript/issues/775)) ([97a6409](https://github.com/tillhub/tillhub-sdk-javascript/commit/97a640941ab85a36cf6f98568ec608dbf18c9e9b))
+
 # [4.295.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.294.0...v4.295.0) (2026-09-11)
 
 

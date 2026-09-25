@@ -5,6 +5,20 @@ var tslib_1 = require("tslib");
 var base_1 = require("../../../base");
 var errors_1 = require("../../../errors");
 var uri_helper_1 = require("../../../uri-helper");
+function omitStocksDateRange(query) {
+    if (!query)
+        return query;
+    var rest = tslib_1.__assign({}, query);
+    delete rest.start;
+    delete rest.end;
+    if (rest.query) {
+        var nestedRest = tslib_1.__assign({}, rest.query);
+        delete nestedRest.start;
+        delete nestedRest.end;
+        rest.query = nestedRest;
+    }
+    return rest;
+}
 var AnalyticsReportsStocks = (function (_super) {
     tslib_1.__extends(AnalyticsReportsStocks, _super);
     function AnalyticsReportsStocks(options, http) {
@@ -30,7 +44,7 @@ var AnalyticsReportsStocks = (function (_super) {
                         nextFn = void 0;
                         localUriHelper = new uri_helper_1.UriHelper('/api/v2/analytics', this.options);
                         uri = localUriHelper.generateBaseUri('/reports/stocks');
-                        return [4, this.handleGet(uri, query, { timeout: this.timeout })];
+                        return [4, this.handleGet(uri, omitStocksDateRange(query), { timeout: this.timeout })];
                     case 1:
                         _g = _h.sent(), d = _g.results, next_1 = _g.next;
                         if (!d) {
@@ -71,7 +85,7 @@ var AnalyticsReportsStocks = (function (_super) {
                         _a.trys.push([0, 2, , 3]);
                         localUriHelper = new uri_helper_1.UriHelper('/api/v2/analytics', this.options);
                         uri = localUriHelper.generateBaseUri('/reports/stocks');
-                        return [4, this.handleSocketsExport(uri, query)];
+                        return [4, this.handleSocketsExport(uri, omitStocksDateRange(query))];
                     case 1:
                         result = _a.sent();
                         return [2, result];

@@ -44,9 +44,14 @@ export interface BulkUpdateResponse {
     metadata?: Record<string, unknown>;
 }
 export declare type PaymentLinkDefaultUsageMode = 'single_use' | 'multi_use';
+export interface PaymentLinksMerchantNotificationSettings {
+    enabled?: boolean;
+    email?: string;
+}
 export interface PaymentLinksConfigurationSettings {
     default_expiry_days?: number;
     default_usage_mode?: PaymentLinkDefaultUsageMode;
+    merchant_notification?: PaymentLinksMerchantNotificationSettings;
 }
 export interface ConfigurationSettings {
     payment_links?: PaymentLinksConfigurationSettings;
