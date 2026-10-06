@@ -1,3 +1,10 @@
+# [4.297.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.296.0...v4.297.0) (2026-10-06)
+
+
+### Bug Fixes
+
+* **UNTIL-23345:** scope json-patch content type to configurations patch ([#777](https://github.com/tillhub/tillhub-sdk-javascript/issues/777)) ([23647dc](https://github.com/tillhub/tillhub-sdk-javascript/commit/23647dccbf24c930a93f6a7a12ebb3b2b623a735))
+
 # [4.296.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.295.0...v4.296.0) (2026-09-25)
 
 
