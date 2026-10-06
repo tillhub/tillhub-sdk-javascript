@@ -91,4 +91,72 @@ describe('v1: Configurations: patch existing config', () => {
     expect(data).toEqual(combinedConf)
     expect(mock.history.patch[0].headers?.['Content-Type']).toBe('application/json-patch+json')
   })
+
+  it('does not leak the json-patch content type to other handlers', async () => {
+    const appointmentReminderId = 'abc123'
+    const appointmentReminder = { active: true }
+
+    if (process.env.SYSTEM_TEST !== 'true') {
+      mock.onPost('https://api.tillhub.com/api/v0/users/login').reply(() => {
+        return [
+          200,
+          {
+            token: '',
+            user: {
+              id: '123',
+              legacy_id: legacyId
+            }
+          }
+        ]
+      })
+
+      mock
+        .onPatch(`https://api.tillhub.com/api/v1/configurations/${legacyId}/${configId}`)
+        .reply(() => {
+          return [
+            200,
+            {
+              count: 1,
+              results: [combinedConf]
+            }
+          ]
+        })
+
+      mock
+        .onPatch(
+          `https://api.tillhub.com/api/v1/notifications/appointment-reminders/${legacyId}/${appointmentReminderId}`
+        )
+        .reply(() => {
+          return [
+            200,
+            {
+              count: 1,
+              results: [appointmentReminder]
+            }
+          ]
+        })
+    }
+
+    const options = {
+      credentials: {
+        username: user.username,
+        password: user.password
+      },
+      base: process.env.TILLHUB_BASE
+    }
+
+    const th = new TillhubClient()
+
+    th.init(options)
+    await th.auth.loginUsername({
+      username: user.username,
+      password: user.password
+    })
+
+    await th.configurationsV1().patch(configId, patchConf)
+    await th.appointmentReminders().patch(appointmentReminderId, appointmentReminder)
+
+    expect(mock.history.patch[0].headers?.['Content-Type']).toBe('application/json-patch+json')
+    expect(mock.history.patch[1].headers?.['Content-Type']).not.toBe('application/json-patch+json')
+  })
 })
