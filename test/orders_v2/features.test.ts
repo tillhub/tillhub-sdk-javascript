@@ -48,7 +48,8 @@ describe('v2: orders: can get features', () => {
             results: [{
               moto: true,
               ecom: false,
-              paylater: false
+              paylater: false,
+              linkpay: false
             }]
           }
         ]
@@ -78,10 +79,10 @@ describe('v2: orders: can get features', () => {
     const { data, msg } = await ordersV2.features()
     expect(data).toEqual({
       msg: 'Success',
-      results: [{ moto: true, ecom: false, paylater: false }]
+      results: [{ moto: true, ecom: false, paylater: false, linkpay: false }]
     })
     expect(msg).toBe('Success')
-    expect(data.results?.[0]).toEqual({ moto: true, ecom: false, paylater: false })
+    expect(data.results?.[0]).toEqual({ moto: true, ecom: false, paylater: false, linkpay: false })
   })
 
   it('rejects on status codes that are not 200', async () => {
