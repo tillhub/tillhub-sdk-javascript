@@ -34,6 +34,7 @@ export interface OrderFeatures {
     moto: boolean;
     ecom: boolean;
     paylater: boolean;
+    linkpay: boolean;
 }
 export interface FeaturesResponse {
     data: {

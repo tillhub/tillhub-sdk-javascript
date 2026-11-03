@@ -1,3 +1,10 @@
+# [4.298.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.297.0...v4.298.0) (2026-11-03)
+
+
+### Features
+
+* **UOD-4189:** update comment for deployment ([9c785a3](https://github.com/tillhub/tillhub-sdk-javascript/commit/9c785a3e0932d0a7472b4dd8c84cde5a50cc64c2))
+
 # [4.297.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.296.0...v4.297.0) (2026-10-06)
 
 
