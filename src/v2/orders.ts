@@ -40,7 +40,7 @@ export interface OrderFeatures {
   moto: boolean
   ecom: boolean
   paylater: boolean
-  linkpay: boolean
+  linkpay: boolean // replacing ecom for linkpay
 }
 
 export interface FeaturesResponse {
