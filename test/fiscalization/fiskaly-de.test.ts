@@ -125,36 +125,4 @@ describe('v0: Fiscalization: Fiskaly DE', () => {
       })
     })
   })
-
-  describe('timeout', () => {
-    beforeEach(() => {
-      mock.onPost(`${baseUri}/fiskaly/organizations`).reply(() => [
-        200,
-        { status: 200, msg: 'Organization created.', results: [organization] }
-      ])
-      mock.onPost(`${baseUri}/registers/${registerId}/tss`).reply(() => [
-        200,
-        { status: 200, msg: 'TSS created.', results: [tss] }
-      ])
-    })
-
-    it('sends both requests with the timeout passed to fiscalization()', async () => {
-      const th = await initThInstance()
-      const fiscalization = th.fiscalization({ timeout: 60000 })
-      await fiscalization.createFiskalyDeOrganization(organizationRequest)
-      await fiscalization.createFiskalyDeTss(registerId)
-
-      expect(mock.history.post[1].timeout).toBe(60000)
-      expect(mock.history.post[2].timeout).toBe(60000)
-    })
-
-    it('sends both requests with the client timeout of 10000 ms when none is passed', async () => {
-      const th = await initThInstance()
-      await th.fiscalization().createFiskalyDeOrganization(organizationRequest)
-      await th.fiscalization().createFiskalyDeTss(registerId)
-
-      expect(mock.history.post[1].timeout).toBe(10000)
-      expect(mock.history.post[2].timeout).toBe(10000)
-    })
-  })
 })

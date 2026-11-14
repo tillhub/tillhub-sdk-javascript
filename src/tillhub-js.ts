@@ -1133,8 +1133,8 @@ export class TillhubClient extends events.EventEmitter {
    * Create an authenticated Fiscalization instance
    *
    */
-  fiscalization (axiosOptions?: AxiosOptions): v0.Fiscalization {
-    return this.generateAuthenticatedInstance(v0.Fiscalization, { timeout: axiosOptions?.timeout })
+  fiscalization (): v0.Fiscalization {
+    return this.generateAuthenticatedInstance(v0.Fiscalization)
   }
 
   /**

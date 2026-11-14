@@ -3,6 +3,7 @@ import { UriHelper } from '../uri-helper'
 import { BaseError } from '../errors/baseError'
 import { ThBaseHandler } from '../base'
 import { Taxpayer } from './taxpayer'
+import { FISKALY_REQUEST_TIMEOUT } from './fiscalization'
 
 export interface SubmissionsOptions {
   user?: string
@@ -173,7 +174,7 @@ export class Submissions extends ThBaseHandler {
       `/branches/${branchId}/submissions/${submissionId}/create`
     )
     try {
-      const response = await this.http.getClient().put(uri)
+      const response = await this.http.getClient().put(uri, undefined, { timeout: FISKALY_REQUEST_TIMEOUT })
 
       if (response.status !== 200) {
         throw new SubmissionCreateFailed(undefined, { status: response.status })
@@ -194,7 +195,7 @@ export class Submissions extends ThBaseHandler {
     )
 
     try {
-      const response = await this.http.getClient().delete(uri)
+      const response = await this.http.getClient().delete(uri, { timeout: FISKALY_REQUEST_TIMEOUT })
 
       if (response.status !== 200) {
         throw new SubmissionDeleteFailed(undefined, { status: response.status })
@@ -214,7 +215,7 @@ export class Submissions extends ThBaseHandler {
     )
 
     try {
-      const response = await this.http.getClient().put(uri)
+      const response = await this.http.getClient().put(uri, undefined, { timeout: FISKALY_REQUEST_TIMEOUT })
 
       if (response.status !== 200) {
         throw new SubmissionTriggerFailed(undefined, { status: response.status })
@@ -235,7 +236,8 @@ export class Submissions extends ThBaseHandler {
     )
     try {
       const { data } = await this.http.getClient().get(uri, {
-        responseType: 'blob'
+        responseType: 'blob',
+        timeout: FISKALY_REQUEST_TIMEOUT
       })
 
       return data
@@ -250,7 +252,8 @@ export class Submissions extends ThBaseHandler {
     )
     try {
       const { data } = await this.http.getClient().get(uri, {
-        responseType: 'blob'
+        responseType: 'blob',
+        timeout: FISKALY_REQUEST_TIMEOUT
       })
 
       return data
