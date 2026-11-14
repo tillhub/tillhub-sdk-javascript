@@ -42,6 +42,44 @@ export interface FiscalizationResponse {
   msg?: string
 }
 
+export interface FiskalyDeCompany {
+  name: string
+  street: string
+  streetNumber?: string | null
+  postalCode: string
+  locality: string
+  country: string
+  vatId?: string | null
+  taxNumber?: string | null
+}
+
+export interface FiskalyDeOrganizationCreateRequest {
+  branchId?: string
+  company: FiskalyDeCompany
+}
+
+export interface FiskalyDeOrganization {
+  organizationId: string
+  organizationType: string
+  managedBy: string
+}
+
+export interface FiskalyDeTss {
+  tssId: string
+  clientId: string
+  clientSerialNumber: string
+}
+
+export interface FiskalyDeOrganizationResponse {
+  data?: FiskalyDeOrganization
+  msg?: string
+}
+
+export interface FiskalyDeTssResponse {
+  data?: FiskalyDeTss
+  msg?: string
+}
+
 export class Fiscalization extends ThBaseHandler {
   public static baseEndpoint = '/api/v0/fiscalization'
   endpoint: string
@@ -93,6 +131,38 @@ export class Fiscalization extends ThBaseHandler {
       throw new FiscalizationSetLicenseFailed(error.message, { error })
     }
   }
+
+  async createFiskalyDeOrganization (options: FiskalyDeOrganizationCreateRequest): Promise<FiskalyDeOrganizationResponse> {
+    const uri = this.uriHelper.generateBaseUri('/fiskaly/organizations')
+
+    try {
+      const response = await this.http.getClient().post(uri, options)
+      if (response.status !== 200) { throw new FiscalizationFiskalyDeOrganizationCreateFailed(undefined, { status: response.status }) }
+
+      return {
+        data: response.data.results[0] as FiskalyDeOrganization,
+        msg: response.data.msg
+      }
+    } catch (error: any) {
+      throw new FiscalizationFiskalyDeOrganizationCreateFailed(error.message, { error })
+    }
+  }
+
+  async createFiskalyDeTss (registerId: string): Promise<FiskalyDeTssResponse> {
+    const uri = this.uriHelper.generateBaseUri(`/registers/${registerId}/tss`)
+
+    try {
+      const response = await this.http.getClient().post(uri)
+      if (response.status !== 200) { throw new FiscalizationFiskalyDeTssCreateFailed(undefined, { status: response.status }) }
+
+      return {
+        data: response.data.results[0] as FiskalyDeTss,
+        msg: response.data.msg
+      }
+    } catch (error: any) {
+      throw new FiscalizationFiskalyDeTssCreateFailed(error.message, { error })
+    }
+  }
 }
 
 export class FiscalizationInitFailed extends BaseError {
@@ -113,5 +183,27 @@ export class FiscalizationSetLicenseFailed extends BaseError {
   ) {
     super(message, properties)
     Object.setPrototypeOf(this, FiscalizationSetLicenseFailed.prototype)
+  }
+}
+
+export class FiscalizationFiskalyDeOrganizationCreateFailed extends BaseError {
+  public name = 'FiscalizationFiskalyDeOrganizationCreateFailed'
+  constructor (
+    public message: string = 'Could not create the Fiskaly DE organization',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, FiscalizationFiskalyDeOrganizationCreateFailed.prototype)
+  }
+}
+
+export class FiscalizationFiskalyDeTssCreateFailed extends BaseError {
+  public name = 'FiscalizationFiskalyDeTssCreateFailed'
+  constructor (
+    public message: string = 'Could not create the Fiskaly DE TSS',
+    properties?: Record<string, unknown>
+  ) {
+    super(message, properties)
+    Object.setPrototypeOf(this, FiscalizationFiskalyDeTssCreateFailed.prototype)
   }
 }
