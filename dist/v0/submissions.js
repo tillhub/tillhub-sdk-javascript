@@ -6,6 +6,7 @@ var uri_helper_1 = require("../uri-helper");
 var baseError_1 = require("../errors/baseError");
 var base_1 = require("../base");
 var taxpayer_1 = require("./taxpayer");
+var fiscalization_1 = require("./fiscalization");
 var SubmissionRegisterStatus;
 (function (SubmissionRegisterStatus) {
     SubmissionRegisterStatus["Unchanged"] = "UNCHANGED";
@@ -112,7 +113,7 @@ var Submissions = (function (_super) {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.http.getClient().put(uri)];
+                        return [4, this.http.getClient().put(uri, undefined, { timeout: fiscalization_1.FISKALY_REQUEST_TIMEOUT })];
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
@@ -140,7 +141,7 @@ var Submissions = (function (_super) {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.http.getClient().delete(uri)];
+                        return [4, this.http.getClient().delete(uri, { timeout: fiscalization_1.FISKALY_REQUEST_TIMEOUT })];
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
@@ -167,7 +168,7 @@ var Submissions = (function (_super) {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.http.getClient().put(uri)];
+                        return [4, this.http.getClient().put(uri, undefined, { timeout: fiscalization_1.FISKALY_REQUEST_TIMEOUT })];
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
@@ -196,7 +197,8 @@ var Submissions = (function (_super) {
                     case 1:
                         _a.trys.push([1, 3, , 4]);
                         return [4, this.http.getClient().get(uri, {
-                                responseType: 'blob'
+                                responseType: 'blob',
+                                timeout: fiscalization_1.FISKALY_REQUEST_TIMEOUT
                             })];
                     case 2:
                         data = (_a.sent()).data;
@@ -220,7 +222,8 @@ var Submissions = (function (_super) {
                     case 1:
                         _a.trys.push([1, 3, , 4]);
                         return [4, this.http.getClient().get(uri, {
-                                responseType: 'blob'
+                                responseType: 'blob',
+                                timeout: fiscalization_1.FISKALY_REQUEST_TIMEOUT
                             })];
                     case 2:
                         data = (_a.sent()).data;

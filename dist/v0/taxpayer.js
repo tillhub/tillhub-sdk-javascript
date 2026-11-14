@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TaxpayerPutFailed = exports.TaxpayerFetchFailed = exports.Taxpayer = exports.Salutation = exports.PersonType = void 0;
 var tslib_1 = require("tslib");
 var errors_1 = require("../errors");
+var fiscalization_1 = require("./fiscalization");
 var PersonType;
 (function (PersonType) {
     PersonType["NATURAL"] = "natural";
@@ -59,7 +60,7 @@ var Taxpayer = (function () {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.http.getClient().put(uri, taxpayer)];
+                        return [4, this.http.getClient().put(uri, taxpayer, { timeout: fiscalization_1.FISKALY_REQUEST_TIMEOUT })];
                     case 2:
                         response = _a.sent();
                         return [2, {

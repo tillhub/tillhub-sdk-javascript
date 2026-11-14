@@ -1,3 +1,11 @@
+# [4.300.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.299.0...v4.300.0) (2026-11-14)
+
+
+### Features
+
+* **UNTIL-24243:** accept a request timeout in fiscalization() ([4e36fa2](https://github.com/tillhub/tillhub-sdk-javascript/commit/4e36fa2b86b4edbd9a2124a9a12323804462631e))
+* **UNTIL-24243:** wait 60 s for every request that calls Fiskaly ([4984c1f](https://github.com/tillhub/tillhub-sdk-javascript/commit/4984c1fec9aa639100dd3d0f623bf1bc1fd3b559))
+
 # [4.299.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.298.0...v4.299.0) (2026-11-14)
 
 

@@ -2,6 +2,7 @@ import { Client } from '../client';
 import { BaseError } from '../errors/baseError';
 import { UriHelper } from '../uri-helper';
 import { ThBaseHandler } from '../base';
+export declare const FISKALY_REQUEST_TIMEOUT = 60000;
 export interface FiscalizationOptions {
     user?: string;
     base?: string;

@@ -1,10 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FiscalizationFiskalyDeTssCreateFailed = exports.FiscalizationFiskalyDeOrganizationCreateFailed = exports.FiscalizationSetLicenseFailed = exports.FiscalizationInitFailed = exports.Fiscalization = void 0;
+exports.FiscalizationFiskalyDeTssCreateFailed = exports.FiscalizationFiskalyDeOrganizationCreateFailed = exports.FiscalizationSetLicenseFailed = exports.FiscalizationInitFailed = exports.Fiscalization = exports.FISKALY_REQUEST_TIMEOUT = void 0;
 var tslib_1 = require("tslib");
 var baseError_1 = require("../errors/baseError");
 var uri_helper_1 = require("../uri-helper");
 var base_1 = require("../base");
+exports.FISKALY_REQUEST_TIMEOUT = 60000;
 var Fiscalization = (function (_super) {
     tslib_1.__extends(Fiscalization, _super);
     function Fiscalization(options, http) {
@@ -30,7 +31,7 @@ var Fiscalization = (function (_super) {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.http.getClient().post(uri, options)];
+                        return [4, this.http.getClient().post(uri, options, { timeout: exports.FISKALY_REQUEST_TIMEOUT })];
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
@@ -58,7 +59,7 @@ var Fiscalization = (function (_super) {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.http.getClient().put(uri, options)];
+                        return [4, this.http.getClient().put(uri, options, { timeout: exports.FISKALY_REQUEST_TIMEOUT })];
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
@@ -86,7 +87,7 @@ var Fiscalization = (function (_super) {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.http.getClient().post(uri, options)];
+                        return [4, this.http.getClient().post(uri, options, { timeout: exports.FISKALY_REQUEST_TIMEOUT })];
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
@@ -114,7 +115,7 @@ var Fiscalization = (function (_super) {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.http.getClient().post(uri)];
+                        return [4, this.http.getClient().post(uri, undefined, { timeout: exports.FISKALY_REQUEST_TIMEOUT })];
                     case 2:
                         response = _a.sent();
                         if (response.status !== 200) {
