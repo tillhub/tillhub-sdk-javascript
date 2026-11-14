@@ -34,6 +34,38 @@ export interface FiscalizationResponse {
     data?: FiscalizationItem;
     msg?: string;
 }
+export interface FiskalyDeCompany {
+    name: string;
+    street: string;
+    streetNumber?: string | null;
+    postalCode: string;
+    locality: string;
+    country: string;
+    vatId?: string | null;
+    taxNumber?: string | null;
+}
+export interface FiskalyDeOrganizationCreateRequest {
+    branchId?: string;
+    company: FiskalyDeCompany;
+}
+export interface FiskalyDeOrganization {
+    organizationId: string;
+    organizationType: string;
+    managedBy: string;
+}
+export interface FiskalyDeTss {
+    tssId: string;
+    clientId: string;
+    clientSerialNumber: string;
+}
+export interface FiskalyDeOrganizationResponse {
+    data?: FiskalyDeOrganization;
+    msg?: string;
+}
+export interface FiskalyDeTssResponse {
+    data?: FiskalyDeTss;
+    msg?: string;
+}
 export declare class Fiscalization extends ThBaseHandler {
     static baseEndpoint: string;
     endpoint: string;
@@ -43,6 +75,8 @@ export declare class Fiscalization extends ThBaseHandler {
     constructor(options: FiscalizationOptions, http: Client);
     init(options: FiscalizationItem): Promise<FiscalizationResponse>;
     setLicense(branchId: string, options: fiscalizationLicenseKey): Promise<FiscalizationResponse>;
+    createFiskalyDeOrganization(options: FiskalyDeOrganizationCreateRequest): Promise<FiskalyDeOrganizationResponse>;
+    createFiskalyDeTss(registerId: string): Promise<FiskalyDeTssResponse>;
 }
 export declare class FiscalizationInitFailed extends BaseError {
     message: string;
@@ -50,6 +84,16 @@ export declare class FiscalizationInitFailed extends BaseError {
     constructor(message?: string, properties?: Record<string, unknown>);
 }
 export declare class FiscalizationSetLicenseFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class FiscalizationFiskalyDeOrganizationCreateFailed extends BaseError {
+    message: string;
+    name: string;
+    constructor(message?: string, properties?: Record<string, unknown>);
+}
+export declare class FiscalizationFiskalyDeTssCreateFailed extends BaseError {
     message: string;
     name: string;
     constructor(message?: string, properties?: Record<string, unknown>);

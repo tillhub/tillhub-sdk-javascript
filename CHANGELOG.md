@@ -1,3 +1,10 @@
+# [4.299.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.298.0...v4.299.0) (2026-11-14)
+
+
+### Features
+
+* **UNTIL-24243:** add Fiskaly DE organization and TSS creation to fiscalization ([d6d5620](https://github.com/tillhub/tillhub-sdk-javascript/commit/d6d5620f4ce4066da0e47b02f205974fada96f48))
+
 # [4.298.0](https://github.com/tillhub/tillhub-sdk-javascript/compare/v4.297.0...v4.298.0) (2026-11-03)
 
 

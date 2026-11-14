@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FiscalizationSetLicenseFailed = exports.FiscalizationInitFailed = exports.Fiscalization = void 0;
+exports.FiscalizationFiskalyDeTssCreateFailed = exports.FiscalizationFiskalyDeOrganizationCreateFailed = exports.FiscalizationSetLicenseFailed = exports.FiscalizationInitFailed = exports.Fiscalization = void 0;
 var tslib_1 = require("tslib");
 var baseError_1 = require("../errors/baseError");
 var uri_helper_1 = require("../uri-helper");
@@ -76,6 +76,62 @@ var Fiscalization = (function (_super) {
             });
         });
     };
+    Fiscalization.prototype.createFiskalyDeOrganization = function (options) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_3;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri('/fiskaly/organizations');
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().post(uri, options)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new FiscalizationFiskalyDeOrganizationCreateFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results[0],
+                                msg: response.data.msg
+                            }];
+                    case 3:
+                        error_3 = _a.sent();
+                        throw new FiscalizationFiskalyDeOrganizationCreateFailed(error_3.message, { error: error_3 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
+    Fiscalization.prototype.createFiskalyDeTss = function (registerId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var uri, response, error_4;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        uri = this.uriHelper.generateBaseUri("/registers/" + registerId + "/tss");
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.http.getClient().post(uri)];
+                    case 2:
+                        response = _a.sent();
+                        if (response.status !== 200) {
+                            throw new FiscalizationFiskalyDeTssCreateFailed(undefined, { status: response.status });
+                        }
+                        return [2, {
+                                data: response.data.results[0],
+                                msg: response.data.msg
+                            }];
+                    case 3:
+                        error_4 = _a.sent();
+                        throw new FiscalizationFiskalyDeTssCreateFailed(error_4.message, { error: error_4 });
+                    case 4: return [2];
+                }
+            });
+        });
+    };
     Fiscalization.baseEndpoint = '/api/v0/fiscalization';
     return Fiscalization;
 }(base_1.ThBaseHandler));
@@ -106,4 +162,30 @@ var FiscalizationSetLicenseFailed = (function (_super) {
     return FiscalizationSetLicenseFailed;
 }(baseError_1.BaseError));
 exports.FiscalizationSetLicenseFailed = FiscalizationSetLicenseFailed;
+var FiscalizationFiskalyDeOrganizationCreateFailed = (function (_super) {
+    tslib_1.__extends(FiscalizationFiskalyDeOrganizationCreateFailed, _super);
+    function FiscalizationFiskalyDeOrganizationCreateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create the Fiskaly DE organization'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'FiscalizationFiskalyDeOrganizationCreateFailed';
+        Object.setPrototypeOf(_this, FiscalizationFiskalyDeOrganizationCreateFailed.prototype);
+        return _this;
+    }
+    return FiscalizationFiskalyDeOrganizationCreateFailed;
+}(baseError_1.BaseError));
+exports.FiscalizationFiskalyDeOrganizationCreateFailed = FiscalizationFiskalyDeOrganizationCreateFailed;
+var FiscalizationFiskalyDeTssCreateFailed = (function (_super) {
+    tslib_1.__extends(FiscalizationFiskalyDeTssCreateFailed, _super);
+    function FiscalizationFiskalyDeTssCreateFailed(message, properties) {
+        if (message === void 0) { message = 'Could not create the Fiskaly DE TSS'; }
+        var _this = _super.call(this, message, properties) || this;
+        _this.message = message;
+        _this.name = 'FiscalizationFiskalyDeTssCreateFailed';
+        Object.setPrototypeOf(_this, FiscalizationFiskalyDeTssCreateFailed.prototype);
+        return _this;
+    }
+    return FiscalizationFiskalyDeTssCreateFailed;
+}(baseError_1.BaseError));
+exports.FiscalizationFiskalyDeTssCreateFailed = FiscalizationFiskalyDeTssCreateFailed;
 //# sourceMappingURL=fiscalization.js.map
