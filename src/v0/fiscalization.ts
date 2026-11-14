@@ -1,4 +1,4 @@
-import { Client } from '../client'
+import { Client, Timeout } from '../client'
 import { BaseError } from '../errors/baseError'
 import { UriHelper } from '../uri-helper'
 import { ThBaseHandler } from '../base'
@@ -6,6 +6,7 @@ import { ThBaseHandler } from '../base'
 export interface FiscalizationOptions {
   user?: string
   base?: string
+  timeout?: Timeout
 }
 
 export interface OrganizationAddress {
@@ -86,6 +87,7 @@ export class Fiscalization extends ThBaseHandler {
   http: Client
   public options: FiscalizationOptions
   public uriHelper: UriHelper
+  public timeout: Timeout
 
   constructor (options: FiscalizationOptions, http: Client) {
     super(http, {
@@ -98,6 +100,7 @@ export class Fiscalization extends ThBaseHandler {
     this.endpoint = Fiscalization.baseEndpoint
     this.options.base = this.options.base ?? 'https://api.tillhub.com'
     this.uriHelper = new UriHelper(this.endpoint, this.options)
+    this.timeout = options.timeout ?? this.http.getClient().defaults.timeout
   }
 
   async init (options: FiscalizationItem): Promise<FiscalizationResponse> {
@@ -136,7 +139,7 @@ export class Fiscalization extends ThBaseHandler {
     const uri = this.uriHelper.generateBaseUri('/fiskaly/organizations')
 
     try {
-      const response = await this.http.getClient().post(uri, options)
+      const response = await this.http.getClient().post(uri, options, { timeout: this.timeout })
       if (response.status !== 200) { throw new FiscalizationFiskalyDeOrganizationCreateFailed(undefined, { status: response.status }) }
 
       return {
@@ -152,7 +155,7 @@ export class Fiscalization extends ThBaseHandler {
     const uri = this.uriHelper.generateBaseUri(`/registers/${registerId}/tss`)
 
     try {
-      const response = await this.http.getClient().post(uri)
+      const response = await this.http.getClient().post(uri, undefined, { timeout: this.timeout })
       if (response.status !== 200) { throw new FiscalizationFiskalyDeTssCreateFailed(undefined, { status: response.status }) }
 
       return {
