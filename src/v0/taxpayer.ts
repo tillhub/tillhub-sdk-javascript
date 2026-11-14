@@ -1,6 +1,7 @@
 import { Client } from '../client'
 import { BaseError } from '../errors'
 import { UriHelper } from '../uri-helper'
+import { FISKALY_REQUEST_TIMEOUT } from './fiscalization'
 
 export interface TaxpayerOptions {
   user?: string
@@ -87,7 +88,7 @@ export class Taxpayer {
   async put (taxpayer: TaxpayerEntity): Promise<TaxpayerResponse> {
     const uri = this.uriHelper.generateBaseUri('/taxpayer')
     try {
-      const response = await this.http.getClient().put(uri, taxpayer)
+      const response = await this.http.getClient().put(uri, taxpayer, { timeout: FISKALY_REQUEST_TIMEOUT })
 
       return {
         data: response.data.results[0] as TaxpayerEntity,
