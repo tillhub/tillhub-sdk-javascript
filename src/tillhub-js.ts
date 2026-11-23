@@ -366,6 +366,14 @@ export class TillhubClient extends events.EventEmitter {
   }
 
   /**
+   * Create an authenticated API credentials instance
+   *
+   */
+  iamApiCredentials (): v0.IamApiCredentials {
+    return this.generateAuthenticatedInstance(v0.IamApiCredentials)
+  }
+
+  /**
    * Create an authenticated configurations instance
    *
    */
