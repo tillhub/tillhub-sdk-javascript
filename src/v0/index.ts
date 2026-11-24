@@ -15,6 +15,7 @@ import { InventoryConfiguration } from './inventory_configuration'
 import { Users } from './users'
 import { IamUsers } from './iam_users'
 import { IamApiKeys } from './iam_api_keys'
+import { IamApiCredentials } from './iam_api_credentials'
 import { IamUserGroups } from './iam_user_groups'
 import { IamRoles } from './iam_roles'
 import { IamPermissions } from './iam_permissions'
@@ -119,6 +120,7 @@ export {
   Users,
   IamUsers,
   IamApiKeys,
+  IamApiCredentials,
   IamUserGroups,
   IamRoles,
   IamPermissions,
